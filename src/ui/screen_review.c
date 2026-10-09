@@ -90,7 +90,6 @@ int ct_review_form_begin(ct_review_form *f, sqlite3 *db, const char *deck, const
     if (f == NULL) {
         return CT_SESSION_ERR_ARG;
     }
-    ct_session_free(&f->session);
     memset(f, 0, sizeof *f);
     f->db = db;
     ct_config cfg = ct_config_defaults();
@@ -287,6 +286,8 @@ void ct_screen_review_update(ct_app *app) {
         ct_review_open(app);
     }
     if (IsKeyPressed(KEY_ESCAPE)) {
+        ct_session_free(&ct_review.form.session);
+        ct_review.opened = false;
         app->screen = CT_SCREEN_MENU;
         return;
     }

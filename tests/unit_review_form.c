@@ -116,6 +116,26 @@ CT_SUITE(review_form_begin) {
     ct_db_close(db);
 }
 
+CT_SUITE(review_form_begin_garbage) {
+    sqlite3 *db = review_db();
+    long a = seed_card(db, "rev", "a", "R U R'", "", "");
+    seed_due(db, a);
+
+    ct_review_form f;
+    memset(&f, 0xA5, sizeof f);
+    CT_ASSERT_EQ(ct_review_form_begin(&f, db, "rev", now_stamp, today_num, 0), 1);
+    CT_ASSERT_EQ(f.status, CT_SESSION_OK);
+    CT_ASSERT_EQ(f.session.queue_count, 1);
+    CT_ASSERT_EQ(f.card.id, a);
+
+    memset(&f, 0x5A, sizeof f);
+    CT_ASSERT_EQ(ct_review_form_begin(&f, db, "rev", now_stamp, today_num, 0), 1);
+    CT_ASSERT_EQ(f.session.queue_count, 1);
+    ct_review_form_end(&f, now_stamp);
+    ct_session_free(&f.session);
+    ct_db_close(db);
+}
+
 CT_SUITE(review_form_empty_deck) {
     sqlite3 *db = review_db();
     seed_card(db, "other", "x", "R U", "", "");
