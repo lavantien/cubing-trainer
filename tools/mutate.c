@@ -14,12 +14,15 @@
 
 #ifdef _WIN32
 #include <direct.h>
+#include <process.h>
 #define CT_MKDIR(p) _mkdir(p)
 #define CT_RMDIR(p) _rmdir(p)
+#define CT_PID() _getpid()
 #else
 #include <unistd.h>
 #define CT_MKDIR(p) mkdir(p, 0755)
 #define CT_RMDIR(p) rmdir(p)
+#define CT_PID() getpid()
 #endif
 
 #define CT_MUT_REL_MAX 512
@@ -655,10 +658,6 @@ static int ct_run_suite(const char *exe, const char *suite) {
     return system(cmd);
 }
 
-static void ct_warmup(const char *exe) {
-    ct_run_suite(exe, "ct_mutate_warmup_no_such_suite");
-}
-
 static int ct_run_suites(const char *exe) {
     if (g_nsuites == 0) {
         return ct_run_suite(exe, NULL);
@@ -799,9 +798,6 @@ static const char *ct_env(const char *name, const char *dflt) {
 }
 
 static void ct_split_list(char *buf, char out[][CT_MUT_EXCLUDE_NAME_MAX], size_t *out_n, size_t out_max) {
-    if (buf[0] == '\0') {
-        return;
-    }
     char *save = NULL;
     for (char *tok = strtok_r(buf, ", ", &save); tok != NULL; tok = strtok_r(NULL, ", ", &save)) {
         if (*out_n == out_max) {
@@ -815,11 +811,6 @@ static void ct_split_list(char *buf, char out[][CT_MUT_EXCLUDE_NAME_MAX], size_t
 
 static void ct_load_cfg(void) {
     char buf[2048];
-    char (*only_names)[CT_MUT_EXCLUDE_NAME_MAX] = malloc(CT_MUT_ONLY_MAX * CT_MUT_EXCLUDE_NAME_MAX);
-    if (only_names == NULL) {
-        fprintf(stderr, "mutate: out of memory\n");
-        exit(2);
-    }
     g_cfg.cc = ct_env("CT_MUTATE_CC", "clang");
     g_cfg.cflags = ct_env(
         "CT_MUTATE_CFLAGS",
@@ -832,11 +823,14 @@ static void ct_load_cfg(void) {
     g_cfg.list = ct_env("CT_MUTATE_LIST", "0")[0] == '1';
     g_cfg.keep = ct_env("CT_MUTATE_KEEP", "0")[0] == '1';
     snprintf(buf, sizeof buf, "%s", ct_env("CT_MUTATE_ONLY", ""));
-    ct_split_list(buf, only_names, &g_cfg.only_n, CT_MUT_ONLY_MAX);
-    for (size_t i = 0; i < g_cfg.only_n; i++) {
-        g_cfg.only[i] = (size_t)strtoul(only_names[i], NULL, 10);
+    char *save = NULL;
+    for (char *tok = strtok_r(buf, ", ", &save); tok != NULL; tok = strtok_r(NULL, ", ", &save)) {
+        if (g_cfg.only_n == CT_MUT_ONLY_MAX) {
+            fprintf(stderr, "mutate: too many CT_MUTATE_ONLY ids\n");
+            exit(2);
+        }
+        g_cfg.only[g_cfg.only_n++] = (size_t)strtoul(tok, NULL, 10);
     }
-    free(only_names);
     snprintf(buf, sizeof buf, "%s", ct_env("CT_MUTATE_EXCLUDE", ""));
     ct_split_list(buf, g_cfg.exclude, &g_cfg.exclude_n, CT_MUT_EXCLUDE_MAX);
 }
@@ -909,10 +903,14 @@ int main(int argc, char **argv) {
     char mutants_dir[CT_MUT_REL_MAX];
     char base_exe[CT_MUT_REL_MAX];
     char mutant_exe[CT_MUT_REL_MAX];
-    snprintf(mutants_dir, sizeof mutants_dir, "%s/mutants", build);
-    snprintf(base_exe, sizeof base_exe, "%s/bin/ct_mutant_base.exe", build);
-    snprintf(mutant_exe, sizeof mutant_exe, "%s/bin/ct_mutant.exe", build);
+    long pid = CT_PID();
+    snprintf(mutants_dir, sizeof mutants_dir, "%s/mutants/p%ld", build, pid);
+    snprintf(base_exe, sizeof base_exe, "%s/bin/ct_mutant_base_p%ld.exe", build, pid);
+    snprintf(mutant_exe, sizeof mutant_exe, "%s/bin/ct_mutant_p%ld.exe", build, pid);
     ct_rmtree(mutants_dir);
+    char mutants_root[CT_MUT_REL_MAX];
+    snprintf(mutants_root, sizeof mutants_root, "%s/mutants", build);
+    CT_MKDIR(mutants_root);
     if (CT_MKDIR(mutants_dir) != 0) {
         fprintf(stderr, "mutate: cannot create %s\n", mutants_dir);
         return 2;
@@ -921,7 +919,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "mutate: baseline link failed\n");
         return 2;
     }
-    ct_warmup(base_exe);
+    ct_run_suite(base_exe, "ct_mutate_warmup_no_such_suite");
     int base_rc = ct_run_suites(base_exe);
     if (base_rc != 0) {
         fprintf(stderr, "mutate: baseline suites failed with exit %d\n", base_rc);
@@ -952,11 +950,7 @@ int main(int argc, char **argv) {
         const char *slash = strrchr(mf->rel, '/');
         const char *base = slash == NULL ? mf->rel : slash + 1;
         char name[CT_MUT_REL_MAX];
-        size_t base_len = strlen(base);
-        snprintf(name, sizeof name, "%s", base);
-        if (base_len > 2 && strcmp(name + base_len - 2, ".c") == 0) {
-            name[base_len - 2] = '\0';
-        }
+        snprintf(name, sizeof name, "%.*s", (int)(strlen(base) - 2), base);
         char mutant_c[CT_MUT_REL_MAX];
         char mutant_o[CT_MUT_REL_MAX];
         snprintf(mutant_c, sizeof mutant_c, "%s/m%04zu_%s.c", mutants_dir, id, name);
@@ -986,7 +980,7 @@ int main(int argc, char **argv) {
             }
             continue;
         }
-        ct_warmup(mutant_exe);
+        ct_run_suite(mutant_exe, "ct_mutate_warmup_no_such_suite");
         if (ct_run_suites(mutant_exe) != 0) {
             killed_tests++;
             ct_print_site("KILLED", id, s);
@@ -1042,6 +1036,11 @@ int main(int argc, char **argv) {
                100.0 * (double)(killed + accepted) / (double)generated);
     }
     printf("mutate: wall %.1fs\n", wall);
+    remove(base_exe);
+    remove(mutant_exe);
+    if (!g_cfg.keep) {
+        ct_rmtree(mutants_dir);
+    }
     if (unexplained > 0) {
         fprintf(stderr, "mutate: %lu unexplained survivors\n", unexplained);
         return 1;
