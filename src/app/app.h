@@ -14,7 +14,7 @@ typedef struct {
     double acc;
     double fixed_dt;
     char db_path[CT_DB_PATH_MAX];
-    char migrations_path[CT_DB_PATH_MAX];
+    char migrations_path[CT_APP_EXE_PATH_MAX];
 } ct_app;
 
 void ct_app_init(ct_app *app);

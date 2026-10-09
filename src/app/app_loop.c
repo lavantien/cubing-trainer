@@ -1,70 +1,52 @@
-#include <direct.h>
-#include <errno.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #include "app/app.h"
+#include "app/paths.h"
 #include "raylib.h"
 #include "ui/ui.h"
-
-static void ct_mkdirs(char *path) {
-    size_t len = strlen(path);
-    for (size_t i = 4; i < len; i++) {
-        if (path[i] != '/' && path[i] != '\\') {
-            continue;
-        }
-        char saved = path[i];
-        path[i] = '\0';
-        if (_mkdir(path) != 0 && errno != EEXIST) {
-            fprintf(stderr, "cubing-trainer: cannot create directory %s\n", path);
-            path[i] = saved;
-            return;
-        }
-        path[i] = saved;
-    }
-}
 
 void ct_app_init(ct_app *app) {
     app->db = NULL;
     app->cfg = ct_config_defaults();
-    const char *base = getenv("LOCALAPPDATA");
-    if (base == NULL) {
-        base = ".";
-    }
-    int written = snprintf(app->db_path, sizeof app->db_path, "%s/%s", base, app->cfg.db.dir_name);
-    if (written < 0 || (size_t)written >= sizeof app->db_path) {
-        fprintf(stderr, "cubing-trainer: data directory path too long\n");
+    app->screen = CT_SCREEN_MENU;
+    app->running = false;
+    app->acc = 0.0;
+    app->fixed_dt = 1.0 / app->cfg.window.target_fps;
+    if (ct_data_dir(app->cfg.db.dir_name, app->db_path, (unsigned)sizeof app->db_path) != 0) {
         app->db_path[0] = '\0';
+        return;
     }
-    ct_mkdirs(app->db_path);
     size_t dir_len = strlen(app->db_path);
     int name_written = snprintf(app->db_path + dir_len, sizeof app->db_path - dir_len, "/%s",
                                 app->cfg.db.filename);
     if (name_written < 0 || (size_t)name_written >= sizeof app->db_path - dir_len) {
         fprintf(stderr, "cubing-trainer: database path too long\n");
         app->db_path[0] = '\0';
+        return;
     }
-    snprintf(app->migrations_path, sizeof app->migrations_path, "db/migrations");
-    bool db_ready = false;
+    if (ct_migrations_dir(app->migrations_path, (unsigned)sizeof app->migrations_path) != 0) {
+        app->migrations_path[0] = '\0';
+        return;
+    }
     if (ct_db_open(&app->db, app->db_path) != 0) {
         fprintf(stderr, "cubing-trainer: cannot open database %s\n", app->db_path);
         app->db = NULL;
-    } else if (ct_db_migrate(app->db, app->migrations_path) != 0) {
+        return;
+    }
+    if (ct_db_migrate(app->db, app->migrations_path) != 0) {
         fprintf(stderr, "cubing-trainer: migration failed from %s\n", app->migrations_path);
         ct_db_close(app->db);
         app->db = NULL;
-    } else if (ct_repo_settings_merge(app->db, &app->cfg) != 0) {
+        return;
+    }
+    if (ct_repo_settings_merge(app->db, &app->cfg) != 0) {
         fprintf(stderr, "cubing-trainer: cannot read settings from %s\n", app->db_path);
         ct_db_close(app->db);
         app->db = NULL;
-    } else {
-        db_ready = true;
+        return;
     }
-    app->screen = CT_SCREEN_MENU;
-    app->running = db_ready;
-    app->acc = 0.0;
-    app->fixed_dt = 1.0 / app->cfg.window.target_fps;
+    app->running = true;
 }
 
 void ct_app_run(ct_app *app) {

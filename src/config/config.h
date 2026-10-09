@@ -202,6 +202,16 @@ typedef enum ct_cfg_status {
 #define CT_FUZZ_ITERATIONS 10000
 #define CT_DB_BUSY_TIMEOUT_MS 5000
 #define CT_DB_PATH_MAX 260
+#define CT_DATA_DIR_ENV "LOCALAPPDATA"
+#define CT_MIGRATIONS_ENV "CT_MIGRATIONS_DIR"
+#define CT_MIGRATIONS_EXE_REL "../../db/migrations"
+#define CT_APP_EXE_PATH_MAX 1024
+#define CT_PROC_SELF_EXE "/proc/self/exe"
+#define CT_DIR_MODE 0755
+#define CT_PATH_ROOT_DRIVE 2
+#define CT_PATH_ROOT_DRIVE_SEP 3
+#define CT_PATH_ROOT_ABS 1
+#define CT_PATH_UNC_COMPONENTS 2
 #define CT_MIG_PATH_MAX (CT_DB_PATH_MAX * 2)
 #define CT_MIG_COPY_BUF 4096
 #define CT_MIG_PRAGMA_MAX 64
