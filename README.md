@@ -14,29 +14,27 @@ The 3-style generator is the distinguishing feature. It emits commutators labele
 
 Prerequisites, verified on this machine 2026-10-09: LLVM clang 23.1.3, winlibs UCRT gcc 16.2.0 as the mingw-w64 sysroot, GNU make 4.4.1, cmake, ninja, sqlite3 CLI 3.53.4, and node with npx and mmdc (mermaid-cli). No MSYS2, no pkg-config.
 
-Run `make vendor` first. It HEAD-checks each URL, downloads, verifies, and extracts the pinned third party sources under third_party/: the raylib 6.0 tarball, raygui 5.0 as a single .c and .h pair, and the SQLite 3.53.4 amalgamation zip verified by SHA3-256. raylib is compiled from third_party/raylib/src/*.c with -DPLATFORM_DESKTOP directly by the Makefile, and the app links -static-libgcc -lopengl32 -lgdi32 -lwinmm.
+Run `make vendor` first. It HEAD-checks each URL, downloads, verifies, and extracts the pinned third party sources under third_party/: the raylib 6.0 tarball, the raygui 5.0 header-only release, and the SQLite 3.53.4 amalgamation zip verified by SHA3-256. raylib compiles from the flat third_party/raylib/src/*.c set of 7 TUs with -DPLATFORM_DESKTOP, a recursive glob over-collects platform files and breaks on duplicate symbols. raygui 5.0 ships only raygui.h, so the Makefile generates build/raygui_impl.c holding RAYGUI_IMPLEMENTATION plus the include as its single TU. sqlite3.c compiles with -Wno-error for two unused parameters in its Windows VFS code.
 
-The cross compiler flag spelling is not frozen yet, the M0 build spike recorded in playground/spike_link/REPORT.md decides it. The current Makefile uses the primary candidate, `clang --target=x86_64-w64-mingw32 --gcc-install-dir=<winlibs gcc lib dir> -fuse-ld=lld`. Documented fallbacks: the `--sysroot=<winlibs root>` spelling, or dropping `-fuse-ld=lld` so clang uses the winlibs GNU ld.
+The toolchain spelling is decided, evidence in playground/spike_link/REPORT.md. Compile lines carry `--target=x86_64-w64-mingw32` alone and link lines add `-fuse-ld=lld`, which resolves crt2.o, crtbegin.o, and the gcc 16.2.0 library directories from the winlibs install. The `--gcc-install-dir` spelling is inert on clang 23.1.3, fails under -Werror as an unused argument, and is not used. One environment hazard: this account exports C_INCLUDE_PATH and CPLUS_INCLUDE_PATH at a foreign gcc, so the Makefile clobbers both to empty for every recipe. The link set for anything touching raylib is -static-libgcc -lopengl32 -lgdi32 -lwinmm, and those Windows libraries appear on no other link line.
 
 | target | what it does |
 | --- | --- |
 | vendor | download, HEAD-check, verify, and extract raylib 6.0, raygui 5.0, and the sqlite amalgamation into third_party/ |
 | build | compile app, raylib, raygui, and sqlite sources and emit build/bin/cubing-trainer.exe |
-| build-headless | build the headless flavor used by e2e and visual runs |
+| spike | build and run the M0 toolchain spike from playground/spike_link |
 | test | run the full unit suite |
-| test-\<suite\> | run one named suite |
+| test-\<suite\> | run suites whose name matches the filter |
 | fmt | format the tree |
+| fmt-check | check formatting without writing |
 | lint | clang-tidy plus the -Wall -Wextra -Werror -Wpedantic -std=c23 gate plus zero-comment and stray-constant checks |
 | analyze | run clang --analyze over the sources |
-| fuzz | run the in-process fuzz loops over every exposed surface |
-| mutate | run token-level mutation for SCOPE=src/\<dir\> and fail on survivors outside the allowlist |
-| e2e | run the real headless binary through tests/e2e scripts and assert final DB state |
-| visual | render defined scenes headless and compare against goldens by perceptual hash |
 | diagrams | render every docs/diagrams/*.mmd to PNG through tools/gen_diagrams.mjs |
-| run | build then launch the trainer window |
-| db-verify | run PRAGMA integrity_check plus schema assertions through the sqlite3 CLI against a copy |
 | memguard | run tools/memguard.ps1 to enforce the combined working set cap on project processes |
+| run | build then launch the trainer window |
 | clean | remove build outputs |
+
+Stub targets that print not implemented and exit 1 today, landing with their milestones: build-headless, fuzz, mutate, e2e, visual, and db-verify.
 
 ## Architecture
 
@@ -44,45 +42,60 @@ Module tree:
 
 ```
 Makefile README.md
-db/migrations/001_init.sql..00N.sql  db/seeds/wca_packs.sql db/seeds/bld_fallback.sql
-docs/diagrams/*.mmd                  docs/diagrams/*.png (generated)
+db/migrations/001_init.sql  db/seeds/speffz.sql  db/seeds/speffz_source.md
+docs/diagrams/*.mmd  docs/diagrams/*.png (generated)
 src/config/config.h config.c
-src/engine/notation.h notation.c cube.h cube.c transform.h transform.c geometry.h geometry.c
+src/engine/cube.h cube.c notation.h notation.c transform.h transform.c
 src/render/renderer.h renderer.c anim.h anim.c
-src/ui/ui.h screen_menu.c screen_trainer.c screen_cards.c screen_review.c screen_settings.c screen_stats.c widgets.c
-src/storage/db.h db.c migrate.c repo_cards.c repo_reviews.c repo_algs.c repo_settings.c repo_stats.c
+src/ui/ui.h screen_menu.c screen_cards.c
+src/storage/db.h db.c migrate.c repo_cards.c repo_reviews.c repo_settings.c repo_stats.c
 src/srs/fsrs.h fsrs.c
-src/trainer/session.h session.c cfop.c selector.c
-src/gen/generate.h targets.c interchange.c synth.c classify.c score.c simplify.c
+src/trainer/session.h session.c cfop.h cfop.c selector.h selector.c
+src/gen/targets.h targets.c interchange.h interchange.c
 src/stats/stats.h stats.c
-src/packs/packs.h packs.c provenance.c
-src/app/main.c app_loop.c headless.c
-third_party/raylib raygui sqlite
-tools/mutate.c gen_diagrams.mjs
-tests/framework.h unit_*.c fuzz_*.c golden/ e2e/
+src/packs/packs.h packs.c provenance.h provenance.c
+src/app/main.c app.h app_loop.c
+tools/gen_diagrams.mjs run_lint.ps1 run_analyze.ps1 check_zero_comments.ps1 check_stray_constants.ps1 memguard.ps1
+tests/framework.h framework.c test_main.c unit_*.c
 ```
 
-Layering, enforced by review: config depends on nothing. engine, srs, and storage depend on config. gen and render depend on engine. trainer depends on storage, srs, and gen. ui depends on trainer, render, and storage. app depends on ui. No upward or lateral edges.
+Still pending from the plan: src/engine/geometry.c, the src/gen synthesis, classification, scoring, and simplification files, the trainer, review, settings, and stats screens, and src/app/headless.c.
 
-The config hub is one header, src/config/config.h, holding ct_config, every enum (grade, orbit, buffer_mode, classification, event, method, stage, direction, ui_screen), and every tunable with its default: FSRS weights, requested retention, interval clamps, preferred move subset and per-face penalties, regrip and fingertrick weights, animation durations and easing, window defaults, DB filename, generator search bounds, and fuzz iteration counts. It is loaded once at startup and passed by pointer, with user settings merged over the defaults from the settings table. The lint target fails on numeric literals in src/ outside config.h, inline test tables are exempt, and values that recur across test tables get centralized too.
+Layering, enforced by review: config depends on nothing. engine, srs, and storage depend on config. gen and render depend on engine. trainer depends on storage and srs. ui depends on trainer, render, and storage. app depends on ui. No upward or lateral edges.
+
+Two patterns keep the code testable without a window. UI screens split a pure model from a thin draw layer: ct_cards_form in src/ui/ui.h carries the flashcard form state and its mutations with no raylib types and is covered by tests/unit_cards_form.c, while ct_screen_cards_update and ct_screen_cards_draw only translate app state into calls. The renderer splits the same way, ct_renderer_quads emits the sticker quad list as plain data and ct_renderer_draw is the only function that builds raylib meshes.
+
+raylib 6 notes from the renderer work: matrix types and math live in raymath.h and the mesh buffer layout lives in rlgl.h, whose stream order renderer.h records as position 0 and color 3. The draw path fills mesh.vertices and mesh.colors and hands them to UploadMesh, then UnloadMesh frees the CPU-side arrays along with the GPU upload, so the dynamic cube mesh is rebuilt and re-uploaded every frame, which stays cheap at 6 * n * n quads and keeps animation out of GPU lifetime management. LoadMaterialDefault is the unlit vertex color path, which is what flat sticker quads need.
+
+The config hub is one header, src/config/config.h, holding ct_config, every enum (grade, orbit, buffer_mode, classification, event, method, stage, direction, ui_screen, ease, config status), and every tunable with its default: FSRS weights, requested retention, interval clamps, preferred move subset and per-face penalties, regrip and fingertrick weights, animation durations and easing, window defaults, DB filename, generator search bounds, and fuzz iteration counts. Face letters map to single bit flags through ct_move_face, CT_MOVE_BIT_U through CT_MOVE_BIT_Z covering faces, slices, and rotations, so a preferred subset is one unsigned mask and per-face penalties index by bit position. The hub is loaded once at startup through ct_config_defaults and passed by pointer, and user settings merge over the defaults through ct_config_set, which parses dotted setting names like srs.request_retention, gen.preferred_moves, and gen.penalty_R with range clamps and rejects unknown names. The lint target fails on numeric literals in src/ outside config.h, inline test tables are exempt, and values that recur across test tables get centralized too.
 
 The data directory is %LOCALAPPDATA%/cubing-trainer, read from the environment at runtime.
 
+## Cube engine
+
+World axes are x right, y up, z front. Each of the 6 faces carries a (normal, row, col) frame in src/engine/cube.c, and a sticker center is normal * (n-1) plus row and col offsets where grid position i maps to the coordinate 2*i - (n-1), so centers lie on the integer range -(n-1) to n-1 with stride 2 and geometry, moves, and letters share one addressing scheme. A move selects its slab by the dot product of the sticker center with the face normal against the depth range, then rotates centers and normals by steps = -sign * quarter right hand quarter turns about the face axis, where sign is the normal's sign on that axis.
+
+Sticker indexing for BLD work runs 0 to 23 per orbit: face order U L F R B D, corner sticker index is face * 4 + p with p running clockwise from (0, 0), edge sticker index is face * 4 + p with p running clockwise from the (0, 1) edge.
+
+src/engine/transform.c rewrites move sequences as algebra: inverse, mirror, rotate_y, conjugate, and simplify. Mirror swaps R and L and inverts quarter counts, rotate_y cycles the side faces around U for k = 1, 2, 3. Both carry simulation oracles in tests/unit_transform.c: mirroring the cube state after an algorithm equals applying the mirrored algorithm to the mirrored solved cube, and appending a y rotation to an algorithm equals applying the rotated algorithm after the y rotation.
+
 ## Notation grammar
 
-A move is ct_move: face, depth range, quarter count. The parser and formatter cover this token grammar:
+A move is ct_move: face, depth range, quarter count. The landed parser and formatter in src/engine/notation.c cover this token grammar:
 
 | token element | forms | notes |
 | --- | --- | --- |
-| digit prefix | optional leading digit | inner layer depth on big cubes |
-| face | U D L R F B | outer layer turns |
-| slice | M E S | middle slices |
-| rotation | x y z | whole cube rotations |
-| wide suffix | w, or a lowercase face | lowercase means wide |
-| prime | ' | counterclockwise |
-| half turn | 2 and '2 | 180 degrees |
-| signed repeat | ++ -- + - | megaminx and clock turns |
-| per-event extensions | square-1 slash notation, megaminx R++ D--, clock turns, FTO faces | event specific token tables |
+| digit prefix | optional leading digit 2 to 7 | inner layer depth on big cubes |
+| face | U D L R F B | outer layer turn at the given depth |
+| wide | w suffix, or a lowercase face | layers 1 through the digit, 2 when no digit |
+| slice | M E S | single middle layer at depth (n + 1) / 2, M follows L, E follows D, S follows F |
+| rotation | x y z | whole cube, depth 1 through n, x follows R, y follows U, z follows F |
+| prime | ' | counterclockwise, quarter 3 |
+| half turn | 2 and '2 | 180 degrees, quarter 2 |
+
+Canonical formatting rules: a single inner layer spells the digit prefix only above depth 1, a wide turn spells Rw at depth 2 and 3Rw above, a wide spanning every layer collapses to the rotation letter so 3Rw formats as x on n = 3, and the middle layer spells as its slice letter. Rotations parse and format as whole cube turns, depth 1 through n. Parse failures return the CT_NOTATION_E_* codes: input, token, suffix, digit, depth, cap, and move.
+
+Per-event token tables for square-1 slash notation, megaminx and clock turns, and FTO faces are planned and not in the parser yet.
 
 Round-trip properties are a fuzz surface: format(parse(s)) normalizes, and parse(format(a)) == a.
 
@@ -109,15 +122,17 @@ Alternate labels (perpendicular, collision, simultaneous) ship as display aliase
 
 ## Case tables and letters
 
-With a fixed buffer there are 378 corner targets (21x18) and 440 edge targets (22x20), per the BH wiki infobox.
+With a fixed buffer there are 378 corner targets (21x18) and 440 edge targets (22x20), per the BH wiki infobox. The counts are asserted in tests/unit_targets.c against ct_targets_corner and ct_targets_edge, with buffers pinned at corner sticker UBL = 0 and edge sticker UF = 2.
 
-Speffz letter scheme summary: face order U L F R B D, each face lettered clockwise from its start corner, so U=A-D, L=E-H, F=I-L, R=M-P, B=Q-T, D=U-X with D read after x2. Corner buffer UBL = A, edge buffer UF = C. The letter scheme is user-editable data in SQLite, and the seed scheme gets fixture-verified against blddb.net at M2 with the source trail recorded.
+Speffz letter scheme summary: face order U L F R B D, each face lettered clockwise from its start corner, so U=A-D, L=E-H, F=I-L, R=M-P, B=Q-T, D=U-X with D read after x2. Corner buffer UBL = A, edge buffer UF = C. The app rule is one line, sticker index i maps to letter 'A' + i in both orbits. Verification is recorded in db/seeds/speffz_source.md against the speedsolving wiki Speffz page and bldtrainer.com, whose glossary pins the buffer letters. blddb.net was the plan's preferred fixture source but its pages are a JavaScript application with no textual letter table, so bldtrainer.com served as the independent reference. The scheme is user-editable data in SQLite, seeded by db/seeds/speffz.sql, and tests/unit_letter_scheme.c asserts the C seed and the SQL file produce identical maps.
+
+CFOP case tables landed in src/trainer/cfop.c with counts asserted in tests/unit_cfop.c: PLL 21 (Aa Ab E F Ga Gb Gc Gd H Ja Jb Na Nb Ra Rb T Ua Ub V Y Z), OLL 57 as oll.01 through oll.57, and F2L 41 per slot across the fr, fl, br, and bl slots for 164 cards.
 
 App definition, floating buffer mode: fixed-buffer mode generates 3-cycles that include the configured buffer sticker, which gives the 378 and 440 tables. Floating mode may emit any 3-cycle (x, t1, t2) that solves the target pair, since the buffer drifts during a real solve. The case table stays at 378 and 440, and the admissible solution space grows about 24x.
 
 ## Event packs
 
-17 official events as of 2026-10-09. FTO joins officially on 2027-01-02 and clock retires after Worlds 2027, both per the WCA post linked under source records. Seed methods per event:
+17 official events as of 2026-10-09. FTO joins officially on 2027-01-02 and clock retires after Worlds 2027, both per the WCA post linked under source records. The packs storage layer landed in src/packs with a hand-rolled SHA-256 over a canonical row form feeding the content_hash column, asserted in tests/unit_packs.c. Seed row capture is the remaining M5 work in flight, and the table below is the plan of record. Seed methods per event:
 
 | event | method | seed source approach | status |
 | --- | --- | --- | --- |
@@ -142,7 +157,7 @@ Every curated seed row records its source URL, retrieval date, and content hash.
 
 ## Database schema
 
-The SQLite amalgamation is compiled into the exe. The DB lives at %LOCALAPPDATA%/cubing-trainer/trainer.db. Forward-only migrations in db/migrations/NNN_*.sql self-apply at startup inside a transaction, the version sits in PRAGMA user_version, and a pre-migration backup goes to trainer.db.bak. The repo_*.c files hold prepared-statement CRUD, 1 file per aggregate. DDL sketch:
+The SQLite amalgamation is compiled into the exe. The DB lives at %LOCALAPPDATA%/cubing-trainer/trainer.db. Forward-only migrations in db/migrations/NNN_*.sql self-apply at startup inside a transaction, the version sits in PRAGMA user_version, and a pre-migration backup goes to trainer.db.bak. The landed migration is db/migrations/001_init.sql with all 9 tables and 5 indexes below. The repo_*.c files hold prepared-statement CRUD, 1 file per aggregate, repo_cards, repo_reviews, repo_settings, and repo_stats so far. DDL sketch:
 
 ```
 settings(key, value)
@@ -153,7 +168,7 @@ srs_state(card_id PK, stability, difficulty, due, last_review, reps, lapses, sta
 review_log(id, card_id, rating, reviewed_at, stability, difficulty, elapsed_days, scheduled_days)
 generated_alg(id, orbit, target_pair, buffer_mode, category, sequence, classification, setup, interchange, insertion, qtm, score, score_parts_json, params_hash, created_at, unique(orbit, category, target_pair, buffer_mode, params_hash))
 session_log(id, deck, started_at, ended_at, n_cards, n_again, n_hard, n_good, n_easy)
-event_pack(id, event, method, stage, case_key, alg, front_json, provenance_url, provenance_at, content_hash, unique(event, method, stage, case_key))
+event_pack(id, event, method, stage, case_key, alg, front_json, source_url, source_at, content_hash, unique(event, method, stage, case_key))
 ```
 
 The flashcard table carries the CFOP variant fields through alg_3x3, alg_big, and alg_oh.
@@ -184,10 +199,10 @@ The C surface sits in src/srs/fsrs.h: ct_grade (again 1, hard, good, easy), ct_f
 
 ## Generator
 
-src/gen/ runs this pipeline per case:
+src/gen/ runs this pipeline per case. Landed so far: target enumeration and interchange detection. Synthesis, classification, scoring, and the cache are planned with M2, so steps 3 through 6 below are the design of record:
 
 1. Enumerate targets through the active letter scheme: 24 corner and 24 edge stickers, the 378 corner and 440 edge ordered pairs in fixed-buffer mode, and parity, flip, and twist categories from small tables.
-2. Detect interchanges: move m interchanges stickers (x, y) iff m(x)==y and m(y)==x on the facelet permutations. Candidates are the 18 outer turns plus M, E, S, and doubles, precomputed per run.
+2. Detect interchanges: move m interchanges stickers (x, y) iff m(x)==y and m(y)==x on the sticker permutations. The landed candidate set in ct_candidate_moves enumerates every face, every slab span contained in the outer half of the cube since deeper spans are complements of shallower ones, and quarters 1 to 3, which is 54 moves on n = 3 and 180 on n = 7, kept when the computed permutation swaps the pair.
 3. Propose insertions from templates: 1-move, 3-move X Y X' over face pairs, and 5-move per special. Simulation disposes: a candidate insert is admitted only if it moves exactly 1 of the interchange pair's pieces into the interchange layer.
 4. Synthesize: BFS setups S over the allowed subset (default R, U, D) to the config depth bound, keeping only setups that create an interchange among cycle members. Assemble [S: [A, I]], simplify, simulate on a solved cube, validate that the resulting sticker cycle equals the target exactly including orientation, then score and keep the best. Template misses fall back to bidirectional BFS over the subset to depth 5 per side, which covers optima to 10 moves, with a full-metric straggler path of 6 per side.
 5. Classify: structural rules label the sequence and emit an explanation naming setup, interchange, insertion, and the recognition rationale. User-entered algorithms get classified and decomposed the same way.
@@ -201,19 +216,21 @@ Optimality caveat: results are optimal only within the template-plus-bounded-fal
 
 ## Testing
 
-Test framework: hand-rolled tests/framework.h, ~150 SLOC. CT_SUITE registration, CT_ASSERT, CT_ASSERT_EQ, CT_ASSERT_DBL_EQ, CT_ASSERT_STR_EQ, a longjmp failure model, console plus JSON output, timing, and sfc64 PRNG helpers for fuzz targets. Zero vendoring, with full exit-code control for the mutation harness.
+Test framework: hand-rolled tests/framework.h plus framework.c, about 300 SLOC. CT_SUITE registration, CT_ASSERT, CT_ASSERT_EQ, CT_ASSERT_DBL_EQ, CT_ASSERT_STR_EQ, a setjmp and longjmp failure model, console output on failure with file and line, and sfc64 PRNG helpers for randomized suites. The runner is tests/test_main.c: an argument filters suites by name, so make test-\<suite\> runs one suite, and the binary also carries a spawn selftest mode. Zero vendoring, with full exit-code control for the mutation harness.
 
-Fuzzing: hand-rolled in-process fuzz loops with a deterministic seeded sfc64 generator per surface, N iterations, nonzero exit on assertion failure, and a watchdog thread for hangs. Sanitizer gap, stated plainly: libFuzzer and ASan are unavailable on the windows-gnu target with this LLVM, because compiler-rt ships only MSVC-ABI .lib files there. UB is caught via -fsanitize=undefined -fsanitize-trap=all, which needs no runtime. Coverage-guided fuzzing and ASan are a recorded gap, with an MSVC-target build as the future path. Fuzz surfaces: notation parser, transform algebra, FSRS numerics, repo SQL, generator validation, config parsing, and the e2e script runner.
+Coding rule from the FSRS work: an enum with only small nonnegative values can get an unsigned underlying type, so arithmetic like grade offsets (g - CT_GOOD) or weight indexing (w[g - 1]) must cast the enum operand to int first, otherwise a negative intermediate promotes to a huge unsigned value and corrupts indices and exponents. src/srs/fsrs.c applies the cast at every grade arithmetic site.
 
-Mutation testing: Mull has no native Windows support, so tools/mutate.c does token-level source mutation: swap arithmetic and comparison ops, swap and-or, flip integer and boolean literals by 1, delete negations, and mutate return literals. make mutate SCOPE=src/srs compiles each mutant with identical flags, runs the unit suite, and fails on survivors. tests/mutant_allowlist.txt holds 1 justification line per accepted equivalent mutant.
+Fuzzing: hand-rolled in-process fuzz loops with a deterministic seeded sfc64 generator per surface, N iterations, nonzero exit on assertion failure, and a watchdog thread for hangs. The harness is M1 T8 in flight and the committed make fuzz target is still a stub. Sanitizer gap, stated plainly: libFuzzer and ASan are unavailable on the windows-gnu target with this LLVM, because compiler-rt ships only MSVC-ABI .lib files there. UB is caught via -fsanitize=undefined -fsanitize-trap=all, which needs no runtime. Coverage-guided fuzzing and ASan are a recorded gap, with an MSVC-target build as the future path. Fuzz surfaces planned: notation parser, transform algebra, FSRS numerics, repo SQL, generator validation, config parsing, and the e2e script runner.
 
-E2E: cubing-trainer.exe --headless --script tests/e2e/\<case\>.txt runs the real binary in the headless flavor, scripts UI actions through an input-injection hook, and asserts final DB state.
+Mutation testing: Mull has no native Windows support, so tools/mutate.c will do token-level source mutation: swap arithmetic and comparison ops, swap and-or, flip integer and boolean literals by 1, delete negations, and mutate return literals. make mutate SCOPE=src/srs will compile each mutant with identical flags, run the unit suite, and fail on survivors. tests/mutant_allowlist.txt will hold 1 justification line per accepted equivalent mutant. The harness is not built yet, make mutate exits 1 as a stub.
 
-Visual regression: headless renders of defined scenes (solved 3x3 through 7x7, mid-animation frames, trainer screens) dumped as PNG and compared by perceptual hash with a threshold. Goldens are versioned in tests/golden/ with a record file holding URL, date, and hash per fixture. The exact headless renderer is not decided yet, rlsw is the M1 spike candidate with RenderTexture2D frame hashing as the fallback.
+E2E: cubing-trainer.exe --headless --script tests/e2e/\<case\>.txt will run the real binary in the headless flavor, script UI actions through an input-injection hook, and assert final DB state. The headless flavor is M1 T7 in flight.
+
+Visual regression: headless renders of defined scenes (solved 3x3 through 7x7, mid-animation frames, trainer screens) dumped as PNG and compared by perceptual hash with a threshold. Goldens are versioned in tests/golden/ with a record file holding URL, date, and hash per fixture. The renderer question is decided: the headless path renders into a hidden window and reads the frame back with LoadImageFromScreen, digests pixels with FNV-1a, and exports PNG fixtures, per the in-flight spike in playground/headless_spike. rlsw is not used.
 
 ## Source records
 
-Policy: every sourcing action leaves a physical artifact with the source URL, retrieval date, and content hash. Curated event pack seed rows carry the provenance_url, provenance_at, and content_hash columns, vendor archives are pinned by hash, and visual goldens get records in tests/golden/PROVENANCE.md. Current records, URLs HEAD-checked 2026-10-09:
+Policy: every sourcing action leaves a physical artifact with the source URL, retrieval date, and content hash. Curated event pack seed rows carry the source_url, source_at, and content_hash columns, vendor archives are pinned by hash, and visual goldens get records in tests/golden/PROVENANCE.md. Current records, URLs HEAD-checked 2026-10-09:
 
 | artifact | source | verification |
 | --- | --- | --- |
@@ -221,18 +238,19 @@ Policy: every sourcing action leaves a physical artifact with the source URL, re
 | raygui 5.0 source tarball | https://github.com/raysan5/raygui/archive/refs/tags/5.0.tar.gz | reachable |
 | sqlite 3.53.4 amalgamation zip | https://sqlite.org/2026/sqlite-amalgamation-3530400.zip | SHA3-256 628a44cfe82c66aed1ccbbe85a562d2e33ebe64b3288981ed76285612227934e |
 | BH commutator pages | https://www.speedsolving.com/wiki/index.php/BH | domain facts for classes and case counts |
-| Speffz page | https://www.speedsolving.com/wiki/index.php/Speffz | domain facts for the letter scheme |
+| Speffz scheme text | https://www.speedsolving.com/wiki/index.php/Speffz | face order and clockwise rule, db/seeds/speffz_source.md |
+| Speffz buffer letters | https://bldtrainer.com/glossary and https://bldtrainer.com/letters | UBL = A and UF = C buffer facts, db/seeds/speffz_source.md |
 | WCA events change post | https://www.worldcubeassociation.org/posts/changes-to-the-wca-s-list-of-official-events-june-2026 | FTO official 2027-01-02, clock retired after Worlds 2027 |
 | FSRS algorithm spec | https://github.com/open-spaced-repetition/fsrs4anki/wiki/The-Algorithm | formulas and default weights |
 
 ## Diagrams
 
-All 5 planned diagrams are mermaid flowchart LR rendered to PNG by make diagrams through the installed mmdc. Sources are docs/diagrams/*.mmd and the rendered PNG files are committed alongside them. app_loop is the first to land, the rest arrive with their milestones:
+All 5 diagrams are mermaid flowchart LR rendered to PNG by make diagrams through the installed mmdc. Sources are docs/diagrams/*.mmd and the rendered PNG files are committed alongside them:
 
 | diagram | shows | status |
 | --- | --- | --- |
-| app_loop | app main loop, fixed-timestep update plus render | landed, docs/diagrams/app_loop.mmd |
-| review flow | review session from card front to FSRS update | planned, lands with M4 |
-| generator pipeline | the src/gen stages from target enumeration to cached algs | planned |
-| data flow | UI to storage through the repo layer | planned |
-| milestone map | the M0 to M6 sequence | planned |
+| app_loop | app main loop, fixed-timestep update plus render | landed |
+| review_session_flow | review session from due queue through reveal, grade, and FSRS update to the session log | landed, matches src/trainer/session.c |
+| generator_pipeline | src/gen stages from target enumeration to cached algs | landed as the design of record, stages land with M2 |
+| data_flow | ui screens through the repo layer to sqlite, with settings merged over config defaults | landed |
+| milestone_map | the M0 to M6 sequence with status | landed, status as of 2026-10-10 |
