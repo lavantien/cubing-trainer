@@ -276,14 +276,17 @@ CT_SUITE(settings_form_moves) {
     CT_ASSERT_EQ(ct_settings_form_stage_move(&f, CT_MOVE_BIT_R), CT_REPO_CONFLICT);
     CT_ASSERT_EQ(f.status, CT_REPO_CONFLICT);
     CT_ASSERT_EQ(f.move_mask, CT_MOVE_BIT_R);
-    CT_ASSERT_EQ(ct_settings_form_stage_move(&f, CT_MOVE_BIT_Z), CT_REPO_OK);
-    CT_ASSERT_EQ(f.move_mask, CT_MOVE_BIT_R | CT_MOVE_BIT_Z);
+    CT_ASSERT_EQ(ct_settings_form_stage_move(&f, CT_MOVE_BIT_Z), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(f.move_mask, CT_MOVE_BIT_R);
+    CT_ASSERT_EQ(ct_settings_form_stage_move(&f, CT_MOVE_BIT_X), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_settings_form_stage_move(&f, CT_MOVE_BIT_Y), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(f.status, CT_REPO_ERR_ARG);
 
     CT_ASSERT_EQ(ct_settings_form_stage_move(&f, 0), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(ct_settings_form_stage_move(&f, 1u << 20), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(ct_settings_form_stage_move(&f, CT_MOVE_BIT_U | CT_MOVE_BIT_D), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(ct_settings_form_stage_move(NULL, CT_MOVE_BIT_U), CT_REPO_ERR_ARG);
-    CT_ASSERT_EQ(f.move_mask, CT_MOVE_BIT_R | CT_MOVE_BIT_Z);
+    CT_ASSERT_EQ(f.move_mask, CT_MOVE_BIT_R);
     ct_db_close(db);
 }
 

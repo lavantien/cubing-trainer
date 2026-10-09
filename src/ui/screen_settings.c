@@ -228,6 +228,10 @@ int ct_settings_form_stage_color(ct_settings_form *f, int face, int channel, int
 int ct_settings_form_stage_move(ct_settings_form *f, unsigned bit) {
     if (f == NULL)
         return CT_REPO_ERR_ARG;
+    if ((bit & CT_MOVE_ROTATION_MASK) != 0) {
+        f->status = CT_REPO_ERR_ARG;
+        return CT_REPO_ERR_ARG;
+    }
     bool known = false;
     for (int i = 0; i < CT_FACE_COUNT; i++) {
         if ((1u << i) == bit)
@@ -302,6 +306,8 @@ int ct_settings_form_stage_buffer(ct_settings_form *f, int orbit, int sticker) {
 static void ct_settings_format_moves(unsigned mask, char *out, size_t cap) {
     size_t n = 0;
     for (int i = 0; i < CT_FACE_COUNT && n + 1 < cap; i++) {
+        if ((CT_MOVE_ROTATION_MASK & (1u << i)) != 0)
+            continue;
         char c = ct_move_face_char(1u << i);
         if (c != '\0' && (mask & (1u << i)) != 0)
             out[n++] = c;
@@ -504,10 +510,14 @@ static void ct_settings_draw_general(ct_app *app, int x, int y, int w, int h) {
     int grid_h = gh - 2 * pad;
     int cell_w = grid_w / CT_SETTINGS_MOVE_COLS;
     int cell_h = grid_h / CT_SETTINGS_ORBITS;
+    int shown = 0;
     for (int i = 0; i < CT_FACE_COUNT; i++) {
         unsigned bit = 1u << i;
-        int col = i % CT_SETTINGS_MOVE_COLS;
-        int row = i / CT_SETTINGS_MOVE_COLS;
+        if ((bit & CT_MOVE_ROTATION_MASK) != 0)
+            continue;
+        int col = shown % CT_SETTINGS_MOVE_COLS;
+        int row = shown / CT_SETTINGS_MOVE_COLS;
+        shown++;
         bool on = (f->move_mask & bit) != 0;
         char label[2] = {ct_move_face_char(bit), '\0'};
         if (GuiToggle(
