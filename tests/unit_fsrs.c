@@ -1,0 +1,343 @@
+#include "framework.h"
+#include "srs/fsrs.h"
+
+#include <math.h>
+
+static ct_fsrs make_fsrs(void) {
+    ct_config cfg = ct_config_defaults();
+    ct_fsrs f;
+    ct_fsrs_init(&f, &cfg);
+    return f;
+}
+
+static ct_fsrs_card fresh_card(void) {
+    ct_fsrs_card c = {0};
+    return c;
+}
+
+static ct_fsrs_card learning_card(void) {
+    ct_fsrs_card c = {0};
+    c.stability = 10.0;
+    c.difficulty = 5.0;
+    c.due_day = 104;
+    c.last_review_day = 100;
+    c.reps = 1;
+    c.lapses = 0;
+    c.state = 1;
+    return c;
+}
+
+static ct_fsrs_card same_day_card(void) {
+    ct_fsrs_card c = {0};
+    c.stability = 10.0;
+    c.difficulty = 5.0;
+    c.due_day = 104;
+    c.last_review_day = 104;
+    c.reps = 2;
+    c.lapses = 0;
+    c.state = 1;
+    return c;
+}
+
+static bool cards_equal(const ct_fsrs_card *a, const ct_fsrs_card *b) {
+    return a->stability == b->stability && a->difficulty == b->difficulty &&
+           a->due_day == b->due_day && a->last_review_day == b->last_review_day &&
+           a->reps == b->reps && a->lapses == b->lapses && a->state == b->state;
+}
+
+CT_SUITE(fsrs_init) {
+    ct_config cfg = ct_config_defaults();
+    ct_fsrs f;
+    ct_fsrs_init(&f, &cfg);
+    bool weights_ok = true;
+    for (int i = 0; i < CT_FSRS_WEIGHT_COUNT; i++) {
+        if (f.w[i] != cfg.fsrs.w[i]) {
+            weights_ok = false;
+        }
+    }
+    CT_ASSERT(weights_ok);
+    CT_ASSERT_DBL_EQ(f.request_retention, CT_FSRS_REQUEST_RETENTION, 1e-9);
+    CT_ASSERT_DBL_EQ(f.max_ivl_days, CT_FSRS_MAX_IVL_DAYS, 1e-9);
+
+    cfg.fsrs.w[0] = 0.123456;
+    cfg.fsrs.request_retention = 0.8;
+    cfg.fsrs.max_ivl_days = 400.0;
+    ct_fsrs g;
+    ct_fsrs_init(&g, &cfg);
+    CT_ASSERT_DBL_EQ(g.w[0], 0.123456, 1e-9);
+    CT_ASSERT_DBL_EQ(g.request_retention, 0.8, 1e-9);
+    CT_ASSERT_DBL_EQ(g.max_ivl_days, 400.0, 1e-9);
+}
+
+CT_SUITE(fsrs_golden_first_review) {
+    static const double gold_s[4] = {0.40255, 1.18385, 3.173, 15.69105};
+    static const double gold_d[4] = {7.1949, 6.488305268471453, 5.282434422319005,
+                                     3.2245015893713678};
+    ct_fsrs f = make_fsrs();
+    for (int g = 1; g <= 4; g++) {
+        ct_fsrs_card in = fresh_card();
+        ct_fsrs_card out = ct_fsrs_review(&f, &in, (ct_grade)g, 0.0, 100);
+        CT_ASSERT_DBL_EQ(out.stability, gold_s[g - 1], 1e-9);
+        CT_ASSERT_DBL_EQ(out.difficulty, gold_d[g - 1], 1e-9);
+        CT_ASSERT_EQ(out.state, 1);
+        CT_ASSERT_EQ(out.reps, 1);
+        CT_ASSERT_EQ(out.lapses, 0);
+        CT_ASSERT_EQ(out.due_day, 100);
+        CT_ASSERT_EQ(out.last_review_day, 100);
+        CT_ASSERT(cards_equal(&in, &(ct_fsrs_card){0}));
+    }
+}
+
+CT_SUITE(fsrs_golden_recall) {
+    static const double gold_s[3] = {11.962060841460307, 19.791582142057077,
+                                     43.20991950624265};
+    static const double gold_d[3] = {5.7994339073111085, 4.991832707311108,
+                                     4.184231507311108};
+    static const long gold_i[3] = {12, 20, 43};
+    ct_fsrs f = make_fsrs();
+    for (int g = 2; g <= 4; g++) {
+        ct_fsrs_card in = learning_card();
+        ct_fsrs_card out = ct_fsrs_review(&f, &in, (ct_grade)g, 4.0, 104);
+        CT_ASSERT_DBL_EQ(out.stability, gold_s[g - 2], 1e-9);
+        CT_ASSERT_DBL_EQ(out.difficulty, gold_d[g - 2], 1e-9);
+        CT_ASSERT_EQ(out.due_day, 104 + gold_i[g - 2]);
+        CT_ASSERT_EQ(out.reps, 2);
+        CT_ASSERT_EQ(out.lapses, 0);
+        CT_ASSERT_EQ(out.state, 1);
+        CT_ASSERT_EQ(out.last_review_day, 104);
+        ct_fsrs_card expect_in = learning_card();
+        CT_ASSERT(cards_equal(&in, &expect_in));
+    }
+}
+
+CT_SUITE(fsrs_golden_forget) {
+    ct_fsrs f = make_fsrs();
+    ct_fsrs_card in = learning_card();
+    ct_fsrs_card out = ct_fsrs_review(&f, &in, CT_AGAIN, 4.0, 104);
+    CT_ASSERT_DBL_EQ(out.stability, 1.7994687509165919, 1e-9);
+    CT_ASSERT_DBL_EQ(out.difficulty, 6.607035107311108, 1e-9);
+    CT_ASSERT_EQ(out.due_day, 106);
+    CT_ASSERT_EQ(out.reps, 2);
+    CT_ASSERT_EQ(out.lapses, 1);
+    CT_ASSERT_EQ(out.state, 1);
+    CT_ASSERT_EQ(out.last_review_day, 104);
+    ct_fsrs_card expect_in = learning_card();
+    CT_ASSERT(cards_equal(&in, &expect_in));
+}
+
+CT_SUITE(fsrs_golden_same_day) {
+    static const double gold_s[4] = {5.010285241935083, 8.398413743809318,
+                                     14.077712147375411, 23.59754893600546};
+    ct_fsrs f = make_fsrs();
+    for (int g = 1; g <= 4; g++) {
+        ct_fsrs_card in = same_day_card();
+        ct_fsrs_card out = ct_fsrs_review(&f, &in, (ct_grade)g, 0.0, 104);
+        CT_ASSERT_DBL_EQ(out.stability, gold_s[g - 1], 1e-9);
+        CT_ASSERT_DBL_EQ(out.difficulty, 5.0, 1e-9);
+        CT_ASSERT_EQ(out.due_day, 104);
+        CT_ASSERT_EQ(out.last_review_day, 104);
+        CT_ASSERT_EQ(out.reps, 3);
+        CT_ASSERT_EQ(out.lapses, 0);
+        CT_ASSERT_EQ(out.state, 1);
+    }
+    for (int g = 1; g < 4; g++) {
+        ct_fsrs_card lo = same_day_card();
+        ct_fsrs_card hi = same_day_card();
+        ct_fsrs_card olo = ct_fsrs_review(&f, &lo, (ct_grade)g, 0.0, 104);
+        ct_fsrs_card ohi = ct_fsrs_review(&f, &hi, (ct_grade)(g + 1), 0.0, 104);
+        CT_ASSERT(olo.stability < ohi.stability);
+    }
+}
+
+CT_SUITE(fsrs_golden_interval_table) {
+    static const double stab[7] = {1.0, 5.0, 10.0, 50.0, 100.0, 365.0, 3650.0};
+    static const long gold[7] = {1, 5, 10, 50, 100, 365, 3650};
+    ct_fsrs f = make_fsrs();
+    for (int i = 0; i < 7; i++) {
+        CT_ASSERT_EQ(ct_fsrs_next_interval_days(&f, stab[i]), gold[i]);
+    }
+    CT_ASSERT_DBL_EQ(ct_fsrs_retrievability(10.0, 4.0), 0.9561491614605041, 1e-9);
+}
+
+CT_SUITE(fsrs_retrievability) {
+    CT_ASSERT_DBL_EQ(ct_fsrs_retrievability(10.0, 0.0), 1.0, 1e-12);
+    CT_ASSERT_DBL_EQ(ct_fsrs_retrievability(0.1, 0.0), 1.0, 1e-12);
+    CT_ASSERT_DBL_EQ(ct_fsrs_retrievability(36500.0, 0.0), 1.0, 1e-12);
+    bool in_range = true;
+    for (double s = 0.1; s <= 1e5; s *= 3.7) {
+        for (double t = 0.25; t <= 4096.0; t *= 2.0) {
+            double r = ct_fsrs_retrievability(s, t);
+            if (!(r > 0.0 && r < 1.0)) {
+                in_range = false;
+            }
+        }
+    }
+    CT_ASSERT(in_range);
+    bool decreasing = true;
+    double prev = ct_fsrs_retrievability(7.3, 0.0);
+    for (int step = 1; step <= 2000; step++) {
+        double r = ct_fsrs_retrievability(7.3, (double)step * 0.25);
+        if (!(r < prev)) {
+            decreasing = false;
+        }
+        prev = r;
+    }
+    CT_ASSERT(decreasing);
+}
+
+CT_SUITE(fsrs_stability_properties) {
+    ct_fsrs f = make_fsrs();
+    bool grows = true;
+    for (int g = 2; g <= 4; g++) {
+        for (int di = 0; di < 10; di++) {
+            ct_fsrs_card c = learning_card();
+            c.difficulty = 1.0 + (double)di;
+            ct_fsrs_card out = ct_fsrs_review(&f, &c, (ct_grade)g, 4.0, 104);
+            if (!(out.stability > c.stability)) {
+                grows = false;
+            }
+        }
+    }
+    CT_ASSERT(grows);
+    bool forget_below = true;
+    for (int di = 0; di < 10; di++) {
+        for (int ei = 1; ei <= 6; ei++) {
+            ct_fsrs_card good = learning_card();
+            ct_fsrs_card again = learning_card();
+            good.difficulty = 1.0 + (double)di;
+            again.difficulty = 1.0 + (double)di;
+            double elapsed = (double)ei * 7.0;
+            ct_fsrs_card og = ct_fsrs_review(&f, &good, CT_GOOD, elapsed, 100 + ei * 7);
+            ct_fsrs_card oa = ct_fsrs_review(&f, &again, CT_AGAIN, elapsed, 100 + ei * 7);
+            if (!(oa.stability < og.stability)) {
+                forget_below = false;
+            }
+        }
+    }
+    CT_ASSERT(forget_below);
+}
+
+CT_SUITE(fsrs_interval_properties) {
+    ct_fsrs f = make_fsrs();
+    bool nondecreasing = true;
+    long prev = 0;
+    for (double s = 0.1; s <= 1e10; s *= 1.3) {
+        long ivl = ct_fsrs_next_interval_days(&f, s);
+        if (ivl < prev || ivl < 1) {
+            nondecreasing = false;
+        }
+        prev = ivl;
+    }
+    CT_ASSERT(nondecreasing);
+    CT_ASSERT_EQ(ct_fsrs_next_interval_days(&f, 0.1), 1);
+    CT_ASSERT_EQ(ct_fsrs_next_interval_days(&f, 0.4), 1);
+    CT_ASSERT_EQ(ct_fsrs_next_interval_days(&f, 1e12), 36500);
+    ct_fsrs capped = make_fsrs();
+    capped.max_ivl_days = 100.0;
+    CT_ASSERT_EQ(ct_fsrs_next_interval_days(&capped, 1000.0), 100);
+    CT_ASSERT_EQ(ct_fsrs_next_interval_days(&capped, 1e9), 100);
+}
+
+CT_SUITE(fsrs_branch_selection) {
+    ct_fsrs f = make_fsrs();
+    ct_fsrs_card stale = learning_card();
+    ct_fsrs_card out = ct_fsrs_review(&f, &stale, CT_GOOD, 0.0, 104);
+    CT_ASSERT(out.due_day > 104);
+    CT_ASSERT(out.difficulty < 5.0);
+    CT_ASSERT_DBL_EQ(out.stability, 10.0, 1e-9);
+    CT_ASSERT_EQ(out.lapses, 0);
+}
+
+CT_SUITE(fsrs_clamp_proof) {
+    ct_fsrs f = make_fsrs();
+    ct_fsrs_card hot = learning_card();
+    hot.difficulty = 42.0;
+    ct_fsrs_card hot_out = ct_fsrs_review(&f, &hot, CT_GOOD, 5.0, 110);
+    CT_ASSERT(hot_out.difficulty >= CT_FSRS_MIN_DIFFICULTY);
+    CT_ASSERT(hot_out.difficulty <= CT_FSRS_MAX_DIFFICULTY);
+    ct_fsrs_card cold = learning_card();
+    cold.difficulty = -9.5;
+    ct_fsrs_card cold_out = ct_fsrs_review(&f, &cold, CT_HARD, 5.0, 110);
+    CT_ASSERT(cold_out.difficulty >= CT_FSRS_MIN_DIFFICULTY);
+    CT_ASSERT(cold_out.difficulty <= CT_FSRS_MAX_DIFFICULTY);
+    ct_fsrs_card big = learning_card();
+    big.stability = 1e12;
+    ct_fsrs_card big_out = ct_fsrs_review(&f, &big, CT_GOOD, 4.0, 104);
+    CT_ASSERT(big_out.stability <= CT_FSRS_MAX_IVL_DAYS);
+    CT_ASSERT(big_out.stability >= CT_FSRS_MIN_STABILITY);
+    ct_fsrs_card tiny = learning_card();
+    tiny.stability = 0.001;
+    ct_fsrs_card tiny_out = ct_fsrs_review(&f, &tiny, CT_AGAIN, 4.0, 104);
+    CT_ASSERT(tiny_out.stability >= CT_FSRS_MIN_STABILITY);
+    CT_ASSERT(tiny_out.stability <= CT_FSRS_MAX_IVL_DAYS);
+}
+
+CT_SUITE(fsrs_random_walk) {
+    ct_fsrs f = make_fsrs();
+    ct_sfc64 rng;
+    ct_sfc64_init(&rng, 20261007);
+    ct_fsrs_card card = fresh_card();
+    int expected_lapses = 0;
+    long today = 500;
+    bool d_ok = true;
+    bool s_ok = true;
+    bool reps_ok = true;
+    bool bookkeeping_ok = true;
+    bool immutability_ok = true;
+    bool lapses_ok = true;
+    for (int i = 0; i < 200; i++) {
+        bool same_day = card.state == 1 && ct_sfc64_range(&rng, 4) == 0;
+        ct_grade g = (ct_grade)(1 + (int)ct_sfc64_range(&rng, 4));
+        double elapsed = 0.0;
+        if (!same_day) {
+            elapsed = 1.0 + (double)ct_sfc64_range(&rng, 30);
+            today += (long)elapsed;
+        }
+        ct_fsrs_card before = card;
+        ct_fsrs_card out = ct_fsrs_review(&f, &card, g, elapsed, today);
+        if (!cards_equal(&card, &before)) {
+            immutability_ok = false;
+        }
+        card = out;
+        if (card.difficulty < CT_FSRS_MIN_DIFFICULTY || card.difficulty > CT_FSRS_MAX_DIFFICULTY) {
+            d_ok = false;
+        }
+        if (card.stability < CT_FSRS_MIN_STABILITY || card.stability > CT_FSRS_MAX_IVL_DAYS) {
+            s_ok = false;
+        }
+        if (card.reps != i + 1) {
+            reps_ok = false;
+        }
+        if (card.state != 1) {
+            bookkeeping_ok = false;
+        }
+        if (card.last_review_day != today) {
+            bookkeeping_ok = false;
+        }
+        if (same_day) {
+            if (card.due_day != today) {
+                bookkeeping_ok = false;
+            }
+        } else if (before.state == 1) {
+            if (card.due_day != today + ct_fsrs_next_interval_days(&f, card.stability)) {
+                bookkeeping_ok = false;
+            }
+        } else if (card.due_day != today) {
+            bookkeeping_ok = false;
+        }
+        if (!same_day && before.state == 1 && g == CT_AGAIN) {
+            expected_lapses++;
+        }
+        if (card.lapses != expected_lapses) {
+            lapses_ok = false;
+        }
+    }
+    CT_ASSERT(d_ok);
+    CT_ASSERT(s_ok);
+    CT_ASSERT(reps_ok);
+    CT_ASSERT(bookkeeping_ok);
+    CT_ASSERT(immutability_ok);
+    CT_ASSERT(lapses_ok);
+    CT_ASSERT(card.reps == 200);
+    CT_ASSERT(card.state == 1);
+}
