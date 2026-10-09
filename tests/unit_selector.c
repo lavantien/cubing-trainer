@@ -12,6 +12,9 @@ enum {
     SPEC_METHOD_MAX = 3,
     SPEC_CFOP_LISTS = 4,
     SPEC_3STYLE_LISTS = 5,
+    SPEC_LBL_LISTS = 6,
+    SPEC_YAU_LISTS = 2,
+    SPEC_LBL_EVENTS = 3,
     SPEC_ONE_LIST = 1,
     SPEC_PLL_CASES = 21,
     SPEC_OLL_CASES = 57,
@@ -36,28 +39,18 @@ static const struct {
     ct_event event;
     ct_method method;
 } spec_event_methods[] = {
-    {CT_EVENT_3X3, CT_METHOD_CFOP},
-    {CT_EVENT_2X2, CT_METHOD_CLL},
-    {CT_EVENT_3BLD, CT_METHOD_3STYLE},
-    {CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN},
-    {CT_EVENT_3BLD, CT_METHOD_M2},
-    {CT_EVENT_4BLD, CT_METHOD_3STYLE},
-    {CT_EVENT_4BLD, CT_METHOD_U2},
-    {CT_EVENT_4BLD, CT_METHOD_R2},
-    {CT_EVENT_5BLD, CT_METHOD_3STYLE},
-    {CT_EVENT_5BLD, CT_METHOD_U2},
-    {CT_EVENT_5BLD, CT_METHOD_R2},
-    {CT_EVENT_MULTI_BLD, CT_METHOD_3STYLE},
-    {CT_EVENT_OH, CT_METHOD_CFOP},
-    {CT_EVENT_4X4, CT_METHOD_YAU},
-    {CT_EVENT_5X5, CT_METHOD_REDUCTION},
-    {CT_EVENT_6X6, CT_METHOD_REDUCTION},
-    {CT_EVENT_7X7, CT_METHOD_REDUCTION},
-    {CT_EVENT_MEGAMINX, CT_METHOD_4LLL},
-    {CT_EVENT_PYRAMINX, CT_METHOD_L4E},
-    {CT_EVENT_PYRAMINX, CT_METHOD_LBL},
-    {CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE},
-    {CT_EVENT_FTO, CT_METHOD_L4T_REDUX},
+    {CT_EVENT_3X3, CT_METHOD_CFOP},      {CT_EVENT_2X2, CT_METHOD_CLL},
+    {CT_EVENT_3BLD, CT_METHOD_3STYLE},   {CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN},
+    {CT_EVENT_3BLD, CT_METHOD_M2},       {CT_EVENT_4BLD, CT_METHOD_3STYLE},
+    {CT_EVENT_4BLD, CT_METHOD_U2},       {CT_EVENT_4BLD, CT_METHOD_R2},
+    {CT_EVENT_5BLD, CT_METHOD_3STYLE},   {CT_EVENT_5BLD, CT_METHOD_U2},
+    {CT_EVENT_5BLD, CT_METHOD_R2},       {CT_EVENT_MULTI_BLD, CT_METHOD_3STYLE},
+    {CT_EVENT_OH, CT_METHOD_CFOP},       {CT_EVENT_4X4, CT_METHOD_YAU},
+    {CT_EVENT_5X5, CT_METHOD_REDUCTION}, {CT_EVENT_6X6, CT_METHOD_REDUCTION},
+    {CT_EVENT_7X7, CT_METHOD_REDUCTION}, {CT_EVENT_CLOCK, CT_METHOD_LBL},
+    {CT_EVENT_MEGAMINX, CT_METHOD_4LLL}, {CT_EVENT_PYRAMINX, CT_METHOD_L4E},
+    {CT_EVENT_PYRAMINX, CT_METHOD_LBL},  {CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE},
+    {CT_EVENT_SQUARE1, CT_METHOD_LBL},   {CT_EVENT_FTO, CT_METHOD_L4T_REDUX},
 };
 
 static const ct_stage spec_cfop_stages[SPEC_CFOP_LISTS] = {CT_STAGE_PLL, CT_STAGE_OLL, CT_STAGE_F2L,
@@ -140,9 +133,7 @@ CT_SUITE(selector_methods) {
             CT_ASSERT_EQ(got[j], want[j]);
         }
     }
-    CT_ASSERT_EQ(ct_selector_methods(CT_EVENT_CLOCK, got, SPEC_METHOD_MAX), 0);
     CT_ASSERT_EQ(ct_selector_methods(CT_EVENT_FMC, got, SPEC_METHOD_MAX), 0);
-    CT_ASSERT_EQ(ct_selector_methods(CT_EVENT_SQUARE1, got, SPEC_METHOD_MAX), 0);
     CT_ASSERT_EQ(ct_selector_methods((ct_event)-1, got, SPEC_METHOD_MAX), 0);
     CT_ASSERT_EQ(ct_selector_methods((ct_event)SPEC_EVENT_COUNT, got, SPEC_METHOD_MAX), 0);
     for (int i = 0; i < SPEC_METHOD_MAX; i++) {
@@ -293,11 +284,9 @@ CT_SUITE(selector_reserved_lists) {
         ct_orbit orbit;
     } spec[] = {
         {CT_EVENT_2X2, CT_METHOD_CLL, CT_STAGE_CLL, CT_ORBIT_CORNER},
-        {CT_EVENT_4X4, CT_METHOD_YAU, CT_STAGE_CONCEPT, CT_ORBIT_CORNER},
         {CT_EVENT_5X5, CT_METHOD_REDUCTION, CT_STAGE_CONCEPT, CT_ORBIT_CORNER},
         {CT_EVENT_MEGAMINX, CT_METHOD_4LLL, CT_STAGE_4LLL, CT_ORBIT_CORNER},
         {CT_EVENT_PYRAMINX, CT_METHOD_L4E, CT_STAGE_L4E, CT_ORBIT_CORNER},
-        {CT_EVENT_PYRAMINX, CT_METHOD_LBL, CT_STAGE_CONCEPT, CT_ORBIT_CORNER},
         {CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE, CT_STAGE_SARAH, CT_ORBIT_CORNER},
         {CT_EVENT_FTO, CT_METHOD_L4T_REDUX, CT_STAGE_L4T, CT_ORBIT_CORNER},
         {CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN, CT_STAGE_CONCEPT, CT_ORBIT_CORNER},
@@ -319,6 +308,55 @@ CT_SUITE(selector_reserved_lists) {
         CT_ASSERT_EQ(ct_selector_case_count(spec[i].event, spec[i].method, 0), 0);
         CT_ASSERT(ct_selector_case_key(spec[i].event, spec[i].method, 0, 0, key, sizeof key) < 0);
     }
+}
+
+CT_SUITE(selector_lbl_lists) {
+    static const ct_stage spec_lbl_stages[SPEC_LBL_LISTS] = {
+        CT_STAGE_CONCEPT, CT_STAGE_CUBESHAPE, CT_STAGE_CO, CT_STAGE_EO, CT_STAGE_CP, CT_STAGE_EP};
+    static const ct_orbit spec_lbl_orbits[SPEC_LBL_LISTS] = {CT_ORBIT_CORNER, CT_ORBIT_CORNER,
+                                                             CT_ORBIT_CORNER, CT_ORBIT_EDGE,
+                                                             CT_ORBIT_CORNER, CT_ORBIT_EDGE};
+    const ct_event evs[SPEC_LBL_EVENTS] = {CT_EVENT_SQUARE1, CT_EVENT_CLOCK, CT_EVENT_PYRAMINX};
+    int ids[SPEC_LBL_LISTS];
+    ct_stage stages[SPEC_LBL_LISTS];
+    ct_orbit orbits[SPEC_LBL_LISTS];
+    char key[SPEC_KEY_CAP];
+    for (int e = 0; e < SPEC_LBL_EVENTS; e++) {
+        CT_ASSERT_EQ(ct_selector_lists(evs[e], CT_METHOD_LBL, NULL, NULL, NULL, 0), SPEC_LBL_LISTS);
+        CT_ASSERT_EQ(ct_selector_lists(evs[e], CT_METHOD_LBL, ids, stages, orbits, SPEC_LBL_LISTS),
+                     SPEC_LBL_LISTS);
+        for (int i = 0; i < SPEC_LBL_LISTS; i++) {
+            CT_ASSERT_EQ(ids[i], i);
+            CT_ASSERT_EQ(stages[i], spec_lbl_stages[i]);
+            CT_ASSERT_EQ(orbits[i], spec_lbl_orbits[i]);
+            CT_ASSERT_EQ(ct_selector_case_count(evs[e], CT_METHOD_LBL, i), 0);
+            CT_ASSERT(ct_selector_case_key(evs[e], CT_METHOD_LBL, i, 0, key, sizeof key) < 0);
+        }
+        CT_ASSERT(ct_selector_case_count(evs[e], CT_METHOD_LBL, SPEC_LBL_LISTS) < 0);
+        CT_ASSERT(ct_selector_case_count(evs[e], CT_METHOD_LBL, -1) < 0);
+    }
+}
+
+CT_SUITE(selector_yau_lists) {
+    static const ct_stage spec_yau_stages[SPEC_YAU_LISTS] = {CT_STAGE_CONCEPT, CT_STAGE_PARITY};
+    static const ct_orbit spec_yau_orbits[SPEC_YAU_LISTS] = {CT_ORBIT_CORNER, CT_ORBIT_WING};
+    int ids[SPEC_YAU_LISTS];
+    ct_stage stages[SPEC_YAU_LISTS];
+    ct_orbit orbits[SPEC_YAU_LISTS];
+    char key[SPEC_KEY_CAP];
+    CT_ASSERT_EQ(ct_selector_lists(CT_EVENT_4X4, CT_METHOD_YAU, NULL, NULL, NULL, 0),
+                 SPEC_YAU_LISTS);
+    CT_ASSERT_EQ(
+        ct_selector_lists(CT_EVENT_4X4, CT_METHOD_YAU, ids, stages, orbits, SPEC_YAU_LISTS),
+        SPEC_YAU_LISTS);
+    for (int i = 0; i < SPEC_YAU_LISTS; i++) {
+        CT_ASSERT_EQ(ids[i], i);
+        CT_ASSERT_EQ(stages[i], spec_yau_stages[i]);
+        CT_ASSERT_EQ(orbits[i], spec_yau_orbits[i]);
+        CT_ASSERT_EQ(ct_selector_case_count(CT_EVENT_4X4, CT_METHOD_YAU, i), 0);
+        CT_ASSERT(ct_selector_case_key(CT_EVENT_4X4, CT_METHOD_YAU, i, 0, key, sizeof key) < 0);
+    }
+    CT_ASSERT(ct_selector_case_count(CT_EVENT_4X4, CT_METHOD_YAU, SPEC_YAU_LISTS) < 0);
 }
 
 CT_SUITE(selector_navigation) {
