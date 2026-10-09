@@ -1,11 +1,8 @@
 #ifndef CT_INTERCHANGE_H
 #define CT_INTERCHANGE_H
 
+#include "config/config.h"
 #include "engine/cube.h"
-
-enum {
-    CT_INTERCHANGE_MAX_CANDIDATES = 180,
-};
 
 typedef struct {
     ct_move move;

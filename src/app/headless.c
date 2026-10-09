@@ -10,10 +10,6 @@
 
 #include "raylib.h"
 
-#define CT_HEADLESS_CAM_X 4.5f
-#define CT_HEADLESS_CAM_Y 4.5f
-#define CT_HEADLESS_CAM_Z 4.5f
-#define CT_HEADLESS_CAM_FOVY 45.0f
 #define CT_HEADLESS_WINDOW_TITLE "cubing-trainer headless"
 
 static Camera3D headless_camera(void) {
@@ -33,8 +29,7 @@ static Camera3D headless_camera(void) {
 }
 
 static double headless_move_seconds(void) {
-    return (double)CT_RENDERER_MOVE_MILLIS /
-           (CT_DECIMAL_BASE * CT_DECIMAL_BASE * CT_DECIMAL_BASE);
+    return (double)CT_RENDERER_MOVE_MILLIS / (CT_DECIMAL_BASE * CT_DECIMAL_BASE * CT_DECIMAL_BASE);
 }
 
 int ct_headless_scene_id(const char *name) {

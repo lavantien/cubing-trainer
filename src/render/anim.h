@@ -3,12 +3,8 @@
 
 #include <stdbool.h>
 
+#include "config/config.h"
 #include "engine/cube.h"
-
-enum {
-    CT_ANIM_QUEUE_CAP = 64,
-    CT_ANIM_SPEED_EPS_SCALE = 1000000
-};
 
 typedef struct {
     ct_move moves[CT_ANIM_QUEUE_CAP];

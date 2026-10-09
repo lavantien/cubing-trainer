@@ -3,14 +3,8 @@
 
 #include <sqlite3.h>
 
+#include "config/config.h"
 #include "repo_cards.h"
-
-enum {
-    CT_STATS_DECK_MAX = 64,
-    CT_STATS_CASE_KEY_MAX = 64,
-    CT_STATS_DAY_MAX = 11,
-    CT_STATS_STAMP_MAX = 32
-};
 
 typedef struct {
     char deck[CT_STATS_DECK_MAX];
@@ -44,7 +38,8 @@ typedef struct {
 } ct_session_row;
 
 int ct_repo_deck_stats(sqlite3 *db, const char *now_iso, ct_deck_stats *out, int cap);
-int ct_repo_due_forecast(sqlite3 *db, const char *from_day, int days, ct_due_forecast_row *out, int cap);
+int ct_repo_due_forecast(sqlite3 *db, const char *from_day, int days, ct_due_forecast_row *out,
+                         int cap);
 int ct_repo_case_accuracy(sqlite3 *db, const char *deck, ct_case_accuracy_row *out, int cap);
 int ct_repo_session_log(sqlite3 *db, const ct_session_row *row);
 int ct_repo_sessions(sqlite3 *db, ct_session_row *out, int cap);

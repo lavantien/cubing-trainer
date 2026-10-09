@@ -104,8 +104,8 @@ double ct_ease_cubic_in_out(double t) {
     if (t > 1.0) {
         return 1.0;
     }
-    if (t < 0.5) {
-        return 4.0 * t * t * t;
+    if (t < CT_ANIM_EASE_HALF) {
+        return CT_ANIM_EASE_CUBIC_SCALE * t * t * t;
     }
     double u = 2.0 - 2.0 * t;
     return 1.0 - u * u * u / 2.0;

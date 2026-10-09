@@ -3,21 +3,16 @@
 
 #include "raylib.h"
 
+#include "config/config.h"
 #include "engine/cube.h"
 #include "render/anim.h"
 
 enum {
     CT_RENDERER_MAX_QUADS = CT_CUBE_FACE_COUNT * CT_CUBE_MAX_N * CT_CUBE_MAX_N,
-    CT_RENDERER_MOVE_MILLIS = 350,
     CT_MESH_BUFFER_POSITION = 0,
     CT_MESH_BUFFER_COLOR = 3,
     CT_MESH_VERTS_PER_QUAD = 6
 };
-
-#define CT_RENDERER_DEFAULT_CUBE_SIZE 3.0f
-#define CT_RENDERER_DEFAULT_INSET 0.12f
-#define CT_RENDERER_OUTSET_FRACTION 0.02f
-#define CT_RENDERER_PI 3.14159265358979323846
 
 typedef struct {
     Color face[CT_CUBE_FACE_COUNT];
