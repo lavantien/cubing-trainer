@@ -1,5 +1,6 @@
 #include "srs/fsrs.h"
 
+#include <limits.h>
 #include <math.h>
 
 enum fsrs_weight {
@@ -71,6 +72,9 @@ void ct_fsrs_init(ct_fsrs *f, const ct_config *cfg) {
 }
 
 double ct_fsrs_retrievability(double stability, double elapsed_days) {
+    if (elapsed_days < 0.0) {
+        elapsed_days = 0.0;
+    }
     return pow(1 + CT_FSRS_FACTOR * elapsed_days / stability, CT_FSRS_DECAY);
 }
 
@@ -113,6 +117,7 @@ ct_fsrs_card ct_fsrs_review(const ct_fsrs *f, const ct_fsrs_card *card, ct_grade
             clamp_stability(stability_forget(f->w, card->stability, out.difficulty, r));
         out.lapses = card->lapses + 1;
     }
-    out.due_day = today_day + ct_fsrs_next_interval_days(f, out.stability);
+    long ivl = ct_fsrs_next_interval_days(f, out.stability);
+    out.due_day = today_day > LONG_MAX - ivl ? LONG_MAX : today_day + ivl;
     return out;
 }

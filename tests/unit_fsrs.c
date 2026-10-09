@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "srs/fsrs.h"
 
+#include <limits.h>
 #include <math.h>
 
 static ct_fsrs make_fsrs(void) {
@@ -270,6 +271,49 @@ CT_SUITE(fsrs_clamp_proof) {
     ct_fsrs_card tiny_out = ct_fsrs_review(&f, &tiny, CT_AGAIN, 4.0, 104);
     CT_ASSERT(tiny_out.stability >= CT_FSRS_MIN_STABILITY);
     CT_ASSERT(tiny_out.stability <= CT_FSRS_MAX_IVL_DAYS);
+}
+
+CT_SUITE(fsrs_negative_elapsed) {
+    ct_fsrs f = make_fsrs();
+    ct_fsrs_card in = learning_card();
+    ct_fsrs_card out = ct_fsrs_review(&f, &in, CT_GOOD, -1.0, 104);
+    CT_ASSERT(isfinite(out.stability));
+    CT_ASSERT(isfinite(out.difficulty));
+    CT_ASSERT_DBL_EQ(out.stability, 10.0, 1e-9);
+    CT_ASSERT_EQ(out.due_day, 104 + ct_fsrs_next_interval_days(&f, out.stability));
+    ct_fsrs_card deep = learning_card();
+    ct_fsrs_card deep_out = ct_fsrs_review(&f, &deep, CT_GOOD, -1e9, 104);
+    CT_ASSERT_DBL_EQ(deep_out.stability, out.stability, 0.0);
+    CT_ASSERT_DBL_EQ(deep_out.difficulty, out.difficulty, 0.0);
+    CT_ASSERT_EQ(deep_out.due_day, out.due_day);
+    CT_ASSERT(isfinite(ct_fsrs_retrievability(0.1, -1.0)));
+    CT_ASSERT_DBL_EQ(ct_fsrs_retrievability(0.1, -1.0), 1.0, 1e-12);
+    CT_ASSERT_DBL_EQ(ct_fsrs_retrievability(0.1, -1e9), 1.0, 1e-12);
+    CT_ASSERT_DBL_EQ(ct_fsrs_retrievability(0.1, -7.5), ct_fsrs_retrievability(0.1, 0.0), 0.0);
+    ct_fsrs_card back = same_day_card();
+    ct_fsrs_card back_out = ct_fsrs_review(&f, &back, CT_GOOD, -0.25, 104);
+    CT_ASSERT(back_out.difficulty < back.difficulty);
+    CT_ASSERT(back_out.due_day >= 105);
+    CT_ASSERT_DBL_EQ(back_out.stability, 10.0, 1e-9);
+}
+
+CT_SUITE(fsrs_today_overflow) {
+    ct_fsrs f = make_fsrs();
+    ct_fsrs_card in = learning_card();
+    in.stability = 3.173;
+    in.last_review_day = LONG_MAX - 40000;
+    in.due_day = LONG_MAX - 40000;
+    ct_fsrs_card out = ct_fsrs_review(&f, &in, CT_GOOD, 4.0, LONG_MAX);
+    CT_ASSERT(out.due_day > 0);
+    CT_ASSERT_EQ(out.due_day, LONG_MAX);
+    ct_fsrs_card near = learning_card();
+    ct_fsrs_card near_out = ct_fsrs_review(&f, &near, CT_GOOD, 4.0, LONG_MAX - 40000);
+    CT_ASSERT_EQ(near_out.due_day,
+                 LONG_MAX - 40000 + ct_fsrs_next_interval_days(&f, near_out.stability));
+    ct_fsrs_card same_edge = learning_card();
+    same_edge.last_review_day = LONG_MAX;
+    ct_fsrs_card same_out = ct_fsrs_review(&f, &same_edge, CT_GOOD, 0.0, LONG_MAX);
+    CT_ASSERT_EQ(same_out.due_day, LONG_MAX);
 }
 
 CT_SUITE(fsrs_random_walk) {
