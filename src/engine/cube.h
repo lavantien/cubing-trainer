@@ -40,6 +40,14 @@ typedef struct {
 } ct_v3;
 
 typedef struct {
+    ct_v3 normal;
+    ct_v3 row;
+    ct_v3 col;
+} ct_face_frame;
+
+extern const ct_face_frame ct_frames[CT_CUBE_FACE_COUNT];
+
+typedef struct {
     int face;
     int row;
     int col;

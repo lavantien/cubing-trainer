@@ -2,13 +2,7 @@
 
 #include <string.h>
 
-typedef struct {
-    ct_v3 normal;
-    ct_v3 row;
-    ct_v3 col;
-} ct_face_frame;
-
-static const ct_face_frame ct_frames[CT_CUBE_FACE_COUNT] = {
+const ct_face_frame ct_frames[CT_CUBE_FACE_COUNT] = {
     [CT_FACE_U] = {{0, 1, 0}, {0, 0, 1}, {1, 0, 0}},
     [CT_FACE_L] = {{-1, 0, 0}, {0, -1, 0}, {0, 0, 1}},
     [CT_FACE_F] = {{0, 0, 1}, {0, -1, 0}, {1, 0, 0}},
