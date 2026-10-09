@@ -1,0 +1,1212 @@
+clang-format --style=file --dry-run -Werror src/app/app_loop.c src/app/headless.c src/app/main.c     src/config/config.c  src/engine/cube.c src/engine/geometry.c src/engine/notation.c src/engine/transform.c        src/gen/interchange.c src/gen/score.c src/gen/synth.c src/gen/targets.c        src/packs/packs.c src/packs/provenance.c    src/render/anim.c src/render/renderer.c    src/srs/fsrs.c  src/stats/stats.c  src/storage/db.c src/storage/migrate.c src/storage/repo_algs.c src/storage/repo_cards.c src/storage/repo_reviews.c src/storage/repo_settings.c src/storage/repo_stats.c             src/trainer/cfop.c src/trainer/selector.c src/trainer/session.c      src/ui/screen_cards.c src/ui/screen_menu.c src/ui/screen_review.c src/ui/screen_settings.c src/ui/screen_stats.c src/ui/widgets.c        src/app/app.h src/app/headless.h     src/config/config.h  src/engine/cube.h src/engine/geometry.h src/engine/notation.h src/engine/transform.h        src/gen/interchange.h src/gen/score.h src/gen/synth.h src/gen/targets.h        src/packs/packs.h src/packs/provenance.h    src/render/anim.h src/render/renderer.h    src/srs/fsrs.h  src/stats/stats.h  src/storage/db.h src/storage/repo_algs.h src/storage/repo_cards.h src/storage/repo_reviews.h src/storage/repo_settings.h src/storage/repo_stats.h             src/trainer/cfop.h src/trainer/selector.h src/trainer/session.h      src/ui/ui.h src/ui/widgets.h        tests/framework.c tests/fuzz_config.c tests/fuzz_db.c tests/fuzz_engine.c tests/fuzz_main.c tests/fuzz_srs.c tests/test_main.c tests/unit_algs.c tests/unit_anim.c tests/unit_cards.c tests/unit_cards_form.c tests/unit_cfop.c tests/unit_config.c tests/unit_cube.c tests/unit_db.c tests/unit_fsrs.c tests/unit_geometry.c tests/unit_interchange.c tests/unit_letter_scheme.c tests/unit_notation.c tests/unit_pack_seeds.c tests/unit_packs.c tests/unit_renderer.c tests/unit_review_form.c tests/unit_score.c tests/unit_selector.c tests/unit_session.c tests/unit_settings_form.c tests/unit_smoke.c tests/unit_stats.c tests/unit_stats_repo.c tests/unit_stats_screen.c tests/unit_synth.c tests/unit_targets.c tests/unit_transform.c                                           tests/framework.h                                          
+src/app/headless.c:36:45: error: code should be clang-formatted [-Wclang-format-violations]
+    return (double)CT_RENDERER_MOVE_MILLIS /
+                                            ^
+src/engine/geometry.c:95:95: error: code should be clang-formatted [-Wclang-format-violations]
+                perm[c.facelet[face * CT_CUBE_STRIDE * CT_CUBE_STRIDE + row * CT_CUBE_STRIDE +
+                                                                                              ^
+src/srs/fsrs.c:6:15: error: code should be clang-formatted [-Wclang-format-violations]
+    fw_s_init, fw_s_init_hard, fw_s_init_good, fw_s_init_easy,
+              ^
+src/srs/fsrs.c:6:31: error: code should be clang-formatted [-Wclang-format-violations]
+    fw_s_init, fw_s_init_hard, fw_s_init_good, fw_s_init_easy,
+                              ^
+src/srs/fsrs.c:6:47: error: code should be clang-formatted [-Wclang-format-violations]
+    fw_s_init, fw_s_init_hard, fw_s_init_good, fw_s_init_easy,
+                                              ^
+src/srs/fsrs.c:7:15: error: code should be clang-formatted [-Wclang-format-violations]
+    fw_d_init, fw_d_slope, fw_d_delta, fw_d_revert,
+              ^
+src/srs/fsrs.c:7:27: error: code should be clang-formatted [-Wclang-format-violations]
+    fw_d_init, fw_d_slope, fw_d_delta, fw_d_revert,
+                          ^
+src/srs/fsrs.c:7:39: error: code should be clang-formatted [-Wclang-format-violations]
+    fw_d_init, fw_d_slope, fw_d_delta, fw_d_revert,
+                                      ^
+src/srs/fsrs.c:8:15: error: code should be clang-formatted [-Wclang-format-violations]
+    fw_s_gain, fw_s_tension, fw_s_press,
+              ^
+src/srs/fsrs.c:8:29: error: code should be clang-formatted [-Wclang-format-violations]
+    fw_s_gain, fw_s_tension, fw_s_press,
+                            ^
+src/srs/fsrs.c:9:15: error: code should be clang-formatted [-Wclang-format-violations]
+    fw_f_init, fw_f_damp, fw_f_grow, fw_f_fuzz,
+              ^
+src/srs/fsrs.c:9:26: error: code should be clang-formatted [-Wclang-format-violations]
+    fw_f_init, fw_f_damp, fw_f_grow, fw_f_fuzz,
+                         ^
+src/srs/fsrs.c:9:37: error: code should be clang-formatted [-Wclang-format-violations]
+    fw_f_init, fw_f_damp, fw_f_grow, fw_f_fuzz,
+                                    ^
+src/srs/fsrs.c:10:21: error: code should be clang-formatted [-Wclang-format-violations]
+    fw_hard_penalty, fw_easy_bonus,
+                    ^
+src/srs/fsrs.c:11:16: error: code should be clang-formatted [-Wclang-format-violations]
+    fw_sd_gain, fw_sd_bias
+               ^
+src/srs/fsrs.c:51:72: error: code should be clang-formatted [-Wclang-format-violations]
+    double inc = exp(w[fw_s_gain]) * (CT_FSRS_MAX_DIFFICULTY + 1 - d) *
+                                                                       ^
+src/srs/fsrs.c:52:44: error: code should be clang-formatted [-Wclang-format-violations]
+                 pow(s, -w[fw_s_tension]) * (exp(w[fw_s_press] * (1 - r)) - 1) * hard * easy;
+                                           ^
+src/srs/fsrs.c:78:48: error: code should be clang-formatted [-Wclang-format-violations]
+    double raw = (stability / CT_FSRS_FACTOR) *
+                                               ^
+src/srs/fsrs.c:112:24: error: code should be clang-formatted [-Wclang-format-violations]
+        out.stability =
+                       ^
+src/storage/repo_cards.c:6:100: error: code should be clang-formatted [-Wclang-format-violations]
+    "INSERT INTO flashcard(deck, case_key, direction, front_json, alg_3x3, alg_big, alg_oh, notes, created_at, updated_at)"
+                                                                                                   ^
+src/storage/repo_cards.c:8:41: error: code should be clang-formatted [-Wclang-format-violations]
+static const char CT_SQL_CARD_UPDATE[] =
+                                        ^
+src/storage/repo_cards.c:9:63: error: code should be clang-formatted [-Wclang-format-violations]
+    "UPDATE flashcard SET deck = ?, case_key = ?, direction = ?, front_json = ?, alg_3x3 = ?, alg_big = ?, alg_oh = ?,"
+                                                              ^
+src/storage/repo_cards.c:9:120: error: code should be clang-formatted [-Wclang-format-violations]
+    "UPDATE flashcard SET deck = ?, case_key = ?, direction = ?, front_json = ?, alg_3x3 = ?, alg_big = ?, alg_oh = ?,"
+                                                                                                                       ^
+src/storage/repo_cards.c:11:38: error: code should be clang-formatted [-Wclang-format-violations]
+static const char CT_SQL_CARD_GET[] =
+                                     ^
+src/storage/repo_cards.c:12:65: error: code should be clang-formatted [-Wclang-format-violations]
+    "SELECT id, deck, case_key, direction, front_json, alg_3x3, alg_big, alg_oh, notes, created_at, updated_at"
+                                                                ^
+src/storage/repo_cards.c:12:112: error: code should be clang-formatted [-Wclang-format-violations]
+    "SELECT id, deck, case_key, direction, front_json, alg_3x3, alg_big, alg_oh, notes, created_at, updated_at"
+                                                                                                               ^
+src/storage/repo_cards.c:15:89: error: code should be clang-formatted [-Wclang-format-violations]
+    "SELECT id, deck, case_key, direction, front_json, alg_3x3, alg_big, alg_oh, notes, created_at, updated_at"
+                                                                                        ^
+src/storage/repo_cards.c:17:41: error: code should be clang-formatted [-Wclang-format-violations]
+static const char CT_SQL_CARD_DELETE[] =
+                                        ^
+src/storage/repo_cards.c:19:39: error: code should be clang-formatted [-Wclang-format-violations]
+static const char CT_SQL_CARD_LIST[] =
+                                      ^
+src/storage/repo_cards.c:20:65: error: code should be clang-formatted [-Wclang-format-violations]
+    "SELECT id, deck, case_key, direction, front_json, alg_3x3, alg_big, alg_oh, notes, created_at, updated_at"
+                                                                ^
+src/storage/repo_cards.c:20:112: error: code should be clang-formatted [-Wclang-format-violations]
+    "SELECT id, deck, case_key, direction, front_json, alg_3x3, alg_big, alg_oh, notes, created_at, updated_at"
+                                                                                                               ^
+src/storage/repo_cards.c:22:37: error: code should be clang-formatted [-Wclang-format-violations]
+static const char CT_SQL_SRS_GET[] =
+                                    ^
+src/storage/repo_cards.c:23:60: error: code should be clang-formatted [-Wclang-format-violations]
+    "SELECT stability, difficulty, due, last_review, reps, lapses, state FROM srs_state WHERE card_id = ?";
+                                                           ^
+src/storage/repo_cards.c:29:99: error: code should be clang-formatted [-Wclang-format-violations]
+    " last_review = excluded.last_review, reps = excluded.reps, lapses = excluded.lapses, state = excluded.state";
+                                                                                                  ^
+src/storage/repo_cards.c:86:18: error: code should be clang-formatted [-Wclang-format-violations]
+    if (n >= cap) n = cap - 1;
+                 ^
+src/storage/repo_cards.c:92:21: error: code should be clang-formatted [-Wclang-format-violations]
+    if (out == NULL) return;
+                    ^
+src/storage/repo_cards.c:94:45: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap < sizeof "0000-00-00T00:00:00Z") return;
+                                            ^
+src/storage/repo_cards.c:97:21: error: code should be clang-formatted [-Wclang-format-violations]
+    if (utc == NULL) return;
+                    ^
+src/storage/repo_cards.c:102:19: error: code should be clang-formatted [-Wclang-format-violations]
+    if (c == NULL) return CT_REPO_ERR_ARG;
+                  ^
+src/storage/repo_cards.c:103:54: error: code should be clang-formatted [-Wclang-format-violations]
+    if (c->deck[0] == '\0' || c->case_key[0] == '\0') return CT_REPO_ERR_ARG;
+                                                     ^
+src/storage/repo_cards.c:124:20: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL) return CT_REPO_ERR_ARG;
+                   ^
+src/storage/repo_cards.c:126:26: error: code should be clang-formatted [-Wclang-format-violations]
+    if (rc != CT_REPO_OK) return rc;
+                         ^
+src/storage/repo_cards.c:129:24: error: code should be clang-formatted [-Wclang-format-violations]
+    if (now[0] == '\0') return CT_REPO_ERR_DB;
+                       ^
+src/storage/repo_cards.c:156:41: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ext == SQLITE_CONSTRAINT_UNIQUE) return CT_REPO_CONFLICT;
+                                        ^
+src/storage/repo_cards.c:161:20: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL) return CT_REPO_ERR_ARG;
+                   ^
+src/storage/repo_cards.c:163:26: error: code should be clang-formatted [-Wclang-format-violations]
+    if (rc != CT_REPO_OK) return rc;
+                         ^
+src/storage/repo_cards.c:164:20: error: code should be clang-formatted [-Wclang-format-violations]
+    if (c->id <= 0) return CT_REPO_ERR_ARG;
+                   ^
+src/storage/repo_cards.c:167:24: error: code should be clang-formatted [-Wclang-format-violations]
+    if (now[0] == '\0') return CT_REPO_ERR_DB;
+                       ^
+src/storage/repo_cards.c:192:41: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ext == SQLITE_CONSTRAINT_UNIQUE) return CT_REPO_CONFLICT;
+                                        ^
+src/storage/repo_cards.c:197:46: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || out == NULL || id <= 0) return CT_REPO_ERR_ARG;
+                                             ^
+src/storage/repo_cards.c:215:96: error: code should be clang-formatted [-Wclang-format-violations]
+int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key, int direction, ct_card *out) {
+                                                                                               ^
+src/storage/repo_cards.c:216:35: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || out == NULL) return CT_REPO_ERR_ARG;
+                                  ^
+src/storage/repo_cards.c:217:50: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX)) return CT_REPO_ERR_ARG;
+                                                 ^
+src/storage/repo_cards.c:218:58: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(case_key, CT_CARD_CASE_KEY_MAX)) return CT_REPO_ERR_ARG;
+                                                         ^
+src/storage/repo_cards.c:241:31: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || id <= 0) return CT_REPO_ERR_ARG;
+                              ^
+src/storage/repo_cards.c:258:20: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL) return CT_REPO_ERR_ARG;
+                   ^
+src/storage/repo_cards.c:259:50: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX)) return CT_REPO_ERR_ARG;
+                                                 ^
+src/storage/repo_cards.c:260:45: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap < 0 || (cap > 0 && out == NULL)) return CT_REPO_ERR_ARG;
+                                            ^
+src/storage/repo_cards.c:261:18: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap == 0) return CT_REPO_OK;
+                 ^
+src/storage/repo_cards.c:276:51: error: code should be clang-formatted [-Wclang-format-violations]
+    if (step != SQLITE_ROW && step != SQLITE_DONE) return CT_REPO_ERR_DB;
+                                                  ^
+src/storage/repo_cards.c:281:51: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || out == NULL || card_id <= 0) return CT_REPO_ERR_ARG;
+                                                  ^
+src/storage/repo_cards.c:308:51: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || row == NULL || card_id <= 0) return CT_REPO_ERR_ARG;
+                                                  ^
+src/storage/repo_cards.c:309:55: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(row->due, CT_CARD_STAMP_MAX)) return CT_REPO_ERR_ARG;
+                                                      ^
+src/storage/repo_cards.c:328:29: error: code should be clang-formatted [-Wclang-format-violations]
+    if (step == SQLITE_DONE) return CT_REPO_OK;
+                            ^
+src/storage/repo_cards.c:329:41: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ext == SQLITE_CONSTRAINT_UNIQUE) return CT_REPO_CONFLICT;
+                                        ^
+src/storage/repo_cards.c:330:45: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ext == SQLITE_CONSTRAINT_FOREIGNKEY) return CT_REPO_MISSING;
+                                            ^
+src/storage/repo_reviews.c:7:43: error: code should be clang-formatted [-Wclang-format-violations]
+static const char CT_SQL_REVIEW_INSERT[] =
+                                          ^
+src/storage/repo_reviews.c:8:59: error: code should be clang-formatted [-Wclang-format-violations]
+    "INSERT INTO review_log(card_id, rating, reviewed_at, stability, difficulty, elapsed_days, scheduled_days)"
+                                                          ^
+src/storage/repo_reviews.c:8:112: error: code should be clang-formatted [-Wclang-format-violations]
+    "INSERT INTO review_log(card_id, rating, reviewed_at, stability, difficulty, elapsed_days, scheduled_days)"
+                                                                                                               ^
+src/storage/repo_reviews.c:18:81: error: code should be clang-formatted [-Wclang-format-violations]
+                       double stability, double difficulty, double elapsed_days, double scheduled_days) {
+                                                                                ^
+src/storage/repo_reviews.c:19:36: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || card_id <= 0) return CT_REPO_ERR_ARG;
+                                   ^
+src/storage/repo_reviews.c:20:47: error: code should be clang-formatted [-Wclang-format-violations]
+    if (rating < CT_AGAIN || rating > CT_EASY) return CT_REPO_ERR_ARG;
+                                              ^
+src/storage/repo_reviews.c:21:58: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(reviewed_at, CT_CARD_STAMP_MAX)) return CT_REPO_ERR_ARG;
+                                                         ^
+src/storage/repo_reviews.c:38:29: error: code should be clang-formatted [-Wclang-format-violations]
+    if (step == SQLITE_DONE) return CT_REPO_OK;
+                            ^
+src/storage/repo_reviews.c:39:41: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ext == SQLITE_CONSTRAINT_UNIQUE) return CT_REPO_CONFLICT;
+                                        ^
+src/storage/repo_reviews.c:40:45: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ext == SQLITE_CONSTRAINT_FOREIGNKEY) return CT_REPO_MISSING;
+                                            ^
+src/storage/repo_reviews.c:45:36: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || card_id <= 0) return CT_REPO_ERR_ARG;
+                                   ^
+src/storage/repo_reviews.c:46:45: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap < 0 || (cap > 0 && out == NULL)) return CT_REPO_ERR_ARG;
+                                            ^
+src/storage/repo_reviews.c:47:18: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap == 0) return CT_REPO_OK;
+                 ^
+src/storage/repo_reviews.c:71:51: error: code should be clang-formatted [-Wclang-format-violations]
+    if (step != SQLITE_ROW && step != SQLITE_DONE) return CT_REPO_ERR_DB;
+                                                  ^
+src/storage/repo_reviews.c:76:20: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL) return CT_REPO_ERR_ARG;
+                   ^
+src/storage/repo_reviews.c:77:50: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX)) return CT_REPO_ERR_ARG;
+                                                 ^
+src/storage/repo_reviews.c:78:54: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(now_iso, CT_CARD_STAMP_MAX)) return CT_REPO_ERR_ARG;
+                                                     ^
+src/storage/repo_reviews.c:79:45: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap < 0 || (cap > 0 && ids == NULL)) return CT_REPO_ERR_ARG;
+                                            ^
+src/storage/repo_reviews.c:80:18: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap == 0) return CT_REPO_OK;
+                 ^
+src/storage/repo_reviews.c:97:51: error: code should be clang-formatted [-Wclang-format-violations]
+    if (step != SQLITE_ROW && step != SQLITE_DONE) return CT_REPO_ERR_DB;
+                                                  ^
+src/storage/repo_settings.c:10:62: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || key == NULL || out == NULL || cap == 0) return -1;
+                                                             ^
+src/storage/repo_settings.c:13:93: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_prepare_v2(db, "SELECT value FROM settings WHERE key = ?", -1, &st, NULL) != SQLITE_OK) {
+                                                                                            ^
+src/storage/repo_settings.c:23:23: error: code should be clang-formatted [-Wclang-format-violations]
+        if (v != NULL) len = strlen((const char *)v);
+                      ^
+src/storage/repo_settings.c:24:35: error: code should be clang-formatted [-Wclang-format-violations]
+        if (len > (size_t)cap - 1) len = (size_t)cap - 1;
+                                  ^
+src/storage/repo_settings.c:25:21: error: code should be clang-formatted [-Wclang-format-violations]
+        if (len > 0) memcpy(out, v, len);
+                    ^
+src/storage/repo_settings.c:36:52: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || key == NULL || value == NULL) return -1;
+                                                   ^
+src/storage/repo_settings.c:38:31: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_prepare_v2(db,
+                              ^
+src/storage/repo_settings.c:39:60: error: code should be clang-formatted [-Wclang-format-violations]
+            "INSERT INTO settings(key, value) VALUES(?, ?)"
+                                                           ^
+src/storage/repo_settings.c:40:70: error: code should be clang-formatted [-Wclang-format-violations]
+            " ON CONFLICT(key) DO UPDATE SET value = excluded.value",
+                                                                     ^
+src/storage/repo_settings.c:53:50: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || name == NULL || id == NULL) return -1;
+                                                 ^
+src/storage/repo_settings.c:56:94: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_prepare_v2(db, "INSERT INTO letter_scheme(name) VALUES(?)", -1, &st, NULL) != SQLITE_OK) {
+                                                                                             ^
+src/storage/repo_settings.c:63:27: error: code should be clang-formatted [-Wclang-format-violations]
+    if (rc != SQLITE_DONE) return -1;
+                          ^
+src/storage/repo_settings.c:69:20: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL) return -1;
+                   ^
+src/storage/repo_settings.c:71:31: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_prepare_v2(db,
+                              ^
+src/storage/repo_settings.c:72:86: error: code should be clang-formatted [-Wclang-format-violations]
+            "SELECT id FROM letter_scheme WHERE is_default <> 0 ORDER BY id LIMIT 1",
+                                                                                     ^
+src/storage/repo_settings.c:89:38: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || scheme_id <= 0) return -1;
+                                     ^
+src/storage/repo_settings.c:90:66: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_exec(db, "BEGIN", NULL, NULL, NULL) != SQLITE_OK) return -1;
+                                                                 ^
+src/storage/repo_settings.c:94:96: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_prepare_v2(db, "UPDATE letter_scheme SET is_default = 0 WHERE is_default <> 0",
+                                                                                               ^
+src/storage/repo_settings.c:95:16: error: code should be clang-formatted [-Wclang-format-violations]
+            -1, &clear, NULL) == SQLITE_OK &&
+               ^
+src/storage/repo_settings.c:96:87: error: code should be clang-formatted [-Wclang-format-violations]
+        sqlite3_prepare_v2(db, "UPDATE letter_scheme SET is_default = 1 WHERE id = ?",
+                                                                                      ^
+src/storage/repo_settings.c:97:23: error: code should be clang-formatted [-Wclang-format-violations]
+            -1, &mark, NULL) == SQLITE_OK) {
+                      ^
+src/storage/repo_settings.c:106:18: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ret != 0) sqlite3_exec(db, "ROLLBACK", NULL, NULL, NULL);
+                 ^
+src/storage/repo_settings.c:111:35: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || out == NULL) return -1;
+                                  ^
+src/storage/repo_settings.c:114:100: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_prepare_v2(db, "SELECT orbit, sticker, letter FROM letter_map WHERE scheme_id = ?",
+                                                                                                   ^
+src/storage/repo_settings.c:126:70: error: code should be clang-formatted [-Wclang-format-violations]
+        if (letter == NULL || letter[0] == '\0' || letter[1] != '\0') continue;
+                                                                     ^
+src/storage/repo_settings.c:127:64: error: code should be clang-formatted [-Wclang-format-violations]
+        if (orbit != CT_ORBIT_CORNER && orbit != CT_ORBIT_EDGE) continue;
+                                                               ^
+src/storage/repo_settings.c:128:58: error: code should be clang-formatted [-Wclang-format-violations]
+        if (sticker < 0 || sticker >= CT_LETTER_STICKERS) continue;
+                                                         ^
+src/storage/repo_settings.c:129:38: error: code should be clang-formatted [-Wclang-format-violations]
+        if (orbit == CT_ORBIT_CORNER) out->corner[sticker] = (char)letter[0];
+                                     ^
+src/storage/repo_settings.c:130:13: error: code should be clang-formatted [-Wclang-format-violations]
+        else out->edge[sticker] = (char)letter[0];
+            ^
+src/storage/repo_settings.c:138:38: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || scheme_id <= 0) return -1;
+                                     ^
+src/storage/repo_settings.c:139:60: error: code should be clang-formatted [-Wclang-format-violations]
+    if (orbit != CT_ORBIT_CORNER && orbit != CT_ORBIT_EDGE) return -1;
+                                                           ^
+src/storage/repo_settings.c:140:54: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sticker < 0 || sticker >= CT_LETTER_STICKERS) return -1;
+                                                     ^
+src/storage/repo_settings.c:141:61: error: code should be clang-formatted [-Wclang-format-violations]
+    if (letter < CT_LETTER_FIRST || letter > CT_LETTER_LAST) return -1;
+                                                            ^
+src/storage/repo_settings.c:145:95: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_prepare_v2(db, "SELECT 1 FROM letter_scheme WHERE id = ?", -1, &find, NULL) == SQLITE_OK &&
+                                                                                              ^
+src/storage/repo_settings.c:146:28: error: code should be clang-formatted [-Wclang-format-violations]
+        sqlite3_prepare_v2(db,
+                           ^
+src/storage/repo_settings.c:153:29: error: code should be clang-formatted [-Wclang-format-violations]
+            char text[2] = { letter, '\0' };
+                            ^
+src/storage/repo_settings.c:153:42: error: code should be clang-formatted [-Wclang-format-violations]
+            char text[2] = { letter, '\0' };
+                                         ^
+src/storage/repo_settings.c:169:20: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL) return -1;
+                   ^
+src/storage/repo_settings.c:170:66: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_exec(db, "BEGIN", NULL, NULL, NULL) != SQLITE_OK) return -1;
+                                                                 ^
+src/storage/repo_settings.c:176:98: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_prepare_v2(db, "SELECT id FROM letter_scheme WHERE name = ?", -1, &find, NULL) != SQLITE_OK) {
+                                                                                                 ^
+src/storage/repo_settings.c:179:91: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_prepare_v2(db, "INSERT INTO letter_scheme(name, is_default) VALUES(?, 0)",
+                                                                                          ^
+src/storage/repo_settings.c:180:16: error: code should be clang-formatted [-Wclang-format-violations]
+            -1, &make, NULL) != SQLITE_OK) {
+               ^
+src/storage/repo_settings.c:183:87: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_prepare_v2(db, "UPDATE letter_scheme SET is_default = 1 WHERE id = ?",
+                                                                                      ^
+src/storage/repo_settings.c:184:23: error: code should be clang-formatted [-Wclang-format-violations]
+            -1, &mark, NULL) != SQLITE_OK) {
+                      ^
+src/storage/repo_settings.c:187:28: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_prepare_v2(db,
+                           ^
+src/storage/repo_settings.c:200:47: error: code should be clang-formatted [-Wclang-format-violations]
+        if (sqlite3_step(make) != SQLITE_DONE) goto done;
+                                              ^
+src/storage/repo_settings.c:206:30: error: code should be clang-formatted [-Wclang-format-violations]
+    if (existing_default < 0) goto done;
+                             ^
+src/storage/repo_settings.c:209:75: error: code should be clang-formatted [-Wclang-format-violations]
+        if (sqlite3_step(mark) != SQLITE_DONE || sqlite3_changes(db) == 0) goto done;
+                                                                          ^
+src/storage/repo_settings.c:215:33: error: code should be clang-formatted [-Wclang-format-violations]
+                char text[2] = { (char)(CT_LETTER_FIRST + sticker), '\0' };
+                                ^
+src/storage/repo_settings.c:215:73: error: code should be clang-formatted [-Wclang-format-violations]
+                char text[2] = { (char)(CT_LETTER_FIRST + sticker), '\0' };
+                                                                        ^
+src/storage/repo_settings.c:221:57: error: code should be clang-formatted [-Wclang-format-violations]
+                if (sqlite3_step(upsert) != SQLITE_DONE) goto done;
+                                                        ^
+src/storage/repo_settings.c:225:67: error: code should be clang-formatted [-Wclang-format-violations]
+    if (sqlite3_exec(db, "COMMIT", NULL, NULL, NULL) != SQLITE_OK) goto done;
+                                                                  ^
+src/storage/repo_settings.c:232:18: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ret != 0) sqlite3_exec(db, "ROLLBACK", NULL, NULL, NULL);
+                 ^
+src/storage/repo_stats.c:37:20: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL) return CT_REPO_ERR_ARG;
+                   ^
+src/storage/repo_stats.c:38:55: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX)) return CT_REPO_ERR_ARG;
+                                                      ^
+src/storage/repo_stats.c:39:45: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap < 0 || (cap > 0 && out == NULL)) return CT_REPO_ERR_ARG;
+                                            ^
+src/storage/repo_stats.c:40:18: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap == 0) return CT_REPO_OK;
+                 ^
+src/storage/repo_stats.c:62:51: error: code should be clang-formatted [-Wclang-format-violations]
+    if (step != SQLITE_ROW && step != SQLITE_DONE) return CT_REPO_ERR_DB;
+                                                  ^
+src/storage/repo_stats.c:68:20: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL) return CT_REPO_ERR_ARG;
+                   ^
+src/storage/repo_stats.c:69:54: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(from_day, CT_STATS_DAY_MAX)) return CT_REPO_ERR_ARG;
+                                                     ^
+src/storage/repo_stats.c:70:18: error: code should be clang-formatted [-Wclang-format-violations]
+    if (days < 0) return CT_REPO_ERR_ARG;
+                 ^
+src/storage/repo_stats.c:71:45: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap < 0 || (cap > 0 && out == NULL)) return CT_REPO_ERR_ARG;
+                                            ^
+src/storage/repo_stats.c:72:19: error: code should be clang-formatted [-Wclang-format-violations]
+    if (days == 0) return 0;
+                  ^
+src/storage/repo_stats.c:73:18: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap == 0) return days;
+                 ^
+src/storage/repo_stats.c:90:51: error: code should be clang-formatted [-Wclang-format-violations]
+    if (step != SQLITE_ROW && step != SQLITE_DONE) return CT_REPO_ERR_DB;
+                                                  ^
+src/storage/repo_stats.c:95:20: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL) return CT_REPO_ERR_ARG;
+                   ^
+src/storage/repo_stats.c:96:51: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(deck, CT_STATS_DECK_MAX)) return CT_REPO_ERR_ARG;
+                                                  ^
+src/storage/repo_stats.c:97:45: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap < 0 || (cap > 0 && out == NULL)) return CT_REPO_ERR_ARG;
+                                            ^
+src/storage/repo_stats.c:98:18: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap == 0) return CT_REPO_OK;
+                 ^
+src/storage/repo_stats.c:119:51: error: code should be clang-formatted [-Wclang-format-violations]
+    if (step != SQLITE_ROW && step != SQLITE_DONE) return CT_REPO_ERR_DB;
+                                                  ^
+src/storage/repo_stats.c:124:35: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL || row == NULL) return CT_REPO_ERR_ARG;
+                                  ^
+src/storage/repo_stats.c:125:56: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(row->deck, CT_STATS_DECK_MAX)) return CT_REPO_ERR_ARG;
+                                                       ^
+src/storage/repo_stats.c:126:63: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(row->started_at, CT_STATS_STAMP_MAX)) return CT_REPO_ERR_ARG;
+                                                              ^
+src/storage/repo_stats.c:127:53: error: code should be clang-formatted [-Wclang-format-violations]
+    if (strlen(row->ended_at) >= CT_STATS_STAMP_MAX) return CT_REPO_ERR_ARG;
+                                                    ^
+src/storage/repo_stats.c:144:29: error: code should be clang-formatted [-Wclang-format-violations]
+    if (step == SQLITE_DONE) return CT_REPO_OK;
+                            ^
+src/storage/repo_stats.c:149:20: error: code should be clang-formatted [-Wclang-format-violations]
+    if (db == NULL) return CT_REPO_ERR_ARG;
+                   ^
+src/storage/repo_stats.c:150:45: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap < 0 || (cap > 0 && out == NULL)) return CT_REPO_ERR_ARG;
+                                            ^
+src/storage/repo_stats.c:151:18: error: code should be clang-formatted [-Wclang-format-violations]
+    if (cap == 0) return CT_REPO_OK;
+                 ^
+src/storage/repo_stats.c:174:51: error: code should be clang-formatted [-Wclang-format-violations]
+    if (step != SQLITE_ROW && step != SQLITE_DONE) return CT_REPO_ERR_DB;
+                                                  ^
+src/trainer/session.c:71:28: error: code should be clang-formatted [-Wclang-format-violations]
+    if (c < '0' || c > '9') return -1;
+                           ^
+src/trainer/session.c:76:21: error: code should be clang-formatted [-Wclang-format-violations]
+    if (iso == NULL) return CT_SESSION_ERR_ARG;
+                    ^
+src/trainer/session.c:80:19: error: code should be clang-formatted [-Wclang-format-violations]
+        if (v < 0) return CT_SESSION_ERR_ARG;
+                  ^
+src/trainer/session.c:83:40: error: code should be clang-formatted [-Wclang-format-violations]
+    if (iso[ct_iso_year_digits] != '-') return CT_SESSION_ERR_ARG;
+                                       ^
+src/trainer/session.c:84:39: error: code should be clang-formatted [-Wclang-format-violations]
+    if (iso[ct_iso_day_at - 1] != '-') return CT_SESSION_ERR_ARG;
+                                      ^
+src/trainer/session.c:89:46: error: code should be clang-formatted [-Wclang-format-violations]
+    if (m1 < 0 || m2 < 0 || d1 < 0 || d2 < 0) return CT_SESSION_ERR_ARG;
+                                             ^
+src/trainer/session.c:95:42: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ry != yy || rm != mm || rd != dd) return CT_SESSION_ERR_ARG;
+                                         ^
+src/trainer/session.c:106:29: error: code should be clang-formatted [-Wclang-format-violations]
+    if (rc != CT_SESSION_OK) return rc;
+                            ^
+src/trainer/session.c:107:21: error: code should be clang-formatted [-Wclang-format-violations]
+    if (out == NULL) return CT_SESSION_ERR_ARG;
+                    ^
+src/trainer/session.c:114:15: error: code should be clang-formatted [-Wclang-format-violations]
+    if (n < 0) return CT_SESSION_ERR_DB;
+              ^
+src/trainer/session.c:116:37: error: code should be clang-formatted [-Wclang-format-violations]
+    if (date_len + suffix + 1 > cap) return CT_SESSION_ERR_ARG;
+                                    ^
+src/trainer/session.c:126:27: error: code should be clang-formatted [-Wclang-format-violations]
+        if (grown == NULL) return CT_SESSION_ERR_DB;
+                          ^
+src/trainer/session.c:129:19: error: code should be clang-formatted [-Wclang-format-violations]
+        if (n < 0) return CT_SESSION_ERR_DB;
+                  ^
+src/trainer/session.c:140:49: error: code should be clang-formatted [-Wclang-format-violations]
+    if (s == NULL || db == NULL || fsrs == NULL) return CT_SESSION_ERR_ARG;
+                                                ^
+src/trainer/session.c:141:53: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(deck, CT_SESSION_DECK_MAX)) return CT_SESSION_ERR_ARG;
+                                                    ^
+src/trainer/session.c:142:57: error: code should be clang-formatted [-Wclang-format-violations]
+    if (!ct_repo_text_ok(now_iso, CT_SESSION_STAMP_MAX)) return CT_SESSION_ERR_ARG;
+                                                        ^
+src/trainer/session.c:145:59: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK) return CT_SESSION_ERR_ARG;
+                                                          ^
+src/trainer/session.c:172:51: error: code should be clang-formatted [-Wclang-format-violations]
+    if (s == NULL || out == NULL || s->db == NULL) return CT_SESSION_ERR_ARG;
+                                                  ^
+src/trainer/session.c:173:60: error: code should be clang-formatted [-Wclang-format-violations]
+    if (s->queue == NULL || s->queue_pos >= s->queue_count) return CT_SESSION_ERR_STATE;
+                                                           ^
+src/trainer/session.c:176:26: error: code should be clang-formatted [-Wclang-format-violations]
+    if (rc != CT_REPO_OK) return rc == CT_REPO_MISSING ? CT_SESSION_ERR_STATE : CT_SESSION_ERR_DB;
+                         ^
+src/trainer/session.c:188:55: error: code should be clang-formatted [-Wclang-format-violations]
+    if (s == NULL || s->db == NULL || s->fsrs == NULL) return CT_SESSION_ERR_ARG;
+                                                      ^
+src/trainer/session.c:189:37: error: code should be clang-formatted [-Wclang-format-violations]
+    if (g < CT_AGAIN || g > CT_EASY) return CT_SESSION_ERR_ARG;
+                                    ^
+src/trainer/session.c:192:62: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ct_iso_scan(now_iso, &vy, &vm, &vd) != CT_SESSION_OK) return CT_SESSION_ERR_ARG;
+                                                             ^
+src/trainer/session.c:193:60: error: code should be clang-formatted [-Wclang-format-violations]
+    if (s->queue == NULL || s->queue_pos >= s->queue_count) return CT_SESSION_ERR_STATE;
+                                                           ^
+src/trainer/session.c:197:26: error: code should be clang-formatted [-Wclang-format-violations]
+    if (rc != CT_REPO_OK) return rc == CT_REPO_MISSING ? CT_SESSION_ERR_STATE : CT_SESSION_ERR_DB;
+                         ^
+src/trainer/session.c:201:51: error: code should be clang-formatted [-Wclang-format-violations]
+    if (rc != CT_REPO_OK && rc != CT_REPO_MISSING) return CT_SESSION_ERR_DB;
+                                                  ^
+src/trainer/session.c:227:17: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ivl < 0) ivl = 0;
+                ^
+src/trainer/session.c:241:26: error: code should be clang-formatted [-Wclang-format-violations]
+    if (rc != CT_REPO_OK) return CT_SESSION_ERR_DB;
+                         ^
+src/trainer/session.c:243:26: error: code should be clang-formatted [-Wclang-format-violations]
+    if (rc != CT_REPO_OK) return CT_SESSION_ERR_DB;
+                         ^
+src/trainer/session.c:262:36: error: code should be clang-formatted [-Wclang-format-violations]
+    if (s == NULL || s->db == NULL) return CT_SESSION_ERR_ARG;
+                                   ^
+src/trainer/session.c:265:59: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK) return CT_SESSION_ERR_ARG;
+                                                          ^
+src/trainer/session.c:286:19: error: code should be clang-formatted [-Wclang-format-violations]
+    if (s == NULL) return;
+                  ^
+src/render/anim.h:8:7: error: code should be clang-formatted [-Wclang-format-violations]
+enum {
+      ^
+src/render/anim.h:9:28: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ANIM_QUEUE_CAP = 64,
+                           ^
+src/render/anim.h:10:38: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ANIM_SPEED_EPS_SCALE = 1000000
+                                     ^
+src/storage/repo_cards.h:54:96: error: code should be clang-formatted [-Wclang-format-violations]
+int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key, int direction, ct_card *out);
+                                                                                               ^
+src/storage/repo_reviews.h:18:81: error: code should be clang-formatted [-Wclang-format-violations]
+                       double stability, double difficulty, double elapsed_days, double scheduled_days);
+                                                                                ^
+src/storage/repo_stats.h:47:96: error: code should be clang-formatted [-Wclang-format-violations]
+int ct_repo_due_forecast(sqlite3 *db, const char *from_day, int days, ct_due_forecast_row *out, int cap);
+                                                                                               ^
+tests/framework.c:37:97: error: code should be clang-formatted [-Wclang-format-violations]
+        fprintf(stderr, "ct_suite_register: capacity %d exceeded, dropping %s\n", CT_MAX_SUITES, name);
+                                                                                                ^
+tests/framework.c:62:76: error: code should be clang-formatted [-Wclang-format-violations]
+void ct_fail_eq(const char *file, int line, const char *ea, const char *eb,
+                                                                           ^
+tests/framework.c:63:38: error: code should be clang-formatted [-Wclang-format-violations]
+                unsigned long long a, unsigned long long b) {
+                                     ^
+tests/framework.c:65:74: error: code should be clang-formatted [-Wclang-format-violations]
+    fprintf(stderr, "%s: %s:%d: assert failed: %s == %s: %llu vs %llu\n",
+                                                                         ^
+tests/framework.c:66:39: error: code should be clang-formatted [-Wclang-format-violations]
+            ct_active, file, line, ea, eb, a, b);
+                                      ^
+tests/framework.c:70:77: error: code should be clang-formatted [-Wclang-format-violations]
+void ct_fail_dbl(const char *file, int line, const char *ea, const char *eb,
+                                                                            ^
+tests/framework.c:71:37: error: code should be clang-formatted [-Wclang-format-violations]
+                 double a, double b, double eps) {
+                                    ^
+tests/framework.c:73:88: error: code should be clang-formatted [-Wclang-format-violations]
+    fprintf(stderr, "%s: %s:%d: assert failed: %s ~= %s (eps %.17g): %.17g vs %.17g\n",
+                                                                                       ^
+tests/framework.c:74:23: error: code should be clang-formatted [-Wclang-format-violations]
+            ct_active, file, line, ea, eb, eps, a, b);
+                      ^
+tests/framework.c:82:77: error: code should be clang-formatted [-Wclang-format-violations]
+void ct_fail_str(const char *file, int line, const char *ea, const char *eb,
+                                                                            ^
+tests/framework.c:83:32: error: code should be clang-formatted [-Wclang-format-violations]
+                 const char *a, const char *b) {
+                               ^
+tests/framework.c:85:78: error: code should be clang-formatted [-Wclang-format-violations]
+    fprintf(stderr, "%s: %s:%d: assert failed: %s == %s: \"%s\" vs \"%s\"\n",
+                                                                             ^
+tests/framework.c:86:35: error: code should be clang-formatted [-Wclang-format-violations]
+            ct_active, file, line, ea, eb, ct_str_or_null(a), ct_str_or_null(b));
+                                  ^
+tests/framework.c:127:75: error: code should be clang-formatted [-Wclang-format-violations]
+static void ct_write_results(const ct_suite_result *results, size_t count,
+                                                                          ^
+tests/framework.c:128:50: error: code should be clang-formatted [-Wclang-format-violations]
+                             uint64_t total_pass, uint64_t total_fail, uint64_t total_ms) {
+                                                 ^
+tests/framework.c:136:82: error: code should be clang-formatted [-Wclang-format-violations]
+        fprintf(f, "%s{\"name\":\"%s\",\"pass\":%llu,\"fail\":%llu,\"ms\":%llu}",
+                                                                                 ^
+tests/framework.c:137:30: error: code should be clang-formatted [-Wclang-format-violations]
+                i ? "," : "", results[i].name,
+                             ^
+tests/framework.c:137:47: error: code should be clang-formatted [-Wclang-format-violations]
+                i ? "," : "", results[i].name,
+                                              ^
+tests/framework.c:139:53: error: code should be clang-formatted [-Wclang-format-violations]
+                (unsigned long long)results[i].fail,
+                                                    ^
+tests/framework.c:168:54: error: code should be clang-formatted [-Wclang-format-violations]
+        printf("%s %s: pass=%llu fail=%llu %llums\n",
+                                                     ^
+tests/framework.c:170:73: error: code should be clang-formatted [-Wclang-format-violations]
+               (unsigned long long)ct_pass, (unsigned long long)ct_fail,
+                                                                        ^
+tests/framework.c:181:50: error: code should be clang-formatted [-Wclang-format-violations]
+    printf("total: pass=%llu fail=%llu %llums\n",
+                                                 ^
+tests/framework.c:182:43: error: code should be clang-formatted [-Wclang-format-violations]
+           (unsigned long long)total_pass, (unsigned long long)total_fail,
+                                          ^
+tests/framework.c:182:75: error: code should be clang-formatted [-Wclang-format-violations]
+           (unsigned long long)total_pass, (unsigned long long)total_fail,
+                                                                          ^
+tests/unit_anim.c:269:80: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(ct_anim_prefix(&a, CT_ANIM_QUEUE_CAP, out, CT_ANIM_QUEUE_CAP), CT_ANIM_QUEUE_CAP - 2);
+                                                                               ^
+tests/unit_cards.c:6:1: error: code should be clang-formatted [-Wclang-format-violations]
+#include "framework.h"
+^
+tests/unit_cards.c:53:26: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(card_insert_get)
+                         ^
+tests/unit_cards.c:87:31: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(card_unique_conflict)
+                              ^
+tests/unit_cards.c:110:22: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(card_update)
+                     ^
+tests/unit_cards.c:152:30: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(card_delete_cascade)
+                             ^
+tests/unit_cards.c:160:100: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_GOOD, "2026-05-01T00:00:00Z", 3.25, 5.5, 12.0, 21.0), CT_REPO_OK);
+                                                                                                   ^
+tests/unit_cards.c:161:98: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_EASY, "2026-05-02T00:00:00Z", 4.0, 5.0, 1.0, 30.0), CT_REPO_OK);
+                                                                                                 ^
+tests/unit_cards.c:162:97: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(ct_repo_review_log(db, b, CT_HARD, "2026-05-03T00:00:00Z", 2.0, 6.0, 2.0, 8.0), CT_REPO_OK);
+                                                                                                ^
+tests/unit_cards.c:175:97: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_GOOD, "2026-05-04T00:00:00Z", 1.0, 5.0, 0.0, 1.0), CT_REPO_MISSING);
+                                                                                                ^
+tests/unit_cards.c:182:20: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(card_list)
+                   ^
+tests/unit_cards.c:212:26: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(card_get_by_key)
+                         ^
+tests/unit_cards.c:246:24: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(srs_roundtrip)
+                       ^
+tests/unit_cards.c:298:26: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(review_log_rows)
+                         ^
+tests/unit_cards.c:304:98: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_AGAIN, "2026-05-01T00:00:00Z", 1.5, 7.0, 0.0, 0.5), CT_REPO_OK);
+                                                                                                 ^
+tests/unit_cards.c:305:97: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_GOOD, "2026-05-02T00:00:00Z", 4.5, 6.0, 1.0, 6.0), CT_REPO_OK);
+                                                                                                ^
+tests/unit_cards.c:306:98: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_EASY, "2026-05-03T00:00:00Z", 9.0, 5.0, 1.0, 12.0), CT_REPO_OK);
+                                                                                                 ^
+tests/unit_cards.c:307:97: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(ct_repo_review_log(db, b, CT_HARD, "2026-05-01T06:00:00Z", 2.5, 6.5, 3.0, 3.0), CT_REPO_OK);
+                                                                                                ^
+tests/unit_cards.c:348:18: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(ct_repo_review_log(db, a + 900, CT_GOOD, "2026-05-04T00:00:00Z", 1.0, 5.0, 0.0, 1.0), CT_REPO_MISSING);
+                 ^
+tests/unit_cards.c:348:103: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(ct_repo_review_log(db, a + 900, CT_GOOD, "2026-05-04T00:00:00Z", 1.0, 5.0, 0.0, 1.0), CT_REPO_MISSING);
+                                                                                                      ^
+tests/unit_cards.c:352:20: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(due_cards)
+                   ^
+tests/unit_cards.c:409:24: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(card_bad_args)
+                       ^
+tests/unit_cards.c:466:18: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(now_iso)
+                 ^
+tests/unit_db.c:14:1: error: code should be clang-formatted [-Wclang-format-violations]
+#include "framework.h"
+^
+tests/unit_db.c:41:19: error: code should be clang-formatted [-Wclang-format-violations]
+    if (f == NULL) return 0;
+                  ^
+tests/unit_db.c:44:24: error: code should be clang-formatted [-Wclang-format-violations]
+    if (fclose(f) != 0) ok = 0;
+                       ^
+tests/unit_db.c:50:19: error: code should be clang-formatted [-Wclang-format-violations]
+    if (f == NULL) return 0;
+                  ^
+tests/unit_db.c:57:21: error: code should be clang-formatted [-Wclang-format-violations]
+    if (src == NULL) return 0;
+                    ^
+tests/unit_db.c:72:21: error: code should be clang-formatted [-Wclang-format-violations]
+    if (ferror(src)) ok = 0;
+                    ^
+tests/unit_db.c:82:44: error: code should be clang-formatted [-Wclang-format-violations]
+        if (sqlite3_step(st) == SQLITE_ROW) v = sqlite3_column_int(st, 0);
+                                           ^
+tests/unit_db.c:94:27: error: code should be clang-formatted [-Wclang-format-violations]
+            if (s != NULL) snprintf(out, cap, "%s", (const char *)s);
+                          ^
+tests/unit_db.c:113:18: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(db_open)
+                 ^
+tests/unit_db.c:142:18: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(migrate)
+                 ^
+tests/unit_db.c:148:31: error: code should be clang-formatted [-Wclang-format-violations]
+    int tables = query_int(db,
+                              ^
+tests/unit_db.c:149:45: error: code should be clang-formatted [-Wclang-format-violations]
+        "SELECT count(*) FROM sqlite_master"
+                                            ^
+tests/unit_db.c:152:32: error: code should be clang-formatted [-Wclang-format-violations]
+    int indexes = query_int(db,
+                               ^
+tests/unit_db.c:153:45: error: code should be clang-formatted [-Wclang-format-violations]
+        "SELECT count(*) FROM sqlite_master"
+                                            ^
+tests/unit_db.c:163:25: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(migrate_backup)
+                        ^
+tests/unit_db.c:187:16: error: code should be clang-formatted [-Wclang-format-violations]
+    int dummy = query_int(db,
+               ^
+tests/unit_db.c:187:30: error: code should be clang-formatted [-Wclang-format-violations]
+    int dummy = query_int(db,
+                             ^
+tests/unit_db.c:194:23: error: code should be clang-formatted [-Wclang-format-violations]
+    int backup_dummy = query_int(backup,
+                      ^
+tests/unit_db.c:194:41: error: code should be clang-formatted [-Wclang-format-violations]
+    int backup_dummy = query_int(backup,
+                                        ^
+tests/unit_db.c:201:30: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(migrate_error_paths)
+                             ^
+tests/unit_db.c:223:18: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(query_int(db,
+                 ^
+tests/unit_db.c:223:31: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(query_int(db,
+                              ^
+tests/unit_db.c:234:18: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(query_int(db,
+                 ^
+tests/unit_db.c:234:31: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(query_int(db,
+                              ^
+tests/unit_db.c:251:60: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT(write_file(CT_TEST_DIR "/migbom/001_bom.sql",
+                                                           ^
+tests/unit_db.c:252:40: error: code should be clang-formatted [-Wclang-format-violations]
+                         "\xEF\xBB\xBF"
+                                       ^
+tests/unit_db.c:253:63: error: code should be clang-formatted [-Wclang-format-violations]
+                         "CREATE TABLE bom_t(id INTEGER);\r\n"
+                                                              ^
+tests/unit_db.c:257:18: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(query_int(db,
+                 ^
+tests/unit_db.c:257:31: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(query_int(db,
+                              ^
+tests/unit_db.c:274:18: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(query_int(db,
+                 ^
+tests/unit_db.c:274:31: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(query_int(db,
+                              ^
+tests/unit_db.c:276:31: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(query_int(db,
+                              ^
+tests/unit_db.c:277:45: error: code should be clang-formatted [-Wclang-format-violations]
+        "SELECT count(*) FROM sqlite_master"
+                                            ^
+tests/unit_db.c:278:61: error: code should be clang-formatted [-Wclang-format-violations]
+        " WHERE type='table' AND name NOT LIKE 'sqlite_%'"), 9);
+                                                            ^
+tests/unit_db.c:284:18: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(pragmas)
+                 ^
+tests/unit_db.c:290:30: error: code should be clang-formatted [-Wclang-format-violations]
+    int rc = sqlite3_exec(db,
+                             ^
+tests/unit_db.c:291:69: error: code should be clang-formatted [-Wclang-format-violations]
+        "INSERT INTO srs_state(card_id, stability, difficulty, due)"
+                                                                    ^
+tests/unit_db.c:292:49: error: code should be clang-formatted [-Wclang-format-violations]
+        " VALUES (999, 1.0, 5.0, '2026-01-01')",
+                                                ^
+tests/unit_fsrs.c:92:77: error: code should be clang-formatted [-Wclang-format-violations]
+    static const double gold_s[3] = {11.962060841460307, 19.791582142057077,
+                                                                            ^
+tests/unit_fsrs.c:94:76: error: code should be clang-formatted [-Wclang-format-violations]
+    static const double gold_d[3] = {5.7994339073111085, 4.991832707311108,
+                                                                           ^
+tests/unit_fsrs.c:129:75: error: code should be clang-formatted [-Wclang-format-violations]
+    static const double gold_s[4] = {5.010285241935083, 8.398413743809318,
+                                                                          ^
+tests/unit_fsrs.c:130:57: error: code should be clang-formatted [-Wclang-format-violations]
+                                     14.077712147375411, 23.59754893600546};
+                                                        ^
+tests/unit_geometry.c:30:27: error: code should be clang-formatted [-Wclang-format-violations]
+    {"R", 3},   {"R'", 3},  {"R2", 3},  {"U", 3},    {"F2", 3},   {"Lw", 3},
+                          ^
+tests/unit_geometry.c:30:39: error: code should be clang-formatted [-Wclang-format-violations]
+    {"R", 3},   {"R'", 3},  {"R2", 3},  {"U", 3},    {"F2", 3},   {"Lw", 3},
+                                      ^
+tests/unit_geometry.c:30:50: error: code should be clang-formatted [-Wclang-format-violations]
+    {"R", 3},   {"R'", 3},  {"R2", 3},  {"U", 3},    {"F2", 3},   {"Lw", 3},
+                                                 ^
+tests/unit_geometry.c:30:64: error: code should be clang-formatted [-Wclang-format-violations]
+    {"R", 3},   {"R'", 3},  {"R2", 3},  {"U", 3},    {"F2", 3},   {"Lw", 3},
+                                                               ^
+tests/unit_geometry.c:30:77: error: code should be clang-formatted [-Wclang-format-violations]
+    {"R", 3},   {"R'", 3},  {"R2", 3},  {"U", 3},    {"F2", 3},   {"Lw", 3},
+                                                                            ^
+tests/unit_geometry.c:31:28: error: code should be clang-formatted [-Wclang-format-violations]
+    {"Bw'", 3}, {"Dw2", 3}, {"M", 3},   {"E2", 3},   {"S'", 3},   {"2R", 3},
+                           ^
+tests/unit_geometry.c:31:64: error: code should be clang-formatted [-Wclang-format-violations]
+    {"Bw'", 3}, {"Dw2", 3}, {"M", 3},   {"E2", 3},   {"S'", 3},   {"2R", 3},
+                                                               ^
+tests/unit_geometry.c:31:77: error: code should be clang-formatted [-Wclang-format-violations]
+    {"Bw'", 3}, {"Dw2", 3}, {"M", 3},   {"E2", 3},   {"S'", 3},   {"2R", 3},
+                                                                            ^
+tests/unit_geometry.c:32:27: error: code should be clang-formatted [-Wclang-format-violations]
+    {"R", 2},   {"R2", 4},  {"Rw", 5},  {"3R", 5},   {"3Rw", 5},  {"2Bw'", 5},
+                          ^
+tests/unit_geometry.c:32:51: error: code should be clang-formatted [-Wclang-format-violations]
+    {"R", 2},   {"R2", 4},  {"Rw", 5},  {"3R", 5},   {"3Rw", 5},  {"2Bw'", 5},
+                                                  ^
+tests/unit_geometry.c:32:65: error: code should be clang-formatted [-Wclang-format-violations]
+    {"R", 2},   {"R2", 4},  {"Rw", 5},  {"3R", 5},   {"3Rw", 5},  {"2Bw'", 5},
+                                                                ^
+tests/unit_geometry.c:32:79: error: code should be clang-formatted [-Wclang-format-violations]
+    {"R", 2},   {"R2", 4},  {"Rw", 5},  {"3R", 5},   {"3Rw", 5},  {"2Bw'", 5},
+                                                                              ^
+tests/unit_geometry.c:33:14: error: code should be clang-formatted [-Wclang-format-violations]
+    {"M", 7},   {"4R", 7},  {"4F'", 7}, {"3Lw2", 7},
+             ^
+tests/unit_geometry.c:33:27: error: code should be clang-formatted [-Wclang-format-violations]
+    {"M", 7},   {"4R", 7},  {"4F'", 7}, {"3Lw2", 7},
+                          ^
+tests/unit_geometry.c:37:14: error: code should be clang-formatted [-Wclang-format-violations]
+    {"x", 3},  {"x'", 7},  {"y2", 5},  {"z", 2},   {"3R", 3},  {"3Rw", 3},
+             ^
+tests/unit_geometry.c:37:26: error: code should be clang-formatted [-Wclang-format-violations]
+    {"x", 3},  {"x'", 7},  {"y2", 5},  {"z", 2},   {"3R", 3},  {"3Rw", 3},
+                         ^
+tests/unit_geometry.c:37:38: error: code should be clang-formatted [-Wclang-format-violations]
+    {"x", 3},  {"x'", 7},  {"y2", 5},  {"z", 2},   {"3R", 3},  {"3Rw", 3},
+                                     ^
+tests/unit_geometry.c:37:49: error: code should be clang-formatted [-Wclang-format-violations]
+    {"x", 3},  {"x'", 7},  {"y2", 5},  {"z", 2},   {"3R", 3},  {"3Rw", 3},
+                                                ^
+tests/unit_geometry.c:37:75: error: code should be clang-formatted [-Wclang-format-violations]
+    {"x", 3},  {"x'", 7},  {"y2", 5},  {"z", 2},   {"3R", 3},  {"3Rw", 3},
+                                                                          ^
+tests/unit_geometry.c:38:27: error: code should be clang-formatted [-Wclang-format-violations]
+    {"5R", 5}, {"7Rw", 7}, {"R", 1},   {"R", 8},   {"Q", 3},   {"2M", 3},
+                          ^
+tests/unit_geometry.c:38:37: error: code should be clang-formatted [-Wclang-format-violations]
+    {"5R", 5}, {"7Rw", 7}, {"R", 1},   {"R", 8},   {"Q", 3},   {"2M", 3},
+                                    ^
+tests/unit_geometry.c:38:49: error: code should be clang-formatted [-Wclang-format-violations]
+    {"5R", 5}, {"7Rw", 7}, {"R", 1},   {"R", 8},   {"Q", 3},   {"2M", 3},
+                                                ^
+tests/unit_geometry.c:38:61: error: code should be clang-formatted [-Wclang-format-violations]
+    {"5R", 5}, {"7Rw", 7}, {"R", 1},   {"R", 8},   {"Q", 3},   {"2M", 3},
+                                                            ^
+tests/unit_geometry.c:38:74: error: code should be clang-formatted [-Wclang-format-violations]
+    {"5R", 5}, {"7Rw", 7}, {"R", 1},   {"R", 8},   {"Q", 3},   {"2M", 3},
+                                                                         ^
+tests/unit_geometry.c:39:25: error: code should be clang-formatted [-Wclang-format-violations]
+    {"R R", 3}, {"", 3},   {"Rq", 3},  {"5F'", 7},
+                        ^
+tests/unit_geometry.c:39:38: error: code should be clang-formatted [-Wclang-format-violations]
+    {"R R", 3}, {"", 3},   {"Rq", 3},  {"5F'", 7},
+                                     ^
+tests/unit_letter_scheme.c:41:24: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(settings_repo)
+                       ^
+tests/unit_letter_scheme.c:72:34: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(letter_scheme_lifecycle)
+                                 ^
+tests/unit_letter_scheme.c:101:32: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(letter_map_validation)
+                               ^
+tests/unit_letter_scheme.c:135:22: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(speffz_seed)
+                     ^
+tests/unit_letter_scheme.c:159:20: error: code should be clang-formatted [-Wclang-format-violations]
+        if (i == 5) continue;
+                   ^
+tests/unit_letter_scheme.c:167:30: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(speffz_seed_default)
+                             ^
+tests/unit_letter_scheme.c:190:31: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(speffz_sql_agreement)
+                              ^
+tests/unit_session.c:85:30: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(session_day_numbers)
+                             ^
+tests/unit_session.c:115:52: error: code should be clang-formatted [-Wclang-format-violations]
+        if (ct_session_date_to_day(y, m, d) != day) round_trip_ok = false;
+                                                   ^
+tests/unit_session.c:116:29: error: code should be clang-formatted [-Wclang-format-violations]
+        if (m < 1 || m > 12) round_trip_ok = false;
+                            ^
+tests/unit_session.c:117:29: error: code should be clang-formatted [-Wclang-format-violations]
+        if (d < 1 || d > 31) round_trip_ok = false;
+                            ^
+tests/unit_session.c:122:31: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(session_iso_add_days)
+                              ^
+tests/unit_session.c:133:91: error: code should be clang-formatted [-Wclang-format-violations]
+        CT_ASSERT_EQ(ct_session_iso_add_days(input[i], add[i], out, (unsigned)sizeof out), CT_SESSION_OK);
+                                                                                          ^
+tests/unit_session.c:165:30: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(session_flow_golden)
+                             ^
+tests/unit_session.c:279:27: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(session_new_card)
+                          ^
+tests/unit_session.c:333:29: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(session_absent_row)
+                            ^
+tests/unit_session.c:371:24: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(session_lapse)
+                       ^
+tests/unit_session.c:406:27: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(session_same_day)
+                          ^
+tests/unit_session.c:447:29: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(session_empty_deck)
+                            ^
+tests/unit_session.c:487:25: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(session_limits)
+                        ^
+tests/unit_session.c:522:31: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(session_card_missing)
+                              ^
+tests/unit_session.c:544:27: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(session_bad_args)
+                          ^
+tests/unit_session.c:595:30: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(session_free_safety)
+                             ^
+tests/unit_smoke.c:33:31: error: code should be clang-formatted [-Wclang-format-violations]
+        0x406a26168ad7417eull, 0xcf8acc48879262e9ull,
+                              ^
+tests/unit_smoke.c:34:31: error: code should be clang-formatted [-Wclang-format-violations]
+        0x7aeb56e3063c19a4ull, 0xf1696c4fc37efd82ull,
+                              ^
+tests/unit_stats_repo.c:5:1: error: code should be clang-formatted [-Wclang-format-violations]
+#include "framework.h"
+^
+tests/unit_stats_repo.c:44:18: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(ct_repo_review_log(db, card_id, rating, "2026-05-01T00:00:00Z", 1.0, 5.0, 0.0, 1.0),
+                 ^
+tests/unit_stats_repo.c:44:102: error: code should be clang-formatted [-Wclang-format-violations]
+    CT_ASSERT_EQ(ct_repo_review_log(db, card_id, rating, "2026-05-01T00:00:00Z", 1.0, 5.0, 0.0, 1.0),
+                                                                                                     ^
+tests/unit_stats_repo.c:48:91: error: code should be clang-formatted [-Wclang-format-violations]
+static ct_session_row session_at(const char *deck, const char *started, const char *ended, int cards,
+                                                                                          ^
+tests/unit_stats_repo.c:48:102: error: code should be clang-formatted [-Wclang-format-violations]
+static ct_session_row session_at(const char *deck, const char *started, const char *ended, int cards,
+                                                                                                     ^
+tests/unit_stats_repo.c:63:22: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(stats_empty)
+                     ^
+tests/unit_stats_repo.c:84:32: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(stats_deck_aggregates)
+                               ^
+tests/unit_stats_repo.c:144:25: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(stats_forecast)
+                        ^
+tests/unit_stats_repo.c:204:30: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(stats_case_accuracy)
+                             ^
+tests/unit_stats_repo.c:274:25: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(stats_sessions)
+                        ^
+tests/unit_stats_repo.c:281:24: error: code should be clang-formatted [-Wclang-format-violations]
+    ct_session_row s2 = session_at("3bld", "2026-06-02T09:00:00Z", "2026-06-02T09:05:00Z", 7, 0, 1, 5, 1);
+                       ^
+tests/unit_stats_repo.c:282:24: error: code should be clang-formatted [-Wclang-format-violations]
+    ct_session_row s3 = session_at("cfop", "2026-06-01T10:00:00Z", "2026-06-01T10:12:00Z", 3, 3, 0, 0, 0);
+                       ^
+tests/unit_stats_repo.c:325:26: error: code should be clang-formatted [-Wclang-format-violations]
+CT_SUITE(stats_malformed)
+                         ^
+tests/framework.h:17:90: error: code should be clang-formatted [-Wclang-format-violations]
+[[noreturn]] void ct_fail_dbl(const char *file, int line, const char *ea, const char *eb,
+                                                                                         ^
+tests/framework.h:18:40: error: code should be clang-formatted [-Wclang-format-violations]
+                              double a, double b, double eps);
+                                       ^
+tests/framework.h:24:17: error: code should be clang-formatted [-Wclang-format-violations]
+typedef struct { uint64_t a, b, c, d; } ct_sfc64;
+                ^
+tests/framework.h:24:38: error: code should be clang-formatted [-Wclang-format-violations]
+typedef struct { uint64_t a, b, c, d; } ct_sfc64;
+                                     ^
+tests/framework.h:33:23: error: code should be clang-formatted [-Wclang-format-violations]
+#define CT_SUITE(name)                                                                        \
+                      ^
+tests/framework.h:34:46: error: code should be clang-formatted [-Wclang-format-violations]
+    static void CT_CAT(ct_body_, name)(void);                                                 \
+                                             ^
+tests/framework.h:35:75: error: code should be clang-formatted [-Wclang-format-violations]
+    __attribute__((constructor)) static void CT_CAT(ct_reg_, name)(void) {                    \
+                                                                          ^
+tests/framework.h:36:58: error: code should be clang-formatted [-Wclang-format-violations]
+        ct_suite_register(#name, CT_CAT(ct_body_, name));                                     \
+                                                         ^
+tests/framework.h:37:6: error: code should be clang-formatted [-Wclang-format-violations]
+    }                                                                                         \
+     ^
+tests/framework.h:40:24: error: code should be clang-formatted [-Wclang-format-violations]
+#define CT_ASSERT(cond)                                                                       \
+                       ^
+tests/framework.h:41:9: error: code should be clang-formatted [-Wclang-format-violations]
+    do {                                                                                      \
+        ^
+tests/framework.h:42:20: error: code should be clang-formatted [-Wclang-format-violations]
+        if (cond) { ct_count_pass(); }                                                        \
+                   ^
+tests/framework.h:42:37: error: code should be clang-formatted [-Wclang-format-violations]
+        if (cond) { ct_count_pass(); }                                                        \
+                                    ^
+tests/framework.h:42:39: error: code should be clang-formatted [-Wclang-format-violations]
+        if (cond) { ct_count_pass(); }                                                        \
+                                      ^
+tests/framework.h:43:15: error: code should be clang-formatted [-Wclang-format-violations]
+        else { ct_fail_plain(__FILE__, __LINE__, #cond); }                                    \
+              ^
+tests/framework.h:43:57: error: code should be clang-formatted [-Wclang-format-violations]
+        else { ct_fail_plain(__FILE__, __LINE__, #cond); }                                    \
+                                                        ^
+tests/framework.h:43:59: error: code should be clang-formatted [-Wclang-format-violations]
+        else { ct_fail_plain(__FILE__, __LINE__, #cond); }                                    \
+                                                          ^
+tests/framework.h:46:27: error: code should be clang-formatted [-Wclang-format-violations]
+#define CT_ASSERT_EQ(a, b)                                                                    \
+                          ^
+tests/framework.h:47:9: error: code should be clang-formatted [-Wclang-format-violations]
+    do {                                                                                      \
+        ^
+tests/framework.h:48:26: error: code should be clang-formatted [-Wclang-format-violations]
+        if ((a) == (b)) { ct_count_pass(); }                                                  \
+                         ^
+tests/framework.h:48:43: error: code should be clang-formatted [-Wclang-format-violations]
+        if ((a) == (b)) { ct_count_pass(); }                                                  \
+                                          ^
+tests/framework.h:48:45: error: code should be clang-formatted [-Wclang-format-violations]
+        if ((a) == (b)) { ct_count_pass(); }                                                  \
+                                            ^
+tests/framework.h:49:15: error: code should be clang-formatted [-Wclang-format-violations]
+        else {                                                                                \
+              ^
+tests/framework.h:50:76: error: code should be clang-formatted [-Wclang-format-violations]
+            ct_fail_eq(__FILE__, __LINE__, #a, #b, (unsigned long long)(a), (unsigned long long)(b)); \
+                                                                           ^
+tests/framework.h:50:102: error: code should be clang-formatted [-Wclang-format-violations]
+            ct_fail_eq(__FILE__, __LINE__, #a, #b, (unsigned long long)(a), (unsigned long long)(b)); \
+                                                                                                     ^
+tests/framework.h:51:10: error: code should be clang-formatted [-Wclang-format-violations]
+        }                                                                                     \
+         ^
+tests/framework.h:54:36: error: code should be clang-formatted [-Wclang-format-violations]
+#define CT_ASSERT_DBL_EQ(a, b, eps)                                                           \
+                                   ^
+tests/framework.h:55:9: error: code should be clang-formatted [-Wclang-format-violations]
+    do {                                                                                      \
+        ^
+tests/framework.h:56:37: error: code should be clang-formatted [-Wclang-format-violations]
+        double ct_va_ = (double)(a);                                                          \
+                                    ^
+tests/framework.h:57:37: error: code should be clang-formatted [-Wclang-format-violations]
+        double ct_vb_ = (double)(b);                                                          \
+                                    ^
+tests/framework.h:58:39: error: code should be clang-formatted [-Wclang-format-violations]
+        double ct_ve_ = (double)(eps);                                                        \
+                                      ^
+tests/framework.h:59:53: error: code should be clang-formatted [-Wclang-format-violations]
+        if (ct_dbl_within(ct_va_, ct_vb_, ct_ve_)) { ct_count_pass(); }                       \
+                                                    ^
+tests/framework.h:59:70: error: code should be clang-formatted [-Wclang-format-violations]
+        if (ct_dbl_within(ct_va_, ct_vb_, ct_ve_)) { ct_count_pass(); }                       \
+                                                                     ^
+tests/framework.h:59:72: error: code should be clang-formatted [-Wclang-format-violations]
+        if (ct_dbl_within(ct_va_, ct_vb_, ct_ve_)) { ct_count_pass(); }                       \
+                                                                       ^
+tests/framework.h:60:15: error: code should be clang-formatted [-Wclang-format-violations]
+        else { ct_fail_dbl(__FILE__, __LINE__, #a, #b, ct_va_, ct_vb_, ct_ve_); }             \
+              ^
+tests/framework.h:60:80: error: code should be clang-formatted [-Wclang-format-violations]
+        else { ct_fail_dbl(__FILE__, __LINE__, #a, #b, ct_va_, ct_vb_, ct_ve_); }             \
+                                                                               ^
+tests/framework.h:60:82: error: code should be clang-formatted [-Wclang-format-violations]
+        else { ct_fail_dbl(__FILE__, __LINE__, #a, #b, ct_va_, ct_vb_, ct_ve_); }             \
+                                                                                 ^
+tests/framework.h:63:31: error: code should be clang-formatted [-Wclang-format-violations]
+#define CT_ASSERT_STR_EQ(a, b)                                                                \
+                              ^
+tests/framework.h:64:9: error: code should be clang-formatted [-Wclang-format-violations]
+    do {                                                                                      \
+        ^
+tests/framework.h:65:34: error: code should be clang-formatted [-Wclang-format-violations]
+        const char *ct_sa_ = (a);                                                             \
+                                 ^
+tests/framework.h:66:34: error: code should be clang-formatted [-Wclang-format-violations]
+        const char *ct_sb_ = (b);                                                             \
+                                 ^
+tests/framework.h:67:41: error: code should be clang-formatted [-Wclang-format-violations]
+        if (ct_str_eq(ct_sa_, ct_sb_)) { ct_count_pass(); }                                   \
+                                        ^
+tests/framework.h:67:58: error: code should be clang-formatted [-Wclang-format-violations]
+        if (ct_str_eq(ct_sa_, ct_sb_)) { ct_count_pass(); }                                   \
+                                                         ^
+tests/framework.h:67:60: error: code should be clang-formatted [-Wclang-format-violations]
+        if (ct_str_eq(ct_sa_, ct_sb_)) { ct_count_pass(); }                                   \
+                                                           ^
+tests/framework.h:68:15: error: code should be clang-formatted [-Wclang-format-violations]
+        else { ct_fail_str(__FILE__, __LINE__, #a, #b, ct_sa_, ct_sb_); }                     \
+              ^
+tests/framework.h:68:72: error: code should be clang-formatted [-Wclang-format-violations]
+        else { ct_fail_str(__FILE__, __LINE__, #a, #b, ct_sa_, ct_sb_); }                     \
+                                                                       ^
+tests/framework.h:68:74: error: code should be clang-formatted [-Wclang-format-violations]
+        else { ct_fail_str(__FILE__, __LINE__, #a, #b, ct_sa_, ct_sb_); }                     \
+                                                                         ^
+make: *** [makefile:156: fmt-check] Error 1
+fmt_exit=2

@@ -1,0 +1,1 @@
+CREATE TABLE after_t(a);

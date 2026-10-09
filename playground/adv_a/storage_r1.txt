@@ -1,0 +1,41 @@
+== gap: 001 then 003, no 002 ==
+OK  : gap migrate rc 0
+version after gap migrations: 3
+OK  : gap version jumps to 3
+OK  : table ga exists
+OK  : table gc exists
+== hand edited user_version above max ==
+OK  : migrate with future version rc 0
+OK  : version stays 5
+OK  : real schema not applied
+== hand edited user_version 0 with schema present ==
+first migrate rc=0, after version reset rc=1
+OK  : version reset re-run fails on existing tables
+OK  : version stays 0 after failed re-run
+== embedded NUL truncates migration SQL ==
+OK  : nul migration rc 0
+OK  : version bumped to 2
+OK  : statement before NUL ran
+OK  : statement after NUL silently dropped
+== non-UTF8 and bad SQL roll back ==
+junk migration rc=1
+OK  : bad sql fails migrate
+OK  : version not bumped
+OK  : partial table rolled back
+== duplicate versions apply in name order ==
+OK  : dup versions rc 0
+OK  : both dup tables exist
+version after dupes: 2
+== numeric sort: 9 before 10 ==
+OK  : numeric sort migrate rc 0
+OK  : both sorted tables exist
+OK  : version is 10
+== overflow version silently skipped ==
+OK  : overflow migrate rc 0
+version after overflow file: 0, ovf table exists: 0
+== backup blocked: .bak path is a directory ==
+blocked backup migrate rc=1 (rc0=0)
+OK  : blocked backup fails migrate
+OK  : version not bumped while blocked
+OK  : migration not applied while blocked
+failures=0

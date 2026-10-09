@@ -1,0 +1,2 @@
+CREATE TABLE crlf_t(a INTEGER);
+INSERT INTO crlf_t VALUES (7);
