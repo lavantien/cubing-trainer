@@ -29,6 +29,10 @@ void ct_ui_update(ct_app *app) {
         ct_screen_settings_update(app);
         return;
     }
+    if (app->screen == CT_SCREEN_STATS) {
+        ct_screen_stats_update(app);
+        return;
+    }
     if (app->screen != CT_SCREEN_MENU) {
         app->screen = CT_SCREEN_MENU;
         return;
@@ -56,6 +60,10 @@ void ct_ui_draw(ct_app *app) {
     }
     if (app->screen == CT_SCREEN_SETTINGS) {
         ct_screen_settings_draw(app);
+        return;
+    }
+    if (app->screen == CT_SCREEN_STATS) {
+        ct_screen_stats_draw(app);
         return;
     }
     ClearBackground(DARKGRAY);

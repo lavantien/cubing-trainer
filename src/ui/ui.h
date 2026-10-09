@@ -4,6 +4,7 @@
 #include <limits.h>
 
 #include "app/app.h"
+#include "stats/stats.h"
 #include "storage/repo_cards.h"
 #include "storage/repo_settings.h"
 
@@ -108,5 +109,39 @@ void ct_review_form_end(ct_review_form *f, const char *now_iso);
 
 void ct_screen_review_update(ct_app *app);
 void ct_screen_review_draw(ct_app *app);
+
+enum {
+    CT_STATS_MAX_DECKS = CT_STATS_DECK_MAX,
+    CT_STATS_FORECAST_DAYS = (1 << 5) - 2,
+    CT_STATS_MAX_CASES = (1 << 6),
+    CT_STATS_RETENTION_BUCKETS = (1 << 3) + 2,
+    CT_STATS_REVIEW_ROWS_MAX = (1 << 8),
+    CT_STATS_SESSIONS_MAX = (1 << 4)
+};
+
+typedef struct {
+    sqlite3 *db;
+    ct_deck_stats decks[CT_STATS_MAX_DECKS];
+    int deck_count;
+    int deck_selected;
+    ct_due_forecast_row forecast[CT_STATS_FORECAST_DAYS];
+    int forecast_count;
+    ct_case_accuracy_row cases[CT_STATS_MAX_CASES];
+    int case_count;
+    int case_order[CT_STATS_MAX_CASES];
+    ct_retention_bucket retention[CT_STATS_RETENTION_BUCKETS];
+    int retention_count;
+    ct_retention_summary retention_summary;
+    ct_session_row sessions[CT_STATS_SESSIONS_MAX];
+    int session_count;
+    char now_iso[CT_STATS_STAMP_MAX];
+} ct_stats_view;
+
+int ct_stats_view_load(ct_stats_view *v, sqlite3 *db, const char *now_iso, const char *deck);
+int ct_stats_view_select_deck(ct_stats_view *v, const char *deck);
+int ct_stats_view_worst_cases(ct_stats_view *v, int n);
+
+void ct_screen_stats_update(ct_app *app);
+void ct_screen_stats_draw(ct_app *app);
 
 #endif
