@@ -103,18 +103,18 @@ typedef enum ct_ui_screen {
 } ct_ui_screen;
 
 typedef enum ct_move_face {
-    CT_FACE_U = 1u << 0,
-    CT_FACE_D = 1u << 1,
-    CT_FACE_L = 1u << 2,
-    CT_FACE_R = 1u << 3,
-    CT_FACE_F = 1u << 4,
-    CT_FACE_B = 1u << 5,
-    CT_FACE_M = 1u << 6,
-    CT_FACE_E = 1u << 7,
-    CT_FACE_S = 1u << 8,
-    CT_FACE_X = 1u << 9,
-    CT_FACE_Y = 1u << 10,
-    CT_FACE_Z = 1u << 11
+    CT_MOVE_BIT_U = 1u << 0,
+    CT_MOVE_BIT_D = 1u << 1,
+    CT_MOVE_BIT_L = 1u << 2,
+    CT_MOVE_BIT_R = 1u << 3,
+    CT_MOVE_BIT_F = 1u << 4,
+    CT_MOVE_BIT_B = 1u << 5,
+    CT_MOVE_BIT_M = 1u << 6,
+    CT_MOVE_BIT_E = 1u << 7,
+    CT_MOVE_BIT_S = 1u << 8,
+    CT_MOVE_BIT_X = 1u << 9,
+    CT_MOVE_BIT_Y = 1u << 10,
+    CT_MOVE_BIT_Z = 1u << 11
 } ct_move_face;
 
 typedef enum ct_ease { CT_EASE_LINEAR = 0, CT_EASE_CUBIC_IN_OUT } ct_ease;
@@ -170,29 +170,29 @@ typedef enum ct_cfg_status {
 static inline unsigned ct_move_face_from_char(char c) {
     switch (c) {
     case 'U':
-        return CT_FACE_U;
+        return CT_MOVE_BIT_U;
     case 'D':
-        return CT_FACE_D;
+        return CT_MOVE_BIT_D;
     case 'L':
-        return CT_FACE_L;
+        return CT_MOVE_BIT_L;
     case 'R':
-        return CT_FACE_R;
+        return CT_MOVE_BIT_R;
     case 'F':
-        return CT_FACE_F;
+        return CT_MOVE_BIT_F;
     case 'B':
-        return CT_FACE_B;
+        return CT_MOVE_BIT_B;
     case 'M':
-        return CT_FACE_M;
+        return CT_MOVE_BIT_M;
     case 'E':
-        return CT_FACE_E;
+        return CT_MOVE_BIT_E;
     case 'S':
-        return CT_FACE_S;
+        return CT_MOVE_BIT_S;
     case 'x':
-        return CT_FACE_X;
+        return CT_MOVE_BIT_X;
     case 'y':
-        return CT_FACE_Y;
+        return CT_MOVE_BIT_Y;
     case 'z':
-        return CT_FACE_Z;
+        return CT_MOVE_BIT_Z;
     default:
         return 0;
     }
@@ -200,29 +200,29 @@ static inline unsigned ct_move_face_from_char(char c) {
 
 static inline char ct_move_face_char(unsigned face) {
     switch (face) {
-    case CT_FACE_U:
+    case CT_MOVE_BIT_U:
         return 'U';
-    case CT_FACE_D:
+    case CT_MOVE_BIT_D:
         return 'D';
-    case CT_FACE_L:
+    case CT_MOVE_BIT_L:
         return 'L';
-    case CT_FACE_R:
+    case CT_MOVE_BIT_R:
         return 'R';
-    case CT_FACE_F:
+    case CT_MOVE_BIT_F:
         return 'F';
-    case CT_FACE_B:
+    case CT_MOVE_BIT_B:
         return 'B';
-    case CT_FACE_M:
+    case CT_MOVE_BIT_M:
         return 'M';
-    case CT_FACE_E:
+    case CT_MOVE_BIT_E:
         return 'E';
-    case CT_FACE_S:
+    case CT_MOVE_BIT_S:
         return 'S';
-    case CT_FACE_X:
+    case CT_MOVE_BIT_X:
         return 'x';
-    case CT_FACE_Y:
+    case CT_MOVE_BIT_Y:
         return 'y';
-    case CT_FACE_Z:
+    case CT_MOVE_BIT_Z:
         return 'z';
     default:
         return '\0';

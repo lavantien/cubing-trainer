@@ -30,18 +30,18 @@ CT_SUITE(config_constants) {
     CT_ASSERT_DBL_EQ(CT_FSRS_MIN_DIFFICULTY, 1.0, 1e-12);
     CT_ASSERT_DBL_EQ(CT_FSRS_FACTOR, 0.2345679012345679, 1e-12);
     CT_ASSERT_DBL_EQ(CT_FSRS_DECAY, -0.5, 1e-12);
-    CT_ASSERT_EQ(CT_FACE_U, 1);
-    CT_ASSERT_EQ(CT_FACE_D, 2);
-    CT_ASSERT_EQ(CT_FACE_L, 4);
-    CT_ASSERT_EQ(CT_FACE_R, 8);
-    CT_ASSERT_EQ(CT_FACE_F, 16);
-    CT_ASSERT_EQ(CT_FACE_B, 32);
-    CT_ASSERT_EQ(CT_FACE_M, 64);
-    CT_ASSERT_EQ(CT_FACE_E, 128);
-    CT_ASSERT_EQ(CT_FACE_S, 256);
-    CT_ASSERT_EQ(CT_FACE_X, 512);
-    CT_ASSERT_EQ(CT_FACE_Y, 1024);
-    CT_ASSERT_EQ(CT_FACE_Z, 2048);
+    CT_ASSERT_EQ(CT_MOVE_BIT_U, 1);
+    CT_ASSERT_EQ(CT_MOVE_BIT_D, 2);
+    CT_ASSERT_EQ(CT_MOVE_BIT_L, 4);
+    CT_ASSERT_EQ(CT_MOVE_BIT_R, 8);
+    CT_ASSERT_EQ(CT_MOVE_BIT_F, 16);
+    CT_ASSERT_EQ(CT_MOVE_BIT_B, 32);
+    CT_ASSERT_EQ(CT_MOVE_BIT_M, 64);
+    CT_ASSERT_EQ(CT_MOVE_BIT_E, 128);
+    CT_ASSERT_EQ(CT_MOVE_BIT_S, 256);
+    CT_ASSERT_EQ(CT_MOVE_BIT_X, 512);
+    CT_ASSERT_EQ(CT_MOVE_BIT_Y, 1024);
+    CT_ASSERT_EQ(CT_MOVE_BIT_Z, 2048);
     CT_ASSERT_EQ(CT_GEN_DEFAULT_PREFERRED_MOVES, 11);
     CT_ASSERT_DBL_EQ(CT_GEN_PENALTY_PREFERRED, 0.0, 1e-12);
     CT_ASSERT_DBL_EQ(CT_GEN_PENALTY_OTHER, 2.0, 1e-12);
@@ -157,36 +157,36 @@ CT_SUITE(config_enums) {
 }
 
 CT_SUITE(config_face_helpers) {
-    CT_ASSERT_EQ(ct_move_face_from_char('U'), CT_FACE_U);
-    CT_ASSERT_EQ(ct_move_face_from_char('D'), CT_FACE_D);
-    CT_ASSERT_EQ(ct_move_face_from_char('L'), CT_FACE_L);
-    CT_ASSERT_EQ(ct_move_face_from_char('R'), CT_FACE_R);
-    CT_ASSERT_EQ(ct_move_face_from_char('F'), CT_FACE_F);
-    CT_ASSERT_EQ(ct_move_face_from_char('B'), CT_FACE_B);
-    CT_ASSERT_EQ(ct_move_face_from_char('M'), CT_FACE_M);
-    CT_ASSERT_EQ(ct_move_face_from_char('E'), CT_FACE_E);
-    CT_ASSERT_EQ(ct_move_face_from_char('S'), CT_FACE_S);
-    CT_ASSERT_EQ(ct_move_face_from_char('x'), CT_FACE_X);
-    CT_ASSERT_EQ(ct_move_face_from_char('y'), CT_FACE_Y);
-    CT_ASSERT_EQ(ct_move_face_from_char('z'), CT_FACE_Z);
+    CT_ASSERT_EQ(ct_move_face_from_char('U'), CT_MOVE_BIT_U);
+    CT_ASSERT_EQ(ct_move_face_from_char('D'), CT_MOVE_BIT_D);
+    CT_ASSERT_EQ(ct_move_face_from_char('L'), CT_MOVE_BIT_L);
+    CT_ASSERT_EQ(ct_move_face_from_char('R'), CT_MOVE_BIT_R);
+    CT_ASSERT_EQ(ct_move_face_from_char('F'), CT_MOVE_BIT_F);
+    CT_ASSERT_EQ(ct_move_face_from_char('B'), CT_MOVE_BIT_B);
+    CT_ASSERT_EQ(ct_move_face_from_char('M'), CT_MOVE_BIT_M);
+    CT_ASSERT_EQ(ct_move_face_from_char('E'), CT_MOVE_BIT_E);
+    CT_ASSERT_EQ(ct_move_face_from_char('S'), CT_MOVE_BIT_S);
+    CT_ASSERT_EQ(ct_move_face_from_char('x'), CT_MOVE_BIT_X);
+    CT_ASSERT_EQ(ct_move_face_from_char('y'), CT_MOVE_BIT_Y);
+    CT_ASSERT_EQ(ct_move_face_from_char('z'), CT_MOVE_BIT_Z);
     CT_ASSERT_EQ(ct_move_face_from_char('Q'), 0);
     CT_ASSERT_EQ(ct_move_face_from_char('u'), 0);
     CT_ASSERT_EQ(ct_move_face_from_char(' '), 0);
     CT_ASSERT_EQ(ct_move_face_from_char('\0'), 0);
-    CT_ASSERT_EQ(ct_move_face_char(CT_FACE_U), 'U');
-    CT_ASSERT_EQ(ct_move_face_char(CT_FACE_D), 'D');
-    CT_ASSERT_EQ(ct_move_face_char(CT_FACE_L), 'L');
-    CT_ASSERT_EQ(ct_move_face_char(CT_FACE_R), 'R');
-    CT_ASSERT_EQ(ct_move_face_char(CT_FACE_F), 'F');
-    CT_ASSERT_EQ(ct_move_face_char(CT_FACE_B), 'B');
-    CT_ASSERT_EQ(ct_move_face_char(CT_FACE_M), 'M');
-    CT_ASSERT_EQ(ct_move_face_char(CT_FACE_E), 'E');
-    CT_ASSERT_EQ(ct_move_face_char(CT_FACE_S), 'S');
-    CT_ASSERT_EQ(ct_move_face_char(CT_FACE_X), 'x');
-    CT_ASSERT_EQ(ct_move_face_char(CT_FACE_Y), 'y');
-    CT_ASSERT_EQ(ct_move_face_char(CT_FACE_Z), 'z');
+    CT_ASSERT_EQ(ct_move_face_char(CT_MOVE_BIT_U), 'U');
+    CT_ASSERT_EQ(ct_move_face_char(CT_MOVE_BIT_D), 'D');
+    CT_ASSERT_EQ(ct_move_face_char(CT_MOVE_BIT_L), 'L');
+    CT_ASSERT_EQ(ct_move_face_char(CT_MOVE_BIT_R), 'R');
+    CT_ASSERT_EQ(ct_move_face_char(CT_MOVE_BIT_F), 'F');
+    CT_ASSERT_EQ(ct_move_face_char(CT_MOVE_BIT_B), 'B');
+    CT_ASSERT_EQ(ct_move_face_char(CT_MOVE_BIT_M), 'M');
+    CT_ASSERT_EQ(ct_move_face_char(CT_MOVE_BIT_E), 'E');
+    CT_ASSERT_EQ(ct_move_face_char(CT_MOVE_BIT_S), 'S');
+    CT_ASSERT_EQ(ct_move_face_char(CT_MOVE_BIT_X), 'x');
+    CT_ASSERT_EQ(ct_move_face_char(CT_MOVE_BIT_Y), 'y');
+    CT_ASSERT_EQ(ct_move_face_char(CT_MOVE_BIT_Z), 'z');
     CT_ASSERT_EQ(ct_move_face_char(0), '\0');
-    CT_ASSERT_EQ(ct_move_face_char(CT_FACE_U | CT_FACE_D), '\0');
+    CT_ASSERT_EQ(ct_move_face_char(CT_MOVE_BIT_U | CT_MOVE_BIT_D), '\0');
     CT_ASSERT_EQ(ct_move_face_char(1u << 12), '\0');
 }
 
@@ -235,7 +235,7 @@ CT_SUITE(config_set_roundtrip) {
     CT_ASSERT_DBL_EQ(c.fsrs.max_ivl_days, 1000.5, 1e-12);
 
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "LF"), 0);
-    CT_ASSERT_EQ(c.gen.preferred_moves, CT_FACE_L | CT_FACE_F);
+    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_L | CT_MOVE_BIT_F);
 
     CT_ASSERT_EQ(ct_config_set(&c, "gen.weight_len", "0.5"), 0);
     CT_ASSERT_DBL_EQ(c.gen.weight_len, 0.5, 1e-12);
@@ -353,7 +353,7 @@ CT_SUITE(config_set_errors) {
 
 CT_SUITE(config_preferred_moves) {
     ct_config c = ct_config_defaults();
-    unsigned rud = CT_FACE_R | CT_FACE_U | CT_FACE_D;
+    unsigned rud = CT_MOVE_BIT_R | CT_MOVE_BIT_U | CT_MOVE_BIT_D;
 
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "RUD"), 0);
     CT_ASSERT_EQ(c.gen.preferred_moves, rud);
@@ -369,15 +369,15 @@ CT_SUITE(config_preferred_moves) {
     CT_ASSERT_EQ(c.gen.preferred_moves, rud);
 
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "xyz"), 0);
-    CT_ASSERT_EQ(c.gen.preferred_moves, CT_FACE_X | CT_FACE_Y | CT_FACE_Z);
+    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_X | CT_MOVE_BIT_Y | CT_MOVE_BIT_Z);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "XYZ"), 0);
-    CT_ASSERT_EQ(c.gen.preferred_moves, CT_FACE_X | CT_FACE_Y | CT_FACE_Z);
+    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_X | CT_MOVE_BIT_Y | CT_MOVE_BIT_Z);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "MES"), 0);
-    CT_ASSERT_EQ(c.gen.preferred_moves, CT_FACE_M | CT_FACE_E | CT_FACE_S);
+    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_M | CT_MOVE_BIT_E | CT_MOVE_BIT_S);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "UDLRFBMESxyz"), 0);
     CT_ASSERT_EQ(c.gen.preferred_moves, 0xFFFu);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "Rr"), 0);
-    CT_ASSERT_EQ(c.gen.preferred_moves, CT_FACE_R);
+    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_R);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", ""), 0);
     CT_ASSERT_EQ(c.gen.preferred_moves, 0u);
 }
