@@ -49,7 +49,8 @@ CT_SUITE(stats_agg_retention) {
     CT_ASSERT_DBL_EQ(ct_fsrs_retrievability(19.0, 63.0), 0.75, 1e-12);
     CT_ASSERT_DBL_EQ(ct_fsrs_retrievability(19.0, 1215.0), 0.25, 1e-12);
     CT_ASSERT_DBL_EQ(ct_fsrs_retrievability(19.0, 32319.0), 0.05, 1e-12);
-    CT_ASSERT_DBL_EQ(ct_fsrs_retrievability(0.0, 5.0), 0.0, 1e-15);
+    CT_ASSERT_DBL_EQ(ct_fsrs_retrievability(0.0, 5.0),
+                     ct_fsrs_retrievability(CT_FSRS_MIN_STABILITY, 5.0), 0.0);
 
     ct_review_row rows[CURVE_ROWS];
     fill_curve(rows);
@@ -167,11 +168,14 @@ CT_SUITE(stats_agg_retention_granularity) {
     edges[2] = review_at(1.0, 0.0, CT_GOOD);
     ct_retention_bucket eo[CURVE_BUCKETS];
     CT_ASSERT_EQ(ct_stats_retention(edges, 3, &f, eo, CURVE_BUCKETS), CURVE_BUCKETS);
-    CT_ASSERT_EQ(eo[0].reviews, 2);
-    CT_ASSERT_EQ(eo[0].actual_recall, 1);
+    CT_ASSERT_EQ(eo[0].reviews, 0);
     CT_ASSERT_DBL_EQ(eo[0].predicted_recall, 0.0, 1e-15);
-    CT_ASSERT_EQ(eo[9].reviews, 1);
-    CT_ASSERT_EQ(eo[9].actual_recall, 1);
+    CT_ASSERT_EQ(eo[2].reviews, 1);
+    CT_ASSERT_EQ(eo[2].actual_recall, 0);
+    CT_ASSERT_DBL_EQ(eo[2].predicted_recall, ct_fsrs_retrievability(CT_FSRS_MIN_STABILITY, 5.0),
+                     1e-15);
+    CT_ASSERT_EQ(eo[9].reviews, 2);
+    CT_ASSERT_EQ(eo[9].actual_recall, 2);
     CT_ASSERT_DBL_EQ(eo[9].predicted_recall, 1.0, 1e-15);
 }
 
