@@ -6,6 +6,7 @@
 
 enum {
     CT_CUBE_FACE_COUNT = 6,
+    CT_CUBE_MIN_N = 2,
     CT_CUBE_MAX_N = 7,
     CT_CUBE_STRIDE = CT_CUBE_MAX_N,
     CT_MOVE_QUARTERS = 4
@@ -28,6 +29,7 @@ typedef struct {
 void ct_cube_init(ct_cube *c, int n);
 bool ct_cube_solved(const ct_cube *c);
 bool ct_cube_equal(const ct_cube *a, const ct_cube *b);
+bool ct_move_legal(const ct_move *m, int n);
 void ct_apply(ct_cube *c, ct_move m);
 ct_move ct_move_inverse(ct_move m);
 

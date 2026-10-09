@@ -18,15 +18,9 @@ static int perm_compact(int n, int face, int row, int col) {
     return face * n * n + row * n + col;
 }
 
-static bool perm_move_valid(ct_move m, int n) {
-    return m.face >= CT_FACE_U && m.face <= CT_FACE_D && m.quarter >= 1 &&
-           m.quarter <= CT_MOVE_QUARTERS - 1 && m.depth_from >= 1 && m.depth_to >= m.depth_from &&
-           m.depth_to <= n;
-}
-
 int ct_sticker_perm(ct_move m, int n,
                     uint8_t perm[CT_CUBE_FACE_COUNT * CT_CUBE_STRIDE * CT_CUBE_STRIDE]) {
-    if (n < CT_PERM_MIN_N || n > CT_PERM_MAX_N || !perm_move_valid(m, n)) {
+    if (n < CT_PERM_MIN_N || n > CT_PERM_MAX_N || !ct_move_legal(&m, n)) {
         return -1;
     }
     memset(perm, 0xFF, (size_t)(CT_CUBE_FACE_COUNT * CT_CUBE_STRIDE * CT_CUBE_STRIDE));

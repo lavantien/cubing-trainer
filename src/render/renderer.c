@@ -28,12 +28,6 @@ static float clampf(float v, float lo, float hi) {
     return v;
 }
 
-static bool move_valid(int n, ct_move m) {
-    return n >= 2 && n <= CT_CUBE_MAX_N && m.face >= CT_FACE_U && m.face <= CT_FACE_D &&
-           m.quarter >= 1 && m.quarter <= CT_MOVE_QUARTERS - 1 && m.depth_from >= 1 &&
-           m.depth_to >= m.depth_from && m.depth_to <= n;
-}
-
 ct_color_scheme ct_color_scheme_default(void) {
     ct_color_scheme scheme;
     scheme.face[CT_FACE_U] = WHITE;
@@ -46,8 +40,8 @@ ct_color_scheme ct_color_scheme_default(void) {
 }
 
 void ct_renderer_init(ct_renderer *r, int n) {
-    if (n < 2) {
-        n = 2;
+    if (n < CT_CUBE_MIN_N) {
+        n = CT_CUBE_MIN_N;
     }
     if (n > CT_CUBE_MAX_N) {
         n = CT_CUBE_MAX_N;
@@ -58,7 +52,7 @@ void ct_renderer_init(ct_renderer *r, int n) {
 }
 
 bool ct_renderer_slab_contains(int n, ct_move m, ct_v3 center) {
-    if (!move_valid(n, m)) {
+    if (!ct_move_legal(&m, n)) {
         return false;
     }
     ct_v3 normal = ct_frames[m.face].normal;
@@ -169,7 +163,7 @@ void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim *
     float angle_rad = 0.0f;
     if (anim != NULL && ct_anim_active(anim)) {
         m = anim->moves[anim->head];
-        if (move_valid(r->n, m)) {
+        if (ct_move_legal(&m, r->n)) {
             double eased = ct_ease_cubic_in_out(anim->elapsed / move_seconds);
             ct_v3 normal = ct_frames[m.face].normal;
             int sign = (normal.x != 0) ? normal.x : ((normal.y != 0) ? normal.y : normal.z);

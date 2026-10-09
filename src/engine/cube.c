@@ -86,8 +86,8 @@ static ct_v3 v3_rot90(ct_v3 v, int axis) {
 }
 
 void ct_cube_init(ct_cube *c, int n) {
-    if (n < 2)
-        n = 2;
+    if (n < CT_CUBE_MIN_N)
+        n = CT_CUBE_MIN_N;
     if (n > CT_CUBE_MAX_N)
         n = CT_CUBE_MAX_N;
     c->n = n;
@@ -119,14 +119,16 @@ ct_move ct_move_inverse(ct_move m) {
     return r;
 }
 
-static bool move_legal(const ct_cube *c, ct_move m) {
-    return m.face >= CT_FACE_U && m.face <= CT_FACE_D && m.quarter >= 1 &&
-           m.quarter <= CT_MOVE_QUARTERS - 1 && m.depth_from >= 1 && m.depth_to >= m.depth_from &&
-           m.depth_to <= c->n;
+bool ct_move_legal(const ct_move *m, int n) {
+    if (m == NULL)
+        return false;
+    return n >= CT_CUBE_MIN_N && n <= CT_CUBE_MAX_N && m->face >= CT_FACE_U &&
+           m->face <= CT_FACE_D && m->quarter >= 1 && m->quarter <= CT_MOVE_QUARTERS - 1 &&
+           m->depth_from >= 1 && m->depth_to >= m->depth_from && m->depth_to <= n;
 }
 
 void ct_apply(ct_cube *c, ct_move m) {
-    if (!move_legal(c, m)) {
+    if (!ct_move_legal(&m, c->n)) {
         return;
     }
     ct_cube src = *c;

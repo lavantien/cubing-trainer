@@ -48,6 +48,40 @@ static bool colors_valid(const ct_cube *c) {
     return true;
 }
 
+CT_SUITE(cube_move_legal) {
+    for (int n = 2; n <= CT_CUBE_MAX_N; n++) {
+        ct_move ok = {CT_FACE_U, 1, n, 1};
+        CT_ASSERT(ct_move_legal(&ok, n));
+        ct_move wide = {CT_FACE_D, 1, n, CT_MOVE_QUARTERS - 1};
+        CT_ASSERT(ct_move_legal(&wide, n));
+    }
+    int n = 3;
+    ct_move depth_zero = {CT_FACE_U, 0, 1, 1};
+    CT_ASSERT(!ct_move_legal(&depth_zero, n));
+    ct_move depth_neg = {CT_FACE_U, -1, 1, 1};
+    CT_ASSERT(!ct_move_legal(&depth_neg, n));
+    ct_move depth_beyond = {CT_FACE_U, 1, n + 1, 1};
+    CT_ASSERT(!ct_move_legal(&depth_beyond, n));
+    ct_move depth_to_below = {CT_FACE_U, 2, 1, 1};
+    CT_ASSERT(!ct_move_legal(&depth_to_below, n));
+    ct_move quarter_zero = {CT_FACE_U, 1, 1, 0};
+    CT_ASSERT(!ct_move_legal(&quarter_zero, n));
+    ct_move quarter_neg = {CT_FACE_U, 1, 1, -1};
+    CT_ASSERT(!ct_move_legal(&quarter_neg, n));
+    ct_move quarter_four = {CT_FACE_U, 1, 1, CT_MOVE_QUARTERS};
+    CT_ASSERT(!ct_move_legal(&quarter_four, n));
+    ct_move face_below = {CT_FACE_U - 1, 1, 1, 1};
+    CT_ASSERT(!ct_move_legal(&face_below, n));
+    ct_move face_above = {CT_FACE_D + 1, 1, 1, 1};
+    CT_ASSERT(!ct_move_legal(&face_above, n));
+    ct_move ok3 = {CT_FACE_R, 1, 1, 2};
+    CT_ASSERT(!ct_move_legal(&ok3, 1));
+    CT_ASSERT(!ct_move_legal(&ok3, 0));
+    CT_ASSERT(!ct_move_legal(&ok3, -3));
+    CT_ASSERT(!ct_move_legal(&ok3, CT_CUBE_MAX_N + 1));
+    CT_ASSERT(!ct_move_legal(NULL, n));
+}
+
 CT_SUITE(cube_init) {
     for (int n = 2; n <= CT_CUBE_MAX_N; n++) {
         ct_cube c;
