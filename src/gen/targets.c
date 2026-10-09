@@ -160,3 +160,20 @@ int ct_targets_corner(int buffer_sticker, ct_target_pair *out, int cap) {
 int ct_targets_edge(int buffer_sticker, ct_target_pair *out, int cap) {
     return ct_enumerate_targets(buffer_sticker, ct_edge_piece_of, out, cap);
 }
+
+void ct_sticker_cell(int orbit, int sticker, int *face, int *row, int *col) {
+    if ((orbit != CT_TARGET_ORBIT_CORNER && orbit != CT_TARGET_ORBIT_EDGE) || sticker < 0 ||
+        sticker >= CT_TARGET_STICKERS) {
+        *face = CT_TARGET_NONE;
+        *row = CT_TARGET_NONE;
+        *col = CT_TARGET_NONE;
+        return;
+    }
+    *face = sticker / CT_TARGET_PER_FACE;
+    int pos = sticker % CT_TARGET_PER_FACE;
+    if (orbit == CT_TARGET_ORBIT_CORNER) {
+        ct_corner_grid(pos, row, col);
+    } else {
+        ct_edge_grid(pos, row, col);
+    }
+}

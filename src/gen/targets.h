@@ -16,6 +16,11 @@ enum ct_target_face {
     CT_TARGET_FACE_D
 };
 
+enum ct_target_orbit {
+    CT_TARGET_ORBIT_CORNER = 0,
+    CT_TARGET_ORBIT_EDGE = 1,
+};
+
 enum ct_target_const {
     CT_TARGET_NONE = -1,
     CT_TARGET_AXIS_COUNT = 3,
@@ -35,6 +40,7 @@ typedef struct ct_target_pair {
 
 int ct_corner_piece_of(int sticker);
 int ct_edge_piece_of(int sticker);
+void ct_sticker_cell(int orbit, int sticker, int *face, int *row, int *col);
 int ct_targets_corner(int buffer_sticker, ct_target_pair *out, int cap);
 int ct_targets_edge(int buffer_sticker, ct_target_pair *out, int cap);
 
