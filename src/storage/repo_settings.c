@@ -55,6 +55,29 @@ int ct_repo_settings_set(sqlite3 *db, const char *key, const char *value) {
     return rc == SQLITE_DONE ? 0 : -1;
 }
 
+int ct_repo_settings_merge(sqlite3 *db, ct_config *cfg) {
+    if (db == NULL || cfg == NULL)
+        return -1;
+    sqlite3_stmt *st = NULL;
+    if (sqlite3_prepare_v2(db, "SELECT key, value FROM settings", -1, &st, NULL) != SQLITE_OK) {
+        sqlite3_finalize(st);
+        return -1;
+    }
+    int ret = 0;
+    int rc;
+    while ((rc = sqlite3_step(st)) == SQLITE_ROW) {
+        const unsigned char *k = sqlite3_column_text(st, 0);
+        const unsigned char *v = sqlite3_column_text(st, 1);
+        if (k == NULL || v == NULL)
+            continue;
+        (void)ct_config_set(cfg, (const char *)k, (const char *)v);
+    }
+    if (rc != SQLITE_DONE)
+        ret = -1;
+    sqlite3_finalize(st);
+    return ret;
+}
+
 int ct_letter_scheme_create(sqlite3 *db, const char *name, int *id) {
     if (db == NULL || name == NULL || id == NULL)
         return -1;

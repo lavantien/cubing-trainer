@@ -54,6 +54,10 @@ void ct_app_init(ct_app *app) {
         fprintf(stderr, "cubing-trainer: migration failed from %s\n", app->migrations_path);
         ct_db_close(app->db);
         app->db = NULL;
+    } else if (ct_repo_settings_merge(app->db, &app->cfg) != 0) {
+        fprintf(stderr, "cubing-trainer: cannot read settings from %s\n", app->db_path);
+        ct_db_close(app->db);
+        app->db = NULL;
     } else {
         db_ready = true;
     }

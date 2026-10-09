@@ -94,6 +94,7 @@ int ct_review_form_begin(ct_review_form *f, sqlite3 *db, const char *deck, const
     memset(f, 0, sizeof *f);
     f->db = db;
     ct_config cfg = ct_config_defaults();
+    (void)ct_repo_settings_merge(f->db, &cfg);
     ct_fsrs_init(&ct_review_fsrs, &cfg);
     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
     if (rc < 0) {
