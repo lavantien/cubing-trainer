@@ -128,6 +128,7 @@ foreach ($file in $files) {
             } else {
                 $core = $literal -replace '[uUlLfF]+$', ''
             }
+            if ($core -match '^[012]\.0$') { $core = $core.Substring(0, 1) }
             if ($allowedCores -contains $core) { continue }
             $isDecimal = $core.Contains('.')
             $digits = ($core -replace '[^0-9]', '').Length
