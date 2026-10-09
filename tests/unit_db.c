@@ -279,8 +279,7 @@ CT_SUITE(migrate_error_paths) {
     cleanup_db_files(path);
 }
 
-CT_SUITE(migrate_soundness)
-{
+CT_SUITE(migrate_soundness) {
     make_dir("build");
     make_dir(CT_TEST_DIR);
     make_dir(CT_TEST_DIR "/migsnd");
@@ -356,8 +355,8 @@ CT_SUITE(migrate_soundness)
 
     db = NULL;
     CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
-    CT_ASSERT(write_file(CT_TEST_DIR "/migsnd/2147483648_long.sql",
-                         "CREATE TABLE bigv(id INTEGER);\n"));
+    CT_ASSERT(
+        write_file(CT_TEST_DIR "/migsnd/2147483648_long.sql", "CREATE TABLE bigv(id INTEGER);\n"));
     CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/migsnd") != 0);
     CT_ASSERT_EQ(ct_db_version(db), 0);
     ct_db_close(db);
