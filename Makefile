@@ -62,6 +62,9 @@ CT_FUZZ_LOOPS ?= 10
 CT_FUZZ_SUITES := fuzz_notation_random_tokens fuzz_notation_garbage fuzz_notation_random_algs
 CT_FUZZ_SUITES += fuzz_transform_inverse fuzz_transform_simplify fuzz_transform_rotate_y
 CT_FUZZ_SUITES += fuzz_cube_invariants fuzz_cube_mirror
+CT_FUZZ_SUITES += fuzz_srs_walk fuzz_srs_elapsed fuzz_srs_grade_space
+CT_FUZZ_SUITES += fuzz_db_card_strings fuzz_db_review_rows fuzz_db_settings_keys
+CT_FUZZ_SUITES += fuzz_config_keys fuzz_config_moves
 
 .PHONY: all build vendor test diagrams memguard run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual db-verify
 
