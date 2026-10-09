@@ -141,3 +141,17 @@ Count: 22 rows, 19 standard targets plus 3 M slice specials.
 
 Validation and coverage: playground/seeds_bld/bld_probe.c applies every algorithm to the engine cube. 20 of 22 algs parse and simulate sticker exact, the target sticker lands precisely on the D face sticker of the DF buffer. m2.15 LF and m2.22 BD contain L2' and M2' digit then prime tokens the notation parser rejects, recorded as gaps, the rows are kept verbatim.
 
+## fmc_concepts.tsv
+
+Sources: https://www.speedsolving.com/wiki/index.php/Fewest_Moves_techniques, Premoves, Insertions, Skeleton, and Blockbuilding pages, all archived at playground/seeds_fmc/speedsolving_fmctech.html, speedsolving_niss.html (the Premoves page, NISS redirects there), speedsolving_insertions.html, speedsolving_skeleton.html, speedsolving_blockbuilding.html plus extracted .txt twins. Retrieved 2026-10-10.
+
+Page contents: the six Fewest Moves techniques category pages. The pack seeds the three techniques named by the plan, blockbuilding, NISS, commutator insertions, plus the supporting concepts they depend on, premoves, reverse NISS, skeletons, domino reduction, and competition practice.
+
+Case key derivation: keys fmc.01 to fmc.16, the alg column holds the concept answer text following the clock pack prose precedent, front_json carries the concept name. The insertion movecount row reproduces the wiki table credited to Sebastiano Tronto's FMC tutorial v3 page 33.
+
+Enum convention: CT_EVENT_FMC, CT_METHOD_CONCEPT, CT_STAGE_CONCEPT.
+
+Count: 16 rows. The plan named no count for this pack.
+
+Discrepancy: none. The wiki's fewest moves pages are prose technique descriptions, no algorithm tables exist to seed beyond the published example algorithms quoted inside the concept text.
+
