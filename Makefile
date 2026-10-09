@@ -36,6 +36,7 @@ APP_MAIN := src/app/main.c
 SRC := $(call rwildcard,src/,*.c)
 LIB_SRC := $(filter-out $(APP_MAIN),$(SRC))
 TEST_SRC := tests/test_main.c tests/framework.c $(wildcard tests/unit_*.c)
+FMT_FILES := $(call rwildcard,src/,*.c) $(call rwildcard,src/,*.h) $(call rwildcard,tests/,*.c) $(call rwildcard,tests/,*.h)
 RAYLIB_SRC := $(wildcard third_party/raylib/src/*.c)
 RAYGUI_IMPL_SRC := $(BUILDDIR)/raygui_impl.c
 SQLITE_SRC := third_party/sqlite/sqlite3.c
@@ -53,7 +54,7 @@ SPIKE_BIN := $(BINDIR)/spike_link.exe
 
 MEMGUARD_ARGS ?=
 
-.PHONY: all build vendor test diagrams memguard run clean spike build-headless fmt lint analyze fuzz mutate e2e visual db-verify
+.PHONY: all build vendor test diagrams memguard run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual db-verify
 
 all: build
 
@@ -141,13 +142,16 @@ run: build
 	$(APP_BIN)
 
 fmt:
-	@echo not implemented && exit 1
+	clang-format --style=file -i $(FMT_FILES)
+
+fmt-check:
+	clang-format --style=file --dry-run -Werror $(FMT_FILES)
 
 lint:
-	@echo not implemented && exit 1
+	pwsh.exe -NoProfile -ExecutionPolicy Bypass -File tools/run_lint.ps1
 
 analyze:
-	@echo not implemented && exit 1
+	pwsh.exe -NoProfile -ExecutionPolicy Bypass -File tools/run_analyze.ps1
 
 fuzz:
 	@echo not implemented && exit 1
