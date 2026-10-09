@@ -1,5 +1,6 @@
 #include "gen/score.h"
 
+#include <math.h>
 #include <stdio.h>
 
 static const unsigned score_face_bits[CT_CUBE_FACE_COUNT] = {
@@ -118,6 +119,9 @@ int ct_score_alg(const ct_move *seq, int count, const ct_config *cfg, ct_score_p
 
 int ct_score_parts_json(const ct_score_parts *p, char *out, unsigned cap) {
     if (p == NULL || out == NULL || cap == 0) {
+        return CT_SCORE_E_ARG;
+    }
+    if (!isfinite(p->subset_penalty) || !isfinite(p->finger_penalty) || !isfinite(p->total)) {
         return CT_SCORE_E_ARG;
     }
     static const char fmt[] =

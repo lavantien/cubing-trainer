@@ -426,6 +426,7 @@ CT_SUITE(config_finger_set) {
     CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_U_ccw", "0.15"), 0);
     CT_ASSERT_DBL_EQ(c.gen.finger_cost[face_index('U')][CT_FINGER_DIR_CCW], 0.15, 1e-12);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_L_cw", "0.35"), 0);
+    CT_ASSERT_DBL_EQ(c.gen.finger_cost[face_index('L')][CT_FINGER_DIR_CW], 0.35, 1e-12);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_F_ccw", "0.95"), 0);
     CT_ASSERT_DBL_EQ(c.gen.finger_cost[face_index('F')][CT_FINGER_DIR_CCW], 0.95, 1e-12);
 

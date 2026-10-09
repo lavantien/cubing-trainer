@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "gen/score.h"
 
+#include <math.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -250,6 +251,13 @@ CT_SUITE(score_json) {
     CT_ASSERT_STR_EQ(out, full);
     CT_ASSERT_EQ(ct_score_parts_json(&p, out, need - 1), CT_SCORE_E_CAP);
     CT_ASSERT_EQ(ct_score_parts_json(&p, out, 8), CT_SCORE_E_CAP);
+
+    ct_score_parts inf = {4, 0.0, 0, 0.0, INFINITY};
+    CT_ASSERT_EQ(ct_score_parts_json(&inf, out, sizeof out), CT_SCORE_E_ARG);
+    ct_score_parts nanp = {4, 0.0, 0, NAN, 0.0};
+    CT_ASSERT_EQ(ct_score_parts_json(&nanp, out, sizeof out), CT_SCORE_E_ARG);
+    ct_score_parts inf_subset = {4, INFINITY, 0, 0.0, 0.0};
+    CT_ASSERT_EQ(ct_score_parts_json(&inf_subset, out, sizeof out), CT_SCORE_E_ARG);
 
     ct_config c = ct_config_defaults();
     ct_score_parts live;
