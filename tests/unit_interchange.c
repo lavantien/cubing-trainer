@@ -284,6 +284,16 @@ CT_SUITE(unit_interchange) {
         composed = composed && perm[perm[cell]] == other[cell];
     }
     CT_ASSERT(composed);
+    test_perm(r1, 3, perm);
+    CT_ASSERT_EQ(perm[test_compact(3, CT_FACE_U, 0, 2)], test_compact(3, CT_FACE_B, 2, 0));
+    CT_ASSERT_EQ(perm[test_compact(3, CT_FACE_F, 0, 2)], test_compact(3, CT_FACE_U, 0, 2));
+    CT_ASSERT_EQ(perm[test_compact(3, CT_FACE_B, 2, 0)], test_compact(3, CT_FACE_D, 0, 2));
+    CT_ASSERT_EQ(perm[test_compact(3, CT_FACE_D, 0, 2)], test_compact(3, CT_FACE_F, 0, 2));
+    CT_ASSERT_EQ(ct_sticker_perm(r1, 3, other), 0);
+    CT_ASSERT_EQ(other[test_compact(3, CT_FACE_U, 0, 2)], test_compact(3, CT_FACE_B, 2, 0));
+    CT_ASSERT_EQ(other[test_compact(3, CT_FACE_F, 0, 2)], test_compact(3, CT_FACE_U, 0, 2));
+    CT_ASSERT_EQ(other[test_compact(3, CT_FACE_B, 2, 0)], test_compact(3, CT_FACE_D, 0, 2));
+    CT_ASSERT_EQ(other[test_compact(3, CT_FACE_D, 0, 2)], test_compact(3, CT_FACE_F, 0, 2));
     for (int i = 0; i < cand_count; i++) {
         test_perm(cands[i], 3, perm);
         bool seen[54] = {false};
