@@ -448,6 +448,34 @@ CT_SUITE(config_finger_set) {
                      ct_finger_defaults[r][CT_FINGER_DIR_CW], 1e-12);
 }
 
+CT_SUITE(config_domain_rejection) {
+    ct_config c = ct_config_defaults();
+    int width = c.window.width;
+    int height = c.window.height;
+
+    CT_ASSERT_EQ(ct_config_set(&c, "window.width", "0"), -2);
+    CT_ASSERT_EQ(c.window.width, width);
+    CT_ASSERT_EQ(ct_config_set(&c, "window.width", "-5"), -2);
+    CT_ASSERT_EQ(c.window.width, width);
+    CT_ASSERT_EQ(ct_config_set(&c, "window.height", "0"), -2);
+    CT_ASSERT_EQ(c.window.height, height);
+    CT_ASSERT_EQ(ct_config_set(&c, "window.height", "-3"), -2);
+    CT_ASSERT_EQ(c.window.height, height);
+    CT_ASSERT_EQ(ct_config_set(&c, "window.width", "641"), 0);
+    CT_ASSERT_EQ(c.window.width, 641);
+    CT_ASSERT_EQ(ct_config_set(&c, "window.height", "481"), 0);
+    CT_ASSERT_EQ(c.window.height, 481);
+
+    CT_ASSERT_EQ(ct_config_set(&c, "db.filename", "sub/trainer.db"), -2);
+    CT_ASSERT_STR_EQ(c.db.filename, CT_DB_FILENAME);
+    CT_ASSERT_EQ(ct_config_set(&c, "db.filename", "sub\\trainer.db"), -2);
+    CT_ASSERT_STR_EQ(c.db.filename, CT_DB_FILENAME);
+    CT_ASSERT_EQ(ct_config_set(&c, "db.filename", "..\\trainer.db"), -2);
+    CT_ASSERT_STR_EQ(c.db.filename, CT_DB_FILENAME);
+    CT_ASSERT_EQ(ct_config_set(&c, "db.filename", "plain-name_1.db"), 0);
+    CT_ASSERT_STR_EQ(c.db.filename, "plain-name_1.db");
+}
+
 CT_SUITE(config_clamping) {
     ct_config c = ct_config_defaults();
 

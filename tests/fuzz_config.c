@@ -32,6 +32,7 @@ enum {
     CT_CKV_DBL_FREE,
     CT_CKV_LONG_FREE,
     CT_CKV_LONG_LO,
+    CT_CKV_LONG_MIN,
     CT_CKV_FILENAME
 };
 
@@ -69,8 +70,8 @@ static const ct_ck_entry ct_ck_table[] = {
     {"gen.fallback_depth", CT_CK_FALLBACK, CT_CKV_LONG_LO},
     {"gen.straggler_depth", CT_CK_STRAGGLER, CT_CKV_LONG_LO},
     {"anim.move_seconds", CT_CK_SECONDS, CT_CKV_DBL_LO},
-    {"window.width", CT_CK_WIDTH, CT_CKV_LONG_FREE},
-    {"window.height", CT_CK_HEIGHT, CT_CKV_LONG_FREE},
+    {"window.width", CT_CK_WIDTH, CT_CKV_LONG_MIN},
+    {"window.height", CT_CK_HEIGHT, CT_CKV_LONG_MIN},
     {"window.target_fps", CT_CK_FPS, CT_CKV_LONG_LO},
     {"fuzz.iterations", CT_CK_FUZZIT, CT_CKV_LONG_FREE},
     {"db.filename", CT_CK_FILENAME, CT_CKV_FILENAME},
@@ -197,14 +198,22 @@ static void ct_ck_expect_double(ct_config *expected, int slot, int kind, double 
     }
 }
 
-static void ct_ck_expect_long(ct_config *expected, int slot, int kind, long value) {
+static bool ct_ck_expect_long(ct_config *expected, int slot, int kind, long value) {
     int *field = ct_ck_int_field(expected, slot);
+    if (kind == CT_CKV_LONG_MIN) {
+        if (value < CT_WINDOW_MIN_DIMENSION) {
+            return false;
+        }
+        *field = (int)value;
+        return true;
+    }
     long lo = slot == CT_CK_FPS ? CT_MIN_FPS : CT_MIN_DEPTH;
     if (kind == CT_CKV_LONG_LO && value < lo) {
         *field = (int)lo;
     } else {
         *field = (int)value;
     }
+    return true;
 }
 
 CT_SUITE(fuzz_config_keys) {
@@ -256,7 +265,7 @@ CT_SUITE(fuzz_config_keys) {
         }
         if (kind == CT_CKV_FILENAME) {
             char value[CT_CK_FILENAME_MAX];
-            unsigned mode = (unsigned)ct_sfc64_range(&s, 3);
+            unsigned mode = (unsigned)ct_sfc64_range(&s, 4);
             unsigned len = mode == 0   ? 0
                            : mode == 1 ? 1 + (unsigned)ct_sfc64_range(&s, CT_DB_NAME_MAX - 1)
                                        : CT_DB_NAME_MAX + (unsigned)ct_sfc64_range(&s, 40);
@@ -264,8 +273,15 @@ CT_SUITE(fuzz_config_keys) {
                 value[k] = (char)('a' + ct_sfc64_range(&s, 26));
             }
             value[len < sizeof value ? len : sizeof value - 1] = '\0';
+            bool separator = false;
+            if (mode == 3 && value[0] != '\0') {
+                unsigned pos = (unsigned)ct_sfc64_range(&s, strlen(value));
+                value[pos] = ct_sfc64_range(&s, 2) == 0 ? '/' : '\\';
+                separator = true;
+            }
             ct_config expected = defaults;
-            bool want_ok = value[0] != '\0' && strlen(value) < sizeof expected.db.filename;
+            bool want_ok = !separator && value[0] != '\0' &&
+                           strlen(value) < sizeof expected.db.filename;
             if (want_ok) {
                 snprintf(expected.db.filename, sizeof expected.db.filename, "%s", value);
             }
@@ -279,15 +295,16 @@ CT_SUITE(fuzz_config_keys) {
             }
             continue;
         }
-        if (kind == CT_CKV_LONG_FREE || kind == CT_CKV_LONG_LO) {
+        if (kind == CT_CKV_LONG_FREE || kind == CT_CKV_LONG_LO || kind == CT_CKV_LONG_MIN) {
             const ct_ck_long *pat =
                 &ct_ck_longs[ct_sfc64_range(&s, sizeof ct_ck_longs / sizeof ct_ck_longs[0])];
             ct_config expected = defaults;
+            bool accepted = false;
             if (pat->ok) {
-                ct_ck_expect_long(&expected, slot, kind, pat->value);
+                accepted = ct_ck_expect_long(&expected, slot, kind, pat->value);
             }
             int rc = ct_config_set(&cfg, key, pat->text);
-            if (pat->ok) {
+            if (accepted) {
                 CT_FZ(rc == CT_CFG_OK, seed);
                 CT_FZ(memcmp(&cfg, &expected, sizeof cfg) == 0, seed);
             } else {

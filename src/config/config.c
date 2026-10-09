@@ -104,6 +104,19 @@ static int assign_long_lo(int *field, const char *value, long lo) {
     return CT_CFG_OK;
 }
 
+static int assign_long_min(int *field, const char *value, long min) {
+    long parsed = 0;
+    int rc = parse_long(value, &parsed);
+    if (rc != CT_CFG_OK) {
+        return rc;
+    }
+    if (parsed < min) {
+        return CT_CFG_BAD_VALUE;
+    }
+    *field = (int)parsed;
+    return CT_CFG_OK;
+}
+
 static unsigned face_from_char_ci(char c) {
     unsigned face = ct_move_face_from_char(c);
     if (face != 0) {
@@ -251,17 +264,18 @@ int ct_config_set(ct_config *cfg, const char *key, const char *value) {
         return assign_double_lo(&cfg->anim.move_seconds, value, CT_ANIM_MIN_MOVE_SECONDS);
     }
     if (strcmp(key, "window.width") == 0) {
-        return assign_long(&cfg->window.width, value);
+        return assign_long_min(&cfg->window.width, value, CT_WINDOW_MIN_DIMENSION);
     }
     if (strcmp(key, "window.height") == 0) {
-        return assign_long(&cfg->window.height, value);
+        return assign_long_min(&cfg->window.height, value, CT_WINDOW_MIN_DIMENSION);
     }
     if (strcmp(key, "window.target_fps") == 0) {
         return assign_long_lo(&cfg->window.target_fps, value, CT_MIN_FPS);
     }
     if (strcmp(key, "db.filename") == 0) {
         size_t len = strlen(value);
-        if (len == 0 || len >= sizeof cfg->db.filename) {
+        if (len == 0 || len >= sizeof cfg->db.filename || strchr(value, '/') != NULL ||
+            strchr(value, '\\') != NULL) {
             return CT_CFG_BAD_VALUE;
         }
         memcpy(cfg->db.filename, value, len + 1);
