@@ -122,8 +122,10 @@ int ct_migrations_dir(char *out, unsigned cap) {
     const char *override = getenv(CT_MIGRATIONS_ENV);
     if (override != NULL && override[0] != '\0') {
         int written = snprintf(out, cap, "%s", override);
-        if (written < 0 || (unsigned)written >= cap)
+        if (written < 0 || (unsigned)written >= cap) {
+            fprintf(stderr, "cubing-trainer: %s is too long\n", CT_MIGRATIONS_ENV);
             return -1;
+        }
         return 0;
     }
     char exe[CT_APP_EXE_PATH_MAX];
@@ -131,7 +133,11 @@ int ct_migrations_dir(char *out, unsigned cap) {
         fprintf(stderr, "cubing-trainer: cannot locate the executable path\n");
         return -1;
     }
-    return ct_exe_relative(exe, CT_MIGRATIONS_EXE_REL, out, cap);
+    if (ct_exe_relative(exe, CT_MIGRATIONS_EXE_REL, out, cap) != 0) {
+        fprintf(stderr, "cubing-trainer: migrations path relative to %s is too long\n", exe);
+        return -1;
+    }
+    return 0;
 }
 
 int ct_data_dir(const char *dir_name, char *out, unsigned cap) {
