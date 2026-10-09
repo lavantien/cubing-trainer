@@ -143,6 +143,7 @@ static const ct_geometry ct_nxn_driver = {
     .sticker_count = nxn_sticker_count,
     .move_count = nxn_move_count,
     .move_facelets = nxn_move_facelets,
+    .move_facelets_state = NULL,
     .sticker_geometry = nxn_sticker_geometry,
     .turn_axis = nxn_turn_axis,
     .move_from_token = nxn_move_from_token,
