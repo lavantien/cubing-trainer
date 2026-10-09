@@ -314,6 +314,63 @@ CT_SUITE(fsrs_today_overflow) {
     CT_ASSERT_EQ(same_out.due_day, LONG_MAX);
 }
 
+CT_SUITE(fsrs_invalid_grade) {
+    ct_fsrs f = make_fsrs();
+    static const int bad[] = {0, -1, -99, 5, 6, 9, 99};
+    for (size_t i = 0; i < sizeof bad / sizeof bad[0]; i++) {
+        ct_fsrs_card in = learning_card();
+        ct_fsrs_card out = ct_fsrs_review(&f, &in, (ct_grade)bad[i], 4.0, 104);
+        CT_ASSERT(cards_equal(&out, &in));
+        ct_fsrs_card fresh = fresh_card();
+        ct_fsrs_card born = ct_fsrs_review(&f, &fresh, (ct_grade)bad[i], 0.0, 100);
+        CT_ASSERT(cards_equal(&born, &fresh));
+    }
+    ct_fsrs_card in = learning_card();
+    ct_fsrs_card again = ct_fsrs_review(&f, &in, CT_AGAIN, 4.0, 104);
+    CT_ASSERT(again.reps == in.reps + 1);
+    ct_fsrs_card easy = ct_fsrs_review(&f, &in, CT_EASY, 4.0, 104);
+    CT_ASSERT(easy.reps == in.reps + 1);
+}
+
+CT_SUITE(fsrs_degenerate_stability) {
+    ct_fsrs f = make_fsrs();
+    static const double degenerate[] = {0.0, -3.0, 0.5 * CT_FSRS_MIN_STABILITY};
+    for (size_t i = 0; i < sizeof degenerate / sizeof degenerate[0]; i++) {
+        for (int g = 1; g <= 4; g++) {
+            ct_fsrs_card zero = learning_card();
+            zero.stability = degenerate[i];
+            ct_fsrs_card out = ct_fsrs_review(&f, &zero, (ct_grade)g, 4.0, 104);
+            CT_ASSERT(isfinite(out.stability));
+            CT_ASSERT(out.stability >= CT_FSRS_MIN_STABILITY);
+            CT_ASSERT(out.stability <= CT_FSRS_MAX_IVL_DAYS);
+            CT_ASSERT(isfinite(out.difficulty));
+            CT_ASSERT(out.due_day >= 104);
+        }
+        ct_fsrs_card same = same_day_card();
+        same.stability = degenerate[i];
+        ct_fsrs_card out = ct_fsrs_review(&f, &same, CT_GOOD, 0.0, 104);
+        CT_ASSERT(isfinite(out.stability));
+        CT_ASSERT(out.stability >= CT_FSRS_MIN_STABILITY);
+    }
+    CT_ASSERT(isfinite(ct_fsrs_retrievability(0.0, 4.0)));
+    CT_ASSERT(isfinite(ct_fsrs_retrievability(-7.0, 4.0)));
+    CT_ASSERT_DBL_EQ(ct_fsrs_retrievability(0.0, 4.0),
+                     ct_fsrs_retrievability(CT_FSRS_MIN_STABILITY, 4.0), 0.0);
+}
+
+CT_SUITE(fsrs_interval_boundaries) {
+    ct_fsrs cap = make_fsrs();
+    cap.request_retention = 0.6;
+    cap.max_ivl_days = pow(0.6, 1.0 / CT_FSRS_DECAY) - 1.0;
+    CT_ASSERT_EQ(ct_fsrs_next_interval_days(&cap, CT_FSRS_FACTOR), 2);
+
+    ct_fsrs floor_cap = make_fsrs();
+    floor_cap.request_retention = 0.5;
+    floor_cap.max_ivl_days = 0.5;
+    double edge = nextafter(1.0 / 3.0, 2.0) * CT_FSRS_FACTOR;
+    CT_ASSERT_EQ(ct_fsrs_next_interval_days(&floor_cap, edge), 0);
+}
+
 CT_SUITE(fsrs_random_walk) {
     ct_fsrs f = make_fsrs();
     ct_sfc64 rng;

@@ -3,6 +3,16 @@
 #include <limits.h>
 #include <math.h>
 
+static double sanitize_stability(double s) {
+    if (!isfinite(s) || s < CT_FSRS_MIN_STABILITY) {
+        return CT_FSRS_MIN_STABILITY;
+    }
+    if (s > CT_FSRS_MAX_IVL_DAYS) {
+        return CT_FSRS_MAX_IVL_DAYS;
+    }
+    return s;
+}
+
 enum fsrs_weight {
     fw_s_init,
     fw_s_init_hard,
@@ -88,6 +98,9 @@ double ct_fsrs_retrievability(double stability, double elapsed_days) {
     if (elapsed_days < 0.0) {
         elapsed_days = 0.0;
     }
+    if (stability < CT_FSRS_MIN_STABILITY) {
+        stability = CT_FSRS_MIN_STABILITY;
+    }
     return pow(1 + CT_FSRS_FACTOR * elapsed_days / stability, CT_FSRS_DECAY);
 }
 
@@ -104,6 +117,10 @@ long ct_fsrs_next_interval_days(const ct_fsrs *f, double stability) {
 
 ct_fsrs_card ct_fsrs_review(const ct_fsrs *f, const ct_fsrs_card *card, ct_grade g,
                             double elapsed_days, long today_day) {
+    if ((int)g < CT_AGAIN || (int)g > CT_EASY) {
+        return *card;
+    }
+    double s = sanitize_stability(card->stability);
     ct_fsrs_card out = *card;
     out.reps = card->reps + 1;
     out.last_review_day = today_day;
@@ -115,17 +132,16 @@ ct_fsrs_card ct_fsrs_review(const ct_fsrs *f, const ct_fsrs_card *card, ct_grade
         return out;
     }
     if (elapsed_days == 0 && card->last_review_day == today_day) {
-        out.stability = clamp_stability(stability_same_day(f->w, card->stability, g));
+        out.stability = clamp_stability(stability_same_day(f->w, s, g));
         out.due_day = today_day;
         return out;
     }
-    double r = ct_fsrs_retrievability(card->stability, elapsed_days);
+    double r = ct_fsrs_retrievability(s, elapsed_days);
     out.difficulty = difficulty_next(f->w, card->difficulty, g);
     if (g >= CT_HARD) {
-        out.stability =
-            clamp_stability(stability_recall(f->w, card->stability, out.difficulty, r, g));
+        out.stability = clamp_stability(stability_recall(f->w, s, out.difficulty, r, g));
     } else {
-        out.stability = clamp_stability(stability_forget(f->w, card->stability, out.difficulty, r));
+        out.stability = clamp_stability(stability_forget(f->w, s, out.difficulty, r));
         out.lapses = card->lapses + 1;
     }
     long ivl = ct_fsrs_next_interval_days(f, out.stability);
