@@ -20,7 +20,7 @@ static bool ct_notation_valid_n(int n) {
     return n >= 1 && n <= CT_CUBE_MAX_N;
 }
 
-static int ct_notation_half(int n) {
+static int ct_notation_middle(int n) {
     return (n + 1) / 2;
 }
 
@@ -105,9 +105,9 @@ static int ct_notation_parse_span(const char *s, size_t len, int n, ct_move *out
     int to;
     if (e->kind == CT_NOTATION_KIND_ROTATION) {
         from = 1;
-        to = ct_notation_half(n);
+        to = n;
     } else if (e->kind == CT_NOTATION_KIND_SLICE) {
-        from = ct_notation_half(n);
+        from = ct_notation_middle(n);
         to = from;
     } else if (wide) {
         from = 1;
@@ -167,11 +167,11 @@ int ct_notation_format_one(const ct_move *m, int n, char *out, unsigned cap) {
         return CT_NOTATION_E_MOVE;
     char buf[CT_NOTATION_TOKEN_MAX];
     unsigned len = 0;
-    int half = ct_notation_half(n);
+    int middle = ct_notation_middle(n);
     int letter = 0;
-    if (m->depth_from == 1 && m->depth_to == half)
+    if (m->depth_from == 1 && m->depth_to == n)
         letter = ct_notation_rotation_letter(m->face);
-    if (letter == 0 && m->depth_from == half && m->depth_to == half)
+    if (letter == 0 && m->depth_from == middle && m->depth_to == middle)
         letter = ct_notation_slice_letter(m->face);
     if (letter != 0) {
         buf[len++] = (char)letter;
