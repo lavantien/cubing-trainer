@@ -5,7 +5,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#define CT_MAX_SUITES 256
+#define CT_MAX_SUITES 512
 
 void ct_suite_register(const char *name, void (*fn)(void));
 int ct_run_all(const char *filter);
