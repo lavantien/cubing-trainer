@@ -6,6 +6,7 @@ import zlib
 AHASH_GRID = 8
 MAX_HAMMING = 4
 MAX_MEAN_DELTA = 0.25
+MAX_CELL_DELTA = 8.0
 SELF_CHECK_SIZE = 64
 
 
@@ -111,60 +112,70 @@ def encode_png(width, height, pixels):
     )
 
 
-def luma(px):
-    return 0.299 * px[0] + 0.587 * px[1] + 0.114 * px[2]
-
-
-def ahash(width, height, pixels):
-    cells = []
+def cell_stats(width, height, pixels):
+    lumas = []
+    cell_means = []
+    totals = [0, 0, 0]
+    count = 0
     for by in range(AHASH_GRID):
         y0 = by * height // AHASH_GRID
         y1 = (by + 1) * height // AHASH_GRID
         for bx in range(AHASH_GRID):
             x0 = bx * width // AHASH_GRID
             x1 = (bx + 1) * width // AHASH_GRID
-            total = 0.0
+            luma_total = 0.0
+            sums = [0, 0, 0]
             for y in range(y0, y1):
+                row = pixels[y]
                 for x in range(x0, x1):
-                    total += luma(pixels[y][x])
-            cells.append(total / ((y1 - y0) * (x1 - x0)))
-    mean = sum(cells) / len(cells)
+                    px = row[x]
+                    luma_total += 0.299 * px[0] + 0.587 * px[1] + 0.114 * px[2]
+                    sums[0] += px[0]
+                    sums[1] += px[1]
+                    sums[2] += px[2]
+            n = (y1 - y0) * (x1 - x0)
+            lumas.append(luma_total / n)
+            cell_means.append((sums[0] / n, sums[1] / n, sums[2] / n))
+            totals[0] += sums[0]
+            totals[1] += sums[1]
+            totals[2] += sums[2]
+            count += n
+    mean = sum(lumas) / len(lumas)
     bits = 0
-    for i, value in enumerate(cells):
+    for i, value in enumerate(lumas):
         if value > mean:
             bits |= 1 << i
-    return bits
+    return bits, cell_means, [t / count for t in totals]
 
 
 def hamming(a, b):
     return bin(a ^ b).count("1")
 
 
-def mean_deltas(pa, pb):
-    w = min(len(pa[0]), len(pb[0]))
-    h = min(len(pa), len(pb))
-    sums_a = [0, 0, 0]
-    sums_b = [0, 0, 0]
-    for y in range(h):
-        for x in range(w):
-            for c in range(3):
-                sums_a[c] += pa[y][x][c]
-                sums_b[c] += pb[y][x][c]
-    n = w * h
-    return [abs(sums_a[c] - sums_b[c]) / n for c in range(3)]
+def compare_pixels(pa, pb):
+    ha = len(pa)
+    wa = len(pa[0])
+    hb = len(pb)
+    wb = len(pb[0])
+    if wa != wb or ha != hb:
+        return False, -1, [255.0, 255.0, 255.0], 255.0
+    bits_a, cells_a, sums_a = cell_stats(wa, ha, pa)
+    bits_b, cells_b, sums_b = cell_stats(wa, ha, pb)
+    dist = hamming(bits_a, bits_b)
+    deltas = [abs(sums_a[c] - sums_b[c]) for c in range(3)]
+    cell_delta = max(
+        abs(cells_a[i][c] - cells_b[i][c])
+        for i in range(AHASH_GRID * AHASH_GRID)
+        for c in range(3)
+    )
+    ok = dist <= MAX_HAMMING and max(deltas) <= MAX_MEAN_DELTA and cell_delta <= MAX_CELL_DELTA
+    return ok, dist, deltas, cell_delta
 
 
 def compare(golden_path, candidate_path):
     gw, gh, gp = decode_png(golden_path)
     cw, ch, cp = decode_png(candidate_path)
-    if gw != cw or gh != ch:
-        return False, -1, [255.0, 255.0, 255.0]
-    ha = ahash(gw, gh, gp)
-    hb = ahash(cw, ch, cp)
-    dist = hamming(ha, hb)
-    deltas = mean_deltas(gp, cp)
-    delta = max(deltas)
-    return dist <= MAX_HAMMING and delta <= MAX_MEAN_DELTA, dist, deltas
+    return compare_pixels(gp, cp)
 
 
 def blank(width, height, value):
@@ -201,21 +212,49 @@ def self_check():
     near_png = encode_png(size, size, near)
     open("build/visual_selfcheck_near.png", "wb").write(near_png)
 
-    ok, dist, deltas = compare_bytes(base_png, identical_png)
-    if not ok or dist != 0 or max(deltas) > 0.0:
-        failures.append(f"identical pair must pass exactly, got dist={dist} deltas={deltas}")
+    cell = size // AHASH_GRID
+    swap_a = blank(size, size, 255)
+    swap_b = blank(size, size, 255)
+    for y in range(2 * cell, 3 * cell):
+        for x in range(2 * cell, 3 * cell):
+            swap_a[y][x] = (230, 41, 55, 255)
+            swap_b[y][x] = (0, 228, 48, 255)
+    for y in range(5 * cell, 6 * cell):
+        for x in range(5 * cell, 6 * cell):
+            swap_a[y][x] = (0, 228, 48, 255)
+            swap_b[y][x] = (230, 41, 55, 255)
+    swap_a_png = encode_png(size, size, swap_a)
+    swap_b_png = encode_png(size, size, swap_b)
+    open("build/visual_selfcheck_swap_a.png", "wb").write(swap_a_png)
+    open("build/visual_selfcheck_swap_b.png", "wb").write(swap_b_png)
 
-    ok, dist, deltas = compare_bytes(base_png, shifted_png)
+    ok, dist, deltas, cell_delta = compare_bytes(base_png, identical_png)
+    if not ok or dist != 0 or max(deltas) > 0.0 or cell_delta > 0.0:
+        failures.append(
+            f"identical pair must pass exactly, got dist={dist} deltas={deltas} cell={cell_delta}"
+        )
+
+    ok, dist, deltas, cell_delta = compare_bytes(base_png, shifted_png)
     if ok:
-        failures.append(f"1px shift must fail, got pass dist={dist} deltas={deltas}")
+        failures.append(f"1px shift must fail, got pass dist={dist} deltas={deltas} cell={cell_delta}")
 
-    ok, dist, deltas = compare_bytes(base_png, recolored_png)
+    ok, dist, deltas, cell_delta = compare_bytes(base_png, recolored_png)
     if ok:
-        failures.append(f"10 percent recolor must fail, got pass dist={dist} deltas={deltas}")
+        failures.append(
+            f"10 percent recolor must fail, got pass dist={dist} deltas={deltas} cell={cell_delta}"
+        )
 
-    ok, dist, deltas = compare_bytes(base_png, near_png)
+    ok, dist, deltas, cell_delta = compare_bytes(base_png, near_png)
     if not ok:
-        failures.append(f"single near pixel must pass, got fail dist={dist} deltas={deltas}")
+        failures.append(
+            f"single near pixel must pass, got fail dist={dist} deltas={deltas} cell={cell_delta}"
+        )
+
+    ok, dist, deltas, cell_delta = compare_bytes(swap_a_png, swap_b_png)
+    if ok:
+        failures.append(
+            f"equal area swap must fail, got pass dist={dist} deltas={deltas} cell={cell_delta}"
+        )
 
     return failures
 
@@ -237,13 +276,13 @@ def main():
         print("usage: python -I tools/visual_check.py <golden.png> <candidate.png>")
         print("       python -I tools/visual_check.py --selfcheck")
         return 2
-    ok, dist, deltas = compare(sys.argv[1], sys.argv[2])
-    delta = max(deltas)
+    ok, dist, deltas, cell_delta = compare(sys.argv[1], sys.argv[2])
     verdict = "pass" if ok else "fail"
     print(
         f"{verdict}: hamming={dist}/{AHASH_GRID * AHASH_GRID} "
         f"mean_delta_r={deltas[0]:.3f} g={deltas[1]:.3f} b={deltas[2]:.3f} "
-        f"thresholds={MAX_HAMMING}/{MAX_MEAN_DELTA}"
+        f"cell_delta={cell_delta:.3f} "
+        f"thresholds={MAX_HAMMING}/{MAX_MEAN_DELTA}/{MAX_CELL_DELTA}"
     )
     return 0 if ok else 1
 
