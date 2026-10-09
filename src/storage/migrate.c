@@ -2,6 +2,8 @@
 
 #include <ctype.h>
 #include <dirent.h>
+#include <errno.h>
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -28,9 +30,10 @@ static int ct_mig_parse_name(const char *name, unsigned long *version) {
     memcpy(digits, name, i);
     digits[i] = '\0';
     char *end = NULL;
+    errno = 0;
     unsigned long v = strtoul(digits, &end, CT_DECIMAL_BASE);
-    if (end == NULL || *end != '\0')
-        return 0;
+    if (end == NULL || *end != '\0' || errno == ERANGE || v > (unsigned long)LONG_MAX)
+        return -1;
     *version = v;
     return 1;
 }
@@ -76,6 +79,11 @@ static char *ct_mig_read_file(const char *path) {
         buf = grown;
     }
     if (ferror(f)) {
+        free(buf);
+        fclose(f);
+        return NULL;
+    }
+    if (memchr(buf, '\0', len) != NULL) {
         free(buf);
         fclose(f);
         return NULL;
@@ -132,8 +140,13 @@ static int ct_mig_collect(const char *dir, ct_migration **out, size_t *count) {
     int rc = 0;
     while ((ent = readdir(d)) != NULL) {
         unsigned long version = 0;
-        if (!ct_mig_parse_name(ent->d_name, &version))
+        int parsed = ct_mig_parse_name(ent->d_name, &version);
+        if (parsed == 0)
             continue;
+        if (parsed < 0) {
+            rc = 1;
+            break;
+        }
         size_t name_len = strlen(ent->d_name);
         if (name_len >= CT_DB_PATH_MAX) {
             rc = 1;
@@ -187,6 +200,24 @@ int ct_db_migrate(sqlite3 *db, const char *migrations_dir) {
     if (current < 0) {
         free(migs);
         return 1;
+    }
+    if (count > 0) {
+        if (current > (long)migs[count - 1].version) {
+            free(migs);
+            return 1;
+        }
+        int seen_pending = 0;
+        for (size_t i = 0; i < count; i++) {
+            if ((long)migs[i].version <= current)
+                continue;
+            unsigned long want =
+                seen_pending == 0 ? (unsigned long)current + 1ul : migs[i - 1].version + 1ul;
+            if (migs[i].version != want) {
+                free(migs);
+                return 1;
+            }
+            seen_pending = 1;
+        }
     }
     int pending = 0;
     for (size_t i = 0; i < count; i++) {

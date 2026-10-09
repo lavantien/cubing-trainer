@@ -230,12 +230,11 @@ CT_SUITE(migrate_error_paths) {
     CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
     CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/miggap/001_init.sql"));
     CT_ASSERT(write_file(CT_TEST_DIR "/miggap/003_gap.sql", "CREATE TABLE gap3(id INTEGER);\n"));
-    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/miggap"), 0);
-    CT_ASSERT_EQ(ct_db_version(db), 3);
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/miggap") != 0);
+    CT_ASSERT_EQ(ct_db_version(db), 0);
     CT_ASSERT_EQ(
-        query_int(db, "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='gap3'"), 1);
-    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/miggap"), 0);
-    CT_ASSERT_EQ(ct_db_version(db), 3);
+        query_int(db, "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='flashcard'"),
+        0);
     ct_db_close(db);
 
     db = NULL;
@@ -278,6 +277,116 @@ CT_SUITE(migrate_error_paths) {
     ct_db_close(db);
     remove_dir(bak);
     cleanup_db_files(path);
+}
+
+CT_SUITE(migrate_soundness)
+{
+    make_dir("build");
+    make_dir(CT_TEST_DIR);
+    make_dir(CT_TEST_DIR "/migsnd");
+    remove_file(CT_TEST_DIR "/migsnd/001_init.sql");
+    remove_file(CT_TEST_DIR "/migsnd/002_next.sql");
+    remove_file(CT_TEST_DIR "/migsnd/003_gap.sql");
+    remove_file(CT_TEST_DIR "/migsnd/000_zero.sql");
+    remove_file(CT_TEST_DIR "/migsnd/001_dupe.sql");
+    remove_file(CT_TEST_DIR "/migsnd/2147483648_long.sql");
+    remove_file(CT_TEST_DIR "/migsnd/00999999999999999999999_big.sql");
+    remove_file(CT_TEST_DIR "/migsnd/002_nul.sql");
+    CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/migsnd/001_init.sql"));
+
+    sqlite3 *db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(write_file(CT_TEST_DIR "/migsnd/002_next.sql", "CREATE TABLE next2(id INTEGER);\n"));
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migsnd"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 2);
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migsnd"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 2);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT_EQ(ct_db_migrate(db, "db/migrations"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 1);
+    CT_ASSERT(write_file(CT_TEST_DIR "/migsnd/003_gap.sql", "CREATE TABLE gap3(id INTEGER);\n"));
+    remove_file(CT_TEST_DIR "/migsnd/002_next.sql");
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/migsnd") != 0);
+    CT_ASSERT_EQ(ct_db_version(db), 1);
+    CT_ASSERT_EQ(
+        query_int(db, "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='gap3'"), 0);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/migsnd") != 0);
+    CT_ASSERT_EQ(ct_db_version(db), 0);
+    CT_ASSERT_EQ(
+        query_int(db, "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='flashcard'"),
+        0);
+    ct_db_close(db);
+    remove_file(CT_TEST_DIR "/migsnd/003_gap.sql");
+    CT_ASSERT(write_file(CT_TEST_DIR "/migsnd/002_next.sql", "CREATE TABLE next2(id INTEGER);\n"));
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT_EQ(sqlite3_exec(db, "PRAGMA user_version = 5", NULL, NULL, NULL), SQLITE_OK);
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/migsnd") != 0);
+    CT_ASSERT_EQ(ct_db_version(db), 5);
+    CT_ASSERT_EQ(sqlite3_exec(db, "PRAGMA user_version = 2", NULL, NULL, NULL), SQLITE_OK);
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migsnd"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 2);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(write_file(CT_TEST_DIR "/migsnd/000_zero.sql", "CREATE TABLE zero0(id INTEGER);\n"));
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migsnd"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 2);
+    CT_ASSERT_EQ(
+        query_int(db, "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='zero0'"), 0);
+    ct_db_close(db);
+    remove_file(CT_TEST_DIR "/migsnd/000_zero.sql");
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(write_file(CT_TEST_DIR "/migsnd/001_dupe.sql", "CREATE TABLE dupe1(id INTEGER);\n"));
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/migsnd") != 0);
+    CT_ASSERT_EQ(ct_db_version(db), 0);
+    ct_db_close(db);
+    remove_file(CT_TEST_DIR "/migsnd/001_dupe.sql");
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(write_file(CT_TEST_DIR "/migsnd/2147483648_long.sql",
+                         "CREATE TABLE bigv(id INTEGER);\n"));
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/migsnd") != 0);
+    CT_ASSERT_EQ(ct_db_version(db), 0);
+    ct_db_close(db);
+    remove_file(CT_TEST_DIR "/migsnd/2147483648_long.sql");
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(write_file(CT_TEST_DIR "/migsnd/00999999999999999999999_big.sql",
+                         "CREATE TABLE bigv2(id INTEGER);\n"));
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/migsnd") != 0);
+    CT_ASSERT_EQ(ct_db_version(db), 0);
+    ct_db_close(db);
+    remove_file(CT_TEST_DIR "/migsnd/00999999999999999999999_big.sql");
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    remove_file(CT_TEST_DIR "/migsnd/002_next.sql");
+    FILE *nul = fopen(CT_TEST_DIR "/migsnd/002_nul.sql", "wb");
+    CT_ASSERT(nul != NULL);
+    CT_ASSERT(fputs("CREATE TABLE nul2(id INTEGER);\n", nul) >= 0);
+    CT_ASSERT(fputc('\0', nul) >= 0);
+    CT_ASSERT(fputs("CREATE TABLE nul3(id INTEGER);\n", nul) >= 0);
+    fclose(nul);
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/migsnd") != 0);
+    CT_ASSERT_EQ(ct_db_version(db), 1);
+    CT_ASSERT_EQ(
+        query_int(db, "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='nul2'"), 0);
+    ct_db_close(db);
+    remove_file(CT_TEST_DIR "/migsnd/002_nul.sql");
 }
 
 CT_SUITE(pragmas) {
