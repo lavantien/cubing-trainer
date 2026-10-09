@@ -6,6 +6,7 @@ export C_INCLUDE_PATH :=
 export CPLUS_INCLUDE_PATH :=
 CFLAGS := -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic
 TEST_CFLAGS := $(CFLAGS) -g -fsanitize=undefined -fsanitize-trap=all
+DEPFLAGS := -MMD -MP
 WINLIBS_LDLIBS := -static-libgcc -lopengl32 -lgdi32 -lwinmm
 
 RAYLIB_VERSION := 6.0
@@ -47,6 +48,9 @@ TEST_OBJ := $(addprefix $(TOBJDIR)/,$(TEST_SRC:.c=.o))
 RAYLIB_OBJ := $(addprefix $(OBJDIR)/,$(RAYLIB_SRC:.c=.o))
 RAYGUI_OBJ := $(OBJDIR)/raygui_impl.o
 SQLITE_OBJ := $(OBJDIR)/third_party/sqlite/sqlite3.o
+DEPFILES := $(LIB_OBJ:.o=.d) $(LIB_TOBJ:.o=.d) $(TEST_OBJ:.o=.d) $(RAYLIB_OBJ:.o=.d) $(RAYGUI_OBJ:.o=.d)
+DEPFILES += $(SQLITE_OBJ:.o=.d)
+-include $(DEPFILES)
 
 APP_BIN := $(BINDIR)/cubing-trainer.exe
 TEST_BIN := $(BINDIR)/ct_tests.exe
@@ -68,11 +72,11 @@ $(BINDIR) $(OBJDIR) $(TOBJDIR) $(DLDIR):
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(@D)
-	$(CC) $(CROSS_COMPILE) $(CFLAGS) -c $< -o $@
+	$(CC) $(CROSS_COMPILE) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 
 $(TOBJDIR)/%.o: %.c
 	@mkdir -p $(@D)
-	$(CC) $(CROSS_COMPILE) $(TEST_CFLAGS) -c $< -o $@
+	$(CC) $(CROSS_COMPILE) $(TEST_CFLAGS) $(DEPFLAGS) -c $< -o $@
 
 $(OBJDIR)/src/%.o: CFLAGS := $(CFLAGS) $(SRC_INCLUDES)
 $(OBJDIR)/third_party/raylib/%.o: CFLAGS := $(CFLAGS) $(RAYLIB_CFLAGS)
@@ -88,7 +92,7 @@ $(RAYGUI_IMPL_SRC):
 
 $(RAYGUI_OBJ): $(RAYGUI_IMPL_SRC)
 	@mkdir -p $(@D)
-	$(CC) $(CROSS_COMPILE) $(CFLAGS) $(RAYGUI_CFLAGS) -c $< -o $@
+	$(CC) $(CROSS_COMPILE) $(CFLAGS) $(DEPFLAGS) $(RAYGUI_CFLAGS) -c $< -o $@
 
 build: $(APP_BIN)
 
