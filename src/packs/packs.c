@@ -222,3 +222,107 @@ int ct_pack_list(sqlite3 *db, ct_event ev, ct_method m, ct_stage st, ct_pack_ent
         return CT_PACK_ERR_DB;
     return n;
 }
+
+static const char CT_SQL_SEED_BEGIN[] = "BEGIN IMMEDIATE";
+static const char CT_SQL_SEED_COMMIT[] = "COMMIT";
+static const char CT_SQL_SEED_ROLLBACK[] = "ROLLBACK";
+static const char CT_PACK_SEED_HEADER[] = "case_key\talg\tfront_json\tsource_url\tsource_at";
+
+static int ct_pack_seed_split(char *line, char *fields[], int max_fields) {
+    fields[0] = line;
+    int count = 1;
+    for (char *p = line; *p != '\0'; p++) {
+        if (*p == '\t') {
+            *p = '\0';
+            if (count == max_fields)
+                return CT_PACK_ERR_FORMAT;
+            fields[count] = p + 1;
+            count++;
+        }
+    }
+    return count;
+}
+
+static int ct_pack_seed_field(char *dst, const char *src, size_t cap) {
+    size_t n = strlen(src);
+    if (n == 0 || n >= cap)
+        return CT_PACK_ERR_FORMAT;
+    memcpy(dst, src, n + 1);
+    return CT_PACK_OK;
+}
+
+int ct_pack_seed_file(sqlite3 *db, const char *path, ct_event ev, ct_method m, ct_stage st) {
+    if (db == NULL || path == NULL || path[0] == '\0')
+        return CT_PACK_ERR_ARG;
+    FILE *f = fopen(path, "rb");
+    if (f == NULL)
+        return CT_PACK_ERR_FILE;
+    if (sqlite3_exec(db, CT_SQL_SEED_BEGIN, NULL, NULL, NULL) != SQLITE_OK) {
+        fclose(f);
+        return CT_PACK_ERR_DB;
+    }
+    char line[CT_PACK_SEED_LINE_MAX];
+    char *fields[CT_PACK_SEED_COLUMNS];
+    int rows = 0;
+    int rc = CT_PACK_OK;
+    int header_left = 1;
+    while (fgets(line, sizeof line, f) != NULL) {
+        size_t n = strlen(line);
+        if (n + 1 == sizeof line && line[n - 1] != '\n' && !feof(f)) {
+            rc = CT_PACK_ERR_FORMAT;
+            break;
+        }
+        if (n > 0 && line[n - 1] == '\n') {
+            line[n - 1] = '\0';
+            n--;
+        }
+        if (n > 0 && line[n - 1] == '\r')
+            line[n - 1] = '\0';
+        if (line[0] == '\0')
+            continue;
+        if (header_left) {
+            header_left = 0;
+            if (strcmp(line, CT_PACK_SEED_HEADER) == 0)
+                continue;
+        }
+        int count = ct_pack_seed_split(line, fields, CT_PACK_SEED_COLUMNS);
+        if (count < 0) {
+            rc = count;
+            break;
+        }
+        if (count != CT_PACK_SEED_COLUMNS) {
+            rc = CT_PACK_ERR_FORMAT;
+            break;
+        }
+        ct_pack_entry e;
+        memset(&e, 0, sizeof e);
+        e.event = ev;
+        e.method = m;
+        e.stage = st;
+        rc = ct_pack_seed_field(e.case_key, fields[0], sizeof e.case_key);
+        if (rc == CT_PACK_OK)
+            rc = ct_pack_seed_field(e.alg, fields[1], sizeof e.alg);
+        if (rc == CT_PACK_OK)
+            rc = ct_pack_seed_field(e.front_json, fields[2], sizeof e.front_json);
+        if (rc == CT_PACK_OK)
+            rc = ct_pack_seed_field(e.source_url, fields[3], sizeof e.source_url);
+        if (rc == CT_PACK_OK)
+            rc = ct_pack_seed_field(e.source_at, fields[4], sizeof e.source_at);
+        if (rc != CT_PACK_OK)
+            break;
+        rc = ct_pack_upsert(db, &e);
+        if (rc != CT_PACK_OK)
+            break;
+        rows++;
+    }
+    if (ferror(f))
+        rc = CT_PACK_ERR_FILE;
+    fclose(f);
+    if (rc != CT_PACK_OK) {
+        sqlite3_exec(db, CT_SQL_SEED_ROLLBACK, NULL, NULL, NULL);
+        return rc;
+    }
+    if (sqlite3_exec(db, CT_SQL_SEED_COMMIT, NULL, NULL, NULL) != SQLITE_OK)
+        return CT_PACK_ERR_DB;
+    return rows;
+}

@@ -17,14 +17,18 @@ enum {
     CT_PACK_URL_MAX = CT_B8 * CT_B32,
     CT_PACK_AT_MAX = CT_B32,
     CT_PACK_HASH_MAX = CT_SHA_HEX_MAX,
-    CT_PACK_CANON_MAX = CT_B16 * CT_B128
+    CT_PACK_CANON_MAX = CT_B16 * CT_B128,
+    CT_PACK_SEED_COLUMNS = CT_B4 + CT_B1,
+    CT_PACK_SEED_LINE_MAX = CT_B16 * CT_B128
 };
 
 typedef enum ct_pack_rc {
     CT_PACK_OK = 0,
     CT_PACK_MISSING = 1,
     CT_PACK_ERR_ARG = -1,
-    CT_PACK_ERR_DB = -2
+    CT_PACK_ERR_DB = -2,
+    CT_PACK_ERR_FILE = -3,
+    CT_PACK_ERR_FORMAT = -4
 } ct_pack_rc;
 
 typedef struct ct_pack_entry {
@@ -44,6 +48,7 @@ int ct_pack_get(sqlite3 *db, ct_event ev, ct_method m, ct_stage st, const char *
 int ct_pack_count(sqlite3 *db, ct_event ev, ct_method m, ct_stage st);
 int ct_pack_list(sqlite3 *db, ct_event ev, ct_method m, ct_stage st, ct_pack_entry *out, int cap);
 int ct_pack_content_hash(const ct_pack_entry *e, char hex_out[CT_PACK_HASH_MAX]);
+int ct_pack_seed_file(sqlite3 *db, const char *path, ct_event ev, ct_method m, ct_stage st);
 
 #ifdef __cplusplus
 }
