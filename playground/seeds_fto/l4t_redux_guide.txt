@@ -1,0 +1,186 @@
+﻿Notation
+
+
+In this doc, I use different notation for piece locations and algs. Piece locations follow this scheme:
+  
+
+Here, each of the eight centers remaining when L4T is reached are denoted LB, LF, RB, RF, FL, FR, FD, and DF, where the first letter tells you the face that the center is on.
+
+
+For algs, the top face is still denoted U, but the down-left, front, and down-right faces are now denoted F, R, and BR respectively, and the back face (orange in the picture above) is denoted BL. This is for compatibility with Twizzle. This means if I say "do an R move", that actually means to turn the face denoted F in the image above.
+
+
+Starting Reduction
+
+
+L4T Redux consists of four steps:
+1. Solve a first block at dBL consisting of a hexagon and two triples. The triples need not match the center.
+   1. This allows more freedom during the reduction step. In particular, leaving the front triple unsolved allows us to deal with some annoying cases. One could solve the back triple, though, for an easier reduction step without too much loss in efficiency.
+2. Solve the remaining three large hexagons.
+3. Reduce to the Pyraminx moveset <U, F, BR, BL>.
+4. Solve the Pyraminx.
+
+
+This document will focus on Step 3. Basically, the goal of this step is to ensure each of the 8 remaining centers are paired with a corner sticker of the same color. We'll call a center solved if it's the same color as the corner sticker it's next to, otherwise it's unsolved. If all the centers are solved, the FTO is reduced to the Pyraminx moveset.
+
+
+  
+
+
+
+In this diagram, the FL, FD, and RF centers are solved; the LB, RB, LF, and FR centers are unsolved. The DF center is not visible, so we'd have to lookahead or peek at the bottom to know if it's solved.
+
+
+Main idea: a single R move (a move of the front face) will preserve the FL, FD, FR, LB, and RB centers if they are already solve, only affecting the status of the LF, RF, and DF centers. You can think of this move as "cycling around" those centers relative to the corner stickers they match to. Let's call the LF, RF, and DF positions the "swapping positions".
+
+
+So, if you have some unsolved centers, you need to put them in the swapping positions using Pyra L4E algs (such as BR U BR' U', F' U' F U, BR' F BR F', or a combination of those), and then do an R move. You really want to get comfortable with how these short triggers affect the puzzle. During reduction, the hexagons you made in Step 2 might be off by some sort of R move: this is okay, we'll fix this at the end. It's worth noting that if they ever happen to not be off by an R move, you can do any pyra moves in <U, F, BR, BL> to set things up, not just sledges/inserts, which might make things a little more efficient.
+
+
+But how do you know which unsolved centers to put in the swapping positions? Well, suppose that a purple center is in a swapping position, and also, a yellow center connected to a purple corner sticker is in a different swapping position. Then you can connect the two purples together with an R move! So, the key idea is to make sure that some of the center colors and corner colors you're putting in the swapping positions are the same, ideally as many as possible.
+
+
+When there are many unsolved centers, this is easy. As long as you make sure no solved centers are in the swapping positions when you do an R move, you'll make progress. Of course, the more color matches you can make per R move, the better. Keep doing this until you have only 2 or 3 unsolved centers left. Try not to get into a situation where two triples (a corner and its two adjacent centers) are completely solved and the other two are completely unsolved - then you'll have to break one of your solved centers. 
+
+
+Finishing It Off
+At this point, there are basically six types of situations you can be in:
+
+
+2a. Two centers unsolved, hexagons off by R/R'
+2b. Two centers unsolved, hexagons solved
+3a1. Three centers unsolved on distinct triples, hexagons off by R/R'
+3b1. Three centers unsolved on distinct triples, hexagons solved
+3a2. Three centers unsolved with two on the same triple, hexagons off by R/R'
+3b2. Three centers unsolved with two on the same triple, hexagons solved
+
+
+Some of these cases are a lot better than others. In particular, try to get 2a or 3a1, and try not to get 3a2.
+
+
+We'll start with 3a1. This case is solvable with a single slice (either R or R', whichever one solves the hexagons). The idea is the same as before: get the three unsolved centers into the swapping locations, and then do an R move. The problem is that you need to get the correct R move to also solve the hexagons now. This is a little harder to do intuitively, since 50% of the time you'll get "parity" and need to disturb one of the dBL triples. 
+
+
+A beginner version would be to bring the three unsolved centers into the swapping locations using Pyra L4E algs, check if the swapping direction is correct, and if not, do U BR U BR' F U F' before the final R move. Note that this algorithm moves around one of the First Block triples as well. In the full version, you'd either learn ~35 extra algs, all still in the Pyra moveset, or intuitively place the three triples the correct way around using F U* F' triggers in addition to the normal L4E triggers. I haven't formally compiled them all, but the example solves use them.
+
+
+Next is 2a. This is basically the same as 3a1, except you get to involve one of the solved centers in addition to the two unsolved centers. This center's color must match one of the two unsolved centers. Like before, move these three centers to the swapping locations, and do an R move, with U BR U BR' F U F' right before that if necessary.
+
+
+For 2b, 3b1, and 3b2, these require two slices to solve. Use any moves in <U, F, BL, BR> to get some of the unsolved centers into the swapping locations such that when you do an R/R', you can reach 2a or 3a1. This should require a few moves at most. A technique that's especially useful for 3b2 is "slice-flip-slice", where you set up two centers in swapping locations, do an R move to solve one of them, flip the triangle that contains the solved center (using one of the Pyra L4E flipping algs), and then undo the R move. If you wanted to, this could also work for some 2b cases.
+
+
+Finally, we have 3a2. This one's similar to the above in that we still need two slices, but you need to make sure the R move you use to reduce to 2a/3a1 doesn't also solve the centers (otherwise you reach 2b/3b1 which still takes two slices). 
+
+
+With any luck, you should be in the Pyra state now, and it should be pretty smooth-sailing from here.
+
+
+
+
+
+
+(#1) 59 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=B%27+R%27+D%27+L%27+D+B+D%27+R%27+D%27+U+R+U+L+R+U+R%27+D%27+R%27+B%27+U%27+B+R+F+R+BL+F+L%27+U&alg=%0AL+R+U+R%27+L+U%27+L%27+%2F%2F+1st+center+%287%2F7%29%0A%2F%2F+1st+triple+%280%2F7%29%0Ar%27+U+R+BR+%2F%2F+2nd+triple+%284%2F11%29%0AR%27+r%27+U%27+r+R%27+U+R+r+U%27+r+U%27+R+%2F%2F+2nd+center+%2812%2F23%29%0AU+R+U%27+R2%27+r+U%27+R+U+R%27+U+%2F%2F+sliced+L2C+%2810%2F33%29%0A%0ABR%27+BL%27+BR2+BL+BR%27+R+%2F%2F+-3x+%286%2F39%29%0AF+U+R+%2F%2F+sfs+setup+%283%2F42%29%0AF+BL+BR%27+F%27+BR+R%27+%2F%2F+reduction+in+15+%286%2F48%29%0A%0AF%27+BL%27+BR%27+%2F%2F+pyra+2e+%283%2F51%29%0AUv%27+F%27+U+F+U%27+F%27+U%27+F+U+%2F%2F+pyra+l4e+%288%2F59%29
+
+
+
+
+(#2) 57 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=D%27+B%27+D%27+B%27+L%27+D%27+L+D%27+L%27+BR%27+D%27+BR+D%27+BR%27+D%27+R+BR%27+D+L+B+R+D+BL%27+D+U+BR%27+B%27+U%27+F%27&alg=Uv%27%0AL+R+L+F+U+R+U+f%27+%2F%2F+1st+center+%288%2F8%29%0AR+BR+%2F%2F+1st+triple+%282%2F10%29%0Ar%27+U%27+R%27+F+%2F%2F+2nd+triple+%284%2F14%29%0Ar+U+r%27+U+R+U%27+R%27+%2F%2F+2nd+center+%287%2F21%29%0AU+R%27+U%27+r%27+R2+U+R%27+U%27+R+U+%2F%2F+sliced+L2C+%2810%2F31%29%0A%0Ar+BR+U+BR%27+U%27+R+%2F%2F+-3x+%286%2F37%29%0AU%27+BL+U+BR+BL+BR%27+R+%2F%2F+reduction+in+13+%287%2F44%29%0A%0AU+F%27+U+%2F%2F+block+%283%2F47%29%0AUBBRv2+r+U+r2%27+U%27+r+%2F%2F+centers+%285%2F52%29%0ABR%27+F+BR+F%27+U+%2F%2F+pyra+l4e+%285%2F57%29
+
+
+(#3) 49 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=R+B%27+D+L%27+R%27+L%27+D%27+L+BR%27+R%27+D+BR%27+D%27+L+BR+R%27+BR+D%27+R%27+B+BR%27+F+BR%27+U+L+BL%27+L%27&alg=Lv+Uv%0A%2F%2F+1st+triple%0AR+U%27+R%27+U%27+l%27+r%27+L+F%27+L+%2F%2F+1st+center+%289%2F9%29%0AU+R%27+F%27+%2F%2F+2nd+triple+%283%2F12%29%0AU+r+U%27+r%27+R+U%27+R%27+%2F%2F+2nd+center+%287%2F19%29%0Ar+U+R%27+r+U+r%27+R%27+%2F%2F+Sliced+L2C+%287%2F26%29%0A%0AU%27+BR+U%27+BR%27+R%27+%2F%2F+-4x+%285%2F31%29%0AU+F%27+U+F+R+%2F%2F+-3x+%285%2F36%29%0AU%27+F%27+U+F+R%27+%2F%2F+reduction+%285%2F41%29%0A%0AF%27+U+BR%27+U+%2F%2F+pyra+2e+%284%2F45%29%0AFRBRv2+BR+U%27+BR%27+U%27+%2F%2F+pyra+l4e+%284%2F49%29
+
+
+(#4) 37 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=L%27+B+D%27+L%27+B+R+L+B+F%27+D%27+L+D%27+F%27+R%27+F%27+L+R%27+F+R%27+BL%27+U%27+BR%27+R%27+BR%27+R%27+U%27&alg=DFv+%2F%2F+inspection%0A%0ABR+%2F%2F+1st+triple+%281%2F1%29%0AU%27+L+F%27+L+%2F%2F+1st+center+%284%2F5%29%0AR+F%27+%2F%2F+2nd+triple+%282%2F7%29%0AU%27+R%27+r+U%27+R+%2F%2F+2nd+center+%285%2F12%29%0AU%27+R%27+r+U+r%27+R+U+R+U+R%27+%2F%2F+L2C+%2810%2F22%29%0A%0AU+R+%2F%2F+-3x+%282%2F24%29%0AF%27+U+F+U%27+R%27+%2F%2F+reduction+%285%2F29%29%0A%0AU%27+F%27+BR%27+U+%2F%2F+pyra+2e+%284%2F33%29%0ARv+F+U%27+F%27+U%27+%2F%2F+pyra+l4e+%284%2F37%29
+
+
+(#5) 52 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=R+D+L+R%27+B%27+R+B%27+L%27+BR%27+D+BR%27+D%27+B+BR%27+B%27+BR+B+BR%27+D%27+BR+U%27+BL%27+L%27+U%27+BR+R+U%27&alg=U%27+R%27+U%27+r%27+U+R+r%27+u+%2F%2F+1st+center+%2B+1st+triple+%288%2F8%29%0AF%27+%2F%2F+2nd+triple+%281%2F9%29%0AU%27+R%27+U%27+r+U+R%27+r+U+R%27+U+R+%2F%2F+2nd+center+%2811%2F20%29%0AR+U+R%27+r+U+R%27+U+r%27+R2+U%27+R%27+U%27+R+U+R%27+U+R+%2F%2F+Sliced+L2C+%2817%2F37%29%0A%0AF%27+U+F+U+R%27+%2F%2F+reduction+%285%2F42%29%0A%0AU+BL%27+F%27+%2F%2F+block+%283%2F45%29%0AU%27+r%27+%2F%2F+centers+%282%2F47%29%0AU+BR+U%27+BR%27+U+%2F%2F+pyra+l4e+%285%2F52%29
+
+
+(#6) 66 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=R%27+L+B%27+L+B+R%27+B%27+U+R%27+U+R+L+R+D+U+R+L%27+B%27+D%27+B%27+F%27+BR+D+U+BL%27+U+F&alg=DFv%0A%0A%2F%2F+1st+triple%0AF%27+U+R%27+l+L+U%27+L%27+R%27+L+F%27+L+%2F%2F+1st+center+%2811%2F11%29%0AF+%2F%2F+2nd+triple+%281%2F12%29%0Ar+U+r%27+U%27+r%27+U+R+U+r+%2F%2F+half+centers+%289%2F21%29%0AU+R%27+U+R%27+U+R+U+R%27+U%27+R+U+R+%2F%2F+sliced+L2HC+%2812%2F33%29%0A%0AU+F%27+U+F+R+%2F%2F+-4x+%285%2F38%29%0Ar+BR+U+BR%27+U%27+R+%2F%2F+better+-4x+%286%2F44%29%0ABR%27+R+%2F%2F+-3x+%282%2F46%29%0AU+BL%27+U%27+F%27+BL%27+F+R%27+%2F%2F+reduction+%287%2F53%29%0A%0ABL%27+BR+%2F%2F+2e+%282%2F55%29%0Ar+U%27+r%27+%2F%2F+centers+%283%2F58%29%0AF%27+U+F+U%27+F%27+U%27+F+U%27+%2F%2F+pyra+l4e+%288%2F66%29
+
+
+(#7) 69 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=R+D%27+R+D+L+B%27+R+D%27+L%27+BR%27+R+B+BR+R%27+L%27+D%27+R%27+L%27+R%27+BR+B+L%27+BL+B%27+F%27+BL%27+L%27+B&alg=T+DFv%0A%0A%2F%2F+1st+triplet%0Ar%27+R+U%27+l%27+r%27+U+L+U+L%27+%2F%2F+1st+center+%289%2F9%29%0AR+F+%2F%2F+2nd+triplet+%282%2F11%29%0Ar+U%27+R+r%27+U+R%27+r2+U%27+r%27+U%27+R+U+R%27+%2F%2F+2nd+center+%2813%2F24%29%0Ar+R+U%27+R%27+r+U%27+R%27+U%27+r%27+R+U%27+R+U+R%27+U%27+R+%2F%2F+Sliced+L2C+%2816%2F40%29%0A%0ABR+F%27+U%27+BR%27+F+R%27+%2F%2F+-2x+mono-flip+%286%2F46%29%0ABR+R+%2F%2F+sfs+setup+%282%2F48%29%0AU%27+BL+U+BR+BL+BR%27+R%27+%2F%2F+sfs+%287%2F55%29+%0A%0AF%27+U%27+F+U+%2F%2F+2e+%284%2F59%29%0ALv+U+r%27+%2F%2F+centers+%282%2F61%29%0ABR+U+BR%27+U%27+F%27+U%27+F+U+%2F%2F+pyra+l4e+%288%2F69%29
+
+
+(#8) 55 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=D%27+R%27+L%27+D%27+R+D%27+L+B+D%27+U+B%27+U+R%27+U+R%27+D+U%27+B+D+R%27+L%27+D%27+F+BL%27+BR%27+U%27+F+D&alg=RFv%0A%0AU+F+R%27+f+U+F%27+R+U%27+L%27+%2F%2F+1st+center+%2B+1st+triplet+%289%2F9%29%0AU%27+R+F%27+%2F%2F+2nd+triplet+%283%2F12%29%0AU%27+r%27+U+R+U%27+R%27+r%27+U+R%27+U%27+R+%2F%2F+2nd+center+%2811%2F23%29%0Ar2+U%27+r%27+R+U+R%27+r+U%27+R%27+%2F%2F+Sliced+L2C+%289%2F32%29%0A%0AU%27+F%27+U+F+U%27+R%27+%2F%2F+-3x+%286%2F38%29%0AF%27+BR%27+BL+F+BR+R%27+%2F%2F+reduction+%286%2F44%29%0A%0ABR%27+%2F%2F+block+%281%2F45%29%0AFv+Uv+U%27+r%27+U+r%27+%2F%2F+centers+%284%2F49%29%0AF%27+U%27+BL%27+U+BL+F+%2F%2F+pyra+l4e+%286%2F55%29
+
+
+(#9) 64 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=D+B%27+R+D%27+R+L%27+R%27+D+U+B%27+R+L%27+R%27+U+R%27+U%27+B%27+U+L%27+D%27+R%27+BR+R+U+BL%27+BR+BL%27+F&alg=Uv%0AR+BL+BR+u+BR%27+u%27+%2F%2F+1st+center+%286%2F6%29%0AU+R%27+F%27+%2F%2F+1st+triplet+%283%2F9%29%0AU+R%27+BR+%2F%2F+2nd+triplet+%283%2F12%29%0A%0Ar%27+R+U%27+R%27+U%27+r%27+U%27+R+U+R%27+%2F%2F+2nd+center+%2810%2F22%29%0Ar+R+U%27+R%27+r+U+R%27+U+r%27+R2+U%27+R%27+U+R+U+R%27+U%27+R+U%27+R%27+%2F%2F+L2C+%2820%2F42%29%0A%0AR%27+%2F%2F+-3x+from+-2x+%281%2F43%29%0ABR%27+BL%27+BR+R+%2F%2F+reduction+%284%2F47%29%0A%0AU%27+BR+U%27+BR%27+%2F%2F+block+%284%2F51%29%0AFv%27+Rv+r+U%27+r%27+U+r%27+U+r+%2F%2F+centers+%2B+influencing+%287%2F58%29%0ABR%27+BL%27+BR2+BL+BR%27+U%27+%2F%2F+pyra+l4e+%286%2F64%29
+
+
+(#10) 60 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=D+R%27+D+R+B+BR%27+D+BR+D%27+BR%27+R+D%27+B+BR%27+R%27+B%27+BR+D%27+U+L+BL+L+R%27+BR%27+F&alg=Uv%27%0A%0AB%27+L+U+l%27+%2F%2F+1st+triple+%2B+1st+large+trap+%284%2F4%29%0AR%27+F+R+L+%2F%2F+1st+center+%284%2F8%29%0AF+%2F%2F+2nd+triple+%281%2F9%29%0A%0AR+U%27+R+U+r+R+U%27+R%27+r+U%27+R%27+r+U%27+R+%2F%2F+2nd+center+%2814%2F23%29%0Ar+U%27+R+U+R%27+U%27+r+U%27+R%27+U%27+%2F%2F+sliced+L2C+%2810%2F33%29%0A%0ABR+BL%27+BR%27+R+%28Rv%29+%2F%2F+-4x+%284%2F37%29%0AU+R%27+%2F%2F+-3x+%282%2F39%29%0ABR%27+U%27+BR+BL+U+R+%2F%2F+reduction+%286%2F45%29%0A%0AU+BR+BL+F%27+U%27+%2F%2F+block+%2B+centers+%285%2F50%29%0A%28Lv%27%29+BR%27+F+BR+F%27+U%27+BR%27+F+BR+F%27+U%27+%2F%2F+pyra+l4e+%2810%2F60%29
+
+
+(#11) 52 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=B+R+B%27+R%27+L%27+B+L%27+BL+D%27+BL+B+D+B+L%27+BL+D+BL+D+BL%27+B%27+F%27+R%27+U+F%27+U%27+F+U&alg=LFDv%0AF%27+%2F%2F+1st+trap+%2B+1st+triple+%281%2F1%29%0AU%27+R+BR+R%27+U+B+%2F%2F+1st+center+%286%2F7%29%0ABR+%2F%2F+2nd+triple+%281%2F8%29%0AR+U+r+R%27+U+r+%2F%2F+half+centers+%286%2F14%29%0AR%27+U%27+R+U%27+R%27+U+R+U+R+U%27+R%27+U%27+R+U+%2F%2F+sliced+L2HC+%2814%2F28%29+-+this+is+suboptimal+by+4+moves%0A%0Ar%27+U%27+F%27+U+F+R+%2F%2F+-2x+%286%2F34%29%0Ar+U+BR+U%27+BR%27+R+%2F%2F+reduction+%286%2F40%29%0A%0ABL%27+BR+U%27+BL%27+U%27+%2F%2F+block+%2B+centers+%285%2F45%29%0ABRv+BR%27+F+BR+F2%27+U%27+F+U%27+%2F%2F+pyra+l4e+%287%2F52%29
+
+
+(#12) 56 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=R+L%27+D%27+B%27+R%27+D+F%27+D+R%27+D+F%27+R+D%27+B+R%27+L+F%27+L%27+R+BL%27+F+BR%27+U%27+BL%27+U&alg=Uv%27%0Au+U+F+u%27+%2F%2F+1st+triplet+%2B+1st+trap+%284%2F4%29%0AU+R%27+L+U%27+L%27+%2F%2F+1st+center+%285%2F9%29%0AU%27+R%27+F+%2F%2F+2nd+triplet+%283%2F12%29%0AU+R%27+r+U+r%27+U+R+U%27+r%27+U%27+R%27+r+U%27+R%27+%2F%2F+2nd+center+%2814%2F26%29%0AR%27+U+r%27+R+U+R+U%27+R%27+U+R+U%27+R%27+%2F%2F+L2C+%2812%2F38%29%0A%0AF+R+%2F%2F+-3x+%282%2F40%29%0ABR+U+BR%27+U%27+R%27+%2F%2F+reduction+%285%2F45%29%0A%0AU+BL%27+F%27+%2F%2F+block+%2B+centers+%283%2F48%29%0A%28BLv%29+U+F+U+F%27+U%27+BL%27+U+BL+%2F%2F+pyra+l4e+%288%2F56%29
+
+
+(#13) 58 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=D%27+L%27+R+L+D%27+B+L%27+R+F%27+L%27+R+D+F%27+R+F+L%27+R%27+B%27+F+L%27+R+U%27+BR+BL%27+D+B%27+BL+F&alg=R+F+%2F%2F+1st+triple+%2B+1st+trap+%282%2F2%29%0A%28Uv%27%29+U%27+R%27+F+U%27+L+F%27+L+%2F%2F+1st+center+%287%2F9%29%0AF+%2F%2F+2nd+triple+%281%2F10%29%0A%0AU%27+R+U+R%27+%2F%2F+2nd+center+%284%2F14%29%0Ar+U%27+R%27+r+U%27+R+U%27+R%27+U%27+%2F%2F+Sliced+L2C+%289%2F23%29%0A%0AF%27+U%27+F+U+R%27+%2F%2F+-5x+%285%2F28%29%0AF+BR%27+F%27+BR+R%27+%2F%2F+-4x+%285%2F33%29%0AF+BR%27+F%27+BR+R+%2F%2F+-2x+%285%2F38%29%0AF+U+F%27+BL%27+U%27+R%27+%2F%2F+reduction+%286%2F44%29%0A%0ABL%27+BR+%2F%2F+block+%282%2F46%29%0AUv+r+U%27+r+%2F%2F+centers+%283%2F49%29%0AF%27+U+F+U+BR%27+F+BR+F%27+U%27+%2F%2F+pyra+l4e+%289%2F58%29
+
+
+(#14) 52 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=R+L%27+B+R%27+L%27+D+R%27+L%27+BR+B%27+R%27+B+BR+R%27+BR%27+D+B%27+BR+D+BR%27+B%27+U%27+BR+U+R+BL+BR%27+D%27&alg=%28BLv%27%29%0AR%27+BR%27+%2F%2F+1st+trap+%2B+1st+triple+%282%2F2%29%0AU+L+U+L%27+R%27+U%27+L%27+%28Rv%29+%2F%2F+1st+center+%2B+2nd+triple+%287%2F9%29%0AU+r%27+U%27+R+U%27+r+U%27+R%27+U+r+%2F%2F+half+centers+%2810%2F19%29%0AU%27+R+U%27+R%27+U+R%27+U+R+U%27+R%27+U+R+%2F%2F+Sliced+L2C+%2812%2F31%29%0A%0AF%27+U+F+R%27+%2F%2F+-4x+%284%2F35%29%0AU%27+R+%2F%2F+-2x+%282%2F37%29%0ABR+U+BR%27+F%27+U%27+F+R%27+%2F%2F+reduction+%287%2F44%29%0A%0ABL%27+F+BR%27+U+%2F%2F+block%2C+centers%2C+avoid+2t+%284%2F48%29%0ABR%27+F+BR+F%27+%2F%2F+pyra+l4e+%285%2F52%29
+
+
+(#15) 55 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=B%27+R+B%27+L+D+R+D+R+BL+L+D%27+BL%27+B%27+D%27+B%27+L+BL%27+B+BL+L+U+B%27+L+R%27+L+U%27+BL&alg=Uv%0A%0ABL%27+L+F%27+R+BL%27+f%27+%2F%2F+1st+center+%286%2F6%29%0A%2F%2F+1st+triplet%0AR%27+F+%28BLv%29+%2F%2F+2nd+triplet+%282%2F8%29%0A%0AU%27+r%27+R+U%27+r+U+R%27+U%27+r+%2F%2F+half+centers+%289%2F17%29%0AR%27+U%27+R+U%27+R+U%27+R+U+R+U%27+R%27+U+R+U%27+%2F%2F+sliced+L2HC+%2814%2F31%29%0A%0ABR%27+F%27+BL%27+F+BR+R+%2F%2F+-2x+%286%2F37%29%0ABR%27+F+BR+F%27+R+%2F%2F+reduction+%285%2F42%29%0A%0AU%27+BL%27+F%27+U%27+BL+BR%27+U%27+%2F%2F+2e+%287%2F49%29%0AU+BR+BL+BR%27+BL%27+U%27+%2F%2F+pyra+l4e+%286%2F55%29
+
+
+(#16) 68 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=D%27+R%27+L+D+B%27+L%27+R+D%27+BR%27+D+L%27+BR%27+R+BR%27+R+L+D%27+BR+R+B+D+F+U+BR+B%27+BR+B%27+BR&alg=U%27+R%27+%2F%2F+arrow+block+%2B+2+triplets+%282%2F2%29%0AB+U+B%27+BL+L%27+U+L+BL%27+%2F%2F+1st+center%2C+preserve+triplets+%288%2F10%29%0A%28Uv%29+U%27+r+U%27+R%27+r%27+U+R%27+r+U+R+%2F%2F+2nd+center+%2810%2F20%29%0Ar2+U+r%27+U%27+R%27+r+U+r%27+R+U+R+U+R%27+U+R+%2F%2F+Sliced+L2C+%2815%2F35%29%0A%0ABR+U%27+BR%27+R%27+%2F%2F+-6x+%284%2F39%29%0AU+R+%2F%2F+-5x+%282%2F41%29%0AF+BL+BR%27+F%27+BR+R+%28Rv%27%29+%2F%2F+-3x+%286%2F47%29%0AU%27+F%27+U+F+R+%2F%2F+reduction+in+17+%285%2F52%29%0A%0AF%27+U+F%27+BR+U+BR+%2F%2F+2e+%286%2F58%29%0AU+BR+U+BR%27+U+BR%27+F+BR+F%27+U%27+%2F%2F+pyra+l4e+%2810%2F68%29
+
+
+(#17) 47 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=D%27+L%27+R+B+D+B%27+L%27+R+BR%27+D+BR%27+R+B%27+D%27+BR%27+R%27+L%27+B%27+BR+R+F+U%27+B+BR%27+U+L%27+R&alg=Lv%27%0A%0AR+F+U%27+R+L%27+%2F%2F+1st+center+%285%2F5%29%0AR%27+F%27+%2F%2F+1st+triple+%282%2F7%29%0AR%27+U%27+R%27+U%27+BR+%2F%2F+2nd+triple+%285%2F12%29%0A%0AU+R%27+r+U%27+R+r+%2F%2F+2nd+center+%286%2F18%29%0AU%27+R%27+r+U+r%27+R2+U+R%27+%2F%2F+L2C+%288%2F26%29%0A%0AU%27+BR%27+R%27+%2F%2F+-3x+%283%2F29%29%0AF+BL%27+F%27+BR%27+BL%27+BR+R+%2F%2F+reduction+%287%2F36%29%0A%0ABR%27+F+%2F%2F+block+%282%2F38%29%0ALv%27+BLv+r+U%27+r2%27+U+r+%2F%2F+centers+%285%2F43%29%0AU%27+BR+U+BR%27+%2F%2F+pyra+l4e+%284%2F47%29
+
+
+(#18) 63 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=B+R+D+B+R+L+B+BR%27+R+L+R+D%27+BR%27+B%27+BR%27+R%27+BR+D%27+L+D%27+F%27+R%27+U%27+R%27+BR%27+F+D&alg=F%27+Uv+D%27+U+R%27+r+B%27+U+B+%2F%2F+1st+center+%288%2F8%29%0AF+U%27+F+R%27+F+%2F%2F+1st+triplet+%285%2F13%29%0AR%27+U%27+R%27+U%27+BR+%2F%2F+2nd+triplet+%285%2F18%29%0AU+R+U+R%27+r%27+U%27+R%27+%2F%2F+1st+center+%287%2F25%29%0AU+r%27+U%27+R%27+r+U+r%27+R2+U+R%27+U+R+U+%2F%2F+Sliced+L2C+%2813%2F38%29%0A%0AF%27+U+F+U%27+R+%2F%2F+-3x+%285%2F43%29%0AF%27+U%27+F2+U%27+F%27+U%27+R+%2F%2F+reduction+%287%2F50%29%0A%0AU+BR%27+%2F%2F+2e+%282%2F52%29%0AU+BR+U%27+%2F%2F+centers+%283%2F55%29%0AFv+BL%27+U+BL+U+BL+F%27+BL%27+F+%2F%2F+pyra+l4e+%288%2F63%29
+
+
+(#19) 61 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=B+L+R%27+B+R+L+R+B+L%27+BR%27+D+L+BR%27+R%27+D%27+L%27+D%27+BR+R%27+BR%27+D%27+L%27+D%27+F+BL%27+BR%27+U+B%27+BR%27&alg=Lv%27%0AU+r%27+f%27+%2F%2F+1st+triplet+%2B+1st+trap+%283%2F3%29%0Ar%27+R+U+R%27+F+L%27+U%27+L%27+%2F%2F+1st+center+%288%2F11%29%0AU+R+F%27+%2F%2F+2nd+triplet+%283%2F14%29%0Ar+U%27+R%27+U+r+U%27+r+R2%27+U%27+R+U%27+R+%2F%2F+2nd+center+%2812%2F26%29%0AU+R+U%27+r+R%27+U+R%27+U+R+U%27+R%27+%2F%2F+Sliced+L2C+%2811%2F37%29%0A%0AF%27+U%27+F+R+%2F%2F+-4x+%284%2F41%29%0AF%27+U+F+U%27+R%27+%2F%2F+-2x+%285%2F46%29%0Ar%27+F%27+U%27+F+U+R+%2F%2F+reduction+%286%2F52%29%0A%0ABL%27+U%27+BL%27+F+U%27+%2F%2F+almost+block+%2B+centers+%285%2F57%29%0ABL+F+BL%27+U+%2F%2F+cancel+into+pyra+l4e+%284%2F61%29
+
+
+(#20) 54 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=D%27+R%27+B%27+L+B%27+R%27+L+D+B%27+F+D+F%27+D%27+F%27+R+B+L+D+F+R%27+B%27+U%27+BR+R%27+B%27+L%27+B&alg=Uv%27%0AU+L+%28Bv%29+%2F%2F+1st+trap+%2B+1st+triple+%282%2F2%29%0Ar+F%27+U+R+U%27+F%27+L%27+F+%2F%2F+1st+center+%2B+2nd+triple+%288%2F10%29%0AU%27+r%27+U%27+R+U+r2+U+r%27+%2F%2F+half+centers+%288%2F18%29%0AU+R+U+R+U+R%27+U+R%27+U+%2F%2F+Sliced+L2HC+%289%2F27%29%0A%0AF%27+U%27+F+BR+U+BR%27+R%27+%2F%2F+-2x+%287%2F34%29%0AF%27+U%27+F+U%27+BR+U%27+BR%27+R%27+%2F%2F+reduction+%288%2F42%29%0A%0AU%27+F+BL%27+U+%2F%2F+2e+%2B+centers+%284%2F46%29%0ADFRv2+BR+U+BR%27+U%27+BR+U%27+BR%27+U%27+%2F%2F+pyra+l4e+%288%2F54%29
+
+
+(#21) 71 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=R%27+L+D%27+B+L%27+D+L+R+BL+D+BL+B+L+BL+D+B%27+BL+B+BL%27+B+BR+U+B%27+R%27+F&alg=B%27+BR+D+L+%2F%2F+1st+triple+%2B+1st+trap+%284%2F4%29%0A%28Uv%29+U+r%27+U+R+U%27+L%27+%2F%2F+1st+center+%286%2F10%29%0AU+R+F%27+%2F%2F+2nd+trap+%283%2F13%29%0A%0AU%27+R%27+r2+U+r%27+U%27+R%27+r+U+R%27+%2F%2F+2nd+center+%2810%2F23%29%0AU%27+r%27+U%27+R+U+R%27+r+U%27+r%27+R+U+R%27+U+R+U+%2F%2F+L2C+%2815%2F38%29%0A%0AR+%2F%2F+-6x+%281%2F39%29%0AU%27+F%27+U+F+R%27+%2F%2F+-4x+%285%2F44%29%0ABR+U+BR%27+U%27+R%27+%2F%2F+-3x+%285%2F49%29%0AF%27+R%27+%2F%2F+better+-3x+%282%2F51%29%0AU+BL%27+U%27+F%27+BL%27+F+R+%2F%2F+reduction+%287%2F58%29%0A%0ABL+U+F%27+%2F%2F+block+%2B+centers+%283%2F61%29%0AU+F%27+U%27+F+U%27+F+BR%27+F%27+BR+U%27+%2F%2F+pyra+l4e+%2810%2F71%29
+
+
+(#22) 56 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=R+D%27+B%27+R+L+B%27+L%27+D+F%27+L+F%27+D+F+R+L%27+B%27+D%27+F+D+R+U+R+F%27+BR+F%27+BR%27+U%27&alg=f%27+U+R+BR+r+L+F%27+L+%2F%2F+1st+center+%288%2F8%29%0AF%27+%2F%2F+1st+triple+%281%2F9%29%0AR+BR+%2F%2F+2nd+triple+%282%2F11%29%0AU%27+R%27+r+U%27+r%27+U%27+R%27+r2+U+R%27+U+R+%2F%2F+2nd+center+%2812%2F23%29%0Ar+R%27+U%27+R+U%27+r%27+U+R+U%27+R%27+%2F%2F+arrow+L2C+%2810%2F33%29%0A%0AU+BR+U%27+BR%27+R%27+%2F%2F+-3x+%285%2F38%29%0AF+BR%27+F%27+BR+R+%2F%2F+reduction+%285%2F43%29%0A%0ABR%27+F%27+%2F%2F+pyra+l5e+setup+%282%2F45%29%0AU+BL+F%27+BL%27+F+%2F%2F+l3e+%285%2F50%29%0ABR%27+BL%27+BR2+BL+BR%27+U%27+%2F%2F+finish+%286%2F56%29
+
+
+(#23) 66 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=D+R%27+B+R%27+B%27+L%27+D%27+R+L%27+U%27+L%27+B%27+R+U%27+L+B+L%27+R+U%27+L+B+U%27+F+U%27+R%27+U%27+BL%27+B+BR%27&alg=L%27+BL%27+L+BR%27+R%27+U%27+L%27+%2F%2F+1st+center+%287%2F7%29%0AF%27+%2F%2F+1st+triple+%281%2F8%29%0AR+U+R%27+BR+%2F%2F+2nd+triple+%284%2F12%29%0AU%27+R+U%27+r2+U+r%27+U%27+R+U+R+r%27+U+R+%2F%2F+1st+center+%2813%2F25%29%0Ar+U%27+r+U+R%27+U%27+R+U%27+r%27+U+R+U%27+%2F%2F+Sliced+L2C+%2812%2F37%29%0A%0AR+%2F%2F+-7x+%281%2F38%29%0AF+BL+BR%27+F%27+BR+R+%28Rv%27%29+%2F%2F+-5x+%286%2F44%29%0AU%27+F%27+U+F+R%27+%2F%2F+-3x+%285%2F49%29%0AF%27+BL+U+BL+F+U%27+R+%2F%2F+reduction+%287%2F56%29%0A%0AU%27+%2F%2F+block+%281%2F57%29%0A%28Fv%27+Uv%29+r+U+r2%27+U+r+%2F%2F+centers+%285%2F62%29%0AF%27+U%27+F+U+%2F%2F+pyra+l4e+%284%2F66%29
+
+
+(#24) 61 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=R+D+R%27+D+R+L+D+B%27+BR%27+D%27+B%27+BR%27+B+BR+R%27+L+BR%27+B%27+L+BR%27+F%27+R%27+F%27+U%27+R+L%27+U&alg=ULBv+BLv%0A%0AU%27+BR+%2F%2F+1st+triplet+%2B+1st+trap+%282%2F2%29%0Ar%27+U+L+U+L%27+U+L%27+%2F%2F+1st+center+%287%2F9%29%0AU+F%27+R+U+F%27+%2F%2F+2nd+triplet+%285%2F14%29%0A%0Ar%27+U+R+U%27+r%27+U%27+R+U%27+r%27+%2F%2F+half+centers+%289%2F23%29%0AU%27+R%27+U%27+R+U%27+R2%27+U%27+R+U+R%27+%2F%2F+sliced+L2C+%2810%2F33%29%0A%0AU+F%27+U+F+R+%2F%2F+-5x+%285%2F38%29%0AU+BR+U%27+BR%27+U+R%27+%2F%2F+-3x+%286%2F44%29%0ABR+U%27+BR%27+U+R+%2F%2F+reduction+%285%2F49%29%0A%0AU%27+BL%27+BR%27+F+BR+%2F%2F+block+%2B+centers+%285%2F54%29%0ARv+BL%27+U+BL+F+U+F%27+U%27+%2F%2F+pyra+l4e+%287%2F61%29
+
+
+(#25) 51 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=L+D+R+L+D%27+L+D%27+R%27+BL%27+D%27+BL%27+B%27+D%27+L+B%27+L%27+BL%27+D%27+B%27+BL%27+L%27+BR%27+D%27+BR+D%27+U%27&alg=FRv+Uv%0A%0Af+%2F%2F+1st+trapezoid+%281%2F1%29%0AU%27+BR+%2F%2F+1st+triple+%282%2F3%29%0AF%27+R%27+L%27+F+L+%2F%2F+1st+center+%285%2F8%29%0AU+R%27+F+%2F%2F+2nd+triple+%283%2F11%29%0A%0AU%27+r+U%27+R+%2F%2F+pseudo+2nd+center+%284%2F15%29%0AR+U+R%27+U+r+%2F%2F+convert+to+normal+LS+%285%2F20%29%0AU+R%27+U+R+U%27+%2F%2F+Sliced+L2C+%285%2F25%29%0A%0ABR+U+BR%27+F%27+U%27+F+R+%2F%2F+-2x+%287%2F32%29%0ABR+U%27+BR%27+F+U+F%27+R+%2F%2F+reduction+%287%2F39%29%0A%0ABR%27+F+Uv+%2F%2F+pseudo+l4e+setup+%282%2F41%29%0ABR%27+F+BR+F%27+U+F%27+U+F+%2F%2F+pyra+l4e+%288%2F49%29%0AU+BR%27+%2F%2F+fix+pseudo+%282%2F51%29
+
+
+(#26) 68 moves:
+https://alpha.twizzle.net/edit/?puzzle=fto&setup-alg=D%27+R%27+D+R+B+D%27+B+R+BL%27+D+BL+B%27+BL%27+L+R%27+B%27+L+B%27+D%27+L+F%27+BR%27+U+L%27+B+F%27+R%27&alg=FLv%0A%0Af+F%27+BR%27+%2F%2F+1st+triplet+%2B+1st+trap+%283%2F3%29%0AR+U%27+L%27+U+L%27+%2F%2F+1st+center+%285%2F8%29%0AU%27+R+F+%2F%2F+2nd+triplet+%283%2F11%29%0A%0AU+R%27+U%27+r+R+U+R%27+r+U+R%27+r+U+R+%2F%2F+2nd+center+%2813%2F24%29%0Ar2+U+r%27+U%27+R+U+R%27+r+U%27+r%27+U%27+R+U%27+R%27+U+R+U+R%27+%2F%2F+L2C+%2818%2F42%29%0A%0AU+R+%2F%2F+bad+-3x+%282%2F44%29%0AU+BR+U%27+BR%27+R+%2F%2F+-2x+%285%2F49%29%0ABR+BL+F%27+BL+F+BR%27+R+%2F%2F+reduction+%287%2F56%29%0A%0AU%27+BR+U%27+F%27+U%27+%2F%2F+block+%2B+centers+%285%2F61%29%0ADBBRv2+BR+U%27+BR%27+F%27+U+F+U+%2F%2F+pyra+l4e+%287%2F68%29

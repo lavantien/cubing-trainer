@@ -97,3 +97,19 @@ Count: 5 rows.
 Notation: algorithms are stored verbatim in the source formatting, including comma separators between tokens and the source spacing quirk in oll4 where one token prints as "Rw U2 ,". HTML nonbreaking spaces are replaced with plain spaces.
 
 Discrepancy: the task example keys included a center parity row for 5x5 and larger. No speedsolving center parity case exists on any big cube, centers are freely permutable during reduction, so no center parity row ships and the gap is recorded here. The nearest public content is the speedcube.us commutator page for swapping two centers on big cubes, archived at playground/seeds_bigcube/speedcubeus_commutators.html, and its 4x4 last two centers page, archived at speedcubeus_l2c.html, both technique pages rather than parity cases. Sarah's 5x5 L2C and L2E sets (sarah_5x5x5_l2c.html, sarah_5x5x5_l2e.html) and the speedcube.us 5x5 L2E 12 case set (speedcubeus_5x5_l2e.html) were also fetched and left out of this pack: L2E mixes parity and non parity edge pairing cases and is not parity only content. The 4x4 corner swap page (speedcubeus_4x4_corner_swap.html) presents PLL parity as two corner swap two edge swap steps, its first step algorithm exists only as an image there, so the two text algorithms of the PLL parity page are the rows of record.
+## fto_l4t_redux.tsv
+
+Sources: the L4T Redux L4E spreadsheet by James Straughan linked from https://www.speedsolving.com/wiki/index.php/Face_Turning_Octahedron, exported as CSV, archived at playground/seeds_fto/l4t_redux_l4e_sheet1.csv (algorithm sheet), l4t_redux_l4e_g2102380954.csv (notation sheet), l4t_redux_l4e_g1864879911.csv (credits sheet, algorithms by James Straughan, images from fto-image-gen), and the L4T Redux guide document by Vincent Trang, exported as text at playground/seeds_fto/l4t_redux_guide.txt. The wiki page itself is archived at playground/seeds_fto/speedsolving_fto.html and speedsolving_fto.txt, trimmed to the Methods section onward, the page intro before Methods is not content of record for this pack. Retrieved 2026-10-10.
+
+Page contents: the algorithm sheet lists 35 named cases in 8 groups, Last Layer, Last Three Edges, Flipped Edges, Polish Flip, Separated Bar, Connected Bar, No Bar, Double Ugly, each with one algorithm. Two unlabeled alternate algorithms sit in a second row under Good Niky and Super Sledge, the first algorithm is stored per the convention. The guide contributes the reduction parity fix U BR U BR' F U F', applied before the final R move when the swapping direction is wrong.
+
+Case key derivation: keys l4t.01 to l4t.36 in sheet reading order, l4t.36 is the guide parity fix, front_json carries group.case names from the sheet.
+
+Transcription note: the Double Sexy algorithm prints its apostrophes as a Unicode right single quote in the source CSV, stored as ASCII apostrophes.
+
+Enum convention: CT_EVENT_FTO, CT_METHOD_L4T_REDUX, CT_STAGE_L4T.
+
+Count: 36 rows. The plan named no count for this pack.
+
+Notation coverage: 31 of 36 algs parse fully. Gaps recorded by playground/seeds_fto/l4t_probe.c: BR and BR' tokens, the FTO back-right face is outside the NxN token table, and L2' and R2', the digit-then-prime suffix order. FTO notation as a whole is a pending parser surface, flagged rather than rejected.
+
