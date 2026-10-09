@@ -1,0 +1,18 @@
+src/srs/fsrs.c:15	clamp lower boundary is a true equivalent: at x == lo the mutant returns lo directly and the original falls through to return x, and lo equals x there, so no input distinguishes them
+src/srs/fsrs.c:18	clamp upper boundary is a true equivalent: at x == hi the mutant returns hi directly and the original returns x, and hi equals x there, so no input distinguishes them
+src/gen/targets.c:6	face normal table mutants are equivalent: the mutated component never flips any sign or zero predicate outcome over the reachable sticker domain, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:10	face row direction table mutants are equivalent: the mutated component never flips any sign or zero predicate outcome over the reachable sticker domain, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:14	face col direction table mutants are equivalent: the mutated component never flips any sign or zero predicate outcome over the reachable sticker domain, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:62	row initializer is a dead store: ct_corner_grid and ct_edge_grid unconditionally write both outputs for every reachable pos
+src/gen/targets.c:63	col initializer is a dead store: both grid helpers unconditionally write both outputs for every reachable pos
+src/gen/targets.c:64	row_off initializer is a dead store: both branches of the corner flag assign row_off before any read
+src/gen/targets.c:65	col_off initializer is a dead store: both branches of the corner flag assign col_off before any read
+src/gen/targets.c:68	corner row offset mutants are equivalent: sign preserving magnitude changes keep every sign and zero predicate outcome identical over the reachable point set, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:69	corner col offset mutants are equivalent: sign preserving magnitude changes keep every sign and zero predicate outcome identical over the reachable point set, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:82	corner layer comparison mutants are equivalent: corner point y is always exactly 1 or -1 by construction so the mutated boundary values are unreachable, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:83	corner back comparison mutants are equivalent: corner point z is always exactly 1 or -1 by construction so the mutated boundary values are unreachable, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:84	corner left comparison mutants are equivalent: corner point x is always exactly 1 or -1 by construction so the mutated boundary values are unreachable, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:92	edge ring slot comparison mutants are equivalent: the reachable edge point set never hits the mutated boundary, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:95	edge ring slot comparison mutants are equivalent: the reachable edge point set never hits the mutated boundary, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:131	negative cap clamp mutants are equivalent: the clamp only fires for negative caps and cap 0 already suppresses every write, so all negative cap values are indistinguishable
+src/gen/targets.c:132	cap reset value mutant is equivalent: the assignment only runs for negative caps where total < cap is false for both 0 and any negative value, verified by exhaustive public surface enumeration digest equality

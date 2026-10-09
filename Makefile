@@ -55,10 +55,13 @@ DEPFILES += $(SQLITE_OBJ:.o=.d)
 APP_BIN := $(BINDIR)/cubing-trainer.exe
 TEST_BIN := $(BINDIR)/ct_tests.exe
 SPIKE_BIN := $(BINDIR)/spike_link.exe
+MUTATE_BIN := $(BINDIR)/mutate.exe
 
 MEMGUARD_ARGS ?=
 
 CT_FUZZ_LOOPS ?= 10
+SCOPE ?= src/srs
+SUITE ?=
 CT_FUZZ_SUITES := fuzz_notation_random_tokens fuzz_notation_garbage fuzz_notation_random_algs
 CT_FUZZ_SUITES += fuzz_transform_inverse fuzz_transform_simplify fuzz_transform_rotate_y
 CT_FUZZ_SUITES += fuzz_cube_invariants fuzz_cube_mirror
@@ -171,8 +174,13 @@ fuzz: $(TEST_BIN)
 fuzz-%: $(TEST_BIN)
 	CT_FUZZ_LOOPS=$(CT_FUZZ_LOOPS) $(TEST_BIN) $*
 
-mutate:
-	@echo not implemented && exit 1
+$(MUTATE_BIN): tools/mutate.c | $(BINDIR)
+	$(CC) $(CROSS_COMPILE) $(CFLAGS) tools/mutate.c -o $@
+
+mutate: $(MUTATE_BIN) $(TEST_OBJ) $(LIB_TOBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ)
+	CT_MUTATE_CC="$(CC)" CT_MUTATE_CFLAGS="$(CROSS_COMPILE) $(TEST_CFLAGS) $(SRC_INCLUDES)" \
+	CT_MUTATE_LDFLAGS="$(CROSS_LINK) -g" CT_MUTATE_LDLIBS="$(WINLIBS_LDLIBS)" \
+	$(MUTATE_BIN) $(SCOPE) $(BUILDDIR) $(SUITE)
 
 e2e:
 	@echo not implemented && exit 1
