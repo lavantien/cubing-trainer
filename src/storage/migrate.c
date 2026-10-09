@@ -6,28 +6,31 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define CT_MIG_NAME_MAX 260
-#define CT_MIG_PATH_MAX 1024
-#define CT_MIG_COPY_BUF 4096
+#include "config/config.h"
 
 typedef struct {
     unsigned long version;
-    char name[CT_MIG_NAME_MAX];
+    char name[CT_DB_PATH_MAX];
 } ct_migration;
 
 static int ct_mig_parse_name(const char *name, unsigned long *version) {
     size_t i = 0;
-    while (isdigit((unsigned char)name[i])) i++;
-    if (i == 0 || name[i] != '_') return 0;
+    while (isdigit((unsigned char)name[i]))
+        i++;
+    if (i == 0 || name[i] != '_')
+        return 0;
     size_t len = strlen(name);
-    if (len < 5 || strcmp(name + len - 4, ".sql") != 0) return 0;
-    if (i >= CT_MIG_NAME_MAX) return 0;
-    char digits[CT_MIG_NAME_MAX];
+    if (len < 5 || strcmp(name + len - 4, ".sql") != 0)
+        return 0;
+    if (i >= CT_DB_PATH_MAX)
+        return 0;
+    char digits[CT_DB_PATH_MAX];
     memcpy(digits, name, i);
     digits[i] = '\0';
     char *end = NULL;
-    unsigned long v = strtoul(digits, &end, 10);
-    if (end == NULL || *end != '\0') return 0;
+    unsigned long v = strtoul(digits, &end, CT_DECIMAL_BASE);
+    if (end == NULL || *end != '\0')
+        return 0;
     *version = v;
     return 1;
 }
@@ -35,58 +38,84 @@ static int ct_mig_parse_name(const char *name, unsigned long *version) {
 static int ct_mig_cmp(const void *a, const void *b) {
     const ct_migration *ma = a;
     const ct_migration *mb = b;
-    if (ma->version != mb->version) return ma->version < mb->version ? -1 : 1;
+    if (ma->version != mb->version)
+        return ma->version < mb->version ? -1 : 1;
     return strcmp(ma->name, mb->name);
 }
 
 static char *ct_mig_read_file(const char *path) {
     FILE *f = fopen(path, "rb");
-    if (f == NULL) return NULL;
-    if (fseek(f, 0, SEEK_END) != 0) {
-        fclose(f);
+    if (f == NULL)
         return NULL;
-    }
-    long size = ftell(f);
-    if (size < 0) {
-        fclose(f);
-        return NULL;
-    }
-    rewind(f);
-    char *buf = malloc((size_t)size + 1);
+    size_t cap = CT_MIG_COPY_BUF;
+    size_t len = 0;
+    char *buf = malloc(cap + 1);
     if (buf == NULL) {
         fclose(f);
         return NULL;
     }
-    if (fread(buf, 1, (size_t)size, f) != (size_t)size) {
+    for (;;) {
+        size_t n = fread(buf + len, 1, cap - len, f);
+        if (n == 0)
+            break;
+        len += n;
+        if (len < cap)
+            break;
+        if (cap > ((size_t)-1) / 2) {
+            free(buf);
+            fclose(f);
+            return NULL;
+        }
+        cap *= 2;
+        char *grown = realloc(buf, cap + 1);
+        if (grown == NULL) {
+            free(buf);
+            fclose(f);
+            return NULL;
+        }
+        buf = grown;
+    }
+    if (ferror(f)) {
         free(buf);
         fclose(f);
         return NULL;
     }
-    buf[size] = '\0';
-    fclose(f);
+    buf[len] = '\0';
+    if (fclose(f) != 0) {
+        free(buf);
+        return NULL;
+    }
     return buf;
 }
 
 static int ct_mig_copy_file(const char *from, const char *to) {
     FILE *src = fopen(from, "rb");
-    if (src == NULL) return 0;
+    if (src == NULL)
+        return 0;
     FILE *dst = fopen(to, "wb");
     if (dst == NULL) {
         fclose(src);
         return 0;
     }
     char buf[CT_MIG_COPY_BUF];
-    size_t n;
     int ok = 1;
-    while ((n = fread(buf, 1, sizeof buf, src)) > 0) {
+    for (;;) {
+        size_t n = fread(buf, 1, sizeof buf, src);
+        if (n == 0)
+            break;
         if (fwrite(buf, 1, n, dst) != n) {
             ok = 0;
             break;
         }
+        if (n < sizeof buf)
+            break;
     }
-    if (ferror(src)) ok = 0;
-    fclose(src);
-    if (fclose(dst) != 0) ok = 0;
+    if (ferror(src))
+        ok = 0;
+    if (fclose(src) != 0)
+        ok = 0;
+    if (fclose(dst) != 0)
+        ok = 0;
     return ok;
 }
 
@@ -94,7 +123,8 @@ static int ct_mig_collect(const char *dir, ct_migration **out, size_t *count) {
     *out = NULL;
     *count = 0;
     DIR *d = opendir(dir);
-    if (d == NULL) return 1;
+    if (d == NULL)
+        return 1;
     ct_migration *migs = NULL;
     size_t n = 0;
     size_t cap = 0;
@@ -102,8 +132,10 @@ static int ct_mig_collect(const char *dir, ct_migration **out, size_t *count) {
     int rc = 0;
     while ((ent = readdir(d)) != NULL) {
         unsigned long version = 0;
-        if (!ct_mig_parse_name(ent->d_name, &version)) continue;
-        if (strlen(ent->d_name) >= CT_MIG_NAME_MAX) {
+        if (!ct_mig_parse_name(ent->d_name, &version))
+            continue;
+        size_t name_len = strlen(ent->d_name);
+        if (name_len >= CT_DB_PATH_MAX) {
             rc = 1;
             break;
         }
@@ -117,7 +149,7 @@ static int ct_mig_collect(const char *dir, ct_migration **out, size_t *count) {
             migs = nm;
             cap = ncap;
         }
-        strcpy(migs[n].name, ent->d_name);
+        memcpy(migs[n].name, ent->d_name, name_len + 1);
         migs[n].version = version;
         n++;
     }
@@ -126,7 +158,8 @@ static int ct_mig_collect(const char *dir, ct_migration **out, size_t *count) {
         free(migs);
         return 1;
     }
-    if (n > 1) qsort(migs, n, sizeof *migs, ct_mig_cmp);
+    if (n > 1)
+        qsort(migs, n, sizeof *migs, ct_mig_cmp);
     *out = migs;
     *count = n;
     return 0;
@@ -137,15 +170,19 @@ static int ct_mig_backup(sqlite3 *db, const char *dbpath) {
     sqlite3_exec(db, "PRAGMA wal_checkpoint(TRUNCATE)", NULL, NULL, &err);
     sqlite3_free(err);
     char bak[CT_MIG_PATH_MAX];
-    if (snprintf(bak, sizeof bak, "%s.bak", dbpath) >= (int)sizeof bak) return 1;
+    int bak_len = snprintf(bak, sizeof bak, "%s.bak", dbpath);
+    if (bak_len < 0 || (size_t)bak_len >= sizeof bak)
+        return 1;
     return ct_mig_copy_file(dbpath, bak) ? 0 : 1;
 }
 
 int ct_db_migrate(sqlite3 *db, const char *migrations_dir) {
-    if (db == NULL || migrations_dir == NULL) return 1;
+    if (db == NULL || migrations_dir == NULL)
+        return 1;
     ct_migration *migs = NULL;
     size_t count = 0;
-    if (ct_mig_collect(migrations_dir, &migs, &count) != 0) return 1;
+    if (ct_mig_collect(migrations_dir, &migs, &count) != 0)
+        return 1;
     int current = ct_db_version(db);
     if (current < 0) {
         free(migs);
@@ -166,9 +203,11 @@ int ct_db_migrate(sqlite3 *db, const char *migrations_dir) {
         }
     }
     for (size_t i = 0; i < count && rc == 0; i++) {
-        if ((long)migs[i].version <= current) continue;
+        if ((long)migs[i].version <= current)
+            continue;
         char path[CT_MIG_PATH_MAX];
-        if (snprintf(path, sizeof path, "%s/%s", migrations_dir, migs[i].name) >= (int)sizeof path) {
+        int path_len = snprintf(path, sizeof path, "%s/%s", migrations_dir, migs[i].name);
+        if (path_len < 0 || (size_t)path_len >= sizeof path) {
             rc = 1;
             break;
         }
@@ -177,13 +216,22 @@ int ct_db_migrate(sqlite3 *db, const char *migrations_dir) {
             rc = 1;
             break;
         }
-        char pragma[64];
-        snprintf(pragma, sizeof pragma, "PRAGMA user_version = %lu", migs[i].version);
+        char pragma[CT_MIG_PRAGMA_MAX];
+        int pragma_len =
+            snprintf(pragma, sizeof pragma, "PRAGMA user_version = %lu", migs[i].version);
+        if (pragma_len < 0 || (size_t)pragma_len >= sizeof pragma) {
+            free(sql);
+            rc = 1;
+            break;
+        }
         char *err = NULL;
         int step = sqlite3_exec(db, "BEGIN", NULL, NULL, &err);
-        if (step == SQLITE_OK) step = sqlite3_exec(db, sql, NULL, NULL, &err);
-        if (step == SQLITE_OK) step = sqlite3_exec(db, pragma, NULL, NULL, &err);
-        if (step == SQLITE_OK) step = sqlite3_exec(db, "COMMIT", NULL, NULL, &err);
+        if (step == SQLITE_OK)
+            step = sqlite3_exec(db, sql, NULL, NULL, &err);
+        if (step == SQLITE_OK)
+            step = sqlite3_exec(db, pragma, NULL, NULL, &err);
+        if (step == SQLITE_OK)
+            step = sqlite3_exec(db, "COMMIT", NULL, NULL, &err);
         if (step != SQLITE_OK) {
             sqlite3_free(err);
             err = NULL;

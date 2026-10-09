@@ -2,10 +2,11 @@
 
 #include <string.h>
 
-#define CT_DB_BUSY_TIMEOUT_MS 5000
+#include "config/config.h"
 
 int ct_db_open(sqlite3 **db, const char *path) {
-    if (db == NULL || path == NULL) return SQLITE_MISUSE;
+    if (db == NULL || path == NULL)
+        return SQLITE_MISUSE;
     *db = NULL;
     int rc = sqlite3_open_v2(path, db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, NULL);
     if (rc != SQLITE_OK) {
@@ -33,19 +34,22 @@ int ct_db_open(sqlite3 **db, const char *path) {
 }
 
 void ct_db_close(sqlite3 *db) {
-    if (db == NULL) return;
+    if (db == NULL)
+        return;
     sqlite3_close(db);
 }
 
 int ct_db_version(sqlite3 *db) {
-    if (db == NULL) return -1;
+    if (db == NULL)
+        return -1;
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(db, "PRAGMA user_version", -1, &st, NULL) != SQLITE_OK) {
         sqlite3_finalize(st);
         return -1;
     }
     int v = -1;
-    if (sqlite3_step(st) == SQLITE_ROW) v = sqlite3_column_int(st, 0);
+    if (sqlite3_step(st) == SQLITE_ROW)
+        v = sqlite3_column_int(st, 0);
     sqlite3_finalize(st);
     return v;
 }
