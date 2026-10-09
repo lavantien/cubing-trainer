@@ -79,7 +79,7 @@ CT_FUZZ_SUITES += fuzz_srs_walk fuzz_srs_elapsed fuzz_srs_grade_space
 CT_FUZZ_SUITES += fuzz_db_card_strings fuzz_db_review_rows fuzz_db_settings_keys
 CT_FUZZ_SUITES += fuzz_config_keys fuzz_config_moves
 
-.PHONY: all build vendor test diagrams memguard memguard-selftest run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual db-verify
+.PHONY: all build vendor test diagrams memguard memguard-selftest run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual visual-selftest db-verify
 
 all: build
 
@@ -214,7 +214,10 @@ e2e: build
 		$(APP_BIN) --headless --script "$$case" || exit 1; \
 	done
 
-visual: $(RENDER_BIN)
+visual-selftest:
+	python -I tools/visual_selftest.py
+
+visual: visual-selftest $(RENDER_BIN)
 	rm -rf $(VISUAL_TMP) && mkdir -p $(VISUAL_TMP)
 	$(RENDER_BIN) solved 3 $(VISUAL_TMP)/golden_solved_3.png
 	$(RENDER_BIN) solved 7 $(VISUAL_TMP)/golden_solved_7.png
