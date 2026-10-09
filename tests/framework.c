@@ -34,7 +34,8 @@ static uint64_t ct_fail;
 
 void ct_suite_register(const char *name, void (*fn)(void)) {
     if (ct_suite_count == CT_MAX_SUITES) {
-        fprintf(stderr, "ct_suite_register: capacity %d exceeded, dropping %s\n", CT_MAX_SUITES, name);
+        fprintf(stderr, "ct_suite_register: capacity %d exceeded, dropping %s\n", CT_MAX_SUITES,
+                name);
         return;
     }
     ct_suites[ct_suite_count].name = name;
@@ -59,19 +60,19 @@ void ct_fail_plain(const char *file, int line, const char *expr) {
     ct_abort();
 }
 
-void ct_fail_eq(const char *file, int line, const char *ea, const char *eb,
-                unsigned long long a, unsigned long long b) {
+void ct_fail_eq(const char *file, int line, const char *ea, const char *eb, unsigned long long a,
+                unsigned long long b) {
     ct_fail++;
-    fprintf(stderr, "%s: %s:%d: assert failed: %s == %s: %llu vs %llu\n",
-            ct_active, file, line, ea, eb, a, b);
+    fprintf(stderr, "%s: %s:%d: assert failed: %s == %s: %llu vs %llu\n", ct_active, file, line, ea,
+            eb, a, b);
     ct_abort();
 }
 
-void ct_fail_dbl(const char *file, int line, const char *ea, const char *eb,
-                 double a, double b, double eps) {
+void ct_fail_dbl(const char *file, int line, const char *ea, const char *eb, double a, double b,
+                 double eps) {
     ct_fail++;
-    fprintf(stderr, "%s: %s:%d: assert failed: %s ~= %s (eps %.17g): %.17g vs %.17g\n",
-            ct_active, file, line, ea, eb, eps, a, b);
+    fprintf(stderr, "%s: %s:%d: assert failed: %s ~= %s (eps %.17g): %.17g vs %.17g\n", ct_active,
+            file, line, ea, eb, eps, a, b);
     ct_abort();
 }
 
@@ -79,11 +80,11 @@ static const char *ct_str_or_null(const char *s) {
     return s ? s : "(null)";
 }
 
-void ct_fail_str(const char *file, int line, const char *ea, const char *eb,
-                 const char *a, const char *b) {
+void ct_fail_str(const char *file, int line, const char *ea, const char *eb, const char *a,
+                 const char *b) {
     ct_fail++;
-    fprintf(stderr, "%s: %s:%d: assert failed: %s == %s: \"%s\" vs \"%s\"\n",
-            ct_active, file, line, ea, eb, ct_str_or_null(a), ct_str_or_null(b));
+    fprintf(stderr, "%s: %s:%d: assert failed: %s == %s: \"%s\" vs \"%s\"\n", ct_active, file, line,
+            ea, eb, ct_str_or_null(a), ct_str_or_null(b));
     ct_abort();
 }
 
@@ -124,8 +125,8 @@ static FILE *ct_open_results(void) {
     return fopen(CT_RESULTS_PATH, "w");
 }
 
-static void ct_write_results(const ct_suite_result *results, size_t count,
-                             uint64_t total_pass, uint64_t total_fail, uint64_t total_ms) {
+static void ct_write_results(const ct_suite_result *results, size_t count, uint64_t total_pass,
+                             uint64_t total_fail, uint64_t total_ms) {
     FILE *f = ct_open_results();
     if (f == NULL) {
         fprintf(stderr, "ct: cannot write %s\n", CT_RESULTS_PATH);
@@ -133,11 +134,9 @@ static void ct_write_results(const ct_suite_result *results, size_t count,
     }
     fprintf(f, "{\"suites\":[");
     for (size_t i = 0; i < count; i++) {
-        fprintf(f, "%s{\"name\":\"%s\",\"pass\":%llu,\"fail\":%llu,\"ms\":%llu}",
-                i ? "," : "", results[i].name,
-                (unsigned long long)results[i].pass,
-                (unsigned long long)results[i].fail,
-                (unsigned long long)results[i].ms);
+        fprintf(f, "%s{\"name\":\"%s\",\"pass\":%llu,\"fail\":%llu,\"ms\":%llu}", i ? "," : "",
+                results[i].name, (unsigned long long)results[i].pass,
+                (unsigned long long)results[i].fail, (unsigned long long)results[i].ms);
     }
     fprintf(f, "],\"total_pass\":%llu,\"total_fail\":%llu,\"total_ms\":%llu}\n",
             (unsigned long long)total_pass, (unsigned long long)total_fail,
@@ -165,10 +164,8 @@ int ct_run_all(const char *filter) {
         }
         ct_in_suite = false;
         uint64_t ms = ct_clock_ms(t0, clock());
-        printf("%s %s: pass=%llu fail=%llu %llums\n",
-               ct_fail ? "FAIL" : "PASS", ct_suites[i].name,
-               (unsigned long long)ct_pass, (unsigned long long)ct_fail,
-               (unsigned long long)ms);
+        printf("%s %s: pass=%llu fail=%llu %llums\n", ct_fail ? "FAIL" : "PASS", ct_suites[i].name,
+               (unsigned long long)ct_pass, (unsigned long long)ct_fail, (unsigned long long)ms);
         results[nrun].name = ct_suites[i].name;
         results[nrun].pass = ct_pass;
         results[nrun].fail = ct_fail;
@@ -178,9 +175,8 @@ int ct_run_all(const char *filter) {
         total_fail += ct_fail;
         total_ms += ms;
     }
-    printf("total: pass=%llu fail=%llu %llums\n",
-           (unsigned long long)total_pass, (unsigned long long)total_fail,
-           (unsigned long long)total_ms);
+    printf("total: pass=%llu fail=%llu %llums\n", (unsigned long long)total_pass,
+           (unsigned long long)total_fail, (unsigned long long)total_ms);
     if (filter != NULL && filter[0] != '\0' && nrun == 0) {
         fprintf(stderr, "ct: no suite matches filter %s\n", filter);
         return 1;

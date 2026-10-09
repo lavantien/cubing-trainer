@@ -38,8 +38,7 @@ static void assert_speffz_map(const ct_letter_map *m) {
     }
 }
 
-CT_SUITE(settings_repo)
-{
+CT_SUITE(settings_repo) {
     sqlite3 *db = open_migrated();
     char buf[64];
     CT_ASSERT_EQ(ct_repo_settings_get(db, "missing", buf, sizeof buf), 1);
@@ -69,8 +68,7 @@ CT_SUITE(settings_repo)
     ct_db_close(db);
 }
 
-CT_SUITE(letter_scheme_lifecycle)
-{
+CT_SUITE(letter_scheme_lifecycle) {
     sqlite3 *db = open_migrated();
     ct_letter_map m;
     CT_ASSERT_EQ(ct_letter_map_load(db, 1, &m), 0);
@@ -98,8 +96,7 @@ CT_SUITE(letter_scheme_lifecycle)
     ct_db_close(db);
 }
 
-CT_SUITE(letter_map_validation)
-{
+CT_SUITE(letter_map_validation) {
     sqlite3 *db = open_migrated();
     int id = 0;
     CT_ASSERT_EQ(ct_letter_scheme_create(db, "s", &id), 0);
@@ -132,8 +129,7 @@ CT_SUITE(letter_map_validation)
     ct_db_close(db);
 }
 
-CT_SUITE(speffz_seed)
-{
+CT_SUITE(speffz_seed) {
     sqlite3 *db = open_migrated();
     ct_letter_map m;
     CT_ASSERT_EQ(ct_letter_seed_speffz(db), 0);
@@ -156,7 +152,8 @@ CT_SUITE(speffz_seed)
     CT_ASSERT_EQ(ct_letter_map_load(db, id, &m), 48);
     CT_ASSERT_EQ(m.corner[5], 'Q');
     for (int i = 0; i < 24; i++) {
-        if (i == 5) continue;
+        if (i == 5)
+            continue;
         CT_ASSERT_EQ(m.corner[i], 'A' + i);
         CT_ASSERT_EQ(m.edge[i], 'A' + i);
     }
@@ -164,8 +161,7 @@ CT_SUITE(speffz_seed)
     ct_db_close(db);
 }
 
-CT_SUITE(speffz_seed_default)
-{
+CT_SUITE(speffz_seed_default) {
     sqlite3 *db = open_migrated();
     int user = 0;
     CT_ASSERT_EQ(ct_letter_scheme_create(db, "user", &user), 0);
@@ -187,8 +183,7 @@ CT_SUITE(speffz_seed_default)
     ct_db_close(db2);
 }
 
-CT_SUITE(speffz_sql_agreement)
-{
+CT_SUITE(speffz_sql_agreement) {
     sqlite3 *c = open_migrated();
     CT_ASSERT_EQ(ct_letter_seed_speffz(c), 0);
     int cid = ct_letter_scheme_default_id(c);

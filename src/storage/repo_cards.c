@@ -3,30 +3,32 @@
 #include <time.h>
 
 static const char CT_SQL_CARD_INSERT[] =
-    "INSERT INTO flashcard(deck, case_key, direction, front_json, alg_3x3, alg_big, alg_oh, notes, created_at, updated_at)"
+    "INSERT INTO flashcard(deck, case_key, direction, front_json, alg_3x3, alg_big, alg_oh, notes, "
+    "created_at, updated_at)"
     " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-static const char CT_SQL_CARD_UPDATE[] =
-    "UPDATE flashcard SET deck = ?, case_key = ?, direction = ?, front_json = ?, alg_3x3 = ?, alg_big = ?, alg_oh = ?,"
-    " notes = ?, updated_at = ? WHERE id = ?";
-static const char CT_SQL_CARD_GET[] =
-    "SELECT id, deck, case_key, direction, front_json, alg_3x3, alg_big, alg_oh, notes, created_at, updated_at"
-    " FROM flashcard WHERE id = ?";
+static const char CT_SQL_CARD_UPDATE[] = "UPDATE flashcard SET deck = ?, case_key = ?, direction = "
+                                         "?, front_json = ?, alg_3x3 = ?, alg_big = ?, alg_oh = ?,"
+                                         " notes = ?, updated_at = ? WHERE id = ?";
+static const char CT_SQL_CARD_GET[] = "SELECT id, deck, case_key, direction, front_json, alg_3x3, "
+                                      "alg_big, alg_oh, notes, created_at, updated_at"
+                                      " FROM flashcard WHERE id = ?";
 static const char CT_SQL_CARD_GET_BY_KEY[] =
-    "SELECT id, deck, case_key, direction, front_json, alg_3x3, alg_big, alg_oh, notes, created_at, updated_at"
+    "SELECT id, deck, case_key, direction, front_json, alg_3x3, alg_big, alg_oh, notes, "
+    "created_at, updated_at"
     " FROM flashcard WHERE deck = ? AND case_key = ? AND direction = ?";
-static const char CT_SQL_CARD_DELETE[] =
-    "DELETE FROM flashcard WHERE id = ?";
-static const char CT_SQL_CARD_LIST[] =
-    "SELECT id, deck, case_key, direction, front_json, alg_3x3, alg_big, alg_oh, notes, created_at, updated_at"
-    " FROM flashcard WHERE deck = ? ORDER BY id";
-static const char CT_SQL_SRS_GET[] =
-    "SELECT stability, difficulty, due, last_review, reps, lapses, state FROM srs_state WHERE card_id = ?";
+static const char CT_SQL_CARD_DELETE[] = "DELETE FROM flashcard WHERE id = ?";
+static const char CT_SQL_CARD_LIST[] = "SELECT id, deck, case_key, direction, front_json, alg_3x3, "
+                                       "alg_big, alg_oh, notes, created_at, updated_at"
+                                       " FROM flashcard WHERE deck = ? ORDER BY id";
+static const char CT_SQL_SRS_GET[] = "SELECT stability, difficulty, due, last_review, reps, "
+                                     "lapses, state FROM srs_state WHERE card_id = ?";
 static const char CT_SQL_SRS_PUT[] =
     "INSERT INTO srs_state(card_id, stability, difficulty, due, last_review, reps, lapses, state)"
     " VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
     " ON CONFLICT(card_id) DO UPDATE SET"
     " stability = excluded.stability, difficulty = excluded.difficulty, due = excluded.due,"
-    " last_review = excluded.last_review, reps = excluded.reps, lapses = excluded.lapses, state = excluded.state";
+    " last_review = excluded.last_review, reps = excluded.reps, lapses = excluded.lapses, state = "
+    "excluded.state";
 
 typedef struct ct_bind {
     sqlite3_stmt *st;
@@ -83,24 +85,30 @@ static void ct_read_text(ct_read *r, char *dst, size_t cap) {
         return;
     }
     size_t n = strlen((const char *)s);
-    if (n >= cap) n = cap - 1;
+    if (n >= cap)
+        n = cap - 1;
     memcpy(dst, s, n);
     dst[n] = '\0';
 }
 
 void ct_now_utc_iso(char *out, unsigned cap) {
-    if (out == NULL) return;
+    if (out == NULL)
+        return;
     out[0] = '\0';
-    if (cap < sizeof "0000-00-00T00:00:00Z") return;
+    if (cap < sizeof "0000-00-00T00:00:00Z")
+        return;
     time_t now = time(NULL);
     const struct tm *utc = gmtime(&now);
-    if (utc == NULL) return;
+    if (utc == NULL)
+        return;
     strftime(out, (size_t)cap, "%Y-%m-%dT%H:%M:%SZ", utc);
 }
 
 static int ct_card_valid(const ct_card *c) {
-    if (c == NULL) return CT_REPO_ERR_ARG;
-    if (c->deck[0] == '\0' || c->case_key[0] == '\0') return CT_REPO_ERR_ARG;
+    if (c == NULL)
+        return CT_REPO_ERR_ARG;
+    if (c->deck[0] == '\0' || c->case_key[0] == '\0')
+        return CT_REPO_ERR_ARG;
     return CT_REPO_OK;
 }
 
@@ -121,12 +129,15 @@ static void ct_card_from_row(sqlite3_stmt *st, ct_card *c) {
 }
 
 int ct_repo_card_insert(sqlite3 *db, ct_card *c) {
-    if (db == NULL) return CT_REPO_ERR_ARG;
+    if (db == NULL)
+        return CT_REPO_ERR_ARG;
     int rc = ct_card_valid(c);
-    if (rc != CT_REPO_OK) return rc;
+    if (rc != CT_REPO_OK)
+        return rc;
     char now[CT_CARD_STAMP_MAX];
     ct_now_utc_iso(now, (unsigned)sizeof now);
-    if (now[0] == '\0') return CT_REPO_ERR_DB;
+    if (now[0] == '\0')
+        return CT_REPO_ERR_DB;
     memcpy(c->created_at, now, sizeof now);
     memcpy(c->updated_at, now, sizeof now);
     sqlite3_stmt *st = NULL;
@@ -153,18 +164,23 @@ int ct_repo_card_insert(sqlite3 *db, ct_card *c) {
         c->id = (long)sqlite3_last_insert_rowid(db);
         return CT_REPO_OK;
     }
-    if (ext == SQLITE_CONSTRAINT_UNIQUE) return CT_REPO_CONFLICT;
+    if (ext == SQLITE_CONSTRAINT_UNIQUE)
+        return CT_REPO_CONFLICT;
     return CT_REPO_ERR_DB;
 }
 
 int ct_repo_card_update(sqlite3 *db, const ct_card *c) {
-    if (db == NULL) return CT_REPO_ERR_ARG;
+    if (db == NULL)
+        return CT_REPO_ERR_ARG;
     int rc = ct_card_valid(c);
-    if (rc != CT_REPO_OK) return rc;
-    if (c->id <= 0) return CT_REPO_ERR_ARG;
+    if (rc != CT_REPO_OK)
+        return rc;
+    if (c->id <= 0)
+        return CT_REPO_ERR_ARG;
     char now[CT_CARD_STAMP_MAX];
     ct_now_utc_iso(now, (unsigned)sizeof now);
-    if (now[0] == '\0') return CT_REPO_ERR_DB;
+    if (now[0] == '\0')
+        return CT_REPO_ERR_DB;
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(db, CT_SQL_CARD_UPDATE, -1, &st, NULL) != SQLITE_OK) {
         sqlite3_finalize(st);
@@ -189,12 +205,14 @@ int ct_repo_card_update(sqlite3 *db, const ct_card *c) {
     if (step == SQLITE_DONE) {
         return changed == 0 ? CT_REPO_MISSING : CT_REPO_OK;
     }
-    if (ext == SQLITE_CONSTRAINT_UNIQUE) return CT_REPO_CONFLICT;
+    if (ext == SQLITE_CONSTRAINT_UNIQUE)
+        return CT_REPO_CONFLICT;
     return CT_REPO_ERR_DB;
 }
 
 int ct_repo_card_get(sqlite3 *db, long id, ct_card *out) {
-    if (db == NULL || out == NULL || id <= 0) return CT_REPO_ERR_ARG;
+    if (db == NULL || out == NULL || id <= 0)
+        return CT_REPO_ERR_ARG;
     memset(out, 0, sizeof *out);
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(db, CT_SQL_CARD_GET, -1, &st, NULL) != SQLITE_OK) {
@@ -212,10 +230,14 @@ int ct_repo_card_get(sqlite3 *db, long id, ct_card *out) {
     return step == SQLITE_DONE ? CT_REPO_MISSING : CT_REPO_ERR_DB;
 }
 
-int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key, int direction, ct_card *out) {
-    if (db == NULL || out == NULL) return CT_REPO_ERR_ARG;
-    if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX)) return CT_REPO_ERR_ARG;
-    if (!ct_repo_text_ok(case_key, CT_CARD_CASE_KEY_MAX)) return CT_REPO_ERR_ARG;
+int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key, int direction,
+                            ct_card *out) {
+    if (db == NULL || out == NULL)
+        return CT_REPO_ERR_ARG;
+    if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX))
+        return CT_REPO_ERR_ARG;
+    if (!ct_repo_text_ok(case_key, CT_CARD_CASE_KEY_MAX))
+        return CT_REPO_ERR_ARG;
     memset(out, 0, sizeof *out);
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(db, CT_SQL_CARD_GET_BY_KEY, -1, &st, NULL) != SQLITE_OK) {
@@ -238,7 +260,8 @@ int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key,
 }
 
 int ct_repo_card_delete(sqlite3 *db, long id) {
-    if (db == NULL || id <= 0) return CT_REPO_ERR_ARG;
+    if (db == NULL || id <= 0)
+        return CT_REPO_ERR_ARG;
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(db, CT_SQL_CARD_DELETE, -1, &st, NULL) != SQLITE_OK) {
         sqlite3_finalize(st);
@@ -255,10 +278,14 @@ int ct_repo_card_delete(sqlite3 *db, long id) {
 }
 
 int ct_repo_card_list(sqlite3 *db, const char *deck, ct_card *out, int cap) {
-    if (db == NULL) return CT_REPO_ERR_ARG;
-    if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX)) return CT_REPO_ERR_ARG;
-    if (cap < 0 || (cap > 0 && out == NULL)) return CT_REPO_ERR_ARG;
-    if (cap == 0) return CT_REPO_OK;
+    if (db == NULL)
+        return CT_REPO_ERR_ARG;
+    if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX))
+        return CT_REPO_ERR_ARG;
+    if (cap < 0 || (cap > 0 && out == NULL))
+        return CT_REPO_ERR_ARG;
+    if (cap == 0)
+        return CT_REPO_OK;
     memset(out, 0, (size_t)cap * sizeof *out);
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(db, CT_SQL_CARD_LIST, -1, &st, NULL) != SQLITE_OK) {
@@ -273,12 +300,14 @@ int ct_repo_card_list(sqlite3 *db, const char *deck, ct_card *out, int cap) {
         n++;
     }
     sqlite3_finalize(st);
-    if (step != SQLITE_ROW && step != SQLITE_DONE) return CT_REPO_ERR_DB;
+    if (step != SQLITE_ROW && step != SQLITE_DONE)
+        return CT_REPO_ERR_DB;
     return n;
 }
 
 int ct_repo_srs_get(sqlite3 *db, long card_id, ct_srs_row *out) {
-    if (db == NULL || out == NULL || card_id <= 0) return CT_REPO_ERR_ARG;
+    if (db == NULL || out == NULL || card_id <= 0)
+        return CT_REPO_ERR_ARG;
     memset(out, 0, sizeof *out);
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(db, CT_SQL_SRS_GET, -1, &st, NULL) != SQLITE_OK) {
@@ -305,8 +334,10 @@ int ct_repo_srs_get(sqlite3 *db, long card_id, ct_srs_row *out) {
 }
 
 int ct_repo_srs_put(sqlite3 *db, long card_id, const ct_srs_row *row) {
-    if (db == NULL || row == NULL || card_id <= 0) return CT_REPO_ERR_ARG;
-    if (!ct_repo_text_ok(row->due, CT_CARD_STAMP_MAX)) return CT_REPO_ERR_ARG;
+    if (db == NULL || row == NULL || card_id <= 0)
+        return CT_REPO_ERR_ARG;
+    if (!ct_repo_text_ok(row->due, CT_CARD_STAMP_MAX))
+        return CT_REPO_ERR_ARG;
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(db, CT_SQL_SRS_PUT, -1, &st, NULL) != SQLITE_OK) {
         sqlite3_finalize(st);
@@ -325,8 +356,11 @@ int ct_repo_srs_put(sqlite3 *db, long card_id, const ct_srs_row *row) {
     int step = sqlite3_step(st);
     int ext = step == SQLITE_DONE ? SQLITE_OK : sqlite3_extended_errcode(db);
     sqlite3_finalize(st);
-    if (step == SQLITE_DONE) return CT_REPO_OK;
-    if (ext == SQLITE_CONSTRAINT_UNIQUE) return CT_REPO_CONFLICT;
-    if (ext == SQLITE_CONSTRAINT_FOREIGNKEY) return CT_REPO_MISSING;
+    if (step == SQLITE_DONE)
+        return CT_REPO_OK;
+    if (ext == SQLITE_CONSTRAINT_UNIQUE)
+        return CT_REPO_CONFLICT;
+    if (ext == SQLITE_CONSTRAINT_FOREIGNKEY)
+        return CT_REPO_MISSING;
     return CT_REPO_ERR_DB;
 }

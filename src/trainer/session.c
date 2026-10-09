@@ -68,31 +68,38 @@ void ct_session_day_to_date(long day, long *y, int *m, int *d) {
 
 static int ct_iso_digit(const char *s, int at) {
     char c = s[at];
-    if (c < '0' || c > '9') return -1;
+    if (c < '0' || c > '9')
+        return -1;
     return c - '0';
 }
 
 static int ct_iso_scan(const char *iso, long *y, int *m, int *d) {
-    if (iso == NULL) return CT_SESSION_ERR_ARG;
+    if (iso == NULL)
+        return CT_SESSION_ERR_ARG;
     long yy = 0;
     for (int i = 0; i < ct_iso_year_digits; i++) {
         int v = ct_iso_digit(iso, i);
-        if (v < 0) return CT_SESSION_ERR_ARG;
+        if (v < 0)
+            return CT_SESSION_ERR_ARG;
         yy = yy * CT_DECIMAL_BASE + v;
     }
-    if (iso[ct_iso_year_digits] != '-') return CT_SESSION_ERR_ARG;
-    if (iso[ct_iso_day_at - 1] != '-') return CT_SESSION_ERR_ARG;
+    if (iso[ct_iso_year_digits] != '-')
+        return CT_SESSION_ERR_ARG;
+    if (iso[ct_iso_day_at - 1] != '-')
+        return CT_SESSION_ERR_ARG;
     int m1 = ct_iso_digit(iso, ct_iso_month_at);
     int m2 = ct_iso_digit(iso, ct_iso_month_at + 1);
     int d1 = ct_iso_digit(iso, ct_iso_day_at);
     int d2 = ct_iso_digit(iso, ct_iso_day_at + 1);
-    if (m1 < 0 || m2 < 0 || d1 < 0 || d2 < 0) return CT_SESSION_ERR_ARG;
+    if (m1 < 0 || m2 < 0 || d1 < 0 || d2 < 0)
+        return CT_SESSION_ERR_ARG;
     int mm = m1 * CT_DECIMAL_BASE + m2;
     int dd = d1 * CT_DECIMAL_BASE + d2;
     long ry;
     int rm, rd;
     ct_session_day_to_date(ct_session_date_to_day(yy, mm, dd), &ry, &rm, &rd);
-    if (ry != yy || rm != mm || rd != dd) return CT_SESSION_ERR_ARG;
+    if (ry != yy || rm != mm || rd != dd)
+        return CT_SESSION_ERR_ARG;
     *y = yy;
     *m = mm;
     *d = dd;
@@ -103,17 +110,21 @@ int ct_session_iso_add_days(const char *iso, long days, char *out, unsigned cap)
     long y;
     int m, d;
     int rc = ct_iso_scan(iso, &y, &m, &d);
-    if (rc != CT_SESSION_OK) return rc;
-    if (out == NULL) return CT_SESSION_ERR_ARG;
+    if (rc != CT_SESSION_OK)
+        return rc;
+    if (out == NULL)
+        return CT_SESSION_ERR_ARG;
     size_t len = strlen(iso);
     size_t suffix = len < (size_t)ct_iso_date_len ? 0 : len - (size_t)ct_iso_date_len;
     long ry;
     int rm, rd;
     ct_session_day_to_date(ct_session_date_to_day(y, m, d) + days, &ry, &rm, &rd);
     int n = snprintf(out, cap, "%04ld-%02d-%02d", ry, rm, rd);
-    if (n < 0) return CT_SESSION_ERR_DB;
+    if (n < 0)
+        return CT_SESSION_ERR_DB;
     size_t date_len = (size_t)n;
-    if (date_len + suffix + 1 > cap) return CT_SESSION_ERR_ARG;
+    if (date_len + suffix + 1 > cap)
+        return CT_SESSION_ERR_ARG;
     memcpy(out + date_len, iso + ct_iso_date_len, suffix);
     out[date_len + suffix] = '\0';
     return CT_SESSION_OK;
@@ -123,10 +134,12 @@ static int ct_queue_load(ct_session *s, const char *deck, const char *now_iso, i
     unsigned cap = limit > 0 ? (unsigned)limit : (unsigned)ct_queue_first_cap;
     for (;;) {
         long *grown = realloc(s->queue, (size_t)cap * sizeof *grown);
-        if (grown == NULL) return CT_SESSION_ERR_DB;
+        if (grown == NULL)
+            return CT_SESSION_ERR_DB;
         s->queue = grown;
         int n = ct_repo_due_cards(s->db, deck, now_iso, s->queue, (int)cap);
-        if (n < 0) return CT_SESSION_ERR_DB;
+        if (n < 0)
+            return CT_SESSION_ERR_DB;
         if (n < (int)cap || limit > 0) {
             s->queue_count = n;
             return CT_SESSION_OK;
@@ -137,12 +150,16 @@ static int ct_queue_load(ct_session *s, const char *deck, const char *now_iso, i
 
 int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs *fsrs, const char *deck,
                      const char *now_iso, long today_day, int limit) {
-    if (s == NULL || db == NULL || fsrs == NULL) return CT_SESSION_ERR_ARG;
-    if (!ct_repo_text_ok(deck, CT_SESSION_DECK_MAX)) return CT_SESSION_ERR_ARG;
-    if (!ct_repo_text_ok(now_iso, CT_SESSION_STAMP_MAX)) return CT_SESSION_ERR_ARG;
+    if (s == NULL || db == NULL || fsrs == NULL)
+        return CT_SESSION_ERR_ARG;
+    if (!ct_repo_text_ok(deck, CT_SESSION_DECK_MAX))
+        return CT_SESSION_ERR_ARG;
+    if (!ct_repo_text_ok(now_iso, CT_SESSION_STAMP_MAX))
+        return CT_SESSION_ERR_ARG;
     long y;
     int m, d;
-    if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK) return CT_SESSION_ERR_ARG;
+    if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+        return CT_SESSION_ERR_ARG;
     free(s->queue);
     s->queue = NULL;
     s->queue_count = 0;
@@ -169,11 +186,14 @@ int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs *fsrs, const char
 }
 
 int ct_session_current(ct_session *s, ct_card *out) {
-    if (s == NULL || out == NULL || s->db == NULL) return CT_SESSION_ERR_ARG;
-    if (s->queue == NULL || s->queue_pos >= s->queue_count) return CT_SESSION_ERR_STATE;
+    if (s == NULL || out == NULL || s->db == NULL)
+        return CT_SESSION_ERR_ARG;
+    if (s->queue == NULL || s->queue_pos >= s->queue_count)
+        return CT_SESSION_ERR_STATE;
     ct_card card;
     int rc = ct_repo_card_get(s->db, s->queue[s->queue_pos], &card);
-    if (rc != CT_REPO_OK) return rc == CT_REPO_MISSING ? CT_SESSION_ERR_STATE : CT_SESSION_ERR_DB;
+    if (rc != CT_REPO_OK)
+        return rc == CT_REPO_MISSING ? CT_SESSION_ERR_STATE : CT_SESSION_ERR_DB;
     *out = card;
     s->current_card = card.id;
     s->card_open = true;
@@ -185,20 +205,26 @@ bool ct_session_has_next(const ct_session *s) {
 }
 
 int ct_session_grade(ct_session *s, ct_grade g, const char *now_iso) {
-    if (s == NULL || s->db == NULL || s->fsrs == NULL) return CT_SESSION_ERR_ARG;
-    if (g < CT_AGAIN || g > CT_EASY) return CT_SESSION_ERR_ARG;
+    if (s == NULL || s->db == NULL || s->fsrs == NULL)
+        return CT_SESSION_ERR_ARG;
+    if (g < CT_AGAIN || g > CT_EASY)
+        return CT_SESSION_ERR_ARG;
     long vy;
     int vm, vd;
-    if (ct_iso_scan(now_iso, &vy, &vm, &vd) != CT_SESSION_OK) return CT_SESSION_ERR_ARG;
-    if (s->queue == NULL || s->queue_pos >= s->queue_count) return CT_SESSION_ERR_STATE;
+    if (ct_iso_scan(now_iso, &vy, &vm, &vd) != CT_SESSION_OK)
+        return CT_SESSION_ERR_ARG;
+    if (s->queue == NULL || s->queue_pos >= s->queue_count)
+        return CT_SESSION_ERR_STATE;
     long id = s->queue[s->queue_pos];
     ct_card card;
     int rc = ct_repo_card_get(s->db, id, &card);
-    if (rc != CT_REPO_OK) return rc == CT_REPO_MISSING ? CT_SESSION_ERR_STATE : CT_SESSION_ERR_DB;
+    if (rc != CT_REPO_OK)
+        return rc == CT_REPO_MISSING ? CT_SESSION_ERR_STATE : CT_SESSION_ERR_DB;
 
     ct_srs_row row;
     rc = ct_repo_srs_get(s->db, id, &row);
-    if (rc != CT_REPO_OK && rc != CT_REPO_MISSING) return CT_SESSION_ERR_DB;
+    if (rc != CT_REPO_OK && rc != CT_REPO_MISSING)
+        return CT_SESSION_ERR_DB;
 
     double pre_s = 0.0;
     double pre_d = 0.0;
@@ -224,7 +250,8 @@ int ct_session_grade(ct_session *s, ct_grade g, const char *now_iso) {
     }
     ct_fsrs_card out = ct_fsrs_review(s->fsrs, &fc, g, elapsed, s->today_day);
     long ivl = out.due_day - s->today_day;
-    if (ivl < 0) ivl = 0;
+    if (ivl < 0)
+        ivl = 0;
 
     ct_srs_row next;
     next.stability = out.stability;
@@ -268,10 +295,12 @@ int ct_session_grade(ct_session *s, ct_grade g, const char *now_iso) {
 }
 
 int ct_session_end(ct_session *s, const char *now_iso) {
-    if (s == NULL || s->db == NULL) return CT_SESSION_ERR_ARG;
+    if (s == NULL || s->db == NULL)
+        return CT_SESSION_ERR_ARG;
     long y;
     int m, d;
-    if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK) return CT_SESSION_ERR_ARG;
+    if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+        return CT_SESSION_ERR_ARG;
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(s->db, CT_SQL_SESSION_INSERT, -1, &st, NULL) != SQLITE_OK) {
         sqlite3_finalize(st);
@@ -292,7 +321,8 @@ int ct_session_end(ct_session *s, const char *now_iso) {
 }
 
 void ct_session_free(ct_session *s) {
-    if (s == NULL) return;
+    if (s == NULL)
+        return;
     free(s->queue);
     s->queue = NULL;
     s->queue_count = 0;

@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "framework.h"
 #include "../src/config/config.h"
 #include "../src/storage/db.h"
 #include "../src/storage/repo_cards.h"
 #include "../src/storage/repo_reviews.h"
 #include "../src/storage/repo_stats.h"
+#include "framework.h"
 
 static sqlite3 *stats_db(void) {
     sqlite3 *db = NULL;
@@ -41,12 +41,13 @@ static void put_srs(sqlite3 *db, long id, double stability, double difficulty, c
 }
 
 static void log_rating(sqlite3 *db, long card_id, int rating) {
-    CT_ASSERT_EQ(ct_repo_review_log(db, card_id, rating, "2026-05-01T00:00:00Z", 1.0, 5.0, 0.0, 1.0),
-                 CT_REPO_OK);
+    CT_ASSERT_EQ(
+        ct_repo_review_log(db, card_id, rating, "2026-05-01T00:00:00Z", 1.0, 5.0, 0.0, 1.0),
+        CT_REPO_OK);
 }
 
-static ct_session_row session_at(const char *deck, const char *started, const char *ended, int cards,
-                                 int again, int hard, int good, int easy) {
+static ct_session_row session_at(const char *deck, const char *started, const char *ended,
+                                 int cards, int again, int hard, int good, int easy) {
     ct_session_row s;
     memset(&s, 0, sizeof s);
     snprintf(s.deck, sizeof s.deck, "%s", deck);
@@ -60,8 +61,7 @@ static ct_session_row session_at(const char *deck, const char *started, const ch
     return s;
 }
 
-CT_SUITE(stats_empty)
-{
+CT_SUITE(stats_empty) {
     sqlite3 *db = stats_db();
     ct_deck_stats decks[4];
     ct_due_forecast_row fc[6];
@@ -81,8 +81,7 @@ CT_SUITE(stats_empty)
     ct_db_close(db);
 }
 
-CT_SUITE(stats_deck_aggregates)
-{
+CT_SUITE(stats_deck_aggregates) {
     sqlite3 *db = stats_db();
     long a1 = add_card(db, "alpha", "a1", CT_DIR_FR);
     long a2 = add_card(db, "alpha", "a2", CT_DIR_FR);
@@ -141,8 +140,7 @@ CT_SUITE(stats_deck_aggregates)
     ct_db_close(db);
 }
 
-CT_SUITE(stats_forecast)
-{
+CT_SUITE(stats_forecast) {
     sqlite3 *db = stats_db();
     long c1 = add_card(db, "f", "c1", CT_DIR_FR);
     long c2 = add_card(db, "f", "c2", CT_DIR_FR);
@@ -201,8 +199,7 @@ CT_SUITE(stats_forecast)
     ct_db_close(db);
 }
 
-CT_SUITE(stats_case_accuracy)
-{
+CT_SUITE(stats_case_accuracy) {
     sqlite3 *db = stats_db();
     long aa = add_card(db, "acc", "aa", CT_DIR_FL);
     long k3 = add_card(db, "acc", "k3", CT_DIR_FR);
@@ -271,15 +268,16 @@ CT_SUITE(stats_case_accuracy)
     ct_db_close(db);
 }
 
-CT_SUITE(stats_sessions)
-{
+CT_SUITE(stats_sessions) {
     sqlite3 *db = stats_db();
     ct_session_row rows[4];
     CT_ASSERT_EQ(ct_repo_sessions(db, rows, 4), 0);
 
     ct_session_row s1 = session_at("cfop", "2026-06-01T10:00:00Z", "", 10, 2, 3, 4, 1);
-    ct_session_row s2 = session_at("3bld", "2026-06-02T09:00:00Z", "2026-06-02T09:05:00Z", 7, 0, 1, 5, 1);
-    ct_session_row s3 = session_at("cfop", "2026-06-01T10:00:00Z", "2026-06-01T10:12:00Z", 3, 3, 0, 0, 0);
+    ct_session_row s2 =
+        session_at("3bld", "2026-06-02T09:00:00Z", "2026-06-02T09:05:00Z", 7, 0, 1, 5, 1);
+    ct_session_row s3 =
+        session_at("cfop", "2026-06-01T10:00:00Z", "2026-06-01T10:12:00Z", 3, 3, 0, 0, 0);
     CT_ASSERT_EQ(ct_repo_session_log(db, &s1), CT_REPO_OK);
     CT_ASSERT_EQ(ct_repo_session_log(db, &s2), CT_REPO_OK);
     CT_ASSERT_EQ(ct_repo_session_log(db, &s3), CT_REPO_OK);
@@ -322,8 +320,7 @@ CT_SUITE(stats_sessions)
     ct_db_close(db);
 }
 
-CT_SUITE(stats_malformed)
-{
+CT_SUITE(stats_malformed) {
     sqlite3 *db = stats_db();
     ct_deck_stats decks[2];
     ct_due_forecast_row fc[2];

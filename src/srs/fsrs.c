@@ -4,12 +4,25 @@
 #include <math.h>
 
 enum fsrs_weight {
-    fw_s_init, fw_s_init_hard, fw_s_init_good, fw_s_init_easy,
-    fw_d_init, fw_d_slope, fw_d_delta, fw_d_revert,
-    fw_s_gain, fw_s_tension, fw_s_press,
-    fw_f_init, fw_f_damp, fw_f_grow, fw_f_fuzz,
-    fw_hard_penalty, fw_easy_bonus,
-    fw_sd_gain, fw_sd_bias
+    fw_s_init,
+    fw_s_init_hard,
+    fw_s_init_good,
+    fw_s_init_easy,
+    fw_d_init,
+    fw_d_slope,
+    fw_d_delta,
+    fw_d_revert,
+    fw_s_gain,
+    fw_s_tension,
+    fw_s_press,
+    fw_f_init,
+    fw_f_damp,
+    fw_f_grow,
+    fw_f_fuzz,
+    fw_hard_penalty,
+    fw_easy_bonus,
+    fw_sd_gain,
+    fw_sd_bias
 };
 
 static double clamp_lo_hi(double x, double lo, double hi) {
@@ -49,8 +62,8 @@ static double difficulty_next(const double *w, double d, ct_grade g) {
 static double stability_recall(const double *w, double s, double d, double r, ct_grade g) {
     double hard = (g == CT_HARD) ? w[fw_hard_penalty] : 1;
     double easy = (g == CT_EASY) ? w[fw_easy_bonus] : 1;
-    double inc = exp(w[fw_s_gain]) * (CT_FSRS_MAX_DIFFICULTY + 1 - d) *
-                 pow(s, -w[fw_s_tension]) * (exp(w[fw_s_press] * (1 - r)) - 1) * hard * easy;
+    double inc = exp(w[fw_s_gain]) * (CT_FSRS_MAX_DIFFICULTY + 1 - d) * pow(s, -w[fw_s_tension]) *
+                 (exp(w[fw_s_press] * (1 - r)) - 1) * hard * easy;
     return s * (1 + inc);
 }
 
@@ -79,8 +92,7 @@ double ct_fsrs_retrievability(double stability, double elapsed_days) {
 }
 
 long ct_fsrs_next_interval_days(const ct_fsrs *f, double stability) {
-    double raw = (stability / CT_FSRS_FACTOR) *
-                 (pow(f->request_retention, 1 / CT_FSRS_DECAY) - 1);
+    double raw = (stability / CT_FSRS_FACTOR) * (pow(f->request_retention, 1 / CT_FSRS_DECAY) - 1);
     if (raw < 1) {
         return 1;
     }
@@ -113,8 +125,7 @@ ct_fsrs_card ct_fsrs_review(const ct_fsrs *f, const ct_fsrs_card *card, ct_grade
         out.stability =
             clamp_stability(stability_recall(f->w, card->stability, out.difficulty, r, g));
     } else {
-        out.stability =
-            clamp_stability(stability_forget(f->w, card->stability, out.difficulty, r));
+        out.stability = clamp_stability(stability_forget(f->w, card->stability, out.difficulty, r));
         out.lapses = card->lapses + 1;
     }
     long ivl = ct_fsrs_next_interval_days(f, out.stability);

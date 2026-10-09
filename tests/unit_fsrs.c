@@ -90,10 +90,8 @@ CT_SUITE(fsrs_golden_first_review) {
 }
 
 CT_SUITE(fsrs_golden_recall) {
-    static const double gold_s[3] = {11.962060841460307, 19.791582142057077,
-                                     43.20991950624265};
-    static const double gold_d[3] = {5.7994339073111085, 4.991832707311108,
-                                     4.184231507311108};
+    static const double gold_s[3] = {11.962060841460307, 19.791582142057077, 43.20991950624265};
+    static const double gold_d[3] = {5.7994339073111085, 4.991832707311108, 4.184231507311108};
     static const long gold_i[3] = {12, 20, 43};
     ct_fsrs f = make_fsrs();
     for (int g = 2; g <= 4; g++) {
@@ -127,8 +125,8 @@ CT_SUITE(fsrs_golden_forget) {
 }
 
 CT_SUITE(fsrs_golden_same_day) {
-    static const double gold_s[4] = {5.010285241935083, 8.398413743809318,
-                                     14.077712147375411, 23.59754893600546};
+    static const double gold_s[4] = {5.010285241935083, 8.398413743809318, 14.077712147375411,
+                                     23.59754893600546};
     ct_fsrs f = make_fsrs();
     for (int g = 1; g <= 4; g++) {
         ct_fsrs_card in = same_day_card();

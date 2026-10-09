@@ -266,7 +266,8 @@ CT_SUITE(unit_anim_edges) {
     CT_ASSERT(r.just_completed);
     r = ct_anim_step(&a);
     CT_ASSERT(r.just_completed);
-    CT_ASSERT_EQ(ct_anim_prefix(&a, CT_ANIM_QUEUE_CAP, out, CT_ANIM_QUEUE_CAP), CT_ANIM_QUEUE_CAP - 2);
+    CT_ASSERT_EQ(ct_anim_prefix(&a, CT_ANIM_QUEUE_CAP, out, CT_ANIM_QUEUE_CAP),
+                 CT_ANIM_QUEUE_CAP - 2);
     CT_ASSERT(move_eq(out[0], move_make(3, 0, 1, 1)));
 
     ct_anim b;

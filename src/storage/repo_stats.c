@@ -34,10 +34,14 @@ static void ct_stats_text(char *dst, size_t cap, const unsigned char *src) {
 }
 
 int ct_repo_deck_stats(sqlite3 *db, const char *now_iso, ct_deck_stats *out, int cap) {
-    if (db == NULL) return CT_REPO_ERR_ARG;
-    if (!ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX)) return CT_REPO_ERR_ARG;
-    if (cap < 0 || (cap > 0 && out == NULL)) return CT_REPO_ERR_ARG;
-    if (cap == 0) return CT_REPO_OK;
+    if (db == NULL)
+        return CT_REPO_ERR_ARG;
+    if (!ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX))
+        return CT_REPO_ERR_ARG;
+    if (cap < 0 || (cap > 0 && out == NULL))
+        return CT_REPO_ERR_ARG;
+    if (cap == 0)
+        return CT_REPO_OK;
     memset(out, 0, (size_t)cap * sizeof *out);
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(db, CT_SQL_DECK_STATS, -1, &st, NULL) != SQLITE_OK) {
@@ -59,18 +63,25 @@ int ct_repo_deck_stats(sqlite3 *db, const char *now_iso, ct_deck_stats *out, int
         n++;
     }
     sqlite3_finalize(st);
-    if (step != SQLITE_ROW && step != SQLITE_DONE) return CT_REPO_ERR_DB;
+    if (step != SQLITE_ROW && step != SQLITE_DONE)
+        return CT_REPO_ERR_DB;
     return n;
 }
 
 int ct_repo_due_forecast(sqlite3 *db, const char *from_day, int days, ct_due_forecast_row *out,
                          int cap) {
-    if (db == NULL) return CT_REPO_ERR_ARG;
-    if (!ct_repo_text_ok(from_day, CT_STATS_DAY_MAX)) return CT_REPO_ERR_ARG;
-    if (days < 0) return CT_REPO_ERR_ARG;
-    if (cap < 0 || (cap > 0 && out == NULL)) return CT_REPO_ERR_ARG;
-    if (days == 0) return 0;
-    if (cap == 0) return days;
+    if (db == NULL)
+        return CT_REPO_ERR_ARG;
+    if (!ct_repo_text_ok(from_day, CT_STATS_DAY_MAX))
+        return CT_REPO_ERR_ARG;
+    if (days < 0)
+        return CT_REPO_ERR_ARG;
+    if (cap < 0 || (cap > 0 && out == NULL))
+        return CT_REPO_ERR_ARG;
+    if (days == 0)
+        return 0;
+    if (cap == 0)
+        return days;
     memset(out, 0, (size_t)cap * sizeof *out);
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(db, CT_SQL_DUE_FORECAST, -1, &st, NULL) != SQLITE_OK) {
@@ -87,15 +98,20 @@ int ct_repo_due_forecast(sqlite3 *db, const char *from_day, int days, ct_due_for
         n++;
     }
     sqlite3_finalize(st);
-    if (step != SQLITE_ROW && step != SQLITE_DONE) return CT_REPO_ERR_DB;
+    if (step != SQLITE_ROW && step != SQLITE_DONE)
+        return CT_REPO_ERR_DB;
     return n;
 }
 
 int ct_repo_case_accuracy(sqlite3 *db, const char *deck, ct_case_accuracy_row *out, int cap) {
-    if (db == NULL) return CT_REPO_ERR_ARG;
-    if (!ct_repo_text_ok(deck, CT_STATS_DECK_MAX)) return CT_REPO_ERR_ARG;
-    if (cap < 0 || (cap > 0 && out == NULL)) return CT_REPO_ERR_ARG;
-    if (cap == 0) return CT_REPO_OK;
+    if (db == NULL)
+        return CT_REPO_ERR_ARG;
+    if (!ct_repo_text_ok(deck, CT_STATS_DECK_MAX))
+        return CT_REPO_ERR_ARG;
+    if (cap < 0 || (cap > 0 && out == NULL))
+        return CT_REPO_ERR_ARG;
+    if (cap == 0)
+        return CT_REPO_OK;
     memset(out, 0, (size_t)cap * sizeof *out);
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(db, CT_SQL_CASE_ACCURACY, -1, &st, NULL) != SQLITE_OK) {
@@ -116,15 +132,20 @@ int ct_repo_case_accuracy(sqlite3 *db, const char *deck, ct_case_accuracy_row *o
         n++;
     }
     sqlite3_finalize(st);
-    if (step != SQLITE_ROW && step != SQLITE_DONE) return CT_REPO_ERR_DB;
+    if (step != SQLITE_ROW && step != SQLITE_DONE)
+        return CT_REPO_ERR_DB;
     return n;
 }
 
 int ct_repo_session_log(sqlite3 *db, const ct_session_row *row) {
-    if (db == NULL || row == NULL) return CT_REPO_ERR_ARG;
-    if (!ct_repo_text_ok(row->deck, CT_STATS_DECK_MAX)) return CT_REPO_ERR_ARG;
-    if (!ct_repo_text_ok(row->started_at, CT_STATS_STAMP_MAX)) return CT_REPO_ERR_ARG;
-    if (strlen(row->ended_at) >= CT_STATS_STAMP_MAX) return CT_REPO_ERR_ARG;
+    if (db == NULL || row == NULL)
+        return CT_REPO_ERR_ARG;
+    if (!ct_repo_text_ok(row->deck, CT_STATS_DECK_MAX))
+        return CT_REPO_ERR_ARG;
+    if (!ct_repo_text_ok(row->started_at, CT_STATS_STAMP_MAX))
+        return CT_REPO_ERR_ARG;
+    if (strlen(row->ended_at) >= CT_STATS_STAMP_MAX)
+        return CT_REPO_ERR_ARG;
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(db, CT_SQL_SESSION_INSERT, -1, &st, NULL) != SQLITE_OK) {
         sqlite3_finalize(st);
@@ -141,14 +162,18 @@ int ct_repo_session_log(sqlite3 *db, const ct_session_row *row) {
     sqlite3_bind_int(st, ++ix, row->n_easy);
     int step = sqlite3_step(st);
     sqlite3_finalize(st);
-    if (step == SQLITE_DONE) return CT_REPO_OK;
+    if (step == SQLITE_DONE)
+        return CT_REPO_OK;
     return CT_REPO_ERR_DB;
 }
 
 int ct_repo_sessions(sqlite3 *db, ct_session_row *out, int cap) {
-    if (db == NULL) return CT_REPO_ERR_ARG;
-    if (cap < 0 || (cap > 0 && out == NULL)) return CT_REPO_ERR_ARG;
-    if (cap == 0) return CT_REPO_OK;
+    if (db == NULL)
+        return CT_REPO_ERR_ARG;
+    if (cap < 0 || (cap > 0 && out == NULL))
+        return CT_REPO_ERR_ARG;
+    if (cap == 0)
+        return CT_REPO_OK;
     memset(out, 0, (size_t)cap * sizeof *out);
     sqlite3_stmt *st = NULL;
     if (sqlite3_prepare_v2(db, CT_SQL_SESSIONS, -1, &st, NULL) != SQLITE_OK) {
@@ -171,6 +196,7 @@ int ct_repo_sessions(sqlite3 *db, ct_session_row *out, int cap) {
         n++;
     }
     sqlite3_finalize(st);
-    if (step != SQLITE_ROW && step != SQLITE_DONE) return CT_REPO_ERR_DB;
+    if (step != SQLITE_ROW && step != SQLITE_DONE)
+        return CT_REPO_ERR_DB;
     return n;
 }

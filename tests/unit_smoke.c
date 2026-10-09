@@ -30,8 +30,10 @@ CT_SUITE(unit_smoke) {
     CT_ASSERT(diff != 0);
 
     static const uint64_t gold_first[4] = {
-        0x406a26168ad7417eull, 0xcf8acc48879262e9ull,
-        0x7aeb56e3063c19a4ull, 0xf1696c4fc37efd82ull,
+        0x406a26168ad7417eull,
+        0xcf8acc48879262e9ull,
+        0x7aeb56e3063c19a4ull,
+        0xf1696c4fc37efd82ull,
     };
     ct_sfc64 gold;
     ct_sfc64_init(&gold, 123456789);

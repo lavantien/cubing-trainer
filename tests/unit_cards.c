@@ -3,11 +3,11 @@
 #include <string.h>
 #include <time.h>
 
-#include "framework.h"
 #include "../src/config/config.h"
 #include "../src/storage/db.h"
 #include "../src/storage/repo_cards.h"
 #include "../src/storage/repo_reviews.h"
+#include "framework.h"
 
 static sqlite3 *cards_db(void) {
     sqlite3 *db = NULL;
@@ -50,8 +50,7 @@ static ct_srs_row srs_at(const char *due) {
     return row;
 }
 
-CT_SUITE(card_insert_get)
-{
+CT_SUITE(card_insert_get) {
     sqlite3 *db = cards_db();
     ct_card c = base_card("cfop-oll", "oll-27", CT_DIR_FL);
     CT_ASSERT_EQ(ct_repo_card_insert(db, &c), CT_REPO_OK);
@@ -84,8 +83,7 @@ CT_SUITE(card_insert_get)
     ct_db_close(db);
 }
 
-CT_SUITE(card_unique_conflict)
-{
+CT_SUITE(card_unique_conflict) {
     sqlite3 *db = cards_db();
     ct_card a = base_card("deck", "key", CT_DIR_FR);
     CT_ASSERT_EQ(ct_repo_card_insert(db, &a), CT_REPO_OK);
@@ -107,8 +105,7 @@ CT_SUITE(card_unique_conflict)
     ct_db_close(db);
 }
 
-CT_SUITE(card_update)
-{
+CT_SUITE(card_update) {
     sqlite3 *db = cards_db();
     ct_card c = base_card("up", "one", CT_DIR_FR);
     CT_ASSERT_EQ(ct_repo_card_insert(db, &c), CT_REPO_OK);
@@ -149,17 +146,19 @@ CT_SUITE(card_update)
     ct_db_close(db);
 }
 
-CT_SUITE(card_delete_cascade)
-{
+CT_SUITE(card_delete_cascade) {
     sqlite3 *db = cards_db();
     long a = add_card(db, "d", "a", CT_DIR_FR);
     long b = add_card(db, "d", "b", CT_DIR_FR);
 
     ct_srs_row row = srs_at("2026-06-01T00:00:00Z");
     CT_ASSERT_EQ(ct_repo_srs_put(db, a, &row), CT_REPO_OK);
-    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_GOOD, "2026-05-01T00:00:00Z", 3.25, 5.5, 12.0, 21.0), CT_REPO_OK);
-    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_EASY, "2026-05-02T00:00:00Z", 4.0, 5.0, 1.0, 30.0), CT_REPO_OK);
-    CT_ASSERT_EQ(ct_repo_review_log(db, b, CT_HARD, "2026-05-03T00:00:00Z", 2.0, 6.0, 2.0, 8.0), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_GOOD, "2026-05-01T00:00:00Z", 3.25, 5.5, 12.0, 21.0),
+                 CT_REPO_OK);
+    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_EASY, "2026-05-02T00:00:00Z", 4.0, 5.0, 1.0, 30.0),
+                 CT_REPO_OK);
+    CT_ASSERT_EQ(ct_repo_review_log(db, b, CT_HARD, "2026-05-03T00:00:00Z", 2.0, 6.0, 2.0, 8.0),
+                 CT_REPO_OK);
 
     ct_review_row revs[4];
     CT_ASSERT_EQ(ct_repo_reviews_for_card(db, a, revs, 4), 2);
@@ -172,15 +171,15 @@ CT_SUITE(card_delete_cascade)
     CT_ASSERT_EQ(srs_back.reps, 0);
     CT_ASSERT_EQ(srs_back.due[0], '\0');
     CT_ASSERT_EQ(ct_repo_reviews_for_card(db, a, revs, 4), 0);
-    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_GOOD, "2026-05-04T00:00:00Z", 1.0, 5.0, 0.0, 1.0), CT_REPO_MISSING);
+    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_GOOD, "2026-05-04T00:00:00Z", 1.0, 5.0, 0.0, 1.0),
+                 CT_REPO_MISSING);
     CT_ASSERT_EQ(ct_repo_reviews_for_card(db, b, revs, 4), 1);
     CT_ASSERT_EQ(revs[0].card_id, b);
     CT_ASSERT_EQ(ct_repo_card_delete(db, a), CT_REPO_MISSING);
     ct_db_close(db);
 }
 
-CT_SUITE(card_list)
-{
+CT_SUITE(card_list) {
     sqlite3 *db = cards_db();
     long c_id = add_card(db, "alpha", "c", CT_DIR_FR);
     long a_id = add_card(db, "alpha", "a", CT_DIR_FR);
@@ -209,8 +208,7 @@ CT_SUITE(card_list)
     ct_db_close(db);
 }
 
-CT_SUITE(card_get_by_key)
-{
+CT_SUITE(card_get_by_key) {
     sqlite3 *db = cards_db();
     ct_card fr = base_card("deck", "key", CT_DIR_FR);
     CT_ASSERT_EQ(ct_repo_card_insert(db, &fr), CT_REPO_OK);
@@ -243,8 +241,7 @@ CT_SUITE(card_get_by_key)
     ct_db_close(db);
 }
 
-CT_SUITE(srs_roundtrip)
-{
+CT_SUITE(srs_roundtrip) {
     sqlite3 *db = cards_db();
     long id = add_card(db, "d", "k", CT_DIR_FR);
 
@@ -295,16 +292,19 @@ CT_SUITE(srs_roundtrip)
     ct_db_close(db);
 }
 
-CT_SUITE(review_log_rows)
-{
+CT_SUITE(review_log_rows) {
     sqlite3 *db = cards_db();
     long a = add_card(db, "d", "a", CT_DIR_FR);
     long b = add_card(db, "d", "b", CT_DIR_FR);
 
-    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_AGAIN, "2026-05-01T00:00:00Z", 1.5, 7.0, 0.0, 0.5), CT_REPO_OK);
-    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_GOOD, "2026-05-02T00:00:00Z", 4.5, 6.0, 1.0, 6.0), CT_REPO_OK);
-    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_EASY, "2026-05-03T00:00:00Z", 9.0, 5.0, 1.0, 12.0), CT_REPO_OK);
-    CT_ASSERT_EQ(ct_repo_review_log(db, b, CT_HARD, "2026-05-01T06:00:00Z", 2.5, 6.5, 3.0, 3.0), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_AGAIN, "2026-05-01T00:00:00Z", 1.5, 7.0, 0.0, 0.5),
+                 CT_REPO_OK);
+    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_GOOD, "2026-05-02T00:00:00Z", 4.5, 6.0, 1.0, 6.0),
+                 CT_REPO_OK);
+    CT_ASSERT_EQ(ct_repo_review_log(db, a, CT_EASY, "2026-05-03T00:00:00Z", 9.0, 5.0, 1.0, 12.0),
+                 CT_REPO_OK);
+    CT_ASSERT_EQ(ct_repo_review_log(db, b, CT_HARD, "2026-05-01T06:00:00Z", 2.5, 6.5, 3.0, 3.0),
+                 CT_REPO_OK);
 
     ct_review_row rows[6];
     memset(rows, 0, sizeof rows);
@@ -345,12 +345,13 @@ CT_SUITE(review_log_rows)
     long_at[sizeof long_at - 1] = '\0';
     CT_ASSERT(ct_repo_review_log(db, a, CT_GOOD, long_at, 1.0, 5.0, 0.0, 1.0) < 0);
     CT_ASSERT(ct_repo_review_log(NULL, a, CT_GOOD, "2026-05-04T00:00:00Z", 1.0, 5.0, 0.0, 1.0) < 0);
-    CT_ASSERT_EQ(ct_repo_review_log(db, a + 900, CT_GOOD, "2026-05-04T00:00:00Z", 1.0, 5.0, 0.0, 1.0), CT_REPO_MISSING);
+    CT_ASSERT_EQ(
+        ct_repo_review_log(db, a + 900, CT_GOOD, "2026-05-04T00:00:00Z", 1.0, 5.0, 0.0, 1.0),
+        CT_REPO_MISSING);
     ct_db_close(db);
 }
 
-CT_SUITE(due_cards)
-{
+CT_SUITE(due_cards) {
     sqlite3 *db = cards_db();
     const char *now = "2026-06-01T00:00:00Z";
     long before = add_card(db, "due", "before", CT_DIR_FR);
@@ -406,8 +407,7 @@ CT_SUITE(due_cards)
     ct_db_close(db);
 }
 
-CT_SUITE(card_bad_args)
-{
+CT_SUITE(card_bad_args) {
     sqlite3 *db = cards_db();
     ct_card c = base_card("d", "k", CT_DIR_FR);
     CT_ASSERT_EQ(ct_repo_card_insert(db, &c), CT_REPO_OK);
@@ -463,8 +463,7 @@ CT_SUITE(card_bad_args)
     ct_db_close(db);
 }
 
-CT_SUITE(now_iso)
-{
+CT_SUITE(now_iso) {
     char stamp[CT_CARD_STAMP_MAX];
     memset(stamp, 'x', sizeof stamp);
     ct_now_utc_iso(stamp, sizeof stamp);

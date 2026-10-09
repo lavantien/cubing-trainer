@@ -51,7 +51,8 @@ void ct_now_utc_iso(char *out, unsigned cap);
 int ct_repo_card_insert(sqlite3 *db, ct_card *c);
 int ct_repo_card_update(sqlite3 *db, const ct_card *c);
 int ct_repo_card_get(sqlite3 *db, long id, ct_card *out);
-int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key, int direction, ct_card *out);
+int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key, int direction,
+                            ct_card *out);
 int ct_repo_card_delete(sqlite3 *db, long id);
 int ct_repo_card_list(sqlite3 *db, const char *deck, ct_card *out, int cap);
 int ct_repo_srs_get(sqlite3 *db, long card_id, ct_srs_row *out);

@@ -82,8 +82,7 @@ static bool read_last_session(sqlite3 *db, char *deck, char *started, char *ende
     return true;
 }
 
-CT_SUITE(session_day_numbers)
-{
+CT_SUITE(session_day_numbers) {
     CT_ASSERT_EQ(ct_session_date_to_day(1970, 1, 1), 0);
     CT_ASSERT_EQ(ct_session_date_to_day(1969, 12, 31), -1);
     CT_ASSERT_EQ(ct_session_date_to_day(2000, 1, 1), 10957);
@@ -112,15 +111,17 @@ CT_SUITE(session_day_numbers)
         int m = 0;
         int d = 0;
         ct_session_day_to_date(day, &y, &m, &d);
-        if (ct_session_date_to_day(y, m, d) != day) round_trip_ok = false;
-        if (m < 1 || m > 12) round_trip_ok = false;
-        if (d < 1 || d > 31) round_trip_ok = false;
+        if (ct_session_date_to_day(y, m, d) != day)
+            round_trip_ok = false;
+        if (m < 1 || m > 12)
+            round_trip_ok = false;
+        if (d < 1 || d > 31)
+            round_trip_ok = false;
     }
     CT_ASSERT(round_trip_ok);
 }
 
-CT_SUITE(session_iso_add_days)
-{
+CT_SUITE(session_iso_add_days) {
     static const char *input[] = {"2026-02-28", "2027-02-28", "2028-02-28", "2028-02-28",
                                   "2026-12-31", "2026-01-01", "2028-01-01", "1900-02-28",
                                   "2000-02-28", "2100-02-28", "2026-03-01"};
@@ -130,7 +131,8 @@ CT_SUITE(session_iso_add_days)
                                  "2000-02-29", "2100-03-01", "2026-02-28"};
     char out[CT_SESSION_STAMP_MAX];
     for (int i = 0; i < 11; i++) {
-        CT_ASSERT_EQ(ct_session_iso_add_days(input[i], add[i], out, (unsigned)sizeof out), CT_SESSION_OK);
+        CT_ASSERT_EQ(ct_session_iso_add_days(input[i], add[i], out, (unsigned)sizeof out),
+                     CT_SESSION_OK);
         CT_ASSERT_STR_EQ(out, want[i]);
     }
 
@@ -162,8 +164,7 @@ CT_SUITE(session_iso_add_days)
     CT_ASSERT(ct_session_iso_add_days("2026-01-01", 1, NULL, (unsigned)sizeof out) < 0);
 }
 
-CT_SUITE(session_flow_golden)
-{
+CT_SUITE(session_flow_golden) {
     sqlite3 *db = session_db();
     ct_fsrs f = session_fsrs();
     long a = seed_card(db, "review", "a");
@@ -276,8 +277,7 @@ CT_SUITE(session_flow_golden)
     ct_db_close(db);
 }
 
-CT_SUITE(session_new_card)
-{
+CT_SUITE(session_new_card) {
     sqlite3 *db = session_db();
     ct_fsrs f = session_fsrs();
     long good_id = seed_card(db, "fresh", "n1");
@@ -330,8 +330,7 @@ CT_SUITE(session_new_card)
     ct_db_close(db);
 }
 
-CT_SUITE(session_absent_row)
-{
+CT_SUITE(session_absent_row) {
     sqlite3 *db = session_db();
     ct_fsrs f = session_fsrs();
     long id = seed_card(db, "orphan", "x");
@@ -368,8 +367,7 @@ CT_SUITE(session_absent_row)
     ct_db_close(db);
 }
 
-CT_SUITE(session_lapse)
-{
+CT_SUITE(session_lapse) {
     sqlite3 *db = session_db();
     ct_fsrs f = session_fsrs();
     long id = seed_card(db, "lapse", "l1");
@@ -403,8 +401,7 @@ CT_SUITE(session_lapse)
     ct_db_close(db);
 }
 
-CT_SUITE(session_same_day)
-{
+CT_SUITE(session_same_day) {
     sqlite3 *db = session_db();
     ct_fsrs f = session_fsrs();
     long id = seed_card(db, "sameday", "s1");
@@ -444,8 +441,7 @@ CT_SUITE(session_same_day)
     ct_db_close(db);
 }
 
-CT_SUITE(session_empty_deck)
-{
+CT_SUITE(session_empty_deck) {
     sqlite3 *db = session_db();
     ct_fsrs f = session_fsrs();
     seed_card(db, "other", "x");
@@ -484,8 +480,7 @@ CT_SUITE(session_empty_deck)
     ct_db_close(db);
 }
 
-CT_SUITE(session_limits)
-{
+CT_SUITE(session_limits) {
     sqlite3 *db = session_db();
     ct_fsrs f = session_fsrs();
     long a = seed_card(db, "lim", "a");
@@ -519,8 +514,7 @@ CT_SUITE(session_limits)
     ct_db_close(db);
 }
 
-CT_SUITE(session_card_missing)
-{
+CT_SUITE(session_card_missing) {
     sqlite3 *db = session_db();
     ct_fsrs f = session_fsrs();
     long a = seed_card(db, "gone", "a");
@@ -541,8 +535,7 @@ CT_SUITE(session_card_missing)
     ct_db_close(db);
 }
 
-CT_SUITE(session_bad_args)
-{
+CT_SUITE(session_bad_args) {
     sqlite3 *db = session_db();
     ct_fsrs f = session_fsrs();
     long id = seed_card(db, "args", "a");
@@ -592,8 +585,7 @@ CT_SUITE(session_bad_args)
     ct_db_close(db);
 }
 
-CT_SUITE(session_free_safety)
-{
+CT_SUITE(session_free_safety) {
     ct_session s;
     memset(&s, 0, sizeof s);
     ct_session_free(&s);
