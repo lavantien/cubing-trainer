@@ -1,7 +1,6 @@
 #include "app/app.h"
 
-int main(void)
-{
+int main(void) {
     ct_app app;
     ct_app_init(&app);
     ct_app_run(&app);
