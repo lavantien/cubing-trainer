@@ -35,7 +35,7 @@ rwildcard = $(wildcard $1$2)$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2)
 APP_MAIN := src/app/main.c
 SRC := $(call rwildcard,src/,*.c)
 LIB_SRC := $(filter-out $(APP_MAIN),$(SRC))
-TEST_SRC := tests/test_main.c tests/framework.c $(wildcard tests/unit_*.c)
+TEST_SRC := tests/test_main.c tests/framework.c $(wildcard tests/unit_*.c) $(wildcard tests/fuzz_*.c)
 FMT_FILES := $(call rwildcard,src/,*.c) $(call rwildcard,src/,*.h) $(call rwildcard,tests/,*.c) $(call rwildcard,tests/,*.h)
 RAYLIB_SRC := $(wildcard third_party/raylib/src/*.c)
 RAYGUI_IMPL_SRC := $(BUILDDIR)/raygui_impl.c
@@ -53,6 +53,11 @@ TEST_BIN := $(BINDIR)/ct_tests.exe
 SPIKE_BIN := $(BINDIR)/spike_link.exe
 
 MEMGUARD_ARGS ?=
+
+CT_FUZZ_LOOPS ?= 10
+CT_FUZZ_SUITES := fuzz_notation_random_tokens fuzz_notation_garbage fuzz_notation_random_algs
+CT_FUZZ_SUITES += fuzz_transform_inverse fuzz_transform_simplify fuzz_transform_rotate_y
+CT_FUZZ_SUITES += fuzz_cube_invariants fuzz_cube_mirror
 
 .PHONY: all build vendor test diagrams memguard run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual db-verify
 
@@ -153,8 +158,11 @@ lint:
 analyze:
 	pwsh.exe -NoProfile -ExecutionPolicy Bypass -File tools/run_analyze.ps1
 
-fuzz:
-	@echo not implemented && exit 1
+fuzz: $(TEST_BIN)
+	for suite in $(CT_FUZZ_SUITES); do CT_FUZZ_LOOPS=$(CT_FUZZ_LOOPS) $(TEST_BIN) $$suite || exit 1; done
+
+fuzz-%: $(TEST_BIN)
+	CT_FUZZ_LOOPS=$(CT_FUZZ_LOOPS) $(TEST_BIN) $*
 
 mutate:
 	@echo not implemented && exit 1
