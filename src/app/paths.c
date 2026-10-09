@@ -116,6 +116,22 @@ static int ct_exe_path(char *out, unsigned cap) {
 #endif
 }
 
+int ct_exe_resource_dir(const char *rel, char *out, unsigned cap) {
+    if (rel == NULL || out == NULL || cap == 0)
+        return -1;
+    char exe[CT_APP_EXE_PATH_MAX];
+    if (ct_exe_path(exe, (unsigned)sizeof exe) != 0) {
+        fprintf(stderr, "cubing-trainer: cannot locate the executable path\n");
+        return -1;
+    }
+    if (ct_exe_relative(exe, rel, out, cap) != 0) {
+        fprintf(stderr, "cubing-trainer: resource path %s relative to the executable is too long\n",
+                rel);
+        return -1;
+    }
+    return 0;
+}
+
 int ct_migrations_dir(char *out, unsigned cap) {
     if (out == NULL || cap == 0)
         return -1;
@@ -128,16 +144,7 @@ int ct_migrations_dir(char *out, unsigned cap) {
         }
         return 0;
     }
-    char exe[CT_APP_EXE_PATH_MAX];
-    if (ct_exe_path(exe, (unsigned)sizeof exe) != 0) {
-        fprintf(stderr, "cubing-trainer: cannot locate the executable path\n");
-        return -1;
-    }
-    if (ct_exe_relative(exe, CT_MIGRATIONS_EXE_REL, out, cap) != 0) {
-        fprintf(stderr, "cubing-trainer: migrations path relative to %s is too long\n", exe);
-        return -1;
-    }
-    return 0;
+    return ct_exe_resource_dir(CT_MIGRATIONS_EXE_REL, out, cap);
 }
 
 int ct_data_dir(const char *dir_name, char *out, unsigned cap) {

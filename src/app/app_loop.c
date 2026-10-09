@@ -3,6 +3,7 @@
 
 #include "app/app.h"
 #include "app/paths.h"
+#include "packs/seed_registry.h"
 #include "raylib.h"
 #include "ui/ui.h"
 
@@ -39,6 +40,13 @@ void ct_app_init(ct_app *app) {
         ct_db_close(app->db);
         app->db = NULL;
         return;
+    }
+    char seeds_dir[CT_APP_EXE_PATH_MAX];
+    if (ct_exe_resource_dir(CT_SEEDS_PACKS_EXE_REL, seeds_dir, (unsigned)sizeof seeds_dir) != 0) {
+        fprintf(stderr, "cubing-trainer: event pack seeds unavailable, continuing without them\n");
+    } else if (ct_pack_seed_registered(app->db, seeds_dir) != 0) {
+        fprintf(stderr, "cubing-trainer: event pack seeds incomplete from %s, continuing\n",
+                seeds_dir);
     }
     if (ct_repo_settings_merge(app->db, &app->cfg) != 0) {
         fprintf(stderr, "cubing-trainer: cannot read settings from %s\n", app->db_path);

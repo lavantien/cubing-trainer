@@ -207,6 +207,7 @@ typedef enum ct_cfg_status {
 #define CT_DATA_DIR_ENV "LOCALAPPDATA"
 #define CT_MIGRATIONS_ENV "CT_MIGRATIONS_DIR"
 #define CT_MIGRATIONS_EXE_REL "../../db/migrations"
+#define CT_SEEDS_PACKS_EXE_REL "../../db/seeds/packs"
 #define CT_APP_EXE_PATH_MAX 1024
 #define CT_PROC_SELF_EXE "/proc/self/exe"
 #define CT_DIR_MODE 0755
