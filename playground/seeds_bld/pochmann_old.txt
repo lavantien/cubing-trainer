@@ -1,0 +1,41 @@
+Stefan Pochmann's Blindsolving
+Home - Cube Corner - Blindsolving
+Blindsolving the 3x3
+-->
+A while ago I invented a method to solve the 3x3 blindfolded using only a single algorithm (repeatedly). I used this old method myself for a while, even in the European Championship 2004, but since then I've improved it a lot. This page describes the resulting method. My current record for solving a 3x3 blindfolded with this new method is 5:26.80 minutes (including memorization). And not only is the new version much more powerful, but also much easier. Thanks to Werner Randelshofer for the great Java applet I use.
+Algorithms -
+Advantages -
+Example Solve -
+Setup Algorithms -
+Memorization -
+Some Last Words
+I claim anyone can solve the 3x3 blindfolded (at least any speedcuber ;-) after some preparation. Even (or "especially" ?) Jessica Fridrich who claims "I have to tell you that I could never solve the cube blindfolded. [...] My mind simply does not work this way". I'll ask her to look at this page and think about it again. What do you think when somebody says he could never solve the cube (looking, *not* blindfolded)?!?
+Blindsolving roughly consists of these three steps, that I'll describe in detail:
+Analysis
+You could memorize the cube in a very raw way, for example memorize what cubie is at the ULF position, then what is at UF, then at UFR, then UL, etc. Somewhat linear. But this is pretty naive. A much better way is to determine "cycles" and memorize/solve along these cycles. Do as much analysis as possible *before* putting on the blindfold! With my method, you basically do *all* thinking while still looking at the cube. As soon as you put on the blindfold, you just need to execute what you planned earlier.
+Memorization
+Of course you need to transfer the information you gathered when looking at the cube to the phase of solving after being blindfolded. I'll show you my technique.
+Execution
+Currently I use a handful of algorithms, which most speedcubers will know already anyway, since they're sweet PLL algorithms. You'll also need some "setup-moves", but they're now very short and intuitive.
+Algorithms
+The basic idea is to always just swap 2 cubies at a time. I can hear you say "That's impossible", and you're right. So when I swap two edges, I also swap two specific corners. For the next edge-swap, these two corners are swapped back. And vice versa when I solve the corners. I use a "buffer" position from which I "shoot" a cubie to certain other "target" positions, thereby solving that cubie. So I solve one cubie at a time. The buffer position plus the two others I have to swap (for the reason mentioned above) is called "buffer area". These are the algorithms I use:
+The buffer position for edges is UR, the buffer area also contains the URF and UBR corners. The position to shoot at is UL. Note that the buffer area is as compact as possible (an edge with it's two adjacent corners) whereas the target position is pretty free. This very fast algorithm (19-1 from Peter Jansen's page) solves the T-permutation and should be known to any speedcuber as one of the PLL algorithms.
+The target edge here is UF. Also a well-known and fast PLL algorithm.
+The target edge here is UB. Also a well-known and fast PLL algorithm.
+This is used for solving the corners. Buffer position is ULB, buffer area also includes the edges UL and UB. Target is RDF. Note again how compact the buffer area is and how free the target area. This is not a PLL, but very close. If you switch the two halves, it's the same as the T-permutation algorithm above! Thanks a lot to Lars Vandenbergh who told me about this (actually of course he told me something slightly different, namely the PLL alg F (R U' R' U' R U R' F') (R U R' U' R' F R) F').
+Note that you can of course use other algorithms that do the same things. After all, not everybody uses the same PLL algs.
+There are of course more possible target positions than those covered by the few algorithms above. What you need to use are "setup-moves" that are done before the algorithm and then undone afterwards:
+Shooting to target FR, using the T-permutation alg. For that, think of it as the FR *position* coming to UL with the setup-moves (d2 L), then shooting there (as it's now at UL), and then bringing the position (together with the cubie) back. Note that the setup-moves must not destroy the buffer area! At the end, simply undo the setup-moves.
+Also note that FR is *not* the same as RF. You can shoot to RF by using the setup-moves (d' L'). The difference is very important, since you don't just want to bring the cubies to the correct place, but also with the correct orientation, right?
+Advantages
+When I came up with this method I didn't intend to use it but now I do. It has several advantages that make it my choice of blindfold system:
+Very easy setup-moves, since always only one target position needs to be set up. Complicated setup-moves are the main reason for mistakes!
+Only very few algorithms to learn and they're mostly very fast PLL algs that you probably know anyway.
+You can use other ways to memorize than the one I'll tell you about, but I think it's very good.
+Parity problem is easily handled.
+Orientation and permutation done together. Yes, I see this as a plus... many others do orientation and permutation separately.
+Example Solve
+Scramble...
+To demonstrate my method I'll use a scrambling algorithm from the Sunday Blindfolded Rubik's Games Contest:
+D2 R2 B2 L' R2 B2 R2 D' R2 F U B R2 D' B L' F' U2 F2 U' D2 R D' B U2
+Edges...

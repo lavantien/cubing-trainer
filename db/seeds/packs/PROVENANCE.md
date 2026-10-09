@@ -113,3 +113,31 @@ Count: 36 rows. The plan named no count for this pack.
 
 Notation coverage: 31 of 36 algs parse fully. Gaps recorded by playground/seeds_fto/l4t_probe.c: BR and BR' tokens, the FTO back-right face is outside the NxN token table, and L2' and R2', the digit-then-prime suffix order. FTO notation as a whole is a pending parser surface, flagged rather than rejected.
 
+## bld_oldpoch.tsv
+
+Sources: https://jperm.net/bld for the swap algorithms, the parity algorithm, and the per letter setup moves, archived as extracted text at playground/seeds_bld/jperm_bld.md, the page was fetched server side because jperm.net timed out from the build machine. http://www.stefan-pochmann.de/spocc/blindsolving/3x3/old.php, the inventor's original method page, archived at playground/seeds_bld/pochmann_old.html and pochmann_old.txt. https://www.speedsolving.com/wiki/index.php/Old_Pochmann, Classic Pochmann, archived at playground/seeds_bld/speedsolving_oldpochmann.html and speedsolving_oldpochmann.txt. Retrieved 2026-10-10.
+
+Page contents: J Perm's tutorial defines the T perm edge swap UR to UL, the Y perm corner swap LBU to DFR, the parity algorithm, and publishes setup moves per letter inside two fully worked example solves. Pochmann's page gives the original T perm plus the direct UF and UB PLL targets and the FR and RF setup examples. The wiki page gives the adjacent corner swap variant R' F R' B2 R F' R' B2 R2 U' with a UFL buffer and URF target.
+
+Case key derivation: op.01 to op.08 are the core rows, swap algorithms, Pochmann's direct targets and setup examples, and parity, op.09 to op.24 are edge letter setups, op.25 to op.38 are corner letter setups. front_json carries the letter, orbit, and target position. Letters are Speffz and the direct target rows, edge D which is UL and corner V which is DFR, store the prose "apply swap directly, no setup" because no setup exists.
+
+Enum convention: CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN, CT_STAGE_PLL as the load time triple, the final stage mapping is decided at registry wiring.
+
+Count: 38 rows, 8 core plus 16 edge letters plus 13 corner letters plus 1 parity.
+
+Validation and coverage: playground/seeds_bld/bld_probe.c simulates every setup with the real engine. All 15 parsed edge setups land their letter sticker exactly on the U face sticker of UL, all 13 corner setups land exactly on the D face sticker of DFR, and every setup is self inverse. The letter cells come from ct_sticker_cell and therefore reverify that J Perm's lettering equals the shipped speffz.sql letter table. The setup table is partial by design, J Perm publishes setups for 30 of the 46 non buffer letters in his example solves and states the rest are intuitive, the remaining 16 letters are left for in app derivation or a future sourcing pass. Parser gaps: U2' in the two Pochmann PLL rows, digit then prime, and bracket groups which the probe strips before parsing, d2 and d' wide turns parse.
+
+## bld_m2.tsv
+
+Source: https://www.speedsolving.com/wiki/index.php/M2, the M2/R2 page, archived at playground/seeds_bld/speedsolving_m2.html and speedsolving_m2.txt. Retrieved 2026-10-10.
+
+Page contents: the M2 target table with the DF buffer, 19 standard targets, plus the additional M slice algs for FU, BU, and BD with several options each, the first listed option is stored per the convention. The r2 wing table on the same page is out of scope here, r2 solves 4BLD wings and belongs with the big cube packs.
+
+Case key derivation: keys m2.01 to m2.22 in wiki table order followed by the three M slice specials, front_json carries the buffer and target.
+
+Enum convention: CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_EP as the load time triple, final mapping at registry wiring.
+
+Count: 22 rows, 19 standard targets plus 3 M slice specials.
+
+Validation and coverage: playground/seeds_bld/bld_probe.c applies every algorithm to the engine cube. 20 of 22 algs parse and simulate sticker exact, the target sticker lands precisely on the D face sticker of the DF buffer. m2.15 LF and m2.22 BD contain L2' and M2' digit then prime tokens the notation parser rejects, recorded as gaps, the rows are kept verbatim.
+
