@@ -83,3 +83,17 @@ Case key derivation: keys clock.01 to clock.14 in solution order, front_json cas
 Count: 14 rows, 12 equalize moves plus 2 final rotations, matching the plan's standard ~14 algs.
 
 Discrepancy: none versus the plan count. J Perm has no clock algorithm page, his site index was checked and archived at playground/seeds_clock/jperm_algs_index.html. Enum convention: event CT_EVENT_CLOCK, method CT_METHOD_LBL, stage CT_STAGE_CONCEPT. LBL is the beginner method placeholder, no clock specific enum exists, and CONCEPT holds the fixed procedure set, mirroring the existing CT_METHOD_LBL CT_STAGE_CONCEPT pairing already used in the selector's stage lists.
+
+## bigcube_parity.tsv
+
+Sources: https://www.speedcube.us/blogs/speedcubing-solutions/4x4-oll-parity-algorithms, https://www.speedcube.us/blogs/speedcubing-solutions/4x4-pll-parity-algorithms, and https://www.speedcube.us/blogs/speedcubing-solutions/5x5-edge-parity-solution-algorithm, archived at playground/seeds_bigcube/speedcubeus_4x4_oll_parity.html, speedcubeus_4x4_pll_parity.html, and speedcubeus_5x5_edge_parity.html. Retrieved 2026-10-10. J Perm's 4x4 OLL and PLL parity pages and their data files (jperm_4x4_oll.html, jperm_4x4pll.js, jperm_4x4oll.js) are archived as cross-checks: his OLL parity definition, the [*] token on his 4x4 OLL page, equals the oll4 row modulo the comma formatting of the speedcube.us page.
+
+Page contents: the OLL parity page gives 2 algorithms, the speedsolve form that also disturbs other pieces and the pure two inner edge flip, the PLL parity page gives 2 cases, opposite edge swap and adjacent edge swap, and the 5x5 edge parity page gives 1 algorithm, single flipped wing pair, and states it works for 4x4 up to 7x7.
+
+Case key derivation: keys parity.oll4, parity.oll4flip, parity.pll4, parity.pll4adj, parity.wing5, front_json carries the same name without the prefix. Pack is loaded as event CT_EVENT_4X4, method CT_METHOD_YAU, stage CT_STAGE_PARITY, the 5x5+ row is keyed by cube size in the suffix and lives in the same pack because the source states the one algorithm covers 4x4 through 7x7 and no 6x6 or 7x7 specific parity algorithm page exists on the sourced site.
+
+Count: 5 rows.
+
+Notation: algorithms are stored verbatim in the source formatting, including comma separators between tokens and the source spacing quirk in oll4 where one token prints as "Rw U2 ,". HTML nonbreaking spaces are replaced with plain spaces.
+
+Discrepancy: the task example keys included a center parity row for 5x5 and larger. No speedsolving center parity case exists on any big cube, centers are freely permutable during reduction, so no center parity row ships and the gap is recorded here. The nearest public content is the speedcube.us commutator page for swapping two centers on big cubes, archived at playground/seeds_bigcube/speedcubeus_commutators.html, and its 4x4 last two centers page, archived at speedcubeus_l2c.html, both technique pages rather than parity cases. Sarah's 5x5 L2C and L2E sets (sarah_5x5x5_l2c.html, sarah_5x5x5_l2e.html) and the speedcube.us 5x5 L2E 12 case set (speedcubeus_5x5_l2e.html) were also fetched and left out of this pack: L2E mixes parity and non parity edge pairing cases and is not parity only content. The 4x4 corner swap page (speedcubeus_4x4_corner_swap.html) presents PLL parity as two corner swap two edge swap steps, its first step algorithm exists only as an image there, so the two text algorithms of the PLL parity page are the rows of record.

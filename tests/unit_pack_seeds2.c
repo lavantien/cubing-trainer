@@ -189,3 +189,23 @@ CT_SUITE(pack_seed_clock) {
                   "clock.14", 14);
     CT_ASSERT_STR_EQ(e.alg, "Push up all pins. Turn any corner till the centre clock is 12.");
 }
+
+CT_SUITE(pack_seed_bigcube_parity) {
+    verify_pack("db/seeds/packs/bigcube_parity.tsv", CT_EVENT_4X4, CT_METHOD_YAU, CT_STAGE_PARITY,
+                5);
+    ct_pack_entry e = fetch_one("db/seeds/packs/bigcube_parity.tsv", CT_EVENT_4X4, CT_METHOD_YAU,
+                                CT_STAGE_PARITY, "parity.oll4", 5);
+    CT_ASSERT_STR_EQ(e.alg, "Rw U2, X, Rw U2, Rw U2 , Rw' U2, Lw U2, Rw' U2, Rw U2, Rw' U2, Rw'");
+    e = fetch_one("db/seeds/packs/bigcube_parity.tsv", CT_EVENT_4X4, CT_METHOD_YAU, CT_STAGE_PARITY,
+                  "parity.pll4", 5);
+    CT_ASSERT_STR_EQ(e.alg, "r2, U2, r2, Uw2, r2, u2");
+    e = fetch_one("db/seeds/packs/bigcube_parity.tsv", CT_EVENT_4X4, CT_METHOD_YAU, CT_STAGE_PARITY,
+                  "parity.wing5", 5);
+    CT_ASSERT_STR_EQ(e.alg, "Rw U2 x Rw U2 Rw U2 Rw' U2 Lw U2 3Rw' U2 Rw U2 Rw' U2 Rw'");
+    e = fetch_one("db/seeds/packs/bigcube_parity.tsv", CT_EVENT_4X4, CT_METHOD_YAU, CT_STAGE_PARITY,
+                  "parity.oll4flip", 5);
+    CT_ASSERT_STR_EQ(e.alg, "r', U2, l, F2, l', F2, r2, U2, r, U2, r', U2, F2, r2, F2");
+    e = fetch_one("db/seeds/packs/bigcube_parity.tsv", CT_EVENT_4X4, CT_METHOD_YAU, CT_STAGE_PARITY,
+                  "parity.pll4adj", 5);
+    CT_ASSERT_STR_EQ(e.alg, "(R' U R U' ) r2, U2, r2, Uw2, r2, u2, (U R' U' R )");
+}
