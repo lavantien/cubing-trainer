@@ -43,6 +43,24 @@ static void write_long_file(const char *path) {
     write_file(path, body);
 }
 
+static int tsv_data_lines(const char *path) {
+    FILE *f = fopen(path, "rb");
+    if (f == NULL)
+        return -1;
+    int lines = 0;
+    int c;
+    int last = '\n';
+    while ((c = fgetc(f)) != EOF) {
+        if (c == '\n')
+            lines++;
+        last = c;
+    }
+    if (last != '\n')
+        lines++;
+    fclose(f);
+    return lines - 1;
+}
+
 static void stored_hash(sqlite3 *db, ct_event ev, ct_method m, ct_stage st, const char *case_key,
                         char *out, size_t cap) {
     sqlite3_stmt *stmt = NULL;
@@ -157,4 +175,105 @@ CT_SUITE(pack_seed_loader_rejects) {
     CT_ASSERT(ct_pack_seed_file(db, NULL, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L) < 0);
     CT_ASSERT(ct_pack_seed_file(db, "", CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L) < 0);
     ct_db_close(db);
+}
+
+static void verify_pack(const char *path, ct_event ev, ct_method m, ct_stage st, int expected) {
+    sqlite3 *db = open_db();
+    CT_ASSERT_EQ(ct_pack_seed_file(db, path, ev, m, st), expected);
+    CT_ASSERT_EQ(ct_pack_count(db, ev, m, st), expected);
+    CT_ASSERT_EQ(tsv_data_lines(path), expected);
+    ct_pack_entry got[CT_SEED_LIST_CAP];
+    CT_ASSERT(expected <= CT_SEED_LIST_CAP);
+    int n = ct_pack_list(db, ev, m, st, got, expected);
+    CT_ASSERT_EQ(n, expected);
+    for (int i = 0; i < n; i++) {
+        CT_ASSERT(got[i].case_key[0] != '\0');
+        CT_ASSERT(got[i].alg[0] != '\0');
+        CT_ASSERT(got[i].front_json[0] != '\0');
+        CT_ASSERT(got[i].source_url[0] != '\0');
+        CT_ASSERT(got[i].source_at[0] != '\0');
+        CT_ASSERT_EQ(got[i].event, ev);
+        CT_ASSERT_EQ(got[i].method, m);
+        CT_ASSERT_EQ(got[i].stage, st);
+        char hex[CT_PACK_HASH_MAX];
+        char stored[CT_PACK_HASH_MAX];
+        CT_ASSERT_EQ(ct_pack_content_hash(&got[i], hex), CT_PACK_OK);
+        stored_hash(db, ev, m, st, got[i].case_key, stored, sizeof stored);
+        CT_ASSERT_STR_EQ(stored, hex);
+    }
+    CT_ASSERT_EQ(ct_pack_seed_file(db, path, ev, m, st), expected);
+    CT_ASSERT_EQ(ct_pack_count(db, ev, m, st), expected);
+    ct_db_close(db);
+}
+
+static ct_pack_entry fetch_one(const char *path, ct_event ev, ct_method m, ct_stage st,
+                               const char *case_key, int expected) {
+    sqlite3 *db = open_db();
+    CT_ASSERT_EQ(ct_pack_seed_file(db, path, ev, m, st), expected);
+    ct_pack_entry got;
+    CT_ASSERT_EQ(ct_pack_get(db, ev, m, st, case_key, &got), CT_PACK_OK);
+    ct_db_close(db);
+    return got;
+}
+
+CT_SUITE(pack_seed_cll) {
+    verify_pack("db/seeds/packs/twoby2_cll.tsv", CT_EVENT_2X2, CT_METHOD_CLL, CT_STAGE_CLL, 42);
+    ct_pack_entry e = fetch_one("db/seeds/packs/twoby2_cll.tsv", CT_EVENT_2X2, CT_METHOD_CLL,
+                                CT_STAGE_CLL, "cll.12", 42);
+    CT_ASSERT_STR_EQ(e.alg, "F R U R' U' F'");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"case\":\"U6\"}");
+    e = fetch_one("db/seeds/packs/twoby2_cll.tsv", CT_EVENT_2X2, CT_METHOD_CLL, CT_STAGE_CLL,
+                  "cll.17", 42);
+    CT_ASSERT_STR_EQ(e.alg, "R U R' U' R' F R F'");
+    e = fetch_one("db/seeds/packs/twoby2_cll.tsv", CT_EVENT_2X2, CT_METHOD_CLL, CT_STAGE_CLL,
+                  "cll.25", 42);
+    CT_ASSERT_STR_EQ(e.alg, "R2 U2 R' U2 R2");
+    e = fetch_one("db/seeds/packs/twoby2_cll.tsv", CT_EVENT_2X2, CT_METHOD_CLL, CT_STAGE_CLL,
+                  "cll.41", 42);
+    CT_ASSERT_STR_EQ(e.alg, "R U R' U' R' F R2 U' R' U' R U R' F'");
+}
+
+CT_SUITE(pack_seed_sarah) {
+    verify_pack("db/seeds/packs/skewb_sarah.tsv", CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE,
+                CT_STAGE_SARAH, 15);
+    ct_pack_entry e = fetch_one("db/seeds/packs/skewb_sarah.tsv", CT_EVENT_SKEWB,
+                                CT_METHOD_SARAH_INTERMEDIATE, CT_STAGE_SARAH, "sarah.03", 15);
+    CT_ASSERT_STR_EQ(e.alg, "F' L F L'");
+    e = fetch_one("db/seeds/packs/skewb_sarah.tsv", CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE,
+                  CT_STAGE_SARAH, "sarah.05", 15);
+    CT_ASSERT_STR_EQ(e.alg, "(y2) (F' L F L')2");
+    e = fetch_one("db/seeds/packs/skewb_sarah.tsv", CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE,
+                  CT_STAGE_SARAH, "sarah.13", 15);
+    CT_ASSERT_STR_EQ(e.alg, "R' F R F' (y2) R' F R F'");
+    e = fetch_one("db/seeds/packs/skewb_sarah.tsv", CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE,
+                  CT_STAGE_SARAH, "sarah.15", 15);
+    CT_ASSERT_STR_EQ(e.alg, "R' F R F' (y2) R' F R F' (z2 x') R' F R F' (y2) R' F R F'");
+}
+
+CT_SUITE(pack_seed_l4e) {
+    verify_pack("db/seeds/packs/pyraminx_l4e.tsv", CT_EVENT_PYRAMINX, CT_METHOD_L4E, CT_STAGE_L4E,
+                35);
+    ct_pack_entry e = fetch_one("db/seeds/packs/pyraminx_l4e.tsv", CT_EVENT_PYRAMINX, CT_METHOD_L4E,
+                                CT_STAGE_L4E, "l4e.01", 35);
+    CT_ASSERT_STR_EQ(e.alg, "(R U' R') U' (R U' R')");
+    e = fetch_one("db/seeds/packs/pyraminx_l4e.tsv", CT_EVENT_PYRAMINX, CT_METHOD_L4E, CT_STAGE_L4E,
+                  "l4e.06", 35);
+    CT_ASSERT_STR_EQ(e.alg, "(R' L R L') U (R' L R L') U (R' L R L')");
+    e = fetch_one("db/seeds/packs/pyraminx_l4e.tsv", CT_EVENT_PYRAMINX, CT_METHOD_L4E, CT_STAGE_L4E,
+                  "l4e.18", 35);
+    CT_ASSERT_STR_EQ(e.alg, "R U' R'");
+}
+
+CT_SUITE(pack_seed_4lll) {
+    verify_pack("db/seeds/packs/megaminx_4lll.tsv", CT_EVENT_MEGAMINX, CT_METHOD_4LLL,
+                CT_STAGE_4LLL, 39);
+    ct_pack_entry e = fetch_one("db/seeds/packs/megaminx_4lll.tsv", CT_EVENT_MEGAMINX,
+                                CT_METHOD_4LLL, CT_STAGE_4LLL, "4lll.01", 39);
+    CT_ASSERT_STR_EQ(e.alg, "F (R U R' U') F'");
+    e = fetch_one("db/seeds/packs/megaminx_4lll.tsv", CT_EVENT_MEGAMINX, CT_METHOD_4LLL,
+                  CT_STAGE_4LLL, "4lll.27", 39);
+    CT_ASSERT_STR_EQ(e.alg, "BR' (R' U L U') (R' U L' U') R2 BR");
+    e = fetch_one("db/seeds/packs/megaminx_4lll.tsv", CT_EVENT_MEGAMINX, CT_METHOD_4LLL,
+                  CT_STAGE_4LLL, "4lll.33", 39);
+    CT_ASSERT_STR_EQ(e.alg, "[(R U R' U) (R' U' R2 U') (R' U R' U R) U] *2");
 }
