@@ -31,6 +31,8 @@ enum {
     ct_iso_month_at = ct_iso_year_digits + 1,
     ct_iso_day_at = ct_iso_year_digits + ct_civ_mar_shift + 1,
     ct_iso_date_len = ct_civ_ten,
+    ct_civ_year_min = 1,
+    ct_civ_year_max = ct_civ_ten * ct_civ_ten * ct_civ_ten * ct_civ_ten - 1,
     ct_queue_first_cap = CT_SESSION_STAMP_MAX
 };
 
@@ -100,6 +102,8 @@ static int ct_iso_scan(const char *iso, long *y, int *m, int *d) {
     ct_session_day_to_date(ct_session_date_to_day(yy, mm, dd), &ry, &rm, &rd);
     if (ry != yy || rm != mm || rd != dd)
         return CT_SESSION_ERR_ARG;
+    if (iso[ct_iso_date_len] != '\0' && iso[ct_iso_date_len] != 'T')
+        return CT_SESSION_ERR_ARG;
     *y = yy;
     *m = mm;
     *d = dd;
@@ -119,6 +123,8 @@ int ct_session_iso_add_days(const char *iso, long days, char *out, unsigned cap)
     long ry;
     int rm, rd;
     ct_session_day_to_date(ct_session_date_to_day(y, m, d) + days, &ry, &rm, &rd);
+    if (ry < ct_civ_year_min || ry > ct_civ_year_max)
+        return CT_SESSION_ERR_ARG;
     int n = snprintf(out, cap, "%04ld-%02d-%02d", ry, rm, rd);
     if (n < 0)
         return CT_SESSION_ERR_DB;
@@ -246,6 +252,9 @@ int ct_session_grade(ct_session *s, ct_grade g, const char *now_iso) {
             }
             fc.last_review_day = ct_session_date_to_day(ly, lm, ld);
             elapsed = (double)(s->today_day - fc.last_review_day);
+            if (elapsed < 0.0) {
+                elapsed = 0.0;
+            }
         }
     }
     ct_fsrs_card out = ct_fsrs_review(s->fsrs, &fc, g, elapsed, s->today_day);

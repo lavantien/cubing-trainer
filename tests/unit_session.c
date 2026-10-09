@@ -164,6 +164,71 @@ CT_SUITE(session_iso_add_days) {
     CT_ASSERT(ct_session_iso_add_days("2026-01-01", 1, NULL, (unsigned)sizeof out) < 0);
 }
 
+CT_SUITE(session_stamp_boundaries) {
+    char out[CT_SESSION_STAMP_MAX];
+    CT_ASSERT(ct_session_iso_add_days("2026-01-01XYZ9876", 5, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("2026-01-01x00:00:00Z", 5, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("2026-01-01 00:00:00Z", 5, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("2026-01-01T00:00:00Z", 5, out, (unsigned)sizeof out) ==
+              CT_SESSION_OK);
+    CT_ASSERT_STR_EQ(out, "2026-01-06T00:00:00Z");
+    CT_ASSERT(ct_session_iso_add_days("2026-10-09", 0, out, (unsigned)sizeof out) == CT_SESSION_OK);
+    CT_ASSERT_STR_EQ(out, "2026-10-09");
+
+    CT_ASSERT(ct_session_iso_add_days("9999-12-31", 1, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("9999-12-31T23:59:59Z", 1, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("9999-12-31", 0, out, (unsigned)sizeof out) == CT_SESSION_OK);
+    CT_ASSERT_STR_EQ(out, "9999-12-31");
+    CT_ASSERT(ct_session_iso_add_days("9998-12-31", 365, out, (unsigned)sizeof out) ==
+              CT_SESSION_OK);
+    CT_ASSERT_STR_EQ(out, "9999-12-31");
+    CT_ASSERT(ct_session_iso_add_days("0001-01-01", -1, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("0001-01-01", -366, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("0001-01-01", 0, out, (unsigned)sizeof out) == CT_SESSION_OK);
+    CT_ASSERT_STR_EQ(out, "0001-01-01");
+
+    sqlite3 *db = session_db();
+    ct_fsrs f = session_fsrs();
+    ct_session s;
+    memset(&s, 0, sizeof s);
+    CT_ASSERT(ct_session_begin(&s, db, &f, "d", "10000-01-01T00:00:00Z", 0, 0) != CT_SESSION_OK);
+    CT_ASSERT(ct_session_begin(&s, db, &f, "d", "2026-01-01XYZ9876", 0, 0) != CT_SESSION_OK);
+    ct_db_close(db);
+}
+
+CT_SUITE(session_stale_last_review) {
+    sqlite3 *db = session_db();
+    ct_fsrs f = session_fsrs();
+    long id = seed_card(db, "review", "a");
+    seed_learning(db, id, "2026-10-01T00:00:00Z");
+    ct_srs_row ahead;
+    memset(&ahead, 0, sizeof ahead);
+    ahead.stability = 10.0;
+    ahead.difficulty = 5.0;
+    snprintf(ahead.due, sizeof ahead.due, "%s", "2026-10-01T00:00:00Z");
+    snprintf(ahead.last_review, sizeof ahead.last_review, "%s", "2026-12-01T00:00:00Z");
+    ahead.reps = 1;
+    ahead.state = 1;
+    CT_ASSERT_EQ(ct_repo_srs_put(db, id, &ahead), CT_REPO_OK);
+
+    ct_session s;
+    CT_ASSERT(ct_session_begin(&s, db, &f, "review", now_stamp, today_num, 0) > 0);
+    CT_ASSERT_EQ(ct_session_current(&s, &(ct_card){0}), CT_SESSION_OK);
+    CT_ASSERT_EQ(ct_session_grade(&s, CT_GOOD, now_stamp), CT_SESSION_OK);
+
+    ct_srs_row row;
+    CT_ASSERT_EQ(ct_repo_srs_get(db, id, &row), CT_REPO_OK);
+    CT_ASSERT_STR_EQ(row.last_review, now_stamp);
+    CT_ASSERT(row.stability >= CT_FSRS_MIN_STABILITY);
+
+    ct_review_row logs[4];
+    int n = ct_repo_reviews_for_card(db, id, logs, 4);
+    CT_ASSERT_EQ(n, 1);
+    CT_ASSERT_DBL_EQ(logs[0].elapsed_days, 0.0, 0.0);
+    ct_session_end(&s, now_stamp);
+    ct_db_close(db);
+}
+
 CT_SUITE(session_flow_golden) {
     sqlite3 *db = session_db();
     ct_fsrs f = session_fsrs();
