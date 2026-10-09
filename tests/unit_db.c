@@ -11,7 +11,7 @@
 #include <sqlite3.h>
 
 #include "framework.h"
-#include "storage/db.h"
+#include "../src/storage/db.h"
 
 #define CT_TEST_DIR "build/test_db"
 
