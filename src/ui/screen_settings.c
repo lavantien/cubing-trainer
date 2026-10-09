@@ -182,6 +182,35 @@ int ct_settings_form_stage_letter(ct_settings_form *f, int orbit, int sticker, c
     return CT_REPO_OK;
 }
 
+int ct_settings_form_swap_letter(ct_settings_form *f, int orbit, int sticker, char letter) {
+    if (f == NULL)
+        return CT_REPO_ERR_ARG;
+    char *arr = ct_settings_orbit(f, orbit);
+    if (arr == NULL || sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+        f->status = CT_REPO_ERR_ARG;
+        return CT_REPO_ERR_ARG;
+    }
+    if (letter < CT_LETTER_FIRST || letter > CT_LETTER_LAST) {
+        f->status = CT_REPO_ERR_ARG;
+        return CT_REPO_ERR_ARG;
+    }
+    int holder = -1;
+    for (int i = 0; i < CT_LETTER_STICKERS; i++) {
+        if (i != sticker && arr[i] == letter) {
+            holder = i;
+        }
+    }
+    if (holder < 0 || arr[sticker] == letter) {
+        return ct_settings_form_stage_letter(f, orbit, sticker, letter);
+    }
+    char freed = arr[sticker];
+    arr[sticker] = letter;
+    arr[holder] = freed;
+    f->dirty = true;
+    f->status = CT_REPO_OK;
+    return CT_REPO_OK;
+}
+
 int ct_settings_form_stage_color(ct_settings_form *f, int face, int channel, int value) {
     if (f == NULL)
         return CT_REPO_ERR_ARG;
@@ -528,11 +557,11 @@ static void ct_settings_draw_letters(ct_app *app, int x, int y, int w, int h) {
         ct_settings.letter_edit = !ct_settings.letter_edit;
         if (!ct_settings.letter_edit && ct_settings.letter_buf[0] >= CT_LETTER_FIRST &&
             ct_settings.letter_buf[0] <= CT_LETTER_LAST)
-            ct_settings_form_stage_letter(f, ct_settings.sel_orbit, ct_settings.sel_sticker,
-                                          ct_settings.letter_buf[0]);
+            ct_settings_form_swap_letter(f, ct_settings.sel_orbit, ct_settings.sel_sticker,
+                                         ct_settings.letter_buf[0]);
     }
     GuiLabel(ct_settings_rect(x + 2 * label_w, y, w - 2 * label_w, row_h),
-             "click a cell then type a letter, red borders mark conflicts");
+             "click a cell then type a letter, a taken letter swaps cells");
 
     int grid_y = y + row_h + margin;
     int grid_h = (h - row_h - margin - margin) / CT_SETTINGS_ORBITS;

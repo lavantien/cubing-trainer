@@ -63,6 +63,7 @@ typedef struct {
 
 void ct_settings_form_open(ct_settings_form *f, sqlite3 *db);
 int ct_settings_form_stage_letter(ct_settings_form *f, int orbit, int sticker, char letter);
+int ct_settings_form_swap_letter(ct_settings_form *f, int orbit, int sticker, char letter);
 int ct_settings_form_stage_color(ct_settings_form *f, int face, int channel, int value);
 int ct_settings_form_stage_move(ct_settings_form *f, unsigned bit);
 int ct_settings_form_stage_retention(ct_settings_form *f, double v);

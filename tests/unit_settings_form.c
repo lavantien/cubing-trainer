@@ -177,6 +177,62 @@ CT_SUITE(settings_form_letters) {
     ct_db_close(db);
 }
 
+CT_SUITE(settings_form_swap) {
+    sqlite3 *db = form_db();
+    ct_settings_form f;
+    ct_settings_form_open(&f, db);
+
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 0, 'A'), CT_REPO_OK);
+    CT_ASSERT(!f.dirty);
+
+    CT_ASSERT_EQ(ct_settings_form_stage_letter(&f, CT_ORBIT_CORNER, 1, 'C'), CT_REPO_CONFLICT);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 1, 'C'), CT_REPO_OK);
+    CT_ASSERT(f.dirty);
+    CT_ASSERT_EQ(f.status, CT_REPO_OK);
+    CT_ASSERT_EQ(f.staged.corner[1], 'C');
+    CT_ASSERT_EQ(f.staged.corner[2], 'B');
+    CT_ASSERT(is_bijection(f.staged.corner));
+    CT_ASSERT(is_bijection(f.staged.edge));
+
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 1, 'B'), CT_REPO_OK);
+    assert_identity_map(&f.staged);
+
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 1, 'Y'), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 1, 'a'), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 1, '\0'), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CENTER, 0, 'A'), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, CT_LETTER_STICKERS, 'A'),
+                 CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, -1, 'A'), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(NULL, CT_ORBIT_CORNER, 0, 'A'), CT_REPO_ERR_ARG);
+    assert_identity_map(&f.staged);
+
+    f.staged.corner[3] = '\0';
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 3, 'A'), CT_REPO_OK);
+    CT_ASSERT_EQ(f.staged.corner[3], 'A');
+    CT_ASSERT_EQ(f.staged.corner[0], '\0');
+
+    int scheme = f.scheme_id;
+    CT_ASSERT_EQ(ct_letter_map_set(db, scheme, CT_ORBIT_CORNER, 3, 'A'), 0);
+    ct_settings_form_open(&f, db);
+    CT_ASSERT(!is_bijection(f.staged.corner));
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 3, 'D'), CT_REPO_OK);
+    CT_ASSERT_EQ(f.staged.corner[3], 'D');
+    assert_identity_map(&f.staged);
+
+    CT_ASSERT_EQ(ct_letter_map_set(db, scheme, CT_ORBIT_EDGE, 5, 'E'), 0);
+    ct_settings_form_open(&f, db);
+    CT_ASSERT(!is_bijection(f.staged.edge));
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_EDGE, 5, 'F'), CT_REPO_OK);
+    CT_ASSERT_EQ(f.staged.edge[5], 'F');
+    CT_ASSERT(is_bijection(f.staged.edge));
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_EDGE, 5, 'A'), CT_REPO_OK);
+    CT_ASSERT_EQ(f.staged.edge[5], 'A');
+    CT_ASSERT_EQ(f.staged.edge[0], 'F');
+    CT_ASSERT(is_bijection(f.staged.edge));
+    ct_db_close(db);
+}
+
 CT_SUITE(settings_form_colors) {
     sqlite3 *db = form_db();
     ct_settings_form f;
