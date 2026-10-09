@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="Learn how to solve the Rubik&#039;s Cube and similar puzzles from two time World Champion speedcuber Feliks Zemdegs.">
+  <meta name="author" content="CubeSkills">
+  <title>CubeSkills Tutorials</title>
+  <link rel="stylesheet" href="/css/cubeskills.css?id=2b15f9fa0af3d353f11bf8734f37b9dc">
+  <link href="//vjs.zencdn.net/5.8.8/video-js.css" rel="stylesheet">
+  <link rel="apple-touch-icon" href="/images/icons/cubeskills-logo-ios.png"/>
+  <link rel="icon" type="image/png" href="/images/icons/cubeskills-favicon.png">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEYWYJBML3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MEYWYJBML3');
+  </script>
+  </head>
+<body>
+<script>
+if (window.location.host==="www.cubeskills.com") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-88908562-1', 'auto');
+    ga('send', 'pageview');
+}
+</script>
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand navbar-logo" href="/">
+          <img class="hidden-xs cubeskills-logo" src="/images/logos/cubeskills-logo-150.png" alt="CubeSkills">
+          <img class="visible-xs cubeskills-logo" src="/images/logos/cubeskills-logo-mobile.png" alt="CubeSkills">
+        </a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="dropdown active">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              Tutorials <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="/categories/3x3"><i class="fa fa-cube fa-fw"></i> 3x3 Videos</a>
+                <a href="/categories/3x3-algs"><i class="fa fa-book fa-fw"></i> 3x3 Algorithms</a>
+                <a href="/categories/3x3oh"><i class="fa fa-cube fa-fw"></i> 3x3 One Handed Videos</a>
+                <a href="/categories/4x4"><i class="fa fa-cube fa-fw"></i> 4x4 Videos</a>
+                <a href="/categories/5x5"><i class="fa fa-cube fa-fw"></i> 5x5 Videos</a>
+                <a href="/categories/big-cubes"><i class="fa fa-cube fa-fw"></i> Big Cube Videos</a>
+                <a href="/categories/megaminx"><i class="fa fa-cube fa-fw"></i> Megaminx Videos</a>
+                <a href="/categories/other-algorithms"><i class="fa fa-book fa-fw"></i> Other Algorithms</a>
+                <a href="/categories/competing"><i class="fa fa-trophy fa-fw"></i> Competing</a>
+                <a href="/categories/livestreams"><i class="fa fa-video-camera fa-fw"></i> Livestreams</a>
+                <a href="/tutorials"><i class="fa fa-th fa-fw"></i> All</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              Blogs <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="/blog"><i class="fa fa-pencil fa-fw"></i> Feliks' Blog</a>
+                <a href="/livestreams"><i class="fa fa-video-camera fa-fw"></i> Livestreams</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              Tools <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="/tools/solve-critiques"><i class="fa fa-cube fa-fw"></i> Solve Critiques</a>
+                <a href="/tools/pll-recognition-trainer"><i class="fa fa-wrench fa-fw"></i> PLL Recognition Trainer</a>
+                <a href="/tools/glossary"><i class="fa fa-book fa-fw"></i> Glossary</a>
+              </li>
+            </ul>
+          </li>
+          <li  ><a href="/faq">FAQ</a></li>
+          <li  ><a href="/membership-options">Premium Membership</a></li>
+        </ul>
+        <!-- Right Side Of Navbar -->
+        <ul class="nav navbar-nav navbar-right">
+          <!-- Authentication Links -->
+                    <li><a href="/login">Login</a></li>
+          <li><a href="/register">Register</a></li>
+                  </ul>
+      </div><!--/.nav-collapse -->
+    </div><!--container -->
+  </nav>
+  <div class="container">
+                  <h1><a href="/categories/3x3">3x3 Videos</a></h1>
+                      <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/introduction-to-speedcubing">
+              <img src="/uploads/images/tutorials/introduction-to-speedcubing.png" 
+                   alt="Introduction to Speedcubing" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-beginner">Beginner</span></h4>
+              <h3>Introduction to Speedcubing</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/the-beginners-method-for-solving-the-rubiks-cube">
+              <img src="/uploads/images/tutorials/the-beginners-method-for-solving-the-rubiks-cube.png" 
+                   alt="The Beginner&#039;s Method for Solving the Rubik&#039;s Cube" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-beginner">Beginner</span></h4>
+              <h3>The Beginner&#039;s Method for Solving the Rubik&#039;s Cube</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/optimising-the-beginners-method">
+              <img src="/uploads/images/tutorials/optimising-the-beginners-method.png" 
+                   alt="Optimising the Beginner&#039;s Method" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-beginner">Beginner</span></h4>
+              <h3>Optimising the Beginner&#039;s Method</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/f2l">
+              <img src="/uploads/images/tutorials/f2l.png" 
+                   alt="F2L" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>F2L</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+                <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/4-look-last-layer">
+              <img src="/uploads/images/tutorials/4-look-last-layer.png" 
+                   alt="4 Look Last Layer" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>4 Look Last Layer</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/intermediate-cross-and-f2l">
+              <img src="/uploads/images/tutorials/intermediate-cross-and-f2l.png" 
+                   alt="Intermediate Cross and F2L" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Intermediate Cross and F2L</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/2-look-last-layer">
+              <img src="/uploads/images/tutorials/2-look-last-layer.png" 
+                   alt=" 2 Look Last Layer" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3> 2 Look Last Layer</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/intermediate-last-layer">
+              <img src="/uploads/images/tutorials/intermediate-last-layer.png" 
+                   alt="Intermediate Last Layer" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Intermediate Last Layer</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+                <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/practicing">
+              <img src="/uploads/images/tutorials/practicing.jpg" 
+                   alt="Practicing" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Practicing</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/fundamentals-of-solve-speed">
+              <img src="/uploads/images/tutorials/fundamentals-of-solve-speed.png" 
+                   alt="Fundamentals of Solve Speed" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Fundamentals of Solve Speed</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/beyond-standard-cfop">
+              <img src="/uploads/images/tutorials/beyond-standard-cfop.png" 
+                   alt="Beyond Standard CFOP" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Beyond Standard CFOP</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/advanced-f2l">
+              <img src="/uploads/images/tutorials/advanced-f2l.png" 
+                   alt="Advanced F2L" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Advanced F2L</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+                <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/advanced-last-layer">
+              <img src="/uploads/images/tutorials/advanced-last-layer.png" 
+                   alt="Advanced Last Layer" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Advanced Last Layer</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/intermediate-example-solves">
+              <img src="/uploads/images/tutorials/intermediate-example-solves.png" 
+                   alt="Intermediate Example Solves" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Intermediate Example Solves</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/advanced-example-solves">
+              <img src="/uploads/images/tutorials/advanced-example-solves.png" 
+                   alt="Advanced Example Solves" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Advanced Example Solves</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+          <hr />
+          <h1><a href="/categories/3x3-algs">3x3 Algorithms</a></h1>
+                      <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/pll-algorithms">
+              <img src="/uploads/images/tutorials/pll-algorithms.png" 
+                   alt="PLL Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>PLL Algorithms</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/oll-algorithms">
+              <img src="/uploads/images/tutorials/oll-algorithms.png" 
+                   alt="OLL Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>OLL Algorithms</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/wv-algorithms">
+              <img src="/uploads/images/tutorials/wv-algorithms.png" 
+                   alt="WV Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>WV Algorithms</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/coll-algorithms">
+              <img src="/uploads/images/tutorials/coll-algorithms.png" 
+                   alt="COLL Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>COLL Algorithms</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+                <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/ble-algorithms">
+              <img src="/uploads/images/tutorials/ble-algorithms.png" 
+                   alt="BLE Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>BLE Algorithms</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/easy-vls-algorithms">
+              <img src="/uploads/images/tutorials/easy-vls-algorithms.png" 
+                   alt="Easy VLS Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Easy VLS Algorithms</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/easy-cls-algorithms">
+              <img src="/uploads/images/tutorials/easy-cls-algorithms.png" 
+                   alt="Easy CLS Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Easy CLS Algorithms</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/f2l-algorithms-different-slot-positions">
+              <img src="/uploads/images/tutorials/f2l-algorithms-different-slot-positions.png" 
+                   alt="F2L Algorithms (Different slot positions)" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>F2L Algorithms (Different slot positions)</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+                <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/useful-f2l-algorithms">
+              <img src="/uploads/images/tutorials/useful-f2l-algorithms.png" 
+                   alt="Useful F2L Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Useful F2L Algorithms</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+          <hr />
+          <h1><a href="/categories/3x3oh">3x3 One Handed Videos</a></h1>
+                      <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/introduction-to-one-handed-speedcubing">
+              <img src="/uploads/images/tutorials/introduction-to-one-handed-speedcubing.png" 
+                   alt="Introduction to One Handed Speedcubing" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-beginner">Beginner</span></h4>
+              <h3>Introduction to One Handed Speedcubing</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/intermediate-one-handed-tips">
+              <img src="/uploads/images/tutorials/intermediate-one-handed-tips.png" 
+                   alt="Intermediate One Handed Tips" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Intermediate One Handed Tips</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/advanced-one-handed-tips">
+              <img src="/uploads/images/tutorials/advanced-one-handed-tips.png" 
+                   alt="Advanced One Handed Tips" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Advanced One Handed Tips</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/intermediate-3x3-oh-example-solves">
+              <img src="/uploads/images/tutorials/intermediate-3x3-oh-example-solves.png" 
+                   alt="Intermediate 3x3 OH Example Solves" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Intermediate 3x3 OH Example Solves</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+                <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/advanced-3x3-oh-example-solves">
+              <img src="/uploads/images/tutorials/advanced-3x3-oh-example-solves.png" 
+                   alt="Advanced 3x3 OH Example Solves" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Advanced 3x3 OH Example Solves</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+          <hr />
+          <h1><a href="/categories/4x4">4x4 Videos</a></h1>
+                      <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/beginners-method-for-solving-the-4x4-cube">
+              <img src="/uploads/images/tutorials/beginners-method-for-solving-the-4x4-cube.png" 
+                   alt="Beginner&#039;s Method for Solving the 4x4 Cube" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-beginner">Beginner</span></h4>
+              <h3>Beginner&#039;s Method for Solving the 4x4 Cube</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/intermediate-tips-and-yau-method">
+              <img src="/uploads/images/tutorials/intermediate-tips-and-yau-method.png" 
+                   alt="Intermediate Tips and Yau Method" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Intermediate Tips and Yau Method</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/advanced-4x4-tips-and-techniques">
+              <img src="/uploads/images/tutorials/advanced-4x4-tips-and-techniques.png" 
+                   alt="Advanced 4x4 Tips and Techniques" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Advanced 4x4 Tips and Techniques</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/intermediate-4x4-example-solves">
+              <img src="/uploads/images/tutorials/intermediate-4x4-example-solves.png" 
+                   alt="Intermediate 4x4 Example Solves" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Intermediate 4x4 Example Solves</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+                <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/advanced-4x4-example-solves">
+              <img src="/uploads/images/tutorials/advanced-4x4-example-solves.png" 
+                   alt="Advanced 4x4 Example Solves" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Advanced 4x4 Example Solves</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+          <hr />
+          <h1><a href="/categories/5x5">5x5 Videos</a></h1>
+                      <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/beginners-method-for-solving-the-5x5-cube">
+              <img src="/uploads/images/tutorials/beginners-method-for-solving-the-5x5-cube.png" 
+                   alt="Beginner&#039;s Method for Solving the 5x5 Cube" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-beginner">Beginner</span></h4>
+              <h3>Beginner&#039;s Method for Solving the 5x5 Cube</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/intermediate-5x5-tips-and-techniques">
+              <img src="/uploads/images/tutorials/intermediate-5x5-tips-and-techniques.png" 
+                   alt="Intermediate 5x5 Tips and Techniques [Reduction Method] " class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Intermediate 5x5 Tips and Techniques [Reduction Method] </h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/the-yau5-method">
+              <img src="/uploads/images/tutorials/the-yau5-method.png" 
+                   alt="The Yau5 Method" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>The Yau5 Method</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/advanced-5x5-tips-and-techniques">
+              <img src="/uploads/images/tutorials/advanced-5x5-tips-and-techniques.png" 
+                   alt="Advanced 5x5 Tips and Techniques    [Reduction Method]" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Advanced 5x5 Tips and Techniques    [Reduction Method]</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+                <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/intermediate-5x5-example-solves">
+              <img src="/uploads/images/tutorials/intermediate-5x5-example-solves.png" 
+                   alt="Intermediate 5x5 Example Solves" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Intermediate 5x5 Example Solves</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/advanced-5x5-example-solves">
+              <img src="/uploads/images/tutorials/advanced-5x5-example-solves.png" 
+                   alt="Advanced 5x5 Example Solves" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Advanced 5x5 Example Solves</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                        </div><!-- row -->
+          <hr />
+          <h1><a href="/categories/big-cubes">Big Cube Videos</a></h1>
+                      <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/big-cube-tutorials">
+              <img src="/uploads/images/tutorials/big-cube-tutorials.png" 
+                   alt="Big Cube Tutorials" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-beginner">Beginner</span></h4>
+              <h3>Big Cube Tutorials</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/intermediate-big-cube-tips">
+              <img src="/uploads/images/tutorials/intermediate-big-cube-tips.png" 
+                   alt="Intermediate Big Cube Tips" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Intermediate Big Cube Tips</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/advanced-big-cube-tips">
+              <img src="/uploads/images/tutorials/advanced-big-cube-tips.png" 
+                   alt="Advanced Big Cube Tips" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Advanced Big Cube Tips</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/intermediate-big-cube-example-solves">
+              <img src="/uploads/images/tutorials/intermediate-big-cube-example-solves.png" 
+                   alt="Intermediate Big Cube Example Solves" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Intermediate Big Cube Example Solves</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+                <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/advanced-big-cube-example-solves">
+              <img src="/uploads/images/tutorials/advanced-big-cube-example-solves.png" 
+                   alt="Advanced Big Cube Example Solves" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Advanced Big Cube Example Solves</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+          <hr />
+          <h1><a href="/categories/megaminx">Megaminx Videos</a></h1>
+                      <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/beginner-megaminx-tutorial">
+              <img src="/uploads/images/tutorials/beginner-megaminx-tutorial.png" 
+                   alt="Beginner Megaminx Tutorial" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-beginner">Beginner</span></h4>
+              <h3>Beginner Megaminx Tutorial</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/intermediate-megaminx-techniques">
+              <img src="/uploads/images/tutorials/intermediate-megaminx-techniques.png" 
+                   alt="Intermediate Megaminx Techniques" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Intermediate Megaminx Techniques</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/advanced-megaminx-techniques">
+              <img src="/uploads/images/tutorials/advanced-megaminx-techniques.png" 
+                   alt="Advanced Megaminx Techniques" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Advanced Megaminx Techniques</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+          <hr />
+          <h1><a href="/categories/other-algorithms">Other Algorithms</a></h1>
+                      <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/onehanded-oll-algorithms">
+              <img src="/uploads/images/tutorials/onehanded-oll-algorithms.png" 
+                   alt="One-Handed OLL Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>One-Handed OLL Algorithms</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/onehanded-pll-algorithms">
+              <img src="/uploads/images/tutorials/onehanded-pll-algorithms.png" 
+                   alt="One-Handed PLL Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>One-Handed PLL Algorithms</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/onehanded-coll-algorithms">
+              <img src="/uploads/images/tutorials/onehanded-coll-algorithms.png" 
+                   alt="One-Handed COLL Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>One-Handed COLL Algorithms</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/useful-last-2-edges-algorithms-4x4">
+              <img src="/uploads/images/tutorials/useful-last-2-edges-algorithms-4x4.png" 
+                   alt="Useful Last 2 Edges Algorithms [4x4]" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Useful Last 2 Edges Algorithms [4x4]</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+                <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/big-cube-oll-algorithms">
+              <img src="/uploads/images/tutorials/big-cube-oll-algorithms.png" 
+                   alt="Big Cube OLL Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Big Cube OLL Algorithms</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/big-cube-pll-algorithms">
+              <img src="/uploads/images/tutorials/big-cube-pll-algorithms.png" 
+                   alt="Big Cube PLL Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Big Cube PLL Algorithms</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/big-cube-coll-algorithms">
+              <img src="/uploads/images/tutorials/big-cube-coll-algorithms.png" 
+                   alt="Big Cube COLL Algorithms" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Big Cube COLL Algorithms</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/easy-parity-cases">
+              <img src="/uploads/images/tutorials/easy-parity-cases.png" 
+                   alt="Easy Parity Cases" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Easy Parity Cases</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+                <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/pll-parity-cases">
+              <img src="/uploads/images/tutorials/pll-parity-cases.png" 
+                   alt="PLL + Parity Cases" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>PLL + Parity Cases</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/last-2-centers-algorithms-5x5">
+              <img src="/uploads/images/tutorials/last-2-centers-algorithms-5x5.png" 
+                   alt="Last 2 Centers Algorithms [5x5]" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Last 2 Centers Algorithms [5x5]</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/last-2-edges-algorithms-5x5">
+              <img src="/uploads/images/tutorials/last-2-edges-algorithms-5x5.png" 
+                   alt="Last 2 Edges Algorithms [5x5]" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-advanced">Advanced</span></h4>
+              <h3>Last 2 Edges Algorithms [5x5]</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+          <hr />
+          <h1><a href="/categories/competing">Competing</a></h1>
+                      <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/competition-advice">
+              <img src="/uploads/images/tutorials/competition-advice.jpg" 
+                   alt="Competition Advice" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-intermediate">Intermediate</span></h4>
+              <h3>Competition Advice</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+          <hr />
+          <h1><a href="/categories/livestreams">Livestreams</a></h1>
+                      <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/2017-livestreams">
+              <img src="/uploads/images/tutorials/2017-livestreams.png" 
+                   alt="2017 Livestreams" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-beginner">Beginner</span></h4>
+              <h3>2017 Livestreams</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/2018-livestreams">
+              <img src="/uploads/images/tutorials/2018-livestreams.png" 
+                   alt="2018 Livestreams" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-beginner">Beginner</span></h4>
+              <h3>2018 Livestreams</h3>
+            </a>
+          </div>
+                      <div class="clearfix visible-sm"></div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/2019-livestreams">
+              <img src="/uploads/images/tutorials/2019-livestreams.png" 
+                   alt="2019 Livestreams" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-beginner">Beginner</span></h4>
+              <h3>2019 Livestreams</h3>
+            </a>
+          </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-3 add-bottom">
+            <a class="tutorials-link" href="/tutorials/2020-livestreams">
+              <img src="/uploads/images/tutorials/2020-livestreams.png" 
+                   alt="2020 Livestreams" class="img-responsive featuredThumbnail"
+              >
+              <h4><span class="label label-beginner">Beginner</span></h4>
+              <h3>2020 Livestreams</h3>
+            </a>
+          </div>
+                        </div><!-- row -->
+          <hr />
+    
+        <div class="footer">
+      <hr />
+      <h3 class="text-center">&copy; CubeSkills</h3> 
+      <div id="socialicons">
+        <a class="icon" href="https://www.youtube.com/cubeskills" title="Follow CubeSkills on YouTube"><i class="fa fa-youtube"></i></a>
+        <a class="icon" href="https://www.instagram.com/cubeskills" title="Follow CubeSkills on Instagram"><i class="fa fa-instagram"></i></a>
+        <a class="icon" href="https://www.facebook.com/cubeskills" title="Follow CubeSkills on Facebook"><i class="fa fa-facebook"></i></a>
+        <a class="icon" href="/contact" title="Contact CubeSkills"><i class="fa fa-envelope"></i></a>
+      </div>
+      <div class="text-center add-bottom">
+        <a href="/about">About</a> |
+        <a href="/privacy-policy">Privacy Policy</a> |
+        <a href="/terms-of-use">Terms of Use</a>
+      </div>
+    </div>
+  <script src="/js/app.js?id=10655cbc9df8796b788d05f016cc3e42"></script>
+  </div><!-- container -->
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>CubeZone - Square-1 solution method - Step 1</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NH801LR252"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NH801LR252');
+</script>
+</head>
+<body>
+
+<!-- BANNER START -->
+<table class="head" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td>&nbsp;</td>
+<td><a href="index.html"><img src="images/cubelogogrey.png" alt=""></a></td>
+<td width="100%">
+<h1>Lars Vandenbergh's CubeZone</h1>
+<div class="quote">Speedcubing taken one step further</div>
+</td>
+</tr>
+</table>
+<!-- BANNER END -->
+
+<!-- NAVIGATION START -->
+<div class="navigation">
+&nbsp;&nbsp;<em>Algorithms</em>&nbsp;&nbsp;
+<a href="zbf2l.html">ZB F2L</a> |
+<a href="oll.html">OLL</a> |
+<a href="pll.html">PLL</a> |
+<a href="coll.html">COLL</a>
+&nbsp;&nbsp;&nbsp;&nbsp;<em>Methods</em>&nbsp;&nbsp;
+<a href="square1.html" class="selected">Square-1</a>
+&nbsp;&nbsp;&nbsp;&nbsp;<em>Tools</em>&nbsp;&nbsp;
+<a href="imagecube.html">ImageCube</a> |
+<a href="imagerevenge.html">ImageRevenge</a>
+&nbsp;&nbsp;&nbsp;&nbsp;<em>Articles</em>&nbsp;&nbsp;
+<a href="crossstudy.html">Cross study</a>
+<a href="xcrossstudy.html">XCross study</a>
+</div>
+<!-- NAVIGATION END -->
+
+<!-- SUBNAVIGATION SQUARE-1 START -->
+<div class="subnavigation">
+&nbsp;&nbsp;<a href="square1.html">Overview</a> |
+<a href="square1notation.html">Notation</a> |
+<a href="square1step1.html" class="selected">Step 1</a> |
+<a href="square1step2.html">Step 2</a> |
+<a href="square1step3.html">Step 3</a> |
+<a href="square1step4.html">Step 4</a> |
+<a href="square1step5.html">Step 5</a> |
+<a href="square1step6.html">Step 6</a>
+</div>
+<!-- SUBNAVIGATION SQUARE-1 END -->
+
+<h2>Square-1 solution method - Step 1</h2>
+
+<h3>Make both layers square</h3>
+
+<p>One of the unique and interesting properties of the Square-1 is that it changes shape when you scramble it. Trying to solve the scrambled puzzle without making it into a cube first can prove to be a tough task since a lot of shapes have very limited options to move pieces around. The state where both layers are square is much more manoeuvrable and it allows us to recognise more easily where each piece belongs.</p>
+
+<p>With this method, the long term goal is to be able to make both layers square in the optimal number of twists of the middle layer. But first we're going to investigate the various shapes that one layer can have, and work out which combinations of bottom layer shapes and top layer shapes are possible.</p>
+
+<h4>Shapes that one layer can have</h4>
+
+<p>A layer can have various combinations of corners (large pieces) and edges (small pieces). There are a few restrictions however. Let's say <em>C</em> is the number of corners and <em>E</em> is the number of edges. Since the inner angle of all pieces must add up to 360&deg;, we know that 60C + 30E = 360 or simpler:</p>
+
+<p align="center">
+<em>2C + E = 12</em>&nbsp;&nbsp;&nbsp;&nbsp;<small>(constraint 1)</small></p>
+
+<p>There are also only 8 small pieces in total and only 8 large pieces in total:</p>
+
+<p align="center"><em>0 &lt;= C &lt;= 8</em>&nbsp;&nbsp;&nbsp;&nbsp;<small>(constraint 2)</small><br />
+<em>0 &lt;= E &lt;= 8</em>&nbsp;&nbsp;&nbsp;&nbsp;<small>(constraint 3)</small></p>
+
+<p>If we consider all possible values for <em>C</em> and calculate the value for <em>E</em> from it using constraint 1, we get the following results:</p>
+
+<ul>
+<li>C=0, E=12</li>
+<li>C=1, E=10</li>
+<li>C=2, E=8</li>
+<li>C=3, E=6</li>
+<li>C=4, E=4</li>
+<li>C=5, E=2</li>
+<li>C=6, E=0</li>
+<li>C=7, E=-2</li>
+<li>C=8, E=-4</li>
+</ul>
+
+<p>If we discard all possibilities with an invalid value of <em>E</em> using constraint 3, only the following 5 options remain that statisfy all constraints:</p>
+
+<ul>
+<li>2 corners and 8 edges</li>
+<li>3 corners and 6 edges</li>
+<li>4 corners and 4 edges</li>
+<li>5 corners and 2 edges</li>
+<li>6 corners and 0 edges</li>
+</ul>
+
+<p>One can now work out all possible arrangements of corners and edges for each subcase, which leads to the following <em>29 shapes</em>:</p>
+
+<center>
+<table class="noborder" cellspacing="10">
+<tr align="center">
+<td colspan="5"><em>2 corners and 8 edges</em><br><em><small>(5 shapes)</small></em></td>
+</tr>
+<tr align="center">
+<td><img src="images/square1/4-4.gif" alt="4-4"></td>
+<td><img src="images/square1/5-3.gif" alt="5-3"></td>
+<td><img src="images/square1/6-2.gif" alt="6-2"></td>
+<td><img src="images/square1/7-1.gif" alt="7-1"></td>
+<td><img src="images/square1/8.gif" alt="8"></td>
+</tr>
+<tr align="center">
+<td><small>4-4</small></td>
+<td><small>5-3</small></td>
+<td><small>6-2</small></td>
+<td><small>7-1</small></td>
+<td><small>8</small></td>
+</tr>
+</table>
+<br />
+<br />
+
+<table class="noborder" cellspacing="10">
+<tr align="center">
+<td colspan="10"><em>3 corners and 6 edges</em><br><em><small>(10 shapes)</small></em></td>
+</tr>
+<tr align="center">
+<td><img src="images/square1/2-2-2.gif" alt="2-2-2"></td>
+<td><img src="images/square1/3-3.gif" alt="3-3"></td>
+<td><img src="images/square1/3-2-1.gif" alt="3-2-1"></td>
+<td><img src="images/square1/3-1-2.gif" alt="3-1-2"></td>
+<td><img src="images/square1/left4-2.gif" alt="Left 4-2"></td>
+<td><img src="images/square1/right4-2.gif" alt="Right 4-2"></td>
+<td><img src="images/square1/4-1-1.gif" alt="4-1-1"></td>
+<td><img src="images/square1/left5-1.gif" alt="Left 5-1"></td>
+<td><img src="images/square1/right5-1.gif" alt="Right 5-1"></td>
+<td><img src="images/square1/6.gif" alt="6"></td>
+</tr>
+<tr align="center">
+<td><small>2-2-2</small></td>
+<td><small>3-3</small></td>
+<td><small>3-2-1</small></td>
+<td><small>3-1-2</small></td>
+<td><small>Left 4-2</small></td>
+<td><small>Right 4-2</small></td>
+<td><small>4-1-1</small></td>
+<td><small>Left 5-1</small></td>
+<td><small>Right 5-1</small></td>
+<td><small>6</small></td>
+</tr>
+</table>
+<br />
+<br />
+
+<table class="noborder" cellspacing="10">
+<tr align="center">
+<td colspan="10"><em>4 corners and 4 edges</em><br><em><small>(10 shapes)</small></em></td>
+</tr>
+<tr align="center">
+<td><img src="images/square1/square.gif" alt="Square"></td>
+<td><img src="images/square1/kite.gif" alt="Kite"></td>
+<td><img src="images/square1/barrel.gif" alt="Barrel"></td>
+<td><img src="images/square1/shield.gif" alt="Shield"></td>
+<td><img src="images/square1/leftfist.gif" alt="Left fist"></td>
+<td><img src="images/square1/rightfist.gif" alt="Right fist"></td>
+<td><img src="images/square1/leftpawn.gif" alt="Left paw"></td>
+<td><img src="images/square1/rightpawn.gif" alt="Right paw"></td>
+<td><img src="images/square1/mushroom.gif" alt="Mushroom"></td>
+<td><img src="images/square1/scallop.gif" alt="Scallop"></td>
+</tr>
+<tr align="center">
+<td><small>Square</small></td>
+<td><small>Kite</small></td>
+<td><small>Barrel</small></td>
+<td><small>Shield</small></td>
+<td><small>Left fist</small></td>
+<td><small>Right fist</small></td>
+<td><small>Left paw</small></td>
+<td><small>Right paw</small></td>
+<td><small>Mushroom</small></td>
+<td><small>Scallop</small></td>
+</tr>
+</table>
+<br />
+<br />
+
+<table class="noborder" cellspacing="10" cellpadding="0">
+<tr align="center">
+<td colspan="3"><em>5 corners and 2 edges</em><br><em><small>(3 shapes)</small></em></td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+<td><em>6 corners and 0 edges</em><br><em><small>(1 shape)</small></em></td>
+</tr>
+<tr align="center">
+<td><img src="images/square1/paired.gif" alt="Paired edges"></td>
+<td><img src="images/square1/perpendicular.gif" alt="Perpendicular edges"></td>
+<td><img src="images/square1/parallel.gif" alt="Parallel edges"></td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+<td><img src="images/square1/star.gif" alt="Star"></td>
+</tr>
+<tr align="center">
+<td><small>Paired edges</small></td>
+<td><small>Perpendicular edges</small></td>
+<td><small>Parallel edges</small></td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+<td><small>Star</small></td>
+</tr>
+</table>
+</center>
+
+<h4>Combining shapes in both layers</h4>
+
+<p>Now that we've worked out all possible shapes one layer can have, we can investigate all shapes the whole puzzle can have by considering all possible combinations of 2 shapes (one shape of the top layer and one shape of the bottom layer). Of course, we don't take the state of the middle layer into account. Since the total amount of corners and edges must at all times be exactly 8, we know that:</p>
+
+<ul>
+<li>if the top layer has <em>6 corners and 0 edges</em>, the bottom layer has to have <em>2 corners and 8 edges</em>.</li>
+<li>if the top layer has <em>5 corners and 2 edges</em>, the bottom layer has to have <em>3 corners and 6 edges</em>.</li>
+<li>if the top layer has <em>4 corners and 4 edges</em>, the bottom layer has to have <em>4 corners and 4 edges</em>.</li>
+<li>if the top layer has <em>3 corners and 6 edges</em>, the bottom layer has to have <em>5 corners and 2 edges</em>.</li>
+<li>if the top layer has <em>2 corners and 8 edges</em>, the bottom layer has to have <em>6 corners and 0 edges</em>.</li>
+</ul>
+
+<p>The last two cases in the list contain the same shapes as the first two cases if you put the cube upside down. So from now on we will only talk about 3 possible configurations:</p>
+
+<ul>
+<li><em>6 corners</em> in the top layer (1 case) and <em>2 corners</em> in the bottom layer (5 cases) which adds up to <em>5 cases</em> in total</li>
+<li><em>5 corners</em> in the top layer (3 cases) and <em>3 corners</em> in the bottom layer (10 cases) which adds up to <em>30 cases</em> in total</li>
+<li><em>4 corners</em> in the top layer (10 cases) and <em>4 corners</em> in the bottom layer (10 cases) which adds up to <em>55 cases</em> in total</li>
+</ul>
+
+<!-- FOOTER START -->
+<table class="footer" cellspacing="0" cellpadding="2" width="100%">
+<tr>
+<td align="left">This page is maintained by <a href="mailto:lars@cubezone.be">Lars Vandenbergh</a></td>
+<td align="center"><a href="http://www.cubezone.be/"><img src="images/cubelogogreysmall.png" alt="CubeZone"></a></td>
+<td align="right">Last update on 16th March 2026</td>
+</tr>
+</table>
+<!-- FOOTER END -->
+
+</body>
+</html>
