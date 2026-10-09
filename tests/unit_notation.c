@@ -25,7 +25,7 @@ static const ct_notation_golden ct_goldens[] = {
     {"M'", 7, CT_FACE_L, 4, 4, 3}, {"E2", 7, CT_FACE_D, 4, 4, 2},  {"S", 7, CT_FACE_F, 4, 4, 1},
     {"x", 7, CT_FACE_R, 1, 7, 1},  {"x'", 7, CT_FACE_R, 1, 7, 3},  {"y2", 7, CT_FACE_U, 1, 7, 2},
     {"z", 7, CT_FACE_F, 1, 7, 1},  {"M", 4, CT_FACE_L, 2, 2, 1},   {"x", 4, CT_FACE_R, 1, 4, 1},
-    {"R", 1, CT_FACE_R, 1, 1, 1},
+    {"x", 2, CT_FACE_R, 1, 2, 1},  {"R", 1, CT_FACE_R, 1, 1, 1},
 };
 
 typedef struct {
@@ -44,7 +44,8 @@ static const ct_notation_canonical ct_canonicals[] = {
     {"4D", 7, "E"},    {"M", 7, "M"},     {"E2", 7, "E2"}, {"S", 7, "S"},    {"x", 7, "x"},
     {"x'", 7, "x'"},   {"y2", 7, "y2"},   {"z", 7, "z"},   {"Rw", 4, "Rw"},  {"2L", 4, "M"},
     {"4Rw", 4, "x"},   {"3Rw", 5, "3Rw"}, {"5Rw", 5, "x"}, {"3L", 5, "M"},   {"3F", 5, "S"},
-    {"Rw", 5, "Rw"},   {"R", 1, "x"},     {"S", 1, "z"},
+    {"Rw", 5, "Rw"},   {"R", 1, "x"},     {"S", 1, "z"},   {"x", 2, "x"},    {"Rw", 2, "x"},
+    {"r", 2, "x"},
 };
 
 static bool ct_move_eq(ct_move a, ct_move b) {
