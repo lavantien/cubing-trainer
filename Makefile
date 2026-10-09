@@ -219,14 +219,7 @@ visual-selftest:
 
 visual: visual-selftest $(RENDER_BIN)
 	rm -rf $(VISUAL_TMP) && mkdir -p $(VISUAL_TMP)
-	$(RENDER_BIN) solved 3 $(VISUAL_TMP)/golden_solved_3.png
-	$(RENDER_BIN) solved 7 $(VISUAL_TMP)/golden_solved_7.png
-	$(RENDER_BIN) scramble 3 $(VISUAL_TMP)/golden_scramble_3.png
-	$(RENDER_BIN) mid 3 $(VISUAL_TMP)/golden_mid_3.png
-	python -I tools/visual_check.py $(GOLDEN_DIR)/golden_solved_3.png $(VISUAL_TMP)/golden_solved_3.png
-	python -I tools/visual_check.py $(GOLDEN_DIR)/golden_solved_7.png $(VISUAL_TMP)/golden_solved_7.png
-	python -I tools/visual_check.py $(GOLDEN_DIR)/golden_scramble_3.png $(VISUAL_TMP)/golden_scramble_3.png
-	python -I tools/visual_check.py $(GOLDEN_DIR)/golden_mid_3.png $(VISUAL_TMP)/golden_mid_3.png
+	python -I tools/run_visual.py $(RENDER_BIN) $(GOLDEN_DIR) $(VISUAL_TMP)
 
 db-verify: $(DBMAKE_BIN)
 	rm -rf $(DBVERIFY_DIR) && mkdir -p $(DBVERIFY_DIR)

@@ -34,7 +34,7 @@ The toolchain spelling is decided, evidence in playground/spike_link/REPORT.md. 
 | fuzz-\<suite\> | run one fuzz suite |
 | mutate | run the token mutation harness over the SCOPE directory or file with the optional SUITE filter |
 | e2e | run every tests/e2e/*.txt through cubing-trainer.exe --headless --script |
-| visual | render the 4 golden scenes fresh into build/visual and compare against tests/golden through tools/visual_check.py |
+| visual | render the 4 golden scenes fresh into build/visual and compare against tests/golden through tools/run_visual.py and tools/visual_check.py |
 | db-verify | build a migrated DB through tools/make_db.c, then check integrity, user_version, and 35 schema assertions through the sqlite3 CLI |
 | diagrams | render every docs/diagrams/*.mmd to PNG through tools/gen_diagrams.mjs |
 | memguard | run tools/memguard.ps1 to enforce the combined working set cap on project processes |
@@ -43,6 +43,8 @@ The toolchain spelling is decided, evidence in playground/spike_link/REPORT.md. 
 | clean | remove build outputs |
 
 make build-headless emits build/bin/render_scene.exe, the headless scene renderer that make visual drives. The e2e script runner is the one pending piece in this set: while tests/e2e holds no script cases, make e2e exits 1 with a message naming the pending runner, so the gate fails honestly.
+
+make visual locks against concurrent runs through build/visual.lock and, for the animated mid scene, renders twice per gate and requires the pair to self-agree before comparing against the committed golden, retrying once on disagreement. Persistent pair disagreement exits 3 as an infra flake, self-agreement that mismatches the golden exits 2 as a regression signal with evidence copied under build/visual_evidence. This split exists because golden_mid_3 flips between two byte-stable rasterization outputs on this machine on a minutes timescale, independent of source and binary, while the static scenes never flip; the phenomenon, proof, and drifted sample are recorded in tests/golden/PROVENANCE.md and playground/m7_visual/.
 
 ## Architecture
 
