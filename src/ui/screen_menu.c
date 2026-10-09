@@ -21,6 +21,10 @@ void ct_ui_update(ct_app *app) {
         ct_screen_cards_update(app);
         return;
     }
+    if (app->screen == CT_SCREEN_REVIEW) {
+        ct_screen_review_update(app);
+        return;
+    }
     if (app->screen != CT_SCREEN_MENU) {
         app->screen = CT_SCREEN_MENU;
         return;
@@ -40,6 +44,10 @@ void ct_ui_update(ct_app *app) {
 void ct_ui_draw(ct_app *app) {
     if (app->screen == CT_SCREEN_CARDS) {
         ct_screen_cards_draw(app);
+        return;
+    }
+    if (app->screen == CT_SCREEN_REVIEW) {
+        ct_screen_review_draw(app);
         return;
     }
     ClearBackground(DARKGRAY);
