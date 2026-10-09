@@ -12,6 +12,15 @@ static const double fsrs_default_weights[CT_FSRS_WEIGHT_COUNT] = {
     0.40255, 1.18385, 3.173, 15.69105, 7.1949, 0.5345, 1.4604, 0.0046,  1.54575, 0.1192,
     1.01925, 1.9395,  0.11,  0.29605,  2.2698, 0.2315, 2.9898, 0.51655, 0.6621};
 
+const double ct_finger_defaults[CT_FINGER_FACE_COUNT][CT_FINGER_DIR_COUNT] = {
+    {CT_FINGER_COST_CHEAP, CT_FINGER_COST_CHEAP},
+    {CT_FINGER_COST_CHEAP, CT_FINGER_COST_CHEAP},
+    {CT_FINGER_COST_MEDIUM, CT_FINGER_COST_MEDIUM},
+    {CT_FINGER_COST_MEDIUM, CT_FINGER_COST_MEDIUM},
+    {CT_FINGER_COST_EXPENSIVE, CT_FINGER_COST_EXPENSIVE},
+    {CT_FINGER_COST_EXPENSIVE, CT_FINGER_COST_EXPENSIVE},
+};
+
 static int parse_double(const char *text, double *out) {
     if (text == NULL || text[0] == '\0') {
         return CT_CFG_BAD_VALUE;
@@ -139,6 +148,7 @@ ct_config ct_config_defaults(void) {
     c.gen.weight_subset = CT_GEN_WEIGHT_SUBSET;
     c.gen.weight_regrip = CT_GEN_WEIGHT_REGRIP;
     c.gen.weight_finger = CT_GEN_WEIGHT_FINGER;
+    memcpy(c.gen.finger_cost, ct_finger_defaults, sizeof c.gen.finger_cost);
     c.gen.setup_bfs_depth = CT_GEN_SETUP_BFS_DEPTH;
     c.gen.fallback_depth = CT_GEN_FALLBACK_DEPTH;
     c.gen.straggler_depth = CT_GEN_STRAGGLER_DEPTH;
@@ -210,6 +220,23 @@ int ct_config_set(ct_config *cfg, const char *key, const char *value) {
             return CT_CFG_UNKNOWN_KEY;
         }
         return assign_double(&cfg->gen.penalty[idx], value);
+    }
+    if (strncmp(key, "gen.finger_cost_", sizeof "gen.finger_cost_" - 1) == 0) {
+        const char *face = key + sizeof "gen.finger_cost_" - 1;
+        unsigned token = ct_move_face_from_char(face[0]);
+        int idx = token == 0 ? -1 : face_bit_index(token);
+        if (idx < 0 || idx >= CT_FINGER_FACE_COUNT) {
+            return CT_CFG_UNKNOWN_KEY;
+        }
+        int dir;
+        if (strcmp(face + 1, "_cw") == 0) {
+            dir = CT_FINGER_DIR_CW;
+        } else if (strcmp(face + 1, "_ccw") == 0) {
+            dir = CT_FINGER_DIR_CCW;
+        } else {
+            return CT_CFG_UNKNOWN_KEY;
+        }
+        return assign_double(&cfg->gen.finger_cost[idx][dir], value);
     }
     if (strcmp(key, "gen.setup_bfs_depth") == 0) {
         return assign_long_lo(&cfg->gen.setup_bfs_depth, value, CT_MIN_DEPTH);

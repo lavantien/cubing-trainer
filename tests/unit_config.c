@@ -382,6 +382,71 @@ CT_SUITE(config_preferred_moves) {
     CT_ASSERT_EQ(c.gen.preferred_moves, 0u);
 }
 
+CT_SUITE(config_finger_defaults) {
+    CT_ASSERT_EQ(CT_FINGER_FACE_COUNT, 6);
+    CT_ASSERT_EQ(CT_FINGER_DIR_COUNT, 2);
+    CT_ASSERT_EQ(CT_FINGER_DIR_CW, 0);
+    CT_ASSERT_EQ(CT_FINGER_DIR_CCW, 1);
+    CT_ASSERT_DBL_EQ(CT_FINGER_COST_CHEAP, 0.2, 1e-12);
+    CT_ASSERT_DBL_EQ(CT_FINGER_COST_MEDIUM, 0.4, 1e-12);
+    CT_ASSERT_DBL_EQ(CT_FINGER_COST_EXPENSIVE, 0.8, 1e-12);
+
+    for (int i = 0; i < CT_FINGER_FACE_COUNT; i++) {
+        char letter = ct_move_face_char(1u << i);
+        double want = letter == 'U' || letter == 'D'   ? CT_FINGER_COST_CHEAP
+                      : letter == 'L' || letter == 'R' ? CT_FINGER_COST_MEDIUM
+                                                       : CT_FINGER_COST_EXPENSIVE;
+        for (int d = 0; d < CT_FINGER_DIR_COUNT; d++) {
+            CT_ASSERT_DBL_EQ(ct_finger_defaults[i][d], want, 1e-12);
+        }
+    }
+
+    ct_config c = ct_config_defaults();
+    for (int i = 0; i < CT_FINGER_FACE_COUNT; i++) {
+        for (int d = 0; d < CT_FINGER_DIR_COUNT; d++) {
+            CT_ASSERT_DBL_EQ(c.gen.finger_cost[i][d], ct_finger_defaults[i][d], 1e-12);
+        }
+    }
+}
+
+CT_SUITE(config_finger_set) {
+    ct_config c = ct_config_defaults();
+
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_R_ccw", "0.7"), 0);
+    int r = face_index('R');
+    CT_ASSERT(r >= 0);
+    CT_ASSERT_DBL_EQ(c.gen.finger_cost[r][CT_FINGER_DIR_CCW], 0.7, 1e-12);
+    CT_ASSERT_DBL_EQ(c.gen.finger_cost[r][CT_FINGER_DIR_CW],
+                     ct_finger_defaults[r][CT_FINGER_DIR_CW], 1e-12);
+
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_B_cw", "1.1"), 0);
+    CT_ASSERT_DBL_EQ(c.gen.finger_cost[face_index('B')][CT_FINGER_DIR_CW], 1.1, 1e-12);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_D_cw", "0.25"), 0);
+    CT_ASSERT_DBL_EQ(c.gen.finger_cost[face_index('D')][CT_FINGER_DIR_CW], 0.25, 1e-12);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_U_ccw", "0.15"), 0);
+    CT_ASSERT_DBL_EQ(c.gen.finger_cost[face_index('U')][CT_FINGER_DIR_CCW], 0.15, 1e-12);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_L_cw", "0.35"), 0);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_F_ccw", "0.95"), 0);
+    CT_ASSERT_DBL_EQ(c.gen.finger_cost[face_index('F')][CT_FINGER_DIR_CCW], 0.95, 1e-12);
+
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_M_cw", "0.5"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_E_cw", "0.5"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_x_cw", "0.5"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_r_cw", "0.5"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_R_cww", "0.5"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_R_cw2", "0.5"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_R", "0.5"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_R_", "0.5"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost__cw", "0.5"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_", "0.5"), -1);
+    CT_ASSERT_DBL_EQ(c.gen.finger_cost[r][CT_FINGER_DIR_CCW], 0.7, 1e-12);
+
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_R_cw", "abc"), -2);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_U_ccw", "nan"), -2);
+    CT_ASSERT_DBL_EQ(c.gen.finger_cost[r][CT_FINGER_DIR_CW],
+                     ct_finger_defaults[r][CT_FINGER_DIR_CW], 1e-12);
+}
+
 CT_SUITE(config_clamping) {
     ct_config c = ct_config_defaults();
 

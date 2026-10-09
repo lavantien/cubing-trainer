@@ -143,6 +143,11 @@ typedef enum ct_cfg_status {
 #define CT_GEN_WEIGHT_SUBSET 2.0
 #define CT_GEN_WEIGHT_REGRIP 1.5
 #define CT_GEN_WEIGHT_FINGER 0.5
+#define CT_FINGER_FACE_COUNT 6
+#define CT_FINGER_DIR_COUNT 2
+#define CT_FINGER_COST_CHEAP 0.2
+#define CT_FINGER_COST_MEDIUM 0.4
+#define CT_FINGER_COST_EXPENSIVE 0.8
 #define CT_GEN_SETUP_BFS_DEPTH 4
 #define CT_GEN_FALLBACK_DEPTH 5
 #define CT_GEN_STRAGGLER_DEPTH 6
@@ -240,6 +245,10 @@ typedef struct ct_fsrs_cfg {
     double decay;
 } ct_fsrs_cfg;
 
+typedef enum ct_finger_dir { CT_FINGER_DIR_CW = 0, CT_FINGER_DIR_CCW = 1 } ct_finger_dir;
+
+extern const double ct_finger_defaults[CT_FINGER_FACE_COUNT][CT_FINGER_DIR_COUNT];
+
 typedef struct ct_gen_cfg {
     unsigned preferred_moves;
     double penalty[CT_FACE_COUNT];
@@ -247,6 +256,7 @@ typedef struct ct_gen_cfg {
     double weight_subset;
     double weight_regrip;
     double weight_finger;
+    double finger_cost[CT_FINGER_FACE_COUNT][CT_FINGER_DIR_COUNT];
     int setup_bfs_depth;
     int fallback_depth;
     int straggler_depth;
