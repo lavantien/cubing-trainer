@@ -1,0 +1,10 @@
+flowchart LR
+    A[session begin on deck] --> B[load due card ids ordered by due date]
+    B --> C[show current card front with alg hidden]
+    C --> D[user reveals alg]
+    D --> E[grade again hard good or easy]
+    E --> F[fsrs review updates stability difficulty and due]
+    F --> G[persist srs row and review log]
+    G --> H{next due card}
+    H -- yes --> C
+    H -- no --> I[write session log and end]

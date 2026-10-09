@@ -1,0 +1,7 @@
+flowchart LR
+    A[ui screens update and draw] --> B[repo layer prepared statements]
+    B --> C[(sqlite trainer db)]
+    C --> D[settings rows]
+    D --> E[merge over config defaults]
+    E --> F[ct_config by pointer]
+    F --> A
