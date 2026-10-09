@@ -1,8 +1,11 @@
 #ifndef CT_UI_H
 #define CT_UI_H
 
+#include <limits.h>
+
 #include "app/app.h"
 #include "storage/repo_cards.h"
+#include "storage/repo_settings.h"
 
 void ct_ui_update(ct_app *app);
 void ct_ui_draw(ct_app *app);
@@ -32,6 +35,43 @@ void ct_cards_form_cancel(ct_cards_form *f);
 
 void ct_screen_cards_update(ct_app *app);
 void ct_screen_cards_draw(ct_app *app);
+
+enum {
+    CT_SETTINGS_FACE_COUNT = CT_LETTER_FACES,
+    CT_SETTINGS_CHANNELS = 3,
+    CT_SETTINGS_COLOR_MAX = UCHAR_MAX,
+    CT_SETTINGS_BUFFER_CORNER_DEFAULT = 0,
+    CT_SETTINGS_BUFFER_EDGE_DEFAULT = 2,
+    CT_SETTINGS_TEXT_MAX = (1 << 5),
+};
+
+typedef struct {
+    sqlite3 *db;
+    int scheme_id;
+    ct_letter_map map;
+    ct_letter_map staged;
+    unsigned move_mask;
+    double retention;
+    double move_seconds;
+    int buffer_corner;
+    int buffer_edge;
+    unsigned char colors[CT_SETTINGS_FACE_COUNT][CT_SETTINGS_CHANNELS];
+    bool dirty;
+    int status;
+} ct_settings_form;
+
+void ct_settings_form_open(ct_settings_form *f, sqlite3 *db);
+int ct_settings_form_stage_letter(ct_settings_form *f, int orbit, int sticker, char letter);
+int ct_settings_form_stage_color(ct_settings_form *f, int face, int channel, int value);
+int ct_settings_form_stage_move(ct_settings_form *f, unsigned bit);
+int ct_settings_form_stage_retention(ct_settings_form *f, double v);
+int ct_settings_form_stage_move_seconds(ct_settings_form *f, double v);
+int ct_settings_form_stage_buffer(ct_settings_form *f, int orbit, int sticker);
+int ct_settings_form_save(ct_settings_form *f);
+void ct_settings_form_cancel(ct_settings_form *f);
+
+void ct_screen_settings_update(ct_app *app);
+void ct_screen_settings_draw(ct_app *app);
 
 #include "engine/cube.h"
 #include "render/anim.h"
