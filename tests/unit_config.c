@@ -306,6 +306,12 @@ CT_SUITE(config_set_errors) {
     CT_ASSERT_EQ(ct_config_set(&c, "srs.wabc", "1"), -1);
     CT_ASSERT_EQ(ct_config_set(&c, "srs.w-1", "1"), -1);
     CT_ASSERT_EQ(ct_config_set(&c, "srs.w", "1"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "srs.w 1", "1"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "srs.w1 ", "1"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "srs.w01", "1"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "srs.w00", "1"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "srs.w+1", "1"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "srs.w1x", "1"), -1);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.penalty_Q", "1"), -1);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.penalty_r", "1"), -1);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.penalty_rr", "1"), -1);
@@ -335,6 +341,8 @@ CT_SUITE(config_set_errors) {
     CT_ASSERT_EQ(ct_config_set(&c, "gen.setup_bfs_depth", "4.5"), -2);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.setup_bfs_depth", "+"), -2);
     CT_ASSERT_EQ(ct_config_set(&c, "fuzz.iterations", "x"), -2);
+    CT_ASSERT_EQ(ct_config_set(&c, "fuzz.iterations", "0"), -2);
+    CT_ASSERT_EQ(ct_config_set(&c, "fuzz.iterations", "-5"), -2);
     CT_ASSERT_EQ(ct_config_set(&c, "anim.move_seconds", "-"), -2);
 
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "RUQ"), -2);
@@ -368,18 +376,24 @@ CT_SUITE(config_preferred_moves) {
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "drruU"), 0);
     CT_ASSERT_EQ(c.gen.preferred_moves, rud);
 
-    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "xyz"), 0);
-    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_X | CT_MOVE_BIT_Y | CT_MOVE_BIT_Z);
-    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "XYZ"), 0);
-    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_X | CT_MOVE_BIT_Y | CT_MOVE_BIT_Z);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "MES"), 0);
     CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_M | CT_MOVE_BIT_E | CT_MOVE_BIT_S);
-    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "UDLRFBMESxyz"), 0);
-    CT_ASSERT_EQ(c.gen.preferred_moves, 0xFFFu);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "UDLRFBMES"), 0);
+    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_U | CT_MOVE_BIT_D | CT_MOVE_BIT_L |
+                                            CT_MOVE_BIT_R | CT_MOVE_BIT_F | CT_MOVE_BIT_B |
+                                            CT_MOVE_BIT_M | CT_MOVE_BIT_E | CT_MOVE_BIT_S);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "Rr"), 0);
     CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_R);
-    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", ""), 0);
-    CT_ASSERT_EQ(c.gen.preferred_moves, 0u);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "xyz"), -2);
+    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_R);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "XYZ"), -2);
+    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_R);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "RUx"), -2);
+    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_R);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "R U"), -2);
+    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_R);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", ""), -2);
+    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_R);
 }
 
 CT_SUITE(config_finger_defaults) {
@@ -474,6 +488,13 @@ CT_SUITE(config_domain_rejection) {
     CT_ASSERT_STR_EQ(c.db.filename, CT_DB_FILENAME);
     CT_ASSERT_EQ(ct_config_set(&c, "db.filename", "plain-name_1.db"), 0);
     CT_ASSERT_STR_EQ(c.db.filename, "plain-name_1.db");
+
+    CT_ASSERT_EQ(ct_config_set(&c, "srs.request_retention", "0x1.8p3"), 0);
+    CT_ASSERT_DBL_EQ(c.fsrs.request_retention, CT_FSRS_RETENTION_MAX, 1e-12);
+    CT_ASSERT_EQ(ct_config_set(&c, "srs.max_ivl_days", "0x1p4"), 0);
+    CT_ASSERT_DBL_EQ(c.fsrs.max_ivl_days, 16.0, 1e-12);
+    CT_ASSERT_EQ(ct_config_set(&c, "fuzz.iterations", "1"), 0);
+    CT_ASSERT_EQ(c.fuzz.iterations, 1);
 }
 
 CT_SUITE(config_clamping) {

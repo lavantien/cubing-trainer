@@ -73,7 +73,7 @@ static const ct_ck_entry ct_ck_table[] = {
     {"window.width", CT_CK_WIDTH, CT_CKV_LONG_MIN},
     {"window.height", CT_CK_HEIGHT, CT_CKV_LONG_MIN},
     {"window.target_fps", CT_CK_FPS, CT_CKV_LONG_LO},
-    {"fuzz.iterations", CT_CK_FUZZIT, CT_CKV_LONG_FREE},
+    {"fuzz.iterations", CT_CK_FUZZIT, CT_CKV_LONG_MIN},
     {"db.filename", CT_CK_FILENAME, CT_CKV_FILENAME},
 };
 
@@ -123,8 +123,7 @@ static const ct_ck_face_bit ct_ck_face_bits[] = {
     {'L', CT_MOVE_BIT_L}, {'l', CT_MOVE_BIT_L}, {'R', CT_MOVE_BIT_R}, {'r', CT_MOVE_BIT_R},
     {'F', CT_MOVE_BIT_F}, {'f', CT_MOVE_BIT_F}, {'B', CT_MOVE_BIT_B}, {'b', CT_MOVE_BIT_B},
     {'M', CT_MOVE_BIT_M}, {'m', CT_MOVE_BIT_M}, {'E', CT_MOVE_BIT_E}, {'e', CT_MOVE_BIT_E},
-    {'S', CT_MOVE_BIT_S}, {'s', CT_MOVE_BIT_S}, {'x', CT_MOVE_BIT_X}, {'X', CT_MOVE_BIT_X},
-    {'y', CT_MOVE_BIT_Y}, {'Y', CT_MOVE_BIT_Y}, {'z', CT_MOVE_BIT_Z}, {'Z', CT_MOVE_BIT_Z},
+    {'S', CT_MOVE_BIT_S}, {'s', CT_MOVE_BIT_S},
 };
 
 static int ct_ck_face_index(char c) {
@@ -201,7 +200,8 @@ static void ct_ck_expect_double(ct_config *expected, int slot, int kind, double 
 static bool ct_ck_expect_long(ct_config *expected, int slot, int kind, long value) {
     int *field = ct_ck_int_field(expected, slot);
     if (kind == CT_CKV_LONG_MIN) {
-        if (value < CT_WINDOW_MIN_DIMENSION) {
+        long min = slot == CT_CK_FUZZIT ? CT_FUZZ_MIN_ITERATIONS : CT_WINDOW_MIN_DIMENSION;
+        if (value < min) {
             return false;
         }
         *field = (int)value;
@@ -348,7 +348,7 @@ CT_SUITE(fuzz_config_keys) {
 }
 
 CT_SUITE(fuzz_config_moves) {
-    static const char invalid[] = "qQwW2!#";
+    static const char invalid[] = "qQwW2!#xXyYzZ";
     int iters = ct_fuzz_iterations();
     CT_ASSERT(iters >= 1);
     for (int i = 0; i < iters; i++) {
@@ -384,6 +384,9 @@ CT_SUITE(fuzz_config_moves) {
                 break;
             }
             mask |= ct_ck_face_bits[hit].bit;
+        }
+        if (mask == 0) {
+            valid = false;
         }
         unsigned sentinel = (unsigned)ct_sfc64_range(&s, 1u << CT_FACE_COUNT);
         cfg.gen.preferred_moves = sentinel;

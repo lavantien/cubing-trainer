@@ -84,16 +84,6 @@ static int assign_double_range(double *field, const char *value, double lo, doub
     return CT_CFG_OK;
 }
 
-static int assign_long(int *field, const char *value) {
-    long parsed = 0;
-    int rc = parse_long(value, &parsed);
-    if (rc != CT_CFG_OK) {
-        return rc;
-    }
-    *field = (int)parsed;
-    return CT_CFG_OK;
-}
-
 static int assign_long_lo(int *field, const char *value, long lo) {
     long parsed = 0;
     int rc = parse_long(value, &parsed);
@@ -189,11 +179,21 @@ int ct_config_set(ct_config *cfg, const char *key, const char *value) {
     }
     if (strncmp(key, "srs.w", sizeof "srs.w" - 1) == 0) {
         const char *num = key + sizeof "srs.w" - 1;
+        if (num[0] == '\0') {
+            return CT_CFG_UNKNOWN_KEY;
+        }
+        for (const char *p = num; *p != '\0'; p++) {
+            if (*p < '0' || *p > '9') {
+                return CT_CFG_UNKNOWN_KEY;
+            }
+        }
+        if (num[0] == '0' && num[1] != '\0') {
+            return CT_CFG_UNKNOWN_KEY;
+        }
         errno = 0;
         char *end = NULL;
         long idx = strtol(num, &end, 10);
-        if (end == num || end[0] != '\0' || errno == ERANGE || idx < 0 ||
-            idx >= CT_FSRS_WEIGHT_COUNT) {
+        if (end[0] != '\0' || errno == ERANGE || idx >= CT_FSRS_WEIGHT_COUNT) {
             return CT_CFG_UNKNOWN_KEY;
         }
         return assign_double(&cfg->fsrs.w[idx], value);
@@ -202,10 +202,13 @@ int ct_config_set(ct_config *cfg, const char *key, const char *value) {
         unsigned mask = 0;
         for (const char *p = value; *p != '\0'; p++) {
             unsigned face = face_from_char_ci(*p);
-            if (face == 0) {
+            if (face == 0 || (face & CT_MOVE_ROTATION_MASK) != 0) {
                 return CT_CFG_BAD_VALUE;
             }
             mask |= face;
+        }
+        if (mask == 0) {
+            return CT_CFG_BAD_VALUE;
         }
         cfg->gen.preferred_moves = mask;
         return CT_CFG_OK;
@@ -282,7 +285,7 @@ int ct_config_set(ct_config *cfg, const char *key, const char *value) {
         return CT_CFG_OK;
     }
     if (strcmp(key, "fuzz.iterations") == 0) {
-        return assign_long(&cfg->fuzz.iterations, value);
+        return assign_long_min(&cfg->fuzz.iterations, value, CT_FUZZ_MIN_ITERATIONS);
     }
     return CT_CFG_UNKNOWN_KEY;
 }
