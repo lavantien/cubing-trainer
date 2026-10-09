@@ -159,7 +159,7 @@ int ct_renderer_quads(const ct_renderer *r, const ct_cube *c, const ct_color_sch
 }
 
 void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim *anim,
-                      const ct_color_scheme *cs, Camera3D cam) {
+                      const ct_color_scheme *cs, Camera3D cam, double move_seconds) {
     if (r == NULL || base == NULL || cs == NULL) {
         return;
     }
@@ -170,7 +170,6 @@ void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim *
     if (anim != NULL && ct_anim_active(anim)) {
         m = anim->moves[anim->head];
         if (move_valid(r->n, m)) {
-            double move_seconds = (double)CT_RENDERER_MOVE_MILLIS / 1000.0;
             double eased = ct_ease_cubic_in_out(anim->elapsed / move_seconds);
             ct_v3 normal = ct_frames[m.face].normal;
             int sign = (normal.x != 0) ? normal.x : ((normal.y != 0) ? normal.y : normal.z);

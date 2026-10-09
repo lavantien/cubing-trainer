@@ -108,6 +108,12 @@ static int facelet_at(const ct_cube *c, int face, int row, int col) {
     return c->facelet[face * CT_CUBE_STRIDE * CT_CUBE_STRIDE + row * CT_CUBE_STRIDE + col];
 }
 
+CT_SUITE(unit_renderer_draw_signature) {
+    void (*pin)(const ct_renderer *, const ct_cube *, const ct_anim *, const ct_color_scheme *,
+                Camera3D, double) = ct_renderer_draw;
+    CT_ASSERT(pin == ct_renderer_draw);
+}
+
 CT_SUITE(unit_renderer_init) {
     ct_renderer r;
     ct_renderer_init(&r, 3);

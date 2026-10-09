@@ -2,6 +2,7 @@
 
 #include <string.h>
 
+#include "config/config.h"
 #include "engine/cube.h"
 #include "engine/notation.h"
 #include "render/anim.h"
@@ -29,6 +30,11 @@ static Camera3D headless_camera(void) {
     cam.fovy = CT_HEADLESS_CAM_FOVY;
     cam.projection = CAMERA_PERSPECTIVE;
     return cam;
+}
+
+static double headless_move_seconds(void) {
+    return (double)CT_RENDERER_MOVE_MILLIS /
+           (CT_DECIMAL_BASE * CT_DECIMAL_BASE * CT_DECIMAL_BASE);
 }
 
 int ct_headless_scene_id(const char *name) {
@@ -98,7 +104,7 @@ int ct_headless_render_scene(int scene, int n, const char *alg, const char *out_
             return CT_HEADLESS_E_ALG;
         }
         ct_anim_push(&anim, move);
-        anim.elapsed = CT_HEADLESS_MID_PROGRESS * ((double)CT_RENDERER_MOVE_MILLIS / 1000.0);
+        anim.elapsed = CT_HEADLESS_MID_PROGRESS * headless_move_seconds();
         anim_view = &anim;
     }
 
@@ -116,7 +122,7 @@ int ct_headless_render_scene(int scene, int n, const char *alg, const char *out_
 
     BeginTextureMode(target);
     ClearBackground(RAYWHITE);
-    ct_renderer_draw(&renderer, &cube, anim_view, &scheme, cam);
+    ct_renderer_draw(&renderer, &cube, anim_view, &scheme, cam, headless_move_seconds());
     EndTextureMode();
 
     Image frame = LoadImageFromTexture(target.texture);

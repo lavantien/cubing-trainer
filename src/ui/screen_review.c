@@ -44,10 +44,6 @@ typedef struct {
 
 static ct_review_screen ct_review;
 
-static double ct_review_move_seconds(void) {
-    return (double)CT_RENDERER_MOVE_MILLIS / (CT_DECIMAL_BASE * CT_DECIMAL_BASE * CT_DECIMAL_BASE);
-}
-
 static const char *ct_review_pick_alg(const ct_card *c) {
     if (c->alg_3x3[0] != '\0') {
         return c->alg_3x3;
@@ -294,7 +290,7 @@ void ct_screen_review_update(ct_app *app) {
         return;
     }
     ct_review_form *f = &ct_review.form;
-    ct_anim_step_result r = ct_anim_update(&f->anim, app->fixed_dt, ct_review_move_seconds());
+    ct_anim_step_result r = ct_anim_update(&f->anim, app->fixed_dt, app->cfg.anim.move_seconds);
     if (r.just_completed) {
         ct_apply(&f->cube, r.move);
         f->scrub_index = f->move_count - f->anim.count;
@@ -373,7 +369,8 @@ void ct_screen_review_draw(ct_app *app) {
     int status_h = row_h;
 
     BeginScissorMode(0, 0, pane_w, h);
-    ct_renderer_draw(&ct_review.renderer, &f->cube, &f->anim, &ct_review.scheme, ct_review.camera);
+    ct_renderer_draw(&ct_review.renderer, &f->cube, &f->anim, &ct_review.scheme, ct_review.camera,
+                     app->cfg.anim.move_seconds);
     EndScissorMode();
 
     char line[CT_REVIEW_LINE_MAX];

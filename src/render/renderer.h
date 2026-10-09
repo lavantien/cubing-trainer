@@ -41,6 +41,6 @@ int ct_renderer_quads(const ct_renderer *r, const ct_cube *c, const ct_color_sch
                       ct_sticker_quad *out, int cap);
 bool ct_renderer_slab_contains(int n, ct_move m, ct_v3 center);
 void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim *anim,
-                      const ct_color_scheme *cs, Camera3D cam);
+                      const ct_color_scheme *cs, Camera3D cam, double move_seconds);
 
 #endif
