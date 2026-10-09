@@ -80,25 +80,28 @@ int ct_transform_conjugate(const ct_move *setup, int setup_count, const ct_move 
 }
 
 int ct_transform_simplify(const ct_move *in, int count, ct_move *out, int cap) {
-    if (count < 0 || cap < 0 || (count > 0 && (in == NULL || out == NULL)) ||
-        !moves_valid(in, count))
+    if (count < 0 || count > CT_TRANSFORM_ASSEMBLY_MAX || cap < 0 ||
+        (count > 0 && (in == NULL || out == NULL)) || !moves_valid(in, count))
         return -1;
+    ct_move stack[CT_TRANSFORM_ASSEMBLY_MAX];
     int cnt = 0;
     for (int i = 0; i < count; i++) {
         ct_move m = in[i];
         int quarter = m.quarter;
-        while (cnt > 0 && quarter != 0 && out[cnt - 1].face == m.face &&
-               out[cnt - 1].depth_from == m.depth_from && out[cnt - 1].depth_to == m.depth_to) {
-            quarter = (out[cnt - 1].quarter + quarter) % CT_MOVE_QUARTERS;
+        while (cnt > 0 && quarter != 0 && stack[cnt - 1].face == m.face &&
+               stack[cnt - 1].depth_from == m.depth_from && stack[cnt - 1].depth_to == m.depth_to) {
+            quarter = (stack[cnt - 1].quarter + quarter) % CT_MOVE_QUARTERS;
             cnt--;
         }
         if (quarter != 0) {
-            if (cnt == cap)
-                return -1;
-            out[cnt] = m;
-            out[cnt].quarter = quarter;
+            stack[cnt] = m;
+            stack[cnt].quarter = quarter;
             cnt++;
         }
     }
+    if (cnt > cap)
+        return -1;
+    for (int i = 0; i < cnt; i++)
+        out[i] = stack[i];
     return cnt;
 }

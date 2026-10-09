@@ -1,7 +1,13 @@
 #ifndef CT_TRANSFORM_H
 #define CT_TRANSFORM_H
 
+#include "config/config.h"
 #include "engine/cube.h"
+
+enum {
+    CT_TRANSFORM_ASSEMBLY_MAX = CT_CLASSIFY_MOVES_MAX + CT_CLASSIFY_SETUP_MAX * 2 +
+    CT_CLASSIFY_PART_MAX * 2
+};
 
 int ct_transform_inverse(const ct_move *in, int count, ct_move *out);
 int ct_transform_mirror(const ct_move *in, int count, ct_move *out);

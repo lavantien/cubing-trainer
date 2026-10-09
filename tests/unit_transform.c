@@ -498,6 +498,156 @@ CT_SUITE(transform_simplify_planted) {
     }
 }
 
+CT_SUITE(transform_simplify_cap_output_bound) {
+    ct_move out[CT_T_CAP];
+    ct_move again[CT_T_CAP];
+    ct_move plant = {CT_T_SENTINEL, CT_T_SENTINEL, CT_T_SENTINEL, CT_T_SENTINEL};
+    ct_cube a;
+    ct_cube b;
+    int m;
+    int m2;
+
+    ct_move reviewer[3] = {{CT_FACE_U, 1, 1, 1}, {CT_FACE_R, 1, 1, 1}, {CT_FACE_R, 1, 1, 3}};
+    m = ct_transform_simplify(reviewer, 3, out, 1);
+    CT_ASSERT_EQ(m, 1);
+    CT_ASSERT_EQ(out[0].face, CT_FACE_U);
+    CT_ASSERT_EQ(out[0].depth_from, 1);
+    CT_ASSERT_EQ(out[0].depth_to, 1);
+    CT_ASSERT_EQ(out[0].quarter, 1);
+    ct_cube_init(&a, 3);
+    apply_seq(&a, reviewer, 3);
+    ct_cube_init(&b, 3);
+    apply_seq(&b, out, m);
+    CT_ASSERT(ct_cube_equal(&a, &b));
+    m2 = ct_transform_simplify(out, m, again, 1);
+    CT_ASSERT_EQ(m2, m);
+    CT_ASSERT(seq_equal(out, again, m));
+
+    ct_move telescope[5] = {{CT_FACE_U, 1, 1, 1},
+                            {CT_FACE_R, 1, 1, 1},
+                            {CT_FACE_F, 1, 1, 1},
+                            {CT_FACE_F, 1, 1, 3},
+                            {CT_FACE_R, 1, 1, 3}};
+    m = ct_transform_simplify(telescope, 5, out, 1);
+    CT_ASSERT_EQ(m, 1);
+    CT_ASSERT_EQ(out[0].face, CT_FACE_U);
+    CT_ASSERT_EQ(out[0].quarter, 1);
+    ct_cube_init(&a, 3);
+    apply_seq(&a, telescope, 5);
+    ct_cube_init(&b, 3);
+    apply_seq(&b, out, m);
+    CT_ASSERT(ct_cube_equal(&a, &b));
+    m2 = ct_transform_simplify(out, m, again, 1);
+    CT_ASSERT_EQ(m2, m);
+    CT_ASSERT(seq_equal(out, again, m));
+
+    ct_move shoulder[4] = {
+        {CT_FACE_U, 1, 1, 1}, {CT_FACE_R, 1, 1, 1}, {CT_FACE_F, 1, 1, 1}, {CT_FACE_F, 1, 1, 3}};
+    m = ct_transform_simplify(shoulder, 4, out, 2);
+    CT_ASSERT_EQ(m, 2);
+    CT_ASSERT_EQ(out[0].face, CT_FACE_U);
+    CT_ASSERT_EQ(out[1].face, CT_FACE_R);
+    ct_cube_init(&a, 3);
+    apply_seq(&a, shoulder, 4);
+    ct_cube_init(&b, 3);
+    apply_seq(&b, out, m);
+    CT_ASSERT(ct_cube_equal(&a, &b));
+    m2 = ct_transform_simplify(out, m, again, 2);
+    CT_ASSERT_EQ(m2, m);
+    CT_ASSERT(seq_equal(out, again, m));
+
+    ct_move buried_merge[5] = {{CT_FACE_U, 1, 1, 1},
+                               {CT_FACE_U, 1, 1, 1},
+                               {CT_FACE_R, 1, 1, 1},
+                               {CT_FACE_R, 1, 1, 3},
+                               {CT_FACE_U, 1, 1, 3}};
+    m = ct_transform_simplify(buried_merge, 5, out, 1);
+    CT_ASSERT_EQ(m, 1);
+    CT_ASSERT_EQ(out[0].face, CT_FACE_U);
+    CT_ASSERT_EQ(out[0].quarter, 1);
+    ct_cube_init(&a, 3);
+    apply_seq(&a, buried_merge, 5);
+    ct_cube_init(&b, 3);
+    apply_seq(&b, out, m);
+    CT_ASSERT(ct_cube_equal(&a, &b));
+    m2 = ct_transform_simplify(out, m, again, 1);
+    CT_ASSERT_EQ(m2, m);
+    CT_ASSERT(seq_equal(out, again, m));
+
+    ct_move head_cancel[3] = {{CT_FACE_R, 1, 1, 1}, {CT_FACE_R, 1, 1, 3}, {CT_FACE_U, 1, 1, 1}};
+    m = ct_transform_simplify(head_cancel, 3, out, 1);
+    CT_ASSERT_EQ(m, 1);
+    CT_ASSERT_EQ(out[0].face, CT_FACE_U);
+    CT_ASSERT_EQ(out[0].quarter, 1);
+    ct_cube_init(&a, 3);
+    apply_seq(&a, head_cancel, 3);
+    ct_cube_init(&b, 3);
+    apply_seq(&b, out, m);
+    CT_ASSERT(ct_cube_equal(&a, &b));
+
+    ct_move full_quarters[4] = {
+        {CT_FACE_U, 1, 1, 1}, {CT_FACE_U, 1, 1, 1}, {CT_FACE_U, 1, 1, 1}, {CT_FACE_U, 1, 1, 1}};
+    CT_ASSERT_EQ(ct_transform_simplify(full_quarters, 4, out, 0), 0);
+
+    ct_move overflow[3] = {{CT_FACE_U, 1, 1, 1}, {CT_FACE_R, 1, 1, 1}, {CT_FACE_F, 1, 1, 1}};
+    for (int i = 0; i < CT_T_CAP; i++)
+        out[i] = plant;
+    CT_ASSERT_EQ(ct_transform_simplify(overflow, 3, out, 2), -1);
+    bool intact = true;
+    for (int i = 0; i < CT_T_CAP; i++)
+        if (!seq_equal(&out[i], &plant, 1))
+            intact = false;
+    CT_ASSERT(intact);
+}
+
+CT_SUITE(transform_simplify_assembly_bound) {
+    ct_move full[CT_TRANSFORM_ASSEMBLY_MAX];
+    ct_move out[CT_TRANSFORM_ASSEMBLY_MAX];
+    for (int i = 0; i < CT_TRANSFORM_ASSEMBLY_MAX; i++) {
+        full[i].face = i % CT_CUBE_FACE_COUNT;
+        full[i].depth_from = 1;
+        full[i].depth_to = 1;
+        full[i].quarter = 1;
+    }
+    int m = ct_transform_simplify(full, CT_TRANSFORM_ASSEMBLY_MAX, out, CT_TRANSFORM_ASSEMBLY_MAX);
+    CT_ASSERT_EQ(m, CT_TRANSFORM_ASSEMBLY_MAX);
+    CT_ASSERT(seq_equal(full, out, CT_TRANSFORM_ASSEMBLY_MAX));
+    CT_ASSERT_EQ(
+        ct_transform_simplify(full, CT_TRANSFORM_ASSEMBLY_MAX, out, CT_TRANSFORM_ASSEMBLY_MAX - 1),
+        -1);
+
+    ct_move over[CT_TRANSFORM_ASSEMBLY_MAX + 1];
+    for (int i = 0; i < CT_TRANSFORM_ASSEMBLY_MAX + 1; i++) {
+        over[i].face = i % CT_CUBE_FACE_COUNT;
+        over[i].depth_from = 1;
+        over[i].depth_to = 1;
+        over[i].quarter = 1;
+    }
+    CT_ASSERT_EQ(ct_transform_simplify(over, CT_TRANSFORM_ASSEMBLY_MAX + 1, out,
+                                       CT_TRANSFORM_ASSEMBLY_MAX + 1),
+                 -1);
+
+    ct_move collapse[CT_TRANSFORM_ASSEMBLY_MAX];
+    int half = CT_TRANSFORM_ASSEMBLY_MAX / 2;
+    for (int i = 0; i < half; i++) {
+        collapse[i].face = i % CT_CUBE_FACE_COUNT;
+        collapse[i].depth_from = 1;
+        collapse[i].depth_to = 1;
+        collapse[i].quarter = 1;
+    }
+    for (int i = 0; i < half; i++) {
+        collapse[half + i] = collapse[half - 1 - i];
+        collapse[half + i].quarter = CT_MOVE_QUARTERS - collapse[half + i].quarter;
+    }
+    CT_ASSERT_EQ(ct_transform_simplify(collapse, CT_TRANSFORM_ASSEMBLY_MAX, out, 0), 0);
+    CT_ASSERT_EQ(ct_transform_simplify(collapse, CT_TRANSFORM_ASSEMBLY_MAX, out, 1), 0);
+
+    ct_cube a;
+    ct_cube_init(&a, 3);
+    apply_seq(&a, collapse, CT_TRANSFORM_ASSEMBLY_MAX);
+    CT_ASSERT(ct_cube_solved(&a));
+}
+
 CT_SUITE(transform_edges) {
     ct_move out[8];
     CT_ASSERT_EQ(ct_transform_inverse(NULL, 0, out), 0);
@@ -518,9 +668,8 @@ CT_SUITE(transform_edges) {
         guard[i] = sentinel;
     ct_move two[2] = {{CT_FACE_U, 1, 1, 1}, {CT_FACE_F, 1, 1, 1}};
     CT_ASSERT_EQ(ct_transform_simplify(two, 2, guard, 1), -1);
-    CT_ASSERT_EQ(guard[0].face, CT_FACE_U);
     bool intact = true;
-    for (int i = 1; i < CT_T_CAP; i++)
+    for (int i = 0; i < CT_T_CAP; i++)
         if (!seq_equal(&guard[i], &sentinel, 1))
             intact = false;
     CT_ASSERT(intact);
