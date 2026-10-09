@@ -11,14 +11,7 @@ enum {
     CT_MOVE_QUARTERS = 4
 };
 
-enum {
-    CT_FACE_U = 0,
-    CT_FACE_L = 1,
-    CT_FACE_F = 2,
-    CT_FACE_R = 3,
-    CT_FACE_B = 4,
-    CT_FACE_D = 5
-};
+enum { CT_FACE_U = 0, CT_FACE_L = 1, CT_FACE_F = 2, CT_FACE_R = 3, CT_FACE_B = 4, CT_FACE_D = 5 };
 
 typedef struct {
     int n;

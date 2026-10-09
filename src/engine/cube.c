@@ -22,14 +22,18 @@ static int cube_index(int face, int row, int col) {
 }
 
 static int frame_axis(const ct_face_frame *fr) {
-    if (fr->normal.x != 0) return 0;
-    if (fr->normal.y != 0) return 1;
+    if (fr->normal.x != 0)
+        return 0;
+    if (fr->normal.y != 0)
+        return 1;
     return 2;
 }
 
 static int frame_sign(const ct_face_frame *fr) {
-    if (fr->normal.x != 0) return fr->normal.x;
-    if (fr->normal.y != 0) return fr->normal.y;
+    if (fr->normal.x != 0)
+        return fr->normal.x;
+    if (fr->normal.y != 0)
+        return fr->normal.y;
     return fr->normal.z;
 }
 
@@ -48,16 +52,16 @@ ct_cell ct_world_sticker(ct_v3 center, ct_v3 normal, int n) {
     const ct_face_frame *fr = NULL;
     for (int face = 0; face < CT_CUBE_FACE_COUNT; face++) {
         const ct_face_frame *candidate = &ct_frames[face];
-        if (normal.x == candidate->normal.x
-            && normal.y == candidate->normal.y
-            && normal.z == candidate->normal.z) {
+        if (normal.x == candidate->normal.x && normal.y == candidate->normal.y &&
+            normal.z == candidate->normal.z) {
             fr = candidate;
             break;
         }
     }
     int h = n - 1;
     ct_cell cell = {-1, -1, -1};
-    if (fr == NULL) return cell;
+    if (fr == NULL)
+        return cell;
     int along_row = center.x * fr->row.x + center.y * fr->row.y + center.z * fr->row.z;
     int along_col = center.x * fr->col.x + center.y * fr->col.y + center.z * fr->col.z;
     cell.face = (int)(fr - ct_frames);
@@ -82,8 +86,10 @@ static ct_v3 v3_rot90(ct_v3 v, int axis) {
 }
 
 void ct_cube_init(ct_cube *c, int n) {
-    if (n < 2) n = 2;
-    if (n > CT_CUBE_MAX_N) n = CT_CUBE_MAX_N;
+    if (n < 2)
+        n = 2;
+    if (n > CT_CUBE_MAX_N)
+        n = CT_CUBE_MAX_N;
     c->n = n;
     for (int face = 0; face < CT_CUBE_FACE_COUNT; face++) {
         for (int i = 0; i < CT_CUBE_STRIDE * CT_CUBE_STRIDE; i++) {
@@ -96,7 +102,8 @@ bool ct_cube_solved(const ct_cube *c) {
     for (int face = 0; face < CT_CUBE_FACE_COUNT; face++) {
         for (int row = 0; row < c->n; row++) {
             for (int col = 0; col < c->n; col++) {
-                if (c->facelet[cube_index(face, row, col)] != face) return false;
+                if (c->facelet[cube_index(face, row, col)] != face)
+                    return false;
             }
         }
     }
@@ -113,13 +120,9 @@ ct_move ct_move_inverse(ct_move m) {
 }
 
 static bool move_legal(const ct_cube *c, ct_move m) {
-    return m.face >= CT_FACE_U
-        && m.face <= CT_FACE_D
-        && m.quarter >= 1
-        && m.quarter <= CT_MOVE_QUARTERS - 1
-        && m.depth_from >= 1
-        && m.depth_to >= m.depth_from
-        && m.depth_to <= c->n;
+    return m.face >= CT_FACE_U && m.face <= CT_FACE_D && m.quarter >= 1 &&
+           m.quarter <= CT_MOVE_QUARTERS - 1 && m.depth_from >= 1 && m.depth_to >= m.depth_from &&
+           m.depth_to <= c->n;
 }
 
 void ct_apply(ct_cube *c, ct_move m) {
@@ -142,13 +145,15 @@ void ct_apply(ct_cube *c, ct_move m) {
                 ct_sticker_world(c->n, face, row, col, &center, &normal);
                 int u = center.x * fr->normal.x + center.y * fr->normal.y + center.z * fr->normal.z;
                 int rot = 0;
-                if (u >= u_lo && u <= u_hi) rot = steps;
+                if (u >= u_lo && u <= u_hi)
+                    rot = steps;
                 for (int k = 0; k < rot; k++) {
                     center = v3_rot90(center, axis);
                     normal = v3_rot90(normal, axis);
                 }
                 ct_cell dst = ct_world_sticker(center, normal, c->n);
-                c->facelet[cube_index(dst.face, dst.row, dst.col)] = src.facelet[cube_index(face, row, col)];
+                c->facelet[cube_index(dst.face, dst.row, dst.col)] =
+                    src.facelet[cube_index(face, row, col)];
             }
         }
     }

@@ -1,11 +1,9 @@
 #include <string.h>
 
-#include "framework.h"
 #include "engine/cube.h"
+#include "framework.h"
 
-enum {
-    CT_SCRAMBLE_LEN = 200
-};
+enum { CT_SCRAMBLE_LEN = 200 };
 
 static const int ct_cycle_ns[] = {2, 3, 4, 5, 7};
 static const int ct_invariant_ns[] = {2, 3, 5, 7};
@@ -17,14 +15,16 @@ static uint8_t at(const ct_cube *c, int face, int row, int col) {
 
 static bool row_all(const ct_cube *c, int face, int row, int value) {
     for (int col = 0; col < c->n; col++) {
-        if (at(c, face, row, col) != value) return false;
+        if (at(c, face, row, col) != value)
+            return false;
     }
     return true;
 }
 
 static bool col_all(const ct_cube *c, int face, int col, int value) {
     for (int row = 0; row < c->n; row++) {
-        if (at(c, face, row, col) != value) return false;
+        if (at(c, face, row, col) != value)
+            return false;
     }
     return true;
 }
@@ -35,19 +35,20 @@ static bool colors_valid(const ct_cube *c) {
         for (int row = 0; row < c->n; row++) {
             for (int col = 0; col < c->n; col++) {
                 int v = at(c, face, row, col);
-                if (v >= CT_CUBE_FACE_COUNT) return false;
+                if (v >= CT_CUBE_FACE_COUNT)
+                    return false;
                 counts[v]++;
             }
         }
     }
     for (int face = 0; face < CT_CUBE_FACE_COUNT; face++) {
-        if (counts[face] != c->n * c->n) return false;
+        if (counts[face] != c->n * c->n)
+            return false;
     }
     return true;
 }
 
-CT_SUITE(cube_init)
-{
+CT_SUITE(cube_init) {
     for (int n = 2; n <= CT_CUBE_MAX_N; n++) {
         ct_cube c;
         ct_cube_init(&c, n);
@@ -57,7 +58,8 @@ CT_SUITE(cube_init)
         for (int face = 0; face < CT_CUBE_FACE_COUNT; face++) {
             for (int row = 0; row < n; row++) {
                 for (int col = 0; col < n; col++) {
-                    if (at(&c, face, row, col) != face) clean = false;
+                    if (at(&c, face, row, col) != face)
+                        clean = false;
                 }
             }
         }
@@ -68,8 +70,7 @@ CT_SUITE(cube_init)
     }
 }
 
-CT_SUITE(cube_frame_convention)
-{
+CT_SUITE(cube_frame_convention) {
     ct_v3 center;
     ct_v3 normal;
     ct_sticker_world(3, CT_FACE_U, 0, 0, &center, &normal);
@@ -88,8 +89,7 @@ CT_SUITE(cube_frame_convention)
     CT_ASSERT_EQ(center.z, 2);
 }
 
-CT_SUITE(cube_round_trip)
-{
+CT_SUITE(cube_round_trip) {
     for (int n = 2; n <= CT_CUBE_MAX_N; n++) {
         for (int face = 0; face < CT_CUBE_FACE_COUNT; face++) {
             for (int row = 0; row < n; row++) {
@@ -107,8 +107,7 @@ CT_SUITE(cube_round_trip)
     }
 }
 
-CT_SUITE(cube_turn_cycle)
-{
+CT_SUITE(cube_turn_cycle) {
     for (size_t i = 0; i < sizeof ct_cycle_ns / sizeof ct_cycle_ns[0]; i++) {
         int n = ct_cycle_ns[i];
         for (int face = 0; face < CT_CUBE_FACE_COUNT; face++) {
@@ -119,16 +118,19 @@ CT_SUITE(cube_turn_cycle)
                 ct_move q3 = {face, depths[d][0], depths[d][1], 3};
                 ct_cube c;
                 ct_cube_init(&c, n);
-                for (int k = 0; k < 4; k++) ct_apply(&c, q1);
+                for (int k = 0; k < 4; k++)
+                    ct_apply(&c, q1);
                 CT_ASSERT(ct_cube_solved(&c));
-                for (int k = 0; k < 2; k++) ct_apply(&c, q2);
+                for (int k = 0; k < 2; k++)
+                    ct_apply(&c, q2);
                 CT_ASSERT(ct_cube_solved(&c));
                 ct_cube once;
                 ct_cube_init(&once, n);
                 ct_apply(&once, q3);
                 ct_cube thrice;
                 ct_cube_init(&thrice, n);
-                for (int k = 0; k < 3; k++) ct_apply(&thrice, q1);
+                for (int k = 0; k < 3; k++)
+                    ct_apply(&thrice, q1);
                 CT_ASSERT(ct_cube_equal(&once, &thrice));
                 ct_cube undo = once;
                 ct_apply(&undo, ct_move_inverse(q3));
@@ -145,8 +147,7 @@ CT_SUITE(cube_turn_cycle)
     }
 }
 
-CT_SUITE(cube_wide)
-{
+CT_SUITE(cube_wide) {
     int n = 5;
     for (int face = 0; face < CT_CUBE_FACE_COUNT; face++) {
         ct_move half = {face, 1, 2, 2};
@@ -175,8 +176,7 @@ CT_SUITE(cube_wide)
     }
 }
 
-CT_SUITE(cube_u_grid)
-{
+CT_SUITE(cube_u_grid) {
     int n = 3;
     ct_cube c;
     ct_cube_init(&c, n);
@@ -191,7 +191,8 @@ CT_SUITE(cube_u_grid)
     bool mixed = false;
     for (int row = 0; row < n; row++) {
         for (int col = 0; col < n; col++) {
-            if (grid[row][col] != CT_FACE_U) mixed = true;
+            if (grid[row][col] != CT_FACE_U)
+                mixed = true;
         }
     }
     CT_ASSERT(mixed);
@@ -200,15 +201,15 @@ CT_SUITE(cube_u_grid)
     bool rotated = true;
     for (int row = 0; row < n; row++) {
         for (int col = 0; col < n; col++) {
-            if (at(&c, CT_FACE_U, row, col) != grid[n - 1 - col][row]) rotated = false;
+            if (at(&c, CT_FACE_U, row, col) != grid[n - 1 - col][row])
+                rotated = false;
         }
     }
     CT_ASSERT(rotated);
     CT_ASSERT_EQ(at(&c, CT_FACE_U, 0, n - 1), grid[0][0]);
 }
 
-CT_SUITE(cube_u_strips)
-{
+CT_SUITE(cube_u_strips) {
     int n = 3;
     ct_cube c;
     ct_cube_init(&c, n);
@@ -222,8 +223,7 @@ CT_SUITE(cube_u_strips)
     CT_ASSERT(colors_valid(&c));
 }
 
-CT_SUITE(cube_f_strips)
-{
+CT_SUITE(cube_f_strips) {
     int n = 3;
     ct_cube c;
     ct_cube_init(&c, n);
@@ -237,8 +237,7 @@ CT_SUITE(cube_f_strips)
     CT_ASSERT(colors_valid(&c));
 }
 
-CT_SUITE(cube_move_invariants)
-{
+CT_SUITE(cube_move_invariants) {
     for (size_t i = 0; i < sizeof ct_invariant_ns / sizeof ct_invariant_ns[0]; i++) {
         int n = ct_invariant_ns[i];
         for (int face = 0; face < CT_CUBE_FACE_COUNT; face++) {
@@ -257,8 +256,7 @@ CT_SUITE(cube_move_invariants)
     }
 }
 
-CT_SUITE(cube_scramble_inverse)
-{
+CT_SUITE(cube_scramble_inverse) {
     for (size_t i = 0; i < sizeof ct_scramble_ns / sizeof ct_scramble_ns[0]; i++) {
         int n = ct_scramble_ns[i];
         ct_cube c;
@@ -269,8 +267,8 @@ CT_SUITE(cube_scramble_inverse)
         for (int k = 0; k < CT_SCRAMBLE_LEN; k++) {
             moves[k].face = (int)ct_sfc64_range(&s, CT_CUBE_FACE_COUNT);
             moves[k].depth_from = 1 + (int)ct_sfc64_range(&s, (uint64_t)n);
-            moves[k].depth_to = moves[k].depth_from
-                + (int)ct_sfc64_range(&s, (uint64_t)(n - moves[k].depth_from + 1));
+            moves[k].depth_to = moves[k].depth_from +
+                                (int)ct_sfc64_range(&s, (uint64_t)(n - moves[k].depth_from + 1));
             moves[k].quarter = 1 + (int)ct_sfc64_range(&s, 3);
             ct_apply(&c, moves[k]);
             CT_ASSERT(colors_valid(&c));
