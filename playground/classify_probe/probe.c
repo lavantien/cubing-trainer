@@ -91,6 +91,7 @@ static void report(const char *alg) {
 }
 
 int main(void) {
+    report("y' M' U2 M U2 M' U2 M U2 y");
     report("R U R' U' R U R' U' R U R' U'");
     report("R' D R U2 R' D' R U2");
     report("R D' R' D R D' R' D U D' R D R' D' R D R' U'");
