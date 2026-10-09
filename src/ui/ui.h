@@ -4,9 +4,12 @@
 #include <limits.h>
 
 #include "app/app.h"
+#include "engine/cube.h"
+#include "render/anim.h"
 #include "stats/stats.h"
 #include "storage/repo_cards.h"
 #include "storage/repo_settings.h"
+#include "trainer/session.h"
 
 void ct_ui_update(ct_app *app);
 void ct_ui_draw(ct_app *app);
@@ -74,10 +77,6 @@ void ct_settings_form_cancel(ct_settings_form *f);
 
 void ct_screen_settings_update(ct_app *app);
 void ct_screen_settings_draw(ct_app *app);
-
-#include "engine/cube.h"
-#include "render/anim.h"
-#include "trainer/session.h"
 
 #define CT_REVIEW_SPEED_MIN (1.0 / (double)CT_ANIM_SPEED_EPS_SCALE)
 #define CT_UI_DEFAULT_DECK "unfiled"
