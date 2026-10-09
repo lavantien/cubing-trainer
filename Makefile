@@ -60,6 +60,7 @@ SPIKE_BIN := $(BINDIR)/spike_link.exe
 MUTATE_BIN := $(BINDIR)/mutate.exe
 RENDER_BIN := $(BINDIR)/render_scene.exe
 DBMAKE_BIN := $(BINDIR)/make_db.exe
+MEMGUARD_SLEEPER_BIN := $(BINDIR)/memguard_sleeper.exe
 
 GOLDEN_DIR := tests/golden
 E2E_DIR := tests/e2e
@@ -78,7 +79,7 @@ CT_FUZZ_SUITES += fuzz_srs_walk fuzz_srs_elapsed fuzz_srs_grade_space
 CT_FUZZ_SUITES += fuzz_db_card_strings fuzz_db_review_rows fuzz_db_settings_keys
 CT_FUZZ_SUITES += fuzz_config_keys fuzz_config_moves
 
-.PHONY: all build vendor test diagrams memguard run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual db-verify
+.PHONY: all build vendor test diagrams memguard memguard-selftest run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual db-verify
 
 all: build
 
@@ -167,6 +168,12 @@ diagrams:
 
 memguard:
 	pwsh.exe -NoProfile -File tools/memguard.ps1 $(MEMGUARD_ARGS)
+
+memguard-selftest: $(MEMGUARD_SLEEPER_BIN)
+	pwsh.exe -NoProfile -File tools/memguard.ps1 -SelfTest -SleeperPath $(MEMGUARD_SLEEPER_BIN)
+
+$(MEMGUARD_SLEEPER_BIN): tools/memguard_sleeper.c | $(BINDIR)
+	$(CC) $(CROSS_COMPILE) $(CFLAGS) tools/memguard_sleeper.c -o $@
 
 run: build
 	$(APP_BIN)
