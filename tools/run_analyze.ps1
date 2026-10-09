@@ -35,7 +35,7 @@ if ($files.Count -eq 0) {
     exit 0
 }
 
-$clangArgs = @("--analyze", "-std=c23", "--target=x86_64-w64-mingw32")
+$clangArgs = @("--analyze", "-std=c23", "--target=x86_64-w64-mingw32", "-Xclang", "-analyzer-output=text")
 $clangArgs += "-I" + (Join-Path $Root "third_party/sqlite").Replace('\', '/')
 foreach ($inc in @("src", "third_party/raylib/src", "third_party/raygui/src")) {
     $dir = Join-Path $Root $inc
