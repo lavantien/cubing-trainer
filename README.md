@@ -29,12 +29,14 @@ The toolchain spelling is decided, evidence in playground/spike_link/REPORT.md. 
 | fmt-check | check formatting without writing |
 | lint | clang-tidy plus the -Wall -Wextra -Werror -Wpedantic -std=c23 gate plus zero-comment and stray-constant checks |
 | analyze | run clang --analyze over the sources |
+| fuzz | run the 8 in-process fuzz suites, CT_FUZZ_LOOPS multiplies the iteration count |
+| fuzz-\<suite\> | run one fuzz suite |
 | diagrams | render every docs/diagrams/*.mmd to PNG through tools/gen_diagrams.mjs |
 | memguard | run tools/memguard.ps1 to enforce the combined working set cap on project processes |
 | run | build then launch the trainer window |
 | clean | remove build outputs |
 
-Stub targets that print not implemented and exit 1 today, landing with their milestones: build-headless, fuzz, mutate, e2e, visual, and db-verify.
+Stub targets that print not implemented and exit 1 today, landing with their milestones: build-headless, mutate, e2e, visual, and db-verify. Visual comparison itself works today through tools/render_scene.c and tools/visual_check.py, the make wiring is pending.
 
 ## Architecture
 
@@ -47,23 +49,23 @@ docs/diagrams/*.mmd  docs/diagrams/*.png (generated)
 src/config/config.h config.c
 src/engine/cube.h cube.c notation.h notation.c transform.h transform.c
 src/render/renderer.h renderer.c anim.h anim.c
-src/ui/ui.h screen_menu.c screen_cards.c
+src/ui/ui.h screen_menu.c screen_cards.c screen_review.c screen_settings.c
 src/storage/db.h db.c migrate.c repo_cards.c repo_reviews.c repo_settings.c repo_stats.c
 src/srs/fsrs.h fsrs.c
 src/trainer/session.h session.c cfop.h cfop.c selector.h selector.c
 src/gen/targets.h targets.c interchange.h interchange.c
 src/stats/stats.h stats.c
 src/packs/packs.h packs.c provenance.h provenance.c
-src/app/main.c app.h app_loop.c
-tools/gen_diagrams.mjs run_lint.ps1 run_analyze.ps1 check_zero_comments.ps1 check_stray_constants.ps1 memguard.ps1
-tests/framework.h framework.c test_main.c unit_*.c
+src/app/main.c app.h app_loop.c headless.h headless.c
+tools/gen_diagrams.mjs run_lint.ps1 run_analyze.ps1 check_zero_comments.ps1 check_stray_constants.ps1 memguard.ps1 render_scene.c visual_check.py
+tests/framework.h framework.c test_main.c unit_*.c fuzz_engine.c fuzz_main.c golden/
 ```
 
-Still pending from the plan: src/engine/geometry.c, the src/gen synthesis, classification, scoring, and simplification files, the trainer, review, settings, and stats screens, and src/app/headless.c.
+Still pending from the plan: src/engine/geometry.c, the src/gen synthesis, classification, scoring, and simplification files, and the trainer and stats screens.
 
 Layering, enforced by review: config depends on nothing. engine, srs, and storage depend on config. gen and render depend on engine. trainer depends on storage and srs. ui depends on trainer, render, and storage. app depends on ui. No upward or lateral edges.
 
-Two patterns keep the code testable without a window. UI screens split a pure model from a thin draw layer: ct_cards_form in src/ui/ui.h carries the flashcard form state and its mutations with no raylib types and is covered by tests/unit_cards_form.c, while ct_screen_cards_update and ct_screen_cards_draw only translate app state into calls. The renderer splits the same way, ct_renderer_quads emits the sticker quad list as plain data and ct_renderer_draw is the only function that builds raylib meshes.
+Two patterns keep the code testable without a window. UI screens split a pure model from a thin draw layer: ct_cards_form and ct_settings_form in src/ui/ui.h carry form state and staged mutations with no raylib types, covered by tests/unit_cards_form.c, tests/unit_review_form.c, and tests/unit_settings_form.c, while the screen update and draw functions only translate app state into calls. The renderer splits the same way, ct_renderer_quads emits the sticker quad list as plain data and ct_renderer_draw is the only function that builds raylib meshes.
 
 raylib 6 notes from the renderer work: matrix types and math live in raymath.h and the mesh buffer layout lives in rlgl.h, whose stream order renderer.h records as position 0 and color 3. The draw path fills mesh.vertices and mesh.colors and hands them to UploadMesh, then UnloadMesh frees the CPU-side arrays along with the GPU upload, so the dynamic cube mesh is rebuilt and re-uploaded every frame, which stays cheap at 6 * n * n quads and keeps animation out of GPU lifetime management. LoadMaterialDefault is the unlit vertex color path, which is what flat sticker quads need.
 
@@ -126,7 +128,7 @@ With a fixed buffer there are 378 corner targets (21x18) and 440 edge targets (2
 
 Speffz letter scheme summary: face order U L F R B D, each face lettered clockwise from its start corner, so U=A-D, L=E-H, F=I-L, R=M-P, B=Q-T, D=U-X with D read after x2. Corner buffer UBL = A, edge buffer UF = C. The app rule is one line, sticker index i maps to letter 'A' + i in both orbits. Verification is recorded in db/seeds/speffz_source.md against the speedsolving wiki Speffz page and bldtrainer.com, whose glossary pins the buffer letters. blddb.net was the plan's preferred fixture source but its pages are a JavaScript application with no textual letter table, so bldtrainer.com served as the independent reference. The scheme is user-editable data in SQLite, seeded by db/seeds/speffz.sql, and tests/unit_letter_scheme.c asserts the C seed and the SQL file produce identical maps.
 
-CFOP case tables landed in src/trainer/cfop.c with counts asserted in tests/unit_cfop.c: PLL 21 (Aa Ab E F Ga Gb Gc Gd H Ja Jb Na Nb Ra Rb T Ua Ub V Y Z), OLL 57 as oll.01 through oll.57, and F2L 41 per slot across the fr, fl, br, and bl slots for 164 cards.
+CFOP case tables landed in src/trainer/cfop.c with counts asserted in tests/unit_cfop.c: PLL 21 (Aa Ab E F Ga Gb Gc Gd H Ja Jb Na Nb Ra Rb T Ua Ub V Y Z), OLL 57 as oll.01 through oll.57, and F2L 41 per slot across the fr, fl, br, and bl slots for 164 cards. Source URLs for the 3 counts sit in the source records table.
 
 App definition, floating buffer mode: fixed-buffer mode generates 3-cycles that include the configured buffer sticker, which gives the 378 and 440 tables. Floating mode may emit any 3-cycle (x, t1, t2) that solves the target pair, since the buffer drifts during a real solve. The case table stays at 378 and 440, and the admissible solution space grows about 24x.
 
@@ -218,15 +220,15 @@ Optimality caveat: results are optimal only within the template-plus-bounded-fal
 
 Test framework: hand-rolled tests/framework.h plus framework.c, about 300 SLOC. CT_SUITE registration, CT_ASSERT, CT_ASSERT_EQ, CT_ASSERT_DBL_EQ, CT_ASSERT_STR_EQ, a setjmp and longjmp failure model, console output on failure with file and line, and sfc64 PRNG helpers for randomized suites. The runner is tests/test_main.c: an argument filters suites by name, so make test-\<suite\> runs one suite, and the binary also carries a spawn selftest mode. Zero vendoring, with full exit-code control for the mutation harness.
 
-Coding rule from the FSRS work: an enum with only small nonnegative values can get an unsigned underlying type, so arithmetic like grade offsets (g - CT_GOOD) or weight indexing (w[g - 1]) must cast the enum operand to int first, otherwise a negative intermediate promotes to a huge unsigned value and corrupts indices and exponents. src/srs/fsrs.c applies the cast at every grade arithmetic site.
+Coding rule from the FSRS work: ct_grade is an all-nonnegative enum, so clang gives it an unsigned underlying type, and bare g - CT_GOOD for grades below GOOD wrapped to about 4.29e9 instead of going negative. That silently corrupted the difficulty and same-day formulas for AGAIN and HARD while every bounds-only property test still passed, and only the independently derived goldens caught it. Cast to signed before enum arithmetic, write (int)g - CT_GOOD, and src/srs/fsrs.c applies the cast at every grade arithmetic site.
 
-Fuzzing: hand-rolled in-process fuzz loops with a deterministic seeded sfc64 generator per surface, N iterations, nonzero exit on assertion failure, and a watchdog thread for hangs. The harness is M1 T8 in flight and the committed make fuzz target is still a stub. Sanitizer gap, stated plainly: libFuzzer and ASan are unavailable on the windows-gnu target with this LLVM, because compiler-rt ships only MSVC-ABI .lib files there. UB is caught via -fsanitize=undefined -fsanitize-trap=all, which needs no runtime. Coverage-guided fuzzing and ASan are a recorded gap, with an MSVC-target build as the future path. Fuzz surfaces planned: notation parser, transform algebra, FSRS numerics, repo SQL, generator validation, config parsing, and the e2e script runner.
+Fuzzing: hand-rolled in-process fuzz loops, one deterministic seeded sfc64 generator per iteration with the seed printed on failure. The engine harness landed with M1 T8 in tests/fuzz_engine.c: 8 suites covering notation tokens, garbage strings, random algorithms, transform inverse, simplify, and rotate_y, and cube invariants and mirror. The iteration count is the config default fuzz.iterations (10000) multiplied by CT_FUZZ_LOOPS (make default 10, capped), so make fuzz runs 100000 iterations per suite and CT_FUZZ_LOOPS=1 gives the config base. Sanitizer gap, stated plainly: libFuzzer and ASan are unavailable on the windows-gnu target with this LLVM, because compiler-rt ships only MSVC-ABI .lib files there. UB is caught via -fsanitize=undefined -fsanitize-trap=all, which needs no runtime. Coverage-guided fuzzing and ASan are a recorded gap, with an MSVC-target build as the future path. Fuzz surfaces still planned: FSRS numerics, repo SQL, generator validation, config parsing, and the e2e script runner.
 
 Mutation testing: Mull has no native Windows support, so tools/mutate.c will do token-level source mutation: swap arithmetic and comparison ops, swap and-or, flip integer and boolean literals by 1, delete negations, and mutate return literals. make mutate SCOPE=src/srs will compile each mutant with identical flags, run the unit suite, and fail on survivors. tests/mutant_allowlist.txt will hold 1 justification line per accepted equivalent mutant. The harness is not built yet, make mutate exits 1 as a stub.
 
-E2E: cubing-trainer.exe --headless --script tests/e2e/\<case\>.txt will run the real binary in the headless flavor, script UI actions through an input-injection hook, and assert final DB state. The headless flavor is M1 T7 in flight.
+E2E: cubing-trainer.exe --headless --script tests/e2e/\<case\>.txt will run the real binary in the headless flavor, script UI actions through an input-injection hook, and assert final DB state. The script runner is still pending.
 
-Visual regression: headless renders of defined scenes (solved 3x3 through 7x7, mid-animation frames, trainer screens) dumped as PNG and compared by perceptual hash with a threshold. Goldens are versioned in tests/golden/ with a record file holding URL, date, and hash per fixture. The renderer question is decided: the headless path renders into a hidden window and reads the frame back with LoadImageFromScreen, digests pixels with FNV-1a, and exports PNG fixtures, per the in-flight spike in playground/headless_spike. rlsw is not used.
+Visual regression: landed with M1 T7. The headless path opens a hidden GLFW window (FLAG_WINDOW_HIDDEN before InitWindow) on OpenGL 3.3, renders offscreen to a RenderTexture2D at 960x540, and reads back through LoadImageFromTexture plus ImageFlipVertical into raylib's PNG encoder, in src/app/headless.c behind tools/render_scene.c. rlsw was evaluated and rejected, its 3D rasterization is broken in the vendored raylib 6.0 snapshot, evidence in playground/headless_spike/REPORT.md. 4 goldens are versioned in tests/golden/ (solved 3 and 7, scramble 3, mid animation 3) with SHA-256, scene parameters, generation commands, and machine dependence recorded in tests/golden/PROVENANCE.md. Comparison runs through tools/visual_check.py, a dependency-free Python aHash over an 8x8 grid with a hamming distance threshold of 4 and a mean delta threshold of 0.25, verified to pass regenerated goldens and fail both a 40x40 sticker recolor and a one token alg edit. The goldens encode GPU rasterization output, so a different GPU or driver requires regenerating them.
 
 ## Source records
 
@@ -240,6 +242,9 @@ Policy: every sourcing action leaves a physical artifact with the source URL, re
 | BH commutator pages | https://www.speedsolving.com/wiki/index.php/BH | domain facts for classes and case counts |
 | Speffz scheme text | https://www.speedsolving.com/wiki/index.php/Speffz | face order and clockwise rule, db/seeds/speffz_source.md |
 | Speffz buffer letters | https://bldtrainer.com/glossary and https://bldtrainer.com/letters | UBL = A and UF = C buffer facts, db/seeds/speffz_source.md |
+| PLL case count 21 | https://www.speedsolving.com/wiki/index.php?title=PLL | page fetched directly 2026-10-10 |
+| OLL case count 57 | https://www.speedsolving.com/wiki/index.php/OLL | count confirmed via search results citing the page 2026-10-10, page not fetched line by line |
+| F2L 41 per slot | https://www.speedsolving.com/wiki/index.php/First_Two_Layers | page fetched directly 2026-10-10 |
 | WCA events change post | https://www.worldcubeassociation.org/posts/changes-to-the-wca-s-list-of-official-events-june-2026 | FTO official 2027-01-02, clock retired after Worlds 2027 |
 | FSRS algorithm spec | https://github.com/open-spaced-repetition/fsrs4anki/wiki/The-Algorithm | formulas and default weights |
 
