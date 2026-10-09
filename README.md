@@ -101,9 +101,11 @@ A move is ct_move: face, depth range, quarter count. The landed parser and forma
 | slice | M E S | single middle layer at depth (n + 1) / 2, M follows L, E follows D, S follows F |
 | rotation | x y z | whole cube, depth 1 through n, x follows R, y follows U, z follows F |
 | prime | ' | counterclockwise, quarter 3 |
-| half turn | 2 and '2 | 180 degrees, quarter 2 |
+| half turn | 2, '2, and 2' | 180 degrees, quarter 2, both suffix orders parse, the prime on a half turn is absorbed because a half turn is its own inverse, formatting writes 2 |
 
 Canonical formatting rules: a single inner layer spells the digit prefix only above depth 1, a wide turn spells Rw at depth 2 and 3Rw above, a wide spanning every layer collapses to the rotation letter so 3Rw formats as x on n = 3, and the middle layer spells as its slice letter. Rotations parse and format as whole cube turns, depth 1 through n. Parse failures return the CT_NOTATION_E_* codes: input, token, suffix, digit, depth, cap, and move.
+
+Half turn suffix order: WCA regulation 12a defines the prime forms as counterclockwise 90 degree turns and the trailing 2 as 180 degrees, and the counterclockwise 180 equals the clockwise 180, so U2', U'2, and U2 denote one move. The regulation spells only letter, prime, and trailing digit forms, the digit then prime spelling comes from community sources, verified 2026-10-10: https://www.speedsolving.com/wiki/index.php/M2 prints L2' in the LF row and M2' in the BD section, and http://www.stefan-pochmann.de/spocc/blindsolving/3x3/old.php prints U2' in its PLL scripts.
 
 Per-event token tables for square-1 slash notation, megaminx and clock turns, and FTO faces are planned and not in the parser yet.
 

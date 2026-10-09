@@ -84,23 +84,26 @@ static int ct_notation_parse_span(const char *s, size_t len, int n, ct_move *out
         wide = 1;
         i++;
     }
-    int quarter;
-    if (i < len && s[i] == '\'') {
-        i++;
-        if (i < len && s[i] == '2') {
+    int quarter = 1;
+    int halves = 0;
+    int primes = 0;
+    while (i < len) {
+        if (s[i] == '2') {
+            halves++;
             i++;
-            quarter = 2;
+        } else if (s[i] == '\'') {
+            primes++;
+            i++;
         } else {
-            quarter = 3;
+            return CT_NOTATION_E_SUFFIX;
         }
-    } else if (i < len && s[i] == '2') {
-        i++;
-        quarter = 2;
-    } else {
-        quarter = 1;
     }
-    if (i != len)
+    if (halves > 1 || primes > 1)
         return CT_NOTATION_E_SUFFIX;
+    if (halves == 1)
+        quarter = 2;
+    else if (primes == 1)
+        quarter = 3;
     int from;
     int to;
     if (e->kind == CT_NOTATION_KIND_ROTATION) {

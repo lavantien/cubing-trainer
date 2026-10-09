@@ -14,18 +14,32 @@ typedef struct {
 } ct_notation_golden;
 
 static const ct_notation_golden ct_goldens[] = {
-    {"R", 3, CT_FACE_R, 1, 1, 1},  {"R'", 3, CT_FACE_R, 1, 1, 3},  {"R2", 3, CT_FACE_R, 1, 1, 2},
-    {"2R", 3, CT_FACE_R, 2, 2, 1}, {"Rw", 3, CT_FACE_R, 1, 2, 1},  {"r", 3, CT_FACE_R, 1, 2, 1},
-    {"3R", 3, CT_FACE_R, 3, 3, 1}, {"2Rw", 3, CT_FACE_R, 1, 2, 1}, {"R'2", 3, CT_FACE_R, 1, 1, 2},
-    {"M", 3, CT_FACE_L, 2, 2, 1},  {"M'", 3, CT_FACE_L, 2, 2, 3},  {"E2", 3, CT_FACE_D, 2, 2, 2},
-    {"S", 3, CT_FACE_F, 2, 2, 1},  {"x", 3, CT_FACE_R, 1, 3, 1},   {"x'", 3, CT_FACE_R, 1, 3, 3},
-    {"y2", 3, CT_FACE_U, 1, 3, 2}, {"z", 3, CT_FACE_F, 1, 3, 1},   {"R", 7, CT_FACE_R, 1, 1, 1},
-    {"2R", 7, CT_FACE_R, 2, 2, 1}, {"3R", 7, CT_FACE_R, 3, 3, 1},  {"3Rw", 7, CT_FACE_R, 1, 3, 1},
-    {"Rw", 7, CT_FACE_R, 1, 2, 1}, {"r", 7, CT_FACE_R, 1, 2, 1},   {"M", 7, CT_FACE_L, 4, 4, 1},
-    {"M'", 7, CT_FACE_L, 4, 4, 3}, {"E2", 7, CT_FACE_D, 4, 4, 2},  {"S", 7, CT_FACE_F, 4, 4, 1},
-    {"x", 7, CT_FACE_R, 1, 7, 1},  {"x'", 7, CT_FACE_R, 1, 7, 3},  {"y2", 7, CT_FACE_U, 1, 7, 2},
-    {"z", 7, CT_FACE_F, 1, 7, 1},  {"M", 4, CT_FACE_L, 2, 2, 1},   {"x", 4, CT_FACE_R, 1, 4, 1},
-    {"x", 2, CT_FACE_R, 1, 2, 1},  {"R", 1, CT_FACE_R, 1, 1, 1},
+    {"R", 3, CT_FACE_R, 1, 1, 1},     {"R'", 3, CT_FACE_R, 1, 1, 3},
+    {"R2", 3, CT_FACE_R, 1, 1, 2},    {"2R", 3, CT_FACE_R, 2, 2, 1},
+    {"Rw", 3, CT_FACE_R, 1, 2, 1},    {"r", 3, CT_FACE_R, 1, 2, 1},
+    {"3R", 3, CT_FACE_R, 3, 3, 1},    {"2Rw", 3, CT_FACE_R, 1, 2, 1},
+    {"R'2", 3, CT_FACE_R, 1, 1, 2},   {"M", 3, CT_FACE_L, 2, 2, 1},
+    {"M'", 3, CT_FACE_L, 2, 2, 3},    {"E2", 3, CT_FACE_D, 2, 2, 2},
+    {"S", 3, CT_FACE_F, 2, 2, 1},     {"x", 3, CT_FACE_R, 1, 3, 1},
+    {"x'", 3, CT_FACE_R, 1, 3, 3},    {"y2", 3, CT_FACE_U, 1, 3, 2},
+    {"z", 3, CT_FACE_F, 1, 3, 1},     {"R", 7, CT_FACE_R, 1, 1, 1},
+    {"2R", 7, CT_FACE_R, 2, 2, 1},    {"3R", 7, CT_FACE_R, 3, 3, 1},
+    {"3Rw", 7, CT_FACE_R, 1, 3, 1},   {"Rw", 7, CT_FACE_R, 1, 2, 1},
+    {"r", 7, CT_FACE_R, 1, 2, 1},     {"M", 7, CT_FACE_L, 4, 4, 1},
+    {"M'", 7, CT_FACE_L, 4, 4, 3},    {"E2", 7, CT_FACE_D, 4, 4, 2},
+    {"S", 7, CT_FACE_F, 4, 4, 1},     {"x", 7, CT_FACE_R, 1, 7, 1},
+    {"x'", 7, CT_FACE_R, 1, 7, 3},    {"y2", 7, CT_FACE_U, 1, 7, 2},
+    {"z", 7, CT_FACE_F, 1, 7, 1},     {"M", 4, CT_FACE_L, 2, 2, 1},
+    {"x", 4, CT_FACE_R, 1, 4, 1},     {"x", 2, CT_FACE_R, 1, 2, 1},
+    {"R", 1, CT_FACE_R, 1, 1, 1},     {"R2'", 3, CT_FACE_R, 1, 1, 2},
+    {"U2'", 3, CT_FACE_U, 1, 1, 2},   {"L2'", 3, CT_FACE_L, 1, 1, 2},
+    {"M2'", 3, CT_FACE_L, 2, 2, 2},   {"S2'", 3, CT_FACE_F, 2, 2, 2},
+    {"E2'", 3, CT_FACE_D, 2, 2, 2},   {"x2'", 3, CT_FACE_R, 1, 3, 2},
+    {"y2'", 3, CT_FACE_U, 1, 3, 2},   {"z2'", 3, CT_FACE_F, 1, 3, 2},
+    {"Rw2'", 3, CT_FACE_R, 1, 2, 2},  {"r2'", 3, CT_FACE_R, 1, 2, 2},
+    {"2R2'", 7, CT_FACE_R, 2, 2, 2},  {"3Rw2'", 7, CT_FACE_R, 1, 3, 2},
+    {"7Rw2'", 7, CT_FACE_R, 1, 7, 2}, {"2R2'", 2, CT_FACE_R, 2, 2, 2},
+    {"M2'", 1, CT_FACE_L, 1, 1, 2},
 };
 
 typedef struct {
@@ -35,17 +49,38 @@ typedef struct {
 } ct_notation_canonical;
 
 static const ct_notation_canonical ct_canonicals[] = {
-    {"R", 3, "R"},     {"R'", 3, "R'"},   {"R2", 3, "R2"}, {"R'2", 3, "R2"}, {"2R", 3, "2R"},
-    {"3R", 3, "3R"},   {"Rw", 3, "Rw"},   {"r", 3, "Rw"},  {"2Rw", 3, "Rw"}, {"3Rw", 3, "x"},
-    {"M", 3, "M"},     {"M'", 3, "M'"},   {"E2", 3, "E2"}, {"S", 3, "S"},    {"2L", 3, "M"},
-    {"x", 3, "x"},     {"x'", 3, "x'"},   {"y2", 3, "y2"}, {"z", 3, "z"},    {"R", 7, "R"},
-    {"2R", 7, "2R"},   {"3R", 7, "3R"},   {"Rw", 7, "Rw"}, {"r", 7, "Rw"},   {"2Rw", 7, "Rw"},
-    {"3Rw", 7, "3Rw"}, {"4Rw", 7, "4Rw"}, {"7Rw", 7, "x"}, {"4L", 7, "M"},   {"4F", 7, "S"},
-    {"4D", 7, "E"},    {"M", 7, "M"},     {"E2", 7, "E2"}, {"S", 7, "S"},    {"x", 7, "x"},
-    {"x'", 7, "x'"},   {"y2", 7, "y2"},   {"z", 7, "z"},   {"Rw", 4, "Rw"},  {"2L", 4, "M"},
-    {"4Rw", 4, "x"},   {"3Rw", 5, "3Rw"}, {"5Rw", 5, "x"}, {"3L", 5, "M"},   {"3F", 5, "S"},
-    {"Rw", 5, "Rw"},   {"R", 1, "x"},     {"S", 1, "z"},   {"x", 2, "x"},    {"Rw", 2, "x"},
-    {"r", 2, "x"},
+    {"R", 3, "R"},     {"R'", 3, "R'"},    {"R2", 3, "R2"},      {"R'2", 3, "R2"},
+    {"2R", 3, "2R"},   {"3R", 3, "3R"},    {"Rw", 3, "Rw"},      {"r", 3, "Rw"},
+    {"2Rw", 3, "Rw"},  {"3Rw", 3, "x"},    {"M", 3, "M"},        {"M'", 3, "M'"},
+    {"E2", 3, "E2"},   {"S", 3, "S"},      {"2L", 3, "M"},       {"x", 3, "x"},
+    {"x'", 3, "x'"},   {"y2", 3, "y2"},    {"z", 3, "z"},        {"R", 7, "R"},
+    {"2R", 7, "2R"},   {"3R", 7, "3R"},    {"Rw", 7, "Rw"},      {"r", 7, "Rw"},
+    {"2Rw", 7, "Rw"},  {"3Rw", 7, "3Rw"},  {"4Rw", 7, "4Rw"},    {"7Rw", 7, "x"},
+    {"4L", 7, "M"},    {"4F", 7, "S"},     {"4D", 7, "E"},       {"M", 7, "M"},
+    {"E2", 7, "E2"},   {"S", 7, "S"},      {"x", 7, "x"},        {"x'", 7, "x'"},
+    {"y2", 7, "y2"},   {"z", 7, "z"},      {"Rw", 4, "Rw"},      {"2L", 4, "M"},
+    {"4Rw", 4, "x"},   {"3Rw", 5, "3Rw"},  {"5Rw", 5, "x"},      {"3L", 5, "M"},
+    {"3F", 5, "S"},    {"Rw", 5, "Rw"},    {"R", 1, "x"},        {"S", 1, "z"},
+    {"x", 2, "x"},     {"Rw", 2, "x"},     {"r", 2, "x"},        {"R2'", 3, "R2"},
+    {"U2'", 3, "U2"},  {"M2'", 3, "M2"},   {"x2'", 3, "x2"},     {"Rw2'", 3, "Rw2"},
+    {"r2'", 3, "Rw2"}, {"2R2'", 7, "2R2"}, {"3Rw2'", 7, "3Rw2"},
+};
+
+typedef struct {
+    const char *case_key;
+    const char *alg;
+    const char *canonical;
+} ct_notation_seed_alg;
+
+static const ct_notation_seed_alg ct_seed_algs[] = {
+    {"m2.15", "x' U L2' U' M2 U L2 U' x", "x' U L2 U' M2 U L2 U' x"},
+    {"m2.22", "M2' D U R2 U' M' U R2 U' M D'", "M2 D U R2 U' M' U R2 U' M D'"},
+    {"op.04", "(L' U) (R U') (L U2') (R' U) (R U2 R')", "L' U R U' L U2 R' U R U2 R'"},
+    {"op.05", "(L U') (R' U) (L' U2') (R U') (R' U2 R)", "L U' R' U L' U2 R U' R' U2 R"},
+    {"l4t.08", "R' L R L2' U L", "R' L R L2 U L"},
+    {"4lll.16", "R U2 R2' U' R2 U' R2' U2 R", "R U2 R2 U' R2 U' R2 U2 R"},
+    {"4lll.20", "R2 U2' R2' U' R2 U2' R2'", "R2 U2 R2 U' R2 U2 R2"},
+    {"l4t.22", "R U' R2' L R L'", "R U' R2 L R L'"},
 };
 
 static bool ct_move_eq(ct_move a, ct_move b) {
@@ -186,9 +221,18 @@ CT_SUITE(notation_errors) {
     CT_ASSERT_EQ(ct_notation_parse_one("xw", 3, &m), CT_NOTATION_E_SUFFIX);
     CT_ASSERT_EQ(ct_notation_parse_one("Mw", 3, &m), CT_NOTATION_E_SUFFIX);
     CT_ASSERT_EQ(ct_notation_parse_one("rw", 3, &m), CT_NOTATION_E_SUFFIX);
-    CT_ASSERT_EQ(ct_notation_parse_one("R2'", 3, &m), CT_NOTATION_E_SUFFIX);
+    CT_ASSERT_EQ(ct_notation_parse_one("R2'", 3, &m), 0);
+    CT_ASSERT(ct_move_eq(m, (ct_move){CT_FACE_R, 1, 1, 2}));
     CT_ASSERT_EQ(ct_notation_parse_one("R''", 3, &m), CT_NOTATION_E_SUFFIX);
     CT_ASSERT_EQ(ct_notation_parse_one("R'2'", 3, &m), CT_NOTATION_E_SUFFIX);
+    CT_ASSERT_EQ(ct_notation_parse_one("R2''", 3, &m), CT_NOTATION_E_SUFFIX);
+    CT_ASSERT_EQ(ct_notation_parse_one("R2'2", 3, &m), CT_NOTATION_E_SUFFIX);
+    CT_ASSERT_EQ(ct_notation_parse_one("R''2", 3, &m), CT_NOTATION_E_SUFFIX);
+    CT_ASSERT_EQ(ct_notation_parse_one("R'3", 3, &m), CT_NOTATION_E_SUFFIX);
+    CT_ASSERT_EQ(ct_notation_parse_one("R3'", 3, &m), CT_NOTATION_E_SUFFIX);
+    CT_ASSERT_EQ(ct_notation_parse_one("2''", 3, &m), CT_NOTATION_E_TOKEN);
+    CT_ASSERT_EQ(ct_notation_parse_one("'2'", 3, &m), CT_NOTATION_E_TOKEN);
+    CT_ASSERT_EQ(ct_notation_parse_one("2'2", 3, &m), CT_NOTATION_E_TOKEN);
 
     CT_ASSERT_EQ(ct_notation_parse_one("2x", 3, &m), CT_NOTATION_E_TOKEN);
     CT_ASSERT_EQ(ct_notation_parse_one("2M", 3, &m), CT_NOTATION_E_TOKEN);
@@ -204,6 +248,49 @@ CT_SUITE(notation_errors) {
     CT_ASSERT_EQ(ct_notation_parse_one("22R", 3, &m), CT_NOTATION_E_TOKEN);
     CT_ASSERT_EQ(ct_notation_parse("R q", 3, &m, 4), CT_NOTATION_E_TOKEN);
     CT_ASSERT_EQ(ct_notation_parse("R R'q", 3, &m, 4), CT_NOTATION_E_SUFFIX);
+}
+
+static void ct_seed_strip_brackets(const char *alg, char *out, unsigned cap) {
+    unsigned w = 0;
+    for (unsigned r = 0; alg[r] != '\0' && w + 1 < cap; r++) {
+        if (alg[r] != '(' && alg[r] != ')')
+            out[w++] = alg[r];
+    }
+    out[w] = '\0';
+}
+
+CT_SUITE(notation_suffix_order) {
+    const char *halves[] = {"U2", "U'2", "U2'"};
+    ct_move parsed[3];
+    for (size_t k = 0; k < sizeof halves / sizeof halves[0]; k++) {
+        parsed[k] = (ct_move){0, 0, 0, 0};
+        CT_ASSERT_EQ(ct_notation_parse_one(halves[k], 3, &parsed[k]), 0);
+        CT_ASSERT_EQ(parsed[k].quarter, 2);
+        CT_ASSERT(ct_move_eq(parsed[0], parsed[k]));
+    }
+    ct_cube c;
+    ct_cube_init(&c, 3);
+    ct_apply(&c, parsed[2]);
+    ct_apply(&c, parsed[2]);
+    CT_ASSERT_EQ(ct_cube_solved(&c), true);
+
+    for (size_t k = 0; k < sizeof ct_seed_algs / sizeof ct_seed_algs[0]; k++) {
+        const ct_notation_seed_alg *s = &ct_seed_algs[k];
+        char flat[128];
+        ct_seed_strip_brackets(s->alg, flat, sizeof flat);
+        ct_move moves[16];
+        int count = ct_notation_parse(flat, 3, moves, 16);
+        CT_ASSERT_EQ(count > 0, true);
+        char buf[128];
+        int len = ct_notation_format(moves, count, 3, buf, sizeof buf);
+        CT_ASSERT_EQ(len, (int)strlen(s->canonical));
+        CT_ASSERT_STR_EQ(buf, s->canonical);
+        ct_move back[16];
+        int recount = ct_notation_parse(s->canonical, 3, back, 16);
+        CT_ASSERT_EQ(recount, count);
+        for (int t = 0; t < count; t++)
+            CT_ASSERT(ct_move_eq(moves[t], back[t]));
+    }
 }
 
 CT_SUITE(notation_fuzz) {

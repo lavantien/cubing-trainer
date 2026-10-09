@@ -375,7 +375,7 @@ static void probe_m2_rows(const ct_pack_entry *entries, int n) {
         }
     }
     printf("m2 strict=%d relaxed-misplaced=%d total=%d\n", strict, relaxed, n);
-    probe_check(strict == 20, "m2 strict count");
+    probe_check(strict == PROBE_M2_ROWS, "m2 strict count");
 }
 
 int main(void) {

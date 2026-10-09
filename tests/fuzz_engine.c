@@ -218,11 +218,15 @@ static unsigned ct_fz_build_valid_token(ct_sfc64 *s, int n, char *tok, ct_move *
         letter = rotations[ct_sfc64_range(s, sizeof rotations - 1)];
         tok[len++] = letter;
     }
-    unsigned suf = (unsigned)ct_sfc64_range(s, 4);
+    unsigned suf = (unsigned)ct_sfc64_range(s, 5);
     if (suf == 1 || suf == 3)
         tok[len++] = '\'';
     if (suf == 2 || suf == 3)
         tok[len++] = '2';
+    if (suf == 4) {
+        tok[len++] = '2';
+        tok[len++] = '\'';
+    }
     tok[len] = '\0';
     exp->quarter = suf == 1 ? 3 : (suf == 0 ? 1 : 2);
     ct_fz_token_shape(letter, digit, wide, n, exp);
@@ -253,7 +257,7 @@ CT_SUITE(fuzz_notation_random_tokens) {
             wide = 1;
             tok[len++] = 'w';
         }
-        unsigned suf = (unsigned)ct_sfc64_range(&s, 6);
+        unsigned suf = (unsigned)ct_sfc64_range(&s, 8);
         if (suf == 1 || suf == 2)
             tok[len++] = '\'';
         if (suf == 2 || suf == 3)
@@ -264,12 +268,22 @@ CT_SUITE(fuzz_notation_random_tokens) {
             tok[len++] = '\'';
             tok[len++] = '\'';
         }
+        if (suf == 6) {
+            tok[len++] = '2';
+            tok[len++] = '\'';
+        }
+        if (suf == 7) {
+            tok[len++] = '2';
+            tok[len++] = '\'';
+            tok[len++] = '2';
+        }
         tok[len] = '\0';
         int n = 1 + (int)ct_sfc64_range(&s, CT_CUBE_MAX_N);
         ct_move exp = ct_fz_guard_move;
         int eff_wide = wide || suf == 4;
-        bool shape_ok = suf != 5 && ct_fz_token_shape(letter, digit, eff_wide, n, &exp);
-        exp.quarter = suf == 1 ? 3 : ((suf == 2 || suf == 3) ? 2 : 1);
+        bool shape_ok = !(suf == 4 && wide) && suf != 5 && suf != 7 &&
+                        ct_fz_token_shape(letter, digit, eff_wide, n, &exp);
+        exp.quarter = suf == 1 ? 3 : ((suf == 2 || suf == 3 || suf == 6) ? 2 : 1);
         ct_move m = ct_fz_guard_move;
         int r = ct_notation_parse_one(tok, n, &m);
         CT_FZ(r <= 0, seed);
@@ -291,6 +305,7 @@ CT_SUITE(fuzz_notation_random_tokens) {
             CT_FZ(flen2 == flen, seed);
             CT_FZ(strcmp(buf, buf2) == 0, seed);
         } else {
+            CT_FZ(!shape_ok, seed);
             CT_FZ(ct_fz_move_eq(m, ct_fz_guard_move), seed);
             ct_move cap_out = ct_fz_guard_move;
             int rp = ct_notation_parse(tok, n, &cap_out, 0);
