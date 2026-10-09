@@ -237,10 +237,19 @@ int ct_session_grade(ct_session *s, ct_grade g, const char *now_iso) {
         return CT_SESSION_ERR_ARG;
     }
     snprintf(next.last_review, sizeof next.last_review, "%s", now_iso);
+    if (sqlite3_exec(s->db, "BEGIN IMMEDIATE", NULL, NULL, NULL) != SQLITE_OK)
+        return CT_SESSION_ERR_DB;
     rc = ct_repo_srs_put(s->db, id, &next);
-    if (rc != CT_REPO_OK) return CT_SESSION_ERR_DB;
-    rc = ct_repo_review_log(s->db, id, (int)g, now_iso, pre_s, pre_d, elapsed, (double)ivl);
-    if (rc != CT_REPO_OK) return CT_SESSION_ERR_DB;
+    if (rc == CT_REPO_OK)
+        rc = ct_repo_review_log(s->db, id, (int)g, now_iso, pre_s, pre_d, elapsed, (double)ivl);
+    if (rc != CT_REPO_OK) {
+        sqlite3_exec(s->db, "ROLLBACK", NULL, NULL, NULL);
+        return CT_SESSION_ERR_DB;
+    }
+    if (sqlite3_exec(s->db, "COMMIT", NULL, NULL, NULL) != SQLITE_OK) {
+        sqlite3_exec(s->db, "ROLLBACK", NULL, NULL, NULL);
+        return CT_SESSION_ERR_DB;
+    }
 
     s->n_graded++;
     if (g == CT_AGAIN) {
