@@ -9,10 +9,8 @@
 #include <string.h>
 
 static const double fsrs_default_weights[CT_FSRS_WEIGHT_COUNT] = {
-    0.40255, 1.18385, 3.173,   15.69105, 7.1949,  0.5345,  1.4604, 0.0046,
-    1.54575, 0.1192,  1.01925, 1.9395,   0.11,    0.29605, 2.2698, 0.2315,
-    2.9898,  0.51655, 0.6621
-};
+    0.40255, 1.18385, 3.173, 15.69105, 7.1949, 0.5345, 1.4604, 0.0046,  1.54575, 0.1192,
+    1.01925, 1.9395,  0.11,  0.29605,  2.2698, 0.2315, 2.9898, 0.51655, 0.6621};
 
 static int parse_double(const char *text, double *out) {
     if (text == NULL || text[0] == '\0') {
@@ -160,8 +158,8 @@ int ct_config_set(ct_config *cfg, const char *key, const char *value) {
         return CT_CFG_UNKNOWN_KEY;
     }
     if (strcmp(key, "srs.request_retention") == 0) {
-        return assign_double_range(&cfg->fsrs.request_retention, value,
-                                   CT_FSRS_RETENTION_MIN, CT_FSRS_RETENTION_MAX);
+        return assign_double_range(&cfg->fsrs.request_retention, value, CT_FSRS_RETENTION_MIN,
+                                   CT_FSRS_RETENTION_MAX);
     }
     if (strcmp(key, "srs.max_ivl_days") == 0) {
         return assign_double_lo(&cfg->fsrs.max_ivl_days, value, CT_FSRS_MIN_STABILITY);

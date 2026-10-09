@@ -6,10 +6,8 @@
 #include <string.h>
 
 static const double spec_weights[CT_FSRS_WEIGHT_COUNT] = {
-    0.40255, 1.18385, 3.173,   15.69105, 7.1949,  0.5345,  1.4604, 0.0046,
-    1.54575, 0.1192,  1.01925, 1.9395,   0.11,    0.29605, 2.2698, 0.2315,
-    2.9898,  0.51655, 0.6621
-};
+    0.40255, 1.18385, 3.173, 15.69105, 7.1949, 0.5345, 1.4604, 0.0046,  1.54575, 0.1192,
+    1.01925, 1.9395,  0.11,  0.29605,  2.2698, 0.2315, 2.9898, 0.51655, 0.6621};
 
 static const unsigned spec_default_mask = (1u << 0) | (1u << 1) | (1u << 3);
 
@@ -22,8 +20,7 @@ static int face_index(char c) {
     return -1;
 }
 
-CT_SUITE(config_constants)
-{
+CT_SUITE(config_constants) {
     CT_ASSERT_EQ(CT_FACE_COUNT, 12);
     CT_ASSERT_EQ(CT_FSRS_WEIGHT_COUNT, 19);
     CT_ASSERT_DBL_EQ(CT_FSRS_REQUEST_RETENTION, 0.9, 1e-12);
@@ -62,10 +59,18 @@ CT_SUITE(config_constants)
     CT_ASSERT_STR_EQ(CT_DB_DIR_NAME, "cubing-trainer");
     CT_ASSERT_STR_EQ(CT_DB_FILENAME, "trainer.db");
     CT_ASSERT_EQ(CT_FUZZ_ITERATIONS, 10000);
+    CT_ASSERT_EQ(CT_DB_BUSY_TIMEOUT_MS, 5000);
+    CT_ASSERT_EQ(CT_DB_PATH_MAX, 260);
+    CT_ASSERT_EQ(CT_MIG_PATH_MAX, 520);
+    CT_ASSERT_EQ(CT_MIG_COPY_BUF, 4096);
+    CT_ASSERT_EQ(CT_MIG_PRAGMA_MAX, 64);
+    CT_ASSERT_EQ(CT_DECIMAL_BASE, 10);
+    CT_ASSERT_EQ(CT_LOOP_CATCHUP_STEPS, 4);
+    CT_ASSERT_EQ(CT_UI_TITLE_SIZE_DIVISOR, 14);
+    CT_ASSERT_EQ(CT_UI_BUTTON_HEIGHT_DIVISOR, 16);
 }
 
-CT_SUITE(config_enums)
-{
+CT_SUITE(config_enums) {
     CT_ASSERT_EQ(CT_AGAIN, 1);
     CT_ASSERT_EQ(CT_HARD, 2);
     CT_ASSERT_EQ(CT_GOOD, 3);
@@ -151,8 +156,7 @@ CT_SUITE(config_enums)
     CT_ASSERT_EQ(CT_SCREEN_STATS, 5);
 }
 
-CT_SUITE(config_face_helpers)
-{
+CT_SUITE(config_face_helpers) {
     CT_ASSERT_EQ(ct_move_face_from_char('U'), CT_FACE_U);
     CT_ASSERT_EQ(ct_move_face_from_char('D'), CT_FACE_D);
     CT_ASSERT_EQ(ct_move_face_from_char('L'), CT_FACE_L);
@@ -186,8 +190,7 @@ CT_SUITE(config_face_helpers)
     CT_ASSERT_EQ(ct_move_face_char(1u << 12), '\0');
 }
 
-CT_SUITE(config_defaults)
-{
+CT_SUITE(config_defaults) {
     ct_config c = ct_config_defaults();
     for (int i = 0; i < CT_FSRS_WEIGHT_COUNT; i++) {
         CT_ASSERT_DBL_EQ(c.fsrs.w[i], spec_weights[i], 1e-12);
@@ -201,7 +204,8 @@ CT_SUITE(config_defaults)
     CT_ASSERT_DBL_EQ(c.fsrs.decay, CT_FSRS_DECAY, 1e-12);
     CT_ASSERT_EQ(c.gen.preferred_moves, spec_default_mask);
     for (int i = 0; i < CT_FACE_COUNT; i++) {
-        double want = ((1u << i) & spec_default_mask) ? CT_GEN_PENALTY_PREFERRED : CT_GEN_PENALTY_OTHER;
+        double want =
+            ((1u << i) & spec_default_mask) ? CT_GEN_PENALTY_PREFERRED : CT_GEN_PENALTY_OTHER;
         CT_ASSERT_DBL_EQ(c.gen.penalty[i], want, 1e-12);
     }
     CT_ASSERT_DBL_EQ(c.gen.weight_len, CT_GEN_WEIGHT_LEN, 1e-12);
@@ -221,8 +225,7 @@ CT_SUITE(config_defaults)
     CT_ASSERT_EQ(c.fuzz.iterations, CT_FUZZ_ITERATIONS);
 }
 
-CT_SUITE(config_set_roundtrip)
-{
+CT_SUITE(config_set_roundtrip) {
     ct_config c = ct_config_defaults();
 
     CT_ASSERT_EQ(ct_config_set(&c, "srs.request_retention", "0.85"), 0);
@@ -280,8 +283,7 @@ CT_SUITE(config_set_roundtrip)
     CT_ASSERT_DBL_EQ(c.fsrs.max_ivl_days, 1000.0, 1e-9);
 }
 
-CT_SUITE(config_set_srs_weights)
-{
+CT_SUITE(config_set_srs_weights) {
     ct_config c = ct_config_defaults();
     for (int i = 0; i < CT_FSRS_WEIGHT_COUNT; i++) {
         char key[16];
@@ -295,8 +297,7 @@ CT_SUITE(config_set_srs_weights)
     }
 }
 
-CT_SUITE(config_set_errors)
-{
+CT_SUITE(config_set_errors) {
     ct_config c = ct_config_defaults();
 
     CT_ASSERT_EQ(ct_config_set(&c, "nope.key", "1"), -1);
@@ -350,8 +351,7 @@ CT_SUITE(config_set_errors)
     CT_ASSERT_STR_EQ(c.db.filename, CT_DB_FILENAME);
 }
 
-CT_SUITE(config_preferred_moves)
-{
+CT_SUITE(config_preferred_moves) {
     ct_config c = ct_config_defaults();
     unsigned rud = CT_FACE_R | CT_FACE_U | CT_FACE_D;
 
@@ -382,8 +382,7 @@ CT_SUITE(config_preferred_moves)
     CT_ASSERT_EQ(c.gen.preferred_moves, 0u);
 }
 
-CT_SUITE(config_clamping)
-{
+CT_SUITE(config_clamping) {
     ct_config c = ct_config_defaults();
 
     CT_ASSERT_EQ(ct_config_set(&c, "srs.request_retention", "0.5"), 0);

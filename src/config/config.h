@@ -5,12 +5,7 @@
 extern "C" {
 #endif
 
-typedef enum ct_grade {
-    CT_AGAIN = 1,
-    CT_HARD = 2,
-    CT_GOOD = 3,
-    CT_EASY = 4
-} ct_grade;
+typedef enum ct_grade { CT_AGAIN = 1, CT_HARD = 2, CT_GOOD = 3, CT_EASY = 4 } ct_grade;
 
 typedef enum ct_orbit {
     CT_ORBIT_CORNER = 0,
@@ -19,10 +14,7 @@ typedef enum ct_orbit {
     CT_ORBIT_WING
 } ct_orbit;
 
-typedef enum ct_buffer_mode {
-    CT_BUFFER_FIXED = 0,
-    CT_BUFFER_FLOATING
-} ct_buffer_mode;
+typedef enum ct_buffer_mode { CT_BUFFER_FIXED = 0, CT_BUFFER_FLOATING } ct_buffer_mode;
 
 typedef enum ct_classification {
     CT_CLS_PURE = 0,
@@ -99,12 +91,7 @@ typedef enum ct_stage {
     CT_STAGE_CONCEPT
 } ct_stage;
 
-typedef enum ct_direction {
-    CT_DIR_FR = 0,
-    CT_DIR_FL,
-    CT_DIR_BR,
-    CT_DIR_BL
-} ct_direction;
+typedef enum ct_direction { CT_DIR_FR = 0, CT_DIR_FL, CT_DIR_BR, CT_DIR_BL } ct_direction;
 
 typedef enum ct_ui_screen {
     CT_SCREEN_MENU = 0,
@@ -130,10 +117,7 @@ typedef enum ct_move_face {
     CT_FACE_Z = 1u << 11
 } ct_move_face;
 
-typedef enum ct_ease {
-    CT_EASE_LINEAR = 0,
-    CT_EASE_CUBIC_IN_OUT
-} ct_ease;
+typedef enum ct_ease { CT_EASE_LINEAR = 0, CT_EASE_CUBIC_IN_OUT } ct_ease;
 
 typedef enum ct_cfg_status {
     CT_CFG_OK = 0,
@@ -173,6 +157,15 @@ typedef enum ct_cfg_status {
 #define CT_DB_FILENAME "trainer.db"
 #define CT_DB_NAME_MAX 128
 #define CT_FUZZ_ITERATIONS 10000
+#define CT_DB_BUSY_TIMEOUT_MS 5000
+#define CT_DB_PATH_MAX 260
+#define CT_MIG_PATH_MAX (CT_DB_PATH_MAX * 2)
+#define CT_MIG_COPY_BUF 4096
+#define CT_MIG_PRAGMA_MAX 64
+#define CT_DECIMAL_BASE 10
+#define CT_LOOP_CATCHUP_STEPS 4
+#define CT_UI_TITLE_SIZE_DIVISOR 14
+#define CT_UI_BUTTON_HEIGHT_DIVISOR 16
 
 static inline unsigned ct_move_face_from_char(char c) {
     switch (c) {
