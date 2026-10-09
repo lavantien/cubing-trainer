@@ -11,7 +11,7 @@
 #include <sqlite3.h>
 
 #include "framework.h"
-#include "db.h"
+#include "storage/db.h"
 
 #define CT_TEST_DIR "build/test_db"
 
@@ -160,7 +160,7 @@ CT_SUITE(migrate_backup)
 
     sqlite3 *db = NULL;
     CT_ASSERT_EQ(ct_db_open(&db, path), SQLITE_OK);
-    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/mig"), 0);
+    CT_ASSERT_EQ(ct_db_migrate(db, "db/migrations"), 0);
     CT_ASSERT_EQ(ct_db_version(db), 1);
     CT_ASSERT(!file_exists(bak));
     CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/mig"), 0);
