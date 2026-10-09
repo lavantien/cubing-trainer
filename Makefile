@@ -45,17 +45,26 @@ SQLITE_SRC := third_party/sqlite/sqlite3.c
 LIB_OBJ := $(addprefix $(OBJDIR)/,$(LIB_SRC:.c=.o))
 LIB_TOBJ := $(addprefix $(TOBJDIR)/,$(LIB_SRC:.c=.o))
 TEST_OBJ := $(addprefix $(TOBJDIR)/,$(TEST_SRC:.c=.o))
+RENDER_OBJ := $(OBJDIR)/tools/render_scene.o
+DBMAKE_OBJ := $(OBJDIR)/tools/make_db.o
 RAYLIB_OBJ := $(addprefix $(OBJDIR)/,$(RAYLIB_SRC:.c=.o))
 RAYGUI_OBJ := $(OBJDIR)/raygui_impl.o
 SQLITE_OBJ := $(OBJDIR)/third_party/sqlite/sqlite3.o
 DEPFILES := $(LIB_OBJ:.o=.d) $(LIB_TOBJ:.o=.d) $(TEST_OBJ:.o=.d) $(RAYLIB_OBJ:.o=.d) $(RAYGUI_OBJ:.o=.d)
-DEPFILES += $(SQLITE_OBJ:.o=.d)
+DEPFILES += $(SQLITE_OBJ:.o=.d) $(RENDER_OBJ:.o=.d) $(DBMAKE_OBJ:.o=.d)
 -include $(DEPFILES)
 
 APP_BIN := $(BINDIR)/cubing-trainer.exe
 TEST_BIN := $(BINDIR)/ct_tests.exe
 SPIKE_BIN := $(BINDIR)/spike_link.exe
 MUTATE_BIN := $(BINDIR)/mutate.exe
+RENDER_BIN := $(BINDIR)/render_scene.exe
+DBMAKE_BIN := $(BINDIR)/make_db.exe
+
+GOLDEN_DIR := tests/golden
+E2E_DIR := tests/e2e
+VISUAL_TMP := $(BUILDDIR)/visual
+DBVERIFY_DIR := $(BUILDDIR)/dbverify
 
 MEMGUARD_ARGS ?=
 
@@ -90,6 +99,7 @@ $(OBJDIR)/third_party/sqlite/%.o: CFLAGS := $(CFLAGS) $(SQLITE_CFLAGS)
 $(OBJDIR)/playground/spike_link/%.o: CFLAGS := $(CFLAGS) $(SPIKE_CFLAGS)
 $(TOBJDIR)/src/%.o: TEST_CFLAGS := $(TEST_CFLAGS) $(SRC_INCLUDES)
 $(TOBJDIR)/tests/%.o: TEST_CFLAGS := $(TEST_CFLAGS) $(SRC_INCLUDES)
+$(OBJDIR)/tools/%.o: CFLAGS := $(CFLAGS) $(SRC_INCLUDES)
 
 $(RAYGUI_IMPL_SRC):
 	@mkdir -p $(BUILDDIR)
@@ -105,8 +115,13 @@ build: $(APP_BIN)
 $(APP_BIN): $(OBJDIR)/src/app/main.o $(LIB_OBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) | $(BINDIR)
 	$(CC) $(CROSS_LINK) -o $@ $(OBJDIR)/src/app/main.o $(LIB_OBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) $(WINLIBS_LDLIBS)
 
-build-headless:
-	@echo not implemented && exit 1
+build-headless: $(RENDER_BIN)
+
+$(RENDER_BIN): $(RENDER_OBJ) $(LIB_OBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) | $(BINDIR)
+	$(CC) $(CROSS_LINK) -o $@ $(RENDER_OBJ) $(LIB_OBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) $(WINLIBS_LDLIBS)
+
+$(DBMAKE_BIN): $(DBMAKE_OBJ) $(LIB_OBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) | $(BINDIR)
+	$(CC) $(CROSS_LINK) -o $@ $(DBMAKE_OBJ) $(LIB_OBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) $(WINLIBS_LDLIBS)
 
 spike: $(SPIKE_BIN)
 	$(SPIKE_BIN)
@@ -182,14 +197,32 @@ mutate: $(MUTATE_BIN) $(TEST_OBJ) $(LIB_TOBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLI
 	CT_MUTATE_LDFLAGS="$(CROSS_LINK) -g" CT_MUTATE_LDLIBS="$(WINLIBS_LDLIBS)" \
 	$(MUTATE_BIN) $(SCOPE) $(BUILDDIR) $(SUITE)
 
-e2e:
-	@echo not implemented && exit 1
+e2e: build
+	@if [ -z "$$(ls $(E2E_DIR)/*.txt 2>/dev/null)" ]; then \
+		echo "e2e: no script cases under $(E2E_DIR), script runner pending" >&2; \
+		exit 1; \
+	fi
+	@for case in $(E2E_DIR)/*.txt; do \
+		echo "e2e: $$case"; \
+		$(APP_BIN) --headless --script "$$case" || exit 1; \
+	done
 
-visual:
-	@echo not implemented && exit 1
+visual: $(RENDER_BIN)
+	rm -rf $(VISUAL_TMP) && mkdir -p $(VISUAL_TMP)
+	$(RENDER_BIN) solved 3 $(VISUAL_TMP)/golden_solved_3.png
+	$(RENDER_BIN) solved 7 $(VISUAL_TMP)/golden_solved_7.png
+	$(RENDER_BIN) scramble 3 $(VISUAL_TMP)/golden_scramble_3.png
+	$(RENDER_BIN) mid 3 $(VISUAL_TMP)/golden_mid_3.png
+	python -I tools/visual_check.py $(GOLDEN_DIR)/golden_solved_3.png $(VISUAL_TMP)/golden_solved_3.png
+	python -I tools/visual_check.py $(GOLDEN_DIR)/golden_solved_7.png $(VISUAL_TMP)/golden_solved_7.png
+	python -I tools/visual_check.py $(GOLDEN_DIR)/golden_scramble_3.png $(VISUAL_TMP)/golden_scramble_3.png
+	python -I tools/visual_check.py $(GOLDEN_DIR)/golden_mid_3.png $(VISUAL_TMP)/golden_mid_3.png
 
-db-verify:
-	@echo not implemented && exit 1
+db-verify: $(DBMAKE_BIN)
+	rm -rf $(DBVERIFY_DIR) && mkdir -p $(DBVERIFY_DIR)
+	$(DBMAKE_BIN) $(DBVERIFY_DIR)/migrated.db
+	cp $(DBVERIFY_DIR)/migrated.db $(DBVERIFY_DIR)/copy.db
+	python -I tools/db_verify.py tools/db_schema_check.sql $(DBVERIFY_DIR)/copy.db db/migrations
 
 clean:
 	rm -rf $(BUILDDIR)

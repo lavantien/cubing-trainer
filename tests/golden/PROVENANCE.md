@@ -9,11 +9,11 @@ hashes are SHA-256 computed with python 3.14.7 hashlib (certutil -hashfile <file
 | file | scene | n | alg | mid state | sha256 |
 | --- | --- | --- | --- | --- | --- |
 | golden_solved_3.png | solved | 3 | none | none | 70d021874787b2d608bd9f3be17e7ce66632d28ed856a10a258967cf0c3fba12 |
-| golden_solved_7.png | solved | 7 | none | none | 6954130954b0d0183bf4edad99c1d3c6d7a52e309e3d4195a7424ea93b2de5a |
-| golden_scramble_3.png | scramble | 3 | R U R' U R U2 R' | none | 964f90cdcbe5ebf22c7b33ded7b6fec129db669a73699e1382c3889fadf5e5622 |
+| golden_solved_7.png | solved | 7 | none | none | 6954130954b0d0183bf4edad99c1d3c6d7a52e309e3d4195a7424ea93b2bde5a |
+| golden_scramble_3.png | scramble | 3 | R U R' U R U2 R' | none | 964f90cdcb5ebf22c7b33ded7b6fec129db669a73699e1382c3889fadf5e5622 |
 | golden_mid_3.png | mid | 3 | R U R' U R U2 R' | move R, progress 0.5 | 8d3f7c87140b67660fee7adbbcec342e78cac7bcdd5eb216c67e78f86c94d5ca |
 
-generation commands, run from the repo root after building build/bin/render_scene.exe (build line in the commit message and in playground/headless_spike/REPORT.md):
+generation commands, run from the repo root after `make build-headless`, which emits build/bin/render_scene.exe from tools/render_scene.c plus the app engine objects. the standing verification gate is `make visual`, which regenerates all 4 scenes into a temp dir and compares them against the committed goldens through tools/visual_check.py. regenerating the goldens on a new machine, after verifying the new hashes, writes the outputs directly over the committed files:
 
 ```
 build/bin/render_scene.exe solved 3 tests/golden/golden_solved_3.png
