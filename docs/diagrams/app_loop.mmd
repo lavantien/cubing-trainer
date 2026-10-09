@@ -1,0 +1,9 @@
+flowchart LR
+    A[load config] --> B[open database and migrate]
+    B --> C[show menu screen]
+    C --> D[accumulate frame time]
+    D --> E[fixed step update by screen]
+    E --> F[render frame by screen]
+    F --> G{window closed or quit}
+    G -- yes --> H[close database and shut down]
+    G -- no --> D
