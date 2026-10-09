@@ -37,4 +37,19 @@ bool ct_cube_equal(const ct_cube *a, const ct_cube *b);
 void ct_apply(ct_cube *c, ct_move m);
 ct_move ct_move_inverse(ct_move m);
 
+typedef struct {
+    int x;
+    int y;
+    int z;
+} ct_v3;
+
+typedef struct {
+    int face;
+    int row;
+    int col;
+} ct_cell;
+
+void ct_sticker_world(int n, int face, int row, int col, ct_v3 *center, ct_v3 *normal);
+ct_cell ct_world_sticker(ct_v3 center, ct_v3 normal, int n);
+
 #endif
