@@ -6,6 +6,7 @@
 #include <direct.h>
 #else
 #include <sys/stat.h>
+#include <unistd.h>
 #endif
 
 #include <sqlite3.h>
@@ -25,6 +26,23 @@ static void make_dir(const char *path) {
 
 static void remove_file(const char *path) {
     remove(path);
+}
+
+static void remove_dir(const char *path) {
+#if defined(_WIN32)
+    _rmdir(path);
+#else
+    rmdir(path);
+#endif
+}
+
+static int write_file(const char *path, const char *data) {
+    FILE *f = fopen(path, "wb");
+    if (f == NULL) return 0;
+    size_t len = strlen(data);
+    int ok = fwrite(data, 1, len, f) == len;
+    if (fclose(f) != 0) ok = 0;
+    return ok;
 }
 
 static int file_exists(const char *path) {
@@ -178,6 +196,88 @@ CT_SUITE(migrate_backup)
     CT_ASSERT_EQ(backup_dummy, 0);
     sqlite3_close(backup);
     ct_db_close(db);
+}
+
+CT_SUITE(migrate_error_paths)
+{
+    make_dir("build");
+    make_dir(CT_TEST_DIR);
+    make_dir(CT_TEST_DIR "/migerr");
+    make_dir(CT_TEST_DIR "/miggap");
+    make_dir(CT_TEST_DIR "/migcrlf");
+    make_dir(CT_TEST_DIR "/migbom");
+    make_dir(CT_TEST_DIR "/migro");
+    remove_file(CT_TEST_DIR "/migerr/002_bad.sql");
+    remove_file(CT_TEST_DIR "/miggap/003_gap.sql");
+    remove_file(CT_TEST_DIR "/migcrlf/001_crlf.sql");
+    remove_file(CT_TEST_DIR "/migbom/001_bom.sql");
+    remove_file(CT_TEST_DIR "/migro/002_ro.sql");
+
+    sqlite3 *db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/migerr/001_init.sql"));
+    CT_ASSERT(write_file(CT_TEST_DIR "/migerr/002_bad.sql",
+                         "CREATE TABLE half(id INTEGER);\nCREATE TABLE 2bad(x INTEGER);\n"));
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/migerr") != 0);
+    CT_ASSERT_EQ(ct_db_version(db), 1);
+    CT_ASSERT_EQ(query_int(db,
+        "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='half'"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 1);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/miggap/001_init.sql"));
+    CT_ASSERT(write_file(CT_TEST_DIR "/miggap/003_gap.sql", "CREATE TABLE gap3(id INTEGER);\n"));
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/miggap"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 3);
+    CT_ASSERT_EQ(query_int(db,
+        "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='gap3'"), 1);
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/miggap"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 3);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(write_file(CT_TEST_DIR "/migcrlf/001_crlf.sql",
+                         "CREATE TABLE crlf_t(id INTEGER);\r\nINSERT INTO crlf_t VALUES (7);\r\n"));
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migcrlf"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 1);
+    CT_ASSERT_EQ(query_int(db, "SELECT id FROM crlf_t"), 7);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(write_file(CT_TEST_DIR "/migbom/001_bom.sql",
+                         "\xEF\xBB\xBF"
+                         "CREATE TABLE bom_t(id INTEGER);\r\n"
+                         "INSERT INTO bom_t VALUES (1);\r\n"));
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migbom"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 1);
+    CT_ASSERT_EQ(query_int(db, "SELECT id FROM bom_t"), 1);
+    ct_db_close(db);
+
+    const char *path = CT_TEST_DIR "/ro_test.db";
+    char bak[512];
+    snprintf(bak, sizeof bak, "%s.bak", path);
+    cleanup_db_files(path);
+    remove_dir(bak);
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, path), SQLITE_OK);
+    CT_ASSERT_EQ(ct_db_migrate(db, "db/migrations"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 1);
+    CT_ASSERT(write_file(CT_TEST_DIR "/migro/002_ro.sql", "CREATE TABLE ro2(id INTEGER);\n"));
+    make_dir(bak);
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/migro") != 0);
+    CT_ASSERT_EQ(ct_db_version(db), 1);
+    CT_ASSERT_EQ(query_int(db,
+        "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='ro2'"), 0);
+    CT_ASSERT_EQ(query_int(db,
+        "SELECT count(*) FROM sqlite_master"
+        " WHERE type='table' AND name NOT LIKE 'sqlite_%'"), 9);
+    ct_db_close(db);
+    remove_dir(bak);
+    cleanup_db_files(path);
 }
 
 CT_SUITE(pragmas)
