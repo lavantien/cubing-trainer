@@ -170,3 +170,22 @@ CT_SUITE(pack_seed_sq1_ep) {
                      "(U) (1,0) / (5,-1) / (3,3) / (3,0) / (1,1) / (-3,0) / (3,-3) / (5,0) *");
     CT_ASSERT_STR_EQ(e.front_json, "{\"case\":\"W-W\"}");
 }
+
+CT_SUITE(pack_seed_clock) {
+    verify_pack("db/seeds/packs/clock_algs.tsv", CT_EVENT_CLOCK, CT_METHOD_LBL, CT_STAGE_CONCEPT,
+                14);
+    ct_pack_entry e = fetch_one("db/seeds/packs/clock_algs.tsv", CT_EVENT_CLOCK, CT_METHOD_LBL,
+                                CT_STAGE_CONCEPT, "clock.01", 14);
+    CT_ASSERT_STR_EQ(e.alg, "Push down the bottom two pins, push up the top two. Turn a top corner"
+                            " until the centre clock matches the bottom middle.");
+    e = fetch_one("db/seeds/packs/clock_algs.tsv", CT_EVENT_CLOCK, CT_METHOD_LBL, CT_STAGE_CONCEPT,
+                  "clock.05", 14);
+    CT_ASSERT_STR_EQ(e.alg, "Push up all pins. Turn any corner till the centre clock is 12.");
+    e = fetch_one("db/seeds/packs/clock_algs.tsv", CT_EVENT_CLOCK, CT_METHOD_LBL, CT_STAGE_CONCEPT,
+                  "clock.10", 14);
+    CT_ASSERT_STR_EQ(e.alg, "Push down the bottom left pin, push the other three up. Turn a top"
+                            " corner till the centre clock matches the bottom left clock.");
+    e = fetch_one("db/seeds/packs/clock_algs.tsv", CT_EVENT_CLOCK, CT_METHOD_LBL, CT_STAGE_CONCEPT,
+                  "clock.14", 14);
+    CT_ASSERT_STR_EQ(e.alg, "Push up all pins. Turn any corner till the centre clock is 12.");
+}

@@ -71,3 +71,15 @@ Normalization recorded for the square-1 pack: HTML nonbreaking spaces and Cubing
 Count: 169 cubeshape plus 7 CO plus 7 EO plus 16 CP plus 99 EP, 298 rows total.
 
 Discrepancy: none versus the plan, which named the square-1 stages but no counts. speedcubedb.com, cuberoot.me, and brandonlin.com square-1 sets are client side rendered or partial and were rejected as sources.
+
+## clock_algs.tsv
+
+Source: http://www.jaapsch.net/puzzles/clock.htm, Jaap Scherphuis's Rubik's Clock page, archived at playground/seeds_clock/jaap_clock.html. Retrieved 2026-10-10. The page's human solution uses exactly 14 moves, and Stefan Pochmann's page http://www.stefan-pochmann.de/spocc/speedsolving/clock/, archived at playground/seeds_clock/pochmann_clock.html, calls it the well-known 14-move solution, so this is the canonical standard set.
+
+Page contents: the solution is front cross equalize in 4 moves (steps 1 to 3), front all clocks to 12 in 1 move (steps 5 to 6), flip the puzzle, back cross equalize in 4 moves (step 8), back corner equalize in 4 moves (steps 9 to 11), back all clocks to 12 in 1 move (step 13).
+
+Case key derivation: keys clock.01 to clock.14 in solution order, front_json case labels are derived (front cross 1 to 4, front all to 12, back cross 1 to 4, back corners 1 to 4, back all to 12). No public page writes the standard clock method as fixed notation algorithms because every turn amount depends on the clock state, so each row's alg is the source's verbatim step text, pin setup plus dial action, repeated verbatim for the 4 repeats the source describes. The current WCA clock notation, pin tokens UR DR DL UL U R D L ALL with signed hour amounts, is documented on https://www.speedsolving.com/wiki/index.php?title=Clock_notation, archived at playground/seeds_clock/speedsolving_clock_notation.html, as the reference for later token support.
+
+Count: 14 rows, 12 equalize moves plus 2 final rotations, matching the plan's standard ~14 algs.
+
+Discrepancy: none versus the plan count. J Perm has no clock algorithm page, his site index was checked and archived at playground/seeds_clock/jperm_algs_index.html. Enum convention: event CT_EVENT_CLOCK, method CT_METHOD_LBL, stage CT_STAGE_CONCEPT. LBL is the beginner method placeholder, no clock specific enum exists, and CONCEPT holds the fixed procedure set, mirroring the existing CT_METHOD_LBL CT_STAGE_CONCEPT pairing already used in the selector's stage lists.

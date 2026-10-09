@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVGS5PM6ZN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-MVGS5PM6ZN');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Rubik's Clock step by step with this clear tutorial from Skewbicle.">
+    <link rel="canonical" href="https://skewbicle.github.io/skewbicle/Clock.html">
+    <title>Clock Tutorial</title>
+    <link rel="icon" href="New folder/3b23a8e9-5a1f-4432-8ca2-7c2d75a1dc50.png">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .language-switcher {
+            background: #1a1a1a;
+            color: white;
+            border: 1px solid #555;
+            border-radius: 8px;
+            padding: 7px 10px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 15px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .language-switcher:hover {
+            border-color: white;
+        }
+
+        .language-switcher option {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        html[dir="rtl"] nav {
+            direction: rtl;
+        }
+
+        html[dir="rtl"] .nav-links {
+            direction: rtl;
+        }
+
+        html[dir="rtl"] footer {
+            direction: rtl;
+        }
+
+        html[dir="rtl"] body {
+            direction: rtl;
+        }
+
+        html[dir="rtl"] .timeline-nav {
+            direction: rtl;
+        }
+
+        html[dir="rtl"] main {
+            margin-left: 0;
+            margin-right: 250px;
+        }
+
+        html[dir="rtl"] .introduction {
+            margin-left: 0;
+            margin-right: 250px;
+        }
+
+        html[dir="rtl"] .timeline-nav {
+            left: auto;
+            right: 28px;
+        }
+
+        html[dir="rtl"] .labels {
+            left: auto;
+            right: 50px;
+        }
+
+        .clock-notation {
+            direction: ltr;
+            unicode-bidi: isolate;
+        }
+
+        @media (max-width: 1024px) {
+            html[dir="rtl"] main {
+                margin-left: 0;
+                margin-right: 60px;
+            }
+
+            html[dir="rtl"] .introduction {
+                margin-left: 0;
+                margin-right: 60px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                gap: 10px;
+            }
+
+            .language-switcher {
+                font-size: 13px;
+                padding: 6px 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <ul class="nav-links">
+        <li><a href="index.html" data-en="Home" data-ar="الرئيسية">Home</a></li>
+        <li><a href="timer.html" data-en="Timer" data-ar="المؤقت">Timer</a></li>
+        <li><a href="simulator.html" data-en="Simulator" data-ar="المحاكي">Simulator</a></li>
+        <li><a href="algorithms.html" data-en="Algorithms" data-ar="الخوارزميات">Algorithms</a></li>
+    </ul>
+
+    <select id="languageSwitcher" class="language-switcher" aria-label="Language">
+        <option value="en">🇬🇧 English</option>
+        <option value="ar">🇸🇦 العربية</option>
+    </select>
+</nav>
+
+<div class="timeline-nav" id="timelineNav">
+
+    <a href="#s1" class="active">
+        <span class="thumb">
+            <img src="tutorials/clock/0d079a1c-a170-4745-865d-2a2faae00b6f.png" alt="Step 1">
+        </span>
+        <span class="labels" data-en="Cross #1" data-ar="الصليب ١">Cross #1</span>
+    </a>
+
+    <a href="#s2">
+        <span class="thumb">
+            <img src="tutorials/clock/29eb35be-81df-4c1e-950d-53c1b5d6119f.png" alt="Step 2">
+        </span>
+        <span class="labels" data-en="Cross #2" data-ar="الصليب ٢">Cross #2</span>
+    </a>
+
+    <a href="#s3">
+        <span class="thumb">
+            <img src="tutorials/clock/9f0c3cae-e6f0-4e6d-bfa8-2b48cb297d2b.png" alt="Step 3">
+        </span>
+        <span class="labels" data-en="Corners" data-ar="الزوايا">Corners</span>
+    </a>
+
+</div>
+
+<header>
+
+    <h1
+        data-en="Rubik's Clock"
+        data-ar="ساعة روبيك">
+        Rubik's Clock
+    </h1>
+
+    <p
+        data-en="A two-sided mechanical puzzle with 9 dual-sided clock faces and 4 corner pins used to sync and set all 18 dials to 12 o'clock."
+        data-ar="لغز ميكانيكي ذو وجهين يحتوي على ٩ واجهات ساعات مزدوجة الجانب و٤ دبابيس في الزوايا، تُستخدم لمزامنة وضبط جميع الساعات الـ١٨ على الساعة ١٢.">
+        A two-sided mechanical puzzle with 9 dual-sided clock faces and 4 corner pins used to sync and set all 18 dials to 12 o'clock.
+    </p>
+
+</header>
+
+<div class="introduction">
+
+    <p>
+        <span
+            data-en="Before starting, get familiar with clock "
+            data-ar="قبل البدء، تعرّف على ">
+            Before starting, get familiar with clock
+        </span>
+
+        <span>
+            <a href="algorithms.html"
+               data-en="move notation"
+               data-ar="ترميز الحركات">
+                move notation
+            </a>
+        </span>
+        <span
+            data-en=":"
+            data-ar=":">
+            :
+        </span>
+    </p>
+
+    <ul>
+
+        <li>
+            <span
+                data-en="Pins (4): Pushing a pin UP engages the dials around it. Pushing a pin DOWN disengages the clocks around that pin."
+                data-ar="الدبابيس (٤): دفع الدبوس إلى الأعلى يُفعّل الساعات المحيطة به. ودفع الدبوس إلى الأسفل يفصل الساعات المحيطة بذلك الدبوس.">
+                Pins (4): Pushing a pin UP engages the dials around it. Pushing a pin DOWN disengages the clocks around that pin.
+            </span>
+        </li>
+
+        <li>
+            <span
+                data-en="Dials (4): Turning a dial rotates all connected clocks around any active (UP) pins."
+                data-ar="الساعات (٤): تدوير أي ساعة يؤدي إلى تدوير جميع الساعات المتصلة حول أي دبوس نشط (مرفوع).">
+                Dials (4): Turning a dial rotates all connected clocks around any active (UP) pins.
+            </span>
+        </li>
+
+    </ul>
+
+</div>
+
+<main>
+
+    <section id="s1">
+
+        <h2
+            data-en="Step 1 — Solve Cross #1 (First Side)"
+            data-ar="الخطوة ١ — حل الصليب ١ (الجانب الأول)">
+            Step 1 — Solve Cross #1 (First Side)
+        </h2>
+
+        <p
+            data-en="Start on side 1 by matching the center clock to each cross clock one by one:"
+            data-ar="ابدأ من الجانب ١ بمطابقة الساعة المركزية مع كل ساعة من ساعات الصليب واحدة تلو الأخرى:">
+            Start on side 1 by matching the center clock to each cross clock one by one:
+        </p>
+
+        <ul>
+
+            <li
+                data-en="Match Center to Edge 1"
+                data-ar="مطابقة المركز مع الحافة ١">
+                Match Center to Edge 1
+            </li>
+
+            <p
+                data-en="Put only 1 pin up (away from the target edge) and turn its dial until the center clock matches the target edge clock."
+                data-ar="ارفع دبوسًا واحدًا فقط (بعيدًا عن الحافة المستهدفة) ثم أدر ساعته حتى تتطابق الساعة المركزية مع ساعة الحافة المستهدفة.">
+                Put only 1 pin up (away from the target edge) and turn its dial until the center clock matches the target edge clock.
+            </p>
+
+            <li
+                data-en="Match Block to Edge 2"
+                data-ar="مطابقة المجموعة مع الحافة ٢">
+                Match Block to Edge 2
+            </li>
+
+            <p
+                data-en="Raise the pin for the solved edge and turn the dial to rotate your solved block into alignment with the next edge clock."
+                data-ar="ارفع الدبوس الخاص بالحافة المحلولة ثم أدر الساعة لتدوير المجموعة المحلولة ومحاذاتها مع ساعة الحافة التالية.">
+                Raise the pin for the solved edge and turn the dial to rotate your solved block into alignment with the next edge clock.
+            </p>
+
+            <li
+                data-en="Match Block to Edge 3 & 4"
+                data-ar="مطابقة المجموعة مع الحافتين ٣ و٤">
+                Match Block to Edge 3 & 4
+            </li>
+
+            <p
+                data-en="Repeat this process—adding UP pins to grow your solved block—until all 5 cross clocks match."
+                data-ar="كرّر هذه العملية — بإضافة دبابيس مرفوعة لتوسيع المجموعة المحلولة — حتى تتطابق جميع ساعات الصليب الخمس.">
+                Repeat this process—adding UP pins to grow your solved block—until all 5 cross clocks match.
+            </p>
+
+            <img src="tutorials/clock/89a691d4-074c-4e10-9b3d-8e13e4bd41cb.png" alt="">
+
+            <li
+                data-en="Point Cross Up"
+                data-ar="توجيه الصليب إلى الأعلى">
+                Point Cross Up
+            </li>
+
+            <p
+                data-en="Push all 4 pins UP and turn any dial until all cross clocks point straight up to 12 o'clock."
+                data-ar="ارفع الدبابيس الأربعة كلها، ثم أدر أي ساعة حتى تشير جميع ساعات الصليب مباشرةً إلى الساعة ١٢.">
+                Push all 4 pins UP and turn any dial until all cross clocks point straight up to 12 o'clock.
+            </p>
+
+        </ul>
+
+        <img src="tutorials/clock/0d079a1c-a170-4745-865d-2a2faae00b6f.png" alt="">
+
+    </section>
+
+    <section id="s2">
+
+        <h2
+            data-en="Step 2 — Solve Cross #2 (Second Side)"
+            data-ar="الخطوة ٢ — حل الصليب ٢ (الجانب الثاني)">
+            Step 2 — Solve Cross #2 (Second Side)
+        </h2>
+
+        <p
+            data-en="Flip the puzzle over to the second side."
+            data-ar="اقلب اللغز إلى الجانب الثاني.">
+            Flip the puzzle over to the second side.
+        </p>
+
+        <p
+            data-en="Crucial Rule: Never turn a dial whose adjacent pin is DOWN. Doing so will mess up the clocks on the opposite side!"
+            data-ar="قاعدة مهمة: لا تُدر أبدًا ساعة يكون الدبوس المجاور لها منخفضًا. القيام بذلك سيُفسد الساعات الموجودة على الجانب المقابل!">
+            Crucial Rule: Never turn a dial whose adjacent pin is DOWN. Doing so will mess up the clocks on the opposite side!
+        </p>
+
+        <li
+            data-en="Repeat the exact same cross-matching process"
+            data-ar="كرّر عملية مطابقة الصليب نفسها تمامًا">
+            Repeat the exact same cross-matching process
+        </li>
+
+        <p
+            data-en="Match the center clock to edge 1, then edge 2, 3, and 4."
+            data-ar="طابق الساعة المركزية مع الحافة ١، ثم الحواف ٢ و٣ و٤.">
+            Match the center clock to edge 1, then edge 2, 3, and 4.
+        </p>
+
+        <p
+            data-en="Note: Do not turn all cross clocks to 12 o'clock yet on this side."
+            data-ar="ملاحظة: لا تضبط جميع ساعات الصليب على الساعة ١٢ بعد في هذا الجانب.">
+            Note: Do not turn all cross clocks to 12 o'clock yet on this side.
+        </p>
+
+        <img src="tutorials/clock/29eb35be-81df-4c1e-950d-53c1b5d6119f.png" alt="">
+
+    </section>
+
+    <section id="s3">
+
+        <h2
+            data-en="Step 3 — Solve All 4 Corners"
+            data-ar="الخطوة ٣ — حل الزوايا الأربع كلها">
+            Step 3 — Solve All 4 Corners
+        </h2>
+
+        <p
+            data-en="Solving the corners on this side automatically solves the corners on the back side simultaneously:"
+            data-ar="حل الزوايا في هذا الجانب يحل زوايا الجانب الخلفي تلقائيًا في الوقت نفسه:">
+            Solving the corners on this side automatically solves the corners on the back side simultaneously:
+        </p>
+
+        <ul>
+
+            <li
+                data-en="Target Corner 1"
+                data-ar="الزاوية المستهدفة ١">
+                Target Corner 1
+            </li>
+
+            <p
+                data-en="Push DOWN only the pin closest to the target corner (keep the other 3 pins UP). Turn any dial near an UP pin until your cross block matches that corner."
+                data-ar="اخفض الدبوس الأقرب إلى الزاوية المستهدفة فقط (وأبقِ الدبابيس الثلاثة الأخرى مرفوعة). أدر أي ساعة بالقرب من دبوس مرفوع حتى تتطابق مجموعة الصليب مع تلك الزاوية.">
+                Push DOWN only the pin closest to the target corner (keep the other 3 pins UP). Turn any dial near an UP pin until your cross block matches that corner.
+            </p>
+
+            <li
+                data-en="Target Corners 2, 3, & 4"
+                data-ar="الزوايا المستهدفة ٢ و٣ و٤">
+                Target Corners 2, 3, & 4
+            </li>
+
+            <p
+                data-en="Repeat this process for each remaining corner by putting its pin DOWN and turning an active dial to match."
+                data-ar="كرّر هذه العملية لكل زاوية متبقية عن طريق خفض دبوسها وتدوير ساعة نشطة للمطابقة.">
+                Repeat this process for each remaining corner by putting its pin DOWN and turning an active dial to match.
+            </p>
+
+            <li
+                data-en="Finish the Solve"
+                data-ar="إنهاء الحل">
+                Finish the Solve
+            </li>
+
+            <p
+                data-en="Put all 4 pins UP and turn any dial until all clocks point straight up to 12 o'clock [03:09]. Flip the puzzle over—both sides will now be fully solved!"
+                data-ar="ارفع الدبابيس الأربعة كلها، ثم أدر أي ساعة حتى تشير جميع الساعات مباشرةً إلى الساعة ١٢ [٠٣:٠٩]. اقلب اللغز — سيكون الجانبان الآن محلولين بالكامل!">
+                Put all 4 pins UP and turn any dial until all clocks point straight up to 12 o'clock [03:09]. Flip the puzzle over—both sides will now be fully solved!
+            </p>
+
+        </ul>
+
+        <img src="tutorials/clock/9f0c3cae-e6f0-4e6d-bfa8-2b48cb297d2b.png" alt="">
+        <img src="tutorials/clock/e5c86a9e-f597-4aad-b481-a34cd358da85.png" alt="">
+
+    </section>
+
+</main>
+
+<footer>
+
+    <p
+        data-en="© 2026 Skewbicle. All rights reserved."
+        data-ar="© ٢٠٢٦ Skewbicle. جميع الحقوق محفوظة.">
+        © 2026 Skewbicle. All rights reserved.
+    </p>
+
+    <a href="mailto:skewbicle@gmail.com"
+       data-en="Contact Us"
+       data-ar="تواصل معنا">
+        Contact Us
+    </a>
+
+</footer>
+
+<script>
+
+    // Timeline navigation
+    const links = document.querySelectorAll('.timeline-nav a');
+    const sections = [...links].map(l =>
+        document.querySelector(l.getAttribute('href'))
+    );
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const idx = sections.indexOf(entry.target);
+
+            if (entry.isIntersecting) {
+                links.forEach((l, i) =>
+                    l.classList.toggle('active', i === idx)
+                );
+            }
+        });
+    }, {
+        rootMargin: '-45% 0px -45% 0px',
+        threshold: 0
+    });
+
+    sections.forEach(s => observer.observe(s));
+
+    links.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+
+            document
+                .querySelector(link.getAttribute('href'))
+                .scrollIntoView({
+                    behavior: 'smooth'
+                });
+        });
+    });
+
+
+    // Language system
+    const languageSwitcher = document.getElementById('languageSwitcher');
+
+    function convertNumbersToArabic(text) {
+        return text.replace(/[0-9]/g, digit =>
+            '٠١٢٣٤٥٦٧٨٩'[digit]
+        );
+    }
+
+    function setLanguage(language) {
+
+        document.documentElement.lang = language;
+        document.documentElement.dir =
+            language === 'ar' ? 'rtl' : 'ltr';
+
+        document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+
+            const value =
+                language === 'ar'
+                    ? el.getAttribute('data-ar')
+                    : el.getAttribute('data-en');
+
+            el.textContent =
+                language === 'ar'
+                    ? convertNumbersToArabic(value)
+                    : value;
+        });
+
+        languageSwitcher.value = language;
+
+        localStorage.setItem(
+            'skewbicle-language',
+            language
+        );
+    }
+
+    const savedLanguage =
+        localStorage.getItem('skewbicle-language') || 'en';
+
+    languageSwitcher.addEventListener('change', () => {
+        setLanguage(languageSwitcher.value);
+    });
+
+    setLanguage(savedLanguage);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Rubik's Clock</title>
+<link rel="stylesheet" type="text/css" href="jaap.css">
+<link rel="shortcut icon" href="images/buttons/favicon.ico">
+
+<script language="JavaScript" type="text/javascript">
+<!--
+function play(){
+    playwin=window.open("javascript/clockj.htm","rc","toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no,copyhistory=no,width=320,height=200");
+    playwin.focus();
+}
+//-->
+</script>
+
+</head>
+<body>
+<div class=header><h1>Jaap's Puzzle Page</h1><a href="../puzzles/" class=jpp></a></div>
+
+<h1>Rubik's Clock</h1>
+
+<div class=mainimg>
+<img src="images/rubclock.jpg" border=4 width=248 height=248 alt="Rubik's Clock" title="Rubik's Clock">
+<img src="images/rubclock2.jpg" border=4 width=248 height=248 alt="Fake Rubik's Clock" title="Fake Rubik's Clock">
+
+</div>
+
+<div class=desc>
+<p>
+This puzzle consists of a disk with 9 small clocks on each side arranged in
+a square. The four corner clocks can be twisted (the front and back corner
+clocks are connected). In between the clocks are four buttons. By pushing
+then up or down, the front or back clocks adjacent to it are connected to
+the corner clocks so that they will be turned when the corners are turned.
+The aim of the puzzle is to set all clocks to 12 o'clock.</p>
+
+<p>
+The pictures above show the original Rubik's Clock on the left,
+and an imitation version on the right. That imitation is called the
+Magic Compass, since it has points of the compass written around each
+face. It still has 12 positions for each 'compass' even though 8 or
+16 positions would be more logical, since the mechanism is a direct
+copy of the original.
+</p>
+
+<p>
+It is a little known fact that the clock was actually not invented by Rubik
+himself but by Christopher Wiggs and Christopher Taylor. They previously
+invented the <a href="orb.htm">Orb</a>. Rubik's Clock was granted a
+patent on 26 September 1989, <a href="patents/us4869506.pdf" target="_blank">US 4,869,506</a>.</p>
+</div>
+
+<div class=play>
+<p>If your browser supports JavaScript, then you can play Rubik's Clock by clicking
+the link below:</p>
+<h2 align=center><a href="javascript:play();">JavaScript Rubik's Clock</a></h2>
+</div>
+
+<div class=numpos>
+<h2>The number of positions:</h2>
+<p>There are 14 independent clocks, with 12 settings each, giving
+12<sup>14</sup> = 1,283,918,464,548,864 positions.</p>
+</div>
+
+<div class=links>
+<h2>Links to other useful pages:</h2>
+<a href="http://www.stefan-pochmann.de/spocc/speedsolving/clock/" target="_blank">Stefan Pochmann</a> has a very clear Rubik's Clock speed-solving solution.
+<br><a href="http://rec-puzzles.org/index.php/Clock%20Solution" target="_blank">rec.puzzles archive</a> has a solution.
+<br><a href="http://web.inter.nl.net/users/C.Eggermont/Puzzels/Clock.html" target="_blank">Chris Eggermont's page.</a> A somewhat cumbersome mathematical solution.
+<br><a href="http://www.dotsphinx.com/games/rubik/clock/" target="_blank">Raymond Penner's page.</a> A Java game simulating the Rubik's Clock.
+<br><a href="http://safalra.com/other/rubiks-clock-solution/" target="_blank">Safalra's website</a> has a solution that solves one complete side first.
+<br><a href="http://www.kongregate.com/games/d4m4s74/rubiks-clock-simulator" target="_blank">Rubik's Clock Simulator</a> in Flash.
+</div>
+
+<div class=solution>
+<h2>Solution:</h2>
+
+<p>
+Note that in this solution, you only turn corners which are next to buttons
+in the up position. This way none of the clocks on the reverse side move, except
+for the corner clocks.
+<ol type=1>
+<li>Push down the bottom two pins, push up the top two.</li>
+<li>Turn a top corner until the centre clock matches the bottom middle.</li>
+<li>Rotate the whole puzzle a quarter turn clockwise.</li>
+<li>Repeat steps 1-3 three more times. Afterwards all the non-corner clocks on the front should match the centre clock.</li>
+<li>Push up all pins.</li>
+<li>Turn any corner till the centre clock is 12. All non-corner clocks on the front are now pointing to 12.</li>
+<li>We are now done with the front side (the corner clocks will be solved later), so turn over the puzzle.</li>
+<li>Repeat steps 1-4 for this side, so that all the non-corner clocks match. There is no need to do steps 5-6 just yet, as we have to make the corners match before setting everything to 12.</li>
+<li>Push down the bottom left pin, push the other three up.</li>
+<li>Turn a top corner till the centre clock matches the bottom left clock.</li>
+<li>Rotate the whole puzzle a quarter turn clockwise.</li>
+<li>Repeat steps 9-11 three more times. Afterwards all the clocks on this side should match each other.</li>
+<li>Repeat steps 5-6 for this side. All the clocks are now at 12, so the puzzle is solved.</li>
+</ol>
+</div>
+
+<div class=chapter>
+<h2>Theory:</h2>
+
+<p>This is the one of the few non-trivial puzzles I know in which the order
+that the moves are performed is unimportant (i.e. the puzzle positions form
+an Abelian group). This means that it is not necessary to do any particular
+move twice during the solution because we could change the order to do
+them one after the other, and therefore combine them into one move.
+Another puzzle of this kind is the <a href="lights.htm">Lights Out</a> puzzle.
+</p>
+
+<p>There are 16 positions that the buttons can be in, and in 14 of these we
+can turn a corner next to an up button or one next to a down button. In the
+other two cases all the buttons are the same. This means there are 30 possible
+types of move that can be performed.</p>
+
+<p>Suppose we choose 14 independent move types. Independent means here that the effect
+of any of the 14 moves cannot be replicated by using only the other 13. It turns out that
+these 14 move types can then always solve the puzzle. For any position of the clocks this
+can be done by writing down 14 independent equations in 14 unknowns and solving them.
+The unknowns represent the how far you have to turn for each type of move. Each
+equation represents a clock; the left side is the amount the clock is turned by
+all the moves, the right side is the amount it has to turn to set it to twelve.
+</p>
+
+<p>The theoretical solution above is in general not very easy for humans to
+perform, but is well suited for computers. By rewriting the equations in matrix
+form, and inverting the matrix, finding a solution becomes nothing more than
+a simply multiplying the (constant) inverse matrix by a vector representing the
+current position to be solved. Such linear algebra is explained in the page
+about the <a href="lomath.htm">Mathematics of Lights Out</a>. Note however
+that here we are working in the integers modulo 12 in which we have 3&middot;4&Congruent;0,
+and this could make inverting a matrix impossible because we cannot divide by 2 or 3.
+Thankfully that situation does not occur here.
+</p>
+
+<p>The solution for humans above does indeed use exactly 14 moves. By a suitable
+choice of 14 moves, and by doing them in an easy order there is virtually no
+mental effort needed at all.</p>
+
+<p>Sometimes fewer than 14 moves are needed, because a clock happened to end up
+in the correct setting. There are 30 possible moves, and with a fixed choice of
+14 independent ones there are always positions that need all 14 moves. Mil&aacute;n Baticz
+pointed out to me however that it is always possible to choose the set of moves such that
+fewer than 14 moves are needed. I decided to investigate using computer searches, and
+got the following results:
+</p>
+
+<ul>
+<li>The 9 clocks on one side can always be solved in 8 moves.</li>
+<li>Of the 12<sup>5</sup> = 248,832 positions for a cross, there are only 18066 that
+need 5 moves, the rest can be solved in fewer. Therefore there is a 92.7% chance of
+being lucky with the cross.</li>
+<li>You have the choice of which side to solve first, so the chances of being lucky
+are even higher. In fact, the chances of being unlucky on both sides is a mere 0.53%.</li>
+<li>If you have one of the 99.47% of cases with a lucky cross, then you can solve that
+cross in 4 moves, and then the other side in 8 moves - 12 moves all together. The
+other 0.53% can be done in at most 13 moves (but maybe less).</li>
+</ul>
+
+<p>It turns out however that even those few positions from my analysis that might need 13
+moves can actually also be solved in 12 moves or less. <a href="http://www.cube20.org/clock/" target="_blank">Tom Rokicki</a> has calculated God's
+Algorithm for the Rubik's Clock with the following results:
+</p>
+
+<table class=god summary="">
+<tr><th>Moves</th><th>Positions</th></tr>
+<tr><th> 0</th><td>                  1</td></tr>
+<tr><th> 1</th><td>                330</td></tr>
+<tr><th> 2</th><td>             51,651</td></tr>
+<tr><th> 3</th><td>          4,947,912</td></tr>
+<tr><th> 4</th><td>        317,141,342</td></tr>
+<tr><th> 5</th><td>     14,054,473,232</td></tr>
+<tr><th> 6</th><td>    428,862,722,294</td></tr>
+<tr><th> 7</th><td>  8,621,633,953,202</td></tr>
+<tr><th> 8</th><td>101,600,180,118,726</td></tr>
+<tr><th> 9</th><td>528,107,928,328,516</td></tr>
+<tr><th>10</th><td>613,251,601,892,918</td></tr>
+<tr><th>11</th><td> 31,893,880,879,492</td></tr>
+<tr><th>12</th><td>             39,248</td></tr>
+<tr><th>Total</th><th>1,283,918,464,548,864</th></tr>
+</table>
+
+<p>
+So the average number of moves to optimally solve a random position is 9.4337 moves.
+</p>
+
+</div>
+
+<div style="text-align: center; width:100%"><div class=nav><ul>
+<li><a href="../puzzles/">Home</a></li>
+<li><a href="puzzlink.htm">Links</a></li>
+<li><a href="guest.htm">Guestbook</a></li>
+</ul></div></div>
+</body>
+</html>

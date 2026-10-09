@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Speedsolving Rubik's Clock</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+      body {
+        background: #fff;
+        color: #000;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 1.1em;
+        margin: 0px;
+        padding-top: 10px;
+      }
+      a:link { color: #33F; }
+      a:visited { color: #88F; }
+      .green { color: #3C3 }
+      .brown { color: #D71 }
+      .blue { color: #33F }
+      .red { color: #F00 }
+      .nobr { white-space: nowrap }
+      .intro { text-align: center }
+      .subpages { margin-left: auto; margin-right: auto }
+      dt { margin-top: 0.5em }
+      img { border: 0 }
+      h1 { color: #D71; font-size: 1.7em; font-weight: normal; margin-top: 1em; text-align:center }
+      h2 { color: #3C3; font-size: 1.3em; font-weight: normal; margin-top: 2em }
+      #head { width:55em; border:0px solid #CCC; height:150px; margin:auto; }
+      #body {
+        width: 50em;
+        border: 0px solid #CCC;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top:10px;
+      }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+          </head>
+  <body>
+
+    <div id="head">
+      <p>
+        <img style="float:left;padding-right:20px"  src="images/header_scrambled.jpg"  alt="left header"  />
+        <img style="float:right;padding-left:20px;" src="images/header_solved.jpg" alt="right header" />
+                <a href="../../../">Home</a> &gt;
+                <a href="../../">Cube Corner</a> &gt;
+                <a href="../">Speedsolving</a> &gt;
+        &nbsp;
+      </p>
+      <h1>Speedsolving Rubik's Clock</h1>
+          </div>
+
+    <div id="body">
+
+<!-- ==================================================  -->
+<!--    Content                                          -->
+<!-- ==================================================  -->
+
+<p style='background-color:#cfc; padding:3px; border: 2px solid #6f6'><a href='/WettenDass/'>Wetten, dass..?</a> vom 5. November</p>
+
+
+
+<!-- ============================================================ -->
+<!--      Introduction                                            -->
+<!-- ============================================================ -->
+
+<p>Using the method I describe here, I won the world championship in 2005 and got the current official world records 8.39 seconds for single solve and 9.74 seconds for mean-of-3. Watch an older <a href="../../videos/GoodClock.wmv">video</a> where I solved the clock in around 10 seconds (not on the stackmat, though). Any <a href="mailto:pochmann@gmx.de">comments are welcome</a>. Please let me know about your experiences with my page/system. Btw, I didn't really invent the system, I just optimized the well-known 14-move solution that you can for example find at <a href="http://www.geocities.com/jaapsch/puzzles/clock.htm">Jaap's page</a>.</p>
+
+<!-- ============================================================ -->
+<h2>My solution</h2>
+<!-- ============================================================ -->
+
+<p>Before we start, let me explain my notation. In the pictures below, you'll always see the goal state of the clocks *after* the turn. Buttons pushed up are shown (the yellow circles), buttons pushed down aren't. The wheels that you can turn are marked with a thick green stripe. If several are thick than you can turn any of them. I don't even know which ones I use there, it depends on where my fingers happen to be and the desired direction of the turn. The hours used are just examples, my drawing program allows me to draw 3, 6, 9 and 12 easily.</p>
+
+  <p style="margin-top:2em"><span class="brown">Equalize the cross.</span>
+ The first goal is not to bring each clock to 12, but to make them all show the same hour. The middle clock is our reference. Connect the four adjacent clocks to it, first the upper, then the left, then the bottom then the right one. The picture always shows the relevant clocks after the turn.</p>
+  <div style="text-align:center"><img src="images/equalize_cross.png" alt="equalize_cross" /></div>
+
+  <p style="margin-top:2em"><span class="brown">Turn the cross clocks to 12.</span>
+ You can use either of the upper wheels.</p>
+  <div style="text-align:center"><img src="images/cross_to_twelve.png" alt="cross_to_twelve" /></div>
+
+  <p style="margin-top:2em"><span class="brown">Flip the clock.</span>
+ Flip the whole toy, we'll now solve the back side. Turn it around the y-axis, so that afterwards you hold it correctly oriented (12 is on top). You don't expect a picture for this, do you?</p>
+
+  <p style="margin-top:2em"><span class="brown">Equalize the cross.</span>
+ Yes, this is indeed the exact same thing you did with the first side. Notice that you don't even have to change the buttons at all for the first turn (I optimized it to be this way).</p>
+  <div style="text-align:center"><img src="images/equalize_cross.png" alt="equalize_cross" /></div>
+
+  <p style="margin-top:2em"><span class="brown">Equalize cross with corners.</span>
+ Similar to the previous step. Remember to not turn the corner clock itself, but instead the other clocks!</p>
+  <div style="text-align:center"><img src="images/equalize_cross_with_corners.png" alt="equalize_cross_with_corners" /></div>
+
+  <p style="margin-top:2em"><span class="brown">Turn all clocks to 12.</span>
+</p>
+  <div style="text-align:center"><img src="images/all_to_twelve.png" alt="all_to_twelve" /></div>
+
+<!-- ============================================================ -->
+<h2>Hints</h2>
+<!-- ============================================================ -->
+
+<ul>
+  <li><p>Scramble the same way you solve, i.e. scramble with the same 14-move-sequence I showed you above. I'll soon write a program that will print out 14 random numbers from 1 to 12. Each number will tell me where to turn the middle clock to. That way I'll remove any dependencies between the clocks that are due to my hands. Also, it might help me practice to hit a certain hour. And it will speed up scrambling because usually I do many more turns than 14 until I'm satisfied to not have a lucky case.</p></li>
+
+  <li><p>Note that scrambling must also randomize the button states and that the puzzle should stand, not lie, after scrambling (i.e. before inspection). I've always done it this way and it's now in the official rules, too.</p></li>
+
+  <li><p>Begin with the easier side. Usually I don't care about the clock states to decide this, but the buttons do make a difference. For example, if all buttons are up then I flip to the other side because it's easier to begin with all buttons down.</p></li>
+
+  <li><p>Do not turn the whole clock 90 degrees all the time, that's only for beginners because it's easier to explain. The only time I turn the clock as a whole is when I flip to the back side.</p></li>
+
+  <li><p>You'll notice that often there are "lucky cases" waiting to be exploited, for example if the bottom clock shows the same hour as the middle clock right at the beginning. I myself get confused and lose my rhythm when I try to exploit this, so unless it's a superlucky case (e.g. four clocks showing the same time) I ignore it.</p></li>
+
+  <li><p>During preinspection remember the first move for the back side, that way you can instantly do it after flipping and don't need a break. Remember that with my optimization you don't even have to change buttons so you can really instantly do the turn.</p></li>
+
+  <li><p>It's included in my solution, but in case you'd like to try modifying it yourself (which I encourage you to do and would like to hear about) I'd suggest using the upper two wheels as often as possible. I do 12 out of the 14 moves with them.</p></li>
+
+  <li><p>Use thumbs to push buttons down. Use middle fingers to push upper buttons up. Use ring fingers to push bottom buttons up. Don't use your index fingers for that!</p></li>
+
+  <li><p>Practice. Who would've thought that, huh?</p></li>
+
+</ul>
+
+<!-- ==================================================  -->
+<!--    Framework footer                                 -->
+<!-- ==================================================  -->
+
+    </div>
+
+    <p style="text-align:right; padding-top:2em; width:55em">
+<!--      <a href="mailto:pochmann@gmx.de">Stefan Pochmann</a><br /> -->
+      <a href="/contact.php">Stefan Pochmann</a><br />
+            Last modified: March 20 2007, 21:33:34    </p>
+
+  </body>
+</html>
