@@ -23,7 +23,8 @@ int ct_sticker_perm(ct_move m, int n,
     if (n < CT_PERM_MIN_N || n > CT_PERM_MAX_N || !ct_move_legal(&m, n)) {
         return -1;
     }
-    memset(perm, 0xFF, (size_t)(CT_CUBE_FACE_COUNT * CT_CUBE_STRIDE * CT_CUBE_STRIDE));
+    memset(perm, CT_INTERCHANGE_PERM_UNSET,
+           (size_t)CT_CUBE_FACE_COUNT * CT_CUBE_STRIDE * CT_CUBE_STRIDE);
     ct_cube c;
     memset(&c, 0, sizeof c);
     c.n = n;

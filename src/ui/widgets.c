@@ -26,10 +26,10 @@ int ct_chart_layout(Rectangle bounds, const double *values, int count, ct_chart_
     for (int i = 0; i < n; i++) {
         double value = isfinite(values[i]) && values[i] > 0.0 ? values[i] : 0.0;
         double h = max > 0.0 ? (double)bounds.height * value / max : 0.0;
-        out[i].bar.x = bounds.x + unit * (double)i + gap / 2.0;
-        out[i].bar.y = bounds.y + (double)bounds.height - h;
-        out[i].bar.width = bar_w;
-        out[i].bar.height = h;
+        out[i].bar.x = (float)(bounds.x + unit * (double)i + gap / 2.0);
+        out[i].bar.y = (float)(bounds.y + (double)bounds.height - h);
+        out[i].bar.width = (float)bar_w;
+        out[i].bar.height = (float)h;
         out[i].value = values[i];
         out[i].label_day = (double)i;
     }

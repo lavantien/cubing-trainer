@@ -84,7 +84,7 @@ static int emit_quads(const ct_renderer *r, const ct_cube *c, const ct_color_sch
     if (c->n < 2 || c->n > CT_CUBE_MAX_N) {
         return 0;
     }
-    float inset = clampf(r->sticker_inset, 0.0f, 0.95f);
+    float inset = clampf(r->sticker_inset, 0.0f, CT_RENDERER_INSET_MAX);
     float step = r->cube_size / (2.0f * (float)(c->n - 1));
     float half = step * (1.0f - inset);
     float outset = 2.0f * step * CT_RENDERER_OUTSET_FRACTION;
@@ -126,17 +126,14 @@ static int emit_quads(const ct_renderer *r, const ct_cube *c, const ct_color_sch
                     tangent_col = v3_rotate(tangent_col, axis, angle_rad);
                 }
                 ct_sticker_quad *q = &out[count];
-                static const int corner_index[2][2] = {{0, 3}, {1, 2}};
-                for (int sy = -1; sy <= 1; sy += 2) {
-                    for (int sx = -1; sx <= 1; sx += 2) {
-                        int idx = corner_index[sx > 0][sy > 0];
-                        q->pos[idx].x =
-                            center.x + tangent_row.x * half * sx + tangent_col.x * half * sy;
-                        q->pos[idx].y =
-                            center.y + tangent_row.y * half * sx + tangent_col.y * half * sy;
-                        q->pos[idx].z =
-                            center.z + tangent_row.z * half * sx + tangent_col.z * half * sy;
-                    }
+                static const float corner_signs[CT_QUAD_CORNER_COUNT][2] = {
+                    {-1.0f, -1.0f}, {1.0f, -1.0f}, {1.0f, 1.0f}, {-1.0f, 1.0f}};
+                for (int k = 0; k < CT_QUAD_CORNER_COUNT; k++) {
+                    float sx = corner_signs[k][0];
+                    float sy = corner_signs[k][1];
+                    q->pos[k].x = center.x + tangent_row.x * half * sx + tangent_col.x * half * sy;
+                    q->pos[k].y = center.y + tangent_row.y * half * sx + tangent_col.y * half * sy;
+                    q->pos[k].z = center.z + tangent_row.z * half * sx + tangent_col.z * half * sy;
                 }
                 q->col = cs->face[value];
                 count++;
@@ -167,8 +164,9 @@ void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim *
             double eased = ct_ease_cubic_in_out(anim->elapsed / move_seconds);
             ct_v3 normal = ct_frames[m.face].normal;
             int sign = (normal.x != 0) ? normal.x : ((normal.y != 0) ? normal.y : normal.z);
-            double degrees = eased * (double)m.quarter * 90.0 * (double)(-sign);
-            angle_rad = (float)(degrees * CT_RENDERER_PI / 180.0);
+            double degrees =
+                eased * (double)m.quarter * CT_RENDERER_RIGHT_ANGLE_DEGREES * (double)(-sign);
+            angle_rad = (float)(degrees * CT_RENDERER_PI / CT_RENDERER_STRAIGHT_ANGLE_DEGREES);
             rotate = true;
         }
     }
@@ -177,14 +175,17 @@ void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim *
         return;
     }
     int vcount = count * CT_MESH_VERTS_PER_QUAD;
-    float *verts = malloc(sizeof(float) * (size_t)vcount * 3);
-    unsigned char *cols = malloc(sizeof(unsigned char) * (size_t)vcount * 4);
+    float *verts = malloc(sizeof(float) * (size_t)vcount * CT_MESH_FLOATS_PER_VERT);
+    unsigned char *cols = malloc(sizeof(unsigned char) * (size_t)vcount * CT_MESH_BYTES_PER_COLOR);
     if (verts == NULL || cols == NULL) {
         free(verts);
         free(cols);
         return;
     }
-    static const int corner_order[CT_MESH_VERTS_PER_QUAD] = {0, 1, 2, 0, 2, 3};
+    static const int corner_order[CT_MESH_VERTS_PER_QUAD] = {
+        CT_QUAD_CORNER_ROW_MIN_COL_MIN, CT_QUAD_CORNER_ROW_MAX_COL_MIN,
+        CT_QUAD_CORNER_ROW_MAX_COL_MAX, CT_QUAD_CORNER_ROW_MIN_COL_MIN,
+        CT_QUAD_CORNER_ROW_MAX_COL_MAX, CT_QUAD_CORNER_ROW_MIN_COL_MAX};
     int vi = 0;
     int ci = 0;
     for (int i = 0; i < count; i++) {
