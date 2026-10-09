@@ -280,8 +280,8 @@ CT_SUITE(fuzz_config_keys) {
                 separator = true;
             }
             ct_config expected = defaults;
-            bool want_ok = !separator && value[0] != '\0' &&
-                           strlen(value) < sizeof expected.db.filename;
+            bool want_ok =
+                !separator && value[0] != '\0' && strlen(value) < sizeof expected.db.filename;
             if (want_ok) {
                 snprintf(expected.db.filename, sizeof expected.db.filename, "%s", value);
             }
