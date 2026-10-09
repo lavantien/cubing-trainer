@@ -7,7 +7,8 @@
 enum {
     CT_CUBE_FACE_COUNT = 6,
     CT_CUBE_MAX_N = 7,
-    CT_CUBE_STRIDE = CT_CUBE_MAX_N
+    CT_CUBE_STRIDE = CT_CUBE_MAX_N,
+    CT_MOVE_QUARTERS = 4
 };
 
 enum {

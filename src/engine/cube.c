@@ -108,7 +108,7 @@ bool ct_cube_equal(const ct_cube *a, const ct_cube *b) {
 }
 
 ct_move ct_move_inverse(ct_move m) {
-    ct_move r = {m.face, m.depth_from, m.depth_to, 4 - m.quarter};
+    ct_move r = {m.face, m.depth_from, m.depth_to, CT_MOVE_QUARTERS - m.quarter};
     return r;
 }
 
@@ -116,7 +116,7 @@ static bool move_legal(const ct_cube *c, ct_move m) {
     return m.face >= CT_FACE_U
         && m.face <= CT_FACE_D
         && m.quarter >= 1
-        && m.quarter <= 3
+        && m.quarter <= CT_MOVE_QUARTERS - 1
         && m.depth_from >= 1
         && m.depth_to >= m.depth_from
         && m.depth_to <= c->n;
@@ -133,7 +133,7 @@ void ct_apply(ct_cube *c, ct_move m) {
     int h = c->n - 1;
     int u_lo = h - 2 * (m.depth_to - 1);
     int u_hi = h - 2 * (m.depth_from - 1);
-    int steps = ((-sign * m.quarter) % 4 + 4) % 4;
+    int steps = ((-sign * m.quarter) % CT_MOVE_QUARTERS + CT_MOVE_QUARTERS) % CT_MOVE_QUARTERS;
     for (int face = 0; face < CT_CUBE_FACE_COUNT; face++) {
         for (int row = 0; row < c->n; row++) {
             for (int col = 0; col < c->n; col++) {
