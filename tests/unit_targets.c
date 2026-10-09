@@ -29,6 +29,8 @@ CT_SUITE(unit_targets) {
     CT_ASSERT_EQ(ct_corner_piece_of(CT_TARGET_STICKERS), CT_TARGET_NONE);
     CT_ASSERT_EQ(ct_edge_piece_of(-5), CT_TARGET_NONE);
     CT_ASSERT_EQ(ct_edge_piece_of(999), CT_TARGET_NONE);
+    CT_ASSERT_EQ(ct_edge_piece_of(-1), CT_TARGET_NONE);
+    CT_ASSERT_EQ(ct_edge_piece_of(CT_TARGET_STICKERS), CT_TARGET_NONE);
 
     int corner_pieces[CT_TARGET_CORNER_PIECES] = {0};
     int edge_pieces[CT_TARGET_EDGE_PIECES] = {0};
@@ -163,6 +165,9 @@ CT_SUITE(unit_targets) {
     CT_ASSERT_EQ(capped[0].t1, -99);
     CT_ASSERT_EQ(ct_targets_edge(2, NULL, -7), 440);
     CT_ASSERT_EQ(ct_targets_edge(2, NULL, 0), 440);
+    CT_ASSERT_EQ(ct_targets_edge(2, capped, -1), 440);
+    CT_ASSERT_EQ(capped[0].t1, -99);
+    CT_ASSERT_EQ(capped[0].t2, -99);
 
     CT_ASSERT_EQ(ct_targets_corner(-1, NULL, 0), CT_TARGET_NONE);
     CT_ASSERT_EQ(ct_targets_corner(CT_TARGET_STICKERS, capped, 5), CT_TARGET_NONE);
@@ -180,6 +185,10 @@ CT_SUITE(unit_targets) {
     CT_ASSERT_EQ(cell_face, CT_TARGET_FACE_U);
     CT_ASSERT_EQ(cell_row, 0);
     CT_ASSERT_EQ(cell_col, 2);
+    ct_sticker_cell(CT_TARGET_ORBIT_CORNER, 3, &cell_face, &cell_row, &cell_col);
+    CT_ASSERT_EQ(cell_face, CT_TARGET_FACE_U);
+    CT_ASSERT_EQ(cell_row, 2);
+    CT_ASSERT_EQ(cell_col, 0);
     ct_sticker_cell(CT_TARGET_ORBIT_CORNER, 16, &cell_face, &cell_row, &cell_col);
     CT_ASSERT_EQ(cell_face, CT_TARGET_FACE_B);
     CT_ASSERT_EQ(cell_row, 0);
@@ -200,6 +209,14 @@ CT_SUITE(unit_targets) {
     CT_ASSERT_EQ(cell_face, CT_TARGET_FACE_B);
     CT_ASSERT_EQ(cell_row, 0);
     CT_ASSERT_EQ(cell_col, 1);
+    ct_sticker_cell(CT_TARGET_ORBIT_EDGE, 5, &cell_face, &cell_row, &cell_col);
+    CT_ASSERT_EQ(cell_face, CT_TARGET_FACE_L);
+    CT_ASSERT_EQ(cell_row, 1);
+    CT_ASSERT_EQ(cell_col, 2);
+    ct_sticker_cell(CT_TARGET_ORBIT_EDGE, 7, &cell_face, &cell_row, &cell_col);
+    CT_ASSERT_EQ(cell_face, CT_TARGET_FACE_L);
+    CT_ASSERT_EQ(cell_row, 1);
+    CT_ASSERT_EQ(cell_col, 0);
     ct_sticker_cell(CT_TARGET_ORBIT_CORNER, CT_TARGET_STICKERS, &cell_face, &cell_row, &cell_col);
     CT_ASSERT_EQ(cell_face, CT_TARGET_NONE);
     CT_ASSERT_EQ(cell_row, CT_TARGET_NONE);
