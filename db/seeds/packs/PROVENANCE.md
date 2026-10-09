@@ -155,3 +155,17 @@ Count: 16 rows. The plan named no count for this pack.
 
 Discrepancy: none. The wiki's fewest moves pages are prose technique descriptions, no algorithm tables exist to seed beyond the published example algorithms quoted inside the concept text.
 
+## mbld_concepts.tsv
+
+Sources: https://www.worldcubeassociation.org/regulations/ with the clauses of record H1a, H1a1, H1a2, H1b, 9f2, 9f2+, 9f12, 9f5 extracted verbatim to playground/seeds_mbld/wca_regulations.txt, https://www.speedsolving.com/wiki/index.php/Multi_BLD archived at playground/seeds_mbld/speedsolving_multibld.txt for the event flow, and https://www.speedsolving.com/wiki/index.php/BLD_Memorisation archived at playground/seeds_mbld/speedsolving_bldmemo.txt for the memorisation systems. The raw page HTMLs are not archived, the text extracts are the artifacts of record. Retrieved 2026-10-10.
+
+Page contents: the WCA regulations define the attempt declaration rule, the time limit, 10 minutes times the number of puzzles below 6 puzzles, else 60 minutes, the scoring rule solved minus unsolved, and the seconds truncation with the judge recording solved, attempted, and time. The wiki memorisation page describes nine memorisation systems from direct visualisation to PAO.
+
+Case key derivation: keys mbld.01 to mbld.14, mbld.01 to mbld.05 are the rule rows with the regulation tag in front_json, mbld.06 to mbld.14 are the memo rows with the memo tag. The alg column holds the rule or method answer text.
+
+Enum convention: CT_EVENT_MULTI_BLD, CT_METHOD_CONCEPT, CT_STAGE_CONCEPT. Per the plan multi BLD reuses the 3BLD pack for solving content, this pack seeds only the distinct method rows.
+
+Count: 14 rows. The plan named no count for this pack.
+
+Discrepancy: the wiki multi blind page states the time limit as 10 minutes per cube and a maximum of 60 minutes total, the regulations text is the source of record and carries the below 6 puzzles condition, the seeded row quotes the regulation wording.
+
