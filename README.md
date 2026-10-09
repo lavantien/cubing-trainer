@@ -22,6 +22,7 @@ The toolchain spelling is decided, evidence in playground/spike_link/REPORT.md. 
 | --- | --- |
 | vendor | download, HEAD-check, verify, and extract raylib 6.0, raygui 5.0, and the sqlite amalgamation into third_party/ |
 | build | compile app, raylib, raygui, and sqlite sources and emit build/bin/cubing-trainer.exe |
+| build-headless | compile tools/render_scene.c against the full library set and emit build/bin/render_scene.exe |
 | spike | build and run the M0 toolchain spike from playground/spike_link |
 | test | run the full unit suite |
 | test-\<suite\> | run suites whose name matches the filter |
@@ -29,14 +30,19 @@ The toolchain spelling is decided, evidence in playground/spike_link/REPORT.md. 
 | fmt-check | check formatting without writing |
 | lint | clang-tidy plus the -Wall -Wextra -Werror -Wpedantic -std=c23 gate plus zero-comment and stray-constant checks |
 | analyze | run clang --analyze over the sources |
-| fuzz | run the 8 in-process fuzz suites, CT_FUZZ_LOOPS multiplies the iteration count |
+| fuzz | run the 16 in-process fuzz suites, CT_FUZZ_LOOPS multiplies the iteration count |
 | fuzz-\<suite\> | run one fuzz suite |
+| mutate | run the token mutation harness over the SCOPE directory or file with the optional SUITE filter |
+| e2e | run every tests/e2e/*.txt through cubing-trainer.exe --headless --script |
+| visual | render the 4 golden scenes fresh into build/visual and compare against tests/golden through tools/visual_check.py |
+| db-verify | build a migrated DB through tools/make_db.c, then check integrity, user_version, and 35 schema assertions through the sqlite3 CLI |
 | diagrams | render every docs/diagrams/*.mmd to PNG through tools/gen_diagrams.mjs |
 | memguard | run tools/memguard.ps1 to enforce the combined working set cap on project processes |
+| memguard-selftest | verify memguard process matching against a spawned sleeper exe |
 | run | build then launch the trainer window |
 | clean | remove build outputs |
 
-Stub targets that print not implemented and exit 1 today, landing with their milestones: build-headless, mutate, e2e, visual, and db-verify. Visual comparison itself works today through tools/render_scene.c and tools/visual_check.py, the make wiring is pending.
+make build-headless emits build/bin/render_scene.exe, the headless scene renderer that make visual drives. The e2e script runner is the one pending piece in this set: while tests/e2e holds no script cases, make e2e exits 1 with a message naming the pending runner, so the gate fails honestly.
 
 ## Architecture
 
@@ -45,27 +51,27 @@ Module tree:
 ```
 Makefile README.md
 db/migrations/001_init.sql  db/seeds/speffz.sql  db/seeds/speffz_source.md
-docs/diagrams/*.mmd  docs/diagrams/*.png (generated)
+docs/diagrams/*.mmd  docs/diagrams/*.png (generated)  docs/reviews/*.md
 src/config/config.h config.c
-src/engine/cube.h cube.c notation.h notation.c transform.h transform.c
+src/engine/cube.h cube.c notation.h notation.c transform.h transform.c geometry.h geometry.c
 src/render/renderer.h renderer.c anim.h anim.c
-src/ui/ui.h screen_menu.c screen_cards.c screen_review.c screen_settings.c
-src/storage/db.h db.c migrate.c repo_cards.c repo_reviews.c repo_settings.c repo_stats.c
+src/ui/ui.h widgets.h widgets.c screen_menu.c screen_cards.c screen_review.c screen_settings.c screen_stats.c
+src/storage/db.h db.c migrate.c repo_cards.c repo_reviews.c repo_settings.c repo_stats.c repo_algs.c
 src/srs/fsrs.h fsrs.c
 src/trainer/session.h session.c cfop.h cfop.c selector.h selector.c
-src/gen/targets.h targets.c interchange.h interchange.c
+src/gen/targets.h targets.c interchange.h interchange.c synth.h synth.c score.h score.c
 src/stats/stats.h stats.c
 src/packs/packs.h packs.c provenance.h provenance.c
 src/app/main.c app.h app_loop.c headless.h headless.c
-tools/gen_diagrams.mjs run_lint.ps1 run_analyze.ps1 check_zero_comments.ps1 check_stray_constants.ps1 memguard.ps1 render_scene.c visual_check.py
-tests/framework.h framework.c test_main.c unit_*.c fuzz_engine.c fuzz_main.c golden/
+tools/gen_diagrams.mjs run_lint.ps1 run_analyze.ps1 check_zero_comments.ps1 check_stray_constants.ps1 stray_constants_allow.txt memguard.ps1 memguard_sleeper.c mutate.c make_db.c db_schema_check.sql db_verify.py render_scene.c visual_check.py visual_selftest.py
+tests/framework.h framework.c test_main.c unit_*.c fuzz_engine.c fuzz_srs.c fuzz_db.c fuzz_config.c fuzz_main.c fixtures/ golden/ mutant_allowlist.txt
 ```
 
-Still pending from the plan: src/engine/geometry.c, the src/gen synthesis, classification, scoring, and simplification files, and the trainer and stats screens.
+In flight: classification in src/gen. Queued: the e2e script runner and the startup settings merge.
 
 Layering, enforced by review: config depends on nothing. engine, srs, and storage depend on config. gen and render depend on engine. trainer depends on storage and srs. ui depends on trainer, render, and storage. app depends on ui. No upward or lateral edges.
 
-Two patterns keep the code testable without a window. UI screens split a pure model from a thin draw layer: ct_cards_form and ct_settings_form in src/ui/ui.h carry form state and staged mutations with no raylib types, covered by tests/unit_cards_form.c, tests/unit_review_form.c, and tests/unit_settings_form.c, while the screen update and draw functions only translate app state into calls. The renderer splits the same way, ct_renderer_quads emits the sticker quad list as plain data and ct_renderer_draw is the only function that builds raylib meshes.
+Two patterns keep the code testable without a window. UI screens split a pure model from a thin draw layer: ct_cards_form and ct_settings_form in src/ui/ui.h carry form state and staged mutations with no raylib types, covered by tests/unit_cards_form.c, tests/unit_review_form.c, and tests/unit_settings_form.c, while the screen update and draw functions only translate app state into calls. The renderer splits the same way, ct_renderer_quads emits the sticker quad list as plain data and ct_renderer_draw is the only function that builds raylib meshes. ct_renderer_draw takes the animation duration as move_seconds (40c5a86): the headless golden path pins CT_RENDERER_MOVE_MILLIS from the config hub for deterministic output, while the review screen feeds the user's anim.move_seconds setting through ct_anim_update into the same draw call end to end.
 
 raylib 6 notes from the renderer work: matrix types and math live in raymath.h and the mesh buffer layout lives in rlgl.h, whose stream order renderer.h records as position 0 and color 3. The draw path fills mesh.vertices and mesh.colors and hands them to UploadMesh, then UnloadMesh frees the CPU-side arrays along with the GPU upload, so the dynamic cube mesh is rebuilt and re-uploaded every frame, which stays cheap at 6 * n * n quads and keeps animation out of GPU lifetime management. LoadMaterialDefault is the unlit vertex color path, which is what flat sticker quads need.
 
@@ -80,6 +86,8 @@ World axes are x right, y up, z front. Each of the 6 faces carries a (normal, ro
 Sticker indexing for BLD work runs 0 to 23 per orbit: face order U L F R B D, corner sticker index is face * 4 + p with p running clockwise from (0, 0), edge sticker index is face * 4 + p with p running clockwise from the (0, 1) edge.
 
 src/engine/transform.c rewrites move sequences as algebra: inverse, mirror, rotate_y, conjugate, and simplify. Mirror swaps R and L and inverts quarter counts, rotate_y cycles the side faces around U for k = 1, 2, 3. Both carry simulation oracles in tests/unit_transform.c: mirroring the cube state after an algorithm equals applying the mirrored algorithm to the mirrored solved cube, and appending a y rotation to an algorithm equals applying the rotated algorithm after the y rotation.
+
+src/engine/geometry.h landed the puzzle driver vtable ct_geometry in 2e22289: sticker_count, move_count, move_facelets, sticker_geometry, turn_axis, and move_from_token, all keyed by n, with ct_geometry_apply composing decode and apply. The landed nxn driver addresses moves as depth pairs, each id decodes to face, depth_from, depth_to, and quarter over every contiguous span inside the outer half of the cube, and move_count(n) is 18P with P = half(half + 1) / 2 and half = (n + 1) / 2, so 54 moves at n = 3 and 180 at n = 7. Whole-cube rotations span depth 1 through n and encoding rejects spans deeper than half, so rotations sit outside the id space by design. move_facelets writes the permutation into uint8_t values, so the compact convention caps at n = 6 (CT_GEOMETRY_PERM_MAX_N) while counts, decoding, sticker geometry, and turn axes stay valid to n = 7. tests/unit_geometry.c covers decode and encode round trips, counts, permutations, sticker geometry, turn axes, token encoding, and guard paths.
 
 ## Notation grammar
 
@@ -195,13 +203,13 @@ I(r, S) = (S/FACTOR) * (r^(1/DECAY) - 1)
 S_same_day = S * e^(w17*(G-3+w18))
 ```
 
-The difficulty update is damped with mean reversion to D0(4), the recall and forget stability updates follow the wiki, and DECAY and FACTOR are the wiki constants. Clamps are recorded design choices: difficulty D in [1, 10], stability S in [0.1, 36500] days. Same-day reviews apply the same-day stability formula and leave difficulty unchanged. Golden unit tests derive expected values by hand from the wiki formulas before implementation.
+The difficulty update is damped with mean reversion to D0(4), the recall and forget stability updates follow the wiki, and DECAY and FACTOR are the wiki constants. Clamps are recorded design choices: difficulty D in [1, 10], stability S in [0.1, 36500] days. The input domain contract, landed in f5d6ac5: negative elapsed days clamp to 0 inside ct_fsrs_retrievability, and due_day saturates at LONG_MAX when today plus the interval would overflow instead of wrapping. Same-day reviews apply the same-day stability formula and leave difficulty unchanged. Golden unit tests derive expected values by hand from the wiki formulas before implementation.
 
 The C surface sits in src/srs/fsrs.h: ct_grade (again 1, hard, good, easy), ct_fsrs_card, ct_fsrs, and the functions ct_fsrs_init, ct_fsrs_review, ct_fsrs_retrievability, ct_fsrs_next_interval_days.
 
 ## Generator
 
-src/gen/ runs this pipeline per case. Landed so far: target enumeration and interchange detection. Synthesis, classification, scoring, and the cache are planned with M2, so steps 3 through 6 below are the design of record:
+src/gen/ runs this pipeline per case. Landed so far: target enumeration and interchange detection, template synthesis with setup search and fallback (3179098), scoring with the regrip model (0db720d), and the generated_alg cache with params hash invalidation (576a526). Classification is in flight, so step 5 below is still the design of record:
 
 1. Enumerate targets through the active letter scheme: 24 corner and 24 edge stickers, the 378 corner and 440 edge ordered pairs in fixed-buffer mode, and parity, flip, and twist categories from small tables.
 2. Detect interchanges: move m interchanges stickers (x, y) iff m(x)==y and m(y)==x on the sticker permutations. The landed candidate set in ct_candidate_moves enumerates every face, every slab span contained in the outer half of the cube since deeper spans are complements of shallower ones, and quarters 1 to 3, which is 54 moves on n = 3 and 180 on n = 7, kept when the computed permutation swaps the pair.
@@ -222,11 +230,15 @@ Test framework: hand-rolled tests/framework.h plus framework.c, about 300 SLOC. 
 
 Coding rule from the FSRS work: ct_grade is an all-nonnegative enum, so clang gives it an unsigned underlying type, and bare g - CT_GOOD for grades below GOOD wrapped to about 4.29e9 instead of going negative. That silently corrupted the difficulty and same-day formulas for AGAIN and HARD while every bounds-only property test still passed, and only the independently derived goldens caught it. Cast to signed before enum arithmetic, write (int)g - CT_GOOD, and src/srs/fsrs.c applies the cast at every grade arithmetic site.
 
-Fuzzing: hand-rolled in-process fuzz loops, one deterministic seeded sfc64 generator per iteration with the seed printed on failure. The engine harness landed with M1 T8 in tests/fuzz_engine.c: 8 suites covering notation tokens, garbage strings, random algorithms, transform inverse, simplify, and rotate_y, and cube invariants and mirror. The iteration count is the config default fuzz.iterations (10000) multiplied by CT_FUZZ_LOOPS (make default 10, capped), so make fuzz runs 100000 iterations per suite and CT_FUZZ_LOOPS=1 gives the config base. Sanitizer gap, stated plainly: libFuzzer and ASan are unavailable on the windows-gnu target with this LLVM, because compiler-rt ships only MSVC-ABI .lib files there. UB is caught via -fsanitize=undefined -fsanitize-trap=all, which needs no runtime. Coverage-guided fuzzing and ASan are a recorded gap, with an MSVC-target build as the future path. Fuzz surfaces still planned: FSRS numerics, repo SQL, generator validation, config parsing, and the e2e script runner.
+Domain notes from the adversarial review: the notation parser accepts n = 1 while ct_cube_init clamps to n at least 2, deliberate and covered by goldens, and a state 0 card's first rating sets due_day to today with the interval applying from the second review, consistent with the FSRS goldens.
 
-Mutation testing: Mull has no native Windows support, so tools/mutate.c will do token-level source mutation: swap arithmetic and comparison ops, swap and-or, flip integer and boolean literals by 1, delete negations, and mutate return literals. make mutate SCOPE=src/srs will compile each mutant with identical flags, run the unit suite, and fail on survivors. tests/mutant_allowlist.txt will hold 1 justification line per accepted equivalent mutant. The harness is not built yet, make mutate exits 1 as a stub.
+The M0 and M1 adversarial review record with both reviewers' findings and dispositions is docs/reviews/2026-10-10-adversarial-m0m1.md.
 
-E2E: cubing-trainer.exe --headless --script tests/e2e/\<case\>.txt will run the real binary in the headless flavor, script UI actions through an input-injection hook, and assert final DB state. The script runner is still pending.
+Fuzzing: hand-rolled in-process fuzz loops, one deterministic seeded sfc64 generator per iteration with the seed printed on failure. 16 suites now run across tests/fuzz_engine.c, tests/fuzz_srs.c, tests/fuzz_db.c, and tests/fuzz_config.c: notation tokens, garbage strings, random algorithms, transform inverse, simplify, and rotate_y, cube invariants and mirror, FSRS state walks, elapsed values, and grade space, repo card, review, and settings string handling, and config keys and move masks. The iteration count is the config default fuzz.iterations (10000) multiplied by CT_FUZZ_LOOPS (make default 10, capped), so make fuzz runs 100000 iterations per suite and CT_FUZZ_LOOPS=1 gives the config base. Sanitizer gap, stated plainly: libFuzzer and ASan are unavailable on the windows-gnu target with this LLVM, because compiler-rt ships only MSVC-ABI .lib files there. UB is caught via -fsanitize=undefined -fsanitize-trap=all, which needs no runtime. Coverage-guided fuzzing and ASan are a recorded gap, with an MSVC-target build as the future path. Fuzz surfaces still planned: generator validation and the e2e script runner.
+
+Mutation testing: Mull has no native Windows support, so tools/mutate.c does token-level source mutation, landed in 74d29fc. The operator set: arithmetic swaps (+ against -, * against /), comparison swaps (< against <=, > against >=, == against !=), logic swap (&& against ||), integer literal plus and minus one, bool literal flip, bang deletion, and return literal swap between 0 and 1. make mutate SCOPE=src/srs SUITE=\<suite\> links each mutant against the build/tobj object set with the mutated TU swapped in, runs a baseline pass first and aborts if it fails, then runs the chosen suite or the full unit binary per mutant and prints the kill rate. Per-run artifacts sit under build/mutants/p\<pid\>/ with pid-suffixed binaries and are cleaned unless CT_MUTATE_KEEP=1 (4921aca), so concurrent runs never collide, and CT_MUTATE_LIST=1 lists sites without running. Survivors must match tests/mutant_allowlist.txt, one line per accepted equivalent mutant as a file glob with optional :line, a tab, and a justification, and any unexplained survivor fails the run. Site counts reproduce only over a quiet tree, with no concurrent source edits or rebuilds, and the harness aborts on a missing build/tobj object, so scoped mutation gates run in quiet build windows after a complete make test.
+
+E2E: make e2e runs every tests/e2e/*.txt through cubing-trainer.exe --headless --script, the real binary in the headless flavor with UI actions scripted through an input-injection hook and final DB state asserted. The script runner is still pending, and while tests/e2e holds no cases the target exits 1 naming the pending runner.
 
 Visual regression: landed with M1 T7. The headless path opens a hidden GLFW window (FLAG_WINDOW_HIDDEN before InitWindow) on OpenGL 3.3, renders offscreen to a RenderTexture2D at 960x540, and reads back through LoadImageFromTexture plus ImageFlipVertical into raylib's PNG encoder, in src/app/headless.c behind tools/render_scene.c. rlsw was evaluated and rejected, its 3D rasterization is broken in the vendored raylib 6.0 snapshot, evidence in playground/headless_spike/REPORT.md. 4 goldens are versioned in tests/golden/ (solved 3 and 7, scramble 3, mid animation 3) with SHA-256, scene parameters, generation commands, and machine dependence recorded in tests/golden/PROVENANCE.md. Comparison runs through tools/visual_check.py, a dependency-free Python aHash over an 8x8 grid with a hamming distance threshold of 4 and a mean delta threshold of 0.25, verified to pass regenerated goldens and fail both a 40x40 sticker recolor and a one token alg edit. The goldens encode GPU rasterization output, so a different GPU or driver requires regenerating them.
 
@@ -257,5 +269,5 @@ All 5 diagrams are mermaid flowchart LR rendered to PNG by make diagrams through
 | app_loop | app main loop, fixed-timestep update plus render | landed |
 | review_session_flow | review session from due queue through reveal, grade, and FSRS update to the session log | landed, matches src/trainer/session.c |
 | generator_pipeline | src/gen stages from target enumeration to cached algs | landed as the design of record, stages land with M2 |
-| data_flow | ui screens through the repo layer to sqlite, with settings merged over config defaults | landed |
+| data_flow | ui screens through the repo layer to sqlite, settings rows merging over config defaults | landed as design of record, startup merge queued |
 | milestone_map | the M0 to M6 sequence with status | landed, status as of 2026-10-10 |
