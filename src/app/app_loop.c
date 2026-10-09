@@ -46,19 +46,27 @@ void ct_app_init(ct_app *app) {
         app->db_path[0] = '\0';
     }
     snprintf(app->migrations_path, sizeof app->migrations_path, "db/migrations");
+    bool db_ready = false;
     if (ct_db_open(&app->db, app->db_path) != 0) {
         fprintf(stderr, "cubing-trainer: cannot open database %s\n", app->db_path);
         app->db = NULL;
     } else if (ct_db_migrate(app->db, app->migrations_path) != 0) {
         fprintf(stderr, "cubing-trainer: migration failed from %s\n", app->migrations_path);
+        ct_db_close(app->db);
+        app->db = NULL;
+    } else {
+        db_ready = true;
     }
     app->screen = CT_SCREEN_MENU;
-    app->running = true;
+    app->running = db_ready;
     app->acc = 0.0;
     app->fixed_dt = 1.0 / app->cfg.window.target_fps;
 }
 
 void ct_app_run(ct_app *app) {
+    if (app == NULL || !app->running) {
+        return;
+    }
     InitWindow((int)app->cfg.window.width, (int)app->cfg.window.height, "cubing-trainer");
     SetTargetFPS((int)app->cfg.window.target_fps);
     while (app->running && !WindowShouldClose()) {
