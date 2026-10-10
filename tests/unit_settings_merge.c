@@ -172,10 +172,10 @@ CT_SUITE(settings_merge_rejected_count) {
     CT_ASSERT_EQ(rejected, 4);
     CT_ASSERT_DBL_EQ(merged.anim.move_seconds, 0.4, 1e-12);
 
-    CT_ASSERT_EQ(sqlite3_exec(db,
-                              "INSERT INTO settings(key, value) VALUES('srs.request_retention', NULL)",
-                              NULL, NULL, NULL),
-                 SQLITE_OK);
+    CT_ASSERT_EQ(
+        sqlite3_exec(db, "INSERT INTO settings(key, value) VALUES('srs.request_retention', NULL)",
+                     NULL, NULL, NULL),
+        SQLITE_OK);
     CT_ASSERT_EQ(ct_repo_settings_merge_rejected(db, &merged, &rejected), 0);
     CT_ASSERT_EQ(rejected, 5);
 
