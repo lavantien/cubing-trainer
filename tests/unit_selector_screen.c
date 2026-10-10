@@ -56,6 +56,12 @@ CT_SUITE(trainer_form_navigation) {
     sqlite3 *db = tss_db();
     ct_trainer_form f;
     CT_ASSERT_EQ(ct_trainer_form_open(&f, db), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_trainer_form_select_event(NULL, CT_EVENT_3X3), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_trainer_form_select_method(NULL, CT_METHOD_CFOP), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_trainer_form_select_list(NULL, 0), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_trainer_form_select_case(NULL, 0), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_trainer_form_visible_count(NULL), 0);
+    CT_ASSERT_EQ(ct_trainer_form_nth_visible(NULL, 0), -1);
     CT_ASSERT_EQ(ct_trainer_form_select_event(&f, CT_EVENT_SQUARE1), CT_REPO_OK);
     CT_ASSERT_EQ(f.sel.method, CT_METHOD_LBL);
     CT_ASSERT_EQ(f.list_count, 5);
@@ -71,11 +77,15 @@ CT_SUITE(trainer_form_navigation) {
     CT_ASSERT_EQ(ct_trainer_form_select_method(&f, CT_METHOD_CFOP), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(ct_trainer_form_select_event(&f, CT_EVENT_SQUARE1), CT_REPO_OK);
     CT_ASSERT_EQ(ct_trainer_form_select_method(&f, CT_METHOD_LBL), CT_REPO_OK);
+    CT_ASSERT_EQ(f.sel.list_id, 0);
     CT_ASSERT_EQ(ct_trainer_form_select_list(&f, 0), CT_REPO_OK);
     CT_ASSERT_EQ(f.lists[0].stage, CT_STAGE_CUBESHAPE);
     CT_ASSERT_EQ(ct_trainer_form_select_list(&f, 4), CT_REPO_OK);
     CT_ASSERT_EQ(f.lists[4].stage, CT_STAGE_EP);
     CT_ASSERT_EQ(f.case_count, 99);
+    CT_ASSERT_EQ(ct_trainer_form_nth_visible(&f, 0), 0);
+    CT_ASSERT_EQ(ct_trainer_form_nth_visible(&f, 98), 98);
+    CT_ASSERT_EQ(ct_trainer_form_nth_visible(&f, 99), -1);
     CT_ASSERT_EQ(ct_trainer_form_select_list(&f, 5), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(ct_trainer_form_select_list(&f, -1), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(f.sel.list_id, 4);
@@ -122,6 +132,9 @@ CT_SUITE(trainer_form_case_detail) {
     CT_ASSERT_STR_EQ(f.front, want.front_json);
     CT_ASSERT_STR_EQ(f.alg_text, want.alg);
     CT_ASSERT_EQ(ct_trainer_form_select_event(&f, CT_EVENT_3X3), CT_REPO_OK);
+    CT_ASSERT_EQ(f.sel.case_index, -1);
+    CT_ASSERT_STR_EQ(f.front, "");
+    CT_ASSERT_STR_EQ(f.alg_text, "");
     CT_ASSERT_EQ(ct_trainer_form_select_case(&f, 0), CT_REPO_OK);
     CT_ASSERT_EQ(f.pack_status, CT_TRAINER_NO_DETAIL);
     CT_ASSERT_STR_EQ(f.alg_text, "");
@@ -156,6 +169,73 @@ CT_SUITE(trainer_form_generated_alg) {
     ct_db_close(db);
 }
 
+CT_SUITE(trainer_form_select_refreshes_inputs) {
+    sqlite3 *db = tss_db();
+    ct_trainer_form f;
+    CT_ASSERT_EQ(ct_trainer_form_open(&f, db), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_trainer_form_select_event(&f, CT_EVENT_3BLD), CT_REPO_OK);
+    CT_ASSERT_EQ(f.sel.method, CT_METHOD_3STYLE);
+
+    ct_config cfg = ct_config_defaults();
+    char hash_old[CT_ALG_HASH_HEX_MAX];
+    ct_params_hash(&cfg, f.scheme_id, CT_BUFFER_FIXED, f.scheme.buffer_corner, f.scheme.buffer_edge,
+                   &f.scheme.map, hash_old);
+    ct_generated_alg old_alg;
+    memset(&old_alg, 0, sizeof old_alg);
+    old_alg.orbit = CT_ORBIT_CORNER;
+    old_alg.buffer_mode = CT_BUFFER_FIXED;
+    old_alg.category = 0;
+    old_alg.classification = CT_CLS_PURE;
+    old_alg.qtm = 9;
+    old_alg.score = 1.0;
+    snprintf(old_alg.target_pair, sizeof old_alg.target_pair, "%s", "AB");
+    snprintf(old_alg.sequence, sizeof old_alg.sequence, "%s", "OLD_BUFFER_UFR");
+    snprintf(old_alg.score_parts_json, sizeof old_alg.score_parts_json, "%s", "{\"len\":9}");
+    CT_ASSERT_EQ(ct_repo_alg_put(db, &old_alg, hash_old), CT_REPO_OK);
+
+    ct_settings_form sf;
+    ct_settings_form_open(&sf, db);
+    CT_ASSERT_EQ(sf.status, CT_REPO_OK);
+    CT_ASSERT_EQ(ct_settings_form_stage_buffer(&sf, CT_ORBIT_CORNER, 5), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_settings_form_save(&sf), CT_REPO_OK);
+
+    ct_selector_scheme fresh;
+    CT_ASSERT_EQ(ct_selector_scheme_load(db, &fresh), 0);
+    CT_ASSERT_EQ(fresh.buffer_corner, 5);
+    char hash_new[CT_ALG_HASH_HEX_MAX];
+    ct_params_hash(&cfg, f.scheme_id, CT_BUFFER_FIXED, fresh.buffer_corner, fresh.buffer_edge,
+                   &fresh.map, hash_new);
+    CT_ASSERT(strcmp(hash_old, hash_new) != 0);
+    ct_generated_alg new_alg = old_alg;
+    snprintf(new_alg.sequence, sizeof new_alg.sequence, "%s", "NEW_BUFFER_5");
+    CT_ASSERT_EQ(ct_repo_alg_put(db, &new_alg, hash_new), CT_REPO_OK);
+
+    CT_ASSERT_EQ(ct_trainer_form_select_case(&f, 0), CT_REPO_OK);
+    CT_ASSERT_EQ(f.scheme.buffer_corner, 5);
+    CT_ASSERT_EQ(f.alg_status, CT_REPO_OK);
+    CT_ASSERT_STR_EQ(f.alg_text, "NEW_BUFFER_5");
+
+    ct_settings_form sf2;
+    ct_settings_form_open(&sf2, db);
+    CT_ASSERT_EQ(sf2.status, CT_REPO_OK);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&sf2, CT_ORBIT_CORNER, 0, 'B'), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_settings_form_stage_move(&sf2, CT_MOVE_BIT_L), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_settings_form_save(&sf2), CT_REPO_OK);
+
+    CT_ASSERT_EQ(ct_trainer_form_select_case(&f, 0), CT_REPO_OK);
+    CT_ASSERT_EQ(f.scheme.map.corner[0], 'B');
+    CT_ASSERT_EQ(f.cfg.gen.preferred_moves & CT_MOVE_BIT_L, CT_MOVE_BIT_L);
+    char hash_fresh[CT_ALG_HASH_HEX_MAX];
+    ct_selector_scheme after;
+    CT_ASSERT_EQ(ct_selector_scheme_load(db, &after), 0);
+    ct_params_hash(&f.cfg, f.scheme_id, CT_BUFFER_FIXED, after.buffer_corner, after.buffer_edge,
+                   &after.map, hash_fresh);
+    CT_ASSERT(strcmp(hash_new, hash_fresh) != 0);
+    CT_ASSERT_STR_EQ(f.alg_text, "");
+    CT_ASSERT(f.alg_status != CT_REPO_OK);
+    ct_db_close(db);
+}
+
 CT_SUITE(trainer_form_chart_cells) {
     sqlite3 *db = tss_db();
     ct_trainer_form f;
@@ -165,6 +245,7 @@ CT_SUITE(trainer_form_chart_cells) {
     CT_ASSERT_EQ(f.lists[0].source, CT_SELECTOR_CHART);
     CT_ASSERT_EQ(ct_trainer_form_visible_count(&f), TSS_CORNER_CASES);
     CT_ASSERT_EQ(ct_trainer_form_select_cell(&f, -1), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_trainer_form_select_cell(&f, 0), CT_REPO_OK);
     CT_ASSERT_EQ(ct_trainer_form_select_cell(&f, CT_LETTER_STICKERS), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(ct_trainer_form_select_cell(&f, TSS_CELL), CT_REPO_OK);
     CT_ASSERT_EQ(f.cell, TSS_CELL);

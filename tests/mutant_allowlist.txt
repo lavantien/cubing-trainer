@@ -530,3 +530,105 @@ src/config/config.c:208	the errno preset mutant to 1 or -1 never equals ERANGE a
 src/config/config.c:249	the index mutant reads the matched underscore byte before the face, never nul, and the empty face still returns UNKNOWN through the token guard
 src/config/config.c:253	the sentinel mutant -2 passes the same idx < 0 rejection, only the sign is consumed
 src/config/config.c:263	the sentinel mutant -2 passes the same idx < 0 rejection, only the sign is consumed
+src/ui/screen_trainer.c:10	layout shift constant, consumed only by the raylib draw path no headless suite exercises
+src/ui/screen_trainer.c:11	layout divisor, consumed only by the raylib draw path no headless suite exercises
+src/ui/screen_trainer.c:12	layout shift constant, consumed only by the raylib draw path no headless suite exercises
+src/ui/screen_trainer.c:13	layout shift constant, consumed only by the raylib draw path no headless suite exercises
+src/ui/screen_trainer.c:17	label array bound, consumed only by the draw-side label builder and event handler no headless suite exercises
+src/ui/screen_trainer.c:18	label array bound, consumed only by the draw-side label builder and case clamp no headless suite exercises
+src/ui/screen_trainer.c:19	centering divisor, consumed only by the raylib draw path no headless suite exercises
+src/ui/screen_trainer.c:39	name table sizing, consumed only by the draw-side label builder no headless suite exercises
+src/ui/screen_trainer.c:40	name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+src/ui/screen_trainer.c:45	name table sizing, consumed only by the draw-side label builder no headless suite exercises
+src/ui/screen_trainer.c:46	name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+src/ui/screen_trainer.c:51	name table sizing, consumed only by the draw-side label builder no headless suite exercises
+src/ui/screen_trainer.c:52	name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+src/ui/screen_trainer.c:57	transient reset, every reachable path overwrites case_count at the case-count query, and the zero-list early return state cannot occur because the caller already rejected pairs without lists
+src/ui/screen_trainer.c:68	zero-list guard unreachable, ct_selector_lists always yields at least one list for an event and method that passed the caller guard
+src/ui/screen_trainer.c:72	clamp fires only when sel.list_id reached list_count, every public setter resets or bounds list_id below list_count before reload runs
+src/ui/screen_trainer.c:73	reachable only inside the same unfireable list_id clamp
+src/ui/screen_trainer.c:76	ternary boundary is a true equivalent, n == 0 selects 0 in both arms, and n below 0 requires a registered list with zero cases
+src/ui/screen_trainer.c:77	off-by-one iteration queries case_group at an out-of-range index which returns CT_SELECTOR_ERR and is skipped, group totals unchanged
+src/ui/screen_trainer.c:83	both mutants converge to the same group_count, the write stores group + 1 regardless and when group + 1 equals group_count both arms leave it unchanged
+src/ui/screen_trainer.c:105	memset fill byte, open assigns cfg, scheme, and selector state and reload resets every field the suites read before it is read
+src/ui/screen_trainer.c:115	zero-methods guard unreachable, the selector registry exposes at least one method for every event
+src/ui/screen_trainer.c:146	zero-list guard unreachable from the method side, ct_selector_lists for a method that passed the pair check always yields at least one list
+src/ui/screen_trainer.c:170	defensive bound, public setters keep sel.list_id within 0 and list_count minus 1 so both comparison mutants are equivalent on every reachable state
+src/ui/screen_trainer.c:190	the clear is redundant on every reachable path, the pack branch snprintf rewrites the buffer from index 0 and the chart key writer never fails for an in-range index
+src/ui/screen_trainer.c:216	guard unreachable, the chart key writer never fails for an in-range index under a loaded scheme so the clear never runs
+src/ui/screen_trainer.c:260	dead store, the pair writer assigns both outputs before any read on the success path and the failure path returns without reading
+src/ui/screen_trainer.c:261	dead store, the pair writer assigns both outputs before any read on the success path and the failure path returns without reading
+src/ui/screen_trainer.c:264	unreachable failure return, the pair writer never fails for an in-range chart index under a loaded scheme, both filter loops only pass in-range indices
+src/ui/screen_trainer.c:270	case_count zero arm is a true equivalent, falling through returns f->case_count which is zero there, identical to the early return
+src/ui/screen_trainer.c:279	out-of-range iteration calls cell_matches which returns zero because the pair writer rejects the index, totals unchanged
+src/ui/screen_trainer.c:288	visible below minus one lets -1 through and every downstream branch returns -1 for it, identical result
+src/ui/screen_trainer.c:297	out-of-range iteration calls cell_matches which returns zero because the pair writer rejects the index, totals unchanged
+src/ui/screen_trainer.c:331	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:332	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:339	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:344	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:350	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:351	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:353	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:355	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:356	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:359	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:366	draw path, only reachable from the raylib screen draw event handler no headless suite exercises
+src/ui/screen_trainer.c:375	draw path, only reachable from the raylib screen draw method handler no headless suite exercises
+src/ui/screen_trainer.c:381	draw path, only reachable from the raylib screen draw list handler no headless suite exercises
+src/ui/screen_trainer.c:388	draw path, only reachable from the raylib screen draw case handler no headless suite exercises
+src/ui/screen_trainer.c:394	draw path, only reachable from the raylib frame update loop no headless suite exercises
+src/ui/screen_trainer.c:397	draw path, only reachable from the raylib frame update loop no headless suite exercises
+src/ui/screen_trainer.c:398	draw path, only reachable from the raylib frame update loop no headless suite exercises
+src/ui/screen_trainer.c:414	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:415	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:417	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:419	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:422	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:424	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:426	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:429	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:432	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:433	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:438	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:439	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:449	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:458	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:459	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:462	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:463	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:464	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:465	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:468	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:469	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:472	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:473	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:476	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:477	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:482	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:487	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:488	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:489	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:493	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:494	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:500	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:505	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:506	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:507	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:510	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:513	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:519	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:523	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:525	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:529	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:530	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:533	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:540	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:542	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:543	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:544	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:545	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:547	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:549	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:553	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:554	draw path, only reachable from the raylib screen draw no headless suite exercises

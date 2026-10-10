@@ -87,6 +87,17 @@ static void ct_trainer_form_reload(ct_trainer_form *f) {
     f->status = CT_REPO_OK;
 }
 
+static int ct_trainer_form_refresh_inputs(ct_trainer_form *f) {
+    if (ct_repo_settings_merge(f->db, &f->cfg) != 0) {
+        return CT_REPO_ERR_DB;
+    }
+    if (ct_selector_scheme_load(f->db, &f->scheme) != 0) {
+        return CT_REPO_ERR_DB;
+    }
+    f->scheme_id = ct_letter_scheme_default_id(f->db);
+    return CT_REPO_OK;
+}
+
 int ct_trainer_form_open(ct_trainer_form *f, sqlite3 *db) {
     if (f == NULL || db == NULL) {
         return CT_REPO_ERR_ARG;
@@ -94,15 +105,10 @@ int ct_trainer_form_open(ct_trainer_form *f, sqlite3 *db) {
     memset(f, 0, sizeof *f);
     f->db = db;
     f->cfg = ct_config_defaults();
-    if (ct_repo_settings_merge(db, &f->cfg) != 0) {
+    if (ct_trainer_form_refresh_inputs(f) != CT_REPO_OK) {
         f->status = CT_REPO_ERR_DB;
         return CT_REPO_ERR_DB;
     }
-    if (ct_selector_scheme_load(db, &f->scheme) != 0) {
-        f->status = CT_REPO_ERR_DB;
-        return CT_REPO_ERR_DB;
-    }
-    f->scheme_id = ct_letter_scheme_default_id(db);
     f->sel.event = CT_EVENT_3X3;
     ct_method methods[CT_TRAINER_LISTS_MAX];
     int method_count = ct_selector_methods(f->sel.event, methods, CT_TRAINER_LISTS_MAX);
@@ -175,6 +181,10 @@ int ct_trainer_form_select_case(ct_trainer_form *f, int index) {
     if (index < 0 || index >= f->case_count) {
         f->status = CT_REPO_ERR_ARG;
         return CT_REPO_ERR_ARG;
+    }
+    if (ct_trainer_form_refresh_inputs(f) != CT_REPO_OK) {
+        f->status = CT_REPO_ERR_DB;
+        return CT_REPO_ERR_DB;
     }
     f->sel.case_index = index;
     f->front[0] = '\0';
