@@ -2,6 +2,7 @@
 
 #include "engine/transform.h"
 #include "gen/interchange.h"
+#include "gen/score.h"
 #include "gen/targets.h"
 
 #include <stdlib.h>
@@ -26,6 +27,12 @@ typedef struct {
 } ct_synth_side;
 
 typedef struct {
+    ct_move seq[CT_SYNTH_MAX_MOVES];
+    int len;
+    bool setup;
+} ct_synth_cand;
+
+typedef struct {
     ct_move moves[CT_CUBE_FACE_COUNT * (CT_MOVE_QUARTERS - 1)];
     int move_n;
     ct_cube cube;
@@ -36,8 +43,9 @@ typedef struct {
     int cb;
     int c1;
     int c2;
-    ct_move seq[CT_SYNTH_MAX_MOVES];
-    int seq_len;
+    ct_synth_cand *cands;
+    int cand_cap;
+    int cand_n;
     bool hit;
 } ct_synth_setup_ctx;
 
@@ -463,26 +471,31 @@ static bool synth_validate(const ct_move *seq, int len, int orbit, int cb, int c
     return true;
 }
 
-static void synth_fill(ct_synth_result *out, const ct_config *cfg, const ct_move *seq, int len,
+static bool synth_fill(ct_synth_result *out, const ct_config *cfg, const ct_move *seq, int len,
                        bool setup, bool fallback) {
+    ct_score_parts parts;
+    if (ct_score_alg(seq, len, cfg, &parts) != CT_SCORE_OK) {
+        return false;
+    }
     memcpy(out->seq, seq, (size_t)len * sizeof *seq);
     out->len = len;
-    out->qtm = 0;
-    out->subset_penalty = 0.0;
-    for (int i = 0; i < len; i++) {
-        out->qtm += seq[i].quarter == CT_SYNTH_TWO ? CT_SYNTH_TWO : 1;
-        unsigned bit = synth_face_bits[seq[i].face];
-        if ((cfg->gen.preferred_moves & bit) == 0) {
-            for (int idx = 0; idx < CT_FACE_COUNT; idx++) {
-                if ((1u << idx) == bit) {
-                    out->subset_penalty += cfg->gen.penalty[idx];
-                }
-            }
-        }
-    }
+    out->qtm = parts.qtm;
+    out->subset_penalty = parts.subset_penalty;
     out->found = true;
     out->used_setup = setup;
     out->used_fallback = fallback;
+    return true;
+}
+
+static void synth_cand_add(ct_synth_cand *cands, int *cand_n, int cand_cap, const ct_move *seq,
+                           int len, bool setup) {
+    if (cands == NULL || *cand_n >= cand_cap) {
+        return;
+    }
+    memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+    cands[*cand_n].len = len;
+    cands[*cand_n].setup = setup;
+    (*cand_n)++;
 }
 
 static bool synth_lookup_seq(int x, int y, int z, ct_move *out, int *out_len) {
@@ -556,9 +569,10 @@ static void synth_setup_try(ct_synth_setup_ctx *ctx) {
     if (!synth_validate(simplified, simplified_len, ctx->orbit, ctx->cb, ctx->c1, ctx->c2)) {
         return;
     }
-    memcpy(ctx->seq, simplified, (size_t)simplified_len * sizeof *simplified);
-    ctx->seq_len = simplified_len;
-    ctx->hit = true;
+    synth_cand_add(ctx->cands, &ctx->cand_n, ctx->cand_cap, simplified, simplified_len, true);
+    if (ctx->cand_n >= ctx->cand_cap) {
+        ctx->hit = true;
+    }
 }
 
 static void synth_setup_dfs(ct_synth_setup_ctx *ctx, int depth) {
@@ -586,8 +600,8 @@ static void synth_setup_dfs(ct_synth_setup_ctx *ctx, int depth) {
     }
 }
 
-static bool synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
-                               int max_depth, ct_move *out, int *out_len) {
+static void synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
+                               int max_depth, ct_synth_cand *cands, int cand_cap, int *cand_n) {
     ct_synth_setup_ctx ctx;
     memset(&ctx, 0, sizeof ctx);
     ctx.move_n = move_n;
@@ -597,16 +611,14 @@ static bool synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move 
     ctx.cb = cb;
     ctx.c1 = c1;
     ctx.c2 = c2;
+    ctx.cands = cands;
+    ctx.cand_cap = cand_cap;
+    ctx.cand_n = *cand_n;
     for (int depth = 1; depth <= max_depth && !ctx.hit; depth++) {
         ctx.max_depth = depth;
         synth_setup_dfs(&ctx, 0);
     }
-    if (!ctx.hit) {
-        return false;
-    }
-    memcpy(out, ctx.seq, (size_t)ctx.seq_len * sizeof *out);
-    *out_len = ctx.seq_len;
-    return true;
+    *cand_n = ctx.cand_n;
 }
 
 enum { CT_SYNTH_STATE_MULT = (1u << (CT_SYNTH_TWO + CT_SYNTH_TWO + CT_SYNTH_ONE)) - CT_SYNTH_ONE };
@@ -858,6 +870,15 @@ int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config *cfg,
     int cb = synth_sticker_cell_of(orbit, buffer);
     int c1 = synth_sticker_cell_of(orbit, t1);
     int c2 = synth_sticker_cell_of(orbit, t2);
+    int cand_cap = cfg->gen.candidate_max;
+    if (cand_cap < CT_SYNTH_ONE) {
+        cand_cap = CT_SYNTH_ONE;
+    }
+    if (cand_cap > CT_SYNTH_CAND_MAX) {
+        cand_cap = CT_SYNTH_CAND_MAX;
+    }
+    ct_synth_cand cands[CT_SYNTH_CAND_MAX];
+    int cand_n = 0;
     ct_move inner[CT_SYNTH_TPL_MAX];
     int inner_len = 0;
     if (synth_lookup_seq(cb, c1, c2, inner, &inner_len)) {
@@ -865,25 +886,37 @@ int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config *cfg,
         int simplified_len =
             ct_transform_simplify(inner, inner_len, simplified, CT_SYNTH_MAX_MOVES);
         if (simplified_len >= 0 && synth_validate(simplified, simplified_len, orbit, cb, c1, c2)) {
-            synth_fill(out, cfg, simplified, simplified_len, false, false);
-            return 0;
+            synth_cand_add(cands, &cand_n, cand_cap, simplified, simplified_len, false);
         }
     }
     ct_move subset[CT_CUBE_FACE_COUNT * (CT_MOVE_QUARTERS - 1)];
     int move_n = synth_subset_moves(cfg->gen.preferred_moves, subset);
-    if (move_n > 0 && cfg->gen.setup_bfs_depth >= 1) {
+    if (move_n > 0 && cand_n < cand_cap && cfg->gen.setup_bfs_depth >= 1) {
         int depth = cfg->gen.setup_bfs_depth;
         if (depth > CT_SYNTH_SETUP_MAX) {
             depth = CT_SYNTH_SETUP_MAX;
         }
-        ct_move seq[CT_SYNTH_MAX_MOVES];
-        int seq_len = 0;
-        if (synth_setup_search(orbit, cb, c1, c2, subset, move_n, depth, seq, &seq_len)) {
-            synth_fill(out, cfg, seq, seq_len, true, false);
+        synth_setup_search(orbit, cb, c1, c2, subset, move_n, depth, cands, cand_cap, &cand_n);
+    }
+    if (cand_n > 0) {
+        int best = -1;
+        double best_total = 0.0;
+        for (int i = 0; i < cand_n; i++) {
+            ct_score_parts parts;
+            if (ct_score_alg(cands[i].seq, cands[i].len, cfg, &parts) != CT_SCORE_OK) {
+                continue;
+            }
+            if (best < 0 || parts.total < best_total) {
+                best = i;
+                best_total = parts.total;
+            }
+        }
+        if (best >= 0 &&
+            synth_fill(out, cfg, cands[best].seq, cands[best].len, cands[best].setup, false)) {
             return 0;
         }
     }
-    if (move_n > 0 && cfg->gen.fallback_depth >= 1) {
+    if (move_n > 0 && cand_n == 0 && cfg->gen.fallback_depth >= 1) {
         int depth = cfg->gen.fallback_depth;
         if (depth > CT_SYNTH_FALLBACK_DEPTH_MAX) {
             depth = CT_SYNTH_FALLBACK_DEPTH_MAX;

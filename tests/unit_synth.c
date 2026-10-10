@@ -2,6 +2,7 @@
 #include "engine/cube.h"
 #include "engine/notation.h"
 #include "framework.h"
+#include "gen/score.h"
 #include "gen/synth.h"
 #include "gen/targets.h"
 
@@ -20,6 +21,7 @@ enum {
     TEST_SAMPLE_ENTRIES = 50,
     TEST_COVERAGE_COUNT = 30,
     TEST_QTM_TEMPLATE_MAX = CT_SYNTH_TPL_MAX * 2,
+    TEST_SCORING_SAMPLES = 40,
 };
 
 static int test_raw(int face, int row, int col) {
@@ -309,6 +311,8 @@ CT_SUITE(unit_synth_table) {
 
 CT_SUITE(unit_synth_direct) {
     ct_config cfg = ct_config_defaults();
+    cfg.gen.setup_bfs_depth = 0;
+    cfg.gen.fallback_depth = 0;
     ct_synth_result res;
     memset(&res, 0, sizeof res);
     int rc = ct_synth_target(CT_ORBIT_CORNER, 0, 1, 6, &cfg, &res);
@@ -436,6 +440,67 @@ CT_SUITE(unit_synth_determinism) {
     CT_ASSERT_EQ(ct_synth_target(CT_ORBIT_EDGE, 2, 7, 13, &cfg, &a), 0);
     CT_ASSERT_EQ(ct_synth_target(CT_ORBIT_EDGE, 2, 7, 13, &cfg, &b), 0);
     CT_ASSERT(memcmp(&a, &b, sizeof a) == 0);
+}
+
+CT_SUITE(unit_synth_scoring) {
+    static ct_target_pair corners[378];
+    static ct_target_pair edges[440];
+    CT_ASSERT_EQ(ct_targets_corner(0, corners, 378), 378);
+    CT_ASSERT_EQ(ct_targets_edge(2, edges, 440), 440);
+    ct_config full = ct_config_defaults();
+    full.gen.candidate_max = CT_GEN_CANDIDATE_MAX;
+    ct_config direct_only = ct_config_defaults();
+    direct_only.gen.setup_bfs_depth = 0;
+    direct_only.gen.fallback_depth = 0;
+    ct_config one_cand = ct_config_defaults();
+    one_cand.gen.candidate_max = 1;
+    int with_direct = 0;
+    int improved = 0;
+    int with_single = 0;
+    int dominated = 0;
+    for (int i = 0; i < TEST_SCORING_SAMPLES; i++) {
+        int orbit = i % CT_SYNTH_TWO == 0 ? CT_ORBIT_CORNER : CT_ORBIT_EDGE;
+        int buffer = orbit == CT_ORBIT_CORNER ? 0 : 2;
+        const ct_target_pair *pair =
+            orbit == CT_ORBIT_CORNER ? &corners[i / CT_SYNTH_TWO] : &edges[i / CT_SYNTH_TWO];
+        ct_synth_result direct;
+        memset(&direct, 0, sizeof direct);
+        CT_ASSERT_EQ(ct_synth_target(orbit, buffer, pair->t1, pair->t2, &direct_only, &direct), 0);
+        ct_synth_result res;
+        memset(&res, 0, sizeof res);
+        CT_ASSERT_EQ(ct_synth_target(orbit, buffer, pair->t1, pair->t2, &full, &res), 0);
+        CT_ASSERT(res.found);
+        CT_ASSERT(test_case_solved(orbit, buffer, pair->t1, pair->t2, res.seq, res.len));
+        ct_score_parts res_score;
+        CT_ASSERT_EQ(ct_score_alg(res.seq, res.len, &full, &res_score), CT_SCORE_OK);
+        ct_synth_result single;
+        memset(&single, 0, sizeof single);
+        CT_ASSERT_EQ(ct_synth_target(orbit, buffer, pair->t1, pair->t2, &one_cand, &single), 0);
+        if (single.found) {
+            with_single++;
+            CT_ASSERT(test_case_solved(orbit, buffer, pair->t1, pair->t2, single.seq, single.len));
+            ct_score_parts single_score;
+            CT_ASSERT_EQ(ct_score_alg(single.seq, single.len, &full, &single_score), CT_SCORE_OK);
+            if (res_score.total <= single_score.total + 1e-9) {
+                dominated++;
+            }
+        }
+        if (direct.found) {
+            with_direct++;
+            CT_ASSERT(res.found);
+            ct_score_parts direct_score;
+            CT_ASSERT_EQ(ct_score_alg(direct.seq, direct.len, &full, &direct_score), CT_SCORE_OK);
+            if (res_score.total < direct_score.total) {
+                improved++;
+            }
+        }
+    }
+    printf("unit_synth_scoring: with_direct=%d improved=%d with_single=%d dominated=%d\n",
+           with_direct, improved, with_single, dominated);
+    CT_ASSERT(with_direct > 0);
+    CT_ASSERT(improved > 0);
+    CT_ASSERT(with_single > 0);
+    CT_ASSERT(with_single == dominated);
 }
 
 CT_SUITE(unit_synth_config) {
