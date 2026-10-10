@@ -27,8 +27,9 @@ enum {
     SPEC_F2L_CASES = 164,
     SPEC_CORNER_CASES = 378,
     SPEC_EDGE_CASES = 440,
-    SPEC_SEED_ROWS_TOTAL = 574,
+    SPEC_SEED_ROWS_TOTAL = 625,
     SPEC_MBLD_RECORD_ROWS = 14,
+    SPEC_REDUCTION_ROWS = 17,
     SPEC_CFOP_CASES_TOTAL = 2 * (SPEC_PLL_CASES + SPEC_OLL_CASES + SPEC_F2L_CASES),
     SPEC_CHART_EVENTS = 4,
     SPEC_CHART_CASES_TOTAL = SPEC_CHART_EVENTS * (SPEC_CORNER_CASES + SPEC_EDGE_CASES),
@@ -119,8 +120,7 @@ static sqlite3 *spec_seeded_db(void) {
     CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
     CT_ASSERT_EQ(ct_db_migrate(db, "db/migrations"), 0);
     CT_ASSERT_EQ(ct_pack_seed_registered(db, "db/seeds/packs"), SPEC_SEEDS_DIR_ROWS);
-    CT_ASSERT_EQ(ct_pack_seed_file(db, "db/seeds/packs/mbld_concepts.tsv", CT_EVENT_MULTI_BLD,
-                                   CT_METHOD_CONCEPT, CT_STAGE_CONCEPT),
+    CT_ASSERT_EQ(ct_pack_count(db, CT_EVENT_MULTI_BLD, CT_METHOD_CONCEPT, CT_STAGE_CONCEPT),
                  SPEC_MBLD_RECORD_ROWS);
     return db;
 }
@@ -132,6 +132,10 @@ static const struct {
     ct_stage stage;
     int rows;
 } spec_record_packs[] = {
+    {"bigcube_l2e.tsv", CT_EVENT_5X5, CT_METHOD_REDUCTION, CT_STAGE_PARITY, SPEC_REDUCTION_ROWS},
+    {"bigcube_l2e.tsv", CT_EVENT_6X6, CT_METHOD_REDUCTION, CT_STAGE_PARITY, SPEC_REDUCTION_ROWS},
+    {"bigcube_l2e.tsv", CT_EVENT_7X7, CT_METHOD_REDUCTION, CT_STAGE_PARITY, SPEC_REDUCTION_ROWS},
+    {"bigcube_parity.tsv", CT_EVENT_4X4, CT_METHOD_YAU, CT_STAGE_PARITY, 5},
     {"twoby2_cll.tsv", CT_EVENT_2X2, CT_METHOD_CLL, CT_STAGE_CLL, 42},
     {"skewb_sarah.tsv", CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE, CT_STAGE_SARAH, 15},
     {"pyraminx_l4e.tsv", CT_EVENT_PYRAMINX, CT_METHOD_L4E, CT_STAGE_L4E, 35},
@@ -371,6 +375,22 @@ CT_SUITE(selector_case_counts) {
         }
         CT_ASSERT(hit);
     }
+    for (int i = 0; i < ct_pack_seed_registry_count(); i++) {
+        const ct_pack_seed_reg *reg = &ct_pack_seed_registry[i];
+        ct_selector_list lists[SPEC_MAX_LISTS];
+        int list_count = ct_selector_lists(reg->event, reg->method, lists, SPEC_MAX_LISTS);
+        int pinned = 0;
+        for (int l = 0; l < list_count; l++) {
+            if (lists[l].stage != reg->stage) {
+                continue;
+            }
+            CT_ASSERT_EQ(lists[l].source, CT_SELECTOR_PACK);
+            CT_ASSERT_EQ(spec_count(db, &s, reg->event, reg->method, l),
+                         ct_pack_count(db, reg->event, reg->method, reg->stage));
+            pinned = 1;
+        }
+        CT_ASSERT(pinned);
+    }
     int total = 0;
     for (int p = 0; p < SPEC_PAIRS; p++) {
         ct_selector_list lists[SPEC_MAX_LISTS];
@@ -382,9 +402,9 @@ CT_SUITE(selector_case_counts) {
         }
     }
     CT_ASSERT_EQ(total, SPEC_SEED_ROWS_TOTAL + SPEC_CFOP_CASES_TOTAL + SPEC_CHART_CASES_TOTAL);
-    CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_5X5, CT_METHOD_REDUCTION, 0), 0);
-    CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_6X6, CT_METHOD_REDUCTION, 0), 0);
-    CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_7X7, CT_METHOD_REDUCTION, 0), 0);
+    CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_5X5, CT_METHOD_REDUCTION, 0), SPEC_REDUCTION_ROWS);
+    CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_6X6, CT_METHOD_REDUCTION, 0), SPEC_REDUCTION_ROWS);
+    CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_7X7, CT_METHOD_REDUCTION, 0), SPEC_REDUCTION_ROWS);
     CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_4BLD, CT_METHOD_U2, 0), 0);
     CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_4BLD, CT_METHOD_R2, 0), 0);
     CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_PYRAMINX, CT_METHOD_LBL, 0), 0);
