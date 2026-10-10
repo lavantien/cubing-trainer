@@ -14,7 +14,7 @@ Page conventions, verified by simulation in playground/synth_sweep/bh_probe.c on
 - A piece name's first letter names the sticker, the remaining letters name the piece (URB is the U sticker of the URB corner, FD is the F sticker of the DF edge).
 - Each alg moves exactly the 3 pieces of its cycle, 9 corner or 6 edge stickers, and nothing else.
 
-Our translation: corner buffer UBL is sticker 0 (Speffz letter A), edge buffer UF is sticker 2 (letter C). Sticker letter is 'A' plus sticker index. The case (t1, t2) for our chart is the listed cycle rotated to start at our buffer.
+Our translation: this fixture suite anchors its cycles at corner sticker 0, UBL, Speffz letter A, and edge sticker 2, UF, letter C, both explicit parameters of the suite rather than the app default. Sticker letter is 'A' plus sticker index. The case (t1, t2) for the chart under test is the listed cycle rotated to start at the anchor buffer.
 
 | orbit | cycle | alg |
 | --- | --- | --- |

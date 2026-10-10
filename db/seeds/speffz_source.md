@@ -10,7 +10,7 @@ Verified verbatim: "The face order to move around the cube is ULFRBD". "Pieces a
 
 https://bldtrainer.com/glossary
 
-Verified verbatim: buffer entries "edges UF (C, I)" and "corners UBL (A, R, U)". This pins the buffer facts: the U face sticker of the UBL corner is A and the U face sticker of the UF edge is C, the two letters this app's buffers use. The remaining stickers in each triple belong to other faces' letter blocks and are listed under divergences below.
+Verified verbatim: buffer entries "edges UF (C, I)" and "corners UBL (A, R, U)". This pins the letter facts: the U face sticker of the UBL corner is A and the U face sticker of the UF edge is C. The remaining stickers in each triple belong to other faces' letter blocks and are listed under divergences below. App buffer note, owner decision 2026-10-10: the edge buffer stays UF, letter C, and the corner buffer moved from UBL, letter A, to UFR, letter C, which follows from the same wiki clockwise rule as the derived mapping below.
 
 https://bldtrainer.com/letters
 
@@ -22,7 +22,7 @@ Consulted as the plan's preferred fixture source. The site is a JavaScript appli
 
 ## divergences
 
-bldtrainer's own default scheme orders the face blocks differently from Speffz on the L and D faces (its letters page fragment reads U A-D, R E-H, F I-L, D M-P, L Q-T, B U-X). The speedsolving wiki starting corner table governs the L, R, B, D blocks here. No source conflicts with the pinned buffer facts, UBL equals A and UF equals C, so no stop condition was reached. Both orbits below are the standard Speffz scheme, not bldtrainer's variant.
+bldtrainer's own default scheme orders the face blocks differently from Speffz on the L and D faces (its letters page fragment reads U A-D, R E-H, F I-L, D M-P, L Q-T, B U-X). The speedsolving wiki starting corner table governs the L, R, B, D blocks here. No source conflicts with the pinned letter facts, UBL equals A and UF equals C, so no stop condition was reached. The app's buffer stickers are a configurable choice, UF for edges and UFR for corners since the 2026-10-10 owner decision, and do not affect the scheme rows below. Both orbits below are the standard Speffz scheme, not bldtrainer's variant.
 
 ## sticker indexing convention
 
@@ -83,7 +83,7 @@ The x2 rotation maps F to B, U to D, and fixes L and R, so reading D after x2 st
 | D | 2 | 2 | 0 | W | 22 |
 | D | 2 | 0 | 0 | X | 23 |
 
-Corner buffer check: the UBL corner is face U, (0, 0), sticker 0, letter A, matching the pinned buffer.
+Corner buffer check: the UFR corner is face U, (2, 2), sticker 2, letter C, matching the app buffer set by the 2026-10-10 owner decision, which moved it from UBL, sticker 0, letter A.
 
 ## derived edge mapping
 
