@@ -522,6 +522,20 @@ CT_SUITE(unit_classify_fixture) {
         CT_ASSERT(test_rebuild_equal(&r, seq, len));
         CT_ASSERT(r.moves > 0);
         CT_ASSERT(r.qtm > 0);
+        CT_ASSERT_EQ(r.interchange_len, 1);
+        int want_insert = r.cls == CT_CLS_CYCLIC_SHIFT ? 2
+                          : r.cls == CT_CLS_PER_SPECIAL ? 5
+                          : r.cls == CT_CLS_HALF_SLICE_PLANE ? 1
+                          : r.cls == CT_CLS_SP5 || r.cls == CT_CLS_SP7 ? 1
+                          : r.cls == CT_CLS_SP9 ? 3
+                                                 : 3;
+        if (r.insertion_len != want_insert) {
+            printf("fixture row %d: alg %s class %s insert span %d want %d\n", i, algs[i],
+                   ct_classification_label(r.cls), r.insertion_len, want_insert);
+        }
+        CT_ASSERT_EQ(r.insertion_len, want_insert);
+        CT_ASSERT(r.setup_len >= 0);
+        CT_ASSERT(r.setup_len <= CT_CLASSIFY_SETUP_MAX);
     }
 }
 
