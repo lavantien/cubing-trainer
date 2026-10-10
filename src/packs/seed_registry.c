@@ -14,6 +14,7 @@ const ct_pack_seed_reg ct_pack_seed_registry[] = {
     {"bigcube_parity.tsv", CT_EVENT_5X5, CT_METHOD_REDUCTION, CT_STAGE_PARITY},
     {"bigcube_parity.tsv", CT_EVENT_6X6, CT_METHOD_REDUCTION, CT_STAGE_PARITY},
     {"bigcube_parity.tsv", CT_EVENT_7X7, CT_METHOD_REDUCTION, CT_STAGE_PARITY},
+    {"bld_3style_specials.tsv", CT_EVENT_3BLD, CT_METHOD_3STYLE, CT_STAGE_PARITY},
     {"bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT},
     {"bld_oldpoch.tsv", CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN, CT_STAGE_CONCEPT},
     {"clock_algs.tsv", CT_EVENT_CLOCK, CT_METHOD_LBL, CT_STAGE_CONCEPT},

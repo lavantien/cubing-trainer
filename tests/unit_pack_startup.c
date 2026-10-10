@@ -40,7 +40,7 @@ enum {
     CT_PACKSTART_L2E_ROWS = 12,
     CT_PACKSTART_REDUCTION_ROWS = 17,
     CT_PACKSTART_PRESENT = 4,
-    CT_PACKSTART_TOTAL_ROWS = 629
+    CT_PACKSTART_TOTAL_ROWS = 714
 };
 
 static const struct ct_packstart_want ct_packstart_want_rows[] = {
@@ -57,6 +57,7 @@ static const struct ct_packstart_want ct_packstart_want_rows[] = {
      CT_PACKSTART_REDUCTION_ROWS},
     {"bigcube_parity.tsv", CT_EVENT_7X7, CT_METHOD_REDUCTION, CT_STAGE_PARITY,
      CT_PACKSTART_REDUCTION_ROWS},
+    {"bld_3style_specials.tsv", CT_EVENT_3BLD, CT_METHOD_3STYLE, CT_STAGE_PARITY, 85},
     {"bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT, 24},
     {"bld_oldpoch.tsv", CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN, CT_STAGE_CONCEPT, 40},
     {"clock_algs.tsv", CT_EVENT_CLOCK, CT_METHOD_LBL, CT_STAGE_CONCEPT, 14},

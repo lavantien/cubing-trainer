@@ -3,6 +3,7 @@
 
 #include <sqlite3.h>
 
+#include "../src/engine/notation.h"
 #include "../src/packs/packs.h"
 #include "../src/storage/db.h"
 #include "framework.h"
@@ -271,6 +272,78 @@ CT_SUITE(pack_seed_oldpoch) {
     CT_ASSERT_STR_EQ(e.alg, "R U R' F' R U R' U' R' F R2 U' R' U'");
     CT_ASSERT_STR_EQ(e.front_json, "{\"kind\":\"parity\",\"swaps\":\"UF-UR+UFR-UBR\"}");
     CT_ASSERT_STR_EQ(e.source_url, "https://bldtrainer.com/parity");
+}
+
+CT_SUITE(pack_seed_3style_specials) {
+    verify_pack("db/seeds/packs/bld_3style_specials.tsv", CT_EVENT_3BLD, CT_METHOD_3STYLE,
+                CT_STAGE_PARITY, 85);
+    sqlite3 *db = open_db();
+    CT_ASSERT_EQ(ct_pack_seed_file(db, "db/seeds/packs/bld_3style_specials.tsv", CT_EVENT_3BLD,
+                                   CT_METHOD_3STYLE, CT_STAGE_PARITY),
+                 85);
+    ct_pack_entry rows[CT_SEED2_LIST_CAP];
+    int n = ct_pack_list(db, CT_EVENT_3BLD, CT_METHOD_3STYLE, CT_STAGE_PARITY, rows, 85);
+    CT_ASSERT_EQ(n, 85);
+    int per_prefix[4] = {0, 0, 0, 0};
+    for (int i = 0; i < n; i++) {
+        ct_move moves[32];
+        CT_ASSERT(ct_notation_parse(rows[i].alg, 3, moves, 32) > 0);
+        int braces = 0;
+        int quotes = 0;
+        for (const char *p = rows[i].front_json; *p != '\0'; p++) {
+            if (*p == '{')
+                braces++;
+            else if (*p == '}')
+                braces--;
+            else if (*p == '"')
+                quotes++;
+        }
+        CT_ASSERT_EQ(braces, 0);
+        CT_ASSERT_EQ(quotes % 2, 0);
+        CT_ASSERT_STR_EQ(rows[i].source_at, "2026-10-10");
+        if (strncmp(rows[i].case_key, "flip.", 5) == 0)
+            per_prefix[0]++;
+        else if (strncmp(rows[i].case_key, "twist.", 6) == 0)
+            per_prefix[1]++;
+        else if (strncmp(rows[i].case_key, "parity.", 7) == 0)
+            per_prefix[2]++;
+        else if (strncmp(rows[i].case_key, "ltct.", 5) == 0)
+            per_prefix[3]++;
+        else
+            CT_ASSERT(0);
+    }
+    CT_ASSERT_EQ(per_prefix[0], 25);
+    CT_ASSERT_EQ(per_prefix[1], 23);
+    CT_ASSERT_EQ(per_prefix[2], 26);
+    CT_ASSERT_EQ(per_prefix[3], 11);
+    ct_db_close(db);
+    ct_pack_entry e = fetch_one("db/seeds/packs/bld_3style_specials.tsv", CT_EVENT_3BLD,
+                                CT_METHOD_3STYLE, CT_STAGE_PARITY, "flip.01", 85);
+    CT_ASSERT_STR_EQ(e.alg, "M' U2 M U R' F' R S R' F R S' U");
+    CT_ASSERT_STR_EQ(e.front_json,
+                     "{\"position\":\"UF & UB\",\"solver\":\"cherry\",\"comm\":\"[M',U2]+U':"
+                     "[R' F' R,S]\"}");
+    CT_ASSERT_STR_EQ(e.source_url, "https://bit.ly/3157nPL");
+    e = fetch_one("db/seeds/packs/bld_3style_specials.tsv", CT_EVENT_3BLD, CT_METHOD_3STYLE,
+                  CT_STAGE_PARITY, "twist.01", 85);
+    CT_ASSERT_STR_EQ(e.alg, "R' D' R D R' D' R U R' D R D' R' D R U'");
+    e = fetch_one("db/seeds/packs/bld_3style_specials.tsv", CT_EVENT_3BLD, CT_METHOD_3STYLE,
+                  CT_STAGE_PARITY, "parity.07", 85);
+    CT_ASSERT_STR_EQ(e.alg, "R U R' F' R U R' U' R' F R2 U' R' U'");
+    CT_ASSERT_STR_EQ(e.front_json,
+                     "{\"position\":\"UF-UR, UFR-UBR\",\"solver\":\"cherry\",\"comm\":"
+                     "\"Not found.\"}");
+    e = fetch_one("db/seeds/packs/bld_3style_specials.tsv", CT_EVENT_3BLD, CT_METHOD_3STYLE,
+                  CT_STAGE_PARITY, "ltct.01", 85);
+    CT_ASSERT_STR_EQ(e.alg, "U R U2 R D R' U' R D' R2 U R U2 R'");
+    CT_ASSERT_STR_EQ(e.front_json,
+                     "{\"position\":\"UF-UR, UBR-LUB[FUR]\",\"solver\":\"cherry\",\"comm\":"
+                     "\"Not found.\"}");
+    e = fetch_one("db/seeds/packs/bld_3style_specials.tsv", CT_EVENT_3BLD, CT_METHOD_3STYLE,
+                  CT_STAGE_PARITY, "ltct.11", 85);
+    CT_ASSERT_STR_EQ(e.front_json,
+                     "{\"position\":\"UF-UR, UFR-UBL[RUB]\",\"solver\":\"eggins\",\"comm\":"
+                     "\"Not found.\"}");
 }
 
 CT_SUITE(pack_seed_fto) {

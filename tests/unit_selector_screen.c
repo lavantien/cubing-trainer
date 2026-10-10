@@ -18,6 +18,7 @@ enum {
     TSS_CORNER_CASES = 378,
     TSS_EDGE_CASES = 440,
     TSS_CUBESHAPE_ROWS = 169,
+    TSS_SPECIALS_ROWS = 85,
     TSS_PLL_CASES = 21,
     TSS_SAMPLES = 3,
     TSS_CELL = 1
@@ -80,10 +81,14 @@ CT_SUITE(trainer_form_navigation) {
     CT_ASSERT_EQ(f.sel.list_id, 4);
     CT_ASSERT_EQ(ct_trainer_form_select_event(&f, CT_EVENT_3BLD), CT_REPO_OK);
     CT_ASSERT_EQ(f.sel.method, CT_METHOD_3STYLE);
-    CT_ASSERT_EQ(f.list_count, 2);
+    CT_ASSERT_EQ(f.list_count, 3);
     CT_ASSERT_EQ(f.case_count, TSS_CORNER_CASES);
     CT_ASSERT_EQ(ct_trainer_form_select_list(&f, 1), CT_REPO_OK);
     CT_ASSERT_EQ(f.case_count, TSS_EDGE_CASES);
+    CT_ASSERT_EQ(ct_trainer_form_select_list(&f, 2), CT_REPO_OK);
+    CT_ASSERT_EQ(f.lists[2].stage, CT_STAGE_PARITY);
+    CT_ASSERT_EQ(f.lists[2].source, CT_SELECTOR_PACK);
+    CT_ASSERT_EQ(f.case_count, TSS_SPECIALS_ROWS);
     ct_db_close(db);
 }
 
