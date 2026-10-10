@@ -41,9 +41,13 @@ The toolchain spelling is decided, evidence in playground/spike_link/REPORT.md. 
 | memguard | run tools/memguard.ps1 to enforce the combined working set cap on project processes |
 | memguard-selftest | verify memguard process matching against a spawned sleeper exe |
 | run | build then launch the trainer window |
+| release | assemble build/release/cubing-trainer, zip it as build/cubing-trainer-\<git-describe\>.zip, and verify layout, zip bytes, a headless run, and fatal exits through tools/release_verify.py |
+| release-verify-selftest | exercise the release verifier's layout, zip, and database assertions against synthetic trees |
 | clean | remove build outputs |
 
 make build-headless emits build/bin/render_scene.exe, the headless scene renderer that make visual drives. The e2e script runner is the one pending piece in this set: while tests/e2e holds no script cases, make e2e exits 1 with a message naming the pending runner, so the gate fails honestly.
+
+make release packages the trainer as build/cubing-trainer-\<git-describe\>.zip holding one cubing-trainer folder with dist/bin/cubing-trainer.exe plus db/migrations and db/seeds/packs. The exe resolves both resource trees exactly two directories up from its own location through the CT_MIGRATIONS_EXE_REL and CT_SEEDS_PACKS_EXE_REL defaults in the config hub, so it sits under dist/bin, the same two-level shape as build/bin inside the repo, and any shallower or deeper placement breaks both resolutions. tools/release_verify.py compares the packaged file sets against the repo trees, compares every zip entry byte for byte, runs the packaged exe headless from a foreign working directory against a fresh LOCALAPPDATA and asserts the database migrates to the latest user_version and event_pack holds all 574 seed rows, then asserts the two fatal paths, LOCALAPPDATA unset and a missing migrations directory, both exit 1 with their startup errors.
 
 make visual locks against concurrent runs through build/visual.lock and, for the animated mid scene, renders twice per gate and requires the pair to self-agree before comparing against the committed golden, retrying once on disagreement. Persistent pair disagreement exits 3 as an infra flake, self-agreement that mismatches the golden exits 2 as a regression signal with evidence copied under build/visual_evidence. This split exists because golden_mid_3 flips between two byte-stable rasterization outputs on this machine on a minutes timescale, independent of source and binary, while the static scenes never flip; the phenomenon, proof, and drifted sample are recorded in tests/golden/PROVENANCE.md and playground/m7_visual/.
 

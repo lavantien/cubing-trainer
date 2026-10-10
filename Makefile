@@ -64,6 +64,13 @@ RENDER_BIN := $(BINDIR)/render_scene.exe
 DBMAKE_BIN := $(BINDIR)/make_db.exe
 MEMGUARD_SLEEPER_BIN := $(BINDIR)/memguard_sleeper.exe
 
+RELEASE_DIR := $(BUILDDIR)/release
+RELEASE_PKG := $(RELEASE_DIR)/cubing-trainer
+RELEASE_EXE := $(RELEASE_PKG)/dist/bin/cubing-trainer.exe
+RELEASE_NAME := cubing-trainer-$(shell git describe --tags --always)
+RELEASE_ZIP := $(BUILDDIR)/$(RELEASE_NAME).zip
+RELEASE_CASE := $(BUILDDIR)/release_smoke.txt
+
 GOLDEN_DIR := tests/golden
 E2E_DIR := tests/e2e
 VISUAL_TMP := $(BUILDDIR)/visual
@@ -81,7 +88,7 @@ CT_FUZZ_SUITES += fuzz_srs_walk fuzz_srs_elapsed fuzz_srs_grade_space
 CT_FUZZ_SUITES += fuzz_db_card_strings fuzz_db_review_rows fuzz_db_settings_keys
 CT_FUZZ_SUITES += fuzz_config_keys fuzz_config_moves
 
-.PHONY: all build vendor vendor-verify-selftest test diagrams memguard memguard-selftest run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual visual-selftest db-verify
+.PHONY: all build vendor vendor-verify-selftest release release-verify-selftest test diagrams memguard memguard-selftest run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual visual-selftest db-verify
 
 all: build
 
@@ -190,6 +197,20 @@ $(MEMGUARD_SLEEPER_BIN): tools/memguard_sleeper.c | $(BINDIR)
 
 run: build
 	$(APP_BIN)
+
+release: build
+	rm -rf $(RELEASE_DIR)
+	mkdir -p $(RELEASE_PKG)/dist/bin $(RELEASE_PKG)/db/seeds
+	cp $(APP_BIN) $(RELEASE_EXE)
+	cp -r db/migrations $(RELEASE_PKG)/db/migrations
+	cp -r db/seeds/packs $(RELEASE_PKG)/db/seeds/packs
+	rm -f $(RELEASE_ZIP)
+	pwsh.exe -NoProfile -Command "Compress-Archive -Path '$(RELEASE_DIR)/*' -DestinationPath '$(RELEASE_ZIP)'"
+	printf 'restart\n' > $(RELEASE_CASE)
+	python -I tools/release_verify.py $(RELEASE_PKG) $(RELEASE_ZIP) $(RELEASE_CASE)
+
+release-verify-selftest:
+	python -I tools/release_verify_selftest.py
 
 fmt:
 	clang-format --style=file -i $(FMT_FILES)
