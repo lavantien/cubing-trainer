@@ -282,6 +282,35 @@ static bool test_rebuild_equal(const ct_classify_result *r, const ct_move *seq, 
     return memcmp(a, b, (size_t)TEST_CELLS) == 0;
 }
 
+static bool test_class_fixture_ok(int orbit, ct_classification cls, int moves) {
+    switch (cls) {
+    case CT_CLS_PURE:
+        return moves == 8;
+    case CT_CLS_A9:
+        return moves == 9;
+    case CT_CLS_B9:
+        return orbit == CT_ORBIT_EDGE && moves == 9;
+    case CT_CLS_ORTHOGONAL:
+        return moves == 10;
+    case CT_CLS_CYCLIC_SHIFT:
+        return orbit == CT_ORBIT_CORNER && moves == 10;
+    case CT_CLS_COLUMN:
+        return orbit == CT_ORBIT_CORNER && moves == 11;
+    case CT_CLS_PER_SPECIAL:
+        return orbit == CT_ORBIT_CORNER && moves == 12;
+    case CT_CLS_HALF_SLICE_PLANE:
+        return orbit == CT_ORBIT_EDGE && moves == 4;
+    case CT_CLS_SP5:
+        return orbit == CT_ORBIT_EDGE && moves == 5;
+    case CT_CLS_SP7:
+        return orbit == CT_ORBIT_EDGE && moves == 7;
+    case CT_CLS_SP9:
+        return orbit == CT_ORBIT_EDGE && moves == 9;
+    default:
+        return false;
+    }
+}
+
 static int test_trim_field(char *text) {
     int len = (int)strlen(text);
     int start = 0;
@@ -390,10 +419,22 @@ CT_SUITE(unit_classify) {
 
     memset(&r, 0, sizeof r);
     CT_ASSERT_EQ(ct_classify_alg("R U R' U'", &r), CT_CLASSIFY_OK);
-    CT_ASSERT_EQ(r.cls, CT_CLS_HALF_SLICE_PLANE);
+    CT_ASSERT_EQ(r.cls, CT_CLS_UNKNOWN);
     int len = test_parse("R U R' U'", seq);
     CT_ASSERT(len > 0);
     CT_ASSERT(test_rebuild_equal(&r, seq, len));
+
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify_alg("R U R' U R U2 R'", &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_UNKNOWN);
+
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify_alg("D R U2 R' U' L2 U R U' L2 U' R' D'", &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_UNKNOWN);
+
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify_alg("R U B U' M U2 M' U2 M U2 M' U' B' U' R'", &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_UNKNOWN);
 
     memset(&r, 0, sizeof r);
     const char *rot_alg = "y' M' U2 M U2 M' U2 M U2 y";
@@ -546,13 +587,11 @@ CT_SUITE(unit_classify_synth_results) {
         if (r.cls != CT_CLS_UNKNOWN) {
             classified++;
             CT_ASSERT(test_rebuild_equal(&r, res.seq, res.len));
-        }
-        if (!res.used_fallback) {
-            if (r.cls == CT_CLS_UNKNOWN) {
-                printf("synth result %d corner t%d/%d unclassifiable\n", i, corners[i].t1,
-                       corners[i].t2);
+            if (!test_class_fixture_ok(CT_ORBIT_CORNER, r.cls, r.moves)) {
+                printf("synth result %d corner t%d/%d class %s at %d moves off fixture\n", i,
+                       corners[i].t1, corners[i].t2, ct_classification_label(r.cls), r.moves);
             }
-            CT_ASSERT(r.cls != CT_CLS_UNKNOWN);
+            CT_ASSERT(test_class_fixture_ok(CT_ORBIT_CORNER, r.cls, r.moves));
         }
     }
     for (int i = 0; i < TEST_TARGET_SAMPLES; i++) {
@@ -570,12 +609,11 @@ CT_SUITE(unit_classify_synth_results) {
         if (r.cls != CT_CLS_UNKNOWN) {
             classified++;
             CT_ASSERT(test_rebuild_equal(&r, res.seq, res.len));
-        }
-        if (!res.used_fallback) {
-            if (r.cls == CT_CLS_UNKNOWN) {
-                printf("synth result %d edge t%d/%d unclassifiable\n", i, edges[i].t1, edges[i].t2);
+            if (!test_class_fixture_ok(CT_ORBIT_EDGE, r.cls, r.moves)) {
+                printf("synth result %d edge t%d/%d class %s at %d moves off fixture\n", i,
+                       edges[i].t1, edges[i].t2, ct_classification_label(r.cls), r.moves);
             }
-            CT_ASSERT(r.cls != CT_CLS_UNKNOWN);
+            CT_ASSERT(test_class_fixture_ok(CT_ORBIT_EDGE, r.cls, r.moves));
         }
     }
     printf("unit_classify_synth_results: found=%d direct=%d setup=%d fallback=%d "
@@ -583,6 +621,7 @@ CT_SUITE(unit_classify_synth_results) {
            found, direct, setup, fallback, classified);
     CT_ASSERT(direct > 0);
     CT_ASSERT(setup > 0);
+    CT_ASSERT(classified > 0);
 }
 
 CT_SUITE(unit_classify_special) {

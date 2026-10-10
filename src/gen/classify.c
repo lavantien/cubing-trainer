@@ -13,6 +13,12 @@ enum {
     CL_PAIR_COUNT = CT_CLASSIFY_SPECIAL_LEN,
     CL_CYCLIC_HEAD = 2 * (CT_CLASSIFY_INSERT_LEN + 2),
     CL_CYCLIC_C_OFF = CL_CYCLIC_HEAD / 2,
+    CL_CYCLE_PIECES = 3,
+    CL_PURE_MOVES = 2 * (CT_CLASSIFY_INSERT_LEN + 1),
+    CL_CONJ_MOVES = CL_PURE_MOVES + 1,
+    CL_ORTH_MOVES = CL_PURE_MOVES + 1 + 1,
+    CL_SPECIAL_MOVES = 2 * (CT_CLASSIFY_SPECIAL_LEN + 1),
+    CL_HSP_MOVES = 2 * (1 + 1),
 };
 
 typedef struct {
@@ -33,6 +39,8 @@ typedef struct {
 typedef struct {
     bool corner;
     bool edge;
+    bool corner_exact;
+    bool edge_exact;
     int flipped;
     int twisted;
     int corner_swaps;
@@ -205,6 +213,40 @@ static bool cl_move_same(ct_move a, ct_move b) {
            a.quarter == b.quarter;
 }
 
+static bool cl_orbit_exact_cycle(const uint8_t st[CT_CLASSIFY_CELLS], int orbit) {
+    int cells[CT_TARGET_STICKERS];
+    for (int s = 0; s < CT_TARGET_STICKERS; s++) {
+        int face = -1;
+        int row = -1;
+        int col = -1;
+        ct_sticker_cell(orbit, s, &face, &row, &col);
+        cells[s] = cl_compact_of(face, row, col);
+    }
+    int per = orbit == CT_ORBIT_CORNER ? CT_TARGET_CORNER_STICKERS_PER_PIECE
+                                       : CT_TARGET_EDGE_STICKERS_PER_PIECE;
+    int moved = 0;
+    for (int s = 0; s < CT_TARGET_STICKERS; s++) {
+        if (st[cells[s]] != (uint8_t)cells[s]) {
+            moved++;
+        }
+    }
+    if (moved != per * CL_CYCLE_PIECES) {
+        return false;
+    }
+    for (int s = 0; s < CT_TARGET_STICKERS; s++) {
+        int c = cells[s];
+        if (st[c] == (uint8_t)c) {
+            continue;
+        }
+        int c1 = st[c];
+        int c2 = st[c1];
+        if (c1 == c || c2 == c || c2 == c1 || st[c2] != (uint8_t)c) {
+            return false;
+        }
+    }
+    return true;
+}
+
 static void cl_perm_scan(const uint8_t st[CT_CLASSIFY_CELLS], cl_perm_info *info) {
     int dest[CT_CLASSIFY_CELLS];
     for (int q = 0; q < CT_CLASSIFY_CELLS; q++) {
@@ -221,6 +263,8 @@ static void cl_perm_scan(const uint8_t st[CT_CLASSIFY_CELLS], cl_perm_info *info
         info->corner = info->corner && cl_corner_cell[q];
         info->edge = info->edge && cl_edge_cell[q];
     }
+    info->corner_exact = cl_orbit_exact_cycle(st, CT_ORBIT_CORNER);
+    info->edge_exact = cl_orbit_exact_cycle(st, CT_ORBIT_EDGE);
     info->corner_swaps = 0;
     info->edge_swaps = 0;
     if (!cl_orbit_transposition(st, CT_ORBIT_CORNER, &info->corner_swaps)) {
@@ -421,55 +465,84 @@ static void cl_fill_parts(ct_classify_result *r, const cl_exp *e, int k, int p, 
     }
 }
 
+static ct_classification cl_length_class(ct_classification cls, bool corner, bool edge, int n) {
+    bool ok = false;
+    switch (cls) {
+    case CT_CLS_PURE:
+        ok = n == CL_PURE_MOVES;
+        break;
+    case CT_CLS_A9:
+        ok = n == CL_CONJ_MOVES;
+        break;
+    case CT_CLS_B9:
+        ok = edge && n == CL_CONJ_MOVES;
+        break;
+    case CT_CLS_ORTHOGONAL:
+        ok = n == CL_ORTH_MOVES;
+        break;
+    case CT_CLS_CYCLIC_SHIFT:
+        ok = corner && n == CL_ORTH_MOVES;
+        break;
+    case CT_CLS_COLUMN:
+        ok = corner && n == CT_CLASSIFY_COLUMN_MOVES;
+        break;
+    case CT_CLS_PER_SPECIAL:
+        ok = corner && n == CL_SPECIAL_MOVES;
+        break;
+    case CT_CLS_HALF_SLICE_PLANE:
+        ok = edge && n == CL_HSP_MOVES;
+        break;
+    case CT_CLS_SP5:
+        ok = edge && n == CT_CLASSIFY_SP5_MOVES;
+        break;
+    case CT_CLS_SP7:
+        ok = edge && n == CT_CLASSIFY_SP7_MOVES;
+        break;
+    case CT_CLS_SP9:
+        ok = edge && n == CT_CLASSIFY_SP9_MOVES;
+        break;
+    default:
+        ok = false;
+        break;
+    }
+    return ok ? cls : CT_CLS_UNKNOWN;
+}
+
 static ct_classification cl_decide(const cl_exp *e, int k, int p, int q, int n,
                                    const cl_perm_info *info) {
     bool corner = info->corner && !info->edge;
     bool edge = info->edge && !info->corner;
+    ct_classification structural = CT_CLS_UNKNOWN;
     if (p == CT_CLASSIFY_SPECIAL_LEN || q == CT_CLASSIFY_SPECIAL_LEN) {
-        return CT_CLS_PER_SPECIAL;
-    }
-    if (p == 1 && q == 1) {
+        structural = CT_CLS_PER_SPECIAL;
+    } else if (p == 1 && q == 1) {
+        if (n == CT_CLASSIFY_SP5_MOVES) {
+            structural = CT_CLS_SP5;
+        } else if (n == CT_CLASSIFY_SP7_MOVES) {
+            structural = CT_CLS_SP7;
+        } else if (n == CT_CLASSIFY_SP9_MOVES) {
+            structural = CT_CLS_SP9;
+        } else {
+            structural = CT_CLS_HALF_SLICE_PLANE;
+        }
+    } else {
+        const ct_move *three = p == CT_CLASSIFY_INSERT_LEN ? e->m + k : e->m + k + 1;
+        const ct_move *one = p == 1 ? e->m + k : e->m + k + CT_CLASSIFY_INSERT_LEN;
+        bool sp_shape = cl_move_same(three[1], one[0]);
+        bool tail_is_insert = q == CT_CLASSIFY_INSERT_LEN;
         if (k == 0) {
-            return CT_CLS_HALF_SLICE_PLANE;
+            structural = CT_CLS_PURE;
+        } else if (sp_shape && n == CT_CLASSIFY_SP9_MOVES) {
+            structural = CT_CLS_SP9;
+        } else if (2 * (k + p + q) == n) {
+            structural = CT_CLS_ORTHOGONAL;
+        } else if (corner && n == CT_CLASSIFY_COLUMN_MOVES) {
+            structural = CT_CLS_COLUMN;
+        } else {
+            structural = corner || tail_is_insert ? CT_CLS_A9 : CT_CLS_B9;
         }
-        if (edge && n == CT_CLASSIFY_SP5_MOVES) {
-            return CT_CLS_SP5;
-        }
-        if (edge && n == CT_CLASSIFY_SP7_MOVES) {
-            return CT_CLS_SP7;
-        }
-        if (edge && n == CT_CLASSIFY_SP9_MOVES) {
-            return CT_CLS_SP9;
-        }
-        return CT_CLS_HALF_SLICE_PLANE;
     }
-    const ct_move *three = p == CT_CLASSIFY_INSERT_LEN ? e->m + k : e->m + k + 1;
-    const ct_move *one = p == 1 ? e->m + k : e->m + k + CT_CLASSIFY_INSERT_LEN;
-    bool sp_shape = cl_move_same(three[1], one[0]);
-    int merges = 2 * (k + p + q) - n;
-    if (k == 0) {
-        return CT_CLS_PURE;
-    }
-    if (sp_shape && edge && n == CT_CLASSIFY_SP9_MOVES) {
-        return CT_CLS_SP9;
-    }
-    bool tail_is_insert = q == CT_CLASSIFY_INSERT_LEN;
-    if (n == CT_CLASSIFY_SP9_MOVES) {
-        if (corner || tail_is_insert) {
-            return CT_CLS_A9;
-        }
-        return CT_CLS_B9;
-    }
-    if (merges == 0) {
-        return CT_CLS_ORTHOGONAL;
-    }
-    if (corner && n == CT_CLASSIFY_COLUMN_MOVES) {
-        return CT_CLS_COLUMN;
-    }
-    if (corner || tail_is_insert) {
-        return CT_CLS_A9;
-    }
-    return CT_CLS_B9;
+    return cl_length_class(structural, corner, edge, n);
 }
 
 static void cl_fmt(const ct_move *m, int len, char *out, unsigned cap) {
@@ -591,45 +664,56 @@ int ct_classify(const ct_move *seq, int count, ct_classify_result *out) {
     } else if (cl_is_twist(st)) {
         out->cls = CT_CLS_TWIST;
     } else {
+        bool corner_cycle = info.corner && !info.edge && info.corner_exact;
+        bool edge_cycle = info.edge && !info.corner && info.edge_exact;
         bool found = false;
-        cl_exp plain;
-        plain.len = s.len;
-        memcpy(plain.m, s.m, (size_t)s.len * sizeof *s.m);
-        cl_exp exps[CT_CLASSIFY_MOVES_MAX * 2 + 1];
-        int exp_n = 0;
-        exps[exp_n++] = plain;
-        for (int pos = 0; pos < s.len && exp_n < (int)(sizeof exps / sizeof exps[0]); pos++) {
-            ct_move vars[CL_SPLIT_VARIANTS][2];
-            int vn = cl_split_variants(s.m[pos], vars);
-            for (int v = 1; v < vn; v++) {
-                cl_exp e;
-                cl_expand(&s, pos, v, &e);
-                exps[exp_n++] = e;
+        if (corner_cycle || edge_cycle) {
+            cl_exp plain;
+            plain.len = s.len;
+            memcpy(plain.m, s.m, (size_t)s.len * sizeof *s.m);
+            cl_exp exps[CT_CLASSIFY_MOVES_MAX * 2 + 1];
+            int exp_n = 0;
+            exps[exp_n++] = plain;
+            for (int pos = 0; pos < s.len && exp_n < (int)(sizeof exps / sizeof exps[0]); pos++) {
+                ct_move vars[CL_SPLIT_VARIANTS][2];
+                int vn = cl_split_variants(s.m[pos], vars);
+                for (int v = 1; v < vn; v++) {
+                    cl_exp e;
+                    cl_expand(&s, pos, v, &e);
+                    exps[exp_n++] = e;
+                }
             }
-        }
-        for (int ei = 0; ei < exp_n && !found; ei++) {
-            const cl_exp *e = &exps[ei];
-            for (int k = 0; k <= CT_CLASSIFY_SETUP_MAX && !found; k++) {
-                for (int pi = 0; pi < CL_PAIR_COUNT && !found; pi++) {
-                    if (pi == CL_CYCLIC_SLOT) {
-                        if (cl_try_cyclic(e, &s, k)) {
-                            out->setup_len = k;
-                            memcpy(out->setup, e->m, (size_t)k * sizeof *out->setup);
-                            out->insertion_len = 2;
-                            out->insertion[0] = e->m[k];
-                            out->insertion[1] = e->m[k + 1];
-                            out->interchange_len = 1;
-                            out->interchange[0] = e->m[k + 2];
-                            out->cyclic = true;
-                            out->cls = CT_CLS_CYCLIC_SHIFT;
-                            found = true;
-                            break;
+            for (int ei = 0; ei < exp_n && !found; ei++) {
+                const cl_exp *e = &exps[ei];
+                for (int k = 0; k <= CT_CLASSIFY_SETUP_MAX && !found; k++) {
+                    for (int pi = 0; pi < CL_PAIR_COUNT && !found; pi++) {
+                        if (pi == CL_CYCLIC_SLOT) {
+                            if (cl_try_cyclic(e, &s, k) &&
+                                cl_length_class(CT_CLS_CYCLIC_SHIFT, corner_cycle, edge_cycle,
+                                                s.len) == CT_CLS_CYCLIC_SHIFT) {
+                                out->setup_len = k;
+                                memcpy(out->setup, e->m, (size_t)k * sizeof *out->setup);
+                                out->insertion_len = 2;
+                                out->insertion[0] = e->m[k];
+                                out->insertion[1] = e->m[k + 1];
+                                out->interchange_len = 1;
+                                out->interchange[0] = e->m[k + 2];
+                                out->cyclic = true;
+                                out->cls = CT_CLS_CYCLIC_SHIFT;
+                                found = true;
+                                break;
+                            }
                         }
-                    }
-                    if (cl_try_pair(e, &s, k, cl_pairs[pi].p, cl_pairs[pi].q)) {
-                        cl_fill_parts(out, e, k, cl_pairs[pi].p, cl_pairs[pi].q);
-                        out->cls = cl_decide(e, k, cl_pairs[pi].p, cl_pairs[pi].q, s.len, &info);
-                        found = true;
+                        if (cl_try_pair(e, &s, k, cl_pairs[pi].p, cl_pairs[pi].q)) {
+                            ct_classification cls =
+                                cl_decide(e, k, cl_pairs[pi].p, cl_pairs[pi].q, s.len, &info);
+                            if (cls == CT_CLS_UNKNOWN) {
+                                continue;
+                            }
+                            cl_fill_parts(out, e, k, cl_pairs[pi].p, cl_pairs[pi].q);
+                            out->cls = cls;
+                            found = true;
+                        }
                     }
                 }
             }
