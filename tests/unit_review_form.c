@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../src/app/app.h"
 #include "../src/engine/notation.h"
 #include "../src/engine/transform.h"
 #include "../src/storage/db.h"
@@ -431,6 +432,49 @@ CT_SUITE(review_form_end) {
 
     ct_review_form_end(&f, "2026");
     CT_ASSERT(f.status < 0);
+
+    ct_db_close(db);
+}
+
+static int session_log_count(sqlite3 *db) {
+    sqlite3_stmt *st = NULL;
+    if (sqlite3_prepare_v2(db, "SELECT COUNT(*) FROM session_log", -1, &st, NULL) != SQLITE_OK) {
+        sqlite3_finalize(st);
+        return -1;
+    }
+    int n = sqlite3_step(st) == SQLITE_ROW ? sqlite3_column_int(st, 0) : -1;
+    sqlite3_finalize(st);
+    return n;
+}
+
+CT_SUITE(review_screen_session_log) {
+    sqlite3 *db = review_db();
+    seed_card(db, "other", "x", "R U", "", "");
+
+    ct_app app;
+    memset(&app, 0, sizeof app);
+    app.cfg = ct_config_defaults();
+    app.db = db;
+    app.screen = CT_SCREEN_REVIEW;
+    app.fixed_dt = 1.0 / (double)app.cfg.window.target_fps;
+
+    ct_screen_review_update(&app);
+    CT_ASSERT_EQ(session_log_count(db), 1);
+
+    ct_screen_review_update(&app);
+    ct_screen_review_update(&app);
+    CT_ASSERT_EQ(session_log_count(db), 1);
+
+    char deck[CT_SESSION_DECK_MAX];
+    char started[CT_SESSION_STAMP_MAX];
+    char ended[CT_SESSION_STAMP_MAX];
+    long counts[5];
+    CT_ASSERT(read_last_session(db, deck, started, ended, counts));
+    CT_ASSERT_STR_EQ(deck, CT_UI_DEFAULT_DECK);
+    CT_ASSERT_EQ(counts[0], 0);
+    for (int i = 0; i < 5; i++) {
+        CT_ASSERT_EQ(counts[i], 0);
+    }
 
     ct_db_close(db);
 }

@@ -40,6 +40,7 @@ typedef struct {
     ct_color_scheme scheme;
     Camera3D camera;
     bool opened;
+    bool session_logged;
 } ct_review_screen;
 
 static ct_review_screen ct_review;
@@ -233,6 +234,16 @@ void ct_review_form_end(ct_review_form *f, const char *now_iso) {
     f->status = ct_session_end(&f->session, now_iso);
 }
 
+static void ct_review_log_session(void) {
+    if (ct_review.session_logged || ct_review.form.session.db == NULL) {
+        return;
+    }
+    char now[CT_SESSION_STAMP_MAX];
+    ct_now_utc_iso(now, (unsigned)sizeof now);
+    ct_review_form_end(&ct_review.form, now);
+    ct_review.session_logged = true;
+}
+
 static int ct_review_iso_scan(const char *iso, long *y, int *m, int *d) {
     int parts[CT_REVIEW_ISO_FIELDS];
     int at = 0;
@@ -258,6 +269,8 @@ static int ct_review_iso_scan(const char *iso, long *y, int *m, int *d) {
 
 static void ct_review_open(ct_app *app) {
     ct_review.opened = true;
+    ct_review.session_logged = false;
+    memset(&ct_review.form, 0, sizeof ct_review.form);
     ct_renderer_init(&ct_review.renderer, CT_REVIEW_CUBE_N);
     ct_review.scheme = ct_color_scheme_default();
     float dist = (float)CT_REVIEW_CAM_DIST;
@@ -286,6 +299,7 @@ void ct_screen_review_update(ct_app *app) {
         ct_review_open(app);
     }
     if (IsKeyPressed(KEY_ESCAPE)) {
+        ct_review_log_session();
         ct_session_free(&ct_review.form.session);
         ct_review.opened = false;
         app->screen = CT_SCREEN_MENU;
@@ -300,6 +314,9 @@ void ct_screen_review_update(ct_app *app) {
             ct_anim_pause(&f->anim);
             f->playing = false;
         }
+    }
+    if (!ct_session_has_next(&f->session)) {
+        ct_review_log_session();
     }
 }
 
