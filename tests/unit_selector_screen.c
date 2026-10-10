@@ -89,6 +89,16 @@ CT_SUITE(trainer_form_navigation) {
     CT_ASSERT_EQ(f.lists[2].stage, CT_STAGE_PARITY);
     CT_ASSERT_EQ(f.lists[2].source, CT_SELECTOR_PACK);
     CT_ASSERT_EQ(f.case_count, TSS_SPECIALS_ROWS);
+    CT_ASSERT_EQ(f.group_count, 4);
+    CT_ASSERT_EQ(f.group_counts[0], 25);
+    CT_ASSERT_EQ(f.group_counts[1], 23);
+    CT_ASSERT_EQ(f.group_counts[2], 26);
+    CT_ASSERT_EQ(f.group_counts[3], 11);
+    CT_ASSERT_EQ(ct_trainer_form_select_list(&f, 0), CT_REPO_OK);
+    CT_ASSERT_EQ(f.group_count, 0);
+    CT_ASSERT_EQ(ct_trainer_form_select_event(&f, CT_EVENT_SQUARE1), CT_REPO_OK);
+    CT_ASSERT_EQ(f.group_count, 1);
+    CT_ASSERT_EQ(f.group_counts[0], TSS_CUBESHAPE_ROWS);
     ct_db_close(db);
 }
 

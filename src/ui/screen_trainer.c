@@ -55,6 +55,10 @@ static const char *ct_trainer_stage_name(ct_stage st) {
 static void ct_trainer_form_reload(ct_trainer_form *f) {
     f->list_count = ct_selector_lists(f->sel.event, f->sel.method, f->lists, CT_TRAINER_LISTS_MAX);
     f->case_count = 0;
+    f->group_count = 0;
+    for (int g = 0; g < CT_SELECTOR_GROUPS_MAX; g++) {
+        f->group_counts[g] = 0;
+    }
     f->cell = CT_TRAINER_CELL_NONE;
     f->sel.case_index = -1;
     f->front[0] = '\0';
@@ -70,6 +74,16 @@ static void ct_trainer_form_reload(ct_trainer_form *f) {
     }
     int n = ct_selector_case_count(f->db, &f->scheme, f->sel.event, f->sel.method, f->sel.list_id);
     f->case_count = n > 0 ? n : 0;
+    for (int i = 0; i < f->case_count; i++) {
+        int group = ct_selector_case_group(f->db, f->sel.event, f->sel.method, f->sel.list_id, i);
+        if (group < 0) {
+            continue;
+        }
+        f->group_counts[group]++;
+        if (group + 1 > f->group_count) {
+            f->group_count = group + 1;
+        }
+    }
     f->status = CT_REPO_OK;
 }
 
@@ -497,8 +511,21 @@ void ct_screen_trainer_draw(ct_app *app) {
              ct_trainer_method_name(f->sel.method));
     GuiLabel(ct_trainer_rect(detail_x + margin, margin + row_h, detail_w - 2 * margin, row_h),
              line);
-    snprintf(line, sizeof line, "list %s cases %d",
-             ct_trainer_stage_name(f->lists[f->sel.list_id].stage), f->case_count);
+    if (f->group_count > 1) {
+        int written =
+            snprintf(line, sizeof line, "list %s cases %d |",
+                     ct_trainer_stage_name(f->lists[f->sel.list_id].stage), f->case_count);
+        for (int g = 0; g < f->group_count && g < CT_SELECTOR_GROUPS_MAX; g++) {
+            if (written < 0 || (unsigned)written >= sizeof line) {
+                break;
+            }
+            written += snprintf(line + written, sizeof line - (unsigned)written, " %s %d",
+                                ct_selector_group_label(g), f->group_counts[g]);
+        }
+    } else {
+        snprintf(line, sizeof line, "list %s cases %d",
+                 ct_trainer_stage_name(f->lists[f->sel.list_id].stage), f->case_count);
+    }
     GuiLabel(ct_trainer_rect(detail_x + margin, margin + 2 * row_h, detail_w - 2 * margin, row_h),
              line);
     if (f->sel.case_index >= 0) {

@@ -161,6 +161,43 @@ int ct_targets_edge(int buffer_sticker, ct_target_pair *out, int cap) {
     return ct_enumerate_targets(buffer_sticker, ct_edge_piece_of, out, cap);
 }
 
+int ct_targets_special(int orbit, int buffer_sticker, ct_target_pair *out, int cap) {
+    ct_piece_of_fn piece_of;
+    if (orbit == CT_TARGET_ORBIT_CORNER) {
+        piece_of = ct_corner_piece_of;
+    } else if (orbit == CT_TARGET_ORBIT_EDGE) {
+        piece_of = ct_edge_piece_of;
+    } else {
+        return CT_TARGET_NONE;
+    }
+    if (buffer_sticker < 0 || buffer_sticker >= CT_TARGET_STICKERS) {
+        return CT_TARGET_NONE;
+    }
+    if (cap < 0) {
+        cap = 0;
+    }
+    int buffer_piece = piece_of(buffer_sticker);
+    int total = 0;
+    for (int t1 = 0; t1 < CT_TARGET_STICKERS; t1++) {
+        int piece1 = piece_of(t1);
+        for (int t2 = 0; t2 < CT_TARGET_STICKERS; t2++) {
+            int piece2 = piece_of(t2);
+            if (piece2 == piece1) {
+                continue;
+            }
+            if (piece1 != buffer_piece && piece2 != buffer_piece) {
+                continue;
+            }
+            if (out != NULL && total < cap) {
+                out[total].t1 = t1;
+                out[total].t2 = t2;
+            }
+            total++;
+        }
+    }
+    return total;
+}
+
 void ct_sticker_cell(int orbit, int sticker, int *face, int *row, int *col) {
     if ((orbit != CT_TARGET_ORBIT_CORNER && orbit != CT_TARGET_ORBIT_EDGE) || sticker < 0 ||
         sticker >= CT_TARGET_STICKERS) {

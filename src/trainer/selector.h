@@ -17,7 +17,7 @@ typedef enum ct_selector_source {
     CT_SELECTOR_PACK
 } ct_selector_source;
 
-enum { CT_SELECTOR_LISTS_PER_PAIR_MAX = 5 };
+enum { CT_SELECTOR_LISTS_PER_PAIR_MAX = 5, CT_SELECTOR_GROUPS_MAX = 4, CT_SELECTOR_ERR = -1 };
 
 typedef struct {
     ct_stage stage;
@@ -50,6 +50,8 @@ int ct_selector_case_pair(const ct_selector_scheme *scheme, ct_event ev, ct_meth
                           int index, int *t1, int *t2);
 int ct_selector_pack_case(sqlite3 *db, ct_event ev, ct_method m, int list_id, int index,
                           ct_pack_entry *out);
+int ct_selector_case_group(sqlite3 *db, ct_event ev, ct_method m, int list_id, int index);
+const char *ct_selector_group_label(int group);
 
 #ifdef __cplusplus
 }

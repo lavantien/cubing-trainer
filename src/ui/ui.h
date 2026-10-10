@@ -61,6 +61,8 @@ typedef struct {
     ct_selector_list lists[CT_TRAINER_LISTS_MAX];
     int list_count;
     int case_count;
+    int group_count;
+    int group_counts[CT_SELECTOR_GROUPS_MAX];
     int cell;
     ct_pack_entry pack;
     int pack_status;

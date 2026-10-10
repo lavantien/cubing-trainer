@@ -13,8 +13,7 @@ enum {
     CT_SELECTOR_PAIR_KEY_LEN = 3,
     CT_SELECTOR_PACK_ROWS_MAX = (1 << 8),
     CT_SELECTOR_SETTING_MAX = (1 << 5),
-    CT_SELECTOR_CHART_ROWS_MAX = CT_TARGET_STICKERS * CT_TARGET_STICKERS,
-    CT_SELECTOR_ERR = -1
+    CT_SELECTOR_CHART_ROWS_MAX = CT_TARGET_STICKERS * CT_TARGET_STICKERS
 };
 
 static const struct {
@@ -364,4 +363,41 @@ int ct_selector_pack_case(sqlite3 *db, ct_event ev, ct_method m, int list_id, in
     }
     *out = ct_selector_pack_rows[index];
     return 0;
+}
+
+static const char *const ct_selector_group_prefixes[CT_SELECTOR_GROUPS_MAX] = {"flip.", "twist.",
+                                                                               "parity.", "ltct."};
+static const char *const ct_selector_group_labels[CT_SELECTOR_GROUPS_MAX] = {"flip", "twist",
+                                                                             "parity", "ltct"};
+
+int ct_selector_case_group(sqlite3 *db, ct_event ev, ct_method m, int list_id, int index) {
+    if (db == NULL || !ct_selector_pair_ok(ev, m) || list_id < 0 ||
+        list_id >= ct_selector_list_count(ev, m) || index < 0) {
+        return CT_SELECTOR_ERR;
+    }
+    ct_stage stage;
+    ct_orbit orbit;
+    ct_selector_source source;
+    if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+        source != CT_SELECTOR_PACK) {
+        return CT_SELECTOR_ERR;
+    }
+    ct_pack_entry e;
+    if (ct_selector_pack_case(db, ev, m, list_id, index, &e) != 0) {
+        return CT_SELECTOR_ERR;
+    }
+    for (int g = 0; g < CT_SELECTOR_GROUPS_MAX; g++) {
+        size_t len = strlen(ct_selector_group_prefixes[g]);
+        if (strncmp(e.case_key, ct_selector_group_prefixes[g], len) == 0) {
+            return g;
+        }
+    }
+    return 0;
+}
+
+const char *ct_selector_group_label(int group) {
+    if (group < 0 || group >= CT_SELECTOR_GROUPS_MAX) {
+        return NULL;
+    }
+    return ct_selector_group_labels[group];
 }

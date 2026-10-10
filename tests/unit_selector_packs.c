@@ -94,3 +94,59 @@ CT_SUITE(selector_pack_reach) {
         ct_db_close(db);
     }
 }
+
+CT_SUITE(selector_pack_groups) {
+    sqlite3 *db = NULL;
+    ct_db_open(&db, ":memory:");
+    ct_db_migrate(db, "db/migrations");
+    CT_ASSERT_EQ(ct_pack_seed_file(db, "db/seeds/packs/bld_3style_specials.tsv", CT_EVENT_3BLD,
+                                   CT_METHOD_3STYLE, CT_STAGE_PARITY),
+                 85);
+    ct_selector_list lists[SP_LISTS];
+    int list_count = ct_selector_lists(CT_EVENT_3BLD, CT_METHOD_3STYLE, lists, SP_LISTS);
+    CT_ASSERT_EQ(list_count, 3);
+    int list_id = -1;
+    for (int i = 0; i < list_count; i++) {
+        if (lists[i].stage == CT_STAGE_PARITY) {
+            list_id = i;
+        }
+    }
+    CT_ASSERT_EQ(list_id, 2);
+    static const char *const prefixes[] = {"flip.", "twist.", "parity.", "ltct."};
+    int counts[CT_SELECTOR_GROUPS_MAX] = {0};
+    char key[SP_KEY_MAX];
+    for (int r = 0; r < 85; r++) {
+        int group = ct_selector_case_group(db, CT_EVENT_3BLD, CT_METHOD_3STYLE, list_id, r);
+        CT_ASSERT(group >= 0 && group < CT_SELECTOR_GROUPS_MAX);
+        CT_ASSERT_EQ(ct_selector_case_key(db, NULL, CT_EVENT_3BLD, CT_METHOD_3STYLE, list_id, r,
+                                          key, sizeof key),
+                     0);
+        CT_ASSERT(strncmp(key, prefixes[group], strlen(prefixes[group])) == 0);
+        counts[group]++;
+    }
+    CT_ASSERT_EQ(counts[0], 25);
+    CT_ASSERT_EQ(counts[1], 23);
+    CT_ASSERT_EQ(counts[2], 26);
+    CT_ASSERT_EQ(counts[3], 11);
+    CT_ASSERT_STR_EQ(ct_selector_group_label(0), "flip");
+    CT_ASSERT_STR_EQ(ct_selector_group_label(1), "twist");
+    CT_ASSERT_STR_EQ(ct_selector_group_label(2), "parity");
+    CT_ASSERT_STR_EQ(ct_selector_group_label(3), "ltct");
+    CT_ASSERT(ct_selector_group_label(CT_SELECTOR_GROUPS_MAX) == NULL);
+    CT_ASSERT(ct_selector_group_label(-1) == NULL);
+
+    CT_ASSERT_EQ(ct_pack_seed_file(db, "db/seeds/packs/clock_algs.tsv", CT_EVENT_CLOCK,
+                                   CT_METHOD_LBL, CT_STAGE_CONCEPT),
+                 14);
+    CT_ASSERT_EQ(ct_selector_case_group(db, CT_EVENT_CLOCK, CT_METHOD_LBL, 0, 0), 0);
+    CT_ASSERT_EQ(ct_selector_case_group(db, CT_EVENT_CLOCK, CT_METHOD_LBL, 0, 13), 0);
+    CT_ASSERT_EQ(ct_selector_case_group(db, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0),
+                 CT_SELECTOR_ERR);
+    CT_ASSERT_EQ(ct_selector_case_group(db, CT_EVENT_3BLD, CT_METHOD_3STYLE, 2, 85),
+                 CT_SELECTOR_ERR);
+    CT_ASSERT_EQ(ct_selector_case_group(db, CT_EVENT_3BLD, CT_METHOD_3STYLE, 9, 0),
+                 CT_SELECTOR_ERR);
+    CT_ASSERT_EQ(ct_selector_case_group(NULL, CT_EVENT_3BLD, CT_METHOD_3STYLE, 2, 0),
+                 CT_SELECTOR_ERR);
+    ct_db_close(db);
+}

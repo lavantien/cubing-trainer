@@ -43,6 +43,7 @@ int ct_edge_piece_of(int sticker);
 void ct_sticker_cell(int orbit, int sticker, int *face, int *row, int *col);
 int ct_targets_corner(int buffer_sticker, ct_target_pair *out, int cap);
 int ct_targets_edge(int buffer_sticker, ct_target_pair *out, int cap);
+int ct_targets_special(int orbit, int buffer_sticker, ct_target_pair *out, int cap);
 
 #ifdef __cplusplus
 }

@@ -21,6 +21,8 @@ src/gen/targets.c:92	edge ring slot comparison mutants are equivalent: the reach
 src/gen/targets.c:95	edge ring slot comparison mutants are equivalent: the reachable edge point set never hits the mutated boundary, verified by exhaustive public surface enumeration digest equality
 src/gen/targets.c:131	negative cap clamp mutants are equivalent: the clamp only fires for negative caps and cap 0 already suppresses every write, so all negative cap values are indistinguishable
 src/gen/targets.c:132	cap reset value mutant is equivalent: the assignment only runs for negative caps where total < cap is false for both 0 and any negative value, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:176	special negative cap clamp mutants are equivalent: the clamp assigns 0 so widening the boundary to cap 0 or 1 rewrites 0 to 0 as a no-op, and narrowing to -1 leaves cap -1 where the total < cap write gate is already false for every total, same class as the 131 cap clamp equivalents
+src/gen/targets.c:177	special cap reset value mutant is equivalent: the assignment only runs for negative caps where total < cap is false for both 0 and any negative value since total starts at 0, verified by exhaustive public surface enumeration digest equality
 src/engine/geometry.c:81	row loop bound boundary mutant is equivalent: perm admits n only up to 6, so the extra row n iteration writes only dead stride padding cells that the active n by n readback and memcmp never read
 src/engine/geometry.c:82	col loop bound boundary mutant is equivalent: perm admits n only up to 6, so the extra col n iteration writes only dead stride padding cells that the active n by n readback and memcmp never read
 src/engine/geometry.c:121	cell argument mutants are equivalent: ct_sticker_world derives the axis output from the face normal only and never from row or col, and the center output is discarded here
@@ -108,6 +110,10 @@ src/trainer/selector.c:323	list id bound relaxation admits ids that list def the
 src/trainer/selector.c:345	list id bound relaxation admits ids that list def then rejects, both paths return the same -1
 src/trainer/selector.c:352	source check flip lands in the pack list scan, which returns zero rows and the same -1
 src/trainer/selector.c:357	cap bound relaxation admits indexes past the largest seeded pack, unreachable over the pinned data
+src/trainer/selector.c:374	case group list id guard mutants are equivalent: an admitted id of -1 or count passes the guard but ct_selector_list_def never matches seen against it and returns the same error, the pinned surface already asserts the error for every out of range id
+src/trainer/selector.c:375	case group list id bound and index guard mutants are equivalent: the bound relaxation admits id count which list def rejects identically, and index -1 passes only into ct_selector_pack_case whose own index guard returns the same error
+src/trainer/selector.c:381	case group source disjunction mutant is equivalent: on every reachable path list def succeeds so the and form skips the early return, pack lists proceed unchanged and non pack lists fall into the pack case source check which returns the same error
+src/trainer/selector.c:389	case group loop start mutant is equivalent: skipping the flip prefix returns the same group 0 through the fallthrough return, and every other prefix still matches, verified by the pinned group counts 25 23 26 11 across all four groups
 src/storage/repo_algs.c:48	sqlite3 treats any negative nByte as read-to-nul, so the -1 bind length mutant -2 is behaviorally identical
 src/storage/repo_algs.c:79	the null-column branch writes into an output struct that ct_repo_alg_get pre-zeroes wholesale, so the write index inside the field is unobservable
 src/storage/repo_algs.c:111	the first snprintf of the canonical string never returns nonpositive for these formats, the guard branch is dead

@@ -235,3 +235,99 @@ CT_SUITE(unit_targets) {
     CT_ASSERT_EQ(cell_row, CT_TARGET_NONE);
     CT_ASSERT_EQ(cell_col, CT_TARGET_NONE);
 }
+
+CT_SUITE(unit_targets_special) {
+    CT_ASSERT_EQ(ct_targets_special(CT_TARGET_ORBIT_CORNER, 0, NULL, 0), 126);
+    CT_ASSERT_EQ(ct_targets_special(CT_TARGET_ORBIT_EDGE, 2, NULL, 0), 88);
+    CT_ASSERT_EQ(ct_targets_special(CT_TARGET_ORBIT_CORNER, 0, NULL, -7), 126);
+    CT_ASSERT_EQ(ct_targets_special(CT_TARGET_ORBIT_CORNER, 0, NULL, 3), 126);
+
+    static ct_target_pair corner_special[126];
+    static ct_target_pair edge_special[88];
+    CT_ASSERT_EQ(ct_targets_special(CT_TARGET_ORBIT_CORNER, 0, corner_special, 126), 126);
+    CT_ASSERT_EQ(ct_targets_special(CT_TARGET_ORBIT_EDGE, 2, edge_special, 88), 88);
+
+    for (int i = 0; i < 126; i++) {
+        CT_ASSERT(corner_special[i].t1 >= 0 && corner_special[i].t1 < CT_TARGET_STICKERS);
+        CT_ASSERT(corner_special[i].t2 >= 0 && corner_special[i].t2 < CT_TARGET_STICKERS);
+        CT_ASSERT(ct_corner_piece_of(corner_special[i].t1) !=
+                  ct_corner_piece_of(corner_special[i].t2));
+        int on_buffer_1 = ct_corner_piece_of(corner_special[i].t1) == ct_corner_piece_of(0);
+        int on_buffer_2 = ct_corner_piece_of(corner_special[i].t2) == ct_corner_piece_of(0);
+        CT_ASSERT(on_buffer_1 != on_buffer_2);
+    }
+    for (int i = 0; i < 88; i++) {
+        CT_ASSERT(edge_special[i].t1 >= 0 && edge_special[i].t1 < CT_TARGET_STICKERS);
+        CT_ASSERT(edge_special[i].t2 >= 0 && edge_special[i].t2 < CT_TARGET_STICKERS);
+        CT_ASSERT(ct_edge_piece_of(edge_special[i].t1) != ct_edge_piece_of(edge_special[i].t2));
+        int on_buffer_1 = ct_edge_piece_of(edge_special[i].t1) == ct_edge_piece_of(2);
+        int on_buffer_2 = ct_edge_piece_of(edge_special[i].t2) == ct_edge_piece_of(2);
+        CT_ASSERT(on_buffer_1 != on_buffer_2);
+    }
+
+    for (int i = 1; i < 126; i++) {
+        bool ok = corner_special[i].t1 > corner_special[i - 1].t1 ||
+                  (corner_special[i].t1 == corner_special[i - 1].t1 &&
+                   corner_special[i].t2 > corner_special[i - 1].t2);
+        CT_ASSERT(ok);
+    }
+    for (int i = 1; i < 88; i++) {
+        bool ok = edge_special[i].t1 > edge_special[i - 1].t1 ||
+                  (edge_special[i].t1 == edge_special[i - 1].t1 &&
+                   edge_special[i].t2 > edge_special[i - 1].t2);
+        CT_ASSERT(ok);
+    }
+
+    CT_ASSERT_EQ(378 + 126,
+                 CT_TARGET_STICKERS * (CT_TARGET_STICKERS - CT_TARGET_CORNER_STICKERS_PER_PIECE));
+    CT_ASSERT_EQ(440 + 88,
+                 CT_TARGET_STICKERS * (CT_TARGET_STICKERS - CT_TARGET_EDGE_STICKERS_PER_PIECE));
+
+    static ct_target_pair alt_corner[126];
+    CT_ASSERT_EQ(ct_targets_special(CT_TARGET_ORBIT_CORNER, 2, alt_corner, 126), 126);
+    for (int i = 0; i < 126; i++) {
+        int on_1 = alt_corner[i].t1 == 2 || alt_corner[i].t1 == 9 || alt_corner[i].t1 == 12;
+        int on_2 = alt_corner[i].t2 == 2 || alt_corner[i].t2 == 9 || alt_corner[i].t2 == 12;
+        CT_ASSERT(on_1 != on_2);
+    }
+
+    static ct_target_pair capped[8];
+    for (int i = 0; i < 8; i++) {
+        capped[i].t1 = -99;
+        capped[i].t2 = -99;
+    }
+    CT_ASSERT_EQ(ct_targets_special(CT_TARGET_ORBIT_CORNER, 0, capped, 5), 126);
+    for (int i = 0; i < 5; i++) {
+        CT_ASSERT_EQ(capped[i].t1, corner_special[i].t1);
+        CT_ASSERT_EQ(capped[i].t2, corner_special[i].t2);
+    }
+    CT_ASSERT_EQ(capped[5].t1, -99);
+    CT_ASSERT_EQ(capped[5].t2, -99);
+    for (int i = 0; i < 8; i++) {
+        capped[i].t1 = -99;
+        capped[i].t2 = -99;
+    }
+    CT_ASSERT_EQ(ct_targets_special(CT_TARGET_ORBIT_EDGE, 2, capped, 0), 88);
+    CT_ASSERT_EQ(capped[0].t1, -99);
+    CT_ASSERT_EQ(ct_targets_special(CT_TARGET_ORBIT_EDGE, 2, capped, -1), 88);
+    CT_ASSERT_EQ(capped[0].t1, -99);
+
+    CT_ASSERT_EQ(ct_targets_special(-1, 0, NULL, 0), CT_TARGET_NONE);
+    CT_ASSERT_EQ(ct_targets_special(CT_TARGET_ORBIT_CORNER + CT_TARGET_ORBIT_EDGE + 1, 0, NULL, 0),
+                 CT_TARGET_NONE);
+    CT_ASSERT_EQ(ct_targets_special(CT_TARGET_ORBIT_CORNER, -1, NULL, 0), CT_TARGET_NONE);
+    CT_ASSERT_EQ(ct_targets_special(CT_TARGET_ORBIT_EDGE, CT_TARGET_STICKERS, NULL, 0),
+                 CT_TARGET_NONE);
+
+    CT_ASSERT_EQ(corner_special[0].t1, 0);
+    CT_ASSERT_EQ(corner_special[0].t2, 1);
+    CT_ASSERT(pair_present(corner_special, 126, 0, 1));
+    CT_ASSERT(pair_present(corner_special, 126, 1, 0));
+    CT_ASSERT(!pair_present(corner_special, 126, 0, 4));
+    CT_ASSERT(!pair_present(corner_special, 126, 1, 5));
+    CT_ASSERT_EQ(edge_special[0].t1, 0);
+    CT_ASSERT_EQ(edge_special[0].t2, 2);
+    CT_ASSERT(pair_present(edge_special, 88, 2, 0));
+    CT_ASSERT(pair_present(edge_special, 88, 0, 2));
+    CT_ASSERT(!pair_present(edge_special, 88, 2, 8));
+}
