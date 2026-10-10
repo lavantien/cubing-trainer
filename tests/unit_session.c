@@ -1,3 +1,4 @@
+#include <limits.h>
 #include <sqlite3.h>
 #include <stdio.h>
 #include <string.h>
@@ -162,6 +163,43 @@ CT_SUITE(session_iso_add_days) {
     CT_ASSERT(ct_session_iso_add_days("2026-02-30", 1, out, (unsigned)sizeof out) < 0);
     CT_ASSERT(ct_session_iso_add_days("2026-02-29", 1, out, (unsigned)sizeof out) < 0);
     CT_ASSERT(ct_session_iso_add_days("2026-01-01", 1, NULL, (unsigned)sizeof out) < 0);
+}
+
+CT_SUITE(session_iso_add_days_domain) {
+    char out[CT_SESSION_STAMP_MAX];
+    CT_ASSERT(ct_session_iso_add_days("2026-10-09", LONG_MAX, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("2026-10-09", LONG_MIN, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("9999-12-31", LONG_MAX, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("0001-01-01", LONG_MIN, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("0001-01-01", LONG_MAX, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("9999-12-31", LONG_MIN, out, (unsigned)sizeof out) < 0);
+
+    long min_day = ct_session_date_to_day(1, 1, 1);
+    long max_day = ct_session_date_to_day(9999, 12, 31);
+    CT_ASSERT_EQ(min_day, -719162);
+    CT_ASSERT_EQ(max_day, 2932896);
+    long y = 0;
+    int m = 0;
+    int d = 0;
+    ct_session_day_to_date(max_day, &y, &m, &d);
+    CT_ASSERT_EQ(y, 9999);
+    CT_ASSERT_EQ(m, 12);
+    CT_ASSERT_EQ(d, 31);
+    ct_session_day_to_date(min_day, &y, &m, &d);
+    CT_ASSERT_EQ(y, 1);
+    CT_ASSERT_EQ(m, 1);
+    CT_ASSERT_EQ(d, 1);
+
+    long span_hi = max_day - 20735;
+    long span_lo = min_day - 20735;
+    CT_ASSERT_EQ(ct_session_iso_add_days("2026-10-09", span_hi, out, (unsigned)sizeof out),
+                 CT_SESSION_OK);
+    CT_ASSERT_STR_EQ(out, "9999-12-31");
+    CT_ASSERT(ct_session_iso_add_days("2026-10-09", span_hi + 1, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT_EQ(ct_session_iso_add_days("2026-10-09", span_lo, out, (unsigned)sizeof out),
+                 CT_SESSION_OK);
+    CT_ASSERT_STR_EQ(out, "0001-01-01");
+    CT_ASSERT(ct_session_iso_add_days("2026-10-09", span_lo - 1, out, (unsigned)sizeof out) < 0);
 }
 
 CT_SUITE(session_stamp_boundaries) {

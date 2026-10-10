@@ -33,6 +33,10 @@ enum {
     ct_iso_date_len = ct_civ_ten,
     ct_civ_year_min = 1,
     ct_civ_year_max = ct_civ_ten * ct_civ_ten * ct_civ_ten * ct_civ_ten - 1,
+    ct_civ_month_min = 1,
+    ct_civ_month_max = 12,
+    ct_civ_day_min = 1,
+    ct_civ_day_max = 31,
     ct_queue_first_cap = CT_SESSION_STAMP_MAX
 };
 
@@ -120,11 +124,14 @@ int ct_session_iso_add_days(const char *iso, long days, char *out, unsigned cap)
         return CT_SESSION_ERR_ARG;
     size_t len = strlen(iso);
     size_t suffix = len < (size_t)ct_iso_date_len ? 0 : len - (size_t)ct_iso_date_len;
+    long base = ct_session_date_to_day(y, m, d);
+    long min_day = ct_session_date_to_day(ct_civ_year_min, ct_civ_month_min, ct_civ_day_min);
+    long max_day = ct_session_date_to_day(ct_civ_year_max, ct_civ_month_max, ct_civ_day_max);
+    if (days < min_day - base || days > max_day - base)
+        return CT_SESSION_ERR_ARG;
     long ry;
     int rm, rd;
-    ct_session_day_to_date(ct_session_date_to_day(y, m, d) + days, &ry, &rm, &rd);
-    if (ry < ct_civ_year_min || ry > ct_civ_year_max)
-        return CT_SESSION_ERR_ARG;
+    ct_session_day_to_date(base + days, &ry, &rm, &rd);
     int n = snprintf(out, cap, "%04ld-%02d-%02d", ry, rm, rd);
     if (n < 0)
         return CT_SESSION_ERR_DB;
