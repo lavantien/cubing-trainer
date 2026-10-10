@@ -1,0 +1,190 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_mut10/bin/mutate.exe src/packs/seed_registry.c build_mut10 pack_startup_registry pack_startup_seeds_all pack_startup_partial pack_startup_real_app_init pack_startup_guards selector_case_counts selector_pack_reach
+mutate: suite pack_startup_registry exited 1
+build_mut10/mutants/p46000/m0004_seed_registry.c:40:37: error: expected ')'
+   40 | int ct_pack_seed_registered(sqlite3 /db, const char *dir) {
+      |                                     ^
+build_mut10/mutants/p46000/m0004_seed_registry.c:40:28: note: to match this '('
+   40 | int ct_pack_seed_registered(sqlite3 /db, const char *dir) {
+      |                            ^
+build_mut10/mutants/p46000/m0004_seed_registry.c:40:5: error: conflicting types for 'ct_pack_seed_registered'
+   40 | int ct_pack_seed_registered(sqlite3 /db, const char *dir) {
+      |     ^
+src\packs/seed_registry.h:18:5: note: previous declaration is here
+   18 | int ct_pack_seed_registered(sqlite3 *db, const char *dir);
+      |     ^
+build_mut10/mutants/p46000/m0004_seed_registry.c:40:37: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   40 | int ct_pack_seed_registered(sqlite3 /db, const char *dir) {
+      |                                     ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_mut10/mutants/p46000/m0004_seed_registry.c:41:9: error: use of undeclared identifier 'db'
+   41 |     if (db == NULL || dir == NULL || dir[0] == '\0')
+      |         ^~
+build_mut10/mutants/p46000/m0004_seed_registry.c:41:23: error: use of undeclared identifier 'dir'
+   41 |     if (db == NULL || dir == NULL || dir[0] == '\0')
+      |                       ^~~
+build_mut10/mutants/p46000/m0004_seed_registry.c:41:38: error: use of undeclared identifier 'dir'
+   41 |     if (db == NULL || dir == NULL || dir[0] == '\0')
+      |                                      ^~~
+build_mut10/mutants/p46000/m0004_seed_registry.c:43:22: error: use of undeclared identifier 'dir'
+   43 |     DIR *d = opendir(dir);
+      |                      ^~~
+build_mut10/mutants/p46000/m0004_seed_registry.c:45:81: error: use of undeclared identifier 'dir'
+   45 |         fprintf(stderr, "cubing-trainer: no event pack seed directory at %s\n", dir);
+      |                                                                                 ^~~
+build_mut10/mutants/p46000/m0004_seed_registry.c:53:60: error: use of undeclared identifier 'dir'
+   53 |         int written = snprintf(path, sizeof path, "%s/%s", dir, reg->file);
+      |                                                            ^~~
+build_mut10/mutants/p46000/m0004_seed_registry.c:59:36: error: use of undeclared identifier 'db'
+   59 |         int rc = ct_pack_seed_file(db, path, reg->event, reg->method, reg->stage);
+      |                                    ^~
+10 errors generated.
+build_mut10/mutants/p46000/m0005_seed_registry.c:40:53: error: expected ')'
+   40 | int ct_pack_seed_registered(sqlite3 *db, const char /dir) {
+      |                                                     ^
+build_mut10/mutants/p46000/m0005_seed_registry.c:40:28: note: to match this '('
+   40 | int ct_pack_seed_registered(sqlite3 *db, const char /dir) {
+      |                            ^
+build_mut10/mutants/p46000/m0005_seed_registry.c:40:5: error: conflicting types for 'ct_pack_seed_registered'
+   40 | int ct_pack_seed_registered(sqlite3 *db, const char /dir) {
+      |     ^
+src\packs/seed_registry.h:18:5: note: previous declaration is here
+   18 | int ct_pack_seed_registered(sqlite3 *db, const char *dir);
+      |     ^
+build_mut10/mutants/p46000/m0005_seed_registry.c:41:23: error: use of undeclared identifier 'dir'
+   41 |     if (db == NULL || dir == NULL || dir[0] == '\0')
+      |                       ^~~
+build_mut10/mutants/p46000/m0005_seed_registry.c:41:38: error: use of undeclared identifier 'dir'
+   41 |     if (db == NULL || dir == NULL || dir[0] == '\0')
+      |                                      ^~~
+build_mut10/mutants/p46000/m0005_seed_registry.c:43:22: error: use of undeclared identifier 'dir'
+   43 |     DIR *d = opendir(dir);
+      |                      ^~~
+build_mut10/mutants/p46000/m0005_seed_registry.c:45:81: error: use of undeclared identifier 'dir'
+   45 |         fprintf(stderr, "cubing-trainer: no event pack seed directory at %s\n", dir);
+      |                                                                                 ^~~
+build_mut10/mutants/p46000/m0005_seed_registry.c:53:60: error: use of undeclared identifier 'dir'
+   53 |         int written = snprintf(path, sizeof path, "%s/%s", dir, reg->file);
+      |                                                            ^~~
+7 errors generated.
+mutate: suite pack_startup_seeds_all exited 1
+build_mut10/mutants/p46000/m0007_seed_registry.c:41:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   41 |     if (db == NULL && dir == NULL || dir[0] == '\0')
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_mut10/mutants/p46000/m0007_seed_registry.c:41:20: note: place parentheses around the '&&' expression to silence this warning
+   41 |     if (db == NULL && dir == NULL || dir[0] == '\0')
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite pack_startup_seeds_all exited 1
+build_mut10/mutants/p46000/m0009_seed_registry.c:41:35: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   41 |     if (db == NULL || dir == NULL && dir[0] == '\0')
+      |                    ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+build_mut10/mutants/p46000/m0009_seed_registry.c:41:35: note: place parentheses around the '&&' expression to silence this warning
+   41 |     if (db == NULL || dir == NULL && dir[0] == '\0')
+      |                                   ^                
+      |                       (                            )
+1 error generated.
+mutate: suite pack_startup_seeds_all exited 1
+mutate: suite pack_startup_seeds_all exited 1
+mutate: suite pack_startup_guards exited 1
+mutate: suite pack_startup_guards exited 1
+mutate: suite pack_startup_guards exited 1
+build_mut10/mutants/p46000/m0016_seed_registry.c:43:9: error: expected identifier or '('
+   43 |     DIR /d = opendir(dir);
+      |         ^
+build_mut10/mutants/p46000/m0016_seed_registry.c:44:9: error: use of undeclared identifier 'd'
+   44 |     if (d == NULL) {
+      |         ^
+build_mut10/mutants/p46000/m0016_seed_registry.c:48:14: error: use of undeclared identifier 'd'
+   48 |     closedir(d);
+      |              ^
+3 errors generated.
+mutate: suite pack_startup_seeds_all exited 1
+mutate: suite pack_startup_guards exited 1
+mutate: suite pack_startup_guards exited 1
+mutate: suite pack_startup_guards exited 1
+mutate: suite pack_startup_seeds_all exited 1
+mutate: suite pack_startup_seeds_all exited 1
+mutate: suite pack_startup_seeds_all exited 1
+mutate: suite pack_startup_seeds_all exited -1073741795
+mutate: suite pack_startup_seeds_all exited -1073741819
+build_mut10/mutants/p46000/m0026_seed_registry.c:52:32: error: expected identifier or '('
+   52 |         const ct_pack_seed_reg /reg = &ct_pack_seed_registry[i];
+      |                                ^
+build_mut10/mutants/p46000/m0026_seed_registry.c:53:65: error: use of undeclared identifier 'reg'
+   53 |         int written = snprintf(path, sizeof path, "%s/%s", dir, reg->file);
+      |                                                                 ^~~
+build_mut10/mutants/p46000/m0026_seed_registry.c:55:90: error: use of undeclared identifier 'reg'
+   55 |             fprintf(stderr, "cubing-trainer: event pack seed path for %s is too long\n", reg->file);
+      |                                                                                          ^~~
+build_mut10/mutants/p46000/m0026_seed_registry.c:59:46: error: use of undeclared identifier 'reg'
+   59 |         int rc = ct_pack_seed_file(db, path, reg->event, reg->method, reg->stage);
+      |                                              ^~~
+build_mut10/mutants/p46000/m0026_seed_registry.c:59:58: error: use of undeclared identifier 'reg'
+   59 |         int rc = ct_pack_seed_file(db, path, reg->event, reg->method, reg->stage);
+      |                                                          ^~~
+build_mut10/mutants/p46000/m0026_seed_registry.c:59:71: error: use of undeclared identifier 'reg'
+   59 |         int rc = ct_pack_seed_file(db, path, reg->event, reg->method, reg->stage);
+      |                                                                       ^~~
+build_mut10/mutants/p46000/m0026_seed_registry.c:61:81: error: use of undeclared identifier 'reg'
+   61 |             fprintf(stderr, "cubing-trainer: cannot seed event pack %s (%d)\n", reg->file, rc);
+      |                                                                                 ^~~
+7 errors generated.
+mutate: scope=src/packs/seed_registry.c files=1 sites=34 suites=7
+KILLED    m0001 src/packs/seed_registry.c:34 [arith / -> *]
+SURVIVED  m0002 src/packs/seed_registry.c:34 [int+1 0 -> 1]
+SURVIVED  m0003 src/packs/seed_registry.c:34 [int-1 0 -> -1]
+KILLED    m0004 src/packs/seed_registry.c:40 [arith * -> /]
+          build break
+KILLED    m0005 src/packs/seed_registry.c:40 [arith * -> /]
+          build break
+KILLED    m0006 src/packs/seed_registry.c:41 [cmp == -> !=]
+KILLED    m0007 src/packs/seed_registry.c:41 [logic || -> &&]
+          build break
+KILLED    m0008 src/packs/seed_registry.c:41 [cmp == -> !=]
+KILLED    m0009 src/packs/seed_registry.c:41 [logic || -> &&]
+          build break
+SURVIVED  m0010 src/packs/seed_registry.c:41 [int+1 0 -> 1]
+KILLED    m0011 src/packs/seed_registry.c:41 [int-1 0 -> -1]
+KILLED    m0012 src/packs/seed_registry.c:41 [cmp == -> !=]
+KILLED    m0013 src/packs/seed_registry.c:42 [arith - -> +]
+KILLED    m0014 src/packs/seed_registry.c:42 [int+1 1 -> 2]
+KILLED    m0015 src/packs/seed_registry.c:42 [int-1 1 -> 0]
+KILLED    m0016 src/packs/seed_registry.c:43 [arith * -> /]
+          build break
+KILLED    m0017 src/packs/seed_registry.c:44 [cmp == -> !=]
+KILLED    m0018 src/packs/seed_registry.c:46 [arith - -> +]
+KILLED    m0019 src/packs/seed_registry.c:46 [int+1 1 -> 2]
+KILLED    m0020 src/packs/seed_registry.c:46 [int-1 1 -> 0]
+KILLED    m0021 src/packs/seed_registry.c:49 [int+1 0 -> 1]
+KILLED    m0022 src/packs/seed_registry.c:49 [int-1 0 -> -1]
+KILLED    m0023 src/packs/seed_registry.c:51 [int+1 0 -> 1]
+KILLED    m0024 src/packs/seed_registry.c:51 [int-1 0 -> -1]
+KILLED    m0025 src/packs/seed_registry.c:51 [cmp < -> <=]
+KILLED    m0026 src/packs/seed_registry.c:52 [arith * -> /]
+          build break
+SURVIVED  m0027 src/packs/seed_registry.c:54 [cmp < -> <=]
+SURVIVED  m0028 src/packs/seed_registry.c:54 [int+1 0 -> 1]
+SURVIVED  m0029 src/packs/seed_registry.c:54 [int-1 0 -> -1]
+SURVIVED  m0030 src/packs/seed_registry.c:54 [logic || -> &&]
+SURVIVED  m0031 src/packs/seed_registry.c:54 [cmp >= -> >]
+SURVIVED  m0032 src/packs/seed_registry.c:60 [cmp < -> <=]
+SURVIVED  m0033 src/packs/seed_registry.c:60 [int+1 0 -> 1]
+SURVIVED  m0034 src/packs/seed_registry.c:60 [int-1 0 -> -1]
+ACCEPTED  m0002 src/packs/seed_registry.c:34 [int+1 0 -> 1] :: sizeof index mutant reads a same sized element, the count is unchanged
+ACCEPTED  m0003 src/packs/seed_registry.c:34 [int-1 0 -> -1] :: sizeof index mutant reads a same sized element, the count is unchanged
+ACCEPTED  m0010 src/packs/seed_registry.c:41 [int+1 0 -> 1] :: dir emptiness check shift is subsumed by opendir failing on the empty path
+ACCEPTED  m0027 src/packs/seed_registry.c:54 [cmp < -> <=] :: snprintf boundary and logic mutants sit at path lengths no registry file name reaches, and a truncated path still fails opendir
+ACCEPTED  m0028 src/packs/seed_registry.c:54 [int+1 0 -> 1] :: snprintf boundary and logic mutants sit at path lengths no registry file name reaches, and a truncated path still fails opendir
+ACCEPTED  m0029 src/packs/seed_registry.c:54 [int-1 0 -> -1] :: snprintf boundary and logic mutants sit at path lengths no registry file name reaches, and a truncated path still fails opendir
+ACCEPTED  m0030 src/packs/seed_registry.c:54 [logic || -> &&] :: snprintf boundary and logic mutants sit at path lengths no registry file name reaches, and a truncated path still fails opendir
+ACCEPTED  m0031 src/packs/seed_registry.c:54 [cmp >= -> >] :: snprintf boundary and logic mutants sit at path lengths no registry file name reaches, and a truncated path still fails opendir
+ACCEPTED  m0032 src/packs/seed_registry.c:60 [cmp < -> <=] :: seed file return boundary mutants sit at 0 and -1, the loop only produces row counts or errors below -1
+ACCEPTED  m0033 src/packs/seed_registry.c:60 [int+1 0 -> 1] :: seed file return boundary mutants sit at 0 and -1, the loop only produces row counts or errors below -1
+ACCEPTED  m0034 src/packs/seed_registry.c:60 [int-1 0 -> -1] :: seed file return boundary mutants sit at 0 and -1, the loop only produces row counts or errors below -1
+mutate: generated=34 build_failed=6 killed_by_tests=17 killed=23 survived=11 accepted=11 unexplained=0 skipped=0
+mutate: kill rate 23/34 = 67.6%, with accepted equivalents 34/34 = 100.0%
+mutate: wall 37.3s

@@ -36,8 +36,27 @@ struct ct_packstart_want {
     int rows;
 };
 
+enum {
+    CT_PACKSTART_L2E_ROWS = 12,
+    CT_PACKSTART_REDUCTION_ROWS = 17,
+    CT_PACKSTART_PRESENT = 4,
+    CT_PACKSTART_TOTAL_ROWS = 625
+};
+
 static const struct ct_packstart_want ct_packstart_want_rows[] = {
+    {"bigcube_l2e.tsv", CT_EVENT_5X5, CT_METHOD_REDUCTION, CT_STAGE_PARITY,
+     CT_PACKSTART_REDUCTION_ROWS},
+    {"bigcube_l2e.tsv", CT_EVENT_6X6, CT_METHOD_REDUCTION, CT_STAGE_PARITY,
+     CT_PACKSTART_REDUCTION_ROWS},
+    {"bigcube_l2e.tsv", CT_EVENT_7X7, CT_METHOD_REDUCTION, CT_STAGE_PARITY,
+     CT_PACKSTART_REDUCTION_ROWS},
     {"bigcube_parity.tsv", CT_EVENT_4X4, CT_METHOD_YAU, CT_STAGE_PARITY, 5},
+    {"bigcube_parity.tsv", CT_EVENT_5X5, CT_METHOD_REDUCTION, CT_STAGE_PARITY,
+     CT_PACKSTART_REDUCTION_ROWS},
+    {"bigcube_parity.tsv", CT_EVENT_6X6, CT_METHOD_REDUCTION, CT_STAGE_PARITY,
+     CT_PACKSTART_REDUCTION_ROWS},
+    {"bigcube_parity.tsv", CT_EVENT_7X7, CT_METHOD_REDUCTION, CT_STAGE_PARITY,
+     CT_PACKSTART_REDUCTION_ROWS},
     {"bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT, 22},
     {"bld_oldpoch.tsv", CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN, CT_STAGE_CONCEPT, 38},
     {"clock_algs.tsv", CT_EVENT_CLOCK, CT_METHOD_LBL, CT_STAGE_CONCEPT, 14},
@@ -119,7 +138,10 @@ CT_SUITE(pack_startup_registry) {
     }
     for (int i = 0; i < CT_PACKSTART_PACKS; i++) {
         for (int j = i + 1; j < CT_PACKSTART_PACKS; j++) {
-            CT_ASSERT(strcmp(ct_pack_seed_registry[i].file, ct_pack_seed_registry[j].file) != 0);
+            CT_ASSERT(strcmp(ct_pack_seed_registry[i].file, ct_pack_seed_registry[j].file) != 0 ||
+                      ct_pack_seed_registry[i].event != ct_pack_seed_registry[j].event ||
+                      ct_pack_seed_registry[i].method != ct_pack_seed_registry[j].method ||
+                      ct_pack_seed_registry[i].stage != ct_pack_seed_registry[j].stage);
         }
     }
 }
@@ -127,18 +149,16 @@ CT_SUITE(pack_startup_registry) {
 CT_SUITE(pack_startup_seeds_all) {
     sqlite3 *db = packstart_db();
     CT_ASSERT_EQ(ct_pack_seed_registered(db, "db/seeds/packs"), 0);
-    int total = 0;
     for (int i = 0; i < CT_PACKSTART_PACKS; i++) {
         CT_ASSERT_EQ(ct_pack_count(db, ct_packstart_want_rows[i].event,
                                    ct_packstart_want_rows[i].method,
                                    ct_packstart_want_rows[i].stage),
                      ct_packstart_want_rows[i].rows);
-        total += ct_packstart_want_rows[i].rows;
     }
-    CT_ASSERT_EQ(pack_rows_total(db), total);
+    CT_ASSERT_EQ(pack_rows_total(db), CT_PACKSTART_TOTAL_ROWS);
 
     CT_ASSERT_EQ(ct_pack_seed_registered(db, "db/seeds/packs"), 0);
-    CT_ASSERT_EQ(pack_rows_total(db), total);
+    CT_ASSERT_EQ(pack_rows_total(db), CT_PACKSTART_TOTAL_ROWS);
     ct_db_close(db);
 }
 
@@ -191,15 +211,15 @@ CT_SUITE(pack_startup_partial) {
     CT_ASSERT_EQ(copy_file_bytes(from, to), 0);
 
     sqlite3 *db = packstart_db();
-    CT_ASSERT_EQ(ct_pack_seed_registered(db, dir), CT_PACKSTART_PACKS - 2);
+    CT_ASSERT_EQ(ct_pack_seed_registered(db, dir), CT_PACKSTART_PACKS - CT_PACKSTART_PRESENT);
     CT_ASSERT_EQ(ct_pack_count(db, ct_packstart_want_rows[0].event,
                                ct_packstart_want_rows[0].method, ct_packstart_want_rows[0].stage),
-                 ct_packstart_want_rows[0].rows);
+                 CT_PACKSTART_L2E_ROWS);
     CT_ASSERT_EQ(ct_pack_count(db, ct_packstart_want_rows[15].event,
                                ct_packstart_want_rows[15].method, ct_packstart_want_rows[15].stage),
                  ct_packstart_want_rows[15].rows);
-    CT_ASSERT_EQ(ct_pack_count(db, ct_packstart_want_rows[5].event,
-                               ct_packstart_want_rows[5].method, ct_packstart_want_rows[5].stage),
+    CT_ASSERT_EQ(ct_pack_count(db, ct_packstart_want_rows[7].event,
+                               ct_packstart_want_rows[7].method, ct_packstart_want_rows[7].stage),
                  0);
     ct_db_close(db);
     wipe_tmp();
@@ -224,18 +244,17 @@ CT_SUITE(pack_startup_real_app_init) {
     CT_ASSERT(app.running);
     CT_ASSERT(app.db != NULL);
     CT_ASSERT_EQ(ct_db_version(app.db), 1);
-    int total = 0;
-    for (int i = 0; i < CT_PACKSTART_PACKS; i++)
-        total += ct_packstart_want_rows[i].rows;
-    CT_ASSERT_EQ(pack_rows_total(app.db), total);
+    CT_ASSERT_EQ(pack_rows_total(app.db), CT_PACKSTART_TOTAL_ROWS);
     CT_ASSERT_EQ(ct_pack_count(app.db, CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_CUBESHAPE), 169);
     CT_ASSERT_EQ(ct_pack_count(app.db, CT_EVENT_2X2, CT_METHOD_CLL, CT_STAGE_CLL), 42);
     CT_ASSERT_EQ(ct_pack_count(app.db, CT_EVENT_FTO, CT_METHOD_L4T_REDUX, CT_STAGE_L4T), 36);
+    CT_ASSERT_EQ(ct_pack_count(app.db, CT_EVENT_7X7, CT_METHOD_REDUCTION, CT_STAGE_PARITY),
+                 CT_PACKSTART_REDUCTION_ROWS);
 
     ct_app_shutdown(&app);
     ct_app_init(&app);
     CT_ASSERT(app.running);
-    CT_ASSERT_EQ(pack_rows_total(app.db), total);
+    CT_ASSERT_EQ(pack_rows_total(app.db), CT_PACKSTART_TOTAL_ROWS);
     ct_app_shutdown(&app);
 
     char db_file[CT_PACKSTART_BUF_MAX];

@@ -148,3 +148,7 @@ src/gen/classify.c:513	decide corner flag logic mutants are equivalent: cl_decid
 src/gen/classify.c:514	decide edge flag logic mutants are equivalent: cl_decide only runs inside the single-orbit gate in ct_classify, so info->corner and info->edge are never both true or both false at any call
 src/gen/classify.c:550	fmt width check mutants are equivalent: the formatted spans hold at most 5 moves at n = 3, about 24 characters against the 48-character buffer, so the failure branch is unreachable
 src/gen/classify.c:551	fmt guard write mutants are equivalent: the guarded branch is unreachable because the spans never exceed the format buffer
+src/packs/seed_registry.c:34	sizeof index mutant reads a same sized element, the count is unchanged
+src/packs/seed_registry.c:41	dir emptiness check shift is subsumed by opendir failing on the empty path
+src/packs/seed_registry.c:54	snprintf boundary and logic mutants sit at path lengths no registry file name reaches, and a truncated path still fails opendir
+src/packs/seed_registry.c:60	seed file return boundary mutants sit at 0 and -1, the loop only produces row counts or errors below -1

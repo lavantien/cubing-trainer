@@ -84,13 +84,29 @@ Count: 14 rows, 12 equalize moves plus 2 final rotations, matching the plan's st
 
 Discrepancy: none versus the plan count. J Perm has no clock algorithm page, his site index was checked and archived at playground/seeds_clock/jperm_algs_index.html. Enum convention: event CT_EVENT_CLOCK, method CT_METHOD_LBL, stage CT_STAGE_CONCEPT. LBL is the beginner method placeholder, no clock specific enum exists, and CONCEPT holds the fixed procedure set, mirroring the existing CT_METHOD_LBL CT_STAGE_CONCEPT pairing already used in the selector's stage lists.
 
+## bigcube_l2e.tsv
+
+Sources: https://www.speedcube.us/blogs/5x5-last-two-edges, archived at playground/seeds_bigcube/speedcubeus_5x5_l2e.html. Retrieved 2026-10-10, the page was fetched during the original big-cube seed pass and held back then because L2E mixes parity and non parity edge pairing cases; it is seeded now as the reduction trainer content for 5x5 through 7x7 under its own file.
+
+Page contents: the page presents a 12 case last two edges set for the 5x5, cases L2E 01 through L2E 12, each with one algorithm. The cases are the standard dedgel flip, double flip, and slice combinations that finish edge pairing during reduction, and the page states the set is for the 5x5. The same case shapes occur on 6x6 and 7x7 with wider slice depths, and the registration covers all three sizes from this one file, mirroring how the parity file registers.
+
+Case key derivation: keys l2e.01 to l2e.12 in the page's case numbering, front_json carries the case label without the dot, for example l2e.07.
+
+Count: 12 rows.
+
+Enum convention: event CT_EVENT_5X5, CT_EVENT_6X6, and CT_EVENT_7X7, method CT_METHOD_REDUCTION, stage CT_STAGE_PARITY. The stage is PARITY because the reduction trainer's parity list is the seeded deck for all three sizes, and this file merges with the bigcube_parity rows into one 17 row deck per event under the pack table's unique event, method, stage, case key constraint.
+
+Notation: algorithms are stored verbatim in the source formatting, including the parenthesized setup groups in cases 01 and 03. Consistent with the pack seed display-only policy recorded in the README event pack section, the notation grammar rejects these site forms by design and the rows show alg text in the selector without animating until curated.
+
+Discrepancy: none. The page's 12 cases all have text algorithms, none are image only.
+
 ## bigcube_parity.tsv
 
 Sources: https://www.speedcube.us/blogs/speedcubing-solutions/4x4-oll-parity-algorithms, https://www.speedcube.us/blogs/speedcubing-solutions/4x4-pll-parity-algorithms, and https://www.speedcube.us/blogs/speedcubing-solutions/5x5-edge-parity-solution-algorithm, archived at playground/seeds_bigcube/speedcubeus_4x4_oll_parity.html, speedcubeus_4x4_pll_parity.html, and speedcubeus_5x5_edge_parity.html. Retrieved 2026-10-10. J Perm's 4x4 OLL and PLL parity pages and their data files (jperm_4x4_oll.html, jperm_4x4pll.js, jperm_4x4oll.js) are archived as cross-checks: his OLL parity definition, the [*] token on his 4x4 OLL page, equals the oll4 row modulo the comma formatting of the speedcube.us page.
 
 Page contents: the OLL parity page gives 2 algorithms, the speedsolve form that also disturbs other pieces and the pure two inner edge flip, the PLL parity page gives 2 cases, opposite edge swap and adjacent edge swap, and the 5x5 edge parity page gives 1 algorithm, single flipped wing pair, and states it works for 4x4 up to 7x7.
 
-Case key derivation: keys parity.oll4, parity.oll4flip, parity.pll4, parity.pll4adj, parity.wing5, front_json carries the same name without the prefix. Pack is loaded as event CT_EVENT_4X4, method CT_METHOD_YAU, stage CT_STAGE_PARITY, the 5x5+ row is keyed by cube size in the suffix and lives in the same pack because the source states the one algorithm covers 4x4 through 7x7 and no 6x6 or 7x7 specific parity algorithm page exists on the sourced site.
+Case key derivation: keys parity.oll4, parity.oll4flip, parity.pll4, parity.pll4adj, parity.wing5, front_json carries the same name without the prefix. Pack is loaded as event CT_EVENT_4X4, method CT_METHOD_YAU, stage CT_STAGE_PARITY, the 5x5+ row is keyed by cube size in the suffix and lives in the same pack because the source states the one algorithm covers 4x4 through 7x7 and no 6x6 or 7x7 specific parity algorithm page exists on the sourced site. The registry also binds this file under event CT_EVENT_5X5, CT_EVENT_6X6, and CT_EVENT_7X7 with method CT_METHOD_REDUCTION and stage CT_STAGE_PARITY, feeding the reduction trainer together with bigcube_l2e.tsv into one 17 row deck per event. Applicability across those registrations is uneven and recorded here rather than silently assumed: the wing5 row is the row of record for every size per the source claim, the oll4 and pll4 rows describe dedge parity which occurs on even cubes only, so they apply directly to 4x4 and 6x6, and for 5x5 and 7x7 they ride along because the registry binds whole files and no odd-cube parity page exists on the sourced site; the odd-cube reduction content of record is the bigcube_l2e.tsv set.
 
 Count: 5 rows.
 
