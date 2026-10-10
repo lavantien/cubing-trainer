@@ -10,6 +10,8 @@
 #define CT_CARD_ALG_MAX (1 << 8)
 #define CT_CARD_FRONT_JSON_MAX (1 << 9)
 #define CT_CARD_NOTES_MAX (1 << 9)
+#define CT_CASE_KEY_FORBIDDEN 0x20
+#define CT_CASE_KEY_DELETE 0x7F
 
 typedef enum ct_repo_rc {
     CT_REPO_OK = 0,
@@ -44,7 +46,7 @@ typedef struct ct_srs_row {
 } ct_srs_row;
 
 static inline int ct_repo_text_ok(const char *s, unsigned max) {
-    return s != NULL && s[0] != '\0' && strlen(s) < max;
+    return s != NULL && memchr(s, '\0', max) != NULL && s[0] != '\0';
 }
 
 void ct_now_utc_iso(char *out, unsigned cap);

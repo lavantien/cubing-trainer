@@ -1,6 +1,7 @@
 #include "config/config.h"
 #include "framework.h"
 #include "storage/db.h"
+#include "storage/repo_algs.h"
 #include "storage/repo_cards.h"
 #include "storage/repo_reviews.h"
 #include "storage/repo_settings.h"
@@ -63,6 +64,30 @@ static int ct_dbs_open(sqlite3 **db) {
     return 0;
 }
 
+static bool ct_dbs_case_key_canonical(const char *key, unsigned len) {
+    if (len == 0 || len >= CT_CARD_CASE_KEY_MAX)
+        return false;
+    for (unsigned k = 0; k < len; k++) {
+        unsigned char ch = (unsigned char)key[k];
+        if (ch <= CT_CASE_KEY_FORBIDDEN || ch == CT_CASE_KEY_DELETE)
+            return false;
+    }
+    return true;
+}
+
+static void ct_dbs_field(ct_sfc64 *s, char *dst, unsigned cap, bool terminate) {
+    unsigned want = (unsigned)ct_sfc64_range(s, cap + 4);
+    unsigned n = terminate ? (want < cap - 1 ? want : cap - 1) : cap;
+    for (unsigned k = 0; k < n; k++)
+        dst[k] = ct_dbs_byte(s);
+    if (terminate)
+        dst[n] = '\0';
+}
+
+static bool ct_dbs_dir_ok(int direction) {
+    return direction >= CT_DIR_FR && direction <= CT_DIR_BL;
+}
+
 CT_SUITE(fuzz_db_card_strings) {
     int iters = ct_fuzz_iterations();
     int count = iters < CT_DBS_ITERS ? iters : CT_DBS_ITERS;
@@ -79,10 +104,10 @@ CT_SUITE(fuzz_db_card_strings) {
         unsigned case_want = (unsigned)ct_sfc64_range(&s, CT_CARD_CASE_KEY_MAX + 8);
         unsigned deck_len = ct_dbs_fill(&s, deck_raw, sizeof deck_raw, deck_want);
         unsigned case_len = ct_dbs_fill(&s, case_raw, sizeof case_raw, case_want);
-        bool deck_fits = deck_len < CT_CARD_DECK_MAX;
-        bool case_fits = case_len < CT_CARD_CASE_KEY_MAX;
+        bool deck_fits = deck_len < CT_CARD_DECK_MAX && deck_len > 0;
+        bool case_fits = ct_dbs_case_key_canonical(case_raw, case_len);
         ct_card probe;
-        if (!deck_fits) {
+        if (deck_len == 0 || deck_len >= CT_CARD_DECK_MAX) {
             CT_FZ(ct_repo_card_get_by_key(db, deck_raw, "k", 0, &probe) == CT_REPO_ERR_ARG, seed);
             CT_FZ(ct_repo_card_list(db, deck_raw, &probe, 1) == CT_REPO_ERR_ARG, seed);
         }
@@ -97,7 +122,7 @@ CT_SUITE(fuzz_db_card_strings) {
         memset(&c, 0, sizeof c);
         memcpy(c.deck, deck_raw, deck_len + 1);
         memcpy(c.case_key, case_raw, case_len + 1);
-        c.direction = (int)ct_sfc64_range(&s, 4);
+        c.direction = (int)ct_sfc64_range(&s, 8) - 2;
         ct_dbs_fill(&s, c.front_json, sizeof c.front_json,
                     (unsigned)ct_sfc64_range(&s, CT_CARD_FRONT_JSON_MAX + 16));
         ct_dbs_fill(&s, c.notes, sizeof c.notes,
@@ -108,9 +133,21 @@ CT_SUITE(fuzz_db_card_strings) {
                     (unsigned)ct_sfc64_range(&s, CT_CARD_ALG_MAX + 16));
         ct_dbs_fill(&s, c.alg_oh, sizeof c.alg_oh,
                     (unsigned)ct_sfc64_range(&s, CT_CARD_ALG_MAX + 16));
-        int rc = ct_repo_card_insert(db, &c);
-        if (deck_len == 0 || case_len == 0) {
+        int rc;
+        bool text_unterminated = ct_sfc64_range(&s, 4) == 0;
+        if (text_unterminated)
+            memset(c.notes, 'z', sizeof c.notes);
+        rc = ct_repo_card_insert(db, &c);
+        if (text_unterminated) {
             CT_FZ(rc == CT_REPO_ERR_ARG, seed);
+            ct_db_close(db);
+            continue;
+        }
+        if (!ct_dbs_dir_ok(c.direction)) {
+            CT_FZ(rc == CT_REPO_ERR_ARG, seed);
+            CT_FZ(ct_repo_card_get_by_key(db, c.deck, c.case_key, c.direction, &probe) ==
+                      CT_REPO_ERR_ARG,
+                  seed);
             ct_db_close(db);
             continue;
         }
@@ -148,6 +185,36 @@ CT_SUITE(fuzz_db_card_strings) {
         CT_FZ(ct_repo_card_get_by_key(db, c.deck, c.case_key, c.direction, &back) == CT_REPO_OK,
               seed);
         CT_FZ(back.id == c.id, seed);
+
+        ct_generated_alg a;
+        memset(&a, 0, sizeof a);
+        a.orbit = CT_ORBIT_CORNER;
+        a.buffer_mode = CT_BUFFER_FIXED;
+        snprintf(a.target_pair, sizeof a.target_pair, "%s", "FU");
+        bool seq_terminated = ct_sfc64_range(&s, 4) != 0;
+        ct_dbs_field(&s, a.sequence, sizeof a.sequence, seq_terminated);
+        unsigned seq_len =
+            seq_terminated ? (unsigned)strlen(a.sequence) : (unsigned)sizeof a.sequence;
+        ct_dbs_field(&s, a.setup, sizeof a.setup, true);
+        ct_dbs_field(&s, a.interchange, sizeof a.interchange, true);
+        ct_dbs_field(&s, a.insertion, sizeof a.insertion, true);
+        ct_dbs_field(&s, a.score_parts_json, sizeof a.score_parts_json, true);
+        int arc = ct_repo_alg_put(db, &a, "fz");
+        if (!seq_terminated || seq_len == 0) {
+            CT_FZ(arc == CT_REPO_ERR_ARG, seed);
+        } else {
+            CT_FZ(arc == CT_REPO_OK, seed);
+            ct_generated_alg aback;
+            memset(&aback, 0, sizeof aback);
+            CT_FZ(ct_repo_alg_get(db, CT_ORBIT_CORNER, "FU", CT_BUFFER_FIXED, 0, "fz", &aback) ==
+                      CT_REPO_OK,
+                  seed);
+            CT_FZ(strcmp(aback.sequence, a.sequence) == 0, seed);
+            CT_FZ(strcmp(aback.setup, a.setup) == 0, seed);
+            CT_FZ(strcmp(aback.interchange, a.interchange) == 0, seed);
+            CT_FZ(strcmp(aback.insertion, a.insertion) == 0, seed);
+            CT_FZ(strcmp(aback.score_parts_json, a.score_parts_json) == 0, seed);
+        }
         ct_db_close(db);
     }
 }

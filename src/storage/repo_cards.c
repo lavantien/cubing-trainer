@@ -2,6 +2,8 @@
 
 #include <time.h>
 
+#include "config/config.h"
+
 static const char CT_SQL_CARD_INSERT[] =
     "INSERT INTO flashcard(deck, case_key, direction, front_json, alg_3x3, alg_big, alg_oh, notes, "
     "created_at, updated_at)"
@@ -104,10 +106,42 @@ void ct_now_utc_iso(char *out, unsigned cap) {
     strftime(out, (size_t)cap, "%Y-%m-%dT%H:%M:%SZ", utc);
 }
 
+static int ct_card_text_ok(const char *s, unsigned max) {
+    return memchr(s, '\0', max) != NULL;
+}
+
+static int ct_case_key_canonical(const char *key) {
+    if (!ct_repo_text_ok(key, CT_CARD_CASE_KEY_MAX))
+        return 0;
+    for (const unsigned char *p = (const unsigned char *)key; *p != '\0'; p++) {
+        if (*p <= CT_CASE_KEY_FORBIDDEN || *p == CT_CASE_KEY_DELETE)
+            return 0;
+    }
+    return 1;
+}
+
+static int ct_direction_ok(int direction) {
+    return direction >= CT_DIR_FR && direction <= CT_DIR_BL;
+}
+
 static int ct_card_valid(const ct_card *c) {
     if (c == NULL)
         return CT_REPO_ERR_ARG;
-    if (c->deck[0] == '\0' || c->case_key[0] == '\0')
+    if (!ct_repo_text_ok(c->deck, CT_CARD_DECK_MAX))
+        return CT_REPO_ERR_ARG;
+    if (!ct_case_key_canonical(c->case_key))
+        return CT_REPO_ERR_ARG;
+    if (!ct_direction_ok(c->direction))
+        return CT_REPO_ERR_ARG;
+    if (!ct_card_text_ok(c->front_json, CT_CARD_FRONT_JSON_MAX))
+        return CT_REPO_ERR_ARG;
+    if (!ct_card_text_ok(c->alg_3x3, CT_CARD_ALG_MAX))
+        return CT_REPO_ERR_ARG;
+    if (!ct_card_text_ok(c->alg_big, CT_CARD_ALG_MAX))
+        return CT_REPO_ERR_ARG;
+    if (!ct_card_text_ok(c->alg_oh, CT_CARD_ALG_MAX))
+        return CT_REPO_ERR_ARG;
+    if (!ct_card_text_ok(c->notes, CT_CARD_NOTES_MAX))
         return CT_REPO_ERR_ARG;
     return CT_REPO_OK;
 }
@@ -236,7 +270,9 @@ int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key,
         return CT_REPO_ERR_ARG;
     if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX))
         return CT_REPO_ERR_ARG;
-    if (!ct_repo_text_ok(case_key, CT_CARD_CASE_KEY_MAX))
+    if (!ct_case_key_canonical(case_key))
+        return CT_REPO_ERR_ARG;
+    if (!ct_direction_ok(direction))
         return CT_REPO_ERR_ARG;
     memset(out, 0, sizeof *out);
     sqlite3_stmt *st = NULL;

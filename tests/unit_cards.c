@@ -407,6 +407,84 @@ CT_SUITE(due_cards) {
     ct_db_close(db);
 }
 
+CT_SUITE(card_write_boundaries) {
+    sqlite3 *db = cards_db();
+    ct_card dir_bad = base_card("d", "k7", CT_DIR_FR);
+    dir_bad.direction = CT_DIR_BL + 1;
+    CT_ASSERT_EQ(ct_repo_card_insert(db, &dir_bad), CT_REPO_ERR_ARG);
+    dir_bad.direction = CT_DIR_FR - 1;
+    CT_ASSERT_EQ(ct_repo_card_insert(db, &dir_bad), CT_REPO_ERR_ARG);
+    dir_bad.direction = 7;
+    CT_ASSERT_EQ(ct_repo_card_insert(db, &dir_bad), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_card_update(db, &dir_bad), CT_REPO_ERR_ARG);
+
+    const char *bad_keys[] = {" lead",       "trail ",     "embed\ttab",
+                              "two  spaces", "nl\ninside", "cr\rinside"};
+    for (unsigned i = 0; i < sizeof bad_keys / sizeof bad_keys[0]; i++) {
+        ct_card ck = base_card("d", bad_keys[i], CT_DIR_FR);
+        CT_ASSERT_EQ(ct_repo_card_insert(db, &ck), CT_REPO_ERR_ARG);
+    }
+
+    char key63[CT_CARD_CASE_KEY_MAX];
+    memset(key63, 'k', sizeof key63 - 1);
+    key63[sizeof key63 - 1] = '\0';
+    ct_card full = base_card("full", key63, CT_DIR_BL);
+    memset(full.front_json, 'j', CT_CARD_FRONT_JSON_MAX - 1);
+    full.front_json[CT_CARD_FRONT_JSON_MAX - 1] = '\0';
+    memset(full.alg_3x3, 'R', CT_CARD_ALG_MAX - 1);
+    full.alg_3x3[CT_CARD_ALG_MAX - 1] = '\0';
+    memset(full.alg_big, 'L', CT_CARD_ALG_MAX - 1);
+    full.alg_big[CT_CARD_ALG_MAX - 1] = '\0';
+    memset(full.alg_oh, 'U', CT_CARD_ALG_MAX - 1);
+    full.alg_oh[CT_CARD_ALG_MAX - 1] = '\0';
+    memset(full.notes, 'n', CT_CARD_NOTES_MAX - 1);
+    full.notes[CT_CARD_NOTES_MAX - 1] = '\0';
+    CT_ASSERT_EQ(ct_repo_card_insert(db, &full), CT_REPO_OK);
+    ct_card back;
+    memset(&back, 0, sizeof back);
+    CT_ASSERT_EQ(ct_repo_card_get(db, full.id, &back), CT_REPO_OK);
+    CT_ASSERT_EQ(strlen(back.case_key), (size_t)(CT_CARD_CASE_KEY_MAX - 1));
+    CT_ASSERT_EQ(strlen(back.front_json), (size_t)(CT_CARD_FRONT_JSON_MAX - 1));
+    CT_ASSERT_EQ(strlen(back.alg_3x3), (size_t)(CT_CARD_ALG_MAX - 1));
+    CT_ASSERT_EQ(strlen(back.alg_big), (size_t)(CT_CARD_ALG_MAX - 1));
+    CT_ASSERT_EQ(strlen(back.alg_oh), (size_t)(CT_CARD_ALG_MAX - 1));
+    CT_ASSERT_EQ(strlen(back.notes), (size_t)(CT_CARD_NOTES_MAX - 1));
+    CT_ASSERT_STR_EQ(back.case_key, full.case_key);
+    CT_ASSERT_STR_EQ(back.front_json, full.front_json);
+    CT_ASSERT_STR_EQ(back.notes, full.notes);
+
+    ct_card unterm = base_card("d", "unterm", CT_DIR_FR);
+    memset(unterm.alg_3x3, 'R', sizeof unterm.alg_3x3);
+    CT_ASSERT_EQ(ct_repo_card_insert(db, &unterm), CT_REPO_ERR_ARG);
+    unterm = base_card("d", "unterm2", CT_DIR_FR);
+    memset(unterm.front_json, 'j', sizeof unterm.front_json);
+    CT_ASSERT_EQ(ct_repo_card_insert(db, &unterm), CT_REPO_ERR_ARG);
+    unterm = base_card("d", "unterm3", CT_DIR_FR);
+    memset(unterm.notes, 'n', sizeof unterm.notes);
+    CT_ASSERT_EQ(ct_repo_card_insert(db, &unterm), CT_REPO_ERR_ARG);
+    unterm = base_card("d", "unterm4", CT_DIR_FR);
+    memset(unterm.deck, 'd', sizeof unterm.deck);
+    CT_ASSERT_EQ(ct_repo_card_insert(db, &unterm), CT_REPO_ERR_ARG);
+
+    ct_card empty_optional = base_card("d", "empty-opt", CT_DIR_FR);
+    empty_optional.front_json[0] = '\0';
+    empty_optional.alg_3x3[0] = '\0';
+    empty_optional.alg_big[0] = '\0';
+    empty_optional.alg_oh[0] = '\0';
+    empty_optional.notes[0] = '\0';
+    CT_ASSERT_EQ(ct_repo_card_insert(db, &empty_optional), CT_REPO_OK);
+    memset(&back, 0, sizeof back);
+    CT_ASSERT_EQ(ct_repo_card_get(db, empty_optional.id, &back), CT_REPO_OK);
+    CT_ASSERT_EQ(back.front_json[0], '\0');
+    CT_ASSERT_EQ(back.notes[0], '\0');
+
+    ct_card out;
+    CT_ASSERT_EQ(ct_repo_card_get_by_key(db, "d", "k7", CT_DIR_BL + 1, &out), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_card_get_by_key(db, "d", " lead", CT_DIR_FR, &out), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_card_get_by_key(db, "d", "trail ", CT_DIR_FR, &out), CT_REPO_ERR_ARG);
+    ct_db_close(db);
+}
+
 CT_SUITE(card_bad_args) {
     sqlite3 *db = cards_db();
     ct_card c = base_card("d", "k", CT_DIR_FR);
