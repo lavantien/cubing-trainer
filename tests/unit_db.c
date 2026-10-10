@@ -211,7 +211,9 @@ CT_SUITE(migrate_error_paths) {
     remove_file(CT_TEST_DIR "/migerr/002_bad.sql");
     remove_file(CT_TEST_DIR "/miggap/003_gap.sql");
     remove_file(CT_TEST_DIR "/migcrlf/001_crlf.sql");
+    remove_file(CT_TEST_DIR "/migcrlf/002_crlf.sql");
     remove_file(CT_TEST_DIR "/migbom/001_bom.sql");
+    remove_file(CT_TEST_DIR "/migbom/002_bom.sql");
     remove_file(CT_TEST_DIR "/migro/002_ro.sql");
 
     sqlite3 *db = NULL;
@@ -239,20 +241,22 @@ CT_SUITE(migrate_error_paths) {
 
     db = NULL;
     CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
-    CT_ASSERT(write_file(CT_TEST_DIR "/migcrlf/001_crlf.sql",
+    CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/migcrlf/001_init.sql"));
+    CT_ASSERT(write_file(CT_TEST_DIR "/migcrlf/002_crlf.sql",
                          "CREATE TABLE crlf_t(id INTEGER);\r\nINSERT INTO crlf_t VALUES (7);\r\n"));
     CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migcrlf"), 0);
-    CT_ASSERT_EQ(ct_db_version(db), 1);
+    CT_ASSERT_EQ(ct_db_version(db), 2);
     CT_ASSERT_EQ(query_int(db, "SELECT id FROM crlf_t"), 7);
     ct_db_close(db);
 
     db = NULL;
     CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
-    CT_ASSERT(write_file(CT_TEST_DIR "/migbom/001_bom.sql", "\xEF\xBB\xBF"
+    CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/migbom/001_init.sql"));
+    CT_ASSERT(write_file(CT_TEST_DIR "/migbom/002_bom.sql", "\xEF\xBB\xBF"
                                                             "CREATE TABLE bom_t(id INTEGER);\r\n"
                                                             "INSERT INTO bom_t VALUES (1);\r\n"));
     CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migbom"), 0);
-    CT_ASSERT_EQ(ct_db_version(db), 1);
+    CT_ASSERT_EQ(ct_db_version(db), 2);
     CT_ASSERT_EQ(query_int(db, "SELECT id FROM bom_t"), 1);
     ct_db_close(db);
 
@@ -331,7 +335,7 @@ CT_SUITE(migrate_soundness) {
     CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/migsnd") != 0);
     CT_ASSERT_EQ(ct_db_version(db), 5);
     CT_ASSERT_EQ(sqlite3_exec(db, "PRAGMA user_version = 2", NULL, NULL, NULL), SQLITE_OK);
-    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migsnd"), 0);
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/migsnd") != 0);
     CT_ASSERT_EQ(ct_db_version(db), 2);
     ct_db_close(db);
 
@@ -386,6 +390,28 @@ CT_SUITE(migrate_soundness) {
         query_int(db, "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='nul2'"), 0);
     ct_db_close(db);
     remove_file(CT_TEST_DIR "/migsnd/002_nul.sql");
+}
+
+CT_SUITE(db_schema_assert) {
+    sqlite3 *db = NULL;
+    CT_ASSERT_EQ(ct_db_schema_ok(NULL), 0);
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT_EQ(ct_db_schema_ok(db), 0);
+    CT_ASSERT_EQ(ct_db_migrate(db, "db/migrations"), 0);
+    CT_ASSERT_EQ(ct_db_schema_ok(db), 1);
+
+    CT_ASSERT_EQ(sqlite3_exec(db, "DROP TABLE flashcard", NULL, NULL, NULL), SQLITE_OK);
+    CT_ASSERT_EQ(ct_db_schema_ok(db), 0);
+    CT_ASSERT(ct_db_migrate(db, "db/migrations") != 0);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT_EQ(sqlite3_exec(db, "PRAGMA user_version = 1", NULL, NULL, NULL), SQLITE_OK);
+    CT_ASSERT(ct_db_migrate(db, "db/migrations") != 0);
+    CT_ASSERT_EQ(ct_db_version(db), 1);
+    CT_ASSERT_EQ(sqlite3_get_autocommit(db), 1);
+    ct_db_close(db);
 }
 
 CT_SUITE(pragmas) {

@@ -30,3 +30,28 @@ SELECT CASE
            ELSE 'FAIL missing column ' || want.tbl || '.' || want.col
        END
 FROM want;
+
+WITH want(name) AS (
+    VALUES ('idx_flashcard_deck'), ('idx_review_log_card'), ('idx_srs_state_due'),
+           ('idx_generated_alg_pair'), ('idx_event_pack_ems')
+)
+SELECT CASE
+           WHEN EXISTS (SELECT 1 FROM sqlite_master WHERE type = 'index' AND name = want.name)
+           THEN 'ok index ' || want.name
+           ELSE 'FAIL missing index ' || want.name
+       END
+FROM want;
+
+SELECT CASE
+           WHEN (SELECT count(*) FROM sqlite_master
+                 WHERE type = 'table' AND name NOT LIKE 'sqlite_%') = 9
+           THEN 'ok table count 9'
+           ELSE 'FAIL unexpected table count'
+       END;
+
+SELECT CASE
+           WHEN (SELECT count(*) FROM sqlite_master
+                 WHERE type = 'index' AND name NOT LIKE 'sqlite_%') = 5
+           THEN 'ok index count 5'
+           ELSE 'FAIL unexpected index count'
+       END;

@@ -39,6 +39,35 @@ void ct_db_close(sqlite3 *db) {
     sqlite3_close(db);
 }
 
+static const char *const ct_db_required_tables[] = {
+    "settings",   "letter_scheme", "letter_map",  "flashcard",  "srs_state",
+    "review_log", "generated_alg", "session_log", "event_pack",
+};
+
+int ct_db_schema_ok(sqlite3 *db) {
+    if (db == NULL)
+        return 0;
+    sqlite3_stmt *st = NULL;
+    if (sqlite3_prepare_v2(db, "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?", -1,
+                           &st, NULL) != SQLITE_OK) {
+        sqlite3_finalize(st);
+        return 0;
+    }
+    int ok = 1;
+    size_t table_count = sizeof ct_db_required_tables / sizeof ct_db_required_tables[0];
+    for (size_t i = 0; i < table_count; i++) {
+        sqlite3_reset(st);
+        sqlite3_clear_bindings(st);
+        sqlite3_bind_text(st, 1, ct_db_required_tables[i], -1, SQLITE_STATIC);
+        if (sqlite3_step(st) != SQLITE_ROW) {
+            ok = 0;
+            break;
+        }
+    }
+    sqlite3_finalize(st);
+    return ok;
+}
+
 int ct_db_version(sqlite3 *db) {
     if (db == NULL)
         return -1;

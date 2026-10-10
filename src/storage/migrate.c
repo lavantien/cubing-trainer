@@ -273,5 +273,7 @@ int ct_db_migrate(sqlite3 *db, const char *migrations_dir) {
         free(sql);
     }
     free(migs);
-    return rc;
+    if (rc != 0 || !ct_db_schema_ok(db))
+        return 1;
+    return 0;
 }
