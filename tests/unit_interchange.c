@@ -428,6 +428,11 @@ CT_SUITE(unit_interchange) {
     CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_CORNER, 0, 2, 7, res, 54) < 0);
     CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_CORNER, 0, 2, 0, res, 54) < 0);
     CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_CORNER, 0, 2, -4, res, 54) < 0);
+    for (int n = 4; n <= 6; n++) {
+        CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_CORNER, 0, 2, n, res, 54) < 0);
+        CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_EDGE, 2, 22, n, res, 54) < 0);
+        CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_CORNER, 0, 2, n, NULL, 0) < 0);
+    }
     for (int i = 0; i < 4; i++) {
         res[i] = (ct_move){-9, -9, -9, -9};
     }

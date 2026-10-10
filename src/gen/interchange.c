@@ -77,7 +77,7 @@ int ct_interchanges_for(int orbit, int x, int y, int n, ct_move *out, int cap) {
     }
     if ((orbit != CT_TARGET_ORBIT_CORNER && orbit != CT_TARGET_ORBIT_EDGE) || x < 0 ||
         x >= CT_TARGET_STICKERS || y < 0 || y >= CT_TARGET_STICKERS || x == y ||
-        n < CT_ORBIT_MIN_N || n > CT_PERM_MAX_N) {
+        n != CT_ORBIT_MIN_N) {
         return -1;
     }
     int xf = 0;
