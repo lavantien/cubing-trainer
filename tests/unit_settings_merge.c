@@ -186,6 +186,23 @@ CT_SUITE(settings_merge_after_form_save) {
     ct_db_close(db);
 }
 
+CT_SUITE(settings_merge_overwrites_live_cfg) {
+    sqlite3 *db = merge_db();
+    ct_settings_form f;
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(ct_settings_form_stage_retention(&f, 0.85), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_settings_form_stage_move_seconds(&f, 0.5), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_settings_form_save(&f), CT_REPO_OK);
+
+    ct_config live = ct_config_defaults();
+    CT_ASSERT_EQ(ct_config_set(&live, "srs.request_retention", "0.99"), CT_CFG_OK);
+    CT_ASSERT_EQ(ct_config_set(&live, "anim.move_seconds", "0.05"), CT_CFG_OK);
+    CT_ASSERT_EQ(ct_repo_settings_merge(db, &live), 0);
+    CT_ASSERT_DBL_EQ(live.fsrs.request_retention, 0.85, 1e-9);
+    CT_ASSERT_DBL_EQ(live.anim.move_seconds, 0.5, 1e-9);
+    ct_db_close(db);
+}
+
 static long form_second_good_scheduled(const char *retention) {
     sqlite3 *db = merge_db();
     ct_card c;

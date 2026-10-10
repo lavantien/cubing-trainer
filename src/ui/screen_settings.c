@@ -683,8 +683,10 @@ void ct_screen_settings_draw(ct_app *app) {
         break;
     }
 
-    if (GuiButton(ct_settings_rect(margin, btn_y, btn_w, btn_h), "save"))
-        ct_settings_form_save(f);
+    if (GuiButton(ct_settings_rect(margin, btn_y, btn_w, btn_h), "save")) {
+        if (ct_settings_form_save(f) == CT_REPO_OK)
+            (void)ct_repo_settings_merge(app->db, &app->cfg);
+    }
     if (GuiButton(ct_settings_rect(margin + btn_w + margin, btn_y, btn_w, btn_h), "cancel"))
         ct_settings_form_cancel(f);
     GuiStatusBar(ct_settings_rect(margin, h - status_h, content_w, status_h),
