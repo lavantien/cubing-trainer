@@ -210,6 +210,12 @@ CT_SUITE(selector_events) {
     CT_ASSERT_EQ(few[1], CT_EVENT_FTO);
     CT_ASSERT_EQ(ct_selector_events(few, 0), SPEC_EVENT_COUNT);
     CT_ASSERT_EQ(few[0], CT_EVENT_3X3);
+    for (int i = 0; i < SPEC_CFOP_LISTS; i++) {
+        few[i] = CT_EVENT_FTO;
+    }
+    CT_ASSERT_EQ(ct_selector_events(few, -1), SPEC_EVENT_COUNT);
+    CT_ASSERT_EQ(few[0], CT_EVENT_FTO);
+    CT_ASSERT_EQ(few[1], CT_EVENT_FTO);
 }
 
 CT_SUITE(selector_methods) {
@@ -433,6 +439,19 @@ CT_SUITE(selector_case_keys) {
         ct_selector_case_key(db, &s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, NULL, sizeof pair) < 0);
     CT_ASSERT(ct_selector_case_key(db, NULL, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, pair,
                                    sizeof pair) < 0);
+    ct_selector_scheme s_edge;
+    CT_ASSERT_EQ(ct_selector_scheme_load(db, &s_edge), 0);
+    int edge_scheme = ct_letter_scheme_default_id(db);
+    CT_ASSERT(edge_scheme > 0);
+    CT_ASSERT_EQ(ct_letter_map_set(db, edge_scheme, 1, 0, 'B'), 0);
+    CT_ASSERT_EQ(ct_letter_map_set(db, edge_scheme, 1, 1, 'A'), 0);
+    CT_ASSERT_EQ(ct_selector_scheme_load(db, &s_edge), 0);
+    CT_ASSERT_EQ(s_edge.map.edge[0], 'B');
+    CT_ASSERT_EQ(s_edge.map.edge[1], 'A');
+    CT_ASSERT_EQ(
+        ct_selector_case_key(db, &s_edge, CT_EVENT_3BLD, CT_METHOD_3STYLE, 1, 0, pair, sizeof pair),
+        0);
+    CT_ASSERT_STR_EQ(pair, "BA");
     char prev[CT_PACK_CASE_KEY_MAX];
     for (int i = 0; i < ct_pack_seed_registry_count(); i++) {
         const ct_pack_seed_reg *reg = &ct_pack_seed_registry[i];
@@ -455,6 +474,13 @@ CT_SUITE(selector_case_keys) {
             }
             CT_ASSERT(ct_selector_case_key(db, &s, reg->event, reg->method, l, rows, key,
                                            sizeof key) < 0);
+            CT_ASSERT_EQ(
+                ct_selector_case_key(db, &s, reg->event, reg->method, l, 0, key, sizeof key), 0);
+            CT_ASSERT(ct_selector_case_key(db, &s, reg->event, reg->method, l, 0, key,
+                                           (unsigned)strlen(key)) < 0);
+            CT_ASSERT_EQ(ct_selector_case_key(db, &s, reg->event, reg->method, l, 0, key,
+                                              (unsigned)strlen(key) + 1),
+                         0);
             break;
         }
     }

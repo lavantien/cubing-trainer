@@ -77,3 +77,34 @@ src/trainer/session.c:321	prepare length mutant is equivalent: sqlite treats any
 src/trainer/session.c:326	bind length mutant is equivalent: sqlite treats any negative text length as nul-terminated, -1 and -2 behave identically
 src/trainer/session.c:327	bind length mutant is equivalent: sqlite treats any negative text length as nul-terminated, -1 and -2 behave identically
 src/trainer/session.c:328	bind length mutant is equivalent: sqlite treats any negative text length as nul-terminated, -1 and -2 behave identically
+src/trainer/selector.c:12	method bound widening admits enum values with no table row, every public function then returns the empty scan result over the pinned surface
+src/trainer/selector.c:14	pack row cap widening admits indexes past the largest seeded pack (169 rows), unreachable over the pinned pack data
+src/trainer/selector.c:15	settings buffer size plus or minus one byte changes nothing for the short numerals the buffer parser accepts
+src/trainer/selector.c:78	enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+src/trainer/selector.c:82	enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+src/trainer/selector.c:86	guard flip still lands in the table scan, which returns the empty result for the unpaired input
+src/trainer/selector.c:87	no match return literal is truthiness only, callers rescan the table and produce the same totals and errors
+src/trainer/selector.c:89	loop start and match mutants still locate every pinned pair through the remaining rows, no pair is defined by a single row
+src/trainer/selector.c:90	match condition mutants still locate every pinned pair through the remaining rows, no pair is defined by a single row
+src/trainer/selector.c:91	return literal is truthiness only
+src/trainer/selector.c:94	no match return literal is truthiness only, callers rescan and produce the same totals and errors
+src/trainer/selector.c:98	cap clamp boundary and return literal mutants agree with the original at every reachable cap, negative caps write nothing under both
+src/trainer/selector.c:108	loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+src/trainer/selector.c:124	count loop start shift is cancelled by list def failing the same way, both surface as the same -1
+src/trainer/selector.c:125	copy loop start and bound shifts change which rows are visited but every pinned list is defined by its full scan
+src/trainer/selector.c:126	match condition mutants keep every pinned list output identical through the full scan
+src/trainer/selector.c:147	re entering the speffz seed is a no op, the seed is idempotent and the default id is reread after it
+src/trainer/selector.c:153	scheme ids are never negative past the seed branch and map load returns a row count or negative only, the mutated boundaries are unreachable
+src/trainer/selector.c:160	sizeof index and bound mutants iterate the same two element array with identical limits
+src/trainer/selector.c:192	loop start shifts skip rows no pinned list is defined by, later rows of the same pair carry the same entries
+src/trainer/selector.c:200	duplicate flag literal is truthiness only
+src/trainer/selector.c:221	loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+src/trainer/selector.c:237	list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+src/trainer/selector.c:254	chart total zero and index boundary mutants coincide with the adjacent guards, both orderings return the same error
+src/trainer/selector.c:256	chart total zero and index boundary mutants coincide with the adjacent guards, both orderings return the same error
+src/trainer/selector.c:268	total and index boundary mutants coincide with the adjacent guard, both orderings return the same error
+src/trainer/selector.c:278	count and index boundary mutants coincide with the adjacent guards, both orderings return the same error or key
+src/trainer/selector.c:321	list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+src/trainer/selector.c:343	list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+src/trainer/selector.c:350	source check flip lands in the pack list scan, which returns zero rows and the same -1
+src/trainer/selector.c:355	cap bound relaxation admits indexes past the largest seeded pack, unreachable over the pinned data
