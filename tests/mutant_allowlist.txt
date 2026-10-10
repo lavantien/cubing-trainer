@@ -24,3 +24,56 @@ src/gen/targets.c:132	cap reset value mutant is equivalent: the assignment only 
 src/engine/geometry.c:81	row loop bound boundary mutant is equivalent: perm admits n only up to 6, so the extra row n iteration writes only dead stride padding cells that the active n by n readback and memcmp never read
 src/engine/geometry.c:82	col loop bound boundary mutant is equivalent: perm admits n only up to 6, so the extra col n iteration writes only dead stride padding cells that the active n by n readback and memcmp never read
 src/engine/geometry.c:121	cell argument mutants are equivalent: ct_sticker_world derives the axis output from the face normal only and never from row or col, and the center output is discarded here
+src/gen/score.c:39	face bit loop bound mutant is equivalent: faces are validated to 0 to 5 before the call, so the extra iteration tests bit 1<<6 against a bit that is always one of bits 0 to 5 and never matches
+src/gen/score.c:44	face bit not-found return mutants are equivalent: every caller passes score_face_bits of a validated face, and 1<<i for i 0 to 5 covers all six bits, so the not-found return path is unreachable
+src/gen/score.c:139	need sign check mutants are equivalent: need is snprintf's length of a fixed nonempty format, never 0 or negative, and a hypothetical -1 still reaches the cap rejection through the unsigned cast
+src/engine/geometry_sq1.c:30	zero position boundary mutant is a true equivalent: pos == CT_SQ1_ZERO_POS implies x == 0 and y == 0, rejected at function entry, so no reachable input distinguishes < from <=
+src/engine/geometry_sq1.c:69	cut half sibling index mutant is a true equivalent: units[4] == units[6] needs one piece covering units 4 through 6, widths max 2, probe counted 0 nonadjacent equalities over 200000 reachable walks
+src/engine/geometry_sq1.c:86	move id lower guard mutant is a true equivalent: move_id == -1 passes the mutated guard and ct_sq1_move_pair rejects it, same error return
+src/engine/geometry_sq1.c:86	move id upper guard mutant is a true equivalent: move_id == CT_SQ1_MOVES passes the mutated guard and ct_sq1_move_pair rejects it via move_id >= CT_SQ1_TWISTS, same error return
+src/engine/geometry_sq1.c:134	twist loop start mutant is a true equivalent: the u == -1 iteration writes position wrap(turn - 1) which the u == 11 iteration rewrites with the identical correct value, dead store
+src/engine/geometry_sq1.c:213	first digit range mutant is a true equivalent: digit 9 passing the mutated guard then stops the accumulation loop and the caller rejects on the comma or paren check, and no valid turn digit is 9
+src/engine/geometry_sq1.c:218	digit loop bound mutant is a true equivalent: digit 9 ending the loop early leaves the follow character unconsumed so the caller comma or paren check rejects, and every original acceptance uses digits 0 to 6 only
+src/engine/geometry_sq1.c:219	magnitude bound mutant is a true equivalent: parsed == CT_SQ1_TURN_MAX entering another digit implies magnitude >= 60, rejected by ct_sq1_move_id either way, single digit 6 is checked before accumulation
+src/engine/geometry_sq1.c:222	base multiply mutant is a true equivalent: division changes only multi digit runs, and every multi digit run is rejected by the leading zero rule or the turn range, single digit values are unchanged since 0 / 10 == 0
+src/engine/geometry_sq1.c:226	leading zero bound mutant is a true equivalent: parsed == CT_DECIMAL_BASE reached with digits > 1 is out of turn range and rejected by ct_sq1_move_id either way, and parsed 10 never appears in an accepted token
+src/engine/geometry_sq1.c:229	minus sign guard mutants are true equivalents: sign is only 1 or -1 so < 0, <= 0, and < 1 agree on both values
+src/engine/geometry_sq1.c:252	used count guard mutants are true equivalents: sq1_parse_int returns at least 1 or CT_GEOMETRY_ERR, and the error value that slips the mutated guard is re rejected by the following comma character check since token[0] is always '('
+src/engine/geometry_sq1.c:257	used count guard mutants are true equivalents: sq1_parse_int returns at least 1 or CT_GEOMETRY_ERR, and the error value that slips the mutated guard is re rejected by the closing paren check since token[1 + used_x] is always ','
+src/gen/interchange.c:24	perm error return value mutants are equivalent: every caller and test compares the result against 0 or < 0, so the exact negative payload is unobservable
+src/gen/interchange.c:29	perm cube memset fill mutants are equivalent: ct_cube holds n and facelet only, n is assigned right after and active facelet cells are fully written before ct_apply, and legal moves never read the stride padding
+src/gen/interchange.c:32	perm cube row loop bound and init mutants are equivalent: the extra or underflowed row writes reach only dead stride padding cells that the active n by n readback never reads, same class as geometry.c row bound equivalents
+src/gen/interchange.c:33	perm cube col loop bound mutant is equivalent: the extra col iteration writes only dead stride padding cells that the active n by n readback never reads, same class as geometry.c col bound equivalents
+src/gen/interchange.c:51	candidate cap clamp mutants are equivalent: the clamp only fires for negative caps and cap 0 already suppresses every write, so all negative cap values are indistinguishable, same class as targets.c cap clamp equivalents
+src/gen/interchange.c:52	candidate cap reset value mutant is equivalent: the assignment only runs for negative caps where total < cap stays false for 0 and any negative value
+src/gen/interchange.c:75	interchanges cap clamp mutants are equivalent: the clamp only fires for negative caps and cap 0 already suppresses every write, so all negative cap values are indistinguishable
+src/gen/interchange.c:76	interchanges cap reset value mutant is equivalent: the assignment only runs for negative caps where total < cap stays false for 0 and any negative value
+src/gen/interchange.c:81	interchanges error return value mutant is equivalent: every caller and test compares the result against < 0, so the exact negative payload is unobservable
+src/gen/interchange.c:83	sticker cell face initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the already validated orbit and sticker
+src/gen/interchange.c:84	sticker cell row initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the already validated orbit and sticker
+src/gen/interchange.c:85	sticker cell col initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the already validated orbit and sticker
+src/gen/interchange.c:86	sticker cell face initializer mutants for y are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the already validated orbit and sticker
+src/gen/interchange.c:87	sticker cell row initializer mutants for y are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the already validated orbit and sticker
+src/gen/interchange.c:88	sticker cell col initializer mutants for y are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the already validated orbit and sticker
+src/gen/interchange.c:97	candidate scan init mutant is equivalent: it skips only candidate 0, a U quarter turn, and quarter turns never interchange any orbit sticker pair per the golden pair tables in unit_interchange
+src/gen/interchange.c:99	inner perm failure return mutants are equivalent: every enumerated candidate is a legal move at the only admitted n, so the branch is unreachable, and the callers compare against != 0 anyway
+src/trainer/session.c:28	century_days arithmetic mutants are equivalent: exhaustive sweep of every day-of-era value 0..146096 shows the mutated divisor never flips the year-of-era quotient, verified by playground/session_mut_probe divergence probe
+src/trainer/session.c:45	era sign boundary mutants are equivalent: y 0 routed to the negation branch still yields era 0 under truncating division, no reachable year distinguishes them
+src/trainer/session.c:54	era sign boundary mutants are equivalent: z 0 routed to the negation branch still yields era 0 under truncating division, no reachable day distinguishes them
+src/trainer/session.c:78	nondigit sentinel mutants are equivalent: ct_iso_digit callers only test the value against 0, -1 and -2 fail identically
+src/trainer/session.c:100	month and first day digit guard mutants are equivalent: a -1 digit yields an out-of-calendar month or negative day the round-trip check rejects identically, the second day digit variant is killed by session_bad_stamp_digits
+src/trainer/session.c:126	suffix length guard mutants are equivalent: scan guarantees length at least 10 where both branches yield suffix 0, shorter lengths unreachable
+src/trainer/session.c:136	snprintf status guard mutants are equivalent: formatting a 4-digit year date never returns 0 or negative, the branch is unreachable
+src/trainer/session.c:149	queue allocation size mutant has no exit-code kill: the shrunken heap block overflows silently under the msvcrt allocator, every suite still passes
+src/trainer/session.c:154	due count lower bound mutant is equivalent: the due-card query cannot return exactly -1 on reachable paths, both sides reject at -2 and below
+src/trainer/session.c:156	queue full boundary mutant is equivalent: accepting at n equal to cap and regrowing then accepting leave the same queue and count
+src/trainer/session.c:156	limit sign mutants are equivalent in the harness: more than 32 due cards is the only distinguisher and the paired cap times 1 mutant hangs such a suite forever, at most 32 due cards behave identically
+src/trainer/session.c:160	growth factor mutants are equivalent or unrunnable: factor 3 loads the same queue with a transient capacity difference, factor 1 only differs by looping forever on growth which no suite can survive
+src/trainer/session.c:178	queue count initializer mutants are equivalent: the loader overwrites the field on success and the failure path is unreachable and unobserved
+src/trainer/session.c:262	negative elapsed clamp boundary is a true equivalent: at elapsed 0.0 the clamp writes 0.0 back, a no-op
+src/trainer/session.c:269	interval clamp boundary mutants are equivalent: fsrs never yields a negative interval on the reachable path and 0 clamps to itself
+src/trainer/session.c:270	interval clamp value mutants are equivalent: the clamp branch never executes because the interval is never negative on the reachable fsrs path
+src/trainer/session.c:321	prepare length mutant is equivalent: sqlite treats any negative sql length as nul-terminated, -1 and -2 behave identically
+src/trainer/session.c:326	bind length mutant is equivalent: sqlite treats any negative text length as nul-terminated, -1 and -2 behave identically
+src/trainer/session.c:327	bind length mutant is equivalent: sqlite treats any negative text length as nul-terminated, -1 and -2 behave identically
+src/trainer/session.c:328	bind length mutant is equivalent: sqlite treats any negative text length as nul-terminated, -1 and -2 behave identically
