@@ -12,15 +12,16 @@ The 3-style generator is the distinguishing feature. It emits commutators labele
 
 ## Build and make targets
 
-Prerequisites, verified on this machine 2026-10-09: LLVM clang 23.1.3, winlibs UCRT gcc 16.2.0 as the mingw-w64 sysroot, GNU make 4.4.1, cmake, ninja, sqlite3 CLI 3.53.4, and node with npx and mmdc (mermaid-cli). No MSYS2, no pkg-config.
+Prerequisites, verified on this machine 2026-10-09: LLVM clang 23.1.3, winlibs UCRT gcc 16.2.0 as the mingw-w64 sysroot, GNU make 4.4.1, cmake, ninja, sqlite3 CLI 3.53.4, python 3 for the vendor, db-verify, and visual targets, and node with npx and mmdc (mermaid-cli). No MSYS2, no pkg-config.
 
-Run `make vendor` first. It HEAD-checks each URL, downloads, verifies, and extracts the pinned third party sources under third_party/: the raylib 6.0 tarball, the raygui 5.0 header-only release, and the SQLite 3.53.4 amalgamation zip verified by SHA3-256. raylib compiles from the flat third_party/raylib/src/*.c set of 7 TUs with -DPLATFORM_DESKTOP, a recursive glob over-collects platform files and breaks on duplicate symbols. raygui 5.0 ships only raygui.h, so the Makefile generates build/raygui_impl.c holding RAYGUI_IMPLEMENTATION plus the include as its single TU. sqlite3.c compiles with -Wno-error for two unused parameters in its Windows VFS code.
+Run `make vendor` first. It HEAD-checks each URL, downloads, extracts the pinned third party sources under third_party/, and verifies every archive by SHA3-256 through tools/vendor_verify.py: the raylib 6.0 and raygui 5.0 tag tarballs and the SQLite 3.53.4 amalgamation zip. Each stamp recipe verifies before extracting and the vendor target re-verifies the kept archives in build/vendor on every run, so a corrupted or truncated download fails the target and needs build/vendor removed to re-download. The zip extracts through python's zipfile module instead of tar because GNU tar on the make shell cannot read zip while the Windows bsdtar can, which made the old tar line depend on which tar won PATH order. raylib compiles from the flat third_party/raylib/src/*.c set of 7 TUs with -DPLATFORM_DESKTOP, a recursive glob over-collects platform files and breaks on duplicate symbols. raygui 5.0 ships only raygui.h, so the Makefile generates build/raygui_impl.c holding RAYGUI_IMPLEMENTATION plus the include as its single TU. sqlite3.c compiles with -Wno-error for two unused parameters in its Windows VFS code.
 
 The toolchain spelling is decided, evidence in playground/spike_link/REPORT.md. Compile lines carry `--target=x86_64-w64-mingw32` alone and link lines add `-fuse-ld=lld`, which resolves crt2.o, crtbegin.o, and the gcc 16.2.0 library directories from the winlibs install. The `--gcc-install-dir` spelling is inert on clang 23.1.3, fails under -Werror as an unused argument, and is not used. One environment hazard: this account exports C_INCLUDE_PATH and CPLUS_INCLUDE_PATH at a foreign gcc, so the Makefile clobbers both to empty for every recipe. The link set for anything touching raylib is -static-libgcc -lopengl32 -lgdi32 -lwinmm, and those Windows libraries appear on no other link line.
 
 | target | what it does |
 | --- | --- |
-| vendor | download, HEAD-check, verify, and extract raylib 6.0, raygui 5.0, and the sqlite amalgamation into third_party/ |
+| vendor | download, HEAD-check, SHA3-256 verify, and extract raylib 6.0, raygui 5.0, and the sqlite amalgamation into third_party/, re-verifying the kept archives every run |
+| vendor-verify-selftest | exercise the archive hash checker against synthetic matches, corruptions, and malformed hashes |
 | build | compile app, raylib, raygui, and sqlite sources and emit build/bin/cubing-trainer.exe |
 | build-headless | compile tools/render_scene.c against the full library set and emit build/bin/render_scene.exe |
 | spike | build and run the M0 toolchain spike from playground/spike_link |
@@ -248,13 +249,13 @@ Visual regression: landed with M1 T7. The headless path opens a hidden GLFW wind
 
 ## Source records
 
-Policy: every sourcing action leaves a physical artifact with the source URL, retrieval date, and content hash. Curated event pack seed rows carry the source_url, source_at, and content_hash columns, vendor archives are pinned by hash, and visual goldens get records in tests/golden/PROVENANCE.md. Current records, URLs HEAD-checked 2026-10-09:
+Policy: every sourcing action leaves a physical artifact with the source URL, retrieval date, and content hash. Curated event pack seed rows carry the source_url, source_at, and content_hash columns, vendor archives are pinned by hash, and visual goldens get records in tests/golden/PROVENANCE.md. Current records, URLs HEAD-checked 2026-10-09, vendor archives re-downloaded and re-verified 2026-10-10:
 
 | artifact | source | verification |
 | --- | --- | --- |
-| raylib 6.0 source tarball | https://github.com/raysan5/raylib/archive/refs/tags/6.0.tar.gz | reachable, verified live |
-| raygui 5.0 source tarball | https://github.com/raysan5/raygui/archive/refs/tags/5.0.tar.gz | reachable |
-| sqlite 3.53.4 amalgamation zip | https://sqlite.org/2026/sqlite-amalgamation-3530400.zip | SHA3-256 628a44cfe82c66aed1ccbbe85a562d2e33ebe64b3288981ed76285612227934e |
+| raylib 6.0 source tarball | https://github.com/raysan5/raylib/archive/refs/tags/6.0.tar.gz | SHA3-256 87fadf1148a547fda4a40dd9bcef059787085deb70515ef80a45839e27188cac, derived from the live tag archive 2026-10-10, no published checksum upstream |
+| raygui 5.0 source tarball | https://github.com/raysan5/raygui/archive/refs/tags/5.0.tar.gz | SHA3-256 723b0b86b71a5df7163ee48fcdf4afd0e44abfcf547326f848161b6c5682d6b7, derived from the live tag archive 2026-10-10, no published checksum upstream |
+| sqlite 3.53.4 amalgamation zip | https://sqlite.org/2026/sqlite-amalgamation-3530400.zip | SHA3-256 628a44cfe82c66aed1ccbbe85a562d2e33ebe64b3288981ed76285612227934e, published by sqlite.org for the then-current release and re-derived from the live artifact 2026-10-10 |
 | BH commutator pages | https://www.speedsolving.com/wiki/index.php/BH | domain facts for classes and case counts |
 | Speffz scheme text | https://www.speedsolving.com/wiki/index.php/Speffz | face order and clockwise rule, db/seeds/speffz_source.md |
 | Speffz buffer letters | https://bldtrainer.com/glossary and https://bldtrainer.com/letters | UBL = A and UF = C buffer facts, db/seeds/speffz_source.md |

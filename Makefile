@@ -15,6 +15,8 @@ SQLITE_VERSION := 3.53.4
 SQLITE_CODE := 3530400
 SQLITE_YEAR := 2026
 SQLITE_SHA3 := 628a44cfe82c66aed1ccbbe85a562d2e33ebe64b3288981ed76285612227934e
+RAYLIB_SHA3 := 87fadf1148a547fda4a40dd9bcef059787085deb70515ef80a45839e27188cac
+RAYGUI_SHA3 := 723b0b86b71a5df7163ee48fcdf4afd0e44abfcf547326f848161b6c5682d6b7
 RAYLIB_URL := https://github.com/raysan5/raylib/archive/refs/tags/$(RAYLIB_VERSION).tar.gz
 RAYGUI_URL := https://github.com/raysan5/raygui/archive/refs/tags/$(RAYGUI_VERSION).tar.gz
 SQLITE_URL := https://sqlite.org/$(SQLITE_YEAR)/sqlite-amalgamation-$(SQLITE_CODE).zip
@@ -79,7 +81,7 @@ CT_FUZZ_SUITES += fuzz_srs_walk fuzz_srs_elapsed fuzz_srs_grade_space
 CT_FUZZ_SUITES += fuzz_db_card_strings fuzz_db_review_rows fuzz_db_settings_keys
 CT_FUZZ_SUITES += fuzz_config_keys fuzz_config_moves
 
-.PHONY: all build vendor test diagrams memguard memguard-selftest run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual visual-selftest db-verify
+.PHONY: all build vendor vendor-verify-selftest test diagrams memguard memguard-selftest run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual visual-selftest db-verify
 
 all: build
 
@@ -140,10 +142,17 @@ $(TEST_BIN): $(TEST_OBJ) $(LIB_TOBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) |
 	$(CC) $(CROSS_LINK) -g -o $@ $(TEST_OBJ) $(LIB_TOBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) $(WINLIBS_LDLIBS)
 
 vendor: $(DLDIR)/raylib.stamp $(DLDIR)/raygui.stamp $(DLDIR)/sqlite.stamp
+	python -I tools/vendor_verify.py $(DLDIR)/raylib.tar.gz $(RAYLIB_SHA3)
+	python -I tools/vendor_verify.py $(DLDIR)/raygui.tar.gz $(RAYGUI_SHA3)
+	python -I tools/vendor_verify.py $(DLDIR)/sqlite.zip $(SQLITE_SHA3)
+
+vendor-verify-selftest:
+	python -I tools/vendor_verify_selftest.py
 
 $(DLDIR)/raylib.stamp: | $(DLDIR)
 	curl.exe -fsIL -o NUL $(RAYLIB_URL)
 	curl.exe -fsL -o $(DLDIR)/raylib.tar.gz $(RAYLIB_URL)
+	python -I tools/vendor_verify.py $(DLDIR)/raylib.tar.gz $(RAYLIB_SHA3)
 	mkdir -p third_party/raylib
 	tar.exe -xzf $(DLDIR)/raylib.tar.gz -C third_party/raylib --strip-components=1
 	echo $(RAYLIB_URL) > $@
@@ -151,6 +160,7 @@ $(DLDIR)/raylib.stamp: | $(DLDIR)
 $(DLDIR)/raygui.stamp: | $(DLDIR)
 	curl.exe -fsIL -o NUL $(RAYGUI_URL)
 	curl.exe -fsL -o $(DLDIR)/raygui.tar.gz $(RAYGUI_URL)
+	python -I tools/vendor_verify.py $(DLDIR)/raygui.tar.gz $(RAYGUI_SHA3)
 	mkdir -p third_party/raygui
 	tar.exe -xzf $(DLDIR)/raygui.tar.gz -C third_party/raygui --strip-components=1
 	echo $(RAYGUI_URL) > $@
@@ -158,12 +168,12 @@ $(DLDIR)/raygui.stamp: | $(DLDIR)
 $(DLDIR)/sqlite.stamp: | $(DLDIR)
 	curl.exe -fsIL -o NUL $(SQLITE_URL)
 	curl.exe -fsL -o $(DLDIR)/sqlite.zip $(SQLITE_URL)
+	python -I tools/vendor_verify.py $(DLDIR)/sqlite.zip $(SQLITE_SHA3)
 	mkdir -p third_party/sqlite
 	rm -rf $(DLDIR)/sqlite_x
 	python -I -m zipfile -e $(DLDIR)/sqlite.zip $(DLDIR)/sqlite_x
 	mv $(DLDIR)/sqlite_x/sqlite-amalgamation-$(SQLITE_CODE)/* third_party/sqlite/
 	rm -rf $(DLDIR)/sqlite_x
-	if command -v python >/dev/null 2>&1; then python -I -c 'import hashlib,sys;h=hashlib.sha3_256(open(sys.argv[1],"rb").read()).hexdigest();print(h);sys.exit(0 if h=="$(SQLITE_SHA3)" else 1)' $(DLDIR)/sqlite.zip && echo sha3-256 verified > $(DLDIR)/sqlite.verify.log; else $(CC) $(CROSS_LINK) $(CFLAGS) -Ithird_party/sqlite playground/spike_link/sqlite_version.c $(SQLITE_SRC) -o $(DLDIR)/sqlite_verify.exe && test "$$($(DLDIR)/sqlite_verify.exe)" = "$(SQLITE_VERSION)" && echo version compile verified > $(DLDIR)/sqlite.verify.log; fi
 	echo $(SQLITE_URL) > $@
 
 diagrams:
