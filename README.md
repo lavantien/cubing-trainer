@@ -62,7 +62,7 @@ docs/diagrams/*.mmd  docs/diagrams/*.png (generated)  docs/reviews/*.md
 src/config/config.h config.c
 src/engine/cube.h cube.c notation.h notation.c transform.h transform.c geometry.h geometry.c geometry_sq1.h geometry_sq1.c geometry_clock.h geometry_clock.c
 src/render/renderer.h renderer.c anim.h anim.c
-src/ui/ui.h widgets.h widgets.c screen_menu.c screen_cards.c screen_review.c screen_settings.c screen_stats.c
+src/ui/ui.h widgets.h widgets.c screen_menu.c screen_trainer.c screen_cards.c screen_review.c screen_settings.c screen_stats.c
 src/storage/db.h db.c migrate.c repo_cards.c repo_reviews.c repo_settings.c repo_stats.c repo_algs.c
 src/srs/fsrs.h fsrs.c
 src/trainer/session.h session.c cfop.h cfop.c selector.h selector.c
