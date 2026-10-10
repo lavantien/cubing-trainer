@@ -169,6 +169,7 @@ ct_config ct_config_defaults(void) {
     memcpy(c.gen.finger_cost, ct_finger_defaults, sizeof c.gen.finger_cost);
     c.gen.setup_bfs_depth = CT_GEN_SETUP_BFS_DEPTH;
     c.gen.fallback_depth = CT_GEN_FALLBACK_DEPTH;
+    c.gen.candidate_max = CT_GEN_CANDIDATE_MAX;
     c.gen.straggler_depth = CT_GEN_STRAGGLER_DEPTH;
     c.anim.move_seconds = CT_ANIM_MOVE_SECONDS;
     c.anim.ease = CT_EASE_CUBIC_IN_OUT;
@@ -274,6 +275,9 @@ int ct_config_set(ct_config *cfg, const char *key, const char *value) {
     }
     if (strcmp(key, "gen.fallback_depth") == 0) {
         return assign_long_lo(&cfg->gen.fallback_depth, value, CT_MIN_DEPTH);
+    }
+    if (strcmp(key, "gen.candidate_max") == 0) {
+        return assign_long_lo(&cfg->gen.candidate_max, value, CT_MIN_DEPTH);
     }
     if (strcmp(key, "gen.straggler_depth") == 0) {
         return assign_long_lo(&cfg->gen.straggler_depth, value, CT_MIN_DEPTH);
