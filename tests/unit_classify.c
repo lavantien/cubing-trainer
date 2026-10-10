@@ -681,3 +681,158 @@ CT_SUITE(unit_classify_special) {
     }
     CT_ASSERT_EQ(r.cls, CT_CLS_TWIST);
 }
+
+CT_SUITE(unit_classify_gates) {
+    static const char *corner_cycle_alg = "L F R' F' L' F R F'";
+    static const char *edge_cycle_alg = "R2 U' R' U' R U R U R U' R";
+    static const char *parity_alg = "R U R' U' R' F R2 U' R' U' R U R' F'";
+    static const char *flip_alg = "M' U M' U M' U2 M U M U M U2";
+    static const char *twist_alg = "R D' R' D R D' R' D U D' R D R' D' R D R' U'";
+    static const char *default_rationale = "no commutator, parity, flip, or twist structure matched";
+
+    ct_classify_result r;
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify_alg("", &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_UNKNOWN);
+    CT_ASSERT_STR_EQ(r.label, "unknown");
+    CT_ASSERT_STR_EQ(r.rationale, "empty sequence");
+    CT_ASSERT_EQ(r.moves, 0);
+
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify_alg("R R'", &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_UNKNOWN);
+    CT_ASSERT_EQ(r.moves, 0);
+    CT_ASSERT_EQ(r.qtm, 0);
+    CT_ASSERT_STR_EQ(r.rationale, default_rationale);
+
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify_alg("R", &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_UNKNOWN);
+    CT_ASSERT_EQ(r.moves, 1);
+    CT_ASSERT_EQ(r.qtm, 1);
+    CT_ASSERT_STR_EQ(r.rationale, default_rationale);
+
+    CT_ASSERT_EQ(ct_classify_alg("Q7", &r), CT_NOTATION_E_TOKEN);
+
+    ct_move big[CT_CLASSIFY_MOVES_MAX];
+    for (int i = 0; i < CT_CLASSIFY_MOVES_MAX; i++) {
+        big[i].face = i % 2 == 0 ? CT_FACE_R : CT_FACE_U;
+        big[i].depth_from = 1;
+        big[i].depth_to = 1;
+        big[i].quarter = 1;
+    }
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify(big, CT_CLASSIFY_MOVES_MAX, &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_UNKNOWN);
+    CT_ASSERT_EQ(r.moves, CT_CLASSIFY_MOVES_MAX);
+    CT_ASSERT_EQ(r.qtm, CT_CLASSIFY_MOVES_MAX);
+
+    ct_move over[CT_CLASSIFY_MOVES_MAX + 1];
+    for (int i = 0; i < CT_CLASSIFY_MOVES_MAX + 1; i++) {
+        over[i].face = CT_FACE_R;
+        over[i].depth_from = 1;
+        over[i].depth_to = 1;
+        over[i].quarter = 1;
+    }
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify(over, CT_CLASSIFY_MOVES_MAX + 1, &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_UNKNOWN);
+    CT_ASSERT_EQ(r.moves, 0);
+    CT_ASSERT_EQ(r.qtm, 0);
+    CT_ASSERT_STR_EQ(r.rationale, "sequence longer than the classify bound");
+
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify_alg("R2 S' R2 S", &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_HALF_SLICE_PLANE);
+    CT_ASSERT_EQ(r.interchange_len, 1);
+    CT_ASSERT_EQ(r.insertion_len, 1);
+    CT_ASSERT(!r.insert_first);
+
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify_alg("U M' U2 M U", &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_SP5);
+    CT_ASSERT_EQ(r.interchange_len, 1);
+    CT_ASSERT_EQ(r.insertion_len, 1);
+    CT_ASSERT(!r.insert_first);
+
+    ct_move seq[TEST_ALG_MAX];
+    int len = test_parse(parity_alg, seq);
+    CT_ASSERT(len > 0);
+    uint8_t state[TEST_CELLS];
+    test_simulate(seq, len, state);
+    CT_ASSERT(test_is_parity(state));
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify(seq, len, &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_PARITY);
+    CT_ASSERT_STR_EQ(r.rationale,
+                     "parity: one corner pair and one edge pair swapped with orientation preserved");
+
+    char rotated[TEST_FIELD_MAX];
+    snprintf(rotated, sizeof rotated, "y %s", parity_alg);
+    len = test_parse(rotated, seq);
+    CT_ASSERT(len > 0);
+    test_simulate(seq, len, state);
+    CT_ASSERT(!test_is_parity(state));
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify_alg(rotated, &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_UNKNOWN);
+
+    char composite[TEST_FIELD_MAX];
+    snprintf(composite, sizeof composite, "%s %s", corner_cycle_alg, edge_cycle_alg);
+    len = test_parse(composite, seq);
+    CT_ASSERT(len > 0);
+    test_simulate(seq, len, state);
+    CT_ASSERT(!test_is_parity(state));
+    CT_ASSERT(!test_is_flip(state));
+    CT_ASSERT(!test_is_twist(state));
+    int dest[TEST_CELLS];
+    test_dest_map(state, dest);
+    int corner_moved = 0;
+    int edge_moved = 0;
+    for (int s = 0; s < CT_TARGET_STICKERS; s++) {
+        corner_moved +=
+            dest[test_sticker_compact(CT_ORBIT_CORNER, s)] != test_sticker_compact(CT_ORBIT_CORNER, s);
+        edge_moved +=
+            dest[test_sticker_compact(CT_ORBIT_EDGE, s)] != test_sticker_compact(CT_ORBIT_EDGE, s);
+    }
+    CT_ASSERT_EQ(corner_moved, 3 * CT_TARGET_CORNER_STICKERS_PER_PIECE);
+    CT_ASSERT_EQ(edge_moved, 3 * CT_TARGET_EDGE_STICKERS_PER_PIECE);
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify_alg(composite, &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_UNKNOWN);
+
+    len = test_parse(flip_alg, seq);
+    CT_ASSERT(len > 0);
+    test_simulate(seq, len, state);
+    CT_ASSERT(test_is_flip(state));
+    test_dest_map(state, dest);
+    int flipped_stickers = 0;
+    for (int s = 0; s < CT_TARGET_STICKERS; s++) {
+        flipped_stickers +=
+            dest[test_sticker_compact(CT_ORBIT_EDGE, s)] != test_sticker_compact(CT_ORBIT_EDGE, s);
+    }
+    char want[TEST_FIELD_MAX];
+    snprintf(want, sizeof want, "flip: %d edge pieces flipped in place",
+             flipped_stickers / CT_TARGET_EDGE_STICKERS_PER_PIECE);
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify(seq, len, &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_FLIP);
+    CT_ASSERT_STR_EQ(r.rationale, want);
+
+    len = test_parse(twist_alg, seq);
+    CT_ASSERT(len > 0);
+    test_simulate(seq, len, state);
+    CT_ASSERT(test_is_twist(state));
+    test_dest_map(state, dest);
+    int twisted_stickers = 0;
+    for (int s = 0; s < CT_TARGET_STICKERS; s++) {
+        twisted_stickers += dest[test_sticker_compact(CT_ORBIT_CORNER, s)] !=
+                            test_sticker_compact(CT_ORBIT_CORNER, s);
+    }
+    snprintf(want, sizeof want, "twist: %d corner pieces twisted in place",
+             twisted_stickers / CT_TARGET_CORNER_STICKERS_PER_PIECE);
+    memset(&r, 0, sizeof r);
+    CT_ASSERT_EQ(ct_classify(seq, len, &r), CT_CLASSIFY_OK);
+    CT_ASSERT_EQ(r.cls, CT_CLS_TWIST);
+    CT_ASSERT_STR_EQ(r.rationale, want);
+}

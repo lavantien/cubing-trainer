@@ -622,6 +622,7 @@ CT_SUITE(unit_synth_stress) {
     ct_sfc64 rng;
     ct_sfc64_init(&rng, 0xC0FFEE);
     ct_config cfg = ct_config_defaults();
+    CT_ASSERT(ct_synth_init() > 0);
     int size = ct_synth_table_size();
     CT_ASSERT(size > 0);
     int bad = 0;
@@ -676,4 +677,62 @@ CT_SUITE(unit_synth_stress) {
             CT_ASSERT(test_case_solved(CT_ORBIT_CORNER, 0, 1, 2, res.seq, res.len));
         }
     }
+}
+
+CT_SUITE(unit_synth_gates) {
+    CT_ASSERT(ct_synth_init() > 0);
+    CT_ASSERT_EQ(ct_synth_table_size(), 4464);
+
+    int key[CT_SYNTH_KEY_FIELDS];
+    ct_move seq[CT_SYNTH_TPL_MAX];
+    CT_ASSERT_EQ(ct_synth_table_entry(-1, key, seq, CT_SYNTH_TPL_MAX), -1);
+    CT_ASSERT_EQ(ct_synth_table_entry(ct_synth_table_size(), key, seq, CT_SYNTH_TPL_MAX), -1);
+    CT_ASSERT_EQ(ct_synth_table_entry(0, key, seq, CT_SYNTH_TPL_MAX), 8);
+    CT_ASSERT_EQ(key[0], 1);
+    CT_ASSERT_EQ(key[1], 3);
+    CT_ASSERT_EQ(key[2], 46);
+    CT_ASSERT_EQ(key[3], 1);
+    static const int want_face[8] = {1, 0, 2, 0, 1, 0, 2, 0};
+    static const int want_from[8] = {2, 1, 1, 1, 2, 1, 1, 1};
+    static const int want_to[8] = {2, 1, 1, 1, 2, 1, 1, 1};
+    static const int want_quarter[8] = {2, 3, 2, 1, 2, 3, 2, 1};
+    for (int i = 0; i < 8; i++) {
+        CT_ASSERT_EQ(seq[i].face, want_face[i]);
+        CT_ASSERT_EQ(seq[i].depth_from, want_from[i]);
+        CT_ASSERT_EQ(seq[i].depth_to, want_to[i]);
+        CT_ASSERT_EQ(seq[i].quarter, want_quarter[i]);
+    }
+    CT_ASSERT_EQ(ct_synth_table_entry(2, key, seq, CT_SYNTH_TPL_MAX), 8);
+    CT_ASSERT_EQ(key[0], 1);
+    CT_ASSERT_EQ(key[1], 3);
+    CT_ASSERT_EQ(key[2], 46);
+    CT_ASSERT_EQ(key[3], 0);
+
+    ct_config direct_only = ct_config_defaults();
+    direct_only.gen.setup_bfs_depth = 0;
+    direct_only.gen.fallback_depth = 0;
+    ct_synth_result res;
+    memset(&res, 0, sizeof res);
+    CT_ASSERT_EQ(ct_synth_target(CT_ORBIT_EDGE, 6, 2, 0, &direct_only, &res), 0);
+    CT_ASSERT(res.found);
+    CT_ASSERT(!res.used_setup);
+    CT_ASSERT(!res.used_fallback);
+    CT_ASSERT(test_case_solved(CT_ORBIT_EDGE, 6, 2, 0, res.seq, res.len));
+    memset(&res, 0, sizeof res);
+    CT_ASSERT_EQ(ct_synth_target(CT_ORBIT_EDGE, 2, 0, 4, &direct_only, &res), 0);
+    CT_ASSERT(!res.found);
+    CT_ASSERT_EQ(res.len, 0);
+
+    ct_config wide = ct_config_defaults();
+    wide.gen.preferred_moves =
+        CT_MOVE_BIT_U | CT_MOVE_BIT_D | CT_MOVE_BIT_L | CT_MOVE_BIT_R | CT_MOVE_BIT_F |
+        CT_MOVE_BIT_B;
+    memset(&res, 0, sizeof res);
+    CT_ASSERT_EQ(ct_synth_target(CT_ORBIT_CORNER, 0, 1, 6, &wide, &res), 0);
+    CT_ASSERT(res.found);
+    CT_ASSERT(test_case_solved(CT_ORBIT_CORNER, 0, 1, 6, res.seq, res.len));
+    memset(&res, 0, sizeof res);
+    CT_ASSERT_EQ(ct_synth_target(CT_ORBIT_EDGE, 2, 1, 4, &wide, &res), 0);
+    CT_ASSERT(res.found);
+    CT_ASSERT(test_case_solved(CT_ORBIT_EDGE, 2, 1, 4, res.seq, res.len));
 }
