@@ -85,12 +85,32 @@ CT_SUITE(alg_hash_mask_differs) {
     CT_ASSERT(strcmp(a, b) != 0);
 }
 
-CT_SUITE(alg_hash_weight_differs) {
+CT_SUITE(alg_hash_fsrs_inert) {
     ct_config cfg = ct_config_defaults();
     char a[CT_ALG_HASH_HEX_MAX];
     char b[CT_ALG_HASH_HEX_MAX];
     ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, a);
     cfg.fsrs.w[3] += 0.5;
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, b);
+    CT_ASSERT_STR_EQ(a, b);
+}
+
+CT_SUITE(alg_hash_penalty_differs) {
+    ct_config cfg = ct_config_defaults();
+    char a[CT_ALG_HASH_HEX_MAX];
+    char b[CT_ALG_HASH_HEX_MAX];
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, a);
+    cfg.gen.penalty[4] += 1.0;
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, b);
+    CT_ASSERT(strcmp(a, b) != 0);
+}
+
+CT_SUITE(alg_hash_finger_differs) {
+    ct_config cfg = ct_config_defaults();
+    char a[CT_ALG_HASH_HEX_MAX];
+    char b[CT_ALG_HASH_HEX_MAX];
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, a);
+    cfg.gen.finger_cost[2][CT_FINGER_DIR_CCW] += 0.25;
     ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, b);
     CT_ASSERT(strcmp(a, b) != 0);
 }
@@ -118,9 +138,12 @@ CT_SUITE(alg_hash_factor_differs) {
 CT_SUITE(alg_hash_format_pinned) {
     ct_config cfg = ct_config_defaults();
     static const char canon[] =
-        "7|0|b|0.402550,1.183850,3.173000,15.691050,7.194900,0.534500,1.460400,0.004600,1.545750,"
-        "0.119200,1.019250,1.939500,0.110000,0.296050,2.269800,0.231500,2.989800,0.516550,0."
-        "662100|4|5|6|1.000000|2.000000|1.500000|0.500000";
+        "7|0|b|"
+        "0.000000,0.000000,2.000000,0.000000,2.000000,2.000000,2.000000,2.000000,2.000000,2.000000,"
+        "2.000000,2.000000|"
+        "0.200000,0.200000,0.200000,0.200000,0.400000,0.400000,0.400000,0.400000,0.800000,0.800000,"
+        "0.800000,0.800000|"
+        "4|5|6|1.000000|2.000000|1.500000|0.500000";
     char want[CT_SHA_HEX_MAX];
     ct_sha256(canon, (unsigned)(sizeof canon - 1), want);
     char got[CT_ALG_HASH_HEX_MAX];
@@ -261,6 +284,115 @@ CT_SUITE(alg_stale) {
     CT_ASSERT_EQ(ids[0], j1);
     CT_ASSERT_EQ(ids[1], j2);
     CT_ASSERT_EQ(ct_repo_alg_stale(db, "h1", ids, 0), 0);
+    ct_db_close(db);
+}
+
+CT_SUITE(alg_drop) {
+    sqlite3 *db = algs_db();
+    put_pair(db, "h1", CT_ORBIT_CORNER, "UB");
+    put_pair(db, "h1", CT_ORBIT_EDGE, "UF");
+    put_pair(db, "h2", CT_ORBIT_CORNER, "UB");
+    put_pair(db, "h2", CT_ORBIT_EDGE, "UF");
+    put_pair(db, "h2", CT_ORBIT_CORNER, "AB");
+
+    CT_ASSERT_EQ(ct_repo_alg_drop(db, "h2"), 3);
+    CT_ASSERT_EQ(ct_repo_alg_count(db, "h2"), 0);
+    CT_ASSERT_EQ(ct_repo_alg_count(db, "h1"), 2);
+    int ids[8];
+    CT_ASSERT_EQ(ct_repo_alg_stale(db, "h1", ids, 8), 0);
+
+    CT_ASSERT_EQ(ct_repo_alg_drop(db, "h2"), 0);
+    CT_ASSERT_EQ(ct_repo_alg_drop(db, "h9"), 0);
+
+    put_pair(db, "h3", CT_ORBIT_CORNER, "UB");
+    put_pair(db, "h3", CT_ORBIT_EDGE, "UF");
+    CT_ASSERT_EQ(ct_repo_alg_drop_orbit(db, "h3", CT_ORBIT_EDGE), 1);
+    CT_ASSERT_EQ(ct_repo_alg_count(db, "h3"), 1);
+    ct_generated_alg left;
+    memset(&left, 0, sizeof left);
+    CT_ASSERT_EQ(ct_repo_alg_get(db, CT_ORBIT_CORNER, "UB", CT_BUFFER_FIXED, 0, "h3", &left),
+                 CT_REPO_OK);
+    CT_ASSERT_EQ(ct_repo_alg_get(db, CT_ORBIT_EDGE, "UF", CT_BUFFER_FIXED, 0, "h3", &left),
+                 CT_REPO_MISSING);
+    CT_ASSERT_EQ(ct_repo_alg_drop_orbit(db, "h3", CT_ORBIT_EDGE), 0);
+    CT_ASSERT_EQ(ct_repo_alg_drop_orbit(db, "h4", CT_ORBIT_CORNER), 0);
+
+    char big_hash[CT_ALG_HASH_HEX_MAX + 1];
+    memset(big_hash, 'a', sizeof big_hash - 1);
+    big_hash[sizeof big_hash - 1] = '\0';
+    CT_ASSERT_EQ(ct_repo_alg_drop(NULL, "h1"), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_alg_drop(db, NULL), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_alg_drop(db, ""), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_alg_drop(db, big_hash), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_alg_drop_orbit(NULL, "h1", CT_ORBIT_CORNER), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_alg_drop_orbit(db, NULL, CT_ORBIT_CORNER), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_alg_drop_orbit(db, big_hash, CT_ORBIT_CORNER), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_alg_count(db, "h1"), 2);
+    ct_db_close(db);
+}
+
+CT_SUITE(alg_text_bounds) {
+    sqlite3 *db = algs_db();
+    ct_generated_alg full = base_alg("UB");
+    memset(full.sequence, 'R', CT_ALG_SEQ_MAX - 1);
+    full.sequence[CT_ALG_SEQ_MAX - 1] = '\0';
+    memset(full.setup, 'U', CT_ALG_SETUP_MAX - 1);
+    full.setup[CT_ALG_SETUP_MAX - 1] = '\0';
+    memset(full.interchange, 'D', CT_ALG_INTER_MAX - 1);
+    full.interchange[CT_ALG_INTER_MAX - 1] = '\0';
+    memset(full.insertion, 'F', CT_ALG_INSERT_MAX - 1);
+    full.insertion[CT_ALG_INSERT_MAX - 1] = '\0';
+    memset(full.score_parts_json, 'j', CT_ALG_PARTS_MAX - 1);
+    full.score_parts_json[CT_ALG_PARTS_MAX - 1] = '\0';
+    CT_ASSERT_EQ(ct_repo_alg_put(db, &full, "h1"), CT_REPO_OK);
+    ct_generated_alg back;
+    memset(&back, 0, sizeof back);
+    CT_ASSERT_EQ(ct_repo_alg_get(db, CT_ORBIT_CORNER, "UB", CT_BUFFER_FIXED, 0, "h1", &back),
+                 CT_REPO_OK);
+    CT_ASSERT_EQ(strlen(back.sequence), (size_t)(CT_ALG_SEQ_MAX - 1));
+    CT_ASSERT_EQ(strlen(back.setup), (size_t)(CT_ALG_SETUP_MAX - 1));
+    CT_ASSERT_EQ(strlen(back.interchange), (size_t)(CT_ALG_INTER_MAX - 1));
+    CT_ASSERT_EQ(strlen(back.insertion), (size_t)(CT_ALG_INSERT_MAX - 1));
+    CT_ASSERT_EQ(strlen(back.score_parts_json), (size_t)(CT_ALG_PARTS_MAX - 1));
+    CT_ASSERT_STR_EQ(back.sequence, full.sequence);
+
+    ct_generated_alg unterm = base_alg("UF");
+    memset(unterm.sequence, 'R', sizeof unterm.sequence);
+    CT_ASSERT_EQ(ct_repo_alg_put(db, &unterm, "h1"), CT_REPO_ERR_ARG);
+    unterm = base_alg("UR");
+    memset(unterm.setup, 'U', sizeof unterm.setup);
+    CT_ASSERT_EQ(ct_repo_alg_put(db, &unterm, "h1"), CT_REPO_ERR_ARG);
+    unterm = base_alg("UL");
+    memset(unterm.interchange, 'D', sizeof unterm.interchange);
+    CT_ASSERT_EQ(ct_repo_alg_put(db, &unterm, "h1"), CT_REPO_ERR_ARG);
+    unterm = base_alg("UB2");
+    memset(unterm.insertion, 'F', sizeof unterm.insertion);
+    CT_ASSERT_EQ(ct_repo_alg_put(db, &unterm, "h1"), CT_REPO_ERR_ARG);
+    unterm = base_alg("UB3");
+    memset(unterm.score_parts_json, 'j', sizeof unterm.score_parts_json);
+    CT_ASSERT_EQ(ct_repo_alg_put(db, &unterm, "h1"), CT_REPO_ERR_ARG);
+    unterm = base_alg("UB4");
+    memset(unterm.target_pair, 'c', sizeof unterm.target_pair);
+    CT_ASSERT_EQ(ct_repo_alg_put(db, &unterm, "h1"), CT_REPO_ERR_ARG);
+
+    ct_generated_alg empty_seq = base_alg("UB5");
+    empty_seq.sequence[0] = '\0';
+    CT_ASSERT_EQ(ct_repo_alg_put(db, &empty_seq, "h1"), CT_REPO_ERR_ARG);
+
+    ct_generated_alg optional_empty = base_alg("UB6");
+    optional_empty.setup[0] = '\0';
+    optional_empty.interchange[0] = '\0';
+    optional_empty.insertion[0] = '\0';
+    optional_empty.score_parts_json[0] = '\0';
+    CT_ASSERT_EQ(ct_repo_alg_put(db, &optional_empty, "h1"), CT_REPO_OK);
+    memset(&back, 0, sizeof back);
+    CT_ASSERT_EQ(ct_repo_alg_get(db, CT_ORBIT_CORNER, "UB6", CT_BUFFER_FIXED, 0, "h1", &back),
+                 CT_REPO_OK);
+    CT_ASSERT_EQ(back.setup[0], '\0');
+    CT_ASSERT_EQ(back.interchange[0], '\0');
+    CT_ASSERT_EQ(back.insertion[0], '\0');
+    CT_ASSERT_EQ(back.score_parts_json[0], '\0');
+    CT_ASSERT_EQ(ct_repo_alg_count(db, "h1"), 2);
     ct_db_close(db);
 }
 

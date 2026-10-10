@@ -25,6 +25,9 @@ static const char CT_SQL_ALG_LIST[] =
     " FROM generated_alg WHERE params_hash = ? AND orbit = ? ORDER BY target_pair";
 static const char CT_SQL_ALG_STALE[] =
     "SELECT id FROM generated_alg WHERE params_hash <> ? ORDER BY id";
+static const char CT_SQL_ALG_DROP[] = "DELETE FROM generated_alg WHERE params_hash = ?";
+static const char CT_SQL_ALG_DROP_ORBIT[] =
+    "DELETE FROM generated_alg WHERE params_hash = ? AND orbit = ?";
 
 typedef struct ct_alg_bind {
     sqlite3_stmt *st;
@@ -110,8 +113,23 @@ static void ct_alg_canonical(const ct_config *cfg, int scheme_id, ct_buffer_mode
         return;
     }
     size_t used = (size_t)n;
-    for (int i = 0; i < CT_FSRS_WEIGHT_COUNT && used < cap; i++) {
-        n = snprintf(out + used, cap - used, i == 0 ? "%.6f" : ",%.6f", cfg->fsrs.w[i]);
+    for (int i = 0; i < CT_FACE_COUNT && used < cap; i++) {
+        n = snprintf(out + used, cap - used, i == 0 ? "%.6f" : ",%.6f", cfg->gen.penalty[i]);
+        if (n <= 0)
+            break;
+        used += (size_t)n;
+    }
+    if (used < cap) {
+        n = snprintf(out + used, cap - used, "|");
+        if (n > 0)
+            used += (size_t)n;
+    }
+    int finger_total = CT_FINGER_FACE_COUNT * CT_FINGER_DIR_COUNT;
+    for (int k = 0; k < finger_total && used < cap; k++) {
+        int face = k / CT_FINGER_DIR_COUNT;
+        int dir = k % CT_FINGER_DIR_COUNT;
+        n = snprintf(out + used, cap - used, k == 0 ? "%.6f" : ",%.6f",
+                     cfg->gen.finger_cost[face][dir]);
         if (n <= 0)
             break;
         used += (size_t)n;
@@ -128,10 +146,30 @@ static void ct_alg_canonical(const ct_config *cfg, int scheme_id, ct_buffer_mode
         out[cap - 1] = '\0';
 }
 
+static int ct_alg_field_ok(const char *s, unsigned max) {
+    return memchr(s, '\0', max) != NULL;
+}
+
+static int ct_alg_row_valid(const ct_generated_alg *a) {
+    if (!ct_repo_text_ok(a->target_pair, CT_ALG_PAIR_MAX))
+        return 0;
+    if (!ct_repo_text_ok(a->sequence, CT_ALG_SEQ_MAX))
+        return 0;
+    if (!ct_alg_field_ok(a->setup, CT_ALG_SETUP_MAX))
+        return 0;
+    if (!ct_alg_field_ok(a->interchange, CT_ALG_INTER_MAX))
+        return 0;
+    if (!ct_alg_field_ok(a->insertion, CT_ALG_INSERT_MAX))
+        return 0;
+    if (!ct_alg_field_ok(a->score_parts_json, CT_ALG_PARTS_MAX))
+        return 0;
+    return 1;
+}
+
 int ct_repo_alg_put(sqlite3 *db, const ct_generated_alg *a, const char *params_hash) {
     if (db == NULL)
         return CT_REPO_ERR_ARG;
-    if (a == NULL || !ct_repo_text_ok(a->target_pair, CT_ALG_PAIR_MAX))
+    if (a == NULL || !ct_alg_row_valid(a))
         return CT_REPO_ERR_ARG;
     if (!ct_repo_text_ok(params_hash, CT_ALG_HASH_HEX_MAX))
         return CT_REPO_ERR_ARG;
@@ -264,6 +302,37 @@ int ct_repo_alg_stale(sqlite3 *db, const char *params_hash, int *out_ids, int ca
     if (step != SQLITE_ROW && step != SQLITE_DONE)
         return CT_REPO_ERR_DB;
     return n;
+}
+
+int ct_repo_alg_drop(sqlite3 *db, const char *params_hash) {
+    if (db == NULL || !ct_repo_text_ok(params_hash, CT_ALG_HASH_HEX_MAX))
+        return CT_REPO_ERR_ARG;
+    sqlite3_stmt *st = NULL;
+    if (sqlite3_prepare_v2(db, CT_SQL_ALG_DROP, -1, &st, NULL) != SQLITE_OK) {
+        sqlite3_finalize(st);
+        return CT_REPO_ERR_DB;
+    }
+    sqlite3_bind_text(st, 1, params_hash, -1, SQLITE_STATIC);
+    int step = sqlite3_step(st);
+    int dropped = step == SQLITE_DONE ? sqlite3_changes(db) : CT_REPO_ERR_DB;
+    sqlite3_finalize(st);
+    return dropped;
+}
+
+int ct_repo_alg_drop_orbit(sqlite3 *db, const char *params_hash, int orbit) {
+    if (db == NULL || !ct_repo_text_ok(params_hash, CT_ALG_HASH_HEX_MAX))
+        return CT_REPO_ERR_ARG;
+    sqlite3_stmt *st = NULL;
+    if (sqlite3_prepare_v2(db, CT_SQL_ALG_DROP_ORBIT, -1, &st, NULL) != SQLITE_OK) {
+        sqlite3_finalize(st);
+        return CT_REPO_ERR_DB;
+    }
+    sqlite3_bind_text(st, 1, params_hash, -1, SQLITE_STATIC);
+    sqlite3_bind_int(st, 2, orbit);
+    int step = sqlite3_step(st);
+    int dropped = step == SQLITE_DONE ? sqlite3_changes(db) : CT_REPO_ERR_DB;
+    sqlite3_finalize(st);
+    return dropped;
 }
 
 void ct_params_hash(const ct_config *cfg, int scheme_id, ct_buffer_mode mode,

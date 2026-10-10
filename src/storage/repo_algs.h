@@ -48,6 +48,8 @@ int ct_repo_alg_count(sqlite3 *db, const char *params_hash);
 int ct_repo_alg_list(sqlite3 *db, const char *params_hash, int orbit, ct_generated_alg *out,
                      int cap);
 int ct_repo_alg_stale(sqlite3 *db, const char *params_hash, int *out_ids, int cap);
+int ct_repo_alg_drop(sqlite3 *db, const char *params_hash);
+int ct_repo_alg_drop_orbit(sqlite3 *db, const char *params_hash, int orbit);
 void ct_params_hash(const ct_config *cfg, int scheme_id, ct_buffer_mode mode,
                     char hex_out[CT_ALG_HASH_HEX_MAX]);
 
