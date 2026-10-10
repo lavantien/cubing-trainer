@@ -368,6 +368,23 @@ CT_SUITE(unit_interchange) {
         CT_ASSERT(memcmp(perm, other, 54) == 0);
     }
     ct_move ok = {CT_FACE_R, 1, 1, 1};
+    uint8_t pad[CT_TEST_PERM_CELLS];
+    memset(pad, 0, sizeof pad);
+    CT_ASSERT_EQ(ct_sticker_perm(ok, 6, pad), 0);
+    bool active_bijection = true;
+    bool seen6[6 * 6 * 6] = {false};
+    for (int i = 0; i < 6 * 6 * 6; i++) {
+        if (pad[i] >= 6 * 6 * 6 || seen6[pad[i]]) {
+            active_bijection = false;
+        }
+        if (pad[i] < 6 * 6 * 6) {
+            seen6[pad[i]] = true;
+        }
+    }
+    CT_ASSERT(active_bijection);
+    for (int i = 6 * 6 * 6; i < CT_TEST_PERM_CELLS; i++) {
+        CT_ASSERT_EQ(pad[i], CT_INTERCHANGE_PERM_UNSET);
+    }
     CT_ASSERT(ct_sticker_perm((ct_move){CT_FACE_R, 1, 1, 0}, 3, other) < 0);
     CT_ASSERT(ct_sticker_perm((ct_move){CT_FACE_R, 1, 1, 4}, 3, other) < 0);
     CT_ASSERT(ct_sticker_perm((ct_move){6, 1, 1, 1}, 3, other) < 0);
@@ -423,6 +440,8 @@ CT_SUITE(unit_interchange) {
     CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_CORNER, 5, 5, 3, res, 54) < 0);
     CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_CORNER, -1, 2, 3, res, 54) < 0);
     CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_CORNER, 0, CT_TARGET_STICKERS, 3, res, 54) < 0);
+    CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_CORNER, CT_TARGET_STICKERS, 2, 3, res, 54) < 0);
+    CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_CORNER, 2, -1, 3, res, 54) < 0);
     CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_EDGE, 0, -7, 3, res, 54) < 0);
     CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_CORNER, 0, 2, 2, res, 54) < 0);
     CT_ASSERT(ct_interchanges_for(CT_TARGET_ORBIT_CORNER, 0, 2, 7, res, 54) < 0);

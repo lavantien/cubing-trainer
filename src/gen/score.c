@@ -68,11 +68,13 @@ int ct_count_regrips(const ct_move *seq, int count) {
     }
     int grip[CT_SCORE_HAND_SLOTS] = {CT_SCORE_GRIP_HOME, CT_SCORE_GRIP_HOME};
     int last = CT_SCORE_HAND_RIGHT;
+    int prev = CT_CUBE_FACE_COUNT;
     int regrips = 0;
     for (int i = 0; i < count; i++) {
-        if (i > 0 && seq[i].face == seq[i - 1].face) {
+        if (seq[i].face == prev) {
             continue;
         }
+        prev = seq[i].face;
         int hand = score_hand_of_face[seq[i].face];
         if (hand == CT_SCORE_HAND_DYNAMIC) {
             hand = last;

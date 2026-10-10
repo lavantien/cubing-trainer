@@ -290,11 +290,13 @@ CT_SUITE(score_errors) {
     ct_move ok[1] = {mv(CT_FACE_R, CT_SCORE_QUARTER_CW)};
 
     CT_ASSERT_EQ(ct_count_qtm(NULL, 1), CT_SCORE_E_ARG);
+    CT_ASSERT_EQ(ct_count_qtm(ok, -1), CT_SCORE_E_ARG);
     CT_ASSERT_EQ(ct_count_qtm(bad_face_lo, 1), CT_SCORE_E_MOVE);
     CT_ASSERT_EQ(ct_count_qtm(bad_face_hi, 1), CT_SCORE_E_MOVE);
     CT_ASSERT_EQ(ct_count_qtm(bad_quarter_lo, 1), CT_SCORE_E_MOVE);
     CT_ASSERT_EQ(ct_count_qtm(bad_quarter_hi, 1), CT_SCORE_E_MOVE);
     CT_ASSERT_EQ(ct_count_regrips(NULL, 1), CT_SCORE_E_ARG);
+    CT_ASSERT_EQ(ct_count_regrips(ok, -1), CT_SCORE_E_ARG);
     CT_ASSERT_EQ(ct_count_regrips(bad_face_lo, 1), CT_SCORE_E_MOVE);
     CT_ASSERT_EQ(ct_count_regrips(bad_quarter_lo, 1), CT_SCORE_E_MOVE);
     CT_ASSERT_EQ(ct_count_regrips(bad_quarter_hi, 1), CT_SCORE_E_MOVE);
@@ -302,6 +304,7 @@ CT_SUITE(score_errors) {
     CT_ASSERT_EQ(ct_score_alg(ok, 1, NULL, &p), CT_SCORE_E_ARG);
     CT_ASSERT_EQ(ct_score_alg(ok, 1, &c, NULL), CT_SCORE_E_ARG);
     CT_ASSERT_EQ(ct_score_alg(NULL, 1, &c, &p), CT_SCORE_E_ARG);
+    CT_ASSERT_EQ(ct_score_alg(ok, -1, &c, &p), CT_SCORE_E_ARG);
     CT_ASSERT_EQ(ct_score_alg(bad_face_hi, 1, &c, &p), CT_SCORE_E_MOVE);
     CT_ASSERT_EQ(ct_score_alg(bad_quarter_lo, 1, &c, &p), CT_SCORE_E_MOVE);
     CT_ASSERT_EQ(ct_score_alg(bad_quarter_hi, 1, &c, &p), CT_SCORE_E_MOVE);
