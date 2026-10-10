@@ -241,10 +241,10 @@ CT_SUITE(e2e_run_trainer_generate) {
         "expect algcount == 1\n"
         "expect count generated_alg == 1\n"
         "expect count flashcard == 1\n"
-        "expect genalg BC sequence == \"R2 Lw D Lw' B2 Lw D' Lw' B2 R2\"\n"
-        "expect genalg BC classification == orthogonal\n"
-        "expect genalg BC qtm == 14\n"
-        "expect card 3style_corner BC alg3 == \"R2 Lw D Lw' B2 Lw D' Lw' B2 R2\"\n";
+        "expect genalg BC sequence == \"U' R2 Uw R2 Uw' F2 Uw R2 Uw' F2 R2 U\"\n"
+        "expect genalg BC classification == \"per special\"\n"
+        "expect genalg BC qtm == 18\n"
+        "expect card 3style_corner BC alg3 == \"U' R2 Uw R2 Uw' F2 Uw R2 Uw' F2 R2 U\"\n";
     CT_ASSERT_EQ(e2e_run(&app, text, err), 0);
     ct_db_close(db);
 }
