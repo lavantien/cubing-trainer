@@ -8,7 +8,7 @@
 #include "../src/trainer/selector.h"
 #include "framework.h"
 
-enum { SP_PACKS = 7, SP_METHODS = 2, SP_LISTS = 6 };
+enum { SP_PACKS = 7, SP_METHODS = 2, SP_LISTS = 6, SP_KEY_MAX = 64 };
 
 struct sp_pack {
     const char *path;
@@ -42,6 +42,10 @@ static const struct sp_pack sp_packs[SP_PACKS] = {
 CT_SUITE(selector_pack_reach) {
     for (int p = 0; p < SP_PACKS; p++) {
         const struct sp_pack *sp = &sp_packs[p];
+        sqlite3 *db = NULL;
+        ct_db_open(&db, ":memory:");
+        ct_db_migrate(db, "db/migrations");
+        CT_ASSERT_EQ(ct_pack_seed_file(db, sp->path, sp->event, sp->method, sp->stage), sp->rows);
         ct_method methods[SP_METHODS];
         int method_count = ct_selector_methods(sp->event, methods, SP_METHODS);
         CT_ASSERT(method_count >= 1 && method_count <= SP_METHODS);
@@ -52,28 +56,41 @@ CT_SUITE(selector_pack_reach) {
             }
         }
         CT_ASSERT(paired);
-        int ids[SP_LISTS];
-        ct_stage stages[SP_LISTS];
-        ct_orbit orbits[SP_LISTS];
-        int list_count = ct_selector_lists(sp->event, sp->method, ids, stages, orbits, SP_LISTS);
+        ct_selector_list lists[SP_LISTS];
+        int list_count = ct_selector_lists(sp->event, sp->method, lists, SP_LISTS);
         CT_ASSERT(list_count >= 1 && list_count <= SP_LISTS);
-        int staged = 0;
+        int list_id = -1;
         for (int i = 0; i < list_count; i++) {
-            if (stages[i] == sp->stage) {
-                staged = 1;
+            if (lists[i].stage == sp->stage) {
+                list_id = i;
             }
         }
-        CT_ASSERT(staged);
-        sqlite3 *db = NULL;
-        ct_db_open(&db, ":memory:");
-        ct_db_migrate(db, "db/migrations");
-        CT_ASSERT_EQ(ct_pack_seed_file(db, sp->path, sp->event, sp->method, sp->stage), sp->rows);
-        CT_ASSERT_EQ(ct_pack_count(db, sp->event, sp->method, sp->stage), sp->rows);
+        CT_ASSERT(list_id >= 0);
+        CT_ASSERT_EQ(lists[list_id].source, CT_SELECTOR_PACK);
+        CT_ASSERT_EQ(ct_selector_case_count(db, NULL, sp->event, sp->method, list_id), sp->rows);
         ct_pack_entry got;
         CT_ASSERT_EQ(ct_pack_get(db, sp->event, sp->method, sp->stage, sp->case_key, &got),
                      CT_PACK_OK);
         CT_ASSERT_STR_EQ(got.alg, sp->alg);
         CT_ASSERT_STR_EQ(got.source_at, "2026-10-10");
+        char key[SP_KEY_MAX];
+        for (int r = 0; r < sp->rows; r++) {
+            CT_ASSERT_EQ(
+                ct_selector_case_key(db, NULL, sp->event, sp->method, list_id, r, key, sizeof key),
+                0);
+            CT_ASSERT_EQ(strlen(key) > 0, true);
+        }
+        CT_ASSERT(ct_selector_case_key(db, NULL, sp->event, sp->method, list_id, sp->rows, key,
+                                       sizeof key) < 0);
+        ct_pack_entry sel;
+        CT_ASSERT_EQ(ct_selector_pack_case(db, sp->event, sp->method, list_id, 0, &sel), 0);
+        CT_ASSERT_EQ(
+            ct_selector_case_key(db, NULL, sp->event, sp->method, list_id, 0, key, sizeof key), 0);
+        ct_pack_entry first;
+        CT_ASSERT_EQ(ct_pack_get(db, sp->event, sp->method, sp->stage, key, &first), CT_PACK_OK);
+        CT_ASSERT_STR_EQ(sel.case_key, first.case_key);
+        CT_ASSERT_STR_EQ(sel.alg, first.alg);
+        CT_ASSERT_STR_EQ(sel.front_json, first.front_json);
         ct_db_close(db);
     }
 }

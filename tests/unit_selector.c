@@ -1,31 +1,41 @@
+#include <stdio.h>
+#include <string.h>
+
+#include <sqlite3.h>
+
 #include "../src/config/config.h"
 #include "../src/gen/targets.h"
-#include "../src/storage/repo_cards.h"
+#include "../src/packs/packs.h"
+#include "../src/packs/seed_registry.h"
+#include "../src/storage/db.h"
+#include "../src/storage/repo_settings.h"
 #include "../src/trainer/cfop.h"
 #include "../src/trainer/selector.h"
 #include "framework.h"
 
-#include <string.h>
-
 enum {
     SPEC_EVENT_COUNT = 18,
-    SPEC_METHOD_MAX = 3,
-    SPEC_CFOP_LISTS = 4,
-    SPEC_3STYLE_LISTS = 5,
-    SPEC_LBL_LISTS = 6,
-    SPEC_YAU_LISTS = 2,
-    SPEC_LBL_EVENTS = 3,
+    SPEC_PAIRS = 25,
+    SPEC_CFOP_LISTS = 3,
+    SPEC_3STYLE_CHART_LISTS = 2,
+    SPEC_SQ1_LISTS = 5,
     SPEC_ONE_LIST = 1,
+    SPEC_MAX_LISTS = SPEC_SQ1_LISTS,
+    SPEC_METHODS_MAX = 3,
     SPEC_PLL_CASES = 21,
     SPEC_OLL_CASES = 57,
     SPEC_F2L_CASES = 164,
     SPEC_CORNER_CASES = 378,
     SPEC_EDGE_CASES = 440,
+    SPEC_SEED_ROWS_TOTAL = 574,
+    SPEC_CFOP_CASES_TOTAL = 2 * (SPEC_PLL_CASES + SPEC_OLL_CASES + SPEC_F2L_CASES),
+    SPEC_CHART_CASES_TOTAL = 3 * (SPEC_CORNER_CASES + SPEC_EDGE_CASES),
     SPEC_KEY_SAMPLE = 20,
     SPEC_UNIQUE_KEYS = 50,
     SPEC_KEY_CAP = 3,
-    SPEC_LISTS_SMALL_CAP = 2,
-    SPEC_SAMPLES = 3
+    SPEC_ALT_BUFFER = 5,
+    SPEC_SEEDS_DIR_ROWS = 0,
+    SPEC_PACK_SAMPLES = 3
 };
 
 static const ct_event spec_events[SPEC_EVENT_COUNT] = {
@@ -38,62 +48,133 @@ static const ct_event spec_events[SPEC_EVENT_COUNT] = {
 static const struct {
     ct_event event;
     ct_method method;
-} spec_event_methods[] = {
-    {CT_EVENT_3X3, CT_METHOD_CFOP},      {CT_EVENT_2X2, CT_METHOD_CLL},
-    {CT_EVENT_3BLD, CT_METHOD_3STYLE},   {CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN},
-    {CT_EVENT_3BLD, CT_METHOD_M2},       {CT_EVENT_4BLD, CT_METHOD_3STYLE},
-    {CT_EVENT_4BLD, CT_METHOD_U2},       {CT_EVENT_4BLD, CT_METHOD_R2},
-    {CT_EVENT_5BLD, CT_METHOD_3STYLE},   {CT_EVENT_5BLD, CT_METHOD_U2},
-    {CT_EVENT_5BLD, CT_METHOD_R2},       {CT_EVENT_MULTI_BLD, CT_METHOD_3STYLE},
-    {CT_EVENT_OH, CT_METHOD_CFOP},       {CT_EVENT_4X4, CT_METHOD_YAU},
-    {CT_EVENT_5X5, CT_METHOD_REDUCTION}, {CT_EVENT_6X6, CT_METHOD_REDUCTION},
-    {CT_EVENT_7X7, CT_METHOD_REDUCTION}, {CT_EVENT_CLOCK, CT_METHOD_LBL},
-    {CT_EVENT_MEGAMINX, CT_METHOD_4LLL}, {CT_EVENT_PYRAMINX, CT_METHOD_L4E},
-    {CT_EVENT_PYRAMINX, CT_METHOD_LBL},  {CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE},
-    {CT_EVENT_SQUARE1, CT_METHOD_LBL},   {CT_EVENT_FTO, CT_METHOD_L4T_REDUX},
+} spec_pairs[] = {
+    {CT_EVENT_3X3, CT_METHOD_CFOP},
+    {CT_EVENT_2X2, CT_METHOD_CLL},
+    {CT_EVENT_3BLD, CT_METHOD_3STYLE},
+    {CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN},
+    {CT_EVENT_3BLD, CT_METHOD_M2},
+    {CT_EVENT_4BLD, CT_METHOD_3STYLE},
+    {CT_EVENT_4BLD, CT_METHOD_U2},
+    {CT_EVENT_4BLD, CT_METHOD_R2},
+    {CT_EVENT_5BLD, CT_METHOD_3STYLE},
+    {CT_EVENT_5BLD, CT_METHOD_U2},
+    {CT_EVENT_5BLD, CT_METHOD_R2},
+    {CT_EVENT_MULTI_BLD, CT_METHOD_3STYLE},
+    {CT_EVENT_FMC, CT_METHOD_CONCEPT},
+    {CT_EVENT_OH, CT_METHOD_CFOP},
+    {CT_EVENT_4X4, CT_METHOD_YAU},
+    {CT_EVENT_5X5, CT_METHOD_REDUCTION},
+    {CT_EVENT_6X6, CT_METHOD_REDUCTION},
+    {CT_EVENT_7X7, CT_METHOD_REDUCTION},
+    {CT_EVENT_CLOCK, CT_METHOD_LBL},
+    {CT_EVENT_MEGAMINX, CT_METHOD_4LLL},
+    {CT_EVENT_PYRAMINX, CT_METHOD_L4E},
+    {CT_EVENT_PYRAMINX, CT_METHOD_LBL},
+    {CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE},
+    {CT_EVENT_SQUARE1, CT_METHOD_LBL},
+    {CT_EVENT_FTO, CT_METHOD_L4T_REDUX},
 };
 
-static const ct_stage spec_cfop_stages[SPEC_CFOP_LISTS] = {CT_STAGE_PLL, CT_STAGE_OLL, CT_STAGE_F2L,
-                                                           CT_STAGE_CROSS};
+static const struct {
+    ct_event event;
+    ct_method method;
+    ct_stage stage;
+    ct_orbit orbit;
+    ct_selector_source source;
+} spec_lists[] = {
+    {CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_PLL, CT_ORBIT_CORNER, CT_SELECTOR_CFOP},
+    {CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_OLL, CT_ORBIT_CORNER, CT_SELECTOR_CFOP},
+    {CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L, CT_ORBIT_CORNER, CT_SELECTOR_CFOP},
+    {CT_EVENT_OH, CT_METHOD_CFOP, CT_STAGE_PLL, CT_ORBIT_CORNER, CT_SELECTOR_CFOP},
+    {CT_EVENT_OH, CT_METHOD_CFOP, CT_STAGE_OLL, CT_ORBIT_CORNER, CT_SELECTOR_CFOP},
+    {CT_EVENT_OH, CT_METHOD_CFOP, CT_STAGE_F2L, CT_ORBIT_CORNER, CT_SELECTOR_CFOP},
+    {CT_EVENT_2X2, CT_METHOD_CLL, CT_STAGE_CLL, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_3BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_CHART},
+    {CT_EVENT_3BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_EDGE, CT_SELECTOR_CHART},
+    {CT_EVENT_4BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_CHART},
+    {CT_EVENT_4BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_EDGE, CT_SELECTOR_CHART},
+    {CT_EVENT_5BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_CHART},
+    {CT_EVENT_5BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_EDGE, CT_SELECTOR_CHART},
+    {CT_EVENT_MULTI_BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT, CT_ORBIT_EDGE, CT_SELECTOR_PACK},
+    {CT_EVENT_4BLD, CT_METHOD_U2, CT_STAGE_CONCEPT, CT_ORBIT_CENTER, CT_SELECTOR_PACK},
+    {CT_EVENT_4BLD, CT_METHOD_R2, CT_STAGE_CONCEPT, CT_ORBIT_WING, CT_SELECTOR_PACK},
+    {CT_EVENT_5BLD, CT_METHOD_U2, CT_STAGE_CONCEPT, CT_ORBIT_CENTER, CT_SELECTOR_PACK},
+    {CT_EVENT_5BLD, CT_METHOD_R2, CT_STAGE_CONCEPT, CT_ORBIT_WING, CT_SELECTOR_PACK},
+    {CT_EVENT_4X4, CT_METHOD_YAU, CT_STAGE_PARITY, CT_ORBIT_WING, CT_SELECTOR_PACK},
+    {CT_EVENT_5X5, CT_METHOD_REDUCTION, CT_STAGE_PARITY, CT_ORBIT_WING, CT_SELECTOR_PACK},
+    {CT_EVENT_6X6, CT_METHOD_REDUCTION, CT_STAGE_PARITY, CT_ORBIT_WING, CT_SELECTOR_PACK},
+    {CT_EVENT_7X7, CT_METHOD_REDUCTION, CT_STAGE_PARITY, CT_ORBIT_WING, CT_SELECTOR_PACK},
+    {CT_EVENT_CLOCK, CT_METHOD_LBL, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_PYRAMINX, CT_METHOD_LBL, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_PYRAMINX, CT_METHOD_L4E, CT_STAGE_L4E, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE, CT_STAGE_SARAH, CT_ORBIT_CORNER,
+     CT_SELECTOR_PACK},
+    {CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_CUBESHAPE, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_CO, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_EO, CT_ORBIT_EDGE, CT_SELECTOR_PACK},
+    {CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_CP, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_EP, CT_ORBIT_EDGE, CT_SELECTOR_PACK},
+    {CT_EVENT_MEGAMINX, CT_METHOD_4LLL, CT_STAGE_4LLL, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_FTO, CT_METHOD_L4T_REDUX, CT_STAGE_L4T, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_FMC, CT_METHOD_CONCEPT, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+};
 
-static const int spec_cfop_counts[SPEC_CFOP_LISTS] = {SPEC_PLL_CASES, SPEC_OLL_CASES,
-                                                      SPEC_F2L_CASES, 0};
-
-static const ct_stage spec_3style_stages[SPEC_3STYLE_LISTS] = {
-    CT_STAGE_CONCEPT, CT_STAGE_CONCEPT, CT_STAGE_PARITY, CT_STAGE_CONCEPT, CT_STAGE_CONCEPT};
-
-static const ct_orbit spec_3style_orbits[SPEC_3STYLE_LISTS] = {
-    CT_ORBIT_CORNER, CT_ORBIT_EDGE, CT_ORBIT_CORNER, CT_ORBIT_EDGE, CT_ORBIT_CORNER};
-
-static int spec_method_count(ct_event ev) {
-    int n = 0;
-    for (unsigned long i = 0; i < sizeof spec_event_methods / sizeof spec_event_methods[0]; i++) {
-        if (spec_event_methods[i].event == ev) {
-            n++;
-        }
-    }
-    return n;
+static sqlite3 *spec_seeded_db(void) {
+    sqlite3 *db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT_EQ(ct_db_migrate(db, "db/migrations"), 0);
+    CT_ASSERT_EQ(ct_pack_seed_registered(db, "db/seeds/packs"), SPEC_SEEDS_DIR_ROWS);
+    return db;
 }
 
-static void spec_method_fill(ct_event ev, ct_method *out) {
-    int n = 0;
-    for (unsigned long i = 0; i < sizeof spec_event_methods / sizeof spec_event_methods[0]; i++) {
-        if (spec_event_methods[i].event == ev) {
-            out[n] = spec_event_methods[i].method;
-            n++;
-        }
+static void spec_identity_scheme(ct_selector_scheme *s) {
+    for (int i = 0; i < CT_LETTER_STICKERS; i++) {
+        s->map.corner[i] = (char)('A' + i);
+        s->map.edge[i] = (char)('A' + i);
     }
+    s->buffer_corner = CT_3STYLE_CORNER_BUFFER;
+    s->buffer_edge = CT_3STYLE_EDGE_BUFFER;
 }
 
-static int spec_keys_unique(const char (*keys)[SPEC_KEY_CAP], int n) {
-    for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (strcmp(keys[i], keys[j]) == 0) {
-                return 0;
-            }
-        }
+static int spec_pair_lists(ct_event ev, ct_method m, ct_selector_list *out) {
+    return ct_selector_lists(ev, m, out, SPEC_MAX_LISTS);
+}
+
+static int spec_count(sqlite3 *db, const ct_selector_scheme *s, ct_event ev, ct_method m,
+                      int list_id) {
+    return ct_selector_case_count(db, s, ev, m, list_id);
+}
+
+CT_SUITE(selector_scheme_load) {
+    sqlite3 *db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT_EQ(ct_db_migrate(db, "db/migrations"), 0);
+    ct_selector_scheme s;
+    CT_ASSERT_EQ(ct_selector_scheme_load(NULL, &s), -1);
+    CT_ASSERT_EQ(ct_selector_scheme_load(db, NULL), -1);
+    CT_ASSERT_EQ(ct_selector_scheme_load(db, &s), 0);
+    for (int i = 0; i < CT_LETTER_STICKERS; i++) {
+        CT_ASSERT_EQ(s.map.corner[i], 'A' + i);
+        CT_ASSERT_EQ(s.map.edge[i], 'A' + i);
     }
-    return 1;
+    CT_ASSERT_EQ(s.buffer_corner, CT_3STYLE_CORNER_BUFFER);
+    CT_ASSERT_EQ(s.buffer_edge, CT_3STYLE_EDGE_BUFFER);
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "bld.buffer_corner", "5"), 0);
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "bld.buffer_edge", "7"), 0);
+    CT_ASSERT_EQ(ct_selector_scheme_load(db, &s), 0);
+    CT_ASSERT_EQ(s.buffer_corner, 5);
+    CT_ASSERT_EQ(s.buffer_edge, 7);
+    int scheme = ct_letter_scheme_default_id(db);
+    CT_ASSERT(scheme > 0);
+    CT_ASSERT_EQ(ct_letter_map_set(db, scheme, 0, 1, 'C'), 0);
+    CT_ASSERT_EQ(ct_letter_map_set(db, scheme, 0, 2, 'B'), 0);
+    CT_ASSERT_EQ(ct_selector_scheme_load(db, &s), 0);
+    CT_ASSERT_EQ(s.map.corner[1], 'C');
+    CT_ASSERT_EQ(s.map.corner[2], 'B');
+    ct_db_close(db);
 }
 
 CT_SUITE(selector_events) {
@@ -111,294 +192,317 @@ CT_SUITE(selector_events) {
     CT_ASSERT_EQ(ct_selector_events(few, 1), SPEC_EVENT_COUNT);
     CT_ASSERT_EQ(few[0], CT_EVENT_3X3);
     CT_ASSERT_EQ(few[1], CT_EVENT_FTO);
-    for (int i = 0; i < SPEC_CFOP_LISTS; i++) {
-        few[i] = CT_EVENT_FTO;
-    }
     CT_ASSERT_EQ(ct_selector_events(few, 0), SPEC_EVENT_COUNT);
-    CT_ASSERT_EQ(few[0], CT_EVENT_FTO);
+    CT_ASSERT_EQ(few[0], CT_EVENT_3X3);
 }
 
 CT_SUITE(selector_methods) {
-    ct_method got[SPEC_METHOD_MAX];
-    ct_method want[SPEC_METHOD_MAX];
-    for (int i = 0; i < SPEC_EVENT_COUNT; i++) {
-        ct_event ev = spec_events[i];
-        int expect = spec_method_count(ev);
-        CT_ASSERT_EQ(ct_selector_methods(ev, NULL, 0), expect);
-        CT_ASSERT_EQ(ct_selector_methods(ev, NULL, SPEC_METHOD_MAX), expect);
-        memset(got, 0, sizeof got);
-        CT_ASSERT_EQ(ct_selector_methods(ev, got, SPEC_METHOD_MAX), expect);
-        spec_method_fill(ev, want);
-        for (int j = 0; j < expect; j++) {
-            CT_ASSERT_EQ(got[j], want[j]);
+    for (int i = 0; i < SPEC_PAIRS; i++) {
+        for (int j = i + 1; j < SPEC_PAIRS; j++) {
+            CT_ASSERT(spec_pairs[i].event != spec_pairs[j].event ||
+                      spec_pairs[i].method != spec_pairs[j].method);
         }
     }
-    CT_ASSERT_EQ(ct_selector_methods(CT_EVENT_FMC, got, SPEC_METHOD_MAX), 0);
-    CT_ASSERT_EQ(ct_selector_methods((ct_event)-1, got, SPEC_METHOD_MAX), 0);
-    CT_ASSERT_EQ(ct_selector_methods((ct_event)SPEC_EVENT_COUNT, got, SPEC_METHOD_MAX), 0);
-    for (int i = 0; i < SPEC_METHOD_MAX; i++) {
-        got[i] = CT_METHOD_CONCEPT;
+    ct_method got[SPEC_METHODS_MAX];
+    for (int e = 0; e < SPEC_EVENT_COUNT; e++) {
+        ct_event ev = spec_events[e];
+        int expect = 0;
+        for (int i = 0; i < SPEC_PAIRS; i++) {
+            if (spec_pairs[i].event == ev) {
+                expect++;
+            }
+        }
+        CT_ASSERT(expect >= 1);
+        memset(got, 0, sizeof got);
+        CT_ASSERT_EQ(ct_selector_methods(ev, got, SPEC_METHODS_MAX), expect);
+        int n = 0;
+        for (int i = 0; i < SPEC_PAIRS; i++) {
+            if (spec_pairs[i].event == ev) {
+                CT_ASSERT_EQ(got[n], spec_pairs[i].method);
+                n++;
+            }
+        }
+        CT_ASSERT_EQ(ct_selector_methods(ev, NULL, 0), expect);
+        for (int i = 0; i < SPEC_METHODS_MAX; i++) {
+            got[i] = CT_METHOD_CONCEPT;
+        }
+        CT_ASSERT_EQ(ct_selector_methods(ev, got, 1), expect);
+        if (expect > 1) {
+            CT_ASSERT_EQ(got[1], CT_METHOD_CONCEPT);
+        }
     }
-    CT_ASSERT_EQ(ct_selector_methods(CT_EVENT_3BLD, got, 1), SPEC_METHOD_MAX);
-    CT_ASSERT_EQ(got[0], CT_METHOD_3STYLE);
-    CT_ASSERT_EQ(got[1], CT_METHOD_CONCEPT);
-    for (int i = 0; i < SPEC_METHOD_MAX; i++) {
-        got[i] = CT_METHOD_CONCEPT;
-    }
-    CT_ASSERT_EQ(ct_selector_methods(CT_EVENT_3BLD, got, 0), SPEC_METHOD_MAX);
-    CT_ASSERT_EQ(got[0], CT_METHOD_CONCEPT);
+    CT_ASSERT_EQ(ct_selector_methods((ct_event)-1, got, SPEC_METHODS_MAX), 0);
+    CT_ASSERT_EQ(ct_selector_methods((ct_event)SPEC_EVENT_COUNT, got, SPEC_METHODS_MAX), 0);
 }
 
-CT_SUITE(selector_cfop_lists) {
-    int ids[SPEC_CFOP_LISTS];
-    ct_stage stages[SPEC_CFOP_LISTS];
-    ct_orbit orbits[SPEC_CFOP_LISTS];
-    CT_ASSERT_EQ(ct_selector_lists(CT_EVENT_3X3, CT_METHOD_CFOP, NULL, NULL, NULL, 0),
-                 SPEC_CFOP_LISTS);
-    CT_ASSERT_EQ(
-        ct_selector_lists(CT_EVENT_3X3, CT_METHOD_CFOP, ids, stages, orbits, SPEC_CFOP_LISTS),
-        SPEC_CFOP_LISTS);
-    for (int i = 0; i < SPEC_CFOP_LISTS; i++) {
-        CT_ASSERT_EQ(ids[i], i);
-        CT_ASSERT_EQ(stages[i], spec_cfop_stages[i]);
-    }
-    for (int i = 0; i < SPEC_CFOP_LISTS; i++) {
-        CT_ASSERT_EQ(ct_selector_case_count(CT_EVENT_3X3, CT_METHOD_CFOP, i), spec_cfop_counts[i]);
-    }
-    char key[CT_CARD_CASE_KEY_MAX];
-    for (int i = 0; i < SPEC_CFOP_LISTS; i++) {
-        int count = spec_cfop_counts[i];
-        if (count == 0) {
-            CT_ASSERT(ct_selector_case_key(CT_EVENT_3X3, CT_METHOD_CFOP, i, 0, key, sizeof key) <
-                      0);
-            continue;
+CT_SUITE(selector_lists) {
+    for (unsigned long i = 0; i < sizeof spec_lists / sizeof spec_lists[0]; i++) {
+        for (unsigned long j = i + 1; j < sizeof spec_lists / sizeof spec_lists[0]; j++) {
+            CT_ASSERT(spec_lists[i].event != spec_lists[j].event ||
+                      spec_lists[i].method != spec_lists[j].method ||
+                      spec_lists[i].stage != spec_lists[j].stage ||
+                      spec_lists[i].orbit != spec_lists[j].orbit);
         }
-        int samples[SPEC_SAMPLES] = {0, count / 2, count - 1};
-        for (int s = 0; s < SPEC_SAMPLES; s++) {
-            char want[CT_CARD_CASE_KEY_MAX];
-            CT_ASSERT_EQ(ct_cfop_case_key(spec_cfop_stages[i], samples[s], want, sizeof want), 0);
-            CT_ASSERT_EQ(
-                ct_selector_case_key(CT_EVENT_3X3, CT_METHOD_CFOP, i, samples[s], key, sizeof key),
-                0);
+    }
+    ct_selector_list lists[SPEC_MAX_LISTS];
+    for (int p = 0; p < SPEC_PAIRS; p++) {
+        ct_event ev = spec_pairs[p].event;
+        ct_method m = spec_pairs[p].method;
+        int expect = 0;
+        for (unsigned long i = 0; i < sizeof spec_lists / sizeof spec_lists[0]; i++) {
+            if (spec_lists[i].event == ev && spec_lists[i].method == m) {
+                expect++;
+            }
+        }
+        CT_ASSERT(expect >= 1);
+        memset(lists, 0, sizeof lists);
+        CT_ASSERT_EQ(spec_pair_lists(ev, m, lists), expect);
+        int n = 0;
+        for (unsigned long i = 0; i < sizeof spec_lists / sizeof spec_lists[0]; i++) {
+            if (spec_lists[i].event != ev || spec_lists[i].method != m) {
+                continue;
+            }
+            CT_ASSERT_EQ(lists[n].stage, spec_lists[i].stage);
+            CT_ASSERT_EQ(lists[n].orbit, spec_lists[i].orbit);
+            CT_ASSERT_EQ(lists[n].source, spec_lists[i].source);
+            n++;
+        }
+        CT_ASSERT_EQ(ct_selector_lists(ev, m, NULL, 0), expect);
+        for (int i = 0; i < SPEC_MAX_LISTS; i++) {
+            lists[i].stage = CT_STAGE_CONCEPT;
+        }
+        CT_ASSERT_EQ(ct_selector_lists(ev, m, lists, 1), expect);
+        if (expect > 1) {
+            CT_ASSERT_EQ(lists[1].stage, CT_STAGE_CONCEPT);
+        }
+    }
+    CT_ASSERT_EQ(ct_selector_lists(CT_EVENT_3X3, CT_METHOD_LBL, lists, SPEC_MAX_LISTS), 0);
+    CT_ASSERT_EQ(ct_selector_lists((ct_event)-1, CT_METHOD_CFOP, lists, SPEC_MAX_LISTS), 0);
+    CT_ASSERT_EQ(ct_selector_lists(CT_EVENT_3X3, (ct_method)99, lists, SPEC_MAX_LISTS), 0);
+    CT_ASSERT_EQ(ct_selector_lists(CT_EVENT_FMC, CT_METHOD_CONCEPT, lists, SPEC_MAX_LISTS), 1);
+    CT_ASSERT_EQ(lists[0].stage, CT_STAGE_CONCEPT);
+    CT_ASSERT_EQ(lists[0].source, CT_SELECTOR_PACK);
+    CT_ASSERT_EQ(ct_selector_lists(CT_EVENT_SQUARE1, CT_METHOD_LBL, lists, SPEC_MAX_LISTS),
+                 SPEC_SQ1_LISTS);
+    CT_ASSERT_EQ(lists[0].stage, CT_STAGE_CUBESHAPE);
+    CT_ASSERT_EQ(lists[4].stage, CT_STAGE_EP);
+}
+
+CT_SUITE(selector_case_counts) {
+    sqlite3 *db = spec_seeded_db();
+    ct_selector_scheme s;
+    spec_identity_scheme(&s);
+    static const int spec_cfop_counts[SPEC_CFOP_LISTS] = {SPEC_PLL_CASES, SPEC_OLL_CASES,
+                                                          SPEC_F2L_CASES};
+    for (int i = 0; i < SPEC_CFOP_LISTS; i++) {
+        CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_3X3, CT_METHOD_CFOP, i), spec_cfop_counts[i]);
+        CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_OH, CT_METHOD_CFOP, i), spec_cfop_counts[i]);
+        CT_ASSERT_EQ(spec_count(NULL, &s, CT_EVENT_3X3, CT_METHOD_CFOP, i), spec_cfop_counts[i]);
+    }
+    const ct_event chart_events[3] = {CT_EVENT_3BLD, CT_EVENT_4BLD, CT_EVENT_5BLD};
+    for (int e = 0; e < 3; e++) {
+        CT_ASSERT_EQ(spec_count(db, &s, chart_events[e], CT_METHOD_3STYLE, 0), SPEC_CORNER_CASES);
+        CT_ASSERT_EQ(spec_count(db, &s, chart_events[e], CT_METHOD_3STYLE, 1), SPEC_EDGE_CASES);
+        CT_ASSERT_EQ(spec_count(NULL, &s, chart_events[e], CT_METHOD_3STYLE, 0), SPEC_CORNER_CASES);
+        CT_ASSERT_EQ(spec_count(db, NULL, chart_events[e], CT_METHOD_3STYLE, 0), -1);
+    }
+    CT_ASSERT_EQ(spec_count(NULL, NULL, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0), -1);
+    for (int i = 0; i < ct_pack_seed_registry_count(); i++) {
+        const ct_pack_seed_reg *reg = &ct_pack_seed_registry[i];
+        ct_selector_list lists[SPEC_MAX_LISTS];
+        int list_count = ct_selector_lists(reg->event, reg->method, lists, SPEC_MAX_LISTS);
+        int hit = 0;
+        for (int l = 0; l < list_count; l++) {
+            if (lists[l].stage != reg->stage) {
+                continue;
+            }
+            hit = 1;
+            int rows = ct_pack_count(db, reg->event, reg->method, reg->stage);
+            CT_ASSERT(rows > 0);
+            CT_ASSERT_EQ(spec_count(db, &s, reg->event, reg->method, l), rows);
+            CT_ASSERT_EQ(spec_count(NULL, &s, reg->event, reg->method, l), -1);
+        }
+        CT_ASSERT(hit);
+    }
+    int total = 0;
+    for (int p = 0; p < SPEC_PAIRS; p++) {
+        ct_selector_list lists[SPEC_MAX_LISTS];
+        int list_count = spec_pair_lists(spec_pairs[p].event, spec_pairs[p].method, lists);
+        for (int l = 0; l < list_count; l++) {
+            int n = spec_count(db, &s, spec_pairs[p].event, spec_pairs[p].method, l);
+            CT_ASSERT(n >= 0);
+            total += n;
+        }
+    }
+    CT_ASSERT_EQ(total, SPEC_SEED_ROWS_TOTAL + SPEC_CFOP_CASES_TOTAL + SPEC_CHART_CASES_TOTAL);
+    CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_5X5, CT_METHOD_REDUCTION, 0), 0);
+    CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_6X6, CT_METHOD_REDUCTION, 0), 0);
+    CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_7X7, CT_METHOD_REDUCTION, 0), 0);
+    CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_4BLD, CT_METHOD_U2, 0), 0);
+    CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_4BLD, CT_METHOD_R2, 0), 0);
+    CT_ASSERT_EQ(spec_count(db, &s, CT_EVENT_PYRAMINX, CT_METHOD_LBL, 0), 0);
+    CT_ASSERT(spec_count(db, &s, CT_EVENT_3X3, CT_METHOD_CFOP, SPEC_CFOP_LISTS) < 0);
+    CT_ASSERT(spec_count(db, &s, CT_EVENT_3X3, CT_METHOD_CFOP, -1) < 0);
+    CT_ASSERT(spec_count(db, &s, CT_EVENT_3X3, CT_METHOD_LBL, 0) < 0);
+    CT_ASSERT(spec_count(db, &s, (ct_event)-1, CT_METHOD_CFOP, 0) < 0);
+    CT_ASSERT(spec_count(db, &s, CT_EVENT_3X3, (ct_method)99, 0) < 0);
+    ct_db_close(db);
+}
+
+CT_SUITE(selector_case_keys) {
+    sqlite3 *db = spec_seeded_db();
+    ct_selector_scheme s;
+    spec_identity_scheme(&s);
+    static const ct_stage cfop_stages[SPEC_CFOP_LISTS] = {CT_STAGE_PLL, CT_STAGE_OLL, CT_STAGE_F2L};
+    static const int cfop_counts[SPEC_CFOP_LISTS] = {SPEC_PLL_CASES, SPEC_OLL_CASES,
+                                                     SPEC_F2L_CASES};
+    char key[CT_PACK_CASE_KEY_MAX];
+    for (int i = 0; i < SPEC_CFOP_LISTS; i++) {
+        int samples[SPEC_PACK_SAMPLES] = {0, cfop_counts[i] / 2, cfop_counts[i] - 1};
+        for (int k = 0; k < SPEC_PACK_SAMPLES; k++) {
+            char want[CT_PACK_CASE_KEY_MAX];
+            CT_ASSERT_EQ(ct_cfop_case_key(cfop_stages[i], samples[k], want, sizeof want), 0);
+            CT_ASSERT_EQ(ct_selector_case_key(db, &s, CT_EVENT_3X3, CT_METHOD_CFOP, i, samples[k],
+                                              key, sizeof key),
+                         0);
             CT_ASSERT_STR_EQ(key, want);
         }
-        CT_ASSERT(ct_selector_case_key(CT_EVENT_3X3, CT_METHOD_CFOP, i, count, key, sizeof key) <
-                  0);
-        CT_ASSERT(ct_selector_case_key(CT_EVENT_3X3, CT_METHOD_CFOP, i, -1, key, sizeof key) < 0);
-    }
-    CT_ASSERT_EQ(
-        ct_selector_lists(CT_EVENT_OH, CT_METHOD_CFOP, ids, stages, orbits, SPEC_CFOP_LISTS),
-        SPEC_CFOP_LISTS);
-    CT_ASSERT_EQ(ct_selector_case_count(CT_EVENT_OH, CT_METHOD_CFOP, 0), SPEC_PLL_CASES);
-    CT_ASSERT_EQ(ct_selector_case_count(CT_EVENT_OH, CT_METHOD_CFOP, 2), SPEC_F2L_CASES);
-    CT_ASSERT(ct_selector_case_count(CT_EVENT_3X3, CT_METHOD_CFOP, SPEC_CFOP_LISTS) < 0);
-    CT_ASSERT(ct_selector_case_count(CT_EVENT_3X3, CT_METHOD_CFOP, -1) < 0);
-    CT_ASSERT(ct_selector_case_key(CT_EVENT_3X3, CT_METHOD_CFOP, -1, 0, key, sizeof key) < 0);
-    CT_ASSERT(ct_selector_case_key(CT_EVENT_3X3, CT_METHOD_CFOP, SPEC_CFOP_LISTS, 0, key,
-                                   sizeof key) < 0);
-    CT_ASSERT(
-        ct_selector_case_key(CT_EVENT_3X3, CT_METHOD_CFOP, 0, SPEC_PLL_CASES, key, sizeof key) < 0);
-    CT_ASSERT(ct_selector_case_key(CT_EVENT_3X3, CT_METHOD_CFOP, 0, 0, NULL, sizeof key) < 0);
-    CT_ASSERT_EQ(
-        ct_selector_lists(CT_EVENT_2X2, CT_METHOD_CFOP, ids, stages, orbits, SPEC_CFOP_LISTS), 0);
-    CT_ASSERT(ct_selector_case_count(CT_EVENT_2X2, CT_METHOD_CFOP, 0) < 0);
-    CT_ASSERT(ct_selector_case_key(CT_EVENT_2X2, CT_METHOD_CFOP, 0, 0, key, sizeof key) < 0);
-}
-
-CT_SUITE(selector_3style_lists) {
-    int ids[SPEC_3STYLE_LISTS];
-    ct_stage stages[SPEC_3STYLE_LISTS];
-    ct_orbit orbits[SPEC_3STYLE_LISTS];
-    const ct_event evs[SPEC_METHOD_MAX + 1] = {CT_EVENT_3BLD, CT_EVENT_4BLD, CT_EVENT_5BLD,
-                                               CT_EVENT_MULTI_BLD};
-    for (int e = 0; e < SPEC_METHOD_MAX + 1; e++) {
-        CT_ASSERT_EQ(ct_selector_lists(evs[e], CT_METHOD_3STYLE, NULL, NULL, NULL, 0),
-                     SPEC_3STYLE_LISTS);
-        CT_ASSERT_EQ(
-            ct_selector_lists(evs[e], CT_METHOD_3STYLE, ids, stages, orbits, SPEC_3STYLE_LISTS),
-            SPEC_3STYLE_LISTS);
-        for (int i = 0; i < SPEC_3STYLE_LISTS; i++) {
-            CT_ASSERT_EQ(ids[i], i);
-            CT_ASSERT_EQ(stages[i], spec_3style_stages[i]);
-            CT_ASSERT_EQ(orbits[i], spec_3style_orbits[i]);
-        }
-        CT_ASSERT_EQ(ct_selector_case_count(evs[e], CT_METHOD_3STYLE, 0), SPEC_CORNER_CASES);
-        CT_ASSERT_EQ(ct_selector_case_count(evs[e], CT_METHOD_3STYLE, 1), SPEC_EDGE_CASES);
+        CT_ASSERT(ct_selector_case_key(db, &s, CT_EVENT_3X3, CT_METHOD_CFOP, i, cfop_counts[i], key,
+                                       sizeof key) < 0);
     }
     static ct_target_pair corner_pairs[SPEC_CORNER_CASES];
     static ct_target_pair edge_pairs[SPEC_EDGE_CASES];
-    CT_ASSERT_EQ(ct_targets_corner(0, corner_pairs, SPEC_CORNER_CASES), SPEC_CORNER_CASES);
-    CT_ASSERT_EQ(ct_targets_edge(2, edge_pairs, SPEC_EDGE_CASES), SPEC_EDGE_CASES);
-    char key[SPEC_KEY_CAP];
-    CT_ASSERT_EQ(ct_selector_case_key(CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, key, sizeof key), 0);
-    CT_ASSERT_STR_EQ(key, "BC");
-    CT_ASSERT_EQ(key[0], 'A' + corner_pairs[0].t1);
-    CT_ASSERT_EQ(key[1], 'A' + corner_pairs[0].t2);
-    CT_ASSERT_EQ(ct_selector_case_key(CT_EVENT_3BLD, CT_METHOD_3STYLE, 1, 0, key, sizeof key), 0);
-    CT_ASSERT_STR_EQ(key, "AB");
-    CT_ASSERT_EQ(key[0], 'A' + edge_pairs[0].t1);
-    CT_ASSERT_EQ(key[1], 'A' + edge_pairs[0].t2);
-    for (int s = 0; s < SPEC_KEY_SAMPLE; s++) {
-        int ci = s * (SPEC_CORNER_CASES - 1) / (SPEC_KEY_SAMPLE - 1);
-        int ei = s * (SPEC_EDGE_CASES - 1) / (SPEC_KEY_SAMPLE - 1);
-        CT_ASSERT_EQ(ct_selector_case_key(CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, ci, key, sizeof key),
-                     0);
-        CT_ASSERT_EQ(strlen(key), 2u);
-        CT_ASSERT(key[0] >= 'A' && key[0] <= 'X');
-        CT_ASSERT(key[1] >= 'A' && key[1] <= 'X');
-        CT_ASSERT_EQ(key[0], 'A' + corner_pairs[ci].t1);
-        CT_ASSERT_EQ(key[1], 'A' + corner_pairs[ci].t2);
-        CT_ASSERT_EQ(ct_selector_case_key(CT_EVENT_3BLD, CT_METHOD_3STYLE, 1, ei, key, sizeof key),
-                     0);
-        CT_ASSERT_EQ(key[0], 'A' + edge_pairs[ei].t1);
-        CT_ASSERT_EQ(key[1], 'A' + edge_pairs[ei].t2);
+    CT_ASSERT_EQ(ct_targets_corner(CT_3STYLE_CORNER_BUFFER, corner_pairs, SPEC_CORNER_CASES),
+                 SPEC_CORNER_CASES);
+    CT_ASSERT_EQ(ct_targets_edge(CT_3STYLE_EDGE_BUFFER, edge_pairs, SPEC_EDGE_CASES),
+                 SPEC_EDGE_CASES);
+    char pair[SPEC_KEY_CAP];
+    CT_ASSERT_EQ(
+        ct_selector_case_key(db, &s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, pair, sizeof pair), 0);
+    CT_ASSERT_STR_EQ(pair, "BC");
+    CT_ASSERT_EQ(
+        ct_selector_case_key(db, &s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 1, 0, pair, sizeof pair), 0);
+    CT_ASSERT_STR_EQ(pair, "AB");
+    for (int k = 0; k < SPEC_KEY_SAMPLE; k++) {
+        int ci = k * (SPEC_CORNER_CASES - 1) / (SPEC_KEY_SAMPLE - 1);
+        int ei = k * (SPEC_EDGE_CASES - 1) / (SPEC_KEY_SAMPLE - 1);
+        CT_ASSERT_EQ(
+            ct_selector_case_key(db, &s, CT_EVENT_5BLD, CT_METHOD_3STYLE, 0, ci, pair, sizeof pair),
+            0);
+        CT_ASSERT_EQ(pair[0], 'A' + corner_pairs[ci].t1);
+        CT_ASSERT_EQ(pair[1], 'A' + corner_pairs[ci].t2);
+        CT_ASSERT_EQ(
+            ct_selector_case_key(db, &s, CT_EVENT_5BLD, CT_METHOD_3STYLE, 1, ei, pair, sizeof pair),
+            0);
+        CT_ASSERT_EQ(pair[0], 'A' + edge_pairs[ei].t1);
+        CT_ASSERT_EQ(pair[1], 'A' + edge_pairs[ei].t2);
     }
     static char keys[SPEC_UNIQUE_KEYS][SPEC_KEY_CAP];
     for (int i = 0; i < SPEC_UNIQUE_KEYS; i++) {
-        CT_ASSERT_EQ(
-            ct_selector_case_key(CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, i, keys[i], sizeof keys[i]),
-            0);
+        CT_ASSERT_EQ(ct_selector_case_key(db, &s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, i, keys[i],
+                                          sizeof keys[i]),
+                     0);
     }
-    CT_ASSERT(spec_keys_unique(keys, SPEC_UNIQUE_KEYS));
-    for (int i = 2; i < SPEC_3STYLE_LISTS; i++) {
-        CT_ASSERT_EQ(ct_selector_case_count(CT_EVENT_3BLD, CT_METHOD_3STYLE, i), 0);
-        CT_ASSERT(ct_selector_case_key(CT_EVENT_3BLD, CT_METHOD_3STYLE, i, 0, key, sizeof key) < 0);
+    for (int i = 0; i < SPEC_UNIQUE_KEYS; i++) {
+        for (int j = i + 1; j < SPEC_UNIQUE_KEYS; j++) {
+            CT_ASSERT(strcmp(keys[i], keys[j]) != 0);
+        }
     }
     char tiny[SPEC_KEY_CAP - 1];
     memset(tiny, 'q', sizeof tiny);
-    CT_ASSERT(ct_selector_case_key(CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, tiny, sizeof tiny) < 0);
+    CT_ASSERT(
+        ct_selector_case_key(db, &s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, tiny, sizeof tiny) < 0);
     CT_ASSERT_EQ(tiny[0], 'q');
-    CT_ASSERT_EQ(tiny[1], 'q');
-    CT_ASSERT(ct_selector_case_key(CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, NULL, sizeof key) < 0);
-    CT_ASSERT(ct_selector_case_key(CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, SPEC_CORNER_CASES, key,
-                                   sizeof key) < 0);
-    CT_ASSERT(ct_selector_case_key(CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, -1, key, sizeof key) < 0);
-    CT_ASSERT(ct_selector_case_count(CT_EVENT_3BLD, CT_METHOD_3STYLE, SPEC_3STYLE_LISTS) < 0);
-}
-
-CT_SUITE(selector_reserved_lists) {
-    static const struct {
-        ct_event event;
-        ct_method method;
-        ct_stage stage;
-        ct_orbit orbit;
-    } spec[] = {
-        {CT_EVENT_2X2, CT_METHOD_CLL, CT_STAGE_CLL, CT_ORBIT_CORNER},
-        {CT_EVENT_5X5, CT_METHOD_REDUCTION, CT_STAGE_CONCEPT, CT_ORBIT_CORNER},
-        {CT_EVENT_MEGAMINX, CT_METHOD_4LLL, CT_STAGE_4LLL, CT_ORBIT_CORNER},
-        {CT_EVENT_PYRAMINX, CT_METHOD_L4E, CT_STAGE_L4E, CT_ORBIT_CORNER},
-        {CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE, CT_STAGE_SARAH, CT_ORBIT_CORNER},
-        {CT_EVENT_FTO, CT_METHOD_L4T_REDUX, CT_STAGE_L4T, CT_ORBIT_CORNER},
-        {CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN, CT_STAGE_CONCEPT, CT_ORBIT_CORNER},
-        {CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT, CT_ORBIT_EDGE},
-        {CT_EVENT_4BLD, CT_METHOD_U2, CT_STAGE_CONCEPT, CT_ORBIT_CENTER},
-        {CT_EVENT_4BLD, CT_METHOD_R2, CT_STAGE_CONCEPT, CT_ORBIT_WING},
-    };
-    int ids[SPEC_ONE_LIST];
-    ct_stage stages[SPEC_ONE_LIST];
-    ct_orbit orbits[SPEC_ONE_LIST];
-    char key[SPEC_KEY_CAP];
-    for (unsigned long i = 0; i < sizeof spec / sizeof spec[0]; i++) {
-        CT_ASSERT_EQ(
-            ct_selector_lists(spec[i].event, spec[i].method, ids, stages, orbits, SPEC_ONE_LIST),
-            SPEC_ONE_LIST);
-        CT_ASSERT_EQ(ids[0], 0);
-        CT_ASSERT_EQ(stages[0], spec[i].stage);
-        CT_ASSERT_EQ(orbits[0], spec[i].orbit);
-        CT_ASSERT_EQ(ct_selector_case_count(spec[i].event, spec[i].method, 0), 0);
-        CT_ASSERT(ct_selector_case_key(spec[i].event, spec[i].method, 0, 0, key, sizeof key) < 0);
-    }
-}
-
-CT_SUITE(selector_lbl_lists) {
-    static const ct_stage spec_lbl_stages[SPEC_LBL_LISTS] = {
-        CT_STAGE_CONCEPT, CT_STAGE_CUBESHAPE, CT_STAGE_CO, CT_STAGE_EO, CT_STAGE_CP, CT_STAGE_EP};
-    static const ct_orbit spec_lbl_orbits[SPEC_LBL_LISTS] = {CT_ORBIT_CORNER, CT_ORBIT_CORNER,
-                                                             CT_ORBIT_CORNER, CT_ORBIT_EDGE,
-                                                             CT_ORBIT_CORNER, CT_ORBIT_EDGE};
-    const ct_event evs[SPEC_LBL_EVENTS] = {CT_EVENT_SQUARE1, CT_EVENT_CLOCK, CT_EVENT_PYRAMINX};
-    int ids[SPEC_LBL_LISTS];
-    ct_stage stages[SPEC_LBL_LISTS];
-    ct_orbit orbits[SPEC_LBL_LISTS];
-    char key[SPEC_KEY_CAP];
-    for (int e = 0; e < SPEC_LBL_EVENTS; e++) {
-        CT_ASSERT_EQ(ct_selector_lists(evs[e], CT_METHOD_LBL, NULL, NULL, NULL, 0), SPEC_LBL_LISTS);
-        CT_ASSERT_EQ(ct_selector_lists(evs[e], CT_METHOD_LBL, ids, stages, orbits, SPEC_LBL_LISTS),
-                     SPEC_LBL_LISTS);
-        for (int i = 0; i < SPEC_LBL_LISTS; i++) {
-            CT_ASSERT_EQ(ids[i], i);
-            CT_ASSERT_EQ(stages[i], spec_lbl_stages[i]);
-            CT_ASSERT_EQ(orbits[i], spec_lbl_orbits[i]);
-            CT_ASSERT_EQ(ct_selector_case_count(evs[e], CT_METHOD_LBL, i), 0);
-            CT_ASSERT(ct_selector_case_key(evs[e], CT_METHOD_LBL, i, 0, key, sizeof key) < 0);
+    CT_ASSERT(
+        ct_selector_case_key(db, &s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, NULL, sizeof pair) < 0);
+    CT_ASSERT(ct_selector_case_key(db, NULL, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, pair,
+                                   sizeof pair) < 0);
+    char prev[CT_PACK_CASE_KEY_MAX];
+    for (int i = 0; i < ct_pack_seed_registry_count(); i++) {
+        const ct_pack_seed_reg *reg = &ct_pack_seed_registry[i];
+        ct_selector_list lists[SPEC_MAX_LISTS];
+        int list_count = ct_selector_lists(reg->event, reg->method, lists, SPEC_MAX_LISTS);
+        prev[0] = '\0';
+        for (int l = 0; l < list_count; l++) {
+            if (lists[l].stage != reg->stage) {
+                continue;
+            }
+            int rows = ct_pack_count(db, reg->event, reg->method, reg->stage);
+            for (int r = 0; r < rows; r++) {
+                CT_ASSERT_EQ(
+                    ct_selector_case_key(db, &s, reg->event, reg->method, l, r, key, sizeof key),
+                    0);
+                if (r > 0) {
+                    CT_ASSERT(strcmp(prev, key) < 0);
+                }
+                snprintf(prev, sizeof prev, "%s", key);
+            }
+            CT_ASSERT(ct_selector_case_key(db, &s, reg->event, reg->method, l, rows, key,
+                                           sizeof key) < 0);
+            break;
         }
-        CT_ASSERT(ct_selector_case_count(evs[e], CT_METHOD_LBL, SPEC_LBL_LISTS) < 0);
-        CT_ASSERT(ct_selector_case_count(evs[e], CT_METHOD_LBL, -1) < 0);
     }
+    ct_db_close(db);
 }
 
-CT_SUITE(selector_yau_lists) {
-    static const ct_stage spec_yau_stages[SPEC_YAU_LISTS] = {CT_STAGE_CONCEPT, CT_STAGE_PARITY};
-    static const ct_orbit spec_yau_orbits[SPEC_YAU_LISTS] = {CT_ORBIT_CORNER, CT_ORBIT_WING};
-    int ids[SPEC_YAU_LISTS];
-    ct_stage stages[SPEC_YAU_LISTS];
-    ct_orbit orbits[SPEC_YAU_LISTS];
-    char key[SPEC_KEY_CAP];
-    CT_ASSERT_EQ(ct_selector_lists(CT_EVENT_4X4, CT_METHOD_YAU, NULL, NULL, NULL, 0),
-                 SPEC_YAU_LISTS);
-    CT_ASSERT_EQ(
-        ct_selector_lists(CT_EVENT_4X4, CT_METHOD_YAU, ids, stages, orbits, SPEC_YAU_LISTS),
-        SPEC_YAU_LISTS);
-    for (int i = 0; i < SPEC_YAU_LISTS; i++) {
-        CT_ASSERT_EQ(ids[i], i);
-        CT_ASSERT_EQ(stages[i], spec_yau_stages[i]);
-        CT_ASSERT_EQ(orbits[i], spec_yau_orbits[i]);
-        CT_ASSERT_EQ(ct_selector_case_count(CT_EVENT_4X4, CT_METHOD_YAU, i), 0);
-        CT_ASSERT(ct_selector_case_key(CT_EVENT_4X4, CT_METHOD_YAU, i, 0, key, sizeof key) < 0);
-    }
-    CT_ASSERT(ct_selector_case_count(CT_EVENT_4X4, CT_METHOD_YAU, SPEC_YAU_LISTS) < 0);
+CT_SUITE(selector_case_pairs) {
+    ct_selector_scheme s;
+    spec_identity_scheme(&s);
+    int t1 = -1;
+    int t2 = -1;
+    CT_ASSERT_EQ(ct_selector_case_pair(&s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, &t1, &t2), 0);
+    CT_ASSERT_EQ(t1, 1);
+    CT_ASSERT_EQ(t2, 2);
+    CT_ASSERT_EQ(ct_selector_case_pair(&s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 1, 0, &t1, &t2), 0);
+    CT_ASSERT_EQ(t1, 0);
+    CT_ASSERT_EQ(t2, 1);
+    static ct_target_pair alt[SPEC_CORNER_CASES];
+    CT_ASSERT_EQ(ct_targets_corner(SPEC_ALT_BUFFER, alt, SPEC_CORNER_CASES), SPEC_CORNER_CASES);
+    s.buffer_corner = SPEC_ALT_BUFFER;
+    CT_ASSERT_EQ(ct_selector_case_pair(&s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, &t1, &t2), 0);
+    CT_ASSERT_EQ(t1, alt[0].t1);
+    CT_ASSERT_EQ(t2, alt[0].t2);
+    s.buffer_corner = CT_3STYLE_CORNER_BUFFER;
+    s.buffer_edge = SPEC_ALT_BUFFER;
+    static ct_target_pair alt_edge[SPEC_EDGE_CASES];
+    CT_ASSERT_EQ(ct_targets_edge(SPEC_ALT_BUFFER, alt_edge, SPEC_EDGE_CASES), SPEC_EDGE_CASES);
+    CT_ASSERT_EQ(ct_selector_case_pair(&s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 1, 0, &t1, &t2), 0);
+    CT_ASSERT_EQ(t1, alt_edge[0].t1);
+    CT_ASSERT_EQ(t2, alt_edge[0].t2);
+    CT_ASSERT(ct_selector_case_pair(NULL, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, &t1, &t2) < 0);
+    CT_ASSERT(ct_selector_case_pair(&s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, SPEC_CORNER_CASES, &t1,
+                                    &t2) < 0);
+    CT_ASSERT(ct_selector_case_pair(&s, CT_EVENT_3BLD, CT_METHOD_3STYLE, -1, 0, &t1, &t2) < 0);
+    CT_ASSERT(ct_selector_case_pair(&s, CT_EVENT_3X3, CT_METHOD_CFOP, 0, 0, &t1, &t2) < 0);
+    CT_ASSERT(ct_selector_case_pair(&s, CT_EVENT_2X2, CT_METHOD_CLL, 0, 0, &t1, &t2) < 0);
+    CT_ASSERT(ct_selector_case_pair(&s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, NULL, &t2) < 0);
+    CT_ASSERT(ct_selector_case_pair(&s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, &t1, NULL) < 0);
 }
 
-CT_SUITE(selector_navigation) {
-    int ids[SPEC_CFOP_LISTS];
-    ct_stage stages[SPEC_CFOP_LISTS];
-    ct_orbit orbits[SPEC_CFOP_LISTS];
-    for (int i = 0; i < SPEC_CFOP_LISTS; i++) {
-        ids[i] = -1;
-        stages[i] = CT_STAGE_CONCEPT;
-        orbits[i] = CT_ORBIT_CENTER;
-    }
+CT_SUITE(selector_pack_cases) {
+    sqlite3 *db = spec_seeded_db();
+    ct_pack_entry e;
+    CT_ASSERT_EQ(ct_selector_pack_case(NULL, CT_EVENT_SQUARE1, CT_METHOD_LBL, 0, 0, &e), -1);
+    CT_ASSERT_EQ(ct_selector_pack_case(db, CT_EVENT_SQUARE1, CT_METHOD_LBL, -1, 0, &e), -1);
+    CT_ASSERT_EQ(ct_selector_pack_case(db, CT_EVENT_SQUARE1, CT_METHOD_LBL, 0, -1, &e), -1);
+    CT_ASSERT_EQ(ct_selector_pack_case(
+                     db, CT_EVENT_SQUARE1, CT_METHOD_LBL, 0,
+                     ct_pack_count(db, CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_CUBESHAPE), &e),
+                 -1);
+    CT_ASSERT_EQ(ct_selector_pack_case(db, CT_EVENT_SQUARE1, CT_METHOD_LBL, 0, 0, NULL), -1);
+    CT_ASSERT_EQ(ct_selector_pack_case(db, CT_EVENT_2X2, CT_METHOD_CLL, 0, 41, &e), 0);
+    CT_ASSERT_EQ(ct_selector_pack_case(db, CT_EVENT_SQUARE1, CT_METHOD_LBL, 0, 0, &e), 0);
+    CT_ASSERT_EQ(e.event, CT_EVENT_SQUARE1);
+    CT_ASSERT_EQ(e.method, CT_METHOD_LBL);
+    CT_ASSERT_EQ(e.stage, CT_STAGE_CUBESHAPE);
+    ct_pack_entry want;
+    char key[CT_PACK_CASE_KEY_MAX];
     CT_ASSERT_EQ(
-        ct_selector_lists(CT_EVENT_3X3, CT_METHOD_CFOP, ids, stages, orbits, SPEC_LISTS_SMALL_CAP),
-        SPEC_CFOP_LISTS);
-    CT_ASSERT_EQ(ids[0], 0);
-    CT_ASSERT_EQ(ids[1], 1);
-    CT_ASSERT_EQ(ids[2], -1);
-    CT_ASSERT_EQ(ids[3], -1);
-    CT_ASSERT_EQ(stages[2], CT_STAGE_CONCEPT);
-    CT_ASSERT_EQ(ct_selector_case_count(CT_EVENT_3X3, CT_METHOD_CFOP, 2), SPEC_F2L_CASES);
-    int few_ids[SPEC_LISTS_SMALL_CAP];
-    ct_stage few_stages[SPEC_LISTS_SMALL_CAP];
-    ct_orbit few_orbits[SPEC_LISTS_SMALL_CAP];
-    CT_ASSERT_EQ(ct_selector_lists(CT_EVENT_3X3, CT_METHOD_CFOP, few_ids, few_stages, few_orbits,
-                                   SPEC_LISTS_SMALL_CAP),
-                 SPEC_CFOP_LISTS);
-    CT_ASSERT_EQ(few_ids[0], 0);
-    CT_ASSERT_EQ(few_ids[1], 1);
-    CT_ASSERT(ct_selector_lists(CT_EVENT_3X3, (ct_method)-1, few_ids, few_stages, few_orbits,
-                                SPEC_LISTS_SMALL_CAP) == 0);
-    CT_ASSERT(ct_selector_lists(CT_EVENT_3X3, (ct_method)99, few_ids, few_stages, few_orbits,
-                                SPEC_LISTS_SMALL_CAP) == 0);
-    CT_ASSERT(ct_selector_lists((ct_event)-1, CT_METHOD_CFOP, few_ids, few_stages, few_orbits,
-                                SPEC_LISTS_SMALL_CAP) == 0);
-    CT_ASSERT(ct_selector_lists((ct_event)SPEC_EVENT_COUNT, CT_METHOD_CFOP, few_ids, few_stages,
-                                few_orbits, SPEC_LISTS_SMALL_CAP) == 0);
-    CT_ASSERT(ct_selector_lists(CT_EVENT_3X3, CT_METHOD_REDUCTION, few_ids, few_stages, few_orbits,
-                                SPEC_LISTS_SMALL_CAP) == 0);
-    CT_ASSERT(ct_selector_case_count(CT_EVENT_3X3, (ct_method)-1, 0) < 0);
-    CT_ASSERT(ct_selector_case_count(CT_EVENT_3X3, CT_METHOD_REDUCTION, 0) < 0);
-    CT_ASSERT(ct_selector_case_count((ct_event)-1, CT_METHOD_CFOP, 0) < 0);
-    char key[SPEC_KEY_CAP];
-    CT_ASSERT(ct_selector_case_key((ct_event)-1, CT_METHOD_CFOP, 0, 0, key, sizeof key) < 0);
-    CT_ASSERT(ct_selector_case_key(CT_EVENT_3X3, (ct_method)99, 0, 0, key, sizeof key) < 0);
+        ct_selector_case_key(db, NULL, CT_EVENT_SQUARE1, CT_METHOD_LBL, 0, 0, key, sizeof key), 0);
+    CT_ASSERT_EQ(ct_pack_get(db, CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_CUBESHAPE, key, &want),
+                 CT_PACK_OK);
+    CT_ASSERT_STR_EQ(e.alg, want.alg);
+    CT_ASSERT_STR_EQ(e.front_json, want.front_json);
+    CT_ASSERT_STR_EQ(e.case_key, want.case_key);
+    ct_db_close(db);
 }

@@ -1,6 +1,8 @@
 #include "trainer/selector.h"
 
-#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "gen/targets.h"
 #include "trainer/cfop.h"
@@ -8,62 +10,69 @@
 enum {
     CT_SELECTOR_EVENT_COUNT = CT_EVENT_FTO + 1,
     CT_SELECTOR_METHOD_COUNT = CT_METHOD_CONCEPT + 1,
-    CT_SELECTOR_CORNER_BUFFER = 0,
-    CT_SELECTOR_EDGE_BUFFER = 2,
-    CT_SELECTOR_PAIR_KEY_LEN = 3
+    CT_SELECTOR_PAIR_KEY_LEN = 3,
+    CT_SELECTOR_PACK_ROWS_MAX = (1 << 8),
+    CT_SELECTOR_SETTING_MAX = (1 << 5),
+    CT_SELECTOR_CHART_ROWS_MAX = CT_TARGET_STICKERS * CT_TARGET_STICKERS,
+    CT_SELECTOR_ERR = -1
 };
 
 static const struct {
     ct_event event;
     ct_method method;
-} ct_event_methods[] = {
-    {CT_EVENT_3X3, CT_METHOD_CFOP},      {CT_EVENT_2X2, CT_METHOD_CLL},
-    {CT_EVENT_3BLD, CT_METHOD_3STYLE},   {CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN},
-    {CT_EVENT_3BLD, CT_METHOD_M2},       {CT_EVENT_4BLD, CT_METHOD_3STYLE},
-    {CT_EVENT_4BLD, CT_METHOD_U2},       {CT_EVENT_4BLD, CT_METHOD_R2},
-    {CT_EVENT_5BLD, CT_METHOD_3STYLE},   {CT_EVENT_5BLD, CT_METHOD_U2},
-    {CT_EVENT_5BLD, CT_METHOD_R2},       {CT_EVENT_MULTI_BLD, CT_METHOD_3STYLE},
-    {CT_EVENT_OH, CT_METHOD_CFOP},       {CT_EVENT_4X4, CT_METHOD_YAU},
-    {CT_EVENT_5X5, CT_METHOD_REDUCTION}, {CT_EVENT_6X6, CT_METHOD_REDUCTION},
-    {CT_EVENT_7X7, CT_METHOD_REDUCTION}, {CT_EVENT_CLOCK, CT_METHOD_LBL},
-    {CT_EVENT_MEGAMINX, CT_METHOD_4LLL}, {CT_EVENT_PYRAMINX, CT_METHOD_L4E},
-    {CT_EVENT_PYRAMINX, CT_METHOD_LBL},  {CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE},
-    {CT_EVENT_SQUARE1, CT_METHOD_LBL},   {CT_EVENT_FTO, CT_METHOD_L4T_REDUX},
+    ct_stage stage;
+    ct_orbit orbit;
+    ct_selector_source source;
+} ct_selector_table[] = {
+    {CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_PLL, CT_ORBIT_CORNER, CT_SELECTOR_CFOP},
+    {CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_OLL, CT_ORBIT_CORNER, CT_SELECTOR_CFOP},
+    {CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L, CT_ORBIT_CORNER, CT_SELECTOR_CFOP},
+    {CT_EVENT_OH, CT_METHOD_CFOP, CT_STAGE_PLL, CT_ORBIT_CORNER, CT_SELECTOR_CFOP},
+    {CT_EVENT_OH, CT_METHOD_CFOP, CT_STAGE_OLL, CT_ORBIT_CORNER, CT_SELECTOR_CFOP},
+    {CT_EVENT_OH, CT_METHOD_CFOP, CT_STAGE_F2L, CT_ORBIT_CORNER, CT_SELECTOR_CFOP},
+    {CT_EVENT_2X2, CT_METHOD_CLL, CT_STAGE_CLL, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_3BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_CHART},
+    {CT_EVENT_3BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_EDGE, CT_SELECTOR_CHART},
+    {CT_EVENT_4BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_CHART},
+    {CT_EVENT_4BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_EDGE, CT_SELECTOR_CHART},
+    {CT_EVENT_5BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_CHART},
+    {CT_EVENT_5BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_EDGE, CT_SELECTOR_CHART},
+    {CT_EVENT_MULTI_BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT, CT_ORBIT_EDGE, CT_SELECTOR_PACK},
+    {CT_EVENT_4BLD, CT_METHOD_U2, CT_STAGE_CONCEPT, CT_ORBIT_CENTER, CT_SELECTOR_PACK},
+    {CT_EVENT_4BLD, CT_METHOD_R2, CT_STAGE_CONCEPT, CT_ORBIT_WING, CT_SELECTOR_PACK},
+    {CT_EVENT_5BLD, CT_METHOD_U2, CT_STAGE_CONCEPT, CT_ORBIT_CENTER, CT_SELECTOR_PACK},
+    {CT_EVENT_5BLD, CT_METHOD_R2, CT_STAGE_CONCEPT, CT_ORBIT_WING, CT_SELECTOR_PACK},
+    {CT_EVENT_4X4, CT_METHOD_YAU, CT_STAGE_PARITY, CT_ORBIT_WING, CT_SELECTOR_PACK},
+    {CT_EVENT_5X5, CT_METHOD_REDUCTION, CT_STAGE_PARITY, CT_ORBIT_WING, CT_SELECTOR_PACK},
+    {CT_EVENT_6X6, CT_METHOD_REDUCTION, CT_STAGE_PARITY, CT_ORBIT_WING, CT_SELECTOR_PACK},
+    {CT_EVENT_7X7, CT_METHOD_REDUCTION, CT_STAGE_PARITY, CT_ORBIT_WING, CT_SELECTOR_PACK},
+    {CT_EVENT_CLOCK, CT_METHOD_LBL, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_PYRAMINX, CT_METHOD_L4E, CT_STAGE_L4E, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_PYRAMINX, CT_METHOD_LBL, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE, CT_STAGE_SARAH, CT_ORBIT_CORNER,
+     CT_SELECTOR_PACK},
+    {CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_CUBESHAPE, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_CO, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_EO, CT_ORBIT_EDGE, CT_SELECTOR_PACK},
+    {CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_CP, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_EP, CT_ORBIT_EDGE, CT_SELECTOR_PACK},
+    {CT_EVENT_MEGAMINX, CT_METHOD_4LLL, CT_STAGE_4LLL, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_FTO, CT_METHOD_L4T_REDUX, CT_STAGE_L4T, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
+    {CT_EVENT_FMC, CT_METHOD_CONCEPT, CT_STAGE_CONCEPT, CT_ORBIT_CORNER, CT_SELECTOR_PACK},
 };
 
 static const struct {
-    ct_method method;
-    ct_stage stage;
-    ct_orbit orbit;
-} ct_lists[] = {
-    {CT_METHOD_CFOP, CT_STAGE_PLL, CT_ORBIT_CORNER},
-    {CT_METHOD_CFOP, CT_STAGE_OLL, CT_ORBIT_CORNER},
-    {CT_METHOD_CFOP, CT_STAGE_F2L, CT_ORBIT_CORNER},
-    {CT_METHOD_CFOP, CT_STAGE_CROSS, CT_ORBIT_CORNER},
-    {CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_CORNER},
-    {CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_EDGE},
-    {CT_METHOD_3STYLE, CT_STAGE_PARITY, CT_ORBIT_CORNER},
-    {CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_EDGE},
-    {CT_METHOD_3STYLE, CT_STAGE_CONCEPT, CT_ORBIT_CORNER},
-    {CT_METHOD_CLL, CT_STAGE_CLL, CT_ORBIT_CORNER},
-    {CT_METHOD_YAU, CT_STAGE_CONCEPT, CT_ORBIT_CORNER},
-    {CT_METHOD_YAU, CT_STAGE_PARITY, CT_ORBIT_WING},
-    {CT_METHOD_REDUCTION, CT_STAGE_CONCEPT, CT_ORBIT_CORNER},
-    {CT_METHOD_4LLL, CT_STAGE_4LLL, CT_ORBIT_CORNER},
-    {CT_METHOD_L4E, CT_STAGE_L4E, CT_ORBIT_CORNER},
-    {CT_METHOD_LBL, CT_STAGE_CONCEPT, CT_ORBIT_CORNER},
-    {CT_METHOD_LBL, CT_STAGE_CUBESHAPE, CT_ORBIT_CORNER},
-    {CT_METHOD_LBL, CT_STAGE_CO, CT_ORBIT_CORNER},
-    {CT_METHOD_LBL, CT_STAGE_EO, CT_ORBIT_EDGE},
-    {CT_METHOD_LBL, CT_STAGE_CP, CT_ORBIT_CORNER},
-    {CT_METHOD_LBL, CT_STAGE_EP, CT_ORBIT_EDGE},
-    {CT_METHOD_SARAH_INTERMEDIATE, CT_STAGE_SARAH, CT_ORBIT_CORNER},
-    {CT_METHOD_L4T_REDUX, CT_STAGE_L4T, CT_ORBIT_CORNER},
-    {CT_METHOD_OLD_POCHMANN, CT_STAGE_CONCEPT, CT_ORBIT_CORNER},
-    {CT_METHOD_M2, CT_STAGE_CONCEPT, CT_ORBIT_EDGE},
-    {CT_METHOD_U2, CT_STAGE_CONCEPT, CT_ORBIT_CENTER},
-    {CT_METHOD_R2, CT_STAGE_CONCEPT, CT_ORBIT_WING},
+    const char *key;
+    int fallback;
+} ct_selector_buffer_keys[] = {
+    {"bld.buffer_corner", CT_3STYLE_CORNER_BUFFER},
+    {"bld.buffer_edge", CT_3STYLE_EDGE_BUFFER},
 };
+
+static ct_pack_entry ct_selector_pack_rows[CT_SELECTOR_PACK_ROWS_MAX];
+static ct_target_pair ct_selector_chart_rows[CT_SELECTOR_CHART_ROWS_MAX];
 
 static int ct_selector_event_ok(ct_event ev) {
     return (int)ev >= 0 && (int)ev < CT_SELECTOR_EVENT_COUNT;
@@ -77,8 +86,8 @@ static int ct_selector_pair_ok(ct_event ev, ct_method m) {
     if (!ct_selector_event_ok(ev) || !ct_selector_method_ok(m)) {
         return 0;
     }
-    for (unsigned long i = 0; i < sizeof ct_event_methods / sizeof ct_event_methods[0]; i++) {
-        if (ct_event_methods[i].event == ev && ct_event_methods[i].method == m) {
+    for (unsigned long i = 0; i < sizeof ct_selector_table / sizeof ct_selector_table[0]; i++) {
+        if (ct_selector_table[i].event == ev && ct_selector_table[i].method == m) {
             return 1;
         }
     }
@@ -87,6 +96,79 @@ static int ct_selector_pair_ok(ct_event ev, ct_method m) {
 
 static int ct_selector_cap(int cap) {
     return cap < 0 ? 0 : cap;
+}
+
+static int ct_selector_buffer_of(const ct_selector_scheme *scheme, ct_orbit orbit) {
+    return orbit == CT_ORBIT_EDGE ? scheme->buffer_edge : scheme->buffer_corner;
+}
+
+static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage *stage,
+                                ct_orbit *orbit, ct_selector_source *source) {
+    int seen = 0;
+    for (unsigned long i = 0; i < sizeof ct_selector_table / sizeof ct_selector_table[0]; i++) {
+        if (ct_selector_table[i].event != ev || ct_selector_table[i].method != m) {
+            continue;
+        }
+        if (seen == list_id) {
+            *stage = ct_selector_table[i].stage;
+            *orbit = ct_selector_table[i].orbit;
+            *source = ct_selector_table[i].source;
+            return 0;
+        }
+        seen++;
+    }
+    return CT_SELECTOR_ERR;
+}
+
+static int ct_selector_list_count(ct_event ev, ct_method m) {
+    int total = 0;
+    for (unsigned long i = 0; i < sizeof ct_selector_table / sizeof ct_selector_table[0]; i++) {
+        if (ct_selector_table[i].event == ev && ct_selector_table[i].method == m) {
+            total++;
+        }
+    }
+    return total;
+}
+
+static int ct_selector_parse_buffer(const char *text, int fallback) {
+    char *end = NULL;
+    long v = strtol(text, &end, CT_DECIMAL_BASE);
+    if (end == text || end[0] != '\0' || v < 0 || v >= CT_LETTER_STICKERS) {
+        return fallback;
+    }
+    return (int)v;
+}
+
+int ct_selector_scheme_load(sqlite3 *db, ct_selector_scheme *out) {
+    if (db == NULL || out == NULL) {
+        return CT_SELECTOR_ERR;
+    }
+    int scheme = ct_letter_scheme_default_id(db);
+    if (scheme <= 0) {
+        if (ct_letter_seed_speffz(db) != 0) {
+            return CT_SELECTOR_ERR;
+        }
+        scheme = ct_letter_scheme_default_id(db);
+    }
+    if (scheme <= 0 || ct_letter_map_load(db, scheme, &out->map) < 0) {
+        return CT_SELECTOR_ERR;
+    }
+    out->buffer_corner = ct_selector_buffer_keys[0].fallback;
+    out->buffer_edge = ct_selector_buffer_keys[1].fallback;
+    char value[CT_SELECTOR_SETTING_MAX];
+    for (unsigned long i = 0;
+         i < sizeof ct_selector_buffer_keys / sizeof ct_selector_buffer_keys[0]; i++) {
+        if (ct_repo_settings_get(db, ct_selector_buffer_keys[i].key, value,
+                                 (unsigned)sizeof value) == 0) {
+            int v = ct_selector_parse_buffer(value, ct_selector_buffer_keys[i].fallback);
+            if (i == 0) {
+                out->buffer_corner = v;
+            } else {
+                out->buffer_edge = v;
+            }
+        }
+    }
+    return 0;
 }
 
 int ct_selector_events(ct_event *out, int cap) {
@@ -107,119 +189,176 @@ int ct_selector_methods(ct_event ev, ct_method *out, int cap) {
         return 0;
     }
     int total = 0;
-    for (unsigned long i = 0; i < sizeof ct_event_methods / sizeof ct_event_methods[0]; i++) {
-        if (ct_event_methods[i].event != ev) {
+    for (unsigned long i = 0; i < sizeof ct_selector_table / sizeof ct_selector_table[0]; i++) {
+        if (ct_selector_table[i].event != ev) {
+            continue;
+        }
+        int duplicate = 0;
+        for (unsigned long j = 0; j < i; j++) {
+            if (ct_selector_table[j].event == ev &&
+                ct_selector_table[j].method == ct_selector_table[i].method) {
+                duplicate = 1;
+                break;
+            }
+        }
+        if (duplicate) {
             continue;
         }
         if (out != NULL && total < cap) {
-            out[total] = ct_event_methods[i].method;
+            out[total] = ct_selector_table[i].method;
         }
         total++;
     }
     return total;
 }
 
-int ct_selector_lists(ct_event ev, ct_method m, int *out_ids, ct_stage *out_stages,
-                      ct_orbit *out_orbits, int cap) {
+int ct_selector_lists(ct_event ev, ct_method m, ct_selector_list *out, int cap) {
     cap = ct_selector_cap(cap);
     if (!ct_selector_pair_ok(ev, m)) {
         return 0;
     }
     int total = 0;
-    for (unsigned long i = 0; i < sizeof ct_lists / sizeof ct_lists[0]; i++) {
-        if (ct_lists[i].method != m) {
+    for (unsigned long i = 0; i < sizeof ct_selector_table / sizeof ct_selector_table[0]; i++) {
+        if (ct_selector_table[i].event != ev || ct_selector_table[i].method != m) {
             continue;
         }
-        if (out_ids != NULL && total < cap) {
-            out_ids[total] = total;
-        }
-        if (out_stages != NULL && total < cap) {
-            out_stages[total] = ct_lists[i].stage;
-        }
-        if (out_orbits != NULL && total < cap) {
-            out_orbits[total] = ct_lists[i].orbit;
+        if (out != NULL && total < cap) {
+            out[total].stage = ct_selector_table[i].stage;
+            out[total].orbit = ct_selector_table[i].orbit;
+            out[total].source = ct_selector_table[i].source;
         }
         total++;
     }
     return total;
 }
 
-static void ct_selector_list_def(ct_method m, int list_id, ct_stage *stage, ct_orbit *orbit) {
-    int seen = 0;
-    for (unsigned long i = 0; i < sizeof ct_lists / sizeof ct_lists[0]; i++) {
-        if (ct_lists[i].method != m) {
-            continue;
-        }
-        if (seen == list_id) {
-            *stage = ct_lists[i].stage;
-            *orbit = ct_lists[i].orbit;
-            return;
-        }
-        seen++;
+int ct_selector_case_count(sqlite3 *db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+                           int list_id) {
+    if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+        return CT_SELECTOR_ERR;
     }
-}
-
-int ct_selector_case_count(ct_event ev, ct_method m, int list_id) {
-    int lists = ct_selector_lists(ev, m, NULL, NULL, NULL, 0);
-    if (lists <= 0 || list_id < 0 || list_id >= lists) {
-        return -1;
+    ct_stage stage;
+    ct_orbit orbit;
+    ct_selector_source source;
+    if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+        return CT_SELECTOR_ERR;
     }
-    if (m == CT_METHOD_CFOP) {
-        ct_stage stage;
-        ct_orbit orbit;
-        ct_selector_list_def(m, list_id, &stage, &orbit);
-        if (stage == CT_STAGE_CROSS) {
-            return 0;
-        }
+    if (source == CT_SELECTOR_CFOP) {
         return ct_cfop_case_count(stage);
     }
-    if (m == CT_METHOD_3STYLE) {
-        if (list_id == 0) {
-            return ct_targets_corner(CT_SELECTOR_CORNER_BUFFER, NULL, 0);
+    if (source == CT_SELECTOR_CHART) {
+        if (scheme == NULL) {
+            return CT_SELECTOR_ERR;
         }
-        if (list_id == 1) {
-            return ct_targets_edge(CT_SELECTOR_EDGE_BUFFER, NULL, 0);
+        if (orbit == CT_ORBIT_EDGE) {
+            return ct_targets_edge(scheme->buffer_edge, NULL, 0);
         }
+        return ct_targets_corner(scheme->buffer_corner, NULL, 0);
     }
-    return 0;
+    return ct_pack_count(db, ev, m, stage);
 }
 
-static int ct_selector_pair_key(int list_id, int index, char *out, unsigned cap) {
-    if (cap < CT_SELECTOR_PAIR_KEY_LEN) {
-        return -1;
-    }
-    ct_target_pair pairs[CT_TARGET_STICKERS * CT_TARGET_STICKERS];
+static int ct_selector_chart_pair(ct_orbit orbit, int buffer, int index, ct_target_pair *out) {
     int total;
-    if (list_id == 0) {
-        total = ct_targets_corner(CT_SELECTOR_CORNER_BUFFER, pairs,
-                                  (int)(sizeof pairs / sizeof pairs[0]));
+    if (orbit == CT_ORBIT_EDGE) {
+        total = ct_targets_edge(buffer, ct_selector_chart_rows, CT_SELECTOR_CHART_ROWS_MAX);
     } else {
-        total =
-            ct_targets_edge(CT_SELECTOR_EDGE_BUFFER, pairs, (int)(sizeof pairs / sizeof pairs[0]));
+        total = ct_targets_corner(buffer, ct_selector_chart_rows, CT_SELECTOR_CHART_ROWS_MAX);
     }
-    if (index < 0 || index >= total) {
-        return -1;
+    if (total <= 0 || index < 0 || index >= total) {
+        return CT_SELECTOR_ERR;
     }
-    out[0] = (char)('A' + pairs[index].t1);
-    out[1] = (char)('A' + pairs[index].t2);
-    out[2] = '\0';
+    *out = ct_selector_chart_rows[index];
     return 0;
 }
 
-int ct_selector_case_key(ct_event ev, ct_method m, int list_id, int index, char *out,
-                         unsigned cap) {
-    int count = ct_selector_case_count(ev, m, list_id);
+int ct_selector_case_key(sqlite3 *db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+                         int list_id, int index, char *out, unsigned cap) {
+    int count = ct_selector_case_count(db, scheme, ev, m, list_id);
     if (count <= 0 || index < 0 || index >= count || out == NULL) {
-        return -1;
+        return CT_SELECTOR_ERR;
     }
-    if (m == CT_METHOD_CFOP) {
-        ct_stage stage;
-        ct_orbit orbit;
-        ct_selector_list_def(m, list_id, &stage, &orbit);
+    ct_stage stage;
+    ct_orbit orbit;
+    ct_selector_source source;
+    if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+        return CT_SELECTOR_ERR;
+    }
+    if (source == CT_SELECTOR_CFOP) {
         return ct_cfop_case_key(stage, index, out, cap);
     }
-    if (m == CT_METHOD_3STYLE) {
-        return ct_selector_pair_key(list_id, index, out, cap);
+    if (source == CT_SELECTOR_CHART) {
+        if (scheme == NULL || cap < (unsigned)CT_SELECTOR_PAIR_KEY_LEN) {
+            return CT_SELECTOR_ERR;
+        }
+        ct_target_pair pair;
+        int buffer = ct_selector_buffer_of(scheme, orbit);
+        if (ct_selector_chart_pair(orbit, buffer, index, &pair) != 0) {
+            return CT_SELECTOR_ERR;
+        }
+        const char *letters = orbit == CT_ORBIT_EDGE ? scheme->map.edge : scheme->map.corner;
+        out[0] = letters[pair.t1];
+        out[1] = letters[pair.t2];
+        out[2] = '\0';
+        return 0;
     }
-    return -1;
+    ct_pack_entry e;
+    if (ct_selector_pack_case(db, ev, m, list_id, index, &e) != 0) {
+        return CT_SELECTOR_ERR;
+    }
+    if (strlen(e.case_key) >= cap) {
+        return CT_SELECTOR_ERR;
+    }
+    snprintf(out, cap, "%s", e.case_key);
+    return 0;
+}
+
+int ct_selector_case_pair(const ct_selector_scheme *scheme, ct_event ev, ct_method m, int list_id,
+                          int index, int *t1, int *t2) {
+    if (scheme == NULL || t1 == NULL || t2 == NULL) {
+        return CT_SELECTOR_ERR;
+    }
+    if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+        return CT_SELECTOR_ERR;
+    }
+    ct_stage stage;
+    ct_orbit orbit;
+    ct_selector_source source;
+    if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+        source != CT_SELECTOR_CHART) {
+        return CT_SELECTOR_ERR;
+    }
+    ct_target_pair pair;
+    int buffer = ct_selector_buffer_of(scheme, orbit);
+    if (ct_selector_chart_pair(orbit, buffer, index, &pair) != 0) {
+        return CT_SELECTOR_ERR;
+    }
+    *t1 = pair.t1;
+    *t2 = pair.t2;
+    return 0;
+}
+
+int ct_selector_pack_case(sqlite3 *db, ct_event ev, ct_method m, int list_id, int index,
+                          ct_pack_entry *out) {
+    if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m) ||
+        index < 0 || out == NULL) {
+        return CT_SELECTOR_ERR;
+    }
+    ct_stage stage;
+    ct_orbit orbit;
+    ct_selector_source source;
+    if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+        source != CT_SELECTOR_PACK) {
+        return CT_SELECTOR_ERR;
+    }
+    int cap = index + 1;
+    if (cap > CT_SELECTOR_PACK_ROWS_MAX) {
+        return CT_SELECTOR_ERR;
+    }
+    int rows = ct_pack_list(db, ev, m, stage, ct_selector_pack_rows, cap);
+    if (rows != cap) {
+        return CT_SELECTOR_ERR;
+    }
+    *out = ct_selector_pack_rows[index];
+    return 0;
 }
