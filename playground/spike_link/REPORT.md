@@ -30,7 +30,7 @@ raylib 6.0: compile only the flat set third_party/raylib/src/*.c, which is 7 TUs
 
 raygui 5.0 is header-only, src/ holds raygui.h with no raygui.c. The single TU is generated as build/raygui_impl.c containing RAYGUI_IMPLEMENTATION plus the include, compiled with -Ithird_party/raylib/src -Ithird_party/raygui/src and -Wno-error for unused parameter and unused function warnings in upstream code.
 
-sqlite 3.53.4 amalgamation verified by python hashlib SHA3-256 over the downloaded zip against the published value 628a44cfe82c66aed1ccbbe85a562d2e33ebe64b3288981ed76285612227934e, which matched. The method line lands in build/vendor/sqlite.verify.log. The compile fallback asserts sqlite3_libversion() equals 3.53.4 through playground/spike_link/sqlite_version.c and stays wired for python-less machines.
+sqlite 3.53.4 amalgamation verified by python hashlib SHA3-256 over the downloaded zip against the published value 628a44cfe82c66aed1ccbbe85a562d2e33ebe64b3288981ed76285612227934e, which matched. The inline check and its log line were replaced on 2026-10-10 by tools/vendor_verify.py, which now hash-verifies all three vendor archives and prints to stdout. The compile fallback through playground/spike_link/sqlite_version.c was dropped with it, python is a hard prerequisite of make vendor.
 
 Link set for anything touching raylib: -static-libgcc -lopengl32 -lgdi32 -lwinmm, matching raylib own static Windows line.
 
