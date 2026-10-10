@@ -19,6 +19,7 @@ typedef struct {
 int ct_repo_settings_get(sqlite3 *db, const char *key, char *out, unsigned cap);
 int ct_repo_settings_set(sqlite3 *db, const char *key, const char *value);
 int ct_repo_settings_merge(sqlite3 *db, ct_config *cfg);
+int ct_repo_settings_merge_rejected(sqlite3 *db, ct_config *cfg, int *rejected);
 
 int ct_letter_scheme_create(sqlite3 *db, const char *name, int *id);
 int ct_letter_scheme_default_id(sqlite3 *db);

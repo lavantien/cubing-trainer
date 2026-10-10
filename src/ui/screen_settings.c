@@ -38,6 +38,7 @@ enum {
     CT_SETTINGS_GRID_ROWS = CT_LETTER_PER_FACE,
     CT_SETTINGS_MOVE_COLS = CT_LETTER_FACES,
     CT_SETTINGS_BTN_COUNT = 2,
+    CT_SETTINGS_STATUS_MAX = (1 << 6),
 };
 
 static char *ct_settings_orbit(ct_settings_form *f, int orbit) {
@@ -404,6 +405,7 @@ typedef struct {
     int chan[CT_SETTINGS_FACE_COUNT][CT_SETTINGS_CHANNELS];
     unsigned chan_edit;
     char labels[CT_SETTINGS_ORBITS][CT_LETTER_STICKERS][2];
+    int rejected;
 } ct_settings_screen;
 
 static ct_settings_screen ct_settings;
@@ -635,6 +637,7 @@ void ct_screen_settings_update(ct_app *app) {
         return;
     if (!ct_settings.opened) {
         ct_settings.opened = true;
+        ct_settings.rejected = 0;
         ct_settings_form_open(&ct_settings.form, app->db);
         ct_settings.sel_orbit = CT_ORBIT_CORNER;
         ct_settings.sel_sticker = 0;
@@ -681,11 +684,20 @@ void ct_screen_settings_draw(ct_app *app) {
     }
 
     if (GuiButton(ct_settings_rect(margin, btn_y, btn_w, btn_h), "save")) {
-        if (ct_settings_form_save(f) == CT_REPO_OK)
-            (void)ct_repo_settings_merge(app->db, &app->cfg);
+        if (ct_settings_form_save(f) == CT_REPO_OK) {
+            int rc = ct_repo_settings_merge_rejected(app->db, &app->cfg, &ct_settings.rejected);
+            if (rc != 0)
+                ct_settings.rejected = 0;
+        }
     }
     if (GuiButton(ct_settings_rect(margin + btn_w + margin, btn_y, btn_w, btn_h), "cancel"))
         ct_settings_form_cancel(f);
-    GuiStatusBar(ct_settings_rect(margin, h - status_h, content_w, status_h),
-                 ct_settings_status_text(f->status));
+    char status_buf[CT_SETTINGS_STATUS_MAX];
+    if (ct_settings.rejected > 0) {
+        snprintf(status_buf, sizeof status_buf, "%s, %d settings rows rejected",
+                 ct_settings_status_text(f->status), ct_settings.rejected);
+    } else {
+        snprintf(status_buf, sizeof status_buf, "%s", ct_settings_status_text(f->status));
+    }
+    GuiStatusBar(ct_settings_rect(margin, h - status_h, content_w, status_h), status_buf);
 }

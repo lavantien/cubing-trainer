@@ -55,7 +55,9 @@ int ct_repo_settings_set(sqlite3 *db, const char *key, const char *value) {
     return rc == SQLITE_DONE ? 0 : -1;
 }
 
-int ct_repo_settings_merge(sqlite3 *db, ct_config *cfg) {
+int ct_repo_settings_merge_rejected(sqlite3 *db, ct_config *cfg, int *rejected) {
+    if (rejected != NULL)
+        *rejected = 0;
     if (db == NULL || cfg == NULL)
         return -1;
     sqlite3_stmt *st = NULL;
@@ -63,19 +65,28 @@ int ct_repo_settings_merge(sqlite3 *db, ct_config *cfg) {
         sqlite3_finalize(st);
         return -1;
     }
-    int ret = 0;
+    int bad = 0;
     int rc;
     while ((rc = sqlite3_step(st)) == SQLITE_ROW) {
         const unsigned char *k = sqlite3_column_text(st, 0);
         const unsigned char *v = sqlite3_column_text(st, 1);
-        if (k == NULL || v == NULL)
+        if (k == NULL || v == NULL) {
+            bad++;
             continue;
-        (void)ct_config_set(cfg, (const char *)k, (const char *)v);
+        }
+        if (ct_config_set(cfg, (const char *)k, (const char *)v) != CT_CFG_OK)
+            bad++;
     }
-    if (rc != SQLITE_DONE)
-        ret = -1;
     sqlite3_finalize(st);
-    return ret;
+    if (rc != SQLITE_DONE)
+        return -1;
+    if (rejected != NULL)
+        *rejected = bad;
+    return 0;
+}
+
+int ct_repo_settings_merge(sqlite3 *db, ct_config *cfg) {
+    return ct_repo_settings_merge_rejected(db, cfg, NULL);
 }
 
 int ct_letter_scheme_create(sqlite3 *db, const char *name, int *id) {

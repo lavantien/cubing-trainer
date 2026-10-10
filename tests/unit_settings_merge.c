@@ -147,6 +147,42 @@ CT_SUITE(settings_merge_guards) {
     assert_same_config(&merged, &def);
     CT_ASSERT_EQ(ct_repo_settings_merge(db, NULL), -1);
     CT_ASSERT_EQ(ct_repo_settings_merge(NULL, NULL), -1);
+    CT_ASSERT_EQ(ct_repo_settings_merge_rejected(NULL, &merged, NULL), -1);
+    CT_ASSERT_EQ(ct_repo_settings_merge_rejected(db, NULL, NULL), -1);
+    int rejected = -1;
+    CT_ASSERT_EQ(ct_repo_settings_merge_rejected(db, &merged, &rejected), 0);
+    CT_ASSERT_EQ(rejected, 0);
+    ct_db_close(db);
+}
+
+CT_SUITE(settings_merge_rejected_count) {
+    sqlite3 *db = merge_db();
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "anim.move_seconds", "0.4"), 0);
+    int rejected = -1;
+    ct_config merged = ct_config_defaults();
+    CT_ASSERT_EQ(ct_repo_settings_merge_rejected(db, &merged, &rejected), 0);
+    CT_ASSERT_EQ(rejected, 0);
+    CT_ASSERT_DBL_EQ(merged.anim.move_seconds, 0.4, 1e-12);
+
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "nope", "1"), 0);
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "anim.move_seconds", "junk"), 0);
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "srs.w19", "1"), 0);
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "gen.weight_len", "-2"), 0);
+    CT_ASSERT_EQ(ct_repo_settings_merge_rejected(db, &merged, &rejected), 0);
+    CT_ASSERT_EQ(rejected, 4);
+    CT_ASSERT_DBL_EQ(merged.anim.move_seconds, 0.4, 1e-12);
+
+    CT_ASSERT_EQ(sqlite3_exec(db,
+                              "INSERT INTO settings(key, value) VALUES('srs.request_retention', NULL)",
+                              NULL, NULL, NULL),
+                 SQLITE_OK);
+    CT_ASSERT_EQ(ct_repo_settings_merge_rejected(db, &merged, &rejected), 0);
+    CT_ASSERT_EQ(rejected, 5);
+
+    ct_config fresh = ct_config_defaults();
+    ct_config def = ct_config_defaults();
+    CT_ASSERT_EQ(ct_repo_settings_merge(db, &fresh), 0);
+    CT_ASSERT(memcmp(&fresh, &def, sizeof(ct_config)) == 0);
     ct_db_close(db);
 }
 
