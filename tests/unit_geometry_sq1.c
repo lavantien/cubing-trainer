@@ -23,9 +23,42 @@ static const ct_sq1_token_row ct_sq1_ok[] = {
 };
 
 static const char *const ct_sq1_bad[] = {
-    "(0,0)",  "(7,0)", "(0,7)", "(-6,0)", "(0,-6)", "(01,0)", "(1,01)", "(+1,0)",  "( 1,0)",
-    "(1, 0)", "(1)",   "(1,0",  "1,0",    "(1,0)x", "()",     "(,)",    "(1,2,3)", "//",
-    "/x",     "",      "(U)",   "(U')",   "(D)",    "3,3",    "(1,0))",
+    "(0,0)",
+    "(7,0)",
+    "(0,7)",
+    "(-6,0)",
+    "(0,-6)",
+    "(01,0)",
+    "(1,01)",
+    "(+1,0)",
+    "( 1,0)",
+    "(1, 0)",
+    "(1)",
+    "(1,0",
+    "1,0",
+    "(1,0)x",
+    "()",
+    "(,)",
+    "(1,2,3)",
+    "//",
+    "/x",
+    "",
+    "(U)",
+    "(U')",
+    "(D)",
+    "3,3",
+    "(1,0))",
+    "(1,-0)",
+    "(-0,1)",
+    "(-0,5)",
+    "(-0,-0)",
+    "(1000000000000,0)",
+    "(1,1000000000000)",
+    "(2147483648,0)",
+    "(4294967296,0)",
+    "(99999999999999999999,0)",
+    "(-99999999999,0)",
+    "(2147483647,0)",
 };
 
 static int side_idx(int layer, int unit) {
@@ -245,21 +278,21 @@ CT_SUITE(sq1_perm) {
     uint8_t perm[PERM_BYTES];
 
     CT_ASSERT_EQ(g->move_facelets(g, ct_sq1_move_id(1, 0), CT_GEOMETRY_SINGLE_N, perm), 0);
-    CT_ASSERT_EQ(perm[side_idx(0, 0)], side_idx(0, 1));
-    CT_ASSERT_EQ(perm[side_idx(0, 11)], side_idx(0, 0));
-    CT_ASSERT_EQ(perm[face_idx(0, 0)], face_idx(0, 1));
-    CT_ASSERT_EQ(perm[face_idx(0, 11)], face_idx(0, 0));
+    CT_ASSERT_EQ(perm[side_idx(0, 0)], side_idx(0, 11));
+    CT_ASSERT_EQ(perm[side_idx(0, 11)], side_idx(0, 10));
+    CT_ASSERT_EQ(perm[face_idx(0, 0)], face_idx(0, 11));
+    CT_ASSERT_EQ(perm[face_idx(0, 11)], face_idx(0, 10));
     CT_ASSERT_EQ(perm[side_idx(1, 5)], side_idx(1, 5));
     CT_ASSERT_EQ(perm[face_idx(1, 7)], face_idx(1, 7));
 
     CT_ASSERT_EQ(g->move_facelets(g, ct_sq1_move_id(0, 1), CT_GEOMETRY_SINGLE_N, perm), 0);
-    CT_ASSERT_EQ(perm[side_idx(1, 0)], side_idx(1, 1));
-    CT_ASSERT_EQ(perm[side_idx(1, 11)], side_idx(1, 0));
+    CT_ASSERT_EQ(perm[side_idx(1, 0)], side_idx(1, 11));
+    CT_ASSERT_EQ(perm[side_idx(1, 11)], side_idx(1, 10));
     CT_ASSERT_EQ(perm[side_idx(0, 4)], side_idx(0, 4));
 
     CT_ASSERT_EQ(g->move_facelets(g, ct_sq1_move_id(-1, -1), CT_GEOMETRY_SINGLE_N, perm), 0);
-    CT_ASSERT_EQ(perm[side_idx(0, 0)], side_idx(0, 11));
-    CT_ASSERT_EQ(perm[face_idx(1, 0)], face_idx(1, 11));
+    CT_ASSERT_EQ(perm[side_idx(0, 0)], side_idx(0, 1));
+    CT_ASSERT_EQ(perm[face_idx(1, 0)], face_idx(1, 1));
 
     CT_ASSERT(g->move_facelets(g, CT_SQ1_SLASH, CT_GEOMETRY_SINGLE_N, perm) == CT_GEOMETRY_E_STATE);
     CT_ASSERT(g->move_facelets(g, -1, CT_GEOMETRY_SINGLE_N, perm) < 0);
@@ -285,6 +318,38 @@ CT_SUITE(sq1_perm) {
                      0);
         for (int i = 0; i < PERM_BYTES; i++) {
             CT_ASSERT_EQ(inv[perm[i]], i);
+        }
+    }
+}
+
+static void state_from_positions(ct_sq1_state *s) {
+    for (int i = 0; i < CT_SQ1_LAYERS * CT_SQ1_UNITS; i++) {
+        s->units[i] = (uint8_t)i;
+    }
+    s->slice_flipped = false;
+}
+
+CT_SUITE(sq1_perm_convention) {
+    const ct_geometry *g = ct_geometry_sq1();
+    uint8_t perm[PERM_BYTES];
+    for (int id = 0; id < CT_SQ1_MOVES; id++) {
+        ct_sq1_state s;
+        state_from_positions(&s);
+        if (id == CT_SQ1_SLASH) {
+            CT_ASSERT_EQ(ct_sq1_can_slash(&s), 1);
+            CT_ASSERT_EQ(g->move_facelets_state(g, id, CT_GEOMETRY_SINGLE_N, &s, perm), 0);
+        } else {
+            CT_ASSERT_EQ(g->move_facelets(g, id, CT_GEOMETRY_SINGLE_N, perm), 0);
+        }
+        CT_ASSERT_EQ(ct_sq1_apply(&s, id), 0);
+        for (int layer = 0; layer < CT_SQ1_LAYERS; layer++) {
+            for (int u = 0; u < CT_SQ1_UNITS; u++) {
+                int origin = s.units[layer * CT_SQ1_UNITS + u];
+                int origin_layer = origin / CT_SQ1_UNITS;
+                int origin_unit = origin % CT_SQ1_UNITS;
+                CT_ASSERT_EQ(perm[side_idx(layer, u)], side_idx(origin_layer, origin_unit));
+                CT_ASSERT_EQ(perm[face_idx(layer, u)], face_idx(origin_layer, origin_unit));
+            }
         }
     }
 }
@@ -457,7 +522,7 @@ CT_SUITE(sq1_perm_state_coherence) {
             uint8_t next[PERM_BYTES];
             CT_ASSERT_EQ(g->move_facelets_state(g, id, CT_GEOMETRY_SINGLE_N, &s, perm), 0);
             for (int i = 0; i < PERM_BYTES; i++) {
-                next[perm[i]] = facelet[i];
+                next[i] = facelet[perm[i]];
             }
             memcpy(facelet, next, sizeof facelet);
             CT_ASSERT_EQ(ct_sq1_apply(&s, id), 0);
@@ -511,4 +576,44 @@ CT_SUITE(sq1_fuzz) {
             CT_ASSERT_EQ(axis.y, 1);
         }
     }
+}
+
+CT_SUITE(sq1_fuzz_long) {
+    const ct_geometry *g = ct_geometry_sq1();
+    ct_sfc64 rng;
+    ct_sfc64_init(&rng, WALK_SEED + 2);
+    int accepted = 0;
+    for (int iter = 0; iter < 20000; iter++) {
+        char token[48];
+        unsigned at = 0;
+        bool short_form = iter % 100 == 0;
+        token[at++] = '(';
+        for (int part = 0; part < 2; part++) {
+            if (part == 1) {
+                token[at++] = ',';
+            }
+            if (!short_form && ct_sfc64_range(&rng, 6) == 0) {
+                token[at++] = '-';
+            }
+            unsigned run = 1 + (unsigned)ct_sfc64_range(&rng, short_form ? 2 : 20);
+            CT_ASSERT(at + run < sizeof token);
+            for (unsigned k = 0; k < run; k++) {
+                token[at++] = (char)('0' + ct_sfc64_range(&rng, 10));
+            }
+        }
+        token[at++] = ')';
+        token[at] = '\0';
+        ct_move m = {7, 7, 7, 7};
+        int id = g->move_from_token(g, token, CT_GEOMETRY_SINGLE_N, &m);
+        if (id < 0) {
+            CT_ASSERT_EQ(m.face, 7);
+            continue;
+        }
+        accepted++;
+        CT_ASSERT(id < CT_SQ1_MOVES);
+        CT_ASSERT(m.depth_from >= CT_SQ1_TURN_MIN && m.depth_from <= CT_SQ1_TURN_MAX);
+        CT_ASSERT(m.depth_to >= CT_SQ1_TURN_MIN && m.depth_to <= CT_SQ1_TURN_MAX);
+        CT_ASSERT_EQ(ct_sq1_move_id(m.depth_from, m.depth_to), id);
+    }
+    CT_ASSERT(accepted > 0);
 }

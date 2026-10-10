@@ -132,8 +132,8 @@ static int sq1_perm_twist(int move_id, uint8_t *perm) {
         int base = block * CT_SQ1_LAYERS * CT_SQ1_UNITS;
         for (int layer = 0; layer < CT_SQ1_LAYERS; layer++) {
             for (int u = 0; u < CT_SQ1_UNITS; u++) {
-                perm[base + layer * CT_SQ1_UNITS + u] =
-                    (uint8_t)(base + layer * CT_SQ1_UNITS + sq1_wrap(u + turns[layer]));
+                perm[base + layer * CT_SQ1_UNITS + sq1_wrap(u + turns[layer])] =
+                    (uint8_t)(base + layer * CT_SQ1_UNITS + u);
             }
         }
     }
@@ -216,11 +216,17 @@ static int sq1_parse_int(const char *text, int *value) {
     int digits = 0;
     int parsed = 0;
     while (text[index] >= '0' && text[index] <= '9') {
+        if (parsed > CT_SQ1_TURN_MAX) {
+            return CT_GEOMETRY_ERR;
+        }
         parsed = parsed * CT_DECIMAL_BASE + (text[index] - '0');
         index++;
         digits++;
     }
     if (digits > 1 && parsed < CT_DECIMAL_BASE) {
+        return CT_GEOMETRY_ERR;
+    }
+    if (sign < 0 && parsed == 0) {
         return CT_GEOMETRY_ERR;
     }
     *value = sign * parsed;
