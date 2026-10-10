@@ -5,10 +5,13 @@
 
 #include "app/app.h"
 #include "engine/cube.h"
+#include "packs/packs.h"
 #include "render/anim.h"
 #include "stats/stats.h"
+#include "storage/repo_algs.h"
 #include "storage/repo_cards.h"
 #include "storage/repo_settings.h"
+#include "trainer/selector.h"
 #include "trainer/session.h"
 
 void ct_ui_update(ct_app *app);
@@ -39,6 +42,47 @@ void ct_cards_form_cancel(ct_cards_form *f);
 
 void ct_screen_cards_update(ct_app *app);
 void ct_screen_cards_draw(ct_app *app);
+
+enum {
+    CT_TRAINER_LISTS_MAX = 5,
+    CT_TRAINER_FRONT_MAX = CT_PACK_FRONT_JSON_MAX,
+    CT_TRAINER_ALG_MAX = CT_PACK_ALG_MAX,
+    CT_TRAINER_CELL_NONE = -1,
+    CT_TRAINER_NO_DETAIL = -1,
+    CT_TRAINER_ALG_CATEGORY = 0
+};
+
+typedef struct {
+    sqlite3 *db;
+    ct_config cfg;
+    int scheme_id;
+    ct_selector_scheme scheme;
+    ct_selector sel;
+    ct_selector_list lists[CT_TRAINER_LISTS_MAX];
+    int list_count;
+    int case_count;
+    int cell;
+    ct_pack_entry pack;
+    int pack_status;
+    ct_generated_alg alg;
+    int alg_status;
+    char front[CT_TRAINER_FRONT_MAX];
+    char alg_text[CT_TRAINER_ALG_MAX];
+    int status;
+} ct_trainer_form;
+
+int ct_trainer_form_open(ct_trainer_form *f, sqlite3 *db);
+int ct_trainer_form_select_event(ct_trainer_form *f, ct_event ev);
+int ct_trainer_form_select_method(ct_trainer_form *f, ct_method m);
+int ct_trainer_form_select_list(ct_trainer_form *f, int list_id);
+int ct_trainer_form_select_case(ct_trainer_form *f, int index);
+int ct_trainer_form_select_cell(ct_trainer_form *f, int sticker);
+int ct_trainer_form_clear_cell(ct_trainer_form *f);
+int ct_trainer_form_visible_count(const ct_trainer_form *f);
+int ct_trainer_form_nth_visible(const ct_trainer_form *f, int visible);
+
+void ct_screen_trainer_update(ct_app *app);
+void ct_screen_trainer_draw(ct_app *app);
 
 enum {
     CT_SETTINGS_FACE_COUNT = CT_LETTER_FACES,

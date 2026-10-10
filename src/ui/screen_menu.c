@@ -17,6 +17,10 @@ static const ct_menu_entry CT_MENU_ENTRIES[] = {
 };
 
 void ct_ui_update(ct_app *app) {
+    if (app->screen == CT_SCREEN_TRAINER) {
+        ct_screen_trainer_update(app);
+        return;
+    }
     if (app->screen == CT_SCREEN_CARDS) {
         ct_screen_cards_update(app);
         return;
@@ -50,6 +54,10 @@ void ct_ui_update(ct_app *app) {
 }
 
 void ct_ui_draw(ct_app *app) {
+    if (app->screen == CT_SCREEN_TRAINER) {
+        ct_screen_trainer_draw(app);
+        return;
+    }
     if (app->screen == CT_SCREEN_CARDS) {
         ct_screen_cards_draw(app);
         return;

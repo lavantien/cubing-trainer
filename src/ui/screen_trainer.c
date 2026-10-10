@@ -1,0 +1,515 @@
+#include <stdio.h>
+#include <string.h>
+
+#include "raygui.h"
+#include "raylib.h"
+#include "ui/ui.h"
+#include "ui/widgets.h"
+
+enum {
+    CT_TRAINER_MARGIN_SHIFT = 6,
+    CT_TRAINER_COL_DIV = 5,
+    CT_TRAINER_FIELD_H_SHIFT = 5,
+    CT_TRAINER_TEXT_SHIFT = 5,
+    CT_TRAINER_GRID_COLS = CT_LETTER_FACES,
+    CT_TRAINER_GRID_ROWS = CT_LETTER_PER_FACE,
+    CT_TRAINER_KEY_MAX = CT_CARD_CASE_KEY_MAX,
+    CT_TRAINER_EVENTS_MAX = CT_EVENT_FTO + 1,
+    CT_TRAINER_CASES_MAX = CT_LETTER_STICKERS * CT_LETTER_STICKERS,
+    CT_TRAINER_HALF = 2
+};
+
+static const char *const CT_TRAINER_EVENT_NAMES[] = {
+    "3x3", "2x2", "3bld", "4bld",  "5bld",     "mbld", "fmc",   "oh",  "4x4",
+    "5x5", "6x6", "7x7",  "clock", "megaminx", "pyra", "skewb", "sq1", "fto",
+};
+
+static const char *const CT_TRAINER_METHOD_NAMES[] = {
+    "cfop", "3style", "old pochmann", "m2",        "u2",  "r2",  "lbl",     "l4e",
+    "4lll", "sarah",  "yau",          "reduction", "cll", "l4t", "concept",
+};
+
+static const char *const CT_TRAINER_STAGE_NAMES[] = {
+    "pll", "oll", "f2l",  "cll",   "cubeshape", "co",     "eo",      "cp",
+    "ep",  "l4e", "4lll", "sarah", "l4t",       "parity", "concept",
+};
+
+static const char *ct_trainer_event_name(ct_event ev) {
+    unsigned long i = (unsigned long)ev;
+    unsigned long count = sizeof CT_TRAINER_EVENT_NAMES / sizeof CT_TRAINER_EVENT_NAMES[0];
+    return i < count ? CT_TRAINER_EVENT_NAMES[i] : "?";
+}
+
+static const char *ct_trainer_method_name(ct_method m) {
+    unsigned long i = (unsigned long)m;
+    unsigned long count = sizeof CT_TRAINER_METHOD_NAMES / sizeof CT_TRAINER_METHOD_NAMES[0];
+    return i < count ? CT_TRAINER_METHOD_NAMES[i] : "?";
+}
+
+static const char *ct_trainer_stage_name(ct_stage st) {
+    unsigned long i = (unsigned long)st;
+    unsigned long count = sizeof CT_TRAINER_STAGE_NAMES / sizeof CT_TRAINER_STAGE_NAMES[0];
+    return i < count ? CT_TRAINER_STAGE_NAMES[i] : "?";
+}
+
+static void ct_trainer_form_reload(ct_trainer_form *f) {
+    f->list_count = ct_selector_lists(f->sel.event, f->sel.method, f->lists, CT_TRAINER_LISTS_MAX);
+    f->case_count = 0;
+    f->cell = CT_TRAINER_CELL_NONE;
+    f->sel.case_index = -1;
+    f->front[0] = '\0';
+    f->alg_text[0] = '\0';
+    f->pack_status = CT_TRAINER_NO_DETAIL;
+    f->alg_status = CT_TRAINER_NO_DETAIL;
+    if (f->list_count <= 0) {
+        f->status = CT_REPO_ERR_DB;
+        return;
+    }
+    if (f->sel.list_id >= f->list_count) {
+        f->sel.list_id = 0;
+    }
+    int n = ct_selector_case_count(f->db, &f->scheme, f->sel.event, f->sel.method, f->sel.list_id);
+    f->case_count = n > 0 ? n : 0;
+    f->status = CT_REPO_OK;
+}
+
+int ct_trainer_form_open(ct_trainer_form *f, sqlite3 *db) {
+    if (f == NULL || db == NULL) {
+        return CT_REPO_ERR_ARG;
+    }
+    memset(f, 0, sizeof *f);
+    f->db = db;
+    f->cfg = ct_config_defaults();
+    if (ct_repo_settings_merge(db, &f->cfg) != 0) {
+        f->status = CT_REPO_ERR_DB;
+        return CT_REPO_ERR_DB;
+    }
+    if (ct_selector_scheme_load(db, &f->scheme) != 0) {
+        f->status = CT_REPO_ERR_DB;
+        return CT_REPO_ERR_DB;
+    }
+    f->scheme_id = ct_letter_scheme_default_id(db);
+    f->sel.event = CT_EVENT_3X3;
+    ct_method methods[CT_TRAINER_LISTS_MAX];
+    int method_count = ct_selector_methods(f->sel.event, methods, CT_TRAINER_LISTS_MAX);
+    if (method_count <= 0) {
+        f->status = CT_REPO_ERR_DB;
+        return CT_REPO_ERR_DB;
+    }
+    f->sel.method = methods[0];
+    f->sel.list_id = 0;
+    ct_trainer_form_reload(f);
+    return f->status;
+}
+
+int ct_trainer_form_select_event(ct_trainer_form *f, ct_event ev) {
+    if (f == NULL || f->db == NULL) {
+        return CT_REPO_ERR_ARG;
+    }
+    ct_method methods[CT_TRAINER_LISTS_MAX];
+    int method_count = ct_selector_methods(ev, methods, CT_TRAINER_LISTS_MAX);
+    if (method_count <= 0) {
+        f->status = CT_REPO_ERR_ARG;
+        return CT_REPO_ERR_ARG;
+    }
+    f->sel.event = ev;
+    f->sel.method = methods[0];
+    f->sel.list_id = 0;
+    ct_trainer_form_reload(f);
+    return f->status;
+}
+
+int ct_trainer_form_select_method(ct_trainer_form *f, ct_method m) {
+    if (f == NULL || f->db == NULL) {
+        return CT_REPO_ERR_ARG;
+    }
+    if (ct_selector_lists(f->sel.event, m, NULL, 0) <= 0) {
+        f->status = CT_REPO_ERR_ARG;
+        return CT_REPO_ERR_ARG;
+    }
+    f->sel.method = m;
+    f->sel.list_id = 0;
+    ct_trainer_form_reload(f);
+    return f->status;
+}
+
+int ct_trainer_form_select_list(ct_trainer_form *f, int list_id) {
+    if (f == NULL || f->db == NULL) {
+        return CT_REPO_ERR_ARG;
+    }
+    if (list_id < 0 || list_id >= f->list_count) {
+        f->status = CT_REPO_ERR_ARG;
+        return CT_REPO_ERR_ARG;
+    }
+    f->sel.list_id = list_id;
+    ct_trainer_form_reload(f);
+    return f->status;
+}
+
+static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source *source) {
+    if (f->sel.list_id < 0 || f->sel.list_id >= f->list_count) {
+        return CT_REPO_ERR_DB;
+    }
+    *source = f->lists[f->sel.list_id].source;
+    return CT_REPO_OK;
+}
+
+int ct_trainer_form_select_case(ct_trainer_form *f, int index) {
+    if (f == NULL || f->db == NULL) {
+        return CT_REPO_ERR_ARG;
+    }
+    if (index < 0 || index >= f->case_count) {
+        f->status = CT_REPO_ERR_ARG;
+        return CT_REPO_ERR_ARG;
+    }
+    f->sel.case_index = index;
+    f->front[0] = '\0';
+    f->alg_text[0] = '\0';
+    f->pack_status = CT_TRAINER_NO_DETAIL;
+    f->alg_status = CT_TRAINER_NO_DETAIL;
+    ct_selector_source source;
+    if (ct_trainer_list_source(f, &source) != CT_REPO_OK) {
+        f->status = CT_REPO_ERR_DB;
+        return CT_REPO_ERR_DB;
+    }
+    if (source == CT_SELECTOR_PACK) {
+        ct_pack_entry e;
+        int rc =
+            ct_selector_pack_case(f->db, f->sel.event, f->sel.method, f->sel.list_id, index, &e);
+        f->pack_status = rc == 0 ? CT_PACK_OK : CT_PACK_ERR_DB;
+        if (rc != 0) {
+            f->status = CT_REPO_MISSING;
+            return CT_REPO_MISSING;
+        }
+        snprintf(f->front, sizeof f->front, "%s", e.front_json);
+        snprintf(f->alg_text, sizeof f->alg_text, "%s", e.alg);
+        f->status = CT_REPO_OK;
+        return CT_REPO_OK;
+    }
+    int rc = ct_selector_case_key(f->db, &f->scheme, f->sel.event, f->sel.method, f->sel.list_id,
+                                  index, f->front, (unsigned)sizeof f->front);
+    if (rc != 0) {
+        f->front[0] = '\0';
+        f->status = CT_REPO_ERR_DB;
+        return CT_REPO_ERR_DB;
+    }
+    if (source == CT_SELECTOR_CHART) {
+        char hash[CT_ALG_HASH_HEX_MAX];
+        ct_params_hash(&f->cfg, f->scheme_id, CT_BUFFER_FIXED, hash);
+        int arc = ct_repo_alg_get(f->db, f->lists[f->sel.list_id].orbit, f->front, CT_BUFFER_FIXED,
+                                  CT_TRAINER_ALG_CATEGORY, hash, &f->alg);
+        f->alg_status = arc;
+        if (arc == CT_REPO_OK) {
+            snprintf(f->alg_text, sizeof f->alg_text, "%s", f->alg.sequence);
+        }
+    }
+    f->status = CT_REPO_OK;
+    return CT_REPO_OK;
+}
+
+int ct_trainer_form_select_cell(ct_trainer_form *f, int sticker) {
+    if (f == NULL) {
+        return CT_REPO_ERR_ARG;
+    }
+    ct_selector_source source;
+    if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+        sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+        f->status = CT_REPO_ERR_ARG;
+        return CT_REPO_ERR_ARG;
+    }
+    f->cell = sticker;
+    f->status = CT_REPO_OK;
+    return CT_REPO_OK;
+}
+
+int ct_trainer_form_clear_cell(ct_trainer_form *f) {
+    if (f == NULL) {
+        return CT_REPO_ERR_ARG;
+    }
+    f->cell = CT_TRAINER_CELL_NONE;
+    f->status = CT_REPO_OK;
+    return CT_REPO_OK;
+}
+
+static int ct_trainer_cell_matches(const ct_trainer_form *f, int index) {
+    int t1 = -1;
+    int t2 = -1;
+    if (ct_selector_case_pair(&f->scheme, f->sel.event, f->sel.method, f->sel.list_id, index, &t1,
+                              &t2) != 0) {
+        return 0;
+    }
+    return t1 == f->cell || t2 == f->cell;
+}
+
+int ct_trainer_form_visible_count(const ct_trainer_form *f) {
+    if (f == NULL || f->case_count <= 0) {
+        return 0;
+    }
+    ct_selector_source source;
+    if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+        f->cell == CT_TRAINER_CELL_NONE) {
+        return f->case_count;
+    }
+    int total = 0;
+    for (int i = 0; i < f->case_count; i++) {
+        if (ct_trainer_cell_matches(f, i)) {
+            total++;
+        }
+    }
+    return total;
+}
+
+int ct_trainer_form_nth_visible(const ct_trainer_form *f, int visible) {
+    if (f == NULL || visible < 0) {
+        return -1;
+    }
+    ct_selector_source source;
+    if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+        f->cell == CT_TRAINER_CELL_NONE) {
+        return visible < f->case_count ? visible : -1;
+    }
+    int seen = 0;
+    for (int i = 0; i < f->case_count; i++) {
+        if (!ct_trainer_cell_matches(f, i)) {
+            continue;
+        }
+        if (seen == visible) {
+            return i;
+        }
+        seen++;
+    }
+    return -1;
+}
+
+typedef struct {
+    ct_trainer_form form;
+    bool opened;
+    int event_scroll;
+    int method_scroll;
+    int list_scroll;
+    int case_scroll;
+    int case_active;
+    char event_labels[CT_TRAINER_EVENTS_MAX][CT_TRAINER_KEY_MAX];
+    char *event_ptrs[CT_TRAINER_EVENTS_MAX];
+    char method_labels[CT_TRAINER_LISTS_MAX][CT_TRAINER_KEY_MAX];
+    char *method_ptrs[CT_TRAINER_LISTS_MAX];
+    char list_labels[CT_TRAINER_LISTS_MAX][CT_TRAINER_KEY_MAX];
+    char *list_ptrs[CT_TRAINER_LISTS_MAX];
+    char case_labels[CT_TRAINER_CASES_MAX][CT_TRAINER_KEY_MAX];
+    char *case_ptrs[CT_TRAINER_CASES_MAX];
+} ct_trainer_screen;
+
+static ct_trainer_screen ct_trainer;
+
+static void ct_trainer_build_labels(ct_trainer_screen *s) {
+    ct_trainer_form *f = &s->form;
+    int events = ct_selector_events(NULL, 0);
+    for (int i = 0; i < events && i < CT_TRAINER_EVENTS_MAX; i++) {
+        snprintf(s->event_labels[i], sizeof s->event_labels[i], "%s",
+                 ct_trainer_event_name((ct_event)i));
+        s->event_ptrs[i] = s->event_labels[i];
+    }
+    ct_method methods[CT_TRAINER_LISTS_MAX];
+    int method_count = ct_selector_methods(f->sel.event, methods, CT_TRAINER_LISTS_MAX);
+    for (int i = 0; i < method_count; i++) {
+        snprintf(s->method_labels[i], sizeof s->method_labels[i], "%s",
+                 ct_trainer_method_name(methods[i]));
+        s->method_ptrs[i] = s->method_labels[i];
+    }
+    for (int i = 0; i < f->list_count; i++) {
+        snprintf(s->list_labels[i], sizeof s->list_labels[i], "%s",
+                 ct_trainer_stage_name(f->lists[i].stage));
+        s->list_ptrs[i] = s->list_labels[i];
+    }
+    int visible = ct_trainer_form_visible_count(f);
+    s->case_active = -1;
+    for (int v = 0; v < visible && v < CT_TRAINER_CASES_MAX; v++) {
+        int index = ct_trainer_form_nth_visible(f, v);
+        if (index < 0 || ct_selector_case_key(f->db, &f->scheme, f->sel.event, f->sel.method,
+                                              f->sel.list_id, index, s->case_labels[v],
+                                              (unsigned)sizeof s->case_labels[v]) != 0) {
+            s->case_labels[v][0] = '\0';
+        }
+        s->case_ptrs[v] = s->case_labels[v];
+        if (index == f->sel.case_index) {
+            s->case_active = v;
+        }
+    }
+}
+
+static void ct_trainer_on_event(int active) {
+    if (active >= 0 && active < CT_TRAINER_EVENTS_MAX) {
+        ct_trainer_form_select_event(&ct_trainer.form, (ct_event)active);
+    }
+}
+
+static void ct_trainer_on_method(int active) {
+    ct_method methods[CT_TRAINER_LISTS_MAX];
+    int method_count =
+        ct_selector_methods(ct_trainer.form.sel.event, methods, CT_TRAINER_LISTS_MAX);
+    if (active >= 0 && active < method_count) {
+        ct_trainer_form_select_method(&ct_trainer.form, methods[active]);
+    }
+}
+
+static void ct_trainer_on_list(int active) {
+    if (active >= 0) {
+        ct_trainer_form_select_list(&ct_trainer.form, active);
+    }
+}
+
+static void ct_trainer_on_case(int active) {
+    int index = ct_trainer_form_nth_visible(&ct_trainer.form, active);
+    if (index >= 0) {
+        ct_trainer_form_select_case(&ct_trainer.form, index);
+    }
+}
+
+void ct_screen_trainer_update(ct_app *app) {
+    if (app == NULL) {
+        return;
+    }
+    if (!ct_trainer.opened) {
+        ct_trainer.opened = true;
+        ct_trainer_form_open(&ct_trainer.form, app->db);
+    }
+    if (IsKeyPressed(KEY_ESCAPE)) {
+        app->screen = CT_SCREEN_MENU;
+    }
+}
+
+static Rectangle ct_trainer_rect(int x, int y, int w, int h) {
+    Rectangle r = {(float)x, (float)y, (float)w, (float)h};
+    return r;
+}
+
+static void ct_trainer_draw_grid(ct_trainer_form *f, Rectangle bounds) {
+    GuiGroupBox(bounds, "letters");
+    const char *letters =
+        f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.map.edge : f->scheme.map.corner;
+    int buffer = f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.buffer_edge
+                                                                 : f->scheme.buffer_corner;
+    for (int i = 0; i < CT_LETTER_STICKERS; i++) {
+        Rectangle cell;
+        if (ct_heatmap_cell(bounds, CT_TRAINER_GRID_COLS, CT_TRAINER_GRID_ROWS, i, &cell) != 0) {
+            continue;
+        }
+        char label[2] = {letters[i], '\0'};
+        Color tint = RAYWHITE;
+        if (i == f->cell) {
+            tint = YELLOW;
+        } else if (i == buffer) {
+            tint = SKYBLUE;
+        }
+        int size = (int)(cell.height / CT_TRAINER_HALF);
+        int tw = MeasureText(label, size);
+        DrawText(label, (int)(cell.x + (cell.width - tw) / CT_TRAINER_HALF),
+                 (int)(cell.y + (cell.height - size) / CT_TRAINER_HALF), size, tint);
+    }
+    Vector2 mouse = GetMousePosition();
+    int picked = ct_heatmap_pick(bounds, CT_TRAINER_GRID_COLS, CT_TRAINER_GRID_ROWS, mouse);
+    if (picked >= 0 && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        if (picked == f->cell) {
+            ct_trainer_form_clear_cell(f);
+        } else {
+            ct_trainer_form_select_cell(f, picked);
+        }
+    }
+}
+
+void ct_screen_trainer_draw(ct_app *app) {
+    ClearBackground(DARKGRAY);
+    if (app == NULL) {
+        return;
+    }
+    ct_trainer_form *f = &ct_trainer.form;
+    int w = (int)app->cfg.window.width;
+    int h = (int)app->cfg.window.height;
+    int margin = w >> CT_TRAINER_MARGIN_SHIFT;
+    int row_h = h >> CT_TRAINER_FIELD_H_SHIFT;
+    int text_size = h >> CT_TRAINER_TEXT_SHIFT;
+    int col_w = w / CT_TRAINER_COL_DIV - margin;
+    int events = ct_selector_events(NULL, 0);
+    ct_method methods[CT_TRAINER_LISTS_MAX];
+    int method_count = ct_selector_methods(f->sel.event, methods, CT_TRAINER_LISTS_MAX);
+    int grid_h = row_h * CT_TRAINER_GRID_ROWS + row_h;
+    int list_y = margin + row_h + margin;
+    int case_y = f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART
+                     ? list_y + grid_h + margin
+                     : list_y;
+    int status_h = row_h;
+    int list_h = h - case_y - status_h - 2 * margin - row_h - margin;
+    if (list_h < row_h) {
+        list_h = row_h;
+    }
+    int detail_x = margin + 2 * (col_w + margin);
+    int detail_w = w - detail_x - margin;
+
+    ct_trainer_build_labels(&ct_trainer);
+    if (f->list_count <= 0 || f->db == NULL) {
+        GuiStatusBar(ct_trainer_rect(margin, h - status_h, w - 2 * margin, status_h),
+                     "no lists for this event");
+        return;
+    }
+    int event_active = (int)f->sel.event;
+    if (GuiListViewEx(ct_trainer_rect(margin, list_y, col_w, h - list_y - status_h - 2 * margin),
+                      ct_trainer.event_ptrs, events, &ct_trainer.event_scroll, &event_active,
+                      NULL)) {
+        ct_trainer_on_event(event_active);
+    }
+    int method_active = -1;
+    for (int i = 0; i < method_count; i++) {
+        if (methods[i] == f->sel.method) {
+            method_active = i;
+        }
+    }
+    if (GuiListViewEx(ct_trainer_rect(margin + col_w + margin, list_y, col_w,
+                                      h - list_y - status_h - 2 * margin),
+                      ct_trainer.method_ptrs, method_count, &ct_trainer.method_scroll,
+                      &method_active, NULL)) {
+        ct_trainer_on_method(method_active);
+    }
+    int list_active = f->sel.list_id;
+    if (GuiListViewEx(ct_trainer_rect(margin + 2 * (col_w + margin), list_y, col_w, row_h + margin),
+                      ct_trainer.list_ptrs, f->list_count, &ct_trainer.list_scroll, &list_active,
+                      NULL)) {
+        ct_trainer_on_list(list_active);
+    }
+    if (f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART) {
+        ct_trainer_draw_grid(f, ct_trainer_rect(margin + 2 * (col_w + margin),
+                                                list_y + row_h + 2 * margin, col_w, grid_h));
+    }
+    int visible = ct_trainer_form_visible_count(f);
+    if (visible > CT_TRAINER_CASES_MAX) {
+        visible = CT_TRAINER_CASES_MAX;
+    }
+    if (GuiListViewEx(ct_trainer_rect(margin + 2 * (col_w + margin), case_y, col_w, list_h),
+                      ct_trainer.case_ptrs, visible, &ct_trainer.case_scroll,
+                      &ct_trainer.case_active, NULL)) {
+        ct_trainer_on_case(ct_trainer.case_active);
+    }
+
+    GuiGroupBox(ct_trainer_rect(detail_x, margin, detail_w, h - 2 * margin - status_h), "case");
+    char line[CT_TRAINER_KEY_MAX];
+    snprintf(line, sizeof line, "event %s method %s", ct_trainer_event_name(f->sel.event),
+             ct_trainer_method_name(f->sel.method));
+    GuiLabel(ct_trainer_rect(detail_x + margin, margin + row_h, detail_w - 2 * margin, row_h),
+             line);
+    snprintf(line, sizeof line, "list %s cases %d",
+             ct_trainer_stage_name(f->lists[f->sel.list_id].stage), f->case_count);
+    GuiLabel(ct_trainer_rect(detail_x + margin, margin + 2 * row_h, detail_w - 2 * margin, row_h),
+             line);
+    if (f->sel.case_index >= 0) {
+        DrawText(f->front, detail_x + margin, margin + 3 * row_h, text_size, RAYWHITE);
+        DrawText(f->alg_text[0] != '\0' ? f->alg_text : "no alg", detail_x + margin,
+                 margin + 4 * row_h, text_size, f->alg_text[0] != '\0' ? RAYWHITE : GRAY);
+    } else {
+        DrawText("no case selected", detail_x + margin, margin + 3 * row_h, text_size, GRAY);
+    }
+    if (GuiButton(ct_trainer_rect(detail_x, h - status_h - margin - row_h, detail_w, row_h),
+                  "back")) {
+        app->screen = CT_SCREEN_MENU;
+    }
+    GuiStatusBar(ct_trainer_rect(margin, h - status_h, w - 2 * margin, status_h),
+                 f->status == CT_REPO_OK ? "ok" : "error");
+}
