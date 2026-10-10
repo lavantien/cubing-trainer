@@ -46,10 +46,16 @@ static double clamp_lo_hi(double x, double lo, double hi) {
 }
 
 static double clamp_stability(double s) {
+    if (!isfinite(s)) {
+        return CT_FSRS_MIN_STABILITY;
+    }
     return clamp_lo_hi(s, CT_FSRS_MIN_STABILITY, CT_FSRS_MAX_IVL_DAYS);
 }
 
 static double clamp_difficulty(double d) {
+    if (!isfinite(d)) {
+        return CT_FSRS_MAX_DIFFICULTY;
+    }
     return clamp_lo_hi(d, CT_FSRS_MIN_DIFFICULTY, CT_FSRS_MAX_DIFFICULTY);
 }
 
@@ -115,6 +121,11 @@ long ct_fsrs_next_interval_days(const ct_fsrs *f, double stability) {
     return (long)round(raw);
 }
 
+static long due_after_interval(const ct_fsrs *f, double stability, long today_day) {
+    long ivl = ct_fsrs_next_interval_days(f, stability);
+    return today_day > LONG_MAX - ivl ? LONG_MAX : today_day + ivl;
+}
+
 ct_fsrs_card ct_fsrs_review(const ct_fsrs *f, const ct_fsrs_card *card, ct_grade g,
                             double elapsed_days, long today_day) {
     if ((int)g < CT_AGAIN || (int)g > CT_EASY) {
@@ -133,18 +144,31 @@ ct_fsrs_card ct_fsrs_review(const ct_fsrs *f, const ct_fsrs_card *card, ct_grade
     }
     if (elapsed_days == 0 && card->last_review_day == today_day) {
         out.stability = clamp_stability(stability_same_day(f->w, s, g));
+        out.difficulty = clamp_difficulty(card->difficulty);
         out.due_day = today_day;
+        if (card->state == 2 && g == CT_AGAIN) {
+            out.state = 3;
+            out.lapses = card->lapses + 1;
+        } else if (card->state == 2) {
+            out.due_day = due_after_interval(f, out.stability, today_day);
+        }
         return out;
     }
     double r = ct_fsrs_retrievability(s, elapsed_days);
     out.difficulty = difficulty_next(f->w, card->difficulty, g);
-    if (g >= CT_HARD) {
-        out.stability = clamp_stability(stability_recall(f->w, s, out.difficulty, r, g));
-    } else {
+    out.due_day = today_day;
+    if (g == CT_AGAIN) {
         out.stability = clamp_stability(stability_forget(f->w, s, out.difficulty, r));
-        out.lapses = card->lapses + 1;
+        if (card->state == 2) {
+            out.state = 3;
+            out.lapses = card->lapses + 1;
+        }
+        return out;
     }
-    long ivl = ct_fsrs_next_interval_days(f, out.stability);
-    out.due_day = today_day > LONG_MAX - ivl ? LONG_MAX : today_day + ivl;
+    out.stability = clamp_stability(stability_recall(f->w, s, out.difficulty, r, g));
+    if (g >= CT_GOOD || card->state == 2) {
+        out.state = 2;
+        out.due_day = due_after_interval(f, out.stability, today_day);
+    }
     return out;
 }

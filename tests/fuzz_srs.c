@@ -80,7 +80,7 @@ static ct_fsrs_card ct_fsr_card(ct_sfc64 *s, long today) {
         c.last_review_day = today;
         return c;
     }
-    c.state = 1;
+    c.state = 1 + (int)ct_sfc64_range(s, 3);
     c.stability = ct_fsr_stability(s);
     c.difficulty = ct_fsr_difficulty(s);
     if (ct_sfc64_range(s, 3) == 0) {
@@ -101,7 +101,7 @@ static bool ct_fsr_card_sane(const ct_fsrs_card *c, long today) {
     return ct_fsr_finite(c->stability) && c->stability >= CT_FSRS_MIN_STABILITY &&
            c->stability <= CT_FSRS_MAX_IVL_DAYS && ct_fsr_finite(c->difficulty) &&
            c->difficulty >= CT_FSRS_MIN_DIFFICULTY && c->difficulty <= CT_FSRS_MAX_DIFFICULTY &&
-           due_ok && c->state == 1;
+           due_ok && c->state >= 1 && c->state <= 3;
 }
 
 CT_SUITE(fuzz_srs_walk) {
@@ -136,14 +136,37 @@ CT_SUITE(fuzz_srs_walk) {
             CT_FZ((double)ivl <= f.max_ivl_days, seed);
             if (fresh) {
                 CT_FZ(out.due_day == today, seed);
+                CT_FZ(out.state == 1, seed);
                 CT_FZ(out.lapses == prev_lapses, seed);
             } else if (same_day) {
+                if (card.state == 2 && g == CT_AGAIN) {
+                    CT_FZ(out.due_day == today, seed);
+                    CT_FZ(out.state == 3, seed);
+                    CT_FZ(out.difficulty == prev_difficulty, seed);
+                    CT_FZ(out.lapses == prev_lapses + 1, seed);
+                } else if (card.state == 2) {
+                    CT_FZ(out.due_day == today + ivl, seed);
+                    CT_FZ(out.state == 2, seed);
+                    CT_FZ(out.difficulty == prev_difficulty, seed);
+                    CT_FZ(out.lapses == prev_lapses, seed);
+                } else {
+                    CT_FZ(out.due_day == today, seed);
+                    CT_FZ(out.state == card.state, seed);
+                    CT_FZ(out.difficulty == prev_difficulty, seed);
+                    CT_FZ(out.lapses == prev_lapses, seed);
+                }
+            } else if (g == CT_AGAIN) {
                 CT_FZ(out.due_day == today, seed);
-                CT_FZ(out.difficulty == prev_difficulty, seed);
+                CT_FZ(out.state == (card.state == 2 ? 3 : card.state), seed);
+                CT_FZ(out.lapses == prev_lapses + (card.state == 2 ? 1 : 0), seed);
+            } else if (g == CT_HARD && card.state != 2) {
+                CT_FZ(out.due_day == today, seed);
+                CT_FZ(out.state == card.state, seed);
                 CT_FZ(out.lapses == prev_lapses, seed);
             } else {
                 CT_FZ(out.due_day == today + ivl, seed);
-                CT_FZ(out.lapses == prev_lapses + (g == CT_AGAIN ? 1 : 0), seed);
+                CT_FZ(out.state == 2, seed);
+                CT_FZ(out.lapses == prev_lapses, seed);
             }
             double r_short = ct_fsrs_retrievability(out.stability, 1.0);
             double r_long = ct_fsrs_retrievability(out.stability, 100.0);
@@ -206,17 +229,39 @@ CT_SUITE(fuzz_srs_elapsed) {
         CT_FZ(ct_fsr_card_sane(&out, today), seed);
         CT_FZ(out.reps == card.reps + 1, seed);
         CT_FZ(out.last_review_day == today, seed);
+        long ivl = ct_fsrs_next_interval_days(&f, out.stability);
+        long interval_due = today > LONG_MAX - ivl ? LONG_MAX : today + ivl;
         if (card.state == 0) {
             CT_FZ(out.due_day == today, seed);
+            CT_FZ(out.state == 1, seed);
             CT_FZ(out.lapses == card.lapses, seed);
         } else if (elapsed == 0.0 && card.last_review_day == today) {
-            CT_FZ(out.due_day == today, seed);
             CT_FZ(out.difficulty == card.difficulty, seed);
+            if (card.state == 2 && g == CT_AGAIN) {
+                CT_FZ(out.due_day == today, seed);
+                CT_FZ(out.state == 3, seed);
+                CT_FZ(out.lapses == card.lapses + 1, seed);
+            } else if (card.state == 2) {
+                CT_FZ(out.due_day == interval_due, seed);
+                CT_FZ(out.state == 2, seed);
+                CT_FZ(out.lapses == card.lapses, seed);
+            } else {
+                CT_FZ(out.due_day == today, seed);
+                CT_FZ(out.state == card.state, seed);
+                CT_FZ(out.lapses == card.lapses, seed);
+            }
+        } else if (g == CT_AGAIN) {
+            CT_FZ(out.due_day == today, seed);
+            CT_FZ(out.state == (card.state == 2 ? 3 : card.state), seed);
+            CT_FZ(out.lapses == card.lapses + (card.state == 2 ? 1 : 0), seed);
+        } else if (g == CT_HARD && card.state != 2) {
+            CT_FZ(out.due_day == today, seed);
+            CT_FZ(out.state == card.state, seed);
             CT_FZ(out.lapses == card.lapses, seed);
         } else {
-            CT_FZ(out.due_day >= today + 1, seed);
-            CT_FZ(out.due_day <= today + (long)max_add, seed);
-            CT_FZ(out.lapses == card.lapses + (g == CT_AGAIN ? 1 : 0), seed);
+            CT_FZ(out.due_day == interval_due, seed);
+            CT_FZ(out.state == 2, seed);
+            CT_FZ(out.lapses == card.lapses, seed);
         }
         ct_fsrs_card edge = card;
         if (edge.state == 0) {
@@ -242,8 +287,14 @@ CT_SUITE(fuzz_srs_elapsed) {
             for (int gidx = 0; gidx < CT_FSR_GRADES; gidx++) {
                 ct_fsrs_card moved = ct_fsrs_review(&f, &stale, (ct_grade)(gidx + 1), 0.0, today);
                 CT_FZ(ct_fsr_card_sane(&moved, today), seed);
-                CT_FZ(moved.due_day >= today + 1, seed);
-                CT_FZ(moved.due_day <= today + (long)max_add, seed);
+                if (gidx + 1 <= CT_HARD) {
+                    CT_FZ(moved.due_day == today, seed);
+                    CT_FZ(moved.state == 1, seed);
+                } else {
+                    CT_FZ(moved.due_day >= today + 1, seed);
+                    CT_FZ(moved.due_day <= today + (long)max_add, seed);
+                    CT_FZ(moved.state == 2, seed);
+                }
             }
         }
         ct_fsrs_card fresh = {0};
@@ -290,10 +341,37 @@ CT_SUITE(fuzz_srs_grade_space) {
         for (int g = 0; g + 1 < CT_FSR_GRADES; g++) {
             CT_FZ(graded[g].difficulty >= graded[g + 1].difficulty, seed);
         }
-        CT_FZ(graded[0].lapses == card.lapses + 1, seed);
+        CT_FZ(graded[0].state == 1, seed);
+        CT_FZ(graded[1].state == 1, seed);
+        CT_FZ(graded[2].state == 2, seed);
+        CT_FZ(graded[3].state == 2, seed);
+        CT_FZ(graded[0].due_day == today, seed);
+        CT_FZ(graded[1].due_day == today, seed);
+        for (int g = 2; g < CT_FSR_GRADES; g++) {
+            CT_FZ(graded[g].due_day == today + ct_fsrs_next_interval_days(&f, graded[g].stability),
+                  seed);
+        }
+        CT_FZ(graded[0].lapses == card.lapses, seed);
         CT_FZ(graded[1].lapses == card.lapses, seed);
         CT_FZ(graded[2].lapses == card.lapses, seed);
         CT_FZ(graded[3].lapses == card.lapses, seed);
+        ct_fsrs_card review_base = card;
+        review_base.state = 2;
+        ct_fsrs_card rv_graded[CT_FSR_GRADES];
+        for (int g = 0; g < CT_FSR_GRADES; g++) {
+            rv_graded[g] = ct_fsrs_review(&f, &review_base, (ct_grade)(g + 1), elapsed, today);
+            CT_FZ(ct_fsr_card_sane(&rv_graded[g], today), seed);
+        }
+        CT_FZ(rv_graded[0].state == 3, seed);
+        CT_FZ(rv_graded[0].due_day == today, seed);
+        CT_FZ(rv_graded[0].lapses == review_base.lapses + 1, seed);
+        for (int g = 1; g < CT_FSR_GRADES; g++) {
+            CT_FZ(rv_graded[g].state == 2, seed);
+            CT_FZ(rv_graded[g].due_day ==
+                      today + ct_fsrs_next_interval_days(&f, rv_graded[g].stability),
+                  seed);
+            CT_FZ(rv_graded[g].lapses == review_base.lapses, seed);
+        }
         ct_fsrs_card fresh = {0};
         fresh.last_review_day = today;
         ct_fsrs_card born[CT_FSR_GRADES];

@@ -319,7 +319,7 @@ CT_SUITE(session_flow_golden) {
     CT_ASSERT_STR_EQ(row.last_review, now_stamp);
     CT_ASSERT_EQ(row.reps, 2);
     CT_ASSERT_EQ(row.lapses, 0);
-    CT_ASSERT_EQ(row.state, 1);
+    CT_ASSERT_EQ(row.state, 2);
 
     ct_review_row revs[4];
     memset(revs, 0, sizeof revs);
@@ -339,7 +339,8 @@ CT_SUITE(session_flow_golden) {
     CT_ASSERT_EQ(ct_repo_srs_get(db, b, &row), CT_REPO_OK);
     CT_ASSERT_DBL_EQ(row.stability, 11.962060841460307, 1e-9);
     CT_ASSERT_DBL_EQ(row.difficulty, 5.7994339073111085, 1e-9);
-    CT_ASSERT_STR_EQ(row.due, "2026-10-21T00:00:00Z");
+    CT_ASSERT_STR_EQ(row.due, now_stamp);
+    CT_ASSERT_EQ(row.state, 1);
     CT_ASSERT_EQ(s.n_hard, 1);
 
     memset(&cur, 0, sizeof cur);
@@ -350,6 +351,7 @@ CT_SUITE(session_flow_golden) {
     CT_ASSERT_DBL_EQ(row.stability, 43.20991950624265, 1e-9);
     CT_ASSERT_DBL_EQ(row.difficulty, 4.184231507311108, 1e-9);
     CT_ASSERT_STR_EQ(row.due, "2026-11-21T00:00:00Z");
+    CT_ASSERT_EQ(row.state, 2);
     CT_ASSERT_EQ(s.n_easy, 1);
     CT_ASSERT_EQ(s.n_graded, 3);
     CT_ASSERT(!ct_session_has_next(&s));
@@ -489,8 +491,9 @@ CT_SUITE(session_lapse) {
     CT_ASSERT_EQ(ct_repo_srs_get(db, id, &row), CT_REPO_OK);
     CT_ASSERT_DBL_EQ(row.stability, 1.7994687509165919, 1e-9);
     CT_ASSERT_DBL_EQ(row.difficulty, 6.607035107311108, 1e-9);
-    CT_ASSERT_STR_EQ(row.due, "2026-10-11T00:00:00Z");
-    CT_ASSERT_EQ(row.lapses, 1);
+    CT_ASSERT_STR_EQ(row.due, now_stamp);
+    CT_ASSERT_EQ(row.state, 1);
+    CT_ASSERT_EQ(row.lapses, 0);
     CT_ASSERT_EQ(row.reps, 2);
 
     ct_review_row revs[2];
@@ -498,7 +501,7 @@ CT_SUITE(session_lapse) {
     CT_ASSERT_EQ(ct_repo_reviews_for_card(db, id, revs, 2), 1);
     CT_ASSERT_EQ(revs[0].rating, CT_AGAIN);
     CT_ASSERT_DBL_EQ(revs[0].elapsed_days, 4.0, 1e-9);
-    CT_ASSERT_DBL_EQ(revs[0].scheduled_days, 2.0, 1e-9);
+    CT_ASSERT_DBL_EQ(revs[0].scheduled_days, 0.0, 1e-9);
     CT_ASSERT(!ct_session_has_next(&s));
     ct_session_free(&s);
     ct_db_close(db);

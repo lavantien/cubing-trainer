@@ -87,24 +87,26 @@ CT_SUITE(stats_deck_aggregates) {
     long a2 = add_card(db, "alpha", "a2", CT_DIR_FR);
     long a3 = add_card(db, "alpha", "a3", CT_DIR_FR);
     add_card(db, "alpha", "a4", CT_DIR_FR);
+    long a5 = add_card(db, "alpha", "a5", CT_DIR_FR);
     long b1 = add_card(db, "beta", "b1", CT_DIR_FR);
     add_card(db, "gamma", "g1", CT_DIR_FR);
 
     put_srs(db, a1, 10.0, 5.0, "2026-05-30T12:00:00Z", 1);
     put_srs(db, a2, 30.0, 7.0, "2026-06-01T00:00:00Z", 2);
     put_srs(db, a3, 1.0, 8.0, "2026-05-01T00:00:00Z", 0);
+    put_srs(db, a5, 2.0, 4.0, "2026-05-15T00:00:00Z", 3);
     put_srs(db, b1, 2.5, 6.5, "2026-07-01T00:00:00Z", 1);
 
     ct_deck_stats decks[4];
     memset(decks, 0, sizeof decks);
     CT_ASSERT_EQ(ct_repo_deck_stats(db, "2026-06-01T00:00:00Z", decks, 4), 3);
     CT_ASSERT_STR_EQ(decks[0].deck, "alpha");
-    CT_ASSERT_EQ(decks[0].total_cards, 4);
-    CT_ASSERT_EQ(decks[0].due_now, 3);
+    CT_ASSERT_EQ(decks[0].total_cards, 5);
+    CT_ASSERT_EQ(decks[0].due_now, 4);
     CT_ASSERT_EQ(decks[0].learning, 1);
-    CT_ASSERT_EQ(decks[0].review_state, 1);
-    CT_ASSERT_DBL_EQ(decks[0].avg_stability, 41.0 / 3.0, 1e-9);
-    CT_ASSERT_DBL_EQ(decks[0].avg_difficulty, 20.0 / 3.0, 1e-9);
+    CT_ASSERT_EQ(decks[0].review_state, 2);
+    CT_ASSERT_DBL_EQ(decks[0].avg_stability, 43.0 / 4.0, 1e-9);
+    CT_ASSERT_DBL_EQ(decks[0].avg_difficulty, 24.0 / 4.0, 1e-9);
     CT_ASSERT_STR_EQ(decks[1].deck, "beta");
     CT_ASSERT_EQ(decks[1].total_cards, 1);
     CT_ASSERT_EQ(decks[1].due_now, 0);
@@ -122,7 +124,7 @@ CT_SUITE(stats_deck_aggregates) {
 
     memset(decks, 0, sizeof decks);
     CT_ASSERT_EQ(ct_repo_deck_stats(db, "2026-08-01T00:00:00Z", decks, 4), 3);
-    CT_ASSERT_EQ(decks[0].due_now, 3);
+    CT_ASSERT_EQ(decks[0].due_now, 4);
     CT_ASSERT_EQ(decks[1].due_now, 1);
     CT_ASSERT_EQ(decks[2].due_now, 0);
 
