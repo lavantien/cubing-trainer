@@ -135,10 +135,9 @@ static void ct_alg_canonical(const ct_config *cfg, int scheme_id, ct_buffer_mode
         used += (size_t)n;
     }
     if (used < cap) {
-        n = snprintf(out + used, cap - used, "|%d|%d|%d|%.6f|%.6f|%.6f|%.6f",
-                     cfg->gen.setup_bfs_depth, cfg->gen.fallback_depth, cfg->gen.straggler_depth,
-                     cfg->gen.weight_len, cfg->gen.weight_subset, cfg->gen.weight_regrip,
-                     cfg->gen.weight_finger);
+        n = snprintf(out + used, cap - used, "|%d|%d|%.6f|%.6f|%.6f|%.6f",
+                     cfg->gen.setup_bfs_depth, cfg->gen.fallback_depth, cfg->gen.weight_len,
+                     cfg->gen.weight_subset, cfg->gen.weight_regrip, cfg->gen.weight_finger);
         if (n > 0)
             used += (size_t)n;
     }

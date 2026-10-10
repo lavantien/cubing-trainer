@@ -51,7 +51,7 @@ CT_SUITE(config_constants) {
     CT_ASSERT_DBL_EQ(CT_GEN_WEIGHT_FINGER, 0.5, 1e-12);
     CT_ASSERT_EQ(CT_GEN_SETUP_BFS_DEPTH, 4);
     CT_ASSERT_EQ(CT_GEN_FALLBACK_DEPTH, 5);
-    CT_ASSERT_EQ(CT_GEN_STRAGGLER_DEPTH, 6);
+    CT_ASSERT_EQ(CT_GEN_CANDIDATE_MAX, 12);
     CT_ASSERT_DBL_EQ(CT_ANIM_MOVE_SECONDS, 0.25, 1e-12);
     CT_ASSERT_EQ(CT_WINDOW_WIDTH, 1280);
     CT_ASSERT_EQ(CT_WINDOW_HEIGHT, 720);
@@ -215,7 +215,6 @@ CT_SUITE(config_defaults) {
     CT_ASSERT_EQ(c.gen.setup_bfs_depth, CT_GEN_SETUP_BFS_DEPTH);
     CT_ASSERT_EQ(c.gen.fallback_depth, CT_GEN_FALLBACK_DEPTH);
     CT_ASSERT_EQ(c.gen.candidate_max, CT_GEN_CANDIDATE_MAX);
-    CT_ASSERT_EQ(c.gen.straggler_depth, CT_GEN_STRAGGLER_DEPTH);
     CT_ASSERT_DBL_EQ(c.anim.move_seconds, CT_ANIM_MOVE_SECONDS, 1e-12);
     CT_ASSERT_EQ(c.anim.ease, CT_EASE_CUBIC_IN_OUT);
     CT_ASSERT_EQ(c.window.width, CT_WINDOW_WIDTH);
@@ -263,8 +262,6 @@ CT_SUITE(config_set_roundtrip) {
     CT_ASSERT_EQ(c.gen.fallback_depth, 3);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.candidate_max", "8"), 0);
     CT_ASSERT_EQ(c.gen.candidate_max, 8);
-    CT_ASSERT_EQ(ct_config_set(&c, "gen.straggler_depth", "8"), 0);
-    CT_ASSERT_EQ(c.gen.straggler_depth, 8);
 
     CT_ASSERT_EQ(ct_config_set(&c, "anim.move_seconds", "0.4"), 0);
     CT_ASSERT_DBL_EQ(c.anim.move_seconds, 0.4, 1e-12);
@@ -552,8 +549,9 @@ CT_SUITE(config_clamping) {
     CT_ASSERT_EQ(c.gen.setup_bfs_depth, 1);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.fallback_depth", "-2"), 0);
     CT_ASSERT_EQ(c.gen.fallback_depth, 1);
-    CT_ASSERT_EQ(ct_config_set(&c, "gen.straggler_depth", "1"), 0);
-    CT_ASSERT_EQ(c.gen.straggler_depth, 1);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.candidate_max", "0"), 0);
+    CT_ASSERT_EQ(c.gen.candidate_max, 1);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.straggler_depth", "8"), -1);
 
     CT_ASSERT_EQ(ct_config_set(&c, "anim.move_seconds", "0.001"), 0);
     CT_ASSERT_DBL_EQ(c.anim.move_seconds, 0.01, 1e-12);

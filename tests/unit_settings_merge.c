@@ -55,7 +55,7 @@ CT_SUITE(settings_merge_round_trip) {
         {"gen.finger_cost_B_ccw", "0.9"},
         {"gen.setup_bfs_depth", "6"},
         {"gen.fallback_depth", "7"},
-        {"gen.straggler_depth", "8"},
+        {"gen.candidate_max", "8"},
         {"anim.move_seconds", "0.4"},
         {"window.width", "1600"},
         {"window.height", "900"},

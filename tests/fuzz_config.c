@@ -15,7 +15,7 @@ enum {
     CT_CK_WFINGER,
     CT_CK_BFS,
     CT_CK_FALLBACK,
-    CT_CK_STRAGGLER,
+    CT_CK_CANDIDATE,
     CT_CK_SECONDS,
     CT_CK_WIDTH,
     CT_CK_HEIGHT,
@@ -69,7 +69,7 @@ static const ct_ck_entry ct_ck_table[] = {
     {"gen.weight_finger", CT_CK_WFINGER, CT_CKV_DBL_MIN},
     {"gen.setup_bfs_depth", CT_CK_BFS, CT_CKV_LONG_LO},
     {"gen.fallback_depth", CT_CK_FALLBACK, CT_CKV_LONG_LO},
-    {"gen.straggler_depth", CT_CK_STRAGGLER, CT_CKV_LONG_LO},
+    {"gen.candidate_max", CT_CK_CANDIDATE, CT_CKV_LONG_LO},
     {"anim.move_seconds", CT_CK_SECONDS, CT_CKV_DBL_LO},
     {"window.width", CT_CK_WIDTH, CT_CKV_LONG_MIN},
     {"window.height", CT_CK_HEIGHT, CT_CKV_LONG_MIN},
@@ -169,8 +169,8 @@ static int *ct_ck_int_field(ct_config *c, int slot) {
         return &c->gen.setup_bfs_depth;
     case CT_CK_FALLBACK:
         return &c->gen.fallback_depth;
-    case CT_CK_STRAGGLER:
-        return &c->gen.straggler_depth;
+    case CT_CK_CANDIDATE:
+        return &c->gen.candidate_max;
     case CT_CK_WIDTH:
         return &c->window.width;
     case CT_CK_HEIGHT:

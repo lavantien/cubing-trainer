@@ -152,7 +152,6 @@ typedef enum ct_cfg_status {
 #define CT_GEN_SETUP_BFS_DEPTH 4
 #define CT_GEN_FALLBACK_DEPTH 5
 #define CT_GEN_CANDIDATE_MAX 12
-#define CT_GEN_STRAGGLER_DEPTH 6
 #define CT_MIN_DEPTH 1
 #define CT_ANIM_MOVE_SECONDS 0.25
 #define CT_ANIM_MIN_MOVE_SECONDS 0.01
@@ -341,7 +340,6 @@ typedef struct ct_gen_cfg {
     int setup_bfs_depth;
     int fallback_depth;
     int candidate_max;
-    int straggler_depth;
 } ct_gen_cfg;
 
 typedef struct ct_anim_cfg {
