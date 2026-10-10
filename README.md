@@ -53,24 +53,24 @@ Module tree:
 
 ```
 Makefile README.md
-db/migrations/001_init.sql  db/seeds/speffz.sql  db/seeds/speffz_source.md
+db/migrations/001_init.sql  db/seeds/speffz.sql  db/seeds/speffz_source.md  db/seeds/packs/*.tsv (16 seed packs)  db/seeds/packs/PROVENANCE.md
 docs/diagrams/*.mmd  docs/diagrams/*.png (generated)  docs/reviews/*.md
 src/config/config.h config.c
-src/engine/cube.h cube.c notation.h notation.c transform.h transform.c geometry.h geometry.c
+src/engine/cube.h cube.c notation.h notation.c transform.h transform.c geometry.h geometry.c geometry_sq1.h geometry_sq1.c geometry_clock.h geometry_clock.c
 src/render/renderer.h renderer.c anim.h anim.c
 src/ui/ui.h widgets.h widgets.c screen_menu.c screen_cards.c screen_review.c screen_settings.c screen_stats.c
 src/storage/db.h db.c migrate.c repo_cards.c repo_reviews.c repo_settings.c repo_stats.c repo_algs.c
 src/srs/fsrs.h fsrs.c
 src/trainer/session.h session.c cfop.h cfop.c selector.h selector.c
-src/gen/targets.h targets.c interchange.h interchange.c synth.h synth.c score.h score.c
+src/gen/targets.h targets.c interchange.h interchange.c synth.h synth.c score.h score.c classify.h classify.c
 src/stats/stats.h stats.c
-src/packs/packs.h packs.c provenance.h provenance.c
-src/app/main.c app.h app_loop.c headless.h headless.c
-tools/gen_diagrams.mjs run_lint.ps1 run_analyze.ps1 check_zero_comments.ps1 check_stray_constants.ps1 stray_constants_allow.txt memguard.ps1 memguard_sleeper.c mutate.c make_db.c db_schema_check.sql db_verify.py render_scene.c visual_check.py visual_selftest.py
+src/packs/packs.h packs.c provenance.h provenance.c seed_registry.h seed_registry.c
+src/app/main.c app.h app_loop.c headless.h headless.c paths.h paths.c
+tools/gen_diagrams.mjs run_lint.ps1 run_analyze.ps1 check_zero_comments.ps1 check_stray_constants.ps1 stray_constants_allow.txt memguard.ps1 memguard_sleeper.c mutate.c make_db.c db_schema_check.sql db_verify.py render_scene.c run_visual.py visual_check.py visual_selftest.py
 tests/framework.h framework.c test_main.c unit_*.c fuzz_engine.c fuzz_srs.c fuzz_db.c fuzz_config.c fuzz_main.c fixtures/ golden/ mutant_allowlist.txt
 ```
 
-In flight: classification in src/gen. Queued: the e2e script runner and the startup settings merge.
+Landed since the last sync: structural classification in src/gen (85f18e1), the startup settings merge (0730ead), exe-relative path resolution (de06402), and startup seeding of the registered event packs (f0e8db9). Queued: the e2e script runner.
 
 Layering, enforced by review: config depends on nothing. engine, srs, and storage depend on config. gen and render depend on engine. trainer depends on storage and srs. ui depends on trainer, render, and storage. app depends on ui. No upward or lateral edges.
 
@@ -80,7 +80,7 @@ raylib 6 notes from the renderer work: matrix types and math live in raymath.h a
 
 The config hub is one header, src/config/config.h, holding ct_config, every enum (grade, orbit, buffer_mode, classification, event, method, stage, direction, ui_screen, ease, config status), and every tunable with its default: FSRS weights, requested retention, interval clamps, preferred move subset and per-face penalties, regrip and fingertrick weights, animation durations and easing, window defaults, DB filename, generator search bounds, and fuzz iteration counts. Face letters map to single bit flags through ct_move_face, CT_MOVE_BIT_U through CT_MOVE_BIT_Z covering faces, slices, and rotations, so a preferred subset is one unsigned mask and per-face penalties index by bit position. The hub is loaded once at startup through ct_config_defaults and passed by pointer, and user settings merge over the defaults through ct_config_set, which parses dotted setting names like srs.request_retention, gen.preferred_moves, and gen.penalty_R with range clamps and rejects unknown names. The lint target fails on numeric literals in src/ outside config.h, inline test tables are exempt, and values that recur across test tables get centralized too.
 
-The data directory is %LOCALAPPDATA%/cubing-trainer, read from the environment at runtime.
+Path resolution landed in src/app/paths.c (de06402). The data directory is %LOCALAPPDATA%/cubing-trainer, read from the environment at runtime and created with mkdir semantics when missing, and an unset LOCALAPPDATA or uncreatable directory aborts startup instead of running db-less (79ffeb5). The migrations directory comes from the CT_MIGRATIONS_DIR environment override when set, else from the executable location at ../../db/migrations, so the installed exe finds the schema next to itself regardless of the working directory. Event pack seeds resolve the same way at ../../db/seeds/packs (CT_SEEDS_PACKS_EXE_REL, f0e8db9), and an override path too long for the buffer is reported at startup instead of being silently truncated (5291338).
 
 ## Cube engine
 
@@ -91,6 +91,8 @@ Sticker indexing for BLD work runs 0 to 23 per orbit: face order U L F R B D, co
 src/engine/transform.c rewrites move sequences as algebra: inverse, mirror, rotate_y, conjugate, and simplify. Mirror swaps R and L and inverts quarter counts, rotate_y cycles the side faces around U for k = 1, 2, 3. Simplify greedily folds adjacent moves that share a face and depth span, merging quarter counts modulo 4 and dropping zeros. Its cap bounds the returned sequence: the call fails only when the folded result exceeds cap or the input exceeds CT_TRANSFORM_ASSEMBLY_MAX, the assembly buffer that bounds intermediate work, and out is left untouched on failure. Both mirror and rotate_y carry simulation oracles in tests/unit_transform.c: mirroring the cube state after an algorithm equals applying the mirrored algorithm to the mirrored solved cube, and appending a y rotation to an algorithm equals applying the rotated algorithm after the y rotation.
 
 src/engine/geometry.h landed the puzzle driver vtable ct_geometry in 2e22289: sticker_count, move_count, move_facelets, sticker_geometry, turn_axis, and move_from_token, all keyed by n, with ct_geometry_apply composing decode and apply. The landed nxn driver addresses moves as depth pairs, each id decodes to face, depth_from, depth_to, and quarter over every contiguous span inside the outer half of the cube, and move_count(n) is 18P with P = half(half + 1) / 2 and half = (n + 1) / 2, so 54 moves at n = 3 and 180 at n = 7. Whole-cube rotations span depth 1 through n and encoding rejects spans deeper than half, so rotations sit outside the id space by design. move_facelets writes the permutation into uint8_t values, so the compact convention caps at n = 6 (CT_GEOMETRY_PERM_MAX_N) while counts, decoding, sticker geometry, and turn axes stay valid to n = 7. tests/unit_geometry.c covers decode and encode round trips, counts, permutations, sticker geometry, turn axes, token encoding, and guard paths.
+
+Two single-puzzle drivers joined the vtable in 19fedfc, both valid only at n = 1 (CT_GEOMETRY_SINGLE_N). The square-1 driver models 48 fixed slots over the 2x12 unit rings, one side slot per 30 degree unit plus one face anchor per piece, with 144 move ids covering the 143 WCA (x,y) twist pairs in [-5,6] excluding (0,0) plus the slash at id 143. Twists are pure shape-independent permutations, the slash is legal only when both rings carry piece boundaries at the cut, so the pure move_facelets entry returns CT_GEOMETRY_E_STATE for the slash while the state-aware move_facelets_state entry, the vtable addition the nxn and clock drivers leave null, checks legality against the ring state. Piece orientation carried by slash flips is outside the permutation abstraction and not modeled, the recorded gap. The clock driver holds the official 18 hand positions mod 12 with the regulation pin rule vectors from the WCA scrambler, 109 move ids from 9 wheel names UR DR DL UL U R D L ALL times 12 canonical amounts plus y2 at id 108. Wheel turns change hand angles and never permute positions, so move_facelets returns CT_GEOMETRY_E_PERM for them and serves the y2 permutation only. Model conventions plus the WCA regulation and official scrambler provenance live in tests/fixtures/wca_sq1_clock_notation.md, coverage in tests/unit_geometry_sq1.c and tests/unit_geometry_clock.c.
 
 ## Notation grammar
 
@@ -110,20 +112,20 @@ Canonical formatting rules: a single inner layer spells the digit prefix only ab
 
 Half turn suffix order: WCA regulation 12a defines the prime forms as counterclockwise 90 degree turns and the trailing 2 as 180 degrees, and the counterclockwise 180 equals the clockwise 180, so U2', U'2, and U2 denote one move. The regulation spells only letter, prime, and trailing digit forms, the digit then prime spelling comes from community sources, verified 2026-10-10: https://www.speedsolving.com/wiki/index.php/M2 prints L2' in the LF row and M2' in the BD section, and http://www.stefan-pochmann.de/spocc/blindsolving/3x3/old.php prints U2' in its PLL scripts.
 
-Per-event token tables for square-1 slash notation, megaminx and clock turns, and FTO faces are planned and not in the parser yet.
+Per-event token tables: square-1 slash notation and clock turns parse through their geometry drivers' move_from_token (19fedfc), restricted to the WCA scramble grammar, strict (X,Y) integer pairs and / for square-1 and the canonical pin plus amount forms and y2 for clock, while site notations beyond that grammar such as Sarah's (U) setup markers, trailing * markers, and cubingapp's paren-less 3,3 form are rejected. Megaminx and FTO face tables remain planned and outside the parser.
 
 Round-trip properties are a fuzz surface: format(parse(s)) normalizes, and parse(format(a)) == a.
 
 ## Commutator classes
 
-Structural classification of 3-style commutators, from the speedsolving wiki BH (Beyer-Hardwick) pages:
+Structural classification of 3-style commutators landed in src/gen/classify.c (85f18e1). The class set is the ct_classification enum in the config hub, and ct_classify_alg returns a ct_classify_result decomposition struct: class label, setup, interchange, and insertion move spans, insert_first and cyclic flags, move and qtm counts, a canonical label, and a rationale string naming the recognition logic, so user-entered algorithms decompose the same way as generated ones. Class definitions and example rows are pinned in tests/fixtures/bh_classification.md, sourced from the speedsolving wiki Beyer-Hardwick page and the speedcubing.com/chris bhcorners and bhedges pages:
 
 | orbit | class | moves |
 | --- | --- | --- |
 | corner | pure | 8 |
 | corner | A9 | 9 |
 | corner | orthogonal | 10 |
-| corner | cyclic shift | 11 |
+| corner | cyclic shift | 10 |
 | corner | column | 11 |
 | corner | per special | 12 |
 | edge | half slice-plane | 4 |
@@ -133,7 +135,7 @@ Structural classification of 3-style commutators, from the speedsolving wiki BH 
 | edge | B9, edges only | 9 |
 | edge | orthogonal | 10 |
 
-Alternate labels (perpendicular, collision, simultaneous) ship as display aliases, the canonical labels are the wiki table. The generator also labels parity, edge flip, and corner twist cases outside this table.
+Cyclic shift count discrepancy, recorded in the fixture: every bhcorners.html cyclic shift row and the A B A' C B C' formula give 10 moves, while the speedsolving wiki page text and the earlier plan say 11, and the fixture follows the algorithms at 10. Alternate labels (perpendicular, collision, simultaneous) ship as display aliases, the canonical labels are the fixture table. The classifier also labels parity, edge flip, and corner twist cases outside this table, and tests/unit_classify.c covers labels, aliases, the 21 fixture rows, synth table agreement, and stress rounds over random sequences.
 
 ## Case tables and letters
 
@@ -147,7 +149,7 @@ App definition, floating buffer mode: fixed-buffer mode generates 3-cycles that 
 
 ## Event packs
 
-17 official events as of 2026-10-09. FTO joins officially on 2027-01-02 and clock retires after Worlds 2027, both per the WCA post linked under source records. The packs storage layer landed in src/packs with a hand-rolled SHA-256 over a canonical row form feeding the content_hash column, asserted in tests/unit_packs.c. Seed row capture is the remaining M5 work in flight, and the table below is the plan of record. Seed methods per event:
+17 official events as of 2026-10-09. FTO joins officially on 2027-01-02 and clock retires after Worlds 2027, both per the WCA post linked under source records. The packs storage layer landed in src/packs with a hand-rolled SHA-256 over a canonical row form feeding the content_hash column, asserted in tests/unit_packs.c. Seed capture is done: 16 TSV packs hold 574 rows in db/seeds/packs/, the seed registry in src/packs/seed_registry.c binds each file to its event, method, and stage triple, and startup seeds every registered pack (f0e8db9). The startup contract is degraded-not-fatal for seeds: a missing seeds directory or an incomplete pass logs to stderr and the app continues, while a failed database open, migration, or settings merge aborts startup (79ffeb5). The per-event method plan of record:
 
 | event | method | seed source approach | status |
 | --- | --- | --- | --- |
@@ -168,7 +170,28 @@ App definition, floating buffer mode: fixed-buffer mode generates 3-cycles that 
 | square-1 | cubeshape and last layer | cubeshape, CO, EO, CP, and EP sets | curated |
 | FTO | L4T Redux | L4T Redux | curated |
 
-Every curated seed row records its source URL, retrieval date, and content hash.
+Landed pack inventory, summary level, with per-pack row counts asserted at startup in tests/unit_pack_startup.c:
+
+| pack | event | method | stage | rows |
+| --- | --- | --- | --- | --- |
+| twoby2_cll.tsv | 2x2 | CLL | CLL | 42 |
+| skewb_sarah.tsv | skewb | Sarah intermediate | Sarah | 15 |
+| pyraminx_l4e.tsv | pyraminx | L4E | L4E | 35 |
+| megaminx_4lll.tsv | megaminx | 4LLL | 4LLL | 39 |
+| sq1_cubeshape.tsv | square-1 | LBL | cubeshape | 169 |
+| sq1_co.tsv | square-1 | LBL | CO | 7 |
+| sq1_eo.tsv | square-1 | LBL | EO | 7 |
+| sq1_cp.tsv | square-1 | LBL | CP | 16 |
+| sq1_ep.tsv | square-1 | LBL | EP | 99 |
+| clock_algs.tsv | clock | LBL | concept | 14 |
+| bigcube_parity.tsv | 4x4 | Yau | parity | 5 |
+| bld_m2.tsv | 3BLD | M2 | concept | 22 |
+| bld_oldpoch.tsv | 3BLD | Old Pochmann | concept | 38 |
+| fmc_concepts.tsv | FMC | concept | concept | 16 |
+| fto_l4t_redux.tsv | FTO | L4T Redux | L4T | 36 |
+| mbld_concepts.tsv | multi-BLD | 3-style | concept | 14 |
+
+16 packs, 574 rows total. The square-1 pack ships as 5 per-stage files because the loader binds one stage per file. Events still without seed rows by design: 3x3 and 3x3 OH are user entered, 3BLD 3-style and the 4BLD and 5BLD core are generated by the app, and the 5x5 through 7x7 reduction algs remain to source. Sources, retrieval dates, case key derivations, and per-pack discrepancies are the detailed record in db/seeds/packs/PROVENANCE.md. Every curated seed row records its source URL, retrieval date, and content hash, and the selector exposes the seeded packs for study, square-1, clock, and parity among them (e75a3f5, tests/unit_selector_packs.c).
 
 ## Database schema
 
@@ -214,7 +237,7 @@ The C surface sits in src/srs/fsrs.h: ct_grade (again 1, hard, good, easy), ct_f
 
 ## Generator
 
-src/gen/ runs this pipeline per case. Landed so far: target enumeration and interchange detection, template synthesis with setup search and fallback (3179098), scoring with the regrip model (0db720d), and the generated_alg cache with params hash invalidation (576a526). Classification is in flight, so step 5 below is still the design of record:
+src/gen/ runs this pipeline per case. Landed so far: target enumeration and interchange detection, template synthesis with setup search and fallback (3179098), scoring with the regrip model (0db720d), the generated_alg cache with params hash invalidation (576a526), and structural classification (85f18e1), so every step below is implemented:
 
 1. Enumerate targets through the active letter scheme: 24 corner and 24 edge stickers, the 378 corner and 440 edge ordered pairs in fixed-buffer mode, and parity, flip, and twist categories from small tables.
 2. Detect interchanges: move m interchanges stickers (x, y) iff m(x)==y and m(y)==x on the sticker permutations. The landed candidate set in ct_candidate_moves enumerates every face, every slab span contained in the outer half of the cube since deeper spans are complements of shallower ones, and quarters 1 to 3, which is 54 moves on n = 3 and 180 on n = 7, kept when the computed permutation swaps the pair.
@@ -273,6 +296,6 @@ All 5 diagrams are mermaid flowchart LR rendered to PNG by make diagrams through
 | --- | --- | --- |
 | app_loop | app main loop, fixed-timestep update plus render | landed |
 | review_session_flow | review session from due queue through reveal, grade, and FSRS update to the session log | landed, matches src/trainer/session.c |
-| generator_pipeline | src/gen stages from target enumeration to cached algs | landed as the design of record, stages land with M2 |
-| data_flow | ui screens through the repo layer to sqlite, settings rows merging over config defaults | landed as design of record, startup merge queued |
+| generator_pipeline | src/gen stages from target enumeration to cached algs | landed, every stage implemented, classification in 85f18e1 |
+| data_flow | ui screens through the repo layer to sqlite, settings rows merging over config defaults | landed, startup merge in 0730ead, matches src/app/app_loop.c |
 | milestone_map | the M0 to M6 sequence with status | landed, status as of 2026-10-10 |

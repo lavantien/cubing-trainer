@@ -111,7 +111,7 @@ Enum convention: CT_EVENT_FTO, CT_METHOD_L4T_REDUX, CT_STAGE_L4T.
 
 Count: 36 rows. The plan named no count for this pack.
 
-Notation coverage: 31 of 36 algs parse fully. Gaps recorded by playground/seeds_fto/l4t_probe.c: BR and BR' tokens, the FTO back-right face is outside the NxN token table, and L2' and R2', the digit-then-prime suffix order. FTO notation as a whole is a pending parser surface, flagged rather than rejected.
+Notation coverage: 35 of 36 algs parse fully. The digit-then-prime suffix order gap closed when a125acc made the parser accept L2' and R2', pinned on rows l4t.08 and l4t.22 in tests/unit_notation.c. The remaining gap, still open, is BR and BR' in l4t.36: the FTO back-right face is outside the NxN token table. FTO notation as a whole is a pending parser surface, flagged rather than rejected.
 
 ## bld_oldpoch.tsv
 
@@ -125,7 +125,7 @@ Enum convention: CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN, CT_STAGE_PLL as the load
 
 Count: 38 rows, 8 core plus 16 edge letters plus 13 corner letters plus 1 parity.
 
-Validation and coverage: playground/seeds_bld/bld_probe.c simulates every setup with the real engine. All 15 parsed edge setups land their letter sticker exactly on the U face sticker of UL, all 13 corner setups land exactly on the D face sticker of DFR, and every setup is self inverse. The letter cells come from ct_sticker_cell and therefore reverify that J Perm's lettering equals the shipped speffz.sql letter table. The setup table is partial by design, J Perm publishes setups for 30 of the 46 non buffer letters in his example solves and states the rest are intuitive, the remaining 16 letters are left for in app derivation or a future sourcing pass. Parser gaps: U2' in the two Pochmann PLL rows, digit then prime, and bracket groups which the probe strips before parsing, d2 and d' wide turns parse.
+Validation and coverage: playground/seeds_bld/bld_probe.c simulates every setup with the real engine. All 15 parsed edge setups land their letter sticker exactly on the U face sticker of UL, all 13 corner setups land exactly on the D face sticker of DFR, and every setup is self inverse. The letter cells come from ct_sticker_cell and therefore reverify that J Perm's lettering equals the shipped speffz.sql letter table. The setup table is partial by design, J Perm publishes setups for 30 of the 46 non buffer letters in his example solves and states the rest are intuitive, the remaining 16 letters are left for in app derivation or a future sourcing pass. Parser gaps: the U2' digit-then-prime tokens in the two Pochmann PLL rows closed with a125acc, pinned as op.04 and op.05 in tests/unit_notation.c, while bracket groups remain outside the token grammar and the probe strips them before parsing. d2 and d' wide turns parse.
 
 ## bld_m2.tsv
 
@@ -139,7 +139,7 @@ Enum convention: CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_EP as the load time tripl
 
 Count: 22 rows, 19 standard targets plus 3 M slice specials.
 
-Validation and coverage: playground/seeds_bld/bld_probe.c applies every algorithm to the engine cube. 20 of 22 algs parse and simulate sticker exact, the target sticker lands precisely on the D face sticker of the DF buffer. m2.15 LF and m2.22 BD contain L2' and M2' digit then prime tokens the notation parser rejects, recorded as gaps, the rows are kept verbatim.
+Validation and coverage: playground/seeds_bld/bld_probe.c applies every algorithm to the engine cube. All 22 algs parse and simulate sticker exact, the target sticker lands precisely on the D face sticker of the DF buffer. m2.15 LF and m2.22 BD contain L2' and M2' digit-then-prime tokens the parser rejected at capture time, the gap closed with a125acc, which also pins both rows canonicalized in tests/unit_notation.c. The rows are kept verbatim.
 
 ## fmc_concepts.tsv
 
