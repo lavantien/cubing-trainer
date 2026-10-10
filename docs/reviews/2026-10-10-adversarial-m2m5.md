@@ -49,3 +49,34 @@ Reviewer A independently re-derived the full Speffz letter table from the wiki r
 ## disposition
 
 Six fix slots partition the table by file ownership. m6-fix-fsrs takes the scheduler state machine and numerics, m6-fix-storage the repo and seed loader boundary cluster, m6-fix-selector the trainer surface and pack reachability including the missing screen, m6-fix-app the settings, session, and color scheme cluster, m6-fix-sq1 the square-1 geometry defects, m6-fix-gen the generator scoring and classification cluster. A-O5 stays recorded as a prerequisite note rather than a slot. After the wave lands: fmt, lint, analyze, full suite, fuzz, mutation over the touched scopes, e2e, then visual, then M6 close.
+
+## resolution
+
+Every defect and every note except A-O5 landed during the fix wave on 2026-10-10, grouped by landing commit:
+
+| ids | commits | outcome |
+| --- | --- | --- |
+| A-D1, B-D2 | bea663a | fsrs-5 state machine implemented per py-fsrs and ts-fsrs, non-finite difficulty guarded before the round cast |
+| A-D2, B-D1, B-G4, B-G5 | 768e24d, bc608c8 | params hash covers penalty, finger_cost, subset, bounds, and candidate_max, srs.w dropped, eviction api added, put and get bounds symmetric |
+| A-D3, A-D4, A-O10 | 664abe8 | sq1 twist permutations written destination-indexed, parser accumulation bounded before overflow, minus-zero tokens rejected |
+| A-D5 | 775f770 | iso day span validated before the civil date add |
+| A-D6, B-G10 | d65a58b | selector list model rebuilt over the registry, 62 lists live, duplication gone |
+| B-D3 | 581f411 | review session logged on screen exit and queue exhaustion |
+| B-D4 | 8879ebc | app config re-merged on settings save |
+| B-D5 | 704bb2a | saved color scheme applied through the renderer |
+| B-D6, B-G8 | 34b9a73 | pack tsv parsed by column name, failed seed commit rolls back |
+| B-D7 | e7b0f4e | schema asserted at startup, user_version stub fails loudly |
+| B-G1, B-G2, B-G3 | d0c6fde | card write boundaries enforced symmetric with reads, exact round-trip |
+| B-G6 | 93d7544 | interchange pairing restricted to the 3x3 orbit labels |
+| B-G7, B-G9 | 18f7a9f, 8bfca15 | trainer selector screen live, stored letter scheme routed through the lists |
+| B-G11, A-O9 | d957e6a, f691aab, 40c37e6 | 5x5 to 7x7 reduction and parity packs seeded with provenance, registry 16 to 22 entries and 574 to 625 rows |
+| B-G12 | 3dff0c2 | rejected settings rows counted and surfaced on save |
+| A-O1, A-O2 | 0aedc7a | classes gated on exact 3-cycles and fixture move counts, README cyclic shift row reads 10 |
+| A-O3 | 292ae14, b127bb8, 9e40674, cf47a2a | all candidates scored and the best kept under the config cap, e2e winner repinned with justification |
+| A-O4 | 29c2349 | dead straggler_depth key removed, README pins the fallback as total-path bounded and candidate-empty gated |
+| A-O6 | ac03b70 | grip continues through same-face repeats, bad quarters rejected in scoring |
+| A-O7 | 0344f90 | negative gen scoring weights rejected |
+| A-O8 | eebaa03 | README states pack seed algs are display-only site text |
+| A-O5 | none | stays recorded, worker-thread prerequisite before concurrent chart caching |
+
+Beyond the table, the wave also landed the aggregate heap corruption root cause fix (2caa801, missing zero-init before ct_session_begin), the mbld concepts pack mapping per the provenance record (25c7fed, 7882bd7, 68bd368), the alg repo read boundary suite (6379337), and the fixture decomposition span pins (718556a). Full suite green at 28,621,179 pass and 0 fail, make lint tree-wide green over 42 files, all e2e cases green over the real exe.
