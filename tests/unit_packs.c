@@ -237,35 +237,74 @@ CT_SUITE(packs_bad_args) {
     ct_pack_entry e = make_entry();
     ct_pack_entry got;
     char hex[CT_SHA_HEX_MAX];
-    CT_ASSERT(ct_pack_upsert(NULL, &e) < 0);
-    CT_ASSERT(ct_pack_upsert(db, NULL) < 0);
+    CT_ASSERT_EQ(ct_pack_upsert(NULL, &e), CT_PACK_ERR_ARG);
+    CT_ASSERT_EQ(ct_pack_upsert(db, NULL), CT_PACK_ERR_ARG);
     ct_pack_entry bad = make_entry();
     bad.case_key[0] = '\0';
-    CT_ASSERT(ct_pack_upsert(db, &bad) < 0);
+    CT_ASSERT_EQ(ct_pack_upsert(db, &bad), CT_PACK_ERR_ARG);
     bad = make_entry();
     fill_unterminated(bad.case_key, CT_PACK_CASE_KEY_MAX, 'k');
-    CT_ASSERT(ct_pack_upsert(db, &bad) < 0);
+    CT_ASSERT_EQ(ct_pack_upsert(db, &bad), CT_PACK_ERR_ARG);
     bad = make_entry();
     fill_unterminated(bad.alg, CT_PACK_ALG_MAX, 'a');
-    CT_ASSERT(ct_pack_upsert(db, &bad) < 0);
+    CT_ASSERT_EQ(ct_pack_upsert(db, &bad), CT_PACK_ERR_ARG);
     bad = make_entry();
     fill_unterminated(bad.front_json, CT_PACK_FRONT_JSON_MAX, 'j');
-    CT_ASSERT(ct_pack_upsert(db, &bad) < 0);
+    CT_ASSERT_EQ(ct_pack_upsert(db, &bad), CT_PACK_ERR_ARG);
     bad = make_entry();
     fill_unterminated(bad.source_url, CT_PACK_URL_MAX, 'u');
-    CT_ASSERT(ct_pack_upsert(db, &bad) < 0);
+    CT_ASSERT_EQ(ct_pack_upsert(db, &bad), CT_PACK_ERR_ARG);
     bad = make_entry();
     fill_unterminated(bad.source_at, CT_PACK_AT_MAX, 't');
-    CT_ASSERT(ct_pack_upsert(db, &bad) < 0);
-    CT_ASSERT(ct_pack_get(NULL, e.event, e.method, e.stage, e.case_key, &got) < 0);
-    CT_ASSERT(ct_pack_get(db, e.event, e.method, e.stage, e.case_key, NULL) < 0);
-    CT_ASSERT(ct_pack_get(db, e.event, e.method, e.stage, "", &got) < 0);
-    CT_ASSERT(ct_pack_get(db, e.event, e.method, e.stage, NULL, &got) < 0);
-    CT_ASSERT(ct_pack_count(NULL, e.event, e.method, e.stage) < 0);
-    CT_ASSERT(ct_pack_list(NULL, e.event, e.method, e.stage, &got, 1) < 0);
-    CT_ASSERT(ct_pack_list(db, e.event, e.method, e.stage, NULL, 1) < 0);
-    CT_ASSERT(ct_pack_list(db, e.event, e.method, e.stage, &got, -1) < 0);
-    CT_ASSERT(ct_pack_content_hash(NULL, hex) < 0);
-    CT_ASSERT(ct_pack_content_hash(&e, NULL) < 0);
+    CT_ASSERT_EQ(ct_pack_upsert(db, &bad), CT_PACK_ERR_ARG);
+    CT_ASSERT_EQ(ct_pack_get(NULL, e.event, e.method, e.stage, e.case_key, &got), CT_PACK_ERR_ARG);
+    CT_ASSERT_EQ(ct_pack_get(db, e.event, e.method, e.stage, e.case_key, NULL), CT_PACK_ERR_ARG);
+    CT_ASSERT_EQ(ct_pack_get(db, e.event, e.method, e.stage, "", &got), CT_PACK_ERR_ARG);
+    CT_ASSERT_EQ(ct_pack_get(db, e.event, e.method, e.stage, NULL, &got), CT_PACK_ERR_ARG);
+    CT_ASSERT_EQ(ct_pack_count(NULL, e.event, e.method, e.stage), CT_PACK_ERR_ARG);
+    CT_ASSERT_EQ(ct_pack_list(NULL, e.event, e.method, e.stage, &got, 1), CT_PACK_ERR_ARG);
+    CT_ASSERT_EQ(ct_pack_list(db, e.event, e.method, e.stage, NULL, 1), CT_PACK_ERR_ARG);
+    CT_ASSERT_EQ(ct_pack_list(db, e.event, e.method, e.stage, NULL, 0), CT_PACK_OK);
+    CT_ASSERT_EQ(ct_pack_list(db, e.event, e.method, e.stage, &got, -1), CT_PACK_ERR_ARG);
+    CT_ASSERT_EQ(ct_pack_content_hash(NULL, hex), CT_PACK_ERR_ARG);
+    CT_ASSERT_EQ(ct_pack_content_hash(&e, NULL), CT_PACK_ERR_ARG);
+    ct_db_close(db);
+}
+
+CT_SUITE(packs_read_boundaries) {
+    sqlite3 *db = open_db();
+    char long_alg[CT_PACK_ALG_MAX + 1];
+    memset(long_alg, 'R', CT_PACK_ALG_MAX);
+    long_alg[CT_PACK_ALG_MAX] = '\0';
+    char *err = NULL;
+    int rc = sqlite3_exec(db,
+                          "INSERT INTO event_pack(event, method, stage, case_key, alg, front_json,"
+                          " source_url, source_at, content_hash)"
+                          " VALUES(0, 0, 2, 'big', 'x', '{}', NULL, NULL, NULL)",
+                          NULL, NULL, &err);
+    sqlite3_free(err);
+    CT_ASSERT_EQ(rc, SQLITE_OK);
+    sqlite3_stmt *st = NULL;
+    CT_ASSERT_EQ(sqlite3_prepare_v2(db, "UPDATE event_pack SET alg = ? WHERE case_key = 'big'", -1,
+                                    &st, NULL),
+                 SQLITE_OK);
+    sqlite3_bind_text(st, 1, long_alg, -1, SQLITE_STATIC);
+    CT_ASSERT_EQ(sqlite3_step(st), SQLITE_DONE);
+    sqlite3_finalize(st);
+
+    ct_pack_entry got;
+    memset(&got, 0, sizeof got);
+    CT_ASSERT_EQ(ct_pack_get(db, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L, "big", &got),
+                 CT_PACK_OK);
+    CT_ASSERT_EQ(strlen(got.alg), (size_t)(CT_PACK_ALG_MAX - 1));
+    CT_ASSERT_EQ(got.source_url[0], '\0');
+    CT_ASSERT_EQ(got.source_at[0], '\0');
+
+    ct_pack_entry listed[4];
+    memset(listed, 0xAA, sizeof listed);
+    CT_ASSERT_EQ(ct_pack_list(db, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L, listed, 4), 1);
+    CT_ASSERT_EQ(listed[1].event, 0);
+    CT_ASSERT_EQ(listed[1].case_key[0], '\0');
+    CT_ASSERT_EQ(listed[1].alg[0], '\0');
     ct_db_close(db);
 }

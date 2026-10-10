@@ -154,6 +154,9 @@ CT_SUITE(pack_seed_loader_columns) {
         "case_key\talg\tfront_json\tsource_url\tsource_at\n"
         "k1\tR U R'\t{\"case\":\"k1\"}\thttps://ex.example/f\t2026-10-12\n"
         "k2\tR U'\t{\"case\":\"k2\"}\n",
+        "case_key\talg\tfront_json\tsource_url\tsource_at\n"
+        "k1\tR U R'\t{\"case\":\"k1\"}\thttps://ex.example/f\t"
+        "12345678901234567890123456789012\n",
     };
     for (unsigned i = 0; i < sizeof bad_headers / sizeof bad_headers[0]; i++) {
         write_file(CT_SEED_BAD_PATH, bad_headers[i]);
@@ -253,10 +256,12 @@ CT_SUITE(pack_seed_loader_rejects) {
     CT_ASSERT_EQ(
         ct_pack_seed_file(db, CT_SEED_MISSING_PATH, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L),
         CT_PACK_ERR_FILE);
-    CT_ASSERT(ct_pack_seed_file(NULL, CT_SEED_OK_PATH, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L) <
-              0);
-    CT_ASSERT(ct_pack_seed_file(db, NULL, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L) < 0);
-    CT_ASSERT(ct_pack_seed_file(db, "", CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L) < 0);
+    CT_ASSERT(ct_pack_seed_file(NULL, CT_SEED_OK_PATH, CT_EVENT_3X3, CT_METHOD_CFOP,
+                                CT_STAGE_F2L) == CT_PACK_ERR_ARG);
+    CT_ASSERT(ct_pack_seed_file(db, NULL, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L) ==
+              CT_PACK_ERR_ARG);
+    CT_ASSERT(ct_pack_seed_file(db, "", CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L) ==
+              CT_PACK_ERR_ARG);
     ct_db_close(db);
 }
 

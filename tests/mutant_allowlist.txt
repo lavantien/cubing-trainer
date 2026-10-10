@@ -152,3 +152,25 @@ src/packs/seed_registry.c:34	sizeof index mutant reads a same sized element, the
 src/packs/seed_registry.c:41	dir emptiness check shift is subsumed by opendir failing on the empty path
 src/packs/seed_registry.c:54	snprintf boundary and logic mutants sit at path lengths no registry file name reaches, and a truncated path still fails opendir
 src/packs/seed_registry.c:60	seed file return boundary mutants sit at 0 and -1, the loop only produces row counts or errors below -1
+src/packs/packs.c:42	sqlite3 treats any negative nByte as read-to-nul, so the -1 bind length mutant -2 is behaviorally identical
+src/packs/packs.c:57	the null-column branch writes into an entry that ct_pack_get and ct_pack_list pre-zero, so the write index inside the field is unobservable
+src/packs/packs.c:112	the canon bound is unreachable, the largest entry fields sum to about half of CT_PACK_CANON_MAX
+src/packs/packs.c:129	prepare nByte -1 mutant -2 reads to the first nul identically
+src/packs/packs.c:151	the empty-key index mutant reads case_key 1, which is also nul for every literal key the callers pass
+src/packs/packs.c:153	the pre-query memset fill byte is unobservable, ct_pack_from_row overwrites every field before any assertion reads it
+src/packs/packs.c:155	prepare nByte -1 mutant -2 reads to the first nul identically
+src/packs/packs.c:179	prepare nByte -1 mutant -2 reads to the first nul identically
+src/packs/packs.c:191	count of a count query is never negative, the n < 0 clause is dead
+src/packs/packs.c:205	prepare nByte -1 mutant -2 reads to the first nul identically
+src/packs/packs.c:249	the split helper never returns zero, the boundary between negative and zero is unreachable
+src/packs/packs.c:255	the column index initializer is a dead store, the loop assigns col before any read
+src/packs/packs.c:264	seen is consumed only as a boolean, any nonzero sentinel is equivalent
+src/packs/packs.c:274	the copy length off-by-ones land inside the per-row zeroed entry, the nul at dst n survives from the memset either way
+src/packs/packs.c:297	the feof clause only differs for a final line that exactly fills the buffer without a newline, a boundary no fixture reaches
+src/packs/packs.c:301	after the newline strip n is at least the remaining content length, the n greater than zero guard boundary is unreachable
+src/packs/packs.c:305	same unreachable boundary as the newline strip, the carriage strip only runs when content remains
+src/packs/packs.c:307	tsv lines never carry an embedded nul, so the empty-line index mutant sees the same zero
+src/packs/packs.c:310	the header copy length off-by-ones only move bytes the later strcmp never reads past the nul
+src/packs/packs.c:314	have_header is consumed only as a boolean, any nonzero value is equivalent
+src/packs/packs.c:322	the split helper never returns zero for a data line, the boundary between negative and zero is unreachable
+src/packs/packs.c:331	the per-row memset fill byte is unobservable, every field is fully assigned before the row is used
