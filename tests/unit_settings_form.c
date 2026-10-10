@@ -63,7 +63,7 @@ CT_SUITE(settings_form_open) {
     CT_ASSERT_DBL_EQ(f.retention, def.fsrs.request_retention, 1e-12);
     CT_ASSERT_DBL_EQ(f.move_seconds, def.anim.move_seconds, 1e-12);
     CT_ASSERT_EQ(f.move_mask, CT_GEN_DEFAULT_PREFERRED_MOVES);
-    CT_ASSERT_EQ(f.buffer_corner, 0);
+    CT_ASSERT_EQ(f.buffer_corner, 2);
     CT_ASSERT_EQ(f.buffer_edge, 2);
     assert_default_colors(&f);
     CT_ASSERT(!f.dirty);
@@ -117,7 +117,7 @@ CT_SUITE(settings_form_open_fallbacks) {
     CT_ASSERT_DBL_EQ(f.retention, def.fsrs.request_retention, 1e-12);
     CT_ASSERT_DBL_EQ(f.move_seconds, CT_ANIM_MIN_MOVE_SECONDS, 1e-12);
     CT_ASSERT_EQ(f.move_mask, CT_GEN_DEFAULT_PREFERRED_MOVES);
-    CT_ASSERT_EQ(f.buffer_corner, 0);
+    CT_ASSERT_EQ(f.buffer_corner, 2);
     CT_ASSERT_EQ(f.buffer_edge, 2);
     assert_default_colors(&f);
 

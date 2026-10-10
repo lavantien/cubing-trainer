@@ -448,7 +448,7 @@ CT_SUITE(selector_case_keys) {
     char pair[SPEC_KEY_CAP];
     CT_ASSERT_EQ(
         ct_selector_case_key(db, &s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, pair, sizeof pair), 0);
-    CT_ASSERT_STR_EQ(pair, "BC");
+    CT_ASSERT_STR_EQ(pair, "AB");
     CT_ASSERT_EQ(
         ct_selector_case_key(db, &s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 1, 0, pair, sizeof pair), 0);
     CT_ASSERT_STR_EQ(pair, "AB");
@@ -545,8 +545,8 @@ CT_SUITE(selector_case_pairs) {
     int t1 = -1;
     int t2 = -1;
     CT_ASSERT_EQ(ct_selector_case_pair(&s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 0, 0, &t1, &t2), 0);
-    CT_ASSERT_EQ(t1, 1);
-    CT_ASSERT_EQ(t2, 2);
+    CT_ASSERT_EQ(t1, 0);
+    CT_ASSERT_EQ(t2, 1);
     CT_ASSERT_EQ(ct_selector_case_pair(&s, CT_EVENT_3BLD, CT_METHOD_3STYLE, 1, 0, &t1, &t2), 0);
     CT_ASSERT_EQ(t1, 0);
     CT_ASSERT_EQ(t2, 1);

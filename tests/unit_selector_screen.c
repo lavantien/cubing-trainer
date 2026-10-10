@@ -135,7 +135,7 @@ CT_SUITE(trainer_form_generated_alg) {
     CT_ASSERT_EQ(ct_trainer_form_open(&f, db), CT_REPO_OK);
     CT_ASSERT_EQ(ct_trainer_form_select_event(&f, CT_EVENT_3BLD), CT_REPO_OK);
     CT_ASSERT_EQ(ct_trainer_form_select_case(&f, 0), CT_REPO_OK);
-    CT_ASSERT_STR_EQ(f.front, "BC");
+    CT_ASSERT_STR_EQ(f.front, "AB");
     CT_ASSERT_STR_EQ(f.alg_text, "");
     CT_ASSERT(f.alg_status != CT_REPO_OK);
     ct_config cfg = ct_config_defaults();
@@ -145,7 +145,7 @@ CT_SUITE(trainer_form_generated_alg) {
     ct_generated_alg a;
     memset(&a, 0, sizeof a);
     a.orbit = CT_ORBIT_CORNER;
-    snprintf(a.target_pair, sizeof a.target_pair, "%s", "BC");
+    snprintf(a.target_pair, sizeof a.target_pair, "%s", "AB");
     a.buffer_mode = CT_BUFFER_FIXED;
     a.category = 0;
     snprintf(a.sequence, sizeof a.sequence, "%s", "[R U : [D2, R U R']]");
@@ -223,6 +223,6 @@ CT_SUITE(trainer_form_letter_scheme_routed) {
     CT_ASSERT_EQ(ct_trainer_form_open(&f, db), CT_REPO_OK);
     CT_ASSERT_EQ(ct_trainer_form_select_event(&f, CT_EVENT_3BLD), CT_REPO_OK);
     CT_ASSERT_EQ(ct_trainer_form_select_case(&f, 0), CT_REPO_OK);
-    CT_ASSERT_STR_EQ(f.front, "CB");
+    CT_ASSERT_STR_EQ(f.front, "AC");
     ct_db_close(db);
 }

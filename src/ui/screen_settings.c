@@ -143,10 +143,10 @@ void ct_settings_form_open(ct_settings_form *f, sqlite3 *db) {
     }
     f->staged = f->map;
     ct_settings_load_cfg(f);
-    f->buffer_corner = ct_settings_load_buffer(db, CT_SETTINGS_KEY_BUFFER_CORNER,
-                                               CT_SETTINGS_BUFFER_CORNER_DEFAULT);
+    f->buffer_corner =
+        ct_settings_load_buffer(db, CT_SETTINGS_KEY_BUFFER_CORNER, CT_3STYLE_CORNER_BUFFER);
     f->buffer_edge =
-        ct_settings_load_buffer(db, CT_SETTINGS_KEY_BUFFER_EDGE, CT_SETTINGS_BUFFER_EDGE_DEFAULT);
+        ct_settings_load_buffer(db, CT_SETTINGS_KEY_BUFFER_EDGE, CT_3STYLE_EDGE_BUFFER);
     ct_settings_load_colors(f);
     f->dirty = false;
     f->status = CT_REPO_OK;
