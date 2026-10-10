@@ -135,6 +135,16 @@ CT_SUITE(alg_hash_factor_differs) {
     CT_ASSERT(strcmp(a, b) != 0);
 }
 
+CT_SUITE(alg_hash_candidate_differs) {
+    ct_config cfg = ct_config_defaults();
+    char a[CT_ALG_HASH_HEX_MAX];
+    char b[CT_ALG_HASH_HEX_MAX];
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, a);
+    cfg.gen.candidate_max = CT_GEN_CANDIDATE_MAX + 1;
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, b);
+    CT_ASSERT(strcmp(a, b) != 0);
+}
+
 CT_SUITE(alg_hash_format_pinned) {
     ct_config cfg = ct_config_defaults();
     static const char canon[] =
@@ -143,7 +153,7 @@ CT_SUITE(alg_hash_format_pinned) {
         "2.000000,2.000000|"
         "0.200000,0.200000,0.200000,0.200000,0.400000,0.400000,0.400000,0.400000,0.800000,0.800000,"
         "0.800000,0.800000|"
-        "4|5|1.000000|2.000000|1.500000|0.500000";
+        "4|5|12|1.000000|2.000000|1.500000|0.500000";
     char want[CT_SHA_HEX_MAX];
     ct_sha256(canon, (unsigned)(sizeof canon - 1), want);
     char got[CT_ALG_HASH_HEX_MAX];
