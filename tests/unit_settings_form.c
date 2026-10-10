@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../src/render/renderer.h"
 #include "../src/ui/ui.h"
 #include "framework.h"
 
@@ -255,6 +256,32 @@ CT_SUITE(settings_form_colors) {
     CT_ASSERT_EQ(ct_settings_form_stage_color(&f, 0, CT_SETTINGS_CHANNELS, 1), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(ct_settings_form_stage_color(NULL, 0, 0, 1), CT_REPO_ERR_ARG);
     CT_ASSERT(memcmp(f.colors, before, sizeof before) == 0);
+    ct_db_close(db);
+}
+
+CT_SUITE(settings_colors_scheme_round_trip) {
+    sqlite3 *db = form_db();
+    ct_settings_form f;
+    ct_settings_form_open(&f, db);
+    unsigned char want[CT_SETTINGS_FACE_COUNT][CT_SETTINGS_CHANNELS];
+    for (int face = 0; face < CT_SETTINGS_FACE_COUNT; face++) {
+        for (int ch = 0; ch < CT_SETTINGS_CHANNELS; ch++) {
+            want[face][ch] = (unsigned char)(17 * face + 31 * ch + 5);
+            CT_ASSERT_EQ(ct_settings_form_stage_color(&f, face, ch, want[face][ch]), CT_REPO_OK);
+        }
+    }
+    CT_ASSERT_EQ(ct_settings_form_save(&f), CT_REPO_OK);
+
+    ct_color_scheme scheme = ct_color_scheme_default();
+    char hex[CT_SETTINGS_TEXT_MAX];
+    for (int face = 0; face < CT_SETTINGS_FACE_COUNT; face++) {
+        CT_ASSERT_EQ(
+            ct_repo_settings_get(db, ct_color_scheme_keys[face], hex, (unsigned)sizeof hex), 0);
+        CT_ASSERT(ct_color_scheme_face_hex(&scheme, face, hex));
+        CT_ASSERT_EQ(scheme.face[face].r, want[face][0]);
+        CT_ASSERT_EQ(scheme.face[face].g, want[face][1]);
+        CT_ASSERT_EQ(scheme.face[face].b, want[face][2]);
+    }
     ct_db_close(db);
 }
 

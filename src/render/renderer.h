@@ -1,6 +1,8 @@
 #ifndef CT_RENDERER_H
 #define CT_RENDERER_H
 
+#include <stdbool.h>
+
 #include "raylib.h"
 
 #include "config/config.h"
@@ -18,7 +20,10 @@ typedef struct {
     Color face[CT_CUBE_FACE_COUNT];
 } ct_color_scheme;
 
+extern const char *const ct_color_scheme_keys[CT_CUBE_FACE_COUNT];
+
 ct_color_scheme ct_color_scheme_default(void);
+bool ct_color_scheme_face_hex(ct_color_scheme *scheme, int face, const char *hex);
 
 typedef struct {
     Vector3 pos[4];

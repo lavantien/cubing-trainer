@@ -267,12 +267,25 @@ static int ct_review_iso_scan(const char *iso, long *y, int *m, int *d) {
     return CT_SESSION_OK;
 }
 
+static void ct_review_load_scheme(sqlite3 *db) {
+    ct_review.scheme = ct_color_scheme_default();
+    if (db == NULL) {
+        return;
+    }
+    char hex[CT_SETTINGS_TEXT_MAX];
+    for (int face = 0; face < CT_CUBE_FACE_COUNT; face++) {
+        if (ct_repo_settings_get(db, ct_color_scheme_keys[face], hex, (unsigned)sizeof hex) == 0) {
+            (void)ct_color_scheme_face_hex(&ct_review.scheme, face, hex);
+        }
+    }
+}
+
 static void ct_review_open(ct_app *app) {
     ct_review.opened = true;
     ct_review.session_logged = false;
     memset(&ct_review.form, 0, sizeof ct_review.form);
     ct_renderer_init(&ct_review.renderer, CT_REVIEW_CUBE_N);
-    ct_review.scheme = ct_color_scheme_default();
+    ct_review_load_scheme(app->db);
     float dist = (float)CT_REVIEW_CAM_DIST;
     float offs = (float)CT_REVIEW_CAM_OFFS;
     ct_review.camera.position = (Vector3){dist, dist, dist};

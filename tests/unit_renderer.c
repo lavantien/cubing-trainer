@@ -4,6 +4,7 @@
 
 #include <math.h>
 #include <stdbool.h>
+#include <string.h>
 
 typedef struct {
     float x;
@@ -353,6 +354,59 @@ CT_SUITE(unit_renderer_colors) {
         CT_ASSERT(cell.face >= 0);
         CT_ASSERT(
             color_eq(quads[i].col, custom.face[facelet_at(&c, cell.face, cell.row, cell.col)]));
+    }
+}
+
+CT_SUITE(unit_renderer_scheme_hex) {
+    ct_color_scheme cs = ct_color_scheme_default();
+
+    CT_ASSERT(ct_color_scheme_face_hex(&cs, CT_FACE_U, "102030"));
+    CT_ASSERT(color_eq(cs.face[CT_FACE_U], (Color){0x10, 0x20, 0x30, 255}));
+    CT_ASSERT(ct_color_scheme_face_hex(&cs, CT_FACE_L, "abcdef"));
+    CT_ASSERT(color_eq(cs.face[CT_FACE_L], (Color){0xAB, 0xCD, 0xEF, 255}));
+    CT_ASSERT(ct_color_scheme_face_hex(&cs, CT_FACE_F, "ABCDEF"));
+    CT_ASSERT(color_eq(cs.face[CT_FACE_F], (Color){0xAB, 0xCD, 0xEF, 255}));
+    CT_ASSERT(ct_color_scheme_face_hex(&cs, CT_FACE_R, "000000"));
+    CT_ASSERT(color_eq(cs.face[CT_FACE_R], (Color){0, 0, 0, 255}));
+    CT_ASSERT(ct_color_scheme_face_hex(&cs, CT_FACE_B, "ffffff"));
+    CT_ASSERT(color_eq(cs.face[CT_FACE_B], (Color){255, 255, 255, 255}));
+    CT_ASSERT(ct_color_scheme_face_hex(&cs, CT_FACE_D, "fF5800"));
+    CT_ASSERT(color_eq(cs.face[CT_FACE_D], (Color){0xFF, 0x58, 0x00, 255}));
+
+    static const char *const bad[] = {
+        "",       "1",      "12",     "1234",    "12345",  "1234567", "12345678", "12345g",
+        "1g3456", "g23456", "12345 ", " 123456", "12-456", "0x1234",  "123456\n",
+    };
+    for (size_t i = 0; i < sizeof bad / sizeof bad[0]; i++) {
+        ct_color_scheme before = cs;
+        CT_ASSERT(!ct_color_scheme_face_hex(&cs, CT_FACE_U, bad[i]));
+        CT_ASSERT(color_eq(cs.face[CT_FACE_U], before.face[CT_FACE_U]));
+    }
+    CT_ASSERT(!ct_color_scheme_face_hex(&cs, -1, "112233"));
+    CT_ASSERT(!ct_color_scheme_face_hex(&cs, CT_CUBE_FACE_COUNT, "112233"));
+    CT_ASSERT(!ct_color_scheme_face_hex(NULL, CT_FACE_U, "112233"));
+    CT_ASSERT(!ct_color_scheme_face_hex(&cs, CT_FACE_U, NULL));
+    CT_ASSERT(color_eq(cs.face[CT_FACE_U], (Color){0x10, 0x20, 0x30, 255}));
+    CT_ASSERT(color_eq(cs.face[CT_FACE_L], (Color){0xAB, 0xCD, 0xEF, 255}));
+    CT_ASSERT(color_eq(cs.face[CT_FACE_F], (Color){0xAB, 0xCD, 0xEF, 255}));
+    CT_ASSERT(color_eq(cs.face[CT_FACE_R], (Color){0, 0, 0, 255}));
+    CT_ASSERT(color_eq(cs.face[CT_FACE_B], (Color){255, 255, 255, 255}));
+    CT_ASSERT(color_eq(cs.face[CT_FACE_D], (Color){0xFF, 0x58, 0x00, 255}));
+
+    for (int f = 0; f < CT_CUBE_FACE_COUNT; f++) {
+        CT_ASSERT(ct_color_scheme_keys[f] != NULL);
+        CT_ASSERT(ct_color_scheme_keys[f][0] == 'u');
+    }
+    CT_ASSERT_STR_EQ(ct_color_scheme_keys[CT_FACE_U], "ui.color_u");
+    CT_ASSERT_STR_EQ(ct_color_scheme_keys[CT_FACE_L], "ui.color_l");
+    CT_ASSERT_STR_EQ(ct_color_scheme_keys[CT_FACE_F], "ui.color_f");
+    CT_ASSERT_STR_EQ(ct_color_scheme_keys[CT_FACE_R], "ui.color_r");
+    CT_ASSERT_STR_EQ(ct_color_scheme_keys[CT_FACE_B], "ui.color_b");
+    CT_ASSERT_STR_EQ(ct_color_scheme_keys[CT_FACE_D], "ui.color_d");
+    for (int a = 0; a < CT_CUBE_FACE_COUNT; a++) {
+        for (int b = a + 1; b < CT_CUBE_FACE_COUNT; b++) {
+            CT_ASSERT(strcmp(ct_color_scheme_keys[a], ct_color_scheme_keys[b]) != 0);
+        }
     }
 }
 

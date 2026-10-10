@@ -6,6 +6,7 @@
 
 #include "raygui.h"
 #include "raylib.h"
+#include "render/renderer.h"
 #include "ui/ui.h"
 
 static const char CT_SETTINGS_KEY_RETENTION[] = "srs.request_retention";
@@ -13,10 +14,6 @@ static const char CT_SETTINGS_KEY_SECONDS[] = "anim.move_seconds";
 static const char CT_SETTINGS_KEY_MOVES[] = "gen.preferred_moves";
 static const char CT_SETTINGS_KEY_BUFFER_CORNER[] = "bld.buffer_corner";
 static const char CT_SETTINGS_KEY_BUFFER_EDGE[] = "bld.buffer_edge";
-
-static const char *const CT_SETTINGS_COLOR_KEYS[CT_SETTINGS_FACE_COUNT] = {
-    "ui.color_u", "ui.color_l", "ui.color_f", "ui.color_r", "ui.color_b", "ui.color_d",
-};
 
 static const char *const CT_SETTINGS_COLOR_DEFAULTS[CT_SETTINGS_FACE_COUNT] = {
     "FFFFFF", "FF5800", "009B48", "B71234", "0046AD", "FFD500",
@@ -108,7 +105,7 @@ static void ct_settings_load_colors(ct_settings_form *f) {
     char buf[CT_SETTINGS_TEXT_MAX];
     for (int face = 0; face < CT_SETTINGS_FACE_COUNT; face++) {
         const char *src = CT_SETTINGS_COLOR_DEFAULTS[face];
-        if (ct_repo_settings_get(f->db, CT_SETTINGS_COLOR_KEYS[face], buf, sizeof buf) == 0 &&
+        if (ct_repo_settings_get(f->db, ct_color_scheme_keys[face], buf, sizeof buf) == 0 &&
             ct_settings_parse_color(buf, f->colors[face])) {
             continue;
         }
@@ -366,7 +363,7 @@ int ct_settings_form_save(ct_settings_form *f) {
     for (int face = 0; face < CT_SETTINGS_FACE_COUNT && rc == CT_REPO_OK; face++) {
         snprintf(buf, sizeof buf, "%02X%02X%02X", (unsigned)f->colors[face][0],
                  (unsigned)f->colors[face][1], (unsigned)f->colors[face][2]);
-        if (ct_repo_settings_set(db, CT_SETTINGS_COLOR_KEYS[face], buf) != 0)
+        if (ct_repo_settings_set(db, ct_color_scheme_keys[face], buf) != 0)
             rc = CT_REPO_ERR_DB;
     }
     if (rc != CT_REPO_OK) {

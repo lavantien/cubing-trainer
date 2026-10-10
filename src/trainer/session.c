@@ -34,9 +34,9 @@ enum {
     ct_civ_year_min = 1,
     ct_civ_year_max = ct_civ_ten * ct_civ_ten * ct_civ_ten * ct_civ_ten - 1,
     ct_civ_month_min = 1,
-    ct_civ_month_max = 12,
+    ct_civ_month_max = ct_civ_ten + 2,
     ct_civ_day_min = 1,
-    ct_civ_day_max = 31,
+    ct_civ_day_max = ct_civ_ten * 3 + 1,
     ct_queue_first_cap = CT_SESSION_STAMP_MAX
 };
 

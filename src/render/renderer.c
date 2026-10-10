@@ -1,7 +1,56 @@
 #include "render/renderer.h"
 
+#include <limits.h>
 #include <math.h>
 #include <stdlib.h>
+#include <string.h>
+
+const char *const ct_color_scheme_keys[CT_CUBE_FACE_COUNT] = {
+    "ui.color_u", "ui.color_l", "ui.color_f", "ui.color_r", "ui.color_b", "ui.color_d",
+};
+
+enum {
+    ct_hex_digits_per_channel = 2,
+    ct_hex_channels = 3,
+    ct_hex_len = ct_hex_digits_per_channel * ct_hex_channels,
+    ct_hex_nibble_shift = 4,
+    ct_hex_alpha = '9' - '0' + 1,
+    ct_hex_alpha_opaque = UCHAR_MAX
+};
+
+static int ct_hex_nibble(char c) {
+    if (c >= '0' && c <= '9') {
+        return c - '0';
+    }
+    if (c >= 'a' && c <= 'f') {
+        return c - 'a' + ct_hex_alpha;
+    }
+    if (c >= 'A' && c <= 'F') {
+        return c - 'A' + ct_hex_alpha;
+    }
+    return -1;
+}
+
+bool ct_color_scheme_face_hex(ct_color_scheme *scheme, int face, const char *hex) {
+    if (scheme == NULL || hex == NULL || face < 0 || face >= CT_CUBE_FACE_COUNT) {
+        return false;
+    }
+    if (strlen(hex) != (size_t)ct_hex_len) {
+        return false;
+    }
+    unsigned char rgb[ct_hex_channels];
+    for (int ch = 0; ch < ct_hex_channels; ch++) {
+        size_t off = (size_t)ch * (size_t)ct_hex_digits_per_channel;
+        int hi = ct_hex_nibble(hex[off]);
+        int lo = ct_hex_nibble(hex[off + 1]);
+        if (hi < 0 || lo < 0) {
+            return false;
+        }
+        rgb[ch] = (unsigned char)((hi << ct_hex_nibble_shift) | lo);
+    }
+    scheme->face[face] = (Color){rgb[0], rgb[1], rgb[2], ct_hex_alpha_opaque};
+    return true;
+}
 
 static float clampf(float v, float lo, float hi) {
     if (v < lo) {
