@@ -667,15 +667,18 @@ static int ct_script_step_trainer(ct_app *app, ct_script_rt *rt, const ct_script
         if (!ev_ok || !m_ok) {
             return ct_script_fail(err, cap, c, "unknown event or method", CT_SCRIPT_EXIT_RUN);
         }
-        ct_orbit orbits[CT_SCRIPT_LIST_CAP];
-        int lists = ct_selector_lists(ev, m, NULL, NULL, orbits, CT_SCRIPT_LIST_CAP);
-        if (lists <= 0 || list_id < 0 || list_id >= lists || list_id >= CT_SCRIPT_LIST_CAP) {
+        if (ct_selector_scheme_load(app->db, &rt->scheme) != 0) {
+            return ct_script_fail(err, cap, c, "letter scheme unavailable", CT_SCRIPT_EXIT_RUN);
+        }
+        ct_selector_list lists[CT_SCRIPT_LIST_CAP];
+        int found = ct_selector_lists(ev, m, lists, CT_SCRIPT_LIST_CAP);
+        if (found <= 0 || list_id < 0 || list_id >= found || list_id >= CT_SCRIPT_LIST_CAP) {
             return ct_script_fail(err, cap, c, "list id out of range", CT_SCRIPT_EXIT_RUN);
         }
         rt->event = ev;
         rt->method = m;
         rt->list_id = (int)list_id;
-        rt->orbit = orbits[list_id];
+        rt->orbit = lists[list_id].orbit;
         rt->target_key[0] = '\0';
         rt->generated = false;
         return 0;
@@ -685,33 +688,36 @@ static int ct_script_step_trainer(ct_app *app, ct_script_rt *rt, const ct_script
         if (ct_script_long(ct_script_arg(s, c, 0), &index) != 0) {
             return ct_script_fail(err, cap, c, "case index is not an integer", CT_SCRIPT_EXIT_RUN);
         }
-        int count = ct_selector_case_count(rt->event, rt->method, rt->list_id);
+        int count =
+            ct_selector_case_count(app->db, &rt->scheme, rt->event, rt->method, rt->list_id);
         if (count <= 0 || index < 0 || index >= count) {
             return ct_script_fail(err, cap, c, "case index out of range", CT_SCRIPT_EXIT_RUN);
         }
         char key[CT_CARD_CASE_KEY_MAX];
-        if (ct_selector_case_key(rt->event, rt->method, rt->list_id, (int)index, key,
-                                 (unsigned)sizeof key) != 0) {
+        if (ct_selector_case_key(app->db, &rt->scheme, rt->event, rt->method, rt->list_id,
+                                 (int)index, key, (unsigned)sizeof key) != 0) {
             return ct_script_fail(err, cap, c, "case key unavailable", CT_SCRIPT_EXIT_RUN);
         }
         snprintf(rt->target_key, sizeof rt->target_key, "%s", key);
+        rt->case_index = (int)index;
         rt->generated = false;
         return 0;
     }
     case CT_SCRIPT_TRAINER_GENERATE: {
-        if (rt->target_key[0] == '\0' || rt->target_key[1] == '\0' || rt->target_key[2] != '\0') {
+        if (rt->target_key[0] == '\0') {
             return ct_script_fail(err, cap, c, "no target pair in scope", CT_SCRIPT_EXIT_RUN);
         }
         if (!rt->synth_ready) {
             ct_synth_init();
             rt->synth_ready = true;
         }
-        int t1 = rt->target_key[0] - CT_LETTER_FIRST;
-        int t2 = rt->target_key[1] - CT_LETTER_FIRST;
-        if (t1 < 0 || t1 >= CT_LETTER_STICKERS || t2 < 0 || t2 >= CT_LETTER_STICKERS) {
-            return ct_script_fail(err, cap, c, "target letters out of range", CT_SCRIPT_EXIT_RUN);
+        int t1 = 0;
+        int t2 = 0;
+        if (ct_selector_case_pair(&rt->scheme, rt->event, rt->method, rt->list_id, rt->case_index,
+                                  &t1, &t2) != 0) {
+            return ct_script_fail(err, cap, c, "target is not a chart pair", CT_SCRIPT_EXIT_RUN);
         }
-        int buffer = rt->orbit == CT_ORBIT_CORNER ? CT_3STYLE_CORNER_BUFFER : CT_3STYLE_EDGE_BUFFER;
+        int buffer = rt->orbit == CT_ORBIT_EDGE ? rt->scheme.buffer_edge : rt->scheme.buffer_corner;
         ct_synth_result res;
         memset(&res, 0, sizeof res);
         int rc = ct_synth_target(rt->orbit, buffer, t1, t2, &app->cfg, &res);

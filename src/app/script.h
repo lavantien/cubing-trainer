@@ -74,7 +74,9 @@ typedef struct {
     ct_event event;
     ct_method method;
     int list_id;
+    int case_index;
     int orbit;
+    ct_selector_scheme scheme;
     char target_key[CT_CARD_CASE_KEY_MAX];
     char alg_text[CT_CARD_ALG_MAX];
     ct_classify_result cls;
