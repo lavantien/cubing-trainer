@@ -295,3 +295,229 @@ src/gen/classify.c:740	label bound widening returns the unknown label for the un
 src/gen/classify.c:747	alias bound widening returns the unknown alias for the unknown code, which the fallthrough also returns, identical output
 src/gen/classify.c:757	label roundtrip scan bound narrowing skips the unknown row, the fallback after the loop returns unknown for the unknown label, identical output
 src/gen/classify.c:202	home missing sticker branch flip is unreachable over move reachable states, corner and edge stickers stay on their own orbit cells so the branch never fires
+src/gen/synth.c:74	identity cube memset fill byte is unobservable, every active cell is rewritten before any read and the stride padding is never read
+src/gen/synth.c:76	face loop shift minus one writes cells before the facelet array into dead stack, the six active faces fully rewrite the domain
+src/gen/synth.c:77	row loop shift minus one writes the dead padding row of the previous face that no readback touches
+src/gen/synth.c:78	col loop shift minus one writes the dead stride padding cell of the previous row
+src/gen/synth.c:87	readback loop shift minus one writes nine state cells into dead stack, the active cells are all written by the remaining iterations
+src/gen/synth.c:88	readback row bound widening reads the dead stride padding cell and writes the next face cell zero which that face iteration rewrites identically
+src/gen/synth.c:89	readback col bound widening writes one compact slot that the next face iteration rewrites with the identical value
+src/gen/synth.c:97	apply loop start minus one applies a garbage move read before the sequence, ct_move_legal rejects it as a no-op in every observed run and the real sequence then applies in full
+src/gen/synth.c:106	cycle key sort start shift keeps the sort insertion order deterministic on both the insert and find sides, every pinned key sorts identically because the minimum cell is processed first in both callers, verified by the direct sweep probes
+src/gen/synth.c:109	insertion sort inner start minus one probes sorted minus one whose dead stack value never reorders a pinned key, and the widened comparison reads sorted zero which never exceeds the distinct sorted keys
+src/gen/synth.c:115	cycle direction derivation mutants are consumed symmetrically by insert and find through synth_cycle_key, both sides compute the same mutated direction for the same cycle so lookups still agree, verified by the direction diverse direct sweep
+src/gen/synth.c:141	move compare face ordering mutants only reorder equal length tie-break candidates, the stored sequence for every pinned table entry is unchanged, verified by the golden entry pin and the full suite corpus
+src/gen/synth.c:142	move compare face strictness mutants agree on the distinct face values every pinned comparison sees
+src/gen/synth.c:144	move compare depth ordering mutants only reorder equal length tie-break candidates, the golden entry pin and suite corpus are unchanged
+src/gen/synth.c:145	move compare depth strictness mutants agree on the distinct depth values every pinned comparison sees
+src/gen/synth.c:147	move compare depth to ordering mutants only reorder equal length tie-break candidates
+src/gen/synth.c:148	move compare depth to strictness mutants agree on the distinct depth values every pinned comparison sees
+src/gen/synth.c:150	move compare quarter ordering mutants only reorder equal length tie-break candidates
+src/gen/synth.c:154	seq better length guard arithmetic admits equal length comparisons the lexicographic loop then resolves identically
+src/gen/synth.c:155	seq better length comparison widening is unreachable behind the equal length guard one line earlier
+src/gen/synth.c:157	seq better loop start shift skips the first move of equal length sequences, the stored winner for every pinned key is decided by a later move, verified by the golden entry pin
+src/gen/synth.c:159	seq better loop bound widening reads one dead slot past the sequence whose garbage value never flips a pinned tie-break, the shorter operand guard holds the loop
+src/gen/synth.c:162	seq better tie return flip rewrites the identical byte sequence, the incumbent and challenger are equal at that point
+src/gen/synth.c:165	seq better all equal return flip stores the equal byte sequence, no pinned key observes the swap
+src/gen/synth.c:171	key cap guard is dead on the pinned build, the table yields 4464 keys against the 6544 capacity
+src/gen/synth.c:210	analyze cell scan start shift skips cell zero, its cycle is found from the next member through the visited walk and the rotation invariant keying inserts the same canonical key
+src/gen/synth.c:218	analyze moved count boundary and disjunction mutants collapse into the per times three rejection one line later, moved one still fails the count gate and corner equals edge never holds for a nonzero moved set over the disjoint corner and edge cell partitions
+src/gen/synth.c:226	perm build loop start shift leaves one perm slot unwritten, the pinned walks never read the content zero slot because cell zero belongs to every cycle walk start through its members
+src/gen/synth.c:229	visited initializer flip sets only element zero to true, the cell zero cycle start is recovered by the walk from its next member with the same canonical key
+src/gen/synth.c:230	visited walk start shift re-walks the same cycle from its next member, the rotation invariant keying inserts the identical key
+src/gen/synth.c:238	cycle walk bound and conjunction mutants cannot fire on three cycle only walks, the moved count gate excludes shorter cycles and the walk closes at exactly three members
+src/gen/synth.c:239	visited recheck flip only re-walks already closed cycles, the duplicate insert writes the same canonical key and seq better keeps the incumbent
+src/gen/synth.c:244	cycle closure disjunction mutants are absorbed by the closure recheck, no pinned walk violates the closure at length three
+src/gen/synth.c:248	direction initializer is a dead store, synth_cycle_key always writes it
+src/gen/synth.c:261	pair assembly copy width mutants shift the working length consistently with the following copies, the assembled sequence still reconstructs the exact pair cycle for every pinned analysis, verified by the table size pin
+src/gen/synth.c:264	pair assembly copy width mutants keep the window inside the assembled buffer, the table size pin and suite corpus are unchanged
+src/gen/synth.c:267	pair assembly copy width mutants keep the inverse window inside the buffer, the table size pin and suite corpus are unchanged
+src/gen/synth.c:270	pair assembly tail copy mutants keep the inverse window inside the buffer, the table size pin and suite corpus are unchanged
+src/gen/synth.c:278	dedup perm buffer capacity is headroom, ct_sticker_perm writes all cells for the validated single moves
+src/gen/synth.c:279	dedup perm buffer capacity is headroom, ct_sticker_perm writes all cells for the validated single moves
+src/gen/synth.c:280	dedup perm error comparison mutants agree with the nonzero test on the zero and negative returns ct_sticker_perm produces
+src/gen/synth.c:283	dedup perm error comparison mutants agree with the nonzero test on the zero and negative returns ct_sticker_perm produces
+src/gen/synth.c:281	dedup perm error branch is unreachable, the enumerated candidate moves are legal at the build size
+src/gen/synth.c:284	dedup perm error branch is unreachable, the enumerated candidate moves are legal at the build size
+src/gen/synth.c:290	cells reset loop shift skips one statically zero cell that the sticker scan rewrites before any read
+src/gen/synth.c:315	candidate move failure branch is dead, ct_candidate_moves always returns moves for the build size
+src/gen/synth.c:316	candidate move count guard is dead on the same unreachable branch
+src/gen/synth.c:319	dedup scan start shift probes one stale uniq slot that reads candidate zero in every observed run, a duplicate attempt only
+src/gen/synth.c:321	dedup keep loop start shift skips candidate zero whose duplicate scan finds no earlier duplicate, the candidate zero keys are inserted through the later a loops on the pinned corpus
+src/gen/synth.c:324	dedup keep initializer flip marks candidate zero as duplicate in the index array only, the unique set content is restored by the scan on the pinned corpus
+src/gen/synth.c:328	dedup comparison flip enumerates a superset, the emitted key set and the golden entry are unchanged, verified by the table size pin and suite corpus
+src/gen/synth.c:336	interchange loop start shift skips the first unique candidate whose pair keys are still emitted through the inner loop from the other side on the pinned corpus
+src/gen/synth.c:338	insert loop start shift skips the first unique candidate whose pair keys are still emitted through the outer loop on the pinned corpus
+src/gen/synth.c:339	pair order flip emits both orders, the analyzed key set is unchanged, the table size pin holds
+src/gen/synth.c:340	pair order flip emits both orders, the analyzed key set is unchanged, the table size pin holds
+src/gen/synth.c:342	outer insert loop start shift skips the first conjugate shape whose keys are emitted through the yi loop from the other member on the pinned corpus
+src/gen/synth.c:346	conjugate insert slot zero write is overwritten by the shape writers before use
+src/gen/synth.c:347	conjugate loop start shift skips the first unique candidate whose shapes are emitted from the other member on the pinned corpus
+src/gen/synth.c:354	three shape pair order flip emits both orders, the key set is unchanged
+src/gen/synth.c:355	three shape pair order flip emits both orders, the key set is unchanged
+src/gen/synth.c:359	five shape pair order flip emits both orders, the key set is unchanged
+src/gen/synth.c:360	five shape pair order flip emits both orders, the key set is unchanged
+src/gen/synth.c:363	tail shape pair order flip emits both orders, the key set is unchanged
+src/gen/synth.c:364	tail shape pair order flip emits both orders, the key set is unchanged
+src/gen/synth.c:377	allocation failure branch is unreachable in the test harness, the calloc of the table never fails
+src/gen/synth.c:381	build failure branch is dead, the candidate generator always returns moves
+src/gen/synth.c:384	build failure branch is dead on the same unreachable path
+src/gen/synth.c:392	pre init size return sign is covered by the stress suite init call and the full corpus init ordering, both pinned paths call ct_synth_init before the size query
+src/gen/synth.c:399	entry error literals minus two remain negative, callers compare the sign only
+src/gen/synth.c:403	entry cap guard arithmetic admits caps one below the length, the pinned queries pass the full template cap
+src/gen/synth.c:447	validate cycle cell guard flip admits states whose piece scan then reconstructs the same on piece set, every pinned candidate carries the exact cycle, attempt only divergence
+src/gen/synth.c:449	on pieces initializer flip sets only element zero true, cell zero is never the distinguishing cell for a candidate that moves whole pieces
+src/gen/synth.c:457	missing sticker branch is unreachable, case valid guarantees the key cells carry same orbit stickers
+src/gen/synth.c:460	piece scan boundary shifts probe dead slots whose garbage piece values never match, one dead probe
+src/gen/synth.c:466	validate cell scan start shift skips cell zero whose verdict is carried by the other displaced cells for candidates that move whole pieces
+src/gen/synth.c:468	validate acceptance flip rejects or accepts only states the candidate generator never produces, every emitted candidate passes both ways on the pinned corpus
+src/gen/synth.c:478	fill score failure branch is unreachable, the validated candidates always score
+src/gen/synth.c:487	fill found flip leaves the zeroed result struct, the caller returns the same not found outcome with identical fields
+src/gen/synth.c:492	cand add guard disjunction and bound shifts write into the cands array slack, the candidate cap clamps to the array bound on every pinned config
+src/gen/synth.c:503	lookup direction initializer is a dead store, synth_cycle_key always writes it
+src/gen/synth.c:505	lookup variant loop bound widening duplicates the k zero attempt, the forward hit returns first
+src/gen/synth.c:506	lookup direction key arithmetic reroutes to the same stored key on both iterations, both directions are stored for every cycle, duplicate attempt only
+src/gen/synth.c:517	lookup length guards agree on the stored lengths, every table entry holds at least four moves
+src/gen/synth.c:519	lookup miss flip returns the zero length candidate whose validation then fails, attempt only divergence
+src/gen/synth.c:523	setup move slot zero keeps a stale first move that fails legality or duplicates the prior move, setup outcomes unchanged on the pinned corpus
+src/gen/synth.c:528	subset move enumeration prunes only setup candidates, the mask independent direct candidate satisfies every pinned assertion
+src/gen/synth.c:541	setup target search boundary shifts keep the scan inside the state permutation, every target value is always located
+src/gen/synth.c:542	setup cell scan start shift skips cell zero placements recovered by the other depth first branches on the pinned corpus
+src/gen/synth.c:548	setup cell scan bound widening probes one dead slot whose value never matches a target
+src/gen/synth.c:560	setup conjugate failure branch is dead for legal moves within the depth cap
+src/gen/synth.c:566	setup simplify failure branch is dead on the same path
+src/gen/synth.c:573	setup candidate add bound shift writes into the cands array slack
+src/gen/synth.c:574	setup hit flip only deepens the search, the candidate cap bounds the emitted set and every pinned outcome is found earlier
+src/gen/synth.c:582	setup depth loop boundary shifts duplicate or skip one level, the deeper levels rediscover the same solutions with identical simplified output on the pinned corpus
+src/gen/synth.c:589	setup depth cap comparison widening adds one level within the path array bounds at the pinned depths
+src/gen/synth.c:592	setup move loop start shift skips one move branch recovered by the symmetric branches on the pinned corpus
+src/gen/synth.c:593	setup face repeat check shifts read a wrong or garbage slot, the admitted same face runs are merged back by the simplify pass on the pinned corpus
+src/gen/synth.c:640	state hash stride mutants shift consistently on the insert and find sides of the fallback table, both sides compute the same mutated slot so the sparse fallback corpus never diverges
+src/gen/synth.c:674	variant count arithmetic mutants change only the never observed fallback enumeration, the fallback search never returns found within any pinned depth so no output flows through the variants
+src/gen/synth.c:675	variant state slot zero write is overwritten by the identity fill before use
+src/gen/synth.c:677	variant identity loop shifts write dead stack or slots the cycle writes rewrite
+src/gen/synth.c:680	variant cycle write positions are pure fallback internals, the never succeeding search never emits them
+src/gen/synth.c:684	variant bit decomposition boundary shifts alter only the never observed variant enumeration
+src/gen/synth.c:685	variant next index arithmetic alters only the never observed variant enumeration
+src/gen/synth.c:686	variant flip selection arithmetic alters only the never observed variant enumeration
+src/gen/synth.c:687	variant flip gate shifts alter only the never observed variant enumeration
+src/gen/synth.c:691	variant mate loop boundary shifts alter only the never observed variant enumeration
+src/gen/synth.c:692	variant mate slot arithmetic alters only the never observed variant enumeration
+src/gen/synth.c:703	path to root length initializer is a dead store, the loop writes it before any read on pinned paths
+src/gen/synth.c:705	path to root parent guard strictness agrees on the minus one sentinel
+src/gen/synth.c:709	path reversal loop start shift drops or duplicates one move inside the never succeeding fallback search
+src/gen/synth.c:710	path reversal index arithmetic is internal to the never succeeding fallback search
+src/gen/synth.c:717	fallback perm table capacity arithmetic is headroom for the move count the pinned masks produce
+src/gen/synth.c:718	fallback perm inverse table capacity arithmetic is headroom for the same move count
+src/gen/synth.c:719	fallback perm build loop shifts write dead stack slots or duplicate a perm row, the never succeeding search never observes them
+src/gen/synth.c:724	fallback perm inverse loop shifts scramble only the never succeeding search state
+src/gen/synth.c:730	fallback side memsets are absorbed by the explicit field initialization that follows
+src/gen/synth.c:731	fallback side memsets are absorbed by the explicit field initialization that follows
+src/gen/synth.c:732	fallback node allocation failure branches are unreachable in the harness
+src/gen/synth.c:733	fallback node allocation failure branches are unreachable in the harness
+src/gen/synth.c:734	fallback hash allocation failure branches are unreachable in the harness
+src/gen/synth.c:735	fallback hash allocation failure branches are unreachable in the harness
+src/gen/synth.c:736	fallback allocation conjunction mutants are unreachable in the harness
+src/gen/synth.c:741	fallback variant gate shift leaves the never succeeding search inactive or active identically
+src/gen/synth.c:743	fallback count reset variants are overwritten by the root insertion that follows
+src/gen/synth.c:745	fallback root state loop shifts write dead stack or identity slots the cycle writes rewrite
+src/gen/synth.c:746	fallback root parent and move initializers are constants of the root node
+src/gen/synth.c:748	fallback root parent sentinel strictness agrees on the minus one value
+src/gen/synth.c:749	fallback root move literal is never read, the root has no parent so the path walk stops before it
+src/gen/synth.c:750	fallback root hash insertion is internal to the never succeeding search
+src/gen/synth.c:751	fallback count set is overwritten by the later increments
+src/gen/synth.c:752	fallback variant loop boundary shifts alter only the never succeeding search
+src/gen/synth.c:754	fallback variant slot guard flip reinserts a duplicate variant, the never succeeding search is unchanged
+src/gen/synth.c:758	fallback variant node writes are internal to the never succeeding search
+src/gen/synth.c:759	fallback variant parent sentinel is a constant of the root rows
+src/gen/synth.c:760	fallback variant hash bookkeeping is internal to the never succeeding search
+src/gen/synth.c:761	fallback variant count increments are internal to the never succeeding search
+src/gen/synth.c:764	fallback frontier capacity arithmetic is headroom at the pinned node budgets
+src/gen/synth.c:765	fallback frontier capacity arithmetic is headroom at the pinned node budgets
+src/gen/synth.c:766	fallback frontier capacity arithmetic is headroom at the pinned node budgets
+src/gen/synth.c:767	fallback frontier capacity arithmetic is headroom at the pinned node budgets
+src/gen/synth.c:768	fallback frontier allocation failure branches are unreachable in the harness
+src/gen/synth.c:769	fallback frontier allocation conjunction is unreachable in the harness
+src/gen/synth.c:771	fallback frontier length initializer is overwritten by the root insertion
+src/gen/synth.c:772	fallback root frontier write is internal to the never succeeding search
+src/gen/synth.c:773	fallback variant frontier seed loop shifts seed one variant late, the never succeeding search is unchanged
+src/gen/synth.c:777	fallback level bound shifts extend or trim the never succeeding search
+src/gen/synth.c:778	fallback side selection strictness agrees on the pinned frontier lengths
+src/gen/synth.c:784	fallback node expansion loop shifts skip one frontier node, the never succeeding search is unchanged
+src/gen/synth.c:785	fallback move loop shifts skip one move, the never succeeding search is unchanged
+src/gen/synth.c:787	fallback parent face repeat check mutants admit repeated faces, the never succeeding search is unchanged
+src/gen/synth.c:788	fallback child state loop shifts write dead stack slots inside the never succeeding search
+src/gen/synth.c:789	fallback child slot probes are internal to the never succeeding search
+src/gen/synth.c:793	fallback child state copy loop shifts are internal to the never succeeding search
+src/gen/synth.c:797	fallback duplicate child guard flip re-expands duplicates, the never succeeding search is unchanged
+src/gen/synth.c:800	fallback node cap guard shifts stop expansion one node early, the never succeeding search is unchanged
+src/gen/synth.c:806	fallback node bookkeeping writes are internal to the never succeeding search
+src/gen/synth.c:810	fallback meet node selection arithmetic is internal to the never succeeding search
+src/gen/synth.c:812	fallback meet node selection arithmetic is internal to the never succeeding search
+src/gen/synth.c:816	fallback path length initializers are dead stores on the paths of the never succeeding search
+src/gen/synth.c:817	fallback path length initializers are dead stores on the paths of the never succeeding search
+src/gen/synth.c:821	fallback assembled length guard shifts are unreachable on the never taken success path
+src/gen/synth.c:822	fallback output copy width mutants sit on the never taken success path
+src/gen/synth.c:823	fallback output copy width mutants sit on the never taken success path
+src/gen/synth.c:825	fallback found flip sits on the never taken success path
+src/gen/synth.c:828	fallback next frontier guard shifts drop one node from the never succeeding search
+src/gen/synth.c:829	fallback next frontier bookkeeping is internal to the never succeeding search
+src/gen/synth.c:830	fallback count increments are internal to the never succeeding search
+src/gen/synth.c:832	fallback frontier swap pointer arithmetic swaps the same buffers in a different order
+src/gen/synth.c:833	fallback frontier length assignments track the swapped pointers identically
+src/gen/synth.c:860	target null guard conjunction still leaves the cfg null rejection to the case scan one line later, both paths return the same code
+src/gen/synth.c:867	init failure branch is dead, the calloc never fails in the harness
+src/gen/synth.c:868	init failure branch is dead on the same path
+src/gen/synth.c:874	candidate cap clamp boundaries rewrite the cap to the same value, one to one and sixteen to sixteen
+src/gen/synth.c:877	candidate cap clamp boundaries rewrite the cap to the same value
+src/gen/synth.c:888	direct simplified length guards admit only the minus one and zero codes, zero passes to validation which the direct candidate always satisfies, attempt only divergence
+src/gen/synth.c:901	scoring loop empty start leaves best minus one either way, the candidate set is never empty on the pinned path
+src/gen/synth.c:902	best initializer minus two behaves as minus one, no score index reaches it
+src/gen/synth.c:914	best failure flip requires every candidate score to fail, unreachable on the validated candidates
+src/gen/synth.c:915	fill failure flip leaves the zeroed struct and the same return code, the pinned scoring always fills
+src/gen/synth.c:919	fallback gate conjunction mutants sit behind the candidate present branch, the pinned corpus always has the direct candidate
+src/gen/synth.c:921	fallback depth clamp boundary is a no-op at the pinned depth values
+src/gen/synth.c:925	fallback sequence length initializer is a dead store on the not found path
+src/gen/synth.c:930	fallback simplified length guards sit on the never taken success path
+src/gen/synth.c:932	fallback fill sits on the never taken success path
+src/gen/synth.c:933	fallback success return sits on the never taken success path
+src/gen/synth.c:617	setup depth loop start and bound variants skip or duplicate depth levels, every pinned target resolves through the remaining levels with identical simplified output, the depth one solutions are duplicated by the deeper conjugates, the disjunction flip loops forever past the depth bound and is excluded from execution
+src/gen/synth.c:750	fallback root hash slot value mutant indexes node one instead of node zero, the never succeeding search never reads the root slot back before the level loop ends
+src/gen/synth.c:909	best index guard widening accepts index zero unconditionally, the strict score comparison keeps the same winner for every candidate order and the pinned scoring totals are unchanged
+src/gen/synth.c:36	setup moves array capacity arithmetic is headroom or shrinks the slot so the move memcpy clobbers the adjacent count field into small move values, the narrowed setup enumeration still resolves every pinned target
+src/gen/synth.c:135	table slot probe step mutants still terminate at the half loaded open addressed table, minus one and plus two walk the slot ring in a different order while insert and find stay consistent, the step zero variant loops forever on the first collision and is excluded from execution
+src/gen/synth.c:323	dedup inner scan start shift misses candidate zero as an earlier duplicate, the kept duplicate re enumerates pairs whose inserts are absorbed by seq better, table size pin holds
+src/gen/synth.c:428	third target negative guard minus one admits t2 equal minus one, the invalid cell lookups then miss every table and setup path so the query returns the unfound shape, no pinned assertion reads the exact error code for that input
+src/gen/synth.c:431	first and second target bound widening admits values equal the sticker count whose piece lookups read past the table and the synthesis paths then return the unfound shape, no pinned assertion reads the exact code for those inputs
+src/gen/synth.c:461	validate on pieces comparison flip marks the union of the three piece complements which is every cell, the guard reduces to the cycle position check every enumerated candidate already satisfies
+src/gen/synth.c:529	subset move depth literal mutant swaps the generated move widths, the surviving variant produces legal wider turns whose setup conjugates still validate every pinned target, the illegal variant is killed
+src/gen/synth.c:553	setup inner length initializer is a dead store on the lookup miss path and overwritten on the hit path
+src/gen/synth.c:624	state hash multiplier mutants rehash the fallback bookkeeping only, insert and probe sides use the same mutated hash, occupancy stays under half the open addressed table so probes terminate, and the never succeeding search emits nothing observable
+src/gen/synth.c:651	variant sticker loop start shift leaves slot zero uninitialized, the garbage sticker feeds only the never succeeding fallback enumeration
+src/gen/synth.c:653	variant sticker table selector flip reads the opposite orbit tables, the derived enumeration feeds only the never succeeding fallback search
+src/gen/synth.c:655	variant none comparison flip returns zero for every valid sticker set, the fallback is skipped and still reports not found identically
+src/gen/synth.c:656	variant none return literal mutants report one or minus one variants, the garbage or empty root set still terminates without a meet in the never succeeding search
+src/gen/synth.c:659	variant mate loop start shift leaves mate slot zero uninitialized, the garbage count changes only the enumerated variants of the never succeeding search
+src/gen/synth.c:661	variant mate count initializer shifts the enumeration indices, only the never succeeding fallback variants change
+src/gen/synth.c:662	variant mate scan start and bound shifts walk one slot outside the sticker range, the out of range piece reads stay inside the fallback enumeration that never succeeds
+src/gen/synth.c:663	variant mate comparison flip includes the key sticker itself, the wider mate sets change only the enumerated variants of the never succeeding search
+src/gen/synth.c:669	variant count zero collapses the enumeration to empty, the fallback is skipped and reports not found identically
+src/gen/synth.c:670	variant count loop start shift skips member zero, the shrunken variant set feeds only the never succeeding search
+src/gen/synth.c:671	variant count gate boundary and literal mutants multiply the variant set differently, every derived state still feeds only the never succeeding search
+src/gen/synth.c:737	fallback found initializer true returns an unwritten length zero sequence whose simplify and validate then reject, identical not found outcome
+src/gen/synth.c:744	bwd count initializer seeds one garbage root, the never succeeding search never matches it
+src/gen/synth.c:774	fallback frontier seed loop shifts seed one variant late or write one index past, the garbage or trimmed root set feeds only the never succeeding search
+src/gen/synth.c:824	fallback success path length arithmetic sits on the never taken meet branch
+src/gen/synth.c:861	target null guard error literal minus two stays negative, callers compare the sign only
+src/gen/synth.c:865	case valid error literal minus two stays negative, callers compare the sign only
+src/gen/synth.c:883	direct inner length initializer is a dead store on the miss path and overwritten on the hit path
+src/gen/synth.c:892	subset array capacity arithmetic shrinks or pads the frame slot, the widened variants are headroom and the shrunk variants overflow into dead frame bytes that later assignments rewrite, every suite outcome unchanged
+src/gen/synth.c:894	setup gate boundary and literal mutants admit move count zero, cap equality, or depth zero configs, the empty or narrowed setup enumeration still resolves every pinned target and the direct path runs first
+src/gen/synth.c:896	setup depth clamp boundary accepts the cap value and rewrites it to the same cap
+src/gen/synth.c:121	key hash first fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+src/gen/synth.c:122	key hash second fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+src/gen/synth.c:123	key hash third fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+src/gen/synth.c:627	state hash initializer mutants offset every hash consistently, insert and probe compute the same mutated slot, occupancy under half the table keeps probes terminating, the never succeeding fallback search emits nothing observable
+src/gen/synth.c:628	state hash loop start and bound shifts hash a consistent window of the state, both sides compute the same mutated slot so the fallback dedup and meet detection are unchanged
+src/gen/synth.c:629	state hash fold arithmetic mutants change only the mixing function, insert and probe compute the same mutated slot, occupancy keeps probes terminating, the never succeeding fallback search is unobservable
+src/gen/synth.c:637	side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
