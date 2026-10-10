@@ -28,6 +28,9 @@ static int score_check_seq(const ct_move *seq, int count) {
         if (seq[i].face < 0 || seq[i].face >= CT_CUBE_FACE_COUNT) {
             return CT_SCORE_E_MOVE;
         }
+        if (seq[i].quarter < CT_SCORE_QUARTER_CW || seq[i].quarter > CT_SCORE_QUARTER_CCW) {
+            return CT_SCORE_E_MOVE;
+        }
     }
     return CT_SCORE_OK;
 }
@@ -67,6 +70,9 @@ int ct_count_regrips(const ct_move *seq, int count) {
     int last = CT_SCORE_HAND_RIGHT;
     int regrips = 0;
     for (int i = 0; i < count; i++) {
+        if (i > 0 && seq[i].face == seq[i - 1].face) {
+            continue;
+        }
         int hand = score_hand_of_face[seq[i].face];
         if (hand == CT_SCORE_HAND_DYNAMIC) {
             hand = last;

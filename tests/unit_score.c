@@ -155,7 +155,18 @@ CT_SUITE(score_regrips) {
 
     ct_move left_ff[3] = {mv(CT_FACE_L, CT_SCORE_QUARTER_CW), mv(CT_FACE_F, CT_SCORE_QUARTER_CW),
                           mv(CT_FACE_F, CT_SCORE_QUARTER_CCW)};
-    CT_ASSERT_EQ(ct_count_regrips(left_ff, 3), 1);
+    CT_ASSERT_EQ(ct_count_regrips(left_ff, 3), 0);
+
+    ct_move ff[2] = {mv(CT_FACE_F, CT_SCORE_QUARTER_CW), mv(CT_FACE_F, CT_SCORE_QUARTER_CW)};
+    CT_ASSERT_EQ(ct_count_regrips(ff, 2), 0);
+
+    ct_move ffff[4] = {mv(CT_FACE_F, CT_SCORE_QUARTER_CW), mv(CT_FACE_F, CT_SCORE_QUARTER_CW),
+                       mv(CT_FACE_F, CT_SCORE_QUARTER_CCW), mv(CT_FACE_F, CT_SCORE_QUARTER_DOUBLE)};
+    CT_ASSERT_EQ(ct_count_regrips(ffff, 4), 0);
+
+    ct_move rffr[4] = {mv(CT_FACE_R, CT_SCORE_QUARTER_CW), mv(CT_FACE_F, CT_SCORE_QUARTER_CW),
+                       mv(CT_FACE_F, CT_SCORE_QUARTER_CCW), mv(CT_FACE_R, CT_SCORE_QUARTER_CCW)};
+    CT_ASSERT_EQ(ct_count_regrips(rffr, 4), 1);
 
     ct_move left_home[3] = {mv(CT_FACE_L, CT_SCORE_QUARTER_CW), mv(CT_FACE_F, CT_SCORE_QUARTER_CW),
                             mv(CT_FACE_L, CT_SCORE_QUARTER_CCW)};
@@ -188,14 +199,14 @@ CT_SUITE(score_total) {
     CT_ASSERT_EQ(p.qtm, 6);
     double subset = 2 * t_subset_of(&c, CT_FACE_L) + 2 * t_subset_of(&c, CT_FACE_F);
     CT_ASSERT_DBL_EQ(p.subset_penalty, subset, 1e-12);
-    CT_ASSERT_EQ(p.regrips, 2);
+    CT_ASSERT_EQ(p.regrips, 1);
     double finger = t_finger_cost(&c, CT_FACE_R, CT_FINGER_DIR_CW) +
                     t_finger_cost(&c, CT_FACE_L, CT_FINGER_DIR_CW) +
                     2 * t_finger_cost(&c, CT_FACE_F, CT_FINGER_DIR_CW) +
                     t_finger_cost(&c, CT_FACE_U, CT_FINGER_DIR_CCW) +
                     t_finger_cost(&c, CT_FACE_L, CT_FINGER_DIR_CCW);
     CT_ASSERT_DBL_EQ(p.finger_penalty, finger, 1e-12);
-    double total = c.gen.weight_len * 6 + c.gen.weight_subset * subset + c.gen.weight_regrip * 2 +
+    double total = c.gen.weight_len * 6 + c.gen.weight_subset * subset + c.gen.weight_regrip * 1 +
                    c.gen.weight_finger * finger;
     CT_ASSERT_DBL_EQ(p.total, total, 1e-9);
     double base_total = p.total;
@@ -209,7 +220,7 @@ CT_SUITE(score_total) {
 
     const char *keys[4] = {"gen.weight_len", "gen.weight_subset", "gen.weight_regrip",
                            "gen.weight_finger"};
-    double comps[4] = {6, subset, 2, finger};
+    double comps[4] = {6, subset, 1, finger};
     char buf[16];
     double delta = 0.25;
     for (int w = 0; w < 4; w++) {
@@ -274,18 +285,26 @@ CT_SUITE(score_errors) {
     ct_score_parts p;
     ct_move bad_face_lo[1] = {mv(-1, CT_SCORE_QUARTER_CW)};
     ct_move bad_face_hi[1] = {mv(6, CT_SCORE_QUARTER_CW)};
+    ct_move bad_quarter_lo[1] = {mv(CT_FACE_R, 0)};
+    ct_move bad_quarter_hi[1] = {mv(CT_FACE_R, CT_MOVE_QUARTERS)};
     ct_move ok[1] = {mv(CT_FACE_R, CT_SCORE_QUARTER_CW)};
 
     CT_ASSERT_EQ(ct_count_qtm(NULL, 1), CT_SCORE_E_ARG);
     CT_ASSERT_EQ(ct_count_qtm(bad_face_lo, 1), CT_SCORE_E_MOVE);
     CT_ASSERT_EQ(ct_count_qtm(bad_face_hi, 1), CT_SCORE_E_MOVE);
+    CT_ASSERT_EQ(ct_count_qtm(bad_quarter_lo, 1), CT_SCORE_E_MOVE);
+    CT_ASSERT_EQ(ct_count_qtm(bad_quarter_hi, 1), CT_SCORE_E_MOVE);
     CT_ASSERT_EQ(ct_count_regrips(NULL, 1), CT_SCORE_E_ARG);
     CT_ASSERT_EQ(ct_count_regrips(bad_face_lo, 1), CT_SCORE_E_MOVE);
+    CT_ASSERT_EQ(ct_count_regrips(bad_quarter_lo, 1), CT_SCORE_E_MOVE);
+    CT_ASSERT_EQ(ct_count_regrips(bad_quarter_hi, 1), CT_SCORE_E_MOVE);
 
     CT_ASSERT_EQ(ct_score_alg(ok, 1, NULL, &p), CT_SCORE_E_ARG);
     CT_ASSERT_EQ(ct_score_alg(ok, 1, &c, NULL), CT_SCORE_E_ARG);
     CT_ASSERT_EQ(ct_score_alg(NULL, 1, &c, &p), CT_SCORE_E_ARG);
     CT_ASSERT_EQ(ct_score_alg(bad_face_hi, 1, &c, &p), CT_SCORE_E_MOVE);
+    CT_ASSERT_EQ(ct_score_alg(bad_quarter_lo, 1, &c, &p), CT_SCORE_E_MOVE);
+    CT_ASSERT_EQ(ct_score_alg(bad_quarter_hi, 1, &c, &p), CT_SCORE_E_MOVE);
 
     char out[8];
     CT_ASSERT_EQ(ct_score_parts_json(NULL, out, sizeof out), CT_SCORE_E_ARG);
