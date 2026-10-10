@@ -67,7 +67,7 @@ MEMGUARD_SLEEPER_BIN := $(BINDIR)/memguard_sleeper.exe
 RELEASE_DIR := $(BUILDDIR)/release
 RELEASE_PKG := $(RELEASE_DIR)/cubing-trainer
 RELEASE_EXE := $(RELEASE_PKG)/dist/bin/cubing-trainer.exe
-RELEASE_NAME := cubing-trainer-$(shell git describe --tags --always)
+RELEASE_NAME := cubing-trainer-$(shell git describe --tags --always --dirty)
 RELEASE_ZIP := $(BUILDDIR)/$(RELEASE_NAME).zip
 RELEASE_CASE := $(BUILDDIR)/release_smoke.txt
 
@@ -204,7 +204,7 @@ release: build
 	cp $(APP_BIN) $(RELEASE_EXE)
 	cp -r db/migrations $(RELEASE_PKG)/db/migrations
 	cp -r db/seeds/packs $(RELEASE_PKG)/db/seeds/packs
-	rm -f $(RELEASE_ZIP)
+	rm -f $(BUILDDIR)/cubing-trainer-*.zip
 	pwsh.exe -NoProfile -Command "Compress-Archive -Path '$(RELEASE_DIR)/*' -DestinationPath '$(RELEASE_ZIP)'"
 	printf 'restart\n' > $(RELEASE_CASE)
 	python -I tools/release_verify.py $(RELEASE_PKG) $(RELEASE_ZIP) $(RELEASE_CASE)

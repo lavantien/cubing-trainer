@@ -43,7 +43,7 @@ def build_tree(base):
     return release, repo_migrations, repo_packs
 
 
-def build_zip(path, release, extra=None, backslash=True, prefix=None):
+def build_zip(path, release, extra=None, backslash=True, prefix=None, duplicate=None):
     sep = "\\" if backslash else "/"
     parts = ([prefix] if prefix else []) + EXE_REL.split("/")
     with zipfile.ZipFile(path, "w") as zf:
@@ -60,6 +60,8 @@ def build_zip(path, release, extra=None, backslash=True, prefix=None):
             )
         if extra is not None:
             zf.writestr(extra, b"stowaway")
+        if duplicate is not None:
+            zf.writestr(duplicate, b"tampered first copy")
 
 
 def build_db(path, version, rows):
@@ -104,8 +106,9 @@ def main():
 
     os.remove(os.path.join(release, "db", "migrations", MIGRATIONS[1]))
     layout_failures = rv.verify_layout(release, migrations, packs, EXE_REL)
-    results.append(expect("layout_missing_migration", len(layout_failures), 1))
+    results.append(expect("layout_missing_migration", len(layout_failures), 2))
     results.append(expect("layout_missing_names_file", MIGRATIONS[1] in layout_failures[0], True))
+    results.append(expect("layout_missing_names_staged", MIGRATIONS[1] in layout_failures[1], True))
 
     results.append(expect("zip_missing_file", len(rv.verify_zip(zip_path, release, "")), 1))
 
@@ -124,6 +127,26 @@ def main():
     build_zip(zip4, release2, prefix="release")
     results.append(expect("zip_prefix_mismatch", len(rv.verify_zip(zip4, release2, "")), 1))
     results.append(expect("zip_prefix_ok", rv.verify_zip(zip4, release2, "release"), []))
+
+    zip5 = os.path.join(case, "out5.zip")
+    build_zip(zip5, release2, duplicate="db/migrations/" + MIGRATIONS[0])
+    dup_failures = rv.verify_zip(zip5, release2, "")
+    results.append(expect("zip_duplicate_entry", len(dup_failures), 1))
+    results.append(expect("zip_duplicate_names_it", "duplicate" in dup_failures[0], True))
+
+    release3, migrations, packs = build_tree(case)
+    write(os.path.join(release3, "db", "extra.txt"), b"stowaway")
+    extra_failures = rv.verify_layout(release3, migrations, packs, EXE_REL)
+    results.append(expect("layout_extra_staged_file", len(extra_failures), 1))
+    results.append(expect("layout_extra_names_it", "extra.txt" in extra_failures[0], True))
+
+    os.environ["CT_PROBE_OVERRIDE"] = "leak"
+    os.environ["KEEP_ME"] = "kept"
+    scrubbed = rv.clean_env()
+    os.environ.pop("CT_PROBE_OVERRIDE")
+    os.environ.pop("KEEP_ME")
+    results.append(expect("env_scrub_drops_ct", "CT_PROBE_OVERRIDE" in scrubbed, False))
+    results.append(expect("env_scrub_keeps_rest", scrubbed.get("KEEP_ME"), "kept"))
 
     db2 = os.path.join(case, "trainer2.db")
     build_db(db2, 1, EXPECTED_ROWS)

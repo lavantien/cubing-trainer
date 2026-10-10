@@ -55,6 +55,12 @@ def verify_layout(release_dir, migrations_dir, packs_dir, exe_rel):
         failures.append(f"no pack seeds found under {packs_dir}")
     elif got_packs != want_packs:
         failures.append(f"pack seeds mismatch: release={sorted(got_packs)} repo={sorted(want_packs)}")
+    staged = tree_files(release_dir)
+    expected = {exe_rel}
+    expected |= {"db/migrations/" + name for name in want_migrations}
+    expected |= {"db/seeds/packs/" + name for name in want_packs}
+    if staged != expected:
+        failures.append(f"staged tree mismatch: extra={sorted(staged - expected)} missing={sorted(expected - staged)}")
     return failures
 
 
@@ -64,10 +70,17 @@ def verify_zip(zip_path, release_dir, prefix):
     try:
         with zipfile.ZipFile(zip_path) as zf:
             entries = {}
+            duplicates = set()
             for info in zf.infolist():
                 name = normalize_entry(info.filename)
-                if name:
-                    entries[name] = info
+                if not name:
+                    continue
+                if name in entries:
+                    duplicates.add(name)
+                entries[name] = info
+            if duplicates:
+                failures.append(f"zip holds duplicate entries: {sorted(duplicates)}")
+                return failures
             if set(entries) != want:
                 extra = sorted(set(entries) - want)
                 missing = sorted(want - set(entries))
@@ -103,6 +116,10 @@ def verify_db(db_path, expected_version, expected_rows):
     finally:
         con.close()
     return failures
+
+
+def clean_env():
+    return {k: v for k, v in os.environ.items() if not k.startswith("CT_")}
 
 
 def run_exe(exe, cwd, env, args):
@@ -145,7 +162,7 @@ def main():
 
     shutil.rmtree(work, ignore_errors=True)
     os.makedirs(work, exist_ok=True)
-    env = {**os.environ, "LOCALAPPDATA": fresh_home(work, "run_home")}
+    env = {**clean_env(), "LOCALAPPDATA": fresh_home(work, "run_home")}
     code, stderr, timed_out = run_exe(exe, work, env, ["--headless", "--script", os.path.abspath(case_path)])
     if timed_out:
         print(f"release_verify FAIL: packaged exe timed out after {RUN_TIMEOUT_SECS}s, headless support missing or hanging")
@@ -169,14 +186,14 @@ def main():
 
 def fatal_checks(exe, work):
     failures = []
-    env = {k: v for k, v in os.environ.items() if k != "LOCALAPPDATA"}
+    env = {k: v for k, v in clean_env().items() if k != "LOCALAPPDATA"}
     code, stderr, timed_out = run_exe(exe, work, env, [])
     if timed_out or code != 1:
         failures.append(f"unset LOCALAPPDATA: expected exit 1, got {'timeout' if timed_out else code}")
     elif "data directory" not in stderr:
         failures.append(f"unset LOCALAPPDATA: stderr missing the data directory failure: {stderr.strip()}")
     home = fresh_home(work, "fatal_migrations_home")
-    env = {**os.environ, "LOCALAPPDATA": home, "CT_MIGRATIONS_DIR": os.path.join(home, "no_such_migrations")}
+    env = {**clean_env(), "LOCALAPPDATA": home, "CT_MIGRATIONS_DIR": os.path.join(home, "no_such_migrations")}
     code, stderr, timed_out = run_exe(exe, work, env, [])
     if timed_out or code != 1:
         failures.append(f"missing migrations dir: expected exit 1, got {'timeout' if timed_out else code}")
