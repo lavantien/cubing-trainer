@@ -122,6 +122,93 @@ CT_SUITE(session_day_numbers) {
     CT_ASSERT(round_trip_ok);
 }
 
+static const int ct_ref_cum[13] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365};
+
+static bool ct_ref_leap(long y) {
+    return (y % 4 == 0 && y % 100 != 0) || y % 400 == 0;
+}
+
+static long ct_ref_days_before_year(long y) {
+    return (y - 1) * 365 + (y - 1) / 4 - (y - 1) / 100 + (y - 1) / 400;
+}
+
+static long ct_ref_day(long y, int m, int d) {
+    if (y == 0) {
+        return ct_ref_day(1, m, d) - 366;
+    }
+    long doy = ct_ref_cum[m - 1] + (m > 2 && ct_ref_leap(y)) + d - 1;
+    return ct_ref_days_before_year(y) + doy - 719162;
+}
+
+CT_SUITE(session_civil_reference) {
+    CT_ASSERT_EQ(ct_ref_day(1970, 1, 1), 0);
+    CT_ASSERT_EQ(ct_ref_day(2000, 1, 1), 10957);
+    CT_ASSERT_EQ(ct_ref_day(2026, 10, 9), 20735);
+    CT_ASSERT_EQ(ct_ref_day(1969, 12, 31), -1);
+
+    static const long years[] = {1,    2,    3,    4,    5,    100,  101,  399,  400,
+                                 401,  499,  500,  501,  800,  801,  1200, 1599, 1600,
+                                 1700, 1800, 1900, 1999, 2000, 2001, 2099, 2100, 2101,
+                                 2199, 2200, 2300, 2400, 2800, 4000, 4400, 8000, 9600,
+                                 9998, 9999};
+    for (size_t i = 0; i < sizeof years / sizeof years[0]; i++) {
+        long y = years[i];
+        for (int m = 1; m <= 12; m++) {
+            int last = ct_ref_leap(y) && m == 2 ? 29 : (m == 2 ? 28 : (ct_ref_cum[m] -
+                                                                       ct_ref_cum[m - 1]));
+            static const int probes[4] = {1, 15, 25, 28};
+            for (int p = 0; p < 4; p++) {
+                int d = probes[p];
+                if (d > last) {
+                    continue;
+                }
+                CT_ASSERT_EQ(ct_session_date_to_day(y, m, d), ct_ref_day(y, m, d));
+                long ry = 0;
+                int rm = 0;
+                int rd = 0;
+                ct_session_day_to_date(ct_ref_day(y, m, d), &ry, &rm, &rd);
+                CT_ASSERT_EQ(ry, y);
+                CT_ASSERT_EQ(rm, m);
+                CT_ASSERT_EQ(rd, d);
+            }
+            if (last == 29) {
+                CT_ASSERT_EQ(ct_session_date_to_day(y, 2, 29), ct_ref_day(y, 2, 29));
+            }
+        }
+    }
+}
+
+CT_SUITE(session_year_zero_boundaries) {
+    CT_ASSERT_EQ(ct_session_date_to_day(0, 1, 1), ct_session_date_to_day(1, 1, 1) - 366);
+    long y = 0;
+    int m = 0;
+    int d = 0;
+    long day = ct_session_date_to_day(0, 1, 1);
+    ct_session_day_to_date(day, &y, &m, &d);
+    CT_ASSERT_EQ(y, 0);
+    CT_ASSERT_EQ(m, 1);
+    CT_ASSERT_EQ(d, 1);
+    day = ct_session_date_to_day(0, 2, 29);
+    ct_session_day_to_date(day, &y, &m, &d);
+    CT_ASSERT_EQ(y, 0);
+    CT_ASSERT_EQ(m, 2);
+    CT_ASSERT_EQ(d, 29);
+
+    long era_day = -146097 - 719162;
+    ct_session_day_to_date(era_day, &y, &m, &d);
+    CT_ASSERT_EQ(ct_session_date_to_day(y, m, d), era_day);
+    ct_session_day_to_date(era_day - 1, &y, &m, &d);
+    CT_ASSERT_EQ(ct_session_date_to_day(y, m, d), era_day - 1);
+    ct_session_day_to_date(era_day + 1, &y, &m, &d);
+    CT_ASSERT_EQ(ct_session_date_to_day(y, m, d), era_day + 1);
+
+    long deep_day = ct_session_date_to_day(-146096, 1, 1);
+    ct_session_day_to_date(deep_day, &y, &m, &d);
+    CT_ASSERT_EQ(y, -146096);
+    CT_ASSERT_EQ(m, 1);
+    CT_ASSERT_EQ(d, 1);
+}
+
 CT_SUITE(session_iso_add_days) {
     static const char *input[] = {"2026-02-28", "2027-02-28", "2028-02-28", "2028-02-28",
                                   "2026-12-31", "2026-01-01", "2028-01-01", "1900-02-28",
@@ -286,6 +373,8 @@ CT_SUITE(session_flow_golden) {
     CT_ASSERT_EQ(s.queue_count, 3);
     CT_ASSERT_EQ(s.queue_pos, 0);
     CT_ASSERT(s.queue != NULL);
+    CT_ASSERT_EQ(s.current_card, 0);
+    CT_ASSERT(!s.card_open);
     CT_ASSERT(ct_session_has_next(&s));
 
     ct_card cur;
@@ -308,6 +397,7 @@ CT_SUITE(session_flow_golden) {
     CT_ASSERT_EQ(s.n_hard, 0);
     CT_ASSERT_EQ(s.n_easy, 0);
     CT_ASSERT(!s.card_open);
+    CT_ASSERT_EQ(s.current_card, 0);
     CT_ASSERT_EQ(s.queue_pos, 1);
 
     ct_srs_row row;
@@ -631,8 +721,8 @@ CT_SUITE(session_card_missing) {
     CT_ASSERT_EQ(ct_session_begin(&s, db, &f, "gone", now_stamp, today_num, 0), 1);
     CT_ASSERT_EQ(ct_repo_card_delete(db, a), CT_REPO_OK);
     ct_card cur;
-    CT_ASSERT(ct_session_current(&s, &cur) < 0);
-    CT_ASSERT(ct_session_grade(&s, CT_GOOD, now_stamp) < 0);
+    CT_ASSERT_EQ(ct_session_current(&s, &cur), CT_SESSION_ERR_STATE);
+    CT_ASSERT_EQ(ct_session_grade(&s, CT_GOOD, now_stamp), CT_SESSION_ERR_STATE);
     CT_ASSERT_EQ(s.n_graded, 0);
     CT_ASSERT_EQ(s.queue_pos, 0);
     ct_review_row revs[2];
@@ -691,14 +781,86 @@ CT_SUITE(session_bad_args) {
     ct_db_close(db);
 }
 
+CT_SUITE(session_queue_guards) {
+    sqlite3 *db = session_db();
+    ct_fsrs f = session_fsrs();
+    long a = seed_card(db, "guard", "a");
+    long b = seed_card(db, "guard", "b");
+    seed_learning(db, a, "2026-10-01T00:00:00Z");
+    seed_learning(db, b, "2026-10-01T00:00:00Z");
+
+    long ids[2] = {a, b};
+    ct_session s;
+    memset(&s, 0, sizeof s);
+    s.db = db;
+    s.fsrs = &f;
+    s.today_day = today_num;
+    snprintf(s.started_at, sizeof s.started_at, "%s", now_stamp);
+
+    s.queue = NULL;
+    s.queue_count = 1;
+    s.queue_pos = 0;
+    ct_card cur;
+    CT_ASSERT_EQ(ct_session_current(&s, &cur), CT_SESSION_ERR_STATE);
+    CT_ASSERT_EQ(ct_session_grade(&s, CT_GOOD, now_stamp), CT_SESSION_ERR_STATE);
+
+    s.queue = ids;
+    s.queue_count = 1;
+    s.queue_pos = 1;
+    CT_ASSERT_EQ(ct_session_current(&s, &cur), CT_SESSION_ERR_STATE);
+    CT_ASSERT_EQ(ct_session_grade(&s, CT_GOOD, now_stamp), CT_SESSION_ERR_STATE);
+    CT_ASSERT_EQ(s.queue_pos, 1);
+    CT_ASSERT_EQ(s.n_graded, 0);
+    ct_review_row revs[2];
+    CT_ASSERT_EQ(ct_repo_reviews_for_card(db, b, revs, 2), 0);
+
+    s.queue = NULL;
+    ct_db_close(db);
+}
+
+CT_SUITE(session_bad_stamp_digits) {
+    char out[CT_SESSION_STAMP_MAX];
+    CT_ASSERT(ct_session_iso_add_days("2026-01-2a", 1, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("2026-01-a2", 1, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("2026-a1-28", 1, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("20a6-01-28", 1, out, (unsigned)sizeof out) < 0);
+    CT_ASSERT(ct_session_iso_add_days("2026-01-28", 1, out, (unsigned)sizeof out) ==
+              CT_SESSION_OK);
+    CT_ASSERT_STR_EQ(out, "2026-01-29");
+}
+
+CT_SUITE(session_bad_last_review) {
+    sqlite3 *db = session_db();
+    ct_fsrs f = session_fsrs();
+    long id = seed_card(db, "badlr", "a");
+    ct_srs_row row;
+    memset(&row, 0, sizeof row);
+    row.stability = 10.0;
+    row.difficulty = 5.0;
+    snprintf(row.due, sizeof row.due, "%s", "2026-10-01T00:00:00Z");
+    snprintf(row.last_review, sizeof row.last_review, "%s", "2");
+    row.state = 1;
+    CT_ASSERT_EQ(ct_repo_srs_put(db, id, &row), CT_REPO_OK);
+
+    ct_session s;
+    memset(&s, 0, sizeof s);
+    CT_ASSERT_EQ(ct_session_begin(&s, db, &f, "badlr", now_stamp, today_num, 0), 1);
+    CT_ASSERT_EQ(ct_session_grade(&s, CT_GOOD, now_stamp), CT_SESSION_ERR_ARG);
+    CT_ASSERT_EQ(s.n_graded, 0);
+    s.queue = NULL;
+    ct_db_close(db);
+}
+
 CT_SUITE(session_free_safety) {
     ct_session s;
     memset(&s, 0, sizeof s);
+    s.current_card = 42;
     ct_session_free(&s);
     ct_session_free(&s);
     CT_ASSERT(s.queue == NULL);
     CT_ASSERT_EQ(s.queue_count, 0);
     CT_ASSERT_EQ(s.queue_pos, 0);
+    CT_ASSERT_EQ(s.current_card, 0);
     CT_ASSERT(!s.card_open);
     ct_session_free(NULL);
 }
