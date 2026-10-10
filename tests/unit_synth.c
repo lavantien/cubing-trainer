@@ -724,9 +724,8 @@ CT_SUITE(unit_synth_gates) {
     CT_ASSERT_EQ(res.len, 0);
 
     ct_config wide = ct_config_defaults();
-    wide.gen.preferred_moves =
-        CT_MOVE_BIT_U | CT_MOVE_BIT_D | CT_MOVE_BIT_L | CT_MOVE_BIT_R | CT_MOVE_BIT_F |
-        CT_MOVE_BIT_B;
+    wide.gen.preferred_moves = CT_MOVE_BIT_U | CT_MOVE_BIT_D | CT_MOVE_BIT_L | CT_MOVE_BIT_R |
+                               CT_MOVE_BIT_F | CT_MOVE_BIT_B;
     memset(&res, 0, sizeof res);
     CT_ASSERT_EQ(ct_synth_target(CT_ORBIT_CORNER, 0, 1, 6, &wide, &res), 0);
     CT_ASSERT(res.found);

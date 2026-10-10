@@ -523,12 +523,12 @@ CT_SUITE(unit_classify_fixture) {
         CT_ASSERT(r.moves > 0);
         CT_ASSERT(r.qtm > 0);
         CT_ASSERT_EQ(r.interchange_len, 1);
-        int want_insert = r.cls == CT_CLS_CYCLIC_SHIFT ? 2
-                          : r.cls == CT_CLS_PER_SPECIAL ? 5
-                          : r.cls == CT_CLS_HALF_SLICE_PLANE ? 1
+        int want_insert = r.cls == CT_CLS_CYCLIC_SHIFT                 ? 2
+                          : r.cls == CT_CLS_PER_SPECIAL                ? 5
+                          : r.cls == CT_CLS_HALF_SLICE_PLANE           ? 1
                           : r.cls == CT_CLS_SP5 || r.cls == CT_CLS_SP7 ? 1
-                          : r.cls == CT_CLS_SP9 ? 3
-                                                 : 3;
+                          : r.cls == CT_CLS_SP9                        ? 3
+                                                                       : 3;
         if (r.insertion_len != want_insert) {
             printf("fixture row %d: alg %s class %s insert span %d want %d\n", i, algs[i],
                    ct_classification_label(r.cls), r.insertion_len, want_insert);
@@ -688,7 +688,8 @@ CT_SUITE(unit_classify_gates) {
     static const char *parity_alg = "R U R' U' R' F R2 U' R' U' R U R' F'";
     static const char *flip_alg = "M' U M' U M' U2 M U M U M U2";
     static const char *twist_alg = "R D' R' D R D' R' D U D' R D R' D' R D R' U'";
-    static const char *default_rationale = "no commutator, parity, flip, or twist structure matched";
+    static const char *default_rationale =
+        "no commutator, parity, flip, or twist structure matched";
 
     ct_classify_result r;
     memset(&r, 0, sizeof r);
@@ -764,8 +765,9 @@ CT_SUITE(unit_classify_gates) {
     memset(&r, 0, sizeof r);
     CT_ASSERT_EQ(ct_classify(seq, len, &r), CT_CLASSIFY_OK);
     CT_ASSERT_EQ(r.cls, CT_CLS_PARITY);
-    CT_ASSERT_STR_EQ(r.rationale,
-                     "parity: one corner pair and one edge pair swapped with orientation preserved");
+    CT_ASSERT_STR_EQ(
+        r.rationale,
+        "parity: one corner pair and one edge pair swapped with orientation preserved");
 
     char rotated[TEST_FIELD_MAX];
     snprintf(rotated, sizeof rotated, "y %s", parity_alg);
@@ -790,8 +792,8 @@ CT_SUITE(unit_classify_gates) {
     int corner_moved = 0;
     int edge_moved = 0;
     for (int s = 0; s < CT_TARGET_STICKERS; s++) {
-        corner_moved +=
-            dest[test_sticker_compact(CT_ORBIT_CORNER, s)] != test_sticker_compact(CT_ORBIT_CORNER, s);
+        corner_moved += dest[test_sticker_compact(CT_ORBIT_CORNER, s)] !=
+                        test_sticker_compact(CT_ORBIT_CORNER, s);
         edge_moved +=
             dest[test_sticker_compact(CT_ORBIT_EDGE, s)] != test_sticker_compact(CT_ORBIT_EDGE, s);
     }
