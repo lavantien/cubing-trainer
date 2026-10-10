@@ -10,8 +10,8 @@
 #define CT_CARD_ALG_MAX (1 << 8)
 #define CT_CARD_FRONT_JSON_MAX (1 << 9)
 #define CT_CARD_NOTES_MAX (1 << 9)
-#define CT_CASE_KEY_FORBIDDEN 0x20
-#define CT_CASE_KEY_DELETE 0x7F
+#define CT_CASE_KEY_FORBIDDEN ' '
+#define CT_CASE_KEY_DELETE '\x7F'
 
 typedef enum ct_repo_rc {
     CT_REPO_OK = 0,
