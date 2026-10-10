@@ -159,7 +159,10 @@ $(DLDIR)/sqlite.stamp: | $(DLDIR)
 	curl.exe -fsIL -o NUL $(SQLITE_URL)
 	curl.exe -fsL -o $(DLDIR)/sqlite.zip $(SQLITE_URL)
 	mkdir -p third_party/sqlite
-	tar.exe -xf $(DLDIR)/sqlite.zip -C third_party/sqlite --strip-components=1
+	rm -rf $(DLDIR)/sqlite_x
+	python -I -m zipfile -e $(DLDIR)/sqlite.zip $(DLDIR)/sqlite_x
+	mv $(DLDIR)/sqlite_x/sqlite-amalgamation-$(SQLITE_CODE)/* third_party/sqlite/
+	rm -rf $(DLDIR)/sqlite_x
 	if command -v python >/dev/null 2>&1; then python -I -c 'import hashlib,sys;h=hashlib.sha3_256(open(sys.argv[1],"rb").read()).hexdigest();print(h);sys.exit(0 if h=="$(SQLITE_SHA3)" else 1)' $(DLDIR)/sqlite.zip && echo sha3-256 verified > $(DLDIR)/sqlite.verify.log; else $(CC) $(CROSS_LINK) $(CFLAGS) -Ithird_party/sqlite playground/spike_link/sqlite_version.c $(SQLITE_SRC) -o $(DLDIR)/sqlite_verify.exe && test "$$($(DLDIR)/sqlite_verify.exe)" = "$(SQLITE_VERSION)" && echo version compile verified > $(DLDIR)/sqlite.verify.log; fi
 	echo $(SQLITE_URL) > $@
 
