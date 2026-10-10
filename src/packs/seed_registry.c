@@ -13,7 +13,7 @@ const ct_pack_seed_reg ct_pack_seed_registry[] = {
     {"clock_algs.tsv", CT_EVENT_CLOCK, CT_METHOD_LBL, CT_STAGE_CONCEPT},
     {"fmc_concepts.tsv", CT_EVENT_FMC, CT_METHOD_CONCEPT, CT_STAGE_CONCEPT},
     {"fto_l4t_redux.tsv", CT_EVENT_FTO, CT_METHOD_L4T_REDUX, CT_STAGE_L4T},
-    {"mbld_concepts.tsv", CT_EVENT_MULTI_BLD, CT_METHOD_3STYLE, CT_STAGE_CONCEPT},
+    {"mbld_concepts.tsv", CT_EVENT_MULTI_BLD, CT_METHOD_CONCEPT, CT_STAGE_CONCEPT},
     {"megaminx_4lll.tsv", CT_EVENT_MEGAMINX, CT_METHOD_4LLL, CT_STAGE_4LLL},
     {"pyraminx_l4e.tsv", CT_EVENT_PYRAMINX, CT_METHOD_L4E, CT_STAGE_L4E},
     {"skewb_sarah.tsv", CT_EVENT_SKEWB, CT_METHOD_SARAH_INTERMEDIATE, CT_STAGE_SARAH},

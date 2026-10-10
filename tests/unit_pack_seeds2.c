@@ -209,3 +209,121 @@ CT_SUITE(pack_seed_bigcube_parity) {
                   "parity.pll4adj", 5);
     CT_ASSERT_STR_EQ(e.alg, "(R' U R U' ) r2, U2, r2, Uw2, r2, u2, (U R' U' R )");
 }
+
+CT_SUITE(pack_seed_m2) {
+    verify_pack("db/seeds/packs/bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT, 22);
+    ct_pack_entry e = fetch_one("db/seeds/packs/bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2,
+                                CT_STAGE_CONCEPT, "m2.01", 22);
+    CT_ASSERT_STR_EQ(e.alg, "M2");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"buffer\":\"DF\",\"target\":\"UB\"}");
+    CT_ASSERT_STR_EQ(e.source_url, "https://www.speedsolving.com/wiki/index.php/M2");
+    e = fetch_one("db/seeds/packs/bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT,
+                  "m2.11", 22);
+    CT_ASSERT_STR_EQ(e.alg, "x' U' R2 U M2 U' R2 U x");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"buffer\":\"DF\",\"target\":\"RF\"}");
+    e = fetch_one("db/seeds/packs/bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT,
+                  "m2.22", 22);
+    CT_ASSERT_STR_EQ(e.alg, "M2' D U R2 U' M' U R2 U' M D'");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"buffer\":\"DF\",\"target\":\"BD\"}");
+}
+
+CT_SUITE(pack_seed_oldpoch) {
+    verify_pack("db/seeds/packs/bld_oldpoch.tsv", CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN,
+                CT_STAGE_CONCEPT, 38);
+    ct_pack_entry e = fetch_one("db/seeds/packs/bld_oldpoch.tsv", CT_EVENT_3BLD,
+                                CT_METHOD_OLD_POCHMANN, CT_STAGE_CONCEPT, "op.01", 38);
+    CT_ASSERT_STR_EQ(e.alg, "R U R' U' R' F R2 U' R' U' R U R' F'");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"buffer\":\"UR\",\"target\":\"UL\",\"kind\":\"edge swap\"}");
+    CT_ASSERT_STR_EQ(e.source_url, "https://jperm.net/bld");
+    e = fetch_one("db/seeds/packs/bld_oldpoch.tsv", CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN,
+                  CT_STAGE_CONCEPT, "op.13", 38);
+    CT_ASSERT_STR_EQ(e.alg, "L");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"letter\":\"R\",\"orbit\":\"edge\",\"target_pos\":\"UL\"}");
+    e = fetch_one("db/seeds/packs/bld_oldpoch.tsv", CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN,
+                  CT_STAGE_CONCEPT, "op.24", 38);
+    CT_ASSERT_STR_EQ(e.alg, "D L2");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"letter\":\"W\",\"orbit\":\"edge\",\"target_pos\":\"UL\"}");
+    e = fetch_one("db/seeds/packs/bld_oldpoch.tsv", CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN,
+                  CT_STAGE_CONCEPT, "op.38", 38);
+    CT_ASSERT_STR_EQ(e.alg, "F' D");
+    CT_ASSERT_STR_EQ(e.front_json,
+                     "{\"letter\":\"F\",\"orbit\":\"corner\",\"target_pos\":\"DFR\"}");
+}
+
+CT_SUITE(pack_seed_fto) {
+    verify_pack("db/seeds/packs/fto_l4t_redux.tsv", CT_EVENT_FTO, CT_METHOD_L4T_REDUX, CT_STAGE_L4T,
+                36);
+    ct_pack_entry e = fetch_one("db/seeds/packs/fto_l4t_redux.tsv", CT_EVENT_FTO,
+                                CT_METHOD_L4T_REDUX, CT_STAGE_L4T, "l4t.01", 36);
+    CT_ASSERT_STR_EQ(e.alg, "L' U L U L' U L");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"case\":\"Last Layer.Sune\"}");
+    CT_ASSERT_STR_EQ(
+        e.source_url,
+        "https://docs.google.com/spreadsheets/d/1_IHL077w-9U-qtpF9hvC6CrUn7etua5QgPH8vEMqK58/edit");
+    e = fetch_one("db/seeds/packs/fto_l4t_redux.tsv", CT_EVENT_FTO, CT_METHOD_L4T_REDUX,
+                  CT_STAGE_L4T, "l4t.11", 36);
+    CT_ASSERT_STR_EQ(e.alg, "R U R'");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"case\":\"Last Three Edges.Sexy\"}");
+    e = fetch_one("db/seeds/packs/fto_l4t_redux.tsv", CT_EVENT_FTO, CT_METHOD_L4T_REDUX,
+                  CT_STAGE_L4T, "l4t.21", 36);
+    CT_ASSERT_STR_EQ(e.alg, "L' U L R U' R'");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"case\":\"Separated Bar.Good Sochi\"}");
+    e = fetch_one("db/seeds/packs/fto_l4t_redux.tsv", CT_EVENT_FTO, CT_METHOD_L4T_REDUX,
+                  CT_STAGE_L4T, "l4t.36", 36);
+    CT_ASSERT_STR_EQ(e.alg, "U BR U BR' F U F'");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"case\":\"Reduction.parity fix\"}");
+    CT_ASSERT_STR_EQ(
+        e.source_url,
+        "https://docs.google.com/document/d/18CMTrFC9PYkEsheOHnywzvV0EdCb3SFGQXSK0DDb30o/edit");
+}
+
+CT_SUITE(pack_seed_fmc) {
+    verify_pack("db/seeds/packs/fmc_concepts.tsv", CT_EVENT_FMC, CT_METHOD_CONCEPT,
+                CT_STAGE_CONCEPT, 16);
+    ct_pack_entry e = fetch_one("db/seeds/packs/fmc_concepts.tsv", CT_EVENT_FMC, CT_METHOD_CONCEPT,
+                                CT_STAGE_CONCEPT, "fmc.01", 16);
+    CT_ASSERT_STR_EQ(
+        e.alg,
+        "Build a 2x2x2 block, then extend to 2x2x3. After the 2x2x2 block there are 3 sides to "
+        "extend on, explore all of them.");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"concept\":\"blockbuilding\"}");
+    CT_ASSERT_STR_EQ(e.source_url,
+                     "https://www.speedsolving.com/wiki/index.php/Fewest_Moves_techniques");
+    e = fetch_one("db/seeds/packs/fmc_concepts.tsv", CT_EVENT_FMC, CT_METHOD_CONCEPT,
+                  CT_STAGE_CONCEPT, "fmc.16", 16);
+    CT_ASSERT_STR_EQ(
+        e.alg,
+        "Pseudo blocks have colors that do not match surrounding pieces. Non-matching blocks "
+        "misalign centers only. Passive blockbuilding allows wrong orientation inside blocks. "
+        "Domino blockbuilding restricts to 180 degree turns.");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"concept\":\"pseudo blockbuilding\"}");
+    CT_ASSERT_STR_EQ(e.source_url, "https://www.speedsolving.com/wiki/index.php/Blockbuilding");
+}
+
+CT_SUITE(pack_seed_mbld) {
+    verify_pack("db/seeds/packs/mbld_concepts.tsv", CT_EVENT_MULTI_BLD, CT_METHOD_CONCEPT,
+                CT_STAGE_CONCEPT, 14);
+    ct_pack_entry e = fetch_one("db/seeds/packs/mbld_concepts.tsv", CT_EVENT_MULTI_BLD,
+                                CT_METHOD_CONCEPT, CT_STAGE_CONCEPT, "mbld.01", 14);
+    CT_ASSERT_STR_EQ(
+        e.alg,
+        "Before the attempt submit the number of puzzles to attempt, at least 2, and that number "
+        "cannot be changed afterwards.");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"rule\":\"H1a\"}");
+    CT_ASSERT_STR_EQ(e.source_url, "https://www.worldcubeassociation.org/regulations/");
+    e = fetch_one("db/seeds/packs/mbld_concepts.tsv", CT_EVENT_MULTI_BLD, CT_METHOD_CONCEPT,
+                  CT_STAGE_CONCEPT, "mbld.07", 14);
+    CT_ASSERT_STR_EQ(
+        e.alg,
+        "Assign each sticker one letter of a fixed scheme, Speffz is the standard, then memorize "
+        "the cycle letters. A lone letter at the end signals parity.");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"memo\":\"lettering scheme\"}");
+    e = fetch_one("db/seeds/packs/mbld_concepts.tsv", CT_EVENT_MULTI_BLD, CT_METHOD_CONCEPT,
+                  CT_STAGE_CONCEPT, "mbld.14", 14);
+    CT_ASSERT_STR_EQ(
+        e.alg,
+        "Person Action Object: each sticker maps to a person an action and an object, 6 letters "
+        "compress to about 4 images, e.g. J K E T O R = a JoKer EaTing an OReo.");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"memo\":\"PAO\"}");
+    CT_ASSERT_STR_EQ(e.source_url, "https://www.speedsolving.com/wiki/index.php/BLD_Memorisation");
+}
