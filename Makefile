@@ -73,6 +73,7 @@ RELEASE_CASE := $(BUILDDIR)/release_smoke.txt
 
 GOLDEN_DIR := tests/golden
 E2E_DIR := tests/e2e
+E2E_RUN_DIR := $(BUILDDIR)/e2e
 VISUAL_TMP := $(BUILDDIR)/visual
 DBVERIFY_DIR := $(BUILDDIR)/dbverify
 
@@ -244,8 +245,11 @@ e2e: build
 		exit 1; \
 	fi
 	@for case in $(E2E_DIR)/*.txt; do \
+		name=$$(basename "$$case" .txt); \
+		sandbox=$(E2E_RUN_DIR)/$$name; \
 		echo "e2e: $$case"; \
-		$(APP_BIN) --headless --script "$$case" || exit 1; \
+		rm -rf "$$sandbox" && mkdir -p "$$sandbox" || exit 1; \
+		CT_DATA_DIR="$$sandbox" $(APP_BIN) --headless --script "$$case" || exit 1; \
 	done
 
 visual-selftest:

@@ -151,7 +151,10 @@ int ct_data_dir(const char *dir_name, char *out, unsigned cap) {
     if (out == NULL || cap == 0)
         return -1;
     out[0] = '\0';
-    const char *base = getenv(CT_DATA_DIR_ENV);
+    const char *base = getenv(CT_DATA_DIR_OVERRIDE_ENV);
+    if (base == NULL || base[0] == '\0') {
+        base = getenv(CT_DATA_DIR_ENV);
+    }
     if (base == NULL || base[0] == '\0') {
         fprintf(stderr, "cubing-trainer: %s is not set, cannot locate the data directory\n",
                 CT_DATA_DIR_ENV);

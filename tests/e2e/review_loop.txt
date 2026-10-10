@@ -1,0 +1,21 @@
+# full review loop over one seeded due card, graded good then easy
+cards_open unfiled
+cards_new unfiled
+cards_field alg3 "R U R'"
+cards_save
+due unfiled new-1 2020-01-01
+review_begin
+review_reveal
+wait 120
+review_grade good
+review_end
+review_begin
+review_grade easy
+review_end
+expect count flashcard == 1
+expect srs unfiled new-1 reps == 2
+expect srs unfiled new-1 state == 1
+expect srs unfiled new-1 lapses == 0
+expect srs unfiled new-1 due == today
+expect reviews unfiled new-1 == 3,4
+expect count session_log == 2

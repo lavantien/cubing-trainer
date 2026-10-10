@@ -1,0 +1,6 @@
+# startup seeds every registered event pack once, a second init adds nothing
+expect count event_pack == 574
+restart
+expect count event_pack == 574
+expect count flashcard == 0
+expect count review_log == 0

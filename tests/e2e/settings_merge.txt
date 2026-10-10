@@ -1,0 +1,11 @@
+# settings form save, raw settings rows, then a second app init merging them back
+settings_open
+settings_retention 0.85
+settings_move R off
+settings_move F on
+settings_save
+expect setting srs.request_retention == 0.850000
+expect setting gen.preferred_moves == UDF
+restart
+expect cfg srs.request_retention == 0.85
+expect cfg gen.preferred_moves == UDF

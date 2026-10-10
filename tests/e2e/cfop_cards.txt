@@ -1,0 +1,12 @@
+# CFOP deck populate, edit one card, then delete it
+cfop_populate pll
+expect count flashcard == 21
+cards_open cfop_pll
+cards_select 0
+cards_edit
+cards_field notes tuned
+cards_save
+expect card cfop_pll pll.Aa notes == tuned
+expect card cfop_pll pll.Aa front == {"stage":"pll","case":"Aa"}
+cards_delete
+expect count flashcard == 20

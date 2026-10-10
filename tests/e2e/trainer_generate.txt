@@ -1,0 +1,12 @@
+# 3-style selector opens corner target zero, generates, caches, saves the card
+trainer_list 3bld 3style 0
+trainer_case 0
+trainer_generate
+trainer_save 3style_corner
+expect algcount == 1
+expect count generated_alg == 1
+expect count flashcard == 1
+expect genalg BC sequence == "R2 Lw D Lw' B2 Lw D' Lw' B2 R2"
+expect genalg BC classification == orthogonal
+expect genalg BC qtm == 14
+expect card 3style_corner BC alg3 == "R2 Lw D Lw' B2 Lw D' Lw' B2 R2"
