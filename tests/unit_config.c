@@ -316,6 +316,10 @@ CT_SUITE(config_set_errors) {
     CT_ASSERT_EQ(ct_config_set(&c, "gen.penalty_r", "1"), -1);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.penalty_rr", "1"), -1);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.penalty_", "1"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.penalty-R", "1"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost-R_cw", "0.5"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "srs.x9", "1.5"), -1);
+    CT_ASSERT_EQ(ct_config_set(&c, "srs.w9x", "1.5"), -1);
     CT_ASSERT_EQ(ct_config_set(&c, "db.dir_name", "x"), -1);
     CT_ASSERT_EQ(ct_config_set(&c, "window.depth", "1"), -1);
     CT_ASSERT_EQ(ct_config_set(&c, "", "1"), -1);
@@ -356,6 +360,11 @@ CT_SUITE(config_set_errors) {
     memset(long_name, 'a', sizeof long_name - 1);
     long_name[sizeof long_name - 1] = '\0';
     CT_ASSERT_EQ(ct_config_set(&c, "db.filename", long_name), -2);
+    CT_ASSERT_STR_EQ(c.db.filename, CT_DB_FILENAME);
+    char exact_name[CT_DB_NAME_MAX + 1];
+    memset(exact_name, 'b', sizeof exact_name - 1);
+    exact_name[sizeof exact_name - 1] = '\0';
+    CT_ASSERT_EQ(ct_config_set(&c, "db.filename", exact_name), -2);
     CT_ASSERT_STR_EQ(c.db.filename, CT_DB_FILENAME);
 }
 
@@ -523,6 +532,64 @@ CT_SUITE(config_gen_weights_negative) {
         CT_ASSERT_DBL_EQ(*fields[i], 0.0, 0.0);
         CT_ASSERT_EQ(ct_config_set(&c, keys[i], "0.5"), CT_CFG_OK);
         CT_ASSERT_DBL_EQ(*fields[i], 0.5, 1e-12);
+    }
+}
+
+CT_SUITE(config_gen_double_bounds) {
+    int u = face_index('U');
+    int d = face_index('D');
+    int r = face_index('R');
+    int f = face_index('F');
+    CT_ASSERT(u >= 0 && d >= 0 && r >= 0 && f >= 0);
+    char at_max[32];
+    snprintf(at_max, sizeof at_max, "%f", CT_GEN_DOUBLE_MAX);
+
+    ct_config c = ct_config_defaults();
+    ct_config before = c;
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.penalty_U", "1e308"), CT_CFG_BAD_VALUE);
+    CT_ASSERT(memcmp(&c, &before, sizeof c) == 0);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.penalty_D", "-1e308"), CT_CFG_BAD_VALUE);
+    CT_ASSERT(memcmp(&c, &before, sizeof c) == 0);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.penalty_U", at_max), CT_CFG_OK);
+    CT_ASSERT_DBL_EQ(c.gen.penalty[u], CT_GEN_DOUBLE_MAX, 1e-9);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.penalty_U", "-1000000"), CT_CFG_OK);
+    CT_ASSERT_DBL_EQ(c.gen.penalty[u], -1000000.0, 1e-9);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.penalty_U", "-1000000.5"), CT_CFG_BAD_VALUE);
+    CT_ASSERT_DBL_EQ(c.gen.penalty[u], -1000000.0, 1e-9);
+
+    c = ct_config_defaults();
+    before = c;
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_U_cw", "1e308"), CT_CFG_BAD_VALUE);
+    CT_ASSERT(memcmp(&c, &before, sizeof c) == 0);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_R_ccw", "-1e308"), CT_CFG_BAD_VALUE);
+    CT_ASSERT(memcmp(&c, &before, sizeof c) == 0);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_U_cw", at_max), CT_CFG_OK);
+    CT_ASSERT_DBL_EQ(c.gen.finger_cost[u][CT_FINGER_DIR_CW], CT_GEN_DOUBLE_MAX, 1e-9);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_F_cw", "-1000000"), CT_CFG_OK);
+    CT_ASSERT_DBL_EQ(c.gen.finger_cost[f][CT_FINGER_DIR_CW], -1000000.0, 1e-9);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.finger_cost_F_cw", "-1000000.5"), CT_CFG_BAD_VALUE);
+    CT_ASSERT_DBL_EQ(c.gen.finger_cost[f][CT_FINGER_DIR_CW], -1000000.0, 1e-9);
+    (void)d;
+
+    static const char *const weight_keys[] = {
+        "gen.weight_len",
+        "gen.weight_subset",
+        "gen.weight_regrip",
+        "gen.weight_finger",
+    };
+    double *const weight_fields[] = {
+        &c.gen.weight_len,
+        &c.gen.weight_subset,
+        &c.gen.weight_regrip,
+        &c.gen.weight_finger,
+    };
+    for (size_t i = 0; i < sizeof weight_keys / sizeof weight_keys[0]; i++) {
+        c = ct_config_defaults();
+        before = c;
+        CT_ASSERT_EQ(ct_config_set(&c, weight_keys[i], "1e308"), CT_CFG_BAD_VALUE);
+        CT_ASSERT(memcmp(&c, &before, sizeof c) == 0);
+        CT_ASSERT_EQ(ct_config_set(&c, weight_keys[i], at_max), CT_CFG_OK);
+        CT_ASSERT_DBL_EQ(*weight_fields[i], CT_GEN_DOUBLE_MAX, 1e-9);
     }
 }
 

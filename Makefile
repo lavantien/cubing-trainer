@@ -235,10 +235,13 @@ fuzz-%: $(TEST_BIN)
 $(MUTATE_BIN): tools/mutate.c | $(BINDIR)
 	$(CC) $(CROSS_COMPILE) $(CFLAGS) tools/mutate.c -o $@
 
+comma := ,
+SUITE_TOKENS = $(subst $(comma), ,$(SUITE))
+
 mutate: $(MUTATE_BIN) $(TEST_OBJ) $(LIB_TOBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ)
 	CT_MUTATE_CC="$(CC)" CT_MUTATE_CFLAGS="$(CROSS_COMPILE) $(TEST_CFLAGS) $(SRC_INCLUDES)" \
 	CT_MUTATE_LDFLAGS="$(CROSS_LINK) -g" CT_MUTATE_LDLIBS="$(WINLIBS_LDLIBS)" \
-	$(MUTATE_BIN) $(SCOPE) $(BUILDDIR) $(SUITE)
+	$(MUTATE_BIN) $(SCOPE) $(BUILDDIR) $(SUITE_TOKENS)
 
 e2e: build
 	@if [ -z "$$(ls $(E2E_DIR)/*.txt 2>/dev/null)" ]; then \

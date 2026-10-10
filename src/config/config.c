@@ -86,13 +86,13 @@ static int assign_double_range(double *field, const char *value, double lo, doub
     return CT_CFG_OK;
 }
 
-static int assign_double_min(double *field, const char *value, double min) {
+static int assign_double_min_max(double *field, const char *value, double lo, double hi) {
     double parsed = 0.0;
     int rc = parse_double(value, &parsed);
     if (rc != CT_CFG_OK) {
         return rc;
     }
-    if (parsed < min) {
+    if (parsed < lo || parsed > hi) {
         return CT_CFG_BAD_VALUE;
     }
     *field = parsed;
@@ -229,16 +229,20 @@ int ct_config_set(ct_config *cfg, const char *key, const char *value) {
         return CT_CFG_OK;
     }
     if (strcmp(key, "gen.weight_len") == 0) {
-        return assign_double_min(&cfg->gen.weight_len, value, ct_gen_weight_min);
+        return assign_double_min_max(&cfg->gen.weight_len, value, ct_gen_weight_min,
+                                     CT_GEN_DOUBLE_MAX);
     }
     if (strcmp(key, "gen.weight_subset") == 0) {
-        return assign_double_min(&cfg->gen.weight_subset, value, ct_gen_weight_min);
+        return assign_double_min_max(&cfg->gen.weight_subset, value, ct_gen_weight_min,
+                                     CT_GEN_DOUBLE_MAX);
     }
     if (strcmp(key, "gen.weight_regrip") == 0) {
-        return assign_double_min(&cfg->gen.weight_regrip, value, ct_gen_weight_min);
+        return assign_double_min_max(&cfg->gen.weight_regrip, value, ct_gen_weight_min,
+                                     CT_GEN_DOUBLE_MAX);
     }
     if (strcmp(key, "gen.weight_finger") == 0) {
-        return assign_double_min(&cfg->gen.weight_finger, value, ct_gen_weight_min);
+        return assign_double_min_max(&cfg->gen.weight_finger, value, ct_gen_weight_min,
+                                     CT_GEN_DOUBLE_MAX);
     }
     if (strncmp(key, "gen.penalty_", sizeof "gen.penalty_" - 1) == 0) {
         const char *face = key + sizeof "gen.penalty_" - 1;
@@ -250,7 +254,8 @@ int ct_config_set(ct_config *cfg, const char *key, const char *value) {
         if (idx < 0) {
             return CT_CFG_UNKNOWN_KEY;
         }
-        return assign_double(&cfg->gen.penalty[idx], value);
+        return assign_double_min_max(&cfg->gen.penalty[idx], value, -CT_GEN_DOUBLE_MAX,
+                                     CT_GEN_DOUBLE_MAX);
     }
     if (strncmp(key, "gen.finger_cost_", sizeof "gen.finger_cost_" - 1) == 0) {
         const char *face = key + sizeof "gen.finger_cost_" - 1;
@@ -267,7 +272,8 @@ int ct_config_set(ct_config *cfg, const char *key, const char *value) {
         } else {
             return CT_CFG_UNKNOWN_KEY;
         }
-        return assign_double(&cfg->gen.finger_cost[idx][dir], value);
+        return assign_double_min_max(&cfg->gen.finger_cost[idx][dir], value, -CT_GEN_DOUBLE_MAX,
+                                     CT_GEN_DOUBLE_MAX);
     }
     if (strcmp(key, "gen.setup_bfs_depth") == 0) {
         return assign_long_lo(&cfg->gen.setup_bfs_depth, value, CT_MIN_DEPTH);

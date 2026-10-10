@@ -960,7 +960,16 @@ int main(int argc, char **argv) {
             return 2;
         }
         char cmd[CT_MUT_CMD_MAX];
-        snprintf(cmd, sizeof cmd, "%s %s -c %s -o %s", g_cfg.cc, g_cfg.cflags, mutant_c, mutant_o);
+        char dir_include[CT_MUT_REL_MAX + 8];
+        const char *last_slash = strrchr(mf->rel, '/');
+        if (last_slash != NULL) {
+            snprintf(dir_include, sizeof dir_include, "-I%.*s ", (int)(last_slash - mf->rel),
+                     mf->rel);
+        } else {
+            dir_include[0] = '\0';
+        }
+        snprintf(cmd, sizeof cmd, "%s %s%s -c %s -o %s", g_cfg.cc, dir_include, g_cfg.cflags,
+                 mutant_c, mutant_o);
         if (system(cmd) != 0) {
             build_failed++;
             ct_print_site("KILLED", id, s);

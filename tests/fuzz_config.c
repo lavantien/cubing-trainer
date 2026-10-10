@@ -31,6 +31,7 @@ enum {
     CT_CKV_DBL_LO,
     CT_CKV_DBL_FREE,
     CT_CKV_DBL_MIN,
+    CT_CKV_DBL_MIN_MAX,
     CT_CKV_LONG_FREE,
     CT_CKV_LONG_LO,
     CT_CKV_LONG_MIN,
@@ -63,10 +64,10 @@ typedef struct {
 static const ct_ck_entry ct_ck_table[] = {
     {"srs.request_retention", CT_CK_RETENTION, CT_CKV_DBL_CLAMP},
     {"srs.max_ivl_days", CT_CK_MAXIVL, CT_CKV_DBL_LO},
-    {"gen.weight_len", CT_CK_WLEN, CT_CKV_DBL_MIN},
-    {"gen.weight_subset", CT_CK_WSUBSET, CT_CKV_DBL_MIN},
-    {"gen.weight_regrip", CT_CK_WREGRIP, CT_CKV_DBL_MIN},
-    {"gen.weight_finger", CT_CK_WFINGER, CT_CKV_DBL_MIN},
+    {"gen.weight_len", CT_CK_WLEN, CT_CKV_DBL_MIN_MAX},
+    {"gen.weight_subset", CT_CK_WSUBSET, CT_CKV_DBL_MIN_MAX},
+    {"gen.weight_regrip", CT_CK_WREGRIP, CT_CKV_DBL_MIN_MAX},
+    {"gen.weight_finger", CT_CK_WFINGER, CT_CKV_DBL_MIN_MAX},
     {"gen.setup_bfs_depth", CT_CK_BFS, CT_CKV_LONG_LO},
     {"gen.fallback_depth", CT_CK_FALLBACK, CT_CKV_LONG_LO},
     {"gen.candidate_max", CT_CK_CANDIDATE, CT_CKV_LONG_LO},
@@ -85,10 +86,12 @@ typedef struct {
 } ct_ck_dbl;
 
 static const ct_ck_dbl ct_ck_dbls[] = {
-    {"0", 1, 0.0},    {"42", 1, 42.0},  {"-17", 1, -17.0}, {"3.5", 1, 3.5},   {"-3.5", 1, -3.5},
-    {" 8.5", 1, 8.5}, {"+2.5", 1, 2.5}, {"1e2", 1, 100.0}, {"1e999", 0, 0.0}, {"-1e999", 0, 0.0},
-    {"", 0, 0.0},     {"abc", 0, 0.0},  {"1x", 0, 0.0},    {"1.2.3", 0, 0.0}, {"90 ", 0, 0.0},
-    {"nan", 0, 0.0},  {"inf", 0, 0.0},  {"-inf", 0, 0.0},  {".", 0, 0.0},     {"1e", 0, 0.0},
+    {"0", 1, 0.0},       {"42", 1, 42.0},       {"-17", 1, -17.0}, {"3.5", 1, 3.5},
+    {"-3.5", 1, -3.5},   {" 8.5", 1, 8.5},      {"+2.5", 1, 2.5},  {"1e2", 1, 100.0},
+    {"1e308", 1, 1e308}, {"-1e308", 1, -1e308}, {"1e999", 0, 0.0}, {"-1e999", 0, 0.0},
+    {"", 0, 0.0},        {"abc", 0, 0.0},       {"1x", 0, 0.0},    {"1.2.3", 0, 0.0},
+    {"90 ", 0, 0.0},     {"nan", 0, 0.0},       {"inf", 0, 0.0},   {"-inf", 0, 0.0},
+    {".", 0, 0.0},       {"1e", 0, 0.0},
 };
 
 typedef struct {
@@ -195,6 +198,16 @@ static bool ct_ck_expect_double(ct_config *expected, int slot, int kind, double 
         *field = value < lo ? lo : value;
     } else if (kind == CT_CKV_DBL_MIN) {
         if (value < 0.0) {
+            return false;
+        }
+        *field = value;
+    } else if (kind == CT_CKV_DBL_MIN_MAX) {
+        if (value < 0.0 || value > CT_GEN_DOUBLE_MAX) {
+            return false;
+        }
+        *field = value;
+    } else if (slot >= CT_CK_PENBASE && slot < CT_CK_PENBASE + CT_FACE_COUNT) {
+        if (value < -CT_GEN_DOUBLE_MAX || value > CT_GEN_DOUBLE_MAX) {
             return false;
         }
         *field = value;

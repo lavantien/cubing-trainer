@@ -1,0 +1,1716 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic tools/mutate.c -o build/bin/mutate.exe
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build/bin/mutate.exe src/config/config.c build config_constants config_enums config_face_helpers config_defaults config_set_roundtrip config_set_srs_weights config_set_errors config_preferred_moves config_finger_defaults config_finger_set config_domain_rejection config_gen_weights_negative config_gen_double_bounds config_clamping fuzz_config_keys fuzz_config_moves
+build/mutants/p18224/m0001_config.c:26:36: error: expected ')'
+   26 | static int parse_double(const char /text, double *out) {
+      |                                    ^
+build/mutants/p18224/m0001_config.c:26:24: note: to match this '('
+   26 | static int parse_double(const char /text, double *out) {
+      |                        ^
+build/mutants/p18224/m0001_config.c:27:9: error: use of undeclared identifier 'text'
+   27 |     if (text == NULL || text[0] == '\0') {
+      |         ^~~~
+build/mutants/p18224/m0001_config.c:27:25: error: use of undeclared identifier 'text'
+   27 |     if (text == NULL || text[0] == '\0') {
+      |                         ^~~~
+build/mutants/p18224/m0001_config.c:32:27: error: use of undeclared identifier 'text'
+   32 |     double value = strtod(text, &end);
+      |                           ^~~~
+build/mutants/p18224/m0001_config.c:33:16: error: use of undeclared identifier 'text'
+   33 |     if (end == text || end[0] != '\0' || errno == ERANGE || !isfinite(value)) {
+      |                ^~~~
+build/mutants/p18224/m0001_config.c:36:6: error: use of undeclared identifier 'out'
+   36 |     *out = value;
+      |      ^~~
+build/mutants/p18224/m0001_config.c:56:34: error: too many arguments to function call, expected 1, have 2
+   56 |     int rc = parse_double(value, &parsed);
+      |              ~~~~~~~~~~~~        ^~~~~~~
+build/mutants/p18224/m0001_config.c:26:12: note: 'parse_double' declared here
+   26 | static int parse_double(const char /text, double *out) {
+      |            ^            ~~~~~~~~~~
+build/mutants/p18224/m0001_config.c:91:34: error: too many arguments to function call, expected 1, have 2
+   91 |     int rc = parse_double(value, &parsed);
+      |              ~~~~~~~~~~~~        ^~~~~~~
+build/mutants/p18224/m0001_config.c:26:12: note: 'parse_double' declared here
+   26 | static int parse_double(const char /text, double *out) {
+      |            ^            ~~~~~~~~~~
+8 errors generated.
+build/mutants/p18224/m0002_config.c:26:50: error: expected ')'
+   26 | static int parse_double(const char *text, double /out) {
+      |                                                  ^
+build/mutants/p18224/m0002_config.c:26:24: note: to match this '('
+   26 | static int parse_double(const char *text, double /out) {
+      |                        ^
+build/mutants/p18224/m0002_config.c:36:6: error: use of undeclared identifier 'out'
+   36 |     *out = value;
+      |      ^~~
+build/mutants/p18224/m0002_config.c:56:34: error: passing 'double *' to parameter of incompatible type 'double'; remove &
+   56 |     int rc = parse_double(value, &parsed);
+      |                                  ^~~~~~~
+build/mutants/p18224/m0002_config.c:26:50: note: passing argument to parameter here
+   26 | static int parse_double(const char *text, double /out) {
+      |                                                  ^
+build/mutants/p18224/m0002_config.c:91:34: error: passing 'double *' to parameter of incompatible type 'double'; remove &
+   91 |     int rc = parse_double(value, &parsed);
+      |                                  ^~~~~~~
+build/mutants/p18224/m0002_config.c:26:50: note: passing argument to parameter here
+   26 | static int parse_double(const char *text, double /out) {
+      |                                                  ^
+4 errors generated.
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_gen_weights_negative exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0010_config.c:31:10: error: expected identifier or '('
+   31 |     char /end = NULL;
+      |          ^
+build/mutants/p18224/m0010_config.c:32:34: error: use of undeclared identifier 'end'
+   32 |     double value = strtod(text, &end);
+      |                                  ^~~
+build/mutants/p18224/m0010_config.c:33:9: error: use of undeclared identifier 'end'
+   33 |     if (end == text || end[0] != '\0' || errno == ERANGE || !isfinite(value)) {
+      |         ^~~
+build/mutants/p18224/m0010_config.c:33:24: error: use of undeclared identifier 'end'
+   33 |     if (end == text || end[0] != '\0' || errno == ERANGE || !isfinite(value)) {
+      |                        ^~~
+4 errors generated.
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0012_config.c:33:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   33 |     if (end == text && end[0] != '\0' || errno == ERANGE || !isfinite(value)) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~ ~~
+build/mutants/p18224/m0012_config.c:33:21: note: place parentheses around the '&&' expression to silence this warning
+   33 |     if (end == text && end[0] != '\0' || errno == ERANGE || !isfinite(value)) {
+      |                     ^
+      |         (                            )
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0016_config.c:33:39: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   33 |     if (end == text || end[0] != '\0' && errno == ERANGE || !isfinite(value)) {
+      |                     ~~ ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0016_config.c:33:39: note: place parentheses around the '&&' expression to silence this warning
+   33 |     if (end == text || end[0] != '\0' && errno == ERANGE || !isfinite(value)) {
+      |                        ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0018_config.c:33:58: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   33 |     if (end == text || end[0] != '\0' || errno == ERANGE && !isfinite(value)) {
+      |                                       ~~ ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0018_config.c:33:58: note: place parentheses around the '&&' expression to silence this warning
+   33 |     if (end == text || end[0] != '\0' || errno == ERANGE && !isfinite(value)) {
+      |                                          ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0020_config.c:36:5: error: expected expression
+   36 |     /out = value;
+      |     ^
+1 error generated.
+build/mutants/p18224/m0021_config.c:40:34: error: expected ')'
+   40 | static int parse_long(const char /text, long *out) {
+      |                                  ^
+build/mutants/p18224/m0021_config.c:40:22: note: to match this '('
+   40 | static int parse_long(const char /text, long *out) {
+      |                      ^
+build/mutants/p18224/m0021_config.c:41:9: error: use of undeclared identifier 'text'
+   41 |     if (text == NULL || text[0] == '\0') {
+      |         ^~~~
+build/mutants/p18224/m0021_config.c:41:25: error: use of undeclared identifier 'text'
+   41 |     if (text == NULL || text[0] == '\0') {
+      |                         ^~~~
+build/mutants/p18224/m0021_config.c:46:25: error: use of undeclared identifier 'text'
+   46 |     long value = strtol(text, &end, 10);
+      |                         ^~~~
+build/mutants/p18224/m0021_config.c:47:16: error: use of undeclared identifier 'text'
+   47 |     if (end == text || end[0] != '\0' || errno == ERANGE || value < INT_MIN || value > INT_MAX) {
+      |                ^~~~
+build/mutants/p18224/m0021_config.c:50:6: error: use of undeclared identifier 'out'
+   50 |     *out = value;
+      |      ^~~
+build/mutants/p18224/m0021_config.c:104:32: error: too many arguments to function call, expected 1, have 2
+  104 |     int rc = parse_long(value, &parsed);
+      |              ~~~~~~~~~~        ^~~~~~~
+build/mutants/p18224/m0021_config.c:40:12: note: 'parse_long' declared here
+   40 | static int parse_long(const char /text, long *out) {
+      |            ^          ~~~~~~~~~~
+build/mutants/p18224/m0021_config.c:114:32: error: too many arguments to function call, expected 1, have 2
+  114 |     int rc = parse_long(value, &parsed);
+      |              ~~~~~~~~~~        ^~~~~~~
+build/mutants/p18224/m0021_config.c:40:12: note: 'parse_long' declared here
+   40 | static int parse_long(const char /text, long *out) {
+      |            ^          ~~~~~~~~~~
+8 errors generated.
+build/mutants/p18224/m0022_config.c:40:46: error: expected ')'
+   40 | static int parse_long(const char *text, long /out) {
+      |                                              ^
+build/mutants/p18224/m0022_config.c:40:22: note: to match this '('
+   40 | static int parse_long(const char *text, long /out) {
+      |                      ^
+build/mutants/p18224/m0022_config.c:50:6: error: use of undeclared identifier 'out'
+   50 |     *out = value;
+      |      ^~~
+build/mutants/p18224/m0022_config.c:104:32: error: incompatible pointer to integer conversion passing 'long *' to parameter of type 'long'; remove & [-Wint-conversion]
+  104 |     int rc = parse_long(value, &parsed);
+      |                                ^~~~~~~
+build/mutants/p18224/m0022_config.c:40:46: note: passing argument to parameter here
+   40 | static int parse_long(const char *text, long /out) {
+      |                                              ^
+build/mutants/p18224/m0022_config.c:114:32: error: incompatible pointer to integer conversion passing 'long *' to parameter of type 'long'; remove & [-Wint-conversion]
+  114 |     int rc = parse_long(value, &parsed);
+      |                                ^~~~~~~
+build/mutants/p18224/m0022_config.c:40:46: note: passing argument to parameter here
+   40 | static int parse_long(const char *text, long /out) {
+      |                                              ^
+4 errors generated.
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0030_config.c:45:10: error: expected identifier or '('
+   45 |     char /end = NULL;
+      |          ^
+build/mutants/p18224/m0030_config.c:46:32: error: use of undeclared identifier 'end'
+   46 |     long value = strtol(text, &end, 10);
+      |                                ^~~
+build/mutants/p18224/m0030_config.c:47:9: error: use of undeclared identifier 'end'
+   47 |     if (end == text || end[0] != '\0' || errno == ERANGE || value < INT_MIN || value > INT_MAX) {
+      |         ^~~
+build/mutants/p18224/m0030_config.c:47:24: error: use of undeclared identifier 'end'
+   47 |     if (end == text || end[0] != '\0' || errno == ERANGE || value < INT_MIN || value > INT_MAX) {
+      |                        ^~~
+4 errors generated.
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0034_config.c:47:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   47 |     if (end == text && end[0] != '\0' || errno == ERANGE || value < INT_MIN || value > INT_MAX) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~ ~~
+build/mutants/p18224/m0034_config.c:47:21: note: place parentheses around the '&&' expression to silence this warning
+   47 |     if (end == text && end[0] != '\0' || errno == ERANGE || value < INT_MIN || value > INT_MAX) {
+      |                     ^
+      |         (                            )
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0038_config.c:47:39: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   47 |     if (end == text || end[0] != '\0' && errno == ERANGE || value < INT_MIN || value > INT_MAX) {
+      |                     ~~ ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0038_config.c:47:39: note: place parentheses around the '&&' expression to silence this warning
+   47 |     if (end == text || end[0] != '\0' && errno == ERANGE || value < INT_MIN || value > INT_MAX) {
+      |                        ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0040_config.c:47:58: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   47 |     if (end == text || end[0] != '\0' || errno == ERANGE && value < INT_MIN || value > INT_MAX) {
+      |                                       ~~ ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0040_config.c:47:58: note: place parentheses around the '&&' expression to silence this warning
+   47 |     if (end == text || end[0] != '\0' || errno == ERANGE && value < INT_MIN || value > INT_MAX) {
+      |                                          ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite fuzz_config_keys exited 1
+build/mutants/p18224/m0042_config.c:47:77: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   47 |     if (end == text || end[0] != '\0' || errno == ERANGE || value < INT_MIN && value > INT_MAX) {
+      |                                                          ~~ ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0042_config.c:47:77: note: place parentheses around the '&&' expression to silence this warning
+   47 |     if (end == text || end[0] != '\0' || errno == ERANGE || value < INT_MIN && value > INT_MAX) {
+      |                                                             ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite fuzz_config_keys exited 1
+build/mutants/p18224/m0044_config.c:50:5: error: expected expression
+   50 |     /out = value;
+      |     ^
+1 error generated.
+build/mutants/p18224/m0045_config.c:54:33: error: expected ')'
+   54 | static int assign_double(double /field, const char *value) {
+      |                                 ^
+build/mutants/p18224/m0045_config.c:54:25: note: to match this '('
+   54 | static int assign_double(double /field, const char *value) {
+      |                         ^
+build/mutants/p18224/m0045_config.c:56:27: error: use of undeclared identifier 'value'
+   56 |     int rc = parse_double(value, &parsed);
+      |                           ^~~~~
+build/mutants/p18224/m0045_config.c:60:6: error: use of undeclared identifier 'field'
+   60 |     *field = parsed;
+      |      ^~~~~
+build/mutants/p18224/m0045_config.c:65:35: error: too many arguments to function call, expected 1, have 2
+   65 |     int rc = assign_double(field, value);
+      |              ~~~~~~~~~~~~~        ^~~~~
+build/mutants/p18224/m0045_config.c:54:12: note: 'assign_double' declared here
+   54 | static int assign_double(double /field, const char *value) {
+      |            ^             ~~~~~~
+build/mutants/p18224/m0045_config.c:76:35: error: too many arguments to function call, expected 1, have 2
+   76 |     int rc = assign_double(field, value);
+      |              ~~~~~~~~~~~~~        ^~~~~
+build/mutants/p18224/m0045_config.c:54:12: note: 'assign_double' declared here
+   54 | static int assign_double(double /field, const char *value) {
+      |            ^             ~~~~~~
+build/mutants/p18224/m0045_config.c:214:49: error: too many arguments to function call, expected 1, have 2
+  214 |         return assign_double(&cfg->fsrs.w[idx], value);
+      |                ~~~~~~~~~~~~~                    ^~~~~
+build/mutants/p18224/m0045_config.c:54:12: note: 'assign_double' declared here
+   54 | static int assign_double(double /field, const char *value) {
+      |            ^             ~~~~~~
+6 errors generated.
+build/mutants/p18224/m0046_config.c:54:52: error: expected ')'
+   54 | static int assign_double(double *field, const char /value) {
+      |                                                    ^
+build/mutants/p18224/m0046_config.c:54:25: note: to match this '('
+   54 | static int assign_double(double *field, const char /value) {
+      |                         ^
+build/mutants/p18224/m0046_config.c:56:27: error: use of undeclared identifier 'value'
+   56 |     int rc = parse_double(value, &parsed);
+      |                           ^~~~~
+build/mutants/p18224/m0046_config.c:65:35: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+   65 |     int rc = assign_double(field, value);
+      |                                   ^~~~~
+build/mutants/p18224/m0046_config.c:54:52: note: passing argument to parameter here
+   54 | static int assign_double(double *field, const char /value) {
+      |                                                    ^
+build/mutants/p18224/m0046_config.c:76:35: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+   76 |     int rc = assign_double(field, value);
+      |                                   ^~~~~
+build/mutants/p18224/m0046_config.c:54:52: note: passing argument to parameter here
+   54 | static int assign_double(double *field, const char /value) {
+      |                                                    ^
+build/mutants/p18224/m0046_config.c:214:49: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  214 |         return assign_double(&cfg->fsrs.w[idx], value);
+      |                                                 ^~~~~
+build/mutants/p18224/m0046_config.c:54:52: note: passing argument to parameter here
+   54 | static int assign_double(double *field, const char /value) {
+      |                                                    ^
+5 errors generated.
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0048_config.c:60:5: error: expected expression
+   60 |     /field = parsed;
+      |     ^
+1 error generated.
+build/mutants/p18224/m0049_config.c:64:36: error: expected ')'
+   64 | static int assign_double_lo(double /field, const char *value, double lo) {
+      |                                    ^
+build/mutants/p18224/m0049_config.c:64:28: note: to match this '('
+   64 | static int assign_double_lo(double /field, const char *value, double lo) {
+      |                            ^
+build/mutants/p18224/m0049_config.c:65:28: error: use of undeclared identifier 'field'
+   65 |     int rc = assign_double(field, value);
+      |                            ^~~~~
+build/mutants/p18224/m0049_config.c:65:35: error: use of undeclared identifier 'value'
+   65 |     int rc = assign_double(field, value);
+      |                                   ^~~~~
+build/mutants/p18224/m0049_config.c:69:10: error: use of undeclared identifier 'field'
+   69 |     if (*field < lo) {
+      |          ^~~~~
+build/mutants/p18224/m0049_config.c:69:18: error: use of undeclared identifier 'lo'
+   69 |     if (*field < lo) {
+      |                  ^~
+build/mutants/p18224/m0049_config.c:70:10: error: use of undeclared identifier 'field'
+   70 |         *field = lo;
+      |          ^~~~~
+build/mutants/p18224/m0049_config.c:70:18: error: use of undeclared identifier 'lo'
+   70 |         *field = lo;
+      |                  ^~
+build/mutants/p18224/m0049_config.c:193:58: error: too many arguments to function call, expected 1, have 3
+  193 |         return assign_double_lo(&cfg->fsrs.max_ivl_days, value, CT_FSRS_MIN_STABILITY);
+      |                ~~~~~~~~~~~~~~~~                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0049_config.c:64:12: note: 'assign_double_lo' declared here
+   64 | static int assign_double_lo(double /field, const char *value, double lo) {
+      |            ^                ~~~~~~
+build/mutants/p18224/m0049_config.c:288:58: error: too many arguments to function call, expected 1, have 3
+  288 |         return assign_double_lo(&cfg->anim.move_seconds, value, CT_ANIM_MIN_MOVE_SECONDS);
+      |                ~~~~~~~~~~~~~~~~                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0049_config.c:64:12: note: 'assign_double_lo' declared here
+   64 | static int assign_double_lo(double /field, const char *value, double lo) {
+      |            ^                ~~~~~~
+9 errors generated.
+build/mutants/p18224/m0050_config.c:64:55: error: expected ')'
+   64 | static int assign_double_lo(double *field, const char /value, double lo) {
+      |                                                       ^
+build/mutants/p18224/m0050_config.c:64:28: note: to match this '('
+   64 | static int assign_double_lo(double *field, const char /value, double lo) {
+      |                            ^
+build/mutants/p18224/m0050_config.c:65:35: error: use of undeclared identifier 'value'
+   65 |     int rc = assign_double(field, value);
+      |                                   ^~~~~
+build/mutants/p18224/m0050_config.c:69:18: error: use of undeclared identifier 'lo'
+   69 |     if (*field < lo) {
+      |                  ^~
+build/mutants/p18224/m0050_config.c:70:18: error: use of undeclared identifier 'lo'
+   70 |         *field = lo;
+      |                  ^~
+build/mutants/p18224/m0050_config.c:193:65: error: too many arguments to function call, expected 2, have 3
+  193 |         return assign_double_lo(&cfg->fsrs.max_ivl_days, value, CT_FSRS_MIN_STABILITY);
+      |                ~~~~~~~~~~~~~~~~                                 ^~~~~~~~~~~~~~~~~~~~~
+src/config\config.h:133:31: note: expanded from macro 'CT_FSRS_MIN_STABILITY'
+  133 | #define CT_FSRS_MIN_STABILITY 0.1
+      |                               ^~~
+build/mutants/p18224/m0050_config.c:64:12: note: 'assign_double_lo' declared here
+   64 | static int assign_double_lo(double *field, const char /value, double lo) {
+      |            ^                ~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0050_config.c:288:65: error: too many arguments to function call, expected 2, have 3
+  288 |         return assign_double_lo(&cfg->anim.move_seconds, value, CT_ANIM_MIN_MOVE_SECONDS);
+      |                ~~~~~~~~~~~~~~~~                                 ^~~~~~~~~~~~~~~~~~~~~~~~
+src/config\config.h:158:34: note: expanded from macro 'CT_ANIM_MIN_MOVE_SECONDS'
+  158 | #define CT_ANIM_MIN_MOVE_SECONDS 0.01
+      |                                  ^~~~
+build/mutants/p18224/m0050_config.c:64:12: note: 'assign_double_lo' declared here
+   64 | static int assign_double_lo(double *field, const char /value, double lo) {
+      |            ^                ~~~~~~~~~~~~~~~~~~~~~~~~~
+6 errors generated.
+mutate: suite config_set_errors exited 1
+build/mutants/p18224/m0052_config.c:69:9: error: expected expression
+   69 |     if (/field < lo) {
+      |         ^
+1 error generated.
+build/mutants/p18224/m0054_config.c:70:9: error: expected expression
+   70 |         /field = lo;
+      |         ^
+1 error generated.
+build/mutants/p18224/m0055_config.c:75:39: error: expected ')'
+   75 | static int assign_double_range(double /field, const char *value, double lo, double hi) {
+      |                                       ^
+build/mutants/p18224/m0055_config.c:75:31: note: to match this '('
+   75 | static int assign_double_range(double /field, const char *value, double lo, double hi) {
+      |                               ^
+build/mutants/p18224/m0055_config.c:76:28: error: use of undeclared identifier 'field'
+   76 |     int rc = assign_double(field, value);
+      |                            ^~~~~
+build/mutants/p18224/m0055_config.c:76:35: error: use of undeclared identifier 'value'
+   76 |     int rc = assign_double(field, value);
+      |                                   ^~~~~
+build/mutants/p18224/m0055_config.c:80:10: error: use of undeclared identifier 'field'
+   80 |     if (*field < lo) {
+      |          ^~~~~
+build/mutants/p18224/m0055_config.c:80:18: error: use of undeclared identifier 'lo'
+   80 |     if (*field < lo) {
+      |                  ^~
+build/mutants/p18224/m0055_config.c:81:10: error: use of undeclared identifier 'field'
+   81 |         *field = lo;
+      |          ^~~~~
+build/mutants/p18224/m0055_config.c:81:18: error: use of undeclared identifier 'lo'
+   81 |         *field = lo;
+      |                  ^~
+build/mutants/p18224/m0055_config.c:83:10: error: use of undeclared identifier 'field'
+   83 |     if (*field > hi) {
+      |          ^~~~~
+build/mutants/p18224/m0055_config.c:83:18: error: use of undeclared identifier 'hi'
+   83 |     if (*field > hi) {
+      |                  ^~
+build/mutants/p18224/m0055_config.c:84:10: error: use of undeclared identifier 'field'
+   84 |         *field = hi;
+      |          ^~~~~
+build/mutants/p18224/m0055_config.c:84:18: error: use of undeclared identifier 'hi'
+   84 |         *field = hi;
+      |                  ^~
+build/mutants/p18224/m0055_config.c:189:66: error: too many arguments to function call, expected 1, have 4
+  189 |         return assign_double_range(&cfg->fsrs.request_retention, value, CT_FSRS_RETENTION_MIN,
+      |                ~~~~~~~~~~~~~~~~~~~                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  190 |                                    CT_FSRS_RETENTION_MAX);
+      |                                    ~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0055_config.c:75:12: note: 'assign_double_range' declared here
+   75 | static int assign_double_range(double /field, const char *value, double lo, double hi) {
+      |            ^                   ~~~~~~
+12 errors generated.
+build/mutants/p18224/m0056_config.c:75:58: error: expected ')'
+   75 | static int assign_double_range(double *field, const char /value, double lo, double hi) {
+      |                                                          ^
+build/mutants/p18224/m0056_config.c:75:31: note: to match this '('
+   75 | static int assign_double_range(double *field, const char /value, double lo, double hi) {
+      |                               ^
+build/mutants/p18224/m0056_config.c:76:35: error: use of undeclared identifier 'value'
+   76 |     int rc = assign_double(field, value);
+      |                                   ^~~~~
+build/mutants/p18224/m0056_config.c:80:18: error: use of undeclared identifier 'lo'
+   80 |     if (*field < lo) {
+      |                  ^~
+build/mutants/p18224/m0056_config.c:81:18: error: use of undeclared identifier 'lo'
+   81 |         *field = lo;
+      |                  ^~
+build/mutants/p18224/m0056_config.c:83:18: error: use of undeclared identifier 'hi'
+   83 |     if (*field > hi) {
+      |                  ^~
+build/mutants/p18224/m0056_config.c:84:18: error: use of undeclared identifier 'hi'
+   84 |         *field = hi;
+      |                  ^~
+build/mutants/p18224/m0056_config.c:189:73: error: too many arguments to function call, expected 2, have 4
+  189 |         return assign_double_range(&cfg->fsrs.request_retention, value, CT_FSRS_RETENTION_MIN,
+      |                ~~~~~~~~~~~~~~~~~~~                                      ^~~~~~~~~~~~~~~~~~~~~~
+  190 |                                    CT_FSRS_RETENTION_MAX);
+      |                                    ~~~~~~~~~~~~~~~~~~~~~
+src/config\config.h:138:31: note: expanded from macro 'CT_FSRS_RETENTION_MIN'
+  138 | #define CT_FSRS_RETENTION_MIN 0.7
+      |                               ^
+build/mutants/p18224/m0056_config.c:75:12: note: 'assign_double_range' declared here
+   75 | static int assign_double_range(double *field, const char /value, double lo, double hi) {
+      |            ^                   ~~~~~~~~~~~~~~~~~~~~~~~~~
+7 errors generated.
+mutate: suite config_set_errors exited 1
+build/mutants/p18224/m0058_config.c:80:9: error: expected expression
+   80 |     if (/field < lo) {
+      |         ^
+1 error generated.
+build/mutants/p18224/m0060_config.c:81:9: error: expected expression
+   81 |         /field = lo;
+      |         ^
+1 error generated.
+build/mutants/p18224/m0061_config.c:83:9: error: expected expression
+   83 |     if (/field > hi) {
+      |         ^
+1 error generated.
+build/mutants/p18224/m0063_config.c:84:9: error: expected expression
+   84 |         /field = hi;
+      |         ^
+1 error generated.
+mutate: scope=src/config/config.c files=1 sites=298 suites=16
+KILLED    m0001 src/config/config.c:26 [arith * -> /]
+          build break
+KILLED    m0002 src/config/config.c:26 [arith * -> /]
+          build break
+KILLED    m0003 src/config/config.c:27 [cmp == -> !=]
+SURVIVED  m0004 src/config/config.c:27 [logic || -> &&]
+KILLED    m0005 src/config/config.c:27 [int+1 0 -> 1]
+KILLED    m0006 src/config/config.c:27 [int-1 0 -> -1]
+KILLED    m0007 src/config/config.c:27 [cmp == -> !=]
+SURVIVED  m0008 src/config/config.c:30 [int+1 0 -> 1]
+SURVIVED  m0009 src/config/config.c:30 [int-1 0 -> -1]
+KILLED    m0010 src/config/config.c:31 [arith * -> /]
+          build break
+KILLED    m0011 src/config/config.c:33 [cmp == -> !=]
+KILLED    m0012 src/config/config.c:33 [logic || -> &&]
+          build break
+KILLED    m0013 src/config/config.c:33 [int+1 0 -> 1]
+KILLED    m0014 src/config/config.c:33 [int-1 0 -> -1]
+KILLED    m0015 src/config/config.c:33 [cmp != -> ==]
+KILLED    m0016 src/config/config.c:33 [logic || -> &&]
+          build break
+KILLED    m0017 src/config/config.c:33 [cmp == -> !=]
+KILLED    m0018 src/config/config.c:33 [logic || -> &&]
+          build break
+KILLED    m0019 src/config/config.c:33 [not-del ! -> (deleted)]
+KILLED    m0020 src/config/config.c:36 [arith * -> /]
+          build break
+KILLED    m0021 src/config/config.c:40 [arith * -> /]
+          build break
+KILLED    m0022 src/config/config.c:40 [arith * -> /]
+          build break
+KILLED    m0023 src/config/config.c:41 [cmp == -> !=]
+SURVIVED  m0024 src/config/config.c:41 [logic || -> &&]
+KILLED    m0025 src/config/config.c:41 [int+1 0 -> 1]
+KILLED    m0026 src/config/config.c:41 [int-1 0 -> -1]
+KILLED    m0027 src/config/config.c:41 [cmp == -> !=]
+SURVIVED  m0028 src/config/config.c:44 [int+1 0 -> 1]
+SURVIVED  m0029 src/config/config.c:44 [int-1 0 -> -1]
+KILLED    m0030 src/config/config.c:45 [arith * -> /]
+          build break
+KILLED    m0031 src/config/config.c:46 [int+1 10 -> 11]
+KILLED    m0032 src/config/config.c:46 [int-1 10 -> 9]
+KILLED    m0033 src/config/config.c:47 [cmp == -> !=]
+KILLED    m0034 src/config/config.c:47 [logic || -> &&]
+          build break
+KILLED    m0035 src/config/config.c:47 [int+1 0 -> 1]
+KILLED    m0036 src/config/config.c:47 [int-1 0 -> -1]
+KILLED    m0037 src/config/config.c:47 [cmp != -> ==]
+KILLED    m0038 src/config/config.c:47 [logic || -> &&]
+          build break
+KILLED    m0039 src/config/config.c:47 [cmp == -> !=]
+KILLED    m0040 src/config/config.c:47 [logic || -> &&]
+          build break
+KILLED    m0041 src/config/config.c:47 [cmp < -> <=]
+KILLED    m0042 src/config/config.c:47 [logic || -> &&]
+          build break
+KILLED    m0043 src/config/config.c:47 [cmp > -> >=]
+KILLED    m0044 src/config/config.c:50 [arith * -> /]
+          build break
+KILLED    m0045 src/config/config.c:54 [arith * -> /]
+          build break
+KILLED    m0046 src/config/config.c:54 [arith * -> /]
+          build break
+KILLED    m0047 src/config/config.c:57 [cmp != -> ==]
+KILLED    m0048 src/config/config.c:60 [arith * -> /]
+          build break
+KILLED    m0049 src/config/config.c:64 [arith * -> /]
+          build break
+KILLED    m0050 src/config/config.c:64 [arith * -> /]
+          build break
+KILLED    m0051 src/config/config.c:66 [cmp != -> ==]
+KILLED    m0052 src/config/config.c:69 [arith * -> /]
+          build break
+SURVIVED  m0053 src/config/config.c:69 [cmp < -> <=]
+KILLED    m0054 src/config/config.c:70 [arith * -> /]
+          build break
+KILLED    m0055 src/config/config.c:75 [arith * -> /]
+          build break
+KILLED    m0056 src/config/config.c:75 [arith * -> /]
+          build break
+KILLED    m0057 src/config/config.c:77 [cmp != -> ==]
+KILLED    m0058 src/config/config.c:80 [arith * -> /]
+          build break
+SURVIVED  m0059 src/config/config.c:80 [cmp < -> <=]
+KILLED    m0060 src/config/config.c:81 [arith * -> /]
+          build break
+KILLED    m0061 src/config/config.c:83 [arith * -> /]
+          build break
+SURVIVED  m0062 src/config/config.c:83 [cmp > -> >=]
+KILLED    m0063 src/config/config.c:84 [arith * -> /]
+      build/mutants/p18224/m0064_config.c:89:41: error: expected ')'
+   89 | static int assign_double_min_max(double /field, const char *value, double lo, double hi) {
+      |                                         ^
+build/mutants/p18224/m0064_config.c:89:33: note: to match this '('
+   89 | static int assign_double_min_max(double /field, const char *value, double lo, double hi) {
+      |                                 ^
+build/mutants/p18224/m0064_config.c:91:27: error: use of undeclared identifier 'value'
+   91 |     int rc = parse_double(value, &parsed);
+      |                           ^~~~~
+build/mutants/p18224/m0064_config.c:95:18: error: use of undeclared identifier 'lo'
+   95 |     if (parsed < lo || parsed > hi) {
+      |                  ^~
+build/mutants/p18224/m0064_config.c:95:33: error: use of undeclared identifier 'hi'
+   95 |     if (parsed < lo || parsed > hi) {
+      |                                 ^~
+build/mutants/p18224/m0064_config.c:98:6: error: use of undeclared identifier 'field'
+   98 |     *field = parsed;
+      |      ^~~~~
+build/mutants/p18224/m0064_config.c:232:60: error: too many arguments to function call, expected 1, have 4
+  232 |         return assign_double_min_max(&cfg->gen.weight_len, value, ct_gen_weight_min,
+      |                ~~~~~~~~~~~~~~~~~~~~~                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+  233 |                                      CT_GEN_DOUBLE_MAX);
+      |                                      ~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0064_config.c:89:12: note: 'assign_double_min_max' declared here
+   89 | static int assign_double_min_max(double /field, const char *value, double lo, double hi) {
+      |            ^                     ~~~~~~
+build/mutants/p18224/m0064_config.c:236:63: error: too many arguments to function call, expected 1, have 4
+  236 |         return assign_double_min_max(&cfg->gen.weight_subset, value, ct_gen_weight_min,
+      |                ~~~~~~~~~~~~~~~~~~~~~                          ^~~~~~~~~~~~~~~~~~~~~~~~~
+  237 |                                      CT_GEN_DOUBLE_MAX);
+      |                                      ~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0064_config.c:89:12: note: 'assign_double_min_max' declared here
+   89 | static int assign_double_min_max(double /field, const char *value, double lo, double hi) {
+      |            ^                     ~~~~~~
+build/mutants/p18224/m0064_config.c:240:63: error: too many arguments to function call, expected 1, have 4
+  240 |         return assign_double_min_max(&cfg->gen.weight_regrip, value, ct_gen_weight_min,
+      |                ~~~~~~~~~~~~~~~~~~~~~                          ^~~~~~~~~~~~~~~~~~~~~~~~~
+  241 |                                      CT_GEN_DOUBLE_MAX);
+      |                                      ~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0064_config.c:89:12: note: 'assign_double_min_max' declared here
+   89 | static int assign_double_min_max(double /field, const char *value, double lo, double hi) {
+      |            ^                     ~~~~~~
+build/mutants/p18224/m0064_config.c:244:63: error: too many arguments to function call, expected 1, have 4
+  244 |         return assign_double_min_max(&cfg->gen.weight_finger, value, ct_gen_weight_min,
+      |                ~~~~~~~~~~~~~~~~~~~~~                          ^~~~~~~~~~~~~~~~~~~~~~~~~
+  245 |                                      CT_GEN_DOUBLE_MAX);
+      |                                      ~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0064_config.c:89:12: note: 'assign_double_min_max' declared here
+   89 | static int assign_double_min_max(double /field, const char *value, double lo, double hi) {
+      |            ^                     ~~~~~~
+build/mutants/p18224/m0064_config.c:257:62: error: too many arguments to function call, expected 1, have 4
+  257 |         return assign_double_min_max(&cfg->gen.penalty[idx], value, -CT_GEN_DOUBLE_MAX,
+      |                ~~~~~~~~~~~~~~~~~~~~~                         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+  258 |                                      CT_GEN_DOUBLE_MAX);
+      |                                      ~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0064_config.c:89:12: note: 'assign_double_min_max' declared here
+   89 | static int assign_double_min_max(double /field, const char *value, double lo, double hi) {
+      |            ^                     ~~~~~~
+build/mutants/p18224/m0064_config.c:275:71: error: too many arguments to function call, expected 1, have 4
+  275 |         return assign_double_min_max(&cfg->gen.finger_cost[idx][dir], value, -CT_GEN_DOUBLE_MAX,
+      |                ~~~~~~~~~~~~~~~~~~~~~                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~
+  276 |                                      CT_GEN_DOUBLE_MAX);
+      |                                      ~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0064_config.c:89:12: note: 'assign_double_min_max' declared here
+   89 | static int assign_double_min_max(double /field, const char *value, double lo, double hi) {
+      |            ^                     ~~~~~~
+11 errors generated.
+build/mutants/p18224/m0065_config.c:89:60: error: expected ')'
+   89 | static int assign_double_min_max(double *field, const char /value, double lo, double hi) {
+      |                                                            ^
+build/mutants/p18224/m0065_config.c:89:33: note: to match this '('
+   89 | static int assign_double_min_max(double *field, const char /value, double lo, double hi) {
+      |                                 ^
+build/mutants/p18224/m0065_config.c:91:27: error: use of undeclared identifier 'value'
+   91 |     int rc = parse_double(value, &parsed);
+      |                           ^~~~~
+build/mutants/p18224/m0065_config.c:95:18: error: use of undeclared identifier 'lo'
+   95 |     if (parsed < lo || parsed > hi) {
+      |                  ^~
+build/mutants/p18224/m0065_config.c:95:33: error: use of undeclared identifier 'hi'
+   95 |     if (parsed < lo || parsed > hi) {
+      |                                 ^~
+build/mutants/p18224/m0065_config.c:232:67: error: too many arguments to function call, expected 2, have 4
+  232 |         return assign_double_min_max(&cfg->gen.weight_len, value, ct_gen_weight_min,
+      |                ~~~~~~~~~~~~~~~~~~~~~                              ^~~~~~~~~~~~~~~~~~
+  233 |                                      CT_GEN_DOUBLE_MAX);
+      |                                      ~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0065_config.c:89:12: note: 'assign_double_min_max' declared here
+   89 | static int assign_double_min_max(double *field, const char /value, double lo, double hi) {
+      |            ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0065_config.c:236:70: error: too many arguments to function call, expected 2, have 4
+  236 |         return assign_double_min_max(&cfg->gen.weight_subset, value, ct_gen_weight_min,
+      |                ~~~~~~~~~~~~~~~~~~~~~                                 ^~~~~~~~~~~~~~~~~~
+  237 |                                      CT_GEN_DOUBLE_MAX);
+      |                                      ~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0065_config.c:89:12: note: 'assign_double_min_max' declared here
+   89 | static int assign_double_min_max(double *field, const char /value, double lo, double hi) {
+      |            ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0065_config.c:240:70: error: too many arguments to function call, expected 2, have 4
+  240 |         return assign_double_min_max(&cfg->gen.weight_regrip, value, ct_gen_weight_min,
+      |                ~~~~~~~~~~~~~~~~~~~~~                                 ^~~~~~~~~~~~~~~~~~
+  241 |                                      CT_GEN_DOUBLE_MAX);
+      |                                      ~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0065_config.c:89:12: note: 'assign_double_min_max' declared here
+   89 | static int assign_double_min_max(double *field, const char /value, double lo, double hi) {
+      |            ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0065_config.c:244:70: error: too many arguments to function call, expected 2, have 4
+  244 |         return assign_double_min_max(&cfg->gen.weight_finger, value, ct_gen_weight_min,
+      |                ~~~~~~~~~~~~~~~~~~~~~                                 ^~~~~~~~~~~~~~~~~~
+  245 |                                      CT_GEN_DOUBLE_MAX);
+      |                                      ~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0065_config.c:89:12: note: 'assign_double_min_max' declared here
+   89 | static int assign_double_min_max(double *field, const char /value, double lo, double hi) {
+      |            ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0065_config.c:257:69: error: too many arguments to function call, expected 2, have 4
+  257 |         return assign_double_min_max(&cfg->gen.penalty[idx], value, -CT_GEN_DOUBLE_MAX,
+      |                ~~~~~~~~~~~~~~~~~~~~~                                ^~~~~~~~~~~~~~~~~~~
+  258 |                                      CT_GEN_DOUBLE_MAX);
+      |                                      ~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0065_config.c:89:12: note: 'assign_double_min_max' declared here
+   89 | static int assign_double_min_max(double *field, const char /value, double lo, double hi) {
+      |            ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0065_config.c:275:78: error: too many arguments to function call, expected 2, have 4
+  275 |         return assign_double_min_max(&cfg->gen.finger_cost[idx][dir], value, -CT_GEN_DOUBLE_MAX,
+      |                ~~~~~~~~~~~~~~~~~~~~~                                         ^~~~~~~~~~~~~~~~~~~
+  276 |                                      CT_GEN_DOUBLE_MAX);
+      |                                      ~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0065_config.c:89:12: note: 'assign_double_min_max' declared here
+   89 | static int assign_double_min_max(double *field, const char /value, double lo, double hi) {
+      |            ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~
+10 errors generated.
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_gen_weights_negative exited 1
+mutate: suite config_gen_weights_negative exited 1
+mutate: suite config_gen_double_bounds exited 1
+build/mutants/p18224/m0070_config.c:98:5: error: expected expression
+   98 |     /field = parsed;
+      |     ^
+1 error generated.
+build/mutants/p18224/m0071_config.c:102:31: error: expected ')'
+  102 | static int assign_long_lo(int /field, const char *value, long lo) {
+      |                               ^
+build/mutants/p18224/m0071_config.c:102:26: note: to match this '('
+  102 | static int assign_long_lo(int /field, const char *value, long lo) {
+      |                          ^
+build/mutants/p18224/m0071_config.c:104:25: error: use of undeclared identifier 'value'
+  104 |     int rc = parse_long(value, &parsed);
+      |                         ^~~~~
+build/mutants/p18224/m0071_config.c:108:6: error: use of undeclared identifier 'field'
+  108 |     *field = parsed < lo ? (int)lo : (int)parsed;
+      |      ^~~~~
+build/mutants/p18224/m0071_config.c:108:23: error: use of undeclared identifier 'lo'
+  108 |     *field = parsed < lo ? (int)lo : (int)parsed;
+      |                       ^~
+build/mutants/p18224/m0071_config.c:108:33: error: use of undeclared identifier 'lo'
+  108 |     *field = parsed < lo ? (int)lo : (int)parsed;
+      |                                 ^~
+build/mutants/p18224/m0071_config.c:279:58: error: too many arguments to function call, expected 1, have 3
+  279 |         return assign_long_lo(&cfg->gen.setup_bfs_depth, value, CT_MIN_DEPTH);
+      |                ~~~~~~~~~~~~~~                            ^~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0071_config.c:102:12: note: 'assign_long_lo' declared here
+  102 | static int assign_long_lo(int /field, const char *value, long lo) {
+      |            ^              ~~~
+build/mutants/p18224/m0071_config.c:282:57: error: too many arguments to function call, expected 1, have 3
+  282 |         return assign_long_lo(&cfg->gen.fallback_depth, value, CT_MIN_DEPTH);
+      |                ~~~~~~~~~~~~~~                           ^~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0071_config.c:102:12: note: 'assign_long_lo' declared here
+  102 | static int assign_long_lo(int /field, const char *value, long lo) {
+      |            ^              ~~~
+build/mutants/p18224/m0071_config.c:285:56: error: too many arguments to function call, expected 1, have 3
+  285 |         return assign_long_lo(&cfg->gen.candidate_max, value, CT_MIN_DEPTH);
+      |                ~~~~~~~~~~~~~~                          ^~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0071_config.c:102:12: note: 'assign_long_lo' declared here
+  102 | static int assign_long_lo(int /field, const char *value, long lo) {
+      |            ^              ~~~
+build/mutants/p18224/m0071_config.c:297:56: error: too many arguments to function call, expected 1, have 3
+  297 |         return assign_long_lo(&cfg->window.target_fps, value, CT_MIN_FPS);
+      |                ~~~~~~~~~~~~~~                          ^~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0071_config.c:102:12: note: 'assign_long_lo' declared here
+  102 | static int assign_long_lo(int /field, const char *value, long lo) {
+      |            ^              ~~~
+9 errors generated.
+build/mutants/p18224/m0072_config.c:102:50: error: expected ')'
+  102 | static int assign_long_lo(int *field, const char /value, long lo) {
+      |                                                  ^
+build/mutants/p18224/m0072_config.c:102:26: note: to match this '('
+  102 | static int assign_long_lo(int *field, const char /value, long lo) {
+      |                          ^
+build/mutants/p18224/m0072_config.c:104:25: error: use of undeclared identifier 'value'
+  104 |     int rc = parse_long(value, &parsed);
+      |                         ^~~~~
+build/mutants/p18224/m0072_config.c:108:23: error: use of undeclared identifier 'lo'
+  108 |     *field = parsed < lo ? (int)lo : (int)parsed;
+      |                       ^~
+build/mutants/p18224/m0072_config.c:108:33: error: use of undeclared identifier 'lo'
+  108 |     *field = parsed < lo ? (int)lo : (int)parsed;
+      |                                 ^~
+build/mutants/p18224/m0072_config.c:279:65: error: too many arguments to function call, expected 2, have 3
+  279 |         return assign_long_lo(&cfg->gen.setup_bfs_depth, value, CT_MIN_DEPTH);
+      |                ~~~~~~~~~~~~~~                                   ^~~~~~~~~~~~
+src/config\config.h:156:22: note: expanded from macro 'CT_MIN_DEPTH'
+  156 | #define CT_MIN_DEPTH 1
+      |                      ^
+build/mutants/p18224/m0072_config.c:102:12: note: 'assign_long_lo' declared here
+  102 | static int assign_long_lo(int *field, const char /value, long lo) {
+      |            ^              ~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0072_config.c:282:64: error: too many arguments to function call, expected 2, have 3
+  282 |         return assign_long_lo(&cfg->gen.fallback_depth, value, CT_MIN_DEPTH);
+      |                ~~~~~~~~~~~~~~                                  ^~~~~~~~~~~~
+src/config\config.h:156:22: note: expanded from macro 'CT_MIN_DEPTH'
+  156 | #define CT_MIN_DEPTH 1
+      |                      ^
+build/mutants/p18224/m0072_config.c:102:12: note: 'assign_long_lo' declared here
+  102 | static int assign_long_lo(int *field, const char /value, long lo) {
+      |            ^              ~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0072_config.c:285:63: error: too many arguments to function call, expected 2, have 3
+  285 |         return assign_long_lo(&cfg->gen.candidate_max, value, CT_MIN_DEPTH);
+      |                ~~~~~~~~~~~~~~                                 ^~~~~~~~~~~~
+src/config\config.h:156:22: note: expanded from macro 'CT_MIN_DEPTH'
+  156 | #define CT_MIN_DEPTH 1
+      |                      ^
+build/mutants/p18224/m0072_config.c:102:12: note: 'assign_long_lo' declared here
+  102 | static int assign_long_lo(int *field, const char /value, long lo) {
+      |            ^              ~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0072_config.c:297:63: error: too many arguments to function call, expected 2, have 3
+  297 |         return assign_long_lo(&cfg->window.target_fps, value, CT_MIN_FPS);
+      |                ~~~~~~~~~~~~~~                                 ^~~~~~~~~~
+src/config\config.h:183:20: note: expanded from macro 'CT_MIN_FPS'
+  183 | #define CT_MIN_FPS 1
+      |                    ^
+build/mutants/p18224/m0072_config.c:102:12: note: 'assign_long_lo' declared here
+  102 | static int assign_long_lo(int *field, const char /value, long lo) {
+      |            ^              ~~~~~~~~~~~~~~~~~~~~~~
+8 errors generated.
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0076_config.c:108:5: error: expected expression
+  108 |     /field = parsed < lo ? (int)lo : (int)parsed;
+      |     ^
+1 error generated.
+build/mutants/p18224/m0078_config.c:112:32: error: expected ')'
+  112 | static int assign_long_min(int /field, const char *value, long min) {
+      |                                ^
+build/mutants/p18224/m0078_config.c:112:27: note: to match this '('
+  112 | static int assign_long_min(int /field, const char *value, long min) {
+      |                           ^
+build/mutants/p18224/m0078_config.c:114:25: error: use of undeclared identifier 'value'
+  114 |     int rc = parse_long(value, &parsed);
+      |                         ^~~~~
+build/mutants/p18224/m0078_config.c:118:18: error: use of undeclared identifier 'min'
+  118 |     if (parsed < min) {
+      |                  ^~~
+build/mutants/p18224/m0078_config.c:121:6: error: use of undeclared identifier 'field'
+  121 |     *field = (int)parsed;
+      |      ^~~~~
+build/mutants/p18224/m0078_config.c:291:52: error: too many arguments to function call, expected 1, have 3
+  291 |         return assign_long_min(&cfg->window.width, value, CT_WINDOW_MIN_DIMENSION);
+      |                ~~~~~~~~~~~~~~~                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0078_config.c:112:12: note: 'assign_long_min' declared here
+  112 | static int assign_long_min(int /field, const char *value, long min) {
+      |            ^               ~~~
+build/mutants/p18224/m0078_config.c:294:53: error: too many arguments to function call, expected 1, have 3
+  294 |         return assign_long_min(&cfg->window.height, value, CT_WINDOW_MIN_DIMENSION);
+      |                ~~~~~~~~~~~~~~~                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0078_config.c:112:12: note: 'assign_long_min' declared here
+  112 | static int assign_long_min(int /field, const char *value, long min) {
+      |            ^               ~~~
+build/mutants/p18224/m0078_config.c:309:55: error: too many arguments to function call, expected 1, have 3
+  309 |         return assign_long_min(&cfg->fuzz.iterations, value, CT_FUZZ_MIN_ITERATIONS);
+      |                ~~~~~~~~~~~~~~~                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0078_config.c:112:12: note: 'assign_long_min' declared here
+  112 | static int assign_long_min(int /field, const char *value, long min) {
+      |            ^               ~~~
+7 errors generated.
+build/mutants/p18224/m0079_config.c:112:51: error: expected ')'
+  112 | static int assign_long_min(int *field, const char /value, long min) {
+      |                                                   ^
+build/mutants/p18224/m0079_config.c:112:27: note: to match this '('
+  112 | static int assign_long_min(int *field, const char /value, long min) {
+      |                           ^
+build/mutants/p18224/m0079_config.c:114:25: error: use of undeclared identifier 'value'
+  114 |     int rc = parse_long(value, &parsed);
+      |                         ^~~~~
+build/mutants/p18224/m0079_config.c:118:18: error: use of undeclared identifier 'min'
+  118 |     if (parsed < min) {
+      |                  ^~~
+build/mutants/p18224/m0079_config.c:291:59: error: too many arguments to function call, expected 2, have 3
+  291 |         return assign_long_min(&cfg->window.width, value, CT_WINDOW_MIN_DIMENSION);
+      |                ~~~~~~~~~~~~~~~                            ^~~~~~~~~~~~~~~~~~~~~~~
+src/config\config.h:181:33: note: expanded from macro 'CT_WINDOW_MIN_DIMENSION'
+  181 | #define CT_WINDOW_MIN_DIMENSION 1
+      |                                 ^
+build/mutants/p18224/m0079_config.c:112:12: note: 'assign_long_min' declared here
+  112 | static int assign_long_min(int *field, const char /value, long min) {
+      |            ^               ~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0079_config.c:294:60: error: too many arguments to function call, expected 2, have 3
+  294 |         return assign_long_min(&cfg->window.height, value, CT_WINDOW_MIN_DIMENSION);
+      |                ~~~~~~~~~~~~~~~                             ^~~~~~~~~~~~~~~~~~~~~~~
+src/config\config.h:181:33: note: expanded from macro 'CT_WINDOW_MIN_DIMENSION'
+  181 | #define CT_WINDOW_MIN_DIMENSION 1
+      |                                 ^
+build/mutants/p18224/m0079_config.c:112:12: note: 'assign_long_min' declared here
+  112 | static int assign_long_min(int *field, const char /value, long min) {
+      |            ^               ~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0079_config.c:309:62: error: too many arguments to function call, expected 2, have 3
+  309 |         return assign_long_min(&cfg->fuzz.iterations, value, CT_FUZZ_MIN_ITERATIONS);
+      |                ~~~~~~~~~~~~~~~                               ^~~~~~~~~~~~~~~~~~~~~~
+src/config\config.h:205:32: note: expanded from macro 'CT_FUZZ_MIN_ITERATIONS'
+  205 | #define CT_FUZZ_MIN_ITERATIONS 1
+      |                                ^
+build/mutants/p18224/m0079_config.c:112:12: note: 'assign_long_min' declared here
+  112 | static int assign_long_min(int *field, const char /value, long min) {
+      |            ^               ~~~~~~~~~~~~~~~~~~~~~~
+6 errors generated.
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_domain_rejection exited 1
+build/mutants/p18224/m0084_config.c:121:5: error: expected expression
+  121 |     /field = (int)parsed;
+      |     ^
+1 error generated.
+mutate: suite config_preferred_moves exited 1
+mutate: suite config_preferred_moves exited 1
+build/mutants/p18224/m0087_config.c:127:14: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  127 |     if (face != -1) {
+      |         ~~~~ ^  ~~
+1 error generated.
+mutate: suite config_preferred_moves exited 1
+mutate: suite config_preferred_moves exited 1
+build/mutants/p18224/m0090_config.c:131:14: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  131 |     if (face != -1) {
+      |         ~~~~ ^  ~~
+1 error generated.
+mutate: suite config_finger_set exited 1
+mutate: suite config_set_roundtrip exited -1073741795
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_defaults exited -1073741795
+mutate: suite config_defaults exited -1073741795
+mutate: suite config_defaults exited 1
+mutate: suite config_defaults exited 1
+build/mutants/p18224/m0107_config.c:184:29: error: expected ')'
+  184 | int ct_config_set(ct_config /cfg, const char *key, const char *value) {
+      |                             ^
+build/mutants/p18224/m0107_config.c:184:18: note: to match this '('
+  184 | int ct_config_set(ct_config /cfg, const char *key, const char *value) {
+      |                  ^
+build/mutants/p18224/m0107_config.c:184:5: error: conflicting types for 'ct_config_set'
+  184 | int ct_config_set(ct_config /cfg, const char *key, const char *value) {
+      |     ^
+src/config\config.h:377:5: note: previous declaration is here
+  377 | int ct_config_set(ct_config *cfg, const char *key, const char *value);
+      |     ^
+build/mutants/p18224/m0107_config.c:185:9: error: use of undeclared identifier 'cfg'
+  185 |     if (cfg == NULL || key == NULL || value == NULL) {
+      |         ^~~
+build/mutants/p18224/m0107_config.c:185:24: error: use of undeclared identifier 'key'
+  185 |     if (cfg == NULL || key == NULL || value == NULL) {
+      |                        ^~~
+build/mutants/p18224/m0107_config.c:185:39: error: use of undeclared identifier 'value'
+  185 |     if (cfg == NULL || key == NULL || value == NULL) {
+      |                                       ^~~~~
+build/mutants/p18224/m0107_config.c:188:16: error: use of undeclared identifier 'key'
+  188 |     if (strcmp(key, "srs.request_retention") == 0) {
+      |                ^~~
+build/mutants/p18224/m0107_config.c:189:37: error: use of undeclared identifier 'cfg'
+  189 |         return assign_double_range(&cfg->fsrs.request_retention, value, CT_FSRS_RETENTION_MIN,
+      |                                     ^~~
+build/mutants/p18224/m0107_config.c:189:66: error: use of undeclared identifier 'value'
+  189 |         return assign_double_range(&cfg->fsrs.request_retention, value, CT_FSRS_RETENTION_MIN,
+      |                                                                  ^~~~~
+build/mutants/p18224/m0107_config.c:192:16: error: use of undeclared identifier 'key'
+  192 |     if (strcmp(key, "srs.max_ivl_days") == 0) {
+      |                ^~~
+build/mutants/p18224/m0107_config.c:193:34: error: use of undeclared identifier 'cfg'
+  193 |         return assign_double_lo(&cfg->fsrs.max_ivl_days, value, CT_FSRS_MIN_STABILITY);
+      |                                  ^~~
+build/mutants/p18224/m0107_config.c:193:58: error: use of undeclared identifier 'value'
+  193 |         return assign_double_lo(&cfg->fsrs.max_ivl_days, value, CT_FSRS_MIN_STABILITY);
+      |                                                          ^~~~~
+build/mutants/p18224/m0107_config.c:195:17: error: use of undeclared identifier 'key'
+  195 |     if (strncmp(key, "srs.w", sizeof "srs.w" - 1) == 0) {
+      |                 ^~~
+build/mutants/p18224/m0107_config.c:196:27: error: use of undeclared identifier 'key'
+  196 |         const char *num = key + sizeof "srs.w" - 1;
+      |                           ^~~
+build/mutants/p18224/m0107_config.c:214:31: error: use of undeclared identifier 'cfg'
+  214 |         return assign_double(&cfg->fsrs.w[idx], value);
+      |                               ^~~
+build/mutants/p18224/m0107_config.c:214:49: error: use of undeclared identifier 'value'
+  214 |         return assign_double(&cfg->fsrs.w[idx], value);
+      |                                                 ^~~~~
+build/mutants/p18224/m0107_config.c:216:16: error: use of undeclared identifier 'key'
+  216 |     if (strcmp(key, "gen.preferred_moves") == 0) {
+      |                ^~~
+build/mutants/p18224/m0107_config.c:218:30: error: use of undeclared identifier 'value'
+  218 |         for (const char *p = value; *p != '\0'; p++) {
+      |                              ^~~~~
+build/mutants/p18224/m0107_config.c:228:9: error: use of undeclared identifier 'cfg'
+  228 |         cfg->gen.preferred_moves = mask;
+      |         ^~~
+build/mutants/p18224/m0107_config.c:231:16: error: use of undeclared identifier 'key'
+  231 |     if (strcmp(key, "gen.weight_len") == 0) {
+      |                ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build/mutants/p18224/m0108_config.c:184:46: error: expected ')'
+  184 | int ct_config_set(ct_config *cfg, const char /key, const char *value) {
+      |                                              ^
+build/mutants/p18224/m0108_config.c:184:18: note: to match this '('
+  184 | int ct_config_set(ct_config *cfg, const char /key, const char *value) {
+      |                  ^
+build/mutants/p18224/m0108_config.c:184:5: error: conflicting types for 'ct_config_set'
+  184 | int ct_config_set(ct_config *cfg, const char /key, const char *value) {
+      |     ^
+src/config\config.h:377:5: note: previous declaration is here
+  377 | int ct_config_set(ct_config *cfg, const char *key, const char *value);
+      |     ^
+build/mutants/p18224/m0108_config.c:185:24: error: use of undeclared identifier 'key'
+  185 |     if (cfg == NULL || key == NULL || value == NULL) {
+      |                        ^~~
+build/mutants/p18224/m0108_config.c:185:39: error: use of undeclared identifier 'value'
+  185 |     if (cfg == NULL || key == NULL || value == NULL) {
+      |                                       ^~~~~
+build/mutants/p18224/m0108_config.c:188:16: error: use of undeclared identifier 'key'
+  188 |     if (strcmp(key, "srs.request_retention") == 0) {
+      |                ^~~
+build/mutants/p18224/m0108_config.c:189:66: error: use of undeclared identifier 'value'
+  189 |         return assign_double_range(&cfg->fsrs.request_retention, value, CT_FSRS_RETENTION_MIN,
+      |                                                                  ^~~~~
+build/mutants/p18224/m0108_config.c:192:16: error: use of undeclared identifier 'key'
+  192 |     if (strcmp(key, "srs.max_ivl_days") == 0) {
+      |                ^~~
+build/mutants/p18224/m0108_config.c:193:58: error: use of undeclared identifier 'value'
+  193 |         return assign_double_lo(&cfg->fsrs.max_ivl_days, value, CT_FSRS_MIN_STABILITY);
+      |                                                          ^~~~~
+build/mutants/p18224/m0108_config.c:195:17: error: use of undeclared identifier 'key'
+  195 |     if (strncmp(key, "srs.w", sizeof "srs.w" - 1) == 0) {
+      |                 ^~~
+build/mutants/p18224/m0108_config.c:196:27: error: use of undeclared identifier 'key'
+  196 |         const char *num = key + sizeof "srs.w" - 1;
+      |                           ^~~
+build/mutants/p18224/m0108_config.c:214:49: error: use of undeclared identifier 'value'
+  214 |         return assign_double(&cfg->fsrs.w[idx], value);
+      |                                                 ^~~~~
+build/mutants/p18224/m0108_config.c:216:16: error: use of undeclared identifier 'key'
+  216 |     if (strcmp(key, "gen.preferred_moves") == 0) {
+      |                ^~~
+build/mutants/p18224/m0108_config.c:218:30: error: use of undeclared identifier 'value'
+  218 |         for (const char *p = value; *p != '\0'; p++) {
+      |                              ^~~~~
+build/mutants/p18224/m0108_config.c:231:16: error: use of undeclared identifier 'key'
+  231 |     if (strcmp(key, "gen.weight_len") == 0) {
+      |                ^~~
+build/mutants/p18224/m0108_config.c:232:60: error: use of undeclared identifier 'value'
+  232 |         return assign_double_min_max(&cfg->gen.weight_len, value, ct_gen_weight_min,
+      |                                                            ^~~~~
+build/mutants/p18224/m0108_config.c:235:16: error: use of undeclared identifier 'key'
+  235 |     if (strcmp(key, "gen.weight_subset") == 0) {
+      |                ^~~
+build/mutants/p18224/m0108_config.c:236:63: error: use of undeclared identifier 'value'
+  236 |         return assign_double_min_max(&cfg->gen.weight_subset, value, ct_gen_weight_min,
+      |                                                               ^~~~~
+build/mutants/p18224/m0108_config.c:239:16: error: use of undeclared identifier 'key'
+  239 |     if (strcmp(key, "gen.weight_regrip") == 0) {
+      |                ^~~
+build/mutants/p18224/m0108_config.c:240:63: error: use of undeclared identifier 'value'
+  240 |         return assign_double_min_max(&cfg->gen.weight_regrip, value, ct_gen_weight_min,
+      |                                                               ^~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build/mutants/p18224/m0109_config.c:184:63: error: expected ')'
+  184 | int ct_config_set(ct_config *cfg, const char *key, const char /value) {
+      |                                                               ^
+build/mutants/p18224/m0109_config.c:184:18: note: to match this '('
+  184 | int ct_config_set(ct_config *cfg, const char *key, const char /value) {
+      |                  ^
+build/mutants/p18224/m0109_config.c:184:5: error: conflicting types for 'ct_config_set'
+  184 | int ct_config_set(ct_config *cfg, const char *key, const char /value) {
+      |     ^
+src/config\config.h:377:5: note: previous declaration is here
+  377 | int ct_config_set(ct_config *cfg, const char *key, const char *value);
+      |     ^
+build/mutants/p18224/m0109_config.c:185:39: error: use of undeclared identifier 'value'
+  185 |     if (cfg == NULL || key == NULL || value == NULL) {
+      |                                       ^~~~~
+build/mutants/p18224/m0109_config.c:189:66: error: use of undeclared identifier 'value'
+  189 |         return assign_double_range(&cfg->fsrs.request_retention, value, CT_FSRS_RETENTION_MIN,
+      |                                                                  ^~~~~
+build/mutants/p18224/m0109_config.c:193:58: error: use of undeclared identifier 'value'
+  193 |         return assign_double_lo(&cfg->fsrs.max_ivl_days, value, CT_FSRS_MIN_STABILITY);
+      |                                                          ^~~~~
+build/mutants/p18224/m0109_config.c:214:49: error: use of undeclared identifier 'value'
+  214 |         return assign_double(&cfg->fsrs.w[idx], value);
+      |                                                 ^~~~~
+build/mutants/p18224/m0109_config.c:218:30: error: use of undeclared identifier 'value'
+  218 |         for (const char *p = value; *p != '\0'; p++) {
+      |                              ^~~~~
+build/mutants/p18224/m0109_config.c:232:60: error: use of undeclared identifier 'value'
+  232 |         return assign_double_min_max(&cfg->gen.weight_len, value, ct_gen_weight_min,
+      |                                                            ^~~~~
+build/mutants/p18224/m0109_config.c:236:63: error: use of undeclared identifier 'value'
+  236 |         return assign_double_min_max(&cfg->gen.weight_subset, value, ct_gen_weight_min,
+      |                                                               ^~~~~
+build/mutants/p18224/m0109_config.c:240:63: error: use of undeclared identifier 'value'
+  240 |         return assign_double_min_max(&cfg->gen.weight_regrip, value, ct_gen_weight_min,
+      |                                                               ^~~~~
+build/mutants/p18224/m0109_config.c:244:63: error: use of undeclared identifier 'value'
+  244 |         return assign_double_min_max(&cfg->gen.weight_finger, value, ct_gen_weight_min,
+      |                                                               ^~~~~
+build/mutants/p18224/m0109_config.c:257:62: error: use of undeclared identifier 'value'
+  257 |         return assign_double_min_max(&cfg->gen.penalty[idx], value, -CT_GEN_DOUBLE_MAX,
+      |                                                              ^~~~~
+build/mutants/p18224/m0109_config.c:275:71: error: use of undeclared identifier 'value'
+  275 |         return assign_double_min_max(&cfg->gen.finger_cost[idx][dir], value, -CT_GEN_DOUBLE_MAX,
+      |                                                                       ^~~~~
+build/mutants/p18224/m0109_config.c:279:58: error: use of undeclared identifier 'value'
+  279 |         return assign_long_lo(&cfg->gen.setup_bfs_depth, value, CT_MIN_DEPTH);
+      |                                                          ^~~~~
+build/mutants/p18224/m0109_config.c:282:57: error: use of undeclared identifier 'value'
+  282 |         return assign_long_lo(&cfg->gen.fallback_depth, value, CT_MIN_DEPTH);
+      |                                                         ^~~~~
+build/mutants/p18224/m0109_config.c:285:56: error: use of undeclared identifier 'value'
+  285 |         return assign_long_lo(&cfg->gen.candidate_max, value, CT_MIN_DEPTH);
+      |                                                        ^~~~~
+build/mutants/p18224/m0109_config.c:288:58: error: use of undeclared identifier 'value'
+  288 |         return assign_double_lo(&cfg->anim.move_seconds, value, CT_ANIM_MIN_MOVE_SECONDS);
+      |                                                          ^~~~~
+build/mutants/p18224/m0109_config.c:291:52: error: use of undeclared identifier 'value'
+  291 |         return assign_long_min(&cfg->window.width, value, CT_WINDOW_MIN_DIMENSION);
+      |                                                    ^~~~~
+build/mutants/p18224/m0109_config.c:294:53: error: use of undeclared identifier 'value'
+  294 |         return assign_long_min(&cfg->window.height, value, CT_WINDOW_MIN_DIMENSION);
+      |                                                     ^~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0111_config.c:185:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  185 |     if (cfg == NULL && key == NULL || value == NULL) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build/mutants/p18224/m0111_config.c:185:21: note: place parentheses around the '&&' expression to silence this warning
+  185 |     if (cfg == NULL && key == NULL || value == NULL) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0113_config.c:185:36: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  185 |     if (cfg == NULL || key == NULL && value == NULL) {
+      |                     ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+build/mutants/p18224/m0113_config.c:185:36: note: place parentheses around the '&&' expression to silence this warning
+  185 |     if (cfg == NULL || key == NULL && value == NULL) {
+      |                        ~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0127_config.c:196:20: error: expected identifier or '('
+  196 |         const char /num = key + sizeof "srs.w" - 1;
+      |                    ^
+build/mutants/p18224/m0127_config.c:197:13: error: use of undeclared identifier 'num'
+  197 |         if (num[0] == '\0') {
+      |             ^~~
+build/mutants/p18224/m0127_config.c:200:30: error: use of undeclared identifier 'num'
+  200 |         for (const char *p = num; *p != '\0'; p++) {
+      |                              ^~~
+build/mutants/p18224/m0127_config.c:205:13: error: use of undeclared identifier 'num'
+  205 |         if (num[0] == '0' && num[1] != '\0') {
+      |             ^~~
+build/mutants/p18224/m0127_config.c:205:30: error: use of undeclared identifier 'num'
+  205 |         if (num[0] == '0' && num[1] != '\0') {
+      |                              ^~~
+build/mutants/p18224/m0127_config.c:210:27: error: use of undeclared identifier 'num'
+  210 |         long idx = strtol(num, &end, 10);
+      |                           ^~~
+6 errors generated.
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_srs_weights exited 1
+    build break
+KILLED    m0064 src/config/config.c:89 [arith * -> /]
+          build break
+KILLED    m0065 src/config/config.c:89 [arith * -> /]
+          build break
+KILLED    m0066 src/config/config.c:92 [cmp != -> ==]
+KILLED    m0067 src/config/config.c:95 [cmp < -> <=]
+KILLED    m0068 src/config/config.c:95 [logic || -> &&]
+KILLED    m0069 src/config/config.c:95 [cmp > -> >=]
+KILLED    m0070 src/config/config.c:98 [arith * -> /]
+          build break
+KILLED    m0071 src/config/config.c:102 [arith * -> /]
+          build break
+KILLED    m0072 src/config/config.c:102 [arith * -> /]
+          build break
+SURVIVED  m0073 src/config/config.c:103 [int+1 0 -> 1]
+SURVIVED  m0074 src/config/config.c:103 [int-1 0 -> -1]
+KILLED    m0075 src/config/config.c:105 [cmp != -> ==]
+KILLED    m0076 src/config/config.c:108 [arith * -> /]
+          build break
+SURVIVED  m0077 src/config/config.c:108 [cmp < -> <=]
+KILLED    m0078 src/config/config.c:112 [arith * -> /]
+          build break
+KILLED    m0079 src/config/config.c:112 [arith * -> /]
+          build break
+SURVIVED  m0080 src/config/config.c:113 [int+1 0 -> 1]
+SURVIVED  m0081 src/config/config.c:113 [int-1 0 -> -1]
+KILLED    m0082 src/config/config.c:115 [cmp != -> ==]
+KILLED    m0083 src/config/config.c:118 [cmp < -> <=]
+KILLED    m0084 src/config/config.c:121 [arith * -> /]
+          build break
+KILLED    m0085 src/config/config.c:127 [cmp != -> ==]
+KILLED    m0086 src/config/config.c:127 [int+1 0 -> 1]
+KILLED    m0087 src/config/config.c:127 [int-1 0 -> -1]
+          build break
+KILLED    m0088 src/config/config.c:131 [cmp != -> ==]
+KILLED    m0089 src/config/config.c:131 [int+1 0 -> 1]
+KILLED    m0090 src/config/config.c:131 [int-1 0 -> -1]
+          build break
+KILLED    m0091 src/config/config.c:138 [int+1 0 -> 1]
+KILLED    m0092 src/config/config.c:138 [int-1 0 -> -1]
+SURVIVED  m0093 src/config/config.c:138 [cmp < -> <=]
+KILLED    m0094 src/config/config.c:139 [int+1 1u -> 2u]
+KILLED    m0095 src/config/config.c:139 [int-1 1u -> 0u]
+KILLED    m0096 src/config/config.c:139 [cmp == -> !=]
+SURVIVED  m0097 src/config/config.c:143 [arith - -> +]
+SURVIVED  m0098 src/config/config.c:143 [int+1 1 -> 2]
+SURVIVED  m0099 src/config/config.c:143 [int-1 1 -> 0]
+SURVIVED  m0100 src/config/config.c:148 [int+1 0 -> 1]
+SURVIVED  m0101 src/config/config.c:148 [int-1 0 -> -1]
+SURVIVED  m0102 src/config/config.c:158 [int+1 0 -> 1]
+KILLED    m0103 src/config/config.c:158 [int-1 0 -> -1]
+KILLED    m0104 src/config/config.c:158 [cmp < -> <=]
+KILLED    m0105 src/config/config.c:159 [int+1 1u -> 2u]
+KILLED    m0106 src/config/config.c:159 [int-1 1u -> 0u]
+KILLED    m0107 src/config/config.c:184 [arith * -> /]
+          build break
+KILLED    m0108 src/config/config.c:184 [arith * -> /]
+          build break
+KILLED    m0109 src/config/config.c:184 [arith * -> /]
+          build break
+KILLED    m0110 src/config/config.c:185 [cmp == -> !=]
+KILLED    m0111 src/config/config.c:185 [logic || -> &&]
+          build break
+KILLED    m0112 src/config/config.c:185 [cmp == -> !=]
+KILLED    m0113 src/config/config.c:185 [logic || -> &&]
+          build break
+KILLED    m0114 src/config/config.c:185 [cmp == -> !=]
+KILLED    m0115 src/config/config.c:188 [cmp == -> !=]
+KILLED    m0116 src/config/config.c:188 [int+1 0 -> 1]
+KILLED    m0117 src/config/config.c:188 [int-1 0 -> -1]
+KILLED    m0118 src/config/config.c:192 [cmp == -> !=]
+KILLED    m0119 src/config/config.c:192 [int+1 0 -> 1]
+KILLED    m0120 src/config/config.c:192 [int-1 0 -> -1]
+KILLED    m0121 src/config/config.c:195 [arith - -> +]
+SURVIVED  m0122 src/config/config.c:195 [int+1 1 -> 2]
+KILLED    m0123 src/config/config.c:195 [int-1 1 -> 0]
+KILLED    m0124 src/config/config.c:195 [cmp == -> !=]
+KILLED    m0125 src/config/config.c:195 [int+1 0 -> 1]
+KILLED    m0126 src/config/config.c:195 [int-1 0 -> -1]
+KILLED    m0127 src/config/config.c:196 [arith * -> /]
+          build break
+KILLED    m0128 src/config/config.c:196 [arith + -> -]
+KILLED    m0129 src/config/config.c:196 [arith - -> +]
+KILLED    m0130 src/config/config.c:196 [int+1 1 -> 2]
+KILLED    mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_errors exited 1
+mutate: suite config_set_srs_weights exited 1
+build/mutants/p18224/m0135_config.c:200:25: error: expected identifier or '('
+  200 |         for (const char /p = num; *p != '\0'; p++) {
+      |                         ^
+build/mutants/p18224/m0135_config.c:200:35: error: expected ';' in 'for' statement specifier
+  200 |         for (const char /p = num; *p != '\0'; p++) {
+      |                                   ^
+build/mutants/p18224/m0135_config.c:200:36: error: use of undeclared identifier 'p'
+  200 |         for (const char /p = num; *p != '\0'; p++) {
+      |                                    ^
+build/mutants/p18224/m0135_config.c:200:47: error: use of undeclared identifier 'p'
+  200 |         for (const char /p = num; *p != '\0'; p++) {
+      |                                               ^
+build/mutants/p18224/m0135_config.c:201:18: error: use of undeclared identifier 'p'
+  201 |             if (*p < '0' || *p > '9') {
+      |                  ^
+build/mutants/p18224/m0135_config.c:201:30: error: use of undeclared identifier 'p'
+  201 |             if (*p < '0' || *p > '9') {
+      |                              ^
+6 errors generated.
+build/mutants/p18224/m0136_config.c:200:35: error: expected expression
+  200 |         for (const char *p = num; /p != '\0'; p++) {
+      |                                   ^
+1 error generated.
+mutate: suite config_set_errors exited -1073741795
+build/mutants/p18224/m0138_config.c:201:17: error: expected expression
+  201 |             if (/p < '0' || *p > '9') {
+      |                 ^
+1 error generated.
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_errors exited -1073741795
+build/mutants/p18224/m0141_config.c:201:29: error: expected expression
+  201 |             if (*p < '0' || /p > '9') {
+      |                             ^
+1 error generated.
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_errors exited 1
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_errors exited 1
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_srs_weights exited 1
+build/mutants/p18224/m0152_config.c:209:14: error: expected identifier or '('
+  209 |         char /end = NULL;
+      |              ^
+build/mutants/p18224/m0152_config.c:210:33: error: use of undeclared identifier 'end'
+  210 |         long idx = strtol(num, &end, 10);
+      |                                 ^~~
+build/mutants/p18224/m0152_config.c:211:13: error: use of undeclared identifier 'end'
+  211 |         if (end[0] != '\0' || errno == ERANGE || idx >= CT_FSRS_WEIGHT_COUNT) {
+      |             ^~~
+3 errors generated.
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_errors exited 1
+mutate: suite config_set_srs_weights exited 1
+mutate: suite config_set_srs_weights exited 1
+build/mutants/p18224/m0158_config.c:211:28: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  211 |         if (end[0] != '\0' && errno == ERANGE || idx >= CT_FSRS_WEIGHT_COUNT) {
+      |             ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~ ~~
+build/mutants/p18224/m0158_config.c:211:28: note: place parentheses around the '&&' expression to silence this warning
+  211 |         if (end[0] != '\0' && errno == ERANGE || idx >= CT_FSRS_WEIGHT_COUNT) {
+      |             ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite config_set_srs_weights exited 1
+build/mutants/p18224/m0160_config.c:211:47: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  211 |         if (end[0] != '\0' || errno == ERANGE && idx >= CT_FSRS_WEIGHT_COUNT) {
+      |                            ~~ ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0160_config.c:211:47: note: place parentheses around the '&&' expression to silence this warning
+  211 |         if (end[0] != '\0' || errno == ERANGE && idx >= CT_FSRS_WEIGHT_COUNT) {
+      |                               ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite config_set_errors exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0167_config.c:218:25: error: expected identifier or '('
+  218 |         for (const char /p = value; *p != '\0'; p++) {
+      |                         ^
+build/mutants/p18224/m0167_config.c:218:37: error: expected ';' in 'for' statement specifier
+  218 |         for (const char /p = value; *p != '\0'; p++) {
+      |                                     ^
+build/mutants/p18224/m0167_config.c:218:38: error: use of undeclared identifier 'p'
+  218 |         for (const char /p = value; *p != '\0'; p++) {
+      |                                      ^
+build/mutants/p18224/m0167_config.c:218:49: error: use of undeclared identifier 'p'
+  218 |         for (const char /p = value; *p != '\0'; p++) {
+      |                                                 ^
+build/mutants/p18224/m0167_config.c:219:48: error: use of undeclared identifier 'p'
+  219 |             unsigned face = face_from_char_ci(*p);
+      |                                                ^
+5 errors generated.
+build/mutants/p18224/m0168_config.c:218:37: error: expected expression
+  218 |         for (const char *p = value; /p != '\0'; p++) {
+      |                                     ^
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0170_config.c:219:47: error: expected expression
+  219 |             unsigned face = face_from_char_ci(/p);
+      |                                               ^
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_errors exited 1
+build/mutants/p18224/m0173_config.c:220:22: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  220 |             if (face == -1 || (face & CT_MOVE_ROTATION_MASK) != 0) {
+      |                 ~~~~ ^  ~~
+1 error generated.
+mutate: suite config_set_errors exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_preferred_moves exited 1
+build/mutants/p18224/m0180_config.c:225:18: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  225 |         if (mask == -1) {
+      |             ~~~~ ^  ~~
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0199_config.c:248:20: error: expected identifier or '('
+  248 |         const char /face = key + sizeof "gen.penalty_" - 1;
+      |                    ^
+build/mutants/p18224/m0199_config.c:249:13: error: use of undeclared identifier 'face'
+  249 |         if (face[0] == '\0' || face[1] != '\0') {
+      |             ^~~~
+build/mutants/p18224/m0199_config.c:249:32: error: use of undeclared identifier 'face'
+  249 |         if (face[0] == '\0' || face[1] != '\0') {
+      |                                ^~~~
+build/mutants/p18224/m0199_config.c:252:49: error: use of undeclared identifier 'face'
+  252 |         unsigned token = ct_move_face_from_char(face[0]);
+      |                                                 ^~~~
+4 errors generated.
+mutate: suite config_set_roundtrip exited 1
+m0131 src/config/config.c:196 [int-1 1 -> 0]
+KILLED    m0132 src/config/config.c:197 [int+1 0 -> 1]
+KILLED    m0133 src/config/config.c:197 [int-1 0 -> -1]
+KILLED    m0134 src/config/config.c:197 [cmp == -> !=]
+KILLED    m0135 src/config/config.c:200 [arith * -> /]
+          build break
+KILLED    m0136 src/config/config.c:200 [arith * -> /]
+          build break
+KILLED    m0137 src/config/config.c:200 [cmp != -> ==]
+KILLED    m0138 src/config/config.c:201 [arith * -> /]
+          build break
+KILLED    m0139 src/config/config.c:201 [cmp < -> <=]
+KILLED    m0140 src/config/config.c:201 [logic || -> &&]
+KILLED    m0141 src/config/config.c:201 [arith * -> /]
+          build break
+KILLED    m0142 src/config/config.c:201 [cmp > -> >=]
+KILLED    m0143 src/config/config.c:205 [int+1 0 -> 1]
+KILLED    m0144 src/config/config.c:205 [int-1 0 -> -1]
+KILLED    m0145 src/config/config.c:205 [cmp == -> !=]
+KILLED    m0146 src/config/config.c:205 [logic && -> ||]
+KILLED    m0147 src/config/config.c:205 [int+1 1 -> 2]
+KILLED    m0148 src/config/config.c:205 [int-1 1 -> 0]
+KILLED    m0149 src/config/config.c:205 [cmp != -> ==]
+SURVIVED  m0150 src/config/config.c:208 [int+1 0 -> 1]
+SURVIVED  m0151 src/config/config.c:208 [int-1 0 -> -1]
+KILLED    m0152 src/config/config.c:209 [arith * -> /]
+          build break
+KILLED    m0153 src/config/config.c:210 [int+1 10 -> 11]
+KILLED    m0154 src/config/config.c:210 [int-1 10 -> 9]
+KILLED    m0155 src/config/config.c:211 [int+1 0 -> 1]
+KILLED    m0156 src/config/config.c:211 [int-1 0 -> -1]
+KILLED    m0157 src/config/config.c:211 [cmp != -> ==]
+KILLED    m0158 src/config/config.c:211 [logic || -> &&]
+          build break
+KILLED    m0159 src/config/config.c:211 [cmp == -> !=]
+KILLED    m0160 src/config/config.c:211 [logic || -> &&]
+          build break
+KILLED    m0161 src/config/config.c:211 [cmp >= -> >]
+KILLED    m0162 src/config/config.c:216 [cmp == -> !=]
+KILLED    m0163 src/config/config.c:216 [int+1 0 -> 1]
+KILLED    m0164 src/config/config.c:216 [int-1 0 -> -1]
+KILLED    m0165 src/config/config.c:217 [int+1 0 -> 1]
+KILLED    m0166 src/config/config.c:217 [int-1 0 -> -1]
+KILLED    m0167 src/config/config.c:218 [arith * -> /]
+          build break
+KILLED    m0168 src/config/config.c:218 [arith * -> /]
+          build break
+KILLED    m0169 src/config/config.c:218 [cmp != -> ==]
+KILLED    m0170 src/config/config.c:219 [arith * -> /]
+          build break
+KILLED    m0171 src/config/config.c:220 [cmp == -> !=]
+KILLED    m0172 src/config/config.c:220 [int+1 0 -> 1]
+KILLED    m0173 src/config/config.c:220 [int-1 0 -> -1]
+          build break
+KILLED    m0174 src/config/config.c:220 [logic || -> &&]
+KILLED    m0175 src/config/config.c:220 [cmp != -> ==]
+KILLED    m0176 src/config/config.c:220 [int+1 0 -> 1]
+KILLED    m0177 src/config/config.c:220 [int-1 0 -> -1]
+KILLED    m0178 src/config/config.c:225 [cmp == -> !=]
+KILLED    m0179 src/config/config.c:225 [int+1 0 -> 1]
+KILLED    m0180 src/config/config.c:225 [int-1 0 -> -1]
+          build break
+KILLED    m0181 src/config/config.c:231 [cmp == -> !=]
+KILLED    m0182 src/config/config.c:231 [int+1 0 -> 1]
+KILLED    m0183 src/config/config.c:231 [int-1 0 -> -1]
+KILLED    m0184 src/config/config.c:235 [cmp == -> !=]
+KILLED    m0185 src/config/config.c:235 [int+1 0 -> 1]
+KILLED    m0186 src/config/config.c:235 [int-1 0 -> -1]
+KILLED    m0187 src/config/config.c:239 [cmp == -> !=]
+KILLED    m0188 src/config/config.c:239 [int+1 0 -> 1]
+KILLED    m0189 src/config/config.c:239 [int-1 0 -> -1]
+KILLED    m0190 src/config/config.c:243 [cmp == -> !=]
+KILLED    m0191 src/config/config.c:243 [int+1 0 -> 1]
+KILLED    m0192 src/config/config.c:243 [int-1 0 -> -1]
+KILLED    m0193 src/config/config.c:247 [arith - -> +]
+SURVIVED  m0194 src/config/config.c:247 [int+1 1 -> 2]
+KILLED    m0195 src/config/config.c:247 [int-1 1 -> 0]
+KILLED    m0196 src/config/config.c:247 [cmp == -> !=]
+KILLED    m0197 src/config/config.c:247 [int+1 0 -> 1]
+KILLED    m0198 src/config/config.c:247 [int-1 0 -> -1]
+KILLED    m0199 src/config/config.c:248 [arith * -> /]
+          build break
+Kmutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0204_config.c:249:29: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+  249 |         if (face[1] == '\0' || face[1] != '\0') {
+      |             ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+mutate: suite fuzz_config_keys exited 1
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0209_config.c:249:29: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+  249 |         if (face[0] == '\0' || face[0] != '\0') {
+      |             ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_gen_double_bounds exited 1
+build/mutants/p18224/m0215_config.c:253:25: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  253 |         int idx = token == -1 ? -1 : face_bit_index(token);
+      |                   ~~~~~ ^  ~~
+1 error generated.
+mutate: suite config_set_errors exited 1
+mutate: suite config_set_errors exited 1
+mutate: suite config_gen_double_bounds exited 1
+mutate: suite config_gen_double_bounds exited 1
+mutate: suite config_set_errors exited -1073741795
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0229_config.c:261:20: error: expected identifier or '('
+  261 |         const char /face = key + sizeof "gen.finger_cost_" - 1;
+      |                    ^
+build/mutants/p18224/m0229_config.c:262:49: error: use of undeclared identifier 'face'
+  262 |         unsigned token = ct_move_face_from_char(face[0]);
+      |                                                 ^~~~
+build/mutants/p18224/m0229_config.c:268:20: error: use of undeclared identifier 'face'
+  268 |         if (strcmp(face + 1, "_cw") == 0) {
+      |                    ^~~~
+build/mutants/p18224/m0229_config.c:270:27: error: use of undeclared identifier 'face'
+  270 |         } else if (strcmp(face + 1, "_ccw") == 0) {
+      |                           ^~~~
+4 errors generated.
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+build/mutants/p18224/m0238_config.c:263:25: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  263 |         int idx = token == -1 ? -1 : face_bit_index(token);
+      |                   ~~~~~ ^  ~~
+1 error generated.
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited -1073741795
+mutate: suite config_finger_set exited -1073741795
+mutate: suite config_finger_set exited -1073741795
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_finger_set exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+ILLED    m0200 src/config/config.c:248 [arith + -> -]
+KILLED    m0201 src/config/config.c:248 [arith - -> +]
+KILLED    m0202 src/config/config.c:248 [int+1 1 -> 2]
+KILLED    m0203 src/config/config.c:248 [int-1 1 -> 0]
+KILLED    m0204 src/config/config.c:249 [int+1 0 -> 1]
+          build break
+SURVIVED  m0205 src/config/config.c:249 [int-1 0 -> -1]
+KILLED    m0206 src/config/config.c:249 [cmp == -> !=]
+KILLED    m0207 src/config/config.c:249 [logic || -> &&]
+KILLED    m0208 src/config/config.c:249 [int+1 1 -> 2]
+KILLED    m0209 src/config/config.c:249 [int-1 1 -> 0]
+          build break
+KILLED    m0210 src/config/config.c:249 [cmp != -> ==]
+KILLED    m0211 src/config/config.c:252 [int+1 0 -> 1]
+KILLED    m0212 src/config/config.c:252 [int-1 0 -> -1]
+KILLED    m0213 src/config/config.c:253 [cmp == -> !=]
+KILLED    m0214 src/config/config.c:253 [int+1 0 -> 1]
+KILLED    m0215 src/config/config.c:253 [int-1 0 -> -1]
+          build break
+KILLED    m0216 src/config/config.c:253 [arith - -> +]
+SURVIVED  m0217 src/config/config.c:253 [int+1 1 -> 2]
+KILLED    m0218 src/config/config.c:253 [int-1 1 -> 0]
+KILLED    m0219 src/config/config.c:254 [cmp < -> <=]
+KILLED    m0220 src/config/config.c:254 [int+1 0 -> 1]
+KILLED    m0221 src/config/config.c:254 [int-1 0 -> -1]
+KILLED    m0222 src/config/config.c:257 [arith - -> +]
+KILLED    m0223 src/config/config.c:260 [arith - -> +]
+SURVIVED  m0224 src/config/config.c:260 [int+1 1 -> 2]
+KILLED    m0225 src/config/config.c:260 [int-1 1 -> 0]
+KILLED    m0226 src/config/config.c:260 [cmp == -> !=]
+KILLED    m0227 src/config/config.c:260 [int+1 0 -> 1]
+KILLED    m0228 src/config/config.c:260 [int-1 0 -> -1]
+KILLED    m0229 src/config/config.c:261 [arith * -> /]
+          build break
+KILLED    m0230 src/config/config.c:261 [arith + -> -]
+KILLED    m0231 src/config/config.c:261 [arith - -> +]
+KILLED    m0232 src/config/config.c:261 [int+1 1 -> 2]
+KILLED    m0233 src/config/config.c:261 [int-1 1 -> 0]
+KILLED    m0234 src/config/config.c:262 [int+1 0 -> 1]
+KILLED    m0235 src/config/config.c:262 [int-1 0 -> -1]
+KILLED    m0236 src/config/config.c:263 [cmp == -> !=]
+KILLED    m0237 src/config/config.c:263 [int+1 0 -> 1]
+KILLED    m0238 src/config/config.c:263 [int-1 0 -> -1]
+          build break
+KILLED    m0239 src/config/config.c:263 [arith - -> +]
+SURVIVED  m0240 src/config/config.c:263 [int+1 1 -> 2]
+KILLED    m0241 src/config/config.c:263 [int-1 1 -> 0]
+KILLED    m0242 src/config/config.c:264 [cmp < -> <=]
+KILLED    m0243 src/config/config.c:264 [int+1 0 -> 1]
+KILLED    m0244 src/config/config.c:264 [int-1 0 -> -1]
+KILLED    m0245 src/config/config.c:264 [logic || -> &&]
+KILLED    m0246 src/config/config.c:264 [cmp >= -> >]
+KILLED    m0247 src/config/config.c:268 [arith + -> -]
+KILLED    m0248 src/config/config.c:268 [int+1 1 -> 2]
+KILLED    m0249 src/config/config.c:268 [int-1 1 -> 0]
+KILLED    m0250 src/config/config.c:268 [cmp == -> !=]
+KILLED    m0251 src/config/config.c:268 [int+1 0 -> 1]
+KILLED    m0252 src/config/config.c:268 [int-1 0 -> -1]
+KILLED    m0253 src/config/config.c:270 [arith + -> -]
+KILLED    m0254 src/config/config.c:270 [int+1 1 -> 2]
+KILLED    m0255 src/config/config.c:270 [int-1 1 -> 0]
+KILLED    m0256 src/config/config.c:270 [cmp == -> !=]
+KILLED    m0257 src/config/config.c:270 [int+1 0 -> 1]
+KILLED    m0258 src/config/config.c:270 [int-1 0 -> -1]
+KILLED    m0259 src/config/config.c:275 [arith - -> +]
+KILLED    m0260 src/config/config.c:278 [cmp == -> !=]
+KILLED    m0261 src/config/config.c:278 [int+1 0 -> 1]
+KILLED    m0262 src/config/config.c:278 [int-1 0 -> -1]
+KILLED    m0263 src/config/config.c:281 [cmp == -> !=]
+KILLED    m0264 src/config/config.c:281 [int+1 0 -> 1]
+KILLED    m0265 src/config/config.c:281 [int-1 0 -> -1]
+KILLED    m0266 src/config/config.c:284 [cmp == -> !=]
+KILLED    m0267 src/config/config.c:284 [int+1 0 -> 1]
+KILLED    m0268 src/config/config.c:284 [int-1 0 -> -1]
+KILLED    m0269 src/config/config.c:287 [cmp == -> !=]
+KILLED    m0270 src/config/config.c:287 [int+1 0 -> 1]
+KILLED    m0271 src/config/config.c:287 [int-1 0 -> -1]
+KILLED    m0mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_errors exited 1
+build/mutants/p18224/m0286_config.c:301:17: error: comparison of integers of different signs: 'size_t' (aka 'unsigned long long') and 'int' [-Werror,-Wsign-compare]
+  301 |         if (len == -1 || len >= sizeof cfg->db.filename || strchr(value, '/') != NULL ||
+      |             ~~~ ^  ~~
+1 error generated.
+build/mutants/p18224/m0287_config.c:301:22: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  301 |         if (len == 0 && len >= sizeof cfg->db.filename || strchr(value, '/') != NULL ||
+      |             ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build/mutants/p18224/m0287_config.c:301:22: note: place parentheses around the '&&' expression to silence this warning
+  301 |         if (len == 0 && len >= sizeof cfg->db.filename || strchr(value, '/') != NULL ||
+      |                      ^
+      |             (                                         )
+1 error generated.
+build/mutants/p18224/m0289_config.c:301:56: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  301 |         if (len == 0 || len >= sizeof cfg->db.filename && strchr(value, '/') != NULL ||
+      |                      ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0289_config.c:301:56: note: place parentheses around the '&&' expression to silence this warning
+  301 |         if (len == 0 || len >= sizeof cfg->db.filename && strchr(value, '/') != NULL ||
+      |                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+build/mutants/p18224/m0291_config.c:301:86: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  301 |         if (len == 0 || len >= sizeof cfg->db.filename || strchr(value, '/') != NULL &&
+      |                                                        ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  302 |             strchr(value, '\\') != NULL) {
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p18224/m0291_config.c:301:86: note: place parentheses around the '&&' expression to silence this warning
+  301 |         if (len == 0 || len >= sizeof cfg->db.filename || strchr(value, '/') != NULL &&
+      |                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  302 |             strchr(value, '\\') != NULL) {
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite fuzz_config_keys exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: suite config_set_roundtrip exited 1
+mutate: 30 unexplained survivors
+272 src/config/config.c:290 [cmp == -> !=]
+KILLED    m0273 src/config/config.c:290 [int+1 0 -> 1]
+KILLED    m0274 src/config/config.c:290 [int-1 0 -> -1]
+KILLED    m0275 src/config/config.c:293 [cmp == -> !=]
+KILLED    m0276 src/config/config.c:293 [int+1 0 -> 1]
+KILLED    m0277 src/config/config.c:293 [int-1 0 -> -1]
+KILLED    m0278 src/config/config.c:296 [cmp == -> !=]
+KILLED    m0279 src/config/config.c:296 [int+1 0 -> 1]
+KILLED    m0280 src/config/config.c:296 [int-1 0 -> -1]
+KILLED    m0281 src/config/config.c:299 [cmp == -> !=]
+KILLED    m0282 src/config/config.c:299 [int+1 0 -> 1]
+KILLED    m0283 src/config/config.c:299 [int-1 0 -> -1]
+KILLED    m0284 src/config/config.c:301 [cmp == -> !=]
+KILLED    m0285 src/config/config.c:301 [int+1 0 -> 1]
+KILLED    m0286 src/config/config.c:301 [int-1 0 -> -1]
+          build break
+KILLED    m0287 src/config/config.c:301 [logic || -> &&]
+          build break
+SURVIVED  m0288 src/config/config.c:301 [cmp >= -> >]
+KILLED    m0289 src/config/config.c:301 [logic || -> &&]
+          build break
+KILLED    m0290 src/config/config.c:301 [cmp != -> ==]
+KILLED    m0291 src/config/config.c:301 [logic || -> &&]
+          build break
+KILLED    m0292 src/config/config.c:302 [cmp != -> ==]
+KILLED    m0293 src/config/config.c:305 [arith + -> -]
+KILLED    m0294 src/config/config.c:305 [int+1 1 -> 2]
+KILLED    m0295 src/config/config.c:305 [int-1 1 -> 0]
+KILLED    m0296 src/config/config.c:308 [cmp == -> !=]
+KILLED    m0297 src/config/config.c:308 [int+1 0 -> 1]
+KILLED    m0298 src/config/config.c:308 [int-1 0 -> -1]
+mutate: generated=298 build_failed=67 killed_by_tests=201 killed=268 survived=30 accepted=0 unexplained=30 skipped=0
+mutate: kill rate 268/298 = 89.9%, with accepted equivalents 268/298 = 89.9%
+mutate: wall 164.5s
+make: *** [makefile:242: mutate] Error 1

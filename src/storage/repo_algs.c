@@ -1,5 +1,6 @@
 #include "storage/repo_algs.h"
 
+#include <stdarg.h>
 #include <stdio.h>
 
 #include "packs/provenance.h"
@@ -105,72 +106,72 @@ static void ct_alg_from_row(sqlite3_stmt *st, ct_generated_alg *a) {
     ct_alg_read_text(&r, a->created_at, sizeof a->created_at);
 }
 
-static void ct_alg_map_segment(const char *letters, int count, char *out, size_t cap,
-                               size_t *used) {
-    for (int i = 0; i < count && *used < cap; i++) {
+static int ct_alg_emit(char *out, size_t cap, size_t *used, const char *fmt, ...) {
+    va_list ap;
+    va_start(ap, fmt);
+    int n = vsnprintf(out + *used, cap - *used, fmt, ap);
+    va_end(ap);
+    if (n < 0) {
+        return CT_REPO_ERR_ARG;
+    }
+    *used += (size_t)n;
+    if (*used >= cap) {
+        return CT_REPO_ERR_ARG;
+    }
+    return CT_REPO_OK;
+}
+
+static int ct_alg_map_segment(const char *letters, int count, char *out, size_t cap, size_t *used) {
+    for (int i = 0; i < count; i++) {
         char c = letters[i];
         if (c < CT_LETTER_FIRST || c > CT_LETTER_LAST)
             c = '.';
-        int n = snprintf(out + *used, cap - *used, "%c", c);
-        if (n <= 0)
-            break;
-        *used += (size_t)n;
+        if (ct_alg_emit(out, cap, used, "%c", c) != CT_REPO_OK) {
+            return CT_REPO_ERR_ARG;
+        }
     }
+    return CT_REPO_OK;
 }
 
 static void ct_alg_canonical(const ct_config *cfg, int scheme_id, ct_buffer_mode mode,
                              int buffer_corner, int buffer_edge, const ct_letter_map *map,
                              char *out, size_t cap) {
-    int n = snprintf(out, cap, "%d|%d|%d|%d|%x|", scheme_id, (int)mode, buffer_corner, buffer_edge,
-                     cfg->gen.preferred_moves);
-    if (n <= 0) {
-        out[0] = '\0';
-        return;
+    size_t used = 0;
+    int ok = ct_alg_emit(out, cap, &used, "%d|%d|%d|%d|%x|", scheme_id, (int)mode, buffer_corner,
+                         buffer_edge, cfg->gen.preferred_moves);
+    for (int i = 0; ok == CT_REPO_OK && i < CT_FACE_COUNT; i++) {
+        ok = ct_alg_emit(out, cap, &used, i == 0 ? "%.6f" : ",%.6f", cfg->gen.penalty[i]);
     }
-    size_t used = (size_t)n;
-    for (int i = 0; i < CT_FACE_COUNT && used < cap; i++) {
-        n = snprintf(out + used, cap - used, i == 0 ? "%.6f" : ",%.6f", cfg->gen.penalty[i]);
-        if (n <= 0)
-            break;
-        used += (size_t)n;
-    }
-    if (used < cap) {
-        n = snprintf(out + used, cap - used, "|");
-        if (n > 0)
-            used += (size_t)n;
+    if (ok == CT_REPO_OK) {
+        ok = ct_alg_emit(out, cap, &used, "|");
     }
     int finger_total = CT_FINGER_FACE_COUNT * CT_FINGER_DIR_COUNT;
-    for (int k = 0; k < finger_total && used < cap; k++) {
+    for (int k = 0; ok == CT_REPO_OK && k < finger_total; k++) {
         int face = k / CT_FINGER_DIR_COUNT;
         int dir = k % CT_FINGER_DIR_COUNT;
-        n = snprintf(out + used, cap - used, k == 0 ? "%.6f" : ",%.6f",
-                     cfg->gen.finger_cost[face][dir]);
-        if (n <= 0)
-            break;
-        used += (size_t)n;
+        ok = ct_alg_emit(out, cap, &used, k == 0 ? "%.6f" : ",%.6f",
+                         cfg->gen.finger_cost[face][dir]);
     }
-    if (used < cap) {
-        n = snprintf(out + used, cap - used, "|%d|%d|%d|%.6f|%.6f|%.6f|%.6f",
-                     cfg->gen.setup_bfs_depth, cfg->gen.fallback_depth, cfg->gen.candidate_max,
-                     cfg->gen.weight_len, cfg->gen.weight_subset, cfg->gen.weight_regrip,
-                     cfg->gen.weight_finger);
-        if (n > 0)
-            used += (size_t)n;
+    if (ok == CT_REPO_OK) {
+        ok = ct_alg_emit(out, cap, &used, "|%d|%d|%d|%.6f|%.6f|%.6f|%.6f", cfg->gen.setup_bfs_depth,
+                         cfg->gen.fallback_depth, cfg->gen.candidate_max, cfg->gen.weight_len,
+                         cfg->gen.weight_subset, cfg->gen.weight_regrip, cfg->gen.weight_finger);
     }
-    if (used < cap) {
-        n = snprintf(out + used, cap - used, "|");
-        if (n > 0)
-            used += (size_t)n;
-        ct_alg_map_segment(map->corner, CT_LETTER_STICKERS, out, cap, &used);
-        if (used < cap) {
-            n = snprintf(out + used, cap - used, "|");
-            if (n > 0)
-                used += (size_t)n;
-        }
-        ct_alg_map_segment(map->edge, CT_LETTER_STICKERS, out, cap, &used);
+    if (ok == CT_REPO_OK) {
+        ok = ct_alg_emit(out, cap, &used, "|");
     }
-    if (used >= cap)
-        out[cap - 1] = '\0';
+    if (ok == CT_REPO_OK) {
+        ok = ct_alg_map_segment(map->corner, CT_LETTER_STICKERS, out, cap, &used);
+    }
+    if (ok == CT_REPO_OK) {
+        ok = ct_alg_emit(out, cap, &used, "|");
+    }
+    if (ok == CT_REPO_OK) {
+        ok = ct_alg_map_segment(map->edge, CT_LETTER_STICKERS, out, cap, &used);
+    }
+    if (ok != CT_REPO_OK) {
+        out[0] = '\0';
+    }
 }
 
 static int ct_alg_field_ok(const char *s, unsigned max) {
@@ -371,5 +372,8 @@ void ct_params_hash(const ct_config *cfg, int scheme_id, ct_buffer_mode mode, in
         return;
     char canon[CT_ALG_CANON_MAX];
     ct_alg_canonical(cfg, scheme_id, mode, buffer_corner, buffer_edge, map, canon, sizeof canon);
+    if (canon[0] == '\0') {
+        return;
+    }
     ct_sha256(canon, (unsigned)strlen(canon), hex_out);
 }

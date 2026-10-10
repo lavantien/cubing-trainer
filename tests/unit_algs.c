@@ -260,6 +260,130 @@ CT_SUITE(alg_hash_format_pinned) {
     CT_ASSERT_STR_EQ(got, want);
 }
 
+static size_t alg_canon_need(const ct_config *cfg, int scheme_id, ct_buffer_mode mode, int bc,
+                             int be) {
+    char probe[2048];
+    size_t need = 0;
+    need += (size_t)snprintf(probe, sizeof probe, "%d|%d|%d|%d|%x|", scheme_id, (int)mode, bc, be,
+                             cfg->gen.preferred_moves);
+    for (int i = 0; i < CT_FACE_COUNT; i++) {
+        need +=
+            (size_t)snprintf(probe, sizeof probe, i == 0 ? "%.6f" : ",%.6f", cfg->gen.penalty[i]);
+    }
+    need += (size_t)snprintf(probe, sizeof probe, "|");
+    int finger_total = CT_FINGER_FACE_COUNT * CT_FINGER_DIR_COUNT;
+    for (int k = 0; k < finger_total; k++) {
+        int face = k / CT_FINGER_DIR_COUNT;
+        int dir = k % CT_FINGER_DIR_COUNT;
+        need += (size_t)snprintf(probe, sizeof probe, k == 0 ? "%.6f" : ",%.6f",
+                                 cfg->gen.finger_cost[face][dir]);
+    }
+    need += (size_t)snprintf(probe, sizeof probe, "|%d|%d|%d|%.6f|%.6f|%.6f|%.6f",
+                             cfg->gen.setup_bfs_depth, cfg->gen.fallback_depth,
+                             cfg->gen.candidate_max, cfg->gen.weight_len, cfg->gen.weight_subset,
+                             cfg->gen.weight_regrip, cfg->gen.weight_finger);
+    need += 1 + CT_LETTER_STICKERS + 1 + CT_LETTER_STICKERS;
+    return need;
+}
+
+static void extreme_cfg(ct_config *cfg) {
+    *cfg = ct_config_defaults();
+    for (int i = 0; i < CT_FACE_COUNT; i++) {
+        cfg->gen.penalty[i] = 1.7e308;
+    }
+    for (int f = 0; f < CT_FINGER_FACE_COUNT; f++) {
+        for (int d = 0; d < CT_FINGER_DIR_COUNT; d++) {
+            cfg->gen.finger_cost[f][d] = 1.7e308;
+        }
+    }
+    cfg->gen.weight_len = 1.7e308;
+    cfg->gen.weight_subset = 1.7e308;
+    cfg->gen.weight_regrip = 1.7e308;
+    cfg->gen.weight_finger = 1.7e308;
+}
+
+CT_SUITE(alg_hash_fail_closed_on_oversize) {
+    ct_config cfg;
+    extreme_cfg(&cfg);
+    ct_letter_map map_a;
+    ct_letter_map map_b;
+    identity_map(&map_a);
+    identity_map(&map_b);
+    map_b.corner[11] = 'Y';
+    map_b.corner[12] = 'L';
+    char ha[CT_ALG_HASH_HEX_MAX];
+    char hb[CT_ALG_HASH_HEX_MAX];
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map_a,
+                   ha);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map_b,
+                   hb);
+    CT_ASSERT_EQ(strlen(ha), 0u);
+    CT_ASSERT_EQ(strlen(hb), 0u);
+
+    sqlite3 *db = algs_db();
+    ct_generated_alg a = base_alg("AB");
+    CT_ASSERT_EQ(ct_repo_alg_put(db, &a, ha), CT_REPO_ERR_ARG);
+    ct_generated_alg out;
+    CT_ASSERT_EQ(ct_repo_alg_get(db, CT_ORBIT_CORNER, "AB", CT_BUFFER_FIXED, 0, ha, &out),
+                 CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_alg_count(db, ha), CT_REPO_ERR_ARG);
+    ct_db_close(db);
+
+    ct_config bounded = ct_config_defaults();
+    bounded.gen.penalty[3] = CT_GEN_DOUBLE_MAX;
+    bounded.gen.finger_cost[4][1] = CT_GEN_DOUBLE_MAX;
+    bounded.gen.weight_len = CT_GEN_DOUBLE_MAX;
+    ct_params_hash(&bounded, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER,
+                   &map_a, ha);
+    ct_params_hash(&bounded, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER,
+                   &map_b, hb);
+    CT_ASSERT_EQ(strlen(ha), 64u);
+    CT_ASSERT_EQ(strlen(hb), 64u);
+    CT_ASSERT(strcmp(ha, hb) != 0);
+    CT_ASSERT(alg_canon_need(&bounded, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER,
+                             CT_3STYLE_EDGE_BUFFER) < CT_ALG_CANON_MAX);
+}
+
+CT_SUITE(alg_hash_canonical_boundary) {
+    ct_config base = ct_config_defaults();
+    for (int i = 0; i < CT_FACE_COUNT; i++) {
+        base.gen.penalty[i] = 1e308;
+    }
+    for (int f = 0; f < CT_FINGER_FACE_COUNT; f++) {
+        for (int d = 0; d < CT_FINGER_DIR_COUNT; d++) {
+            base.gen.finger_cost[f][d] = 1e308;
+        }
+    }
+    base.gen.weight_len = 1e308;
+    ct_letter_map map;
+    identity_map(&map);
+    char hex[CT_ALG_HASH_HEX_MAX];
+    int below = -1;
+    int at_or_above = -1;
+    double knob = 1.0;
+    for (int k = 0; k <= 308; k++) {
+        ct_config cfg = base;
+        cfg.gen.weight_finger = knob;
+        size_t need = alg_canon_need(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER,
+                                     CT_3STYLE_EDGE_BUFFER);
+        ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER,
+                       &map, hex);
+        if (need < CT_ALG_CANON_MAX) {
+            CT_ASSERT_EQ(strlen(hex), 64u);
+            below = k;
+        } else {
+            CT_ASSERT_EQ(strlen(hex), 0u);
+            if (at_or_above < 0) {
+                at_or_above = k;
+            }
+        }
+        knob *= 10.0;
+    }
+    CT_ASSERT(below >= 0);
+    CT_ASSERT(at_or_above >= 0);
+    CT_ASSERT_EQ(at_or_above, below + 1);
+}
+
 CT_SUITE(alg_put_get_roundtrip) {
     sqlite3 *db = algs_db();
     ct_generated_alg a = base_alg("UB");

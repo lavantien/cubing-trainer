@@ -144,6 +144,7 @@ typedef enum ct_cfg_status {
 #define CT_GEN_WEIGHT_SUBSET 2.0
 #define CT_GEN_WEIGHT_REGRIP 1.5
 #define CT_GEN_WEIGHT_FINGER 0.5
+#define CT_GEN_DOUBLE_MAX 1000000.0
 #define CT_FINGER_FACE_COUNT 6
 #define CT_FINGER_DIR_COUNT 2
 #define CT_FINGER_COST_CHEAP 0.2
