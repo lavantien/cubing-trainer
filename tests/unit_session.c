@@ -146,16 +146,15 @@ CT_SUITE(session_civil_reference) {
     CT_ASSERT_EQ(ct_ref_day(2026, 10, 9), 20735);
     CT_ASSERT_EQ(ct_ref_day(1969, 12, 31), -1);
 
-    static const long years[] = {1,    2,    3,    4,    5,    100,  101,  399,  400,
-                                 401,  499,  500,  501,  800,  801,  1200, 1599, 1600,
-                                 1700, 1800, 1900, 1999, 2000, 2001, 2099, 2100, 2101,
-                                 2199, 2200, 2300, 2400, 2800, 4000, 4400, 8000, 9600,
-                                 9998, 9999};
+    static const long years[] = {1,    2,    3,    4,    5,    100,  101,  399,  400,  401,
+                                 499,  500,  501,  800,  801,  1200, 1599, 1600, 1700, 1800,
+                                 1900, 1999, 2000, 2001, 2099, 2100, 2101, 2199, 2200, 2300,
+                                 2400, 2800, 4000, 4400, 8000, 9600, 9998, 9999};
     for (size_t i = 0; i < sizeof years / sizeof years[0]; i++) {
         long y = years[i];
         for (int m = 1; m <= 12; m++) {
-            int last = ct_ref_leap(y) && m == 2 ? 29 : (m == 2 ? 28 : (ct_ref_cum[m] -
-                                                                       ct_ref_cum[m - 1]));
+            int last =
+                ct_ref_leap(y) && m == 2 ? 29 : (m == 2 ? 28 : (ct_ref_cum[m] - ct_ref_cum[m - 1]));
             static const int probes[4] = {1, 15, 25, 28};
             for (int p = 0; p < 4; p++) {
                 int d = probes[p];
@@ -337,6 +336,7 @@ CT_SUITE(session_stale_last_review) {
     CT_ASSERT_EQ(ct_repo_srs_put(db, id, &ahead), CT_REPO_OK);
 
     ct_session s;
+    memset(&s, 0, sizeof s);
     CT_ASSERT(ct_session_begin(&s, db, &f, "review", now_stamp, today_num, 0) > 0);
     CT_ASSERT_EQ(ct_session_current(&s, &(ct_card){0}), CT_SESSION_OK);
     CT_ASSERT_EQ(ct_session_grade(&s, CT_GOOD, now_stamp), CT_SESSION_OK);
@@ -824,8 +824,7 @@ CT_SUITE(session_bad_stamp_digits) {
     CT_ASSERT(ct_session_iso_add_days("2026-01-a2", 1, out, (unsigned)sizeof out) < 0);
     CT_ASSERT(ct_session_iso_add_days("2026-a1-28", 1, out, (unsigned)sizeof out) < 0);
     CT_ASSERT(ct_session_iso_add_days("20a6-01-28", 1, out, (unsigned)sizeof out) < 0);
-    CT_ASSERT(ct_session_iso_add_days("2026-01-28", 1, out, (unsigned)sizeof out) ==
-              CT_SESSION_OK);
+    CT_ASSERT(ct_session_iso_add_days("2026-01-28", 1, out, (unsigned)sizeof out) == CT_SESSION_OK);
     CT_ASSERT_STR_EQ(out, "2026-01-29");
 }
 
