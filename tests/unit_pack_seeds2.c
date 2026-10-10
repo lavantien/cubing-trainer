@@ -211,43 +211,66 @@ CT_SUITE(pack_seed_bigcube_parity) {
 }
 
 CT_SUITE(pack_seed_m2) {
-    verify_pack("db/seeds/packs/bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT, 22);
+    verify_pack("db/seeds/packs/bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT, 24);
     ct_pack_entry e = fetch_one("db/seeds/packs/bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2,
-                                CT_STAGE_CONCEPT, "m2.01", 22);
+                                CT_STAGE_CONCEPT, "m2.01", 24);
     CT_ASSERT_STR_EQ(e.alg, "M2");
     CT_ASSERT_STR_EQ(e.front_json, "{\"buffer\":\"DF\",\"target\":\"UB\"}");
     CT_ASSERT_STR_EQ(e.source_url, "https://www.speedsolving.com/wiki/index.php/M2");
     e = fetch_one("db/seeds/packs/bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT,
-                  "m2.11", 22);
+                  "m2.11", 24);
     CT_ASSERT_STR_EQ(e.alg, "x' U' R2 U M2 U' R2 U x");
     CT_ASSERT_STR_EQ(e.front_json, "{\"buffer\":\"DF\",\"target\":\"RF\"}");
     e = fetch_one("db/seeds/packs/bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT,
-                  "m2.22", 22);
+                  "m2.22", 24);
     CT_ASSERT_STR_EQ(e.alg, "M2' D U R2 U' M' U R2 U' M D'");
     CT_ASSERT_STR_EQ(e.front_json, "{\"buffer\":\"DF\",\"target\":\"BD\"}");
+    e = fetch_one("db/seeds/packs/bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT,
+                  "m2.23", 24);
+    CT_ASSERT_STR_EQ(e.alg, "M2 U' M U2 M U' M' U2 M' U2");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"kind\":\"parity\"}");
+    CT_ASSERT_STR_EQ(e.source_url, "https://www.youtube.com/watch?v=JTkSQxWk_u8");
+    e = fetch_one("db/seeds/packs/bld_m2.tsv", CT_EVENT_3BLD, CT_METHOD_M2, CT_STAGE_CONCEPT,
+                  "m2.24", 24);
+    CT_ASSERT_STR_EQ(e.alg, "F2 M' U M' U M' U2 M U M U M U2 F2");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"kind\":\"buffer edge flip\",\"buffer\":\"DF\",\"flips\":"
+                                   "\"DF+UB\"}");
+    CT_ASSERT_STR_EQ(e.source_url, "http://www.cubefreak.net/bld/m2_guide.html");
 }
 
 CT_SUITE(pack_seed_oldpoch) {
     verify_pack("db/seeds/packs/bld_oldpoch.tsv", CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN,
-                CT_STAGE_CONCEPT, 38);
+                CT_STAGE_CONCEPT, 40);
     ct_pack_entry e = fetch_one("db/seeds/packs/bld_oldpoch.tsv", CT_EVENT_3BLD,
-                                CT_METHOD_OLD_POCHMANN, CT_STAGE_CONCEPT, "op.01", 38);
+                                CT_METHOD_OLD_POCHMANN, CT_STAGE_CONCEPT, "op.01", 40);
     CT_ASSERT_STR_EQ(e.alg, "R U R' U' R' F R2 U' R' U' R U R' F'");
     CT_ASSERT_STR_EQ(e.front_json, "{\"buffer\":\"UR\",\"target\":\"UL\",\"kind\":\"edge swap\"}");
     CT_ASSERT_STR_EQ(e.source_url, "https://jperm.net/bld");
     e = fetch_one("db/seeds/packs/bld_oldpoch.tsv", CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN,
-                  CT_STAGE_CONCEPT, "op.13", 38);
+                  CT_STAGE_CONCEPT, "op.13", 40);
     CT_ASSERT_STR_EQ(e.alg, "L");
     CT_ASSERT_STR_EQ(e.front_json, "{\"letter\":\"R\",\"orbit\":\"edge\",\"target_pos\":\"UL\"}");
     e = fetch_one("db/seeds/packs/bld_oldpoch.tsv", CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN,
-                  CT_STAGE_CONCEPT, "op.24", 38);
+                  CT_STAGE_CONCEPT, "op.24", 40);
     CT_ASSERT_STR_EQ(e.alg, "D L2");
     CT_ASSERT_STR_EQ(e.front_json, "{\"letter\":\"W\",\"orbit\":\"edge\",\"target_pos\":\"UL\"}");
     e = fetch_one("db/seeds/packs/bld_oldpoch.tsv", CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN,
-                  CT_STAGE_CONCEPT, "op.38", 38);
+                  CT_STAGE_CONCEPT, "op.38", 40);
     CT_ASSERT_STR_EQ(e.alg, "F' D");
     CT_ASSERT_STR_EQ(e.front_json,
                      "{\"letter\":\"F\",\"orbit\":\"corner\",\"target_pos\":\"DFR\"}");
+    e = fetch_one("db/seeds/packs/bld_oldpoch.tsv", CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN,
+                  CT_STAGE_CONCEPT, "op.39", 40);
+    CT_ASSERT_STR_EQ(e.alg, "L' U' L U' L' U2 L R U R' U R U2 R'");
+    CT_ASSERT_STR_EQ(e.front_json,
+                     "{\"kind\":\"corner twist\",\"twists\":\"UBR+UFR\",\"zero_perm\":"
+                     "true}");
+    CT_ASSERT_STR_EQ(e.source_url, "http://www.stefan-pochmann.de/spocc/blindsolving/M2R2/");
+    e = fetch_one("db/seeds/packs/bld_oldpoch.tsv", CT_EVENT_3BLD, CT_METHOD_OLD_POCHMANN,
+                  CT_STAGE_CONCEPT, "op.40", 40);
+    CT_ASSERT_STR_EQ(e.alg, "R U R' F' R U R' U' R' F R2 U' R' U'");
+    CT_ASSERT_STR_EQ(e.front_json, "{\"kind\":\"parity\",\"swaps\":\"UF-UR+UFR-UBR\"}");
+    CT_ASSERT_STR_EQ(e.source_url, "https://bldtrainer.com/parity");
 }
 
 CT_SUITE(pack_seed_fto) {

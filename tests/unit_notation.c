@@ -81,6 +81,10 @@ static const ct_notation_seed_alg ct_seed_algs[] = {
     {"4lll.16", "R U2 R2' U' R2 U' R2' U2 R", "R U2 R2 U' R2 U' R2 U2 R"},
     {"4lll.20", "R2 U2' R2' U' R2 U2' R2'", "R2 U2 R2 U' R2 U2 R2"},
     {"l4t.22", "R U' R2' L R L'", "R U' R2 L R L'"},
+    {"m2.23", "M2 U' M U2 M U' M' U2 M' U2", "M2 U' M U2 M U' M' U2 M' U2"},
+    {"m2.24", "F2 M' U M' U M' U2 M U M U M U2 F2", "F2 M' U M' U M' U2 M U M U M U2 F2"},
+    {"op.39", "L' U' L U' L' U2 L R U R' U R U2 R'", "L' U' L U' L' U2 L R U R' U R U2 R'"},
+    {"op.40", "R U R' F' R U R' U' R' F R2 U' R' U'", "R U R' F' R U R' U' R' F R2 U' R' U'"},
 };
 
 static bool ct_move_eq(ct_move a, ct_move b) {
