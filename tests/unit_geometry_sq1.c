@@ -59,6 +59,7 @@ static const char *const ct_sq1_bad[] = {
     "(99999999999999999999,0)",
     "(-99999999999,0)",
     "(2147483647,0)",
+    "(1x2)",
 };
 
 static int side_idx(int layer, int unit) {
@@ -266,6 +267,20 @@ CT_SUITE(sq1_slash_legality) {
     ct_sq1_state before = s;
     CT_ASSERT(ct_sq1_apply(&s, CT_SQ1_SLASH) < 0);
     CT_ASSERT_EQ(memcmp(&s, &before, sizeof before), 0);
+    ct_sq1_state_solved(&s);
+    ct_sq1_apply(&s, ct_sq1_move_id(0, 1));
+    CT_ASSERT_EQ(ct_sq1_can_slash(&s), 0);
+    before = s;
+    CT_ASSERT(ct_sq1_apply(&s, CT_SQ1_SLASH) < 0);
+    CT_ASSERT_EQ(memcmp(&s, &before, sizeof before), 0);
+    ct_sq1_state_solved(&s);
+    apply_alg("/(-3,-1) (1,6) (-2,-2) (1,4)", &s);
+    CT_ASSERT_EQ(ct_sq1_can_slash(&s), 0);
+    CT_ASSERT(ct_sq1_apply(&s, CT_SQ1_SLASH) < 0);
+    ct_sq1_state_solved(&s);
+    apply_alg("(-2,-3) /(0,4) (4,4) (-4,6) /", &s);
+    CT_ASSERT_EQ(ct_sq1_can_slash(&s), 1);
+    CT_ASSERT_EQ(ct_sq1_apply(&s, CT_SQ1_SLASH), 0);
     CT_ASSERT(ct_sq1_can_slash(NULL) < 0);
     CT_ASSERT(ct_sq1_apply(NULL, CT_SQ1_SLASH) < 0);
     ct_sq1_state_solved(&s);
@@ -356,11 +371,12 @@ CT_SUITE(sq1_perm_convention) {
 
 CT_SUITE(sq1_perm_state) {
     const ct_geometry *g = ct_geometry_sq1();
-    uint8_t perm[PERM_BYTES];
+    uint8_t perm[PERM_BYTES + CT_SQ1_UNITS];
     uint8_t pure[PERM_BYTES];
     ct_sq1_state s;
 
     CT_ASSERT(g->move_facelets_state(g, CT_SQ1_SLASH, CT_GEOMETRY_SINGLE_N, NULL, perm) < 0);
+    memset(perm + PERM_BYTES, 0, CT_SQ1_UNITS);
     ct_sq1_state_solved(&s);
     CT_ASSERT_EQ(g->move_facelets_state(g, CT_SQ1_SLASH, CT_GEOMETRY_SINGLE_N, &s, perm), 0);
     CT_ASSERT_EQ(perm[side_idx(0, 6)], side_idx(1, 6));
@@ -370,6 +386,9 @@ CT_SUITE(sq1_perm_state) {
     CT_ASSERT_EQ(perm[face_idx(0, 6)], face_idx(1, 6));
     CT_ASSERT_EQ(perm[face_idx(1, 8)], face_idx(0, 8));
     CT_ASSERT_EQ(perm[face_idx(0, 2)], face_idx(0, 2));
+    for (int i = PERM_BYTES; i < PERM_BYTES + CT_SQ1_UNITS; i++) {
+        CT_ASSERT_EQ(perm[i], 0);
+    }
     bool seen[PERM_BYTES] = {false};
     for (int i = 0; i < PERM_BYTES; i++) {
         CT_ASSERT(perm[i] < PERM_BYTES);
@@ -460,6 +479,37 @@ CT_SUITE(sq1_stickers) {
         for (int j = i + 1; j < PERM_BYTES; j++) {
             CT_ASSERT(positions[i].x != positions[j].x || positions[i].y != positions[j].y ||
                       positions[i].z != positions[j].z);
+        }
+    }
+    static const int ring_x[CT_SQ1_LAYERS][CT_SQ1_UNITS] = {
+        {1, 1, 2, 2, 1, 1, -1, -1, -2, -2, -1, -1},
+        {1, 1, 2, 2, 1, 1, -1, -1, -2, -2, -1, -1},
+    };
+    static const int ring_z[CT_SQ1_LAYERS][CT_SQ1_UNITS] = {
+        {2, 1, 1, -1, -1, -2, -2, -1, -1, 1, 1, 2},
+        {-2, -1, -1, 1, 1, 2, 2, 1, 1, -1, -1, -2},
+    };
+    for (int block = 0; block < CT_SQ1_BLOCKS; block++) {
+        for (int layer = 0; layer < CT_SQ1_LAYERS; layer++) {
+            for (int u = 0; u < CT_SQ1_UNITS; u++) {
+                int sticker = block * CT_SQ1_LAYERS * CT_SQ1_UNITS + layer * CT_SQ1_UNITS + u;
+                ct_v3 p = {0, 0, 0};
+                ct_v3 nrm = {0, 0, 0};
+                CT_ASSERT_EQ(g->sticker_geometry(g, sticker, CT_GEOMETRY_SINGLE_N, &p, &nrm), 0);
+                CT_ASSERT_EQ(p.x, ring_x[layer][u]);
+                CT_ASSERT_EQ(p.z, ring_z[layer][u]);
+                CT_ASSERT_EQ(p.y, layer == 0 ? (block == 0 ? CT_SQ1_SIDE_Y : CT_SQ1_FACE_Y)
+                                             : (block == 0 ? -CT_SQ1_SIDE_Y : -CT_SQ1_FACE_Y));
+                if (block == 0) {
+                    CT_ASSERT_EQ(nrm.x, ring_x[layer][u]);
+                    CT_ASSERT_EQ(nrm.y, 0);
+                    CT_ASSERT_EQ(nrm.z, ring_z[layer][u]);
+                } else {
+                    CT_ASSERT_EQ(nrm.x, 0);
+                    CT_ASSERT_EQ(nrm.y, layer == 0 ? 1 : -1);
+                    CT_ASSERT_EQ(nrm.z, 0);
+                }
+            }
         }
     }
     CT_ASSERT(g->sticker_geometry(g, -1, CT_GEOMETRY_SINGLE_N, &pos, &normal) < 0);
