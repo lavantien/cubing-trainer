@@ -406,6 +406,66 @@ CT_SUITE(alg_text_bounds) {
     ct_db_close(db);
 }
 
+CT_SUITE(alg_read_boundaries) {
+    sqlite3 *db = algs_db();
+    char long_seq[CT_ALG_SEQ_MAX + 1];
+    memset(long_seq, 'R', CT_ALG_SEQ_MAX);
+    long_seq[CT_ALG_SEQ_MAX] = '\0';
+    char long_json[CT_ALG_PARTS_MAX + 1];
+    memset(long_json, 'j', CT_ALG_PARTS_MAX);
+    long_json[CT_ALG_PARTS_MAX] = '\0';
+    char *err = NULL;
+    int rc = sqlite3_exec(db,
+                          "INSERT INTO generated_alg(orbit, target_pair, buffer_mode, category,"
+                          " sequence, classification, setup, interchange, insertion, qtm, score,"
+                          " score_parts_json, params_hash, created_at)"
+                          " VALUES(1, 'ZZ', 0, 0, 'x', 0, NULL, NULL, NULL, 1, 1.0, NULL, 'hx',"
+                          " '2026-01-01T00:00:00Z')",
+                          NULL, NULL, &err);
+    sqlite3_free(err);
+    CT_ASSERT_EQ(rc, SQLITE_OK);
+    sqlite3_stmt *st = NULL;
+    CT_ASSERT_EQ(sqlite3_prepare_v2(db,
+                                    "UPDATE generated_alg SET sequence = ?, score_parts_json = ?"
+                                    " WHERE target_pair = 'ZZ'",
+                                    -1, &st, NULL),
+                 SQLITE_OK);
+    sqlite3_bind_text(st, 1, long_seq, -1, SQLITE_STATIC);
+    sqlite3_bind_text(st, 2, long_json, -1, SQLITE_STATIC);
+    CT_ASSERT_EQ(sqlite3_step(st), SQLITE_DONE);
+    sqlite3_finalize(st);
+
+    ct_generated_alg got;
+    memset(&got, 0xAA, sizeof got);
+    CT_ASSERT_EQ(ct_repo_alg_get(db, CT_ORBIT_EDGE, "ZZ", CT_BUFFER_FIXED, 0, "hx", &got),
+                 CT_REPO_OK);
+    CT_ASSERT_EQ(strlen(got.sequence), (size_t)(CT_ALG_SEQ_MAX - 1));
+    CT_ASSERT_EQ(strlen(got.score_parts_json), (size_t)(CT_ALG_PARTS_MAX - 1));
+    CT_ASSERT_EQ(got.setup[0], '\0');
+    CT_ASSERT_EQ(got.interchange[0], '\0');
+    CT_ASSERT_EQ(got.insertion[0], '\0');
+    CT_ASSERT_STR_EQ(got.created_at, "2026-01-01T00:00:00Z");
+
+    ct_generated_alg listed[8];
+    memset(listed, 0xAA, sizeof listed);
+    CT_ASSERT_EQ(ct_repo_alg_list(db, "hx", CT_ORBIT_EDGE, listed, 8), 1);
+    CT_ASSERT_EQ(listed[1].orbit, 0);
+    CT_ASSERT_EQ(listed[1].target_pair[0], '\0');
+    CT_ASSERT_EQ(listed[1].sequence[0], '\0');
+
+    CT_ASSERT_EQ(ct_repo_alg_list(db, "hx", CT_ORBIT_EDGE, NULL, 1), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_alg_list(db, "hx", CT_ORBIT_EDGE, NULL, 0), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_repo_alg_stale(db, "hx", NULL, 1), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_alg_stale(db, "hx", NULL, 0), CT_REPO_OK);
+
+    char null_cfg[CT_ALG_HASH_HEX_MAX];
+    memset(null_cfg, 'q', sizeof null_cfg - 1);
+    null_cfg[sizeof null_cfg - 1] = '\0';
+    ct_params_hash(NULL, 1, CT_BUFFER_FIXED, null_cfg);
+    CT_ASSERT_EQ(null_cfg[0], '\0');
+    ct_db_close(db);
+}
+
 CT_SUITE(alg_malformed) {
     sqlite3 *db = algs_db();
     ct_generated_alg a = base_alg("UB");
