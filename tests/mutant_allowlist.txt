@@ -2,9 +2,9 @@ src/srs/fsrs.c:7	sanitize lower boundary is a true equivalent: at s == CT_FSRS_M
 src/srs/fsrs.c:10	sanitize upper boundary is a true equivalent: at s == CT_FSRS_MAX_IVL_DAYS both branches return CT_FSRS_MAX_IVL_DAYS, so no input distinguishes them
 src/srs/fsrs.c:39	clamp lower boundary is a true equivalent: at x == lo the mutant returns lo directly and the original falls through to return x, and lo equals x there, so no input distinguishes them
 src/srs/fsrs.c:42	clamp upper boundary is a true equivalent: at x == hi the mutant returns hi directly and the original returns x, and hi equals x there, so no input distinguishes them
-src/srs/fsrs.c:98	negative elapsed clamp boundary is a true equivalent: at elapsed_days == 0.0 the clamp writes 0.0 back, a no-op, so no input distinguishes them
-src/srs/fsrs.c:101	retrievability stability clamp boundary is a true equivalent: at stability == CT_FSRS_MIN_STABILITY the clamp writes the same value back, a no-op, so no input distinguishes them
-src/srs/fsrs.c:148	due day saturation boundary is a true equivalent: at today_day == LONG_MAX - ivl the addition yields exactly LONG_MAX, identical to the saturating branch, so no input distinguishes them
+src/srs/fsrs.c:104	negative elapsed clamp boundary is a true equivalent: at elapsed_days == 0.0 the clamp writes 0.0 back, a no-op, so no input distinguishes them
+src/srs/fsrs.c:107	retrievability stability clamp boundary is a true equivalent: at stability == CT_FSRS_MIN_STABILITY the clamp writes the same value back, a no-op, so no input distinguishes them
+src/srs/fsrs.c:126	due day saturation boundary is a true equivalent: at today_day == LONG_MAX - ivl the addition yields exactly LONG_MAX, identical to the saturating branch, so no input distinguishes them
 src/gen/targets.c:6	face normal table mutants are equivalent: the mutated component never flips any sign or zero predicate outcome over the reachable sticker domain, verified by exhaustive public surface enumeration digest equality
 src/gen/targets.c:10	face row direction table mutants are equivalent: the mutated component never flips any sign or zero predicate outcome over the reachable sticker domain, verified by exhaustive public surface enumeration digest equality
 src/gen/targets.c:14	face col direction table mutants are equivalent: the mutated component never flips any sign or zero predicate outcome over the reachable sticker domain, verified by exhaustive public surface enumeration digest equality
