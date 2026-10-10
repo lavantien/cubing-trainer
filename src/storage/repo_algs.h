@@ -4,7 +4,7 @@
 #include <sqlite3.h>
 
 #include "config/config.h"
-#include "repo_cards.h"
+#include "storage/repo_cards.h"
 
 enum {
     CT_ALG_B1 = 1,
