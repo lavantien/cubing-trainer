@@ -17,6 +17,8 @@ typedef enum ct_selector_source {
     CT_SELECTOR_PACK
 } ct_selector_source;
 
+enum { CT_SELECTOR_LISTS_PER_PAIR_MAX = 5 };
+
 typedef struct {
     ct_stage stage;
     ct_orbit orbit;

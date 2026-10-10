@@ -44,7 +44,7 @@ void ct_screen_cards_update(ct_app *app);
 void ct_screen_cards_draw(ct_app *app);
 
 enum {
-    CT_TRAINER_LISTS_MAX = 5,
+    CT_TRAINER_LISTS_MAX = CT_SELECTOR_LISTS_PER_PAIR_MAX,
     CT_TRAINER_FRONT_MAX = CT_PACK_FRONT_JSON_MAX,
     CT_TRAINER_ALG_MAX = CT_PACK_ALG_MAX,
     CT_TRAINER_CELL_NONE = -1,

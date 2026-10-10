@@ -9,7 +9,7 @@
 enum {
     CT_TRAINER_MARGIN_SHIFT = 6,
     CT_TRAINER_COL_DIV = 5,
-    CT_TRAINER_FIELD_H_SHIFT = 5,
+    CT_TRAINER_FIELD_H_SHIFT = 4,
     CT_TRAINER_TEXT_SHIFT = 5,
     CT_TRAINER_GRID_COLS = CT_LETTER_FACES,
     CT_TRAINER_GRID_ROWS = CT_LETTER_PER_FACE,
@@ -401,10 +401,12 @@ static void ct_trainer_draw_grid(ct_trainer_form *f, Rectangle bounds) {
         } else if (i == buffer) {
             tint = SKYBLUE;
         }
-        int size = (int)(cell.height / CT_TRAINER_HALF);
-        int tw = MeasureText(label, size);
-        DrawText(label, (int)(cell.x + (cell.width - tw) / CT_TRAINER_HALF),
-                 (int)(cell.y + (cell.height - size) / CT_TRAINER_HALF), size, tint);
+        float cell_size = cell.height / CT_TRAINER_HALF;
+        int size = (int)cell_size;
+        float tw = (float)MeasureText(label, size);
+        float cx = cell.x + (cell.width - tw) / CT_TRAINER_HALF;
+        float cy = cell.y + (cell.height - cell_size) / CT_TRAINER_HALF;
+        DrawText(label, (int)cx, (int)cy, size, tint);
     }
     Vector2 mouse = GetMousePosition();
     int picked = ct_heatmap_pick(bounds, CT_TRAINER_GRID_COLS, CT_TRAINER_GRID_ROWS, mouse);
