@@ -140,7 +140,8 @@ CT_SUITE(trainer_form_generated_alg) {
     CT_ASSERT(f.alg_status != CT_REPO_OK);
     ct_config cfg = ct_config_defaults();
     char hash[CT_ALG_HASH_HEX_MAX];
-    ct_params_hash(&cfg, f.scheme_id, CT_BUFFER_FIXED, hash);
+    ct_params_hash(&cfg, f.scheme_id, CT_BUFFER_FIXED, f.scheme.buffer_corner, f.scheme.buffer_edge,
+                   &f.scheme.map, hash);
     ct_generated_alg a;
     memset(&a, 0, sizeof a);
     a.orbit = CT_ORBIT_CORNER;

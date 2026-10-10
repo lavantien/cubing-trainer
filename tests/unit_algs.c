@@ -44,12 +44,23 @@ static long put_pair(sqlite3 *db, const char *hash, int orbit, const char *pair)
     return back.id;
 }
 
+static void identity_map(ct_letter_map *m) {
+    for (int i = 0; i < CT_LETTER_STICKERS; i++) {
+        m->corner[i] = (char)(CT_LETTER_FIRST + i);
+        m->edge[i] = (char)(CT_LETTER_FIRST + i);
+    }
+}
+
 CT_SUITE(alg_hash_deterministic) {
     ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
     char a[CT_ALG_HASH_HEX_MAX];
     char b[CT_ALG_HASH_HEX_MAX];
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, a);
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, b);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   a);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   b);
     CT_ASSERT_STR_EQ(a, b);
     CT_ASSERT_EQ(strlen(a), 64u);
     for (unsigned i = 0; i < CT_SHA_HEX_MAX - 1; i++) {
@@ -59,105 +70,193 @@ CT_SUITE(alg_hash_deterministic) {
 
 CT_SUITE(alg_hash_scheme_differs) {
     ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
     char a[CT_ALG_HASH_HEX_MAX];
     char b[CT_ALG_HASH_HEX_MAX];
-    ct_params_hash(&cfg, 3, CT_BUFFER_FIXED, a);
-    ct_params_hash(&cfg, 4, CT_BUFFER_FIXED, b);
+    ct_params_hash(&cfg, 3, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   a);
+    ct_params_hash(&cfg, 4, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   b);
     CT_ASSERT(strcmp(a, b) != 0);
 }
 
 CT_SUITE(alg_hash_mode_differs) {
     ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
     char a[CT_ALG_HASH_HEX_MAX];
     char b[CT_ALG_HASH_HEX_MAX];
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, a);
-    ct_params_hash(&cfg, 1, CT_BUFFER_FLOATING, b);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   a);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FLOATING, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER,
+                   &map, b);
     CT_ASSERT(strcmp(a, b) != 0);
 }
 
 CT_SUITE(alg_hash_mask_differs) {
     ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
     char a[CT_ALG_HASH_HEX_MAX];
     char b[CT_ALG_HASH_HEX_MAX];
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, a);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   a);
     cfg.gen.preferred_moves |= CT_MOVE_BIT_B;
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, b);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   b);
     CT_ASSERT(strcmp(a, b) != 0);
 }
 
 CT_SUITE(alg_hash_fsrs_inert) {
     ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
     char a[CT_ALG_HASH_HEX_MAX];
     char b[CT_ALG_HASH_HEX_MAX];
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, a);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   a);
     cfg.fsrs.w[3] += 0.5;
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, b);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   b);
     CT_ASSERT_STR_EQ(a, b);
 }
 
 CT_SUITE(alg_hash_penalty_differs) {
     ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
     char a[CT_ALG_HASH_HEX_MAX];
     char b[CT_ALG_HASH_HEX_MAX];
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, a);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   a);
     cfg.gen.penalty[4] += 1.0;
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, b);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   b);
     CT_ASSERT(strcmp(a, b) != 0);
 }
 
 CT_SUITE(alg_hash_finger_differs) {
     ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
     char a[CT_ALG_HASH_HEX_MAX];
     char b[CT_ALG_HASH_HEX_MAX];
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, a);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   a);
     cfg.gen.finger_cost[2][CT_FINGER_DIR_CCW] += 0.25;
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, b);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   b);
     CT_ASSERT(strcmp(a, b) != 0);
 }
 
 CT_SUITE(alg_hash_bound_differs) {
     ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
     char a[CT_ALG_HASH_HEX_MAX];
     char b[CT_ALG_HASH_HEX_MAX];
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, a);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   a);
     cfg.gen.setup_bfs_depth = CT_GEN_SETUP_BFS_DEPTH + 1;
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, b);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   b);
     CT_ASSERT(strcmp(a, b) != 0);
 }
 
 CT_SUITE(alg_hash_factor_differs) {
     ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
     char a[CT_ALG_HASH_HEX_MAX];
     char b[CT_ALG_HASH_HEX_MAX];
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, a);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   a);
     cfg.gen.weight_finger = 0.75;
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, b);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   b);
     CT_ASSERT(strcmp(a, b) != 0);
 }
 
 CT_SUITE(alg_hash_candidate_differs) {
     ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
     char a[CT_ALG_HASH_HEX_MAX];
     char b[CT_ALG_HASH_HEX_MAX];
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, a);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   a);
     cfg.gen.candidate_max = CT_GEN_CANDIDATE_MAX + 1;
-    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, b);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   b);
+    CT_ASSERT(strcmp(a, b) != 0);
+}
+
+CT_SUITE(alg_hash_buffer_differs) {
+    ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
+    char a[CT_ALG_HASH_HEX_MAX];
+    char b[CT_ALG_HASH_HEX_MAX];
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, 0, CT_3STYLE_EDGE_BUFFER, &map, a);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, 2, CT_3STYLE_EDGE_BUFFER, &map, b);
+    CT_ASSERT(strcmp(a, b) != 0);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, 2, &map, a);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, 5, &map, b);
+    CT_ASSERT(strcmp(a, b) != 0);
+}
+
+CT_SUITE(alg_hash_map_differs) {
+    ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
+    char a[CT_ALG_HASH_HEX_MAX];
+    char b[CT_ALG_HASH_HEX_MAX];
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   a);
+    char swapped = map.corner[1];
+    map.corner[1] = map.corner[2];
+    map.corner[2] = swapped;
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   b);
+    CT_ASSERT(strcmp(a, b) != 0);
+    map.corner[1] = (char)(CT_LETTER_FIRST + 1);
+    map.corner[2] = (char)(CT_LETTER_FIRST + 2);
+    map.edge[7] = '\0';
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   b);
+    CT_ASSERT(strcmp(a, b) != 0);
+    ct_letter_map tail_a;
+    ct_letter_map tail_b;
+    identity_map(&tail_a);
+    identity_map(&tail_b);
+    tail_a.corner[5] = '\0';
+    tail_a.corner[6] = 'G';
+    tail_b.corner[5] = '\0';
+    tail_b.corner[6] = 'H';
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER,
+                   &tail_a, a);
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER,
+                   &tail_b, b);
     CT_ASSERT(strcmp(a, b) != 0);
 }
 
 CT_SUITE(alg_hash_format_pinned) {
     ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
     static const char canon[] =
-        "7|0|b|"
+        "7|0|0|2|b|"
         "0.000000,0.000000,2.000000,0.000000,2.000000,2.000000,2.000000,2.000000,2.000000,2.000000,"
         "2.000000,2.000000|"
         "0.200000,0.200000,0.200000,0.200000,0.400000,0.400000,0.400000,0.400000,0.800000,0.800000,"
         "0.800000,0.800000|"
-        "4|5|12|1.000000|2.000000|1.500000|0.500000";
+        "4|5|12|1.000000|2.000000|1.500000|0.500000|"
+        "ABCDEFGHIJKLMNOPQRSTUVWX|ABCDEFGHIJKLMNOPQRSTUVWX";
     char want[CT_SHA_HEX_MAX];
     ct_sha256(canon, (unsigned)(sizeof canon - 1), want);
     char got[CT_ALG_HASH_HEX_MAX];
-    ct_params_hash(&cfg, 7, CT_BUFFER_FIXED, got);
+    ct_params_hash(&cfg, 7, CT_BUFFER_FIXED, 0, 2, &map, got);
     CT_ASSERT_STR_EQ(got, want);
 }
 
@@ -336,6 +435,7 @@ CT_SUITE(alg_drop) {
     CT_ASSERT_EQ(ct_repo_alg_drop(db, big_hash), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(ct_repo_alg_drop_orbit(NULL, "h1", CT_ORBIT_CORNER), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(ct_repo_alg_drop_orbit(db, NULL, CT_ORBIT_CORNER), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_alg_drop_orbit(db, "", CT_ORBIT_CORNER), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(ct_repo_alg_drop_orbit(db, big_hash, CT_ORBIT_CORNER), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(ct_repo_alg_count(db, "h1"), 2);
     ct_db_close(db);
@@ -408,6 +508,8 @@ CT_SUITE(alg_text_bounds) {
 
 CT_SUITE(alg_read_boundaries) {
     sqlite3 *db = algs_db();
+    ct_letter_map map;
+    identity_map(&map);
     char long_seq[CT_ALG_SEQ_MAX + 1];
     memset(long_seq, 'R', CT_ALG_SEQ_MAX);
     long_seq[CT_ALG_SEQ_MAX] = '\0';
@@ -461,7 +563,12 @@ CT_SUITE(alg_read_boundaries) {
     char null_cfg[CT_ALG_HASH_HEX_MAX];
     memset(null_cfg, 'q', sizeof null_cfg - 1);
     null_cfg[sizeof null_cfg - 1] = '\0';
-    ct_params_hash(NULL, 1, CT_BUFFER_FIXED, null_cfg);
+    ct_params_hash(NULL, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   null_cfg);
+    CT_ASSERT_EQ(null_cfg[0], '\0');
+    ct_config cfg = ct_config_defaults();
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, NULL,
+                   null_cfg);
     CT_ASSERT_EQ(null_cfg[0], '\0');
     ct_db_close(db);
 }

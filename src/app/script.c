@@ -746,7 +746,8 @@ static int ct_script_step_trainer(ct_app *app, ct_script_rt *rt, const ct_script
         if (scheme <= 0) {
             return ct_script_fail(err, cap, c, "letter scheme unavailable", CT_SCRIPT_EXIT_RUN);
         }
-        ct_params_hash(&app->cfg, scheme, CT_BUFFER_FIXED, rt->params_hash);
+        ct_params_hash(&app->cfg, scheme, CT_BUFFER_FIXED, rt->scheme.buffer_corner,
+                       rt->scheme.buffer_edge, &rt->scheme.map, rt->params_hash);
         ct_generated_alg a;
         memset(&a, 0, sizeof a);
         a.orbit = rt->orbit;

@@ -209,7 +209,8 @@ int ct_trainer_form_select_case(ct_trainer_form *f, int index) {
     }
     if (source == CT_SELECTOR_CHART) {
         char hash[CT_ALG_HASH_HEX_MAX];
-        ct_params_hash(&f->cfg, f->scheme_id, CT_BUFFER_FIXED, hash);
+        ct_params_hash(&f->cfg, f->scheme_id, CT_BUFFER_FIXED, f->scheme.buffer_corner,
+                       f->scheme.buffer_edge, &f->scheme.map, hash);
         int arc = ct_repo_alg_get(f->db, f->lists[f->sel.list_id].orbit, f->front, CT_BUFFER_FIXED,
                                   CT_TRAINER_ALG_CATEGORY, hash, &f->alg);
         f->alg_status = arc;

@@ -105,9 +105,24 @@ static void ct_alg_from_row(sqlite3_stmt *st, ct_generated_alg *a) {
     ct_alg_read_text(&r, a->created_at, sizeof a->created_at);
 }
 
-static void ct_alg_canonical(const ct_config *cfg, int scheme_id, ct_buffer_mode mode, char *out,
-                             size_t cap) {
-    int n = snprintf(out, cap, "%d|%d|%x|", scheme_id, (int)mode, cfg->gen.preferred_moves);
+static void ct_alg_map_segment(const char *letters, int count, char *out, size_t cap,
+                               size_t *used) {
+    for (int i = 0; i < count && *used < cap; i++) {
+        char c = letters[i];
+        if (c < CT_LETTER_FIRST || c > CT_LETTER_LAST)
+            c = '.';
+        int n = snprintf(out + *used, cap - *used, "%c", c);
+        if (n <= 0)
+            break;
+        *used += (size_t)n;
+    }
+}
+
+static void ct_alg_canonical(const ct_config *cfg, int scheme_id, ct_buffer_mode mode,
+                             int buffer_corner, int buffer_edge, const ct_letter_map *map,
+                             char *out, size_t cap) {
+    int n = snprintf(out, cap, "%d|%d|%d|%d|%x|", scheme_id, (int)mode, buffer_corner, buffer_edge,
+                     cfg->gen.preferred_moves);
     if (n <= 0) {
         out[0] = '\0';
         return;
@@ -141,6 +156,18 @@ static void ct_alg_canonical(const ct_config *cfg, int scheme_id, ct_buffer_mode
                      cfg->gen.weight_finger);
         if (n > 0)
             used += (size_t)n;
+    }
+    if (used < cap) {
+        n = snprintf(out + used, cap - used, "|");
+        if (n > 0)
+            used += (size_t)n;
+        ct_alg_map_segment(map->corner, CT_LETTER_STICKERS, out, cap, &used);
+        if (used < cap) {
+            n = snprintf(out + used, cap - used, "|");
+            if (n > 0)
+                used += (size_t)n;
+        }
+        ct_alg_map_segment(map->edge, CT_LETTER_STICKERS, out, cap, &used);
     }
     if (used >= cap)
         out[cap - 1] = '\0';
@@ -335,14 +362,14 @@ int ct_repo_alg_drop_orbit(sqlite3 *db, const char *params_hash, int orbit) {
     return dropped;
 }
 
-void ct_params_hash(const ct_config *cfg, int scheme_id, ct_buffer_mode mode,
-                    char hex_out[CT_ALG_HASH_HEX_MAX]) {
+void ct_params_hash(const ct_config *cfg, int scheme_id, ct_buffer_mode mode, int buffer_corner,
+                    int buffer_edge, const ct_letter_map *map, char hex_out[CT_ALG_HASH_HEX_MAX]) {
     if (hex_out == NULL)
         return;
     hex_out[0] = '\0';
-    if (cfg == NULL)
+    if (cfg == NULL || map == NULL)
         return;
     char canon[CT_ALG_CANON_MAX];
-    ct_alg_canonical(cfg, scheme_id, mode, canon, sizeof canon);
+    ct_alg_canonical(cfg, scheme_id, mode, buffer_corner, buffer_edge, map, canon, sizeof canon);
     ct_sha256(canon, (unsigned)strlen(canon), hex_out);
 }

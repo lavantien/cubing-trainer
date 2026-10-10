@@ -116,36 +116,45 @@ src/trainer/selector.c:381	case group source disjunction mutant is equivalent: o
 src/trainer/selector.c:389	case group loop start mutant is equivalent: skipping the flip prefix returns the same group 0 through the fallthrough return, and every other prefix still matches, verified by the pinned group counts 25 23 26 11 across all four groups
 src/storage/repo_algs.c:48	sqlite3 treats any negative nByte as read-to-nul, so the -1 bind length mutant -2 is behaviorally identical
 src/storage/repo_algs.c:79	the null-column branch writes into an output struct that ct_repo_alg_get pre-zeroes wholesale, so the write index inside the field is unobservable
-src/storage/repo_algs.c:111	the first snprintf of the canonical string never returns nonpositive for these formats, the guard branch is dead
-src/storage/repo_algs.c:112	reachable only when the dead snprintf guard fires, the out reset is unreachable
-src/storage/repo_algs.c:116	second cap comparison of the penalty loop, the fixed field set keeps used far below CT_ALG_CANON_MAX so the bound never fires
-src/storage/repo_algs.c:117	remaining-cap arithmetic only matters at the cap boundary, unreachable for the fixed canonical length
-src/storage/repo_algs.c:118	penalty snprintf never returns nonpositive or zero, the break guard is dead
-src/storage/repo_algs.c:122	second cap comparison before the separator, never fires for the reachable canonical length
-src/storage/repo_algs.c:123	remaining-cap arithmetic for the separator only matters at the cap boundary, unreachable
-src/storage/repo_algs.c:124	separator snprintf never returns zero, the guard is dead
-src/storage/repo_algs.c:128	second cap comparison of the finger loop, never fires for the reachable canonical length
-src/storage/repo_algs.c:131	finger snprintf remaining-cap arithmetic only matters at the cap boundary, unreachable
-src/storage/repo_algs.c:133	finger snprintf never returns nonpositive or zero, the break guard is dead
-src/storage/repo_algs.c:137	second cap comparison before the tail, never fires for the reachable canonical length
-src/storage/repo_algs.c:138	tail snprintf remaining-cap arithmetic only matters at the cap boundary, unreachable
-src/storage/repo_algs.c:142	tail snprintf never returns zero, the guard is dead
-src/storage/repo_algs.c:145	final cap comparison never fires because the canonical string stays far below CT_ALG_CANON_MAX
-src/storage/repo_algs.c:146	reachable only when the never-firing final cap guard fires, the terminator write is dead code
-src/storage/repo_algs.c:166	ct_alg_row_valid is consumed only through boolean negation, any nonzero return is equivalent
-src/storage/repo_algs.c:178	ct_now_utc_iso writes a 20 character stamp on every reachable path, now[1] is never nul so both indexes decide identically
-src/storage/repo_algs.c:181	sqlite3_prepare_v2 treats any negative sql length as read-to-nul, the -1 mutant -2 is behaviorally identical
-src/storage/repo_algs.c:214	the pre-query memset fill byte is unobservable, ct_alg_from_row overwrites every field before any assertion reads it
-src/storage/repo_algs.c:216	prepare nByte -1 mutant -2 reads to the first nul identically
-src/storage/repo_algs.c:241	prepare nByte -1 mutant -2 reads to the first nul identically
-src/storage/repo_algs.c:245	bind length -1 mutant -2 is read-to-nul identically in sqlite3
-src/storage/repo_algs.c:262	prepare nByte -1 mutant -2 reads to the first nul identically
-src/storage/repo_algs.c:290	prepare nByte -1 mutant -2 reads to the first nul identically
-src/storage/repo_algs.c:294	bind length -1 mutant -2 is read-to-nul identically in sqlite3
-src/storage/repo_algs.c:311	prepare nByte -1 mutant -2 reads to the first nul identically
-src/storage/repo_algs.c:315	bind length -1 mutant -2 is read-to-nul identically in sqlite3
-src/storage/repo_algs.c:326	prepare nByte -1 mutant -2 reads to the first nul identically
-src/storage/repo_algs.c:330	bind length -1 mutant -2 is read-to-nul identically in sqlite3
+src/storage/repo_algs.c:110	map segment cap comparison never fires, the full canonical string stays under 400 bytes against the 8192 buffer
+src/storage/repo_algs.c:114	map segment remaining-cap arithmetic only matters at the cap boundary, unreachable at the reachable canonical length
+src/storage/repo_algs.c:115	single char snprintf never returns nonpositive or zero, the break guard is dead
+src/storage/repo_algs.c:126	the head snprintf of the canonical string never returns nonpositive for these formats, the guard branch is dead
+src/storage/repo_algs.c:127	reachable only when the dead head snprintf guard fires, the out reset is unreachable
+src/storage/repo_algs.c:131	penalty loop cap comparison never fires, the canonical string stays under 400 bytes against the 8192 buffer
+src/storage/repo_algs.c:132	penalty remaining-cap arithmetic only matters at the cap boundary, unreachable for the fixed field set
+src/storage/repo_algs.c:133	penalty snprintf never returns nonpositive or zero, the break guard is dead
+src/storage/repo_algs.c:137	cap comparison before the finger separator never fires for the reachable canonical length
+src/storage/repo_algs.c:138	finger separator remaining-cap arithmetic only matters at the cap boundary, unreachable
+src/storage/repo_algs.c:139	separator snprintf never returns zero, the guard is dead
+src/storage/repo_algs.c:143	finger loop cap comparison never fires for the reachable canonical length
+src/storage/repo_algs.c:146	finger snprintf remaining-cap arithmetic only matters at the cap boundary, unreachable
+src/storage/repo_algs.c:148	finger snprintf never returns nonpositive or zero, the break guard is dead
+src/storage/repo_algs.c:152	cap comparison before the tail never fires for the reachable canonical length
+src/storage/repo_algs.c:153	tail snprintf remaining-cap arithmetic only matters at the cap boundary, unreachable
+src/storage/repo_algs.c:157	tail snprintf never returns zero, the guard is dead
+src/storage/repo_algs.c:160	cap comparison before the map segments never fires for the reachable canonical length
+src/storage/repo_algs.c:161	corner map separator remaining-cap arithmetic only matters at the cap boundary, unreachable
+src/storage/repo_algs.c:162	corner map separator snprintf never returns zero, the guard is dead
+src/storage/repo_algs.c:165	cap comparison before the edge map separator never fires for the reachable canonical length
+src/storage/repo_algs.c:166	edge map separator remaining-cap arithmetic only matters at the cap boundary, unreachable
+src/storage/repo_algs.c:167	edge map separator snprintf never returns zero, the guard is dead
+src/storage/repo_algs.c:172	final cap comparison never fires because the canonical string stays under 400 bytes against the 8192 buffer
+src/storage/repo_algs.c:173	reachable only when the never-firing final cap guard fires, the terminator write is dead code
+src/storage/repo_algs.c:193	ct_alg_row_valid is consumed only through boolean negation, any nonzero return is equivalent
+src/storage/repo_algs.c:205	ct_now_utc_iso writes a 20 character stamp on every reachable path, now[1] is never nul so both indexes decide identically
+src/storage/repo_algs.c:208	sqlite3_prepare_v2 treats any negative sql length as read-to-nul, the -1 mutant -2 is behaviorally identical
+src/storage/repo_algs.c:241	the pre-query memset fill byte is unobservable, ct_alg_from_row overwrites every field before any assertion reads it
+src/storage/repo_algs.c:243	prepare nByte -1 mutant -2 reads to the first nul identically
+src/storage/repo_algs.c:268	prepare nByte -1 mutant -2 reads to the first nul identically
+src/storage/repo_algs.c:272	bind length -1 mutant -2 is read-to-nul identically in sqlite3
+src/storage/repo_algs.c:289	prepare nByte -1 mutant -2 reads to the first nul identically
+src/storage/repo_algs.c:317	prepare nByte -1 mutant -2 reads to the first nul identically
+src/storage/repo_algs.c:321	bind length -1 mutant -2 is read-to-nul identically in sqlite3
+src/storage/repo_algs.c:338	prepare nByte -1 mutant -2 reads to the first nul identically
+src/storage/repo_algs.c:342	bind length -1 mutant -2 is read-to-nul identically in sqlite3
+src/storage/repo_algs.c:353	prepare nByte -1 mutant -2 reads to the first nul identically
+src/storage/repo_algs.c:357	bind length -1 mutant -2 is read-to-nul identically in sqlite3
 src/gen/classify.c:219	exact cycle face initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
 src/gen/classify.c:220	exact cycle row initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
 src/gen/classify.c:221	exact cycle col initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker

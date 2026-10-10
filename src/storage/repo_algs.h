@@ -5,6 +5,7 @@
 
 #include "config/config.h"
 #include "storage/repo_cards.h"
+#include "storage/repo_settings.h"
 
 enum {
     CT_ALG_B1 = 1,
@@ -50,7 +51,7 @@ int ct_repo_alg_list(sqlite3 *db, const char *params_hash, int orbit, ct_generat
 int ct_repo_alg_stale(sqlite3 *db, const char *params_hash, int *out_ids, int cap);
 int ct_repo_alg_drop(sqlite3 *db, const char *params_hash);
 int ct_repo_alg_drop_orbit(sqlite3 *db, const char *params_hash, int orbit);
-void ct_params_hash(const ct_config *cfg, int scheme_id, ct_buffer_mode mode,
-                    char hex_out[CT_ALG_HASH_HEX_MAX]);
+void ct_params_hash(const ct_config *cfg, int scheme_id, ct_buffer_mode mode, int buffer_corner,
+                    int buffer_edge, const ct_letter_map *map, char hex_out[CT_ALG_HASH_HEX_MAX]);
 
 #endif
