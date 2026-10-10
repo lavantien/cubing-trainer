@@ -226,7 +226,8 @@ int ct_pack_list(sqlite3 *db, ct_event ev, ct_method m, ct_stage st, ct_pack_ent
 static const char CT_SQL_SEED_BEGIN[] = "BEGIN IMMEDIATE";
 static const char CT_SQL_SEED_COMMIT[] = "COMMIT";
 static const char CT_SQL_SEED_ROLLBACK[] = "ROLLBACK";
-static const char CT_PACK_SEED_HEADER[] = "case_key\talg\tfront_json\tsource_url\tsource_at";
+static const char *const ct_pack_seed_columns[CT_PACK_SEED_COLUMNS] = {
+    "case_key", "alg", "front_json", "source_url", "source_at"};
 
 static int ct_pack_seed_split(char *line, char *fields[], int max_fields) {
     fields[0] = line;
@@ -241,6 +242,29 @@ static int ct_pack_seed_split(char *line, char *fields[], int max_fields) {
         }
     }
     return count;
+}
+
+static int ct_pack_seed_header_map(char *line, char *fields[], int map[]) {
+    int count = ct_pack_seed_split(line, fields, CT_PACK_SEED_COLUMNS);
+    if (count < 0)
+        return count;
+    if (count != CT_PACK_SEED_COLUMNS)
+        return CT_PACK_ERR_FORMAT;
+    int seen[CT_PACK_SEED_COLUMNS] = {0};
+    for (int pos = 0; pos < CT_PACK_SEED_COLUMNS; pos++) {
+        int col = -1;
+        for (int j = 0; j < CT_PACK_SEED_COLUMNS; j++) {
+            if (strcmp(fields[pos], ct_pack_seed_columns[j]) == 0) {
+                col = j;
+                break;
+            }
+        }
+        if (col < 0 || seen[col])
+            return CT_PACK_ERR_FORMAT;
+        seen[col] = 1;
+        map[col] = pos;
+    }
+    return CT_PACK_OK;
 }
 
 static int ct_pack_seed_field(char *dst, const char *src, size_t cap) {
@@ -262,10 +286,12 @@ int ct_pack_seed_file(sqlite3 *db, const char *path, ct_event ev, ct_method m, c
         return CT_PACK_ERR_DB;
     }
     char line[CT_PACK_SEED_LINE_MAX];
+    char header[CT_PACK_SEED_LINE_MAX];
     char *fields[CT_PACK_SEED_COLUMNS];
+    int map[CT_PACK_SEED_COLUMNS];
     int rows = 0;
     int rc = CT_PACK_OK;
-    int header_left = 1;
+    int have_header = 0;
     while (fgets(line, sizeof line, f) != NULL) {
         size_t n = strlen(line);
         if (n + 1 == sizeof line && line[n - 1] != '\n' && !feof(f)) {
@@ -280,10 +306,17 @@ int ct_pack_seed_file(sqlite3 *db, const char *path, ct_event ev, ct_method m, c
             line[n - 1] = '\0';
         if (line[0] == '\0')
             continue;
-        if (header_left) {
-            header_left = 0;
-            if (strcmp(line, CT_PACK_SEED_HEADER) == 0)
-                continue;
+        if (!have_header) {
+            memcpy(header, line, n + 1);
+            rc = ct_pack_seed_header_map(line, fields, map);
+            if (rc != CT_PACK_OK)
+                break;
+            have_header = 1;
+            continue;
+        }
+        if (strcmp(line, header) == 0) {
+            rc = CT_PACK_ERR_FORMAT;
+            break;
         }
         int count = ct_pack_seed_split(line, fields, CT_PACK_SEED_COLUMNS);
         if (count < 0) {
@@ -299,15 +332,15 @@ int ct_pack_seed_file(sqlite3 *db, const char *path, ct_event ev, ct_method m, c
         e.event = ev;
         e.method = m;
         e.stage = st;
-        rc = ct_pack_seed_field(e.case_key, fields[0], sizeof e.case_key);
+        rc = ct_pack_seed_field(e.case_key, fields[map[0]], sizeof e.case_key);
         if (rc == CT_PACK_OK)
-            rc = ct_pack_seed_field(e.alg, fields[1], sizeof e.alg);
+            rc = ct_pack_seed_field(e.alg, fields[map[1]], sizeof e.alg);
         if (rc == CT_PACK_OK)
-            rc = ct_pack_seed_field(e.front_json, fields[2], sizeof e.front_json);
+            rc = ct_pack_seed_field(e.front_json, fields[map[2]], sizeof e.front_json);
         if (rc == CT_PACK_OK)
-            rc = ct_pack_seed_field(e.source_url, fields[3], sizeof e.source_url);
+            rc = ct_pack_seed_field(e.source_url, fields[map[3]], sizeof e.source_url);
         if (rc == CT_PACK_OK)
-            rc = ct_pack_seed_field(e.source_at, fields[4], sizeof e.source_at);
+            rc = ct_pack_seed_field(e.source_at, fields[map[4]], sizeof e.source_at);
         if (rc != CT_PACK_OK)
             break;
         rc = ct_pack_upsert(db, &e);
@@ -322,7 +355,9 @@ int ct_pack_seed_file(sqlite3 *db, const char *path, ct_event ev, ct_method m, c
         sqlite3_exec(db, CT_SQL_SEED_ROLLBACK, NULL, NULL, NULL);
         return rc;
     }
-    if (sqlite3_exec(db, CT_SQL_SEED_COMMIT, NULL, NULL, NULL) != SQLITE_OK)
+    if (sqlite3_exec(db, CT_SQL_SEED_COMMIT, NULL, NULL, NULL) != SQLITE_OK) {
+        sqlite3_exec(db, CT_SQL_SEED_ROLLBACK, NULL, NULL, NULL);
         return CT_PACK_ERR_DB;
+    }
     return rows;
 }

@@ -116,13 +116,96 @@ CT_SUITE(pack_seed_loader_header) {
     write_file(CT_SEED_NOHDR_PATH, "n1\tF R' F' R\t{\"case\":\"n1\"}\thttps://ex.example/b\t"
                                    "2026-10-10\n");
     CT_ASSERT_EQ(
-        ct_pack_seed_file(db, CT_SEED_NOHDR_PATH, CT_EVENT_OH, CT_METHOD_CFOP, CT_STAGE_F2L), 1);
-    CT_ASSERT_EQ(ct_pack_count(db, CT_EVENT_OH, CT_METHOD_CFOP, CT_STAGE_F2L), 1);
+        ct_pack_seed_file(db, CT_SEED_NOHDR_PATH, CT_EVENT_OH, CT_METHOD_CFOP, CT_STAGE_F2L),
+        CT_PACK_ERR_FORMAT);
+    CT_ASSERT_EQ(ct_pack_count(db, CT_EVENT_OH, CT_METHOD_CFOP, CT_STAGE_F2L), 0);
     write_file(CT_SEED_EMPTY_PATH, "case_key\talg\tfront_json\tsource_url\tsource_at\n");
     CT_ASSERT_EQ(
         ct_pack_seed_file(db, CT_SEED_EMPTY_PATH, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L), 0);
     CT_ASSERT_EQ(ct_pack_count(db, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L), 0);
     ct_db_close(db);
+}
+
+CT_SUITE(pack_seed_loader_columns) {
+    sqlite3 *db = open_db();
+    write_file(CT_SEED_BAD_PATH,
+               "source_at\tcase_key\talg\tsource_url\tfront_json\n"
+               "2026-10-11\tk1\tR U R'\thttps://ex.example/e\t{\"case\":\"k1\"}\n"
+               "2026-10-11\tk2\tR U2 R'\thttps://ex.example/e\t{\"case\":\"k2\"}\n");
+    CT_ASSERT_EQ(
+        ct_pack_seed_file(db, CT_SEED_BAD_PATH, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L), 2);
+    ct_pack_entry got;
+    CT_ASSERT_EQ(ct_pack_get(db, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L, "k1", &got),
+                 CT_PACK_OK);
+    CT_ASSERT_STR_EQ(got.alg, "R U R'");
+    CT_ASSERT_STR_EQ(got.front_json, "{\"case\":\"k1\"}");
+    CT_ASSERT_STR_EQ(got.source_url, "https://ex.example/e");
+    CT_ASSERT_STR_EQ(got.source_at, "2026-10-11");
+
+    const char *bad_headers[] = {
+        "case_key\talg\tfront_json\tsource_url\n",
+        "case_key\talg\tfront_json\tsource_url\tsource_at\textra\n",
+        "case_key\talg\tfront_json\tsource_url\tbogus\n",
+        "case_key\talg\talg\tsource_url\tsource_at\n",
+        "case_key\talg\tfront_json\tsource_url\tsource_at\tsource_at\n",
+        "case_key\talg\tfront_json\tsource_url\tsource_at\n"
+        "k1\tR U R'\t{\"case\":\"k1\"}\thttps://ex.example/f\t2026-10-12\n"
+        "case_key\talg\tfront_json\tsource_url\tsource_at\n",
+        "case_key\talg\tfront_json\tsource_url\tsource_at\n"
+        "k1\tR U R'\t{\"case\":\"k1\"}\thttps://ex.example/f\t2026-10-12\n"
+        "k2\tR U'\t{\"case\":\"k2\"}\n",
+    };
+    for (unsigned i = 0; i < sizeof bad_headers / sizeof bad_headers[0]; i++) {
+        write_file(CT_SEED_BAD_PATH, bad_headers[i]);
+        CT_ASSERT_EQ(
+            ct_pack_seed_file(db, CT_SEED_BAD_PATH, CT_EVENT_OH, CT_METHOD_CFOP, CT_STAGE_F2L),
+            CT_PACK_ERR_FORMAT);
+    }
+    CT_ASSERT_EQ(ct_pack_count(db, CT_EVENT_OH, CT_METHOD_CFOP, CT_STAGE_F2L), 0);
+    ct_db_close(db);
+}
+
+CT_SUITE(pack_seed_commit_rollback) {
+    sqlite3 *db = open_db();
+    write_file(CT_SEED_OK_PATH,
+               "case_key\talg\tfront_json\tsource_url\tsource_at\n"
+               "k1\tR U R'\t{\"case\":\"k1\"}\thttps://ex.example/g\t2026-10-10\n");
+    CT_ASSERT_EQ(sqlite3_exec(db, "DROP TABLE event_pack", NULL, NULL, NULL), SQLITE_OK);
+    CT_ASSERT_EQ(
+        sqlite3_exec(db, "CREATE TABLE seed_fk_guard(id INTEGER PRIMARY KEY)", NULL, NULL, NULL),
+        SQLITE_OK);
+    CT_ASSERT_EQ(sqlite3_exec(db,
+                              "CREATE TABLE event_pack("
+                              "id INTEGER PRIMARY KEY,"
+                              "event INTEGER NOT NULL REFERENCES seed_fk_guard(id),"
+                              "method INTEGER NOT NULL,"
+                              "stage INTEGER NOT NULL,"
+                              "case_key TEXT NOT NULL,"
+                              "alg TEXT,"
+                              "front_json TEXT NOT NULL DEFAULT '{}',"
+                              "source_url TEXT,"
+                              "source_at TEXT,"
+                              "content_hash TEXT,"
+                              "UNIQUE(event, method, stage, case_key))",
+                              NULL, NULL, NULL),
+                 SQLITE_OK);
+    CT_ASSERT_EQ(sqlite3_exec(db, "PRAGMA defer_foreign_keys=ON", NULL, NULL, NULL), SQLITE_OK);
+    CT_ASSERT_EQ(ct_pack_seed_file(db, CT_SEED_OK_PATH, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L),
+                 CT_PACK_ERR_DB);
+    CT_ASSERT_EQ(sqlite3_get_autocommit(db), 1);
+    sqlite3_stmt *st = NULL;
+    CT_ASSERT_EQ(sqlite3_prepare_v2(db, "SELECT count(*) FROM event_pack", -1, &st, NULL),
+                 SQLITE_OK);
+    CT_ASSERT_EQ(sqlite3_step(st), SQLITE_ROW);
+    CT_ASSERT_EQ(sqlite3_column_int(st, 0), 0);
+    sqlite3_finalize(st);
+    ct_db_close(db);
+
+    sqlite3 *plain = open_db();
+    CT_ASSERT_EQ(
+        ct_pack_seed_file(plain, CT_SEED_OK_PATH, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L), 1);
+    CT_ASSERT_EQ(ct_pack_count(plain, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L), 1);
+    ct_db_close(plain);
 }
 
 CT_SUITE(pack_seed_loader_crlf) {
