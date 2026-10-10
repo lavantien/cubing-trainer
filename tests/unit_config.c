@@ -497,6 +497,29 @@ CT_SUITE(config_domain_rejection) {
     CT_ASSERT_EQ(c.fuzz.iterations, 1);
 }
 
+CT_SUITE(config_gen_weights_negative) {
+    static const char *const keys[] = {
+        "gen.weight_len", "gen.weight_subset", "gen.weight_regrip", "gen.weight_finger",
+    };
+    ct_config c = ct_config_defaults();
+    double *const fields[] = {
+        &c.gen.weight_len, &c.gen.weight_subset, &c.gen.weight_regrip, &c.gen.weight_finger,
+    };
+    for (size_t i = 0; i < sizeof keys / sizeof keys[0]; i++) {
+        ct_config before = c;
+        CT_ASSERT_EQ(ct_config_set(&c, keys[i], "-1"), CT_CFG_BAD_VALUE);
+        CT_ASSERT(memcmp(&c, &before, sizeof c) == 0);
+        CT_ASSERT_EQ(ct_config_set(&c, keys[i], "-0.25"), CT_CFG_BAD_VALUE);
+        CT_ASSERT(memcmp(&c, &before, sizeof c) == 0);
+        CT_ASSERT_EQ(ct_config_set(&c, keys[i], "-1e-9"), CT_CFG_BAD_VALUE);
+        CT_ASSERT(memcmp(&c, &before, sizeof c) == 0);
+        CT_ASSERT_EQ(ct_config_set(&c, keys[i], "0"), CT_CFG_OK);
+        CT_ASSERT_DBL_EQ(*fields[i], 0.0, 0.0);
+        CT_ASSERT_EQ(ct_config_set(&c, keys[i], "0.5"), CT_CFG_OK);
+        CT_ASSERT_DBL_EQ(*fields[i], 0.5, 1e-12);
+    }
+}
+
 CT_SUITE(config_clamping) {
     ct_config c = ct_config_defaults();
 

@@ -30,6 +30,7 @@ enum {
     CT_CKV_DBL_CLAMP = 0,
     CT_CKV_DBL_LO,
     CT_CKV_DBL_FREE,
+    CT_CKV_DBL_MIN,
     CT_CKV_LONG_FREE,
     CT_CKV_LONG_LO,
     CT_CKV_LONG_MIN,
@@ -62,10 +63,10 @@ typedef struct {
 static const ct_ck_entry ct_ck_table[] = {
     {"srs.request_retention", CT_CK_RETENTION, CT_CKV_DBL_CLAMP},
     {"srs.max_ivl_days", CT_CK_MAXIVL, CT_CKV_DBL_LO},
-    {"gen.weight_len", CT_CK_WLEN, CT_CKV_DBL_FREE},
-    {"gen.weight_subset", CT_CK_WSUBSET, CT_CKV_DBL_FREE},
-    {"gen.weight_regrip", CT_CK_WREGRIP, CT_CKV_DBL_FREE},
-    {"gen.weight_finger", CT_CK_WFINGER, CT_CKV_DBL_FREE},
+    {"gen.weight_len", CT_CK_WLEN, CT_CKV_DBL_MIN},
+    {"gen.weight_subset", CT_CK_WSUBSET, CT_CKV_DBL_MIN},
+    {"gen.weight_regrip", CT_CK_WREGRIP, CT_CKV_DBL_MIN},
+    {"gen.weight_finger", CT_CK_WFINGER, CT_CKV_DBL_MIN},
     {"gen.setup_bfs_depth", CT_CK_BFS, CT_CKV_LONG_LO},
     {"gen.fallback_depth", CT_CK_FALLBACK, CT_CKV_LONG_LO},
     {"gen.straggler_depth", CT_CK_STRAGGLER, CT_CKV_LONG_LO},
@@ -183,7 +184,7 @@ static int *ct_ck_int_field(ct_config *c, int slot) {
     }
 }
 
-static void ct_ck_expect_double(ct_config *expected, int slot, int kind, double value) {
+static bool ct_ck_expect_double(ct_config *expected, int slot, int kind, double value) {
     double *field = ct_ck_dbl_field(expected, slot);
     if (kind == CT_CKV_DBL_CLAMP) {
         *field = value < CT_FSRS_RETENTION_MIN   ? CT_FSRS_RETENTION_MIN
@@ -192,9 +193,15 @@ static void ct_ck_expect_double(ct_config *expected, int slot, int kind, double 
     } else if (kind == CT_CKV_DBL_LO) {
         double lo = slot == CT_CK_SECONDS ? CT_ANIM_MIN_MOVE_SECONDS : CT_FSRS_MIN_STABILITY;
         *field = value < lo ? lo : value;
+    } else if (kind == CT_CKV_DBL_MIN) {
+        if (value < 0.0) {
+            return false;
+        }
+        *field = value;
     } else {
         *field = value;
     }
+    return true;
 }
 
 static bool ct_ck_expect_long(ct_config *expected, int slot, int kind, long value) {
@@ -315,11 +322,12 @@ CT_SUITE(fuzz_config_keys) {
             const ct_ck_dbl *pat =
                 &ct_ck_dbls[ct_sfc64_range(&s, sizeof ct_ck_dbls / sizeof ct_ck_dbls[0])];
             ct_config expected = defaults;
+            bool accepted = false;
             if (pat->ok) {
-                ct_ck_expect_double(&expected, slot, kind, pat->value);
+                accepted = ct_ck_expect_double(&expected, slot, kind, pat->value);
             }
             int rc = ct_config_set(&cfg, key, pat->text);
-            if (pat->ok) {
+            if (accepted) {
                 CT_FZ(rc == CT_CFG_OK, seed);
                 CT_FZ(memcmp(&cfg, &expected, sizeof cfg) == 0, seed);
             } else {

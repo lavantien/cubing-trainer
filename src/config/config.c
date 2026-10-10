@@ -21,6 +21,8 @@ const double ct_finger_defaults[CT_FINGER_FACE_COUNT][CT_FINGER_DIR_COUNT] = {
     {CT_FINGER_COST_EXPENSIVE, CT_FINGER_COST_EXPENSIVE},
 };
 
+static const double ct_gen_weight_min = 0.0;
+
 static int parse_double(const char *text, double *out) {
     if (text == NULL || text[0] == '\0') {
         return CT_CFG_BAD_VALUE;
@@ -81,6 +83,19 @@ static int assign_double_range(double *field, const char *value, double lo, doub
     if (*field > hi) {
         *field = hi;
     }
+    return CT_CFG_OK;
+}
+
+static int assign_double_min(double *field, const char *value, double min) {
+    double parsed = 0.0;
+    int rc = parse_double(value, &parsed);
+    if (rc != CT_CFG_OK) {
+        return rc;
+    }
+    if (parsed < min) {
+        return CT_CFG_BAD_VALUE;
+    }
+    *field = parsed;
     return CT_CFG_OK;
 }
 
@@ -214,16 +229,16 @@ int ct_config_set(ct_config *cfg, const char *key, const char *value) {
         return CT_CFG_OK;
     }
     if (strcmp(key, "gen.weight_len") == 0) {
-        return assign_double(&cfg->gen.weight_len, value);
+        return assign_double_min(&cfg->gen.weight_len, value, ct_gen_weight_min);
     }
     if (strcmp(key, "gen.weight_subset") == 0) {
-        return assign_double(&cfg->gen.weight_subset, value);
+        return assign_double_min(&cfg->gen.weight_subset, value, ct_gen_weight_min);
     }
     if (strcmp(key, "gen.weight_regrip") == 0) {
-        return assign_double(&cfg->gen.weight_regrip, value);
+        return assign_double_min(&cfg->gen.weight_regrip, value, ct_gen_weight_min);
     }
     if (strcmp(key, "gen.weight_finger") == 0) {
-        return assign_double(&cfg->gen.weight_finger, value);
+        return assign_double_min(&cfg->gen.weight_finger, value, ct_gen_weight_min);
     }
     if (strncmp(key, "gen.penalty_", sizeof "gen.penalty_" - 1) == 0) {
         const char *face = key + sizeof "gen.penalty_" - 1;
