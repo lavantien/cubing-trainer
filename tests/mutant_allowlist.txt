@@ -1164,3 +1164,14 @@ src/app/headless.c:57	the loop bound and start shifts apply a stack garbage move
 src/app/headless.c:82	the empty alg arm differs only by applying zero moves instead of the default scramble, ct_notation_parse of the empty string returns zero, pixel level only
 src/app/headless.c:90	the empty alg arm differs only by applying zero moves before the fixed mid move, ct_notation_parse of the empty string returns zero, pixel level only
 src/app/headless.c:102	the mid progress scaling feeds only the animation elapsed value inside the render body, no gate suite observes the animation clock
+src/app/app_loop.c:16	the fixed timestep constant feeds only the raylib frame loop no gate suite exercises
+src/app/app_loop.c:18	ct_data_dir returns only zero or minus one over the reachable surface, the shifted comparison decides identically on both
+src/app/app_loop.c:22	the capacity arithmetic arm sits on path lengths beyond every reachable harness db path
+src/app/app_loop.c:24	the guard family sits on path lengths beyond every reachable harness db path, written zero is unreachable for the slash filename format, and a negative written slips into the unsigned cast comparison which rejects it identically
+src/app/app_loop.c:26	the write sits on the filename snprintf failure arm which no reachable harness path length triggers
+src/app/app_loop.c:47	the branch only selects the stderr diagnostic, seeding runs inside the condition either way, and the call returns only zero or negative over the reachable flow
+src/app/app_loop.c:61	the run guard feeds only the raylib frame loop no gate suite exercises
+src/app/app_loop.c:66	inside the raylib frame loop no gate suite exercises
+src/app/app_loop.c:69	inside the raylib frame loop no gate suite exercises
+src/app/app_loop.c:70	inside the raylib frame loop no gate suite exercises
+src/app/app_loop.c:73	inside the raylib frame loop no gate suite exercises
