@@ -471,6 +471,46 @@ CT_SUITE(stats_screen_heatmap_grid) {
     CT_ASSERT_EQ(ct_heatmap_pick(shifted, 6, 4, exact_origin), -1);
 }
 
+CT_SUITE(stats_screen_boundaries) {
+    sqlite3 *db = seed_db();
+    ct_stats_view v;
+    CT_ASSERT_EQ(ct_stats_view_load(&v, db, NOW, NULL), CT_REPO_OK);
+    CT_ASSERT_EQ(v.deck_count, 0);
+    CT_ASSERT_EQ(v.deck_selected, -1);
+    CT_ASSERT_EQ(v.forecast_count, CT_STATS_FORECAST_DAYS);
+    CT_ASSERT_EQ(v.session_count, 0);
+    CT_ASSERT_EQ(v.case_count, 0);
+    ct_db_close(db);
+
+    db = seed_db();
+    long only;
+    seed_insert_card(db, "only", "o1", CT_DIR_FR, &only);
+    CT_ASSERT(only > 0);
+    CT_ASSERT_EQ(ct_stats_view_load(&v, db, NOW, NULL), CT_REPO_OK);
+    CT_ASSERT_EQ(v.deck_count, 1);
+    CT_ASSERT_EQ(v.deck_selected, 0);
+    CT_ASSERT_EQ(v.case_count, 0);
+    ct_db_close(db);
+
+    seed_state s;
+    seed_build(&s);
+    long zid;
+    seed_insert_card(s.db, "z", "z1", CT_DIR_FR, &zid);
+    CT_ASSERT(zid > 0);
+    CT_ASSERT_EQ(ct_stats_view_load(&v, s.db, NOW, "z"), CT_REPO_OK);
+    CT_ASSERT_EQ(v.case_count, 0);
+    CT_ASSERT_STR_EQ(v.decks[v.deck_selected].deck, "z");
+
+    CT_ASSERT_EQ(ct_stats_view_select_deck(&v, "ghost"), CT_REPO_OK);
+    CT_ASSERT_EQ(v.deck_selected, -1);
+    CT_ASSERT_EQ(v.case_count, 0);
+    CT_ASSERT_EQ(v.retention_count, CT_STATS_RETENTION_BUCKETS);
+    for (int i = 0; i < CT_STATS_RETENTION_BUCKETS; i++) {
+        CT_ASSERT_EQ(v.retention[i].reviews, 0);
+    }
+    ct_db_close(s.db);
+}
+
 CT_SUITE(stats_screen_heatmap_color) {
     Color r0 = ct_heatmap_color(0.0);
     CT_ASSERT_EQ(r0.r, 255);
