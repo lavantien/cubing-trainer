@@ -74,9 +74,9 @@ CT_SUITE(shots_state_guards) {
                  CT_SHOTS_E_STATE);
     CT_ASSERT_EQ(ct_shots_chart(&app, CT_EVENT_3X3, CT_METHOD_CFOP, 0, 0, CT_TEST_GUARD_PNG),
                  CT_SHOTS_E_STATE);
-    CT_ASSERT_EQ(
-        ct_shots_chart(&app, CT_EVENT_3BLD, CT_METHOD_3STYLE, 1, CT_LETTER_STICKERS, CT_TEST_GUARD_PNG),
-        CT_SHOTS_E_STATE);
+    CT_ASSERT_EQ(ct_shots_chart(&app, CT_EVENT_3BLD, CT_METHOD_3STYLE, 1, CT_LETTER_STICKERS,
+                                CT_TEST_GUARD_PNG),
+                 CT_SHOTS_E_STATE);
     CT_ASSERT_EQ(
         ct_shots_trainer(&app, CT_EVENT_3X3, CT_METHOD_SARAH_INTERMEDIATE, 0, 0, CT_TEST_GUARD_PNG),
         CT_SHOTS_E_STATE);
