@@ -1,0 +1,6 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_scrn2/bin/mutate.exe src/ui/screen_trainer.c build_scrn2 trainer_decomp_lines
+mutate: scope=src/ui/screen_trainer.c files=1 sites=541 suites=1
+mutate: generated=0 build_failed=0 killed_by_tests=0 killed=0 survived=0 accepted=0 unexplained=0 skipped=541
+mutate: wall 0.0s

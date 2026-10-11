@@ -1,0 +1,42 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_scrn2/bin/mutate.exe src/ui/screen_trainer.c build_scrn2 
+mutate: scope=src/ui/screen_trainer.c files=1 sites=541 suites=0
+SURVIVED  m0012 src/ui/screen_trainer.c:19 [arith * -> /]
+SURVIVED  m0015 src/ui/screen_trainer.c:21 [int+1 3 -> 4]
+SURVIVED  m0016 src/ui/screen_trainer.c:21 [int-1 3 -> 2]
+SURVIVED  m0017 src/ui/screen_trainer.c:22 [int+1 3 -> 4]
+SURVIVED  m0018 src/ui/screen_trainer.c:22 [int-1 3 -> 2]
+KILLED    m0019 src/ui/screen_trainer.c:23 [int+1 4 -> 5]
+KILLED    m0020 src/ui/screen_trainer.c:23 [int-1 4 -> 3]
+KILLED    m0021 src/ui/screen_trainer.c:24 [arith + -> -]
+SURVIVED  m0022 src/ui/screen_trainer.c:24 [int+1 1 -> 2]
+KILLED    m0023 src/ui/screen_trainer.c:24 [int-1 1 -> 0]
+SURVIVED  m0024 src/ui/screen_trainer.c:25 [int+1 2 -> 3]
+SURVIVED  m0025 src/ui/screen_trainer.c:25 [int-1 2 -> 1]
+SURVIVED  m0101 src/ui/screen_trainer.c:121 [cmp <= -> <]
+SURVIVED  m0103 src/ui/screen_trainer.c:121 [int-1 0 -> -1]
+SURVIVED  m0375 src/ui/screen_trainer.c:472 [cmp >= -> >]
+KILLED    m0376 src/ui/screen_trainer.c:472 [int+1 0 -> 1]
+SURVIVED  m0377 src/ui/screen_trainer.c:472 [int-1 0 -> -1]
+SURVIVED  m0378 src/ui/screen_trainer.c:472 [logic && -> ||]
+KILLED    m0391 src/ui/screen_trainer.c:498 [arith + -> -]
+SURVIVED  m0392 src/ui/screen_trainer.c:498 [arith + -> -]
+KILLED    m0393 src/ui/screen_trainer.c:498 [int+1 2 -> 3]
+SURVIVED  m0394 src/ui/screen_trainer.c:498 [int-1 2 -> 1]
+SURVIVED  m0395 src/ui/screen_trainer.c:498 [arith * -> /]
+SURVIVED  m0464 src/ui/screen_trainer.c:545 [cmp > -> >=]
+SURVIVED  m0517 src/ui/screen_trainer.c:582 [int+1 0 -> 1]
+SURVIVED  m0519 src/ui/screen_trainer.c:582 [cmp != -> ==]
+KILLED    m0523 src/ui/screen_trainer.c:589 [arith + -> -]
+SURVIVED  m0524 src/ui/screen_trainer.c:589 [arith / -> *]
+SURVIVED  m0525 src/ui/screen_trainer.c:590 [int+1 0 -> 1]
+KILLED    m0527 src/ui/screen_trainer.c:590 [cmp < -> <=]
+SURVIVED  m0528 src/ui/screen_trainer.c:591 [arith + -> -]
+KILLED    m0529 src/ui/screen_trainer.c:592 [arith + -> -]
+KILLED    m0530 src/ui/screen_trainer.c:592 [arith * -> /]
+SURVIVED  m0531 src/ui/screen_trainer.c:592 [arith + -> -]
+KILLED    m0532 src/ui/screen_trainer.c:592 [arith * -> /]
+mutate: generated=35 build_failed=0 killed_by_tests=12 killed=12 survived=23 accepted=0 unexplained=23 skipped=506
+mutate: kill rate 12/35 = 34.3%, with accepted equivalents 12/35 = 34.3%
+mutate: wall 1085.0s

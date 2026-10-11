@@ -1,0 +1,25 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_scrn2/bin/mutate.exe src/ui/screen_trainer.c build_scrn2 trainer_decomp_lines trainer_form_visible_count_edges
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: 6 unexplained survivors
+mutate: scope=src/ui/screen_trainer.c files=1 sites=541 suites=2
+SURVIVED  m0199 src/ui/screen_trainer.c:270 [ret-lit 0 -> 1]
+SURVIVED  m0200 src/ui/screen_trainer.c:270 [int+1 0 -> 1]
+KILLED    m0259 src/ui/screen_trainer.c:316 [int+1 0 -> 1]
+KILLED    m0266 src/ui/screen_trainer.c:319 [int-1 0 -> -1]
+SURVIVED  m0278 src/ui/screen_trainer.c:323 [cmp < -> <=]
+SURVIVED  m0279 src/ui/screen_trainer.c:323 [logic && -> ||]
+SURVIVED  m0280 src/ui/screen_trainer.c:323 [int+1 0 -> 1]
+KILLED    m0283 src/ui/screen_trainer.c:326 [cmp < -> <=]
+KILLED    m0288 src/ui/screen_trainer.c:329 [cmp < -> <=]
+KILLED    m0289 src/ui/screen_trainer.c:329 [logic && -> ||]
+SURVIVED  m0290 src/ui/screen_trainer.c:329 [int+1 0 -> 1]
+mutate: generated=11 build_failed=0 killed_by_tests=5 killed=5 survived=6 accepted=0 unexplained=6 skipped=530
+mutate: kill rate 5/11 = 45.5%, with accepted equivalents 5/11 = 45.5%
+mutate: wall 8.1s
+make: *** [makefile:256: mutate] Error 1
