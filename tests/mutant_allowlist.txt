@@ -1175,3 +1175,12 @@ src/app/app_loop.c:66	inside the raylib frame loop no gate suite exercises
 src/app/app_loop.c:69	inside the raylib frame loop no gate suite exercises
 src/app/app_loop.c:70	inside the raylib frame loop no gate suite exercises
 src/app/app_loop.c:73	inside the raylib frame loop no gate suite exercises
+src/app/main.c:8	argv guards sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary where every pinned invocation passes the exact headless script argc
+src/app/main.c:9	argv guards sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary where every pinned invocation passes the exact script flag
+src/app/main.c:14	init failure latch sits outside the gate suite surface, every pinned e2e invocation inits a running app
+src/app/main.c:16	scripted init failure exit code sits outside the gate suite surface, every pinned e2e invocation inits successfully
+src/app/main.c:18	script path index sits outside the gate suite surface, every pinned e2e invocation passes the exact four argv words
+src/app/main.c:25	argc dispatch sits outside the gate suite surface, the app file entry runs only through the e2e make target with the scripted argv shape
+src/app/main.c:29	interactive init failure latch sits outside the gate suite surface, every pinned e2e invocation inits a running app
+src/app/main.c:31	interactive init failure exit code sits outside the gate suite surface, every pinned e2e invocation inits successfully
+src/app/main.c:35	interactive success exit code sits outside the gate suite surface, the e2e target pins the scripted exit path instead
