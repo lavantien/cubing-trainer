@@ -31,17 +31,23 @@ def main():
     checked = 0
     missing = []
     skipped = 0
+    pair_format = 0
+    triples = {}
+    total = 0
     with open(sys.argv[2], encoding="utf-8") as f:
         f.readline()
         for line in f:
             fields = line.rstrip("\n").split("\t")
             if len(fields) < 8:
                 continue
+            total += 1
             solver, sheet, rowid, position = fields[:4]
             names = position.split("-")
             if len(names) != 3 or any(len(n) != 3 for n in names):
+                pair_format += 1
                 skipped += 1
                 continue
+            triples[names[0]] = triples.get(names[0], 0) + 1
             corner = sheet == "corner"
             buffer_name, t1_name, t2_name = names
             buffer = name_to_index(buffer_name, corner)
@@ -56,7 +62,11 @@ def main():
                 missing.append(position)
                 continue
             checked += 1
-    print("ref_shared=%d ref_missing=%d ref_other_buffer=%d" % (checked, len(missing), skipped))
+    print("ref_rows=%d ref_triples=%d ref_pair_format=%d" % (total, sum(triples.values()),
+                                                             pair_format))
+    for name in sorted(triples):
+        print("ref_triple_buffer %s %d" % (name, triples[name]))
+    print("ref_shared=%d ref_missing=%d ref_skipped=%d" % (checked, len(missing), skipped))
     for m in missing[:10]:
         print("MISSING " + m)
     return 1 if missing else 0
