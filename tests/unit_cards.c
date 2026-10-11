@@ -80,6 +80,24 @@ CT_SUITE(card_insert_get) {
     CT_ASSERT_EQ(ct_repo_card_get(db, id, &back), CT_REPO_MISSING);
     CT_ASSERT_EQ(back.id, 0);
     CT_ASSERT_EQ(back.deck[0], '\0');
+
+    char long_deck[CT_CARD_DECK_MAX + 1];
+    memset(long_deck, 'd', CT_CARD_DECK_MAX);
+    long_deck[CT_CARD_DECK_MAX] = '\0';
+    char sql[320];
+    snprintf(sql, sizeof sql,
+             "INSERT INTO flashcard(deck, case_key, direction, created_at, updated_at)"
+             " VALUES ('%s', 'long', 0, '2026-06-01T00:00:00Z', '2026-06-01T00:00:00Z')",
+             long_deck);
+    CT_ASSERT_EQ(sqlite3_exec(db, sql, NULL, NULL, NULL), SQLITE_OK);
+    long over_id = (long)sqlite3_last_insert_rowid(db);
+    memset(&back, 0xAA, sizeof back);
+    CT_ASSERT_EQ(ct_repo_card_get(db, over_id, &back), CT_REPO_OK);
+    CT_ASSERT_EQ(strlen(back.deck), CT_CARD_DECK_MAX - 1);
+    CT_ASSERT_EQ(back.deck[CT_CARD_DECK_MAX - 1], '\0');
+    CT_ASSERT_EQ(sqlite3_exec(db, "DELETE FROM flashcard WHERE id < 0", NULL, NULL, NULL),
+                 SQLITE_OK);
+    CT_ASSERT_EQ(sqlite3_exec(db, "DELETE FROM flashcard", NULL, NULL, NULL), SQLITE_OK);
     ct_db_close(db);
 }
 
@@ -205,6 +223,8 @@ CT_SUITE(card_list) {
     CT_ASSERT_EQ(ct_repo_card_list(db, "gamma", two, 2), 0);
     CT_ASSERT_EQ(ct_repo_card_list(db, "alpha", two, 0), 0);
     CT_ASSERT(ct_repo_card_list(db, NULL, two, 2) < 0);
+    CT_ASSERT_EQ(ct_repo_card_list(db, "alpha", NULL, 0), 0);
+    CT_ASSERT(ct_repo_card_list(db, "alpha", NULL, 1) < 0);
     ct_db_close(db);
 }
 
@@ -238,6 +258,11 @@ CT_SUITE(card_get_by_key) {
     big[sizeof big - 1] = '\0';
     CT_ASSERT(ct_repo_card_get_by_key(db, big, "key", CT_DIR_FR, &out) < 0);
     CT_ASSERT(ct_repo_card_get_by_key(db, "deck", "", CT_DIR_FR, &out) < 0);
+
+    memset(&out, 0xAA, sizeof out);
+    CT_ASSERT_EQ(ct_repo_card_get_by_key(db, "deck", "key", CT_DIR_FL, &out), CT_REPO_MISSING);
+    CT_ASSERT_EQ(out.id, 0);
+    CT_ASSERT_EQ(out.deck[0], '\0');
     ct_db_close(db);
 }
 
@@ -547,6 +572,10 @@ CT_SUITE(now_iso) {
     ct_now_utc_iso(stamp, sizeof stamp);
     CT_ASSERT_EQ(strlen(stamp), 20u);
     CT_ASSERT_EQ(stamp[19], 'Z');
+    char exact[21];
+    memset(exact, 'x', sizeof exact);
+    ct_now_utc_iso(exact, 21);
+    CT_ASSERT_EQ(strlen(exact), 20u);
     static const char pattern[] = "0000-00-00T00:00:00Z";
     for (int i = 0; i < 20; i++) {
         if (pattern[i] == '0') {

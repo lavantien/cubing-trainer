@@ -1108,3 +1108,17 @@ src/storage/migrate.c:253	capacity arms lie beyond the 260 platform path limit, 
 src/storage/migrate.c:255	read failure arm requires the migration file to vanish between collect and read, unreachable without a race
 src/storage/migrate.c:270	nonzero rc variants are indistinguishable, the caller compares against zero
 src/storage/migrate.c:277	nonzero return variants are indistinguishable, the caller compares against zero
+src/storage/repo_cards.c:51	sqlite reads any negative byte count as nul terminated, minus two binds the same text
+src/storage/repo_cards.c:86	null text arm unreachable, every column the readers touch is not null under the schema
+src/storage/repo_cards.c:120	case key reject value is boolean, any nonzero is equivalent
+src/storage/repo_cards.c:173	clock failure guard unreachable, a working gmtime always fills the stamp
+src/storage/repo_cards.c:178	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+src/storage/repo_cards.c:216	clock failure guard unreachable, a working gmtime always fills the stamp
+src/storage/repo_cards.c:219	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+src/storage/repo_cards.c:252	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+src/storage/repo_cards.c:279	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+src/storage/repo_cards.c:302	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+src/storage/repo_cards.c:327	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+src/storage/repo_cards.c:331	sqlite reads any negative byte count as nul terminated, minus two binds the same deck text
+src/storage/repo_cards.c:349	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+src/storage/repo_cards.c:378	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
