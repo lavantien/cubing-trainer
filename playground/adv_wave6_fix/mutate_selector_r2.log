@@ -1,0 +1,626 @@
+mkdir -p build_mutw7/bin
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/test_main.c -o build_mutw7/tobj/tests/test_main.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/framework.c -o build_mutw7/tobj/tests/framework.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_algs.c -o build_mutw7/tobj/tests/unit_algs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_anim.c -o build_mutw7/tobj/tests/unit_anim.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_app_paths.c -o build_mutw7/tobj/tests/unit_app_paths.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cards.c -o build_mutw7/tobj/tests/unit_cards.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cards_form.c -o build_mutw7/tobj/tests/unit_cards_form.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cfop.c -o build_mutw7/tobj/tests/unit_cfop.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_classify.c -o build_mutw7/tobj/tests/unit_classify.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_config.c -o build_mutw7/tobj/tests/unit_config.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cube.c -o build_mutw7/tobj/tests/unit_cube.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_db.c -o build_mutw7/tobj/tests/unit_db.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_e2e_script.c -o build_mutw7/tobj/tests/unit_e2e_script.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_fsrs.c -o build_mutw7/tobj/tests/unit_fsrs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_geometry.c -o build_mutw7/tobj/tests/unit_geometry.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_geometry_clock.c -o build_mutw7/tobj/tests/unit_geometry_clock.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_geometry_sq1.c -o build_mutw7/tobj/tests/unit_geometry_sq1.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_interchange.c -o build_mutw7/tobj/tests/unit_interchange.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_letter_scheme.c -o build_mutw7/tobj/tests/unit_letter_scheme.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_notation.c -o build_mutw7/tobj/tests/unit_notation.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_pack_seeds.c -o build_mutw7/tobj/tests/unit_pack_seeds.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_pack_seeds2.c -o build_mutw7/tobj/tests/unit_pack_seeds2.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_pack_startup.c -o build_mutw7/tobj/tests/unit_pack_startup.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_packs.c -o build_mutw7/tobj/tests/unit_packs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_renderer.c -o build_mutw7/tobj/tests/unit_renderer.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_review_form.c -o build_mutw7/tobj/tests/unit_review_form.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_score.c -o build_mutw7/tobj/tests/unit_score.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_selector.c -o build_mutw7/tobj/tests/unit_selector.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_selector_packs.c -o build_mutw7/tobj/tests/unit_selector_packs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_selector_screen.c -o build_mutw7/tobj/tests/unit_selector_screen.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_session.c -o build_mutw7/tobj/tests/unit_session.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_settings_form.c -o build_mutw7/tobj/tests/unit_settings_form.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_settings_merge.c -o build_mutw7/tobj/tests/unit_settings_merge.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_smoke.c -o build_mutw7/tobj/tests/unit_smoke.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_stats.c -o build_mutw7/tobj/tests/unit_stats.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_stats_repo.c -o build_mutw7/tobj/tests/unit_stats_repo.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_stats_screen.c -o build_mutw7/tobj/tests/unit_stats_screen.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_synth.c -o build_mutw7/tobj/tests/unit_synth.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_targets.c -o build_mutw7/tobj/tests/unit_targets.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_transform.c -o build_mutw7/tobj/tests/unit_transform.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_config.c -o build_mutw7/tobj/tests/fuzz_config.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_db.c -o build_mutw7/tobj/tests/fuzz_db.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_engine.c -o build_mutw7/tobj/tests/fuzz_engine.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_main.c -o build_mutw7/tobj/tests/fuzz_main.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_script.c -o build_mutw7/tobj/tests/fuzz_script.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_srs.c -o build_mutw7/tobj/tests/fuzz_srs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/app_loop.c -o build_mutw7/tobj/src/app/app_loop.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/headless.c -o build_mutw7/tobj/src/app/headless.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/paths.c -o build_mutw7/tobj/src/app/paths.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/script.c -o build_mutw7/tobj/src/app/script.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/script_expect.c -o build_mutw7/tobj/src/app/script_expect.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/config/config.c -o build_mutw7/tobj/src/config/config.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/cube.c -o build_mutw7/tobj/src/engine/cube.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/geometry.c -o build_mutw7/tobj/src/engine/geometry.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/geometry_clock.c -o build_mutw7/tobj/src/engine/geometry_clock.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/geometry_sq1.c -o build_mutw7/tobj/src/engine/geometry_sq1.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/notation.c -o build_mutw7/tobj/src/engine/notation.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/transform.c -o build_mutw7/tobj/src/engine/transform.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/classify.c -o build_mutw7/tobj/src/gen/classify.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/interchange.c -o build_mutw7/tobj/src/gen/interchange.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/score.c -o build_mutw7/tobj/src/gen/score.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/synth.c -o build_mutw7/tobj/src/gen/synth.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/targets.c -o build_mutw7/tobj/src/gen/targets.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/packs/packs.c -o build_mutw7/tobj/src/packs/packs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/packs/provenance.c -o build_mutw7/tobj/src/packs/provenance.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/packs/seed_registry.c -o build_mutw7/tobj/src/packs/seed_registry.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/render/anim.c -o build_mutw7/tobj/src/render/anim.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/render/renderer.c -o build_mutw7/tobj/src/render/renderer.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/srs/fsrs.c -o build_mutw7/tobj/src/srs/fsrs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/stats/stats.c -o build_mutw7/tobj/src/stats/stats.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/db.c -o build_mutw7/tobj/src/storage/db.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/migrate.c -o build_mutw7/tobj/src/storage/migrate.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_algs.c -o build_mutw7/tobj/src/storage/repo_algs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_cards.c -o build_mutw7/tobj/src/storage/repo_cards.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_reviews.c -o build_mutw7/tobj/src/storage/repo_reviews.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_settings.c -o build_mutw7/tobj/src/storage/repo_settings.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_stats.c -o build_mutw7/tobj/src/storage/repo_stats.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/trainer/cfop.c -o build_mutw7/tobj/src/trainer/cfop.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/trainer/selector.c -o build_mutw7/tobj/src/trainer/selector.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/trainer/session.c -o build_mutw7/tobj/src/trainer/session.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_cards.c -o build_mutw7/tobj/src/ui/screen_cards.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_menu.c -o build_mutw7/tobj/src/ui/screen_menu.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_review.c -o build_mutw7/tobj/src/ui/screen_review.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_settings.c -o build_mutw7/tobj/src/ui/screen_settings.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_stats.c -o build_mutw7/tobj/src/ui/screen_stats.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_trainer.c -o build_mutw7/tobj/src/ui/screen_trainer.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/widgets.c -o build_mutw7/tobj/src/ui/widgets.o
+echo '#define RAYGUI_IMPLEMENTATION' > build_mutw7/raygui_impl.c
+echo '#include "raygui.h"' >> build_mutw7/raygui_impl.c
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/raudio.c -o build_mutw7/obj/third_party/raylib/src/raudio.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rcore.c -o build_mutw7/obj/third_party/raylib/src/rcore.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rglfw.c -o build_mutw7/obj/third_party/raylib/src/rglfw.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rmodels.c -o build_mutw7/obj/third_party/raylib/src/rmodels.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rshapes.c -o build_mutw7/obj/third_party/raylib/src/rshapes.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rtext.c -o build_mutw7/obj/third_party/raylib/src/rtext.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rtextures.c -o build_mutw7/obj/third_party/raylib/src/rtextures.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -Ithird_party/sqlite -Wno-error -MMD -MP -c third_party/sqlite/sqlite3.c -o build_mutw7/obj/third_party/sqlite/sqlite3.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic tools/mutate.c -o build_mutw7/bin/mutate.exe
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -MMD -MP -Ithird_party/raylib/src -Ithird_party/raygui/src -Wno-error -c build_mutw7/raygui_impl.c -o build_mutw7/obj/raygui_impl.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_mutw7/bin/mutate.exe src/trainer/selector.c build_mutw7 selector_scheme_load selector_events selector_methods selector_lists selector_case_counts selector_case_keys selector_case_pairs selector_pack_cases selector_pack_reach selector_pack_groups selector_group_scope trainer_form_navigation trainer_form_generated_alg trainer_form_case_detail trainer_form_select_refreshes_inputs e2e_run_trainer_generate e2e_run_trainer_edge_generate
+mutate: scope=src/trainer/selector.c files=1 sites=373 suites=17
+KILLED    m0001 src/trainer/selector.c:11 [arith + -> -]
+KILLED    m0002 src/trainer/selector.c:11 [int+1 1 -> 2]
+KILLED    m0003 src/trainer/selector.c:11 [int-1 1 -> 0]
+KILLED    m0004 src/trainer/selector.c:12 [arith + -> -]
+SURVIVED  m0005 src/trainer/selector.c:12 [int+1 1 -> 2]
+KILLED    m0006 src/trainer/selector.c:12 [int-1 1 -> 0]
+KILLED    m0007 src/trainer/selector.c:13 [int+1 3 -> 4]
+KILLED    m0008 src/trainer/selector.c:13 [int-1 3 -> 2]
+SURVIVED  m0009 src/trainer/selector.c:14 [int+1 1 -> 2]
+KILLED    m0010 src/trainer/selector.c:14 [int-1 1 -> 0]
+          build break
+SURVIVED  m0011 src/trainer/selector.c:14 [int+1 8 -> 9]
+KILLED    m0012 src/trainer/selector.c:14 [int-1 8 -> 7]
+SURVIVED  m0013 src/trainer/selector.c:15 [int+1 1 -> 2]
+KILLED    m0014 src/trainer/selector.c:15 [int-1 1 -> 0]
+          build break
+SURVIVED  m0015 src/trainer/selector.c:15 [int+1 5 -> 6]
+SURVIVED  m0016 src/trainer/selector.c:15 [int-1 5 -> 4]
+KILLED    m0017 src/trainer/selector.c:16 [arith * -> /]
+KILLED    m0018 src/trainer/selector.c:69 [arith * -> /]
+          build break
+KILLED    m0019 src/trainer/selector.c:80 [cmp >= -> >]
+KILLED    m0020 src/trainer/selector.c:80 [int+1 0 -> 1]
+SURVIVED  m0021 src/trainer/selector.c:80 [int-1 0 -> -1]
+SURVIVED  m0022 src/trainer/selector.c:80 [logic && -> ||]
+SURVIVED  m0023 src/trainer/selector.c:80 [cmp < -> <=]
+KILLED    m0024 src/trainer/selector.c:84 [cmp >= -> >]
+KILLED    m0025 src/trainer/selector.c:84 [int+1 0 -> 1]
+SURVIVED  m0026 src/trainer/selector.c:84 [int-1 0 -> -1]
+SURVIVED  m0027 src/trainer/selector.c:84 [logic && -> ||]
+SURVIVED  m0028 src/trainer/selector.c:84 [cmp < -> <=]
+KILLED    m0029 src/trainer/selector.c:88 [not-del ! -> (deleted)]
+SURVIVED  m0030 src/trainer/selector.c:88 [logic || -> &&]
+KILLED    m0031 src/trainer/selector.c:88 [not-del ! -> (deleted)]
+SURVIVED  m0032 src/trainer/selector.c:89 [ret-lit 0 -> 1]
+SURVIVED  m0033 src/trainer/selector.c:89 [int+1 0 -> 1]
+SURVIVED  m0034 src/trainer/selector.c:89 [int-1 0 -> -1]
+SURVIVED  m0035 src/trainer/selector.c:91 [int+1 0 -> 1]
+KILLED    m0036 src/trainer/selector.c:91 [int-1 0 -> -1]
+KILLED    m0037 src/trainer/selector.c:91 [cmp < -> <=]
+KILLED    m0038 src/trainer/selector.c:91 [arith / -> *]
+SURVIVED  m0039 src/trainer/selector.c:91 [int+1 0 -> 1]
+SURVIVED  m0040 src/trainer/selector.c:91 [int-1 0 -> -1]
+KILLED    m0041 src/trainer/selector.c:92 [cmp == -> !=]
+SURVIVED  m0042 src/trainer/selector.c:92 [logic && -> ||]
+KILLED    m0043 src/trainer/selector.c:92 [cmp == -> !=]
+KILLED    m0044 src/trainer/selector.c:93 [ret-lit 1 -> 0]
+SURVIVED  m0045 src/trainer/selector.c:93 [int+1 1 -> 2]
+KILLED    m0046 src/trainer/selector.c:93 [int-1 1 -> 0]
+SURVIVED  m0047 src/trainer/selector.c:96 [ret-lit 0 -> 1]
+SURVIVED  m0048 src/trainer/selector.c:96 [int+1 0 -> 1]
+SURVIVED  m0049 src/trainer/selector.c:96 [int-1 0 -> -1]
+SURVIVED  m0050 src/trainer/selector.c:100 [cmp < -> <=]
+SURVIVED  m0051 src/trainer/selector.c:100 [int+1 0 -> 1]
+SURVIVED  m0052 src/trainer/selector.c:100 [int-1 0 -> -1]
+KILLED    m0053 src/trainer/selector.c:100 [int+1 0 -> 1]
+SURVIVED  m0054 src/trainer/selector.c:100 [int-1 0 -> -1]
+KILLED    m0055 src/trainer/selector.c:103 [arith * -> /]
+          build break
+SURVIVED  m0056 src/trainer/selector.c:104 [cmp == -> !=]
+KILLED    m0057 src/trainer/selector.c:107 [arith * -> /]
+          build break
+KILLED    m0058 src/trainer/selector.c:108 [arith * -> /]
+          build break
+KILLED    m0059 src/trainer/selector.c:108 [arith * -> /]
+          build break
+KILLED    m0060 src/trainer/selector.c:109 [int+1 0 -> 1]
+KILLED    m0061 src/trainer/selector.c:109 [int-1 0 -> -1]
+KILLED    m0062 src/trainer/selector.c:110 [int+1 0 -> 1]
+KILLED    m0063 src/trainer/selector.c:110 [int-1 0 -> -1]
+SURVIVED  m0064 src/trainer/selector.c:110 [cmp < -> <=]
+SURVIVED  m0065 src/trainer/selector.c:110 [arith / -> *]
+SURVIVED  m0066 src/trainer/selector.c:110 [int+1 0 -> 1]
+SURVIVED  m0067 src/trainer/selector.c:110 [int-1 0 -> -1]
+KILLED    m0068 src/trainer/selector.c:111 [cmp != -> ==]
+KILLED    m0069 src/trainer/selector.c:111 [logic || -> &&]
+KILLED    m0070 src/trainer/selector.c:111 [cmp != -> ==]
+KILLED    m0071 src/trainer/selector.c:114 [cmp == -> !=]
+KILLED    m0072 src/trainer/selector.c:115 [arith * -> /]
+          build break
+KILLED    m0073 src/trainer/selector.c:116 [arith * -> /]
+          build break
+KILLED    m0074 src/trainer/selector.c:117 [arith * -> /]
+          build break
+KILLED    m0075 src/trainer/selector.c:118 [ret-lit 0 -> 1]
+KILLED    m0076 src/trainer/selector.c:118 [int+1 0 -> 1]
+KILLED    m0077 src/trainer/selector.c:118 [int-1 0 -> -1]
+SURVIVED  m0078 src/trainer/selector.c:126 [int+1 0 -> 1]
+KILLED    m0079 src/trainer/selector.c:126 [int-1 0 -> -1]
+KILLED    m0080 src/trainer/selector.c:127 [int+1 0 -> 1]
+KILLED    m0081 src/trainer/selector.c:127 [int-1 0 -> -1]
+KILLED    m0082 src/trainer/selector.c:127 [cmp < -> <=]
+KILLED    m0083 src/trainer/selector.c:127 [arith / -> *]
+SURVIVED  m0084 src/trainer/selector.c:127 [int+1 0 -> 1]
+SURVIVED  m0085 src/trainer/selector.c:127 [int-1 0 -> -1]
+KILLED    m0086 src/trainer/selector.c:128 [cmp == -> !=]
+SURVIVED  m0087 src/trainer/selector.c:128 [logic && -> ||]
+KILLED    m0088 src/trainer/selector.c:128 [cmp == -> !=]
+KILLED    m0089 src/trainer/selector.c:135 [arith * -> /]
+          build break
+KILLED    m0090 src/trainer/selector.c:136 [arith * -> /]
+          build break
+KILLED    m0091 src/trainer/selector.c:138 [cmp == -> !=]
+KILLED    m0092 src/trainer/selector.c:138 [logic || -> &&]
+          build break
+KILLED    m0093 src/trainer/selector.c:138 [int+1 0 -> 1]
+KILLED    m0094 src/trainer/selector.c:138 [int-1 0 -> -1]
+KILLED    m0095 src/trainer/selector.c:138 [cmp != -> ==]
+KILLED    m0096 src/trainer/selector.c:138 [logic || -> &&]
+          build break
+KILLED    m0097 src/trainer/selector.c:138 [cmp < -> <=]
+KILLED    m0098 src/trainer/selector.c:138 [int+1 0 -> 1]
+KILLED    m0099 src/trainer/selector.c:138 [int-1 0 -> -1]
+KILLED    m0100 src/trainer/selector.c:138 [logic || -> &&]
+          build break
+KILLED    m0101 src/trainer/selector.c:138 [cmp >= -> >]
+KILLED    m0102 src/trainer/selector.c:144 [arith * -> /]
+          build break
+KILLED    m0103 src/trainer/selector.c:144 [arith * -> /]
+          build break
+KILLED    m0104 src/trainer/selector.c:145 [cmp == -> !=]
+KILLED    m0105 src/trainer/selector.c:145 [logic || -> &&]
+KILLED    m0106 src/trainer/selector.c:145 [cmp == -> !=]
+KILLED    m0107 src/trainer/selector.c:149 [cmp <= -> <]
+SURVIVED  m0108 src/trainer/selector.c:149 [int+1 0 -> 1]
+KILLED    m0109 src/trainer/selector.c:149 [int-1 0 -> -1]
+KILLED    m0110 src/trainer/selector.c:150 [cmp != -> ==]
+KILLED    m0111 src/trainer/selector.c:150 [int+1 0 -> 1]
+KILLED    m0112 src/trainer/selector.c:150 [int-1 0 -> -1]
+SURVIVED  m0113 src/trainer/selector.c:155 [cmp <= -> <]
+KILLED    m0114 src/trainer/selector.c:155 [int+1 0 -> 1]
+SURVIVED  m0115 src/trainer/selector.c:155 [int-1 0 -> -1]
+KILLED    m0116 src/trainer/selector.c:155 [logic || -> &&]
+SURVIVED  m0117 src/trainer/selector.c:155 [cmp < -> <=]
+SURVIVED  m0118 src/trainer/selector.c:155 [int+1 0 -> 1]
+SURVIVED  m0119 src/trainer/selector.c:155 [int-1 0 -> -1]
+SURVIVED  m0120 src/trainer/selector.c:158 [int+1 0 -> 1]
+KILLED    m0121 src/trainer/selector.c:158 [int-1 0 -> -1]
+          build break
+KILLED    m0122 src/trainer/selector.c:159 [int+1 1 -> 2]
+          build break
+SURVIVED  m0123 src/trainer/selector.c:159 [int-1 1 -> 0]
+KILLED    m0124 src/trainer/selector.c:161 [int+1 0 -> 1]
+KILLED    m0125 src/trainer/selector.c:161 [int-1 0 -> -1]
+KILLED    m0126 src/trainer/selector.c:162 [cmp < -> <=]
+KILLED    m0127 src/trainer/selector.c:162 [arith / -> *]
+SURVIVED  m0128 src/trainer/selector.c:162 [int+1 0 -> 1]
+SURVIVED  m0129 src/trainer/selector.c:162 [int-1 0 -> -1]
+KILLED    m0130 src/trainer/selector.c:164 [cmp == -> !=]
+KILLED    m0131 src/trainer/selector.c:164 [int+1 0 -> 1]
+KILLED    m0132 src/trainer/selector.c:164 [int-1 0 -> -1]
+KILLED    m0133 src/trainer/selector.c:166 [cmp == -> !=]
+KILLED    m0134 src/trainer/selector.c:166 [int+1 0 -> 1]
+KILLED    m0135 src/trainer/selector.c:166 [int-1 0 -> -1]
+          build break
+KILLED    m0136 src/trainer/selector.c:173 [ret-lit 0 -> 1]
+KILLED    m0137 src/trainer/selector.c:173 [int+1 0 -> 1]
+KILLED    m0138 src/trainer/selector.c:173 [int-1 0 -> -1]
+KILLED    m0139 src/trainer/selector.c:176 [arith * -> /]
+          build break
+KILLED    m0140 src/trainer/selector.c:178 [int+1 0 -> 1]
+KILLED    m0141 src/trainer/selector.c:178 [int-1 0 -> -1]
+KILLED    m0142 src/trainer/selector.c:179 [cmp < -> <=]
+KILLED    m0143 src/trainer/selector.c:180 [cmp != -> ==]
+KILLED    m0144 src/trainer/selector.c:180 [logic && -> ||]
+KILLED    m0145 src/trainer/selector.c:180 [cmp < -> <=]
+KILLED    m0146 src/trainer/selector.c:188 [arith * -> /]
+          build break
+KILLED    m0147 src/trainer/selector.c:190 [not-del ! -> (deleted)]
+KILLED    m0148 src/trainer/selector.c:191 [ret-lit 0 -> 1]
+KILLED    m0149 src/trainer/selector.c:191 [int+1 0 -> 1]
+KILLED    m0150 src/trainer/selector.c:191 [int-1 0 -> -1]
+KILLED    m0151 src/trainer/selector.c:193 [int+1 0 -> 1]
+KILLED    m0152 src/trainer/selector.c:193 [int-1 0 -> -1]
+KILLED    m0153 src/trainer/selector.c:194 [int+1 0 -> 1]
+KILLED    m0154 src/trainer/selector.c:194 [int-1 0 -> -1]
+KILLED    m0155 src/trainer/selector.c:194 [cmp < -> <=]
+KILLED    m0156 src/trainer/selector.c:194 [arith / -> *]
+SURVIVED  m0157 src/trainer/selector.c:194 [int+1 0 -> 1]
+SURVIVED  m0158 src/trainer/selector.c:194 [int-1 0 -> -1]
+KILLED    m0159 src/trainer/selector.c:195 [cmp != -> ==]
+KILLED    m0160 src/trainer/selector.c:198 [int+1 0 -> 1]
+KILLED    m0161 src/trainer/selector.c:198 [int-1 0 -> -1]
+KILLED    m0162 src/trainer/selector.c:199 [int+1 0 -> 1]
+KILLED    m0163 src/trainer/selector.c:199 [int-1 0 -> -1]
+KILLED    m0164 src/trainer/selector.c:199 [cmp < -> <=]
+KILLED    m0165 src/trainer/selector.c:200 [cmp == -> !=]
+KILLED    m0166 src/trainer/selector.c:200 [logic && -> ||]
+KILLED    m0167 src/trainer/selector.c:201 [cmp == -> !=]
+SURVIVED  m0168 src/trainer/selector.c:202 [int+1 1 -> 2]
+KILLED    m0169 src/trainer/selector.c:202 [int-1 1 -> 0]
+KILLED    m0170 src/trainer/selector.c:209 [cmp != -> ==]
+KILLED    m0171 src/trainer/selector.c:209 [logic && -> ||]
+KILLED    m0172 src/trainer/selector.c:209 [cmp < -> <=]
+KILLED    m0173 src/trainer/selector.c:217 [arith * -> /]
+          build break
+KILLED    m0174 src/trainer/selector.c:219 [not-del ! -> (deleted)]
+KILLED    m0175 src/trainer/selector.c:220 [ret-lit 0 -> 1]
+KILLED    m0176 src/trainer/selector.c:220 [int+1 0 -> 1]
+KILLED    m0177 src/trainer/selector.c:220 [int-1 0 -> -1]
+KILLED    m0178 src/trainer/selector.c:222 [int+1 0 -> 1]
+KILLED    m0179 src/trainer/selector.c:222 [int-1 0 -> -1]
+KILLED    m0180 src/trainer/selector.c:223 [int+1 0 -> 1]
+KILLED    m0181 src/trainer/selector.c:223 [int-1 0 -> -1]
+KILLED    m0182 src/trainer/selector.c:223 [cmp < -> <=]
+KILLED    m0183 src/trainer/selector.c:223 [arith / -> *]
+SURVIVED  m0184 src/trainer/selector.c:223 [int+1 0 -> 1]
+SURVIVED  m0185 src/trainer/selector.c:223 [int-1 0 -> -1]
+KILLED    m0186 src/trainer/selector.c:224 [cmp != -> ==]
+KILLED    m0187 src/trainer/selector.c:224 [logic || -> &&]
+KILLED    m0188 src/trainer/selector.c:224 [cmp != -> ==]
+KILLED    m0189 src/trainer/selector.c:227 [cmp != -> ==]
+KILLED    m0190 src/trainer/selector.c:227 [logic && -> ||]
+KILLED    m0191 src/trainer/selector.c:227 [cmp < -> <=]
+KILLED    m0192 src/trainer/selector.c:237 [arith * -> /]
+          build break
+KILLED    m0193 src/trainer/selector.c:237 [arith * -> /]
+          build break
+KILLED    m0194 src/trainer/selector.c:239 [not-del ! -> (deleted)]
+KILLED    m0195 src/trainer/selector.c:239 [logic || -> &&]
+          build break
+KILLED    m0196 src/trainer/selector.c:239 [cmp < -> <=]
+KILLED    m0197 src/trainer/selector.c:239 [int+1 0 -> 1]
+SURVIVED  m0198 src/trainer/selector.c:239 [int-1 0 -> -1]
+KILLED    m0199 src/trainer/selector.c:239 [logic || -> &&]
+          build break
+SURVIVED  m0200 src/trainer/selector.c:239 [cmp >= -> >]
+KILLED    m0201 src/trainer/selector.c:245 [cmp != -> ==]
+KILLED    m0202 src/trainer/selector.c:245 [int+1 0 -> 1]
+KILLED    m0203 src/trainer/selector.c:245 [int-1 0 -> -1]
+KILLED    m0204 src/trainer/selector.c:248 [cmp == -> !=]
+KILLED    m0205 src/trainer/selector.c:251 [cmp == -> !=]
+KILLED    m0206 src/trainer/selector.c:252 [cmp == -> !=]
+KILLED    m0207 src/trainer/selector.c:255 [cmp == -> !=]
+SURVIVED  m0208 src/trainer/selector.c:256 [int+1 0 -> 1]
+SURVIVED  m0209 src/trainer/selector.c:256 [int-1 0 -> -1]
+SURVIVED  m0210 src/trainer/selector.c:258 [int+1 0 -> 1]
+SURVIVED  m0211 src/trainer/selector.c:258 [int-1 0 -> -1]
+KILLED    m0212 src/trainer/selector.c:263 [arith * -> /]
+          build break
+KILLED    m0213 src/trainer/selector.c:265 [cmp == -> !=]
+SURVIVED  m0214 src/trainer/selector.c:270 [cmp <= -> <]
+SURVIVED  m0215 src/trainer/selector.c:270 [int+1 0 -> 1]
+SURVIVED  m0216 src/trainer/selector.c:270 [int-1 0 -> -1]
+KILLED    m0217 src/trainer/selector.c:270 [logic || -> &&]
+          build break
+KILLED    m0218 src/trainer/selector.c:270 [cmp < -> <=]
+KILLED    m0219 src/trainer/selector.c:270 [int+1 0 -> 1]
+SURVIVED  m0220 src/trainer/selector.c:270 [int-1 0 -> -1]
+KILLED    m0221 src/trainer/selector.c:270 [logic || -> &&]
+          build break
+KILLED    m0222 src/trainer/selector.c:270 [cmp >= -> >]
+KILLED    m0223 src/trainer/selector.c:273 [arith * -> /]
+          build break
+KILLED    m0224 src/trainer/selector.c:274 [ret-lit 0 -> 1]
+KILLED    m0225 src/trainer/selector.c:274 [int+1 0 -> 1]
+KILLED    m0226 src/trainer/selector.c:274 [int-1 0 -> -1]
+KILLED    m0227 src/trainer/selector.c:277 [arith * -> /]
+          build break
+KILLED    m0228 src/trainer/selector.c:277 [arith * -> /]
+          build break
+KILLED    m0229 src/trainer/selector.c:278 [arith * -> /]
+          build break
+SURVIVED  m0230 src/trainer/selector.c:280 [cmp <= -> <]
+SURVIVED  m0231 src/trainer/selector.c:280 [int+1 0 -> 1]
+SURVIVED  m0232 src/trainer/selector.c:280 [int-1 0 -> -1]
+KILLED    m0233 src/trainer/selector.c:280 [logic || -> &&]
+          build break
+KILLED    m0234 src/trainer/selector.c:280 [cmp < -> <=]
+KILLED    m0235 src/trainer/selector.c:280 [int+1 0 -> 1]
+SURVIVED  m0236 src/trainer/selector.c:280 [int-1 0 -> -1]
+KILLED    m0237 src/trainer/selector.c:280 [logic || -> &&]
+          build break
+SURVIVED  m0238 src/trainer/selector.c:280 [cmp >= -> >]
+KILLED    m0239 src/trainer/selector.c:280 [logic || -> &&]
+          build break
+KILLED    m0240 src/trainer/selector.c:280 [cmp == -> !=]
+KILLED    m0241 src/trainer/selector.c:286 [cmp != -> ==]
+KILLED    m0242 src/trainer/selector.c:286 [int+1 0 -> 1]
+KILLED    m0243 src/trainer/selector.c:286 [int-1 0 -> -1]
+KILLED    m0244 src/trainer/selector.c:289 [cmp == -> !=]
+KILLED    m0245 src/trainer/selector.c:292 [cmp == -> !=]
+KILLED    m0246 src/trainer/selector.c:293 [cmp == -> !=]
+KILLED    m0247 src/trainer/selector.c:293 [logic || -> &&]
+KILLED    m0248 src/trainer/selector.c:293 [cmp < -> <=]
+KILLED    m0249 src/trainer/selector.c:298 [cmp != -> ==]
+KILLED    m0250 src/trainer/selector.c:298 [int+1 0 -> 1]
+KILLED    m0251 src/trainer/selector.c:298 [int-1 0 -> -1]
+KILLED    m0252 src/trainer/selector.c:301 [arith * -> /]
+          build break
+KILLED    m0253 src/trainer/selector.c:301 [cmp == -> !=]
+KILLED    m0254 src/trainer/selector.c:302 [int+1 0 -> 1]
+KILLED    m0255 src/trainer/selector.c:302 [int-1 0 -> -1]
+KILLED    m0256 src/trainer/selector.c:303 [int+1 1 -> 2]
+KILLED    m0257 src/trainer/selector.c:303 [int-1 1 -> 0]
+KILLED    m0258 src/trainer/selector.c:304 [int+1 2 -> 3]
+KILLED    m0259 src/trainer/selector.c:304 [int-1 2 -> 1]
+KILLED    m0260 src/trainer/selector.c:305 [ret-lit 0 -> 1]
+KILLED    m0261 src/trainer/selector.c:305 [int+1 0 -> 1]
+KILLED    m0262 src/trainer/selector.c:305 [int-1 0 -> -1]
+KILLED    m0263 src/trainer/selector.c:308 [cmp != -> ==]
+KILLED    m0264 src/trainer/selector.c:308 [int+1 0 -> 1]
+KILLED    m0265 src/trainer/selector.c:308 [int-1 0 -> -1]
+KILLED    m0266 src/trainer/selector.c:311 [cmp >= -> >]
+KILLED    m0267 src/trainer/selector.c:315 [ret-lit 0 -> 1]
+KILLED    m0268 src/trainer/selector.c:315 [int+1 0 -> 1]
+KILLED    m0269 src/trainer/selector.c:315 [int-1 0 -> -1]
+KILLED    m0270 src/trainer/selector.c:318 [arith * -> /]
+          build break
+KILLED    m0271 src/trainer/selector.c:319 [arith * -> /]
+          build break
+KILLED    m0272 src/trainer/selector.c:319 [arith * -> /]
+          build break
+KILLED    m0273 src/trainer/selector.c:320 [cmp == -> !=]
+KILLED    m0274 src/trainer/selector.c:320 [logic || -> &&]
+          build break
+KILLED    m0275 src/trainer/selector.c:320 [cmp == -> !=]
+KILLED    m0276 src/trainer/selector.c:320 [logic || -> &&]
+          build break
+KILLED    m0277 src/trainer/selector.c:320 [cmp == -> !=]
+KILLED    m0278 src/trainer/selector.c:323 [not-del ! -> (deleted)]
+KILLED    m0279 src/trainer/selector.c:323 [logic || -> &&]
+          build break
+KILLED    m0280 src/trainer/selector.c:323 [cmp < -> <=]
+KILLED    m0281 src/trainer/selector.c:323 [int+1 0 -> 1]
+SURVIVED  m0282 src/trainer/selector.c:323 [int-1 0 -> -1]
+KILLED    m0283 src/trainer/selector.c:323 [logic || -> &&]
+          build break
+SURVIVED  m0284 src/trainer/selector.c:323 [cmp >= -> >]
+KILLED    m0285 src/trainer/selector.c:329 [cmp != -> ==]
+KILLED    m0286 src/trainer/selector.c:329 [int+1 0 -> 1]
+KILLED    m0287 src/trainer/selector.c:329 [int-1 0 -> -1]
+KILLED    m0288 src/trainer/selector.c:329 [logic || -> &&]
+KILLED    m0289 src/trainer/selector.c:330 [cmp != -> ==]
+KILLED    m0290 src/trainer/selector.c:335 [cmp != -> ==]
+KILLED    m0291 src/trainer/selector.c:335 [int+1 0 -> 1]
+KILLED    m0292 src/trainer/selector.c:335 [int-1 0 -> -1]
+KILLED    m0293 src/trainer/selector.c:338 [arith * -> /]
+          build break
+KILLED    m0294 src/trainer/selector.c:339 [arith * -> /]
+          build break
+KILLED    m0295 src/trainer/selector.c:340 [ret-lit 0 -> 1]
+KILLED    m0296 src/trainer/selector.c:340 [int+1 0 -> 1]
+KILLED    m0297 src/trainer/selector.c:340 [int-1 0 -> -1]
+KILLED    m0298 src/trainer/selector.c:343 [arith * -> /]
+          build break
+KILLED    m0299 src/trainer/selector.c:344 [arith * -> /]
+          build break
+KILLED    m0300 src/trainer/selector.c:345 [not-del ! -> (deleted)]
+KILLED    m0301 src/trainer/selector.c:345 [logic || -> &&]
+          build break
+KILLED    m0302 src/trainer/selector.c:345 [cmp < -> <=]
+KILLED    m0303 src/trainer/selector.c:345 [int+1 0 -> 1]
+SURVIVED  m0304 src/trainer/selector.c:345 [int-1 0 -> -1]
+KILLED    m0305 src/trainer/selector.c:345 [logic || -> &&]
+          build break
+SURVIVED  m0306 src/trainer/selector.c:345 [cmp >= -> >]
+KILLED    m0307 src/trainer/selector.c:345 [logic || -> &&]
+          build break
+KILLED    m0308 src/trainer/selector.c:346 [cmp < -> <=]
+KILLED    m0309 src/trainer/selector.c:346 [int+1 0 -> 1]
+KILLED    m0310 src/trainer/selector.c:346 [int-1 0 -> -1]
+KILLED    m0311 src/trainer/selector.c:346 [logic || -> &&]
+          build break
+KILLED    m0312 src/trainer/selector.c:346 [cmp == -> !=]
+KILLED    m0313 src/trainer/selector.c:352 [cmp != -> ==]
+KILLED    m0314 src/trainer/selector.c:352 [int+1 0 -> 1]
+KILLED    m0315 src/trainer/selector.c:352 [int-1 0 -> -1]
+SURVIVED  m0316 src/trainer/selector.c:352 [logic || -> &&]
+KILLED    m0317 src/trainer/selector.c:353 [cmp != -> ==]
+KILLED    m0318 src/trainer/selector.c:356 [arith + -> -]
+KILLED    m0319 src/trainer/selector.c:356 [int+1 1 -> 2]
+KILLED    m0320 src/trainer/selector.c:356 [int-1 1 -> 0]
+SURVIVED  m0321 src/trainer/selector.c:357 [cmp > -> >=]
+KILLED    m0322 src/trainer/selector.c:361 [cmp != -> ==]
+KILLED    m0323 src/trainer/selector.c:364 [arith * -> /]
+          build break
+KILLED    m0324 src/trainer/selector.c:365 [ret-lit 0 -> 1]
+KILLED    m0325 src/trainer/selector.c:365 [int+1 0 -> 1]
+KILLED    m0326 src/trainer/selector.c:365 [int-1 0 -> -1]
+KILLED    m0327 src/trainer/selector.c:368 [arith * -> /]
+          build break
+KILLED    m0328 src/trainer/selector.c:370 [arith * -> /]
+          build break
+KILLED    m0329 src/trainer/selector.c:373 [arith * -> /]
+          build break
+KILLED    m0330 src/trainer/selector.c:374 [cmp == -> !=]
+KILLED    m0331 src/trainer/selector.c:374 [logic || -> &&]
+          build break
+KILLED    m0332 src/trainer/selector.c:374 [not-del ! -> (deleted)]
+KILLED    m0333 src/trainer/selector.c:374 [logic || -> &&]
+          build break
+KILLED    m0334 src/trainer/selector.c:374 [cmp < -> <=]
+KILLED    m0335 src/trainer/selector.c:374 [int+1 0 -> 1]
+SURVIVED  m0336 src/trainer/selector.c:374 [int-1 0 -> -1]
+KILLED    m0337 src/trainer/selector.c:374 [logic || -> &&]
+          build break
+SURVIVED  m0338 src/trainer/selector.c:375 [cmp >= -> >]
+KILLED    m0339 src/trainer/selector.c:375 [logic || -> &&]
+          build break
+KILLED    m0340 src/trainer/selector.c:375 [cmp < -> <=]
+KILLED    m0341 src/trainer/selector.c:375 [int+1 0 -> 1]
+SURVIVED  m0342 src/trainer/selector.c:375 [int-1 0 -> -1]
+KILLED    m0343 src/trainer/selector.c:381 [cmp != -> ==]
+KILLED    m0344 src/trainer/selector.c:381 [int+1 0 -> 1]
+KILLED    m0345 src/trainer/selector.c:381 [int-1 0 -> -1]
+SURVIVED  m0346 src/trainer/selector.c:381 [logic || -> &&]
+KILLED    m0347 src/trainer/selector.c:382 [cmp != -> ==]
+KILLED    m0348 src/trainer/selector.c:386 [cmp != -> ==]
+KILLED    m0349 src/trainer/selector.c:386 [int+1 0 -> 1]
+KILLED    m0350 src/trainer/selector.c:386 [int-1 0 -> -1]
+KILLED    m0351 src/trainer/selector.c:389 [cmp != -> ==]
+KILLED    m0352 src/trainer/selector.c:389 [logic || -> &&]
+          build break
+KILLED    m0353 src/trainer/selector.c:389 [cmp != -> ==]
+KILLED    m0354 src/trainer/selector.c:389 [logic || -> &&]
+          build break
+KILLED    m0355 src/trainer/selector.c:389 [cmp != -> ==]
+KILLED    m0356 src/trainer/selector.c:390 [ret-lit 0 -> 1]
+KILLED    m0357 src/trainer/selector.c:390 [int+1 0 -> 1]
+KILLED    m0358 src/trainer/selector.c:390 [int-1 0 -> -1]
+SURVIVED  m0359 src/trainer/selector.c:392 [int+1 0 -> 1]
+KILLED    m0360 src/trainer/selector.c:392 [int-1 0 -> -1]
+SURVIVED  m0361 src/trainer/selector.c:392 [cmp < -> <=]
+KILLED    m0362 src/trainer/selector.c:394 [cmp == -> !=]
+KILLED    m0363 src/trainer/selector.c:394 [int+1 0 -> 1]
+KILLED    m0364 src/trainer/selector.c:394 [int-1 0 -> -1]
+SURVIVED  m0365 src/trainer/selector.c:398 [ret-lit 0 -> 1]
+SURVIVED  m0366 src/trainer/selector.c:398 [int+1 0 -> 1]
+SURVIVED  m0367 src/trainer/selector.c:398 [int-1 0 -> -1]
+KILLED    m0368 src/trainer/selector.c:401 [arith * -> /]
+          build break
+KILLED    m0369 src/trainer/selector.c:402 [cmp < -> <=]
+KILLED    m0370 src/trainer/selector.c:402 [int+1 0 -> 1]
+KILLED    m0371 src/trainer/selector.c:402 [int-1 0 -> -1]
+KILLED    m0372 src/trainer/selector.c:402 [logic || -> &&]
+KILLED    m0373 src/trainer/selector.c:402 [cmp >= -> >]
+ACCEPTED  m0005 src/trainer/selector.c:12 [int+1 1 -> 2] :: method bound widening admits enum values with no table row, every public function then returns the empty scan result over the pinned surface
+ACCEPTED  m0009 src/trainer/selector.c:14 [int+1 1 -> 2] :: pack row cap widening admits indexes past the largest seeded pack (169 rows), unreachable over the pinned pack data
+ACCEPTED  m0011 src/trainer/selector.c:14 [int+1 8 -> 9] :: pack row cap widening admits indexes past the largest seeded pack (169 rows), unreachable over the pinned pack data
+ACCEPTED  m0013 src/trainer/selector.c:15 [int+1 1 -> 2] :: settings buffer size plus or minus one byte changes nothing for the short numerals the buffer parser accepts
+ACCEPTED  m0015 src/trainer/selector.c:15 [int+1 5 -> 6] :: settings buffer size plus or minus one byte changes nothing for the short numerals the buffer parser accepts
+ACCEPTED  m0016 src/trainer/selector.c:15 [int-1 5 -> 4] :: settings buffer size plus or minus one byte changes nothing for the short numerals the buffer parser accepts
+ACCEPTED  m0021 src/trainer/selector.c:80 [int-1 0 -> -1] :: enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+ACCEPTED  m0022 src/trainer/selector.c:80 [logic && -> ||] :: enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+ACCEPTED  m0023 src/trainer/selector.c:80 [cmp < -> <=] :: enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+ACCEPTED  m0026 src/trainer/selector.c:84 [int-1 0 -> -1] :: enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+ACCEPTED  m0027 src/trainer/selector.c:84 [logic && -> ||] :: enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+ACCEPTED  m0028 src/trainer/selector.c:84 [cmp < -> <=] :: enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+ACCEPTED  m0030 src/trainer/selector.c:88 [logic || -> &&] :: guard flip still lands in the table scan, which returns the empty result for the unpaired input
+ACCEPTED  m0032 src/trainer/selector.c:89 [ret-lit 0 -> 1] :: no match return literal is truthiness only, callers rescan the table and produce the same totals and errors
+ACCEPTED  m0033 src/trainer/selector.c:89 [int+1 0 -> 1] :: no match return literal is truthiness only, callers rescan the table and produce the same totals and errors
+ACCEPTED  m0034 src/trainer/selector.c:89 [int-1 0 -> -1] :: no match return literal is truthiness only, callers rescan the table and produce the same totals and errors
+ACCEPTED  m0035 src/trainer/selector.c:91 [int+1 0 -> 1] :: loop start and match mutants still locate every pinned pair through the remaining rows, no pair is defined by a single row
+ACCEPTED  m0039 src/trainer/selector.c:91 [int+1 0 -> 1] :: loop start and match mutants still locate every pinned pair through the remaining rows, no pair is defined by a single row
+ACCEPTED  m0040 src/trainer/selector.c:91 [int-1 0 -> -1] :: loop start and match mutants still locate every pinned pair through the remaining rows, no pair is defined by a single row
+ACCEPTED  m0042 src/trainer/selector.c:92 [logic && -> ||] :: match condition mutants still locate every pinned pair through the remaining rows, no pair is defined by a single row
+ACCEPTED  m0045 src/trainer/selector.c:93 [int+1 1 -> 2] :: return literal is truthiness only
+ACCEPTED  m0047 src/trainer/selector.c:96 [ret-lit 0 -> 1] :: no match return literal is truthiness only, callers rescan and produce the same totals and errors
+ACCEPTED  m0048 src/trainer/selector.c:96 [int+1 0 -> 1] :: no match return literal is truthiness only, callers rescan and produce the same totals and errors
+ACCEPTED  m0049 src/trainer/selector.c:96 [int-1 0 -> -1] :: no match return literal is truthiness only, callers rescan and produce the same totals and errors
+ACCEPTED  m0050 src/trainer/selector.c:100 [cmp < -> <=] :: cap clamp boundary and return literal mutants agree with the original at every reachable cap, negative caps write nothing under both
+ACCEPTED  m0051 src/trainer/selector.c:100 [int+1 0 -> 1] :: cap clamp boundary and return literal mutants agree with the original at every reachable cap, negative caps write nothing under both
+ACCEPTED  m0052 src/trainer/selector.c:100 [int-1 0 -> -1] :: cap clamp boundary and return literal mutants agree with the original at every reachable cap, negative caps write nothing under both
+ACCEPTED  m0054 src/trainer/selector.c:100 [int-1 0 -> -1] :: cap clamp boundary and return literal mutants agree with the original at every reachable cap, negative caps write nothing under both
+ACCEPTED  m0056 src/trainer/selector.c:104 [cmp == -> !=] :: orbit buffer ternary mutant is equivalent: both buffer fallback constants CT_3STYLE_CORNER_BUFFER and CT_3STYLE_EDGE_BUFFER are the value 2, the speffz seeded scheme carries buffer 2 for both fields, verified by direct scheme load probe, so the ternary selects an identical buffer on every reachable flow
+ACCEPTED  m0064 src/trainer/selector.c:110 [cmp < -> <=] :: loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+ACCEPTED  m0065 src/trainer/selector.c:110 [arith / -> *] :: loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+ACCEPTED  m0066 src/trainer/selector.c:110 [int+1 0 -> 1] :: loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+ACCEPTED  m0067 src/trainer/selector.c:110 [int-1 0 -> -1] :: loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+ACCEPTED  m0078 src/trainer/selector.c:126 [int+1 0 -> 1] :: count loop start shift is cancelled by list def failing the same way, both surface as the same -1
+ACCEPTED  m0084 src/trainer/selector.c:127 [int+1 0 -> 1] :: copy loop start and bound shifts change which rows are visited but every pinned list is defined by its full scan
+ACCEPTED  m0085 src/trainer/selector.c:127 [int-1 0 -> -1] :: copy loop start and bound shifts change which rows are visited but every pinned list is defined by its full scan
+ACCEPTED  m0087 src/trainer/selector.c:128 [logic && -> ||] :: match condition mutants keep every pinned list output identical through the full scan
+ACCEPTED  m0108 src/trainer/selector.c:149 [int+1 0 -> 1] :: re entering the speffz seed is a no op, the seed is idempotent and the default id is reread after it
+ACCEPTED  m0113 src/trainer/selector.c:155 [cmp <= -> <] :: scheme ids are never negative past the seed branch and map load returns a row count or negative only, the mutated boundaries are unreachable
+ACCEPTED  m0115 src/trainer/selector.c:155 [int-1 0 -> -1] :: scheme ids are never negative past the seed branch and map load returns a row count or negative only, the mutated boundaries are unreachable
+ACCEPTED  m0117 src/trainer/selector.c:155 [cmp < -> <=] :: scheme ids are never negative past the seed branch and map load returns a row count or negative only, the mutated boundaries are unreachable
+ACCEPTED  m0118 src/trainer/selector.c:155 [int+1 0 -> 1] :: scheme ids are never negative past the seed branch and map load returns a row count or negative only, the mutated boundaries are unreachable
+ACCEPTED  m0119 src/trainer/selector.c:155 [int-1 0 -> -1] :: scheme ids are never negative past the seed branch and map load returns a row count or negative only, the mutated boundaries are unreachable
+ACCEPTED  m0120 src/trainer/selector.c:158 [int+1 0 -> 1] :: buffer key index mutants are equivalent: both table rows carry the fallback constant 2, either index reads the same default before the settings loop runs, and pinned flows without custom buffer settings keep both fields at 2
+ACCEPTED  m0123 src/trainer/selector.c:159 [int-1 1 -> 0] :: buffer key index mutants are equivalent: both table rows carry the fallback constant 2, either index reads the same default before the settings loop runs, and pinned flows without custom buffer settings keep both fields at 2
+ACCEPTED  m0128 src/trainer/selector.c:162 [int+1 0 -> 1] :: sizeof index and bound mutants iterate the same two element array with identical limits
+ACCEPTED  m0129 src/trainer/selector.c:162 [int-1 0 -> -1] :: sizeof index and bound mutants iterate the same two element array with identical limits
+ACCEPTED  m0157 src/trainer/selector.c:194 [int+1 0 -> 1] :: loop start shifts skip rows no pinned list is defined by, later rows of the same pair carry the same entries
+ACCEPTED  m0158 src/trainer/selector.c:194 [int-1 0 -> -1] :: loop start shifts skip rows no pinned list is defined by, later rows of the same pair carry the same entries
+ACCEPTED  m0168 src/trainer/selector.c:202 [int+1 1 -> 2] :: duplicate flag literal is truthiness only
+ACCEPTED  m0184 src/trainer/selector.c:223 [int+1 0 -> 1] :: loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+ACCEPTED  m0185 src/trainer/selector.c:223 [int-1 0 -> -1] :: loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+ACCEPTED  m0198 src/trainer/selector.c:239 [int-1 0 -> -1] :: list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+ACCEPTED  m0200 src/trainer/selector.c:239 [cmp >= -> >] :: list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+ACCEPTED  m0208 src/trainer/selector.c:256 [int+1 0 -> 1] :: chart total zero and index boundary mutants coincide with the adjacent guards, both orderings return the same error
+ACCEPTED  m0209 src/trainer/selector.c:256 [int-1 0 -> -1] :: chart total zero and index boundary mutants coincide with the adjacent guards, both orderings return the same error
+ACCEPTED  m0210 src/trainer/selector.c:258 [int+1 0 -> 1] :: chart total zero and index boundary mutants coincide with the adjacent guards, both orderings return the same error
+ACCEPTED  m0211 src/trainer/selector.c:258 [int-1 0 -> -1] :: chart total zero and index boundary mutants coincide with the adjacent guards, both orderings return the same error
+ACCEPTED  m0214 src/trainer/selector.c:270 [cmp <= -> <] :: total and index boundary mutants coincide with the adjacent guard, both orderings return the same error
+ACCEPTED  m0215 src/trainer/selector.c:270 [int+1 0 -> 1] :: total and index boundary mutants coincide with the adjacent guard, both orderings return the same error
+ACCEPTED  m0216 src/trainer/selector.c:270 [int-1 0 -> -1] :: total and index boundary mutants coincide with the adjacent guard, both orderings return the same error
+ACCEPTED  m0220 src/trainer/selector.c:270 [int-1 0 -> -1] :: total and index boundary mutants coincide with the adjacent guard, both orderings return the same error
+ACCEPTED  m0230 src/trainer/selector.c:280 [cmp <= -> <] :: count and index boundary mutants coincide with the adjacent guards, both orderings return the same error or key
+ACCEPTED  m0231 src/trainer/selector.c:280 [int+1 0 -> 1] :: count and index boundary mutants coincide with the adjacent guards, both orderings return the same error or key
+ACCEPTED  m0232 src/trainer/selector.c:280 [int-1 0 -> -1] :: count and index boundary mutants coincide with the adjacent guards, both orderings return the same error or key
+ACCEPTED  m0236 src/trainer/selector.c:280 [int-1 0 -> -1] :: count and index boundary mutants coincide with the adjacent guards, both orderings return the same error or key
+ACCEPTED  m0238 src/trainer/selector.c:280 [cmp >= -> >] :: count and index boundary mutants coincide with the adjacent guards, both orderings return the same error or key
+ACCEPTED  m0282 src/trainer/selector.c:323 [int-1 0 -> -1] :: list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+ACCEPTED  m0284 src/trainer/selector.c:323 [cmp >= -> >] :: list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+ACCEPTED  m0304 src/trainer/selector.c:345 [int-1 0 -> -1] :: list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+ACCEPTED  m0306 src/trainer/selector.c:345 [cmp >= -> >] :: list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+ACCEPTED  m0316 src/trainer/selector.c:352 [logic || -> &&] :: source check flip lands in the pack list scan, which returns zero rows and the same -1
+ACCEPTED  m0321 src/trainer/selector.c:357 [cmp > -> >=] :: cap bound relaxation admits indexes past the largest seeded pack, unreachable over the pinned data
+ACCEPTED  m0336 src/trainer/selector.c:374 [int-1 0 -> -1] :: case group list id guard mutants are equivalent: an admitted id of -1 or count passes the guard but ct_selector_list_def never matches seen against it and returns the same error, the pinned surface already asserts the error for every out of range id
+ACCEPTED  m0338 src/trainer/selector.c:375 [cmp >= -> >] :: case group list id bound and index guard mutants are equivalent: the bound relaxation admits id count which list def rejects identically, and index -1 passes only into ct_selector_pack_case whose own index guard returns the same error
+ACCEPTED  m0342 src/trainer/selector.c:375 [int-1 0 -> -1] :: case group list id bound and index guard mutants are equivalent: the bound relaxation admits id count which list def rejects identically, and index -1 passes only into ct_selector_pack_case whose own index guard returns the same error
+ACCEPTED  m0346 src/trainer/selector.c:381 [logic || -> &&] :: case group source disjunction mutant is equivalent: on every reachable path list def succeeds so the and form skips the early return, pack lists proceed unchanged and non pack lists fall into the pack case source check which returns the same error
+ACCEPTED  m0359 src/trainer/selector.c:392 [int+1 0 -> 1] :: case group loop start and bound mutants are equivalent: skipping the flip prefix returns the same group 0 through the fallthrough return which is the flip bucket, and the widened bound reads the adjacent labels table entry whose string equals the flip prefix already rejected at index zero, verified by the pinned group counts 25 23 26 11 across all four groups
+ACCEPTED  m0361 src/trainer/selector.c:392 [cmp < -> <=] :: case group loop start and bound mutants are equivalent: skipping the flip prefix returns the same group 0 through the fallthrough return which is the flip bucket, and the widened bound reads the adjacent labels table entry whose string equals the flip prefix already rejected at index zero, verified by the pinned group counts 25 23 26 11 across all four groups
+ACCEPTED  m0365 src/trainer/selector.c:398 [ret-lit 0 -> 1] :: case group fallback return mutants are unreachable over the seeded deck: all 85 specials rows carry one of the four pinned prefixes so the loop always returns in body, and every non 3bld parity list returns earlier at the deck gate with the same group 0
+ACCEPTED  m0366 src/trainer/selector.c:398 [int+1 0 -> 1] :: case group fallback return mutants are unreachable over the seeded deck: all 85 specials rows carry one of the four pinned prefixes so the loop always returns in body, and every non 3bld parity list returns earlier at the deck gate with the same group 0
+ACCEPTED  m0367 src/trainer/selector.c:398 [int-1 0 -> -1] :: case group fallback return mutants are unreachable over the seeded deck: all 85 specials rows carry one of the four pinned prefixes so the loop always returns in body, and every non 3bld parity list returns earlier at the deck gate with the same group 0
+mutate: generated=373 build_failed=64 killed_by_tests=227 killed=291 survived=82 accepted=82 unexplained=0 skipped=0
+mutate: kill rate 291/373 = 78.0%, with accepted equivalents 373/373 = 100.0%
+mutate: wall 915.4s

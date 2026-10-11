@@ -1,0 +1,111 @@
+104|int+1 2 -> 3; |CT_SCRIPT_LE = 2,
+108|int+1 8 -> 9; int-1 8 -> 7; |CT_SCRIPT_LIST_CAP = 8
+126|int+1 0 -> 1; |if (src == NULL || out == NULL || err == NULL || cap == 0) {
+129|int+1 0 -> 1; int-1 0 -> -1; |err[0] = '\0';
+131|cmp >= -> >; |if (len >= sizeof out->text) {
+135|int+1 1 -> 2; int-1 1 -> 0; |memcpy(out->text, src, len + 1);
+151|cmp < -> <=; |while (p < end && *p != '\n') {
+161|int+1 0 -> 1; int-1 0 -> -1; |memset(cmd, 0, sizeof *cmd);
+165|cmp < -> <=; |while (line_end < end && *line_end != '\n') {
+168|cmp < -> <=; |bool has_nl = line_end < end;
+170|cmp < -> <=; |while (p < line_end) {
+171|cmp < -> <=; |while (p < line_end && ct_script_sep(*p)) {
+185|cmp < -> <=; |while (close < line_end && *close != '"') {
+193|int+1 1 -> 2; |p = close + 1;
+199|cmp < -> <=; |char delim = p < line_end ? *p : '\0';
+214|int-1 0 -> -1; |if (argc == 0) {
+221|arith + -> -; cmp < -> <=; int+1 1 -> 2; int-1 1 -> 0; |if (argc < CT_SCRIPT_SUB + 1) {
+226|int+1 0 -> 1; int-1 0 -> -1; |sizeof CT_SCRIPT_EXPECTS / sizeof CT_SCRIPT_EXPECTS[0],
+231|int+1 0 -> 1; int-1 0 -> -1; |sizeof CT_SCRIPT_WORDS / sizeof CT_SCRIPT_WORDS[0], word);
+253|cmp < -> <=; |for (int i = 0; i < spec->argc; i++) {
+255|arith + -> -; |cmd->len[i] = cmd->len[drop + i];
+276|cmp >= -> >; int-1 0 -> -1; |if (s == NULL || c == NULL || i < 0 || i >= c->argc || i >= CT_SCRIPT_
+288|int+1 0 -> 1; int-1 0 -> -1; |errno = 0;
+292|arith - -> +; int+1 1 -> 2; int-1 1 -> 0; |return -1;
+299|int+1 0 -> 1; int-1 0 -> -1; |errno = 0;
+303|arith - -> +; int+1 1 -> 2; int-1 1 -> 0; |return -1;
+313|int-1 0 -> -1; |if (strcmp(s, ">=") == 0) {
+316|int-1 0 -> -1; |if (strcmp(s, "<=") == 0) {
+319|int-1 0 -> -1; |if (strcmp(s, "!=") == 0) {
+322|int+1 1 -> 2; |return -1;
+330|cmp >= -> >; |return a >= b;
+332|cmp <= -> <; |return a <= b;
+334|cmp != -> ==; |return a != b;
+340|cmp < -> <=; |if (d < 0.0) {
+341|arith - -> +; |d = -d;
+345|cmp <= -> <; |return d <= CT_SCRIPT_DBL_EPS;
+347|cmp >= -> >; |return a >= b;
+349|cmp <= -> <; |return a <= b;
+351|cmp > -> >=; |return d > CT_SCRIPT_DBL_EPS;
+358|cmp > -> >=; |if (iso[i] < '0' || iso[i] > '9') {
+359|arith - -> +; int+1 1 -> 2; int-1 1 -> 0; |return -1;
+364|arith - -> +; int+1 1 -> 2; int-1 1 -> 0; |return -1;
+368|cmp > -> >=; |if (iso[i] < '0' || iso[i] > '9') {
+369|arith - -> +; int+1 1 -> 2; int-1 1 -> 0; |return -1;
+374|arith - -> +; int+1 1 -> 2; int-1 1 -> 0; |return -1;
+378|cmp > -> >=; |if (iso[i] < '0' || iso[i] > '9') {
+379|arith - -> +; int+1 1 -> 2; |return -1;
+389|int+1 0 -> 1; |if (now[0] == '\0') {
+390|arith - -> +; int+1 1 -> 2; int-1 1 -> 0; |return -1;
+400|int-1 0 -> -1; |if (strcmp(name, "algbig") == 0) {
+404|int-1 0 -> -1; |if (strcmp(name, "algoh") == 0) {
+408|int-1 0 -> -1; |if (strcmp(name, "front") == 0) {
+424|int+1 0 -> 1; int-1 0 -> -1; |ct_cards_form_open(f, app->db, ct_script_arg(s, c, 0));
+451|int+1 0 -> 1; int-1 0 -> -1; |unsigned field_cap = 0;
+456|int+1 1 -> 2; |const char *value = ct_script_arg(s, c, 1);
+457|cmp >= -> >; |if (strlen(value) >= field_cap) {
+461|bool true -> false; |f->dirty = true;
+477|int+1 0 -> 1; int-1 0 -> -1; ret-lit 0 -> 1; |return 0;
+485|int+1 0 -> 1; int-1 0 -> -1; |long day = 0;
+489|int+1 0 -> 1; int-1 0 -> -1; |int rc = ct_review_form_begin(&rt->review, app->db, CT_UI_DEFAULT_DECK
+490|cmp < -> <=; int+1 0 -> 1; int-1 0 -> -1; |if (rc < 0) {
+504|int+1 0 -> 1; |const char *word = ct_script_arg(s, c, 0);
+505|bool false -> true; |bool found = false;
+507|arith / -> *; cmp < -> <=; int+1 0 -> 1; int-1 0 -> -1; |for (unsigned i = 0; i < sizeof CT_SCRIPT_GRADES / sizeof CT_SCRIPT_GR
+519|int+1 0 -> 1; |if (now[0] == '\0') {
+530|int+1 0 -> 1; |if (now[0] == '\0') {
+540|cmp < -> <=; int+1 1 -> 2; int-1 1 -> 0; |if (ct_script_long(ct_script_arg(s, c, 0), &ticks) != 0 || ticks < 1 |
+541|cmp > -> >=; |ticks > CT_SCRIPT_REVIEW_WAIT_MAX) {
+545|cmp < -> <=; int+1 0 -> 1; int-1 0 -> -1; |for (long i = 0; i < ticks; i++) {
+550|arith - -> +; |f->scrub_index = f->move_count - f->anim.count;
+551|not-del ! -> (deleted); |if (!ct_anim_active(&f->anim)) {
+553|bool false -> true; |f->playing = false;
+560|int+1 0 -> 1; int-1 0 -> -1; ret-lit 0 -> 1; |return 0;
+586|logic || -> &&; |if (face[0] == '\0' || face[1] != '\0') {
+599|int+1 0 -> 1; int-1 0 -> -1; ret-lit 0 -> 1; |return 0;
+613|int+1 0 -> 1; int-1 0 -> -1; ret-lit 0 -> 1; |return 0;
+621|cmp == -> !=; int+1 0 -> 1; int-1 0 -> -1; |if (strcmp(word, "oll") == 0) {
+624|cmp == -> !=; int+1 0 -> 1; int-1 0 -> -1; |if (strcmp(word, "f2l") == 0) {
+627|arith - -> +; int+1 1 -> 2; int-1 1 -> 0; |return -1;
+634|int+1 0 -> 1; |int stage = ct_script_stage_parse(ct_script_arg(s, c, 0));
+635|int-1 0 -> -1; |if (stage < 0) {
+639|cmp >= -> >; int+1 0 -> 1; int-1 0 -> -1; |return made >= 0 ? 0
+645|int+1 0 -> 1; int-1 0 -> -1; |long list_id = 0;
+650|bool false -> true; |bool ev_ok = false;
+651|arith / -> *; cmp < -> <=; int+1 0 -> 1; int-1 0 -> -1; |for (unsigned i = 0; i < sizeof CT_SCRIPT_EVENTS / sizeof CT_SCRIPT_EV
+659|bool false -> true; |bool m_ok = false;
+660|arith / -> *; cmp < -> <=; int+1 0 -> 1; int-1 0 -> -1; |for (unsigned i = 0; i < sizeof CT_SCRIPT_METHODS / sizeof CT_SCRIPT_M
+667|logic || -> &&; |if (!ev_ok || !m_ok) {
+675|cmp >= -> >; int+1 0 -> 1; int-1 0 -> -1; |if (found <= 0 || list_id < 0 || list_id >= found || list_id >= CT_SCR
+682|int+1 0 -> 1; |rt->target_key[0] = '\0';
+683|bool false -> true; |rt->generated = false;
+693|cmp <= -> <; cmp >= -> >; int+1 0 -> 1; int-1 0 -> -1; |if (count <= 0 || index < 0 || index >= count) {
+703|bool false -> true; |rt->generated = false;
+707|int+1 0 -> 1; |if (rt->target_key[0] == '\0') {
+710|not-del ! -> (deleted); |if (!rt->synth_ready) {
+712|bool true -> false; |rt->synth_ready = true;
+714|int+1 0 -> 1; int-1 0 -> -1; |int t1 = 0;
+715|int+1 0 -> 1; int-1 0 -> -1; |int t2 = 0;
+720|cmp == -> !=; |int buffer = rt->orbit == CT_ORBIT_EDGE ? rt->scheme.buffer_edge : rt-
+722|int+1 0 -> 1; int-1 0 -> -1; |memset(&res, 0, sizeof res);
+724|logic || -> &&; |if (rc != 0 || !res.found) {
+728|cmp < -> <=; int+1 0 -> 1; int-1 0 -> -1; |(unsigned)sizeof rt->alg_text) < 0) {
+731|int+1 0 -> 1; int-1 0 -> -1; |memset(&rt->cls, 0, sizeof rt->cls);
+735|int+1 0 -> 1; int-1 0 -> -1; |memset(&rt->parts, 0, sizeof rt->parts);
+740|cmp <= -> <; int+1 0 -> 1; int-1 0 -> -1; |if (scheme <= 0) {
+741|cmp != -> ==; int+1 0 -> 1; int-1 0 -> -1; |if (ct_letter_seed_speffz(app->db) != 0) {
+746|cmp <= -> <; |if (scheme <= 0) {
+752|int+1 0 -> 1; int-1 0 -> -1; |memset(&a, 0, sizeof a);
+790|int+1 0 -> 1; int-1 0 -> -1; ret-lit 0 -> 1; |return 0;
+803|int+1 0 -> 1; int-1 0 -> -1; |if (ct_script_iso_day(date, &(long){0}) != 0) {
+865|int+1 0 -> 1; |if (app == NULL || rt == NULL || s == NULL || err == NULL || cap == 0)

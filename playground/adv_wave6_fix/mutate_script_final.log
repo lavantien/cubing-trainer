@@ -1,0 +1,1126 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_e2e_script.c -o build_mutw6/tobj/tests/unit_e2e_script.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_selector_packs.c -o build_mutw6/tobj/tests/unit_selector_packs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_selector_screen.c -o build_mutw6/tobj/tests/unit_selector_screen.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/script.c -o build_mutw6/tobj/src/app/script.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/script_expect.c -o build_mutw6/tobj/src/app/script_expect.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/trainer/selector.c -o build_mutw6/tobj/src/trainer/selector.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_mutw6/bin/mutate.exe src/app/script.c build_mutw6 e2e_parse_flow e2e_parse_comments_and_quotes e2e_parse_errors e2e_parse_caps e2e_run_review_loop e2e_run_expect_failure e2e_run_cfop_cards e2e_run_settings_form e2e_run_restart_merge e2e_run_trainer_generate e2e_run_trainer_edge_generate e2e_run_script_guards fuzz_script_parse
+mutate: scope=src/app/script.c files=1 sites=825 suites=13
+KILLED    m0001 src/app/script.c:18 [arith * -> /]
+          build break
+KILLED    m0002 src/app/script.c:24 [int+1 0 -> 1]
+KILLED    m0003 src/app/script.c:24 [int-1 0 -> -1]
+KILLED    m0004 src/app/script.c:25 [int+1 1 -> 2]
+KILLED    m0005 src/app/script.c:25 [int-1 1 -> 0]
+KILLED    m0006 src/app/script.c:26 [int+1 1 -> 2]
+KILLED    m0007 src/app/script.c:26 [int-1 1 -> 0]
+KILLED    m0008 src/app/script.c:27 [int+1 1 -> 2]
+KILLED    m0009 src/app/script.c:27 [int-1 1 -> 0]
+KILLED    m0010 src/app/script.c:28 [int+1 0 -> 1]
+KILLED    m0011 src/app/script.c:28 [int-1 0 -> -1]
+KILLED    m0012 src/app/script.c:30 [int+1 0 -> 1]
+KILLED    m0013 src/app/script.c:30 [int-1 0 -> -1]
+KILLED    m0014 src/app/script.c:31 [int+1 0 -> 1]
+KILLED    m0015 src/app/script.c:31 [int-1 0 -> -1]
+KILLED    m0016 src/app/script.c:32 [int+1 1 -> 2]
+KILLED    m0017 src/app/script.c:32 [int-1 1 -> 0]
+KILLED    m0018 src/app/script.c:34 [int+1 0 -> 1]
+KILLED    m0019 src/app/script.c:34 [int-1 0 -> -1]
+KILLED    m0020 src/app/script.c:35 [int+1 0 -> 1]
+KILLED    m0021 src/app/script.c:35 [int-1 0 -> -1]
+KILLED    m0022 src/app/script.c:36 [int+1 1 -> 2]
+KILLED    m0023 src/app/script.c:36 [int-1 1 -> 0]
+KILLED    m0024 src/app/script.c:37 [int+1 0 -> 1]
+KILLED    m0025 src/app/script.c:37 [int-1 0 -> -1]
+KILLED    m0026 src/app/script.c:38 [int+1 1 -> 2]
+KILLED    m0027 src/app/script.c:38 [int-1 1 -> 0]
+KILLED    m0028 src/app/script.c:39 [int+1 0 -> 1]
+KILLED    m0029 src/app/script.c:39 [int-1 0 -> -1]
+KILLED    m0030 src/app/script.c:40 [int+1 1 -> 2]
+KILLED    m0031 src/app/script.c:40 [int-1 1 -> 0]
+KILLED    m0032 src/app/script.c:42 [int+1 0 -> 1]
+KILLED    m0033 src/app/script.c:42 [int-1 0 -> -1]
+KILLED    m0034 src/app/script.c:44 [int+1 1 -> 2]
+KILLED    m0035 src/app/script.c:44 [int-1 1 -> 0]
+KILLED    m0036 src/app/script.c:45 [int+1 0 -> 1]
+KILLED    m0037 src/app/script.c:45 [int-1 0 -> -1]
+KILLED    m0038 src/app/script.c:46 [int+1 1 -> 2]
+KILLED    m0039 src/app/script.c:46 [int-1 1 -> 0]
+KILLED    m0040 src/app/script.c:56 [int+1 2 -> 3]
+KILLED    m0041 src/app/script.c:56 [int-1 2 -> 1]
+KILLED    m0042 src/app/script.c:61 [arith * -> /]
+          build break
+KILLED    m0043 src/app/script.c:71 [arith * -> /]
+          build break
+KILLED    m0044 src/app/script.c:86 [arith * -> /]
+          build break
+KILLED    m0045 src/app/script.c:100 [int+1 0 -> 1]
+KILLED    m0046 src/app/script.c:100 [int-1 0 -> -1]
+          build break
+KILLED    m0047 src/app/script.c:101 [int+1 1 -> 2]
+KILLED    m0048 src/app/script.c:101 [int-1 1 -> 0]
+KILLED    m0049 src/app/script.c:102 [int+1 4 -> 5]
+KILLED    m0050 src/app/script.c:102 [int-1 4 -> 3]
+KILLED    m0051 src/app/script.c:103 [int+1 5 -> 6]
+KILLED    m0052 src/app/script.c:103 [int-1 5 -> 4]
+KILLED    m0053 src/app/script.c:104 [int+1 8 -> 9]
+KILLED    m0054 src/app/script.c:104 [int-1 8 -> 7]
+SURVIVED  m0055 src/app/script.c:105 [int+1 8 -> 9]
+SURVIVED  m0056 src/app/script.c:105 [int-1 8 -> 7]
+KILLED    m0057 src/app/script.c:109 [cmp == -> !=]
+KILLED    m0058 src/app/script.c:109 [logic || -> &&]
+          build break
+KILLED    m0059 src/app/script.c:109 [cmp == -> !=]
+KILLED    m0060 src/app/script.c:109 [logic || -> &&]
+          build break
+KILLED    m0061 src/app/script.c:109 [cmp == -> !=]
+KILLED    m0062 src/app/script.c:112 [arith * -> /]
+          build break
+KILLED    m0063 src/app/script.c:112 [arith * -> /]
+          build break
+KILLED    m0064 src/app/script.c:113 [arith * -> /]
+          build break
+KILLED    m0065 src/app/script.c:114 [int+1 0 -> 1]
+KILLED    m0066 src/app/script.c:114 [int-1 0 -> -1]
+KILLED    m0067 src/app/script.c:114 [cmp < -> <=]
+KILLED    m0068 src/app/script.c:115 [cmp == -> !=]
+KILLED    m0069 src/app/script.c:115 [int+1 0 -> 1]
+KILLED    m0070 src/app/script.c:115 [int-1 0 -> -1]
+KILLED    m0071 src/app/script.c:122 [arith * -> /]
+          build break
+KILLED    m0072 src/app/script.c:122 [arith * -> /]
+          build break
+KILLED    m0073 src/app/script.c:122 [arith * -> /]
+          build break
+KILLED    m0074 src/app/script.c:123 [cmp == -> !=]
+KILLED    m0075 src/app/script.c:123 [logic || -> &&]
+          build break
+KILLED    m0076 src/app/script.c:123 [cmp == -> !=]
+KILLED    m0077 src/app/script.c:123 [logic || -> &&]
+          build break
+KILLED    m0078 src/app/script.c:123 [cmp == -> !=]
+KILLED    m0079 src/app/script.c:123 [logic || -> &&]
+          build break
+KILLED    m0080 src/app/script.c:123 [cmp == -> !=]
+KILLED    m0081 src/app/script.c:123 [int+1 0 -> 1]
+KILLED    m0082 src/app/script.c:123 [int-1 0 -> -1]
+          build break
+SURVIVED  m0083 src/app/script.c:126 [int+1 0 -> 1]
+SURVIVED  m0084 src/app/script.c:126 [int-1 0 -> -1]
+KILLED    m0085 src/app/script.c:128 [cmp >= -> >]
+KILLED    m0086 src/app/script.c:132 [arith + -> -]
+SURVIVED  m0087 src/app/script.c:132 [int+1 1 -> 2]
+SURVIVED  m0088 src/app/script.c:132 [int-1 1 -> 0]
+KILLED    m0089 src/app/script.c:133 [int+1 0 -> 1]
+KILLED    m0090 src/app/script.c:133 [int-1 0 -> -1]
+KILLED    m0091 src/app/script.c:134 [arith * -> /]
+          build break
+KILLED    m0092 src/app/script.c:135 [arith * -> /]
+          build break
+KILLED    m0093 src/app/script.c:135 [arith + -> -]
+KILLED    m0094 src/app/script.c:136 [int+1 1 -> 2]
+KILLED    m0095 src/app/script.c:136 [int-1 1 -> 0]
+KILLED    m0096 src/app/script.c:137 [cmp < -> <=]
+KILLED    m0097 src/app/script.c:138 [arith * -> /]
+          build break
+KILLED    m0098 src/app/script.c:138 [cmp == -> !=]
+KILLED    m0099 src/app/script.c:143 [arith * -> /]
+          build break
+KILLED    m0100 src/app/script.c:147 [arith * -> /]
+          build break
+KILLED    m0101 src/app/script.c:147 [cmp == -> !=]
+SURVIVED  m0102 src/app/script.c:148 [cmp < -> <=]
+KILLED    m0103 src/app/script.c:148 [logic && -> ||]
+KILLED    m0104 src/app/script.c:148 [arith * -> /]
+          build break
+KILLED    m0105 src/app/script.c:148 [cmp != -> ==]
+KILLED    m0106 src/app/script.c:153 [cmp == -> !=]
+KILLED    m0107 src/app/script.c:157 [arith * -> /]
+          build break
+SURVIVED  m0108 src/app/script.c:158 [int+1 0 -> 1]
+SURVIVED  m0109 src/app/script.c:158 [int-1 0 -> -1]
+KILLED    m0110 src/app/script.c:158 [arith * -> /]
+          build break
+KILLED    m0111 src/app/script.c:161 [arith * -> /]
+          build break
+SURVIVED  m0112 src/app/script.c:162 [cmp < -> <=]
+KILLED    m0113 src/app/script.c:162 [logic && -> ||]
+KILLED    m0114 src/app/script.c:162 [arith * -> /]
+          build break
+KILLED    m0115 src/app/script.c:162 [cmp != -> ==]
+SURVIVED  m0116 src/app/script.c:165 [cmp < -> <=]
+KILLED    m0117 src/app/script.c:166 [int+1 0 -> 1]
+KILLED    m0118 src/app/script.c:166 [int-1 0 -> -1]
+SURVIVED  m0119 src/app/script.c:167 [cmp < -> <=]
+SURVIVED  m0120 src/app/script.c:168 [cmp < -> <=]
+KILLED    m0121 src/app/script.c:168 [logic && -> ||]
+KILLED    m0122 src/app/script.c:168 [arith * -> /]
+          build break
+KILLED    m0123 src/app/script.c:171 [cmp >= -> >]
+KILLED    m0124 src/app/script.c:171 [logic || -> &&]
+KILLED    m0125 src/app/script.c:171 [arith * -> /]
+          build break
+KILLED    m0126 src/app/script.c:171 [cmp == -> !=]
+KILLED    m0127 src/app/script.c:174 [cmp == -> !=]
+KILLED    m0128 src/app/script.c:178 [arith * -> /]
+          build break
+KILLED    m0129 src/app/script.c:179 [arith * -> /]
+          build break
+KILLED    m0130 src/app/script.c:179 [cmp == -> !=]
+KILLED    m0131 src/app/script.c:180 [arith + -> -]
+KILLED    m0132 src/app/script.c:180 [int+1 1 -> 2]
+KILLED    m0133 src/app/script.c:180 [int-1 1 -> 0]
+KILLED    m0134 src/app/script.c:181 [arith * -> /]
+          build break
+SURVIVED  m0135 src/app/script.c:182 [cmp < -> <=]
+KILLED    m0136 src/app/script.c:182 [logic && -> ||]
+KILLED    m0137 src/app/script.c:182 [arith * -> /]
+          build break
+KILLED    m0138 src/app/script.c:182 [cmp != -> ==]
+KILLED    m0139 src/app/script.c:185 [cmp >= -> >]
+KILLED    m0140 src/app/script.c:189 [arith * -> /]
+          build break
+KILLED    m0141 src/app/script.c:190 [arith + -> -]
+SURVIVED  m0142 src/app/script.c:190 [int+1 1 -> 2]
+KILLED    m0143 src/app/script.c:190 [int-1 1 -> 0]
+KILLED    m0144 src/app/script.c:193 [cmp < -> <=]
+KILLED    m0145 src/app/script.c:193 [logic && -> ||]
+          build break
+KILLED    m0146 src/app/script.c:193 [not-del ! -> (deleted)]
+KILLED    m0147 src/app/script.c:193 [arith * -> /]
+          build break
+KILLED    m0148 src/app/script.c:193 [logic && -> ||]
+          build break
+KILLED    m0149 src/app/script.c:193 [arith * -> /]
+          build break
+KILLED    m0150 src/app/script.c:193 [cmp != -> ==]
+SURVIVED  m0151 src/app/script.c:196 [cmp < -> <=]
+KILLED    m0152 src/app/script.c:196 [arith * -> /]
+          build break
+KILLED    m0153 src/app/script.c:197 [arith * -> /]
+          build break
+KILLED    m0154 src/app/script.c:199 [cmp == -> !=]
+KILLED    m0155 src/app/script.c:203 [arith - -> +]
+          build break
+KILLED    m0156 src/app/script.c:207 [arith + -> -]
+KILLED    m0157 src/app/script.c:207 [int+1 1 -> 2]
+KILLED    m0158 src/app/script.c:207 [int-1 1 -> 0]
+KILLED    m0159 src/app/script.c:211 [cmp == -> !=]
+KILLED    m0160 src/app/script.c:211 [int+1 0 -> 1]
+SURVIVED  m0161 src/app/script.c:211 [int-1 0 -> -1]
+KILLED    m0162 src/app/script.c:214 [arith * -> /]
+          build break
+KILLED    m0163 src/app/script.c:214 [arith + -> -]
+KILLED    m0164 src/app/script.c:215 [arith * -> /]
+          build break
+KILLED    m0165 src/app/script.c:217 [cmp == -> !=]
+KILLED    m0166 src/app/script.c:217 [int+1 0 -> 1]
+KILLED    m0167 src/app/script.c:217 [int-1 0 -> -1]
+SURVIVED  m0168 src/app/script.c:218 [cmp < -> <=]
+SURVIVED  m0169 src/app/script.c:218 [arith + -> -]
+SURVIVED  m0170 src/app/script.c:218 [int+1 1 -> 2]
+SURVIVED  m0171 src/app/script.c:218 [int-1 1 -> 0]
+KILLED    m0172 src/app/script.c:223 [arith / -> *]
+SURVIVED  m0173 src/app/script.c:223 [int+1 0 -> 1]
+SURVIVED  m0174 src/app/script.c:223 [int-1 0 -> -1]
+KILLED    m0175 src/app/script.c:224 [arith + -> -]
+KILLED    m0176 src/app/script.c:225 [arith + -> -]
+KILLED    m0177 src/app/script.c:225 [int+1 1 -> 2]
+KILLED    m0178 src/app/script.c:225 [int-1 1 -> 0]
+KILLED    m0179 src/app/script.c:228 [arith / -> *]
+SURVIVED  m0180 src/app/script.c:228 [int+1 0 -> 1]
+SURVIVED  m0181 src/app/script.c:228 [int-1 0 -> -1]
+KILLED    m0182 src/app/script.c:229 [arith + -> -]
+KILLED    m0183 src/app/script.c:229 [int+1 1 -> 2]
+KILLED    m0184 src/app/script.c:229 [int-1 1 -> 0]
+KILLED    m0185 src/app/script.c:231 [cmp == -> !=]
+KILLED    m0186 src/app/script.c:235 [arith - -> +]
+KILLED    m0187 src/app/script.c:235 [cmp != -> ==]
+KILLED    m0188 src/app/script.c:241 [arith - -> +]
+          build break
+KILLED    m0189 src/app/script.c:242 [arith - -> +]
+          build break
+KILLED    m0190 src/app/script.c:243 [arith - -> +]
+          build break
+KILLED    m0191 src/app/script.c:244 [arith - -> +]
+          build break
+KILLED    m0192 src/app/script.c:245 [arith - -> +]
+          build break
+KILLED    m0193 src/app/script.c:246 [arith - -> +]
+          build break
+KILLED    m0194 src/app/script.c:247 [arith - -> +]
+          build break
+KILLED    m0195 src/app/script.c:248 [arith - -> +]
+          build break
+KILLED    m0196 src/app/script.c:250 [int+1 0 -> 1]
+KILLED    m0197 src/app/script.c:250 [int-1 0 -> -1]
+SURVIVED  m0198 src/app/script.c:250 [cmp < -> <=]
+KILLED    m0199 src/app/script.c:251 [arith + -> -]
+SURVIVED  m0200 src/app/script.c:252 [arith + -> -]
+KILLED    m0201 src/app/script.c:254 [cmp >= -> >]
+KILLED    m0202 src/app/script.c:255 [arith - -> +]
+KILLED    m0203 src/app/script.c:256 [arith + -> -]
+KILLED    m0204 src/app/script.c:256 [cmp < -> <=]
+KILLED    m0205 src/app/script.c:256 [int+1 0 -> 1]
+KILLED    m0206 src/app/script.c:256 [int-1 0 -> -1]
+KILLED    m0207 src/app/script.c:265 [cmp == -> !=]
+KILLED    m0208 src/app/script.c:265 [int+1 0 -> 1]
+KILLED    m0209 src/app/script.c:265 [int-1 0 -> -1]
+KILLED    m0210 src/app/script.c:269 [ret-lit 0 -> 1]
+KILLED    m0211 src/app/script.c:269 [int+1 0 -> 1]
+KILLED    m0212 src/app/script.c:269 [int-1 0 -> -1]
+KILLED    m0213 src/app/script.c:272 [arith * -> /]
+          build break
+KILLED    m0214 src/app/script.c:272 [arith * -> /]
+          build break
+KILLED    m0215 src/app/script.c:272 [arith * -> /]
+          build break
+KILLED    m0216 src/app/script.c:273 [cmp == -> !=]
+KILLED    m0217 src/app/script.c:273 [logic || -> &&]
+          build break
+KILLED    m0218 src/app/script.c:273 [cmp == -> !=]
+KILLED    m0219 src/app/script.c:273 [logic || -> &&]
+          build break
+KILLED    m0220 src/app/script.c:273 [cmp < -> <=]
+KILLED    m0221 src/app/script.c:273 [int+1 0 -> 1]
+SURVIVED  m0222 src/app/script.c:273 [int-1 0 -> -1]
+KILLED    m0223 src/app/script.c:273 [logic || -> &&]
+          build break
+SURVIVED  m0224 src/app/script.c:273 [cmp >= -> >]
+KILLED    m0225 src/app/script.c:273 [logic || -> &&]
+          build break
+SURVIVED  m0226 src/app/script.c:273 [cmp >= -> >]
+KILLED    m0227 src/app/script.c:276 [arith + -> -]
+KILLED    m0228 src/app/script.c:279 [arith * -> /]
+          build break
+KILLED    m0229 src/app/script.c:279 [arith * -> /]
+          build break
+KILLED    m0230 src/app/script.c:279 [arith * -> /]
+          build break
+KILLED    m0231 src/app/script.c:284 [arith * -> /]
+          build break
+KILLED    m0232 src/app/script.c:284 [arith * -> /]
+          build break
+SURVIVED  m0233 src/app/script.c:285 [int+1 0 -> 1]
+SURVIVED  m0234 src/app/script.c:285 [int-1 0 -> -1]
+KILLED    m0235 src/app/script.c:286 [arith * -> /]
+          build break
+KILLED    m0236 src/app/script.c:288 [cmp == -> !=]
+KILLED    m0237 src/app/script.c:288 [logic || -> &&]
+          build break
+KILLED    m0238 src/app/script.c:288 [int+1 0 -> 1]
+KILLED    m0239 src/app/script.c:288 [int-1 0 -> -1]
+KILLED    m0240 src/app/script.c:288 [cmp != -> ==]
+KILLED    m0241 src/app/script.c:288 [logic || -> &&]
+          build break
+KILLED    m0242 src/app/script.c:288 [cmp == -> !=]
+KILLED    m0243 src/app/script.c:289 [arith - -> +]
+KILLED    m0244 src/app/script.c:289 [int+1 1 -> 2]
+KILLED    m0245 src/app/script.c:289 [int-1 1 -> 0]
+KILLED    m0246 src/app/script.c:291 [arith * -> /]
+          build break
+KILLED    m0247 src/app/script.c:292 [ret-lit 0 -> 1]
+KILLED    m0248 src/app/script.c:292 [int+1 0 -> 1]
+KILLED    m0249 src/app/script.c:292 [int-1 0 -> -1]
+KILLED    m0250 src/app/script.c:295 [arith * -> /]
+          build break
+KILLED    m0251 src/app/script.c:295 [arith * -> /]
+          build break
+SURVIVED  m0252 src/app/script.c:296 [int+1 0 -> 1]
+SURVIVED  m0253 src/app/script.c:296 [int-1 0 -> -1]
+KILLED    m0254 src/app/script.c:297 [arith * -> /]
+          build break
+KILLED    m0255 src/app/script.c:299 [cmp == -> !=]
+KILLED    m0256 src/app/script.c:299 [logic || -> &&]
+          build break
+KILLED    m0257 src/app/script.c:299 [int+1 0 -> 1]
+KILLED    m0258 src/app/script.c:299 [int-1 0 -> -1]
+KILLED    m0259 src/app/script.c:299 [cmp != -> ==]
+KILLED    m0260 src/app/script.c:299 [logic || -> &&]
+          build break
+KILLED    m0261 src/app/script.c:299 [cmp == -> !=]
+KILLED    m0262 src/app/script.c:299 [logic || -> &&]
+          build break
+KILLED    m0263 src/app/script.c:299 [not-del ! -> (deleted)]
+KILLED    m0264 src/app/script.c:300 [arith - -> +]
+KILLED    m0265 src/app/script.c:300 [int+1 1 -> 2]
+KILLED    m0266 src/app/script.c:300 [int-1 1 -> 0]
+KILLED    m0267 src/app/script.c:302 [arith * -> /]
+          build break
+KILLED    m0268 src/app/script.c:303 [ret-lit 0 -> 1]
+KILLED    m0269 src/app/script.c:303 [int+1 0 -> 1]
+KILLED    m0270 src/app/script.c:303 [int-1 0 -> -1]
+KILLED    m0271 src/app/script.c:306 [arith * -> /]
+          build break
+KILLED    m0272 src/app/script.c:307 [cmp == -> !=]
+KILLED    m0273 src/app/script.c:307 [int+1 0 -> 1]
+KILLED    m0274 src/app/script.c:307 [int-1 0 -> -1]
+KILLED    m0275 src/app/script.c:310 [cmp == -> !=]
+KILLED    m0276 src/app/script.c:310 [int+1 0 -> 1]
+KILLED    m0277 src/app/script.c:310 [int-1 0 -> -1]
+KILLED    m0278 src/app/script.c:313 [cmp == -> !=]
+KILLED    m0279 src/app/script.c:313 [int+1 0 -> 1]
+KILLED    m0280 src/app/script.c:313 [int-1 0 -> -1]
+KILLED    m0281 src/app/script.c:316 [cmp == -> !=]
+KILLED    m0282 src/app/script.c:316 [int+1 0 -> 1]
+KILLED    m0283 src/app/script.c:316 [int-1 0 -> -1]
+KILLED    m0284 src/app/script.c:319 [arith - -> +]
+KILLED    m0285 src/app/script.c:319 [int+1 1 -> 2]
+KILLED    m0286 src/app/script.c:319 [int-1 1 -> 0]
+KILLED    m0287 src/app/script.c:325 [cmp == -> !=]
+KILLED    m0288 src/app/script.c:327 [cmp >= -> >]
+KILLED    m0289 src/app/script.c:329 [cmp <= -> <]
+KILLED    m0290 src/app/script.c:331 [cmp != -> ==]
+KILLED    m0291 src/app/script.c:336 [arith - -> +]
+SURVIVED  m0292 src/app/script.c:337 [cmp < -> <=]
+SURVIVED  m0293 src/app/script.c:338 [arith - -> +]
+SURVIVED  m0294 src/app/script.c:342 [cmp <= -> <]
+KILLED    m0295 src/app/script.c:344 [cmp >= -> >]
+KILLED    m0296 src/app/script.c:346 [cmp <= -> <]
+SURVIVED  m0297 src/app/script.c:348 [cmp > -> >=]
+KILLED    m0298 src/app/script.c:352 [arith * -> /]
+          build break
+KILLED    m0299 src/app/script.c:352 [arith * -> /]
+          build break
+KILLED    m0300 src/app/script.c:353 [int+1 0 -> 1]
+KILLED    m0301 src/app/script.c:353 [int-1 0 -> -1]
+KILLED    m0302 src/app/script.c:354 [int+1 0 -> 1]
+KILLED    m0303 src/app/script.c:354 [int-1 0 -> -1]
+KILLED    m0304 src/app/script.c:354 [cmp < -> <=]
+KILLED    m0305 src/app/script.c:355 [cmp < -> <=]
+KILLED    m0306 src/app/script.c:355 [logic || -> &&]
+          build break
+KILLED    m0307 src/app/script.c:355 [cmp > -> >=]
+KILLED    m0308 src/app/script.c:356 [arith - -> +]
+KILLED    m0309 src/app/script.c:356 [int+1 1 -> 2]
+KILLED    m0310 src/app/script.c:356 [int-1 1 -> 0]
+KILLED    m0311 src/app/script.c:358 [arith * -> /]
+KILLED    m0312 src/app/script.c:358 [arith + -> -]
+KILLED    m0313 src/app/script.c:358 [arith - -> +]
+KILLED    m0314 src/app/script.c:360 [cmp != -> ==]
+KILLED    m0315 src/app/script.c:361 [arith - -> +]
+KILLED    m0316 src/app/script.c:361 [int+1 1 -> 2]
+KILLED    m0317 src/app/script.c:361 [int-1 1 -> 0]
+KILLED    m0318 src/app/script.c:363 [int+1 0 -> 1]
+KILLED    m0319 src/app/script.c:363 [int-1 0 -> -1]
+KILLED    m0320 src/app/script.c:364 [cmp < -> <=]
+KILLED    m0321 src/app/script.c:364 [arith + -> -]
+KILLED    m0322 src/app/script.c:364 [int+1 2 -> 3]
+KILLED    m0323 src/app/script.c:364 [int-1 2 -> 1]
+KILLED    m0324 src/app/script.c:365 [cmp < -> <=]
+KILLED    m0325 src/app/script.c:365 [logic || -> &&]
+          build break
+KILLED    m0326 src/app/script.c:365 [cmp > -> >=]
+KILLED    m0327 src/app/script.c:366 [arith - -> +]
+KILLED    m0328 src/app/script.c:366 [int+1 1 -> 2]
+KILLED    m0329 src/app/script.c:366 [int-1 1 -> 0]
+KILLED    m0330 src/app/script.c:368 [arith * -> /]
+KILLED    m0331 src/app/script.c:368 [arith + -> -]
+KILLED    m0332 src/app/script.c:368 [arith - -> +]
+KILLED    m0333 src/app/script.c:370 [arith + -> -]
+KILLED    m0334 src/app/script.c:370 [int+1 2 -> 3]
+KILLED    m0335 src/app/script.c:370 [int-1 2 -> 1]
+KILLED    m0336 src/app/script.c:370 [cmp != -> ==]
+KILLED    m0337 src/app/script.c:371 [arith - -> +]
+KILLED    m0338 src/app/script.c:371 [int+1 1 -> 2]
+KILLED    m0339 src/app/script.c:371 [int-1 1 -> 0]
+KILLED    m0340 src/app/script.c:373 [int+1 0 -> 1]
+KILLED    m0341 src/app/script.c:373 [int-1 0 -> -1]
+KILLED    m0342 src/app/script.c:374 [cmp < -> <=]
+KILLED    m0343 src/app/script.c:374 [arith + -> -]
+KILLED    m0344 src/app/script.c:374 [int+1 2 -> 3]
+KILLED    m0345 src/app/script.c:374 [int-1 2 -> 1]
+KILLED    m0346 src/app/script.c:375 [cmp < -> <=]
+KILLED    m0347 src/app/script.c:375 [logic || -> &&]
+          build break
+KILLED    m0348 src/app/script.c:375 [cmp > -> >=]
+KILLED    m0349 src/app/script.c:376 [arith - -> +]
+KILLED    m0350 src/app/script.c:376 [int+1 1 -> 2]
+KILLED    m0351 src/app/script.c:376 [int-1 1 -> 0]
+KILLED    m0352 src/app/script.c:378 [arith * -> /]
+KILLED    m0353 src/app/script.c:378 [arith + -> -]
+KILLED    m0354 src/app/script.c:378 [arith - -> +]
+KILLED    m0355 src/app/script.c:380 [arith * -> /]
+          build break
+KILLED    m0356 src/app/script.c:381 [ret-lit 0 -> 1]
+KILLED    m0357 src/app/script.c:381 [int+1 0 -> 1]
+KILLED    m0358 src/app/script.c:381 [int-1 0 -> -1]
+KILLED    m0359 src/app/script.c:384 [arith * -> /]
+          build break
+KILLED    m0360 src/app/script.c:384 [arith * -> /]
+          build break
+SURVIVED  m0361 src/app/script.c:386 [int+1 0 -> 1]
+KILLED    m0362 src/app/script.c:386 [int-1 0 -> -1]
+KILLED    m0363 src/app/script.c:386 [cmp == -> !=]
+SURVIVED  m0364 src/app/script.c:387 [arith - -> +]
+SURVIVED  m0365 src/app/script.c:387 [int+1 1 -> 2]
+SURVIVED  m0366 src/app/script.c:387 [int-1 1 -> 0]
+KILLED    m0367 src/app/script.c:392 [arith * -> /]
+          build break
+KILLED    m0368 src/app/script.c:392 [arith * -> /]
+          build break
+KILLED    m0369 src/app/script.c:392 [arith * -> /]
+          build break
+KILLED    m0370 src/app/script.c:392 [arith * -> /]
+          build break
+KILLED    m0371 src/app/script.c:393 [cmp == -> !=]
+KILLED    m0372 src/app/script.c:393 [int+1 0 -> 1]
+KILLED    m0373 src/app/script.c:393 [int-1 0 -> -1]
+KILLED    m0374 src/app/script.c:394 [arith * -> /]
+          build break
+KILLED    m0375 src/app/script.c:397 [cmp == -> !=]
+KILLED    m0376 src/app/script.c:397 [int+1 0 -> 1]
+KILLED    m0377 src/app/script.c:397 [int-1 0 -> -1]
+KILLED    m0378 src/app/script.c:398 [arith * -> /]
+          build break
+KILLED    m0379 src/app/script.c:401 [cmp == -> !=]
+KILLED    m0380 src/app/script.c:401 [int+1 0 -> 1]
+KILLED    m0381 src/app/script.c:401 [int-1 0 -> -1]
+KILLED    m0382 src/app/script.c:402 [arith * -> /]
+          build break
+KILLED    m0383 src/app/script.c:405 [cmp == -> !=]
+KILLED    m0384 src/app/script.c:405 [int+1 0 -> 1]
+KILLED    m0385 src/app/script.c:405 [int-1 0 -> -1]
+KILLED    m0386 src/app/script.c:406 [arith * -> /]
+          build break
+KILLED    m0387 src/app/script.c:409 [cmp == -> !=]
+KILLED    m0388 src/app/script.c:409 [int+1 0 -> 1]
+KILLED    m0389 src/app/script.c:409 [int-1 0 -> -1]
+KILLED    m0390 src/app/script.c:410 [arith * -> /]
+          build break
+KILLED    m0391 src/app/script.c:416 [arith * -> /]
+          build break
+KILLED    m0392 src/app/script.c:416 [arith * -> /]
+          build break
+KILLED    m0393 src/app/script.c:416 [arith * -> /]
+          build break
+KILLED    m0394 src/app/script.c:417 [arith * -> /]
+          build break
+KILLED    m0395 src/app/script.c:417 [arith * -> /]
+          build break
+KILLED    m0396 src/app/script.c:418 [arith * -> /]
+          build break
+KILLED    m0397 src/app/script.c:421 [int+1 0 -> 1]
+KILLED    m0398 src/app/script.c:421 [int-1 0 -> -1]
+KILLED    m0399 src/app/script.c:422 [cmp == -> !=]
+KILLED    m0400 src/app/script.c:424 [int+1 0 -> 1]
+KILLED    m0401 src/app/script.c:424 [int-1 0 -> -1]
+KILLED    m0402 src/app/script.c:426 [int+1 0 -> 1]
+KILLED    m0403 src/app/script.c:426 [int-1 0 -> -1]
+KILLED    m0404 src/app/script.c:427 [cmp == -> !=]
+KILLED    m0405 src/app/script.c:428 [int+1 0 -> 1]
+KILLED    m0406 src/app/script.c:428 [int-1 0 -> -1]
+KILLED    m0407 src/app/script.c:433 [int+1 0 -> 1]
+KILLED    m0408 src/app/script.c:433 [int-1 0 -> -1]
+KILLED    m0409 src/app/script.c:433 [cmp != -> ==]
+KILLED    m0410 src/app/script.c:433 [int+1 0 -> 1]
+KILLED    m0411 src/app/script.c:433 [int-1 0 -> -1]
+KILLED    m0412 src/app/script.c:437 [cmp == -> !=]
+KILLED    m0413 src/app/script.c:438 [int+1 0 -> 1]
+KILLED    m0414 src/app/script.c:438 [int-1 0 -> -1]
+KILLED    m0415 src/app/script.c:443 [cmp == -> !=]
+KILLED    m0416 src/app/script.c:444 [int+1 0 -> 1]
+KILLED    m0417 src/app/script.c:444 [int-1 0 -> -1]
+SURVIVED  m0418 src/app/script.c:448 [int+1 0 -> 1]
+SURVIVED  m0419 src/app/script.c:448 [int-1 0 -> -1]
+KILLED    m0420 src/app/script.c:449 [arith * -> /]
+          build break
+KILLED    m0421 src/app/script.c:449 [int+1 0 -> 1]
+KILLED    m0422 src/app/script.c:449 [int-1 0 -> -1]
+KILLED    m0423 src/app/script.c:450 [cmp == -> !=]
+KILLED    m0424 src/app/script.c:453 [arith * -> /]
+          build break
+SURVIVED  m0425 src/app/script.c:453 [int+1 1 -> 2]
+KILLED    m0426 src/app/script.c:453 [int-1 1 -> 0]
+KILLED    m0427 src/app/script.c:454 [cmp >= -> >]
+SURVIVED  m0428 src/app/script.c:458 [bool true -> false]
+KILLED    m0429 src/app/script.c:459 [ret-lit 0 -> 1]
+KILLED    m0430 src/app/script.c:459 [int+1 0 -> 1]
+KILLED    m0431 src/app/script.c:459 [int-1 0 -> -1]
+KILLED    m0432 src/app/script.c:463 [cmp == -> !=]
+KILLED    m0433 src/app/script.c:464 [int+1 0 -> 1]
+KILLED    m0434 src/app/script.c:464 [int-1 0 -> -1]
+KILLED    m0435 src/app/script.c:469 [cmp == -> !=]
+KILLED    m0436 src/app/script.c:470 [int+1 0 -> 1]
+KILLED    m0437 src/app/script.c:470 [int-1 0 -> -1]
+SURVIVED  m0438 src/app/script.c:474 [ret-lit 0 -> 1]
+SURVIVED  m0439 src/app/script.c:474 [int+1 0 -> 1]
+SURVIVED  m0440 src/app/script.c:474 [int-1 0 -> -1]
+KILLED    m0441 src/app/script.c:478 [arith * -> /]
+          build break
+KILLED    m0442 src/app/script.c:478 [arith * -> /]
+          build break
+KILLED    m0443 src/app/script.c:478 [arith * -> /]
+          build break
+KILLED    m0444 src/app/script.c:479 [arith * -> /]
+          build break
+KILLED    m0445 src/app/script.c:479 [arith * -> /]
+          build break
+KILLED    m0446 src/app/script.c:480 [cmp == -> !=]
+SURVIVED  m0447 src/app/script.c:482 [int+1 0 -> 1]
+SURVIVED  m0448 src/app/script.c:482 [int-1 0 -> -1]
+KILLED    m0449 src/app/script.c:483 [cmp != -> ==]
+KILLED    m0450 src/app/script.c:483 [int+1 0 -> 1]
+KILLED    m0451 src/app/script.c:483 [int-1 0 -> -1]
+SURVIVED  m0452 src/app/script.c:486 [int+1 0 -> 1]
+SURVIVED  m0453 src/app/script.c:486 [int-1 0 -> -1]
+KILLED    m0454 src/app/script.c:487 [cmp < -> <=]
+KILLED    m0455 src/app/script.c:487 [int+1 0 -> 1]
+SURVIVED  m0456 src/app/script.c:487 [int-1 0 -> -1]
+KILLED    m0457 src/app/script.c:490 [bool true -> false]
+KILLED    m0458 src/app/script.c:491 [ret-lit 0 -> 1]
+KILLED    m0459 src/app/script.c:491 [int+1 0 -> 1]
+KILLED    m0460 src/app/script.c:491 [int-1 0 -> -1]
+KILLED    m0461 src/app/script.c:493 [not-del ! -> (deleted)]
+KILLED    m0462 src/app/script.c:499 [ret-lit 0 -> 1]
+KILLED    m0463 src/app/script.c:499 [int+1 0 -> 1]
+KILLED    m0464 src/app/script.c:499 [int-1 0 -> -1]
+KILLED    m0465 src/app/script.c:501 [arith * -> /]
+          build break
+SURVIVED  m0466 src/app/script.c:501 [int+1 0 -> 1]
+KILLED    m0467 src/app/script.c:501 [int-1 0 -> -1]
+SURVIVED  m0468 src/app/script.c:502 [bool false -> true]
+SURVIVED  m0469 src/app/script.c:504 [int+1 0 -> 1]
+KILLED    m0470 src/app/script.c:504 [int-1 0 -> -1]
+SURVIVED  m0471 src/app/script.c:504 [cmp < -> <=]
+SURVIVED  m0472 src/app/script.c:504 [arith / -> *]
+SURVIVED  m0473 src/app/script.c:504 [int+1 0 -> 1]
+SURVIVED  m0474 src/app/script.c:504 [int-1 0 -> -1]
+KILLED    m0475 src/app/script.c:505 [cmp == -> !=]
+KILLED    m0476 src/app/script.c:505 [int+1 0 -> 1]
+KILLED    m0477 src/app/script.c:505 [int-1 0 -> -1]
+KILLED    m0478 src/app/script.c:507 [bool true -> false]
+KILLED    m0479 src/app/script.c:511 [not-del ! -> (deleted)]
+SURVIVED  m0480 src/app/script.c:516 [int+1 0 -> 1]
+KILLED    m0481 src/app/script.c:516 [int-1 0 -> -1]
+          build break
+KILLED    m0482 src/app/script.c:516 [cmp == -> !=]
+KILLED    m0483 src/app/script.c:520 [cmp == -> !=]
+KILLED    m0484 src/app/script.c:521 [int+1 0 -> 1]
+KILLED    m0485 src/app/script.c:521 [int-1 0 -> -1]
+SURVIVED  m0486 src/app/script.c:527 [int+1 0 -> 1]
+KILLED    m0487 src/app/script.c:527 [int-1 0 -> -1]
+          build break
+KILLED    m0488 src/app/script.c:527 [cmp == -> !=]
+KILLED    m0489 src/app/script.c:531 [cmp == -> !=]
+KILLED    m0490 src/app/script.c:532 [int+1 0 -> 1]
+KILLED    m0491 src/app/script.c:532 [int-1 0 -> -1]
+KILLED    m0492 src/app/script.c:537 [int+1 0 -> 1]
+KILLED    m0493 src/app/script.c:537 [int-1 0 -> -1]
+KILLED    m0494 src/app/script.c:537 [cmp != -> ==]
+KILLED    m0495 src/app/script.c:537 [int+1 0 -> 1]
+KILLED    m0496 src/app/script.c:537 [int-1 0 -> -1]
+KILLED    m0497 src/app/script.c:537 [logic || -> &&]
+          build break
+KILLED    m0498 src/app/script.c:537 [cmp < -> <=]
+KILLED    m0499 src/app/script.c:537 [int+1 1 -> 2]
+KILLED    m0500 src/app/script.c:537 [int-1 1 -> 0]
+KILLED    m0501 src/app/script.c:537 [logic || -> &&]
+          build break
+KILLED    m0502 src/app/script.c:538 [cmp > -> >=]
+KILLED    m0503 src/app/script.c:541 [arith * -> /]
+          build break
+SURVIVED  m0504 src/app/script.c:542 [int+1 0 -> 1]
+SURVIVED  m0505 src/app/script.c:542 [int-1 0 -> -1]
+SURVIVED  m0506 src/app/script.c:542 [cmp < -> <=]
+SURVIVED  m0507 src/app/script.c:547 [arith - -> +]
+SURVIVED  m0508 src/app/script.c:548 [not-del ! -> (deleted)]
+SURVIVED  m0509 src/app/script.c:550 [bool false -> true]
+KILLED    m0510 src/app/script.c:554 [ret-lit 0 -> 1]
+KILLED    m0511 src/app/script.c:554 [int+1 0 -> 1]
+KILLED    m0512 src/app/script.c:554 [int-1 0 -> -1]
+SURVIVED  m0513 src/app/script.c:557 [ret-lit 0 -> 1]
+SURVIVED  m0514 src/app/script.c:557 [int+1 0 -> 1]
+SURVIVED  m0515 src/app/script.c:557 [int-1 0 -> -1]
+KILLED    m0516 src/app/script.c:561 [arith * -> /]
+          build break
+KILLED    m0517 src/app/script.c:561 [arith * -> /]
+          build break
+KILLED    m0518 src/app/script.c:561 [arith * -> /]
+          build break
+KILLED    m0519 src/app/script.c:562 [arith * -> /]
+          build break
+KILLED    m0520 src/app/script.c:562 [arith * -> /]
+          build break
+KILLED    m0521 src/app/script.c:563 [arith * -> /]
+          build break
+KILLED    m0522 src/app/script.c:567 [cmp == -> !=]
+KILLED    m0523 src/app/script.c:568 [int+1 0 -> 1]
+KILLED    m0524 src/app/script.c:568 [int-1 0 -> -1]
+KILLED    m0525 src/app/script.c:572 [int+1 0 -> 1]
+KILLED    m0526 src/app/script.c:572 [int-1 0 -> -1]
+KILLED    m0527 src/app/script.c:572 [cmp != -> ==]
+KILLED    m0528 src/app/script.c:572 [int+1 0 -> 1]
+KILLED    m0529 src/app/script.c:572 [int-1 0 -> -1]
+KILLED    m0530 src/app/script.c:576 [cmp == -> !=]
+KILLED    m0531 src/app/script.c:577 [int+1 0 -> 1]
+KILLED    m0532 src/app/script.c:577 [int-1 0 -> -1]
+KILLED    m0533 src/app/script.c:581 [arith * -> /]
+          build break
+KILLED    m0534 src/app/script.c:581 [int+1 0 -> 1]
+KILLED    m0535 src/app/script.c:581 [int-1 0 -> -1]
+KILLED    m0536 src/app/script.c:582 [arith * -> /]
+          build break
+KILLED    m0537 src/app/script.c:582 [int+1 1 -> 2]
+KILLED    m0538 src/app/script.c:582 [int-1 1 -> 0]
+KILLED    m0539 src/app/script.c:583 [int+1 0 -> 1]
+          build break
+KILLED    m0540 src/app/script.c:583 [int-1 0 -> -1]
+KILLED    m0541 src/app/script.c:583 [cmp == -> !=]
+KILLED    m0542 src/app/script.c:583 [logic || -> &&]
+KILLED    m0543 src/app/script.c:583 [int+1 1 -> 2]
+KILLED    m0544 src/app/script.c:583 [int-1 1 -> 0]
+          build break
+KILLED    m0545 src/app/script.c:583 [cmp != -> ==]
+KILLED    m0546 src/app/script.c:586 [int+1 0 -> 1]
+KILLED    m0547 src/app/script.c:586 [int-1 0 -> -1]
+KILLED    m0548 src/app/script.c:588 [cmp == -> !=]
+KILLED    m0549 src/app/script.c:588 [int+1 0 -> 1]
+KILLED    m0550 src/app/script.c:588 [int-1 0 -> -1]
+KILLED    m0551 src/app/script.c:589 [bool true -> false]
+KILLED    m0552 src/app/script.c:590 [cmp == -> !=]
+KILLED    m0553 src/app/script.c:590 [int+1 0 -> 1]
+KILLED    m0554 src/app/script.c:590 [int-1 0 -> -1]
+KILLED    m0555 src/app/script.c:591 [bool false -> true]
+KILLED    m0556 src/app/script.c:595 [cmp == -> !=]
+KILLED    m0557 src/app/script.c:595 [cmp != -> ==]
+KILLED    m0558 src/app/script.c:595 [int+1 0 -> 1]
+KILLED    m0559 src/app/script.c:595 [int-1 0 -> -1]
+          build break
+SURVIVED  m0560 src/app/script.c:596 [ret-lit 0 -> 1]
+SURVIVED  m0561 src/app/script.c:596 [int+1 0 -> 1]
+SURVIVED  m0562 src/app/script.c:596 [int-1 0 -> -1]
+KILLED    m0563 src/app/script.c:599 [cmp == -> !=]
+KILLED    m0564 src/app/script.c:600 [int+1 0 -> 1]
+KILLED    m0565 src/app/script.c:600 [int-1 0 -> -1]
+KILLED    m0566 src/app/script.c:605 [cmp == -> !=]
+KILLED    m0567 src/app/script.c:606 [int+1 0 -> 1]
+KILLED    m0568 src/app/script.c:606 [int-1 0 -> -1]
+SURVIVED  m0569 src/app/script.c:610 [ret-lit 0 -> 1]
+SURVIVED  m0570 src/app/script.c:610 [int+1 0 -> 1]
+SURVIVED  m0571 src/app/script.c:610 [int-1 0 -> -1]
+KILLED    m0572 src/app/script.c:614 [arith * -> /]
+          build break
+KILLED    m0573 src/app/script.c:615 [cmp == -> !=]
+KILLED    m0574 src/app/script.c:615 [int+1 0 -> 1]
+KILLED    m0575 src/app/script.c:615 [int-1 0 -> -1]
+KILLED    m0576 src/app/script.c:618 [cmp == -> !=]
+KILLED    m0577 src/app/script.c:618 [int+1 0 -> 1]
+KILLED    m0578 src/app/script.c:618 [int-1 0 -> -1]
+KILLED    m0579 src/app/script.c:621 [cmp == -> !=]
+KILLED    m0580 src/app/script.c:621 [int+1 0 -> 1]
+KILLED    m0581 src/app/script.c:621 [int-1 0 -> -1]
+KILLED    m0582 src/app/script.c:624 [arith - -> +]
+SURVIVED  m0583 src/app/script.c:624 [int+1 1 -> 2]
+KILLED    m0584 src/app/script.c:624 [int-1 1 -> 0]
+KILLED    m0585 src/app/script.c:627 [arith * -> /]
+          build break
+KILLED    m0586 src/app/script.c:627 [arith * -> /]
+          build break
+KILLED    m0587 src/app/script.c:627 [arith * -> /]
+          build break
+KILLED    m0588 src/app/script.c:628 [arith * -> /]
+          build break
+KILLED    m0589 src/app/script.c:628 [arith * -> /]
+          build break
+SURVIVED  m0590 src/app/script.c:631 [int+1 0 -> 1]
+KILLED    m0591 src/app/script.c:631 [int-1 0 -> -1]
+KILLED    m0592 src/app/script.c:632 [cmp < -> <=]
+KILLED    m0593 src/app/script.c:632 [int+1 0 -> 1]
+KILLED    m0594 src/app/script.c:632 [int-1 0 -> -1]
+KILLED    m0595 src/app/script.c:636 [cmp >= -> >]
+KILLED    m0596 src/app/script.c:636 [int+1 0 -> 1]
+SURVIVED  m0597 src/app/script.c:636 [int-1 0 -> -1]
+KILLED    m0598 src/app/script.c:636 [int+1 0 -> 1]
+KILLED    m0599 src/app/script.c:636 [int-1 0 -> -1]
+KILLED    m0600 src/app/script.c:640 [arith * -> /]
+          build break
+KILLED    m0601 src/app/script.c:640 [int+1 0 -> 1]
+KILLED    m0602 src/app/script.c:640 [int-1 0 -> -1]
+KILLED    m0603 src/app/script.c:641 [arith * -> /]
+          build break
+KILLED    m0604 src/app/script.c:641 [int+1 1 -> 2]
+KILLED    m0605 src/app/script.c:641 [int-1 1 -> 0]
+SURVIVED  m0606 src/app/script.c:642 [int+1 0 -> 1]
+SURVIVED  m0607 src/app/script.c:642 [int-1 0 -> -1]
+KILLED    m0608 src/app/script.c:643 [int+1 2 -> 3]
+KILLED    m0609 src/app/script.c:643 [int-1 2 -> 1]
+KILLED    m0610 src/app/script.c:643 [cmp != -> ==]
+KILLED    m0611 src/app/script.c:643 [int+1 0 -> 1]
+KILLED    m0612 src/app/script.c:643 [int-1 0 -> -1]
+KILLED    m0613 src/app/script.c:647 [bool false -> true]
+SURVIVED  m0614 src/app/script.c:648 [int+1 0 -> 1]
+KILLED    m0615 src/app/script.c:648 [int-1 0 -> -1]
+KILLED    m0616 src/app/script.c:648 [cmp < -> <=]
+KILLED    m0617 src/app/script.c:648 [arith / -> *]
+SURVIVED  m0618 src/app/script.c:648 [int+1 0 -> 1]
+SURVIVED  m0619 src/app/script.c:648 [int-1 0 -> -1]
+KILLED    m0620 src/app/script.c:649 [cmp == -> !=]
+KILLED    m0621 src/app/script.c:649 [int+1 0 -> 1]
+KILLED    m0622 src/app/script.c:649 [int-1 0 -> -1]
+KILLED    m0623 src/app/script.c:651 [bool true -> false]
+KILLED    m0624 src/app/script.c:656 [bool false -> true]
+SURVIVED  m0625 src/app/script.c:657 [int+1 0 -> 1]
+KILLED    m0626 src/app/script.c:657 [int-1 0 -> -1]
+KILLED    m0627 src/app/script.c:657 [cmp < -> <=]
+KILLED    m0628 src/app/script.c:657 [arith / -> *]
+SURVIVED  m0629 src/app/script.c:657 [int+1 0 -> 1]
+SURVIVED  m0630 src/app/script.c:657 [int-1 0 -> -1]
+KILLED    m0631 src/app/script.c:658 [cmp == -> !=]
+KILLED    m0632 src/app/script.c:658 [int+1 0 -> 1]
+KILLED    m0633 src/app/script.c:658 [int-1 0 -> -1]
+KILLED    m0634 src/app/script.c:660 [bool true -> false]
+KILLED    m0635 src/app/script.c:664 [not-del ! -> (deleted)]
+KILLED    m0636 src/app/script.c:664 [logic || -> &&]
+KILLED    m0637 src/app/script.c:664 [not-del ! -> (deleted)]
+KILLED    m0638 src/app/script.c:667 [cmp != -> ==]
+KILLED    m0639 src/app/script.c:667 [int+1 0 -> 1]
+KILLED    m0640 src/app/script.c:667 [int-1 0 -> -1]
+SURVIVED  m0641 src/app/script.c:672 [cmp <= -> <]
+SURVIVED  m0642 src/app/script.c:672 [int+1 0 -> 1]
+SURVIVED  m0643 src/app/script.c:672 [int-1 0 -> -1]
+KILLED    m0644 src/app/script.c:672 [logic || -> &&]
+          build break
+KILLED    m0645 src/app/script.c:672 [cmp < -> <=]
+KILLED    m0646 src/app/script.c:672 [int+1 0 -> 1]
+KILLED    m0647 src/app/script.c:672 [int-1 0 -> -1]
+KILLED    m0648 src/app/script.c:672 [logic || -> &&]
+          build break
+KILLED    m0649 src/app/script.c:672 [cmp >= -> >]
+KILLED    m0650 src/app/script.c:672 [logic || -> &&]
+          build break
+SURVIVED  m0651 src/app/script.c:672 [cmp >= -> >]
+SURVIVED  m0652 src/app/script.c:679 [int+1 0 -> 1]
+KILLED    m0653 src/app/script.c:679 [int-1 0 -> -1]
+          build break
+KILLED    m0654 src/app/script.c:680 [bool false -> true]
+KILLED    m0655 src/app/script.c:681 [ret-lit 0 -> 1]
+KILLED    m0656 src/app/script.c:681 [int+1 0 -> 1]
+KILLED    m0657 src/app/script.c:681 [int-1 0 -> -1]
+KILLED    m0658 src/app/script.c:685 [int+1 0 -> 1]
+KILLED    m0659 src/app/script.c:685 [int-1 0 -> -1]
+KILLED    m0660 src/app/script.c:685 [cmp != -> ==]
+KILLED    m0661 src/app/script.c:685 [int+1 0 -> 1]
+KILLED    m0662 src/app/script.c:685 [int-1 0 -> -1]
+SURVIVED  m0663 src/app/script.c:690 [cmp <= -> <]
+SURVIVED  m0664 src/app/script.c:690 [int+1 0 -> 1]
+SURVIVED  m0665 src/app/script.c:690 [int-1 0 -> -1]
+KILLED    m0666 src/app/script.c:690 [logic || -> &&]
+          build break
+KILLED    m0667 src/app/script.c:690 [cmp < -> <=]
+KILLED    m0668 src/app/script.c:690 [int+1 0 -> 1]
+SURVIVED  m0669 src/app/script.c:690 [int-1 0 -> -1]
+KILLED    m0670 src/app/script.c:690 [logic || -> &&]
+          build break
+SURVIVED  m0671 src/app/script.c:690 [cmp >= -> >]
+KILLED    m0672 src/app/script.c:695 [cmp != -> ==]
+KILLED    m0673 src/app/script.c:695 [int+1 0 -> 1]
+KILLED    m0674 src/app/script.c:695 [int-1 0 -> -1]
+KILLED    m0675 src/app/script.c:700 [bool false -> true]
+KILLED    m0676 src/app/script.c:701 [ret-lit 0 -> 1]
+KILLED    m0677 src/app/script.c:701 [int+1 0 -> 1]
+KILLED    m0678 src/app/script.c:701 [int-1 0 -> -1]
+SURVIVED  m0679 src/app/script.c:704 [int+1 0 -> 1]
+KILLED    m0680 src/app/script.c:704 [int-1 0 -> -1]
+          build break
+KILLED    m0681 src/app/script.c:704 [cmp == -> !=]
+SURVIVED  m0682 src/app/script.c:707 [not-del ! -> (deleted)]
+SURVIVED  m0683 src/app/script.c:709 [bool true -> false]
+SURVIVED  m0684 src/app/script.c:711 [int+1 0 -> 1]
+SURVIVED  m0685 src/app/script.c:711 [int-1 0 -> -1]
+SURVIVED  m0686 src/app/script.c:712 [int+1 0 -> 1]
+SURVIVED  m0687 src/app/script.c:712 [int-1 0 -> -1]
+KILLED    m0688 src/app/script.c:714 [cmp != -> ==]
+KILLED    m0689 src/app/script.c:714 [int+1 0 -> 1]
+KILLED    m0690 src/app/script.c:714 [int-1 0 -> -1]
+SURVIVED  m0691 src/app/script.c:717 [cmp == -> !=]
+SURVIVED  m0692 src/app/script.c:719 [int+1 0 -> 1]
+SURVIVED  m0693 src/app/script.c:719 [int-1 0 -> -1]
+KILLED    m0694 src/app/script.c:721 [cmp != -> ==]
+KILLED    m0695 src/app/script.c:721 [int+1 0 -> 1]
+KILLED    m0696 src/app/script.c:721 [int-1 0 -> -1]
+SURVIVED  m0697 src/app/script.c:721 [logic || -> &&]
+KILLED    m0698 src/app/script.c:721 [not-del ! -> (deleted)]
+SURVIVED  m0699 src/app/script.c:725 [cmp < -> <=]
+SURVIVED  m0700 src/app/script.c:725 [int+1 0 -> 1]
+SURVIVED  m0701 src/app/script.c:725 [int-1 0 -> -1]
+SURVIVED  m0702 src/app/script.c:728 [int+1 0 -> 1]
+SURVIVED  m0703 src/app/script.c:728 [int-1 0 -> -1]
+KILLED    m0704 src/app/script.c:729 [cmp != -> ==]
+SURVIVED  m0705 src/app/script.c:732 [int+1 0 -> 1]
+SURVIVED  m0706 src/app/script.c:732 [int-1 0 -> -1]
+KILLED    m0707 src/app/script.c:733 [cmp != -> ==]
+SURVIVED  m0708 src/app/script.c:737 [cmp <= -> <]
+SURVIVED  m0709 src/app/script.c:737 [int+1 0 -> 1]
+SURVIVED  m0710 src/app/script.c:737 [int-1 0 -> -1]
+SURVIVED  m0711 src/app/script.c:738 [cmp != -> ==]
+SURVIVED  m0712 src/app/script.c:738 [int+1 0 -> 1]
+SURVIVED  m0713 src/app/script.c:738 [int-1 0 -> -1]
+SURVIVED  m0714 src/app/script.c:743 [cmp <= -> <]
+KILLED    m0715 src/app/script.c:743 [int+1 0 -> 1]
+SURVIVED  m0716 src/app/script.c:743 [int-1 0 -> -1]
+SURVIVED  m0717 src/app/script.c:749 [int+1 0 -> 1]
+SURVIVED  m0718 src/app/script.c:749 [int-1 0 -> -1]
+KILLED    m0719 src/app/script.c:765 [cmp != -> ==]
+KILLED    m0720 src/app/script.c:768 [bool true -> false]
+KILLED    m0721 src/app/script.c:769 [ret-lit 0 -> 1]
+KILLED    m0722 src/app/script.c:769 [int+1 0 -> 1]
+KILLED    m0723 src/app/script.c:769 [int-1 0 -> -1]
+KILLED    m0724 src/app/script.c:772 [not-del ! -> (deleted)]
+KILLED    m0725 src/app/script.c:776 [int+1 0 -> 1]
+KILLED    m0726 src/app/script.c:776 [int-1 0 -> -1]
+KILLED    m0727 src/app/script.c:777 [int+1 0 -> 1]
+KILLED    m0728 src/app/script.c:777 [int-1 0 -> -1]
+KILLED    m0729 src/app/script.c:781 [cmp != -> ==]
+KILLED    m0730 src/app/script.c:784 [ret-lit 0 -> 1]
+KILLED    m0731 src/app/script.c:784 [int+1 0 -> 1]
+KILLED    m0732 src/app/script.c:784 [int-1 0 -> -1]
+SURVIVED  m0733 src/app/script.c:787 [ret-lit 0 -> 1]
+SURVIVED  m0734 src/app/script.c:787 [int+1 0 -> 1]
+SURVIVED  m0735 src/app/script.c:787 [int-1 0 -> -1]
+KILLED    m0736 src/app/script.c:791 [arith * -> /]
+          build break
+KILLED    m0737 src/app/script.c:791 [arith * -> /]
+          build break
+KILLED    m0738 src/app/script.c:791 [arith * -> /]
+          build break
+KILLED    m0739 src/app/script.c:791 [arith * -> /]
+          build break
+KILLED    m0740 src/app/script.c:794 [int+1 0 -> 1]
+KILLED    m0741 src/app/script.c:794 [int-1 0 -> -1]
+KILLED    m0742 src/app/script.c:794 [int+1 1 -> 2]
+KILLED    m0743 src/app/script.c:794 [int-1 1 -> 0]
+KILLED    m0744 src/app/script.c:796 [cmp != -> ==]
+KILLED    m0745 src/app/script.c:799 [arith * -> /]
+          build break
+KILLED    m0746 src/app/script.c:799 [int+1 2 -> 3]
+KILLED    m0747 src/app/script.c:799 [int-1 2 -> 1]
+SURVIVED  m0748 src/app/script.c:800 [int+1 0 -> 1]
+SURVIVED  m0749 src/app/script.c:800 [int-1 0 -> -1]
+KILLED    m0750 src/app/script.c:800 [cmp != -> ==]
+KILLED    m0751 src/app/script.c:800 [int+1 0 -> 1]
+KILLED    m0752 src/app/script.c:800 [int-1 0 -> -1]
+KILLED    m0753 src/app/script.c:804 [int+1 0 -> 1]
+KILLED    m0754 src/app/script.c:804 [int-1 0 -> -1]
+KILLED    m0755 src/app/script.c:807 [cmp == -> !=]
+KILLED    m0756 src/app/script.c:807 [int+1 0 -> 1]
+KILLED    m0757 src/app/script.c:807 [int-1 0 -> -1]
+KILLED    m0758 src/app/script.c:811 [arith * -> /]
+          build break
+KILLED    m0759 src/app/script.c:815 [int+1 0 -> 1]
+KILLED    m0760 src/app/script.c:815 [int-1 0 -> -1]
+KILLED    m0761 src/app/script.c:815 [arith * -> /]
+          build break
+KILLED    m0762 src/app/script.c:818 [arith * -> /]
+          build break
+KILLED    m0763 src/app/script.c:818 [arith * -> /]
+          build break
+KILLED    m0764 src/app/script.c:818 [arith * -> /]
+          build break
+KILLED    m0765 src/app/script.c:818 [arith * -> /]
+          build break
+KILLED    m0766 src/app/script.c:819 [arith * -> /]
+          build break
+KILLED    m0767 src/app/script.c:825 [not-del ! -> (deleted)]
+KILLED    m0768 src/app/script.c:828 [ret-lit 0 -> 1]
+KILLED    m0769 src/app/script.c:828 [int+1 0 -> 1]
+KILLED    m0770 src/app/script.c:828 [int-1 0 -> -1]
+KILLED    m0771 src/app/script.c:861 [arith * -> /]
+          build break
+KILLED    m0772 src/app/script.c:861 [arith * -> /]
+          build break
+KILLED    m0773 src/app/script.c:861 [arith * -> /]
+          build break
+KILLED    m0774 src/app/script.c:861 [arith * -> /]
+          build break
+KILLED    m0775 src/app/script.c:862 [cmp == -> !=]
+KILLED    m0776 src/app/script.c:862 [logic || -> &&]
+          build break
+KILLED    m0777 src/app/script.c:862 [cmp == -> !=]
+KILLED    m0778 src/app/script.c:862 [logic || -> &&]
+          build break
+KILLED    m0779 src/app/script.c:862 [cmp == -> !=]
+KILLED    m0780 src/app/script.c:862 [logic || -> &&]
+          build break
+KILLED    m0781 src/app/script.c:862 [cmp == -> !=]
+KILLED    m0782 src/app/script.c:862 [logic || -> &&]
+          build break
+KILLED    m0783 src/app/script.c:862 [cmp == -> !=]
+SURVIVED  m0784 src/app/script.c:862 [int+1 0 -> 1]
+KILLED    m0785 src/app/script.c:862 [int-1 0 -> -1]
+          build break
+KILLED    m0786 src/app/script.c:865 [int+1 0 -> 1]
+KILLED    m0787 src/app/script.c:865 [int-1 0 -> -1]
+KILLED    m0788 src/app/script.c:865 [cmp < -> <=]
+KILLED    m0789 src/app/script.c:867 [cmp != -> ==]
+KILLED    m0790 src/app/script.c:867 [int+1 0 -> 1]
+KILLED    m0791 src/app/script.c:867 [int-1 0 -> -1]
+SURVIVED  m0792 src/app/script.c:873 [bool false -> true]
+KILLED    m0793 src/app/script.c:875 [ret-lit 0 -> 1]
+KILLED    m0794 src/app/script.c:875 [int+1 0 -> 1]
+KILLED    m0795 src/app/script.c:875 [int-1 0 -> -1]
+KILLED    m0796 src/app/script.c:878 [arith * -> /]
+          build break
+KILLED    m0797 src/app/script.c:878 [arith * -> /]
+          build break
+SURVIVED  m0798 src/app/script.c:879 [cmp == -> !=]
+KILLED    m0799 src/app/script.c:879 [logic || -> &&]
+          build break
+SURVIVED  m0800 src/app/script.c:879 [cmp == -> !=]
+KILLED    m0801 src/app/script.c:879 [logic || -> &&]
+          build break
+SURVIVED  m0802 src/app/script.c:879 [int+1 0 -> 1]
+SURVIVED  m0803 src/app/script.c:879 [int-1 0 -> -1]
+SURVIVED  m0804 src/app/script.c:879 [cmp == -> !=]
+KILLED    m0805 src/app/script.c:883 [arith * -> /]
+          build break
+SURVIVED  m0806 src/app/script.c:884 [cmp == -> !=]
+KILLED    m0807 src/app/script.c:888 [arith * -> /]
+          build break
+SURVIVED  m0808 src/app/script.c:888 [arith + -> -]
+SURVIVED  m0809 src/app/script.c:888 [int+1 1 -> 2]
+SURVIVED  m0810 src/app/script.c:888 [int-1 1 -> 0]
+SURVIVED  m0811 src/app/script.c:889 [cmp == -> !=]
+SURVIVED  m0812 src/app/script.c:894 [int+1 1 -> 2]
+SURVIVED  m0813 src/app/script.c:894 [int-1 1 -> 0]
+SURVIVED  m0814 src/app/script.c:894 [arith + -> -]
+SURVIVED  m0815 src/app/script.c:894 [int+1 1 -> 2]
+SURVIVED  m0816 src/app/script.c:894 [int-1 1 -> 0]
+SURVIVED  m0817 src/app/script.c:896 [cmp > -> >=]
+SURVIVED  m0818 src/app/script.c:907 [cmp != -> ==]
+SURVIVED  m0819 src/app/script.c:907 [int+1 0 -> 1]
+SURVIVED  m0820 src/app/script.c:907 [int-1 0 -> -1]
+SURVIVED  m0821 src/app/script.c:912 [int+1 0 -> 1]
+SURVIVED  m0822 src/app/script.c:912 [int-1 0 -> -1]
+SURVIVED  m0823 src/app/script.c:914 [cmp != -> ==]
+SURVIVED  m0824 src/app/script.c:914 [int+1 0 -> 1]
+SURVIVED  m0825 src/app/script.c:914 [int-1 0 -> -1]
+ACCEPTED  m0055 src/app/script.c:105 [int+1 8 -> 9] :: list cap mutants bound the stack array only, every event method pair yields at most 3 lists so a cap of 7 or 9 never changes a reachable scan and the cap clause is dominated by the found bound
+ACCEPTED  m0056 src/app/script.c:105 [int-1 8 -> 7] :: list cap mutants bound the stack array only, every event method pair yields at most 3 lists so a cap of 7 or 9 never changes a reachable scan and the cap clause is dominated by the found bound
+ACCEPTED  m0083 src/app/script.c:126 [int+1 0 -> 1] :: error buffer write index mutants are unobservable, the byte lands before the buffer or at index one, every failing path rewrites the buffer through snprintf before any pinned reader and no pinned reader reads err after a success return
+ACCEPTED  m0084 src/app/script.c:126 [int-1 0 -> -1] :: error buffer write index mutants are unobservable, the byte lands before the buffer or at index one, every failing path rewrites the buffer through snprintf before any pinned reader and no pinned reader reads err after a success return
+ACCEPTED  m0087 src/app/script.c:132 [int+1 1 -> 2] :: script tail copy count mutants are equivalent, the extra byte lands past the nul inside the text array and is never scanned past end, and the missing nul is rewritten by the tokenizer when the final token reaches the tail while comment tails are never read past end
+ACCEPTED  m0088 src/app/script.c:132 [int-1 1 -> 0] :: script tail copy count mutants are equivalent, the extra byte lands past the nul inside the text array and is never scanned past end, and the missing nul is rewritten by the tokenizer when the final token reaches the tail while comment tails are never read past end
+ACCEPTED  m0102 src/app/script.c:148 [cmp < -> <=] :: comment scan bound and inequality mutants are hang or sentinel classes, the widened bound reads the nul sentinel at end which fails the newline clause and exits identically, and the inverted inequality re-enters the comment branch without progress and was killed by the external 330 second kick in two runs, excluded from execution
+ACCEPTED  m0108 src/app/script.c:158 [int+1 0 -> 1] :: command row memset fill and count mutants are dead stores, every field the parser consumes is assigned after the memset
+ACCEPTED  m0109 src/app/script.c:158 [int-1 0 -> -1] :: command row memset fill and count mutants are dead stores, every field the parser consumes is assigned after the memset
+ACCEPTED  m0112 src/app/script.c:162 [cmp < -> <=] :: line end scan bound mutant reads the newline sentinel at the boundary which fails the scan clause and exits identically
+ACCEPTED  m0116 src/app/script.c:165 [cmp < -> <=] :: trailing newline flag bound mutant flips has_nl only at line_end == end where both arms leave p past end and terminate the outer scan, only the final error line number differs and no pinned suite reads it
+ACCEPTED  m0119 src/app/script.c:167 [cmp < -> <=] :: token scan bound mutant reads the newline sentinel at line_end which fails the scan clause and exits identically
+ACCEPTED  m0120 src/app/script.c:168 [cmp < -> <=] :: separator skip bound mutant reads the newline sentinel at line_end which fails the separator test and exits identically
+ACCEPTED  m0135 src/app/script.c:182 [cmp < -> <=] :: quote close scan bound mutant reads the newline sentinel at line_end which fails the quote clause so the unterminated quote verdict is unchanged
+ACCEPTED  m0142 src/app/script.c:190 [int+1 1 -> 2] :: quote close advance mutant skips one char after the closing quote, every pinned quoted token is followed by a separator or line end so the skipped char is blank and the token stream is unchanged
+ACCEPTED  m0151 src/app/script.c:196 [cmp < -> <=] :: delimiter probe bound mutant reads the line end sentinel, the ternary yields the same nul delimiter and the token termination is unchanged
+ACCEPTED  m0161 src/app/script.c:211 [int-1 0 -> -1] :: empty line argc guard mutants are dead, the outer loop consumes blank and comment only lines before command parsing starts so argc is never zero at the guard, the only input that reaches it is the 137 hang mutant
+ACCEPTED  m0168 src/app/script.c:218 [cmp < -> <=] :: expect kind arity guard mutants only select which parse error message fires on malformed expect lines, the accept set is unchanged and no pinned suite pins the message
+ACCEPTED  m0169 src/app/script.c:218 [arith + -> -] :: expect kind arity guard mutants only select which parse error message fires on malformed expect lines, the accept set is unchanged and no pinned suite pins the message
+ACCEPTED  m0170 src/app/script.c:218 [int+1 1 -> 2] :: expect kind arity guard mutants only select which parse error message fires on malformed expect lines, the accept set is unchanged and no pinned suite pins the message
+ACCEPTED  m0171 src/app/script.c:218 [int-1 1 -> 0] :: expect kind arity guard mutants only select which parse error message fires on malformed expect lines, the accept set is unchanged and no pinned suite pins the message
+ACCEPTED  m0173 src/app/script.c:223 [int+1 0 -> 1] :: expect table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
+ACCEPTED  m0174 src/app/script.c:223 [int-1 0 -> -1] :: expect table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
+ACCEPTED  m0180 src/app/script.c:228 [int+1 0 -> 1] :: word table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
+ACCEPTED  m0181 src/app/script.c:228 [int-1 0 -> -1] :: word table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
+ACCEPTED  m0198 src/app/script.c:250 [cmp < -> <=] :: argument shift loop bound mutant writes one offset slot past argc, the slot is in bounds padding and every accessor bounds the index by argc before reading
+ACCEPTED  m0200 src/app/script.c:252 [arith + -> -] :: argument length copies are dead stores, no reader consumes the len fields, argument text is nul terminated in place and accessed through the offsets only
+ACCEPTED  m0222 src/app/script.c:273 [int-1 0 -> -1] :: argument accessor guard relaxations admit indexes no caller produces, every call site passes a literal inside argc
+ACCEPTED  m0224 src/app/script.c:273 [cmp >= -> >] :: argument accessor guard relaxations admit indexes no caller produces, every call site passes a literal inside argc
+ACCEPTED  m0226 src/app/script.c:273 [cmp >= -> >] :: argument accessor guard relaxations admit indexes no caller produces, every call site passes a literal inside argc
+ACCEPTED  m0233 src/app/script.c:285 [int+1 0 -> 1] :: errno preset mutants are equivalent, a non ERANGE preset is cleared identically for the ERANGE comparison and strtol sets errno itself on range errors
+ACCEPTED  m0234 src/app/script.c:285 [int-1 0 -> -1] :: errno preset mutants are equivalent, a non ERANGE preset is cleared identically for the ERANGE comparison and strtol sets errno itself on range errors
+ACCEPTED  m0252 src/app/script.c:296 [int+1 0 -> 1] :: errno preset mutants are equivalent, a non ERANGE preset is cleared identically for the ERANGE comparison and strtod sets errno itself on range errors
+ACCEPTED  m0253 src/app/script.c:296 [int-1 0 -> -1] :: errno preset mutants are equivalent, a non ERANGE preset is cleared identically for the ERANGE comparison and strtod sets errno itself on range errors
+ACCEPTED  m0292 src/app/script.c:337 [cmp < -> <=] :: negative difference test bound mutant is a no-op at zero, negating plus or minus zero yields zero so the epsilon comparison is unchanged
+ACCEPTED  m0294 src/app/script.c:342 [cmp <= -> <] :: double equality epsilon boundary mutant differs only at a difference of exactly CT_SCRIPT_DBL_EPS which no decimal literal pair constructs, every pinned difference lands strictly above or below
+ACCEPTED  m0297 src/app/script.c:348 [cmp > -> >=] :: double inequality epsilon boundary mutant differs only at a difference of exactly CT_SCRIPT_DBL_EPS which no decimal literal pair constructs, every pinned difference lands strictly above or below
+ACCEPTED  m0361 src/app/script.c:386 [int+1 0 -> 1] :: clock stamp index mutant checks the second stamp char, ct_now_utc_iso always writes a 20 char stamp whose second char is a digit, so the empty stamp arm never fires over the pinned clock path, same class as the repo_algs stamp row
+ACCEPTED  m0364 src/app/script.c:387 [arith - -> +] :: clock failure return payload mutants are equivalent, every caller compares the result against zero
+ACCEPTED  m0365 src/app/script.c:387 [int+1 1 -> 2] :: clock failure return payload mutants are equivalent, every caller compares the result against zero
+ACCEPTED  m0366 src/app/script.c:387 [int-1 1 -> 0] :: clock failure return payload mutants are equivalent, every caller compares the result against zero
+ACCEPTED  m0418 src/app/script.c:448 [int+1 0 -> 1] :: card field capacity init mutants are dead stores, every branch of the field resolver assigns the capacity before any read
+ACCEPTED  m0419 src/app/script.c:448 [int-1 0 -> -1] :: card field capacity init mutants are dead stores, every branch of the field resolver assigns the capacity before any read
+ACCEPTED  m0425 src/app/script.c:453 [int+1 1 -> 2] :: card field value index mutant fetches the stale pre-shift offset slot that still holds the value token for two argument commands, verified by the pinned cfop cards field roundtrip
+ACCEPTED  m0438 src/app/script.c:474 [ret-lit 0 -> 1] :: cards step default arm is unreachable, ct_script_step routes exactly the cards kinds into this dispatcher
+ACCEPTED  m0439 src/app/script.c:474 [int+1 0 -> 1] :: cards step default arm is unreachable, ct_script_step routes exactly the cards kinds into this dispatcher
+ACCEPTED  m0440 src/app/script.c:474 [int-1 0 -> -1] :: cards step default arm is unreachable, ct_script_step routes exactly the cards kinds into this dispatcher
+ACCEPTED  m0447 src/app/script.c:482 [int+1 0 -> 1] :: review day init mutants are dead stores, ct_script_now writes the day on the only path that continues
+ACCEPTED  m0448 src/app/script.c:482 [int-1 0 -> -1] :: review day init mutants are dead stores, ct_script_now writes the day on the only path that continues
+ACCEPTED  m0452 src/app/script.c:486 [int+1 0 -> 1] :: review begin rc init mutants are dead stores, the begin call overwrites rc before any read
+ACCEPTED  m0453 src/app/script.c:486 [int-1 0 -> -1] :: review begin rc init mutants are dead stores, the begin call overwrites rc before any read
+ACCEPTED  m0456 src/app/script.c:487 [int-1 0 -> -1] :: review begin rc negative one payload mutant admits only a begin return of minus one which the pinned seeded flows never produce, every pinned begin returns zero or a positive row count
+ACCEPTED  m0466 src/app/script.c:501 [int+1 0 -> 1] :: review grade word index mutant fetches the stale pre-shift offset slot that still holds the grade token for one argument commands, verified by the pinned review loop
+ACCEPTED  m0469 src/app/script.c:504 [int+1 0 -> 1] :: grade table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned grade word matches inside the table
+ACCEPTED  m0471 src/app/script.c:504 [cmp < -> <=] :: grade table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned grade word matches inside the table
+ACCEPTED  m0472 src/app/script.c:504 [arith / -> *] :: grade table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned grade word matches inside the table
+ACCEPTED  m0473 src/app/script.c:504 [int+1 0 -> 1] :: grade table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned grade word matches inside the table
+ACCEPTED  m0474 src/app/script.c:504 [int-1 0 -> -1] :: grade table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned grade word matches inside the table
+ACCEPTED  m0480 src/app/script.c:516 [int+1 0 -> 1] :: clock stamp index mutant checks the second stamp char, ct_now_utc_iso always writes a 20 char stamp whose second char is a digit, so the empty stamp arm never fires over the pinned clock path
+ACCEPTED  m0486 src/app/script.c:527 [int+1 0 -> 1] :: clock stamp index mutant checks the second stamp char, ct_now_utc_iso always writes a 20 char stamp whose second char is a digit, so the empty stamp arm never fires over the pinned clock path
+ACCEPTED  m0504 src/app/script.c:542 [int+1 0 -> 1] :: wait tick loop bound and start mutants shift one idle animation step, the pinned review flows animate no moves so no completion edge is crossed and every pinned wait assertion is unchanged
+ACCEPTED  m0505 src/app/script.c:542 [int-1 0 -> -1] :: wait tick loop bound and start mutants shift one idle animation step, the pinned review flows animate no moves so no completion edge is crossed and every pinned wait assertion is unchanged
+ACCEPTED  m0506 src/app/script.c:542 [cmp < -> <=] :: wait tick loop bound and start mutants shift one idle animation step, the pinned review flows animate no moves so no completion edge is crossed and every pinned wait assertion is unchanged
+ACCEPTED  m0507 src/app/script.c:547 [arith - -> +] :: wait scrub index arithmetic mutant touches a display bookkeeping field that no headless suite reads
+ACCEPTED  m0508 src/app/script.c:548 [not-del ! -> (deleted)] :: wait animation pause branch mutants are no-ops over pinned waits, the pinned review flows run idle animations where pausing changes no observable state
+ACCEPTED  m0509 src/app/script.c:550 [bool false -> true] :: wait playing flag mutant touches a display state field that no headless suite reads
+ACCEPTED  m0513 src/app/script.c:557 [ret-lit 0 -> 1] :: review step default arm is unreachable, ct_script_step routes exactly the review kinds into this dispatcher
+ACCEPTED  m0514 src/app/script.c:557 [int+1 0 -> 1] :: review step default arm is unreachable, ct_script_step routes exactly the review kinds into this dispatcher
+ACCEPTED  m0515 src/app/script.c:557 [int-1 0 -> -1] :: review step default arm is unreachable, ct_script_step routes exactly the review kinds into this dispatcher
+ACCEPTED  m0560 src/app/script.c:596 [ret-lit 0 -> 1] :: settings step default arm is unreachable, ct_script_step routes exactly the settings kinds into this dispatcher
+ACCEPTED  m0561 src/app/script.c:596 [int+1 0 -> 1] :: settings step default arm is unreachable, ct_script_step routes exactly the settings kinds into this dispatcher
+ACCEPTED  m0562 src/app/script.c:596 [int-1 0 -> -1] :: settings step default arm is unreachable, ct_script_step routes exactly the settings kinds into this dispatcher
+ACCEPTED  m0569 src/app/script.c:610 [ret-lit 0 -> 1] :: trainer step default arm is unreachable, ct_script_step routes exactly the trainer kinds into this dispatcher
+ACCEPTED  m0570 src/app/script.c:610 [int+1 0 -> 1] :: trainer step default arm is unreachable, ct_script_step routes exactly the trainer kinds into this dispatcher
+ACCEPTED  m0571 src/app/script.c:610 [int-1 0 -> -1] :: trainer step default arm is unreachable, ct_script_step routes exactly the trainer kinds into this dispatcher
+ACCEPTED  m0590 src/app/script.c:631 [int+1 0 -> 1] :: cfop stage argument index mutant fetches the stale pre-shift offset slot that still holds the stage token for one argument commands, verified by the pinned populate flows
+ACCEPTED  m0597 src/app/script.c:636 [int-1 0 -> -1] :: cfop populate made zero boundary is unreachable, every pinned stage inserts a positive card count
+ACCEPTED  m0606 src/app/script.c:642 [int+1 0 -> 1] :: trainer list id init mutants are dead stores, the integer parse writes the id on the only path that continues
+ACCEPTED  m0607 src/app/script.c:642 [int-1 0 -> -1] :: trainer list id init mutants are dead stores, the integer parse writes the id on the only path that continues
+ACCEPTED  m0614 src/app/script.c:648 [int+1 0 -> 1] :: event table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned event word matches inside the table
+ACCEPTED  m0618 src/app/script.c:648 [int+1 0 -> 1] :: event table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned event word matches inside the table
+ACCEPTED  m0619 src/app/script.c:648 [int-1 0 -> -1] :: event table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned event word matches inside the table
+ACCEPTED  m0625 src/app/script.c:657 [int+1 0 -> 1] :: method table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned method word matches inside the table
+ACCEPTED  m0629 src/app/script.c:657 [int+1 0 -> 1] :: method table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned method word matches inside the table
+ACCEPTED  m0630 src/app/script.c:657 [int-1 0 -> -1] :: method table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned method word matches inside the table
+ACCEPTED  m0641 src/app/script.c:672 [cmp <= -> <] :: trainer list found zero bound and cap clause mutants are unreachable, every valid event method pair scans at least one table row so found is always positive and the found bound fires before the cap clause for every reachable id
+ACCEPTED  m0642 src/app/script.c:672 [int+1 0 -> 1] :: trainer list found zero bound and cap clause mutants are unreachable, every valid event method pair scans at least one table row so found is always positive and the found bound fires before the cap clause for every reachable id
+ACCEPTED  m0643 src/app/script.c:672 [int-1 0 -> -1] :: trainer list found zero bound and cap clause mutants are unreachable, every valid event method pair scans at least one table row so found is always positive and the found bound fires before the cap clause for every reachable id
+ACCEPTED  m0651 src/app/script.c:672 [cmp >= -> >] :: trainer list found zero bound and cap clause mutants are unreachable, every valid event method pair scans at least one table row so found is always positive and the found bound fires before the cap clause for every reachable id
+ACCEPTED  m0652 src/app/script.c:679 [int+1 0 -> 1] :: trainer list target key reset index mutants are unobservable over the pinned list then case sequences, the byte lands in a stale tail slot never read before the next assignment
+ACCEPTED  m0679 src/app/script.c:704 [int+1 0 -> 1] :: trainer generate target guard index mutant checks the second key char, the guard fires only on a fresh runtime whose zeroed key also has a nul second char, so the verdict is unchanged
+ACCEPTED  m0682 src/app/script.c:707 [not-del ! -> (deleted)] :: synth ready guard and flag mutants are equivalent, ct_synth_target self initializes through the synth_built gate so skipping or repeating the eager init changes no result
+ACCEPTED  m0683 src/app/script.c:709 [bool true -> false] :: synth ready flag mutant is equivalent, ct_synth_init is idempotent through the synth_built gate so reinitializing on every generate changes no result
+ACCEPTED  m0684 src/app/script.c:711 [int+1 0 -> 1] :: target sticker one init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
+ACCEPTED  m0685 src/app/script.c:711 [int-1 0 -> -1] :: target sticker one init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
+ACCEPTED  m0686 src/app/script.c:712 [int+1 0 -> 1] :: target sticker two init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
+ACCEPTED  m0687 src/app/script.c:712 [int-1 0 -> -1] :: target sticker two init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
+ACCEPTED  m0691 src/app/script.c:717 [cmp == -> !=] :: orbit buffer ternary mutant is equivalent, both scheme buffers carry the default index 2 from the equal corner and edge constants, verified by direct scheme load probe, so the ternary selects an identical buffer on every reachable flow
+ACCEPTED  m0692 src/app/script.c:719 [int+1 0 -> 1] :: synthesis result memset count mutants are dead stores, ct_synth_target memsets the whole output on every return path before writing
+ACCEPTED  m0693 src/app/script.c:719 [int-1 0 -> -1] :: synthesis result memset count mutants are dead stores, ct_synth_target memsets the whole output on every return path before writing
+ACCEPTED  m0697 src/app/script.c:721 [logic || -> &&] :: synthesis failure disjunction mutant is equivalent over pinned targets, every pinned generate finds a candidate so the rc zero with found zero arm never occurs
+ACCEPTED  m0699 src/app/script.c:725 [cmp < -> <=] :: sequence format failure bound mutant is unreachable, the formatter returns a positive length for every pinned nonempty sequence and the zero return needs an empty sequence never formatted here
+ACCEPTED  m0700 src/app/script.c:725 [int+1 0 -> 1] :: sequence format failure bound mutant is unreachable, the formatter returns a positive length for every pinned nonempty sequence and the zero return needs an empty sequence never formatted here
+ACCEPTED  m0701 src/app/script.c:725 [int-1 0 -> -1] :: sequence format failure bound mutant is unreachable, the formatter returns a positive length for every pinned nonempty sequence and the zero return needs an empty sequence never formatted here
+ACCEPTED  m0702 src/app/script.c:728 [int+1 0 -> 1] :: classification memset count mutants are equivalent, ct_classify overwrites every consumed field and the off byte is tail padding never read
+ACCEPTED  m0703 src/app/script.c:728 [int-1 0 -> -1] :: classification memset count mutants are equivalent, ct_classify overwrites every consumed field and the off byte is tail padding never read
+ACCEPTED  m0705 src/app/script.c:732 [int+1 0 -> 1] :: scoring memset count mutants are equivalent, ct_score_alg overwrites every consumed field and the off byte is tail padding never read
+ACCEPTED  m0706 src/app/script.c:732 [int-1 0 -> -1] :: scoring memset count mutants are equivalent, ct_score_alg overwrites every consumed field and the off byte is tail padding never read
+ACCEPTED  m0708 src/app/script.c:737 [cmp <= -> <] :: scheme id zero bound and payload mutants are unreachable over the pinned startup, app init seeds the speffz scheme so the default id is always positive and the seed branch never runs
+ACCEPTED  m0709 src/app/script.c:737 [int+1 0 -> 1] :: scheme id zero bound and payload mutants are unreachable over the pinned startup, app init seeds the speffz scheme so the default id is always positive and the seed branch never runs
+ACCEPTED  m0710 src/app/script.c:737 [int-1 0 -> -1] :: scheme id zero bound and payload mutants are unreachable over the pinned startup, app init seeds the speffz scheme so the default id is always positive and the seed branch never runs
+ACCEPTED  m0711 src/app/script.c:738 [cmp != -> ==] :: scheme seed guard mutants are unreachable over the pinned startup, the enclosing scheme id zero branch never runs because app init seeds the speffz scheme
+ACCEPTED  m0712 src/app/script.c:738 [int+1 0 -> 1] :: scheme seed guard mutants are unreachable over the pinned startup, the enclosing scheme id zero branch never runs because app init seeds the speffz scheme
+ACCEPTED  m0713 src/app/script.c:738 [int-1 0 -> -1] :: scheme seed guard mutants are unreachable over the pinned startup, the enclosing scheme id zero branch never runs because app init seeds the speffz scheme
+ACCEPTED  m0714 src/app/script.c:743 [cmp <= -> <] :: post seed scheme id bound mutant is unreachable over the pinned startup, the seeded default id is always positive
+ACCEPTED  m0716 src/app/script.c:743 [int-1 0 -> -1] :: post seed scheme id bound mutant is unreachable over the pinned startup, the seeded default id is always positive
+ACCEPTED  m0717 src/app/script.c:749 [int+1 0 -> 1] :: generated alg struct memset count mutants are equivalent, every consumed field is assigned before the store and the off byte is tail padding the row validator never reads
+ACCEPTED  m0718 src/app/script.c:749 [int-1 0 -> -1] :: generated alg struct memset count mutants are equivalent, every consumed field is assigned before the store and the off byte is tail padding the row validator never reads
+ACCEPTED  m0733 src/app/script.c:787 [ret-lit 0 -> 1] :: trainer step dispatcher default arm is unreachable, ct_script_step routes every trainer kind and the expect kinds route to the expect dispatcher
+ACCEPTED  m0734 src/app/script.c:787 [int+1 0 -> 1] :: trainer step dispatcher default arm is unreachable, ct_script_step routes every trainer kind and the expect kinds route to the expect dispatcher
+ACCEPTED  m0735 src/app/script.c:787 [int-1 0 -> -1] :: trainer step dispatcher default arm is unreachable, ct_script_step routes every trainer kind and the expect kinds route to the expect dispatcher
+ACCEPTED  m0748 src/app/script.c:800 [int+1 0 -> 1] :: due date day output literal mutants are unobservable, the due command validates only and discards the parsed day value
+ACCEPTED  m0749 src/app/script.c:800 [int-1 0 -> -1] :: due date day output literal mutants are unobservable, the due command validates only and discards the parsed day value
+ACCEPTED  m0784 src/app/script.c:862 [int+1 0 -> 1] :: run guard cap mutants are unreachable, every caller passes the full error buffer capacity and no pinned caller passes zero or one
+mutate: generated=825 build_failed=164 killed_by_tests=503 killed=667 survived=158 accepted=124 unexplained=34 skipped=0
+mutate: kill rate 667/825 = 80.8%, with accepted equivalents 791/825 = 95.9%
+mutate: wall 3049.5s

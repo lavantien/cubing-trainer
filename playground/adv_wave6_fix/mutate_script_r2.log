@@ -1,0 +1,1353 @@
+mkdir -p build_mutw6/bin
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/test_main.c -o build_mutw6/tobj/tests/test_main.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/framework.c -o build_mutw6/tobj/tests/framework.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_algs.c -o build_mutw6/tobj/tests/unit_algs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_anim.c -o build_mutw6/tobj/tests/unit_anim.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_app_paths.c -o build_mutw6/tobj/tests/unit_app_paths.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cards.c -o build_mutw6/tobj/tests/unit_cards.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cards_form.c -o build_mutw6/tobj/tests/unit_cards_form.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cfop.c -o build_mutw6/tobj/tests/unit_cfop.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_classify.c -o build_mutw6/tobj/tests/unit_classify.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_config.c -o build_mutw6/tobj/tests/unit_config.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cube.c -o build_mutw6/tobj/tests/unit_cube.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_db.c -o build_mutw6/tobj/tests/unit_db.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_e2e_script.c -o build_mutw6/tobj/tests/unit_e2e_script.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_fsrs.c -o build_mutw6/tobj/tests/unit_fsrs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_geometry.c -o build_mutw6/tobj/tests/unit_geometry.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_geometry_clock.c -o build_mutw6/tobj/tests/unit_geometry_clock.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_geometry_sq1.c -o build_mutw6/tobj/tests/unit_geometry_sq1.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_interchange.c -o build_mutw6/tobj/tests/unit_interchange.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_letter_scheme.c -o build_mutw6/tobj/tests/unit_letter_scheme.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_notation.c -o build_mutw6/tobj/tests/unit_notation.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_pack_seeds.c -o build_mutw6/tobj/tests/unit_pack_seeds.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_pack_seeds2.c -o build_mutw6/tobj/tests/unit_pack_seeds2.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_pack_startup.c -o build_mutw6/tobj/tests/unit_pack_startup.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_packs.c -o build_mutw6/tobj/tests/unit_packs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_renderer.c -o build_mutw6/tobj/tests/unit_renderer.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_review_form.c -o build_mutw6/tobj/tests/unit_review_form.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_score.c -o build_mutw6/tobj/tests/unit_score.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_selector.c -o build_mutw6/tobj/tests/unit_selector.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_selector_packs.c -o build_mutw6/tobj/tests/unit_selector_packs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_selector_screen.c -o build_mutw6/tobj/tests/unit_selector_screen.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_session.c -o build_mutw6/tobj/tests/unit_session.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_settings_form.c -o build_mutw6/tobj/tests/unit_settings_form.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_settings_merge.c -o build_mutw6/tobj/tests/unit_settings_merge.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_smoke.c -o build_mutw6/tobj/tests/unit_smoke.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_stats.c -o build_mutw6/tobj/tests/unit_stats.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_stats_repo.c -o build_mutw6/tobj/tests/unit_stats_repo.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_stats_screen.c -o build_mutw6/tobj/tests/unit_stats_screen.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_synth.c -o build_mutw6/tobj/tests/unit_synth.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_targets.c -o build_mutw6/tobj/tests/unit_targets.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_transform.c -o build_mutw6/tobj/tests/unit_transform.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_config.c -o build_mutw6/tobj/tests/fuzz_config.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_db.c -o build_mutw6/tobj/tests/fuzz_db.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_engine.c -o build_mutw6/tobj/tests/fuzz_engine.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_main.c -o build_mutw6/tobj/tests/fuzz_main.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_script.c -o build_mutw6/tobj/tests/fuzz_script.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_srs.c -o build_mutw6/tobj/tests/fuzz_srs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/app_loop.c -o build_mutw6/tobj/src/app/app_loop.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/headless.c -o build_mutw6/tobj/src/app/headless.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/paths.c -o build_mutw6/tobj/src/app/paths.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/script.c -o build_mutw6/tobj/src/app/script.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/script_expect.c -o build_mutw6/tobj/src/app/script_expect.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/config/config.c -o build_mutw6/tobj/src/config/config.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/cube.c -o build_mutw6/tobj/src/engine/cube.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/geometry.c -o build_mutw6/tobj/src/engine/geometry.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/geometry_clock.c -o build_mutw6/tobj/src/engine/geometry_clock.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/geometry_sq1.c -o build_mutw6/tobj/src/engine/geometry_sq1.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/notation.c -o build_mutw6/tobj/src/engine/notation.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/transform.c -o build_mutw6/tobj/src/engine/transform.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/classify.c -o build_mutw6/tobj/src/gen/classify.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/interchange.c -o build_mutw6/tobj/src/gen/interchange.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/score.c -o build_mutw6/tobj/src/gen/score.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/synth.c -o build_mutw6/tobj/src/gen/synth.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/targets.c -o build_mutw6/tobj/src/gen/targets.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/packs/packs.c -o build_mutw6/tobj/src/packs/packs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/packs/provenance.c -o build_mutw6/tobj/src/packs/provenance.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/packs/seed_registry.c -o build_mutw6/tobj/src/packs/seed_registry.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/render/anim.c -o build_mutw6/tobj/src/render/anim.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/render/renderer.c -o build_mutw6/tobj/src/render/renderer.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/srs/fsrs.c -o build_mutw6/tobj/src/srs/fsrs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/stats/stats.c -o build_mutw6/tobj/src/stats/stats.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/db.c -o build_mutw6/tobj/src/storage/db.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/migrate.c -o build_mutw6/tobj/src/storage/migrate.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_algs.c -o build_mutw6/tobj/src/storage/repo_algs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_cards.c -o build_mutw6/tobj/src/storage/repo_cards.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_reviews.c -o build_mutw6/tobj/src/storage/repo_reviews.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_settings.c -o build_mutw6/tobj/src/storage/repo_settings.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_stats.c -o build_mutw6/tobj/src/storage/repo_stats.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/trainer/cfop.c -o build_mutw6/tobj/src/trainer/cfop.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/trainer/selector.c -o build_mutw6/tobj/src/trainer/selector.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/trainer/session.c -o build_mutw6/tobj/src/trainer/session.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_cards.c -o build_mutw6/tobj/src/ui/screen_cards.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_menu.c -o build_mutw6/tobj/src/ui/screen_menu.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_review.c -o build_mutw6/tobj/src/ui/screen_review.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_settings.c -o build_mutw6/tobj/src/ui/screen_settings.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_stats.c -o build_mutw6/tobj/src/ui/screen_stats.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_trainer.c -o build_mutw6/tobj/src/ui/screen_trainer.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/widgets.c -o build_mutw6/tobj/src/ui/widgets.o
+echo '#define RAYGUI_IMPLEMENTATION' > build_mutw6/raygui_impl.c
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/raudio.c -o build_mutw6/obj/third_party/raylib/src/raudio.o
+echo '#include "raygui.h"' >> build_mutw6/raygui_impl.c
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rcore.c -o build_mutw6/obj/third_party/raylib/src/rcore.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rglfw.c -o build_mutw6/obj/third_party/raylib/src/rglfw.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rmodels.c -o build_mutw6/obj/third_party/raylib/src/rmodels.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rshapes.c -o build_mutw6/obj/third_party/raylib/src/rshapes.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rtext.c -o build_mutw6/obj/third_party/raylib/src/rtext.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rtextures.c -o build_mutw6/obj/third_party/raylib/src/rtextures.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -Ithird_party/sqlite -Wno-error -MMD -MP -c third_party/sqlite/sqlite3.c -o build_mutw6/obj/third_party/sqlite/sqlite3.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic tools/mutate.c -o build_mutw6/bin/mutate.exe
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -MMD -MP -Ithird_party/raylib/src -Ithird_party/raygui/src -Wno-error -c build_mutw6/raygui_impl.c -o build_mutw6/obj/raygui_impl.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_mutw6/bin/mutate.exe src/app/script.c build_mutw6 e2e_parse_flow e2e_parse_comments_and_quotes e2e_parse_errors e2e_parse_caps e2e_run_review_loop e2e_run_expect_failure e2e_run_cfop_cards e2e_run_settings_form e2e_run_restart_merge e2e_run_trainer_generate e2e_run_trainer_edge_generate fuzz_script_parse
+mutate: scope=src/app/script.c files=1 sites=831 suites=12
+KILLED    m0001 src/app/script.c:18 [arith * -> /]
+          build break
+KILLED    m0002 src/app/script.c:24 [int+1 0 -> 1]
+KILLED    m0003 src/app/script.c:24 [int-1 0 -> -1]
+KILLED    m0004 src/app/script.c:25 [int+1 1 -> 2]
+KILLED    m0005 src/app/script.c:25 [int-1 1 -> 0]
+KILLED    m0006 src/app/script.c:26 [int+1 1 -> 2]
+KILLED    m0007 src/app/script.c:26 [int-1 1 -> 0]
+KILLED    m0008 src/app/script.c:27 [int+1 1 -> 2]
+KILLED    m0009 src/app/script.c:27 [int-1 1 -> 0]
+KILLED    m0010 src/app/script.c:28 [int+1 0 -> 1]
+KILLED    m0011 src/app/script.c:28 [int-1 0 -> -1]
+KILLED    m0012 src/app/script.c:30 [int+1 0 -> 1]
+KILLED    m0013 src/app/script.c:30 [int-1 0 -> -1]
+KILLED    m0014 src/app/script.c:31 [int+1 0 -> 1]
+KILLED    m0015 src/app/script.c:31 [int-1 0 -> -1]
+KILLED    m0016 src/app/script.c:32 [int+1 1 -> 2]
+KILLED    m0017 src/app/script.c:32 [int-1 1 -> 0]
+KILLED    m0018 src/app/script.c:34 [int+1 0 -> 1]
+KILLED    m0019 src/app/script.c:34 [int-1 0 -> -1]
+KILLED    m0020 src/app/script.c:35 [int+1 0 -> 1]
+KILLED    m0021 src/app/script.c:35 [int-1 0 -> -1]
+KILLED    m0022 src/app/script.c:36 [int+1 1 -> 2]
+KILLED    m0023 src/app/script.c:36 [int-1 1 -> 0]
+KILLED    m0024 src/app/script.c:37 [int+1 0 -> 1]
+KILLED    m0025 src/app/script.c:37 [int-1 0 -> -1]
+KILLED    m0026 src/app/script.c:38 [int+1 1 -> 2]
+KILLED    m0027 src/app/script.c:38 [int-1 1 -> 0]
+KILLED    m0028 src/app/script.c:39 [int+1 0 -> 1]
+KILLED    m0029 src/app/script.c:39 [int-1 0 -> -1]
+KILLED    m0030 src/app/script.c:40 [int+1 1 -> 2]
+KILLED    m0031 src/app/script.c:40 [int-1 1 -> 0]
+KILLED    m0032 src/app/script.c:42 [int+1 0 -> 1]
+KILLED    m0033 src/app/script.c:42 [int-1 0 -> -1]
+KILLED    m0034 src/app/script.c:44 [int+1 1 -> 2]
+KILLED    m0035 src/app/script.c:44 [int-1 1 -> 0]
+KILLED    m0036 src/app/script.c:45 [int+1 0 -> 1]
+KILLED    m0037 src/app/script.c:45 [int-1 0 -> -1]
+KILLED    m0038 src/app/script.c:46 [int+1 1 -> 2]
+KILLED    m0039 src/app/script.c:46 [int-1 1 -> 0]
+KILLED    m0040 src/app/script.c:56 [int+1 2 -> 3]
+KILLED    m0041 src/app/script.c:56 [int-1 2 -> 1]
+KILLED    m0042 src/app/script.c:61 [arith * -> /]
+          build break
+KILLED    m0043 src/app/script.c:71 [arith * -> /]
+          build break
+KILLED    m0044 src/app/script.c:86 [arith * -> /]
+          build break
+KILLED    m0045 src/app/script.c:100 [int+1 0 -> 1]
+KILLED    m0046 src/app/script.c:100 [int-1 0 -> -1]
+          build break
+KILLED    m0047 src/app/script.c:101 [int+1 1 -> 2]
+KILLED    m0048 src/app/script.c:101 [int-1 1 -> 0]
+KILLED    m0049 src/app/script.c:102 [int+1 0 -> 1]
+          build break
+KILLED    m0050 src/app/script.c:102 [int-1 0 -> -1]
+KILLED    m0051 src/app/script.c:103 [int+1 1 -> 2]
+          build break
+KILLED    m0052 src/app/script.c:103 [int-1 1 -> 0]
+          build break
+SURVIVED  m0053 src/app/script.c:104 [int+1 2 -> 3]
+KILLED    m0054 src/app/script.c:104 [int-1 2 -> 1]
+          build break
+KILLED    m0055 src/app/script.c:105 [int+1 4 -> 5]
+KILLED    m0056 src/app/script.c:105 [int-1 4 -> 3]
+KILLED    m0057 src/app/script.c:106 [int+1 5 -> 6]
+KILLED    m0058 src/app/script.c:106 [int-1 5 -> 4]
+KILLED    m0059 src/app/script.c:107 [int+1 8 -> 9]
+KILLED    m0060 src/app/script.c:107 [int-1 8 -> 7]
+SURVIVED  m0061 src/app/script.c:108 [int+1 8 -> 9]
+SURVIVED  m0062 src/app/script.c:108 [int-1 8 -> 7]
+KILLED    m0063 src/app/script.c:112 [cmp == -> !=]
+KILLED    m0064 src/app/script.c:112 [logic || -> &&]
+          build break
+KILLED    m0065 src/app/script.c:112 [cmp == -> !=]
+KILLED    m0066 src/app/script.c:112 [logic || -> &&]
+          build break
+KILLED    m0067 src/app/script.c:112 [cmp == -> !=]
+KILLED    m0068 src/app/script.c:115 [arith * -> /]
+          build break
+KILLED    m0069 src/app/script.c:115 [arith * -> /]
+          build break
+KILLED    m0070 src/app/script.c:116 [arith * -> /]
+          build break
+KILLED    m0071 src/app/script.c:117 [int+1 0 -> 1]
+KILLED    m0072 src/app/script.c:117 [int-1 0 -> -1]
+KILLED    m0073 src/app/script.c:117 [cmp < -> <=]
+KILLED    m0074 src/app/script.c:118 [cmp == -> !=]
+KILLED    m0075 src/app/script.c:118 [int+1 0 -> 1]
+KILLED    m0076 src/app/script.c:118 [int-1 0 -> -1]
+KILLED    m0077 src/app/script.c:125 [arith * -> /]
+          build break
+KILLED    m0078 src/app/script.c:125 [arith * -> /]
+          build break
+KILLED    m0079 src/app/script.c:125 [arith * -> /]
+          build break
+KILLED    m0080 src/app/script.c:126 [cmp == -> !=]
+KILLED    m0081 src/app/script.c:126 [logic || -> &&]
+          build break
+KILLED    m0082 src/app/script.c:126 [cmp == -> !=]
+KILLED    m0083 src/app/script.c:126 [logic || -> &&]
+          build break
+KILLED    m0084 src/app/script.c:126 [cmp == -> !=]
+KILLED    m0085 src/app/script.c:126 [logic || -> &&]
+          build break
+KILLED    m0086 src/app/script.c:126 [cmp == -> !=]
+SURVIVED  m0087 src/app/script.c:126 [int+1 0 -> 1]
+KILLED    m0088 src/app/script.c:126 [int-1 0 -> -1]
+          build break
+SURVIVED  m0089 src/app/script.c:129 [int+1 0 -> 1]
+SURVIVED  m0090 src/app/script.c:129 [int-1 0 -> -1]
+SURVIVED  m0091 src/app/script.c:131 [cmp >= -> >]
+KILLED    m0092 src/app/script.c:135 [arith + -> -]
+SURVIVED  m0093 src/app/script.c:135 [int+1 1 -> 2]
+SURVIVED  m0094 src/app/script.c:135 [int-1 1 -> 0]
+KILLED    m0095 src/app/script.c:136 [int+1 0 -> 1]
+KILLED    m0096 src/app/script.c:136 [int-1 0 -> -1]
+KILLED    m0097 src/app/script.c:137 [arith * -> /]
+          build break
+KILLED    m0098 src/app/script.c:138 [arith * -> /]
+          build break
+KILLED    m0099 src/app/script.c:138 [arith + -> -]
+KILLED    m0100 src/app/script.c:139 [int+1 1 -> 2]
+KILLED    m0101 src/app/script.c:139 [int-1 1 -> 0]
+KILLED    m0102 src/app/script.c:140 [cmp < -> <=]
+KILLED    m0103 src/app/script.c:141 [arith * -> /]
+          build break
+KILLED    m0104 src/app/script.c:141 [cmp == -> !=]
+KILLED    m0105 src/app/script.c:146 [arith * -> /]
+          build break
+KILLED    m0106 src/app/script.c:150 [arith * -> /]
+          build break
+KILLED    m0107 src/app/script.c:150 [cmp == -> !=]
+SURVIVED  m0108 src/app/script.c:151 [cmp < -> <=]
+KILLED    m0109 src/app/script.c:151 [logic && -> ||]
+KILLED    m0110 src/app/script.c:151 [arith * -> /]
+          build break
+KILLED    m0111 src/app/script.c:151 [cmp != -> ==]
+KILLED    m0112 src/app/script.c:156 [cmp == -> !=]
+KILLED    m0113 src/app/script.c:160 [arith * -> /]
+          build break
+SURVIVED  m0114 src/app/script.c:161 [int+1 0 -> 1]
+SURVIVED  m0115 src/app/script.c:161 [int-1 0 -> -1]
+KILLED    m0116 src/app/script.c:161 [arith * -> /]
+          build break
+KILLED    m0117 src/app/script.c:164 [arith * -> /]
+          build break
+SURVIVED  m0118 src/app/script.c:165 [cmp < -> <=]
+KILLED    m0119 src/app/script.c:165 [logic && -> ||]
+KILLED    m0120 src/app/script.c:165 [arith * -> /]
+          build break
+KILLED    m0121 src/app/script.c:165 [cmp != -> ==]
+SURVIVED  m0122 src/app/script.c:168 [cmp < -> <=]
+KILLED    m0123 src/app/script.c:169 [int+1 0 -> 1]
+KILLED    m0124 src/app/script.c:169 [int-1 0 -> -1]
+SURVIVED  m0125 src/app/script.c:170 [cmp < -> <=]
+SURVIVED  m0126 src/app/script.c:171 [cmp < -> <=]
+KILLED    m0127 src/app/script.c:171 [logic && -> ||]
+KILLED    m0128 src/app/script.c:171 [arith * -> /]
+          build break
+KILLED    m0129 src/app/script.c:174 [cmp >= -> >]
+KILLED    m0130 src/app/script.c:174 [logic || -> &&]
+KILLED    m0131 src/app/script.c:174 [arith * -> /]
+          build break
+KILLED    m0132 src/app/script.c:174 [cmp == -> !=]
+KILLED    m0133 src/app/script.c:177 [cmp == -> !=]
+KILLED    m0134 src/app/script.c:181 [arith * -> /]
+          build break
+KILLED    m0135 src/app/script.c:182 [arith * -> /]
+          build break
+KILLED    m0136 src/app/script.c:182 [cmp == -> !=]
+KILLED    m0137 src/app/script.c:183 [arith + -> -]
+KILLED    m0138 src/app/script.c:183 [int+1 1 -> 2]
+KILLED    m0139 src/app/script.c:183 [int-1 1 -> 0]
+KILLED    m0140 src/app/script.c:184 [arith * -> /]
+          build break
+SURVIVED  m0141 src/app/script.c:185 [cmp < -> <=]
+KILLED    m0142 src/app/script.c:185 [logic && -> ||]
+KILLED    m0143 src/app/script.c:185 [arith * -> /]
+          build break
+KILLED    m0144 src/app/script.c:185 [cmp != -> ==]
+KILLED    m0145 src/app/script.c:188 [cmp >= -> >]
+KILLED    m0146 src/app/script.c:192 [arith * -> /]
+          build break
+KILLED    m0147 src/app/script.c:193 [arith + -> -]
+SURVIVED  m0148 src/app/script.c:193 [int+1 1 -> 2]
+KILLED    m0149 src/app/script.c:193 [int-1 1 -> 0]
+KILLED    m0150 src/app/script.c:196 [cmp < -> <=]
+KILLED    m0151 src/app/script.c:196 [logic && -> ||]
+          build break
+KILLED    m0152 src/app/script.c:196 [not-del ! -> (deleted)]
+KILLED    m0153 src/app/script.c:196 [arith * -> /]
+          build break
+KILLED    m0154 src/app/script.c:196 [logic && -> ||]
+          build break
+KILLED    m0155 src/app/script.c:196 [arith * -> /]
+          build break
+KILLED    m0156 src/app/script.c:196 [cmp != -> ==]
+SURVIVED  m0157 src/app/script.c:199 [cmp < -> <=]
+KILLED    m0158 src/app/script.c:199 [arith * -> /]
+          build break
+KILLED    m0159 src/app/script.c:200 [arith * -> /]
+          build break
+KILLED    m0160 src/app/script.c:202 [cmp == -> !=]
+KILLED    m0161 src/app/script.c:206 [arith - -> +]
+          build break
+KILLED    m0162 src/app/script.c:210 [arith + -> -]
+KILLED    m0163 src/app/script.c:210 [int+1 1 -> 2]
+KILLED    m0164 src/app/script.c:210 [int-1 1 -> 0]
+KILLED    m0165 src/app/script.c:214 [cmp == -> !=]
+KILLED    m0166 src/app/script.c:214 [int+1 0 -> 1]
+SURVIVED  m0167 src/app/script.c:214 [int-1 0 -> -1]
+KILLED    m0168 src/app/script.c:217 [arith * -> /]
+          build break
+KILLED    m0169 src/app/script.c:217 [arith + -> -]
+KILLED    m0170 src/app/script.c:218 [arith * -> /]
+          build break
+KILLED    m0171 src/app/script.c:220 [cmp == -> !=]
+KILLED    m0172 src/app/script.c:220 [int+1 0 -> 1]
+KILLED    m0173 src/app/script.c:220 [int-1 0 -> -1]
+SURVIVED  m0174 src/app/script.c:221 [cmp < -> <=]
+SURVIVED  m0175 src/app/script.c:221 [arith + -> -]
+SURVIVED  m0176 src/app/script.c:221 [int+1 1 -> 2]
+SURVIVED  m0177 src/app/script.c:221 [int-1 1 -> 0]
+KILLED    m0178 src/app/script.c:226 [arith / -> *]
+SURVIVED  m0179 src/app/script.c:226 [int+1 0 -> 1]
+SURVIVED  m0180 src/app/script.c:226 [int-1 0 -> -1]
+KILLED    m0181 src/app/script.c:227 [arith + -> -]
+KILLED    m0182 src/app/script.c:228 [arith + -> -]
+KILLED    m0183 src/app/script.c:228 [int+1 1 -> 2]
+KILLED    m0184 src/app/script.c:228 [int-1 1 -> 0]
+KILLED    m0185 src/app/script.c:231 [arith / -> *]
+SURVIVED  m0186 src/app/script.c:231 [int+1 0 -> 1]
+SURVIVED  m0187 src/app/script.c:231 [int-1 0 -> -1]
+KILLED    m0188 src/app/script.c:232 [arith + -> -]
+KILLED    m0189 src/app/script.c:232 [int+1 1 -> 2]
+KILLED    m0190 src/app/script.c:232 [int-1 1 -> 0]
+KILLED    m0191 src/app/script.c:234 [cmp == -> !=]
+KILLED    m0192 src/app/script.c:238 [arith - -> +]
+KILLED    m0193 src/app/script.c:238 [cmp != -> ==]
+KILLED    m0194 src/app/script.c:244 [arith - -> +]
+          build break
+KILLED    m0195 src/app/script.c:245 [arith - -> +]
+          build break
+KILLED    m0196 src/app/script.c:246 [arith - -> +]
+          build break
+KILLED    m0197 src/app/script.c:247 [arith - -> +]
+          build break
+KILLED    m0198 src/app/script.c:248 [arith - -> +]
+          build break
+KILLED    m0199 src/app/script.c:249 [arith - -> +]
+          build break
+KILLED    m0200 src/app/script.c:250 [arith - -> +]
+          build break
+KILLED    m0201 src/app/script.c:251 [arith - -> +]
+          build break
+KILLED    m0202 src/app/script.c:253 [int+1 0 -> 1]
+KILLED    m0203 src/app/script.c:253 [int-1 0 -> -1]
+SURVIVED  m0204 src/app/script.c:253 [cmp < -> <=]
+KILLED    m0205 src/app/script.c:254 [arith + -> -]
+SURVIVED  m0206 src/app/script.c:255 [arith + -> -]
+KILLED    m0207 src/app/script.c:257 [cmp >= -> >]
+KILLED    m0208 src/app/script.c:258 [arith - -> +]
+KILLED    m0209 src/app/script.c:259 [arith + -> -]
+KILLED    m0210 src/app/script.c:259 [cmp < -> <=]
+KILLED    m0211 src/app/script.c:259 [int+1 0 -> 1]
+KILLED    m0212 src/app/script.c:259 [int-1 0 -> -1]
+KILLED    m0213 src/app/script.c:268 [cmp == -> !=]
+KILLED    m0214 src/app/script.c:268 [int+1 0 -> 1]
+KILLED    m0215 src/app/script.c:268 [int-1 0 -> -1]
+KILLED    m0216 src/app/script.c:272 [ret-lit 0 -> 1]
+KILLED    m0217 src/app/script.c:272 [int+1 0 -> 1]
+KILLED    m0218 src/app/script.c:272 [int-1 0 -> -1]
+KILLED    m0219 src/app/script.c:275 [arith * -> /]
+          build break
+KILLED    m0220 src/app/script.c:275 [arith * -> /]
+          build break
+KILLED    m0221 src/app/script.c:275 [arith * -> /]
+          build break
+KILLED    m0222 src/app/script.c:276 [cmp == -> !=]
+KILLED    m0223 src/app/script.c:276 [logic || -> &&]
+          build break
+KILLED    m0224 src/app/script.c:276 [cmp == -> !=]
+KILLED    m0225 src/app/script.c:276 [logic || -> &&]
+          build break
+KILLED    m0226 src/app/script.c:276 [cmp < -> <=]
+KILLED    m0227 src/app/script.c:276 [int+1 0 -> 1]
+SURVIVED  m0228 src/app/script.c:276 [int-1 0 -> -1]
+KILLED    m0229 src/app/script.c:276 [logic || -> &&]
+          build break
+SURVIVED  m0230 src/app/script.c:276 [cmp >= -> >]
+KILLED    m0231 src/app/script.c:276 [logic || -> &&]
+          build break
+SURVIVED  m0232 src/app/script.c:276 [cmp >= -> >]
+KILLED    m0233 src/app/script.c:279 [arith + -> -]
+KILLED    m0234 src/app/script.c:282 [arith * -> /]
+          build break
+KILLED    m0235 src/app/script.c:282 [arith * -> /]
+          build break
+KILLED    m0236 src/app/script.c:282 [arith * -> /]
+          build break
+KILLED    m0237 src/app/script.c:287 [arith * -> /]
+          build break
+KILLED    m0238 src/app/script.c:287 [arith * -> /]
+          build break
+SURVIVED  m0239 src/app/script.c:288 [int+1 0 -> 1]
+SURVIVED  m0240 src/app/script.c:288 [int-1 0 -> -1]
+KILLED    m0241 src/app/script.c:289 [arith * -> /]
+          build break
+KILLED    m0242 src/app/script.c:291 [cmp == -> !=]
+KILLED    m0243 src/app/script.c:291 [logic || -> &&]
+          build break
+KILLED    m0244 src/app/script.c:291 [int+1 0 -> 1]
+KILLED    m0245 src/app/script.c:291 [int-1 0 -> -1]
+KILLED    m0246 src/app/script.c:291 [cmp != -> ==]
+KILLED    m0247 src/app/script.c:291 [logic || -> &&]
+          build break
+KILLED    m0248 src/app/script.c:291 [cmp == -> !=]
+SURVIVED  m0249 src/app/script.c:292 [arith - -> +]
+SURVIVED  m0250 src/app/script.c:292 [int+1 1 -> 2]
+SURVIVED  m0251 src/app/script.c:292 [int-1 1 -> 0]
+KILLED    m0252 src/app/script.c:294 [arith * -> /]
+          build break
+KILLED    m0253 src/app/script.c:295 [ret-lit 0 -> 1]
+KILLED    m0254 src/app/script.c:295 [int+1 0 -> 1]
+KILLED    m0255 src/app/script.c:295 [int-1 0 -> -1]
+KILLED    m0256 src/app/script.c:298 [arith * -> /]
+          build break
+KILLED    m0257 src/app/script.c:298 [arith * -> /]
+          build break
+SURVIVED  m0258 src/app/script.c:299 [int+1 0 -> 1]
+SURVIVED  m0259 src/app/script.c:299 [int-1 0 -> -1]
+KILLED    m0260 src/app/script.c:300 [arith * -> /]
+          build break
+KILLED    m0261 src/app/script.c:302 [cmp == -> !=]
+KILLED    m0262 src/app/script.c:302 [logic || -> &&]
+          build break
+KILLED    m0263 src/app/script.c:302 [int+1 0 -> 1]
+KILLED    m0264 src/app/script.c:302 [int-1 0 -> -1]
+KILLED    m0265 src/app/script.c:302 [cmp != -> ==]
+KILLED    m0266 src/app/script.c:302 [logic || -> &&]
+          build break
+KILLED    m0267 src/app/script.c:302 [cmp == -> !=]
+KILLED    m0268 src/app/script.c:302 [logic || -> &&]
+          build break
+KILLED    m0269 src/app/script.c:302 [not-del ! -> (deleted)]
+SURVIVED  m0270 src/app/script.c:303 [arith - -> +]
+SURVIVED  m0271 src/app/script.c:303 [int+1 1 -> 2]
+SURVIVED  m0272 src/app/script.c:303 [int-1 1 -> 0]
+KILLED    m0273 src/app/script.c:305 [arith * -> /]
+          build break
+KILLED    m0274 src/app/script.c:306 [ret-lit 0 -> 1]
+KILLED    m0275 src/app/script.c:306 [int+1 0 -> 1]
+KILLED    m0276 src/app/script.c:306 [int-1 0 -> -1]
+KILLED    m0277 src/app/script.c:309 [arith * -> /]
+          build break
+KILLED    m0278 src/app/script.c:310 [cmp == -> !=]
+KILLED    m0279 src/app/script.c:310 [int+1 0 -> 1]
+KILLED    m0280 src/app/script.c:310 [int-1 0 -> -1]
+KILLED    m0281 src/app/script.c:313 [cmp == -> !=]
+KILLED    m0282 src/app/script.c:313 [int+1 0 -> 1]
+SURVIVED  m0283 src/app/script.c:313 [int-1 0 -> -1]
+KILLED    m0284 src/app/script.c:316 [cmp == -> !=]
+KILLED    m0285 src/app/script.c:316 [int+1 0 -> 1]
+SURVIVED  m0286 src/app/script.c:316 [int-1 0 -> -1]
+KILLED    m0287 src/app/script.c:319 [cmp == -> !=]
+KILLED    m0288 src/app/script.c:319 [int+1 0 -> 1]
+SURVIVED  m0289 src/app/script.c:319 [int-1 0 -> -1]
+KILLED    m0290 src/app/script.c:322 [arith - -> +]
+SURVIVED  m0291 src/app/script.c:322 [int+1 1 -> 2]
+KILLED    m0292 src/app/script.c:322 [int-1 1 -> 0]
+KILLED    m0293 src/app/script.c:328 [cmp == -> !=]
+SURVIVED  m0294 src/app/script.c:330 [cmp >= -> >]
+SURVIVED  m0295 src/app/script.c:332 [cmp <= -> <]
+SURVIVED  m0296 src/app/script.c:334 [cmp != -> ==]
+KILLED    m0297 src/app/script.c:339 [arith - -> +]
+SURVIVED  m0298 src/app/script.c:340 [cmp < -> <=]
+SURVIVED  m0299 src/app/script.c:341 [arith - -> +]
+SURVIVED  m0300 src/app/script.c:345 [cmp <= -> <]
+SURVIVED  m0301 src/app/script.c:347 [cmp >= -> >]
+SURVIVED  m0302 src/app/script.c:349 [cmp <= -> <]
+SURVIVED  m0303 src/app/script.c:351 [cmp > -> >=]
+KILLED    m0304 src/app/script.c:355 [arith * -> /]
+          build break
+KILLED    m0305 src/app/script.c:355 [arith * -> /]
+          build break
+KILLED    m0306 src/app/script.c:356 [int+1 0 -> 1]
+KILLED    m0307 src/app/script.c:356 [int-1 0 -> -1]
+KILLED    m0308 src/app/script.c:357 [int+1 0 -> 1]
+KILLED    m0309 src/app/script.c:357 [int-1 0 -> -1]
+KILLED    m0310 src/app/script.c:357 [cmp < -> <=]
+KILLED    m0311 src/app/script.c:358 [cmp < -> <=]
+KILLED    m0312 src/app/script.c:358 [logic || -> &&]
+          build break
+SURVIVED  m0313 src/app/script.c:358 [cmp > -> >=]
+SURVIVED  m0314 src/app/script.c:359 [arith - -> +]
+SURVIVED  m0315 src/app/script.c:359 [int+1 1 -> 2]
+SURVIVED  m0316 src/app/script.c:359 [int-1 1 -> 0]
+KILLED    m0317 src/app/script.c:361 [arith * -> /]
+KILLED    m0318 src/app/script.c:361 [arith + -> -]
+KILLED    m0319 src/app/script.c:361 [arith - -> +]
+KILLED    m0320 src/app/script.c:363 [cmp != -> ==]
+SURVIVED  m0321 src/app/script.c:364 [arith - -> +]
+SURVIVED  m0322 src/app/script.c:364 [int+1 1 -> 2]
+SURVIVED  m0323 src/app/script.c:364 [int-1 1 -> 0]
+KILLED    m0324 src/app/script.c:366 [int+1 0 -> 1]
+KILLED    m0325 src/app/script.c:366 [int-1 0 -> -1]
+KILLED    m0326 src/app/script.c:367 [cmp < -> <=]
+KILLED    m0327 src/app/script.c:367 [arith + -> -]
+KILLED    m0328 src/app/script.c:367 [int+1 2 -> 3]
+KILLED    m0329 src/app/script.c:367 [int-1 2 -> 1]
+KILLED    m0330 src/app/script.c:368 [cmp < -> <=]
+KILLED    m0331 src/app/script.c:368 [logic || -> &&]
+          build break
+SURVIVED  m0332 src/app/script.c:368 [cmp > -> >=]
+SURVIVED  m0333 src/app/script.c:369 [arith - -> +]
+SURVIVED  m0334 src/app/script.c:369 [int+1 1 -> 2]
+SURVIVED  m0335 src/app/script.c:369 [int-1 1 -> 0]
+KILLED    m0336 src/app/script.c:371 [arith * -> /]
+KILLED    m0337 src/app/script.c:371 [arith + -> -]
+KILLED    m0338 src/app/script.c:371 [arith - -> +]
+KILLED    m0339 src/app/script.c:373 [arith + -> -]
+KILLED    m0340 src/app/script.c:373 [int+1 2 -> 3]
+KILLED    m0341 src/app/script.c:373 [int-1 2 -> 1]
+KILLED    m0342 src/app/script.c:373 [cmp != -> ==]
+SURVIVED  m0343 src/app/script.c:374 [arith - -> +]
+SURVIVED  m0344 src/app/script.c:374 [int+1 1 -> 2]
+SURVIVED  m0345 src/app/script.c:374 [int-1 1 -> 0]
+KILLED    m0346 src/app/script.c:376 [int+1 0 -> 1]
+KILLED    m0347 src/app/script.c:376 [int-1 0 -> -1]
+KILLED    m0348 src/app/script.c:377 [cmp < -> <=]
+KILLED    m0349 src/app/script.c:377 [arith + -> -]
+KILLED    m0350 src/app/script.c:377 [int+1 2 -> 3]
+KILLED    m0351 src/app/script.c:377 [int-1 2 -> 1]
+KILLED    m0352 src/app/script.c:378 [cmp < -> <=]
+KILLED    m0353 src/app/script.c:378 [logic || -> &&]
+          build break
+SURVIVED  m0354 src/app/script.c:378 [cmp > -> >=]
+SURVIVED  m0355 src/app/script.c:379 [arith - -> +]
+SURVIVED  m0356 src/app/script.c:379 [int+1 1 -> 2]
+SURVIVED  m0357 src/app/script.c:379 [int-1 1 -> 0]
+KILLED    m0358 src/app/script.c:381 [arith * -> /]
+KILLED    m0359 src/app/script.c:381 [arith + -> -]
+KILLED    m0360 src/app/script.c:381 [arith - -> +]
+KILLED    m0361 src/app/script.c:383 [arith * -> /]
+          build break
+KILLED    m0362 src/app/script.c:384 [ret-lit 0 -> 1]
+KILLED    m0363 src/app/script.c:384 [int+1 0 -> 1]
+KILLED    m0364 src/app/script.c:384 [int-1 0 -> -1]
+KILLED    m0365 src/app/script.c:387 [arith * -> /]
+          build break
+KILLED    m0366 src/app/script.c:387 [arith * -> /]
+          build break
+SURVIVED  m0367 src/app/script.c:389 [int+1 0 -> 1]
+KILLED    m0368 src/app/script.c:389 [int-1 0 -> -1]
+KILLED    m0369 src/app/script.c:389 [cmp == -> !=]
+SURVIVED  m0370 src/app/script.c:390 [arith - -> +]
+SURVIVED  m0371 src/app/script.c:390 [int+1 1 -> 2]
+SURVIVED  m0372 src/app/script.c:390 [int-1 1 -> 0]
+KILLED    m0373 src/app/script.c:395 [arith * -> /]
+          build break
+KILLED    m0374 src/app/script.c:395 [arith * -> /]
+          build break
+KILLED    m0375 src/app/script.c:395 [arith * -> /]
+          build break
+KILLED    m0376 src/app/script.c:395 [arith * -> /]
+          build break
+KILLED    m0377 src/app/script.c:396 [cmp == -> !=]
+KILLED    m0378 src/app/script.c:396 [int+1 0 -> 1]
+KILLED    m0379 src/app/script.c:396 [int-1 0 -> -1]
+KILLED    m0380 src/app/script.c:397 [arith * -> /]
+          build break
+KILLED    m0381 src/app/script.c:400 [cmp == -> !=]
+KILLED    m0382 src/app/script.c:400 [int+1 0 -> 1]
+SURVIVED  m0383 src/app/script.c:400 [int-1 0 -> -1]
+KILLED    m0384 src/app/script.c:401 [arith * -> /]
+          build break
+KILLED    m0385 src/app/script.c:404 [cmp == -> !=]
+KILLED    m0386 src/app/script.c:404 [int+1 0 -> 1]
+SURVIVED  m0387 src/app/script.c:404 [int-1 0 -> -1]
+KILLED    m0388 src/app/script.c:405 [arith * -> /]
+          build break
+KILLED    m0389 src/app/script.c:408 [cmp == -> !=]
+KILLED    m0390 src/app/script.c:408 [int+1 0 -> 1]
+SURVIVED  m0391 src/app/script.c:408 [int-1 0 -> -1]
+KILLED    m0392 src/app/script.c:409 [arith * -> /]
+          build break
+KILLED    m0393 src/app/script.c:412 [cmp == -> !=]
+KILLED    m0394 src/app/script.c:412 [int+1 0 -> 1]
+KILLED    m0395 src/app/script.c:412 [int-1 0 -> -1]
+KILLED    m0396 src/app/script.c:413 [arith * -> /]
+          build break
+KILLED    m0397 src/app/script.c:419 [arith * -> /]
+          build break
+KILLED    m0398 src/app/script.c:419 [arith * -> /]
+          build break
+KILLED    m0399 src/app/script.c:419 [arith * -> /]
+          build break
+KILLED    m0400 src/app/script.c:420 [arith * -> /]
+          build break
+KILLED    m0401 src/app/script.c:420 [arith * -> /]
+          build break
+KILLED    m0402 src/app/script.c:421 [arith * -> /]
+          build break
+SURVIVED  m0403 src/app/script.c:424 [int+1 0 -> 1]
+SURVIVED  m0404 src/app/script.c:424 [int-1 0 -> -1]
+KILLED    m0405 src/app/script.c:425 [cmp == -> !=]
+KILLED    m0406 src/app/script.c:427 [int+1 0 -> 1]
+KILLED    m0407 src/app/script.c:427 [int-1 0 -> -1]
+KILLED    m0408 src/app/script.c:429 [int+1 0 -> 1]
+KILLED    m0409 src/app/script.c:429 [int-1 0 -> -1]
+KILLED    m0410 src/app/script.c:430 [cmp == -> !=]
+KILLED    m0411 src/app/script.c:431 [int+1 0 -> 1]
+KILLED    m0412 src/app/script.c:431 [int-1 0 -> -1]
+KILLED    m0413 src/app/script.c:436 [int+1 0 -> 1]
+KILLED    m0414 src/app/script.c:436 [int-1 0 -> -1]
+KILLED    m0415 src/app/script.c:436 [cmp != -> ==]
+KILLED    m0416 src/app/script.c:436 [int+1 0 -> 1]
+KILLED    m0417 src/app/script.c:436 [int-1 0 -> -1]
+KILLED    m0418 src/app/script.c:440 [cmp == -> !=]
+KILLED    m0419 src/app/script.c:441 [int+1 0 -> 1]
+KILLED    m0420 src/app/script.c:441 [int-1 0 -> -1]
+KILLED    m0421 src/app/script.c:446 [cmp == -> !=]
+KILLED    m0422 src/app/script.c:447 [int+1 0 -> 1]
+KILLED    m0423 src/app/script.c:447 [int-1 0 -> -1]
+SURVIVED  m0424 src/app/script.c:451 [int+1 0 -> 1]
+SURVIVED  m0425 src/app/script.c:451 [int-1 0 -> -1]
+KILLED    m0426 src/app/script.c:452 [arith * -> /]
+          build break
+KILLED    m0427 src/app/script.c:452 [int+1 0 -> 1]
+KILLED    m0428 src/app/script.c:452 [int-1 0 -> -1]
+KILLED    m0429 src/app/script.c:453 [cmp == -> !=]
+KILLED    m0430 src/app/script.c:456 [arith * -> /]
+          build break
+SURVIVED  m0431 src/app/script.c:456 [int+1 1 -> 2]
+KILLED    m0432 src/app/script.c:456 [int-1 1 -> 0]
+SURVIVED  m0433 src/app/script.c:457 [cmp >= -> >]
+SURVIVED  m0434 src/app/script.c:461 [bool true -> false]
+KILLED    m0435 src/app/script.c:462 [ret-lit 0 -> 1]
+KILLED    m0436 src/app/script.c:462 [int+1 0 -> 1]
+KILLED    m0437 src/app/script.c:462 [int-1 0 -> -1]
+KILLED    m0438 src/app/script.c:466 [cmp == -> !=]
+KILLED    m0439 src/app/script.c:467 [int+1 0 -> 1]
+KILLED    m0440 src/app/script.c:467 [int-1 0 -> -1]
+KILLED    m0441 src/app/script.c:472 [cmp == -> !=]
+KILLED    m0442 src/app/script.c:473 [int+1 0 -> 1]
+KILLED    m0443 src/app/script.c:473 [int-1 0 -> -1]
+SURVIVED  m0444 src/app/script.c:477 [ret-lit 0 -> 1]
+SURVIVED  m0445 src/app/script.c:477 [int+1 0 -> 1]
+SURVIVED  m0446 src/app/script.c:477 [int-1 0 -> -1]
+KILLED    m0447 src/app/script.c:481 [arith * -> /]
+          build break
+KILLED    m0448 src/app/script.c:481 [arith * -> /]
+          build break
+KILLED    m0449 src/app/script.c:481 [arith * -> /]
+          build break
+KILLED    m0450 src/app/script.c:482 [arith * -> /]
+          build break
+KILLED    m0451 src/app/script.c:482 [arith * -> /]
+          build break
+KILLED    m0452 src/app/script.c:483 [cmp == -> !=]
+SURVIVED  m0453 src/app/script.c:485 [int+1 0 -> 1]
+SURVIVED  m0454 src/app/script.c:485 [int-1 0 -> -1]
+KILLED    m0455 src/app/script.c:486 [cmp != -> ==]
+KILLED    m0456 src/app/script.c:486 [int+1 0 -> 1]
+KILLED    m0457 src/app/script.c:486 [int-1 0 -> -1]
+SURVIVED  m0458 src/app/script.c:489 [int+1 0 -> 1]
+SURVIVED  m0459 src/app/script.c:489 [int-1 0 -> -1]
+SURVIVED  m0460 src/app/script.c:490 [cmp < -> <=]
+SURVIVED  m0461 src/app/script.c:490 [int+1 0 -> 1]
+SURVIVED  m0462 src/app/script.c:490 [int-1 0 -> -1]
+KILLED    m0463 src/app/script.c:493 [bool true -> false]
+KILLED    m0464 src/app/script.c:494 [ret-lit 0 -> 1]
+KILLED    m0465 src/app/script.c:494 [int+1 0 -> 1]
+KILLED    m0466 src/app/script.c:494 [int-1 0 -> -1]
+KILLED    m0467 src/app/script.c:496 [not-del ! -> (deleted)]
+KILLED    m0468 src/app/script.c:502 [ret-lit 0 -> 1]
+KILLED    m0469 src/app/script.c:502 [int+1 0 -> 1]
+KILLED    m0470 src/app/script.c:502 [int-1 0 -> -1]
+KILLED    m0471 src/app/script.c:504 [arith * -> /]
+          build break
+SURVIVED  m0472 src/app/script.c:504 [int+1 0 -> 1]
+KILLED    m0473 src/app/script.c:504 [int-1 0 -> -1]
+SURVIVED  m0474 src/app/script.c:505 [bool false -> true]
+SURVIVED  m0475 src/app/script.c:507 [int+1 0 -> 1]
+KILLED    m0476 src/app/script.c:507 [int-1 0 -> -1]
+SURVIVED  m0477 src/app/script.c:507 [cmp < -> <=]
+SURVIVED  m0478 src/app/script.c:507 [arith / -> *]
+SURVIVED  m0479 src/app/script.c:507 [int+1 0 -> 1]
+SURVIVED  m0480 src/app/script.c:507 [int-1 0 -> -1]
+KILLED    m0481 src/app/script.c:508 [cmp == -> !=]
+KILLED    m0482 src/app/script.c:508 [int+1 0 -> 1]
+KILLED    m0483 src/app/script.c:508 [int-1 0 -> -1]
+KILLED    m0484 src/app/script.c:510 [bool true -> false]
+KILLED    m0485 src/app/script.c:514 [not-del ! -> (deleted)]
+SURVIVED  m0486 src/app/script.c:519 [int+1 0 -> 1]
+KILLED    m0487 src/app/script.c:519 [int-1 0 -> -1]
+          build break
+KILLED    m0488 src/app/script.c:519 [cmp == -> !=]
+KILLED    m0489 src/app/script.c:523 [cmp == -> !=]
+KILLED    m0490 src/app/script.c:524 [int+1 0 -> 1]
+KILLED    m0491 src/app/script.c:524 [int-1 0 -> -1]
+SURVIVED  m0492 src/app/script.c:530 [int+1 0 -> 1]
+KILLED    m0493 src/app/script.c:530 [int-1 0 -> -1]
+          build break
+KILLED    m0494 src/app/script.c:530 [cmp == -> !=]
+KILLED    m0495 src/app/script.c:534 [cmp == -> !=]
+KILLED    m0496 src/app/script.c:535 [int+1 0 -> 1]
+KILLED    m0497 src/app/script.c:535 [int-1 0 -> -1]
+KILLED    m0498 src/app/script.c:540 [int+1 0 -> 1]
+KILLED    m0499 src/app/script.c:540 [int-1 0 -> -1]
+KILLED    m0500 src/app/script.c:540 [cmp != -> ==]
+KILLED    m0501 src/app/script.c:540 [int+1 0 -> 1]
+KILLED    m0502 src/app/script.c:540 [int-1 0 -> -1]
+KILLED    m0503 src/app/script.c:540 [logic || -> &&]
+          build break
+SURVIVED  m0504 src/app/script.c:540 [cmp < -> <=]
+SURVIVED  m0505 src/app/script.c:540 [int+1 1 -> 2]
+SURVIVED  m0506 src/app/script.c:540 [int-1 1 -> 0]
+KILLED    m0507 src/app/script.c:540 [logic || -> &&]
+          build break
+SURVIVED  m0508 src/app/script.c:541 [cmp > -> >=]
+KILLED    m0509 src/app/script.c:544 [arith * -> /]
+          build break
+KILLED    m0510 src/app/script.c:545 [int+1 0 -> 1]
+          build break
+KILLED    m0511 src/app/script.c:545 [int-1 0 -> -1]
+          build break
+KILLED    m0512 src/app/script.c:545 [cmp < -> <=]
+          build break
+KILLED    m0513 src/app/script.c:550 [arith - -> +]
+          build break
+KILLED    m0514 src/app/script.c:551 [not-del ! -> (deleted)]
+          build break
+KILLED    m0515 src/app/script.c:553 [bool false -> true]
+          build break
+KILLED    m0516 src/app/script.c:557 [ret-lit 0 -> 1]
+          build break
+KILLED    m0517 src/app/script.c:557 [int+1 0 -> 1]
+          build break
+KILLED    m0518 src/app/script.c:557 [int-1 0 -> -1]
+          build break
+KILLED    m0519 src/app/script.c:560 [ret-lit 0 -> 1]
+          build break
+KILLED    m0520 src/app/script.c:560 [int+1 0 -> 1]
+          build break
+KILLED    m0521 src/app/script.c:560 [int-1 0 -> -1]
+          build break
+KILLED    m0522 src/app/script.c:564 [arith * -> /]
+          build break
+KILLED    m0523 src/app/script.c:564 [arith * -> /]
+          build break
+KILLED    m0524 src/app/script.c:564 [arith * -> /]
+          build break
+KILLED    m0525 src/app/script.c:565 [arith * -> /]
+          build break
+KILLED    m0526 src/app/script.c:565 [arith * -> /]
+          build break
+KILLED    m0527 src/app/script.c:566 [arith * -> /]
+          build break
+KILLED    m0528 src/app/script.c:570 [cmp == -> !=]
+          build break
+KILLED    m0529 src/app/script.c:571 [int+1 0 -> 1]
+          build break
+KILLED    m0530 src/app/script.c:571 [int-1 0 -> -1]
+          build break
+KILLED    m0531 src/app/script.c:575 [int+1 0 -> 1]
+          build break
+KILLED    m0532 src/app/script.c:575 [int-1 0 -> -1]
+          build break
+KILLED    m0533 src/app/script.c:575 [cmp != -> ==]
+          build break
+KILLED    m0534 src/app/script.c:575 [int+1 0 -> 1]
+          build break
+KILLED    m0535 src/app/script.c:575 [int-1 0 -> -1]
+          build break
+KILLED    m0536 src/app/script.c:579 [cmp == -> !=]
+          build break
+KILLED    m0537 src/app/script.c:580 [int+1 0 -> 1]
+          build break
+KILLED    m0538 src/app/script.c:580 [int-1 0 -> -1]
+          build break
+KILLED    m0539 src/app/script.c:584 [arith * -> /]
+          build break
+KILLED    m0540 src/app/script.c:584 [int+1 0 -> 1]
+          build break
+KILLED    m0541 src/app/script.c:584 [int-1 0 -> -1]
+          build break
+KILLED    m0542 src/app/script.c:585 [arith * -> /]
+          build break
+KILLED    m0543 src/app/script.c:585 [int+1 1 -> 2]
+          build break
+KILLED    m0544 src/app/script.c:585 [int-1 1 -> 0]
+          build break
+KILLED    m0545 src/app/script.c:586 [int+1 0 -> 1]
+          build break
+KILLED    m0546 src/app/script.c:586 [int-1 0 -> -1]
+          build break
+KILLED    m0547 src/app/script.c:586 [cmp == -> !=]
+          build break
+KILLED    m0548 src/app/script.c:586 [logic || -> &&]
+          build break
+KILLED    m0549 src/app/script.c:586 [int+1 1 -> 2]
+          build break
+KILLED    m0550 src/app/script.c:586 [int-1 1 -> 0]
+          build break
+KILLED    m0551 src/app/script.c:586 [cmp != -> ==]
+          build break
+KILLED    m0552 src/app/script.c:589 [int+1 0 -> 1]
+          build break
+KILLED    m0553 src/app/script.c:589 [int-1 0 -> -1]
+          build break
+KILLED    m0554 src/app/script.c:591 [cmp == -> !=]
+          build break
+KILLED    m0555 src/app/script.c:591 [int+1 0 -> 1]
+          build break
+KILLED    m0556 src/app/script.c:591 [int-1 0 -> -1]
+          build break
+KILLED    m0557 src/app/script.c:592 [bool true -> false]
+          build break
+KILLED    m0558 src/app/script.c:593 [cmp == -> !=]
+          build break
+KILLED    m0559 src/app/script.c:593 [int+1 0 -> 1]
+          build break
+KILLED    m0560 src/app/script.c:593 [int-1 0 -> -1]
+          build break
+KILLED    m0561 src/app/script.c:594 [bool false -> true]
+          build break
+KILLED    m0562 src/app/script.c:598 [cmp == -> !=]
+          build break
+KILLED    m0563 src/app/script.c:598 [cmp != -> ==]
+          build break
+KILLED    m0564 src/app/script.c:598 [int+1 0 -> 1]
+KILLED    m0565 src/app/script.c:598 [int-1 0 -> -1]
+          build break
+KILLED    m0566 src/app/script.c:599 [ret-lit 0 -> 1]
+KILLED    m0567 src/app/script.c:599 [int+1 0 -> 1]
+          build break
+KILLED    m0568 src/app/script.c:599 [int-1 0 -> -1]
+          build break
+KILLED    m0569 src/app/script.c:602 [cmp == -> !=]
+          build break
+KILLED    m0570 src/app/script.c:603 [int+1 0 -> 1]
+          build break
+KILLED    m0571 src/app/script.c:603 [int-1 0 -> -1]
+          build break
+KILLED    m0572 src/app/script.c:608 [cmp == -> !=]
+          build break
+KILLED    m0573 src/app/script.c:609 [int+1 0 -> 1]
+          build break
+KILLED    m0574 src/app/script.c:609 [int-1 0 -> -1]
+          build break
+KILLED    m0575 src/app/script.c:613 [ret-lit 0 -> 1]
+          build break
+SURVIVED  m0576 src/app/script.c:613 [int+1 0 -> 1]
+SURVIVED  m0577 src/app/script.c:613 [int-1 0 -> -1]
+KILLED    m0578 src/app/script.c:617 [arith * -> /]
+          build break
+KILLED    m0579 src/app/script.c:618 [cmp == -> !=]
+KILLED    m0580 src/app/script.c:618 [int+1 0 -> 1]
+KILLED    m0581 src/app/script.c:618 [int-1 0 -> -1]
+SURVIVED  m0582 src/app/script.c:621 [cmp == -> !=]
+SURVIVED  m0583 src/app/script.c:621 [int+1 0 -> 1]
+SURVIVED  m0584 src/app/script.c:621 [int-1 0 -> -1]
+SURVIVED  m0585 src/app/script.c:624 [cmp == -> !=]
+SURVIVED  m0586 src/app/script.c:624 [int+1 0 -> 1]
+SURVIVED  m0587 src/app/script.c:624 [int-1 0 -> -1]
+SURVIVED  m0588 src/app/script.c:627 [arith - -> +]
+SURVIVED  m0589 src/app/script.c:627 [int+1 1 -> 2]
+SURVIVED  m0590 src/app/script.c:627 [int-1 1 -> 0]
+KILLED    m0591 src/app/script.c:630 [arith * -> /]
+          build break
+KILLED    m0592 src/app/script.c:630 [arith * -> /]
+          build break
+KILLED    m0593 src/app/script.c:630 [arith * -> /]
+          build break
+KILLED    m0594 src/app/script.c:631 [arith * -> /]
+          build break
+KILLED    m0595 src/app/script.c:631 [arith * -> /]
+          build break
+SURVIVED  m0596 src/app/script.c:634 [int+1 0 -> 1]
+KILLED    m0597 src/app/script.c:634 [int-1 0 -> -1]
+KILLED    m0598 src/app/script.c:635 [cmp < -> <=]
+KILLED    m0599 src/app/script.c:635 [int+1 0 -> 1]
+SURVIVED  m0600 src/app/script.c:635 [int-1 0 -> -1]
+SURVIVED  m0601 src/app/script.c:639 [cmp >= -> >]
+KILLED    m0602 src/app/script.c:639 [int+1 0 -> 1]
+          build break
+KILLED    m0603 src/app/script.c:639 [int-1 0 -> -1]
+          build break
+KILLED    m0604 src/app/script.c:639 [int+1 0 -> 1]
+          build break
+KILLED    m0605 src/app/script.c:639 [int-1 0 -> -1]
+          build break
+KILLED    m0606 src/app/script.c:643 [arith * -> /]
+          build break
+KILLED    m0607 src/app/script.c:643 [int+1 0 -> 1]
+          build break
+KILLED    m0608 src/app/script.c:643 [int-1 0 -> -1]
+          build break
+KILLED    m0609 src/app/script.c:644 [arith * -> /]
+          build break
+KILLED    m0610 src/app/script.c:644 [int+1 1 -> 2]
+          build break
+KILLED    m0611 src/app/script.c:644 [int-1 1 -> 0]
+          build break
+KILLED    m0612 src/app/script.c:645 [int+1 0 -> 1]
+          build break
+KILLED    m0613 src/app/script.c:645 [int-1 0 -> -1]
+          build break
+KILLED    m0614 src/app/script.c:646 [int+1 2 -> 3]
+          build break
+KILLED    m0615 src/app/script.c:646 [int-1 2 -> 1]
+          build break
+KILLED    m0616 src/app/script.c:646 [cmp != -> ==]
+          build break
+KILLED    m0617 src/app/script.c:646 [int+1 0 -> 1]
+          build break
+KILLED    m0618 src/app/script.c:646 [int-1 0 -> -1]
+          build break
+KILLED    m0619 src/app/script.c:650 [bool false -> true]
+          build break
+KILLED    m0620 src/app/script.c:651 [int+1 0 -> 1]
+          build break
+KILLED    m0621 src/app/script.c:651 [int-1 0 -> -1]
+          build break
+KILLED    m0622 src/app/script.c:651 [cmp < -> <=]
+          build break
+KILLED    m0623 src/app/script.c:651 [arith / -> *]
+          build break
+KILLED    m0624 src/app/script.c:651 [int+1 0 -> 1]
+          build break
+KILLED    m0625 src/app/script.c:651 [int-1 0 -> -1]
+          build break
+KILLED    m0626 src/app/script.c:652 [cmp == -> !=]
+          build break
+KILLED    m0627 src/app/script.c:652 [int+1 0 -> 1]
+          build break
+KILLED    m0628 src/app/script.c:652 [int-1 0 -> -1]
+          build break
+KILLED    m0629 src/app/script.c:654 [bool true -> false]
+          build break
+KILLED    m0630 src/app/script.c:659 [bool false -> true]
+          build break
+KILLED    m0631 src/app/script.c:660 [int+1 0 -> 1]
+          build break
+KILLED    m0632 src/app/script.c:660 [int-1 0 -> -1]
+          build break
+KILLED    m0633 src/app/script.c:660 [cmp < -> <=]
+          build break
+KILLED    m0634 src/app/script.c:660 [arith / -> *]
+          build break
+KILLED    m0635 src/app/script.c:660 [int+1 0 -> 1]
+          build break
+KILLED    m0636 src/app/script.c:660 [int-1 0 -> -1]
+          build break
+KILLED    m0637 src/app/script.c:661 [cmp == -> !=]
+          build break
+KILLED    m0638 src/app/script.c:661 [int+1 0 -> 1]
+          build break
+KILLED    m0639 src/app/script.c:661 [int-1 0 -> -1]
+          build break
+KILLED    m0640 src/app/script.c:663 [bool true -> false]
+          build break
+KILLED    m0641 src/app/script.c:667 [not-del ! -> (deleted)]
+          build break
+KILLED    m0642 src/app/script.c:667 [logic || -> &&]
+          build break
+KILLED    m0643 src/app/script.c:667 [not-del ! -> (deleted)]
+          build break
+KILLED    m0644 src/app/script.c:670 [cmp != -> ==]
+          build break
+KILLED    m0645 src/app/script.c:670 [int+1 0 -> 1]
+          build break
+KILLED    m0646 src/app/script.c:670 [int-1 0 -> -1]
+          build break
+KILLED    m0647 src/app/script.c:675 [cmp <= -> <]
+          build break
+KILLED    m0648 src/app/script.c:675 [int+1 0 -> 1]
+          build break
+KILLED    m0649 src/app/script.c:675 [int-1 0 -> -1]
+          build break
+KILLED    m0650 src/app/script.c:675 [logic || -> &&]
+          build break
+KILLED    m0651 src/app/script.c:675 [cmp < -> <=]
+          build break
+KILLED    m0652 src/app/script.c:675 [int+1 0 -> 1]
+          build break
+KILLED    m0653 src/app/script.c:675 [int-1 0 -> -1]
+          build break
+KILLED    m0654 src/app/script.c:675 [logic || -> &&]
+          build break
+KILLED    m0655 src/app/script.c:675 [cmp >= -> >]
+          build break
+KILLED    m0656 src/app/script.c:675 [logic || -> &&]
+          build break
+KILLED    m0657 src/app/script.c:675 [cmp >= -> >]
+          build break
+KILLED    m0658 src/app/script.c:682 [int+1 0 -> 1]
+          build break
+KILLED    m0659 src/app/script.c:682 [int-1 0 -> -1]
+          build break
+KILLED    m0660 src/app/script.c:683 [bool false -> true]
+          build break
+KILLED    m0661 src/app/script.c:684 [ret-lit 0 -> 1]
+          build break
+KILLED    m0662 src/app/script.c:684 [int+1 0 -> 1]
+          build break
+KILLED    m0663 src/app/script.c:684 [int-1 0 -> -1]
+          build break
+KILLED    m0664 src/app/script.c:688 [int+1 0 -> 1]
+          build break
+KILLED    m0665 src/app/script.c:688 [int-1 0 -> -1]
+          build break
+KILLED    m0666 src/app/script.c:688 [cmp != -> ==]
+          build break
+KILLED    m0667 src/app/script.c:688 [int+1 0 -> 1]
+          build break
+KILLED    m0668 src/app/script.c:688 [int-1 0 -> -1]
+          build break
+KILLED    m0669 src/app/script.c:693 [cmp <= -> <]
+          build break
+KILLED    m0670 src/app/script.c:693 [int+1 0 -> 1]
+          build break
+KILLED    m0671 src/app/script.c:693 [int-1 0 -> -1]
+          build break
+KILLED    m0672 src/app/script.c:693 [logic || -> &&]
+          build break
+KILLED    m0673 src/app/script.c:693 [cmp < -> <=]
+          build break
+KILLED    m0674 src/app/script.c:693 [int+1 0 -> 1]
+          build break
+KILLED    m0675 src/app/script.c:693 [int-1 0 -> -1]
+          build break
+KILLED    m0676 src/app/script.c:693 [logic || -> &&]
+          build break
+KILLED    m0677 src/app/script.c:693 [cmp >= -> >]
+          build break
+KILLED    m0678 src/app/script.c:698 [cmp != -> ==]
+          build break
+KILLED    m0679 src/app/script.c:698 [int+1 0 -> 1]
+          build break
+KILLED    m0680 src/app/script.c:698 [int-1 0 -> -1]
+          build break
+KILLED    m0681 src/app/script.c:703 [bool false -> true]
+          build break
+KILLED    m0682 src/app/script.c:704 [ret-lit 0 -> 1]
+          build break
+KILLED    m0683 src/app/script.c:704 [int+1 0 -> 1]
+          build break
+KILLED    m0684 src/app/script.c:704 [int-1 0 -> -1]
+          build break
+KILLED    m0685 src/app/script.c:707 [int+1 0 -> 1]
+          build break
+KILLED    m0686 src/app/script.c:707 [int-1 0 -> -1]
+          build break
+KILLED    m0687 src/app/script.c:707 [cmp == -> !=]
+          build break
+KILLED    m0688 src/app/script.c:710 [not-del ! -> (deleted)]
+          build break
+KILLED    m0689 src/app/script.c:712 [bool true -> false]
+          build break
+KILLED    m0690 src/app/script.c:714 [int+1 0 -> 1]
+          build break
+KILLED    m0691 src/app/script.c:714 [int-1 0 -> -1]
+          build break
+KILLED    m0692 src/app/script.c:715 [int+1 0 -> 1]
+          build break
+KILLED    m0693 src/app/script.c:715 [int-1 0 -> -1]
+          build break
+KILLED    m0694 src/app/script.c:717 [cmp != -> ==]
+          build break
+KILLED    m0695 src/app/script.c:717 [int+1 0 -> 1]
+          build break
+KILLED    m0696 src/app/script.c:717 [int-1 0 -> -1]
+          build break
+KILLED    m0697 src/app/script.c:720 [cmp == -> !=]
+          build break
+KILLED    m0698 src/app/script.c:722 [int+1 0 -> 1]
+          build break
+KILLED    m0699 src/app/script.c:722 [int-1 0 -> -1]
+          build break
+KILLED    m0700 src/app/script.c:724 [cmp != -> ==]
+          build break
+KILLED    m0701 src/app/script.c:724 [int+1 0 -> 1]
+          build break
+KILLED    m0702 src/app/script.c:724 [int-1 0 -> -1]
+          build break
+KILLED    m0703 src/app/script.c:724 [logic || -> &&]
+          build break
+KILLED    m0704 src/app/script.c:724 [not-del ! -> (deleted)]
+          build break
+KILLED    m0705 src/app/script.c:728 [cmp < -> <=]
+          build break
+KILLED    m0706 src/app/script.c:728 [int+1 0 -> 1]
+          build break
+KILLED    m0707 src/app/script.c:728 [int-1 0 -> -1]
+          build break
+KILLED    m0708 src/app/script.c:731 [int+1 0 -> 1]
+          build break
+KILLED    m0709 src/app/script.c:731 [int-1 0 -> -1]
+          build break
+KILLED    m0710 src/app/script.c:732 [cmp != -> ==]
+          build break
+KILLED    m0711 src/app/script.c:735 [int+1 0 -> 1]
+          build break
+KILLED    m0712 src/app/script.c:735 [int-1 0 -> -1]
+          build break
+KILLED    m0713 src/app/script.c:736 [cmp != -> ==]
+          build break
+KILLED    m0714 src/app/script.c:740 [cmp <= -> <]
+          build break
+KILLED    m0715 src/app/script.c:740 [int+1 0 -> 1]
+          build break
+KILLED    m0716 src/app/script.c:740 [int-1 0 -> -1]
+          build break
+KILLED    m0717 src/app/script.c:741 [cmp != -> ==]
+          build break
+KILLED    m0718 src/app/script.c:741 [int+1 0 -> 1]
+          build break
+KILLED    m0719 src/app/script.c:741 [int-1 0 -> -1]
+          build break
+KILLED    m0720 src/app/script.c:746 [cmp <= -> <]
+          build break
+KILLED    m0721 src/app/script.c:746 [int+1 0 -> 1]
+          build break
+KILLED    m0722 src/app/script.c:746 [int-1 0 -> -1]
+          build break
+KILLED    m0723 src/app/script.c:752 [int+1 0 -> 1]
+          build break
+KILLED    m0724 src/app/script.c:752 [int-1 0 -> -1]
+          build break
+KILLED    m0725 src/app/script.c:768 [cmp != -> ==]
+          build break
+KILLED    m0726 src/app/script.c:771 [bool true -> false]
+          build break
+KILLED    m0727 src/app/script.c:772 [ret-lit 0 -> 1]
+          build break
+KILLED    m0728 src/app/script.c:772 [int+1 0 -> 1]
+          build break
+KILLED    m0729 src/app/script.c:772 [int-1 0 -> -1]
+          build break
+KILLED    m0730 src/app/script.c:775 [not-del ! -> (deleted)]
+          build break
+KILLED    m0731 src/app/script.c:779 [int+1 0 -> 1]
+          build break
+KILLED    m0732 src/app/script.c:779 [int-1 0 -> -1]
+          build break
+KILLED    m0733 src/app/script.c:780 [int+1 0 -> 1]
+          build break
+KILLED    m0734 src/app/script.c:780 [int-1 0 -> -1]
+          build break
+KILLED    m0735 src/app/script.c:784 [cmp != -> ==]
+          build break
+KILLED    m0736 src/app/script.c:787 [ret-lit 0 -> 1]
+          build break
+KILLED    m0737 src/app/script.c:787 [int+1 0 -> 1]
+          build break
+KILLED    m0738 src/app/script.c:787 [int-1 0 -> -1]
+          build break
+KILLED    m0739 src/app/script.c:790 [ret-lit 0 -> 1]
+          build break
+KILLED    m0740 src/app/script.c:790 [int+1 0 -> 1]
+          build break
+KILLED    m0741 src/app/script.c:790 [int-1 0 -> -1]
+          build break
+KILLED    m0742 src/app/script.c:794 [arith * -> /]
+          build break
+KILLED    m0743 src/app/script.c:794 [arith * -> /]
+          build break
+KILLED    m0744 src/app/script.c:794 [arith * -> /]
+          build break
+KILLED    m0745 src/app/script.c:794 [arith * -> /]
+          build break
+KILLED    m0746 src/app/script.c:797 [int+1 0 -> 1]
+          build break
+KILLED    m0747 src/app/script.c:797 [int-1 0 -> -1]
+          build break
+KILLED    m0748 src/app/script.c:797 [int+1 1 -> 2]
+          build break
+KILLED    m0749 src/app/script.c:797 [int-1 1 -> 0]
+          build break
+KILLED    m0750 src/app/script.c:799 [cmp != -> ==]
+          build break
+KILLED    m0751 src/app/script.c:802 [arith * -> /]
+          build break
+KILLED    m0752 src/app/script.c:802 [int+1 2 -> 3]
+          build break
+KILLED    m0753 src/app/script.c:802 [int-1 2 -> 1]
+          build break
+KILLED    m0754 src/app/script.c:803 [int+1 0 -> 1]
+          build break
+KILLED    m0755 src/app/script.c:803 [int-1 0 -> -1]
+          build break
+KILLED    m0756 src/app/script.c:803 [cmp != -> ==]
+          build break
+KILLED    m0757 src/app/script.c:803 [int+1 0 -> 1]
+          build break
+KILLED    m0758 src/app/script.c:803 [int-1 0 -> -1]
+          build break
+KILLED    m0759 src/app/script.c:807 [int+1 0 -> 1]
+          build break
+KILLED    m0760 src/app/script.c:807 [int-1 0 -> -1]
+          build break
+KILLED    m0761 src/app/script.c:810 [cmp == -> !=]
+          build break
+KILLED    m0762 src/app/script.c:810 [int+1 0 -> 1]
+          build break
+KILLED    m0763 src/app/script.c:810 [int-1 0 -> -1]
+          build break
+KILLED    m0764 src/app/script.c:814 [arith * -> /]
+          build break
+KILLED    m0765 src/app/script.c:818 [int+1 0 -> 1]
+          build break
+KILLED    m0766 src/app/script.c:818 [int-1 0 -> -1]
+          build break
+KILLED    m0767 src/app/script.c:818 [arith * -> /]
+          build break
+KILLED    m0768 src/app/script.c:821 [arith * -> /]
+          build break
+KILLED    m0769 src/app/script.c:821 [arith * -> /]
+          build break
+KILLED    m0770 src/app/script.c:821 [arith * -> /]
+          build break
+KILLED    m0771 src/app/script.c:821 [arith * -> /]
+          build break
+KILLED    m0772 src/app/script.c:822 [arith * -> /]
+          build break
+KILLED    m0773 src/app/script.c:828 [not-del ! -> (deleted)]
+          build break
+KILLED    m0774 src/app/script.c:831 [ret-lit 0 -> 1]
+          build break
+KILLED    m0775 src/app/script.c:831 [int+1 0 -> 1]
+          build break
+KILLED    m0776 src/app/script.c:831 [int-1 0 -> -1]
+          build break
+KILLED    m0777 src/app/script.c:864 [arith * -> /]
+          build break
+KILLED    m0778 src/app/script.c:864 [arith * -> /]
+          build break
+KILLED    m0779 src/app/script.c:864 [arith * -> /]
+          build break
+KILLED    m0780 src/app/script.c:864 [arith * -> /]
+          build break
+KILLED    m0781 src/app/script.c:865 [cmp == -> !=]
+          build break
+KILLED    m0782 src/app/script.c:865 [logic || -> &&]
+          build break
+KILLED    m0783 src/app/script.c:865 [cmp == -> !=]
+          build break
+KILLED    m0784 src/app/script.c:865 [logic || -> &&]
+          build break
+KILLED    m0785 src/app/script.c:865 [cmp == -> !=]
+          build break
+KILLED    m0786 src/app/script.c:865 [logic || -> &&]
+          build break
+KILLED    m0787 src/app/script.c:865 [cmp == -> !=]
+          build break
+KILLED    m0788 src/app/script.c:865 [logic || -> &&]
+          build break
+KILLED    m0789 src/app/script.c:865 [cmp == -> !=]
+          build break
+KILLED    m0790 src/app/script.c:865 [int+1 0 -> 1]
+          build break
+KILLED    m0791 src/app/script.c:865 [int-1 0 -> -1]
+          build break
+KILLED    m0792 src/app/script.c:868 [int+1 0 -> 1]
+          build break
+KILLED    m0793 src/app/script.c:868 [int-1 0 -> -1]
+          build break
+KILLED    m0794 src/app/script.c:868 [cmp < -> <=]
+          build break
+KILLED    m0795 src/app/script.c:870 [cmp != -> ==]
+          build break
+KILLED    m0796 src/app/script.c:870 [int+1 0 -> 1]
+          build break
+KILLED    m0797 src/app/script.c:870 [int-1 0 -> -1]
+          build break
+KILLED    m0798 src/app/script.c:876 [bool false -> true]
+          build break
+KILLED    m0799 src/app/script.c:878 [ret-lit 0 -> 1]
+          build break
+KILLED    m0800 src/app/script.c:878 [int+1 0 -> 1]
+          build break
+KILLED    m0801 src/app/script.c:878 [int-1 0 -> -1]
+          build break
+KILLED    m0802 src/app/script.c:881 [arith * -> /]
+          build break
+KILLED    m0803 src/app/script.c:881 [arith * -> /]
+          build break
+KILLED    m0804 src/app/script.c:882 [cmp == -> !=]
+          build break
+KILLED    m0805 src/app/script.c:882 [logic || -> &&]
+          build break
+KILLED    m0806 src/app/script.c:882 [cmp == -> !=]
+          build break
+KILLED    m0807 src/app/script.c:882 [logic || -> &&]
+          build break
+KILLED    m0808 src/app/script.c:882 [int+1 0 -> 1]
+          build break
+KILLED    m0809 src/app/script.c:882 [int-1 0 -> -1]
+          build break
+KILLED    m0810 src/app/script.c:882 [cmp == -> !=]
+          build break
+KILLED    m0811 src/app/script.c:886 [arith * -> /]
+          build break
+KILLED    m0812 src/app/script.c:887 [cmp == -> !=]
+          build break
+KILLED    m0813 src/app/script.c:891 [arith * -> /]
+          build break
+KILLED    m0814 src/app/script.c:891 [arith + -> -]
+          build break
+KILLED    m0815 src/app/script.c:891 [int+1 1 -> 2]
+          build break
+KILLED    m0816 src/app/script.c:891 [int-1 1 -> 0]
+          build break
+KILLED    m0817 src/app/script.c:892 [cmp == -> !=]
+          build break
+KILLED    m0818 src/app/script.c:897 [int+1 1 -> 2]
+          build break
+KILLED    m0819 src/app/script.c:897 [int-1 1 -> 0]
+          build break
+KILLED    m0820 src/app/script.c:897 [arith + -> -]
+          build break
+KILLED    m0821 src/app/script.c:897 [int+1 1 -> 2]
+          build break
+KILLED    m0822 src/app/script.c:897 [int-1 1 -> 0]
+          build break
+KILLED    m0823 src/app/script.c:899 [cmp > -> >=]
+          build break
+KILLED    m0824 src/app/script.c:910 [cmp != -> ==]
+          build break
+KILLED    m0825 src/app/script.c:910 [int+1 0 -> 1]
+          build break
+KILLED    m0826 src/app/script.c:910 [int-1 0 -> -1]
+          build break
+KILLED    m0827 src/app/script.c:915 [int+1 0 -> 1]
+          build break
+KILLED    m0828 src/app/script.c:915 [int-1 0 -> -1]
+          build break
+KILLED    m0829 src/app/script.c:917 [cmp != -> ==]
+          build break
+KILLED    m0830 src/app/script.c:917 [int+1 0 -> 1]
+          build break
+KILLED    m0831 src/app/script.c:917 [int-1 0 -> -1]
+          build break
+mutate: generated=831 build_failed=415 killed_by_tests=291 killed=706 survived=125 accepted=0 unexplained=125 skipped=0
+mutate: kill rate 706/831 = 85.0%, with accepted equivalents 706/831 = 85.0%
+mutate: wall 2101.5s

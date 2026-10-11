@@ -1,0 +1,10 @@
+mutate: scope=src/app/script.c files=1 sites=825 suites=2
+SURVIVED  m0818 src/app/script.c:907 [cmp != -> ==]
+SURVIVED  m0819 src/app/script.c:907 [int+1 0 -> 1]
+SURVIVED  m0820 src/app/script.c:907 [int-1 0 -> -1]
+ACCEPTED  m0818 src/app/script.c:907 [cmp != -> ==] :: scripted entry parse result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+ACCEPTED  m0819 src/app/script.c:907 [int+1 0 -> 1] :: scripted entry parse result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+ACCEPTED  m0820 src/app/script.c:907 [int-1 0 -> -1] :: scripted entry parse result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+mutate: generated=3 build_failed=0 killed_by_tests=0 killed=0 survived=3 accepted=3 unexplained=0 skipped=822
+mutate: kill rate 0/3 = 0.0%, with accepted equivalents 3/3 = 100.0%
+mutate: wall 14.9s

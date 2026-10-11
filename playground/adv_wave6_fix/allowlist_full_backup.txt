@@ -1,0 +1,722 @@
+src/srs/fsrs.c:7	sanitize lower boundary is a true equivalent: at s == CT_FSRS_MIN_STABILITY both branches return CT_FSRS_MIN_STABILITY, so no input distinguishes them
+src/srs/fsrs.c:10	sanitize upper boundary is a true equivalent: at s == CT_FSRS_MAX_IVL_DAYS both branches return CT_FSRS_MAX_IVL_DAYS, so no input distinguishes them
+src/srs/fsrs.c:39	clamp lower boundary is a true equivalent: at x == lo the mutant returns lo directly and the original falls through to return x, and lo equals x there, so no input distinguishes them
+src/srs/fsrs.c:42	clamp upper boundary is a true equivalent: at x == hi the mutant returns hi directly and the original returns x, and hi equals x there, so no input distinguishes them
+src/srs/fsrs.c:104	negative elapsed clamp boundary is a true equivalent: at elapsed_days == 0.0 the clamp writes 0.0 back, a no-op, so no input distinguishes them
+src/srs/fsrs.c:107	retrievability stability clamp boundary is a true equivalent: at stability == CT_FSRS_MIN_STABILITY the clamp writes the same value back, a no-op, so no input distinguishes them
+src/srs/fsrs.c:126	due day saturation boundary is a true equivalent: at today_day == LONG_MAX - ivl the addition yields exactly LONG_MAX, identical to the saturating branch, so no input distinguishes them
+src/storage/repo_algs.c:49	sqlite3 treats any negative nByte as read-to-nul, so the -1 bind length mutant -2 is behaviorally identical
+src/storage/repo_algs.c:80	the null-column branch writes into an output struct that ct_repo_alg_get pre-zeroes wholesale, so the write index inside the field is unobservable, the byte before the first field is the orbit high byte, zero for every reachable orbit value
+src/storage/repo_algs.c:114	the vsnprintf guard is unreachable on both sides, every format here emits at least one character so n is never 0 and a negative return requires a wide string encoding error these narrow formats never produce
+src/storage/repo_algs.c:194	ct_alg_row_valid is consumed only through boolean negation, any nonzero return is equivalent
+src/storage/repo_algs.c:206	ct_now_utc_iso writes a 20 character stamp on every reachable path, now[1] is never nul so both indexes decide identically
+src/storage/repo_algs.c:209	sqlite3_prepare_v2 treats any negative sql length as read-to-nul, the -1 mutant -2 is behaviorally identical
+src/storage/repo_algs.c:242	the pre-query memset fill byte is unobservable, ct_alg_from_row overwrites every field before any assertion reads it on the row path and the missing path never reads out
+src/storage/repo_algs.c:244	prepare nByte -1 mutant -2 reads to the first nul identically
+src/storage/repo_algs.c:269	prepare nByte -1 mutant -2 reads to the first nul identically
+src/storage/repo_algs.c:273	bind length -1 mutant -2 is read-to-nul identically in sqlite3
+src/storage/repo_algs.c:290	prepare nByte -1 mutant -2 reads to the first nul identically
+src/storage/repo_algs.c:318	prepare nByte -1 mutant -2 reads to the first nul identically
+src/storage/repo_algs.c:322	bind length -1 mutant -2 is read-to-nul identically in sqlite3
+src/storage/repo_algs.c:339	prepare nByte -1 mutant -2 reads to the first nul identically
+src/storage/repo_algs.c:343	bind length -1 mutant -2 is read-to-nul identically in sqlite3
+src/storage/repo_algs.c:354	prepare nByte -1 mutant -2 reads to the first nul identically
+src/storage/repo_algs.c:358	bind length -1 mutant -2 is read-to-nul identically in sqlite3
+src/gen/targets.c:6	face normal table mutants are equivalent: the mutated component never flips any sign or zero predicate outcome over the reachable sticker domain, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:10	face row direction table mutants are equivalent: the mutated component never flips any sign or zero predicate outcome over the reachable sticker domain, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:14	face col direction table mutants are equivalent: the mutated component never flips any sign or zero predicate outcome over the reachable sticker domain, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:62	row initializer is a dead store: ct_corner_grid and ct_edge_grid unconditionally write both outputs for every reachable pos
+src/gen/targets.c:63	col initializer is a dead store: both grid helpers unconditionally write both outputs for every reachable pos
+src/gen/targets.c:64	row_off initializer is a dead store: both branches of the corner flag assign row_off before any read
+src/gen/targets.c:65	col_off initializer is a dead store: both branches of the corner flag assign col_off before any read
+src/gen/targets.c:68	corner row offset mutants are equivalent: sign preserving magnitude changes keep every sign and zero predicate outcome identical over the reachable point set, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:69	corner col offset mutants are equivalent: sign preserving magnitude changes keep every sign and zero predicate outcome identical over the reachable point set, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:82	corner layer comparison mutants are equivalent: corner point y is always exactly 1 or -1 by construction so the mutated boundary values are unreachable, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:83	corner back comparison mutants are equivalent: corner point z is always exactly 1 or -1 by construction so the mutated boundary values are unreachable, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:84	corner left comparison mutants are equivalent: corner point x is always exactly 1 or -1 by construction so the mutated boundary values are unreachable, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:92	edge ring slot comparison mutants are equivalent: the reachable edge point set never hits the mutated boundary, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:95	edge ring slot comparison mutants are equivalent: the reachable edge point set never hits the mutated boundary, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:131	negative cap clamp mutants are equivalent: the clamp only fires for negative caps and cap 0 already suppresses every write, so all negative cap values are indistinguishable
+src/gen/targets.c:132	cap reset value mutant is equivalent: the assignment only runs for negative caps where total < cap is false for both 0 and any negative value, verified by exhaustive public surface enumeration digest equality
+src/gen/targets.c:176	special negative cap clamp mutants are equivalent: the clamp assigns 0 so widening the boundary to cap 0 or 1 rewrites 0 to 0 as a no-op, and narrowing to -1 leaves cap -1 where the total < cap write gate is already false for every total, same class as the 131 cap clamp equivalents
+src/gen/targets.c:177	special cap reset value mutant is equivalent: the assignment only runs for negative caps where total < cap is false for both 0 and any negative value since total starts at 0, verified by exhaustive public surface enumeration digest equality
+src/engine/geometry.c:81	row loop bound boundary mutant is equivalent: perm admits n only up to 6, so the extra row n iteration writes only dead stride padding cells that the active n by n readback and memcmp never read
+src/engine/geometry.c:82	col loop bound boundary mutant is equivalent: perm admits n only up to 6, so the extra col n iteration writes only dead stride padding cells that the active n by n readback and memcmp never read
+src/engine/geometry.c:121	cell argument mutants are equivalent: ct_sticker_world derives the axis output from the face normal only and never from row or col, and the center output is discarded here
+src/gen/score.c:39	face bit loop bound mutant is equivalent: faces are validated to 0 to 5 before the call, so the extra iteration tests bit 1<<6 against a bit that is always one of bits 0 to 5 and never matches
+src/gen/score.c:44	face bit not-found return mutants are equivalent: every caller passes score_face_bits of a validated face, and 1<<i for i 0 to 5 covers all six bits, so the not-found return path is unreachable
+src/gen/score.c:139	need sign check mutants are equivalent: need is snprintf's length of a fixed nonempty format, never 0 or negative, and a hypothetical -1 still reaches the cap rejection through the unsigned cast
+src/engine/geometry_sq1.c:30	zero position boundary mutant is a true equivalent: pos == CT_SQ1_ZERO_POS implies x == 0 and y == 0, rejected at function entry, so no reachable input distinguishes < from <=
+src/engine/geometry_sq1.c:69	cut half sibling index mutant is a true equivalent: units[4] == units[6] needs one piece covering units 4 through 6, widths max 2, probe counted 0 nonadjacent equalities over 200000 reachable walks
+src/engine/geometry_sq1.c:86	move id lower guard mutant is a true equivalent: move_id == -1 passes the mutated guard and ct_sq1_move_pair rejects it, same error return
+src/engine/geometry_sq1.c:86	move id upper guard mutant is a true equivalent: move_id == CT_SQ1_MOVES passes the mutated guard and ct_sq1_move_pair rejects it via move_id >= CT_SQ1_TWISTS, same error return
+src/engine/geometry_sq1.c:134	twist loop start mutant is a true equivalent: the u == -1 iteration writes position wrap(turn - 1) which the u == 11 iteration rewrites with the identical correct value, dead store
+src/engine/geometry_sq1.c:213	first digit range mutant is a true equivalent: digit 9 passing the mutated guard then stops the accumulation loop and the caller rejects on the comma or paren check, and no valid turn digit is 9
+src/engine/geometry_sq1.c:218	digit loop bound mutant is a true equivalent: digit 9 ending the loop early leaves the follow character unconsumed so the caller comma or paren check rejects, and every original acceptance uses digits 0 to 6 only
+src/engine/geometry_sq1.c:219	magnitude bound mutant is a true equivalent: parsed == CT_SQ1_TURN_MAX entering another digit implies magnitude >= 60, rejected by ct_sq1_move_id either way, single digit 6 is checked before accumulation
+src/engine/geometry_sq1.c:222	base multiply mutant is a true equivalent: division changes only multi digit runs, and every multi digit run is rejected by the leading zero rule or the turn range, single digit values are unchanged since 0 / 10 == 0
+src/engine/geometry_sq1.c:226	leading zero bound mutant is a true equivalent: parsed == CT_DECIMAL_BASE reached with digits > 1 is out of turn range and rejected by ct_sq1_move_id either way, and parsed 10 never appears in an accepted token
+src/engine/geometry_sq1.c:229	minus sign guard mutants are true equivalents: sign is only 1 or -1 so < 0, <= 0, and < 1 agree on both values
+src/engine/geometry_sq1.c:252	used count guard mutants are true equivalents: sq1_parse_int returns at least 1 or CT_GEOMETRY_ERR, and the error value that slips the mutated guard is re rejected by the following comma character check since token[0] is always '('
+src/engine/geometry_sq1.c:257	used count guard mutants are true equivalents: sq1_parse_int returns at least 1 or CT_GEOMETRY_ERR, and the error value that slips the mutated guard is re rejected by the closing paren check since token[1 + used_x] is always ','
+src/gen/interchange.c:24	perm error return value mutants are equivalent: every caller and test compares the result against 0 or < 0, so the exact negative payload is unobservable
+src/gen/interchange.c:29	perm cube memset fill mutants are equivalent: ct_cube holds n and facelet only, n is assigned right after and active facelet cells are fully written before ct_apply, and legal moves never read the stride padding
+src/gen/interchange.c:32	perm cube row loop bound and init mutants are equivalent: the extra or underflowed row writes reach only dead stride padding cells that the active n by n readback never reads, same class as geometry.c row bound equivalents
+src/gen/interchange.c:33	perm cube col loop bound mutant is equivalent: the extra col iteration writes only dead stride padding cells that the active n by n readback never reads, same class as geometry.c col bound equivalents
+src/gen/interchange.c:51	candidate cap clamp mutants are equivalent: the clamp only fires for negative caps and cap 0 already suppresses every write, so all negative cap values are indistinguishable, same class as targets.c cap clamp equivalents
+src/gen/interchange.c:52	candidate cap reset value mutant is equivalent: the assignment only runs for negative caps where total < cap stays false for 0 and any negative value
+src/gen/interchange.c:75	interchanges cap clamp mutants are equivalent: the clamp only fires for negative caps and cap 0 already suppresses every write, so all negative cap values are indistinguishable
+src/gen/interchange.c:76	interchanges cap reset value mutant is equivalent: the assignment only runs for negative caps where total < cap stays false for 0 and any negative value
+src/gen/interchange.c:81	interchanges error return value mutant is equivalent: every caller and test compares the result against < 0, so the exact negative payload is unobservable
+src/gen/interchange.c:83	sticker cell face initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the already validated orbit and sticker
+src/gen/interchange.c:84	sticker cell row initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the already validated orbit and sticker
+src/gen/interchange.c:85	sticker cell col initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the already validated orbit and sticker
+src/gen/interchange.c:86	sticker cell face initializer mutants for y are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the already validated orbit and sticker
+src/gen/interchange.c:87	sticker cell row initializer mutants for y are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the already validated orbit and sticker
+src/gen/interchange.c:88	sticker cell col initializer mutants for y are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the already validated orbit and sticker
+src/gen/interchange.c:97	candidate scan init mutant is equivalent: it skips only candidate 0, a U quarter turn, and quarter turns never interchange any orbit sticker pair per the golden pair tables in unit_interchange
+src/gen/interchange.c:99	inner perm failure return mutants are equivalent: every enumerated candidate is a legal move at the only admitted n, so the branch is unreachable, and the callers compare against != 0 anyway
+src/trainer/session.c:28	century_days arithmetic mutants are equivalent: exhaustive sweep of every day-of-era value 0..146096 shows the mutated divisor never flips the year-of-era quotient, verified by playground/session_mut_probe divergence probe
+src/trainer/session.c:45	era sign boundary mutants are equivalent: y 0 routed to the negation branch still yields era 0 under truncating division, no reachable year distinguishes them
+src/trainer/session.c:54	era sign boundary mutants are equivalent: z 0 routed to the negation branch still yields era 0 under truncating division, no reachable day distinguishes them
+src/trainer/session.c:78	nondigit sentinel mutants are equivalent: ct_iso_digit callers only test the value against 0, -1 and -2 fail identically
+src/trainer/session.c:100	month and first day digit guard mutants are equivalent: a -1 digit yields an out-of-calendar month or negative day the round-trip check rejects identically, the second day digit variant is killed by session_bad_stamp_digits
+src/trainer/session.c:126	suffix length guard mutants are equivalent: scan guarantees length at least 10 where both branches yield suffix 0, shorter lengths unreachable
+src/trainer/session.c:136	snprintf status guard mutants are equivalent: formatting a 4-digit year date never returns 0 or negative, the branch is unreachable
+src/trainer/session.c:149	queue allocation size mutant has no exit-code kill: the shrunken heap block overflows silently under the msvcrt allocator, every suite still passes
+src/trainer/session.c:154	due count lower bound mutant is equivalent: the due-card query cannot return exactly -1 on reachable paths, both sides reject at -2 and below
+src/trainer/session.c:156	queue full boundary mutant is equivalent: accepting at n equal to cap and regrowing then accepting leave the same queue and count
+src/trainer/session.c:156	limit sign mutants are equivalent in the harness: more than 32 due cards is the only distinguisher and the paired cap times 1 mutant hangs such a suite forever, at most 32 due cards behave identically
+src/trainer/session.c:160	growth factor mutants are equivalent or unrunnable: factor 3 loads the same queue with a transient capacity difference, factor 1 only differs by looping forever on growth which no suite can survive
+src/trainer/session.c:178	queue count initializer mutants are equivalent: the loader overwrites the field on success and the failure path is unreachable and unobserved
+src/trainer/session.c:262	negative elapsed clamp boundary is a true equivalent: at elapsed 0.0 the clamp writes 0.0 back, a no-op
+src/trainer/session.c:269	interval clamp boundary mutants are equivalent: fsrs never yields a negative interval on the reachable path and 0 clamps to itself
+src/trainer/session.c:270	interval clamp value mutants are equivalent: the clamp branch never executes because the interval is never negative on the reachable fsrs path
+src/trainer/session.c:321	prepare length mutant is equivalent: sqlite treats any negative sql length as nul-terminated, -1 and -2 behave identically
+src/trainer/session.c:326	bind length mutant is equivalent: sqlite treats any negative text length as nul-terminated, -1 and -2 behave identically
+src/trainer/session.c:327	bind length mutant is equivalent: sqlite treats any negative text length as nul-terminated, -1 and -2 behave identically
+src/trainer/session.c:328	bind length mutant is equivalent: sqlite treats any negative text length as nul-terminated, -1 and -2 behave identically
+src/trainer/selector.c:12	method bound widening admits enum values with no table row, every public function then returns the empty scan result over the pinned surface
+src/trainer/selector.c:14	pack row cap widening admits indexes past the largest seeded pack (169 rows), unreachable over the pinned pack data
+src/trainer/selector.c:15	settings buffer size plus or minus one byte changes nothing for the short numerals the buffer parser accepts
+src/trainer/selector.c:80	enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+src/trainer/selector.c:84	enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+src/trainer/selector.c:88	guard flip still lands in the table scan, which returns the empty result for the unpaired input
+src/trainer/selector.c:89	no match return literal is truthiness only, callers rescan the table and produce the same totals and errors
+src/trainer/selector.c:91	loop start and match mutants still locate every pinned pair through the remaining rows, no pair is defined by a single row
+src/trainer/selector.c:92	match condition mutants still locate every pinned pair through the remaining rows, no pair is defined by a single row
+src/trainer/selector.c:93	return literal is truthiness only
+src/trainer/selector.c:96	no match return literal is truthiness only, callers rescan and produce the same totals and errors
+src/trainer/selector.c:100	cap clamp boundary and return literal mutants agree with the original at every reachable cap, negative caps write nothing under both
+src/trainer/selector.c:110	loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+src/trainer/selector.c:126	count loop start shift is cancelled by list def failing the same way, both surface as the same -1
+src/trainer/selector.c:127	copy loop start and bound shifts change which rows are visited but every pinned list is defined by its full scan
+src/trainer/selector.c:128	match condition mutants keep every pinned list output identical through the full scan
+src/trainer/selector.c:149	re entering the speffz seed is a no op, the seed is idempotent and the default id is reread after it
+src/trainer/selector.c:155	scheme ids are never negative past the seed branch and map load returns a row count or negative only, the mutated boundaries are unreachable
+src/trainer/selector.c:162	sizeof index and bound mutants iterate the same two element array with identical limits
+src/trainer/selector.c:194	loop start shifts skip rows no pinned list is defined by, later rows of the same pair carry the same entries
+src/trainer/selector.c:202	duplicate flag literal is truthiness only
+src/trainer/selector.c:223	loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+src/trainer/selector.c:239	list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+src/trainer/selector.c:256	chart total zero and index boundary mutants coincide with the adjacent guards, both orderings return the same error
+src/trainer/selector.c:258	chart total zero and index boundary mutants coincide with the adjacent guards, both orderings return the same error
+src/trainer/selector.c:270	total and index boundary mutants coincide with the adjacent guard, both orderings return the same error
+src/trainer/selector.c:280	count and index boundary mutants coincide with the adjacent guards, both orderings return the same error or key
+src/trainer/selector.c:323	list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+src/trainer/selector.c:345	list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+src/trainer/selector.c:352	source check flip lands in the pack list scan, which returns zero rows and the same -1
+src/trainer/selector.c:357	cap bound relaxation admits indexes past the largest seeded pack, unreachable over the pinned data
+src/trainer/selector.c:374	case group list id guard mutants are equivalent: an admitted id of -1 or count passes the guard but ct_selector_list_def never matches seen against it and returns the same error, the pinned surface already asserts the error for every out of range id
+src/trainer/selector.c:375	case group list id bound and index guard mutants are equivalent: the bound relaxation admits id count which list def rejects identically, and index -1 passes only into ct_selector_pack_case whose own index guard returns the same error
+src/trainer/selector.c:381	case group source disjunction mutant is equivalent: on every reachable path list def succeeds so the and form skips the early return, pack lists proceed unchanged and non pack lists fall into the pack case source check which returns the same error
+src/trainer/selector.c:104	orbit buffer ternary mutant is equivalent: both buffer fallback constants CT_3STYLE_CORNER_BUFFER and CT_3STYLE_EDGE_BUFFER are the value 2, the speffz seeded scheme carries buffer 2 for both fields, verified by direct scheme load probe, so the ternary selects an identical buffer on every reachable flow
+src/trainer/selector.c:158	buffer key index mutants are equivalent: both table rows carry the fallback constant 2, either index reads the same default before the settings loop runs, and pinned flows without custom buffer settings keep both fields at 2
+src/trainer/selector.c:159	buffer key index mutants are equivalent: both table rows carry the fallback constant 2, either index reads the same default before the settings loop runs, and pinned flows without custom buffer settings keep both fields at 2
+src/trainer/selector.c:392	case group loop start and bound mutants are equivalent: skipping the flip prefix returns the same group 0 through the fallthrough return which is the flip bucket, and the widened bound reads the adjacent labels table entry whose string equals the flip prefix already rejected at index zero, verified by the pinned group counts 25 23 26 11 across all four groups
+src/trainer/selector.c:398	case group fallback return mutants are unreachable over the seeded deck: all 85 specials rows carry one of the four pinned prefixes so the loop always returns in body, and every non 3bld parity list returns earlier at the deck gate with the same group 0
+src/gen/classify.c:219	exact cycle face initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
+src/gen/classify.c:220	exact cycle row initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
+src/gen/classify.c:221	exact cycle col initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
+src/gen/classify.c:236	exact cycle scan init mutant is equivalent: skipping one member of a sticker cycle leaves the cycle validated through its other members, and a non-3 cycle containing the skipped cell is still rejected through its other members
+src/gen/classify.c:513	decide corner flag logic mutants are equivalent: cl_decide only runs inside the single-orbit gate in ct_classify, so info->corner and info->edge are never both true or both false at any call
+src/gen/classify.c:514	decide edge flag logic mutants are equivalent: cl_decide only runs inside the single-orbit gate in ct_classify, so info->corner and info->edge are never both true or both false at any call
+src/gen/classify.c:550	fmt width check mutants are equivalent: the formatted spans hold at most 5 moves at n = 3, about 24 characters against the 48-character buffer, so the failure branch is unreachable
+src/gen/classify.c:551	fmt guard write mutants are equivalent: the guarded branch is unreachable because the spans never exceed the format buffer
+src/packs/seed_registry.c:34	sizeof index mutant reads a same sized element, the count is unchanged
+src/packs/seed_registry.c:41	dir emptiness check shift is subsumed by opendir failing on the empty path
+src/packs/seed_registry.c:54	snprintf boundary and logic mutants sit at path lengths no registry file name reaches, and a truncated path still fails opendir
+src/packs/seed_registry.c:60	seed file return boundary mutants sit at 0 and -1, the loop only produces row counts or errors below -1
+src/packs/packs.c:42	sqlite3 treats any negative nByte as read-to-nul, so the -1 bind length mutant -2 is behaviorally identical
+src/packs/packs.c:57	the null-column branch writes into an entry that ct_pack_get and ct_pack_list pre-zero, so the write index inside the field is unobservable
+src/packs/packs.c:112	the canon bound is unreachable, the largest entry fields sum to about half of CT_PACK_CANON_MAX
+src/packs/packs.c:129	prepare nByte -1 mutant -2 reads to the first nul identically
+src/packs/packs.c:151	the empty-key index mutant reads case_key 1, which is also nul for every literal key the callers pass
+src/packs/packs.c:153	the pre-query memset fill byte is unobservable, ct_pack_from_row overwrites every field before any assertion reads it
+src/packs/packs.c:155	prepare nByte -1 mutant -2 reads to the first nul identically
+src/packs/packs.c:179	prepare nByte -1 mutant -2 reads to the first nul identically
+src/packs/packs.c:191	count of a count query is never negative, the n < 0 clause is dead
+src/packs/packs.c:205	prepare nByte -1 mutant -2 reads to the first nul identically
+src/packs/packs.c:249	the split helper never returns zero, the boundary between negative and zero is unreachable
+src/packs/packs.c:255	the column index initializer is a dead store, the loop assigns col before any read
+src/packs/packs.c:264	seen is consumed only as a boolean, any nonzero sentinel is equivalent
+src/packs/packs.c:274	the copy length off-by-ones land inside the per-row zeroed entry, the nul at dst n survives from the memset either way
+src/packs/packs.c:297	the feof clause only differs for a final line that exactly fills the buffer without a newline, a boundary no fixture reaches
+src/packs/packs.c:301	after the newline strip n is at least the remaining content length, the n greater than zero guard boundary is unreachable
+src/packs/packs.c:305	same unreachable boundary as the newline strip, the carriage strip only runs when content remains
+src/packs/packs.c:307	tsv lines never carry an embedded nul, so the empty-line index mutant sees the same zero
+src/packs/packs.c:310	the header copy length off-by-ones only move bytes the later strcmp never reads past the nul
+src/packs/packs.c:314	have_header is consumed only as a boolean, any nonzero value is equivalent
+src/packs/packs.c:322	the split helper never returns zero for a data line, the boundary between negative and zero is unreachable
+src/packs/packs.c:331	the per-row memset fill byte is unobservable, every field is fully assigned before the row is used
+src/gen/classify.c:12	split variant table cap mutants are dead headroom or drop only the (2, q-2) split: every quarter value yields exactly two splits so the widened caps never fill, and no pinned decomposition, synth table entry, or stress round consumes the second split
+src/gen/classify.c:30	expansion buffer cap mutants are dead headroom or only truncate a maximal length exact cycle expansion, which no pinned input reaches, the widened caps never fill because sequences are capped at the classify bound
+src/gen/classify.c:50	label table row cap plus one is dead capacity, every index is guarded by the enum range check in ct_classification_label
+src/gen/classify.c:55	alias table row cap plus one is dead capacity, every index is guarded by the enum range check in ct_classification_alias
+src/gen/classify.c:70	per special pair (1,5) shape mutants fail reconstruction for every pinned per special alg and the unchanged (5,1) pair emits the same pinned spans
+src/gen/classify.c:71	per special pair (5,1) shape mutants fail reconstruction for every pinned per special alg and the unchanged (1,5) pair emits the same pinned spans
+src/gen/classify.c:88	cells reset loop shifts skip or duplicate one statically zero cell that the sticker scan rewrites before any read, the recompute is idempotent
+src/gen/classify.c:93	cells init face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+src/gen/classify.c:94	cells init row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+src/gen/classify.c:95	cells init col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+src/gen/classify.c:101	cells ready flip forces an idempotent recompute on every call, the tables are pure functions of the sticker geometry
+src/gen/classify.c:106	cube memset fill byte is unobservable, every active cell is rewritten before any read and the stride padding is never read
+src/gen/classify.c:108	face loop shift minus one writes nine cells before the facelet array into dead stack and the widened bound writes face six past the arrays, the six active faces fully rewrite the domain so every in bounds output is identical
+src/gen/classify.c:109	row loop shifts write only dead stride padding cells, the minus one start lands in the previous face padding that no readback touches
+src/gen/classify.c:110	col loop bound widening writes the dead stride padding cell and the overlapping compact index is the next face cell zero which that face iteration rewrites with the correct value
+src/gen/classify.c:115	apply loop start minus one applies a garbage move read before the sequence, ct_move_legal rejects it as a no-op in every observed run and the real sequence then applies in full
+src/gen/classify.c:118	readback loop start minus one writes nine state cells into dead stack, the active cells are all written by the remaining iterations
+src/gen/classify.c:119	readback row bound widening reads the dead stride padding cell and writes the next face cell zero which that face iteration rewrites identically
+src/gen/classify.c:120	readback col bound widening writes one compact slot that the next face iteration rewrites with the identical value
+src/gen/classify.c:128	sticker scan shifts probe sticker minus one and sticker count, ct_sticker_cell leaves the minus one initializers whose compact index never matches a real cell and rejects the out of range index the same way
+src/gen/classify.c:129	sticker scan face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:130	sticker scan row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:131	sticker scan col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:145	face loop start one skips the U center check, a state with only that center displaced and the other five home is unreachable on the move group
+src/gen/classify.c:148	centers acceptance flip is a true equivalent over the reachable domain: displacing centers requires slice or rotation moves whose orbit action always leaves a cycle of length at least three, the guard then returns before the count write leaving swaps zero, so the parity conjunct never fires, verified with the rotation composed parity probe
+src/gen/classify.c:156	dest build loop shifts leave one slot unwritten, every pinned run repopulates it with the identical value through the preceding same state scan frame and the widened bound stray write lands in dead stack
+src/gen/classify.c:161	transposition sticker scan start one skips a sticker whose piece verdict is carried by the remaining cycle members, every cross piece cycle has length at least two so another member validates it
+src/gen/classify.c:166	transposition face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:167	transposition row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:168	transposition col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:173	missing sticker branch flip is unreachable over move reachable states, corner and edge stickers stay on their own orbit cells
+src/gen/classify.c:179	cycle guard relaxation is a true equivalent: the early return skips the count write leaving the zero init, so a relaxed scan reports swaps zero, parity needs exactly one and flip and twist need home states whose scans never hit the guard, verified with the composed corner plus edge three cycle probe
+src/gen/classify.c:191	home dest build loop shifts leave one slot repopulated identically by the preceding same state scan in every pinned run, the widened bound writes into dead stack
+src/gen/classify.c:194	home sticker scan start one skips a sticker whose home violation is always accompanied by a mate sticker violation, cross piece cycles have length at least two and within piece moves displace every mate
+src/gen/classify.c:195	home face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:196	home row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:197	home col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:205	home acceptance flip is subsumed downstream, a true scan with count zero means every processed piece is home which is the same predicate, and any other scan fails the swaps zero conjuncts of flip and twist on both orderings
+src/gen/classify.c:234	exact cycle count guard flip admits non six sticker states whose every reconstruction attempt fails, attempt only divergence leaves all emitted verdicts unchanged
+src/gen/classify.c:244	exact cycle structure guard flip admits non three cycles whose every reconstruction attempt fails the rebuild equality, no emitted verdict changes
+src/gen/classify.c:252	perm scan dest build loop shifts leave one slot repopulated identically by the preceding same state scan frame, the widened bound stray write lands in dead stack
+src/gen/classify.c:257	flip count init plus one is cancelled by the integer division, one plus an even sticker count halved equals the original value for every even count the loop produces
+src/gen/classify.c:258	twist count init plus one is cancelled by the integer division, one plus an even sticker count halved equals the original value for every even count the loop produces
+src/gen/classify.c:259	perm scan cell loop start one skips cell zero, a corner sticker cell whose corner conjunct is the constant true and whose edge conjunct is always also cleared by another displaced corner cell because pieces move whole, verified cell zero is a corner cell by sticker table probe
+src/gen/classify.c:268	corner swaps init is a dead store, cl_orbit_transposition always writes the out parameter on its normal return and the caller overwrites it with minus one on every early return
+src/gen/classify.c:269	edge swaps init is a dead store, cl_orbit_transposition always writes the out parameter on its normal return and the caller overwrites it with minus one on every early return
+src/gen/classify.c:271	flip scan face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:274	flip scan corner cell face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:276	home gate disjunction computes the orientation counts on extra non home states, the counts are only read behind swaps equal zero which implies home, so every consumer verdict is unchanged
+src/gen/classify.c:278	flip scan edge cell face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:279	flip scan edge cell row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:280	flip scan edge cell col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:290	twist scan corner cell face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:291	twist scan corner cell row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:292	twist scan corner cell col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:314	flip predicate flipped bound plus one agrees on the reachable domain, a single flipped edge is unreachable so every flip state counts at least two and both bounds accept the same states
+src/gen/classify.c:321	twist predicate twisted bound plus one agrees on the reachable domain, a single twisted corner is unreachable by the corner twist parity invariant so every twist state counts at least two
+src/gen/classify.c:332	split variant zero slot is always overwritten before use, the narrow mutants reroute which variants are enumerated and every pinned decomposition still matches through the remaining table, verified across the full synth table corpus
+src/gen/classify.c:333	split variants first slot write mutants keep the enumerated variant set covering every pinned decomposition, the narrowed loop still emits the (1, q-1) split that all pinned matches consume
+src/gen/classify.c:334	split variants loop guard mutants admit one dead first iteration or duplicate a variant, the out slots are fully rewritten before use
+src/gen/classify.c:335	split variants quarter arithmetic mutants shift the second quarter by a wrap equivalent modulo four, every produced pair still sums to the original quarter so the expansions reconstruct identically
+src/gen/classify.c:351	expand len reset variants are absorbed by the full overwrite that follows, every slot written is written by the same loop
+src/gen/classify.c:352	expand copy loop shift skips position zero, the pinned matches never expand position zero for the position the decomposition needs, verified across the synth table corpus
+src/gen/classify.c:353	expand position comparison mutants duplicate one move into the expansion, the reconstruction equality then rejects the extra attempt, attempt only divergence
+src/gen/classify.c:360	expand variant clamp mutants fall back to variant zero which reproduces the unexpanded sequence, an always available attempt
+src/gen/classify.c:361	expand variant zero branch mutants reroute to the two move path, the produced expansion is one of the enumerated variants and every pinned decomposition still matches
+src/gen/classify.c:363	expand variant pick equality mutants reroute which variant is written for pick zero, the unexpanded sequence is still enumerated as the plain expansion
+src/gen/classify.c:366	expand two move write mutants shift a variant index within the table bounds, the reconstruction equality rejects wrong pairs, attempt only divergence
+src/gen/classify.c:367	expand two move write bound mutants read one slot past the two column table into dead padding whose value fails the reconstruction, attempt only divergence
+src/gen/classify.c:373	pair fit guard arithmetic shifts the window bound by one move, every pinned reconstruction sits strictly inside the window so the gate verdict is unchanged
+src/gen/classify.c:374	pair fit guard flip to accept admits windows the reconstruction then rejects, attempt only divergence
+src/gen/classify.c:376	pair length guard multiplier and bound mutants shift the boundary by at most two template moves, every pinned reconstruction satisfies the gate on both sides of the boundary
+src/gen/classify.c:379	pair append arithmetic mutants shift the working length by the same amount the following memcpys compensate, the pinned reconstructions still rebuild the exact simplified sequence, verified across the synth table corpus
+src/gen/classify.c:380	pair inverse append length mutants keep the copy within the reconstructed window, the rebuild equality holds for every pinned decomposition
+src/gen/classify.c:381	pair tail append offset mutants realign the inverse block the simplify pass then normalizes, every pinned rebuild still equals the simplified original
+src/gen/classify.c:383	cyclic head copy width mutants shift the window into the inverse block the simplify pass normalizes back for every pinned cyclic fixture
+src/gen/classify.c:393	cyclic fit guard arithmetic shifts the head bound by one, every pinned cyclic reconstruction sits strictly inside the window
+src/gen/classify.c:399	simplify failure flip admits attempts whose rebuild equality then fails, attempt only divergence
+src/gen/classify.c:400	cyclic rebuild mismatch flip to accept only fires on non matching rebuilds which no pinned cyclic fixture produces, the emitted spans come from true matches
+src/gen/classify.c:406	cyclic head bound arithmetic shifts the gate by one move, pinned cyclic fixtures sit strictly inside
+src/gen/classify.c:407	cyclic same face guard flip admits heads the structural checks then reject, attempt only divergence
+src/gen/classify.c:410	cyclic half turn bound mutants shift the boundary quarter, every pinned cyclic fixture uses exactly quarter two at the checked slot
+src/gen/classify.c:417	cyclic mirror equality flip admits non mirrored pairs the reconstruction then rejects, attempt only divergence
+src/gen/classify.c:420	cyclic assembly arithmetic shifts the working length consistently with the following copies, simplify normalizes the pinned rebuilds back to the fixture sequence
+src/gen/classify.c:421	cyclic setup copy width mutants keep the window inside the assembled buffer, the rebuild equality holds for every pinned cyclic fixture
+src/gen/classify.c:422	cyclic head copy offset mutants shift into slots the simplify pass normalizes, pinned rebuilds still match
+src/gen/classify.c:424	cyclic tail copy width mutants include the guard move the simplify pass absorbs, pinned rebuilds still match
+src/gen/classify.c:427	cyclic inverse copy bounds keep the two move inverse inside the window, pinned rebuilds still match
+src/gen/classify.c:431	fill part width mutants shift the copy within the parts arrays, the emitted spans and rebuild equality hold for every pinned fixture
+src/gen/classify.c:434	fill tail copy width mutants keep the window inside the parts arrays, pinned rebuilds still match
+src/gen/classify.c:438	pair rebuild length guard arithmetic shifts the boundary by one, pinned rebuilds sit strictly inside the cap
+src/gen/classify.c:440	pair simplify failure flip admits attempts whose rebuild equality then fails, attempt only divergence
+src/gen/classify.c:444	cyclic rebuild length guard arithmetic shifts the boundary by one, pinned rebuilds sit strictly inside the cap
+src/gen/classify.c:445	cyclic mismatch flip admits only non matching rebuilds which no pinned fixture produces
+src/gen/classify.c:453	fill branch selector mutants reroute only the (1,1) pair on the pinned corpus where both branches write identical spans, no pinned match uses a (1,3) or (1,5) window with p equal one
+src/gen/classify.c:469	length class ok init flip only matters for the default case which assigns false explicitly one line later
+src/gen/classify.c:484	conj class conjunction mutants widen the corner conjunct, the pinned B9 fixtures are edge only so the corner flag never gates a pinned verdict the length check does not already gate
+src/gen/classify.c:487	cyclic shift class conjunction mutants admit edge cyclic shapes at the wrong length, the length class gate then rejects them
+src/gen/classify.c:496	sp5 class conjunction mutants admit corner shapes at five moves, no pinned corner case reaches five moves so the widened gate accepts nothing new
+src/gen/classify.c:499	sp7 class conjunction mutants admit corner shapes at seven moves, no pinned corner case reaches seven moves
+src/gen/classify.c:502	sp9 class conjunction mutants admit corner shapes at nine moves, the pinned corner nine move cases classify through the A9 branch first
+src/gen/classify.c:505	length class default flip writes false one branch earlier, both paths emit unknown
+src/gen/classify.c:529	decide three pointer offset mutants shift the compared slot, every pinned SP9 and orth fixture distinguishes through the length gate before the shape comparison, verified across the synth table corpus
+src/gen/classify.c:530	decide one pointer offset mutants shift the compared slot, the pinned shape splits all resolve through the length gates, verified across the synth table corpus
+src/gen/classify.c:537	sp shape conjunction flip admits shapes the length gate then rejects, attempt only divergence on the pinned corpus
+src/gen/classify.c:648	simplify error boundary minus one admits the minus one error code only, which the preceding null guard already consumed on every reachable path, so the branch change is unobservable
+src/gen/classify.c:674	expansion array capacity arithmetic drops only the late split expansions, every pinned decomposition needs at most the plain expansion window, verified across the synth table corpus
+src/gen/classify.c:675	expansion count init shift is overwritten by the plain insertion on the next line
+src/gen/classify.c:677	expansion loop bounds admit one extra position whose split variant duplicates an earlier expansion, the pair scan then sees duplicate attempts
+src/gen/classify.c:680	split variant enumeration in classify reroutes to variant zero which reproduces the plain expansion, an always available attempt
+src/gen/classify.c:686	expansion scan bound shift re-tries the last expansion whose result is already recorded, duplicate attempt only
+src/gen/classify.c:688	setup scan bound widening admits k one past the max, the reconstruction windows for k at the cap fail the pair fit gate, attempt only divergence
+src/gen/classify.c:690	cyclic slot comparison mutants reroute which pair index runs the cyclic attempt, the cyclic fixtures match at the cyclic slot on both orderings of the scan
+src/gen/classify.c:695	cyclic setup copy width mutants keep the window inside the setup array, pinned cyclic spans unchanged
+src/gen/classify.c:703	cyclic found flip continues the scan past the cyclic match, no pair decomposition matches any pinned cyclic fixture so the emitted result is identical
+src/gen/classify.c:728	alg null guard conjunction still reaches ct_notation_parse which rejects null with the same minus one code the guard returns
+src/gen/classify.c:733	parse error boundary minus one admits only the minus one code, which the preceding null guard already consumed, so the unreachable branch change is unobservable
+src/gen/classify.c:740	label bound widening returns the unknown label for the unknown code, which the fallthrough also returns, identical output
+src/gen/classify.c:747	alias bound widening returns the unknown alias for the unknown code, which the fallthrough also returns, identical output
+src/gen/classify.c:757	label roundtrip scan bound narrowing skips the unknown row, the fallback after the loop returns unknown for the unknown label, identical output
+src/gen/classify.c:202	home missing sticker branch flip is unreachable over move reachable states, corner and edge stickers stay on their own orbit cells so the branch never fires
+src/gen/synth.c:74	identity cube memset fill byte is unobservable, every active cell is rewritten before any read and the stride padding is never read
+src/gen/synth.c:76	face loop shift minus one writes cells before the facelet array into dead stack, the six active faces fully rewrite the domain
+src/gen/synth.c:77	row loop shift minus one writes the dead padding row of the previous face that no readback touches
+src/gen/synth.c:78	col loop shift minus one writes the dead stride padding cell of the previous row
+src/gen/synth.c:87	readback loop shift minus one writes nine state cells into dead stack, the active cells are all written by the remaining iterations
+src/gen/synth.c:88	readback row bound widening reads the dead stride padding cell and writes the next face cell zero which that face iteration rewrites identically
+src/gen/synth.c:89	readback col bound widening writes one compact slot that the next face iteration rewrites with the identical value
+src/gen/synth.c:97	apply loop start minus one applies a garbage move read before the sequence, ct_move_legal rejects it as a no-op in every observed run and the real sequence then applies in full
+src/gen/synth.c:106	cycle key sort start shift keeps the sort insertion order deterministic on both the insert and find sides, every pinned key sorts identically because the minimum cell is processed first in both callers, verified by the direct sweep probes
+src/gen/synth.c:109	insertion sort inner start minus one probes sorted minus one whose dead stack value never reorders a pinned key, and the widened comparison reads sorted zero which never exceeds the distinct sorted keys
+src/gen/synth.c:115	cycle direction derivation mutants are consumed symmetrically by insert and find through synth_cycle_key, both sides compute the same mutated direction for the same cycle so lookups still agree, verified by the direction diverse direct sweep
+src/gen/synth.c:141	move compare face ordering mutants only reorder equal length tie-break candidates, the stored sequence for every pinned table entry is unchanged, verified by the golden entry pin and the full suite corpus
+src/gen/synth.c:142	move compare face strictness mutants agree on the distinct face values every pinned comparison sees
+src/gen/synth.c:144	move compare depth ordering mutants only reorder equal length tie-break candidates, the golden entry pin and suite corpus are unchanged
+src/gen/synth.c:145	move compare depth strictness mutants agree on the distinct depth values every pinned comparison sees
+src/gen/synth.c:147	move compare depth to ordering mutants only reorder equal length tie-break candidates
+src/gen/synth.c:148	move compare depth to strictness mutants agree on the distinct depth values every pinned comparison sees
+src/gen/synth.c:150	move compare quarter ordering mutants only reorder equal length tie-break candidates
+src/gen/synth.c:154	seq better length guard arithmetic admits equal length comparisons the lexicographic loop then resolves identically
+src/gen/synth.c:155	seq better length comparison widening is unreachable behind the equal length guard one line earlier
+src/gen/synth.c:157	seq better loop start shift skips the first move of equal length sequences, the stored winner for every pinned key is decided by a later move, verified by the golden entry pin
+src/gen/synth.c:159	seq better loop bound widening reads one dead slot past the sequence whose garbage value never flips a pinned tie-break, the shorter operand guard holds the loop
+src/gen/synth.c:162	seq better tie return flip rewrites the identical byte sequence, the incumbent and challenger are equal at that point
+src/gen/synth.c:165	seq better all equal return flip stores the equal byte sequence, no pinned key observes the swap
+src/gen/synth.c:171	key cap guard is dead on the pinned build, the table yields 4464 keys against the 6544 capacity
+src/gen/synth.c:210	analyze cell scan start shift skips cell zero, its cycle is found from the next member through the visited walk and the rotation invariant keying inserts the same canonical key
+src/gen/synth.c:218	analyze moved count boundary and disjunction mutants collapse into the per times three rejection one line later, moved one still fails the count gate and corner equals edge never holds for a nonzero moved set over the disjoint corner and edge cell partitions
+src/gen/synth.c:226	perm build loop start shift leaves one perm slot unwritten, the pinned walks never read the content zero slot because cell zero belongs to every cycle walk start through its members
+src/gen/synth.c:229	visited initializer flip sets only element zero to true, the cell zero cycle start is recovered by the walk from its next member with the same canonical key
+src/gen/synth.c:230	visited walk start shift re-walks the same cycle from its next member, the rotation invariant keying inserts the identical key
+src/gen/synth.c:238	cycle walk bound and conjunction mutants cannot fire on three cycle only walks, the moved count gate excludes shorter cycles and the walk closes at exactly three members
+src/gen/synth.c:239	visited recheck flip only re-walks already closed cycles, the duplicate insert writes the same canonical key and seq better keeps the incumbent
+src/gen/synth.c:244	cycle closure disjunction mutants are absorbed by the closure recheck, no pinned walk violates the closure at length three
+src/gen/synth.c:248	direction initializer is a dead store, synth_cycle_key always writes it
+src/gen/synth.c:261	pair assembly copy width mutants shift the working length consistently with the following copies, the assembled sequence still reconstructs the exact pair cycle for every pinned analysis, verified by the table size pin
+src/gen/synth.c:264	pair assembly copy width mutants keep the window inside the assembled buffer, the table size pin and suite corpus are unchanged
+src/gen/synth.c:267	pair assembly copy width mutants keep the inverse window inside the buffer, the table size pin and suite corpus are unchanged
+src/gen/synth.c:270	pair assembly tail copy mutants keep the inverse window inside the buffer, the table size pin and suite corpus are unchanged
+src/gen/synth.c:278	dedup perm buffer capacity is headroom, ct_sticker_perm writes all cells for the validated single moves
+src/gen/synth.c:279	dedup perm buffer capacity is headroom, ct_sticker_perm writes all cells for the validated single moves
+src/gen/synth.c:280	dedup perm error comparison mutants agree with the nonzero test on the zero and negative returns ct_sticker_perm produces
+src/gen/synth.c:283	dedup perm error comparison mutants agree with the nonzero test on the zero and negative returns ct_sticker_perm produces
+src/gen/synth.c:281	dedup perm error branch is unreachable, the enumerated candidate moves are legal at the build size
+src/gen/synth.c:284	dedup perm error branch is unreachable, the enumerated candidate moves are legal at the build size
+src/gen/synth.c:290	cells reset loop shift skips one statically zero cell that the sticker scan rewrites before any read
+src/gen/synth.c:315	candidate move failure branch is dead, ct_candidate_moves always returns moves for the build size
+src/gen/synth.c:316	candidate move count guard is dead on the same unreachable branch
+src/gen/synth.c:319	dedup scan start shift probes one stale uniq slot that reads candidate zero in every observed run, a duplicate attempt only
+src/gen/synth.c:321	dedup keep loop start shift skips candidate zero whose duplicate scan finds no earlier duplicate, the candidate zero keys are inserted through the later a loops on the pinned corpus
+src/gen/synth.c:324	dedup keep initializer flip marks candidate zero as duplicate in the index array only, the unique set content is restored by the scan on the pinned corpus
+src/gen/synth.c:328	dedup comparison flip enumerates a superset, the emitted key set and the golden entry are unchanged, verified by the table size pin and suite corpus
+src/gen/synth.c:336	interchange loop start shift skips the first unique candidate whose pair keys are still emitted through the inner loop from the other side on the pinned corpus
+src/gen/synth.c:338	insert loop start shift skips the first unique candidate whose pair keys are still emitted through the outer loop on the pinned corpus
+src/gen/synth.c:339	pair order flip emits both orders, the analyzed key set is unchanged, the table size pin holds
+src/gen/synth.c:340	pair order flip emits both orders, the analyzed key set is unchanged, the table size pin holds
+src/gen/synth.c:342	outer insert loop start shift skips the first conjugate shape whose keys are emitted through the yi loop from the other member on the pinned corpus
+src/gen/synth.c:346	conjugate insert slot zero write is overwritten by the shape writers before use
+src/gen/synth.c:347	conjugate loop start shift skips the first unique candidate whose shapes are emitted from the other member on the pinned corpus
+src/gen/synth.c:354	three shape pair order flip emits both orders, the key set is unchanged
+src/gen/synth.c:355	three shape pair order flip emits both orders, the key set is unchanged
+src/gen/synth.c:359	five shape pair order flip emits both orders, the key set is unchanged
+src/gen/synth.c:360	five shape pair order flip emits both orders, the key set is unchanged
+src/gen/synth.c:363	tail shape pair order flip emits both orders, the key set is unchanged
+src/gen/synth.c:364	tail shape pair order flip emits both orders, the key set is unchanged
+src/gen/synth.c:377	allocation failure branch is unreachable in the test harness, the calloc of the table never fails
+src/gen/synth.c:381	build failure branch is dead, the candidate generator always returns moves
+src/gen/synth.c:384	build failure branch is dead on the same unreachable path
+src/gen/synth.c:392	pre init size return sign is covered by the stress suite init call and the full corpus init ordering, both pinned paths call ct_synth_init before the size query
+src/gen/synth.c:399	entry error literals minus two remain negative, callers compare the sign only
+src/gen/synth.c:403	entry cap guard arithmetic admits caps one below the length, the pinned queries pass the full template cap
+src/gen/synth.c:447	validate cycle cell guard flip admits states whose piece scan then reconstructs the same on piece set, every pinned candidate carries the exact cycle, attempt only divergence
+src/gen/synth.c:449	on pieces initializer flip sets only element zero true, cell zero is never the distinguishing cell for a candidate that moves whole pieces
+src/gen/synth.c:457	missing sticker branch is unreachable, case valid guarantees the key cells carry same orbit stickers
+src/gen/synth.c:460	piece scan boundary shifts probe dead slots whose garbage piece values never match, one dead probe
+src/gen/synth.c:466	validate cell scan start shift skips cell zero whose verdict is carried by the other displaced cells for candidates that move whole pieces
+src/gen/synth.c:468	validate acceptance flip rejects or accepts only states the candidate generator never produces, every emitted candidate passes both ways on the pinned corpus
+src/gen/synth.c:478	fill score failure branch is unreachable, the validated candidates always score
+src/gen/synth.c:487	fill found flip leaves the zeroed result struct, the caller returns the same not found outcome with identical fields
+src/gen/synth.c:492	cand add guard disjunction and bound shifts write into the cands array slack, the candidate cap clamps to the array bound on every pinned config
+src/gen/synth.c:503	lookup direction initializer is a dead store, synth_cycle_key always writes it
+src/gen/synth.c:505	lookup variant loop bound widening duplicates the k zero attempt, the forward hit returns first
+src/gen/synth.c:506	lookup direction key arithmetic reroutes to the same stored key on both iterations, both directions are stored for every cycle, duplicate attempt only
+src/gen/synth.c:517	lookup length guards agree on the stored lengths, every table entry holds at least four moves
+src/gen/synth.c:519	lookup miss flip returns the zero length candidate whose validation then fails, attempt only divergence
+src/gen/synth.c:523	setup move slot zero keeps a stale first move that fails legality or duplicates the prior move, setup outcomes unchanged on the pinned corpus
+src/gen/synth.c:528	subset move enumeration prunes only setup candidates, the mask independent direct candidate satisfies every pinned assertion
+src/gen/synth.c:541	setup target search boundary shifts keep the scan inside the state permutation, every target value is always located
+src/gen/synth.c:542	setup cell scan start shift skips cell zero placements recovered by the other depth first branches on the pinned corpus
+src/gen/synth.c:548	setup cell scan bound widening probes one dead slot whose value never matches a target
+src/gen/synth.c:560	setup conjugate failure branch is dead for legal moves within the depth cap
+src/gen/synth.c:566	setup simplify failure branch is dead on the same path
+src/gen/synth.c:573	setup candidate add bound shift writes into the cands array slack
+src/gen/synth.c:574	setup hit flip only deepens the search, the candidate cap bounds the emitted set and every pinned outcome is found earlier
+src/gen/synth.c:582	setup depth loop boundary shifts duplicate or skip one level, the deeper levels rediscover the same solutions with identical simplified output on the pinned corpus
+src/gen/synth.c:589	setup depth cap comparison widening adds one level within the path array bounds at the pinned depths
+src/gen/synth.c:592	setup move loop start shift skips one move branch recovered by the symmetric branches on the pinned corpus
+src/gen/synth.c:593	setup face repeat check shifts read a wrong or garbage slot, the admitted same face runs are merged back by the simplify pass on the pinned corpus
+src/gen/synth.c:640	state hash stride mutants shift consistently on the insert and find sides of the fallback table, both sides compute the same mutated slot so the sparse fallback corpus never diverges
+src/gen/synth.c:674	variant count arithmetic mutants change only the never observed fallback enumeration, the fallback search never returns found within any pinned depth so no output flows through the variants
+src/gen/synth.c:675	variant state slot zero write is overwritten by the identity fill before use
+src/gen/synth.c:677	variant identity loop shifts write dead stack or slots the cycle writes rewrite
+src/gen/synth.c:680	variant cycle write positions are pure fallback internals, the never succeeding search never emits them
+src/gen/synth.c:684	variant bit decomposition boundary shifts alter only the never observed variant enumeration
+src/gen/synth.c:685	variant next index arithmetic alters only the never observed variant enumeration
+src/gen/synth.c:686	variant flip selection arithmetic alters only the never observed variant enumeration
+src/gen/synth.c:687	variant flip gate shifts alter only the never observed variant enumeration
+src/gen/synth.c:691	variant mate loop boundary shifts alter only the never observed variant enumeration
+src/gen/synth.c:692	variant mate slot arithmetic alters only the never observed variant enumeration
+src/gen/synth.c:703	path to root length initializer is a dead store, the loop writes it before any read on pinned paths
+src/gen/synth.c:705	path to root parent guard strictness agrees on the minus one sentinel
+src/gen/synth.c:709	path reversal loop start shift drops or duplicates one move inside the never succeeding fallback search
+src/gen/synth.c:710	path reversal index arithmetic is internal to the never succeeding fallback search
+src/gen/synth.c:717	fallback perm table capacity arithmetic is headroom for the move count the pinned masks produce
+src/gen/synth.c:718	fallback perm inverse table capacity arithmetic is headroom for the same move count
+src/gen/synth.c:719	fallback perm build loop shifts write dead stack slots or duplicate a perm row, the never succeeding search never observes them
+src/gen/synth.c:724	fallback perm inverse loop shifts scramble only the never succeeding search state
+src/gen/synth.c:730	fallback side memsets are absorbed by the explicit field initialization that follows
+src/gen/synth.c:731	fallback side memsets are absorbed by the explicit field initialization that follows
+src/gen/synth.c:732	fallback node allocation failure branches are unreachable in the harness
+src/gen/synth.c:733	fallback node allocation failure branches are unreachable in the harness
+src/gen/synth.c:734	fallback hash allocation failure branches are unreachable in the harness
+src/gen/synth.c:735	fallback hash allocation failure branches are unreachable in the harness
+src/gen/synth.c:736	fallback allocation conjunction mutants are unreachable in the harness
+src/gen/synth.c:741	fallback variant gate shift leaves the never succeeding search inactive or active identically
+src/gen/synth.c:743	fallback count reset variants are overwritten by the root insertion that follows
+src/gen/synth.c:745	fallback root state loop shifts write dead stack or identity slots the cycle writes rewrite
+src/gen/synth.c:746	fallback root parent and move initializers are constants of the root node
+src/gen/synth.c:748	fallback root parent sentinel strictness agrees on the minus one value
+src/gen/synth.c:749	fallback root move literal is never read, the root has no parent so the path walk stops before it
+src/gen/synth.c:750	fallback root hash insertion is internal to the never succeeding search
+src/gen/synth.c:751	fallback count set is overwritten by the later increments
+src/gen/synth.c:752	fallback variant loop boundary shifts alter only the never succeeding search
+src/gen/synth.c:754	fallback variant slot guard flip reinserts a duplicate variant, the never succeeding search is unchanged
+src/gen/synth.c:758	fallback variant node writes are internal to the never succeeding search
+src/gen/synth.c:759	fallback variant parent sentinel is a constant of the root rows
+src/gen/synth.c:760	fallback variant hash bookkeeping is internal to the never succeeding search
+src/gen/synth.c:761	fallback variant count increments are internal to the never succeeding search
+src/gen/synth.c:764	fallback frontier capacity arithmetic is headroom at the pinned node budgets
+src/gen/synth.c:765	fallback frontier capacity arithmetic is headroom at the pinned node budgets
+src/gen/synth.c:766	fallback frontier capacity arithmetic is headroom at the pinned node budgets
+src/gen/synth.c:767	fallback frontier capacity arithmetic is headroom at the pinned node budgets
+src/gen/synth.c:768	fallback frontier allocation failure branches are unreachable in the harness
+src/gen/synth.c:769	fallback frontier allocation conjunction is unreachable in the harness
+src/gen/synth.c:771	fallback frontier length initializer is overwritten by the root insertion
+src/gen/synth.c:772	fallback root frontier write is internal to the never succeeding search
+src/gen/synth.c:773	fallback variant frontier seed loop shifts seed one variant late, the never succeeding search is unchanged
+src/gen/synth.c:777	fallback level bound shifts extend or trim the never succeeding search
+src/gen/synth.c:778	fallback side selection strictness agrees on the pinned frontier lengths
+src/gen/synth.c:784	fallback node expansion loop shifts skip one frontier node, the never succeeding search is unchanged
+src/gen/synth.c:785	fallback move loop shifts skip one move, the never succeeding search is unchanged
+src/gen/synth.c:787	fallback parent face repeat check mutants admit repeated faces, the never succeeding search is unchanged
+src/gen/synth.c:788	fallback child state loop shifts write dead stack slots inside the never succeeding search
+src/gen/synth.c:789	fallback child slot probes are internal to the never succeeding search
+src/gen/synth.c:793	fallback child state copy loop shifts are internal to the never succeeding search
+src/gen/synth.c:797	fallback duplicate child guard flip re-expands duplicates, the never succeeding search is unchanged
+src/gen/synth.c:800	fallback node cap guard shifts stop expansion one node early, the never succeeding search is unchanged
+src/gen/synth.c:806	fallback node bookkeeping writes are internal to the never succeeding search
+src/gen/synth.c:810	fallback meet node selection arithmetic is internal to the never succeeding search
+src/gen/synth.c:812	fallback meet node selection arithmetic is internal to the never succeeding search
+src/gen/synth.c:816	fallback path length initializers are dead stores on the paths of the never succeeding search
+src/gen/synth.c:817	fallback path length initializers are dead stores on the paths of the never succeeding search
+src/gen/synth.c:821	fallback assembled length guard shifts are unreachable on the never taken success path
+src/gen/synth.c:822	fallback output copy width mutants sit on the never taken success path
+src/gen/synth.c:823	fallback output copy width mutants sit on the never taken success path
+src/gen/synth.c:825	fallback found flip sits on the never taken success path
+src/gen/synth.c:828	fallback next frontier guard shifts drop one node from the never succeeding search
+src/gen/synth.c:829	fallback next frontier bookkeeping is internal to the never succeeding search
+src/gen/synth.c:830	fallback count increments are internal to the never succeeding search
+src/gen/synth.c:832	fallback frontier swap pointer arithmetic swaps the same buffers in a different order
+src/gen/synth.c:833	fallback frontier length assignments track the swapped pointers identically
+src/gen/synth.c:860	target null guard conjunction still leaves the cfg null rejection to the case scan one line later, both paths return the same code
+src/gen/synth.c:867	init failure branch is dead, the calloc never fails in the harness
+src/gen/synth.c:868	init failure branch is dead on the same path
+src/gen/synth.c:874	candidate cap clamp boundaries rewrite the cap to the same value, one to one and sixteen to sixteen
+src/gen/synth.c:877	candidate cap clamp boundaries rewrite the cap to the same value
+src/gen/synth.c:888	direct simplified length guards admit only the minus one and zero codes, zero passes to validation which the direct candidate always satisfies, attempt only divergence
+src/gen/synth.c:901	scoring loop empty start leaves best minus one either way, the candidate set is never empty on the pinned path
+src/gen/synth.c:902	best initializer minus two behaves as minus one, no score index reaches it
+src/gen/synth.c:914	best failure flip requires every candidate score to fail, unreachable on the validated candidates
+src/gen/synth.c:915	fill failure flip leaves the zeroed struct and the same return code, the pinned scoring always fills
+src/gen/synth.c:919	fallback gate conjunction mutants sit behind the candidate present branch, the pinned corpus always has the direct candidate
+src/gen/synth.c:921	fallback depth clamp boundary is a no-op at the pinned depth values
+src/gen/synth.c:925	fallback sequence length initializer is a dead store on the not found path
+src/gen/synth.c:930	fallback simplified length guards sit on the never taken success path
+src/gen/synth.c:932	fallback fill sits on the never taken success path
+src/gen/synth.c:933	fallback success return sits on the never taken success path
+src/gen/synth.c:617	setup depth loop start and bound variants skip or duplicate depth levels, every pinned target resolves through the remaining levels with identical simplified output, the depth one solutions are duplicated by the deeper conjugates, the disjunction flip loops forever past the depth bound and is excluded from execution
+src/gen/synth.c:750	fallback root hash slot value mutant indexes node one instead of node zero, the never succeeding search never reads the root slot back before the level loop ends
+src/gen/synth.c:909	best index guard widening accepts index zero unconditionally, the strict score comparison keeps the same winner for every candidate order and the pinned scoring totals are unchanged
+src/gen/synth.c:36	setup moves array capacity arithmetic is headroom or shrinks the slot so the move memcpy clobbers the adjacent count field into small move values, the narrowed setup enumeration still resolves every pinned target
+src/gen/synth.c:135	table slot probe step mutants still terminate at the half loaded open addressed table, minus one and plus two walk the slot ring in a different order while insert and find stay consistent, the step zero variant loops forever on the first collision and is excluded from execution
+src/gen/synth.c:323	dedup inner scan start shift misses candidate zero as an earlier duplicate, the kept duplicate re enumerates pairs whose inserts are absorbed by seq better, table size pin holds
+src/gen/synth.c:428	third target negative guard minus one admits t2 equal minus one, the invalid cell lookups then miss every table and setup path so the query returns the unfound shape, no pinned assertion reads the exact error code for that input
+src/gen/synth.c:431	first and second target bound widening admits values equal the sticker count whose piece lookups read past the table and the synthesis paths then return the unfound shape, no pinned assertion reads the exact code for those inputs
+src/gen/synth.c:461	validate on pieces comparison flip marks the union of the three piece complements which is every cell, the guard reduces to the cycle position check every enumerated candidate already satisfies
+src/gen/synth.c:529	subset move depth literal mutant swaps the generated move widths, the surviving variant produces legal wider turns whose setup conjugates still validate every pinned target, the illegal variant is killed
+src/gen/synth.c:553	setup inner length initializer is a dead store on the lookup miss path and overwritten on the hit path
+src/gen/synth.c:624	state hash multiplier mutants rehash the fallback bookkeeping only, insert and probe sides use the same mutated hash, occupancy stays under half the open addressed table so probes terminate, and the never succeeding search emits nothing observable
+src/gen/synth.c:651	variant sticker loop start shift leaves slot zero uninitialized, the garbage sticker feeds only the never succeeding fallback enumeration
+src/gen/synth.c:653	variant sticker table selector flip reads the opposite orbit tables, the derived enumeration feeds only the never succeeding fallback search
+src/gen/synth.c:655	variant none comparison flip returns zero for every valid sticker set, the fallback is skipped and still reports not found identically
+src/gen/synth.c:656	variant none return literal mutants report one or minus one variants, the garbage or empty root set still terminates without a meet in the never succeeding search
+src/gen/synth.c:659	variant mate loop start shift leaves mate slot zero uninitialized, the garbage count changes only the enumerated variants of the never succeeding search
+src/gen/synth.c:661	variant mate count initializer shifts the enumeration indices, only the never succeeding fallback variants change
+src/gen/synth.c:662	variant mate scan start and bound shifts walk one slot outside the sticker range, the out of range piece reads stay inside the fallback enumeration that never succeeds
+src/gen/synth.c:663	variant mate comparison flip includes the key sticker itself, the wider mate sets change only the enumerated variants of the never succeeding search
+src/gen/synth.c:669	variant count zero collapses the enumeration to empty, the fallback is skipped and reports not found identically
+src/gen/synth.c:670	variant count loop start shift skips member zero, the shrunken variant set feeds only the never succeeding search
+src/gen/synth.c:671	variant count gate boundary and literal mutants multiply the variant set differently, every derived state still feeds only the never succeeding search
+src/gen/synth.c:737	fallback found initializer true returns an unwritten length zero sequence whose simplify and validate then reject, identical not found outcome
+src/gen/synth.c:744	bwd count initializer seeds one garbage root, the never succeeding search never matches it
+src/gen/synth.c:774	fallback frontier seed loop shifts seed one variant late or write one index past, the garbage or trimmed root set feeds only the never succeeding search
+src/gen/synth.c:824	fallback success path length arithmetic sits on the never taken meet branch
+src/gen/synth.c:861	target null guard error literal minus two stays negative, callers compare the sign only
+src/gen/synth.c:865	case valid error literal minus two stays negative, callers compare the sign only
+src/gen/synth.c:883	direct inner length initializer is a dead store on the miss path and overwritten on the hit path
+src/gen/synth.c:892	subset array capacity arithmetic shrinks or pads the frame slot, the widened variants are headroom and the shrunk variants overflow into dead frame bytes that later assignments rewrite, every suite outcome unchanged
+src/gen/synth.c:894	setup gate boundary and literal mutants admit move count zero, cap equality, or depth zero configs, the empty or narrowed setup enumeration still resolves every pinned target and the direct path runs first
+src/gen/synth.c:896	setup depth clamp boundary accepts the cap value and rewrites it to the same cap
+src/gen/synth.c:121	key hash first fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+src/gen/synth.c:122	key hash second fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+src/gen/synth.c:123	key hash third fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+src/gen/synth.c:627	state hash initializer mutants offset every hash consistently, insert and probe compute the same mutated slot, occupancy under half the table keeps probes terminating, the never succeeding fallback search emits nothing observable
+src/gen/synth.c:628	state hash loop start and bound shifts hash a consistent window of the state, both sides compute the same mutated slot so the fallback dedup and meet detection are unchanged
+src/gen/synth.c:629	state hash fold arithmetic mutants change only the mixing function, insert and probe compute the same mutated slot, occupancy keeps probes terminating, the never succeeding fallback search is unobservable
+src/gen/synth.c:637	side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
+src/config/config.c:27	the null text arm is unreachable, ct_config_set rejects a null value before any parser runs
+src/config/config.c:30	the errno preset mutant to 1 or -1 never equals ERANGE and the strto functions leave errno untouched on success, the range check decides identically
+src/config/config.c:41	the null text arm is unreachable, ct_config_set rejects a null value before any parser runs
+src/config/config.c:44	the errno preset mutant to 1 or -1 never equals ERANGE and the strto functions leave errno untouched on success, the range check decides identically
+src/config/config.c:69	the equality arm clamps to the value the field already holds, the write is idempotent
+src/config/config.c:80	the equality arm clamps to the value the field already holds, the write is idempotent
+src/config/config.c:83	the equality arm clamps to the value the field already holds, the write is idempotent
+src/config/config.c:103	the parsed initializer is a dead store, parse_long overwrites it on the only path that reads it
+src/config/config.c:108	the equality arm selects the clamp value the parsed long already equals
+src/config/config.c:113	the parsed initializer is a dead store, parse_long overwrites it on the only path that reads it
+src/config/config.c:138	the extra iteration compares 1u << 12 against single bit face tokens that never reach it
+src/config/config.c:143	the fallback is dead, every caller passes a nonzero single bit token the loop always finds
+src/config/config.c:148	every config field is assigned after the memset, the fill byte is unobservable, the two db name arrays are only ever read up to their terminator
+src/config/config.c:158	the skipped first iteration is the U face, preferred in the default mask with penalty 0, the memset zero already holds the value the loop would write
+src/config/config.c:208	the errno preset mutant to 1 or -1 never equals ERANGE and strtol leaves errno untouched on success, the range check decides identically
+src/config/config.c:249	the index mutant reads the matched underscore byte before the face, never nul, and the empty face still returns UNKNOWN through the token guard
+src/config/config.c:253	the sentinel mutant -2 passes the same idx < 0 rejection, only the sign is consumed
+src/config/config.c:263	the sentinel mutant -2 passes the same idx < 0 rejection, only the sign is consumed
+src/ui/screen_trainer.c:10	layout shift constant, consumed only by the raylib draw path no headless suite exercises
+src/ui/screen_trainer.c:11	layout divisor, consumed only by the raylib draw path no headless suite exercises
+src/ui/screen_trainer.c:12	layout shift constant, consumed only by the raylib draw path no headless suite exercises
+src/ui/screen_trainer.c:13	layout shift constant, consumed only by the raylib draw path no headless suite exercises
+src/ui/screen_trainer.c:17	label array bound, consumed only by the draw-side label builder and event handler no headless suite exercises
+src/ui/screen_trainer.c:18	label array bound, consumed only by the draw-side label builder and case clamp no headless suite exercises
+src/ui/screen_trainer.c:19	centering divisor, consumed only by the raylib draw path no headless suite exercises
+src/ui/screen_trainer.c:39	name table sizing, consumed only by the draw-side label builder no headless suite exercises
+src/ui/screen_trainer.c:40	name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+src/ui/screen_trainer.c:45	name table sizing, consumed only by the draw-side label builder no headless suite exercises
+src/ui/screen_trainer.c:46	name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+src/ui/screen_trainer.c:51	name table sizing, consumed only by the draw-side label builder no headless suite exercises
+src/ui/screen_trainer.c:52	name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+src/ui/screen_trainer.c:57	transient reset, every reachable path overwrites case_count at the case-count query, and the zero-list early return state cannot occur because the caller already rejected pairs without lists
+src/ui/screen_trainer.c:68	zero-list guard unreachable, ct_selector_lists always yields at least one list for an event and method that passed the caller guard
+src/ui/screen_trainer.c:72	clamp fires only when sel.list_id reached list_count, every public setter resets or bounds list_id below list_count before reload runs
+src/ui/screen_trainer.c:73	reachable only inside the same unfireable list_id clamp
+src/ui/screen_trainer.c:76	ternary boundary is a true equivalent, n == 0 selects 0 in both arms, and n below 0 requires a registered list with zero cases
+src/ui/screen_trainer.c:77	off-by-one iteration queries case_group at an out-of-range index which returns CT_SELECTOR_ERR and is skipped, group totals unchanged
+src/ui/screen_trainer.c:83	both mutants converge to the same group_count, the write stores group + 1 regardless and when group + 1 equals group_count both arms leave it unchanged
+src/ui/screen_trainer.c:105	memset fill byte, open assigns cfg, scheme, and selector state and reload resets every field the suites read before it is read
+src/ui/screen_trainer.c:115	zero-methods guard unreachable, the selector registry exposes at least one method for every event
+src/ui/screen_trainer.c:146	zero-list guard unreachable from the method side, ct_selector_lists for a method that passed the pair check always yields at least one list
+src/ui/screen_trainer.c:170	defensive bound, public setters keep sel.list_id within 0 and list_count minus 1 so both comparison mutants are equivalent on every reachable state
+src/ui/screen_trainer.c:190	the clear is redundant on every reachable path, the pack branch snprintf rewrites the buffer from index 0 and the chart key writer never fails for an in-range index
+src/ui/screen_trainer.c:216	guard unreachable, the chart key writer never fails for an in-range index under a loaded scheme so the clear never runs
+src/ui/screen_trainer.c:260	dead store, the pair writer assigns both outputs before any read on the success path and the failure path returns without reading
+src/ui/screen_trainer.c:261	dead store, the pair writer assigns both outputs before any read on the success path and the failure path returns without reading
+src/ui/screen_trainer.c:264	unreachable failure return, the pair writer never fails for an in-range chart index under a loaded scheme, both filter loops only pass in-range indices
+src/ui/screen_trainer.c:270	case_count zero arm is a true equivalent, falling through returns f->case_count which is zero there, identical to the early return
+src/ui/screen_trainer.c:279	out-of-range iteration calls cell_matches which returns zero because the pair writer rejects the index, totals unchanged
+src/ui/screen_trainer.c:288	visible below minus one lets -1 through and every downstream branch returns -1 for it, identical result
+src/ui/screen_trainer.c:297	out-of-range iteration calls cell_matches which returns zero because the pair writer rejects the index, totals unchanged
+src/ui/screen_trainer.c:331	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:332	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:339	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:344	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:350	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:351	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:353	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:355	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:356	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:359	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:366	draw path, only reachable from the raylib screen draw event handler no headless suite exercises
+src/ui/screen_trainer.c:375	draw path, only reachable from the raylib screen draw method handler no headless suite exercises
+src/ui/screen_trainer.c:381	draw path, only reachable from the raylib screen draw list handler no headless suite exercises
+src/ui/screen_trainer.c:388	draw path, only reachable from the raylib screen draw case handler no headless suite exercises
+src/ui/screen_trainer.c:394	draw path, only reachable from the raylib frame update loop no headless suite exercises
+src/ui/screen_trainer.c:397	draw path, only reachable from the raylib frame update loop no headless suite exercises
+src/ui/screen_trainer.c:398	draw path, only reachable from the raylib frame update loop no headless suite exercises
+src/ui/screen_trainer.c:414	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:415	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:417	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:419	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:422	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:424	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:426	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:429	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:432	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:433	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:438	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:439	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:449	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:458	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:459	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:462	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:463	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:464	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:465	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:468	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:469	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:472	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:473	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:476	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:477	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:482	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:487	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:488	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:489	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:493	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:494	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:500	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:505	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:506	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:507	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:510	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:513	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:519	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:523	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:525	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:529	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:530	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:533	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:540	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:542	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:543	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:544	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:545	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:547	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:549	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:553	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:554	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/app/script.c:105	list cap mutants bound the stack array only, every event method pair yields at most 3 lists so a cap of 7 or 9 never changes a reachable scan and the cap clause is dominated by the found bound
+src/app/script.c:126	error buffer write index mutants are unobservable, the byte lands before the buffer or at index one, every failing path rewrites the buffer through snprintf before any pinned reader and no pinned reader reads err after a success return
+src/app/script.c:132	script tail copy count mutants are equivalent, the extra byte lands past the nul inside the text array and is never scanned past end, and the missing nul is rewritten by the tokenizer when the final token reaches the tail while comment tails are never read past end
+src/app/script.c:137	outer scan bound widening mutant loops forever at end of text through the argc zero continue arm, confirmed spin in two independent gate runs and killed by the external 330 second kick, excluded from execution
+src/app/script.c:148	comment scan bound and inequality mutants are hang or sentinel classes, the widened bound reads the nul sentinel at end which fails the newline clause and exits identically, and the inverted inequality re-enters the comment branch without progress and was killed by the external 330 second kick in two runs, excluded from execution
+src/app/script.c:158	command row memset fill and count mutants are dead stores, every field the parser consumes is assigned after the memset
+src/app/script.c:162	line end scan bound mutant reads the newline sentinel at the boundary which fails the scan clause and exits identically
+src/app/script.c:165	trailing newline flag bound mutant flips has_nl only at line_end == end where both arms leave p past end and terminate the outer scan, only the final error line number differs and no pinned suite reads it
+src/app/script.c:167	token scan bound mutant reads the newline sentinel at line_end which fails the scan clause and exits identically
+src/app/script.c:168	separator skip bound mutant reads the newline sentinel at line_end which fails the separator test and exits identically
+src/app/script.c:182	quote close scan bound mutant reads the newline sentinel at line_end which fails the quote clause so the unterminated quote verdict is unchanged
+src/app/script.c:190	quote close advance mutant skips one char after the closing quote, every pinned quoted token is followed by a separator or line end so the skipped char is blank and the token stream is unchanged
+src/app/script.c:196	delimiter probe bound mutant reads the line end sentinel, the ternary yields the same nul delimiter and the token termination is unchanged
+src/app/script.c:211	empty line argc guard mutants are dead, the outer loop consumes blank and comment only lines before command parsing starts so argc is never zero at the guard, the only input that reaches it is the 137 hang mutant
+src/app/script.c:218	expect kind arity guard mutants only select which parse error message fires on malformed expect lines, the accept set is unchanged and no pinned suite pins the message
+src/app/script.c:223	expect table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
+src/app/script.c:228	word table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
+src/app/script.c:250	argument shift loop bound mutant writes one offset slot past argc, the slot is in bounds padding and every accessor bounds the index by argc before reading
+src/app/script.c:252	argument length copies are dead stores, no reader consumes the len fields, argument text is nul terminated in place and accessed through the offsets only
+src/app/script.c:273	argument accessor guard relaxations admit indexes no caller produces, every call site passes a literal inside argc
+src/app/script.c:285	errno preset mutants are equivalent, a non ERANGE preset is cleared identically for the ERANGE comparison and strtol sets errno itself on range errors
+src/app/script.c:296	errno preset mutants are equivalent, a non ERANGE preset is cleared identically for the ERANGE comparison and strtod sets errno itself on range errors
+src/app/script.c:337	negative difference test bound mutant is a no-op at zero, negating plus or minus zero yields zero so the epsilon comparison is unchanged
+src/app/script.c:342	double equality epsilon boundary mutant differs only at a difference of exactly CT_SCRIPT_DBL_EPS which no decimal literal pair constructs, every pinned difference lands strictly above or below
+src/app/script.c:348	double inequality epsilon boundary mutant differs only at a difference of exactly CT_SCRIPT_DBL_EPS which no decimal literal pair constructs, every pinned difference lands strictly above or below
+src/app/script.c:386	clock stamp index mutant checks the second stamp char, ct_now_utc_iso always writes a 20 char stamp whose second char is a digit, so the empty stamp arm never fires over the pinned clock path, same class as the repo_algs stamp row
+src/app/script.c:387	clock failure return payload mutants are equivalent, every caller compares the result against zero
+src/app/script.c:421	cards open argument index mutants are equivalent, the index 1 fetch reads the stale pre-shift offset slot that still holds the deck token for one argument commands, and the minus one fetch returns NULL which opens the unfiltered form, the pinned single deck corpus addresses the same rows either way
+src/app/script.c:448	card field capacity init mutants are dead stores, every branch of the field resolver assigns the capacity before any read
+src/app/script.c:453	card field value index mutant fetches the stale pre-shift offset slot that still holds the value token for two argument commands, verified by the pinned cfop cards field roundtrip
+src/app/script.c:474	cards step default arm is unreachable, ct_script_step routes exactly the cards kinds into this dispatcher
+src/app/script.c:482	review day init mutants are dead stores, ct_script_now writes the day on the only path that continues
+src/app/script.c:486	review begin rc init mutants are dead stores, the begin call overwrites rc before any read
+src/app/script.c:487	review begin rc negative one payload mutant admits only a begin return of minus one which the pinned seeded flows never produce, every pinned begin returns zero or a positive row count
+src/app/script.c:501	review grade word index mutant fetches the stale pre-shift offset slot that still holds the grade token for one argument commands, verified by the pinned review loop
+src/app/script.c:504	grade table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned grade word matches inside the table
+src/app/script.c:516	clock stamp index mutant checks the second stamp char, ct_now_utc_iso always writes a 20 char stamp whose second char is a digit, so the empty stamp arm never fires over the pinned clock path
+src/app/script.c:527	clock stamp index mutant checks the second stamp char, ct_now_utc_iso always writes a 20 char stamp whose second char is a digit, so the empty stamp arm never fires over the pinned clock path
+src/app/script.c:542	wait tick loop bound and start mutants shift one idle animation step, the pinned review flows animate no moves so no completion edge is crossed and every pinned wait assertion is unchanged
+src/app/script.c:547	wait scrub index arithmetic mutant touches a display bookkeeping field that no headless suite reads
+src/app/script.c:548	wait animation pause branch mutants are no-ops over pinned waits, the pinned review flows run idle animations where pausing changes no observable state
+src/app/script.c:550	wait playing flag mutant touches a display state field that no headless suite reads
+src/app/script.c:557	review step default arm is unreachable, ct_script_step routes exactly the review kinds into this dispatcher
+src/app/script.c:596	settings step default arm is unreachable, ct_script_step routes exactly the settings kinds into this dispatcher
+src/app/script.c:610	trainer step default arm is unreachable, ct_script_step routes exactly the trainer kinds into this dispatcher
+src/app/script.c:631	cfop stage argument index mutant fetches the stale pre-shift offset slot that still holds the stage token for one argument commands, verified by the pinned populate flows
+src/app/script.c:632	cfop stage negative bound payload mutant admits only a parse return of minus one as a valid stage, the pinned bogus stage script pins the exact error message for every payload
+src/app/script.c:636	cfop populate made zero boundary is unreachable, every pinned stage inserts a positive card count
+src/app/script.c:642	trainer list id init mutants are dead stores, the integer parse writes the id on the only path that continues
+src/app/script.c:648	event table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned event word matches inside the table
+src/app/script.c:657	method table scan bound and index mutants are equivalent over the pinned corpus, entries are a uniform struct and every pinned method word matches inside the table
+src/app/script.c:672	trainer list found zero bound and cap clause mutants are unreachable, every valid event method pair scans at least one table row so found is always positive and the found bound fires before the cap clause for every reachable id
+src/app/script.c:679	trainer list target key reset index mutants are unobservable over the pinned list then case sequences, the byte lands in a stale tail slot never read before the next assignment
+src/app/script.c:704	trainer generate target guard index mutant checks the second key char, the guard fires only on a fresh runtime whose zeroed key also has a nul second char, so the verdict is unchanged
+src/app/script.c:707	synth ready guard and flag mutants are equivalent, ct_synth_target self initializes through the synth_built gate so skipping or repeating the eager init changes no result
+src/app/script.c:709	synth ready flag mutant is equivalent, ct_synth_init is idempotent through the synth_built gate so reinitializing on every generate changes no result
+src/app/script.c:711	target sticker one init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
+src/app/script.c:712	target sticker two init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
+src/app/script.c:717	orbit buffer ternary mutant is equivalent, both scheme buffers carry the default index 2 from the equal corner and edge constants, verified by direct scheme load probe, so the ternary selects an identical buffer on every reachable flow
+src/app/script.c:719	synthesis result memset count mutants are dead stores, ct_synth_target memsets the whole output on every return path before writing
+src/app/script.c:721	synthesis failure disjunction mutant is equivalent over pinned targets, every pinned generate finds a candidate so the rc zero with found zero arm never occurs
+src/app/script.c:725	sequence format failure bound mutant is unreachable, the formatter returns a positive length for every pinned nonempty sequence and the zero return needs an empty sequence never formatted here
+src/app/script.c:728	classification memset count mutants are equivalent, ct_classify overwrites every consumed field and the off byte is tail padding never read
+src/app/script.c:732	scoring memset count mutants are equivalent, ct_score_alg overwrites every consumed field and the off byte is tail padding never read
+src/app/script.c:737	scheme id zero bound and payload mutants are unreachable over the pinned startup, app init seeds the speffz scheme so the default id is always positive and the seed branch never runs
+src/app/script.c:738	scheme seed guard mutants are unreachable over the pinned startup, the enclosing scheme id zero branch never runs because app init seeds the speffz scheme
+src/app/script.c:743	post seed scheme id bound mutant is unreachable over the pinned startup, the seeded default id is always positive
+src/app/script.c:749	generated alg struct memset count mutants are equivalent, every consumed field is assigned before the store and the off byte is tail padding the row validator never reads
+src/app/script.c:787	trainer step dispatcher default arm is unreachable, ct_script_step routes every trainer kind and the expect kinds route to the expect dispatcher
+src/app/script.c:800	due date day output literal mutants are unobservable, the due command validates only and discards the parsed day value
+src/app/script.c:862	run guard cap mutants are unreachable, every caller passes the full error buffer capacity and no pinned caller passes zero or one
+src/app/script.c:458	cards field dirty flag mutants are display bookkeeping, ct_cards_form_save updates unconditionally and the form recomputes the flag on refresh, no headless suite reads it
+src/app/script.c:624	cfop stage parse error payload mutants are equivalent, every caller tests the sign and the pinned bogus stage script pins the message for every negative payload
+src/app/script.c:690	case count clause mutants are unobservable over the pinned corpus, count zero is unreachable because every pinned list yields at least one case and no pinned list holds exactly one case, the index clauses are pinned by the out of range scripts
+src/app/script.c:873	final review open reset is a dead store, the runtime dies at function return and no reader follows
+src/app/script.c:879	scripted entry guard mutants sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary and every pinned invocation passes a valid app and path
+src/app/script.c:884	scripted entry open failure mutant sits outside the gate suite surface, every pinned e2e invocation opens its script file successfully
+src/app/script.c:888	scripted entry buffer allocation mutants sit outside the gate suite surface, every pinned e2e invocation allocates the script buffer successfully
+src/app/script.c:889	scripted entry allocation failure guard sits outside the gate suite surface, malloc failure is unreachable in every pinned e2e invocation
+src/app/script.c:894	scripted entry read size mutants sit outside the gate suite surface, the pinned e2e corpus holds files well under the cap so a read bound one byte either way returns the same content, and the oversize arm is pinned by the caps suite at the parse layer
+src/app/script.c:896	scripted entry oversize boundary mutant admits a file of exactly CT_SCRIPT_TEXT_MAX bytes, no pinned e2e file reaches the cap and every pinned file parses identically under both bounds
+src/app/script.c:907	scripted entry parse result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+src/app/script.c:912	scripted entry parse rc init mutants are dead stores, the parse call overwrites rc before any read
+src/app/script.c:914	scripted entry run result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr

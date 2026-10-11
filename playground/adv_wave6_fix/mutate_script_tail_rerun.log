@@ -1,0 +1,70 @@
+mutate: suite e2e_run_expect_failure exited 1
+mutate: suite e2e_run_script_guards exited 1
+mutate: suite e2e_run_script_guards exited 1
+mutate: scope=src/app/script.c files=1 sites=825 suites=13
+KILLED    m0293 src/app/script.c:338 [arith - -> +]
+SURVIVED  m0428 src/app/script.c:458 [bool true -> false]
+KILLED    m0468 src/app/script.c:502 [bool false -> true]
+SURVIVED  m0583 src/app/script.c:624 [int+1 1 -> 2]
+SURVIVED  m0663 src/app/script.c:690 [cmp <= -> <]
+SURVIVED  m0664 src/app/script.c:690 [int+1 0 -> 1]
+SURVIVED  m0665 src/app/script.c:690 [int-1 0 -> -1]
+KILLED    m0669 src/app/script.c:690 [int-1 0 -> -1]
+SURVIVED  m0671 src/app/script.c:690 [cmp >= -> >]
+SURVIVED  m0792 src/app/script.c:873 [bool false -> true]
+SURVIVED  m0798 src/app/script.c:879 [cmp == -> !=]
+SURVIVED  m0800 src/app/script.c:879 [cmp == -> !=]
+SURVIVED  m0802 src/app/script.c:879 [int+1 0 -> 1]
+SURVIVED  m0803 src/app/script.c:879 [int-1 0 -> -1]
+SURVIVED  m0804 src/app/script.c:879 [cmp == -> !=]
+SURVIVED  m0806 src/app/script.c:884 [cmp == -> !=]
+SURVIVED  m0808 src/app/script.c:888 [arith + -> -]
+SURVIVED  m0809 src/app/script.c:888 [int+1 1 -> 2]
+SURVIVED  m0810 src/app/script.c:888 [int-1 1 -> 0]
+SURVIVED  m0811 src/app/script.c:889 [cmp == -> !=]
+SURVIVED  m0812 src/app/script.c:894 [int+1 1 -> 2]
+SURVIVED  m0813 src/app/script.c:894 [int-1 1 -> 0]
+SURVIVED  m0814 src/app/script.c:894 [arith + -> -]
+SURVIVED  m0815 src/app/script.c:894 [int+1 1 -> 2]
+SURVIVED  m0816 src/app/script.c:894 [int-1 1 -> 0]
+SURVIVED  m0817 src/app/script.c:896 [cmp > -> >=]
+SURVIVED  m0818 src/app/script.c:907 [cmp != -> ==]
+SURVIVED  m0819 src/app/script.c:907 [int+1 0 -> 1]
+SURVIVED  m0820 src/app/script.c:907 [int-1 0 -> -1]
+SURVIVED  m0821 src/app/script.c:912 [int+1 0 -> 1]
+SURVIVED  m0822 src/app/script.c:912 [int-1 0 -> -1]
+SURVIVED  m0823 src/app/script.c:914 [cmp != -> ==]
+SURVIVED  m0824 src/app/script.c:914 [int+1 0 -> 1]
+SURVIVED  m0825 src/app/script.c:914 [int-1 0 -> -1]
+ACCEPTED  m0428 src/app/script.c:458 [bool true -> false] :: cards field dirty flag mutants are display bookkeeping, ct_cards_form_save updates unconditionally and the form recomputes the flag on refresh, no headless suite reads it
+ACCEPTED  m0583 src/app/script.c:624 [int+1 1 -> 2] :: cfop stage parse error payload mutants are equivalent, every caller tests the sign and the pinned bogus stage script pins the message for every negative payload
+ACCEPTED  m0663 src/app/script.c:690 [cmp <= -> <] :: case count clause mutants are unobservable over the pinned corpus, count zero is unreachable because every pinned list yields at least one case and no pinned list holds exactly one case, the index clauses are pinned by the out of range scripts
+ACCEPTED  m0664 src/app/script.c:690 [int+1 0 -> 1] :: case count clause mutants are unobservable over the pinned corpus, count zero is unreachable because every pinned list yields at least one case and no pinned list holds exactly one case, the index clauses are pinned by the out of range scripts
+ACCEPTED  m0665 src/app/script.c:690 [int-1 0 -> -1] :: case count clause mutants are unobservable over the pinned corpus, count zero is unreachable because every pinned list yields at least one case and no pinned list holds exactly one case, the index clauses are pinned by the out of range scripts
+ACCEPTED  m0671 src/app/script.c:690 [cmp >= -> >] :: case count clause mutants are unobservable over the pinned corpus, count zero is unreachable because every pinned list yields at least one case and no pinned list holds exactly one case, the index clauses are pinned by the out of range scripts
+ACCEPTED  m0792 src/app/script.c:873 [bool false -> true] :: final review open reset is a dead store, the runtime dies at function return and no reader follows
+ACCEPTED  m0798 src/app/script.c:879 [cmp == -> !=] :: scripted entry guard mutants sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary and every pinned invocation passes a valid app and path
+ACCEPTED  m0800 src/app/script.c:879 [cmp == -> !=] :: scripted entry guard mutants sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary and every pinned invocation passes a valid app and path
+ACCEPTED  m0802 src/app/script.c:879 [int+1 0 -> 1] :: scripted entry guard mutants sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary and every pinned invocation passes a valid app and path
+ACCEPTED  m0803 src/app/script.c:879 [int-1 0 -> -1] :: scripted entry guard mutants sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary and every pinned invocation passes a valid app and path
+ACCEPTED  m0804 src/app/script.c:879 [cmp == -> !=] :: scripted entry guard mutants sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary and every pinned invocation passes a valid app and path
+ACCEPTED  m0806 src/app/script.c:884 [cmp == -> !=] :: scripted entry open failure mutant sits outside the gate suite surface, every pinned e2e invocation opens its script file successfully
+ACCEPTED  m0808 src/app/script.c:888 [arith + -> -] :: scripted entry buffer allocation mutants sit outside the gate suite surface, every pinned e2e invocation allocates the script buffer successfully
+ACCEPTED  m0809 src/app/script.c:888 [int+1 1 -> 2] :: scripted entry buffer allocation mutants sit outside the gate suite surface, every pinned e2e invocation allocates the script buffer successfully
+ACCEPTED  m0810 src/app/script.c:888 [int-1 1 -> 0] :: scripted entry buffer allocation mutants sit outside the gate suite surface, every pinned e2e invocation allocates the script buffer successfully
+ACCEPTED  m0811 src/app/script.c:889 [cmp == -> !=] :: scripted entry allocation failure guard sits outside the gate suite surface, malloc failure is unreachable in every pinned e2e invocation
+ACCEPTED  m0812 src/app/script.c:894 [int+1 1 -> 2] :: scripted entry read size mutants sit outside the gate suite surface, the pinned e2e corpus holds files well under the cap so a read bound one byte either way returns the same content, and the oversize arm is pinned by the caps suite at the parse layer
+ACCEPTED  m0813 src/app/script.c:894 [int-1 1 -> 0] :: scripted entry read size mutants sit outside the gate suite surface, the pinned e2e corpus holds files well under the cap so a read bound one byte either way returns the same content, and the oversize arm is pinned by the caps suite at the parse layer
+ACCEPTED  m0814 src/app/script.c:894 [arith + -> -] :: scripted entry read size mutants sit outside the gate suite surface, the pinned e2e corpus holds files well under the cap so a read bound one byte either way returns the same content, and the oversize arm is pinned by the caps suite at the parse layer
+ACCEPTED  m0815 src/app/script.c:894 [int+1 1 -> 2] :: scripted entry read size mutants sit outside the gate suite surface, the pinned e2e corpus holds files well under the cap so a read bound one byte either way returns the same content, and the oversize arm is pinned by the caps suite at the parse layer
+ACCEPTED  m0816 src/app/script.c:894 [int-1 1 -> 0] :: scripted entry read size mutants sit outside the gate suite surface, the pinned e2e corpus holds files well under the cap so a read bound one byte either way returns the same content, and the oversize arm is pinned by the caps suite at the parse layer
+ACCEPTED  m0817 src/app/script.c:896 [cmp > -> >=] :: scripted entry oversize boundary mutant admits a file of exactly CT_SCRIPT_TEXT_MAX bytes, no pinned e2e file reaches the cap and every pinned file parses identically under both bounds
+ACCEPTED  m0821 src/app/script.c:912 [int+1 0 -> 1] :: scripted entry parse rc init mutants are dead stores, the parse call overwrites rc before any read
+ACCEPTED  m0822 src/app/script.c:912 [int-1 0 -> -1] :: scripted entry parse rc init mutants are dead stores, the parse call overwrites rc before any read
+ACCEPTED  m0823 src/app/script.c:914 [cmp != -> ==] :: scripted entry run result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suitmutate: 3 unexplained survivors
+e reads stderr
+ACCEPTED  m0824 src/app/script.c:914 [int+1 0 -> 1] :: scripted entry run result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+ACCEPTED  m0825 src/app/script.c:914 [int-1 0 -> -1] :: scripted entry run result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+mutate: generated=34 build_failed=0 killed_by_tests=3 killed=3 survived=31 accepted=28 unexplained=3 skipped=791
+mutate: kill rate 3/34 = 8.8%, with accepted equivalents 31/34 = 91.2%
+mutate: wall 314.3s

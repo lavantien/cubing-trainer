@@ -1,0 +1,2166 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build/bin/mutate.exe src/ui/screen_trainer.c build trainer_form_open trainer_form_navigation trainer_form_case_detail trainer_form_generated_alg trainer_form_select_refreshes_inputs trainer_form_chart_cells trainer_form_letter_scheme_routed
+build/mutants/p45028/m0015_screen_trainer.c:22:19: error: expected identifier or '('
+   22 | static const char /const CT_TRAINER_EVENT_NAMES[] = {
+      |                   ^
+build/mutants/p45028/m0015_screen_trainer.c:39:34: error: use of undeclared identifier 'CT_TRAINER_EVENT_NAMES'
+   39 |     unsigned long count = sizeof CT_TRAINER_EVENT_NAMES / sizeof CT_TRAINER_EVENT_NAMES[0];
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0015_screen_trainer.c:39:66: error: use of undeclared identifier 'CT_TRAINER_EVENT_NAMES'
+   39 |     unsigned long count = sizeof CT_TRAINER_EVENT_NAMES / sizeof CT_TRAINER_EVENT_NAMES[0];
+      |                                                                  ^~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0015_screen_trainer.c:40:24: error: use of undeclared identifier 'CT_TRAINER_EVENT_NAMES'
+   40 |     return i < count ? CT_TRAINER_EVENT_NAMES[i] : "?";
+      |                        ^~~~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+build/mutants/p45028/m0016_screen_trainer.c:27:19: error: expected identifier or '('
+   27 | static const char /const CT_TRAINER_METHOD_NAMES[] = {
+      |                   ^
+build/mutants/p45028/m0016_screen_trainer.c:45:34: error: use of undeclared identifier 'CT_TRAINER_METHOD_NAMES'
+   45 |     unsigned long count = sizeof CT_TRAINER_METHOD_NAMES / sizeof CT_TRAINER_METHOD_NAMES[0];
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0016_screen_trainer.c:45:67: error: use of undeclared identifier 'CT_TRAINER_METHOD_NAMES'
+   45 |     unsigned long count = sizeof CT_TRAINER_METHOD_NAMES / sizeof CT_TRAINER_METHOD_NAMES[0];
+      |                                                                   ^~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0016_screen_trainer.c:46:24: error: use of undeclared identifier 'CT_TRAINER_METHOD_NAMES'
+   46 |     return i < count ? CT_TRAINER_METHOD_NAMES[i] : "?";
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+build/mutants/p45028/m0017_screen_trainer.c:32:19: error: expected identifier or '('
+   32 | static const char /const CT_TRAINER_STAGE_NAMES[] = {
+      |                   ^
+build/mutants/p45028/m0017_screen_trainer.c:51:34: error: use of undeclared identifier 'CT_TRAINER_STAGE_NAMES'
+   51 |     unsigned long count = sizeof CT_TRAINER_STAGE_NAMES / sizeof CT_TRAINER_STAGE_NAMES[0];
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0017_screen_trainer.c:51:66: error: use of undeclared identifier 'CT_TRAINER_STAGE_NAMES'
+   51 |     unsigned long count = sizeof CT_TRAINER_STAGE_NAMES / sizeof CT_TRAINER_STAGE_NAMES[0];
+      |                                                                  ^~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0017_screen_trainer.c:52:24: error: use of undeclared identifier 'CT_TRAINER_STAGE_NAMES'
+   52 |     return i < count ? CT_TRAINER_STAGE_NAMES[i] : "?";
+      |                        ^~~~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+build/mutants/p45028/m0018_screen_trainer.c:37:19: error: expected identifier or '('
+   37 | static const char /ct_trainer_event_name(ct_event ev) {
+      |                   ^
+build/mutants/p45028/m0018_screen_trainer.c:334:18: error: use of undeclared identifier 'ct_trainer_event_name'
+  334 |                  ct_trainer_event_name((ct_event)i));
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0018_screen_trainer.c:521:55: error: use of undeclared identifier 'ct_trainer_event_name'
+  521 |     snprintf(line, sizeof line, "event %s method %s", ct_trainer_event_name(f->sel.event),
+      |                                                       ^~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+build/mutants/p45028/m0023_screen_trainer.c:43:19: error: expected identifier or '('
+   43 | static const char /ct_trainer_method_name(ct_method m) {
+      |                   ^
+build/mutants/p45028/m0023_screen_trainer.c:341:18: error: use of undeclared identifier 'ct_trainer_method_name'
+  341 |                  ct_trainer_method_name(methods[i]));
+      |                  ^~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0023_screen_trainer.c:522:14: error: use of undeclared identifier 'ct_trainer_method_name'
+  522 |              ct_trainer_method_name(f->sel.method));
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+build/mutants/p45028/m0028_screen_trainer.c:49:19: error: expected identifier or '('
+   49 | static const char /ct_trainer_stage_name(ct_stage st) {
+      |                   ^
+build/mutants/p45028/m0028_screen_trainer.c:346:18: error: use of undeclared identifier 'ct_trainer_stage_name'
+  346 |                  ct_trainer_stage_name(f->lists[i].stage));
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0028_screen_trainer.c:528:22: error: use of undeclared identifier 'ct_trainer_stage_name'
+  528 |                      ct_trainer_stage_name(f->lists[f->sel.list_id].stage), f->case_count);
+      |                      ^~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0028_screen_trainer.c:538:18: error: use of undeclared identifier 'ct_trainer_stage_name'
+  538 |                  ct_trainer_stage_name(f->lists[f->sel.list_id].stage), f->case_count);
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+build/mutants/p45028/m0033_screen_trainer.c:55:52: error: expected ')'
+   55 | static void ct_trainer_form_reload(ct_trainer_form /f) {
+      |                                                    ^
+build/mutants/p45028/m0033_screen_trainer.c:55:35: note: to match this '('
+   55 | static void ct_trainer_form_reload(ct_trainer_form /f) {
+      |                                   ^
+build/mutants/p45028/m0033_screen_trainer.c:56:5: error: use of undeclared identifier 'f'
+   56 |     f->list_count = ct_selector_lists(f->sel.event, f->sel.method, f->lists, CT_TRAINER_LISTS_MAX);
+      |     ^
+build/mutants/p45028/m0033_screen_trainer.c:56:39: error: use of undeclared identifier 'f'
+   56 |     f->list_count = ct_selector_lists(f->sel.event, f->sel.method, f->lists, CT_TRAINER_LISTS_MAX);
+      |                                       ^
+build/mutants/p45028/m0033_screen_trainer.c:56:53: error: use of undeclared identifier 'f'
+   56 |     f->list_count = ct_selector_lists(f->sel.event, f->sel.method, f->lists, CT_TRAINER_LISTS_MAX);
+      |                                                     ^
+build/mutants/p45028/m0033_screen_trainer.c:56:68: error: use of undeclared identifier 'f'
+   56 |     f->list_count = ct_selector_lists(f->sel.event, f->sel.method, f->lists, CT_TRAINER_LISTS_MAX);
+      |                                                                    ^
+build/mutants/p45028/m0033_screen_trainer.c:57:5: error: use of undeclared identifier 'f'
+   57 |     f->case_count = 0;
+      |     ^
+build/mutants/p45028/m0033_screen_trainer.c:58:5: error: use of undeclared identifier 'f'
+   58 |     f->group_count = 0;
+      |     ^
+build/mutants/p45028/m0033_screen_trainer.c:60:9: error: use of undeclared identifier 'f'
+   60 |         f->group_counts[g] = 0;
+      |         ^
+build/mutants/p45028/m0033_screen_trainer.c:62:5: error: use of undeclared identifier 'f'
+   62 |     f->cell = CT_TRAINER_CELL_NONE;
+      |     ^
+build/mutants/p45028/m0033_screen_trainer.c:63:5: error: use of undeclared identifier 'f'
+   63 |     f->sel.case_index = -1;
+      |     ^
+build/mutants/p45028/m0033_screen_trainer.c:64:5: error: use of undeclared identifier 'f'
+   64 |     f->front[0] = '\0';
+      |     ^
+build/mutants/p45028/m0033_screen_trainer.c:65:5: error: use of undeclared identifier 'f'
+   65 |     f->alg_text[0] = '\0';
+      |     ^
+build/mutants/p45028/m0033_screen_trainer.c:66:5: error: use of undeclared identifier 'f'
+   66 |     f->pack_status = CT_TRAINER_NO_DETAIL;
+      |     ^
+build/mutants/p45028/m0033_screen_trainer.c:67:5: error: use of undeclared identifier 'f'
+   67 |     f->alg_status = CT_TRAINER_NO_DETAIL;
+      |     ^
+build/mutants/p45028/m0033_screen_trainer.c:68:9: error: use of undeclared identifier 'f'
+   68 |     if (f->list_count <= 0) {
+      |         ^
+build/mutants/p45028/m0033_screen_trainer.c:69:9: error: use of undeclared identifier 'f'
+   69 |         f->status = CT_REPO_ERR_DB;
+      |         ^
+build/mutants/p45028/m0033_screen_trainer.c:72:9: error: use of undeclared identifier 'f'
+   72 |     if (f->sel.list_id >= f->list_count) {
+      |         ^
+build/mutants/p45028/m0033_screen_trainer.c:72:27: error: use of undeclared identifier 'f'
+   72 |     if (f->sel.list_id >= f->list_count) {
+      |                           ^
+build/mutants/p45028/m0033_screen_trainer.c:73:9: error: use of undeclared identifier 'f'
+   73 |         f->sel.list_id = 0;
+      |         ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_open exited -1073741795
+mutate: suite trainer_form_open exited -1073741795
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+build/mutants/p45028/m0047_screen_trainer.c:64:5: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   64 |     f->front[-1] = '\0';
+      |     ^        ~~
+src\ui/ui.h:71:5: note: array 'front' declared here
+   71 |     char front[CT_TRAINER_FRONT_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_form_case_detail exited 1
+build/mutants/p45028/m0049_screen_trainer.c:65:5: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   65 |     f->alg_text[-1] = '\0';
+      |     ^           ~~
+src\ui/ui.h:72:5: note: array 'alg_text' declared here
+   72 |     char alg_text[CT_TRAINER_ALG_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_open exited -1073741795
+mutate: scope=src/ui/screen_trainer.c files=1 sites=483 suites=7
+SURVIVED  m0001 src/ui/screen_trainer.c:10 [int+1 6 -> 7]
+SURVIVED  m0002 src/ui/screen_trainer.c:10 [int-1 6 -> 5]
+SURVIVED  m0003 src/ui/screen_trainer.c:11 [int+1 5 -> 6]
+SURVIVED  m0004 src/ui/screen_trainer.c:11 [int-1 5 -> 4]
+SURVIVED  m0005 src/ui/screen_trainer.c:12 [int+1 4 -> 5]
+SURVIVED  m0006 src/ui/screen_trainer.c:12 [int-1 4 -> 3]
+SURVIVED  m0007 src/ui/screen_trainer.c:13 [int+1 5 -> 6]
+SURVIVED  m0008 src/ui/screen_trainer.c:13 [int-1 5 -> 4]
+SURVIVED  m0009 src/ui/screen_trainer.c:17 [arith + -> -]
+SURVIVED  m0010 src/ui/screen_trainer.c:17 [int+1 1 -> 2]
+SURVIVED  m0011 src/ui/screen_trainer.c:17 [int-1 1 -> 0]
+SURVIVED  m0012 src/ui/screen_trainer.c:18 [arith * -> /]
+SURVIVED  m0013 src/ui/screen_trainer.c:19 [int+1 2 -> 3]
+SURVIVED  m0014 src/ui/screen_trainer.c:19 [int-1 2 -> 1]
+KILLED    m0015 src/ui/screen_trainer.c:22 [arith * -> /]
+          build break
+KILLED    m0016 src/ui/screen_trainer.c:27 [arith * -> /]
+          build break
+KILLED    m0017 src/ui/screen_trainer.c:32 [arith * -> /]
+          build break
+KILLED    m0018 src/ui/screen_trainer.c:37 [arith * -> /]
+          build break
+SURVIVED  m0019 src/ui/screen_trainer.c:39 [arith / -> *]
+SURVIVED  m0020 src/ui/screen_trainer.c:39 [int+1 0 -> 1]
+SURVIVED  m0021 src/ui/screen_trainer.c:39 [int-1 0 -> -1]
+SURVIVED  m0022 src/ui/screen_trainer.c:40 [cmp < -> <=]
+KILLED    m0023 src/ui/screen_trainer.c:43 [arith * -> /]
+          build break
+SURVIVED  m0024 src/ui/screen_trainer.c:45 [arith / -> *]
+SURVIVED  m0025 src/ui/screen_trainer.c:45 [int+1 0 -> 1]
+SURVIVED  m0026 src/ui/screen_trainer.c:45 [int-1 0 -> -1]
+SURVIVED  m0027 src/ui/screen_trainer.c:46 [cmp < -> <=]
+KILLED    m0028 src/ui/screen_trainer.c:49 [arith * -> /]
+          build break
+SURVIVED  m0029 src/ui/screen_trainer.c:51 [arith / -> *]
+SURVIVED  m0030 src/ui/screen_trainer.c:51 [int+1 0 -> 1]
+SURVIVED  m0031 src/ui/screen_trainer.c:51 [int-1 0 -> -1]
+SURVIVED  m0032 src/ui/screen_trainer.c:52 [cmp < -> <=]
+KILLED    m0033 src/ui/screen_trainer.c:55 [arith * -> /]
+          build break
+SURVIVED  m0034 src/ui/screen_trainer.c:57 [int+1 0 -> 1]
+SURVIVED  m0035 src/ui/screen_trainer.c:57 [int-1 0 -> -1]
+KILLED    m0036 src/ui/screen_trainer.c:58 [int+1 0 -> 1]
+KILLED    m0037 src/ui/screen_trainer.c:58 [int-1 0 -> -1]
+KILLED    m0038 src/ui/screen_trainer.c:59 [int+1 0 -> 1]
+KILLED    m0039 src/ui/screen_trainer.c:59 [int-1 0 -> -1]
+KILLED    m0040 src/ui/screen_trainer.c:59 [cmp < -> <=]
+KILLED    m0041 src/ui/screen_trainer.c:60 [int+1 0 -> 1]
+KILLED    m0042 src/ui/screen_trainer.c:60 [int-1 0 -> -1]
+KILLED    m0043 src/ui/screen_trainer.c:63 [arith - -> +]
+KILLED    m0044 src/ui/screen_trainer.c:63 [int+1 1 -> 2]
+KILLED    m0045 src/ui/screen_trainer.c:63 [int-1 1 -> 0]
+KILLED    m0046 src/ui/screen_trainer.c:64 [int+1 0 -> 1]
+KILLED    m0047 src/ui/screen_trainer.c:64 [int-1 0 -> -1]
+          build break
+KILLED    m0048 src/ui/screen_trainer.c:65 [int+1 0 -> 1]
+KILLED    m0049 src/ui/screen_trainer.c:65 [int-1 0 -> -1]
+          build break
+SURVIVED  m0050 src/ui/screen_trainer.c:68 [cmp <= -> <]
+KILLED    m0051 src/ui/screen_trainer.c:68 [int+1 0 -> 1]
+SURVIVED  m0052 src/ui/screen_trainer.c:68 [int-1 0 -> -1]
+SURVIVED  m0053 src/ui/screen_trainer.c:72 [cmp >= -> >]
+SURVIVED  m0054 src/ui/screen_trainer.c:73 [int+1 0 -> 1]
+SURVIVED  m0055 src/ui/screen_trainer.c:73 [int-1 0 -> -1]
+SURVIVED  m0056 src/ui/screen_trainer.c:76 [cmp > -> >=]
+SURVIVED  m0057 src/ui/screen_trainer.c:76 [int+1 0 -> 1]
+SURVIVED  m0058 src/ui/screen_trainer.c:76 [int-1 0 -> -1]
+SURVIVED  m0059 src/ui/screen_trainer.c:76 [int+1 0 -> 1]
+SURVIVED  m0060 src/ui/screen_trainer.c:76 [int-1 0 -> -1]
+KILLED    m0061 src/ui/screen_trainer.c:77 [int+1 0 -> 1]
+SURVIVED  m0062 src/ui/screen_trainer.c:77 [int-1 0 -> -1]
+SURVIVED  m0063 src/ui/screen_trainer.c:77 [cmp < -> <=]
+KILLED    m0064 src/ui/screen_trainer.c:79 [cmp < -> <=]
+KILLED    m0065 src/ui/screen_trainer.c:79 [int+1 0 -> 1]
+KILLED    m0066 src/ui/screen_trainer.c:79 [int-1 0 -> -1]mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+build/mutants/p45028/m0074_screen_trainer.c:90:59: error: expected ')'
+   90 | static int ct_trainer_form_refresh_inputs(ct_trainer_form /f) {
+      |                                                           ^
+build/mutants/p45028/m0074_screen_trainer.c:90:42: note: to match this '('
+   90 | static int ct_trainer_form_refresh_inputs(ct_trainer_form /f) {
+      |                                          ^
+build/mutants/p45028/m0074_screen_trainer.c:91:32: error: use of undeclared identifier 'f'
+   91 |     if (ct_repo_settings_merge(f->db, &f->cfg) != 0) {
+      |                                ^
+build/mutants/p45028/m0074_screen_trainer.c:91:40: error: use of undeclared identifier 'f'
+   91 |     if (ct_repo_settings_merge(f->db, &f->cfg) != 0) {
+      |                                        ^
+build/mutants/p45028/m0074_screen_trainer.c:94:33: error: use of undeclared identifier 'f'
+   94 |     if (ct_selector_scheme_load(f->db, &f->scheme) != 0) {
+      |                                 ^
+build/mutants/p45028/m0074_screen_trainer.c:94:41: error: use of undeclared identifier 'f'
+   94 |     if (ct_selector_scheme_load(f->db, &f->scheme) != 0) {
+      |                                         ^
+build/mutants/p45028/m0074_screen_trainer.c:97:5: error: use of undeclared identifier 'f'
+   97 |     f->scheme_id = ct_letter_scheme_default_id(f->db);
+      |     ^
+build/mutants/p45028/m0074_screen_trainer.c:97:48: error: use of undeclared identifier 'f'
+   97 |     f->scheme_id = ct_letter_scheme_default_id(f->db);
+      |                                                ^
+build/mutants/p45028/m0074_screen_trainer.c:108:40: error: passing 'ct_trainer_form *' to parameter of incompatible type 'ct_trainer_form'; dereference with *
+  108 |     if (ct_trainer_form_refresh_inputs(f) != CT_REPO_OK) {
+      |                                        ^
+      |                                        *
+build/mutants/p45028/m0074_screen_trainer.c:90:59: note: passing argument to parameter here
+   90 | static int ct_trainer_form_refresh_inputs(ct_trainer_form /f) {
+      |                                                           ^
+build/mutants/p45028/m0074_screen_trainer.c:185:40: error: passing 'ct_trainer_form *' to parameter of incompatible type 'ct_trainer_form'; dereference with *
+  185 |     if (ct_trainer_form_refresh_inputs(f) != CT_REPO_OK) {
+      |                                        ^
+      |                                        *
+build/mutants/p45028/m0074_screen_trainer.c:90:59: note: passing argument to parameter here
+   90 | static int ct_trainer_form_refresh_inputs(ct_trainer_form /f) {
+      |                                                           ^
+9 errors generated.
+mutate: suite trainer_form_open exited 1
+mutate: suite trainer_form_open exited 1
+mutate: suite trainer_form_open exited 1
+mutate: suite trainer_form_open exited 1
+mutate: suite trainer_form_open exited 1
+mutate: suite trainer_form_open exited 1
+build/mutants/p45028/m0081_screen_trainer.c:101:42: error: expected ')'
+  101 | int ct_trainer_form_open(ct_trainer_form /f, sqlite3 *db) {
+      |                                          ^
+build/mutants/p45028/m0081_screen_trainer.c:101:25: note: to match this '('
+  101 | int ct_trainer_form_open(ct_trainer_form /f, sqlite3 *db) {
+      |                         ^
+build/mutants/p45028/m0081_screen_trainer.c:101:5: error: conflicting types for 'ct_trainer_form_open'
+  101 | int ct_trainer_form_open(ct_trainer_form /f, sqlite3 *db) {
+      |     ^
+src\ui/ui.h:76:5: note: previous declaration is here
+   76 | int ct_trainer_form_open(ct_trainer_form *f, sqlite3 *db);
+      |     ^
+build/mutants/p45028/m0081_screen_trainer.c:102:9: error: use of undeclared identifier 'f'
+  102 |     if (f == NULL || db == NULL) {
+      |         ^
+build/mutants/p45028/m0081_screen_trainer.c:102:22: error: use of undeclared identifier 'db'
+  102 |     if (f == NULL || db == NULL) {
+      |                      ^~
+build/mutants/p45028/m0081_screen_trainer.c:105:12: error: use of undeclared identifier 'f'
+  105 |     memset(f, 0, sizeof *f);
+      |            ^
+build/mutants/p45028/m0081_screen_trainer.c:105:26: error: use of undeclared identifier 'f'
+  105 |     memset(f, 0, sizeof *f);
+      |                          ^
+build/mutants/p45028/m0081_screen_trainer.c:106:5: error: use of undeclared identifier 'f'
+  106 |     f->db = db;
+      |     ^
+build/mutants/p45028/m0081_screen_trainer.c:106:13: error: use of undeclared identifier 'db'
+  106 |     f->db = db;
+      |             ^~
+build/mutants/p45028/m0081_screen_trainer.c:107:5: error: use of undeclared identifier 'f'
+  107 |     f->cfg = ct_config_defaults();
+      |     ^
+build/mutants/p45028/m0081_screen_trainer.c:108:40: error: use of undeclared identifier 'f'
+  108 |     if (ct_trainer_form_refresh_inputs(f) != CT_REPO_OK) {
+      |                                        ^
+build/mutants/p45028/m0081_screen_trainer.c:109:9: error: use of undeclared identifier 'f'
+  109 |         f->status = CT_REPO_ERR_DB;
+      |         ^
+build/mutants/p45028/m0081_screen_trainer.c:112:5: error: use of undeclared identifier 'f'
+  112 |     f->sel.event = CT_EVENT_3X3;
+      |     ^
+build/mutants/p45028/m0081_screen_trainer.c:114:44: error: use of undeclared identifier 'f'
+  114 |     int method_count = ct_selector_methods(f->sel.event, methods, CT_TRAINER_LISTS_MAX);
+      |                                            ^
+build/mutants/p45028/m0081_screen_trainer.c:116:9: error: use of undeclared identifier 'f'
+  116 |         f->status = CT_REPO_ERR_DB;
+      |         ^
+build/mutants/p45028/m0081_screen_trainer.c:119:5: error: use of undeclared identifier 'f'
+  119 |     f->sel.method = methods[0];
+      |     ^
+build/mutants/p45028/m0081_screen_trainer.c:120:5: error: use of undeclared identifier 'f'
+  120 |     f->sel.list_id = 0;
+      |     ^
+build/mutants/p45028/m0081_screen_trainer.c:121:28: error: use of undeclared identifier 'f'
+  121 |     ct_trainer_form_reload(f);
+      |                            ^
+build/mutants/p45028/m0081_screen_trainer.c:122:12: error: use of undeclared identifier 'f'
+  122 |     return f->status;
+      |            ^
+18 errors generated.
+build/mutants/p45028/m0082_screen_trainer.c:101:54: error: expected ')'
+  101 | int ct_trainer_form_open(ct_trainer_form *f, sqlite3 /db) {
+      |                                                      ^
+build/mutants/p45028/m0082_screen_trainer.c:101:25: note: to match this '('
+  101 | int ct_trainer_form_open(ct_trainer_form *f, sqlite3 /db) {
+      |                         ^
+build/mutants/p45028/m0082_screen_trainer.c:101:5: error: conflicting types for 'ct_trainer_form_open'
+  101 | int ct_trainer_form_open(ct_trainer_form *f, sqlite3 /db) {
+      |     ^
+src\ui/ui.h:76:5: note: previous declaration is here
+   76 | int ct_trainer_form_open(ct_trainer_form *f, sqlite3 *db);
+      |     ^
+build/mutants/p45028/m0082_screen_trainer.c:101:54: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  101 | int ct_trainer_form_open(ct_trainer_form *f, sqlite3 /db) {
+      |                                                      ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build/mutants/p45028/m0082_screen_trainer.c:102:22: error: use of undeclared identifier 'db'
+  102 |     if (f == NULL || db == NULL) {
+      |                      ^~
+build/mutants/p45028/m0082_screen_trainer.c:106:13: error: use of undeclared identifier 'db'
+  106 |     f->db = db;
+      |             ^~
+5 errors generated.
+mutate: suite trainer_form_open exited 1
+mutate: suite trainer_form_open exited -1073741819
+mutate: suite trainer_form_open exited 1
+build/mutants/p45028/m0088_screen_trainer.c:105:25: error: expected expression
+  105 |     memset(f, 0, sizeof /f);
+      |                         ^
+1 error generated.
+mutate: suite trainer_form_open exited 1
+mutate: suite trainer_form_open exited 1
+mutate: suite trainer_form_open exited 1
+build/mutants/p45028/m0094_screen_trainer.c:119:21: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  119 |     f->sel.method = methods[-1];
+      |                     ^       ~~
+build/mutants/p45028/m0094_screen_trainer.c:113:5: note: array 'methods' declared here
+  113 |     ct_method methods[CT_TRAINER_LISTS_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_form_open exited 1
+mutate: suite trainer_form_open exited 1
+build/mutants/p45028/m0097_screen_trainer.c:125:50: error: expected ')'
+  125 | int ct_trainer_form_select_event(ct_trainer_form /f, ct_event ev) {
+      |                                                  ^
+build/mutants/p45028/m0097_screen_trainer.c:125:33: note: to match this '('
+  125 | int ct_trainer_form_select_event(ct_trainer_form /f, ct_event ev) {
+      |                                 ^
+build/mutants/p45028/m0097_screen_trainer.c:125:5: error: conflicting types for 'ct_trainer_form_select_event'
+  125 | int ct_trainer_form_select_event(ct_trainer_form /f, ct_event ev) {
+      |     ^
+src\ui/ui.h:77:5: note: previous declaration is here
+   77 | int ct_trainer_form_select_event(ct_trainer_form *f, ct_event ev);
+      |     ^
+build/mutants/p45028/m0097_screen_trainer.c:126:9: error: use of undeclared identifier 'f'
+  126 |     if (f == NULL || f->db == NULL) {
+      |         ^
+build/mutants/p45028/m0097_screen_trainer.c:126:22: error: use of undeclared identifier 'f'
+  126 |     if (f == NULL || f->db == NULL) {
+      |                      ^
+build/mutants/p45028/m0097_screen_trainer.c:130:44: error: use of undeclared identifier 'ev'
+  130 |     int method_count = ct_selector_methods(ev, methods, CT_TRAINER_LISTS_MAX);
+      |                                            ^~
+build/mutants/p45028/m0097_screen_trainer.c:132:9: error: use of undeclared identifier 'f'
+  132 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build/mutants/p45028/m0097_screen_trainer.c:135:5: error: use of undeclared identifier 'f'
+  135 |     f->sel.event = ev;
+      |     ^
+build/mutants/p45028/m0097_screen_trainer.c:135:20: error: use of undeclared identifier 'ev'
+  135 |     f->sel.event = ev;
+      |                    ^~
+build/mutants/p45028/m0097_screen_trainer.c:136:5: error: use of undeclared identifier 'f'
+  136 |     f->sel.method = methods[0];
+      |     ^
+build/mutants/p45028/m0097_screen_trainer.c:137:5: error: use of undeclared identifier 'f'
+  137 |     f->sel.list_id = 0;
+      |     ^
+build/mutants/p45028/m0097_screen_trainer.c:138:28: error: use of undeclared identifier 'f'
+  138 |     ct_trainer_form_reload(f);
+      |                            ^
+build/mutants/p45028/m0097_screen_trainer.c:139:12: error: use of undeclared identifier 'f'
+  139 |     return f->status;
+      |            ^
+12 errors generated.
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+build/mutants/p45028/m0105_screen_trainer.c:136:21: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  136 |     f->sel.method = methods[-1];
+      |                     ^       ~~
+build/mutants/p45028/m0105_screen_trainer.c:129:5: note: array 'methods' declared here
+  129 |     ct_method methods[CT_TRAINER_LISTS_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+build/mutants/p45028/m0108_screen_trainer.c:142:51: error: expected ')'
+  142 | int ct_trainer_form_select_method(ct_trainer_form /f, ct_method m) {
+      |                                                   ^
+build/mutants/p45028/m0108_screen_trainer.c:142:34: note: to match this '('
+  142 | int ct_trainer_form_select_method(ct_trainer_form /f, ct_method m) {
+      |                                  ^
+build/mutants/p45028/m0108_screen_trainer.c:142:5: error: conflicting types for 'ct_trainer_form_select_method'
+  142 | int ct_trainer_form_select_method(ct_trainer_form /f, ct_method m) {
+      |     ^
+src\ui/ui.h:78:5: note: previous declaration is here
+   78 | int ct_trainer_form_select_method(ct_trainer_form *f, ct_method m);
+      |     ^
+build/mutants/p45028/m0108_screen_trainer.c:143:9: error: use of undeclared identifier 'f'
+  143 |     if (f == NULL || f->db == NULL) {
+      |         ^
+build/mutants/p45028/m0108_screen_trainer.c:143:22: error: use of undeclared identifier 'f'
+  143 |     if (f == NULL || f->db == NULL) {
+      |                      ^
+build/mutants/p45028/m0108_screen_trainer.c:146:27: error: use of undeclared identifier 'f'
+  146 |     if (ct_selector_lists(f->sel.event, m, NULL, 0) <= 0) {
+      |                           ^
+build/mutants/p45028/m0108_screen_trainer.c:146:41: error: use of undeclared identifier 'm'
+  146 |     if (ct_selector_lists(f->sel.event, m, NULL, 0) <= 0) {
+      |                                         ^
+build/mutants/p45028/m0108_screen_trainer.c:147:9: error: use of undeclared identifier 'f'
+  147 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build/mutants/p45028/m0108_screen_trainer.c:150:5: error: use of undeclared identifier 'f'
+  150 |     f->sel.method = m;
+      |     ^
+build/mutants/p45028/m0108_screen_trainer.c:150:21: error: use of undeclared identifier 'm'
+  150 |     f->sel.method = m;
+      |                     ^
+build/mutants/p45028/m0108_screen_trainer.c:151:5: error: use of undeclared identifier 'f'
+  151 |     f->sel.list_id = 0;
+      |     ^
+build/mutants/p45028/m0108_screen_trainer.c:152:28: error: use of undeclared identifier 'f'
+  152 |     ct_trainer_form_reload(f);
+      |                            ^
+build/mutants/p45028/m0108_screen_trainer.c:153:12: error: use of undeclared identifier 'f'
+  153 |     return f->status;
+      |            ^
+12 errors generated.
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+build/mutants/p45028/m0119_screen_trainer.c:156:49: error: expected ')'
+  156 | int ct_trainer_form_select_list(ct_trainer_form /f, int list_id) {
+      |                                                 ^
+build/mutants/p45028/m0119_screen_trainer.c:156:32: note: to match this '('
+  156 | int ct_trainer_form_select_list(ct_trainer_form /f, int list_id) {
+      |                                ^
+build/mutants/p45028/m0119_screen_trainer.c:156:5: error: conflicting types for 'ct_trainer_form_select_list'
+  156 | int ct_trainer_form_select_list(ct_trainer_form /f, int list_id) {
+      |     ^
+src\ui/ui.h:79:5: note: previous declaration is here
+   79 | int ct_trainer_form_select_list(ct_trainer_form *f, int list_id);
+      |     ^
+build/mutants/p45028/m0119_screen_trainer.c:157:9: error: use of undeclared identifier 'f'
+  157 |     if (f == NULL || f->db == NULL) {
+      |         ^
+build/mutants/p45028/m0119_screen_trainer.c:157:22: error: use of undeclared identifier 'f'
+  157 |     if (f == NULL || f->db == NULL) {
+      |                      ^
+build/mutants/p45028/m0119_screen_trainer.c:160:9: error: use of undeclared identifier 'list_id'
+  160 |     if (list_id < 0 || list_id >= f->list_count) {
+      |         ^~~~~~~
+build/mutants/p45028/m0119_screen_trainer.c:160:24: error: use of undeclared identifier 'list_id'
+  160 |     if (list_id < 0 || list_id >= f->list_count) {
+      |                        ^~~~~~~
+build/mutants/p45028/m0119_screen_trainer.c:160:35: error: use of undeclared identifier 'f'
+  160 |     if (list_id < 0 || list_id >= f->list_count) {
+      |                                   ^
+build/mutants/p45028/m0119_screen_trainer.c:161:9: error: use of undeclared identifier 'f'
+  161 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build/mutants/p45028/m0119_screen_trainer.c:164:5: error: use of undeclared identifier 'f'
+  164 |     f->sel.list_id = list_id;
+      |     ^
+build/mutants/p45028/m0119_screen_trainer.c:164:22: error: use of undeclared identifier 'list_id'
+  164 |     f->sel.list_id = list_id;
+      |                      ^~~~~~~
+build/mutants/p45028/m0119_screen_trainer.c:165:28: error: use of undeclared identifier 'f'
+  165 |     ct_trainer_form_reload(f);
+      |                            ^
+build/mutants/p45028/m0119_screen_trainer.c:166:12: error: use of undeclared identifier 'f'
+  166 |     return f->status;
+      |            ^
+12 errors generated.
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+build/mutants/p45028/m0128_screen_trainer.c:169:57: error: expected ')'
+  169 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |                                                         ^
+build/mutants/p45028/m0128_screen_trainer.c:169:34: note: to match this '('
+  169 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |                                  ^
+build/mutants/p45028/m0128_screen_trainer.c:170:9: error: use of undeclared identifier 'f'
+  170 |     if (f->sel.list_id < 0 || f->sel.list_id >= f->list_count) {
+      |         ^
+build/mutants/p45028/m0128_screen_trainer.c:170:31: error: use of undeclared identifier 'f'
+  170 |     if (f->sel.list_id < 0 || f->sel.list_id >= f->list_count) {
+      |                               ^
+build/mutants/p45028/m0128_screen_trainer.c:170:49: error: use of undeclared identifier 'f'
+  170 |     if (f->sel.list_id < 0 || f->sel.list_id >= f->list_count) {
+      |                                                 ^
+build/mutants/p45028/m0128_screen_trainer.c:173:6: error: use of undeclared identifier 'source'
+  173 |     *source = f->lists[f->sel.list_id].source;
+      |      ^~~~~~
+build/mutants/p45028/m0128_screen_trainer.c:173:15: error: use of undeclared identifier 'f'
+  173 |     *source = f->lists[f->sel.list_id].source;
+      |               ^
+build/mutants/p45028/m0128_screen_trainer.c:173:24: error: use of undeclared identifier 'f'
+  173 |     *source = f->lists[f->sel.list_id].source;
+      |                        ^
+build/mutants/p45028/m0128_screen_trainer.c:195:35: error: too many arguments to function call, expected 1, have 2
+  195 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~    ^~~~~~~
+build/mutants/p45028/m0128_screen_trainer.c:169:12: note: 'ct_trainer_list_source' declared here
+  169 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |            ^                      ~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0128_screen_trainer.c:240:35: error: too many arguments to function call, expected 1, have 2
+  240 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~    ^~~~~~~
+build/mutants/p45028/m0128_screen_trainer.c:169:12: note: 'ct_trainer_list_source' declared here
+  169 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |            ^                      ~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0128_screen_trainer.c:274:35: error: too many arguments to function call, expected 1, have 2
+  274 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~    ^~~~~~~
+build/mutants/p45028/m0128_screen_trainer.c:169:12: note: 'ct_trainer_list_source' declared here
+  169 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |            ^                      ~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0128_screen_trainer.c:292:35: error: too many arguments to function call, expected 1, have 2
+  292 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~    ^~~~~~~
+build/mutants/p45028/m0128_screen_trainer.c:169:12: note: 'ct_trainer_list_source' declared here
+  169 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |            ^                      ~~~~~~~~~~~~~~~~~~~~~
+11 errors generated.
+build/mutants/p45028/m0129_screen_trainer.c:169:80: error: expected ')'
+  169 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                                                                ^
+build/mutants/p45028/m0129_screen_trainer.c:169:34: note: to match this '('
+  169 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                  ^
+build/mutants/p45028/m0129_screen_trainer.c:173:6: error: use of undeclared identifier 'source'
+  173 |     *source = f->lists[f->sel.list_id].source;
+      |      ^~~~~~
+build/mutants/p45028/m0129_screen_trainer.c:195:35: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  195 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK) {
+      |                                   ^~~~~~~
+build/mutants/p45028/m0129_screen_trainer.c:169:80: note: passing argument to parameter here
+  169 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                                                                ^
+build/mutants/p45028/m0129_screen_trainer.c:240:35: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  240 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                   ^~~~~~~
+build/mutants/p45028/m0129_screen_trainer.c:169:80: note: passing argument to parameter here
+  169 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                                                                ^
+build/mutants/p45028/m0129_screen_trainer.c:274:35: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  274 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                   ^~~~~~~
+build/mutants/p45028/m0129_screen_trainer.c:169:80: note: passing argument to parameter here
+  169 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                                                                ^
+build/mutants/p45028/m0129_screen_trainer.c:292:35: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  292 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                   ^~~~~~~
+build/mutants/p45028/m0129_screen_trainer.c:169:80: note: passing argument to parameter here
+  169 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                                                                ^
+6 errors generated.
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+
+KILLED    m0067 src/ui/screen_trainer.c:83 [arith + -> -]
+SURVIVED  m0068 src/ui/screen_trainer.c:83 [int+1 1 -> 2]
+KILLED    m0069 src/ui/screen_trainer.c:83 [int-1 1 -> 0]
+SURVIVED  m0070 src/ui/screen_trainer.c:83 [cmp > -> >=]
+KILLED    m0071 src/ui/screen_trainer.c:84 [arith + -> -]
+KILLED    m0072 src/ui/screen_trainer.c:84 [int+1 1 -> 2]
+KILLED    m0073 src/ui/screen_trainer.c:84 [int-1 1 -> 0]
+KILLED    m0074 src/ui/screen_trainer.c:90 [arith * -> /]
+          build break
+KILLED    m0075 src/ui/screen_trainer.c:91 [cmp != -> ==]
+KILLED    m0076 src/ui/screen_trainer.c:91 [int+1 0 -> 1]
+KILLED    m0077 src/ui/screen_trainer.c:91 [int-1 0 -> -1]
+KILLED    m0078 src/ui/screen_trainer.c:94 [cmp != -> ==]
+KILLED    m0079 src/ui/screen_trainer.c:94 [int+1 0 -> 1]
+KILLED    m0080 src/ui/screen_trainer.c:94 [int-1 0 -> -1]
+KILLED    m0081 src/ui/screen_trainer.c:101 [arith * -> /]
+          build break
+KILLED    m0082 src/ui/screen_trainer.c:101 [arith * -> /]
+          build break
+KILLED    m0083 src/ui/screen_trainer.c:102 [cmp == -> !=]
+KILLED    m0084 src/ui/screen_trainer.c:102 [logic || -> &&]
+KILLED    m0085 src/ui/screen_trainer.c:102 [cmp == -> !=]
+SURVIVED  m0086 src/ui/screen_trainer.c:105 [int+1 0 -> 1]
+SURVIVED  m0087 src/ui/screen_trainer.c:105 [int-1 0 -> -1]
+KILLED    m0088 src/ui/screen_trainer.c:105 [arith * -> /]
+          build break
+KILLED    m0089 src/ui/screen_trainer.c:108 [cmp != -> ==]
+SURVIVED  m0090 src/ui/screen_trainer.c:115 [cmp <= -> <]
+KILLED    m0091 src/ui/screen_trainer.c:115 [int+1 0 -> 1]
+SURVIVED  m0092 src/ui/screen_trainer.c:115 [int-1 0 -> -1]
+KILLED    m0093 src/ui/screen_trainer.c:119 [int+1 0 -> 1]
+KILLED    m0094 src/ui/screen_trainer.c:119 [int-1 0 -> -1]
+          build break
+KILLED    m0095 src/ui/screen_trainer.c:120 [int+1 0 -> 1]
+KILLED    m0096 src/ui/screen_trainer.c:120 [int-1 0 -> -1]
+KILLED    m0097 src/ui/screen_trainer.c:125 [arith * -> /]
+          build break
+KILLED    m0098 src/ui/screen_trainer.c:126 [cmp == -> !=]
+KILLED    m0099 src/ui/screen_trainer.c:126 [logic || -> &&]
+KILLED    m0100 src/ui/screen_trainer.c:126 [cmp == -> !=]
+KILLED    m0101 src/ui/screen_trainer.c:131 [cmp <= -> <]
+KILLED    m0102 src/ui/screen_trainer.c:131 [int+1 0 -> 1]
+KILLED    m0103 src/ui/screen_trainer.c:131 [int-1 0 -> -1]
+KILLED    m0104 src/ui/screen_trainer.c:136 [int+1 0 -> 1]
+KILLED    m0105 src/ui/screen_trainer.c:136 [int-1 0 -> -1]
+          build break
+KILLED    m0106 src/ui/screen_trainer.c:137 [int+1 0 -> 1]
+KILLED    m0107 src/ui/screen_trainer.c:137 [int-1 0 -> -1]
+KILLED    m0108 src/ui/screen_trainer.c:142 [arith * -> /]
+          build break
+KILLED    m0109 src/ui/screen_trainer.c:143 [cmp == -> !=]
+KILLED    m0110 src/ui/screen_trainer.c:143 [logic || -> &&]
+KILLED    m0111 src/ui/screen_trainer.c:143 [cmp == -> !=]
+SURVIVED  m0112 src/ui/screen_trainer.c:146 [int+1 0 -> 1]
+SURVIVED  m0113 src/ui/screen_trainer.c:146 [int-1 0 -> -1]
+KILLED    m0114 src/ui/screen_trainer.c:146 [cmp <= -> <]
+SURVIVED  m0115 src/ui/screen_trainer.c:146 [int+1 0 -> 1]
+KILLED    m0116 src/ui/screen_trainer.c:146 [int-1 0 -> -1]
+KILLED    m0117 src/ui/screen_trainer.c:151 [int+1 0 -> 1]
+KILLED    m0118 src/ui/screen_trainer.c:151 [int-1 0 -> -1]
+KILLED    m0119 src/ui/screen_trainer.c:156 [arith * -> /]
+          build break
+KILLED    m0120 src/ui/screen_trainer.c:157 [cmp == -> !=]
+KILLED    m0121 src/ui/screen_trainer.c:157 [logic || -> &&]
+KILLED    m0122 src/ui/screen_trainer.c:157 [cmp == -> !=]
+KILLED    m0123 src/ui/screen_trainer.c:160 [cmp < -> <=]
+KILLED    m0124 src/ui/screen_trainer.c:160 [int+1 0 -> 1]
+KILLED    m0125 src/ui/screen_trainer.c:160 [int-1 0 -> -1]
+KILLED    m0126 src/ui/screen_trainer.c:160 [logic || -> &&]
+KILLED    m0127 src/ui/screen_trainer.c:160 [cmp >= -> >]
+KILLED    m0128 src/ui/screen_trainer.c:169 [arith * -> /]
+          build break
+KILLED    m0129 src/ui/screen_trainer.c:169 [arith * -> /]
+          build break
+KILLED    m0130 src/ui/screen_trainer.c:170 [cmp < -> <=]
+KILLED    m0131 src/ui/screen_trainer.c:170 [int+1 0 -> 1]
+SURVIVED  m0132 build/mutants/p45028/m0135_screen_trainer.c:173:5: error: expected expression
+  173 |     /source = f->lists[f->sel.list_id].source;
+      |     ^
+1 error generated.
+build/mutants/p45028/m0136_screen_trainer.c:177:49: error: expected ')'
+  177 | int ct_trainer_form_select_case(ct_trainer_form /f, int index) {
+      |                                                 ^
+build/mutants/p45028/m0136_screen_trainer.c:177:32: note: to match this '('
+  177 | int ct_trainer_form_select_case(ct_trainer_form /f, int index) {
+      |                                ^
+build/mutants/p45028/m0136_screen_trainer.c:177:5: error: conflicting types for 'ct_trainer_form_select_case'
+  177 | int ct_trainer_form_select_case(ct_trainer_form /f, int index) {
+      |     ^
+src\ui/ui.h:80:5: note: previous declaration is here
+   80 | int ct_trainer_form_select_case(ct_trainer_form *f, int index);
+      |     ^
+build/mutants/p45028/m0136_screen_trainer.c:178:9: error: use of undeclared identifier 'f'
+  178 |     if (f == NULL || f->db == NULL) {
+      |         ^
+build/mutants/p45028/m0136_screen_trainer.c:178:22: error: use of undeclared identifier 'f'
+  178 |     if (f == NULL || f->db == NULL) {
+      |                      ^
+build/mutants/p45028/m0136_screen_trainer.c:181:9: error: use of undeclared identifier 'index'
+  181 |     if (index < 0 || index >= f->case_count) {
+      |         ^~~~~
+build/mutants/p45028/m0136_screen_trainer.c:181:22: error: use of undeclared identifier 'index'
+  181 |     if (index < 0 || index >= f->case_count) {
+      |                      ^~~~~
+build/mutants/p45028/m0136_screen_trainer.c:181:31: error: use of undeclared identifier 'f'
+  181 |     if (index < 0 || index >= f->case_count) {
+      |                               ^
+build/mutants/p45028/m0136_screen_trainer.c:182:9: error: use of undeclared identifier 'f'
+  182 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build/mutants/p45028/m0136_screen_trainer.c:185:40: error: use of undeclared identifier 'f'
+  185 |     if (ct_trainer_form_refresh_inputs(f) != CT_REPO_OK) {
+      |                                        ^
+build/mutants/p45028/m0136_screen_trainer.c:186:9: error: use of undeclared identifier 'f'
+  186 |         f->status = CT_REPO_ERR_DB;
+      |         ^
+build/mutants/p45028/m0136_screen_trainer.c:189:5: error: use of undeclared identifier 'f'
+  189 |     f->sel.case_index = index;
+      |     ^
+build/mutants/p45028/m0136_screen_trainer.c:189:25: error: use of undeclared identifier 'index'
+  189 |     f->sel.case_index = index;
+      |                         ^~~~~
+build/mutants/p45028/m0136_screen_trainer.c:190:5: error: use of undeclared identifier 'f'
+  190 |     f->front[0] = '\0';
+      |     ^
+build/mutants/p45028/m0136_screen_trainer.c:191:5: error: use of undeclared identifier 'f'
+  191 |     f->alg_text[0] = '\0';
+      |     ^
+build/mutants/p45028/m0136_screen_trainer.c:192:5: error: use of undeclared identifier 'f'
+  192 |     f->pack_status = CT_TRAINER_NO_DETAIL;
+      |     ^
+build/mutants/p45028/m0136_screen_trainer.c:193:5: error: use of undeclared identifier 'f'
+  193 |     f->alg_status = CT_TRAINER_NO_DETAIL;
+      |     ^
+build/mutants/p45028/m0136_screen_trainer.c:195:32: error: use of undeclared identifier 'f'
+  195 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK) {
+      |                                ^
+build/mutants/p45028/m0136_screen_trainer.c:196:9: error: use of undeclared identifier 'f'
+  196 |         f->status = CT_REPO_ERR_DB;
+      |         ^
+build/mutants/p45028/m0136_screen_trainer.c:202:35: error: use of undeclared identifier 'f'
+  202 |             ct_selector_pack_case(f->db, f->sel.event, f->sel.method, f->sel.list_id, index, &e);
+      |                                   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+build/mutants/p45028/m0147_screen_trainer.c:190:5: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  190 |     f->front[-1] = '\0';
+      |     ^        ~~
+src\ui/ui.h:71:5: note: array 'front' declared here
+   71 |     char front[CT_TRAINER_FRONT_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_form_select_refreshes_inputs exited 1
+build/mutants/p45028/m0149_screen_trainer.c:191:5: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  191 |     f->alg_text[-1] = '\0';
+      |     ^           ~~
+src\ui/ui.h:72:5: note: array 'alg_text' declared here
+   72 |     char alg_text[CT_TRAINER_ALG_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+build/mutants/p45028/m0162_screen_trainer.c:216:9: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  216 |         f->front[-1] = '\0';
+      |         ^        ~~
+src\ui/ui.h:71:5: note: array 'front' declared here
+   71 |     char front[CT_TRAINER_FRONT_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_form_generated_alg exited 1
+mutate: suite trainer_form_generated_alg exited 1
+build/mutants/p45028/m0165_screen_trainer.c:235:49: error: expected ')'
+  235 | int ct_trainer_form_select_cell(ct_trainer_form /f, int sticker) {
+      |                                                 ^
+build/mutants/p45028/m0165_screen_trainer.c:235:32: note: to match this '('
+  235 | int ct_trainer_form_select_cell(ct_trainer_form /f, int sticker) {
+      |                                ^
+build/mutants/p45028/m0165_screen_trainer.c:235:5: error: conflicting types for 'ct_trainer_form_select_cell'
+  235 | int ct_trainer_form_select_cell(ct_trainer_form /f, int sticker) {
+      |     ^
+src\ui/ui.h:81:5: note: previous declaration is here
+   81 | int ct_trainer_form_select_cell(ct_trainer_form *f, int sticker);
+      |     ^
+build/mutants/p45028/m0165_screen_trainer.c:236:9: error: use of undeclared identifier 'f'
+  236 |     if (f == NULL) {
+      |         ^
+build/mutants/p45028/m0165_screen_trainer.c:240:32: error: use of undeclared identifier 'f'
+  240 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                ^
+build/mutants/p45028/m0165_screen_trainer.c:241:9: error: use of undeclared identifier 'sticker'
+  241 |         sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |         ^~~~~~~
+build/mutants/p45028/m0165_screen_trainer.c:241:24: error: use of undeclared identifier 'sticker'
+  241 |         sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |                        ^~~~~~~
+build/mutants/p45028/m0165_screen_trainer.c:242:9: error: use of undeclared identifier 'f'
+  242 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build/mutants/p45028/m0165_screen_trainer.c:245:5: error: use of undeclared identifier 'f'
+  245 |     f->cell = sticker;
+      |     ^
+build/mutants/p45028/m0165_screen_trainer.c:245:15: error: use of undeclared identifier 'sticker'
+  245 |     f->cell = sticker;
+      |               ^~~~~~~
+build/mutants/p45028/m0165_screen_trainer.c:246:5: error: use of undeclared identifier 'f'
+  246 |     f->status = CT_REPO_OK;
+      |     ^
+10 errors generated.
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build/mutants/p45028/m0168_screen_trainer.c:240:58: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  240 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build/mutants/p45028/m0168_screen_trainer.c:240:58: note: place parentheses around the '&&' expression to silence this warning
+  240 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |                                                          ^
+      |         (                                                                              )
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+build/mutants/p45028/m0170_screen_trainer.c:240:89: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  240 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                          ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  241 |         sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |         ~~~~~~~~~~~
+build/mutants/p45028/m0170_screen_trainer.c:240:89: note: place parentheses around the '&&' expression to silence this warning
+  240 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                                                         ^
+      |                                                             (
+  241 |         sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |                    )
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build/mutants/p45028/m0174_screen_trainer.c:241:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  240 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                                                                         ~~
+  241 |         sticker < 0 && sticker >= CT_LETTER_STICKERS) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0174_screen_trainer.c:241:21: note: place parentheses around the '&&' expression to silence this warning
+  241 |         sticker < 0 && sticker >= CT_LETTER_STICKERS) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+build/mutants/p45028/m0176_screen_trainer.c:250:48: error: expected ')'
+  250 | int ct_trainer_form_clear_cell(ct_trainer_form /f) {
+      |                                                ^
+build/mutants/p45028/m0176_screen_trainer.c:250:31: note: to match this '('
+  250 | int ct_trainer_form_clear_cell(ct_trainer_form /f) {
+      |                               ^
+build/mutants/p45028/m0176_screen_trainer.c:250:5: error: conflicting types for 'ct_trainer_form_clear_cell'
+  250 | int ct_trainer_form_clear_cell(ct_trainer_form /f) {
+      |     ^
+src\ui/ui.h:82:5: note: previous declaration is here
+   82 | int ct_trainer_form_clear_cell(ct_trainer_form *f);
+      |     ^
+build/mutants/p45028/m0176_screen_trainer.c:251:9: error: use of undeclared identifier 'f'
+  251 |     if (f == NULL) {
+      |         ^
+build/mutants/p45028/m0176_screen_trainer.c:254:5: error: use of undeclared identifier 'f'
+  254 |     f->cell = CT_TRAINER_CELL_NONE;
+      |     ^
+build/mutants/p45028/m0176_screen_trainer.c:255:5: error: use of undeclared identifier 'f'
+  255 |     f->status = CT_REPO_OK;
+      |     ^
+5 errors generated.
+mutate: suite trainer_form_chart_cells exited 1
+build/mutants/p45028/m0178_screen_trainer.c:259:58: error: expected ')'
+  259 | static int ct_trainer_cell_matches(const ct_trainer_form /f, int index) {
+      |                                                          ^
+build/mutants/p45028/m0178_screen_trainer.c:259:35: note: to match this '('
+  259 | static int ct_trainer_cell_matches(const ct_trainer_form /f, int index) {
+      |                                   ^
+build/mutants/p45028/m0178_screen_trainer.c:262:32: error: use of undeclared identifier 'f'
+  262 |     if (ct_selector_case_pair(&f->scheme, f->sel.event, f->sel.method, f->sel.list_id, index, &t1,
+      |                                ^
+build/mutants/p45028/m0178_screen_trainer.c:262:43: error: use of undeclared identifier 'f'
+  262 |     if (ct_selector_case_pair(&f->scheme, f->sel.event, f->sel.method, f->sel.list_id, index, &t1,
+      |                                           ^
+build/mutants/p45028/m0178_screen_trainer.c:262:57: error: use of undeclared identifier 'f'
+  262 |     if (ct_selector_case_pair(&f->scheme, f->sel.event, f->sel.method, f->sel.list_id, index, &t1,
+      |                                                         ^
+build/mutants/p45028/m0178_screen_trainer.c:262:72: error: use of undeclared identifier 'f'
+  262 |     if (ct_selector_case_pair(&f->scheme, f->sel.event, f->sel.method, f->sel.list_id, index, &t1,
+      |                                                                        ^
+build/mutants/p45028/m0178_screen_trainer.c:262:88: error: use of undeclared identifier 'index'
+  262 |     if (ct_selector_case_pair(&f->scheme, f->sel.event, f->sel.method, f->sel.list_id, index, &t1,
+      |                                                                                        ^~~~~
+build/mutants/p45028/m0178_screen_trainer.c:266:18: error: use of undeclared identifier 'f'
+  266 |     return t1 == f->cell || t2 == f->cell;
+      |                  ^
+build/mutants/p45028/m0178_screen_trainer.c:266:35: error: use of undeclared identifier 'f'
+  266 |     return t1 == f->cell || t2 == f->cell;
+      |                                   ^
+build/mutants/p45028/m0178_screen_trainer.c:280:40: error: too many arguments to function call, expected 1, have 2
+  280 |         if (ct_trainer_cell_matches(f, i)) {
+      |             ~~~~~~~~~~~~~~~~~~~~~~~    ^
+build/mutants/p45028/m0178_screen_trainer.c:259:12: note: 'ct_trainer_cell_matches' declared here
+  259 | static int ct_trainer_cell_matches(const ct_trainer_form /f, int index) {
+      |            ^                       ~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0178_screen_trainer.c:298:41: error: too many arguments to function call, expected 1, have 2
+  298 |         if (!ct_trainer_cell_matches(f, i)) {
+      |              ~~~~~~~~~~~~~~~~~~~~~~~    ^
+build/mutants/p45028/m0178_screen_trainer.c:259:12: note: 'ct_trainer_cell_matches' declared here
+  259 | static int ct_trainer_cell_matches(const ct_trainer_form /f, int index) {
+      |            ^                       ~~~~~~~~~~~~~~~~~~~~~
+10 errors generated.
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build/mutants/p45028/m0194_screen_trainer.c:269:57: error: expected ')'
+  269 | int ct_trainer_form_visible_count(const ct_trainer_form /f) {
+      |                                                         ^
+build/mutants/p45028/m0194_screen_trainer.c:269:34: note: to match this '('
+  269 | int ct_trainer_form_visible_count(const ct_trainer_form /f) {
+      |                                  ^
+build/mutants/p45028/m0194_screen_trainer.c:269:5: error: conflicting types for 'ct_trainer_form_visible_count'
+  269 | int ct_trainer_form_visible_count(const ct_trainer_form /f) {
+      |     ^
+src\ui/ui.h:83:5: note: previous declaration is here
+   83 | int ct_trainer_form_visible_count(const ct_trainer_form *f);
+      |     ^
+build/mutants/p45028/m0194_screen_trainer.c:270:9: error: use of undeclared identifier 'f'
+  270 |     if (f == NULL || f->case_count <= 0) {
+      |         ^
+build/mutants/p45028/m0194_screen_trainer.c:270:22: error: use of undeclared identifier 'f'
+  270 |     if (f == NULL || f->case_count <= 0) {
+      |                      ^
+build/mutants/p45028/m0194_screen_trainer.c:274:32: error: use of undeclared identifier 'f'
+  274 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                ^
+build/mutants/p45028/m0194_screen_trainer.c:275:9: error: use of undeclared identifier 'f'
+  275 |         f->cell == CT_TRAINER_CELL_NONE) {
+      |         ^
+build/mutants/p45028/m0194_screen_trainer.c:276:16: error: use of undeclared identifier 'f'
+  276 |         return f->case_count;
+      |                ^
+build/mutants/p45028/m0194_screen_trainer.c:279:25: error: use of undeclared identifier 'f'
+  279 |     for (int i = 0; i < f->case_count; i++) {
+      |                         ^
+build/mutants/p45028/m0194_screen_trainer.c:280:37: error: use of undeclared identifier 'f'
+  280 |         if (ct_trainer_cell_matches(f, i)) {
+      |                                     ^
+9 errors generated.
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_navigation exited -1073741795
+src/ui/screen_trainer.c:170 [int-1 0 -> -1]
+SURVIVED  m0133 src/ui/screen_trainer.c:170 [logic || -> &&]
+SURVIVED  m0134 src/ui/screen_trainer.c:170 [cmp >= -> >]
+KILLED    m0135 src/ui/screen_trainer.c:173 [arith * -> /]
+          build break
+KILLED    m0136 src/ui/screen_trainer.c:177 [arith * -> /]
+          build break
+KILLED    m0137 src/ui/screen_trainer.c:178 [cmp == -> !=]
+KILLED    m0138 src/ui/screen_trainer.c:178 [logic || -> &&]
+KILLED    m0139 src/ui/screen_trainer.c:178 [cmp == -> !=]
+KILLED    m0140 src/ui/screen_trainer.c:181 [cmp < -> <=]
+KILLED    m0141 src/ui/screen_trainer.c:181 [int+1 0 -> 1]
+KILLED    m0142 src/ui/screen_trainer.c:181 [int-1 0 -> -1]
+KILLED    m0143 src/ui/screen_trainer.c:181 [logic || -> &&]
+KILLED    m0144 src/ui/screen_trainer.c:181 [cmp >= -> >]
+KILLED    m0145 src/ui/screen_trainer.c:185 [cmp != -> ==]
+SURVIVED  m0146 src/ui/screen_trainer.c:190 [int+1 0 -> 1]
+KILLED    m0147 src/ui/screen_trainer.c:190 [int-1 0 -> -1]
+          build break
+KILLED    m0148 src/ui/screen_trainer.c:191 [int+1 0 -> 1]
+KILLED    m0149 src/ui/screen_trainer.c:191 [int-1 0 -> -1]
+          build break
+KILLED    m0150 src/ui/screen_trainer.c:195 [cmp != -> ==]
+KILLED    m0151 src/ui/screen_trainer.c:199 [cmp == -> !=]
+KILLED    m0152 src/ui/screen_trainer.c:203 [cmp == -> !=]
+KILLED    m0153 src/ui/screen_trainer.c:203 [int+1 0 -> 1]
+KILLED    m0154 src/ui/screen_trainer.c:203 [int-1 0 -> -1]
+KILLED    m0155 src/ui/screen_trainer.c:204 [cmp != -> ==]
+KILLED    m0156 src/ui/screen_trainer.c:204 [int+1 0 -> 1]
+KILLED    m0157 src/ui/screen_trainer.c:204 [int-1 0 -> -1]
+KILLED    m0158 src/ui/screen_trainer.c:215 [cmp != -> ==]
+KILLED    m0159 src/ui/screen_trainer.c:215 [int+1 0 -> 1]
+KILLED    m0160 src/ui/screen_trainer.c:215 [int-1 0 -> -1]
+SURVIVED  m0161 src/ui/screen_trainer.c:216 [int+1 0 -> 1]
+KILLED    m0162 src/ui/screen_trainer.c:216 [int-1 0 -> -1]
+          build break
+KILLED    m0163 src/ui/screen_trainer.c:220 [cmp == -> !=]
+KILLED    m0164 src/ui/screen_trainer.c:227 [cmp == -> !=]
+KILLED    m0165 src/ui/screen_trainer.c:235 [arith * -> /]
+          build break
+KILLED    m0166 src/ui/screen_trainer.c:236 [cmp == -> !=]
+KILLED    m0167 src/ui/screen_trainer.c:240 [cmp != -> ==]
+KILLED    m0168 src/ui/screen_trainer.c:240 [logic || -> &&]
+          build break
+KILLED    m0169 src/ui/screen_trainer.c:240 [cmp != -> ==]
+KILLED    m0170 src/ui/screen_trainer.c:240 [logic || -> &&]
+          build break
+KILLED    m0171 src/ui/screen_trainer.c:241 [cmp < -> <=]
+KILLED    m0172 src/ui/screen_trainer.c:241 [int+1 0 -> 1]
+KILLED    m0173 src/ui/screen_trainer.c:241 [int-1 0 -> -1]
+KILLED    m0174 src/ui/screen_trainer.c:241 [logic || -> &&]
+          build break
+KILLED    m0175 src/ui/screen_trainer.c:241 [cmp >= -> >]
+KILLED    m0176 src/ui/screen_trainer.c:250 [arith * -> /]
+          build break
+KILLED    m0177 src/ui/screen_trainer.c:251 [cmp == -> !=]
+KILLED    m0178 src/ui/screen_trainer.c:259 [arith * -> /]
+          build break
+SURVIVED  m0179 src/ui/screen_trainer.c:260 [arith - -> +]
+SURVIVED  m0180 src/ui/screen_trainer.c:260 [int+1 1 -> 2]
+SURVIVED  m0181 src/ui/screen_trainer.c:260 [int-1 1 -> 0]
+SURVIVED  m0182 src/ui/screen_trainer.c:261 [arith - -> +]
+SURVIVED  m0183 src/ui/screen_trainer.c:261 [int+1 1 -> 2]
+SURVIVED  m0184 src/ui/screen_trainer.c:261 [int-1 1 -> 0]
+KILLED    m0185 src/ui/screen_trainer.c:263 [cmp != -> ==]
+KILLED    m0186 src/ui/screen_trainer.c:263 [int+1 0 -> 1]
+KILLED    m0187 src/ui/screen_trainer.c:263 [int-1 0 -> -1]
+SURVIVED  m0188 src/ui/screen_trainer.c:264 [ret-lit 0 -> 1]
+SURVIVED  m0189 src/ui/screen_trainer.c:264 [int+1 0 -> 1]
+SURVIVED  m0190 src/ui/screen_trainer.c:264 [int-1 0 -> -1]
+KILLED    m0191 src/ui/screen_trainer.c:266 [cmp == -> !=]
+KILLED    m0192 src/ui/screen_trainer.c:266 [logic || -> &&]
+KILLED    m0193 src/ui/screen_trainer.c:266 [cmp == -> !=]
+KILLED    m0194 src/ui/screen_trainer.c:269 [arith * -> /]
+          build break
+KILLED    m0195 src/ui/screen_trainer.c:270 [cmp == -> !=]
+KILLED    m0196 src/ui/screen_trainer.c:270 [logicmutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build/mutants/p45028/m0204_screen_trainer.c:274:58: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  274 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build/mutants/p45028/m0204_screen_trainer.c:274:58: note: place parentheses around the '&&' expression to silence this warning
+  274 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |                                                          ^
+      |         (                                                                              )
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+build/mutants/p45028/m0206_screen_trainer.c:274:89: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  274 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                          ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  275 |         f->cell == CT_TRAINER_CELL_NONE) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0206_screen_trainer.c:274:89: note: place parentheses around the '&&' expression to silence this warning
+  274 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                                                         ^
+      |                                                             (
+  275 |         f->cell == CT_TRAINER_CELL_NONE) {
+      |                                        
+      |                                        )
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build/mutants/p45028/m0213_screen_trainer.c:287:55: error: expected ')'
+  287 | int ct_trainer_form_nth_visible(const ct_trainer_form /f, int visible) {
+      |                                                       ^
+build/mutants/p45028/m0213_screen_trainer.c:287:32: note: to match this '('
+  287 | int ct_trainer_form_nth_visible(const ct_trainer_form /f, int visible) {
+      |                                ^
+build/mutants/p45028/m0213_screen_trainer.c:287:5: error: conflicting types for 'ct_trainer_form_nth_visible'
+  287 | int ct_trainer_form_nth_visible(const ct_trainer_form /f, int visible) {
+      |     ^
+src\ui/ui.h:84:5: note: previous declaration is here
+   84 | int ct_trainer_form_nth_visible(const ct_trainer_form *f, int visible);
+      |     ^
+build/mutants/p45028/m0213_screen_trainer.c:288:9: error: use of undeclared identifier 'f'
+  288 |     if (f == NULL || visible < 0) {
+      |         ^
+build/mutants/p45028/m0213_screen_trainer.c:288:22: error: use of undeclared identifier 'visible'
+  288 |     if (f == NULL || visible < 0) {
+      |                      ^~~~~~~
+build/mutants/p45028/m0213_screen_trainer.c:292:32: error: use of undeclared identifier 'f'
+  292 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                ^
+build/mutants/p45028/m0213_screen_trainer.c:293:9: error: use of undeclared identifier 'f'
+  293 |         f->cell == CT_TRAINER_CELL_NONE) {
+      |         ^
+build/mutants/p45028/m0213_screen_trainer.c:294:16: error: use of undeclared identifier 'visible'
+  294 |         return visible < f->case_count ? visible : -1;
+      |                ^~~~~~~
+build/mutants/p45028/m0213_screen_trainer.c:294:26: error: use of undeclared identifier 'f'
+  294 |         return visible < f->case_count ? visible : -1;
+      |                          ^
+build/mutants/p45028/m0213_screen_trainer.c:294:42: error: use of undeclared identifier 'visible'
+  294 |         return visible < f->case_count ? visible : -1;
+      |                                          ^~~~~~~
+build/mutants/p45028/m0213_screen_trainer.c:297:25: error: use of undeclared identifier 'f'
+  297 |     for (int i = 0; i < f->case_count; i++) {
+      |                         ^
+build/mutants/p45028/m0213_screen_trainer.c:298:38: error: use of undeclared identifier 'f'
+  298 |         if (!ct_trainer_cell_matches(f, i)) {
+      |                                      ^
+build/mutants/p45028/m0213_screen_trainer.c:301:21: error: use of undeclared identifier 'visible'
+  301 |         if (seen == visible) {
+      |                     ^~~~~~~
+12 errors generated.
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build/mutants/p45028/m0223_screen_trainer.c:292:58: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  292 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build/mutants/p45028/m0223_screen_trainer.c:292:58: note: place parentheses around the '&&' expression to silence this warning
+  292 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |                                                          ^
+      |         (                                                                              )
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+build/mutants/p45028/m0225_screen_trainer.c:292:89: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  292 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                          ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  293 |         f->cell == CT_TRAINER_CELL_NONE) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0225_screen_trainer.c:292:89: note: place parentheses around the '&&' expression to silence this warning
+  292 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                                                         ^
+      |                                                             (
+  293 |         f->cell == CT_TRAINER_CELL_NONE) {
+      |                                        
+      |                                        )
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build/mutants/p45028/m0241_screen_trainer.c:318:10: error: expected member name or ';' after declaration specifiers
+  318 |     char /event_ptrs[CT_TRAINER_EVENTS_MAX];
+      |     ~~~~ ^
+build/mutants/p45028/m0241_screen_trainer.c:318:9: error: expected ';' at end of declaration list
+  318 |     char /event_ptrs[CT_TRAINER_EVENTS_MAX];
+      |         ^
+      |         ;
+build/mutants/p45028/m0241_screen_trainer.c:335:12: error: no member named 'event_ptrs' in 'struct (unnamed at build/mutants/p45028/m0241_screen_trainer.c:309:9)'
+  335 |         s->event_ptrs[i] = s->event_labels[i];
+      |         ~  ^
+build/mutants/p45028/m0241_screen_trainer.c:483:34: error: no member named 'event_ptrs' in 'struct (unnamed at build/mutants/p45028/m0241_screen_trainer.c:309:9)'
+  483 |                       ct_trainer.event_ptrs, events, &ct_trainer.event_scroll, &event_active,
+      |                       ~~~~~~~~~~ ^
+4 errors generated.
+build/mutants/p45028/m0242_screen_trainer.c:320:10: error: expected member name or ';' after declaration specifiers
+  320 |     char /method_ptrs[CT_TRAINER_LISTS_MAX];
+      |     ~~~~ ^
+build/mutants/p45028/m0242_screen_trainer.c:320:9: error: expected ';' at end of declaration list
+  320 |     char /method_ptrs[CT_TRAINER_LISTS_MAX];
+      |         ^
+      |         ;
+build/mutants/p45028/m0242_screen_trainer.c:342:12: error: no member named 'method_ptrs' in 'struct (unnamed at build/mutants/p45028/m0242_screen_trainer.c:309:9)'
+  342 |         s->method_ptrs[i] = s->method_labels[i];
+      |         ~  ^
+build/mutants/p45028/m0242_screen_trainer.c:495:34: error: no member named 'method_ptrs' in 'struct (unnamed at build/mutants/p45028/m0242_screen_trainer.c:309:9)'
+  495 |                       ct_trainer.method_ptrs, method_count, &ct_trainer.method_scroll,
+      |                       ~~~~~~~~~~ ^
+4 errors generated.
+build/mutants/p45028/m0243_screen_trainer.c:322:10: error: expected member name or ';' after declaration specifiers
+  322 |     char /list_ptrs[CT_TRAINER_LISTS_MAX];
+      |     ~~~~ ^
+build/mutants/p45028/m0243_screen_trainer.c:322:9: error: expected ';' at end of declaration list
+  322 |     char /list_ptrs[CT_TRAINER_LISTS_MAX];
+      |         ^
+      |         ;
+build/mutants/p45028/m0243_screen_trainer.c:347:12: error: no member named 'list_ptrs' in 'struct (unnamed at build/mutants/p45028/m0243_screen_trainer.c:309:9)'
+  347 |         s->list_ptrs[i] = s->list_labels[i];
+      |         ~  ^
+build/mutants/p45028/m0243_screen_trainer.c:501:34: error: no member named 'list_ptrs' in 'struct (unnamed at build/mutants/p45028/m0243_screen_trainer.c:309:9)'
+  501 |                       ct_trainer.list_ptrs, f->list_count, &ct_trainer.list_scroll, &list_active,
+      |                       ~~~~~~~~~~ ^
+4 errors generated.
+build/mutants/p45028/m0244_screen_trainer.c:324:10: error: expected member name or ';' after declaration specifiers
+  324 |     char /case_ptrs[CT_TRAINER_CASES_MAX];
+      |     ~~~~ ^
+build/mutants/p45028/m0244_screen_trainer.c:324:9: error: expected ';' at end of declaration list
+  324 |     char /case_ptrs[CT_TRAINER_CASES_MAX];
+      |         ^
+      |         ;
+build/mutants/p45028/m0244_screen_trainer.c:358:12: error: no member named 'case_ptrs' in 'struct (unnamed at build/mutants/p45028/m0244_screen_trainer.c:309:9)'
+  358 |         s->case_ptrs[v] = s->case_labels[v];
+      |         ~  ^
+build/mutants/p45028/m0244_screen_trainer.c:514:34: error: no member named 'case_ptrs' in 'struct (unnamed at build/mutants/p45028/m0244_screen_trainer.c:309:9)'
+  514 |                       ct_trainer.case_ptrs, visible, &ct_trainer.case_scroll,
+      |                       ~~~~~~~~~~ ^
+4 errors generated.
+build/mutants/p45028/m0245_screen_trainer.c:329:55: error: expected ')'
+  329 | static void ct_trainer_build_labels(ct_trainer_screen /s) {
+      |                                                       ^
+build/mutants/p45028/m0245_screen_trainer.c:329:36: note: to match this '('
+  329 | static void ct_trainer_build_labels(ct_trainer_screen /s) {
+      |                                    ^
+build/mutants/p45028/m0245_screen_trainer.c:330:27: error: use of undeclared identifier 's'
+  330 |     ct_trainer_form *f = &s->form;
+      |                           ^
+build/mutants/p45028/m0245_screen_trainer.c:333:18: error: use of undeclared identifier 's'
+  333 |         snprintf(s->event_labels[i], sizeof s->event_labels[i], "%s",
+      |                  ^
+build/mutants/p45028/m0245_screen_trainer.c:333:45: error: use of undeclared identifier 's'
+  333 |         snprintf(s->event_labels[i], sizeof s->event_labels[i], "%s",
+      |                                             ^
+build/mutants/p45028/m0245_screen_trainer.c:335:9: error: use of undeclared identifier 's'
+  335 |         s->event_ptrs[i] = s->event_labels[i];
+      |         ^
+build/mutants/p45028/m0245_screen_trainer.c:335:28: error: use of undeclared identifier 's'
+  335 |         s->event_ptrs[i] = s->event_labels[i];
+      |                            ^
+build/mutants/p45028/m0245_screen_trainer.c:340:18: error: use of undeclared identifier 's'
+  340 |         snprintf(s->method_labels[i], sizeof s->method_labels[i], "%s",
+      |                  ^
+build/mutants/p45028/m0245_screen_trainer.c:340:46: error: use of undeclared identifier 's'
+  340 |         snprintf(s->method_labels[i], sizeof s->method_labels[i], "%s",
+      |                                              ^
+build/mutants/p45028/m0245_screen_trainer.c:342:9: error: use of undeclared identifier 's'
+  342 |         s->method_ptrs[i] = s->method_labels[i];
+      |         ^
+build/mutants/p45028/m0245_screen_trainer.c:342:29: error: use of undeclared identifier 's'
+  342 |         s->method_ptrs[i] = s->method_labels[i];
+      |                             ^
+build/mutants/p45028/m0245_screen_trainer.c:345:18: error: use of undeclared identifier 's'
+  345 |         snprintf(s->list_labels[i], sizeof s->list_labels[i], "%s",
+      |                  ^
+build/mutants/p45028/m0245_screen_trainer.c:345:44: error: use of undeclared identifier 's'
+  345 |         snprintf(s->list_labels[i], sizeof s->list_labels[i], "%s",
+      |                                            ^
+build/mutants/p45028/m0245_screen_trainer.c:347:9: error: use of undeclared identifier 's'
+  347 |         s->list_ptrs[i] = s->list_labels[i];
+      |         ^
+build/mutants/p45028/m0245_screen_trainer.c:347:27: error: use of undeclared identifier 's'
+  347 |         s->list_ptrs[i] = s->list_labels[i];
+      |                           ^
+build/mutants/p45028/m0245_screen_trainer.c:350:5: error: use of undeclared identifier 's'
+  350 |     s->case_active = -1;
+      |     ^
+build/mutants/p45028/m0245_screen_trainer.c:354:70: error: use of undeclared identifier 's'
+  354 |                                               f->sel.list_id, index, s->case_labels[v],
+      |                                                                      ^
+build/mutants/p45028/m0245_screen_trainer.c:355:64: error: use of undeclared identifier 's'
+  355 |                                               (unsigned)sizeof s->case_labels[v]) != 0) {
+      |                                                                ^
+build/mutants/p45028/m0245_screen_trainer.c:356:13: error: use of undeclared identifier 's'
+  356 |             s->case_labels[v][0] = '\0';
+      |             ^
+build/mutants/p45028/m0245_screen_trainer.c:358:9: error: use of undeclared identifier 's'
+  358 |         s->case_ptrs[v] = s->case_labels[v];
+      |         ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build/mutants/p45028/m0246_screen_trainer.c:330:21: error: expected identifier or '('
+  330 |     ct_trainer_form /f = &s->form;
+      |                     ^
+build/mutants/p45028/m0246_screen_trainer.c:338:44: error: use of undeclared identifier 'f'
+  338 |     int method_count = ct_selector_methods(f->sel.event, methods, CT_TRAINER_LISTS_MAX);
+      |                                            ^
+build/mutants/p45028/m0246_screen_trainer.c:344:25: error: use of undeclared identifier 'f'
+  344 |     for (int i = 0; i < f->list_count; i++) {
+      |                         ^
+build/mutants/p45028/m0246_screen_trainer.c:346:40: error: use of undeclared identifier 'f'
+  346 |                  ct_trainer_stage_name(f->lists[i].stage));
+      |                                        ^
+build/mutants/p45028/m0246_screen_trainer.c:349:49: error: use of undeclared identifier 'f'
+  349 |     int visible = ct_trainer_form_visible_count(f);
+      |                                                 ^
+build/mutants/p45028/m0246_screen_trainer.c:352:49: error: use of undeclared identifier 'f'
+  352 |         int index = ct_trainer_form_nth_visible(f, v);
+      |                                                 ^
+build/mutants/p45028/m0246_screen_trainer.c:353:47: error: use of undeclared identifier 'f'
+  353 |         if (index < 0 || ct_selector_case_key(f->db, &f->scheme, f->sel.event, f->sel.method,
+      |                                               ^
+build/mutants/p45028/m0246_screen_trainer.c:353:55: error: use of undeclared identifier 'f'
+  353 |         if (index < 0 || ct_selector_case_key(f->db, &f->scheme, f->sel.event, f->sel.method,
+      |                                                       ^
+build/mutants/p45028/m0246_screen_trainer.c:353:66: error: use of undeclared identifier 'f'
+  353 |         if (index < 0 || ct_selector_case_key(f->db, &f->scheme, f->sel.event, f->sel.method,
+      |                                                                  ^
+build/mutants/p45028/m0246_screen_trainer.c:353:80: error: use of undeclared identifier 'f'
+  353 |         if (index < 0 || ct_selector_case_key(f->db, &f->scheme, f->sel.event, f->sel.method,
+      |                                                                                ^
+build/mutants/p45028/m0246_screen_trainer.c:354:47: error: use of undeclared identifier 'f'
+  354 |                                               f->sel.list_id, index, s->case_labels[v],
+      |                                               ^
+build/mutants/p45028/m0246_screen_trainer.c:359:22: error: use of undeclared identifier 'f'
+  359 |         if (index == f->sel.case_index) {
+      |                      ^
+12 errors generated.
+ || -> &&]
+SURVIVED  m0197 src/ui/screen_trainer.c:270 [cmp <= -> <]
+SURVIVED  m0198 src/ui/screen_trainer.c:270 [int+1 0 -> 1]
+SURVIVED  m0199 src/ui/screen_trainer.c:270 [int-1 0 -> -1]
+KILLED    m0200 src/ui/screen_trainer.c:271 [ret-lit 0 -> 1]
+KILLED    m0201 src/ui/screen_trainer.c:271 [int+1 0 -> 1]
+KILLED    m0202 src/ui/screen_trainer.c:271 [int-1 0 -> -1]
+KILLED    m0203 src/ui/screen_trainer.c:274 [cmp != -> ==]
+KILLED    m0204 src/ui/screen_trainer.c:274 [logic || -> &&]
+          build break
+KILLED    m0205 src/ui/screen_trainer.c:274 [cmp != -> ==]
+KILLED    m0206 src/ui/screen_trainer.c:274 [logic || -> &&]
+          build break
+KILLED    m0207 src/ui/screen_trainer.c:275 [cmp == -> !=]
+KILLED    m0208 src/ui/screen_trainer.c:278 [int+1 0 -> 1]
+KILLED    m0209 src/ui/screen_trainer.c:278 [int-1 0 -> -1]
+KILLED    m0210 src/ui/screen_trainer.c:279 [int+1 0 -> 1]
+SURVIVED  m0211 src/ui/screen_trainer.c:279 [int-1 0 -> -1]
+SURVIVED  m0212 src/ui/screen_trainer.c:279 [cmp < -> <=]
+KILLED    m0213 src/ui/screen_trainer.c:287 [arith * -> /]
+          build break
+KILLED    m0214 src/ui/screen_trainer.c:288 [cmp == -> !=]
+KILLED    m0215 src/ui/screen_trainer.c:288 [logic || -> &&]
+KILLED    m0216 src/ui/screen_trainer.c:288 [cmp < -> <=]
+KILLED    m0217 src/ui/screen_trainer.c:288 [int+1 0 -> 1]
+SURVIVED  m0218 src/ui/screen_trainer.c:288 [int-1 0 -> -1]
+KILLED    m0219 src/ui/screen_trainer.c:289 [arith - -> +]
+KILLED    m0220 src/ui/screen_trainer.c:289 [int+1 1 -> 2]
+KILLED    m0221 src/ui/screen_trainer.c:289 [int-1 1 -> 0]
+KILLED    m0222 src/ui/screen_trainer.c:292 [cmp != -> ==]
+KILLED    m0223 src/ui/screen_trainer.c:292 [logic || -> &&]
+          build break
+KILLED    m0224 src/ui/screen_trainer.c:292 [cmp != -> ==]
+KILLED    m0225 src/ui/screen_trainer.c:292 [logic || -> &&]
+          build break
+KILLED    m0226 src/ui/screen_trainer.c:293 [cmp == -> !=]
+KILLED    m0227 src/ui/screen_trainer.c:294 [cmp < -> <=]
+KILLED    m0228 src/ui/screen_trainer.c:294 [arith - -> +]
+KILLED    m0229 src/ui/screen_trainer.c:294 [int+1 1 -> 2]
+KILLED    m0230 src/ui/screen_trainer.c:294 [int-1 1 -> 0]
+KILLED    m0231 src/ui/screen_trainer.c:296 [int+1 0 -> 1]
+KILLED    m0232 src/ui/screen_trainer.c:296 [int-1 0 -> -1]
+KILLED    m0233 src/ui/screen_trainer.c:297 [int+1 0 -> 1]
+SURVIVED  m0234 src/ui/screen_trainer.c:297 [int-1 0 -> -1]
+SURVIVED  m0235 src/ui/screen_trainer.c:297 [cmp < -> <=]
+KILLED    m0236 src/ui/screen_trainer.c:298 [not-del ! -> (deleted)]
+KILLED    m0237 src/ui/screen_trainer.c:301 [cmp == -> !=]
+KILLED    m0238 src/ui/screen_trainer.c:306 [arith - -> +]
+KILLED    m0239 src/ui/screen_trainer.c:306 [int+1 1 -> 2]
+KILLED    m0240 src/ui/screen_trainer.c:306 [int-1 1 -> 0]
+KILLED    m0241 src/ui/screen_trainer.c:318 [arith * -> /]
+          build break
+KILLED    m0242 src/ui/screen_trainer.c:320 [arith * -> /]
+          build break
+KILLED    m0243 src/ui/screen_trainer.c:322 [arith * -> /]
+          build break
+KILLED    m0244 src/ui/screen_trainer.c:324 [arith * -> /]
+          build break
+KILLED    m0245 src/ui/screen_trainer.c:329 [arith * -> /]
+          build break
+KILLED    m0246 src/ui/screen_trainer.c:330 [arith * -> /]
+          build break
+SURVIVED  m0247 src/ui/screen_trainer.c:331 [int+1 0 -> 1]
+SURVIVED  m0248 src/ui/screen_trainer.c:331 [int-1 0 -> -1]
+SURVIVED  m0249 src/ui/screen_trainer.c:332 [int+1 0 -> 1]
+SURVIVED  m0250 src/ui/screen_trainer.c:332 [int-1 0 -> -1]
+SURVIVED  m0251 src/ui/screen_trainer.c:332 [cmp < -> <=]
+SURVIVED  m0252 src/ui/screen_trainer.c:332 [logic && -> ||]
+SURVIVED  m0253 src/ui/screen_trainer.c:332 [cmp < -> <=]
+SURVIVED  m0254 src/ui/screen_trainer.c:339 [int+1 0 -> 1]
+SURVIVED  m0255 src/ui/screen_trainer.c:339 [int-1 0 -> -1]
+SURVIVED  m0256 src/ui/screen_trainer.c:339 [cmp < -> <=]
+SURVIVED  m0257 src/ui/screen_trainer.c:344 [int+1 0 -> 1]
+SURVIVED  m0258 src/ui/screen_trainer.c:344 [int-1 0 -> -1]
+SURVIVED  m0259 src/ui/screen_trainer.c:344 [cmp < -> <=]
+SURVIVED  m0260 src/ui/screen_trainer.c:350 [arith - -> +]
+SURVIVED  m0261 src/ui/screen_trainer.c:3build/mutants/p45028/m0276_screen_trainer.c:356:13: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  356 |             s->case_labels[v][-1] = '\0';
+      |             ^                 ~~
+build/mutants/p45028/m0276_screen_trainer.c:323:5: note: array 'case_labels' declared here
+  323 |     char case_labels[CT_TRAINER_CASES_MAX][CT_TRAINER_KEY_MAX];
+      |     ^
+1 error generated.
+build/mutants/p45028/m0294_screen_trainer.c:393:38: error: expected ')'
+  393 | void ct_screen_trainer_update(ct_app /app) {
+      |                                      ^
+build/mutants/p45028/m0294_screen_trainer.c:393:30: note: to match this '('
+  393 | void ct_screen_trainer_update(ct_app /app) {
+      |                              ^
+build/mutants/p45028/m0294_screen_trainer.c:393:6: error: conflicting types for 'ct_screen_trainer_update'
+  393 | void ct_screen_trainer_update(ct_app /app) {
+      |      ^
+src\ui/ui.h:86:6: note: previous declaration is here
+   86 | void ct_screen_trainer_update(ct_app *app);
+      |      ^
+build/mutants/p45028/m0294_screen_trainer.c:394:9: error: use of undeclared identifier 'app'
+  394 |     if (app == NULL) {
+      |         ^~~
+build/mutants/p45028/m0294_screen_trainer.c:399:48: error: use of undeclared identifier 'app'
+  399 |         ct_trainer_form_open(&ct_trainer.form, app->db);
+      |                                                ^~~
+build/mutants/p45028/m0294_screen_trainer.c:402:9: error: use of undeclared identifier 'app'
+  402 |         app->screen = CT_SCREEN_MENU;
+      |         ^~~
+5 errors generated.
+build/mutants/p45028/m0298_screen_trainer.c:411:50: error: expected ')'
+  411 | static void ct_trainer_draw_grid(ct_trainer_form /f, Rectangle bounds) {
+      |                                                  ^
+build/mutants/p45028/m0298_screen_trainer.c:411:33: note: to match this '('
+  411 | static void ct_trainer_draw_grid(ct_trainer_form /f, Rectangle bounds) {
+      |                                 ^
+build/mutants/p45028/m0298_screen_trainer.c:412:17: error: use of undeclared identifier 'bounds'
+  412 |     GuiGroupBox(bounds, "letters");
+      |                 ^~~~~~
+build/mutants/p45028/m0298_screen_trainer.c:414:9: error: use of undeclared identifier 'f'
+  414 |         f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.map.edge : f->scheme.map.corner;
+      |         ^
+build/mutants/p45028/m0298_screen_trainer.c:414:18: error: use of undeclared identifier 'f'
+  414 |         f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.map.edge : f->scheme.map.corner;
+      |                  ^
+build/mutants/p45028/m0298_screen_trainer.c:414:59: error: use of undeclared identifier 'f'
+  414 |         f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.map.edge : f->scheme.map.corner;
+      |                                                           ^
+build/mutants/p45028/m0298_screen_trainer.c:414:80: error: use of undeclared identifier 'f'
+  414 |         f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.map.edge : f->scheme.map.corner;
+      |                                                                                ^
+build/mutants/p45028/m0298_screen_trainer.c:415:18: error: use of undeclared identifier 'f'
+  415 |     int buffer = f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.buffer_edge
+      |                  ^
+build/mutants/p45028/m0298_screen_trainer.c:415:27: error: use of undeclared identifier 'f'
+  415 |     int buffer = f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.buffer_edge
+      |                           ^
+build/mutants/p45028/m0298_screen_trainer.c:415:68: error: use of undeclared identifier 'f'
+  415 |     int buffer = f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.buffer_edge
+      |                                                                    ^
+build/mutants/p45028/m0298_screen_trainer.c:416:68: error: use of undeclared identifier 'f'
+  416 |                                                                  : f->scheme.buffer_corner;
+      |                                                                    ^
+build/mutants/p45028/m0298_screen_trainer.c:419:29: error: use of undeclared identifier 'bounds'
+  419 |         if (ct_heatmap_cell(bounds, CT_TRAINER_GRID_COLS, CT_TRAINER_GRID_ROWS, i, &cell) != 0) {
+      |                             ^~~~~~
+build/mutants/p45028/m0298_screen_trainer.c:424:18: error: use of undeclared identifier 'f'
+  424 |         if (i == f->cell) {
+      |                  ^
+build/mutants/p45028/m0298_screen_trainer.c:437:34: error: use of undeclared identifier 'bounds'
+  437 |     int picked = ct_heatmap_pick(bounds, CT_TRAINER_GRID_COLS, CT_TRAINER_GRID_ROWS, mouse);
+      |                                  ^~~~~~
+build/mutants/p45028/m0298_screen_trainer.c:439:23: error: use of undeclared identifier 'f'
+  439 |         if (picked == f->cell) {
+      |                       ^
+build/mutants/p45028/m0298_screen_trainer.c:440:40: error: use of undeclared identifier 'f'
+  440 |             ct_trainer_form_clear_cell(f);
+      |                                        ^
+build/mutants/p45028/m0298_screen_trainer.c:442:41: error: use of undeclared identifier 'f'
+  442 |             ct_trainer_form_select_cell(f, picked);
+      |                                         ^
+build/mutants/p45028/m0298_screen_trainer.c:506:33: error: too many arguments to function call, expected 1, have 2
+  506 |         ct_trainer_draw_grid(f, ct_trainer_rect(margin + 2 * (col_w + margin),
+      |         ~~~~~~~~~~~~~~~~~~~~    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  507 |                                                 list_y + row_h + 2 * margin, col_w, grid_h));
+      |                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p45028/m0298_screen_trainer.c:411:13: note: 'ct_trainer_draw_grid' declared here
+  411 | static void ct_trainer_draw_grid(ct_trainer_form /f, Rectangle bounds) {
+      |             ^                    ~~~~~~~~~~~~~~~
+17 errors generated.
+build/mutants/p45028/m0299_screen_trainer.c:413:16: error: expected identifier or '('
+  413 |     const char /letters =
+      |                ^
+build/mutants/p45028/m0299_screen_trainer.c:422:26: error: use of undeclared identifier 'letters'
+  422 |         char label[2] = {letters[i], '\0'};
+      |                          ^~~~~~~
+2 errors generated.
+build/mutants/p45028/m0309_screen_trainer.c:422:38: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+  422 |         char label[1] = {letters[i], '\0'};
+      |                                      ^~~~
+1 error generated.
+build/mutants/p45028/m0324_screen_trainer.c:447:36: error: expected ')'
+  447 | void ct_screen_trainer_draw(ct_app /app) {
+      |                                    ^
+build/mutants/p45028/m0324_screen_trainer.c:447:28: note: to match this '('
+  447 | void ct_screen_trainer_draw(ct_app /app) {
+      |                            ^
+build/mutants/p45028/m0324_screen_trainer.c:447:6: error: conflicting types for 'ct_screen_trainer_draw'
+  447 | void ct_screen_trainer_draw(ct_app /app) {
+      |      ^
+src\ui/ui.h:87:6: note: previous declaration is here
+   87 | void ct_screen_trainer_draw(ct_app *app);
+      |      ^
+build/mutants/p45028/m0324_screen_trainer.c:449:9: error: use of undeclared identifier 'app'
+  449 |     if (app == NULL) {
+      |         ^~~
+build/mutants/p45028/m0324_screen_trainer.c:453:18: error: use of undeclared identifier 'app'
+  453 |     int w = (int)app->cfg.window.width;
+      |                  ^~~
+build/mutants/p45028/m0324_screen_trainer.c:454:18: error: use of undeclared identifier 'app'
+  454 |     int h = (int)app->cfg.window.height;
+      |                  ^~~
+build/mutants/p45028/m0324_screen_trainer.c:551:9: error: use of undeclared identifier 'app'
+  551 |         app->screen = CT_SCREEN_MENU;
+      |         ^~~
+6 errors generated.
+build/mutants/p45028/m0326_screen_trainer.c:452:21: error: expected identifier or '('
+  452 |     ct_trainer_form /f = &ct_trainer.form;
+      |                     ^
+build/mutants/p45028/m0326_screen_trainer.c:461:44: error: use of undeclared identifier 'f'
+  461 |     int method_count = ct_selector_methods(f->sel.event, methods, CT_TRAINER_LISTS_MAX);
+      |                                            ^
+build/mutants/p45028/m0326_screen_trainer.c:464:18: error: use of undeclared identifier 'f'
+  464 |     int case_y = f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART
+      |                  ^
+build/mutants/p45028/m0326_screen_trainer.c:464:39: error: use of undeclared identifier 'f'
+  464 |     int case_y = f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART
+      |                                       ^
+build/mutants/p45028/m0326_screen_trainer.c:464:48: error: use of undeclared identifier 'f'
+  464 |     int case_y = f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART
+      |                                                ^
+build/mutants/p45028/m0326_screen_trainer.c:476:9: error: use of undeclared identifier 'f'
+  476 |     if (f->list_count <= 0 || f->db == NULL) {
+      |         ^
+build/mutants/p45028/m0326_screen_trainer.c:476:31: error: use of undeclared identifier 'f'
+  476 |     if (f->list_count <= 0 || f->db == NULL) {
+      |                               ^
+build/mutants/p45028/m0326_screen_trainer.c:481:29: error: use of undeclared identifier 'f'
+  481 |     int event_active = (int)f->sel.event;
+      |                             ^
+build/mutants/p45028/m0326_screen_trainer.c:489:27: error: use of undeclared identifier 'f'
+  489 |         if (methods[i] == f->sel.method) {
+      |                           ^
+build/mutants/p45028/m0326_screen_trainer.c:499:23: error: use of undeclared identifier 'f'
+  499 |     int list_active = f->sel.list_id;
+      |                       ^
+build/mutants/p45028/m0326_screen_trainer.c:501:45: error: use of undeclared identifier 'f'
+  501 |                       ct_trainer.list_ptrs, f->list_count, &ct_trainer.list_scroll, &list_active,
+      |                                             ^
+build/mutants/p45028/m0326_screen_trainer.c:505:9: error: use of undeclared identifier 'f'
+  505 |     if (f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART) {
+      |         ^
+build/mutants/p45028/m0326_screen_trainer.c:505:30: error: use of undeclared identifier 'f'
+  505 |     if (f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART) {
+      |                              ^
+build/mutants/p45028/m0326_screen_trainer.c:505:39: error: use of undeclared identifier 'f'
+  505 |     if (f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART) {
+      |                                       ^
+build/mutants/p45028/m0326_screen_trainer.c:506:30: error: use of undeclared identifier 'f'
+  506 |         ct_trainer_draw_grid(f, ct_trainer_rect(margin + 2 * (col_w + margin),
+      |                              ^
+build/mutants/p45028/m0326_screen_trainer.c:509:49: error: use of undeclared identifier 'f'
+  509 |     int visible = ct_trainer_form_visible_count(f);
+      |                                                 ^
+build/mutants/p45028/m0326_screen_trainer.c:521:77: error: use of undeclared identifier 'f'
+  521 |     snprintf(line, sizeof line, "event %s method %s", ct_trainer_event_name(f->sel.event),
+      |                                                                             ^
+build/mutants/p45028/m0326_screen_trainer.c:522:37: error: use of undeclared identifier 'f'
+  522 |              ct_trainer_method_name(f->sel.method));
+      |                                     ^
+build/mutants/p45028/m0326_screen_trainer.c:525:9: error: use of undeclared identifier 'f'
+  525 |     if (f->group_count > 1) {
+      |         ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+50 [int+1 1 -> 2]
+SURVIVED  m0262 src/ui/screen_trainer.c:350 [int-1 1 -> 0]
+SURVIVED  m0263 src/ui/screen_trainer.c:351 [int+1 0 -> 1]
+SURVIVED  m0264 src/ui/screen_trainer.c:351 [int-1 0 -> -1]
+SURVIVED  m0265 src/ui/screen_trainer.c:351 [cmp < -> <=]
+SURVIVED  m0266 src/ui/screen_trainer.c:351 [logic && -> ||]
+SURVIVED  m0267 src/ui/screen_trainer.c:351 [cmp < -> <=]
+SURVIVED  m0268 src/ui/screen_trainer.c:353 [cmp < -> <=]
+SURVIVED  m0269 src/ui/screen_trainer.c:353 [int+1 0 -> 1]
+SURVIVED  m0270 src/ui/screen_trainer.c:353 [int-1 0 -> -1]
+SURVIVED  m0271 src/ui/screen_trainer.c:353 [logic || -> &&]
+SURVIVED  m0272 src/ui/screen_trainer.c:355 [cmp != -> ==]
+SURVIVED  m0273 src/ui/screen_trainer.c:355 [int+1 0 -> 1]
+SURVIVED  m0274 src/ui/screen_trainer.c:355 [int-1 0 -> -1]
+SURVIVED  m0275 src/ui/screen_trainer.c:356 [int+1 0 -> 1]
+KILLED    m0276 src/ui/screen_trainer.c:356 [int-1 0 -> -1]
+          build break
+SURVIVED  m0277 src/ui/screen_trainer.c:359 [cmp == -> !=]
+SURVIVED  m0278 src/ui/screen_trainer.c:366 [cmp >= -> >]
+SURVIVED  m0279 src/ui/screen_trainer.c:366 [int+1 0 -> 1]
+SURVIVED  m0280 src/ui/screen_trainer.c:366 [int-1 0 -> -1]
+SURVIVED  m0281 src/ui/screen_trainer.c:366 [logic && -> ||]
+SURVIVED  m0282 src/ui/screen_trainer.c:366 [cmp < -> <=]
+SURVIVED  m0283 src/ui/screen_trainer.c:375 [cmp >= -> >]
+SURVIVED  m0284 src/ui/screen_trainer.c:375 [int+1 0 -> 1]
+SURVIVED  m0285 src/ui/screen_trainer.c:375 [int-1 0 -> -1]
+SURVIVED  m0286 src/ui/screen_trainer.c:375 [logic && -> ||]
+SURVIVED  m0287 src/ui/screen_trainer.c:375 [cmp < -> <=]
+SURVIVED  m0288 src/ui/screen_trainer.c:381 [cmp >= -> >]
+SURVIVED  m0289 src/ui/screen_trainer.c:381 [int+1 0 -> 1]
+SURVIVED  m0290 src/ui/screen_trainer.c:381 [int-1 0 -> -1]
+SURVIVED  m0291 src/ui/screen_trainer.c:388 [cmp >= -> >]
+SURVIVED  m0292 src/ui/screen_trainer.c:388 [int+1 0 -> 1]
+SURVIVED  m0293 src/ui/screen_trainer.c:388 [int-1 0 -> -1]
+KILLED    m0294 src/ui/screen_trainer.c:393 [arith * -> /]
+          build break
+SURVIVED  m0295 src/ui/screen_trainer.c:394 [cmp == -> !=]
+SURVIVED  m0296 src/ui/screen_trainer.c:397 [not-del ! -> (deleted)]
+SURVIVED  m0297 src/ui/screen_trainer.c:398 [bool true -> false]
+KILLED    m0298 src/ui/screen_trainer.c:411 [arith * -> /]
+          build break
+KILLED    m0299 src/ui/screen_trainer.c:413 [arith * -> /]
+          build break
+SURVIVED  m0300 src/ui/screen_trainer.c:414 [cmp == -> !=]
+SURVIVED  m0301 src/ui/screen_trainer.c:415 [cmp == -> !=]
+SURVIVED  m0302 src/ui/screen_trainer.c:417 [int+1 0 -> 1]
+SURVIVED  m0303 src/ui/screen_trainer.c:417 [int-1 0 -> -1]
+SURVIVED  m0304 src/ui/screen_trainer.c:417 [cmp < -> <=]
+SURVIVED  m0305 src/ui/screen_trainer.c:419 [cmp != -> ==]
+SURVIVED  m0306 src/ui/screen_trainer.c:419 [int+1 0 -> 1]
+SURVIVED  m0307 src/ui/screen_trainer.c:419 [int-1 0 -> -1]
+SURVIVED  m0308 src/ui/screen_trainer.c:422 [int+1 2 -> 3]
+KILLED    m0309 src/ui/screen_trainer.c:422 [int-1 2 -> 1]
+          build break
+SURVIVED  m0310 src/ui/screen_trainer.c:424 [cmp == -> !=]
+SURVIVED  m0311 src/ui/screen_trainer.c:426 [cmp == -> !=]
+SURVIVED  m0312 src/ui/screen_trainer.c:429 [arith / -> *]
+SURVIVED  m0313 src/ui/screen_trainer.c:432 [arith + -> -]
+SURVIVED  m0314 src/ui/screen_trainer.c:432 [arith - -> +]
+SURVIVED  m0315 src/ui/screen_trainer.c:432 [arith / -> *]
+SURVIVED  m0316 src/ui/screen_trainer.c:433 [arith + -> -]
+SURVIVED  m0317 src/ui/screen_trainer.c:433 [arith - -> +]
+SURVIVED  m0318 src/ui/screen_trainer.c:433 [arith / -> *]
+SURVIVED  m0319 src/ui/screen_trainer.c:438 [cmp >= -> >]
+SURVIVED  m0320 src/ui/screen_trainer.c:438 [int+1 0 -> 1]
+SURVIVED  m0321 src/ui/screen_trainer.c:438 [int-1 0 -> -1]
+SURVIVED  m0322 src/ui/screen_trainer.c:438 [logic && -> ||]
+SURVIVED  m0323 src/ui/screen_trainer.c:439 [cmp == -> !=]
+KILLED    m0324 src/ui/screen_trainer.c:447 [arith * -> /]
+          build break
+SURVIVED  m0325 src/ui/screen_trainer.c:449 [cmp == -> !=]
+KILLED    m0326 src/ui/screen_trainer.c:452 [arith * -> /]
+          build break
+SURVIVED  m0327 src/ui/screen_trainer.c:458 [arith / -> *]
+SURVIVED  m0328 src/ui/screen_trainer.c:458 [arith - -> +]
+SURVIVED  m0329 src/ui/screen_trainer.c:459 [int+1 0 -> 1]
+SURVIVED  m0330 src/ui/screen_trainer.c:459 [int-1 0 -> -1]
+SURVIVED  m0331 src/ui/screen_trainer.c:462 [arith * -> /]
+SURVIVED  m0332 src/ui/screen_trainer.c:462 [arith + -> -]
+SURVIVED  m0333 src/ui/screen_trainer.c:463 [arith + -> -]
+SURVIVED  m0334 src/ui/screen_trainer.c:463 [arith + -> -]
+SURVIVED  m0335 src/ui/screen_trainer.c:464 [cmp > -> >=]
+SURVIVED  m0336 src/ui/screen_trainer.c:464 [int+1 0 -> 1]
+SURVIVED  m0337 src/ui/screen_trainer.c:464 [int-1 0 -> -1]
+SURVIVED  m0338 src/ui/screen_trainer.c:464 [logic && -> ||]
+SURVIVED  m0339 src/ui/screen_trainer.c:464 [cmp == -> !=]
+SURVIVED  m0340 src/ui/screen_trainer.c:465 [arith + -> -]
+SURVIVED  m0341 src/ui/screen_trainer.c:465 [arith + -> -]
+SURVIVED  m0342 src/ui/screen_trainer.c:468 [arith - -> +]
+SURVIVED  m0343 src/ui/screen_trainer.c:468 [arith - -> +]
+SURVIVED  m0344 src/ui/screen_trainer.c:468 [arith - -> +]
+SURVIVED  m0345 src/ui/screen_trainer.c:468 [int+1 2 -> 3]
+SURVIVED  m0346 src/ui/screen_trainer.c:468 [int-1 2 -> 1]
+SURVIVED  m0347 src/ui/screen_trainer.c:468 [arith * -> /]
+SURVIVED  m0348 src/ui/screen_trainer.c:468 [arith - -> +]
+SURVIVED  m0349 src/ui/screen_trainer.c:468 [arith - -> +]
+SURVIVED  m0350 src/ui/screen_trainer.c:469 [cmp < -> <=]
+SURVIVED  m0351 src/ui/screen_trainer.c:472 [arith + -> -]
+SURVIVED  m0352 src/ui/screen_trainer.c:472 [int+1 2 -> 3]
+SURVIVED  m0353 src/ui/screen_trainer.c:472 [int-1 2 -> 1]
+SURVIVED  m0354 src/ui/screen_trainer.c:472 [arith * -> /]
+SURVIVED  m0355 src/ui/screen_trainer.c:472 [arith + -> -]
+SURVIVED  m0356 src/ui/screen_trainer.c:473 [arith - -> +]
+SURVIVED  m0357 src/ui/screen_trainer.c:473 [arith - -> +]
+SURVIVED  m0358 src/ui/screen_trainer.c:476 [cmp <= -> <]
+SURVIVED  m0359 src/ui/screen_trainer.c:476 [int+1 0 -> 1]
+SURVIVED  m0360 src/ui/screen_trainer.c:476 [int-1 0 -> -1]
+SURVIVED  m0361 src/ui/screen_trainer.c:476 [logic || -> &&]
+SURVIVED  m0362 src/ui/screen_trainer.c:476 [cmp == -> !=]
+SURVIVED  m0363 src/ui/screen_trainer.c:477 [arith - -> +]
+SURVIVED  m0364 src/ui/screen_trainer.c:477 [arith - -> +]
+SURVIVED  m0365 src/ui/screen_trainer.c:477 [int+1 2 -> 3]
+SURVIVED  m0366 src/ui/screen_trainer.c:477 [int-1 2 -> 1]
+SURVIVED  m0367 src/ui/screen_trainer.c:477 [arith * -> /]
+SURVIVED  m0368 src/ui/screen_trainer.c:482 [arith - -> +]
+SURVIVED  m0369 src/ui/screen_trainer.c:482 [arith - -> +]
+SURVIVED  m0370 src/ui/screen_trainer.c:482 [arith - -> +]
+SURVIVED  m0371 src/ui/screen_trainer.c:482 [int+1 2 -> 3]
+SURVIVED  m0372 src/ui/screen_trainer.c:482 [int-1 2 -> 1]
+SURVIVED  m0373 src/ui/screen_trainer.c:482 [arith * -> /]
+SURVIVED  m0374 src/ui/screen_trainer.c:487 [arith - -> +]
+SURVIVED  m0375 src/ui/screen_trainer.c:487 [int+1 1 -> 2]
+SURVIVED  m0376 src/ui/screen_trainer.c:487 [int-1 1 -> 0]
+SURVIVED  m0377 src/ui/screen_trainer.c:488 [int+1 0 -> 1]
+SURVIVED  m0378 src/ui/screen_trainer.c:488 [int-1 0 -> -1]
+SURVIVED  m0379 src/ui/screen_trainer.c:488 [cmp < -> <=]
+SURVIVED  m0380 src/ui/screen_trainer.c:489 [cmp == -> !=]
+SURVIVED  m0381 src/ui/screen_trainer.c:493 [arith + -> -]
+SURVIVED  m0382 src/ui/screen_trainer.c:493 [arith + -> -]
+SURVIVED  m0383 src/ui/screen_trainer.c:494 [arith - -> +]
+SURVIVED  m0384 src/ui/screen_trainer.c:494 [arith - -> +]
+SURVIVED  m0385 src/ui/screen_trainer.c:494 [arith - -> +]
+SURVIVED  m0386 src/ui/screen_trainer.c:494 [int+1 2 -> 3]
+SURVIVED  m0387 src/ui/screen_trainer.c:494 [int-1 2 -> 1]
+SURVIVED  m0388 src/ui/screen_trainer.c:494 [arith * -> /]
+SURVIVED  m0389 src/ui/screen_trainer.c:500 [arith + -> -]
+SURVIVED  m0390 src/ui/screen_trainer.c:500 [int+1 2 -> 3]
+SURVIVED  m0391 src/ui/screen_trainer.c:500 [int-1 2 -> 1]
+SURVIVED  m0392 src/ui/screen_trainer.c:500 [arith * -> /]
+SURVIVED  m0393 src/ui/screen_trainer.c:500 [arith + -> -]
+SURVIVED  m0394 src/ui/screen_trainer.c:500 [arith + -> -]
+SURVIVED  m0395 src/ui/screen_trainer.c:505 [cmp > -> >=]
+SURVIVED  m0396 src/ui/screen_trainer.c:505 [int+1 0 -> 1]
+SURVIVED  m0397 src/ui/scrbuild/mutants/p45028/m0460_screen_trainer.c:544:18: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  544 |         DrawText(f->alg_text[-1] != '\0' ? f->alg_text : "no alg", detail_x + margin,
+      |                  ^           ~~
+src\ui/ui.h:72:5: note: array 'alg_text' declared here
+   72 |     char alg_text[CT_TRAINER_ALG_MAX];
+      |     ^
+1 error generated.
+een_trainer.c:505 [int-1 0 -> -1]
+SURVIVED  m0398 src/ui/screen_trainer.c:505 [logic && -> ||]
+SURVIVED  m0399 src/ui/screen_trainer.c:505 [cmp == -> !=]
+SURVIVED  m0400 src/ui/screen_trainer.c:506 [arith + -> -]
+SURVIVED  m0401 src/ui/screen_trainer.c:506 [int+1 2 -> 3]
+SURVIVED  m0402 src/ui/screen_trainer.c:506 [int-1 2 -> 1]
+SURVIVED  m0403 src/ui/screen_trainer.c:506 [arith * -> /]
+SURVIVED  m0404 src/ui/screen_trainer.c:506 [arith + -> -]
+SURVIVED  m0405 src/ui/screen_trainer.c:507 [arith + -> -]
+SURVIVED  m0406 src/ui/screen_trainer.c:507 [arith + -> -]
+SURVIVED  m0407 src/ui/screen_trainer.c:507 [int+1 2 -> 3]
+SURVIVED  m0408 src/ui/screen_trainer.c:507 [int-1 2 -> 1]
+SURVIVED  m0409 src/ui/screen_trainer.c:507 [arith * -> /]
+SURVIVED  m0410 src/ui/screen_trainer.c:510 [cmp > -> >=]
+SURVIVED  m0411 src/ui/screen_trainer.c:513 [arith + -> -]
+SURVIVED  m0412 src/ui/screen_trainer.c:513 [int+1 2 -> 3]
+SURVIVED  m0413 src/ui/screen_trainer.c:513 [int-1 2 -> 1]
+SURVIVED  m0414 src/ui/screen_trainer.c:513 [arith * -> /]
+SURVIVED  m0415 src/ui/screen_trainer.c:513 [arith + -> -]
+SURVIVED  m0416 src/ui/screen_trainer.c:519 [arith - -> +]
+SURVIVED  m0417 src/ui/screen_trainer.c:519 [int+1 2 -> 3]
+SURVIVED  m0418 src/ui/screen_trainer.c:519 [int-1 2 -> 1]
+SURVIVED  m0419 src/ui/screen_trainer.c:519 [arith * -> /]
+SURVIVED  m0420 src/ui/screen_trainer.c:519 [arith - -> +]
+SURVIVED  m0421 src/ui/screen_trainer.c:523 [arith + -> -]
+SURVIVED  m0422 src/ui/screen_trainer.c:523 [arith + -> -]
+SURVIVED  m0423 src/ui/screen_trainer.c:523 [arith - -> +]
+SURVIVED  m0424 src/ui/screen_trainer.c:523 [int+1 2 -> 3]
+SURVIVED  m0425 src/ui/screen_trainer.c:523 [int-1 2 -> 1]
+SURVIVED  m0426 src/ui/screen_trainer.c:523 [arith * -> /]
+SURVIVED  m0427 src/ui/screen_trainer.c:525 [cmp > -> >=]
+SURVIVED  m0428 src/ui/screen_trainer.c:525 [int+1 1 -> 2]
+SURVIVED  m0429 src/ui/screen_trainer.c:525 [int-1 1 -> 0]
+SURVIVED  m0430 src/ui/screen_trainer.c:529 [int+1 0 -> 1]
+SURVIVED  m0431 src/ui/screen_trainer.c:529 [int-1 0 -> -1]
+SURVIVED  m0432 src/ui/screen_trainer.c:529 [cmp < -> <=]
+SURVIVED  m0433 src/ui/screen_trainer.c:529 [logic && -> ||]
+SURVIVED  m0434 src/ui/screen_trainer.c:529 [cmp < -> <=]
+SURVIVED  m0435 src/ui/screen_trainer.c:530 [cmp < -> <=]
+SURVIVED  m0436 src/ui/screen_trainer.c:530 [int+1 0 -> 1]
+SURVIVED  m0437 src/ui/screen_trainer.c:530 [int-1 0 -> -1]
+SURVIVED  m0438 src/ui/screen_trainer.c:530 [logic || -> &&]
+SURVIVED  m0439 src/ui/screen_trainer.c:530 [cmp >= -> >]
+SURVIVED  m0440 src/ui/screen_trainer.c:533 [arith + -> -]
+SURVIVED  m0441 src/ui/screen_trainer.c:533 [arith - -> +]
+SURVIVED  m0442 src/ui/screen_trainer.c:540 [arith + -> -]
+SURVIVED  m0443 src/ui/screen_trainer.c:540 [arith + -> -]
+SURVIVED  m0444 src/ui/screen_trainer.c:540 [int+1 2 -> 3]
+SURVIVED  m0445 src/ui/screen_trainer.c:540 [int-1 2 -> 1]
+SURVIVED  m0446 src/ui/screen_trainer.c:540 [arith * -> /]
+SURVIVED  m0447 src/ui/screen_trainer.c:540 [arith - -> +]
+SURVIVED  m0448 src/ui/screen_trainer.c:540 [int+1 2 -> 3]
+SURVIVED  m0449 src/ui/screen_trainer.c:540 [int-1 2 -> 1]
+SURVIVED  m0450 src/ui/screen_trainer.c:540 [arith * -> /]
+SURVIVED  m0451 src/ui/screen_trainer.c:542 [cmp >= -> >]
+SURVIVED  m0452 src/ui/screen_trainer.c:542 [int+1 0 -> 1]
+SURVIVED  m0453 src/ui/screen_trainer.c:542 [int-1 0 -> -1]
+SURVIVED  m0454 src/ui/screen_trainer.c:543 [arith + -> -]
+SURVIVED  m0455 src/ui/screen_trainer.c:543 [arith + -> -]
+SURVIVED  m0456 src/ui/screen_trainer.c:543 [int+1 3 -> 4]
+SURVIVED  m0457 src/ui/screen_trainer.c:543 [int-1 3 -> 2]
+SURVIVED  m0458 src/ui/screen_trainer.c:543 [arith * -> /]
+SURVIVED  m0459 src/ui/screen_trainer.c:544 [int+1 0 -> 1]
+KILLED    m0460 src/ui/screen_trainer.c:544 [int-1 0 -> -1]
+          build break
+SURVIVED  m0461 src/ui/screen_trainer.c:544 [cmp != -> ==]
+SURVIVED  m0462 src/ui/screen_trainer.c:544 [arith + -> -]
+SURVIVED  m0463 src/ui/screen_trainer.c:545 [arith + -> -]
+SURVIVED  m0464 src/ui/screen_trainer.c:545 [int+1 4 -> 5]
+SURVIVED  m0465 src/ui/screen_trainer.c:545 [int-1 4 -> 3]
+SURVIVED  m0466 src/ui/scbuild/mutants/p45028/m0468_screen_trainer.c:545:49: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  545 |                  margin + 4 * row_h, text_size, f->alg_text[-1] != '\0' ? RAYWHITE : GRAY);
+      |                                                 ^           ~~
+src\ui/ui.h:72:5: note: array 'alg_text' declared here
+   72 |     char alg_text[CT_TRAINER_ALG_MAX];
+      |     ^
+1 error generated.
+reen_trainer.c:545 [arith * -> /]
+SURVIVED  m0467 src/ui/screen_trainer.c:545 [int+1 0 -> 1]
+KILLED    m0468 src/ui/screen_trainer.c:545 [int-1 0 -> -1]
+          build break
+SURVIVED  m0469 src/ui/screen_trainer.c:545 [cmp != -> ==]
+SURVIVED  m0470 src/ui/screen_trainer.c:547 [arith + -> -]
+SURVIVED  m0471 src/ui/screen_trainer.c:547 [arith + -> -]
+SURVIVED  m0472 src/ui/screen_trainer.c:547 [int+1 3 -> 4]
+SURVIVED  m0473 src/ui/screen_trainer.c:547 [int-1 3 -> 2]
+SURVIVED  m0474 src/ui/screen_trainer.c:547 [arith * -> /]
+SURVIVED  m0475 src/ui/screen_trainer.c:549 [arith - -> +]
+SURVIVED  m0476 src/ui/screen_trainer.c:549 [arith - -> +]
+SURVIVED  m0477 src/ui/screen_trainer.c:549 [arith - -> +]
+SURVIVED  m0478 src/ui/screen_trainer.c:553 [arith - -> +]
+SURVIVED  m0479 src/ui/screen_trainer.c:553 [arith - -> +]
+SURVIVED  m0480 src/ui/screen_trainer.c:553 [int+1 2 -> 3]
+SURVIVED  m0481 src/ui/screen_trainer.c:553 [int-1 2 -> 1]
+SURVIVED  m0482 src/ui/screen_trainer.c:553 [arith * -> /]
+SURVIVED  m0483 src/ui/screen_trainer.c:554 [cmp == -> !=]
+ACCEPTED  m0001 src/ui/screen_trainer.c:10 [int+1 6 -> 7] :: layout shift constant, consumed only by the raylib draw path no headless suite exercises
+ACCEPTED  m0002 src/ui/screen_trainer.c:10 [int-1 6 -> 5] :: layout shift constant, consumed only by the raylib draw path no headless suite exercises
+ACCEPTED  m0003 src/ui/screen_trainer.c:11 [int+1 5 -> 6] :: layout divisor, consumed only by the raylib draw path no headless suite exercises
+ACCEPTED  m0004 src/ui/screen_trainer.c:11 [int-1 5 -> 4] :: layout divisor, consumed only by the raylib draw path no headless suite exercises
+ACCEPTED  m0005 src/ui/screen_trainer.c:12 [int+1 4 -> 5] :: layout shift constant, consumed only by the raylib draw path no headless suite exercises
+ACCEPTED  m0006 src/ui/screen_trainer.c:12 [int-1 4 -> 3] :: layout shift constant, consumed only by the raylib draw path no headless suite exercises
+ACCEPTED  m0007 src/ui/screen_trainer.c:13 [int+1 5 -> 6] :: layout shift constant, consumed only by the raylib draw path no headless suite exercises
+ACCEPTED  m0008 src/ui/screen_trainer.c:13 [int-1 5 -> 4] :: layout shift constant, consumed only by the raylib draw path no headless suite exercises
+ACCEPTED  m0009 src/ui/screen_trainer.c:17 [arith + -> -] :: label array bound, consumed only by the draw-side label builder and event handler no headless suite exercises
+ACCEPTED  m0010 src/ui/screen_trainer.c:17 [int+1 1 -> 2] :: label array bound, consumed only by the draw-side label builder and event handler no headless suite exercises
+ACCEPTED  m0011 src/ui/screen_trainer.c:17 [int-1 1 -> 0] :: label array bound, consumed only by the draw-side label builder and event handler no headless suite exercises
+ACCEPTED  m0012 src/ui/screen_trainer.c:18 [arith * -> /] :: label array bound, consumed only by the draw-side label builder and case clamp no headless suite exercises
+ACCEPTED  m0013 src/ui/screen_trainer.c:19 [int+1 2 -> 3] :: centering divisor, consumed only by the raylib draw path no headless suite exercises
+ACCEPTED  m0014 src/ui/screen_trainer.c:19 [int-1 2 -> 1] :: centering divisor, consumed only by the raylib draw path no headless suite exercises
+ACCEPTED  m0019 src/ui/screen_trainer.c:39 [arith / -> *] :: name table sizing, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0020 src/ui/screen_trainer.c:39 [int+1 0 -> 1] :: name table sizing, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0021 src/ui/screen_trainer.c:39 [int-1 0 -> -1] :: name table sizing, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0022 src/ui/screen_trainer.c:40 [cmp < -> <=] :: name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0024 src/ui/screen_trainer.c:45 [arith / -> *] :: name table sizing, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0025 src/ui/screen_trainer.c:45 [int+1 0 -> 1] :: name table sizing, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0026 src/ui/screen_trainer.c:45 [int-1 0 -> -1] :: name table sizing, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0027 src/ui/screen_trainer.c:46 [cmp < -> <=] :: name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0029 src/ui/screen_trainer.c:51 [arith / -> *] :: name table sizing, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0030 src/ui/screen_trainer.c:51 [int+1 0 -> 1] :: name table sizing, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0031 src/ui/screen_trainer.c:51 [int-1 0 -> -1] :: name table sizing, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0032 src/ui/screen_trainer.c:52 [cmp < -> <=] :: name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0034 src/ui/screen_trainer.c:57 [int+1 0 -> 1] :: transient reset, every reachable path overwrites case_count at the case-count query, and the zero-list early return state cannot occur because the caller already rejected pairs without lists
+ACCEPTED  m0035 src/ui/screen_trainer.c:57 [int-1 0 -> -1] :: transient reset, every reachable path overwrites case_count at the case-count query, and the zero-list early return state cannot occur because the caller already rejected pairs without lists
+ACCEPTED  m0050 src/ui/screen_trainer.c:68 [cmp <= -> <] :: zero-list guard unreachable, ct_selector_lists always yields at least one list for an event and method that passed the caller guard
+ACCEPTED  m0052 src/ui/screen_trainer.c:68 [int-1 0 -> -1] :: zero-list guard unreachable, ct_selector_lists always yields at least one list for an event and method that passed the caller guard
+ACCEPTED  m0053 src/ui/screen_trainer.c:72 [cmp >= -> >] :: clamp fires only when sel.list_id reached list_count, every public setter resets or bounds list_id below list_count before reload runs
+ACCEPTED  m0054 src/ui/screen_trainer.c:73 [int+1 0 -> 1] :: reachable only inside the same unfireable list_id clamp
+ACCEPTED  m0055 src/ui/screen_trainer.c:73 [int-1 0 -> -1] :: reachable only inside the same unfireable list_id clamp
+ACCEPTED  m0056 src/ui/screen_trainer.c:76 [cmp > -> >=] :: ternary boundary is a true equivalent, n == 0 selects 0 in both arms, and n below 0 requires a registered list with zero cases
+ACCEPTED  m0057 src/ui/screen_trainer.c:76 [int+1 0 -> 1] :: ternary boundary is a true equivalent, n == 0 selects 0 in both arms, and n below 0 requires a registered list with zero cases
+ACCEPTED  m0058 src/ui/screen_trainer.c:76 [int-1 0 -> -1] :: ternary boundary is a true equivalent, n == 0 selects 0 in both arms, and n below 0 requires a registered list with zero cases
+ACCEPTED  m0059 src/ui/screen_trainer.c:76 [int+1 0 -> 1] :: ternary boundary is a true equivalent, n == 0 selects 0 in both arms, and n below 0 requires a registered list with zero cases
+ACCEPTED  m0060 src/ui/screen_trainer.c:76 [int-1 0 -> -1] :: ternary boundary is a true equivalent, n == 0 selects 0 in both arms, and n below 0 requires a registered list with zero cases
+ACCEPTED  m0062 src/ui/screen_trainer.c:77 [int-1 0 -> -1] :: off-by-one iteration queries case_group at an out-of-range index which returns CT_SELECTOR_ERR and is skipped, group totals unchanged
+ACCEPTED  m0063 src/ui/screen_trainer.c:77 [cmp < -> <=] :: off-by-one iteration queries case_group at an out-of-range index which returns CT_SELECTOR_ERR and is skipped, group totals unchanged
+ACCEPTED  m0068 src/ui/screen_trainer.c:83 [int+1 1 -> 2] :: both mutants converge to the same group_count, the write stores group + 1 regardless and when group + 1 equals group_count both arms leave it unchanged
+ACCEPTED  m0070 src/ui/screen_trainer.c:83 [cmp > -> >=] :: both mutants converge to the same group_count, the write stores group + 1 regardless and when group + 1 equals group_count both arms leave it unchanged
+ACCEPTED  m0086 src/ui/screen_trainer.c:105 [int+1 0 -> 1] :: memset fill byte, open assigns cfg, scheme, and selector state and reload resets every field the suites read before it is read
+ACCEPTED  m0087 src/ui/screen_trainer.c:105 [int-1 0 -> -1] :: memset fill byte, open assigns cfg, scheme, and selector state and reload resets every field the suites read before it is read
+ACCEPTED  m0090 src/ui/screen_trainer.c:115 [cmp <= -> <] :: zero-methods guard unreachable, the selector registry exposes at least one method for every event
+ACCEPTED  m0092 src/ui/screen_trainer.c:115 [int-1 0 -> -1] :: zero-methods guard unreachable, the selector registry exposes at least one method for every event
+ACCEPTED  m0112 src/ui/screen_trainer.c:146 [int+1 0 -> 1] :: zero-list guard unreachable from the method side, ct_selector_lists for a method that passed the pair check always yields at least one list
+ACCEPTED  m0113 src/ui/screen_trainer.c:146 [int-1 0 -> -1] :: zero-list guard unreachable from the method side, ct_selector_lists for a method that passed the pair check always yields at least one list
+ACCEPTED  m0115 src/ui/screen_trainer.c:146 [int+1 0 -> 1] :: zero-list guard unreachable from the method side, ct_selector_lists for a method that passed the pair check always yields at least one list
+ACCEPTED  m0132 src/ui/screen_trainer.c:170 [int-1 0 -> -1] :: defensive bound, public setters keep sel.list_id within 0 and list_count minus 1 so both comparison mutants are equivalent on every reachable state
+ACCEPTED  m0133 src/ui/screen_trainer.c:170 [logic || -> &&] :: defensive bound, public setters keep sel.list_id within 0 and list_count minus 1 so both comparison mutants are equivalent on every reachable state
+ACCEPTED  m0134 src/ui/screen_trainer.c:170 [cmp >= -> >] :: defensive bound, public setters keep sel.list_id within 0 and list_count minus 1 so both comparison mutants are equivalent on every reachable state
+ACCEPTED  m0146 src/ui/screen_trainer.c:190 [int+1 0 -> 1] :: the clear is redundant on every reachable path, the pack branch snprintf rewrites the buffer from index 0 and the chart key writer never fails for an in-range index
+ACCEPTED  m0161 src/ui/screen_trainer.c:216 [int+1 0 -> 1] :: guard unreachable, the chart key writer never fails for an in-range index under a loaded scheme so the clear never runs
+ACCEPTED  m0179 src/ui/screen_trainer.c:260 [arith - -> +] :: dead store, the pair writer assigns both outputs before any read on the success path and the failure path returns without reading
+ACCEPTED  m0180 src/ui/screen_trainer.c:260 [int+1 1 -> 2] :: dead store, the pair writer assigns both outputs before any read on the success path and the failure path returns without reading
+ACCEPTED  m0181 src/ui/screen_trainer.c:260 [int-1 1 -> 0] :: dead store, the pair writer assigns both outputs before any read on the success path and the failure path returns without reading
+ACCEPTED  m0182 src/ui/screen_trainer.c:261 [arith - -> +] :: dead store, the pair writer assigns both outputs before any read on the success path and the failure path returns without reading
+ACCEPTED  m0183 src/ui/screen_trainer.c:261 [int+1 1 -> 2] :: dead store, the pair writer assigns both outputs before any read on the success path and the failure path returns without reading
+ACCEPTED  m0184 src/ui/screen_trainer.c:261 [int-1 1 -> 0] :: dead store, the pair writer assigns both outputs before any read on the success path and the failure path returns without reading
+ACCEPTED  m0188 src/ui/screen_trainer.c:264 [ret-lit 0 -> 1] :: unreachable failure return, the pair writer never fails for an in-range chart index under a loaded scheme, both filter loops only pass in-range indices
+ACCEPTED  m0189 src/ui/screen_trainer.c:264 [int+1 0 -> 1] :: unreachable failure return, the pair writer never fails for an in-range chart index under a loaded scheme, both filter loops only pass in-range indices
+ACCEPTED  m0190 src/ui/screen_trainer.c:264 [int-1 0 -> -1] :: unreachable failure return, the pair writer never fails for an in-range chart index under a loaded scheme, both filter loops only pass in-range indices
+ACCEPTED  m0197 src/ui/screen_trainer.c:270 [cmp <= -> <] :: case_count zero arm is a true equivalent, falling through returns f->case_count which is zero there, identical to the early return
+ACCEPTED  m0198 src/ui/screen_trainer.c:270 [int+1 0 -> 1] :: case_count zero arm is a true equivalent, falling through returns f->case_count which is zero there, identical to the early return
+ACCEPTED  m0199 src/ui/screen_trainer.c:270 [int-1 0 -> -1] :: case_count zero arm is a true equivalent, falling through returns f->case_count which is zero there, identical to the early return
+ACCEPTED  m0211 src/ui/screen_trainer.c:279 [int-1 0 -> -1] :: out-of-range iteration calls cell_matches which returns zero because the pair writer rejects the index, totals unchanged
+ACCEPTED  m0212 src/ui/screen_trainer.c:279 [cmp < -> <=] :: out-of-range iteration calls cell_matches which returns zero because the pair writer rejects the index, totals unchanged
+ACCEPTED  m0218 src/ui/screen_trainer.c:288 [int-1 0 -> -1] :: visible below minus one lets -1 through and every downstream branch returns -1 for it, identical result
+ACCEPTED  m0234 src/ui/screen_trainer.c:297 [int-1 0 -> -1] :: out-of-range iteration calls cell_matches which returns zero because the pair writer rejects the index, totals unchanged
+ACCEPTED  m0235 src/ui/screen_trainer.c:297 [cmp < -> <=] :: out-of-range iteration calls cell_matches which returns zero because the pair writer rejects the index, totals unchanged
+ACCEPTED  m0247 src/ui/screen_trainer.c:331 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0248 src/ui/screen_trainer.c:331 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0249 src/ui/screen_trainer.c:332 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0250 src/ui/screen_trainer.c:332 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0251 src/ui/screen_trainer.c:332 [cmp < -> <=] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0252 src/ui/screen_trainer.c:332 [logic && -> ||] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0253 src/ui/screen_trainer.c:332 [cmp < -> <=] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0254 src/ui/screen_trainer.c:339 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0255 src/ui/screen_trainer.c:339 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0256 src/ui/screen_trainer.c:339 [cmp < -> <=] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0257 src/ui/screen_trainer.c:344 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0258 src/ui/screen_trainer.c:344 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0259 src/ui/screen_trainer.c:344 [cmp < -> <=] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0260 src/ui/screen_trainer.c:350 [arith - -> +] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0261 src/ui/screen_trainer.c:350 [int+1 1 -> 2] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0262 src/ui/screen_trainer.c:350 [int-1 1 -> 0] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0263 src/ui/screen_trainer.c:351 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0264 src/ui/screen_trainer.c:351 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0265 src/ui/screen_trainer.c:351 [cmp < -> <=] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0266 src/ui/screen_trainer.c:351 [logic && -> ||] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0267 src/ui/screen_trainer.c:351 [cmp < -> <=] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0268 src/ui/screen_trainer.c:353 [cmp < -> <=] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0269 src/ui/screen_trainer.c:353 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0270 src/ui/screen_trainer.c:353 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0271 src/ui/screen_trainer.c:353 [logic || -> &&] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0272 src/ui/screen_trainer.c:355 [cmp != -> ==] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0273 src/ui/screen_trainer.c:355 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0274 src/ui/screen_trainer.c:355 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0275 src/ui/screen_trainer.c:356 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0277 src/ui/screen_trainer.c:359 [cmp == -> !=] :: draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+ACCEPTED  m0278 src/ui/screen_trainer.c:366 [cmp >= -> >] :: draw path, only reachable from the raylib screen draw event handler no headless suite exercises
+ACCEPTED  m0279 src/ui/screen_trainer.c:366 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw event handler no headless suite exercises
+ACCEPTED  m0280 src/ui/screen_trainer.c:366 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw event handler no headless suite exercises
+ACCEPTED  m0281 src/ui/screen_trainer.c:366 [logic && -> ||] :: draw path, only reachable from the raylib screen draw event handler no headless suite exercises
+ACCEPTED  m0282 src/ui/screen_trainer.c:366 [cmp < -> <=] :: draw path, only reachable from the raylib screen draw event handler no headless suite exercises
+ACCEPTED  m0283 src/ui/screen_trainer.c:375 [cmp >= -> >] :: draw path, only reachable from the raylib screen draw method handler no headless suite exercises
+ACCEPTED  m0284 src/ui/screen_trainer.c:375 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw method handler no headless suite exercises
+ACCEPTED  m0285 src/ui/screen_trainer.c:375 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw method handler no headless suite exercises
+ACCEPTED  m0286 src/ui/screen_trainer.c:375 [logic && -> ||] :: draw path, only reachable from the raylib screen draw method handler no headless suite exercises
+ACCEPTED  m0287 src/ui/screen_trainer.c:375 [cmp < -> <=] :: draw path, only reachable from the raylib screen draw method handler no headless suite exercises
+ACCEPTED  m0288 src/ui/screen_trainer.c:381 [cmp >= -> >] :: draw path, only reachable from the raylib screen draw list handler no headless suite exercises
+ACCEPTED  m0289 src/ui/screen_trainer.c:381 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw list handler no headless suite exercises
+ACCEPTED  m0290 src/ui/screen_trainer.c:381 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw list handler no headless suite exercises
+ACCEPTED  m0291 src/ui/screen_trainer.c:388 [cmp >= -> >] :: draw path, only reachable from the raylib screen draw case handler no headless suite exercises
+ACCEPTED  m0292 src/ui/screen_trainer.c:388 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw case handler no headless suite exercises
+ACCEPTED  m0293 src/ui/screen_trainer.c:388 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw case handler no headless suite exercises
+ACCEPTED  m0295 src/ui/screen_trainer.c:394 [cmp == -> !=] :: draw path, only reachable from the raylib frame update loop no headless suite exercises
+ACCEPTED  m0296 src/ui/screen_trainer.c:397 [not-del ! -> (deleted)] :: draw path, only reachable from the raylib frame update loop no headless suite exercises
+ACCEPTED  m0297 src/ui/screen_trainer.c:398 [bool true -> false] :: draw path, only reachable from the raylib frame update loop no headless suite exercises
+ACCEPTED  m0300 src/ui/screen_trainer.c:414 [cmp == -> !=] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0301 src/ui/screen_trainer.c:415 [cmp == -> !=] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0302 src/ui/screen_trainer.c:417 [int+1 0 -> 1] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0303 src/ui/screen_trainer.c:417 [int-1 0 -> -1] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0304 src/ui/screen_trainer.c:417 [cmp < -> <=] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0305 src/ui/screen_trainer.c:419 [cmp != -> ==] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0306 src/ui/screen_trainer.c:419 [int+1 0 -> 1] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0307 src/ui/screen_trainer.c:419 [int-1 0 -> -1] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0308 src/ui/screen_trainer.c:422 [int+1 2 -> 3] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0310 src/ui/screen_trainer.c:424 [cmp == -> !=] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0311 src/ui/screen_trainer.c:426 [cmp == -> !=] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0312 src/ui/screen_trainer.c:429 [arith / -> *] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0313 src/ui/screen_trainer.c:432 [arith + -> -] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0314 src/ui/screen_trainer.c:432 [arith - -> +] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0315 src/ui/screen_trainer.c:432 [arith / -> *] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0316 src/ui/screen_trainer.c:433 [arith + -> -] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0317 src/ui/screen_trainer.c:433 [arith - -> +] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0318 src/ui/screen_trainer.c:433 [arith / -> *] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0319 src/ui/screen_trainer.c:438 [cmp >= -> >] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0320 src/ui/screen_trainer.c:438 [int+1 0 -> 1] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0321 src/ui/screen_trainer.c:438 [int-1 0 -> -1] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0322 src/ui/screen_trainer.c:438 [logic && -> ||] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0323 src/ui/screen_trainer.c:439 [cmp == -> !=] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0325 src/ui/screen_trainer.c:449 [cmp == -> !=] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0327 src/ui/screen_trainer.c:458 [arith / -> *] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0328 src/ui/screen_trainer.c:458 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0329 src/ui/screen_trainer.c:459 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0330 src/ui/screen_trainer.c:459 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0331 src/ui/screen_trainer.c:462 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0332 src/ui/screen_trainer.c:462 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0333 src/ui/screen_trainer.c:463 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0334 src/ui/screen_trainer.c:463 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0335 src/ui/screen_trainer.c:464 [cmp > -> >=] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0336 src/ui/screen_trainer.c:464 [int+1 0 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0337 src/ui/screen_trainer.c:464 [int-1 0 -> -1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0338 src/ui/screen_trainer.c:464 [logic && -> ||] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0339 src/ui/screen_trainer.c:464 [cmp == -> !=] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0340 src/ui/screen_trainer.c:465 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0341 src/ui/screen_trainer.c:465 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0342 src/ui/screen_trainer.c:468 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0343 src/ui/screen_trainer.c:468 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0344 src/ui/screen_trainer.c:468 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0345 src/ui/screen_trainer.c:468 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0346 src/ui/screen_trainer.c:468 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0347 src/ui/screen_trainer.c:468 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0348 src/ui/screen_trainer.c:468 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0349 src/ui/screen_trainer.c:468 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0350 src/ui/screen_trainer.c:469 [cmp < -> <=] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0351 src/ui/screen_trainer.c:472 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0352 src/ui/screen_trainer.c:472 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0353 src/ui/screen_trainer.c:472 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0354 src/ui/screen_trainer.c:472 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0355 src/ui/screen_trainer.c:472 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0356 src/ui/screen_trainer.c:473 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0357 src/ui/screen_trainer.c:473 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0358 src/ui/screen_trainer.c:476 [cmp <= -> <] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0359 src/ui/screen_trainer.c:476 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0360 src/ui/screen_trainer.c:476 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0361 src/ui/screen_trainer.c:476 [logic || -> &&] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0362 src/ui/screen_trainer.c:476 [cmp == -> !=] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0363 src/ui/screen_trainer.c:477 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0364 src/ui/screen_trainer.c:477 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0365 src/ui/screen_trainer.c:477 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0366 src/ui/screen_trainer.c:477 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0367 src/ui/screen_trainer.c:477 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0368 src/ui/screen_trainer.c:482 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0369 src/ui/screen_trainer.c:482 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0370 src/ui/screen_trainer.c:482 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0371 src/ui/screen_trainer.c:482 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0372 src/ui/screen_trainer.c:482 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0373 src/ui/screen_trainer.c:482 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0374 src/ui/screen_trainer.c:487 [arith - -> +] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0375 src/ui/screen_trainer.c:487 [int+1 1 -> 2] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0376 src/ui/screen_trainer.c:487 [int-1 1 -> 0] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0377 src/ui/screen_trainer.c:488 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0378 src/ui/screen_trainer.c:488 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0379 src/ui/screen_trainer.c:488 [cmp < -> <=] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0380 src/ui/screen_trainer.c:489 [cmp == -> !=] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0381 src/ui/screen_trainer.c:493 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0382 src/ui/screen_trainer.c:493 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0383 src/ui/screen_trainer.c:494 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0384 src/ui/screen_trainer.c:494 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0385 src/ui/screen_trainer.c:494 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0386 src/ui/screen_trainer.c:494 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0387 src/ui/screen_trainer.c:494 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0388 src/ui/screen_trainer.c:494 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0389 src/ui/screen_trainer.c:500 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0390 src/ui/screen_trainer.c:500 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0391 src/ui/screen_trainer.c:500 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0392 src/ui/screen_trainer.c:500 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0393 src/ui/screen_trainer.c:500 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0394 src/ui/screen_trainer.c:500 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0395 src/ui/screen_trainer.c:505 [cmp > -> >=] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0396 src/ui/screen_trainer.c:505 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0397 src/ui/screen_trainer.c:505 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0398 src/ui/screen_trainer.c:505 [logic && -> ||] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0399 src/ui/screen_trainer.c:505 [cmp == -> !=] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0400 src/ui/screen_trainer.c:506 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0401 src/ui/screen_trainer.c:506 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0402 src/ui/screen_trainer.c:506 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0403 src/ui/screen_trainer.c:506 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0404 src/ui/screen_trainer.c:506 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0405 src/ui/screen_trainer.c:507 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0406 src/ui/screen_trainer.c:507 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0407 src/ui/screen_trainer.c:507 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0408 src/ui/screen_trainer.c:507 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0409 src/ui/screen_trainer.c:507 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0410 src/ui/screen_trainer.c:510 [cmp > -> >=] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0411 src/ui/screen_trainer.c:513 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0412 src/ui/screen_trainer.c:513 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0413 src/ui/screen_trainer.c:513 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0414 src/ui/screen_trainer.c:513 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0415 src/ui/screen_trainer.c:513 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0416 src/ui/screen_trainer.c:519 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0417 src/ui/screen_trainer.c:519 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0418 src/ui/screen_trainer.c:519 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0419 src/ui/screen_trainer.c:519 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0420 src/ui/screen_trainer.c:519 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0421 src/ui/screen_trainer.c:523 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0422 src/ui/screen_trainer.c:523 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0423 src/ui/screen_trainer.c:523 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0424 src/ui/screen_trainer.c:523 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0425 src/ui/screen_trainer.c:523 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0426 src/ui/screen_trainer.c:523 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0427 src/ui/screen_trainer.c:525 [cmp > -> >=] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0428 src/ui/screen_trainer.c:525 [int+1 1 -> 2] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0429 src/ui/screen_trainer.c:525 [int-1 1 -> 0] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0430 src/ui/screen_trainer.c:529 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0431 src/ui/screen_trainer.c:529 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0432 src/ui/screen_trainer.c:529 [cmp < -> <=] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0433 src/ui/screen_trainer.c:529 [logic && -> ||] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0434 src/ui/screen_trainer.c:529 [cmp < -> <=] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0435 src/ui/screen_trainer.c:530 [cmp < -> <=] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0436 src/ui/screen_trainer.c:530 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0437 src/ui/screen_trainer.c:530 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0438 src/ui/screen_trainer.c:530 [logic || -> &&] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0439 src/ui/screen_trainer.c:530 [cmp >= -> >] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0440 src/ui/screen_trainer.c:533 [arith + -> -] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0441 src/ui/screen_trainer.c:533 [arith - -> +] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0442 src/ui/screen_trainer.c:540 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0443 src/ui/screen_trainer.c:540 [arith + -> -] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0444 src/ui/screen_trainer.c:540 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0445 src/ui/screen_trainer.c:540 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0446 src/ui/screen_trainer.c:540 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0447 src/ui/screen_trainer.c:540 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0448 src/ui/screen_trainer.c:540 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0449 src/ui/screen_trainer.c:540 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0450 src/ui/screen_trainer.c:540 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0451 src/ui/screen_trainer.c:542 [cmp >= -> >] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0452 src/ui/screen_trainer.c:542 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0453 src/ui/screen_trainer.c:542 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0454 src/ui/screen_trainer.c:543 [arith + -> -] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0455 src/ui/screen_trainer.c:543 [arith + -> -] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0456 src/ui/screen_trainer.c:543 [int+1 3 -> 4] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0457 src/ui/screen_trainer.c:543 [int-1 3 -> 2] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0458 src/ui/screen_trainer.c:543 [arith * -> /] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0459 src/ui/screen_trainer.c:544 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0461 src/ui/screen_trainer.c:544 [cmp != -> ==] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0462 src/ui/screen_trainer.c:544 [arith + -> -] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0463 src/ui/screen_trainer.c:545 [arith + -> -] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0464 src/ui/screen_trainer.c:545 [int+1 4 -> 5] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0465 src/ui/screen_trainer.c:545 [int-1 4 -> 3] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0466 src/ui/screen_trainer.c:545 [arith * -> /] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0467 src/ui/screen_trainer.c:545 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0469 src/ui/screen_trainer.c:545 [cmp != -> ==] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0470 src/ui/screen_trainer.c:547 [arith + -> -] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0471 src/ui/screen_trainer.c:547 [arith + -> -] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0472 src/ui/screen_trainer.c:547 [int+1 3 -> 4] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0473 src/ui/screen_trainer.c:547 [int-1 3 -> 2] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0474 src/ui/screen_trainer.c:547 [arith * -> /] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0475 src/ui/screen_trainer.c:549 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0476 src/ui/screen_trainer.c:549 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0477 src/ui/screen_trainer.c:549 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0478 src/ui/screen_trainer.c:553 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0479 src/ui/screen_trainer.c:553 [arith - -> +] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0480 src/ui/screen_trainer.c:553 [int+1 2 -> 3] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0481 src/ui/screen_trainer.c:553 [int-1 2 -> 1] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0482 src/ui/screen_trainer.c:553 [arith * -> /] :: draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
+ACCEPTED  m0483 src/ui/screen_trainer.c:554 [cmp == -> !=] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+mutate: generated=483 build_failed=52 killed_by_tests=132 killed=184 survived=299 accepted=299 unexplained=0 skipped=0
+mutate: kill rate 184/483 = 38.1%, with accepted equivalents 483/483 = 100.0%
+mutate: wall 334.3s

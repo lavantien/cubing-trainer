@@ -1,0 +1,203 @@
+0053 L104 [int+1 2 -> 3] CT_SCRIPT_LE = 2,
+0061 L108 [int+1 8 -> 9] CT_SCRIPT_LIST_CAP = 8
+0062 L108 [int-1 8 -> 7] CT_SCRIPT_LIST_CAP = 8
+0087 L126 [int+1 0 -> 1] if (src == NULL || out == NULL || err == NULL || cap == 0) {
+0089 L129 [int+1 0 -> 1] err[0] = '\0';
+0090 L129 [int-1 0 -> -1] err[0] = '\0';
+0091 L131 [cmp >= -> >] if (len >= sizeof out->text) {
+0093 L135 [int+1 1 -> 2] memcpy(out->text, src, len + 1);
+0094 L135 [int-1 1 -> 0] memcpy(out->text, src, len + 1);
+0108 L151 [cmp < -> <=] while (p < end && *p != '\n') {
+0114 L161 [int+1 0 -> 1] memset(cmd, 0, sizeof *cmd);
+0115 L161 [int-1 0 -> -1] memset(cmd, 0, sizeof *cmd);
+0118 L165 [cmp < -> <=] while (line_end < end && *line_end != '\n') {
+0122 L168 [cmp < -> <=] bool has_nl = line_end < end;
+0125 L170 [cmp < -> <=] while (p < line_end) {
+0126 L171 [cmp < -> <=] while (p < line_end && ct_script_sep(*p)) {
+0141 L185 [cmp < -> <=] while (close < line_end && *close != '"') {
+0148 L193 [int+1 1 -> 2] p = close + 1;
+0157 L199 [cmp < -> <=] char delim = p < line_end ? *p : '\0';
+0167 L214 [int-1 0 -> -1] if (argc == 0) {
+0174 L221 [cmp < -> <=] if (argc < CT_SCRIPT_SUB + 1) {
+0175 L221 [arith + -> -] if (argc < CT_SCRIPT_SUB + 1) {
+0176 L221 [int+1 1 -> 2] if (argc < CT_SCRIPT_SUB + 1) {
+0177 L221 [int-1 1 -> 0] if (argc < CT_SCRIPT_SUB + 1) {
+0179 L226 [int+1 0 -> 1] sizeof CT_SCRIPT_EXPECTS / sizeof CT_SCRIPT_EXPECTS[0],
+0180 L226 [int-1 0 -> -1] sizeof CT_SCRIPT_EXPECTS / sizeof CT_SCRIPT_EXPECTS[0],
+0186 L231 [int+1 0 -> 1] sizeof CT_SCRIPT_WORDS / sizeof CT_SCRIPT_WORDS[0], word);
+0187 L231 [int-1 0 -> -1] sizeof CT_SCRIPT_WORDS / sizeof CT_SCRIPT_WORDS[0], word);
+0204 L253 [cmp < -> <=] for (int i = 0; i < spec->argc; i++) {
+0206 L255 [arith + -> -] cmd->len[i] = cmd->len[drop + i];
+0228 L276 [int-1 0 -> -1] if (s == NULL || c == NULL || i < 0 || i >= c->argc || i >= CT_SCRIPT_AR
+0230 L276 [cmp >= -> >] if (s == NULL || c == NULL || i < 0 || i >= c->argc || i >= CT_SCRIPT_AR
+0232 L276 [cmp >= -> >] if (s == NULL || c == NULL || i < 0 || i >= c->argc || i >= CT_SCRIPT_AR
+0239 L288 [int+1 0 -> 1] errno = 0;
+0240 L288 [int-1 0 -> -1] errno = 0;
+0249 L292 [arith - -> +] return -1;
+0250 L292 [int+1 1 -> 2] return -1;
+0251 L292 [int-1 1 -> 0] return -1;
+0258 L299 [int+1 0 -> 1] errno = 0;
+0259 L299 [int-1 0 -> -1] errno = 0;
+0270 L303 [arith - -> +] return -1;
+0271 L303 [int+1 1 -> 2] return -1;
+0272 L303 [int-1 1 -> 0] return -1;
+0283 L313 [int-1 0 -> -1] if (strcmp(s, ">=") == 0) {
+0286 L316 [int-1 0 -> -1] if (strcmp(s, "<=") == 0) {
+0289 L319 [int-1 0 -> -1] if (strcmp(s, "!=") == 0) {
+0291 L322 [int+1 1 -> 2] return -1;
+0294 L330 [cmp >= -> >] return a >= b;
+0295 L332 [cmp <= -> <] return a <= b;
+0296 L334 [cmp != -> ==] return a != b;
+0298 L340 [cmp < -> <=] if (d < 0.0) {
+0299 L341 [arith - -> +] d = -d;
+0300 L345 [cmp <= -> <] return d <= CT_SCRIPT_DBL_EPS;
+0301 L347 [cmp >= -> >] return a >= b;
+0302 L349 [cmp <= -> <] return a <= b;
+0303 L351 [cmp > -> >=] return d > CT_SCRIPT_DBL_EPS;
+0313 L358 [cmp > -> >=] if (iso[i] < '0' || iso[i] > '9') {
+0314 L359 [arith - -> +] return -1;
+0315 L359 [int+1 1 -> 2] return -1;
+0316 L359 [int-1 1 -> 0] return -1;
+0321 L364 [arith - -> +] return -1;
+0322 L364 [int+1 1 -> 2] return -1;
+0323 L364 [int-1 1 -> 0] return -1;
+0332 L368 [cmp > -> >=] if (iso[i] < '0' || iso[i] > '9') {
+0333 L369 [arith - -> +] return -1;
+0334 L369 [int+1 1 -> 2] return -1;
+0335 L369 [int-1 1 -> 0] return -1;
+0343 L374 [arith - -> +] return -1;
+0344 L374 [int+1 1 -> 2] return -1;
+0345 L374 [int-1 1 -> 0] return -1;
+0354 L378 [cmp > -> >=] if (iso[i] < '0' || iso[i] > '9') {
+0355 L379 [arith - -> +] return -1;
+0356 L379 [int+1 1 -> 2] return -1;
+0357 L379 [int-1 1 -> 0] return -1;
+0367 L389 [int+1 0 -> 1] if (now[0] == '\0') {
+0370 L390 [arith - -> +] return -1;
+0371 L390 [int+1 1 -> 2] return -1;
+0372 L390 [int-1 1 -> 0] return -1;
+0383 L400 [int-1 0 -> -1] if (strcmp(name, "algbig") == 0) {
+0387 L404 [int-1 0 -> -1] if (strcmp(name, "algoh") == 0) {
+0391 L408 [int-1 0 -> -1] if (strcmp(name, "front") == 0) {
+0403 L424 [int+1 0 -> 1] ct_cards_form_open(f, app->db, ct_script_arg(s, c, 0));
+0404 L424 [int-1 0 -> -1] ct_cards_form_open(f, app->db, ct_script_arg(s, c, 0));
+0424 L451 [int+1 0 -> 1] unsigned field_cap = 0;
+0425 L451 [int-1 0 -> -1] unsigned field_cap = 0;
+0431 L456 [int+1 1 -> 2] const char *value = ct_script_arg(s, c, 1);
+0433 L457 [cmp >= -> >] if (strlen(value) >= field_cap) {
+0434 L461 [bool true -> false] f->dirty = true;
+0444 L477 [ret-lit 0 -> 1] return 0;
+0445 L477 [int+1 0 -> 1] return 0;
+0446 L477 [int-1 0 -> -1] return 0;
+0453 L485 [int+1 0 -> 1] long day = 0;
+0454 L485 [int-1 0 -> -1] long day = 0;
+0458 L489 [int+1 0 -> 1] int rc = ct_review_form_begin(&rt->review, app->db, CT_UI_DEFAULT_DECK, 
+0459 L489 [int-1 0 -> -1] int rc = ct_review_form_begin(&rt->review, app->db, CT_UI_DEFAULT_DECK, 
+0460 L490 [cmp < -> <=] if (rc < 0) {
+0461 L490 [int+1 0 -> 1] if (rc < 0) {
+0462 L490 [int-1 0 -> -1] if (rc < 0) {
+0472 L504 [int+1 0 -> 1] const char *word = ct_script_arg(s, c, 0);
+0474 L505 [bool false -> true] bool found = false;
+0475 L507 [int+1 0 -> 1] for (unsigned i = 0; i < sizeof CT_SCRIPT_GRADES / sizeof CT_SCRIPT_GRAD
+0477 L507 [cmp < -> <=] for (unsigned i = 0; i < sizeof CT_SCRIPT_GRADES / sizeof CT_SCRIPT_GRAD
+0478 L507 [arith / -> *] for (unsigned i = 0; i < sizeof CT_SCRIPT_GRADES / sizeof CT_SCRIPT_GRAD
+0479 L507 [int+1 0 -> 1] for (unsigned i = 0; i < sizeof CT_SCRIPT_GRADES / sizeof CT_SCRIPT_GRAD
+0480 L507 [int-1 0 -> -1] for (unsigned i = 0; i < sizeof CT_SCRIPT_GRADES / sizeof CT_SCRIPT_GRAD
+0486 L519 [int+1 0 -> 1] if (now[0] == '\0') {
+0492 L530 [int+1 0 -> 1] if (now[0] == '\0') {
+0504 L540 [cmp < -> <=] if (ct_script_long(ct_script_arg(s, c, 0), &ticks) != 0 || ticks < 1 ||
+0505 L540 [int+1 1 -> 2] if (ct_script_long(ct_script_arg(s, c, 0), &ticks) != 0 || ticks < 1 ||
+0506 L540 [int-1 1 -> 0] if (ct_script_long(ct_script_arg(s, c, 0), &ticks) != 0 || ticks < 1 ||
+0508 L541 [cmp > -> >=] ticks > CT_SCRIPT_REVIEW_WAIT_MAX) {
+0510 L545 [int+1 0 -> 1] for (long i = 0; i < ticks; i++) {
+0511 L545 [int-1 0 -> -1] for (long i = 0; i < ticks; i++) {
+0512 L545 [cmp < -> <=] for (long i = 0; i < ticks; i++) {
+0513 L550 [arith - -> +] f->scrub_index = f->move_count - f->anim.count;
+0514 L551 [not-del ! -> (deleted)] if (!ct_anim_active(&f->anim)) {
+0515 L553 [bool false -> true] f->playing = false;
+0519 L560 [ret-lit 0 -> 1] return 0;
+0520 L560 [int+1 0 -> 1] return 0;
+0521 L560 [int-1 0 -> -1] return 0;
+0548 L586 [logic || -> &&] if (face[0] == '\0' || face[1] != '\0') {
+0566 L599 [ret-lit 0 -> 1] return 0;
+0567 L599 [int+1 0 -> 1] return 0;
+0568 L599 [int-1 0 -> -1] return 0;
+0575 L613 [ret-lit 0 -> 1] return 0;
+0576 L613 [int+1 0 -> 1] return 0;
+0577 L613 [int-1 0 -> -1] return 0;
+0582 L621 [cmp == -> !=] if (strcmp(word, "oll") == 0) {
+0583 L621 [int+1 0 -> 1] if (strcmp(word, "oll") == 0) {
+0584 L621 [int-1 0 -> -1] if (strcmp(word, "oll") == 0) {
+0585 L624 [cmp == -> !=] if (strcmp(word, "f2l") == 0) {
+0586 L624 [int+1 0 -> 1] if (strcmp(word, "f2l") == 0) {
+0587 L624 [int-1 0 -> -1] if (strcmp(word, "f2l") == 0) {
+0588 L627 [arith - -> +] return -1;
+0589 L627 [int+1 1 -> 2] return -1;
+0590 L627 [int-1 1 -> 0] return -1;
+0596 L634 [int+1 0 -> 1] int stage = ct_script_stage_parse(ct_script_arg(s, c, 0));
+0600 L635 [int-1 0 -> -1] if (stage < 0) {
+0601 L639 [cmp >= -> >] return made >= 0 ? 0
+0602 L639 [int+1 0 -> 1] return made >= 0 ? 0
+0603 L639 [int-1 0 -> -1] return made >= 0 ? 0
+0612 L645 [int+1 0 -> 1] long list_id = 0;
+0613 L645 [int-1 0 -> -1] long list_id = 0;
+0619 L650 [bool false -> true] bool ev_ok = false;
+0620 L651 [int+1 0 -> 1] for (unsigned i = 0; i < sizeof CT_SCRIPT_EVENTS / sizeof CT_SCRIPT_EVEN
+0622 L651 [cmp < -> <=] for (unsigned i = 0; i < sizeof CT_SCRIPT_EVENTS / sizeof CT_SCRIPT_EVEN
+0623 L651 [arith / -> *] for (unsigned i = 0; i < sizeof CT_SCRIPT_EVENTS / sizeof CT_SCRIPT_EVEN
+0624 L651 [int+1 0 -> 1] for (unsigned i = 0; i < sizeof CT_SCRIPT_EVENTS / sizeof CT_SCRIPT_EVEN
+0625 L651 [int-1 0 -> -1] for (unsigned i = 0; i < sizeof CT_SCRIPT_EVENTS / sizeof CT_SCRIPT_EVEN
+0630 L659 [bool false -> true] bool m_ok = false;
+0631 L660 [int+1 0 -> 1] for (unsigned i = 0; i < sizeof CT_SCRIPT_METHODS / sizeof CT_SCRIPT_MET
+0633 L660 [cmp < -> <=] for (unsigned i = 0; i < sizeof CT_SCRIPT_METHODS / sizeof CT_SCRIPT_MET
+0634 L660 [arith / -> *] for (unsigned i = 0; i < sizeof CT_SCRIPT_METHODS / sizeof CT_SCRIPT_MET
+0635 L660 [int+1 0 -> 1] for (unsigned i = 0; i < sizeof CT_SCRIPT_METHODS / sizeof CT_SCRIPT_MET
+0636 L660 [int-1 0 -> -1] for (unsigned i = 0; i < sizeof CT_SCRIPT_METHODS / sizeof CT_SCRIPT_MET
+0642 L667 [logic || -> &&] if (!ev_ok || !m_ok) {
+0647 L675 [cmp <= -> <] if (found <= 0 || list_id < 0 || list_id >= found || list_id >= CT_SCRIP
+0648 L675 [int+1 0 -> 1] if (found <= 0 || list_id < 0 || list_id >= found || list_id >= CT_SCRIP
+0649 L675 [int-1 0 -> -1] if (found <= 0 || list_id < 0 || list_id >= found || list_id >= CT_SCRIP
+0653 L675 [int-1 0 -> -1] if (found <= 0 || list_id < 0 || list_id >= found || list_id >= CT_SCRIP
+0655 L675 [cmp >= -> >] if (found <= 0 || list_id < 0 || list_id >= found || list_id >= CT_SCRIP
+0657 L675 [cmp >= -> >] if (found <= 0 || list_id < 0 || list_id >= found || list_id >= CT_SCRIP
+0658 L682 [int+1 0 -> 1] rt->target_key[0] = '\0';
+0660 L683 [bool false -> true] rt->generated = false;
+0669 L693 [cmp <= -> <] if (count <= 0 || index < 0 || index >= count) {
+0670 L693 [int+1 0 -> 1] if (count <= 0 || index < 0 || index >= count) {
+0671 L693 [int-1 0 -> -1] if (count <= 0 || index < 0 || index >= count) {
+0675 L693 [int-1 0 -> -1] if (count <= 0 || index < 0 || index >= count) {
+0677 L693 [cmp >= -> >] if (count <= 0 || index < 0 || index >= count) {
+0681 L703 [bool false -> true] rt->generated = false;
+0685 L707 [int+1 0 -> 1] if (rt->target_key[0] == '\0') {
+0688 L710 [not-del ! -> (deleted)] if (!rt->synth_ready) {
+0689 L712 [bool true -> false] rt->synth_ready = true;
+0690 L714 [int+1 0 -> 1] int t1 = 0;
+0691 L714 [int-1 0 -> -1] int t1 = 0;
+0692 L715 [int+1 0 -> 1] int t2 = 0;
+0693 L715 [int-1 0 -> -1] int t2 = 0;
+0697 L720 [cmp == -> !=] int buffer = rt->orbit == CT_ORBIT_EDGE ? rt->scheme.buffer_edge : rt->s
+0698 L722 [int+1 0 -> 1] memset(&res, 0, sizeof res);
+0699 L722 [int-1 0 -> -1] memset(&res, 0, sizeof res);
+0703 L724 [logic || -> &&] if (rc != 0 || !res.found) {
+0705 L728 [cmp < -> <=] (unsigned)sizeof rt->alg_text) < 0) {
+0706 L728 [int+1 0 -> 1] (unsigned)sizeof rt->alg_text) < 0) {
+0707 L728 [int-1 0 -> -1] (unsigned)sizeof rt->alg_text) < 0) {
+0708 L731 [int+1 0 -> 1] memset(&rt->cls, 0, sizeof rt->cls);
+0709 L731 [int-1 0 -> -1] memset(&rt->cls, 0, sizeof rt->cls);
+0711 L735 [int+1 0 -> 1] memset(&rt->parts, 0, sizeof rt->parts);
+0712 L735 [int-1 0 -> -1] memset(&rt->parts, 0, sizeof rt->parts);
+0714 L740 [cmp <= -> <] if (scheme <= 0) {
+0715 L740 [int+1 0 -> 1] if (scheme <= 0) {
+0716 L740 [int-1 0 -> -1] if (scheme <= 0) {
+0717 L741 [cmp != -> ==] if (ct_letter_seed_speffz(app->db) != 0) {
+0718 L741 [int+1 0 -> 1] if (ct_letter_seed_speffz(app->db) != 0) {
+0719 L741 [int-1 0 -> -1] if (ct_letter_seed_speffz(app->db) != 0) {
+0720 L746 [cmp <= -> <] if (scheme <= 0) {
+0723 L752 [int+1 0 -> 1] memset(&a, 0, sizeof a);
+0724 L752 [int-1 0 -> -1] memset(&a, 0, sizeof a);
+0739 L790 [ret-lit 0 -> 1] return 0;
+0740 L790 [int+1 0 -> 1] return 0;
+0741 L790 [int-1 0 -> -1] return 0;
+0754 L803 [int+1 0 -> 1] if (ct_script_iso_day(date, &(long){0}) != 0) {
+0755 L803 [int-1 0 -> -1] if (ct_script_iso_day(date, &(long){0}) != 0) {
+0790 L865 [int+1 0 -> 1] if (app == NULL || rt == NULL || s == NULL || err == NULL || cap == 0) {
