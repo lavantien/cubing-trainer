@@ -390,3 +390,29 @@ CT_SUITE(notation_engine) {
     }
     CT_ASSERT(ct_cube_equal(&scrambled, &rotated));
 }
+
+CT_SUITE(notation_gate_edges) {
+    ct_move m;
+    CT_ASSERT_EQ(ct_notation_parse_one("2R", 3, &m), 0);
+    CT_ASSERT(ct_move_eq(m, (ct_move){CT_FACE_R, 2, 2, 1}));
+
+    CT_ASSERT_EQ(ct_notation_parse("", 3, &m, 1), 0);
+    CT_ASSERT_EQ(ct_notation_parse("U", 3, NULL, 1), CT_NOTATION_E_INPUT);
+    CT_ASSERT_EQ(ct_notation_parse("U", 3, &m, -1), CT_NOTATION_E_INPUT);
+    CT_ASSERT_EQ(ct_notation_parse("U", 3, NULL, 0), CT_NOTATION_E_CAP);
+
+    char buf[CT_NOTATION_TOKEN_MAX];
+    ct_move bad_face = {-1, 1, 1, 1};
+    CT_ASSERT_EQ(ct_notation_format_one(&bad_face, 3, buf, sizeof buf), CT_NOTATION_E_MOVE);
+    ct_move bad_quarter = {CT_FACE_U, 1, 1, 0};
+    CT_ASSERT_EQ(ct_notation_format_one(&bad_quarter, 3, buf, sizeof buf), CT_NOTATION_E_MOVE);
+    ct_move bad_depth = {CT_FACE_U, 0, 1, 1};
+    CT_ASSERT_EQ(ct_notation_format_one(&bad_depth, 3, buf, sizeof buf), CT_NOTATION_E_MOVE);
+    ct_move u = {CT_FACE_U, 1, 1, 1};
+    CT_ASSERT_EQ(ct_notation_format_one(&u, 3, buf, 2), 1);
+    CT_ASSERT_STR_EQ(buf, "U");
+
+    CT_ASSERT_EQ(ct_notation_format(&m, -1, 3, buf, sizeof buf), CT_NOTATION_E_INPUT);
+    CT_ASSERT_EQ(ct_notation_format(NULL, 0, 3, buf, sizeof buf), 0);
+    CT_ASSERT_EQ(ct_notation_format(NULL, 1, 3, buf, sizeof buf), CT_NOTATION_E_INPUT);
+}

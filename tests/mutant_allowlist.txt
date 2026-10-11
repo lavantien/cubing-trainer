@@ -1019,3 +1019,15 @@ src/engine/cube.c:83	cube n clamp lower boundary is idempotent, at the minimum b
 src/engine/cube.c:85	cube n clamp upper boundary is idempotent, at the maximum both arms store the same value
 src/engine/cube.c:89	per face overshoot lands on the next face zeroth cell which the following iteration rewrites, the final overshoot lands one byte past the object where no reachable reader looks
 src/engine/cube.c:143	rotation count init of minus one skips the loop exactly like zero, no out of slab sticker rotates
+src/engine/notation.c:28	sizeof operand index is unevaluated, the entry size is identical at any index so the loop bound is unchanged
+src/engine/notation.c:60	span guard edges, an empty span reads the nul which fails the digit test, and a one character token carries no digit prefix so skipping the probe parses it identically
+src/engine/notation.c:66	token end widened read sees the delimiter or nul which no table entry matches, rejected identically
+src/engine/notation.c:72	lowercase bound edges, the letters a and z resolve in the table or have no uppercase entry, the fallback is never taken for them
+src/engine/notation.c:76	wide flag is consumed as a boolean, any nonzero value is equivalent
+src/engine/notation.c:83	wide marker probe past the token reads the delimiter or nul which never equals w
+src/engine/notation.c:84	wide flag is consumed as a boolean, any nonzero value is equivalent
+src/engine/notation.c:122	depth lower bound is structurally unreachable, every arm yields at least one
+src/engine/notation.c:152	input error code minus one is unreachable inside the loop, the caller prevalidated n and the move pointer
+src/engine/notation.c:169	zero depth passes the weakened bound into the shape ladder which rejects it at the final else with the same move error
+src/engine/notation.c:205	lone move list guard widened, the single read is rejected by the per move null guard inside format one with the same input error
+src/engine/notation.c:211	input error code minus one is unreachable from the loop caller, and a successful format returns at least one so a zero result never occurs
