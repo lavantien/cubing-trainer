@@ -67,6 +67,10 @@ CT_SUITE(stats_empty) {
     ct_due_forecast_row fc[6];
     ct_case_accuracy_row acc[4];
     ct_session_row sess[4];
+    memset(decks, 0xAA, sizeof decks);
+    memset(fc, 0xAA, sizeof fc);
+    memset(acc, 0xAA, sizeof acc);
+    memset(sess, 0xAA, sizeof sess);
 
     CT_ASSERT_EQ(ct_repo_deck_stats(db, "2026-06-01T00:00:00Z", decks, 4), 0);
     CT_ASSERT_EQ(ct_repo_due_forecast(db, "2026-06-01", 3, fc, 6), 3);
@@ -78,6 +82,15 @@ CT_SUITE(stats_empty) {
     CT_ASSERT_EQ(fc[2].due_count, 0);
     CT_ASSERT_EQ(ct_repo_case_accuracy(db, "none", acc, 4), 0);
     CT_ASSERT_EQ(ct_repo_sessions(db, sess, 4), 0);
+
+    CT_ASSERT_EQ(decks[0].deck[0], '\0');
+    CT_ASSERT_EQ(decks[0].total_cards, 0);
+    CT_ASSERT_EQ(fc[3].day[0], '\0');
+    CT_ASSERT_EQ(fc[3].due_count, 0);
+    CT_ASSERT_EQ(acc[0].case_key[0], '\0');
+    CT_ASSERT_EQ(acc[0].reviews, 0);
+    CT_ASSERT_EQ(sess[0].deck[0], '\0');
+    CT_ASSERT_EQ(sess[0].id, 0);
     ct_db_close(db);
 }
 
@@ -339,6 +352,7 @@ CT_SUITE(stats_malformed) {
     CT_ASSERT(ct_repo_deck_stats(db, long_now, decks, 2) < 0);
     CT_ASSERT(ct_repo_deck_stats(db, "2026-06-01T00:00:00Z", decks, -1) < 0);
     CT_ASSERT(ct_repo_deck_stats(db, "2026-06-01T00:00:00Z", NULL, 2) < 0);
+    CT_ASSERT(ct_repo_deck_stats(db, "2026-06-01T00:00:00Z", NULL, 1) < 0);
     CT_ASSERT_EQ(ct_repo_deck_stats(db, "2026-06-01T00:00:00Z", NULL, 0), 0);
 
     CT_ASSERT(ct_repo_due_forecast(NULL, "2026-06-01", 3, fc, 2) < 0);
@@ -350,6 +364,7 @@ CT_SUITE(stats_malformed) {
     CT_ASSERT(ct_repo_due_forecast(db, long_day, 3, fc, 2) < 0);
     CT_ASSERT(ct_repo_due_forecast(db, "2026-06-01", -1, fc, 2) < 0);
     CT_ASSERT(ct_repo_due_forecast(db, "2026-06-01", 3, NULL, 2) < 0);
+    CT_ASSERT(ct_repo_due_forecast(db, "2026-06-01", 3, NULL, 1) < 0);
     CT_ASSERT(ct_repo_due_forecast(db, "2026-06-01", 3, fc, -1) < 0);
 
     CT_ASSERT(ct_repo_case_accuracy(NULL, "d", acc, 2) < 0);
@@ -361,6 +376,7 @@ CT_SUITE(stats_malformed) {
     CT_ASSERT(ct_repo_case_accuracy(db, big_deck, acc, 2) < 0);
     CT_ASSERT(ct_repo_case_accuracy(db, "d", acc, -1) < 0);
     CT_ASSERT(ct_repo_case_accuracy(db, "d", NULL, 2) < 0);
+    CT_ASSERT(ct_repo_case_accuracy(db, "d", NULL, 1) < 0);
     CT_ASSERT_EQ(ct_repo_case_accuracy(db, "d", NULL, 0), 0);
 
     CT_ASSERT(ct_repo_session_log(NULL, &row) < 0);
@@ -379,9 +395,19 @@ CT_SUITE(stats_malformed) {
     memset(over.r.deck, 'd', CT_STATS_DECK_MAX + 4);
     snprintf(over.r.started_at, sizeof over.r.started_at, "%s", "2026-06-01T00:00:00Z");
     CT_ASSERT(ct_repo_session_log(db, &over.r) < 0);
+    struct {
+        ct_session_row r;
+        char pad[8];
+    } exact;
+    memset(&exact, 0, sizeof exact);
+    snprintf(exact.r.deck, sizeof exact.r.deck, "%s", "d");
+    snprintf(exact.r.started_at, sizeof exact.r.started_at, "%s", "2026-06-01T00:00:00Z");
+    memset(exact.r.ended_at, 'e', CT_STATS_STAMP_MAX);
+    CT_ASSERT(ct_repo_session_log(db, &exact.r) < 0);
     CT_ASSERT(ct_repo_sessions(NULL, sess, 2) < 0);
     CT_ASSERT(ct_repo_sessions(db, sess, -1) < 0);
     CT_ASSERT(ct_repo_sessions(db, NULL, 2) < 0);
+    CT_ASSERT(ct_repo_sessions(db, NULL, 1) < 0);
     CT_ASSERT_EQ(ct_repo_sessions(db, NULL, 0), 0);
     ct_db_close(db);
 }
