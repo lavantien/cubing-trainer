@@ -1052,3 +1052,59 @@ src/storage/db.c:61	sqlite reads any negative byte count as nul terminated, minu
 src/storage/db.c:75	sqlite reads any negative byte count as nul terminated, minus two prepares the same pragma text
 src/storage/db.c:77	version prepare failure is unreachable through the public open path, the fixed pragma compiles on every healthy handle
 src/storage/db.c:79	version step fallback is unreachable, the user version pragma always yields a row on every handle the public path produces
+src/storage/migrate.c:25	minimum valid migration name is six bytes, the sub five and sub four length arms never fire past the prefix check
+src/storage/migrate.c:61	second read destination offset lands in allocator slack below the buffer that no suite reads, the content and terminator still land in place
+src/storage/migrate.c:187	capacity and sign arms lie beyond the 260 platform path limit, the suffix never reaches the boundary and snprintf failure is unreachable
+src/storage/migrate.c:188	capacity arm lies beyond the 260 platform path limit, the return variants never fire
+src/storage/migrate.c:193	each single null path is re-rejected downstream, the null handle by the version read and the null directory by the opendir failure
+src/storage/migrate.c:194	nonzero return variants are indistinguishable, the caller compares against zero
+src/storage/migrate.c:202	version failure arm is unreachable through the public path, the return variants never fire
+src/storage/migrate.c:232	filename accessor returns a normalized absolute path on this platform, the second byte is never the terminator for any reachable database file
+src/storage/migrate.c:242	nonzero rc variants are indistinguishable, the caller compares against zero, and the zeroing variant sits on the unreachable capacity arm
+src/storage/migrate.c:26	length reject arm unreachable, a name passing the digit prefix and underscore check is at least six bytes
+src/storage/migrate.c:27	digit count bound lies beyond the 260 platform path limit, no reachable filename reaches it
+src/storage/migrate.c:28	digit count bound lies beyond the 260 platform path limit, no reachable filename reaches it
+src/storage/migrate.c:33	errno reset value, the following check compares against ERANGE only, any non-ERANGE residue behaves identically
+src/storage/migrate.c:35	overflow boundary version cannot head a contiguous sequence, both arms fail the gap check with the same nonzero
+src/storage/migrate.c:36	parse reject value is sign only, the caller tests parsed below zero
+src/storage/migrate.c:38	any positive parse result is valid, only zero and the negatives are special cased
+src/storage/migrate.c:45	comparator sign variants preserve ordering, the equality boundary only matters for duplicate versions the gap check rejects
+src/storage/migrate.c:55	buffer headroom margins never engage for files under the copy buffer, all writes stay in bounds
+src/storage/migrate.c:62	one byte read break matches the end of stream break, both stop at the same offset
+src/storage/migrate.c:67	overflow guard arithmetic engages only near size_t limits, no reachable file grows the buffer that far
+src/storage/migrate.c:72	growth factor variants read the file to the end identically, only the truncating halving is observable
+src/storage/migrate.c:73	realloc headroom margins never engage below the overflow guard
+src/storage/migrate.c:102	source open failure unreachable, the caller passes the existing database path
+src/storage/migrate.c:109	ok flag init variants are truthy and overwritten on every path that reads it
+src/storage/migrate.c:112	one byte read break matches the end of stream break, both stop at the same offset
+src/storage/migrate.c:115	stream error arms unreachable without an io fault, no suite can force the write to fail
+src/storage/migrate.c:122	stream error arms unreachable without an io fault, no suite can force the read to fail
+src/storage/migrate.c:124	stream error arms unreachable without an io fault, no suite can force the close to fail
+src/storage/migrate.c:126	stream error arms unreachable without an io fault, no suite can force the close to fail
+src/storage/migrate.c:132	count init is overwritten on success and unread on every failure return
+src/storage/migrate.c:135	nonzero return variants are indistinguishable, the caller compares against zero
+src/storage/migrate.c:142	version init is overwritten by the parse or the entry is skipped before any read
+src/storage/migrate.c:146	parsed zero already continued above, the widened abort sees only the negatives
+src/storage/migrate.c:147	nonzero rc variants are indistinguishable, the caller compares against zero
+src/storage/migrate.c:151	name length bound lies at the 260 platform path limit, no reachable filename reaches it
+src/storage/migrate.c:152	length abort arm unreachable at the platform path limit, the rc variants never fire
+src/storage/migrate.c:156	initial capacity headroom and larger growth factors are invisible to the entry loop
+src/storage/migrate.c:159	allocation failure arm unreachable, no suite can force the realloc to fail
+src/storage/migrate.c:165	extra copied byte lands after the nul terminator and is never read
+src/storage/migrate.c:172	nonzero return variants are indistinguishable, the caller compares against zero
+src/storage/migrate.c:174	sorting zero or one entry is a no-op, the boundary variants see nothing to order
+src/storage/migrate.c:189	nonzero return variants are indistinguishable, the caller compares against zero
+src/storage/migrate.c:196	count init is overwritten by the collect call before any read
+src/storage/migrate.c:198	nonzero return variants are indistinguishable, the caller compares against zero
+src/storage/migrate.c:200	minus one version is unreachable through the public path, and even reaching it fails the gap check identically
+src/storage/migrate.c:205	nonzero return variants are indistinguishable, the caller compares against zero
+src/storage/migrate.c:207	nonzero return variants are indistinguishable, the caller compares against zero
+src/storage/migrate.c:217	nonzero return variants are indistinguishable, the caller compares against zero
+src/storage/migrate.c:219	predecessor want equals current plus one by the contiguity the same loop enforces, the first pending index resolves identically
+src/storage/migrate.c:225	pending flag is consumed as a boolean, any nonzero value is equivalent
+src/storage/migrate.c:241	capacity arms lie beyond the 260 platform path limit, no reachable directory nesting reaches them
+src/storage/migrate.c:247	read failure arm requires the migration file to vanish between collect and read, unreachable without a race
+src/storage/migrate.c:253	capacity arms lie beyond the 260 platform path limit, the pragma fits for every reachable version
+src/storage/migrate.c:255	read failure arm requires the migration file to vanish between collect and read, unreachable without a race
+src/storage/migrate.c:270	nonzero rc variants are indistinguishable, the caller compares against zero
+src/storage/migrate.c:277	nonzero return variants are indistinguishable, the caller compares against zero

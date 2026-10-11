@@ -11,6 +11,7 @@
 
 #include <sqlite3.h>
 
+#include "../src/config/config.h"
 #include "../src/storage/db.h"
 #include "framework.h"
 
@@ -53,6 +54,35 @@ static int file_exists(const char *path) {
         return 0;
     fclose(f);
     return 1;
+}
+
+static long file_size(const char *path) {
+    FILE *f = fopen(path, "rb");
+    if (f == NULL)
+        return -1;
+    fseek(f, 0, SEEK_END);
+    long size = ftell(f);
+    fclose(f);
+    return size;
+}
+
+static int file_prefix_eq(const char *a, const char *b, size_t n) {
+    FILE *fa = fopen(a, "rb");
+    FILE *fb = fopen(b, "rb");
+    if (fa == NULL || fb == NULL) {
+        if (fa != NULL)
+            fclose(fa);
+        if (fb != NULL)
+            fclose(fb);
+        return 0;
+    }
+    char ba[64];
+    char bb[64];
+    size_t na = fread(ba, 1, n, fa);
+    size_t nb = fread(bb, 1, n, fb);
+    fclose(fa);
+    fclose(fb);
+    return na == n && nb == n && memcmp(ba, bb, n) == 0;
 }
 
 static int copy_file(const char *from, const char *to) {
@@ -159,6 +189,146 @@ CT_SUITE(db_open) {
     CT_ASSERT_STR_EQ(mode, "wal");
     ct_db_close(db);
     cleanup_db_files(near_path);
+}
+
+CT_SUITE(migrate_name_edges) {
+    make_dir("build");
+    make_dir(CT_TEST_DIR);
+    make_dir(CT_TEST_DIR "/mig1x");
+    make_dir(CT_TEST_DIR "/migtxt");
+    make_dir(CT_TEST_DIR "/migcmp");
+    make_dir(CT_TEST_DIR "/mig10");
+    make_dir(CT_TEST_DIR "/miglen");
+    remove_file(CT_TEST_DIR "/mig1x/1x.sql");
+    remove_file(CT_TEST_DIR "/migtxt/1_x.txt");
+    remove_file(CT_TEST_DIR "/migcmp/2_z.sql");
+    remove_file(CT_TEST_DIR "/migcmp/03_a.sql");
+    remove_file(CT_TEST_DIR "/mig10/10_x.sql");
+    remove_file(CT_TEST_DIR "/miglen/2_.sql");
+
+    sqlite3 *db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/mig1x/001_init.sql"));
+    CT_ASSERT(write_file(CT_TEST_DIR "/mig1x/1x.sql", "CREATE TABLE nope(id INTEGER);\n"));
+    remove_file(CT_TEST_DIR "/mig1x/x1_y.sql");
+    CT_ASSERT(write_file(CT_TEST_DIR "/mig1x/x1_y.sql", "CREATE TABLE nope2(id INTEGER);\n"));
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/mig1x"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 1);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/migtxt/001_init.sql"));
+    CT_ASSERT(write_file(CT_TEST_DIR "/migtxt/1_x.txt", "CREATE TABLE nope(id INTEGER);\n"));
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migtxt"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 1);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/migcmp/001_init.sql"));
+    CT_ASSERT(write_file(CT_TEST_DIR "/migcmp/2_z.sql", "CREATE TABLE cmp2(id INTEGER);\n"));
+    CT_ASSERT(write_file(CT_TEST_DIR "/migcmp/03_a.sql", "CREATE TABLE cmp3(id INTEGER);\n"));
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migcmp"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 3);
+    CT_ASSERT_EQ(query_int(db, "SELECT count(*) FROM cmp2"), 0);
+    CT_ASSERT_EQ(query_int(db, "SELECT count(*) FROM cmp3"), 0);
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/mig1x") != 0);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/mig10/001_init.sql"));
+    CT_ASSERT(write_file(CT_TEST_DIR "/mig10/10_x.sql", "CREATE TABLE nope(id INTEGER);\n"));
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/mig10") != 0);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/miglen/001_init.sql"));
+    CT_ASSERT(write_file(CT_TEST_DIR "/miglen/2_.sql", "CREATE TABLE len2(id INTEGER);\n"));
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/miglen"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 2);
+    CT_ASSERT_EQ(query_int(db, "SELECT count(*) FROM sqlite_master WHERE name = 'len2'"), 1);
+    ct_db_close(db);
+
+    make_dir(CT_TEST_DIR "/migbig");
+    make_dir(CT_TEST_DIR "/migmany");
+    make_dir(CT_TEST_DIR "/migempty");
+    make_dir(CT_TEST_DIR "/migovf");
+    remove_file(CT_TEST_DIR "/migbig/002_big.sql");
+    remove_file(CT_TEST_DIR "/migovf/99999999999999999999_ovf.sql");
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/migbig/001_init.sql"));
+    char big[CT_MIG_COPY_BUF + 160];
+    memset(big, '-', sizeof big);
+    memcpy(big, "-- ", 3);
+    big[CT_MIG_COPY_BUF + 100] = '\n';
+    memcpy(big + CT_MIG_COPY_BUF + 101, "CREATE TABLE big_end(id INTEGER);\n", 34);
+    big[CT_MIG_COPY_BUF + 135] = '\0';
+    CT_ASSERT(write_file(CT_TEST_DIR "/migbig/002_big.sql", big));
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migbig"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 2);
+    CT_ASSERT_EQ(query_int(db, "SELECT count(*) FROM sqlite_master WHERE name = 'big_end'"), 1);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/migmany/001_init.sql"));
+    char name[CT_DB_PATH_MAX];
+    for (int v = 2; v <= 10; v++) {
+        snprintf(name, sizeof name, "%s/migmany/%03d_step.sql", CT_TEST_DIR, v);
+        remove_file(name);
+        char body[64];
+        snprintf(body, sizeof body, "-- step %d\n", v);
+        CT_ASSERT(write_file(name, body));
+    }
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migmany"), 0);
+    CT_ASSERT_EQ(ct_db_version(db), 10);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT(copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/migovf/001_init.sql"));
+    CT_ASSERT(write_file(CT_TEST_DIR "/migovf/99999999999999999999_ovf.sql", "-- ovf\n"));
+    CT_ASSERT(ct_db_migrate(db, CT_TEST_DIR "/migovf") != 0);
+    CT_ASSERT_EQ(ct_db_version(db), 0);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT_EQ(ct_db_migrate(db, "db/migrations"), 0);
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/migempty"), 0);
+    CT_ASSERT(ct_db_migrate(NULL, "db/migrations") != 0);
+    CT_ASSERT(ct_db_migrate(db, NULL) != 0);
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/mig1x"), 0);
+    ct_db_close(db);
+
+    const char *noop_path = CT_TEST_DIR "/noop.db";
+    cleanup_db_files(noop_path);
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, noop_path), SQLITE_OK);
+    CT_ASSERT_EQ(ct_db_migrate(db, "db/migrations"), 0);
+    char noop_bak[512];
+    snprintf(noop_bak, sizeof noop_bak, "%s.bak", noop_path);
+    remove_file(noop_bak);
+    CT_ASSERT_EQ(ct_db_migrate(db, "db/migrations"), 0);
+    CT_ASSERT(!file_exists(noop_bak));
+    ct_db_close(db);
+    cleanup_db_files(noop_path);
+
+    cleanup_db_files("x");
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, "x"), SQLITE_OK);
+    CT_ASSERT_EQ(ct_db_migrate(db, "db/migrations"), 0);
+    CT_ASSERT_EQ(ct_db_migrate(db, CT_TEST_DIR "/miglen"), 0);
+    CT_ASSERT(file_exists("x.bak"));
+    CT_ASSERT(file_prefix_eq("x", "x.bak", 15));
+    CT_ASSERT_EQ(file_size("x.bak"), file_size("x"));
+    ct_db_close(db);
+    cleanup_db_files("x");
 }
 
 CT_SUITE(migrate) {
