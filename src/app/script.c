@@ -730,7 +730,7 @@ static int ct_script_step_trainer(ct_app *app, ct_script_rt *rt, const ct_script
             return ct_script_fail(err, cap, c, "classification failed", CT_SCRIPT_EXIT_RUN);
         }
         memset(&rt->parts, 0, sizeof rt->parts);
-        if (ct_score_alg(res.seq, res.len, &app->cfg, &rt->parts) != CT_SCORE_OK) {
+        if (ct_score_alg(res.seq, res.len, &app->cfg, rt->orbit, &rt->parts) != CT_SCORE_OK) {
             return ct_script_fail(err, cap, c, "scoring failed", CT_SCRIPT_EXIT_RUN);
         }
         int scheme = ct_letter_scheme_default_id(app->db);

@@ -35,7 +35,8 @@ typedef struct {
     double total;
 } ct_score_parts;
 
-int ct_score_alg(const ct_move *seq, int count, const ct_config *cfg, ct_score_parts *out);
+int ct_score_alg(const ct_move *seq, int count, const ct_config *cfg, ct_orbit orbit,
+                 ct_score_parts *out);
 int ct_score_parts_json(const ct_score_parts *p, char *out, unsigned cap);
 int ct_count_qtm(const ct_move *seq, int count);
 int ct_count_regrips(const ct_move *seq, int count);

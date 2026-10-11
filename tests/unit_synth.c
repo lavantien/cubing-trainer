@@ -472,7 +472,7 @@ CT_SUITE(unit_synth_scoring) {
         CT_ASSERT(res.found);
         CT_ASSERT(test_case_solved(orbit, buffer, pair->t1, pair->t2, res.seq, res.len));
         ct_score_parts res_score;
-        CT_ASSERT_EQ(ct_score_alg(res.seq, res.len, &full, &res_score), CT_SCORE_OK);
+        CT_ASSERT_EQ(ct_score_alg(res.seq, res.len, &full, orbit, &res_score), CT_SCORE_OK);
         ct_synth_result single;
         memset(&single, 0, sizeof single);
         CT_ASSERT_EQ(ct_synth_target(orbit, buffer, pair->t1, pair->t2, &one_cand, &single), 0);
@@ -480,7 +480,8 @@ CT_SUITE(unit_synth_scoring) {
             with_single++;
             CT_ASSERT(test_case_solved(orbit, buffer, pair->t1, pair->t2, single.seq, single.len));
             ct_score_parts single_score;
-            CT_ASSERT_EQ(ct_score_alg(single.seq, single.len, &full, &single_score), CT_SCORE_OK);
+            CT_ASSERT_EQ(ct_score_alg(single.seq, single.len, &full, orbit, &single_score),
+                         CT_SCORE_OK);
             if (res_score.total <= single_score.total + 1e-9) {
                 dominated++;
             }
@@ -489,7 +490,8 @@ CT_SUITE(unit_synth_scoring) {
             with_direct++;
             CT_ASSERT(res.found);
             ct_score_parts direct_score;
-            CT_ASSERT_EQ(ct_score_alg(direct.seq, direct.len, &full, &direct_score), CT_SCORE_OK);
+            CT_ASSERT_EQ(ct_score_alg(direct.seq, direct.len, &full, orbit, &direct_score),
+                         CT_SCORE_OK);
             if (res_score.total < direct_score.total) {
                 improved++;
             }

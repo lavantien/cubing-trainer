@@ -10,6 +10,11 @@ static ct_move mv(int face, int quarter) {
     return m;
 }
 
+static ct_move sl(int face, int quarter) {
+    ct_move m = {face, CT_GEN_SLICE_DEPTH, CT_GEN_SLICE_DEPTH, quarter};
+    return m;
+}
+
 static int t_bit_index(unsigned bit) {
     for (int i = 0; i < CT_FACE_COUNT; i++) {
         if ((1u << i) == bit) {
@@ -79,23 +84,74 @@ CT_SUITE(score_subset) {
     ct_move seq[3] = {mv(CT_FACE_R, CT_SCORE_QUARTER_CW), mv(CT_FACE_L, CT_SCORE_QUARTER_CW),
                       mv(CT_FACE_F, CT_SCORE_QUARTER_CW)};
     ct_score_parts p;
-    CT_ASSERT_EQ(ct_score_alg(seq, 3, &c, &p), CT_SCORE_OK);
+    CT_ASSERT_EQ(ct_score_alg(seq, 3, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
     double want = t_subset_of(&c, CT_FACE_L) + t_subset_of(&c, CT_FACE_F);
     CT_ASSERT_DBL_EQ(p.subset_penalty, want, 1e-12);
 
     ct_move preferred[3] = {mv(CT_FACE_R, CT_SCORE_QUARTER_CW),
                             mv(CT_FACE_U, CT_SCORE_QUARTER_DOUBLE),
                             mv(CT_FACE_D, CT_SCORE_QUARTER_CCW)};
-    CT_ASSERT_EQ(ct_score_alg(preferred, 3, &c, &p), CT_SCORE_OK);
+    CT_ASSERT_EQ(ct_score_alg(preferred, 3, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
     CT_ASSERT_DBL_EQ(p.subset_penalty, 0.0, 1e-12);
 
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "RU"), 0);
-    CT_ASSERT_EQ(ct_score_alg(seq, 3, &c, &p), CT_SCORE_OK);
+    CT_ASSERT_EQ(ct_score_alg(seq, 3, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
     want = t_subset_of(&c, CT_FACE_L) + t_subset_of(&c, CT_FACE_F);
     CT_ASSERT_DBL_EQ(p.subset_penalty, want, 1e-12);
 
-    CT_ASSERT_EQ(ct_score_alg(seq, 0, &c, &p), CT_SCORE_OK);
+    CT_ASSERT_EQ(ct_score_alg(seq, 0, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
     CT_ASSERT_DBL_EQ(p.subset_penalty, 0.0, 1e-12);
+}
+
+CT_SUITE(score_subset_edge) {
+    ct_config c = ct_config_defaults();
+    unsigned slices = CT_MOVE_BIT_M | CT_MOVE_BIT_E | CT_MOVE_BIT_S;
+    CT_ASSERT_EQ(c.gen.preferred_moves, CT_GEN_DEFAULT_PREFERRED_MOVES);
+    CT_ASSERT_EQ(c.gen.preferred_moves_edge, CT_GEN_DEFAULT_PREFERRED_MOVES_EDGE);
+    CT_ASSERT_EQ(c.gen.preferred_moves_edge, CT_GEN_DEFAULT_PREFERRED_MOVES | slices);
+    CT_ASSERT_EQ(c.gen.preferred_moves_edge & (CT_MOVE_BIT_L | CT_MOVE_BIT_F | CT_MOVE_BIT_B), 0u);
+
+    ct_score_parts p;
+
+    ct_move mes[3] = {sl(CT_FACE_L, CT_SCORE_QUARTER_CW), sl(CT_FACE_D, CT_SCORE_QUARTER_DOUBLE),
+                      sl(CT_FACE_F, CT_SCORE_QUARTER_CCW)};
+    CT_ASSERT_EQ(ct_score_alg(mes, 3, &c, CT_ORBIT_EDGE, &p), CT_SCORE_OK);
+    CT_ASSERT_DBL_EQ(p.subset_penalty, 0.0, 1e-12);
+
+    ct_move mixed[6] = {mv(CT_FACE_R, CT_SCORE_QUARTER_CW),     sl(CT_FACE_L, CT_SCORE_QUARTER_CW),
+                        mv(CT_FACE_U, CT_SCORE_QUARTER_DOUBLE), sl(CT_FACE_D, CT_SCORE_QUARTER_CW),
+                        mv(CT_FACE_D, CT_SCORE_QUARTER_CCW),    sl(CT_FACE_F, CT_SCORE_QUARTER_CW)};
+    CT_ASSERT_EQ(ct_score_alg(mixed, 6, &c, CT_ORBIT_EDGE, &p), CT_SCORE_OK);
+    CT_ASSERT_DBL_EQ(p.subset_penalty, 0.0, 1e-12);
+
+    CT_ASSERT_EQ(ct_score_alg(mes, 3, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
+    double corner_want =
+        t_subset_of(&c, CT_FACE_L) + t_subset_of(&c, CT_FACE_D) + t_subset_of(&c, CT_FACE_F);
+    CT_ASSERT_DBL_EQ(p.subset_penalty, corner_want, 1e-12);
+    CT_ASSERT_DBL_EQ(corner_want, 2 * CT_GEN_PENALTY_OTHER, 1e-12);
+
+    ct_move outer_l[1] = {mv(CT_FACE_L, CT_SCORE_QUARTER_CW)};
+    CT_ASSERT_EQ(ct_score_alg(outer_l, 1, &c, CT_ORBIT_EDGE, &p), CT_SCORE_OK);
+    CT_ASSERT_DBL_EQ(p.subset_penalty, t_subset_of(&c, CT_FACE_L), 1e-12);
+
+    ct_move wide_l[1] = {{CT_FACE_L, 1, CT_GEN_SLICE_DEPTH, CT_SCORE_QUARTER_CW}};
+    CT_ASSERT_EQ(ct_score_alg(wide_l, 1, &c, CT_ORBIT_EDGE, &p), CT_SCORE_OK);
+    CT_ASSERT_DBL_EQ(p.subset_penalty, t_subset_of(&c, CT_FACE_L), 1e-12);
+
+    ct_move inner_u[1] = {sl(CT_FACE_U, CT_SCORE_QUARTER_CW)};
+    CT_ASSERT_EQ(ct_score_alg(inner_u, 1, &c, CT_ORBIT_EDGE, &p), CT_SCORE_OK);
+    CT_ASSERT_DBL_EQ(p.subset_penalty, 0.0, 1e-12);
+
+    ct_move inner_b[1] = {sl(CT_FACE_B, CT_SCORE_QUARTER_CW)};
+    CT_ASSERT_EQ(ct_score_alg(inner_b, 1, &c, CT_ORBIT_EDGE, &p), CT_SCORE_OK);
+    CT_ASSERT_DBL_EQ(p.subset_penalty, t_subset_of(&c, CT_FACE_B), 1e-12);
+
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves_edge", "RUD"), 0);
+    CT_ASSERT_EQ(ct_score_alg(mes, 3, &c, CT_ORBIT_EDGE, &p), CT_SCORE_OK);
+    double stripped = c.gen.penalty[t_bit_index(CT_MOVE_BIT_M)] +
+                      c.gen.penalty[t_bit_index(CT_MOVE_BIT_E)] +
+                      c.gen.penalty[t_bit_index(CT_MOVE_BIT_S)];
+    CT_ASSERT_DBL_EQ(p.subset_penalty, stripped, 1e-12);
 }
 
 CT_SUITE(score_finger) {
@@ -105,15 +161,15 @@ CT_SUITE(score_finger) {
     int faces[6] = {CT_FACE_U, CT_FACE_D, CT_FACE_L, CT_FACE_R, CT_FACE_F, CT_FACE_B};
     for (int i = 0; i < 6; i++) {
         ct_move cw = mv(faces[i], CT_SCORE_QUARTER_CW);
-        CT_ASSERT_EQ(ct_score_alg(&cw, 1, &c, &p), CT_SCORE_OK);
+        CT_ASSERT_EQ(ct_score_alg(&cw, 1, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
         CT_ASSERT_DBL_EQ(p.finger_penalty, t_finger_cost(&c, faces[i], CT_FINGER_DIR_CW), 1e-12);
 
         ct_move ccw = mv(faces[i], CT_SCORE_QUARTER_CCW);
-        CT_ASSERT_EQ(ct_score_alg(&ccw, 1, &c, &p), CT_SCORE_OK);
+        CT_ASSERT_EQ(ct_score_alg(&ccw, 1, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
         CT_ASSERT_DBL_EQ(p.finger_penalty, t_finger_cost(&c, faces[i], CT_FINGER_DIR_CCW), 1e-12);
 
         ct_move dbl = mv(faces[i], CT_SCORE_QUARTER_DOUBLE);
-        CT_ASSERT_EQ(ct_score_alg(&dbl, 1, &c, &p), CT_SCORE_OK);
+        CT_ASSERT_EQ(ct_score_alg(&dbl, 1, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
         CT_ASSERT_DBL_EQ(p.finger_penalty, t_finger_cost(&c, faces[i], CT_FINGER_DIR_CW), 1e-12);
     }
 
@@ -122,16 +178,16 @@ CT_SUITE(score_finger) {
     ct_move u = mv(CT_FACE_U, CT_SCORE_QUARTER_CW);
     ct_move up = mv(CT_FACE_U, CT_SCORE_QUARTER_CCW);
     ct_move u2 = mv(CT_FACE_U, CT_SCORE_QUARTER_DOUBLE);
-    CT_ASSERT_EQ(ct_score_alg(&u, 1, &c, &p), CT_SCORE_OK);
+    CT_ASSERT_EQ(ct_score_alg(&u, 1, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
     CT_ASSERT_DBL_EQ(p.finger_penalty, 0.1, 1e-12);
-    CT_ASSERT_EQ(ct_score_alg(&up, 1, &c, &p), CT_SCORE_OK);
+    CT_ASSERT_EQ(ct_score_alg(&up, 1, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
     CT_ASSERT_DBL_EQ(p.finger_penalty, 0.3, 1e-12);
-    CT_ASSERT_EQ(ct_score_alg(&u2, 1, &c, &p), CT_SCORE_OK);
+    CT_ASSERT_EQ(ct_score_alg(&u2, 1, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
     CT_ASSERT_DBL_EQ(p.finger_penalty, 0.1, 1e-12);
 
     ct_move seq[3] = {mv(CT_FACE_R, CT_SCORE_QUARTER_CW), mv(CT_FACE_U, CT_SCORE_QUARTER_CCW),
                       mv(CT_FACE_F, CT_SCORE_QUARTER_DOUBLE)};
-    CT_ASSERT_EQ(ct_score_alg(seq, 3, &c, &p), CT_SCORE_OK);
+    CT_ASSERT_EQ(ct_score_alg(seq, 3, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
     double want = t_finger_cost(&c, CT_FACE_R, CT_FINGER_DIR_CW) + 0.3 +
                   t_finger_cost(&c, CT_FACE_F, CT_FINGER_DIR_CW);
     CT_ASSERT_DBL_EQ(p.finger_penalty, want, 1e-12);
@@ -195,7 +251,7 @@ CT_SUITE(score_total) {
     ct_move seq[6] = {mv(CT_FACE_R, CT_SCORE_QUARTER_CW),  mv(CT_FACE_L, CT_SCORE_QUARTER_CW),
                       mv(CT_FACE_F, CT_SCORE_QUARTER_CW),  mv(CT_FACE_F, CT_SCORE_QUARTER_CW),
                       mv(CT_FACE_U, CT_SCORE_QUARTER_CCW), mv(CT_FACE_L, CT_SCORE_QUARTER_CCW)};
-    CT_ASSERT_EQ(ct_score_alg(seq, 6, &c, &p), CT_SCORE_OK);
+    CT_ASSERT_EQ(ct_score_alg(seq, 6, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
     CT_ASSERT_EQ(p.qtm, 6);
     double subset = 2 * t_subset_of(&c, CT_FACE_L) + 2 * t_subset_of(&c, CT_FACE_F);
     CT_ASSERT_DBL_EQ(p.subset_penalty, subset, 1e-12);
@@ -211,7 +267,7 @@ CT_SUITE(score_total) {
     CT_ASSERT_DBL_EQ(p.total, total, 1e-9);
     double base_total = p.total;
 
-    CT_ASSERT_EQ(ct_score_alg(seq, 0, &c, &p), CT_SCORE_OK);
+    CT_ASSERT_EQ(ct_score_alg(seq, 0, &c, CT_ORBIT_CORNER, &p), CT_SCORE_OK);
     CT_ASSERT_EQ(p.qtm, 0);
     CT_ASSERT_EQ(p.regrips, 0);
     CT_ASSERT_DBL_EQ(p.subset_penalty, 0.0, 1e-12);
@@ -232,7 +288,7 @@ CT_SUITE(score_total) {
         snprintf(buf, sizeof buf, "%.2f", orig + delta);
         CT_ASSERT_EQ(ct_config_set(&c2, keys[w], buf), 0);
         ct_score_parts q;
-        CT_ASSERT_EQ(ct_score_alg(seq, 6, &c2, &q), CT_SCORE_OK);
+        CT_ASSERT_EQ(ct_score_alg(seq, 6, &c2, CT_ORBIT_CORNER, &q), CT_SCORE_OK);
         CT_ASSERT_DBL_EQ(q.total - base_total, delta * comps[w], 1e-9);
     }
 }
@@ -273,7 +329,7 @@ CT_SUITE(score_json) {
     ct_config c = ct_config_defaults();
     ct_score_parts live;
     ct_move seq[2] = {mv(CT_FACE_R, CT_SCORE_QUARTER_CW), mv(CT_FACE_U, CT_SCORE_QUARTER_DOUBLE)};
-    CT_ASSERT_EQ(ct_score_alg(seq, 2, &c, &live), CT_SCORE_OK);
+    CT_ASSERT_EQ(ct_score_alg(seq, 2, &c, CT_ORBIT_CORNER, &live), CT_SCORE_OK);
     const char *live_str =
         "{\"qtm\":3,\"subset\":0.0000,\"regrip\":0,\"finger\":0.6000,\"total\":3.3000}";
     CT_ASSERT_EQ(ct_score_parts_json(&live, out, sizeof out), (int)strlen(live_str));
@@ -301,13 +357,13 @@ CT_SUITE(score_errors) {
     CT_ASSERT_EQ(ct_count_regrips(bad_quarter_lo, 1), CT_SCORE_E_MOVE);
     CT_ASSERT_EQ(ct_count_regrips(bad_quarter_hi, 1), CT_SCORE_E_MOVE);
 
-    CT_ASSERT_EQ(ct_score_alg(ok, 1, NULL, &p), CT_SCORE_E_ARG);
-    CT_ASSERT_EQ(ct_score_alg(ok, 1, &c, NULL), CT_SCORE_E_ARG);
-    CT_ASSERT_EQ(ct_score_alg(NULL, 1, &c, &p), CT_SCORE_E_ARG);
-    CT_ASSERT_EQ(ct_score_alg(ok, -1, &c, &p), CT_SCORE_E_ARG);
-    CT_ASSERT_EQ(ct_score_alg(bad_face_hi, 1, &c, &p), CT_SCORE_E_MOVE);
-    CT_ASSERT_EQ(ct_score_alg(bad_quarter_lo, 1, &c, &p), CT_SCORE_E_MOVE);
-    CT_ASSERT_EQ(ct_score_alg(bad_quarter_hi, 1, &c, &p), CT_SCORE_E_MOVE);
+    CT_ASSERT_EQ(ct_score_alg(ok, 1, NULL, CT_ORBIT_CORNER, &p), CT_SCORE_E_ARG);
+    CT_ASSERT_EQ(ct_score_alg(ok, 1, &c, CT_ORBIT_CORNER, NULL), CT_SCORE_E_ARG);
+    CT_ASSERT_EQ(ct_score_alg(NULL, 1, &c, CT_ORBIT_CORNER, &p), CT_SCORE_E_ARG);
+    CT_ASSERT_EQ(ct_score_alg(ok, -1, &c, CT_ORBIT_CORNER, &p), CT_SCORE_E_ARG);
+    CT_ASSERT_EQ(ct_score_alg(bad_face_hi, 1, &c, CT_ORBIT_CORNER, &p), CT_SCORE_E_MOVE);
+    CT_ASSERT_EQ(ct_score_alg(bad_quarter_lo, 1, &c, CT_ORBIT_CORNER, &p), CT_SCORE_E_MOVE);
+    CT_ASSERT_EQ(ct_score_alg(bad_quarter_hi, 1, &c, CT_ORBIT_CORNER, &p), CT_SCORE_E_MOVE);
 
     char out[8];
     CT_ASSERT_EQ(ct_score_parts_json(NULL, out, sizeof out), CT_SCORE_E_ARG);

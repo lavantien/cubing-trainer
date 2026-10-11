@@ -108,6 +108,20 @@ CT_SUITE(alg_hash_mask_differs) {
     CT_ASSERT(strcmp(a, b) != 0);
 }
 
+CT_SUITE(alg_hash_edge_mask_differs) {
+    ct_config cfg = ct_config_defaults();
+    ct_letter_map map;
+    identity_map(&map);
+    char a[CT_ALG_HASH_HEX_MAX];
+    char b[CT_ALG_HASH_HEX_MAX];
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   a);
+    cfg.gen.preferred_moves_edge &= ~CT_MOVE_BIT_M;
+    ct_params_hash(&cfg, 1, CT_BUFFER_FIXED, CT_3STYLE_CORNER_BUFFER, CT_3STYLE_EDGE_BUFFER, &map,
+                   b);
+    CT_ASSERT(strcmp(a, b) != 0);
+}
+
 CT_SUITE(alg_hash_fsrs_inert) {
     ct_config cfg = ct_config_defaults();
     ct_letter_map map;
@@ -246,7 +260,7 @@ CT_SUITE(alg_hash_format_pinned) {
     ct_letter_map map;
     identity_map(&map);
     static const char canon[] =
-        "7|0|0|2|b|"
+        "7|0|0|2|b|1cb|"
         "0.000000,0.000000,2.000000,0.000000,2.000000,2.000000,2.000000,2.000000,2.000000,2.000000,"
         "2.000000,2.000000|"
         "0.200000,0.200000,0.200000,0.200000,0.400000,0.400000,0.400000,0.400000,0.800000,0.800000,"
@@ -264,8 +278,8 @@ static size_t alg_canon_need(const ct_config *cfg, int scheme_id, ct_buffer_mode
                              int be) {
     char probe[2048];
     size_t need = 0;
-    need += (size_t)snprintf(probe, sizeof probe, "%d|%d|%d|%d|%x|", scheme_id, (int)mode, bc, be,
-                             cfg->gen.preferred_moves);
+    need += (size_t)snprintf(probe, sizeof probe, "%d|%d|%d|%d|%x|%x|", scheme_id, (int)mode, bc,
+                             be, cfg->gen.preferred_moves, cfg->gen.preferred_moves_edge);
     for (int i = 0; i < CT_FACE_COUNT; i++) {
         need +=
             (size_t)snprintf(probe, sizeof probe, i == 0 ? "%.6f" : ",%.6f", cfg->gen.penalty[i]);

@@ -471,10 +471,10 @@ static bool synth_validate(const ct_move *seq, int len, int orbit, int cb, int c
     return true;
 }
 
-static bool synth_fill(ct_synth_result *out, const ct_config *cfg, const ct_move *seq, int len,
-                       bool setup, bool fallback) {
+static bool synth_fill(ct_synth_result *out, const ct_config *cfg, int orbit, const ct_move *seq,
+                       int len, bool setup, bool fallback) {
     ct_score_parts parts;
-    if (ct_score_alg(seq, len, cfg, &parts) != CT_SCORE_OK) {
+    if (ct_score_alg(seq, len, cfg, orbit, &parts) != CT_SCORE_OK) {
         return false;
     }
     memcpy(out->seq, seq, (size_t)len * sizeof *seq);
@@ -903,7 +903,7 @@ int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config *cfg,
         double best_total = 0.0;
         for (int i = 0; i < cand_n; i++) {
             ct_score_parts parts;
-            if (ct_score_alg(cands[i].seq, cands[i].len, cfg, &parts) != CT_SCORE_OK) {
+            if (ct_score_alg(cands[i].seq, cands[i].len, cfg, orbit, &parts) != CT_SCORE_OK) {
                 continue;
             }
             if (best < 0 || parts.total < best_total) {
@@ -911,8 +911,8 @@ int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config *cfg,
                 best_total = parts.total;
             }
         }
-        if (best >= 0 &&
-            synth_fill(out, cfg, cands[best].seq, cands[best].len, cands[best].setup, false)) {
+        if (best >= 0 && synth_fill(out, cfg, orbit, cands[best].seq, cands[best].len,
+                                    cands[best].setup, false)) {
             return 0;
         }
     }
@@ -929,7 +929,7 @@ int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config *cfg,
                 ct_transform_simplify(seq, seq_len, simplified, CT_SYNTH_MAX_MOVES);
             if (simplified_len >= 0 &&
                 synth_validate(simplified, simplified_len, orbit, cb, c1, c2)) {
-                synth_fill(out, cfg, simplified, simplified_len, false, true);
+                synth_fill(out, cfg, orbit, simplified, simplified_len, false, true);
                 return 0;
             }
         }

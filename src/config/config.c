@@ -143,6 +143,22 @@ static int face_bit_index(unsigned face) {
     return -1;
 }
 
+static int parse_move_mask(const char *value, unsigned *out) {
+    unsigned mask = 0;
+    for (const char *p = value; *p != '\0'; p++) {
+        unsigned face = face_from_char_ci(*p);
+        if (face == 0 || (face & CT_MOVE_ROTATION_MASK) != 0) {
+            return CT_CFG_BAD_VALUE;
+        }
+        mask |= face;
+    }
+    if (mask == 0) {
+        return CT_CFG_BAD_VALUE;
+    }
+    *out = mask;
+    return CT_CFG_OK;
+}
+
 ct_config ct_config_defaults(void) {
     ct_config c;
     memset(&c, 0, sizeof c);
@@ -155,6 +171,7 @@ ct_config ct_config_defaults(void) {
     c.fsrs.factor = CT_FSRS_FACTOR;
     c.fsrs.decay = CT_FSRS_DECAY;
     c.gen.preferred_moves = CT_GEN_DEFAULT_PREFERRED_MOVES;
+    c.gen.preferred_moves_edge = CT_GEN_DEFAULT_PREFERRED_MOVES_EDGE;
     for (int i = 0; i < CT_FACE_COUNT; i++) {
         if ((1u << i) & c.gen.preferred_moves) {
             c.gen.penalty[i] = CT_GEN_PENALTY_PREFERRED;
@@ -214,19 +231,10 @@ int ct_config_set(ct_config *cfg, const char *key, const char *value) {
         return assign_double(&cfg->fsrs.w[idx], value);
     }
     if (strcmp(key, "gen.preferred_moves") == 0) {
-        unsigned mask = 0;
-        for (const char *p = value; *p != '\0'; p++) {
-            unsigned face = face_from_char_ci(*p);
-            if (face == 0 || (face & CT_MOVE_ROTATION_MASK) != 0) {
-                return CT_CFG_BAD_VALUE;
-            }
-            mask |= face;
-        }
-        if (mask == 0) {
-            return CT_CFG_BAD_VALUE;
-        }
-        cfg->gen.preferred_moves = mask;
-        return CT_CFG_OK;
+        return parse_move_mask(value, &cfg->gen.preferred_moves);
+    }
+    if (strcmp(key, "gen.preferred_moves_edge") == 0) {
+        return parse_move_mask(value, &cfg->gen.preferred_moves_edge);
     }
     if (strcmp(key, "gen.weight_len") == 0) {
         return assign_double_min_max(&cfg->gen.weight_len, value, ct_gen_weight_min,

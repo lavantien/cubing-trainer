@@ -44,6 +44,24 @@ static int score_face_bit_index(unsigned bit) {
     return -1;
 }
 
+static unsigned score_preferred_bit(const ct_move *m, ct_orbit orbit) {
+    unsigned bit = score_face_bits[m->face];
+    if (orbit != CT_ORBIT_EDGE || m->depth_from != CT_GEN_SLICE_DEPTH ||
+        m->depth_to != CT_GEN_SLICE_DEPTH) {
+        return bit;
+    }
+    switch (m->face) {
+    case CT_FACE_L:
+        return CT_MOVE_BIT_M;
+    case CT_FACE_D:
+        return CT_MOVE_BIT_E;
+    case CT_FACE_F:
+        return CT_MOVE_BIT_S;
+    default:
+        return bit;
+    }
+}
+
 int ct_count_qtm(const ct_move *seq, int count) {
     int rc = score_check_seq(seq, count);
     if (rc != CT_SCORE_OK) {
@@ -90,7 +108,8 @@ int ct_count_regrips(const ct_move *seq, int count) {
     return regrips;
 }
 
-int ct_score_alg(const ct_move *seq, int count, const ct_config *cfg, ct_score_parts *out) {
+int ct_score_alg(const ct_move *seq, int count, const ct_config *cfg, ct_orbit orbit,
+                 ct_score_parts *out) {
     if (cfg == NULL || out == NULL) {
         return CT_SCORE_E_ARG;
     }
@@ -98,20 +117,23 @@ int ct_score_alg(const ct_move *seq, int count, const ct_config *cfg, ct_score_p
     if (rc != CT_SCORE_OK) {
         return rc;
     }
+    unsigned preferred =
+        orbit == CT_ORBIT_EDGE ? cfg->gen.preferred_moves_edge : cfg->gen.preferred_moves;
     int qtm = 0;
     double subset = 0.0;
     double finger = 0.0;
     for (int i = 0; i < count; i++) {
-        unsigned bit = score_face_bits[seq[i].face];
-        int idx = score_face_bit_index(bit);
+        unsigned face_bit = score_face_bits[seq[i].face];
+        int idx = score_face_bit_index(face_bit);
         int quarter = seq[i].quarter;
         if (quarter == CT_SCORE_QUARTER_DOUBLE) {
             qtm += CT_SCORE_QUARTER_DOUBLE;
         } else if (quarter == CT_SCORE_QUARTER_CW || quarter == CT_SCORE_QUARTER_CCW) {
             qtm += 1;
         }
-        if ((cfg->gen.preferred_moves & bit) == 0) {
-            subset += cfg->gen.penalty[idx];
+        unsigned pref_bit = score_preferred_bit(&seq[i], orbit);
+        if ((preferred & pref_bit) == 0) {
+            subset += cfg->gen.penalty[score_face_bit_index(pref_bit)];
         }
         int dir = quarter == CT_SCORE_QUARTER_CCW ? CT_FINGER_DIR_CCW : CT_FINGER_DIR_CW;
         finger += cfg->gen.finger_cost[idx][dir];

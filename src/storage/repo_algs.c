@@ -137,8 +137,8 @@ static void ct_alg_canonical(const ct_config *cfg, int scheme_id, ct_buffer_mode
                              int buffer_corner, int buffer_edge, const ct_letter_map *map,
                              char *out, size_t cap) {
     size_t used = 0;
-    int ok = ct_alg_emit(out, cap, &used, "%d|%d|%d|%d|%x|", scheme_id, (int)mode, buffer_corner,
-                         buffer_edge, cfg->gen.preferred_moves);
+    int ok = ct_alg_emit(out, cap, &used, "%d|%d|%d|%d|%x|%x|", scheme_id, (int)mode, buffer_corner,
+                         buffer_edge, cfg->gen.preferred_moves, cfg->gen.preferred_moves_edge);
     for (int i = 0; ok == CT_REPO_OK && i < CT_FACE_COUNT; i++) {
         ok = ct_alg_emit(out, cap, &used, i == 0 ? "%.6f" : ",%.6f", cfg->gen.penalty[i]);
     }

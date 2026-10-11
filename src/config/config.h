@@ -138,6 +138,9 @@ typedef enum ct_cfg_status {
 #define CT_FSRS_RETENTION_MIN 0.7
 #define CT_FSRS_RETENTION_MAX 0.99
 #define CT_GEN_DEFAULT_PREFERRED_MOVES ((1u << 0) | (1u << 1) | (1u << 3))
+#define CT_GEN_DEFAULT_PREFERRED_MOVES_EDGE                                                        \
+    (CT_GEN_DEFAULT_PREFERRED_MOVES | CT_MOVE_BIT_M | CT_MOVE_BIT_E | CT_MOVE_BIT_S)
+#define CT_GEN_SLICE_DEPTH 2
 #define CT_GEN_PENALTY_PREFERRED 0.0
 #define CT_GEN_PENALTY_OTHER 2.0
 #define CT_GEN_WEIGHT_LEN 1.0
@@ -332,6 +335,7 @@ extern const double ct_finger_defaults[CT_FINGER_FACE_COUNT][CT_FINGER_DIR_COUNT
 
 typedef struct ct_gen_cfg {
     unsigned preferred_moves;
+    unsigned preferred_moves_edge;
     double penalty[CT_FACE_COUNT];
     double weight_len;
     double weight_subset;

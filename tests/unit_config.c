@@ -10,6 +10,8 @@ static const double spec_weights[CT_FSRS_WEIGHT_COUNT] = {
     1.01925, 1.9395,  0.11,  0.29605,  2.2698, 0.2315, 2.9898, 0.51655, 0.6621};
 
 static const unsigned spec_default_mask = (1u << 0) | (1u << 1) | (1u << 3);
+static const unsigned spec_default_edge_mask =
+    (1u << 0) | (1u << 1) | (1u << 3) | (1u << 6) | (1u << 7) | (1u << 8);
 
 static int face_index(char c) {
     for (int i = 0; i < CT_FACE_COUNT; i++) {
@@ -43,6 +45,8 @@ CT_SUITE(config_constants) {
     CT_ASSERT_EQ(CT_MOVE_BIT_Y, 1024);
     CT_ASSERT_EQ(CT_MOVE_BIT_Z, 2048);
     CT_ASSERT_EQ(CT_GEN_DEFAULT_PREFERRED_MOVES, 11);
+    CT_ASSERT_EQ(CT_GEN_DEFAULT_PREFERRED_MOVES_EDGE, 459);
+    CT_ASSERT_EQ(CT_GEN_SLICE_DEPTH, 2);
     CT_ASSERT_DBL_EQ(CT_GEN_PENALTY_PREFERRED, 0.0, 1e-12);
     CT_ASSERT_DBL_EQ(CT_GEN_PENALTY_OTHER, 2.0, 1e-12);
     CT_ASSERT_DBL_EQ(CT_GEN_WEIGHT_LEN, 1.0, 1e-12);
@@ -203,6 +207,7 @@ CT_SUITE(config_defaults) {
     CT_ASSERT_DBL_EQ(c.fsrs.factor, CT_FSRS_FACTOR, 1e-15);
     CT_ASSERT_DBL_EQ(c.fsrs.decay, CT_FSRS_DECAY, 1e-12);
     CT_ASSERT_EQ(c.gen.preferred_moves, spec_default_mask);
+    CT_ASSERT_EQ(c.gen.preferred_moves_edge, spec_default_edge_mask);
     for (int i = 0; i < CT_FACE_COUNT; i++) {
         double want =
             ((1u << i) & spec_default_mask) ? CT_GEN_PENALTY_PREFERRED : CT_GEN_PENALTY_OTHER;
@@ -236,6 +241,13 @@ CT_SUITE(config_set_roundtrip) {
 
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "LF"), 0);
     CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_L | CT_MOVE_BIT_F);
+    CT_ASSERT_EQ(c.gen.preferred_moves_edge, spec_default_edge_mask);
+
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves_edge", "MES"), 0);
+    CT_ASSERT_EQ(c.gen.preferred_moves_edge, CT_MOVE_BIT_M | CT_MOVE_BIT_E | CT_MOVE_BIT_S);
+    CT_ASSERT_EQ(c.gen.preferred_moves, CT_MOVE_BIT_L | CT_MOVE_BIT_F);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves_edge", "rudmes"), 0);
+    CT_ASSERT_EQ(c.gen.preferred_moves_edge, spec_default_edge_mask);
 
     CT_ASSERT_EQ(ct_config_set(&c, "gen.weight_len", "0.5"), 0);
     CT_ASSERT_DBL_EQ(c.gen.weight_len, 0.5, 1e-12);
@@ -353,6 +365,12 @@ CT_SUITE(config_set_errors) {
     CT_ASSERT_EQ(c.gen.preferred_moves, spec_default_mask);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "R "), -2);
     CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves", "9"), -2);
+
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves_edge", "x"), -2);
+    CT_ASSERT_EQ(c.gen.preferred_moves_edge, spec_default_edge_mask);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves_edge", "R "), -2);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves_edge", ""), -2);
+    CT_ASSERT_EQ(ct_config_set(&c, "gen.preferred_moves_edge", "RUQ"), -2);
 
     CT_ASSERT_EQ(ct_config_set(&c, "db.filename", ""), -2);
     CT_ASSERT_STR_EQ(c.db.filename, CT_DB_FILENAME);
