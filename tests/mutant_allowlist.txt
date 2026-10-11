@@ -528,12 +528,12 @@ src/config/config.c:108	the equality arm selects the clamp value the parsed long
 src/config/config.c:113	the parsed initializer is a dead store, parse_long overwrites it on the only path that reads it
 src/config/config.c:138	the extra iteration compares 1u << 12 against single bit face tokens that never reach it
 src/config/config.c:143	the fallback is dead, every caller passes a nonzero single bit token the loop always finds
-src/config/config.c:148	every config field is assigned after the memset, the fill byte is unobservable, the two db name arrays are only ever read up to their terminator
-src/config/config.c:158	the skipped first iteration is the U face, preferred in the default mask with penalty 0, the memset zero already holds the value the loop would write
-src/config/config.c:208	the errno preset mutant to 1 or -1 never equals ERANGE and strtol leaves errno untouched on success, the range check decides identically
-src/config/config.c:249	the index mutant reads the matched underscore byte before the face, never nul, and the empty face still returns UNKNOWN through the token guard
-src/config/config.c:253	the sentinel mutant -2 passes the same idx < 0 rejection, only the sign is consumed
-src/config/config.c:263	the sentinel mutant -2 passes the same idx < 0 rejection, only the sign is consumed
+src/config/config.c:164	every config field is assigned after the memset, the fill byte is unobservable, the two db name arrays are only ever read up to their terminator
+src/config/config.c:175	the skipped first iteration is the U face, preferred in the default mask with penalty 0, the memset zero already holds the value the loop would write
+src/config/config.c:225	the errno preset mutant to 1 or -1 never equals ERANGE and strtol leaves errno untouched on success, the range check decides identically
+src/config/config.c:257	the index mutant reads the matched underscore byte before the face, never nul, and the empty face still returns UNKNOWN through the token guard
+src/config/config.c:261	the sentinel mutant -2 passes the same idx < 0 rejection, only the sign is consumed
+src/config/config.c:271	the sentinel mutant -2 passes the same idx < 0 rejection, only the sign is consumed
 src/ui/screen_trainer.c:10	layout shift constant, consumed only by the raylib draw path no headless suite exercises
 src/ui/screen_trainer.c:11	layout divisor, consumed only by the raylib draw path no headless suite exercises
 src/ui/screen_trainer.c:12	layout shift constant, consumed only by the raylib draw path no headless suite exercises
