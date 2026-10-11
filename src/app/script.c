@@ -7,6 +7,7 @@
 #include <string.h>
 
 #include "app/script_internal.h"
+#include "app/shots.h"
 #include "engine/notation.h"
 #include "gen/synth.h"
 #include "storage/repo_settings.h"
@@ -31,6 +32,7 @@ static const ct_script_word CT_SCRIPT_WORDS[] = {
     {"cards_delete", CT_SCRIPT_CARDS_DELETE, 0},
     {"cfop_populate", CT_SCRIPT_CFOP_POPULATE, 1},
     {"due", CT_SCRIPT_DUE, CT_SCRIPT_ARGC_3},
+    {"due_in", CT_SCRIPT_DUE_IN, CT_SCRIPT_ARGC_3},
     {"review_begin", CT_SCRIPT_REVIEW_BEGIN, 0},
     {"review_reveal", CT_SCRIPT_REVIEW_REVEAL, 0},
     {"review_grade", CT_SCRIPT_REVIEW_GRADE, 1},
@@ -44,6 +46,14 @@ static const ct_script_word CT_SCRIPT_WORDS[] = {
     {"trainer_case", CT_SCRIPT_TRAINER_CASE, 1},
     {"trainer_generate", CT_SCRIPT_TRAINER_GENERATE, 0},
     {"trainer_save", CT_SCRIPT_TRAINER_SAVE, 1},
+    {"shot_menu", CT_SCRIPT_SHOT_MENU, CT_SCRIPT_ARGC_1},
+    {"shot_trainer", CT_SCRIPT_SHOT_TRAINER, CT_SCRIPT_ARGC_5},
+    {"shot_chart", CT_SCRIPT_SHOT_CHART, CT_SCRIPT_ARGC_5},
+    {"shot_review", CT_SCRIPT_SHOT_REVIEW, CT_SCRIPT_ARGC_2},
+    {"shot_cards", CT_SCRIPT_SHOT_CARDS, CT_SCRIPT_ARGC_3},
+    {"shot_settings", CT_SCRIPT_SHOT_SETTINGS, CT_SCRIPT_ARGC_2},
+    {"shot_stats", CT_SCRIPT_SHOT_STATS, CT_SCRIPT_ARGC_1},
+    {"reviewed", CT_SCRIPT_REVIEWED, 6},
 };
 
 static const ct_script_word CT_SCRIPT_EXPECTS[] = {
@@ -55,45 +65,6 @@ static const ct_script_word CT_SCRIPT_EXPECTS[] = {
     {"cfg", CT_SCRIPT_EXPECT_CFG, CT_SCRIPT_ARGC_3},
     {"algcount", CT_SCRIPT_EXPECT_ALGCOUNT, 2},
     {"genalg", CT_SCRIPT_EXPECT_GENALG, CT_SCRIPT_ARGC_4},
-};
-
-static const struct {
-    const char *word;
-    ct_grade grade;
-} CT_SCRIPT_GRADES[] = {
-    {"again", CT_AGAIN},
-    {"hard", CT_HARD},
-    {"good", CT_GOOD},
-    {"easy", CT_EASY},
-};
-
-static const struct {
-    const char *word;
-    ct_event event;
-} CT_SCRIPT_EVENTS[] = {
-    {"3x3", CT_EVENT_3X3},           {"2x2", CT_EVENT_2X2},
-    {"3bld", CT_EVENT_3BLD},         {"4bld", CT_EVENT_4BLD},
-    {"5bld", CT_EVENT_5BLD},         {"mbld", CT_EVENT_MULTI_BLD},
-    {"fmc", CT_EVENT_FMC},           {"oh", CT_EVENT_OH},
-    {"4x4", CT_EVENT_4X4},           {"5x5", CT_EVENT_5X5},
-    {"6x6", CT_EVENT_6X6},           {"7x7", CT_EVENT_7X7},
-    {"clock", CT_EVENT_CLOCK},       {"megaminx", CT_EVENT_MEGAMINX},
-    {"pyraminx", CT_EVENT_PYRAMINX}, {"skewb", CT_EVENT_SKEWB},
-    {"sq1", CT_EVENT_SQUARE1},       {"fto", CT_EVENT_FTO},
-};
-
-static const struct {
-    const char *word;
-    ct_method method;
-} CT_SCRIPT_METHODS[] = {
-    {"cfop", CT_METHOD_CFOP},       {"3style", CT_METHOD_3STYLE},
-    {"op", CT_METHOD_OLD_POCHMANN}, {"m2", CT_METHOD_M2},
-    {"u2", CT_METHOD_U2},           {"r2", CT_METHOD_R2},
-    {"lbl", CT_METHOD_LBL},         {"l4e", CT_METHOD_L4E},
-    {"4lll", CT_METHOD_4LLL},       {"sarah", CT_METHOD_SARAH_INTERMEDIATE},
-    {"yau", CT_METHOD_YAU},         {"reduction", CT_METHOD_REDUCTION},
-    {"cll", CT_METHOD_CLL},         {"l4t", CT_METHOD_L4T_REDUX},
-    {"concept", CT_METHOD_CONCEPT},
 };
 
 enum {
@@ -498,16 +469,8 @@ static int ct_script_step_review(ct_app *app, ct_script_rt *rt, const ct_script 
         ct_review_form_reveal(&rt->review);
         return 0;
     case CT_SCRIPT_REVIEW_GRADE: {
-        const char *word = ct_script_arg(s, c, 0);
         bool found = false;
-        ct_grade g = CT_AGAIN;
-        for (unsigned i = 0; i < sizeof CT_SCRIPT_GRADES / sizeof CT_SCRIPT_GRADES[0]; i++) {
-            if (strcmp(CT_SCRIPT_GRADES[i].word, word) == 0) {
-                g = CT_SCRIPT_GRADES[i].grade;
-                found = true;
-                break;
-            }
-        }
+        ct_grade g = ct_script_grade_parse(ct_script_arg(s, c, 0), &found);
         if (!found) {
             return ct_script_fail(err, cap, c, "unknown grade", CT_SCRIPT_EXIT_RUN);
         }
@@ -643,24 +606,10 @@ static int ct_script_step_trainer(ct_app *app, ct_script_rt *rt, const ct_script
         if (ct_script_long(ct_script_arg(s, c, 2), &list_id) != 0) {
             return ct_script_fail(err, cap, c, "list id is not an integer", CT_SCRIPT_EXIT_RUN);
         }
-        ct_event ev = CT_EVENT_3X3;
         bool ev_ok = false;
-        for (unsigned i = 0; i < sizeof CT_SCRIPT_EVENTS / sizeof CT_SCRIPT_EVENTS[0]; i++) {
-            if (strcmp(CT_SCRIPT_EVENTS[i].word, ev_word) == 0) {
-                ev = CT_SCRIPT_EVENTS[i].event;
-                ev_ok = true;
-                break;
-            }
-        }
-        ct_method m = CT_METHOD_CFOP;
         bool m_ok = false;
-        for (unsigned i = 0; i < sizeof CT_SCRIPT_METHODS / sizeof CT_SCRIPT_METHODS[0]; i++) {
-            if (strcmp(CT_SCRIPT_METHODS[i].word, m_word) == 0) {
-                m = CT_SCRIPT_METHODS[i].method;
-                m_ok = true;
-                break;
-            }
-        }
+        ct_event ev = ct_script_event_parse(ev_word, &ev_ok);
+        ct_method m = ct_script_method_parse(m_word, &m_ok);
         if (!ev_ok || !m_ok) {
             return ct_script_fail(err, cap, c, "unknown event or method", CT_SCRIPT_EXIT_RUN);
         }
@@ -828,6 +777,8 @@ static int ct_script_step(ct_app *app, ct_script_rt *rt, const ct_script *s, con
         return 0;
     case CT_SCRIPT_DUE:
         return ct_script_step_due(app, s, c, err, cap);
+    case CT_SCRIPT_DUE_IN:
+        return ct_script_step_due_in(app, s, c, err, cap);
     case CT_SCRIPT_CARDS_OPEN:
     case CT_SCRIPT_CARDS_NEW:
     case CT_SCRIPT_CARDS_SELECT:
@@ -853,6 +804,16 @@ static int ct_script_step(ct_app *app, ct_script_rt *rt, const ct_script *s, con
     case CT_SCRIPT_TRAINER_GENERATE:
     case CT_SCRIPT_TRAINER_SAVE:
         return ct_script_step_trainer(app, rt, s, c, err, cap);
+    case CT_SCRIPT_SHOT_MENU:
+    case CT_SCRIPT_SHOT_TRAINER:
+    case CT_SCRIPT_SHOT_CHART:
+    case CT_SCRIPT_SHOT_REVIEW:
+    case CT_SCRIPT_SHOT_CARDS:
+    case CT_SCRIPT_SHOT_SETTINGS:
+    case CT_SCRIPT_SHOT_STATS:
+        return ct_script_step_shot(app, s, c, err, cap);
+    case CT_SCRIPT_REVIEWED:
+        return ct_script_step_reviewed(app, s, c, err, cap);
     default:
         return ct_script_expect(app, rt, s, c, err, cap);
     }
@@ -862,17 +823,19 @@ int ct_script_run(ct_app *app, ct_script_rt *rt, const ct_script *s, char *err, 
     if (app == NULL || rt == NULL || s == NULL || err == NULL || cap == 0) {
         return CT_SCRIPT_EXIT_RUN;
     }
+    int rc = 0;
     for (int i = 0; i < s->count; i++) {
-        int rc = ct_script_step(app, rt, s, &s->cmds[i], err, cap);
+        rc = ct_script_step(app, rt, s, &s->cmds[i], err, cap);
         if (rc != 0) {
-            return rc;
+            break;
         }
     }
     if (rt->review_open) {
         ct_session_free(&rt->review.session);
         rt->review_open = false;
     }
-    return 0;
+    ct_shots_close();
+    return rc;
 }
 
 int ct_app_run_scripted(ct_app *app, const char *path) {
