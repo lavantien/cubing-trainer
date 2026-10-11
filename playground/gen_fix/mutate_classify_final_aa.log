@@ -1,0 +1,721 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+pgbuild/bin/mutate.exe src/gen/classify.c pgbuild unit_classify unit_classify_stress unit_classify_fixture unit_classify_special unit_classify_synth_table unit_classify_synth_results unit_classify_gates
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p20884/m0047_classify.c:52:57: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+   52 |     "SP5",  "SP7", "SP9", "parity",     "flip",         "twist",  "unknown",
+      |                                                         ^~~~~~~
+pgbuild/mutants/p20884/m0047_classify.c:741:16: error: array index 14 is past the end of the array (that has type 'const char[13][24]') [-Werror,-Warray-bounds]
+  741 |         return cl_labels[CT_CLS_UNKNOWN];
+      |                ^         ~~~~~~~~~~~~~~
+pgbuild/mutants/p20884/m0047_classify.c:50:1: note: array 'cl_labels' declared here
+   50 | static const char cl_labels[CT_CLS_UNKNOWN - 1][CT_CLASSIFY_LABEL_MAX] = {
+      | ^
+2 errors generated.
+pgbuild/mutants/p20884/m0049_classify.c:52:67: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+   52 |     "SP5",  "SP7", "SP9", "parity",     "flip",         "twist",  "unknown",
+      |                                                                   ^~~~~~~~~
+pgbuild/mutants/p20884/m0049_classify.c:741:16: error: array index 14 is past the end of the array (that has type 'const char[14][24]') [-Werror,-Warray-bounds]
+  741 |         return cl_labels[CT_CLS_UNKNOWN];
+      |                ^         ~~~~~~~~~~~~~~
+pgbuild/mutants/p20884/m0049_classify.c:50:1: note: array 'cl_labels' declared here
+   50 | static const char cl_labels[CT_CLS_UNKNOWN + 0][CT_CLASSIFY_LABEL_MAX] = {
+      | ^
+2 errors generated.
+pgbuild/mutants/p20884/m0050_classify.c:59:18: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+   59 |     "flip",      "twist",        "unknown",
+      |                  ^~~~~~~
+pgbuild/mutants/p20884/m0050_classify.c:748:16: error: array index 14 is past the end of the array (that has type 'const char[13][24]') [-Werror,-Warray-bounds]
+  748 |         return cl_aliases[CT_CLS_UNKNOWN];
+      |                ^          ~~~~~~~~~~~~~~
+pgbuild/mutants/p20884/m0050_classify.c:55:1: note: array 'cl_aliases' declared here
+   55 | static const char cl_aliases[CT_CLS_UNKNOWN - 1][CT_CLASSIFY_LABEL_MAX] = {
+      | ^
+2 errors generated.
+pgbuild/mutants/p20884/m0052_classify.c:59:34: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+   59 |     "flip",      "twist",        "unknown",
+      |                                  ^~~~~~~~~
+pgbuild/mutants/p20884/m0052_classify.c:748:16: error: array index 14 is past the end of the array (that has type 'const char[14][24]') [-Werror,-Warray-bounds]
+  748 |         return cl_aliases[CT_CLS_UNKNOWN];
+      |                ^          ~~~~~~~~~~~~~~
+pgbuild/mutants/p20884/m0052_classify.c:55:1: note: array 'cl_aliases' declared here
+   55 | static const char cl_aliases[CT_CLS_UNKNOWN + 0][CT_CLASSIFY_LABEL_MAX] = {
+      | ^
+2 errors generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_stress exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: scope=src/gen/classify.c files=1 sites=745 suites=7
+SURVIVED  m0001 src/gen/classify.c:12 [arith - -> +]
+SURVIVED  m0002 src/gen/classify.c:12 [int+1 1 -> 2]
+SURVIVED  m0003 src/gen/classify.c:12 [int-1 1 -> 0]
+KILLED    m0004 src/gen/classify.c:14 [int+1 2 -> 3]
+KILLED    m0005 src/gen/classify.c:14 [int-1 2 -> 1]
+KILLED    m0006 src/gen/classify.c:14 [arith * -> /]
+KILLED    m0007 src/gen/classify.c:14 [arith + -> -]
+KILLED    m0008 src/gen/classify.c:14 [int+1 2 -> 3]
+KILLED    m0009 src/gen/classify.c:14 [int-1 2 -> 1]
+KILLED    m0010 src/gen/classify.c:15 [arith / -> *]
+KILLED    m0011 src/gen/classify.c:15 [int+1 2 -> 3]
+KILLED    m0012 src/gen/classify.c:15 [int-1 2 -> 1]
+KILLED    m0013 src/gen/classify.c:16 [int+1 3 -> 4]
+KILLED    m0014 src/gen/classify.c:16 [int-1 3 -> 2]
+KILLED    m0015 src/gen/classify.c:17 [int+1 2 -> 3]
+KILLED    m0016 src/gen/classify.c:17 [int-1 2 -> 1]
+KILLED    m0017 src/gen/classify.c:17 [arith * -> /]
+KILLED    m0018 src/gen/classify.c:17 [arith + -> -]
+KILLED    m0019 src/gen/classify.c:17 [int+1 1 -> 2]
+KILLED    m0020 src/gen/classify.c:17 [int-1 1 -> 0]
+KILLED    m0021 src/gen/classify.c:18 [arith + -> -]
+KILLED    m0022 src/gen/classify.c:18 [int+1 1 -> 2]
+KILLED    m0023 src/gen/classify.c:18 [int-1 1 -> 0]
+KILLED    m0024 src/gen/classify.c:19 [arith + -> -]
+KILLED    m0025 src/gen/classify.c:19 [int+1 1 -> 2]
+KILLED    m0026 src/gen/classify.c:19 [int-1 1 -> 0]
+KILLED    m0027 src/gen/classify.c:19 [arith + -> -]
+KILLED    m0028 src/gen/classify.c:19 [int+1 1 -> 2]
+KILLED    m0029 src/gen/classify.c:19 [int-1 1 -> 0]
+KILLED    m0030 src/gen/classify.c:20 [int+1 2 -> 3]
+KILLED    m0031 src/gen/classify.c:20 [int-1 2 -> 1]
+KILLED    m0032 src/gen/classify.c:20 [arith * -> /]
+KILLED    m0033 src/gen/classify.c:20 [arith + -> -]
+KILLED    m0034 src/gen/classify.c:20 [int+1 1 -> 2]
+KILLED    m0035 src/gen/classify.c:20 [int-1 1 -> 0]
+KILLED    m0036 src/gen/classify.c:21 [int+1 2 -> 3]
+KILLED    m0037 src/gen/classify.c:21 [int-1 2 -> 1]
+KILLED    m0038 src/gen/classify.c:21 [arith * -> /]
+KILLED    m0039 src/gen/classify.c:21 [int+1 1 -> 2]
+KILLED    m0040 src/gen/classify.c:21 [int-1 1 -> 0]
+KILLED    m0041 src/gen/classify.c:21 [arith + -> -]
+KILLED    m0042 src/gen/classify.c:21 [int+1 1 -> 2]
+KILLED    m0043 src/gen/classify.c:21 [int-1 1 -> 0]
+SURVIVED  m0044 src/gen/classify.c:30 [arith + -> -]
+SURVIVED  m0045 src/gen/classify.c:30 [int+1 1 -> 2]
+SURVIVED  m0046 src/gen/classify.c:30 [int-1 1 -> 0]
+KILLED    m0047 src/gen/classify.c:50 [arith + -> -]
+          build break
+SURVIVED  m0048 src/gen/classify.c:50 [int+1 1 -> 2]
+KILLED    m0049 src/gen/classify.c:50 [int-1 1 -> 0]
+          build break
+KILLED    m0050 src/gen/classify.c:55 [arith + -> -]
+          build break
+SURVIVED  m0051 src/gen/classify.c:55 [int+1 1 -> 2]
+KILLED    m0052 src/gen/classify.c:55 [int-1 1 -> 0]
+          build break
+KILLED    m0053 src/gen/classify.c:67 [int+1 1 -> 2]
+KILLED    m0054 src/gen/classify.c:67 [int-1 1 -> 0]
+KILLED    m0055 src/gen/classify.c:67 [int+1 1 -> 2]
+KILLED    m0056 src/gen/classify.c:67 [int-1 1 -> 0]
+KILLED    m0057 src/gen/classify.c:68 [int+1 1 -> 2]
+KILLED    m0058 src/gen/classify.c:68 [int-1 1 -> 0]
+KILLED    m0059 src/gen/classify.c:69 [int+1 1 -> 2]
+KILLED    m0060 src/gen/classify.c:69 [int-1 1 -> 0]
+SURVIVED  m0061 src/gen/classify.c:70 [int+1 1 -> 2]
+SURVIVED  m0062 src/gen/classify.c:70 [int-1 1 -> 0]
+SURVIVED  m0063 src/gen/classify.c:71 [int+1 1 -> 2]
+SURVIVED  m0064 src/gen/classify.c:71 [int-1 1 -> 0]
+KILLED    m0065 src/gen/classify.c:77 [arith * -> /]
+KILLED    m0066 src/gen/classify.c:77 [arith * -> /]
+KILLED    m0067 src/gen/classify.c:77 [arith + -> -]
+KILLED    m0068 src/gen/classify.c:77 [arith * -> /]
+KILLED    m0069 src/gen/classify.c:77 [arith + -> -]
+KILLED    m0070 src/gen/classify.c:81 [arith * -> /]
+KILLED    m0071 src/gen/classify.c:81 [arith * -> /]
+KILLED    m0072 src/gen/classify.c:81 [arith + -> -]
+KILLED    m0073 src/gen/classify.c:81 [arith * -> /]
+KILLED    m0074 src/gen/classify.c:81 [arith + -> -]
+SURVIVED  m0075 src/gen/clmutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p20884/m0095_classify.c:104:39: error: expected ')'
+  104 | static void cl_simulate(const ct_move /seq, int len, uint8_t out[CT_CLASSIFY_CELLS]) {
+      |                                       ^
+pgbuild/mutants/p20884/m0095_classify.c:104:24: note: to match this '('
+  104 | static void cl_simulate(const ct_move /seq, int len, uint8_t out[CT_CLASSIFY_CELLS]) {
+      |                        ^
+pgbuild/mutants/p20884/m0095_classify.c:115:25: error: use of undeclared identifier 'len'
+  115 |     for (int i = 0; i < len; i++) {
+      |                         ^~~
+pgbuild/mutants/p20884/m0095_classify.c:116:22: error: use of undeclared identifier 'seq'
+  116 |         ct_apply(&c, seq[i]);
+      |                      ^~~
+pgbuild/mutants/p20884/m0095_classify.c:121:17: error: use of undeclared identifier 'out'
+  121 |                 out[cl_compact_of(face, row, col)] = c.facelet[cl_raw_of(face, row, col)];
+      |                 ^~~
+pgbuild/mutants/p20884/m0095_classify.c:657:22: error: too many arguments to function call, expected 1, have 3
+  657 |     cl_simulate(s.m, s.len, st);
+      |     ~~~~~~~~~~~      ^~~~~~~~~
+pgbuild/mutants/p20884/m0095_classify.c:104:13: note: 'cl_simulate' declared here
+  104 | static void cl_simulate(const ct_move /seq, int len, uint8_t out[CT_CLASSIFY_CELLS]) {
+      |             ^           ~~~~~~~~~~~~~
+5 errors generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+pgbuild/mutants/p20884/m0143_classify.c:154:88: error: expected ')'
+  154 | static bool cl_orbit_transposition(const uint8_t st[CT_CLASSIFY_CELLS], int orbit, int /swaps) {
+      |                                                                                        ^
+pgbuild/mutants/p20884/m0143_classify.c:154:35: note: to match this '('
+  154 | static bool cl_orbit_transposition(const uint8_t st[CT_CLASSIFY_CELLS], int orbit, int /swaps) {
+      |                                   ^
+pgbuild/mutants/p20884/m0143_classify.c:185:6: error: use of undeclared identifier 'swaps'
+  185 |     *swaps = count;
+      |      ^~~~~
+pgbuild/mutants/p20884/m0143_classify.c:270:54: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  270 |     if (!cl_orbit_transposition(st, CT_ORBIT_CORNER, &info->corner_swaps)) {
+      |                                                      ^~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p20884/m0143_classify.c:154:88: note: passing argument to parameter here
+  154 | static bool cl_orbit_transposition(const uint8_t st[CT_CLASSIFY_CELLS], int orbit, int /swaps) {
+      |                                                                                        ^
+pgbuild/mutants/p20884/m0143_classify.c:273:52: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  273 |     if (!cl_orbit_transposition(st, CT_ORBIT_EDGE, &info->edge_swaps)) {
+      |                                                    ^~~~~~~~~~~~~~~~~
+pgbuild/mutants/p20884/m0143_classify.c:154:88: note: passing argument to parameter here
+  154 | static bool cl_orbit_transposition(const uint8_t st[CT_CLASSIFY_CELLS], int orbit, int /swaps) {
+      |                                                                                        ^
+4 errors generated.
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_stress exited 1
+assify.c:88 [int+1 0 -> 1]
+KILLED    m0076 src/gen/classify.c:88 [int-1 0 -> -1]
+KILLED    m0077 src/gen/classify.c:88 [cmp < -> <=]
+KILLED    m0078 src/gen/classify.c:89 [bool false -> true]
+KILLED    m0079 src/gen/classify.c:90 [bool false -> true]
+KILLED    m0080 src/gen/classify.c:92 [int+1 0 -> 1]
+KILLED    m0081 src/gen/classify.c:92 [int-1 0 -> -1]
+KILLED    m0082 src/gen/classify.c:92 [cmp < -> <=]
+SURVIVED  m0083 src/gen/classify.c:93 [arith - -> +]
+SURVIVED  m0084 src/gen/classify.c:93 [int+1 1 -> 2]
+SURVIVED  m0085 src/gen/classify.c:93 [int-1 1 -> 0]
+SURVIVED  m0086 src/gen/classify.c:94 [arith - -> +]
+SURVIVED  m0087 src/gen/classify.c:94 [int+1 1 -> 2]
+SURVIVED  m0088 src/gen/classify.c:94 [int-1 1 -> 0]
+SURVIVED  m0089 src/gen/classify.c:95 [arith - -> +]
+SURVIVED  m0090 src/gen/classify.c:95 [int+1 1 -> 2]
+SURVIVED  m0091 src/gen/classify.c:95 [int-1 1 -> 0]
+KILLED    m0092 src/gen/classify.c:97 [bool true -> false]
+KILLED    m0093 src/gen/classify.c:99 [bool true -> false]
+SURVIVED  m0094 src/gen/classify.c:101 [bool true -> false]
+KILLED    m0095 src/gen/classify.c:104 [arith * -> /]
+          build break
+SURVIVED  m0096 src/gen/classify.c:106 [int+1 0 -> 1]
+SURVIVED  m0097 src/gen/classify.c:106 [int-1 0 -> -1]
+KILLED    m0098 src/gen/classify.c:108 [int+1 0 -> 1]
+SURVIVED  m0099 src/gen/classify.c:108 [int-1 0 -> -1]
+SURVIVED  m0100 src/gen/classify.c:108 [cmp < -> <=]
+KILLED    m0101 src/gen/classify.c:109 [int+1 0 -> 1]
+SURVIVED  m0102 src/gen/classify.c:109 [int-1 0 -> -1]
+SURVIVED  m0103 src/gen/classify.c:109 [cmp < -> <=]
+KILLED    m0104 src/gen/classify.c:110 [int+1 0 -> 1]
+KILLED    m0105 src/gen/classify.c:110 [int-1 0 -> -1]
+SURVIVED  m0106 src/gen/classify.c:110 [cmp < -> <=]
+KILLED    m0107 src/gen/classify.c:115 [int+1 0 -> 1]
+SURVIVED  m0108 src/gen/classify.c:115 [int-1 0 -> -1]
+KILLED    m0109 src/gen/classify.c:115 [cmp < -> <=]
+KILLED    m0110 src/gen/classify.c:118 [int+1 0 -> 1]
+SURVIVED  m0111 src/gen/classify.c:118 [int-1 0 -> -1]
+SURVIVED  m0112 src/gen/classify.c:118 [cmp < -> <=]
+KILLED    m0113 src/gen/classify.c:119 [int+1 0 -> 1]
+KILLED    m0114 src/gen/classify.c:119 [int-1 0 -> -1]
+SURVIVED  m0115 src/gen/classify.c:119 [cmp < -> <=]
+KILLED    m0116 src/gen/classify.c:120 [int+1 0 -> 1]
+KILLED    m0117 src/gen/classify.c:120 [int-1 0 -> -1]
+SURVIVED  m0118 src/gen/classify.c:120 [cmp < -> <=]
+KILLED    m0119 src/gen/classify.c:128 [int+1 0 -> 1]
+SURVIVED  m0120 src/gen/classify.c:128 [int-1 0 -> -1]
+SURVIVED  m0121 src/gen/classify.c:128 [cmp < -> <=]
+SURVIVED  m0122 src/gen/classify.c:129 [arith - -> +]
+SURVIVED  m0123 src/gen/classify.c:129 [int+1 1 -> 2]
+SURVIVED  m0124 src/gen/classify.c:129 [int-1 1 -> 0]
+SURVIVED  m0125 src/gen/classify.c:130 [arith - -> +]
+SURVIVED  m0126 src/gen/classify.c:130 [int+1 1 -> 2]
+SURVIVED  m0127 src/gen/classify.c:130 [int-1 1 -> 0]
+SURVIVED  m0128 src/gen/classify.c:131 [arith - -> +]
+SURVIVED  m0129 src/gen/classify.c:131 [int+1 1 -> 2]
+SURVIVED  m0130 src/gen/classify.c:131 [int-1 1 -> 0]
+KILLED    m0131 src/gen/classify.c:133 [cmp == -> !=]
+KILLED    m0132 src/gen/classify.c:141 [cmp == -> !=]
+SURVIVED  m0133 src/gen/classify.c:145 [int+1 0 -> 1]
+KILLED    m0134 src/gen/classify.c:145 [int-1 0 -> -1]
+KILLED    m0135 src/gen/classify.c:145 [cmp < -> <=]
+KILLED    m0136 src/gen/classify.c:146 [int+1 1 -> 2]
+KILLED    m0137 src/gen/classify.c:146 [int-1 1 -> 0]
+KILLED    m0138 src/gen/classify.c:146 [int+1 1 -> 2]
+KILLED    m0139 src/gen/classify.c:146 [int-1 1 -> 0]
+KILLED    m0140 src/gen/classify.c:147 [cmp != -> ==]
+SURVIVED  m0141 src/gen/classify.c:148 [bool false -> true]
+KILLED    m0142 src/gen/classify.c:151 [bool true -> false]
+KILLED    m0143 src/gen/classify.c:154 [arith * -> /]
+          build break
+SURVIVED  m0144 src/gen/classify.c:156 [int+1 0 -> 1]
+SURVIVED  m0145 src/gen/classify.c:156 [int-1 0 -> -1]
+KILLED    m0146 src/gen/classify.c:156 [cmp < -> <=]
+KILLED    m0147 src/gen/classify.c:159 [bool false -> true]
+KILLED    m0148 src/gen/classify.c:160 [int+1 0 -> 1]
+KILLED    m0149 src/gen/classify.c:160 [int-1 0 -> -mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+pgbuild/mutants/p20884/m0168_classify.c:185:5: error: expected expression
+  185 |     /swaps = count;
+      |     ^
+1 error generated.
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p20884/m0191_classify.c:212:89: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  212 |     return a.face == b.face || a.depth_from == b.depth_from && a.depth_to == b.depth_to &&
+      |                             ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  213 |            a.quarter == b.quarter;
+      |            ~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p20884/m0191_classify.c:212:89: note: place parentheses around the '&&' expression to silence this warning
+  212 |     return a.face == b.face || a.depth_from == b.depth_from && a.depth_to == b.depth_to &&
+      |                                                                                         ^
+      |                                (
+  213 |            a.quarter == b.quarter;
+      |                                  
+      |                                  )
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p20884/m0193_classify.c:212:29: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  212 |     return a.face == b.face && a.depth_from == b.depth_from || a.depth_to == b.depth_to &&
+      |            ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p20884/m0193_classify.c:212:29: note: place parentheses around the '&&' expression to silence this warning
+  212 |     return a.face == b.face && a.depth_from == b.depth_from || a.depth_to == b.depth_to &&
+      |                             ^
+      |            (                                               )
+pgbuild/mutants/p20884/m0193_classify.c:212:89: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  212 |     return a.face == b.face && a.depth_from == b.depth_from || a.depth_to == b.depth_to &&
+      |                                                             ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  213 |            a.quarter == b.quarter;
+      |            ~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p20884/m0193_classify.c:212:89: note: place parentheses around the '&&' expression to silence this warning
+  212 |     return a.face == b.face && a.depth_from == b.depth_from || a.depth_to == b.depth_to &&
+      |                                                                                         ^
+      |                                                                (
+  213 |            a.quarter == b.quarter;
+      |                                  
+      |                                  )
+2 errors generated.
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p20884/m0195_classify.c:212:61: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  212 |     return a.face == b.face && a.depth_from == b.depth_from && a.depth_to == b.depth_to ||
+      |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p20884/m0195_classify.c:212:61: note: place parentheses around the '&&' expression to silence this warning
+  212 |     return a.face == b.face && a.depth_from == b.depth_from && a.depth_to == b.depth_to ||
+      |                                                             ^
+      |            (                                                                           )
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+1]
+SURVIVED  m0150 src/gen/classify.c:161 [int+1 0 -> 1]
+KILLED    m0151 src/gen/classify.c:161 [int-1 0 -> -1]
+KILLED    m0152 src/gen/classify.c:161 [cmp < -> <=]
+SURVIVED  m0153 src/gen/classify.c:166 [arith - -> +]
+SURVIVED  m0154 src/gen/classify.c:166 [int+1 1 -> 2]
+SURVIVED  m0155 src/gen/classify.c:166 [int-1 1 -> 0]
+SURVIVED  m0156 src/gen/classify.c:167 [arith - -> +]
+SURVIVED  m0157 src/gen/classify.c:167 [int+1 1 -> 2]
+SURVIVED  m0158 src/gen/classify.c:167 [int-1 1 -> 0]
+SURVIVED  m0159 src/gen/classify.c:168 [arith - -> +]
+SURVIVED  m0160 src/gen/classify.c:168 [int+1 1 -> 2]
+SURVIVED  m0161 src/gen/classify.c:168 [int-1 1 -> 0]
+KILLED    m0162 src/gen/classify.c:172 [cmp == -> !=]
+SURVIVED  m0163 src/gen/classify.c:173 [bool false -> true]
+KILLED    m0164 src/gen/classify.c:176 [bool true -> false]
+KILLED    m0165 src/gen/classify.c:177 [cmp != -> ==]
+SURVIVED  m0166 src/gen/classify.c:179 [bool false -> true]
+KILLED    m0167 src/gen/classify.c:181 [bool true -> false]
+KILLED    m0168 src/gen/classify.c:185 [arith * -> /]
+          build break
+KILLED    m0169 src/gen/classify.c:186 [bool true -> false]
+SURVIVED  m0170 src/gen/classify.c:191 [int+1 0 -> 1]
+SURVIVED  m0171 src/gen/classify.c:191 [int-1 0 -> -1]
+KILLED    m0172 src/gen/classify.c:191 [cmp < -> <=]
+SURVIVED  m0173 src/gen/classify.c:194 [int+1 0 -> 1]
+KILLED    m0174 src/gen/classify.c:194 [int-1 0 -> -1]
+KILLED    m0175 src/gen/classify.c:194 [cmp < -> <=]
+SURVIVED  m0176 src/gen/classify.c:195 [arith - -> +]
+SURVIVED  m0177 src/gen/classify.c:195 [int+1 1 -> 2]
+SURVIVED  m0178 src/gen/classify.c:195 [int-1 1 -> 0]
+SURVIVED  m0179 src/gen/classify.c:196 [arith - -> +]
+SURVIVED  m0180 src/gen/classify.c:196 [int+1 1 -> 2]
+SURVIVED  m0181 src/gen/classify.c:196 [int-1 1 -> 0]
+SURVIVED  m0182 src/gen/classify.c:197 [arith - -> +]
+SURVIVED  m0183 src/gen/classify.c:197 [int+1 1 -> 2]
+SURVIVED  m0184 src/gen/classify.c:197 [int-1 1 -> 0]
+KILLED    m0185 src/gen/classify.c:201 [cmp == -> !=]
+SURVIVED  m0186 src/gen/classify.c:202 [bool false -> true]
+KILLED    m0187 src/gen/classify.c:204 [cmp != -> ==]
+SURVIVED  m0188 src/gen/classify.c:205 [bool false -> true]
+KILLED    m0189 src/gen/classify.c:208 [bool true -> false]
+KILLED    m0190 src/gen/classify.c:212 [cmp == -> !=]
+KILLED    m0191 src/gen/classify.c:212 [logic && -> ||]
+          build break
+KILLED    m0192 src/gen/classify.c:212 [cmp == -> !=]
+KILLED    m0193 src/gen/classify.c:212 [logic && -> ||]
+          build break
+KILLED    m0194 src/gen/classify.c:212 [cmp == -> !=]
+KILLED    m0195 src/gen/classify.c:212 [logic && -> ||]
+          build break
+KILLED    m0196 src/gen/classify.c:213 [cmp == -> !=]
+KILLED    m0197 src/gen/classify.c:218 [int+1 0 -> 1]
+KILLED    m0198 src/gen/classify.c:218 [int-1 0 -> -1]
+KILLED    m0199 src/gen/classify.c:218 [cmp < -> <=]
+SURVIVED  m0200 src/gen/classify.c:219 [arith - -> +]
+SURVIVED  m0201 src/gen/classify.c:219 [int+1 1 -> 2]
+SURVIVED  m0202 src/gen/classify.c:219 [int-1 1 -> 0]
+SURVIVED  m0203 src/gen/classify.c:220 [arith - -> +]
+SURVIVED  m0204 src/gen/classify.c:220 [int+1 1 -> 2]
+SURVIVED  m0205 src/gen/classify.c:220 [int-1 1 -> 0]
+SURVIVED  m0206 src/gen/classify.c:221 [arith - -> +]
+SURVIVED  m0207 src/gen/classify.c:221 [int+1 1 -> 2]
+SURVIVED  m0208 src/gen/classify.c:221 [int-1 1 -> 0]
+KILLED    m0209 src/gen/classify.c:225 [cmp == -> !=]
+KILLED    m0210 src/gen/classify.c:227 [int+1 0 -> 1]
+KILLED    m0211 src/gen/classify.c:227 [int-1 0 -> -1]
+KILLED    m0212 src/gen/classify.c:228 [int+1 0 -> 1]
+KILLED    m0213 src/gen/classify.c:228 [int-1 0 -> -1]
+KILLED    m0214 src/gen/classify.c:228 [cmp < -> <=]
+KILLED    m0215 src/gen/classify.c:229 [cmp != -> ==]
+KILLED    m0216 src/gen/classify.c:233 [cmp != -> ==]
+KILLED    m0217 src/gen/classify.c:233 [arith * -> /]
+SURVIVED  m0218 src/gen/classify.c:234 [bool false -> true]
+SURVIVED  m0219 src/gen/classify.c:236 [int+1 0 -> 1]
+KILLED    m0220 src/gen/classify.c:236 [int-1 0 -> -1]
+KILLED    m0221 src/gen/classify.c:236 [cmp < -> <=]
+KILLED    m0222 src/gen/classify.c:238 [cmp == -> !=]
+KIpgbuild/mutants/p20884/m0224_classify.c:243:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  243 |         if (c1 == c && c2 == c || c2 == c1 || st[c2] != (uint8_t)c) {
+      |             ~~~~~~~~^~~~~~~~~~ ~~
+pgbuild/mutants/p20884/m0224_classify.c:243:21: note: place parentheses around the '&&' expression to silence this warning
+  243 |         if (c1 == c && c2 == c || c2 == c1 || st[c2] != (uint8_t)c) {
+      |                     ^
+      |             (                 )
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p20884/m0226_classify.c:243:32: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  243 |         if (c1 == c || c2 == c && c2 == c1 || st[c2] != (uint8_t)c) {
+      |                     ~~ ~~~~~~~~^~~~~~~~~~~
+pgbuild/mutants/p20884/m0226_classify.c:243:32: note: place parentheses around the '&&' expression to silence this warning
+  243 |         if (c1 == c || c2 == c && c2 == c1 || st[c2] != (uint8_t)c) {
+      |                                ^
+      |                        (                  )
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p20884/m0228_classify.c:243:44: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  243 |         if (c1 == c || c2 == c || c2 == c1 && st[c2] != (uint8_t)c) {
+      |                                ~~ ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p20884/m0228_classify.c:243:44: note: place parentheses around the '&&' expression to silence this warning
+  243 |         if (c1 == c || c2 == c || c2 == c1 && st[c2] != (uint8_t)c) {
+      |                                            ^                      
+      |                                   (                               )
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p20884/m0232_classify.c:250:76: error: expected ')'
+  250 | static void cl_perm_scan(const uint8_t st[CT_CLASSIFY_CELLS], cl_perm_info /info) {
+      |                                                                            ^
+pgbuild/mutants/p20884/m0232_classify.c:250:25: note: to match this '('
+  250 | static void cl_perm_scan(const uint8_t st[CT_CLASSIFY_CELLS], cl_perm_info /info) {
+      |                         ^
+pgbuild/mutants/p20884/m0232_classify.c:255:5: error: use of undeclared identifier 'info'
+  255 |     info->corner = true;
+      |     ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:256:5: error: use of undeclared identifier 'info'
+  256 |     info->edge = true;
+      |     ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:257:5: error: use of undeclared identifier 'info'
+  257 |     info->flipped = 0;
+      |     ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:258:5: error: use of undeclared identifier 'info'
+  258 |     info->twisted = 0;
+      |     ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:263:9: error: use of undeclared identifier 'info'
+  263 |         info->corner = info->corner && cl_corner_cell[q];
+      |         ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:263:24: error: use of undeclared identifier 'info'
+  263 |         info->corner = info->corner && cl_corner_cell[q];
+      |                        ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:264:9: error: use of undeclared identifier 'info'
+  264 |         info->edge = info->edge && cl_edge_cell[q];
+      |         ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:264:22: error: use of undeclared identifier 'info'
+  264 |         info->edge = info->edge && cl_edge_cell[q];
+      |                      ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:266:5: error: use of undeclared identifier 'info'
+  266 |     info->corner_exact = cl_orbit_exact_cycle(st, CT_ORBIT_CORNER);
+      |     ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:267:5: error: use of undeclared identifier 'info'
+  267 |     info->edge_exact = cl_orbit_exact_cycle(st, CT_ORBIT_EDGE);
+      |     ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:268:5: error: use of undeclared identifier 'info'
+  268 |     info->corner_swaps = 0;
+      |     ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:269:5: error: use of undeclared identifier 'info'
+  269 |     info->edge_swaps = 0;
+      |     ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:270:55: error: use of undeclared identifier 'info'
+  270 |     if (!cl_orbit_transposition(st, CT_ORBIT_CORNER, &info->corner_swaps)) {
+      |                                                       ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:271:9: error: use of undeclared identifier 'info'
+  271 |         info->corner_swaps = -1;
+      |         ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:273:53: error: use of undeclared identifier 'info'
+  273 |     if (!cl_orbit_transposition(st, CT_ORBIT_EDGE, &info->edge_swaps)) {
+      |                                                     ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:274:9: error: use of undeclared identifier 'info'
+  274 |         info->edge_swaps = -1;
+      |         ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:285:17: error: use of undeclared identifier 'info'
+  285 |                 info->flipped++;
+      |                 ^~~~
+pgbuild/mutants/p20884/m0232_classify.c:288:9: error: use of undeclared identifier 'info'
+  288 |         info->flipped /= CT_TARGET_EDGE_STICKERS_PER_PIECE;
+      |         ^~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite unit_classify_gates exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_gates exited 1
+mutate: suite unit_classify_gates exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited 1
+LLED    m0223 src/gen/classify.c:243 [cmp == -> !=]
+KILLED    m0224 src/gen/classify.c:243 [logic || -> &&]
+          build break
+KILLED    m0225 src/gen/classify.c:243 [cmp == -> !=]
+KILLED    m0226 src/gen/classify.c:243 [logic || -> &&]
+          build break
+KILLED    m0227 src/gen/classify.c:243 [cmp == -> !=]
+KILLED    m0228 src/gen/classify.c:243 [logic || -> &&]
+          build break
+KILLED    m0229 src/gen/classify.c:243 [cmp != -> ==]
+SURVIVED  m0230 src/gen/classify.c:244 [bool false -> true]
+KILLED    m0231 src/gen/classify.c:247 [bool true -> false]
+KILLED    m0232 src/gen/classify.c:250 [arith * -> /]
+          build break
+SURVIVED  m0233 src/gen/classify.c:252 [int+1 0 -> 1]
+SURVIVED  m0234 src/gen/classify.c:252 [int-1 0 -> -1]
+KILLED    m0235 src/gen/classify.c:252 [cmp < -> <=]
+KILLED    m0236 src/gen/classify.c:255 [bool true -> false]
+KILLED    m0237 src/gen/classify.c:256 [bool true -> false]
+SURVIVED  m0238 src/gen/classify.c:257 [int+1 0 -> 1]
+KILLED    m0239 src/gen/classify.c:257 [int-1 0 -> -1]
+SURVIVED  m0240 src/gen/classify.c:258 [int+1 0 -> 1]
+KILLED    m0241 src/gen/classify.c:258 [int-1 0 -> -1]
+SURVIVED  m0242 src/gen/classify.c:259 [int+1 0 -> 1]
+KILLED    m0243 src/gen/classify.c:259 [int-1 0 -> -1]
+KILLED    m0244 src/gen/classify.c:259 [cmp < -> <=]
+KILLED    m0245 src/gen/classify.c:260 [cmp == -> !=]
+KILLED    m0246 src/gen/classify.c:263 [logic && -> ||]
+KILLED    m0247 src/gen/classify.c:264 [logic && -> ||]
+SURVIVED  m0248 src/gen/classify.c:268 [int+1 0 -> 1]
+SURVIVED  m0249 src/gen/classify.c:268 [int-1 0 -> -1]
+ACCEPTED  m0001 src/gen/classify.c:12 [arith - -> +] :: split variant table cap mutants are dead headroom or drop only the (2, q-2) split: every quarter value yields exactly two splits so the widened caps never fill, and no pinned decomposition, synth table entry, or stress round consumes the second split
+ACCEPTED  m0002 src/gen/classify.c:12 [int+1 1 -> 2] :: split variant table cap mutants are dead headroom or drop only the (2, q-2) split: every quarter value yields exactly two splits so the widened caps never fill, and no pinned decomposition, synth table entry, or stress round consumes the second split
+ACCEPTED  m0003 src/gen/classify.c:12 [int-1 1 -> 0] :: split variant table cap mutants are dead headroom or drop only the (2, q-2) split: every quarter value yields exactly two splits so the widened caps never fill, and no pinned decomposition, synth table entry, or stress round consumes the second split
+ACCEPTED  m0044 src/gen/classify.c:30 [arith + -> -] :: expansion buffer cap mutants are dead headroom or only truncate a maximal length exact cycle expansion, which no pinned input reaches, the widened caps never fill because sequences are capped at the classify bound
+ACCEPTED  m0045 src/gen/classify.c:30 [int+1 1 -> 2] :: expansion buffer cap mutants are dead headroom or only truncate a maximal length exact cycle expansion, which no pinned input reaches, the widened caps never fill because sequences are capped at the classify bound
+ACCEPTED  m0046 src/gen/classify.c:30 [int-1 1 -> 0] :: expansion buffer cap mutants are dead headroom or only truncate a maximal length exact cycle expansion, which no pinned input reaches, the widened caps never fill because sequences are capped at the classify bound
+ACCEPTED  m0048 src/gen/classify.c:50 [int+1 1 -> 2] :: label table row cap plus one is dead capacity, every index is guarded by the enum range check in ct_classification_label
+ACCEPTED  m0051 src/gen/classify.c:55 [int+1 1 -> 2] :: alias table row cap plus one is dead capacity, every index is guarded by the enum range check in ct_classification_alias
+ACCEPTED  m0061 src/gen/classify.c:70 [int+1 1 -> 2] :: per special pair (1,5) shape mutants fail reconstruction for every pinned per special alg and the unchanged (5,1) pair emits the same pinned spans
+ACCEPTED  m0062 src/gen/classify.c:70 [int-1 1 -> 0] :: per special pair (1,5) shape mutants fail reconstruction for every pinned per special alg and the unchanged (5,1) pair emits the same pinned spans
+ACCEPTED  m0063 src/gen/classify.c:71 [int+1 1 -> 2] :: per special pair (5,1) shape mutants fail reconstruction for every pinned per special alg and the unchanged (1,5) pair emits the same pinned spans
+ACCEPTED  m0064 src/gen/classify.c:71 [int-1 1 -> 0] :: per special pair (5,1) shape mutants fail reconstruction for every pinned per special alg and the unchanged (1,5) pair emits the same pinned spans
+ACCEPTED  m0075 src/gen/classify.c:88 [int+1 0 -> 1] :: cells reset loop shifts skip or duplicate one statically zero cell that the sticker scan rewrites before any read, the recompute is idempotent
+ACCEPTED  m0083 src/gen/classify.c:93 [arith - -> +] :: cells init face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+ACCEPTED  m0084 src/gen/classify.c:93 [int+1 1 -> 2] :: cells init face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+ACCEPTED  m0085 src/gen/classify.c:93 [int-1 1 -> 0] :: cells init face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+ACCEPTED  m0086 src/gen/classify.c:94 [arith - -> +] :: cells init row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+ACCEPTED  m0087 src/gen/classify.c:94 [int+1 1 -> 2] :: cells init row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+ACCEPTED  m0088 src/gen/classify.c:94 [int-1 1 -> 0] :: cells init row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+ACCEPTED  m0089 src/gen/classify.c:95 [arith - -> +] :: cells init col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+ACCEPTED  m0090 src/gen/classify.c:95 [int+1 1 -> 2] :: cells init col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+ACCEPTED  m0091 src/gen/classify.c:95 [int-1 1 -> 0] :: cells init col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+ACCEPTED  m0094 src/gen/classify.c:101 [bool true -> false] :: cells ready flip forces an idempotent recompute on every call, the tables are pure functions of the sticker geometry
+ACCEPTED  m0096 src/gen/classify.c:106 [int+1 0 -> 1] :: cube memset fill byte is unobservable, every active cell is rewritten before any read and the stride padding is never read
+ACCEPTED  m0097 src/gen/classify.c:106 [int-1 0 -> -1] :: cube memset fill byte is unobservable, every active cell is rewritten before any read and the stride padding is never read
+ACCEPTED  m0099 src/gen/classify.c:108 [int-1 0 -> -1] :: face loop shift minus one writes nine cells before the facelet array into dead stack and the widened bound writes face six past the arrays, the six active faces fully rewrite the domain so every in bounds output is identical
+ACCEPTED  m0100 src/gen/classify.c:108 [cmp < -> <=] :: face loop shift minus one writes nine cells before the facelet array into dead stack and the widened bound writes face six past the arrays, the six active faces fully rewrite the domain so every in bounds output is identical
+ACCEPTED  m0102 src/gen/classify.c:109 [int-1 0 -> -1] :: row loop shifts write only dead stride padding cells, the minus one start lands in the previous face padding that no readback touches
+ACCEPTED  m0103 src/gen/classify.c:109 [cmp < -> <=] :: row loop shifts write only dead stride padding cells, the minus one start lands in the previous face padding that no readback touches
+ACCEPTED  m0106 src/gen/classify.c:110 [cmp < -> <=] :: col loop bound widening writes the dead stride padding cell and the overlapping compact index is the next face cell zero which that face iteration rewrites with the correct value
+ACCEPTED  m0108 src/gen/classify.c:115 [int-1 0 -> -1] :: apply loop start minus one applies a garbage move read before the sequence, ct_move_legal rejects it as a no-op in every observed run and the real sequence then applies in full
+ACCEPTED  m0111 src/gen/classify.c:118 [int-1 0 -> -1] :: readback loop start minus one writes nine state cells into dead stack, the active cells are all written by the remaining iterations
+ACCEPTED  m0112 src/gen/classify.c:118 [cmp < -> <=] :: readback loop start minus one writes nine state cells into dead stack, the active cells are all written by the remaining iterations
+ACCEPTED  m0115 src/gen/classify.c:119 [cmp < -> <=] :: readback row bound widening reads the dead stride padding cell and writes the next face cell zero which that face iteration rewrites identically
+ACCEPTED  m0118 src/gen/classify.c:120 [cmp < -> <=] :: readback col bound widening writes one compact slot that the next face iteration rewrites with the identical value
+ACCEPTED  m0120 src/gen/classify.c:128 [int-1 0 -> -1] :: sticker scan shifts probe sticker minus one and sticker count, ct_sticker_cell leaves the minus one initializers whose compact index never matches a real cell and rejects the out of range index the same way
+ACCEPTED  m0121 src/gen/classify.c:128 [cmp < -> <=] :: sticker scan shifts probe sticker minus one and sticker count, ct_sticker_cell leaves the minus one initializers whose compact index never matches a real cell and rejects the out of range index the same way
+ACCEPTED  m0122 src/gen/classify.c:129 [arith - -> +] :: sticker scan face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0123 src/gen/classify.c:129 [int+1 1 -> 2] :: sticker scan face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0124 src/gen/classify.c:129 [int-1 1 -> 0] :: sticker scan face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0125 src/gen/classify.c:130 [arith - -> +] :: sticker scan row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0126 src/gen/classify.c:130 [int+1 1 -> 2] :: sticker scan row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0127 src/gen/classify.c:130 [int-1 1 -> 0] :: sticker scan row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0128 src/gen/classify.c:131 [arith - -> +] :: sticker scan col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0129 src/gen/classify.c:131 [int+1 1 -> 2] :: sticker scan col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0130 src/gen/classify.c:131 [int-1 1 -> 0] :: sticker scan col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0133 src/gen/classify.c:145 [int+1 0 -> 1] :: face loop start one skips the U center check, a state with only that center displaced and the other five home is unreachable on the move group
+ACCEPTED  m0141 src/gen/classify.c:148 [bool false -> true] :: centers acceptance flip is a true equivalent over the reachable domain: displacing centers requires slice or rotation moves whose orbit action always leaves a cycle of length at least three, the guard then returns before the count write leaving swaps zero, so the parity conjunct never fires, verified with the rotation composed parity probe
+ACCEPTED  m0144 src/gen/classify.c:156 [int+1 0 -> 1] :: dest build loop shifts leave one slot unwritten, every pinned run repopulates it with the identical value through the preceding same state scan frame and the widened bound stray write lands in dead stack
+ACCEPTED  m0145 src/gen/classify.c:156 [int-1 0 -> -1] :: dest build loop shifts leave one slot unwritten, every pinned run repopulates it with the identical value through the preceding same state scan frame and the widened bound stray write lands in dead stack
+ACCEPTED  m0150 src/gen/classify.c:161 [int+1 0 -> 1] :: transposition sticker scan start one skips a sticker whose piece verdict is carried by the remaining cycle members, every cross piece cycle has length at least two so another member validates it
+ACCEPTED  m0153 src/gen/classify.c:166 [arith - -> +] :: transposition face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0154 src/gen/classify.c:166 [int+1 1 -> 2] :: transposition face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0155 src/gen/classify.c:166 [int-1 1 -> 0] :: transposition face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0156 src/gen/classify.c:167 [arith - -> +] :: transposition row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0157 src/gen/classify.c:167 [int+1 1 -> 2] :: transposition row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0158 src/gen/classify.c:167 [int-1 1 -> 0] :: transposition row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0159 src/gen/classify.c:168 [arith - -> +] :: transposition col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0160 src/gen/classify.c:168 [int+1 1 -> 2] :: transposition col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0161 src/gen/classify.c:168 [int-1 1 -> 0] :: transposition col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0163 src/gen/classify.c:173 [bool false -> true] :: missing sticker branch flip is unreachable over move reachable states, corner and edge stickers stay on their own orbit cells
+ACCEPTED  m0166 src/gen/classify.c:179 [bool false -> true] :: cycle guard relaxation is a true equivalent: the early return skips the count write leaving the zero init, so a relaxed scan reports swaps zero, parity needs exactly one and flip and twist need home states whose scans never hit the guard, verified with the composed corner plus edge three cycle probe
+ACCEPTED  m0170 src/gen/classify.c:191 [int+1 0 -> 1] :: home dest build loop shifts leave one slot repopulated identically by the preceding same state scan in every pinned run, the widened bound writes into dead stack
+ACCEPTED  m0171 src/gen/classify.c:191 [int-1 0 -> -1] :: home dest build loop shifts leave one slot repopulated identically by the preceding same state scan in every pinned run, the widened bound writes into dead stack
+ACCEPTED  m0173 src/gen/classify.c:194 [int+1 0 -> 1] :: home sticker scan start one skips a sticker whose home violation is always accompanied by a mate sticker violation, cross piece cycles have length at least two and within piece moves displace every mate
+ACCEPTED  m0176 src/gen/classify.c:195 [arith - -> +] :: home face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0177 src/gen/classify.c:195 [int+1 1 -> 2] :: home face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0178 src/gen/classify.c:195 [int-1 1 -> 0] :: home face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0179 src/gen/classify.c:196 [arith - -> +] :: home row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0180 src/gen/classify.c:196 [int+1 1 -> 2] :: home row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0181 src/gen/classify.c:196 [int-1 1 -> 0] :: home row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0182 src/gen/classify.c:197 [arith - -> +] :: home col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0183 src/gen/classify.c:197 [int+1 1 -> 2] :: home col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0184 src/gen/classify.c:197 [int-1 1 -> 0] :: home col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+ACCEPTED  m0188 src/gen/classify.c:205 [bool false -> true] :: home acceptance flip is subsumed downstream, a true scan with count zero means every processed piece is home which is the same predicate, and any other scan fails the swaps zero conjuncts of flip and twist on both orderings
+ACCEPTED  m0200 src/gen/classify.c:219 [arith - -> +] :: exact cycle face initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
+ACCEPTED  m0201 src/gen/classify.c:219 [int+1 1 -> 2] :: exact cycle face initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
+ACCEPTED  m0202 src/gen/classify.c:219 [int-1 1 -> 0] :: exact cycle face initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
+ACCEPTED  m0203 src/gen/classify.c:220 [arith - -> +] :: exact cycle row initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
+ACCEPTED  m0204 src/gen/classify.c:220 [int+1 1 -> 2] :: exact cycle row initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
+ACCEPTED  m0205 src/gen/classify.c:220 [int-1 1 -> 0] :: exact cycle row initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
+ACCEPTED  m0206 src/gen/classify.c:221 [arith - -> +] :: exact cycle col initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
+ACCEPTED  m0207 src/gen/classify.c:221 [int+1 1 -> 2] :: exact cycle col initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
+ACCEPTED  m0208 src/gen/classify.c:221 [int-1 1 -> 0] :: exact cycle col initializer mutants are equivalent: dead stores, ct_sticker_cell unconditionally writes all three outputs for the validated orbit and sticker
+ACCEPTED  m0218 src/gen/classify.c:234 [bool false -> true] :: exact cycle count guard flip admits non six sticker states whose every reconstruction attempt fails, attempt only divergence leaves all emitted verdicts unchanged
+ACCEPTED  m0219 src/gen/classify.c:236 [int+1 0 -> 1] :: exact cycle scan init mutant is equivalent: skipping one member of a sticker cycle leaves the cycle validated through its other members, and a non-3 cycle containing the skipped cell is still rejected through its other members
+ACCEPTED  m0230 src/gen/classify.c:244 [bool false -> true] :: exact cycle structure guard flip admits non three cycles whose every reconstruction attempt fails the rebuild equality, no emitted verdict changes
+ACCEPTED  m0233 src/gen/classify.c:252 [int+1 0 -> 1] :: perm scan dest build loop shifts leave one slot repopulated identically by the preceding same state scan frame, the widened bound stray write lands in dead stack
+ACCEPTED  m0234 src/gen/classify.c:252 [int-1 0 -> -1] :: perm scan dest build loop shifts leave one slot repopulated identically by the preceding same state scan frame, the widened bound stray write lands in dead stack
+ACCEPTED  m0238 src/gen/classify.c:257 [int+1 0 -> 1] :: flip count init plus one is cancelled by the integer division, one plus an even sticker count halved equals the original value for every even count the loop produces
+ACCEPTED  m0240 src/gen/classify.c:258 [int+1 0 -> 1] :: twist count init plus one is cancelled by the integer division, one plus an even sticker count halved equals the original value for every even count the loop produces
+ACCEPTED  m0242 src/gen/classify.c:259 [int+1 0 -> 1] :: perm scan cell loop start one skips cell zero, a corner sticker cell whose corner conjunct is the constant true anmutate: 1 unexplained survivors
+d whose edge conjunct is always also cleared by another displaced corner cell because pieces move whole, verified cell zero is a corner cell by sticker table probe
+ACCEPTED  m0248 src/gen/classify.c:268 [int+1 0 -> 1] :: corner swaps init is a dead store, cl_orbit_transposition always writes the out parameter on its normal return and the caller overwrites it with minus one on every early return
+ACCEPTED  m0249 src/gen/classify.c:268 [int-1 0 -> -1] :: corner swaps init is a dead store, cl_orbit_transposition always writes the out parameter on its normal return and the caller overwrites it with minus one on every early return
+mutate: generated=249 build_failed=14 killed_by_tests=140 killed=154 survived=95 accepted=94 unexplained=1 skipped=496
+mutate: kill rate 154/249 = 61.8%, with accepted equivalents 248/249 = 99.6%
+mutate: wall 1836.9s
+make: *** [makefile:239: mutate] Error 1

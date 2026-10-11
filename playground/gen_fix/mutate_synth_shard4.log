@@ -1,0 +1,390 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+pgbuild/bin/mutate.exe src/gen/synth.c pgbuild unit_synth_table unit_synth_coverage unit_synth_config unit_synth_bh unit_synth_scoring
+pgbuild/mutants/p14984/m0465_synth.c:517:16: error: expected expression
+  517 |         return /out_len > 0;
+      |                ^
+1 error generated.
+pgbuild/mutants/p14984/m0470_synth.c:522:54: error: expected ')'
+  522 | static int synth_subset_moves(unsigned mask, ct_move /out) {
+      |                                                      ^
+pgbuild/mutants/p14984/m0470_synth.c:522:30: note: to match this '('
+  522 | static int synth_subset_moves(unsigned mask, ct_move /out) {
+      |                              ^
+pgbuild/mutants/p14984/m0470_synth.c:529:13: error: use of undeclared identifier 'out'
+  529 |             out[n++] = (ct_move){face, 1, 1, quarter};
+      |             ^~~
+pgbuild/mutants/p14984/m0470_synth.c:893:63: error: passing 'ct_move[18]' to parameter of incompatible type 'ct_move'
+  893 |     int move_n = synth_subset_moves(cfg->gen.preferred_moves, subset);
+      |                                                               ^~~~~~
+pgbuild/mutants/p14984/m0470_synth.c:522:54: note: passing argument to parameter here
+  522 | static int synth_subset_moves(unsigned mask, ct_move /out) {
+      |                                                      ^
+3 errors generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_config exited 1
+mutate: suite unit_synth_config exited 1
+pgbuild/mutants/p14984/m0478_synth.c:525:44: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  525 |         if ((mask & synth_face_bits[face]) == -1) {
+      |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ^  ~~
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p14984/m0486_synth.c:535:48: error: expected ')'
+  535 | static void synth_setup_try(ct_synth_setup_ctx /ctx) {
+      |                                                ^
+pgbuild/mutants/p14984/m0486_synth.c:535:28: note: to match this '('
+  535 | static void synth_setup_try(ct_synth_setup_ctx /ctx) {
+      |                            ^
+pgbuild/mutants/p14984/m0486_synth.c:537:23: error: use of undeclared identifier 'ctx'
+  537 |     synth_read_state(&ctx->cube, state);
+      |                       ^~~
+pgbuild/mutants/p14984/m0486_synth.c:538:40: error: use of undeclared identifier 'ctx'
+  538 |     int targets[CT_SYNTH_CYCLE_LEN] = {ctx->cb, ctx->c1, ctx->c2};
+      |                                        ^~~
+pgbuild/mutants/p14984/m0486_synth.c:538:49: error: use of undeclared identifier 'ctx'
+  538 |     int targets[CT_SYNTH_CYCLE_LEN] = {ctx->cb, ctx->c1, ctx->c2};
+      |                                                 ^~~
+pgbuild/mutants/p14984/m0486_synth.c:538:58: error: use of undeclared identifier 'ctx'
+  538 |     int targets[CT_SYNTH_CYCLE_LEN] = {ctx->cb, ctx->c1, ctx->c2};
+      |                                                          ^~~
+pgbuild/mutants/p14984/m0486_synth.c:558:48: error: use of undeclared identifier 'ctx'
+  558 |     int assembled_len = ct_transform_conjugate(ctx->path, ctx->depth, inner, inner_len, assembled,
+      |                                                ^~~
+pgbuild/mutants/p14984/m0486_synth.c:558:59: error: use of undeclared identifier 'ctx'
+  558 |     int assembled_len = ct_transform_conjugate(ctx->path, ctx->depth, inner, inner_len, assembled,
+      |                                                           ^~~
+pgbuild/mutants/p14984/m0486_synth.c:569:53: error: use of undeclared identifier 'ctx'
+  569 |     if (!synth_validate(simplified, simplified_len, ctx->orbit, ctx->cb, ctx->c1, ctx->c2)) {
+      |                                                     ^~~
+pgbuild/mutants/p14984/m0486_synth.c:569:65: error: use of undeclared identifier 'ctx'
+  569 |     if (!synth_validate(simplified, simplified_len, ctx->orbit, ctx->cb, ctx->c1, ctx->c2)) {
+      |                                                                 ^~~
+pgbuild/mutants/p14984/m0486_synth.c:569:74: error: use of undeclared identifier 'ctx'
+  569 |     if (!synth_validate(simplified, simplified_len, ctx->orbit, ctx->cb, ctx->c1, ctx->c2)) {
+      |                                                                          ^~~
+pgbuild/mutants/p14984/m0486_synth.c:569:83: error: use of undeclared identifier 'ctx'
+  569 |     if (!synth_validate(simplified, simplified_len, ctx->orbit, ctx->cb, ctx->c1, ctx->c2)) {
+      |                                                                                   ^~~
+pgbuild/mutants/p14984/m0486_synth.c:572:20: error: use of undeclared identifier 'ctx'
+  572 |     synth_cand_add(ctx->cands, &ctx->cand_n, ctx->cand_cap, simplified, simplified_len, true);
+      |                    ^~~
+pgbuild/mutants/p14984/m0486_synth.c:572:33: error: use of undeclared identifier 'ctx'
+  572 |     synth_cand_add(ctx->cands, &ctx->cand_n, ctx->cand_cap, simplified, simplified_len, true);
+      |                                 ^~~
+pgbuild/mutants/p14984/m0486_synth.c:572:46: error: use of undeclared identifier 'ctx'
+  572 |     synth_cand_add(ctx->cands, &ctx->cand_n, ctx->cand_cap, simplified, simplified_len, true);
+      |                                              ^~~
+pgbuild/mutants/p14984/m0486_synth.c:573:9: error: use of undeclared identifier 'ctx'
+  573 |     if (ctx->cand_n >= ctx->cand_cap) {
+      |         ^~~
+pgbuild/mutants/p14984/m0486_synth.c:573:24: error: use of undeclared identifier 'ctx'
+  573 |     if (ctx->cand_n >= ctx->cand_cap) {
+      |                        ^~~
+pgbuild/mutants/p14984/m0486_synth.c:574:9: error: use of undeclared identifier 'ctx'
+  574 |         ctx->hit = true;
+      |         ^~~
+pgbuild/mutants/p14984/m0486_synth.c:584:25: error: passing 'ct_synth_setup_ctx *' to parameter of incompatible type 'ct_synth_setup_ctx'; dereference with *
+  584 |         synth_setup_try(ctx);
+      |                         ^~~
+      |                         *
+pgbuild/mutants/p14984/m0486_synth.c:535:48: note: passing argument to parameter here
+  535 | static void synth_setup_try(ct_synth_setup_ctx /ctx) {
+      |                                                ^
+18 errors generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p14984/m0504_synth.c:554:27: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  554 |     if (!synth_lookup_seq(q[-1], q[1], q[2], inner, &inner_len)) {
+      |                           ^ ~~
+pgbuild/mutants/p14984/m0504_synth.c:539:5: note: array 'q' declared here
+  539 |     int q[CT_SYNTH_CYCLE_LEN];
+      |     ^
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p14984/m0507_synth.c:554:39: error: array index 3 is past the end of the array (that has type 'int[3]') [-Werror,-Warray-bounds]
+  554 |     if (!synth_lookup_seq(q[0], q[1], q[3], inner, &inner_len)) {
+      |                                       ^ ~
+pgbuild/mutants/p14984/m0507_synth.c:539:5: note: array 'q' declared here
+  539 |     int q[CT_SYNTH_CYCLE_LEN];
+      |     ^
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p14984/m0519_synth.c:578:48: error: expected ')'
+  578 | static void synth_setup_dfs(ct_synth_setup_ctx /ctx, int depth) {
+      |                                                ^
+pgbuild/mutants/p14984/m0519_synth.c:578:28: note: to match this '('
+  578 | static void synth_setup_dfs(ct_synth_setup_ctx /ctx, int depth) {
+      |                            ^
+pgbuild/mutants/p14984/m0519_synth.c:579:9: error: use of undeclared identifier 'ctx'
+  579 |     if (ctx->hit) {
+      |         ^~~
+pgbuild/mutants/p14984/m0519_synth.c:582:9: error: use of undeclared identifier 'depth'
+  582 |     if (depth > 0) {
+      |         ^~~~~
+pgbuild/mutants/p14984/m0519_synth.c:583:9: error: use of undeclared identifier 'ctx'
+  583 |         ctx->depth = depth;
+      |         ^~~
+pgbuild/mutants/p14984/m0519_synth.c:583:22: error: use of undeclared identifier 'depth'
+  583 |         ctx->depth = depth;
+      |                      ^~~~~
+pgbuild/mutants/p14984/m0519_synth.c:584:25: error: use of undeclared identifier 'ctx'
+  584 |         synth_setup_try(ctx);
+      |                         ^~~
+pgbuild/mutants/p14984/m0519_synth.c:585:13: error: use of undeclared identifier 'ctx'
+  585 |         if (ctx->hit) {
+      |             ^~~
+pgbuild/mutants/p14984/m0519_synth.c:589:9: error: use of undeclared identifier 'depth'
+  589 |     if (depth >= ctx->max_depth) {
+      |         ^~~~~
+pgbuild/mutants/p14984/m0519_synth.c:589:18: error: use of undeclared identifier 'ctx'
+  589 |     if (depth >= ctx->max_depth) {
+      |                  ^~~
+pgbuild/mutants/p14984/m0519_synth.c:592:25: error: use of undeclared identifier 'ctx'
+  592 |     for (int i = 0; i < ctx->move_n && !ctx->hit; i++) {
+      |                         ^~~
+pgbuild/mutants/p14984/m0519_synth.c:592:41: error: use of undeclared identifier 'ctx'
+  592 |     for (int i = 0; i < ctx->move_n && !ctx->hit; i++) {
+      |                                         ^~~
+pgbuild/mutants/p14984/m0519_synth.c:593:13: error: use of undeclared identifier 'depth'
+  593 |         if (depth > 0 && ctx->path[depth - 1].face == ctx->moves[i].face) {
+      |             ^~~~~
+pgbuild/mutants/p14984/m0519_synth.c:593:26: error: use of undeclared identifier 'ctx'
+  593 |         if (depth > 0 && ctx->path[depth - 1].face == ctx->moves[i].face) {
+      |                          ^~~
+pgbuild/mutants/p14984/m0519_synth.c:593:36: error: use of undeclared identifier 'depth'
+  593 |         if (depth > 0 && ctx->path[depth - 1].face == ctx->moves[i].face) {
+      |                                    ^~~~~
+pgbuild/mutants/p14984/m0519_synth.c:593:55: error: use of undeclared identifier 'ctx'
+  593 |         if (depth > 0 && ctx->path[depth - 1].face == ctx->moves[i].face) {
+      |                                                       ^~~
+pgbuild/mutants/p14984/m0519_synth.c:596:9: error: use of undeclared identifier 'ctx'
+  596 |         ctx->path[depth] = ctx->moves[i];
+      |         ^~~
+pgbuild/mutants/p14984/m0519_synth.c:596:19: error: use of undeclared identifier 'depth'
+  596 |         ctx->path[depth] = ctx->moves[i];
+      |                   ^~~~~
+pgbuild/mutants/p14984/m0519_synth.c:596:28: error: use of undeclared identifier 'ctx'
+  596 |         ctx->path[depth] = ctx->moves[i];
+      |                            ^~~
+pgbuild/mutants/p14984/m0519_synth.c:597:19: error: use of undeclared identifier 'ctx'
+  597 |         ct_apply(&ctx->cube, ctx->moves[i]);
+      |                   ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited -1073741571
+pgbuild/mutants/p14984/m0540_synth.c:603:81: error: expected ')'
+  603 | static void synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move /moves, int move_n,
+      |                                                                                 ^
+pgbuild/mutants/p14984/m0540_synth.c:603:31: note: to match this '('
+  603 | static void synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move /moves, int move_n,
+      |                               ^
+pgbuild/mutants/p14984/m0540_synth.c:607:18: error: use of undeclared identifier 'move_n'
+  607 |     ctx.move_n = move_n;
+      |                  ^~~~~~
+pgbuild/mutants/p14984/m0540_synth.c:608:23: error: use of undeclared identifier 'moves'
+  608 |     memcpy(ctx.moves, moves, (size_t)move_n * sizeof *moves);
+      |                       ^~~~~
+pgbuild/mutants/p14984/m0540_synth.c:608:38: error: use of undeclared identifier 'move_n'
+  608 |     memcpy(ctx.moves, moves, (size_t)move_n * sizeof *moves);
+      |                                      ^~~~~~
+pgbuild/mutants/p14984/m0540_synth.c:608:55: error: use of undeclared identifier 'moves'
+  608 |     memcpy(ctx.moves, moves, (size_t)move_n * sizeof *moves);
+      |                                                       ^~~~~
+pgbuild/mutants/p14984/m0540_synth.c:614:17: error: use of undeclared identifier 'cands'
+  614 |     ctx.cands = cands;
+      |                 ^~~~~
+pgbuild/mutants/p14984/m0540_synth.c:615:20: error: use of undeclared identifier 'cand_cap'
+  615 |     ctx.cand_cap = cand_cap;
+      |                    ^~~~~~~~
+pgbuild/mutants/p14984/m0540_synth.c:616:19: error: use of undeclared identifier 'cand_n'
+  616 |     ctx.cand_n = *cand_n;
+      |                   ^~~~~~
+pgbuild/mutants/p14984/m0540_synth.c:617:34: error: use of undeclared identifier 'max_depth'
+  617 |     for (int depth = 1; depth <= max_depth && !ctx.hit; depth++) {
+      |                                  ^~~~~~~~~
+pgbuild/mutants/p14984/m0540_synth.c:621:6: error: use of undeclared identifier 'cand_n'
+  621 |     *cand_n = ctx.cand_n;
+      |      ^~~~~~
+pgbuild/mutants/p14984/m0540_synth.c:899:55: error: too many arguments to function call, expected 5, have 10
+  899 |         synth_setup_search(orbit, cb, c1, c2, subset, move_n, depth, cands, cand_cap, &cand_n);
+      |         ~~~~~~~~~~~~~~~~~~                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p14984/m0540_synth.c:603:13: note: 'synth_setup_search' declared here
+  603 | static void synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move /moves, int move_n,
+      |             ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+11 errors generated.
+mutate: scope=src/gen/synth.c files=1 sites=928 suites=5
+KILLED    m0465 src/gen/synth.c:517 [arith * -> /]
+          build break
+SURVIVED  m0466 src/gen/synth.c:517 [cmp > -> >=]
+SURVIVED  m0467 src/gen/synth.c:517 [int+1 0 -> 1]
+SURVIVED  m0468 src/gen/synth.c:517 [int-1 0 -> -1]
+SURVIVED  m0469 src/gen/synth.c:519 [bool false -> true]
+KILLED    m0470 src/gen/synth.c:522 [arith * -> /]
+          build break
+SURVIVED  m0471 src/gen/synth.c:523 [int+1 0 -> 1]
+SURVIVED  m0472 src/gen/synth.c:523 [int-1 0 -> -1]
+KILLED    m0473 src/gen/synth.c:524 [int+1 0 -> 1]
+KILLED    m0474 src/gen/synth.c:524 [int-1 0 -> -1]
+KILLED    m0475 src/gen/synth.c:524 [cmp < -> <=]
+KILLED    m0476 src/gen/synth.c:525 [cmp == -> !=]
+KILLED    m0477 src/gen/synth.c:525 [int+1 0 -> 1]
+KILLED    m0478 src/gen/synth.c:525 [int-1 0 -> -1]
+          build break
+SURVIVED  m0479 src/gen/synth.c:528 [int+1 1 -> 2]
+SURVIVED  m0480 src/gen/synth.c:528 [int-1 1 -> 0]
+SURVIVED  m0481 src/gen/synth.c:528 [cmp < -> <=]
+KILLED    m0482 src/gen/synth.c:529 [int+1 1 -> 2]
+KILLED    m0483 src/gen/synth.c:529 [int-1 1 -> 0]
+SURVIVED  m0484 src/gen/synth.c:529 [int+1 1 -> 2]
+KILLED    m0485 src/gen/synth.c:529 [int-1 1 -> 0]
+KILLED    m0486 src/gen/synth.c:535 [arith * -> /]
+          build break
+KILLED    m0487 src/gen/synth.c:540 [int+1 0 -> 1]
+KILLED    m0488 src/gen/synth.c:540 [int-1 0 -> -1]
+KILLED    m0489 src/gen/synth.c:540 [cmp < -> <=]
+SURVIVED  m0490 src/gen/synth.c:541 [arith - -> +]
+SURVIVED  m0491 src/gen/synth.c:541 [int+1 1 -> 2]
+SURVIVED  m0492 src/gen/synth.c:541 [int-1 1 -> 0]
+SURVIVED  m0493 src/gen/synth.c:542 [int+1 0 -> 1]
+KILLED    m0494 src/gen/synth.c:542 [int-1 0 -> -1]
+SURVIVED  m0495 src/gen/synth.c:542 [cmp < -> <=]
+KILLED    m0496 src/gen/synth.c:543 [cmp == -> !=]
+SURVIVED  m0497 src/gen/synth.c:548 [cmp < -> <=]
+SURVIVED  m0498 src/gen/synth.c:548 [int+1 0 -> 1]
+SURVIVED  m0499 src/gen/synth.c:548 [int-1 0 -> -1]
+SURVIVED  m0500 src/gen/synth.c:553 [int+1 0 -> 1]
+SURVIVED  m0501 src/gen/synth.c:553 [int-1 0 -> -1]
+KILLED    m0502 src/gen/synth.c:554 [not-del ! -> (deleted)]
+KILLED    m0503 src/gen/synth.c:554 [int+1 0 -> 1]
+KILLED    m0504 src/gen/synth.c:554 [int-1 0 -> -1]
+          build break
+KILLED    m0505 src/gen/synth.c:554 [int+1 1 -> 2]
+KILLED    m0506 src/gen/synth.c:554 [int-1 1 -> 0]
+KILLED    m0507 src/gen/synth.c:554 [int+1 2 -> 3]
+          build break
+KILLED    m0508 src/gen/synth.c:554 [int-1 2 -> 1]
+SURVIVED  m0509 src/gen/synth.c:560 [cmp < -> <=]
+SURVIVED  m0510 src/gen/synth.c:560 [int+1 0 -> 1]
+SURVIVED  m0511 src/gen/synth.c:560 [int-1 0 -> -1]
+SURVIVED  m0512 src/gen/synth.c:566 [cmp < -> <=]
+SURVIVED  m0513 src/gen/synth.c:566 [int+1 0 -> 1]
+SURVIVED  m0514 src/gen/synth.c:566 [int-1 0 -> -1]
+KILLED    m0515 src/gen/synth.c:569 [not-del ! -> (deleted)]
+SURVIVED  m0516 src/gen/synth.c:572 [bool true -> false]
+SURVIVED  m0517 src/gen/synth.c:573 [cmp >= -> >]
+SURVIVED  m0518 src/gen/synth.c:574 [bool true -> false]
+KILLED    m0519 src/gen/synth.c:578 [arith * -> /]
+          build break
+SURVIVED  m0520 src/gen/synth.c:582 [cmp > -> >=]
+SURVIVED  m0521 src/gen/synth.c:582 [int+1 0 -> 1]
+SURVIVED  m0522 src/gen/synth.c:582 [int-1 0 -> -1]
+SURVIVED  m0523 src/gen/synth.c:589 [cmp >= -> >]
+SURVIVED  m0524 src/gen/synth.c:592 [int+1 0 -> 1]
+KILLED    m0525 src/gen/synth.c:592 [int-1 0 -> -1]
+SURVIVED  m0526 src/gen/synth.c:592 [cmp < -> <=]
+KILLED    m0527 src/gen/synth.c:592 [logic && -> ||]
+KILLED    m0528 src/gen/synth.c:592 [not-del ! -> (deleted)]
+KILLED    m0529 src/gen/synth.c:593 [cmp > -> >=]
+SURVIVED  m0530 src/gen/synth.c:593 [int+1 0 -> 1]
+KILLED    m0531 src/gen/synth.c:593 [int-1 0 -> -1]
+KILLED    m0532 src/gen/synth.c:593 [logic && -> ||]
+SURVIVED  m0533 src/gen/synth.c:593 [arith - -> +]
+KILLED    m0534 src/gen/synth.c:593 [int+1 1 -> 2]
+SURVIVED  m0535 src/gen/synth.c:593 [int-1 1 -> 0]
+KILLED    m0536 src/gen/synth.c:593 [cmp == -> !=]
+KILLED    m0537 src/gen/synth.c:598 [arith + -> -]
+KILLED    m0538 src/gen/synth.c:598 [int+1 1 -> 2]
+KILLED    m0539 src/gen/synth.c:598 [int-1 1 -> 0]
+KILLED pgbuild/mutants/p14984/m0541_synth.c:604:61: error: expected ')'
+  604 |                                int max_depth, ct_synth_cand /cands, int cand_cap, int *cand_n) {
+      |                                                             ^
+pgbuild/mutants/p14984/m0541_synth.c:603:31: note: to match this '('
+  603 | static void synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
+      |                               ^
+pgbuild/mutants/p14984/m0541_synth.c:614:17: error: use of undeclared identifier 'cands'
+  614 |     ctx.cands = cands;
+      |                 ^~~~~
+pgbuild/mutants/p14984/m0541_synth.c:615:20: error: use of undeclared identifier 'cand_cap'
+  615 |     ctx.cand_cap = cand_cap;
+      |                    ^~~~~~~~
+pgbuild/mutants/p14984/m0541_synth.c:616:19: error: use of undeclared identifier 'cand_n'
+  616 |     ctx.cand_n = *cand_n;
+      |                   ^~~~~~
+pgbuild/mutants/p14984/m0541_synth.c:621:6: error: use of undeclared identifier 'cand_n'
+  621 |     *cand_n = ctx.cand_n;
+      |      ^~~~~~
+pgbuild/mutants/p14984/m0541_synth.c:899:77: error: too many arguments to function call, expected 8, have 10
+  899 |         synth_setup_search(orbit, cb, c1, c2, subset, move_n, depth, cands, cand_cap, &cand_n);
+      |         ~~~~~~~~~~~~~~~~~~                                                  ^~~~~~~~~~~~~~~~~
+pgbuild/mutants/p14984/m0541_synth.c:603:13: note: 'synth_setup_search' declared here
+  603 | static void synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
+      |             ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  604 |                                int max_depth, ct_synth_cand /cands, int cand_cap, int *cand_n) {
+      |                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+6 errors generated.
+pgbuild/mutants/p14984/m0542_synth.c:604:87: error: expected ')'
+  604 |                                int max_depth, ct_synth_cand *cands, int cand_cap, int /cand_n) {
+      |                                                                                       ^
+pgbuild/mutants/p14984/m0542_synth.c:603:31: note: to match this '('
+  603 | static void synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
+      |                               ^
+pgbuild/mutants/p14984/m0542_synth.c:616:19: error: use of undeclared identifier 'cand_n'; did you mean 'cands'?
+  616 |     ctx.cand_n = *cand_n;
+      |                   ^~~~~~
+      |                   cands
+pgbuild/mutants/p14984/m0542_synth.c:604:62: note: 'cands' declared here
+  604 |                                int max_depth, ct_synth_cand *cands, int cand_cap, int /cand_n) {
+      |                                                              ^
+pgbuild/mutants/p14984/m0542_synth.c:616:16: error: assigning to 'int' from incompatible type 'ct_synth_cand'
+  616 |     ctx.cand_n = *cand_n;
+      |                ^ ~~~~~~~
+pgbuild/mutants/p14984/m0542_synth.c:621:6: error: use of undeclared identifier 'cand_n'; did you mean 'cands'?
+  621 |     *cand_n = ctx.cand_n;
+      |      ^~~~~~
+      |      cands
+pgbuild/mutants/p14984/m0542_synth.c:604:62: note: 'cands' declared here
+  604 |                                int max_depth, ct_synth_cand *cands, int cand_cap, int /cand_n) {
+      |                                                              ^
+pgbuild/mutants/p14984/m0542_synth.c:621:13: error: assigning to 'ct_synth_cand' from incompatible type 'int'
+  621 |     *cand_n = ctx.cand_n;
+      |             ^ ~~~~~~~~~~
+pgbuild/mutants/p14984/m0542_synth.c:899:87: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  899 |         synth_setup_search(orbit, cb, c1, c2, subset, move_n, depth, cands, cand_cap, &cand_n);
+      |                                                                                       ^~~~~~~
+pgbuild/mutants/p14984/m0542_synth.c:604:87: note: passing argument to parameter here
+  604 |                                int max_depth, ct_synth_cand *cands, int cand_cap, int /cand_n) {
+      |                                                                                       ^
+6 errors generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p14984/m0546_synth.c:608:54: error: expected expression
+  608 |     memcpy(ctx.moves, moves, (size_t)move_n * sizeof /moves);
+      |                                                      ^
+1 error generated.
+pgbuild/mutants/p14984/m0547_synth.c:616:18: error: expected expression
+  616 |     ctx.cand_n = /cand_n;
+      |                  ^
+1 error generated.
+make: *** [makefile:239: mutate] Error 1

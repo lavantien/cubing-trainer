@@ -1,0 +1,848 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+pgbuild/bin/mutate.exe src/gen/synth.c pgbuild unit_synth_table unit_synth_coverage unit_synth_config unit_synth_bh unit_synth_scoring
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p52412/m0351_synth.c:401:26: error: expected identifier or '('
+  401 |     const ct_synth_entry /e = &synth_entries[index];
+      |                          ^
+pgbuild/mutants/p52412/m0351_synth.c:402:35: error: use of undeclared identifier 'e'
+  402 |     if (out == NULL || cap < (int)e->len) {
+      |                                   ^
+pgbuild/mutants/p52412/m0351_synth.c:406:18: error: use of undeclared identifier 'e'
+  406 |         key[i] = e->key[i];
+      |                  ^
+pgbuild/mutants/p52412/m0351_synth.c:408:17: error: use of undeclared identifier 'e'
+  408 |     memcpy(out, e->seq, (size_t)e->len * sizeof *out);
+      |                 ^
+pgbuild/mutants/p52412/m0351_synth.c:408:33: error: use of undeclared identifier 'e'
+  408 |     memcpy(out, e->seq, (size_t)e->len * sizeof *out);
+      |                                 ^
+pgbuild/mutants/p52412/m0351_synth.c:409:12: error: use of undeclared identifier 'e'
+  409 |     return e->len;
+      |            ^
+6 errors generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p52412/m0362_synth.c:408:49: error: expected expression
+  408 |     memcpy(out, e->seq, (size_t)e->len * sizeof /out);
+      |                                                 ^
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0365_synth.c:425:34: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+  425 |     if (orbit != CT_ORBIT_CORNER || orbit != CT_ORBIT_EDGE) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0371_synth.c:428:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  428 |     if (buffer < 0 && t1 < 0 || t2 < 0) {
+      |         ~~~~~~~~~~~^~~~~~~~~ ~~
+pgbuild/mutants/p52412/m0371_synth.c:428:20: note: place parentheses around the '&&' expression to silence this warning
+  428 |     if (buffer < 0 && t1 < 0 || t2 < 0) {
+      |                    ^
+      |         (                   )
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0375_synth.c:428:30: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  428 |     if (buffer < 0 || t1 < 0 && t2 < 0) {
+      |                    ~~ ~~~~~~~^~~~~~~~~
+pgbuild/mutants/p52412/m0375_synth.c:428:30: note: place parentheses around the '&&' expression to silence this warning
+  428 |     if (buffer < 0 || t1 < 0 && t2 < 0) {
+      |                              ^        
+      |                       (               )
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0381_synth.c:431:38: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  431 |     if (buffer >= CT_TARGET_STICKERS && t1 >= CT_TARGET_STICKERS || t2 >= CT_TARGET_STICKERS) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p52412/m0381_synth.c:431:38: note: place parentheses around the '&&' expression to silence this warning
+  431 |     if (buffer >= CT_TARGET_STICKERS && t1 >= CT_TARGET_STICKERS || t2 >= CT_TARGET_STICKERS) {
+      |                                      ^
+      |         (                                                       )
+1 error generated.
+pgbuild/mutants/p52412/m0383_synth.c:431:66: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  431 |     if (buffer >= CT_TARGET_STICKERS || t1 >= CT_TARGET_STICKERS && t2 >= CT_TARGET_STICKERS) {
+      |                                      ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0383_synth.c:431:66: note: place parentheses around the '&&' expression to silence this warning
+  431 |     if (buffer >= CT_TARGET_STICKERS || t1 >= CT_TARGET_STICKERS && t2 >= CT_TARGET_STICKERS) {
+      |                                                                  ^                          
+      |                                         (                                                   )
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0387_synth.c:437:33: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  437 |     return pb != p1 || p1 != p2 && pb != p2;
+      |                     ~~ ~~~~~~~~~^~~~~~~~~~~
+pgbuild/mutants/p52412/m0387_synth.c:437:33: note: place parentheses around the '&&' expression to silence this warning
+  437 |     return pb != p1 || p1 != p2 && pb != p2;
+      |                                 ^          
+      |                        (                   )
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0389_synth.c:437:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  437 |     return pb != p1 && p1 != p2 || pb != p2;
+      |            ~~~~~~~~~^~~~~~~~~~~ ~~
+pgbuild/mutants/p52412/m0389_synth.c:437:21: note: place parentheses around the '&&' expression to silence this warning
+  437 |     return pb != p1 && p1 != p2 || pb != p2;
+      |                     ^
+      |            (                   )
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0391_synth.c:440:42: error: expected ')'
+  440 | static bool synth_validate(const ct_move /seq, int len, int orbit, int cb, int c1, int c2) {
+      |                                          ^
+pgbuild/mutants/p52412/m0391_synth.c:440:27: note: to match this '('
+  440 | static bool synth_validate(const ct_move /seq, int len, int orbit, int cb, int c1, int c2) {
+      |                           ^
+pgbuild/mutants/p52412/m0391_synth.c:443:28: error: use of undeclared identifier 'seq'
+  443 |     synth_apply_seq(&cube, seq, len);
+      |                            ^~~
+pgbuild/mutants/p52412/m0391_synth.c:443:33: error: use of undeclared identifier 'len'
+  443 |     synth_apply_seq(&cube, seq, len);
+      |                                 ^~~
+pgbuild/mutants/p52412/m0391_synth.c:446:15: error: use of undeclared identifier 'c1'
+  446 |     if (state[c1] != (uint8_t)cb || state[c2] != (uint8_t)c1 || state[cb] != (uint8_t)c2) {
+      |               ^~
+pgbuild/mutants/p52412/m0391_synth.c:446:31: error: use of undeclared identifier 'cb'
+  446 |     if (state[c1] != (uint8_t)cb || state[c2] != (uint8_t)c1 || state[cb] != (uint8_t)c2) {
+      |                               ^~
+pgbuild/mutants/p52412/m0391_synth.c:446:43: error: use of undeclared identifier 'c2'
+  446 |     if (state[c1] != (uint8_t)cb || state[c2] != (uint8_t)c1 || state[cb] != (uint8_t)c2) {
+      |                                           ^~
+pgbuild/mutants/p52412/m0391_synth.c:446:59: error: use of undeclared identifier 'c1'
+  446 |     if (state[c1] != (uint8_t)cb || state[c2] != (uint8_t)c1 || state[cb] != (uint8_t)c2) {
+      |                                                           ^~
+pgbuild/mutants/p52412/m0391_synth.c:446:71: error: use of undeclared identifier 'cb'
+  446 |     if (state[c1] != (uint8_t)cb || state[c2] != (uint8_t)c1 || state[cb] != (uint8_t)c2) {
+      |                                                                       ^~
+pgbuild/mutants/p52412/m0391_synth.c:446:87: error: use of undeclared identifier 'c2'
+  446 |     if (state[c1] != (uint8_t)cb || state[c2] != (uint8_t)c1 || state[cb] != (uint8_t)c2) {
+      |                                                                                       ^~
+pgbuild/mutants/p52412/m0391_synth.c:450:42: error: use of undeclared identifier 'cb'
+  450 |     int key_cells[CT_SYNTH_CYCLE_LEN] = {cb, c1, c2};
+      |                                          ^~
+pgbuild/mutants/p52412/m0391_synth.c:450:46: error: use of undeclared identifier 'c1'
+  450 |     int key_cells[CT_SYNTH_CYCLE_LEN] = {cb, c1, c2};
+      |                                              ^~
+pgbuild/mutants/p52412/m0391_synth.c:450:50: error: use of undeclared identifier 'c2'
+  450 |     int key_cells[CT_SYNTH_CYCLE_LEN] = {cb, c1, c2};
+      |                                                  ^~
+pgbuild/mutants/p52412/m0391_synth.c:453:13: error: use of undeclared identifier 'orbit'
+  453 |         if (orbit == CT_ORBIT_EDGE) {
+      |             ^~~~~
+pgbuild/mutants/p52412/m0391_synth.c:459:36: error: use of undeclared identifier 'orbit'
+  459 |         int piece = synth_piece_of(orbit, sticker);
+      |                                    ^~~~~
+pgbuild/mutants/p52412/m0391_synth.c:461:32: error: use of undeclared identifier 'orbit'
+  461 |             if (synth_piece_of(orbit, s) == piece) {
+      |                                ^~~~~
+pgbuild/mutants/p52412/m0391_synth.c:462:49: error: use of undeclared identifier 'orbit'
+  462 |                 on_pieces[synth_sticker_cell_of(orbit, s)] = true;
+      |                                                 ^~~~~
+pgbuild/mutants/p52412/m0391_synth.c:569:37: error: too many arguments to function call, expected 1, have 6
+  569 |     if (!synth_validate(simplified, simplified_len, ctx->orbit, ctx->cb, ctx->c1, ctx->c2)) {
+      |          ~~~~~~~~~~~~~~             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0391_synth.c:440:13: note: 'synth_validate' declared here
+  440 | static bool synth_validate(const ct_move /seq, int len, int orbit, int cb, int c1, int c2) {
+      |             ^              ~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0391_synth.c:888:63: error: too many arguments to function call, expected 1, have 6
+  888 |         if (simplified_len >= 0 && synth_validate(simplified, simplified_len, orbit, cb, c1, c2)) {
+      |                                    ~~~~~~~~~~~~~~             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0391_synth.c:440:13: note: 'synth_validate' declared here
+  440 | static bool synth_validate(const ct_move /seq, int len, int orbit, int cb, int c1, int c2) {
+      |             ^              ~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0391_synth.c:931:44: error: too many arguments to function call, expected 1, have 6
+  931 |                 synth_validate(simplified, simplified_len, orbit, cb, c1, c2)) {
+      |                 ~~~~~~~~~~~~~~             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0391_synth.c:440:13: note: 'synth_validate' declared here
+  440 | static bool synth_validate(const ct_move /seq, int len, int orbit, int cb, int c1, int c2) {
+      |             ^              ~~~~~~~~~~~~~
+19 errors generated.
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0393_synth.c:446:34: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  446 |     if (state[c1] != (uint8_t)cb && state[c2] != (uint8_t)c1 || state[cb] != (uint8_t)c2) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p52412/m0393_synth.c:446:34: note: place parentheses around the '&&' expression to silence this warning
+  446 |     if (state[c1] != (uint8_t)cb && state[c2] != (uint8_t)c1 || state[cb] != (uint8_t)c2) {
+      |                                  ^
+      |         (                                                   )
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0395_synth.c:446:62: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  446 |     if (state[c1] != (uint8_t)cb || state[c2] != (uint8_t)c1 && state[cb] != (uint8_t)c2) {
+      |                                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0395_synth.c:446:62: note: place parentheses around the '&&' expression to silence this warning
+  446 |     if (state[c1] != (uint8_t)cb || state[c2] != (uint8_t)c1 && state[cb] != (uint8_t)c2) {
+      |                                                              ^                          
+      |                                     (                                                   )
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0418_synth.c:474:40: error: expected ')'
+  474 | static bool synth_fill(ct_synth_result /out, const ct_config *cfg, const ct_move *seq, int len,
+      |                                        ^
+pgbuild/mutants/p52412/m0418_synth.c:474:23: note: to match this '('
+  474 | static bool synth_fill(ct_synth_result /out, const ct_config *cfg, const ct_move *seq, int len,
+      |                       ^
+pgbuild/mutants/p52412/m0418_synth.c:477:22: error: use of undeclared identifier 'seq'
+  477 |     if (ct_score_alg(seq, len, cfg, &parts) != CT_SCORE_OK) {
+      |                      ^~~
+pgbuild/mutants/p52412/m0418_synth.c:477:27: error: use of undeclared identifier 'len'
+  477 |     if (ct_score_alg(seq, len, cfg, &parts) != CT_SCORE_OK) {
+      |                           ^~~
+pgbuild/mutants/p52412/m0418_synth.c:477:32: error: use of undeclared identifier 'cfg'
+  477 |     if (ct_score_alg(seq, len, cfg, &parts) != CT_SCORE_OK) {
+      |                                ^~~
+pgbuild/mutants/p52412/m0418_synth.c:480:12: error: use of undeclared identifier 'out'
+  480 |     memcpy(out->seq, seq, (size_t)len * sizeof *seq);
+      |            ^~~
+pgbuild/mutants/p52412/m0418_synth.c:480:22: error: use of undeclared identifier 'seq'
+  480 |     memcpy(out->seq, seq, (size_t)len * sizeof *seq);
+      |                      ^~~
+pgbuild/mutants/p52412/m0418_synth.c:480:35: error: use of undeclared identifier 'len'
+  480 |     memcpy(out->seq, seq, (size_t)len * sizeof *seq);
+      |                                   ^~~
+pgbuild/mutants/p52412/m0418_synth.c:480:49: error: use of undeclared identifier 'seq'
+  480 |     memcpy(out->seq, seq, (size_t)len * sizeof *seq);
+      |                                                 ^~~
+pgbuild/mutants/p52412/m0418_synth.c:481:5: error: use of undeclared identifier 'out'
+  481 |     out->len = len;
+      |     ^~~
+pgbuild/mutants/p52412/m0418_synth.c:481:16: error: use of undeclared identifier 'len'
+  481 |     out->len = len;
+      |                ^~~
+pgbuild/mutants/p52412/m0418_synth.c:482:5: error: use of undeclared identifier 'out'
+  482 |     out->qtm = parts.qtm;
+      |     ^~~
+pgbuild/mutants/p52412/m0418_synth.c:483:5: error: use of undeclared identifier 'out'
+  483 |     out->subset_penalty = parts.subset_penalty;
+      |     ^~~
+pgbuild/mutants/p52412/m0418_synth.c:484:5: error: use of undeclared identifier 'out'
+  484 |     out->found = true;
+      |     ^~~
+pgbuild/mutants/p52412/m0418_synth.c:485:5: error: use of undeclared identifier 'out'
+  485 |     out->used_setup = setup;
+      |     ^~~
+pgbuild/mutants/p52412/m0418_synth.c:485:23: error: use of undeclared identifier 'setup'
+  485 |     out->used_setup = setup;
+      |                       ^~~~~
+pgbuild/mutants/p52412/m0418_synth.c:486:5: error: use of undeclared identifier 'out'
+  486 |     out->used_fallback = fallback;
+      |     ^~~
+pgbuild/mutants/p52412/m0418_synth.c:486:26: error: use of undeclared identifier 'fallback'
+  486 |     out->used_fallback = fallback;
+      |                          ^~~~~~~~
+pgbuild/mutants/p52412/m0418_synth.c:915:29: error: too many arguments to function call, expected 1, have 6
+  915 |             synth_fill(out, cfg, cands[best].seq, cands[best].len, cands[best].setup, false)) {
+      |             ~~~~~~~~~~      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0418_synth.c:474:13: note: 'synth_fill' declared here
+  474 | static bool synth_fill(ct_synth_result /out, const ct_config *cfg, const ct_move *seq, int len,
+      |             ^          ~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0418_synth.c:932:33: error: too many arguments to function call, expected 1, have 6
+  932 |                 synth_fill(out, cfg, simplified, simplified_len, false, true);
+      |                 ~~~~~~~~~~      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0418_synth.c:474:13: note: 'synth_fill' declared here
+  474 | static bool synth_fill(ct_synth_result /out, const ct_config *cfg, const ct_move *seq, int len,
+      |             ^          ~~~~~~~~~~~~~~~
+19 errors generated.
+pgbuild/mutants/p52412/m0419_synth.c:474:62: error: expected ')'
+  474 | static bool synth_fill(ct_synth_result *out, const ct_config /cfg, const ct_move *seq, int len,
+      |                                                              ^
+pgbuild/mutants/p52412/m0419_synth.c:474:23: note: to match this '('
+  474 | static bool synth_fill(ct_synth_result *out, const ct_config /cfg, const ct_move *seq, int len,
+      |                       ^
+pgbuild/mutants/p52412/m0419_synth.c:477:22: error: use of undeclared identifier 'seq'
+  477 |     if (ct_score_alg(seq, len, cfg, &parts) != CT_SCORE_OK) {
+      |                      ^~~
+pgbuild/mutants/p52412/m0419_synth.c:477:27: error: use of undeclared identifier 'len'
+  477 |     if (ct_score_alg(seq, len, cfg, &parts) != CT_SCORE_OK) {
+      |                           ^~~
+pgbuild/mutants/p52412/m0419_synth.c:477:32: error: use of undeclared identifier 'cfg'
+  477 |     if (ct_score_alg(seq, len, cfg, &parts) != CT_SCORE_OK) {
+      |                                ^~~
+pgbuild/mutants/p52412/m0419_synth.c:480:22: error: use of undeclared identifier 'seq'
+  480 |     memcpy(out->seq, seq, (size_t)len * sizeof *seq);
+      |                      ^~~
+pgbuild/mutants/p52412/m0419_synth.c:480:35: error: use of undeclared identifier 'len'
+  480 |     memcpy(out->seq, seq, (size_t)len * sizeof *seq);
+      |                                   ^~~
+pgbuild/mutants/p52412/m0419_synth.c:480:49: error: use of undeclared identifier 'seq'
+  480 |     memcpy(out->seq, seq, (size_t)len * sizeof *seq);
+      |                                                 ^~~
+pgbuild/mutants/p52412/m0419_synth.c:481:16: error: use of undeclared identifier 'len'
+  481 |     out->len = len;
+      |                ^~~
+pgbuild/mutants/p52412/m0419_synth.c:485:23: error: use of undeclared identifier 'setup'
+  485 |     out->used_setup = setup;
+      |                       ^~~~~
+pgbuild/mutants/p52412/m0419_synth.c:486:26: error: use of undeclared identifier 'fallback'
+  486 |     out->used_fallback = fallback;
+      |                          ^~~~~~~~
+pgbuild/mutants/p52412/m0419_synth.c:915:34: error: too many arguments to function call, expected 2, have 6
+  915 |             synth_fill(out, cfg, cands[best].seq, cands[best].len, cands[best].setup, false)) {
+      |             ~~~~~~~~~~           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0419_synth.c:474:13: note: 'synth_fill' declared here
+  474 | static bool synth_fill(ct_synth_result *out, const ct_config /cfg, const ct_move *seq, int len,
+      |             ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0419_synth.c:932:38: error: too many arguments to function call, expected 2, have 6
+  932 |                 synth_fill(out, cfg, simplified, simplified_len, false, true);
+      |                 ~~~~~~~~~~           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0419_synth.c:474:13: note: 'synth_fill' declared here
+  474 | static bool synth_fill(ct_synth_result *out, const ct_config /cfg, const ct_move *seq, int len,
+      |             ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+12 errors generated.
+pgbuild/mutants/p52412/m0420_synth.c:474:82: error: expected ')'
+  474 | static bool synth_fill(ct_synth_result *out, const ct_config *cfg, const ct_move /seq, int len,
+      |                                                                                  ^
+pgbuild/mutants/p52412/m0420_synth.c:474:23: note: to match this '('
+  474 | static bool synth_fill(ct_synth_result *out, const ct_config *cfg, const ct_move /seq, int len,
+      |                       ^
+pgbuild/mutants/p52412/m0420_synth.c:477:22: error: use of undeclared identifier 'seq'
+  477 |     if (ct_score_alg(seq, len, cfg, &parts) != CT_SCORE_OK) {
+      |                      ^~~
+pgbuild/mutants/p52412/m0420_synth.c:477:27: error: use of undeclared identifier 'len'
+  477 |     if (ct_score_alg(seq, len, cfg, &parts) != CT_SCORE_OK) {
+      |                           ^~~
+pgbuild/mutants/p52412/m0420_synth.c:480:22: error: use of undeclared identifier 'seq'
+  480 |     memcpy(out->seq, seq, (size_t)len * sizeof *seq);
+      |                      ^~~
+pgbuild/mutants/p52412/m0420_synth.c:480:35: error: use of undeclared identifier 'len'
+  480 |     memcpy(out->seq, seq, (size_t)len * sizeof *seq);
+      |                                   ^~~
+pgbuild/mutants/p52412/m0420_synth.c:480:49: error: use of undeclared identifier 'seq'
+  480 |     memcpy(out->seq, seq, (size_t)len * sizeof *seq);
+      |                                                 ^~~
+pgbuild/mutants/p52412/m0420_synth.c:481:16: error: use of undeclared identifier 'len'
+  481 |     out->len = len;
+      |                ^~~
+pgbuild/mutants/p52412/m0420_synth.c:485:23: error: use of undeclared identifier 'setup'
+  485 |     out->used_setup = setup;
+      |                       ^~~~~
+pgbuild/mutants/p52412/m0420_synth.c:486:26: error: use of undeclared identifier 'fallback'
+  486 |     out->used_fallback = fallback;
+      |                          ^~~~~~~~
+pgbuild/mutants/p52412/m0420_synth.c:915:51: error: too many arguments to function call, expected 3, have 6
+  915 |             synth_fill(out, cfg, cands[best].seq, cands[best].len, cands[best].setup, false)) {
+      |             ~~~~~~~~~~                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0420_synth.c:474:13: note: 'synth_fill' declared here
+  474 | static bool synth_fill(ct_synth_result *out, const ct_config *cfg, const ct_move /seq, int len,
+      |             ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0420_synth.c:932:50: error: too many arguments to function call, expected 3, have 6
+  932 |                 synth_fill(out, cfg, simplified, simplified_len, false, true);
+      |                 ~~~~~~~~~~                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0420_synth.c:474:13: note: 'synth_fill' declared here
+  474 | static bool synth_fill(ct_synth_result *out, const ct_config *cfg, const ct_move /seq, int len,
+      |             ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+11 errors generated.
+mutate: scope=src/gen/synth.c files=1 sites=928 suites=5
+SURVIVED  m0349 src/gen/synth.c:399 [int+1 1 -> 2]
+KILLED    m0350 src/gen/synth.c:399 [int-1 1 -> 0]
+KILLED    m0351 src/gen/synth.c:401 [arith * -> /]
+          build break
+KILLED    m0352 src/gen/synth.c:402 [cmp == -> !=]
+KILLED    m0353 src/gen/synth.c:402 [logic || -> &&]
+KILLED    m0354 src/gen/synth.c:402 [cmp < -> <=]
+KILLED    m0355 src/gen/synth.c:403 [arith - -> +]
+SURVIVED  m0356 src/gen/synth.c:403 [int+1 1 -> 2]
+KILLED    m0357 src/gen/synth.c:403 [int-1 1 -> 0]
+KILLED    m0358 src/gen/synth.c:405 [int+1 0 -> 1]
+KILLED    m0359 src/gen/synth.c:405 [int-1 0 -> -1]
+KILLED    m0360 src/gen/synth.c:405 [cmp < -> <=]
+KILLED    m0361 src/gen/synth.c:408 [arith * -> /]
+KILLED    m0362 src/gen/synth.c:408 [arith * -> /]
+          build break
+KILLED    m0363 src/gen/synth.c:421 [cmp == -> !=]
+KILLED    m0364 src/gen/synth.c:425 [cmp != -> ==]
+KILLED    m0365 src/gen/synth.c:425 [logic && -> ||]
+          build break
+KILLED    m0366 src/gen/synth.c:425 [cmp != -> ==]
+SURVIVED  m0367 src/gen/synth.c:426 [bool false -> true]
+KILLED    m0368 src/gen/synth.c:428 [cmp < -> <=]
+KILLED    m0369 src/gen/synth.c:428 [int+1 0 -> 1]
+SURVIVED  m0370 src/gen/synth.c:428 [int-1 0 -> -1]
+KILLED    m0371 src/gen/synth.c:428 [logic || -> &&]
+          build break
+KILLED    m0372 src/gen/synth.c:428 [cmp < -> <=]
+KILLED    m0373 src/gen/synth.c:428 [int+1 0 -> 1]
+SURVIVED  m0374 src/gen/synth.c:428 [int-1 0 -> -1]
+KILLED    m0375 src/gen/synth.c:428 [logic || -> &&]
+          build break
+KILLED    m0376 src/gen/synth.c:428 [cmp < -> <=]
+KILLED    m0377 src/gen/synth.c:428 [int+1 0 -> 1]
+SURVIVED  m0378 src/gen/synth.c:428 [int-1 0 -> -1]
+SURVIVED  m0379 src/gen/synth.c:429 [bool false -> true]
+SURVIVED  m0380 src/gen/synth.c:431 [cmp >= -> >]
+KILLED    m0381 src/gen/synth.c:431 [logic || -> &&]
+          build break
+SURVIVED  m0382 src/gen/synth.c:431 [cmp >= -> >]
+KILLED    m0383 src/gen/synth.c:431 [logic || -> &&]
+          build break
+SURVIVED  m0384 src/gen/synth.c:431 [cmp >= -> >]
+SURVIVED  m0385 src/gen/synth.c:432 [bool false -> true]
+KILLED    m0386 src/gen/synth.c:437 [cmp != -> ==]
+KILLED    m0387 src/gen/synth.c:437 [logic && -> ||]
+          build break
+KILLED    m0388 src/gen/synth.c:437 [cmp != -> ==]
+KILLED    m0389 src/gen/synth.c:437 [logic && -> ||]
+          build break
+KILLED    m0390 src/gen/synth.c:437 [cmp != -> ==]
+KILLED    m0391 src/gen/synth.c:440 [arith * -> /]
+          build break
+KILLED    m0392 src/gen/synth.c:446 [cmp != -> ==]
+KILLED    m0393 src/gen/synth.c:446 [logic || -> &&]
+          build break
+KILLED    m0394 src/gen/synth.c:446 [cmp != -> ==]
+KILLED    m0395 src/gen/synth.c:446 [logic || -> &&]
+          build break
+KILLED    m0396 src/gen/synth.c:446 [cmp != -> ==]
+SURVIVED  m0397 src/gen/synth.c:447 [bool false -> true]
+SURVIVED  m0398 src/gen/synth.c:449 [bool false -> true]
+KILLED    m0399 src/gen/synth.c:451 [int+1 0 -> 1]
+KILLED    m0400 src/gen/synth.c:451 [int-1 0 -> -1]
+KILLED    m0401 src/gen/synth.c:451 [cmp < -> <=]
+KILLED    m0402 src/gen/synth.c:453 [cmp == -> !=]
+KILLED    m0403 src/gen/synth.c:456 [cmp == -> !=]
+SURVIVED  m0404 src/gen/synth.c:457 [bool false -> true]
+KILLED    m0405 src/gen/synth.c:460 [int+1 0 -> 1]
+SURVIVED  m0406 src/gen/synth.c:460 [int-1 0 -> -1]
+SURVIVED  m0407 src/gen/synth.c:460 [cmp < -> <=]
+SURVIVED  m0408 src/gen/synth.c:461 [cmp == -> !=]
+KILLED    m0409 src/gen/synth.c:462 [bool true -> false]
+SURVIVED  m0410 src/gen/synth.c:466 [int+1 0 -> 1]
+KILLED    m0411 src/gen/synth.c:466 [int-1 0 -> -1]
+KILLED    m0412 src/gen/synth.c:466 [cmp < -> <=]
+KILLED    m0413 src/gen/synth.c:467 [cmp != -> ==]
+KILLED    m0414 src/gen/synth.c:467 [logic && -> ||]
+KILLED    m0415 src/gen/synth.c:467 [not-del ! -> (deleted)]
+SURVIVED  m0416 src/gen/synth.c:468 [bool false -> true]
+KILLED    m0417 src/gen/synth.c:471 [bool true -> false]
+KILLED    m0418 src/gen/synth.c:474 [arith * -> /]
+          build break
+KILLED    m0419 src/gen/synth.c:474 [arith * -> /]
+          build break
+KILLED    m0420 src/gen/syntmutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0424_synth.c:480:48: error: expected expression
+  480 |     memcpy(out->seq, seq, (size_t)len * sizeof /seq);
+      |                                                ^
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0427_synth.c:490:42: error: expected ')'
+  490 | static void synth_cand_add(ct_synth_cand /cands, int *cand_n, int cand_cap, const ct_move *seq,
+      |                                          ^
+pgbuild/mutants/p52412/m0427_synth.c:490:27: note: to match this '('
+  490 | static void synth_cand_add(ct_synth_cand /cands, int *cand_n, int cand_cap, const ct_move *seq,
+      |                           ^
+pgbuild/mutants/p52412/m0427_synth.c:492:9: error: use of undeclared identifier 'cands'
+  492 |     if (cands == NULL || *cand_n >= cand_cap) {
+      |         ^~~~~
+pgbuild/mutants/p52412/m0427_synth.c:492:27: error: use of undeclared identifier 'cand_n'
+  492 |     if (cands == NULL || *cand_n >= cand_cap) {
+      |                           ^~~~~~
+pgbuild/mutants/p52412/m0427_synth.c:492:37: error: use of undeclared identifier 'cand_cap'
+  492 |     if (cands == NULL || *cand_n >= cand_cap) {
+      |                                     ^~~~~~~~
+pgbuild/mutants/p52412/m0427_synth.c:495:12: error: use of undeclared identifier 'cands'
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |            ^~~~~
+pgbuild/mutants/p52412/m0427_synth.c:495:19: error: use of undeclared identifier 'cand_n'
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |                   ^~~~~~
+pgbuild/mutants/p52412/m0427_synth.c:495:32: error: use of undeclared identifier 'seq'
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |                                ^~~
+pgbuild/mutants/p52412/m0427_synth.c:495:45: error: use of undeclared identifier 'len'
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |                                             ^~~
+pgbuild/mutants/p52412/m0427_synth.c:495:59: error: use of undeclared identifier 'seq'
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |                                                           ^~~
+pgbuild/mutants/p52412/m0427_synth.c:496:5: error: use of undeclared identifier 'cands'
+  496 |     cands[*cand_n].len = len;
+      |     ^~~~~
+pgbuild/mutants/p52412/m0427_synth.c:496:12: error: use of undeclared identifier 'cand_n'
+  496 |     cands[*cand_n].len = len;
+      |            ^~~~~~
+pgbuild/mutants/p52412/m0427_synth.c:496:26: error: use of undeclared identifier 'len'
+  496 |     cands[*cand_n].len = len;
+      |                          ^~~
+pgbuild/mutants/p52412/m0427_synth.c:497:5: error: use of undeclared identifier 'cands'
+  497 |     cands[*cand_n].setup = setup;
+      |     ^~~~~
+pgbuild/mutants/p52412/m0427_synth.c:497:12: error: use of undeclared identifier 'cand_n'
+  497 |     cands[*cand_n].setup = setup;
+      |            ^~~~~~
+pgbuild/mutants/p52412/m0427_synth.c:497:28: error: use of undeclared identifier 'setup'
+  497 |     cands[*cand_n].setup = setup;
+      |                            ^~~~~
+pgbuild/mutants/p52412/m0427_synth.c:498:7: error: use of undeclared identifier 'cand_n'
+  498 |     (*cand_n)++;
+      |       ^~~~~~
+pgbuild/mutants/p52412/m0427_synth.c:572:32: error: too many arguments to function call, expected 1, have 6
+  572 |     synth_cand_add(ctx->cands, &ctx->cand_n, ctx->cand_cap, simplified, simplified_len, true);
+      |     ~~~~~~~~~~~~~~             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0427_synth.c:490:13: note: 'synth_cand_add' declared here
+  490 | static void synth_cand_add(ct_synth_cand /cands, int *cand_n, int cand_cap, const ct_move *seq,
+      |             ^              ~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0427_synth.c:889:35: error: too many arguments to function call, expected 1, have 6
+  889 |             synth_cand_add(cands, &cand_n, cand_cap, simplified, simplified_len, false);
+      |             ~~~~~~~~~~~~~~        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0427_synth.c:490:13: note: 'synth_cand_add' declared here
+  490 | static void synth_cand_add(ct_synth_cand /cands, int *cand_n, int cand_cap, const ct_move *seq,
+      |             ^              ~~~~~~~~~~~~~
+18 errors generated.
+pgbuild/mutants/p52412/m0428_synth.c:490:54: error: expected ')'
+  490 | static void synth_cand_add(ct_synth_cand *cands, int /cand_n, int cand_cap, const ct_move *seq,
+      |                                                      ^
+pgbuild/mutants/p52412/m0428_synth.c:490:27: note: to match this '('
+  490 | static void synth_cand_add(ct_synth_cand *cands, int /cand_n, int cand_cap, const ct_move *seq,
+      |                           ^
+pgbuild/mutants/p52412/m0428_synth.c:492:27: error: use of undeclared identifier 'cand_n'; did you mean 'cands'?
+  492 |     if (cands == NULL || *cand_n >= cand_cap) {
+      |                           ^~~~~~
+      |                           cands
+pgbuild/mutants/p52412/m0428_synth.c:490:43: note: 'cands' declared here
+  490 | static void synth_cand_add(ct_synth_cand *cands, int /cand_n, int cand_cap, const ct_move *seq,
+      |                                           ^
+pgbuild/mutants/p52412/m0428_synth.c:492:37: error: use of undeclared identifier 'cand_cap'
+  492 |     if (cands == NULL || *cand_n >= cand_cap) {
+      |                                     ^~~~~~~~
+pgbuild/mutants/p52412/m0428_synth.c:495:19: error: use of undeclared identifier 'cand_n'; did you mean 'cands'?
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |                   ^~~~~~
+      |                   cands
+pgbuild/mutants/p52412/m0428_synth.c:490:43: note: 'cands' declared here
+  490 | static void synth_cand_add(ct_synth_cand *cands, int /cand_n, int cand_cap, const ct_move *seq,
+      |                                           ^
+pgbuild/mutants/p52412/m0428_synth.c:495:17: error: array subscript is not an integer
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |                 ^~~~~~~~
+pgbuild/mutants/p52412/m0428_synth.c:495:32: error: use of undeclared identifier 'seq'
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |                                ^~~
+pgbuild/mutants/p52412/m0428_synth.c:495:45: error: use of undeclared identifier 'len'
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |                                             ^~~
+pgbuild/mutants/p52412/m0428_synth.c:495:59: error: use of undeclared identifier 'seq'
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |                                                           ^~~
+pgbuild/mutants/p52412/m0428_synth.c:496:12: error: use of undeclared identifier 'cand_n'; did you mean 'cands'?
+  496 |     cands[*cand_n].len = len;
+      |            ^~~~~~
+      |            cands
+pgbuild/mutants/p52412/m0428_synth.c:490:43: note: 'cands' declared here
+  490 | static void synth_cand_add(ct_synth_cand *cands, int /cand_n, int cand_cap, const ct_move *seq,
+      |                                           ^
+pgbuild/mutants/p52412/m0428_synth.c:496:10: error: array subscript is not an integer
+  496 |     cands[*cand_n].len = len;
+      |          ^~~~~~~~
+pgbuild/mutants/p52412/m0428_synth.c:496:26: error: use of undeclared identifier 'len'
+  496 |     cands[*cand_n].len = len;
+      |                          ^~~
+pgbuild/mutants/p52412/m0428_synth.c:497:12: error: use of undeclared identifier 'cand_n'; did you mean 'cands'?
+  497 |     cands[*cand_n].setup = setup;
+      |            ^~~~~~
+      |            cands
+pgbuild/mutants/p52412/m0428_synth.c:490:43: note: 'cands' declared here
+  490 | static void synth_cand_add(ct_synth_cand *cands, int /cand_n, int cand_cap, const ct_move *seq,
+      |                                           ^
+pgbuild/mutants/p52412/m0428_synth.c:497:10: error: array subscript is not an integer
+  497 |     cands[*cand_n].setup = setup;
+      |          ^~~~~~~~
+pgbuild/mutants/p52412/m0428_synth.c:497:28: error: use of undeclared identifier 'setup'
+  497 |     cands[*cand_n].setup = setup;
+      |                            ^~~~~
+pgbuild/mutants/p52412/m0428_synth.c:498:7: error: use of undeclared identifier 'cand_n'; did you mean 'cands'?
+  498 |     (*cand_n)++;
+      |       ^~~~~~
+      |       cands
+pgbuild/mutants/p52412/m0428_synth.c:490:43: note: 'cands' declared here
+  490 | static void synth_cand_add(ct_synth_cand *cands, int /cand_n, int cand_cap, const ct_move *seq,
+      |                                           ^
+pgbuild/mutants/p52412/m0428_synth.c:498:14: error: cannot increment value of type 'ct_synth_cand'
+  498 |     (*cand_n)++;
+      |     ~~~~~~~~~^
+pgbuild/mutants/p52412/m0428_synth.c:572:46: error: too many arguments to function call, expected 2, have 6
+  572 |     synth_cand_add(ctx->cands, &ctx->cand_n, ctx->cand_cap, simplified, simplified_len, true);
+      |     ~~~~~~~~~~~~~~                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0428_synth.c:490:13: note: 'synth_cand_add' declared here
+  490 | static void synth_cand_add(ct_synth_cand *cands, int /cand_n, int cand_cap, const ct_move *seq,
+      |             ^              ~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0428_synth.c:889:44: error: too many arguments to function call, expected 2, have 6
+  889 |             synth_cand_add(cands, &cand_n, cand_cap, simplified, simplified_len, false);
+      |             ~~~~~~~~~~~~~~                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0428_synth.c:490:13: note: 'synth_cand_add' declared here
+  490 | static void synth_cand_add(ct_synth_cand *cands, int /cand_n, int cand_cap, const ct_move *seq,
+      |             ^              ~~~~~~~~~~~~~~~~~~~~~~~~~
+18 errors generated.
+pgbuild/mutants/p52412/m0429_synth.c:490:91: error: expected ')'
+  490 | static void synth_cand_add(ct_synth_cand *cands, int *cand_n, int cand_cap, const ct_move /seq,
+      |                                                                                           ^
+pgbuild/mutants/p52412/m0429_synth.c:490:27: note: to match this '('
+  490 | static void synth_cand_add(ct_synth_cand *cands, int *cand_n, int cand_cap, const ct_move /seq,
+      |                           ^
+pgbuild/mutants/p52412/m0429_synth.c:495:32: error: use of undeclared identifier 'seq'
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |                                ^~~
+pgbuild/mutants/p52412/m0429_synth.c:495:45: error: use of undeclared identifier 'len'
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |                                             ^~~
+pgbuild/mutants/p52412/m0429_synth.c:495:59: error: use of undeclared identifier 'seq'
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |                                                           ^~~
+pgbuild/mutants/p52412/m0429_synth.c:496:26: error: use of undeclared identifier 'len'
+  496 |     cands[*cand_n].len = len;
+      |                          ^~~
+pgbuild/mutants/p52412/m0429_synth.c:497:28: error: use of undeclared identifier 'setup'
+  497 |     cands[*cand_n].setup = setup;
+      |                            ^~~~~
+pgbuild/mutants/p52412/m0429_synth.c:572:73: error: too many arguments to function call, expected 4, have 6
+  572 |     synth_cand_add(ctx->cands, &ctx->cand_n, ctx->cand_cap, simplified, simplified_len, true);
+      |     ~~~~~~~~~~~~~~                                                      ^~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0429_synth.c:490:13: note: 'synth_cand_add' declared here
+  490 | static void synth_cand_add(ct_synth_cand *cands, int *cand_n, int cand_cap, const ct_move /seq,
+      |             ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0429_synth.c:889:66: error: too many arguments to function call, expected 4, have 6
+  889 |             synth_cand_add(cands, &cand_n, cand_cap, simplified, simplified_len, false);
+      |             ~~~~~~~~~~~~~~                                       ^~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0429_synth.c:490:13: note: 'synth_cand_add' declared here
+  490 | static void synth_cand_add(ct_synth_cand *cands, int *cand_n, int cand_cap, const ct_move /seq,
+      |             ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+8 errors generated.
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0432_synth.c:492:26: error: expected expression
+  492 |     if (cands == NULL || /cand_n >= cand_cap) {
+      |                          ^
+1 error generated.
+pgbuild/mutants/p52412/m0434_synth.c:495:18: error: expected expression
+  495 |     memcpy(cands[/cand_n].seq, seq, (size_t)len * sizeof *seq);
+      |                  ^
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0436_synth.c:495:58: error: expected expression
+  495 |     memcpy(cands[*cand_n].seq, seq, (size_t)len * sizeof /seq);
+      |                                                          ^
+1 error generated.
+pgbuild/mutants/p52412/m0437_synth.c:496:11: error: expected expression
+  496 |     cands[/cand_n].len = len;
+      |           ^
+1 error generated.
+pgbuild/mutants/p52412/m0438_synth.c:497:11: error: expected expression
+  497 |     cands[/cand_n].setup = setup;
+      |           ^
+1 error generated.
+pgbuild/mutants/p52412/m0439_synth.c:498:6: error: expected expression
+  498 |     (/cand_n)++;
+      |      ^
+1 error generated.
+pgbuild/mutants/p52412/m0440_synth.c:501:59: error: expected ')'
+  501 | static bool synth_lookup_seq(int x, int y, int z, ct_move /out, int *out_len) {
+      |                                                           ^
+pgbuild/mutants/p52412/m0440_synth.c:501:29: note: to match this '('
+  501 | static bool synth_lookup_seq(int x, int y, int z, ct_move /out, int *out_len) {
+      |                             ^
+pgbuild/mutants/p52412/m0440_synth.c:512:20: error: use of undeclared identifier 'out'
+  512 |             memcpy(out, e->seq, (size_t)e->len * sizeof *out);
+      |                    ^~~
+pgbuild/mutants/p52412/m0440_synth.c:512:58: error: use of undeclared identifier 'out'
+  512 |             memcpy(out, e->seq, (size_t)e->len * sizeof *out);
+      |                                                          ^~~
+pgbuild/mutants/p52412/m0440_synth.c:513:14: error: use of undeclared identifier 'out_len'
+  513 |             *out_len = e->len;
+      |              ^~~~~~~
+pgbuild/mutants/p52412/m0440_synth.c:515:14: error: use of undeclared identifier 'out_len'
+  515 |             *out_len = ct_transform_inverse(e->seq, e->len, out);
+      |              ^~~~~~~
+pgbuild/mutants/p52412/m0440_synth.c:515:61: error: use of undeclared identifier 'out'
+  515 |             *out_len = ct_transform_inverse(e->seq, e->len, out);
+      |                                                             ^~~
+pgbuild/mutants/p52412/m0440_synth.c:517:17: error: use of undeclared identifier 'out_len'
+  517 |         return *out_len > 0;
+      |                 ^~~~~~~
+pgbuild/mutants/p52412/m0440_synth.c:554:52: error: too many arguments to function call, expected 4, have 5
+  554 |     if (!synth_lookup_seq(q[0], q[1], q[2], inner, &inner_len)) {
+      |          ~~~~~~~~~~~~~~~~                          ^~~~~~~~~~
+pgbuild/mutants/p52412/m0440_synth.c:501:13: note: 'synth_lookup_seq' declared here
+  501 | static bool synth_lookup_seq(int x, int y, int z, ct_move /out, int *out_len) {
+      |             ^                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p52412/m0440_synth.c:884:45: error: too many arguments to function call, expected 4, have 5
+  884 |     if (synth_lookup_seq(cb, c1, c2, inner, &inner_len)) {
+      |         ~~~~~~~~~~~~~~~~                    ^~~~~~~~~~
+pgbuild/mutants/p52412/m0440_synth.c:501:13: note: 'synth_lookup_seq' declared here
+  501 | static bool synth_lookup_seq(int x, int y, int z, ct_move /out, int *out_len) {
+      |             ^                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+9 errors generated.
+pgbuild/mutants/p52412/m0441_synth.c:501:69: error: expected ')'
+  501 | static bool synth_lookup_seq(int x, int y, int z, ct_move *out, int /out_len) {
+      |                                                                     ^
+pgbuild/mutants/p52412/m0441_synth.c:501:29: note: to match this '('
+  501 | static bool synth_lookup_seq(int x, int y, int z, ct_move *out, int /out_len) {
+      |                             ^
+pgbuild/mutants/p52412/m0441_synth.c:513:14: error: use of undeclared identifier 'out_len'
+  513 |             *out_len = e->len;
+      |              ^~~~~~~
+pgbuild/mutants/p52412/m0441_synth.c:515:14: error: use of undeclared identifier 'out_len'
+  515 |             *out_len = ct_transform_inverse(e->seq, e->len, out);
+      |              ^~~~~~~
+pgbuild/mutants/p52412/m0441_synth.c:517:17: error: use of undeclared identifier 'out_len'
+  517 |         return *out_len > 0;
+      |                 ^~~~~~~
+pgbuild/mutants/p52412/m0441_synth.c:554:52: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  554 |     if (!synth_lookup_seq(q[0], q[1], q[2], inner, &inner_len)) {
+      |                                                    ^~~~~~~~~~
+pgbuild/mutants/p52412/m0441_synth.c:501:69: note: passing argument to parameter here
+  501 | static bool synth_lookup_seq(int x, int y, int z, ct_move *out, int /out_len) {
+      |                                                                     ^
+pgbuild/mutants/p52412/m0441_synth.c:884:45: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  884 |     if (synth_lookup_seq(cb, c1, c2, inner, &inner_len)) {
+      |                                             ^~~~~~~~~~
+pgbuild/mutants/p52412/m0441_synth.c:501:69: note: passing argument to parameter here
+  501 | static bool synth_lookup_seq(int x, int y, int z, ct_move *out, int /out_len) {
+      |                                                                     ^
+6 errors generated.
+pgbuild/mutants/p52412/m0452_synth.c:507:30: error: expected identifier or '('
+  507 |         const ct_synth_entry /e = synth_table_find(sorted[0], sorted[1], sorted[2], want);
+      |                              ^
+pgbuild/mutants/p52412/m0452_synth.c:508:13: error: use of undeclared identifier 'e'
+  508 |         if (e == NULL) {
+      |             ^
+pgbuild/mutants/p52412/m0452_synth.c:512:25: error: use of undeclared identifier 'e'
+  512 |             memcpy(out, e->seq, (size_t)e->len * sizeof *out);
+      |                         ^
+pgbuild/mutants/p52412/m0452_synth.c:512:41: error: use of undeclared identifier 'e'
+  512 |             memcpy(out, e->seq, (size_t)e->len * sizeof *out);
+      |                                         ^
+pgbuild/mutants/p52412/m0452_synth.c:513:24: error: use of undeclared identifier 'e'
+  513 |             *out_len = e->len;
+      |                        ^
+pgbuild/mutants/p52412/m0452_synth.c:515:45: error: use of undeclared identifier 'e'
+  515 |             *out_len = ct_transform_inverse(e->seq, e->len, out);
+      |                                             ^
+pgbuild/mutants/p52412/m0452_synth.c:515:53: error: use of undeclared identifier 'e'
+  515 |             *out_len = ct_transform_inverse(e->seq, e->len, out);
+      |                                                     ^
+7 errors generated.
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0454_synth.c:507:52: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  507 |         const ct_synth_entry *e = synth_table_find(sorted[-1], sorted[1], sorted[2], want);
+      |                                                    ^      ~~
+pgbuild/mutants/p52412/m0454_synth.c:502:5: note: array 'sorted' declared here
+  502 |     int sorted[CT_SYNTH_CYCLE_LEN];
+      |     ^
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0457_synth.c:507:74: error: array index 3 is past the end of the array (that has type 'int[3]') [-Werror,-Warray-bounds]
+  507 |         const ct_synth_entry *e = synth_table_find(sorted[0], sorted[1], sorted[3], want);
+      |                                                                          ^      ~
+pgbuild/mutants/p52412/m0457_synth.c:502:5: note: array 'sorted' declared here
+  502 |     int sorted[CT_SYNTH_CYCLE_LEN];
+      |     ^
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p52412/m0462_synth.c:512:57: error: expected expression
+  512 |             memcpy(out, e->seq, (size_t)e->len * sizeof /out);
+      |                                                         ^
+1 error generated.
+pgbuild/mutants/p52412/m0463_synth.c:513:13: error: expected expression
+  513 |             /out_len = e->len;
+      |             ^
+1 error generated.
+pgbuild/mutants/p52412/m0464_synth.c:515:13: error: expected expression
+  515 |             /out_len = ct_transform_inverse(e->seq, e->len, out);
+      |             ^
+1 error generated.
+mutate: 33 unexplained survivors
+h.c:474 [arith * -> /]
+          build break
+KILLED    m0421 src/gen/synth.c:477 [cmp != -> ==]
+SURVIVED  m0422 src/gen/synth.c:478 [bool false -> true]
+KILLED    m0423 src/gen/synth.c:480 [arith * -> /]
+KILLED    m0424 src/gen/synth.c:480 [arith * -> /]
+          build break
+KILLED    m0425 src/gen/synth.c:484 [bool true -> false]
+SURVIVED  m0426 src/gen/synth.c:487 [bool true -> false]
+KILLED    m0427 src/gen/synth.c:490 [arith * -> /]
+          build break
+KILLED    m0428 src/gen/synth.c:490 [arith * -> /]
+          build break
+KILLED    m0429 src/gen/synth.c:490 [arith * -> /]
+          build break
+KILLED    m0430 src/gen/synth.c:492 [cmp == -> !=]
+SURVIVED  m0431 src/gen/synth.c:492 [logic || -> &&]
+KILLED    m0432 src/gen/synth.c:492 [arith * -> /]
+          build break
+SURVIVED  m0433 src/gen/synth.c:492 [cmp >= -> >]
+KILLED    m0434 src/gen/synth.c:495 [arith * -> /]
+          build break
+KILLED    m0435 src/gen/synth.c:495 [arith * -> /]
+KILLED    m0436 src/gen/synth.c:495 [arith * -> /]
+          build break
+KILLED    m0437 src/gen/synth.c:496 [arith * -> /]
+          build break
+KILLED    m0438 src/gen/synth.c:497 [arith * -> /]
+          build break
+KILLED    m0439 src/gen/synth.c:498 [arith * -> /]
+          build break
+KILLED    m0440 src/gen/synth.c:501 [arith * -> /]
+          build break
+KILLED    m0441 src/gen/synth.c:501 [arith * -> /]
+          build break
+SURVIVED  m0442 src/gen/synth.c:503 [int+1 0 -> 1]
+SURVIVED  m0443 src/gen/synth.c:503 [int-1 0 -> -1]
+SURVIVED  m0444 src/gen/synth.c:505 [int+1 0 -> 1]
+SURVIVED  m0445 src/gen/synth.c:505 [int-1 0 -> -1]
+SURVIVED  m0446 src/gen/synth.c:505 [cmp < -> <=]
+SURVIVED  m0447 src/gen/synth.c:506 [cmp == -> !=]
+SURVIVED  m0448 src/gen/synth.c:506 [int+1 0 -> 1]
+SURVIVED  m0449 src/gen/synth.c:506 [int-1 0 -> -1]
+SURVIVED  m0450 src/gen/synth.c:506 [int+1 1 -> 2]
+SURVIVED  m0451 src/gen/synth.c:506 [int-1 1 -> 0]
+KILLED    m0452 src/gen/synth.c:507 [arith * -> /]
+          build break
+KILLED    m0453 src/gen/synth.c:507 [int+1 0 -> 1]
+KILLED    m0454 src/gen/synth.c:507 [int-1 0 -> -1]
+          build break
+KILLED    m0455 src/gen/synth.c:507 [int+1 1 -> 2]
+KILLED    m0456 src/gen/synth.c:507 [int-1 1 -> 0]
+KILLED    m0457 src/gen/synth.c:507 [int+1 2 -> 3]
+          build break
+KILLED    m0458 src/gen/synth.c:507 [int-1 2 -> 1]
+KILLED    m0459 src/gen/synth.c:508 [cmp == -> !=]
+KILLED    m0460 src/gen/synth.c:511 [cmp == -> !=]
+KILLED    m0461 src/gen/synth.c:512 [arith * -> /]
+KILLED    m0462 src/gen/synth.c:512 [arith * -> /]
+          build break
+KILLED    m0463 src/gen/synth.c:513 [arith * -> /]
+          build break
+KILLED    m0464 src/gen/synth.c:515 [arith * -> /]
+          build break
+mutate: generated=116 build_failed=33 killed_by_tests=50 killed=83 survived=33 accepted=0 unexplained=33 skipped=812
+mutate: kill rate 83/116 = 71.6%, with accepted equivalents 83/116 = 71.6%
+mutate: wall 1803.8s
+make: *** [makefile:239: mutate] Error 1

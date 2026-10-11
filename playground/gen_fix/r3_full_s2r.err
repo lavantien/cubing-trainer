@@ -1,0 +1,520 @@
+pgr3c/mutants/p27592/m0540_synth.c:603:81: error: expected ')'
+  603 | static void synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move /moves, int move_n,
+      |                                                                                 ^
+pgr3c/mutants/p27592/m0540_synth.c:603:31: note: to match this '('
+  603 | static void synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move /moves, int move_n,
+      |                               ^
+pgr3c/mutants/p27592/m0540_synth.c:607:18: error: use of undeclared identifier 'move_n'
+  607 |     ctx.move_n = move_n;
+      |                  ^~~~~~
+pgr3c/mutants/p27592/m0540_synth.c:608:23: error: use of undeclared identifier 'moves'
+  608 |     memcpy(ctx.moves, moves, (size_t)move_n * sizeof *moves);
+      |                       ^~~~~
+pgr3c/mutants/p27592/m0540_synth.c:608:38: error: use of undeclared identifier 'move_n'
+  608 |     memcpy(ctx.moves, moves, (size_t)move_n * sizeof *moves);
+      |                                      ^~~~~~
+pgr3c/mutants/p27592/m0540_synth.c:608:55: error: use of undeclared identifier 'moves'
+  608 |     memcpy(ctx.moves, moves, (size_t)move_n * sizeof *moves);
+      |                                                       ^~~~~
+pgr3c/mutants/p27592/m0540_synth.c:614:17: error: use of undeclared identifier 'cands'
+  614 |     ctx.cands = cands;
+      |                 ^~~~~
+pgr3c/mutants/p27592/m0540_synth.c:615:20: error: use of undeclared identifier 'cand_cap'
+  615 |     ctx.cand_cap = cand_cap;
+      |                    ^~~~~~~~
+pgr3c/mutants/p27592/m0540_synth.c:616:19: error: use of undeclared identifier 'cand_n'
+  616 |     ctx.cand_n = *cand_n;
+      |                   ^~~~~~
+pgr3c/mutants/p27592/m0540_synth.c:617:34: error: use of undeclared identifier 'max_depth'
+  617 |     for (int depth = 1; depth <= max_depth && !ctx.hit; depth++) {
+      |                                  ^~~~~~~~~
+pgr3c/mutants/p27592/m0540_synth.c:621:6: error: use of undeclared identifier 'cand_n'
+  621 |     *cand_n = ctx.cand_n;
+      |      ^~~~~~
+pgr3c/mutants/p27592/m0540_synth.c:899:55: error: too many arguments to function call, expected 5, have 10
+  899 |         synth_setup_search(orbit, cb, c1, c2, subset, move_n, depth, cands, cand_cap, &cand_n);
+      |         ~~~~~~~~~~~~~~~~~~                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0540_synth.c:603:13: note: 'synth_setup_search' declared here
+  603 | static void synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move /moves, int move_n,
+      |             ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+11 errors generated.
+pgr3c/mutants/p27592/m0541_synth.c:604:61: error: expected ')'
+  604 |                                int max_depth, ct_synth_cand /cands, int cand_cap, int *cand_n) {
+      |                                                             ^
+pgr3c/mutants/p27592/m0541_synth.c:603:31: note: to match this '('
+  603 | static void synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
+      |                               ^
+pgr3c/mutants/p27592/m0541_synth.c:614:17: error: use of undeclared identifier 'cands'
+  614 |     ctx.cands = cands;
+      |                 ^~~~~
+pgr3c/mutants/p27592/m0541_synth.c:615:20: error: use of undeclared identifier 'cand_cap'
+  615 |     ctx.cand_cap = cand_cap;
+      |                    ^~~~~~~~
+pgr3c/mutants/p27592/m0541_synth.c:616:19: error: use of undeclared identifier 'cand_n'
+  616 |     ctx.cand_n = *cand_n;
+      |                   ^~~~~~
+pgr3c/mutants/p27592/m0541_synth.c:621:6: error: use of undeclared identifier 'cand_n'
+  621 |     *cand_n = ctx.cand_n;
+      |      ^~~~~~
+pgr3c/mutants/p27592/m0541_synth.c:899:77: error: too many arguments to function call, expected 8, have 10
+  899 |         synth_setup_search(orbit, cb, c1, c2, subset, move_n, depth, cands, cand_cap, &cand_n);
+      |         ~~~~~~~~~~~~~~~~~~                                                  ^~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0541_synth.c:603:13: note: 'synth_setup_search' declared here
+  603 | static void synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
+      |             ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  604 |                                int max_depth, ct_synth_cand /cands, int cand_cap, int *cand_n) {
+      |                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+6 errors generated.
+pgr3c/mutants/p27592/m0542_synth.c:604:87: error: expected ')'
+  604 |                                int max_depth, ct_synth_cand *cands, int cand_cap, int /cand_n) {
+      |                                                                                       ^
+pgr3c/mutants/p27592/m0542_synth.c:603:31: note: to match this '('
+  603 | static void synth_setup_search(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
+      |                               ^
+pgr3c/mutants/p27592/m0542_synth.c:616:19: error: use of undeclared identifier 'cand_n'; did you mean 'cands'?
+  616 |     ctx.cand_n = *cand_n;
+      |                   ^~~~~~
+      |                   cands
+pgr3c/mutants/p27592/m0542_synth.c:604:62: note: 'cands' declared here
+  604 |                                int max_depth, ct_synth_cand *cands, int cand_cap, int /cand_n) {
+      |                                                              ^
+pgr3c/mutants/p27592/m0542_synth.c:616:16: error: assigning to 'int' from incompatible type 'ct_synth_cand'
+  616 |     ctx.cand_n = *cand_n;
+      |                ^ ~~~~~~~
+pgr3c/mutants/p27592/m0542_synth.c:621:6: error: use of undeclared identifier 'cand_n'; did you mean 'cands'?
+  621 |     *cand_n = ctx.cand_n;
+      |      ^~~~~~
+      |      cands
+pgr3c/mutants/p27592/m0542_synth.c:604:62: note: 'cands' declared here
+  604 |                                int max_depth, ct_synth_cand *cands, int cand_cap, int /cand_n) {
+      |                                                              ^
+pgr3c/mutants/p27592/m0542_synth.c:621:13: error: assigning to 'ct_synth_cand' from incompatible type 'int'
+  621 |     *cand_n = ctx.cand_n;
+      |             ^ ~~~~~~~~~~
+pgr3c/mutants/p27592/m0542_synth.c:899:87: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  899 |         synth_setup_search(orbit, cb, c1, c2, subset, move_n, depth, cands, cand_cap, &cand_n);
+      |                                                                                       ^~~~~~~
+pgr3c/mutants/p27592/m0542_synth.c:604:87: note: passing argument to parameter here
+  604 |                                int max_depth, ct_synth_cand *cands, int cand_cap, int /cand_n) {
+      |                                                                                       ^
+6 errors generated.
+mutate: suite unit_synth_setup exited 1
+mutate: suite unit_synth_setup exited -1073741795
+mutate: suite unit_synth_setup exited 1
+pgr3c/mutants/p27592/m0546_synth.c:608:54: error: expected expression
+  608 |     memcpy(ctx.moves, moves, (size_t)move_n * sizeof /moves);
+      |                                                      ^
+1 error generated.
+pgr3c/mutants/p27592/m0547_synth.c:616:18: error: expected expression
+  616 |     ctx.cand_n = /cand_n;
+      |                  ^
+1 error generated.
+mutate: suite unit_synth_setup exited 1
+mutate: suite unit_synth_setup exited 1
+mutate: suite unit_synth_setup exited -1073741795
+pgr3c/mutants/p27592/m0555_synth.c:621:5: error: expected expression
+  621 |     /cand_n = ctx.cand_n;
+      |     ^
+1 error generated.
+pgr3c/mutants/p27592/m0561_synth.c:626:48: error: expected ')'
+  626 | static uint32_t synth_state_hash(const uint8_t /state) {
+      |                                                ^
+pgr3c/mutants/p27592/m0561_synth.c:626:33: note: to match this '('
+  626 | static uint32_t synth_state_hash(const uint8_t /state) {
+      |                                 ^
+pgr3c/mutants/p27592/m0561_synth.c:629:39: error: use of undeclared identifier 'state'
+  629 |         h = h * CT_SYNTH_STATE_MULT + state[i];
+      |                                       ^~~~~
+pgr3c/mutants/p27592/m0561_synth.c:635:35: error: incompatible pointer to integer conversion passing 'const uint8_t *' (aka 'const unsigned char *') to parameter of type 'uint8_t' (aka 'unsigned char') [-Wint-conversion]
+  635 |     uint32_t h = synth_state_hash(state) % (uint32_t)CT_SYNTH_FALLBACK_HASH;
+      |                                   ^~~~~
+pgr3c/mutants/p27592/m0561_synth.c:626:48: note: passing argument to parameter here
+  626 | static uint32_t synth_state_hash(const uint8_t /state) {
+      |                                                ^
+3 errors generated.
+pgr3c/mutants/p27592/m0569_synth.c:634:48: error: expected ')'
+  634 | static int synth_side_slot(const ct_synth_side /side, const uint8_t *state) {
+      |                                                ^
+pgr3c/mutants/p27592/m0569_synth.c:634:27: note: to match this '('
+  634 | static int synth_side_slot(const ct_synth_side /side, const uint8_t *state) {
+      |                           ^
+pgr3c/mutants/p27592/m0569_synth.c:635:35: error: use of undeclared identifier 'state'
+  635 |     uint32_t h = synth_state_hash(state) % (uint32_t)CT_SYNTH_FALLBACK_HASH;
+      |                                   ^~~~~
+pgr3c/mutants/p27592/m0569_synth.c:636:12: error: use of undeclared identifier 'side'
+  636 |     while (side->hash[h] != 0) {
+      |            ^~~~
+pgr3c/mutants/p27592/m0569_synth.c:637:20: error: use of undeclared identifier 'side'
+  637 |         if (memcmp(side->nodes[side->hash[h] - 1].state, state, (size_t)CT_SYNTH_CELLS) == 0) {
+      |                    ^~~~
+pgr3c/mutants/p27592/m0569_synth.c:637:32: error: use of undeclared identifier 'side'
+  637 |         if (memcmp(side->nodes[side->hash[h] - 1].state, state, (size_t)CT_SYNTH_CELLS) == 0) {
+      |                                ^~~~
+pgr3c/mutants/p27592/m0569_synth.c:637:58: error: use of undeclared identifier 'state'
+  637 |         if (memcmp(side->nodes[side->hash[h] - 1].state, state, (size_t)CT_SYNTH_CELLS) == 0) {
+      |                                                          ^~~~~
+pgr3c/mutants/p27592/m0569_synth.c:750:44: error: too many arguments to function call, expected 1, have 2
+  750 |             fwd.hash[synth_side_slot(&fwd, fwd.nodes[0].state)] = 1;
+      |                      ~~~~~~~~~~~~~~~       ^~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0569_synth.c:634:12: note: 'synth_side_slot' declared here
+  634 | static int synth_side_slot(const ct_synth_side /side, const uint8_t *state) {
+      |            ^               ~~~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0569_synth.c:753:50: error: too many arguments to function call, expected 1, have 2
+  753 |                 int slot = synth_side_slot(&bwd, variants[v]);
+      |                            ~~~~~~~~~~~~~~~       ^~~~~~~~~~~
+pgr3c/mutants/p27592/m0569_synth.c:634:12: note: 'synth_side_slot' declared here
+  634 | static int synth_side_slot(const ct_synth_side /side, const uint8_t *state) {
+      |            ^               ~~~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0569_synth.c:796:66: error: too many arguments to function call, expected 1, have 2
+  796 |                             int own_slot = synth_side_slot(side, child);
+      |                                            ~~~~~~~~~~~~~~~       ^~~~~
+pgr3c/mutants/p27592/m0569_synth.c:634:12: note: 'synth_side_slot' declared here
+  634 | static int synth_side_slot(const ct_synth_side /side, const uint8_t *state) {
+      |            ^               ~~~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0569_synth.c:807:69: error: too many arguments to function call, expected 1, have 2
+  807 |                             int other_slot = synth_side_slot(other, child);
+      |                                              ~~~~~~~~~~~~~~~        ^~~~~
+pgr3c/mutants/p27592/m0569_synth.c:634:12: note: 'synth_side_slot' declared here
+  634 | static int synth_side_slot(const ct_synth_side /side, const uint8_t *state) {
+      |            ^               ~~~~~~~~~~~~~~~~~~~
+10 errors generated.
+pgr3c/mutants/p27592/m0570_synth.c:634:69: error: expected ')'
+  634 | static int synth_side_slot(const ct_synth_side *side, const uint8_t /state) {
+      |                                                                     ^
+pgr3c/mutants/p27592/m0570_synth.c:634:27: note: to match this '('
+  634 | static int synth_side_slot(const ct_synth_side *side, const uint8_t /state) {
+      |                           ^
+pgr3c/mutants/p27592/m0570_synth.c:635:35: error: use of undeclared identifier 'state'
+  635 |     uint32_t h = synth_state_hash(state) % (uint32_t)CT_SYNTH_FALLBACK_HASH;
+      |                                   ^~~~~
+pgr3c/mutants/p27592/m0570_synth.c:637:58: error: use of undeclared identifier 'state'
+  637 |         if (memcmp(side->nodes[side->hash[h] - 1].state, state, (size_t)CT_SYNTH_CELLS) == 0) {
+      |                                                          ^~~~~
+pgr3c/mutants/p27592/m0570_synth.c:750:44: error: incompatible pointer to integer conversion passing 'uint8_t[54]' (aka 'unsigned char[54]') to parameter of type 'uint8_t' (aka 'unsigned char') [-Wint-conversion]
+  750 |             fwd.hash[synth_side_slot(&fwd, fwd.nodes[0].state)] = 1;
+      |                                            ^~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0570_synth.c:634:69: note: passing argument to parameter here
+  634 | static int synth_side_slot(const ct_synth_side *side, const uint8_t /state) {
+      |                                                                     ^
+pgr3c/mutants/p27592/m0570_synth.c:753:50: error: incompatible pointer to integer conversion passing 'uint8_t[54]' (aka 'unsigned char[54]') to parameter of type 'uint8_t' (aka 'unsigned char') [-Wint-conversion]
+  753 |                 int slot = synth_side_slot(&bwd, variants[v]);
+      |                                                  ^~~~~~~~~~~
+pgr3c/mutants/p27592/m0570_synth.c:634:69: note: passing argument to parameter here
+  634 | static int synth_side_slot(const ct_synth_side *side, const uint8_t /state) {
+      |                                                                     ^
+pgr3c/mutants/p27592/m0570_synth.c:796:66: error: incompatible pointer to integer conversion passing 'uint8_t[54]' (aka 'unsigned char[54]') to parameter of type 'uint8_t' (aka 'unsigned char') [-Wint-conversion]
+  796 |                             int own_slot = synth_side_slot(side, child);
+      |                                                                  ^~~~~
+pgr3c/mutants/p27592/m0570_synth.c:634:69: note: passing argument to parameter here
+  634 | static int synth_side_slot(const ct_synth_side *side, const uint8_t /state) {
+      |                                                                     ^
+pgr3c/mutants/p27592/m0570_synth.c:807:69: error: incompatible pointer to integer conversion passing 'uint8_t[54]' (aka 'unsigned char[54]') to parameter of type 'uint8_t' (aka 'unsigned char') [-Wint-conversion]
+  807 |                             int other_slot = synth_side_slot(other, child);
+      |                                                                     ^~~~~
+pgr3c/mutants/p27592/m0570_synth.c:634:69: note: passing argument to parameter here
+  634 | static int synth_side_slot(const ct_synth_side *side, const uint8_t /state) {
+      |                                                                     ^
+7 errors generated.
+mutate: suite unit_synth_config exited -1073741819
+mutate: suite unit_synth_config exited -1073741819
+mutate: suite unit_synth_config exited -1073741819
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+pgr3c/mutants/p27592/m0586_synth.c:652:19: error: expected identifier or '('
+  652 |         const int /sticker_of =
+      |                   ^
+pgr3c/mutants/p27592/m0586_synth.c:654:23: error: use of undeclared identifier 'sticker_of'; did you mean 'stickers'?
+  654 |         stickers[i] = sticker_of[key_cells[i]];
+      |                       ^~~~~~~~~~
+      |                       stickers
+pgr3c/mutants/p27592/m0586_synth.c:648:9: note: 'stickers' declared here
+  648 |     int stickers[CT_SYNTH_CYCLE_LEN];
+      |         ^
+2 errors generated.
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+pgr3c/mutants/p27592/m0614_synth.c:676:17: error: expected identifier or '('
+  676 |         uint8_t /state = states[v];
+      |                 ^
+pgr3c/mutants/p27592/m0614_synth.c:678:13: error: use of undeclared identifier 'state'; did you mean 'states'?
+  678 |             state[q] = (uint8_t)q;
+      |             ^~~~~
+      |             states
+pgr3c/mutants/p27592/m0614_synth.c:646:41: note: 'states' declared here
+  646 |                                 uint8_t states[][CT_SYNTH_CELLS]) {
+      |                                         ^
+pgr3c/mutants/p27592/m0614_synth.c:678:22: error: array type 'uint8_t[54]' (aka 'unsigned char[54]') is not assignable
+  678 |             state[q] = (uint8_t)q;
+      |             ~~~~~~~~ ^
+pgr3c/mutants/p27592/m0614_synth.c:680:9: error: use of undeclared identifier 'state'; did you mean 'states'?
+  680 |         state[c1] = (uint8_t)cb;
+      |         ^~~~~
+      |         states
+pgr3c/mutants/p27592/m0614_synth.c:646:41: note: 'states' declared here
+  646 |                                 uint8_t states[][CT_SYNTH_CELLS]) {
+      |                                         ^
+pgr3c/mutants/p27592/m0614_synth.c:680:19: error: array type 'uint8_t[54]' (aka 'unsigned char[54]') is not assignable
+  680 |         state[c1] = (uint8_t)cb;
+      |         ~~~~~~~~~ ^
+pgr3c/mutants/p27592/m0614_synth.c:681:9: error: use of undeclared identifier 'state'; did you mean 'states'?
+  681 |         state[c2] = (uint8_t)c1;
+      |         ^~~~~
+      |         states
+pgr3c/mutants/p27592/m0614_synth.c:646:41: note: 'states' declared here
+  646 |                                 uint8_t states[][CT_SYNTH_CELLS]) {
+      |                                         ^
+pgr3c/mutants/p27592/m0614_synth.c:681:19: error: array type 'uint8_t[54]' (aka 'unsigned char[54]') is not assignable
+  681 |         state[c2] = (uint8_t)c1;
+      |         ~~~~~~~~~ ^
+pgr3c/mutants/p27592/m0614_synth.c:682:9: error: use of undeclared identifier 'state'; did you mean 'states'?
+  682 |         state[cb] = (uint8_t)c2;
+      |         ^~~~~
+      |         states
+pgr3c/mutants/p27592/m0614_synth.c:646:41: note: 'states' declared here
+  646 |                                 uint8_t states[][CT_SYNTH_CELLS]) {
+      |                                         ^
+pgr3c/mutants/p27592/m0614_synth.c:682:19: error: array type 'uint8_t[54]' (aka 'unsigned char[54]') is not assignable
+  682 |         state[cb] = (uint8_t)c2;
+      |         ~~~~~~~~~ ^
+pgr3c/mutants/p27592/m0614_synth.c:693:17: error: use of undeclared identifier 'state'; did you mean 'states'?
+  693 |                 state[synth_sticker_cell_of(orbit, mates[next][dst_j])] =
+      |                 ^~~~~
+      |                 states
+pgr3c/mutants/p27592/m0614_synth.c:646:41: note: 'states' declared here
+  646 |                                 uint8_t states[][CT_SYNTH_CELLS]) {
+      |                                         ^
+pgr3c/mutants/p27592/m0614_synth.c:693:73: error: array type 'uint8_t[54]' (aka 'unsigned char[54]') is not assignable
+  693 |                 state[synth_sticker_cell_of(orbit, mates[next][dst_j])] =
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^
+11 errors generated.
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+pgr3c/mutants/p27592/m0639_synth.c:701:52: error: expected ')'
+  701 | static void synth_path_to_root(const ct_synth_side /side, int node, ct_move *out, int *out_len) {
+      |                                                    ^
+pgr3c/mutants/p27592/m0639_synth.c:701:31: note: to match this '('
+  701 | static void synth_path_to_root(const ct_synth_side /side, int node, ct_move *out, int *out_len) {
+      |                               ^
+pgr3c/mutants/p27592/m0639_synth.c:704:15: error: use of undeclared identifier 'node'
+  704 |     int cur = node;
+      |               ^~~~
+pgr3c/mutants/p27592/m0639_synth.c:705:12: error: use of undeclared identifier 'side'
+  705 |     while (side->nodes[cur].parent >= 0) {
+      |            ^~~~
+pgr3c/mutants/p27592/m0639_synth.c:706:22: error: use of undeclared identifier 'side'
+  706 |         rev[len++] = side->nodes[cur].move;
+      |                      ^~~~
+pgr3c/mutants/p27592/m0639_synth.c:707:15: error: use of undeclared identifier 'side'
+  707 |         cur = side->nodes[cur].parent;
+      |               ^~~~
+pgr3c/mutants/p27592/m0639_synth.c:710:9: error: use of undeclared identifier 'out'
+  710 |         out[i] = rev[len - 1 - i];
+      |         ^~~
+pgr3c/mutants/p27592/m0639_synth.c:712:6: error: use of undeclared identifier 'out_len'
+  712 |     *out_len = len;
+      |      ^~~~~~~
+pgr3c/mutants/p27592/m0639_synth.c:818:58: error: too many arguments to function call, expected 1, have 4
+  818 |                                 synth_path_to_root(&fwd, fwd_node, fseq, &fseq_len);
+      |                                 ~~~~~~~~~~~~~~~~~~       ^~~~~~~~~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0639_synth.c:701:13: note: 'synth_path_to_root' declared here
+  701 | static void synth_path_to_root(const ct_synth_side /side, int node, ct_move *out, int *out_len) {
+      |             ^                  ~~~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0639_synth.c:819:58: error: too many arguments to function call, expected 1, have 4
+  819 |                                 synth_path_to_root(&bwd, bwd_node, bseq, &bseq_len);
+      |                                 ~~~~~~~~~~~~~~~~~~       ^~~~~~~~~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0639_synth.c:701:13: note: 'synth_path_to_root' declared here
+  701 | static void synth_path_to_root(const ct_synth_side /side, int node, ct_move *out, int *out_len) {
+      |             ^                  ~~~~~~~~~~~~~~~~~~~
+9 errors generated.
+pgr3c/mutants/p27592/m0640_synth.c:701:77: error: expected ')'
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move /out, int *out_len) {
+      |                                                                             ^
+pgr3c/mutants/p27592/m0640_synth.c:701:31: note: to match this '('
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move /out, int *out_len) {
+      |                               ^
+pgr3c/mutants/p27592/m0640_synth.c:710:9: error: use of undeclared identifier 'out'
+  710 |         out[i] = rev[len - 1 - i];
+      |         ^~~
+pgr3c/mutants/p27592/m0640_synth.c:712:6: error: use of undeclared identifier 'out_len'
+  712 |     *out_len = len;
+      |      ^~~~~~~
+pgr3c/mutants/p27592/m0640_synth.c:818:74: error: too many arguments to function call, expected 3, have 4
+  818 |                                 synth_path_to_root(&fwd, fwd_node, fseq, &fseq_len);
+      |                                 ~~~~~~~~~~~~~~~~~~                       ^~~~~~~~~
+pgr3c/mutants/p27592/m0640_synth.c:701:13: note: 'synth_path_to_root' declared here
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move /out, int *out_len) {
+      |             ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0640_synth.c:819:74: error: too many arguments to function call, expected 3, have 4
+  819 |                                 synth_path_to_root(&bwd, bwd_node, bseq, &bseq_len);
+      |                                 ~~~~~~~~~~~~~~~~~~                       ^~~~~~~~~
+pgr3c/mutants/p27592/m0640_synth.c:701:13: note: 'synth_path_to_root' declared here
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move /out, int *out_len) {
+      |             ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+5 errors generated.
+pgr3c/mutants/p27592/m0641_synth.c:701:87: error: expected ')'
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move *out, int /out_len) {
+      |                                                                                       ^
+pgr3c/mutants/p27592/m0641_synth.c:701:31: note: to match this '('
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move *out, int /out_len) {
+      |                               ^
+pgr3c/mutants/p27592/m0641_synth.c:712:6: error: use of undeclared identifier 'out_len'
+  712 |     *out_len = len;
+      |      ^~~~~~~
+pgr3c/mutants/p27592/m0641_synth.c:818:74: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  818 |                                 synth_path_to_root(&fwd, fwd_node, fseq, &fseq_len);
+      |                                                                          ^~~~~~~~~
+pgr3c/mutants/p27592/m0641_synth.c:701:87: note: passing argument to parameter here
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move *out, int /out_len) {
+      |                                                                                       ^
+pgr3c/mutants/p27592/m0641_synth.c:819:74: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  819 |                                 synth_path_to_root(&bwd, bwd_node, bseq, &bseq_len);
+      |                                                                          ^~~~~~~~~
+pgr3c/mutants/p27592/m0641_synth.c:701:87: note: passing argument to parameter here
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move *out, int /out_len) {
+      |                                                                                       ^
+4 errors generated.
+pgr3c/mutants/p27592/m0654_synth.c:712:5: error: expected expression
+  712 |     /out_len = len;
+      |     ^
+1 error generated.
+pgr3c/mutants/p27592/m0655_synth.c:715:77: error: expected ')'
+  715 | static bool synth_fallback(int orbit, int cb, int c1, int c2, const ct_move /moves, int move_n,
+      |                                                                             ^
+pgr3c/mutants/p27592/m0655_synth.c:715:27: note: to match this '('
+  715 | static bool synth_fallback(int orbit, int cb, int c1, int c2, const ct_move /moves, int move_n,
+      |                           ^
+pgr3c/mutants/p27592/m0655_synth.c:719:25: error: use of undeclared identifier 'move_n'
+  719 |     for (int i = 0; i < move_n; i++) {
+      |                         ^~~~~~
+pgr3c/mutants/p27592/m0655_synth.c:722:25: error: use of undeclared identifier 'moves'
+  722 |         ct_apply(&cube, moves[i]);
+      |                         ^~~~~
+pgr3c/mutants/p27592/m0655_synth.c:777:45: error: use of undeclared identifier 'max_depth'
+  777 |                 for (int level = 0; level < max_depth && !found; level++) {
+      |                                             ^~~~~~~~~
+pgr3c/mutants/p27592/m0655_synth.c:787:47: error: use of undeclared identifier 'move_n'
+  787 |                         for (int mi = 0; mi < move_n; mi++) {
+      |                                               ^~~~~~
+pgr3c/mutants/p27592/m0655_synth.c:789:68: error: use of undeclared identifier 'moves'
+  789 |                                 side->nodes[node_idx].move.face == moves[mi].face) {
+      |                                                                    ^~~~~
+pgr3c/mutants/p27592/m0655_synth.c:805:61: error: use of undeclared identifier 'moves'
+  805 |                             side->nodes[side->count].move = moves[mi];
+      |                                                             ^~~~~
+pgr3c/mutants/p27592/m0655_synth.c:822:44: error: use of undeclared identifier 'out'
+  822 |                                     memcpy(out, fseq, (size_t)fseq_len * sizeof *fseq);
+      |                                            ^~~
+pgr3c/mutants/p27592/m0655_synth.c:823:44: error: use of undeclared identifier 'out'
+  823 |                                     memcpy(out + fseq_len, binv, (size_t)binv_len * sizeof *binv);
+      |                                            ^~~
+pgr3c/mutants/p27592/m0655_synth.c:824:38: error: use of undeclared identifier 'out_len'
+  824 |                                     *out_len = fseq_len + binv_len;
+      |                                      ^~~~~~~
+pgr3c/mutants/p27592/m0655_synth.c:926:55: error: too many arguments to function call, expected 5, have 9
+  926 |         if (synth_fallback(orbit, cb, c1, c2, subset, move_n, depth, seq, &seq_len)) {
+      |             ~~~~~~~~~~~~~~                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0655_synth.c:715:13: note: 'synth_fallback' declared here
+  715 | static bool synth_fallback(int orbit, int cb, int c1, int c2, const ct_move /moves, int move_n,
+      |             ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+11 errors generated.
+pgr3c/mutants/p27592/m0656_synth.c:716:51: error: expected ')'
+  716 |                            int max_depth, ct_move /out, int *out_len) {
+      |                                                   ^
+pgr3c/mutants/p27592/m0656_synth.c:715:27: note: to match this '('
+  715 | static bool synth_fallback(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
+      |                           ^
+pgr3c/mutants/p27592/m0656_synth.c:822:44: error: use of undeclared identifier 'out'
+  822 |                                     memcpy(out, fseq, (size_t)fseq_len * sizeof *fseq);
+      |                                            ^~~
+pgr3c/mutants/p27592/m0656_synth.c:823:44: error: use of undeclared identifier 'out'
+  823 |                                     memcpy(out + fseq_len, binv, (size_t)binv_len * sizeof *binv);
+      |                                            ^~~
+pgr3c/mutants/p27592/m0656_synth.c:824:38: error: use of undeclared identifier 'out_len'
+  824 |                                     *out_len = fseq_len + binv_len;
+      |                                      ^~~~~~~
+pgr3c/mutants/p27592/m0656_synth.c:926:75: error: too many arguments to function call, expected 8, have 9
+  926 |         if (synth_fallback(orbit, cb, c1, c2, subset, move_n, depth, seq, &seq_len)) {
+      |             ~~~~~~~~~~~~~~                                                ^~~~~~~~
+pgr3c/mutants/p27592/m0656_synth.c:715:13: note: 'synth_fallback' declared here
+  715 | static bool synth_fallback(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
+      |             ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  716 |                            int max_depth, ct_move /out, int *out_len) {
+      |                            ~~~~~~~~~~~~~~~~~~~~~~
+5 errors generated.
+pgr3c/mutants/p27592/m0657_synth.c:716:61: error: expected ')'
+  716 |                            int max_depth, ct_move *out, int /out_len) {
+      |                                                             ^
+pgr3c/mutants/p27592/m0657_synth.c:715:27: note: to match this '('
+  715 | static bool synth_fallback(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
+      |                           ^
+pgr3c/mutants/p27592/m0657_synth.c:824:38: error: use of undeclared identifier 'out_len'
+  824 |                                     *out_len = fseq_len + binv_len;
+      |                                      ^~~~~~~
+pgr3c/mutants/p27592/m0657_synth.c:926:75: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  926 |         if (synth_fallback(orbit, cb, c1, c2, subset, move_n, depth, seq, &seq_len)) {
+      |                                                                           ^~~~~~~~
+pgr3c/mutants/p27592/m0657_synth.c:716:61: note: passing argument to parameter here
+  716 |                            int max_depth, ct_move *out, int /out_len) {
+      |                                                             ^
+3 errors generated.
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+pgr3c/mutants/p27592/m0677_synth.c:732:65: error: expected expression
+  732 |     fwd.nodes = malloc((size_t)CT_SYNTH_FALLBACK_NODES * sizeof /fwd.nodes);
+      |                                                                 ^
+1 error generated.
+pgr3c/mutants/p27592/m0679_synth.c:733:65: error: expected expression
+  733 |     bwd.nodes = malloc((size_t)CT_SYNTH_FALLBACK_NODES * sizeof /bwd.nodes);
+      |                                                                 ^
+1 error generated.
+pgr3c/mutants/p27592/m0680_synth.c:734:62: error: expected expression
+  734 |     fwd.hash = calloc((size_t)CT_SYNTH_FALLBACK_HASH, sizeof /fwd.hash);
+      |                                                              ^
+1 error generated.
+pgr3c/mutants/p27592/m0681_synth.c:735:62: error: expected expression
+  735 |     bwd.hash = calloc((size_t)CT_SYNTH_FALLBACK_HASH, sizeof /bwd.hash);
+      |                                                              ^
+1 error generated.
+pgr3c/mutants/p27592/m0683_synth.c:736:74: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  736 |     bool ok = fwd.nodes != NULL || bwd.nodes != NULL && fwd.hash != NULL && bwd.hash != NULL;
+      |                                 ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0683_synth.c:736:74: note: place parentheses around the '&&' expression to silence this warning
+  736 |     bool ok = fwd.nodes != NULL || bwd.nodes != NULL && fwd.hash != NULL && bwd.hash != NULL;
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+1 error generated.
+pgr3c/mutants/p27592/m0685_synth.c:736:33: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL || fwd.hash != NULL && bwd.hash != NULL;
+      |               ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~ ~~
+pgr3c/mutants/p27592/m0685_synth.c:736:33: note: place parentheses around the '&&' expression to silence this warning
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL || fwd.hash != NULL && bwd.hash != NULL;
+      |               ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0685_synth.c:736:74: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL || fwd.hash != NULL && bwd.hash != NULL;
+      |                                                      ~~ ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+pgr3c/mutants/p27592/m0685_synth.c:736:74: note: place parentheses around the '&&' expression to silence this warning
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL || fwd.hash != NULL && bwd.hash != NULL;
+      |                                                         ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+2 errors generated.
+pgr3c/mutants/p27592/m0687_synth.c:736:54: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL && fwd.hash != NULL || bwd.hash != NULL;
+      |               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~ ~~
+pgr3c/mutants/p27592/m0687_synth.c:736:54: note: place parentheses around the '&&' expression to silence this warning
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL && fwd.hash != NULL || bwd.hash != NULL;
+      |               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite unit_synth_config exited -1073741819
+mutate: 13 unexplained survivors

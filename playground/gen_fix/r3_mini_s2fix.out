@@ -1,0 +1,30 @@
+mutate: scope=src/gen/synth.c files=1 sites=928 suites=11
+SURVIVED  m0562 src/gen/synth.c:627 [int+1 0 -> 1]
+SURVIVED  m0563 src/gen/synth.c:627 [int-1 0 -> -1]
+SURVIVED  m0564 src/gen/synth.c:628 [int+1 0 -> 1]
+SURVIVED  m0565 src/gen/synth.c:628 [int-1 0 -> -1]
+SURVIVED  m0566 src/gen/synth.c:628 [cmp < -> <=]
+SURVIVED  m0567 src/gen/synth.c:629 [arith * -> /]
+SURVIVED  m0568 src/gen/synth.c:629 [arith + -> -]
+SURVIVED  m0574 src/gen/synth.c:637 [arith - -> +]
+SURVIVED  m0575 src/gen/synth.c:637 [int+1 1 -> 2]
+SURVIVED  m0576 src/gen/synth.c:637 [int-1 1 -> 0]
+SURVIVED  m0577 src/gen/synth.c:637 [cmp == -> !=]
+SURVIVED  m0578 src/gen/synth.c:637 [int+1 0 -> 1]
+SURVIVED  m0579 src/gen/synth.c:637 [int-1 0 -> -1]
+ACCEPTED  m0562 src/gen/synth.c:627 [int+1 0 -> 1] :: state hash initializer mutants offset every hash consistently, insert and probe compute the same mutated slot, occupancy under half the table keeps probes terminating, the never succeeding fallback search emits nothing observable
+ACCEPTED  m0563 src/gen/synth.c:627 [int-1 0 -> -1] :: state hash initializer mutants offset every hash consistently, insert and probe compute the same mutated slot, occupancy under half the table keeps probes terminating, the never succeeding fallback search emits nothing observable
+ACCEPTED  m0564 src/gen/synth.c:628 [int+1 0 -> 1] :: state hash loop start and bound shifts hash a consistent window of the state, both sides compute the same mutated slot so the fallback dedup and meet detection are unchanged
+ACCEPTED  m0565 src/gen/synth.c:628 [int-1 0 -> -1] :: state hash loop start and bound shifts hash a consistent window of the state, both sides compute the same mutated slot so the fallback dedup and meet detection are unchanged
+ACCEPTED  m0566 src/gen/synth.c:628 [cmp < -> <=] :: state hash loop start and bound shifts hash a consistent window of the state, both sides compute the same mutated slot so the fallback dedup and meet detection are unchanged
+ACCEPTED  m0567 src/gen/synth.c:629 [arith * -> /] :: state hash fold arithmetic mutants change only the mixing function, insert and probe compute the same mutated slot, occupancy keeps probes terminating, the never succeeding fallback search is unobservable
+ACCEPTED  m0568 src/gen/synth.c:629 [arith + -> -] :: state hash fold arithmetic mutants change only the mixing function, insert and probe compute the same mutated slot, occupancy keeps probes terminating, the never succeeding fallback search is unobservable
+ACCEPTED  m0574 src/gen/synth.c:637 [arith - -> +] :: side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
+ACCEPTED  m0575 src/gen/synth.c:637 [int+1 1 -> 2] :: side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
+ACCEPTED  m0576 src/gen/synth.c:637 [int-1 1 -> 0] :: side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
+ACCEPTED  m0577 src/gen/synth.c:637 [cmp == -> !=] :: side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
+ACCEPTED  m0578 src/gen/synth.c:637 [int+1 0 -> 1] :: side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
+ACCEPTED  m0579 src/gen/synth.c:637 [int-1 0 -> -1] :: side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
+mutate: generated=13 build_failed=0 killed_by_tests=0 killed=0 survived=13 accepted=13 unexplained=0 skipped=915
+mutate: kill rate 0/13 = 0.0%, with accepted equivalents 13/13 = 100.0%
+mutate: wall 632.7s

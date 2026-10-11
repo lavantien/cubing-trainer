@@ -1,0 +1,295 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+pgbuild/bin/mutate.exe src/gen/synth.c pgbuild unit_synth_table unit_synth_coverage unit_synth_config unit_synth_bh unit_synth_scoring
+pgbuild/mutants/p12748/m0824_synth.c:822:81: error: expected expression
+  822 |                                     memcpy(out, fseq, (size_t)fseq_len * sizeof /fseq);
+      |                                                                                 ^
+1 error generated.
+pgbuild/mutants/p12748/m0827_synth.c:823:92: error: expected expression
+  823 |                                     memcpy(out + fseq_len, binv, (size_t)binv_len * sizeof /binv);
+      |                                                                                            ^
+1 error generated.
+pgbuild/mutants/p12748/m0828_synth.c:824:37: error: expected expression
+  824 |                                     /out_len = fseq_len + binv_len;
+      |                                     ^
+1 error generated.
+pgbuild/mutants/p12748/m0832_synth.c:858:76: error: expected ')'
+  858 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config /cfg,
+      |                                                                            ^
+pgbuild/mutants/p12748/m0832_synth.c:858:20: note: to match this '('
+  858 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config /cfg,
+      |                    ^
+pgbuild/mutants/p12748/m0832_synth.c:858:5: error: conflicting types for 'ct_synth_target'
+  858 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config /cfg,
+      |     ^
+src\gen/synth.h:60:5: note: previous declaration is here
+   60 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config *cfg,
+      |     ^
+pgbuild/mutants/p12748/m0832_synth.c:860:9: error: use of undeclared identifier 'out'
+  860 |     if (out == NULL || cfg == NULL) {
+      |         ^~~
+pgbuild/mutants/p12748/m0832_synth.c:860:24: error: use of undeclared identifier 'cfg'
+  860 |     if (out == NULL || cfg == NULL) {
+      |                        ^~~
+pgbuild/mutants/p12748/m0832_synth.c:863:12: error: use of undeclared identifier 'out'
+  863 |     memset(out, 0, sizeof *out);
+      |            ^~~
+pgbuild/mutants/p12748/m0832_synth.c:863:28: error: use of undeclared identifier 'out'
+  863 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+pgbuild/mutants/p12748/m0832_synth.c:873:20: error: use of undeclared identifier 'cfg'
+  873 |     int cand_cap = cfg->gen.candidate_max;
+      |                    ^~~
+pgbuild/mutants/p12748/m0832_synth.c:893:37: error: use of undeclared identifier 'cfg'
+  893 |     int move_n = synth_subset_moves(cfg->gen.preferred_moves, subset);
+      |                                     ^~~
+pgbuild/mutants/p12748/m0832_synth.c:894:44: error: use of undeclared identifier 'cfg'
+  894 |     if (move_n > 0 && cand_n < cand_cap && cfg->gen.setup_bfs_depth >= 1) {
+      |                                            ^~~
+pgbuild/mutants/p12748/m0832_synth.c:895:21: error: use of undeclared identifier 'cfg'
+  895 |         int depth = cfg->gen.setup_bfs_depth;
+      |                     ^~~
+pgbuild/mutants/p12748/m0832_synth.c:906:58: error: use of undeclared identifier 'cfg'
+  906 |             if (ct_score_alg(cands[i].seq, cands[i].len, cfg, &parts) != CT_SCORE_OK) {
+      |                                                          ^~~
+pgbuild/mutants/p12748/m0832_synth.c:915:24: error: use of undeclared identifier 'out'
+  915 |             synth_fill(out, cfg, cands[best].seq, cands[best].len, cands[best].setup, false)) {
+      |                        ^~~
+pgbuild/mutants/p12748/m0832_synth.c:915:29: error: use of undeclared identifier 'cfg'
+  915 |             synth_fill(out, cfg, cands[best].seq, cands[best].len, cands[best].setup, false)) {
+      |                             ^~~
+pgbuild/mutants/p12748/m0832_synth.c:919:38: error: use of undeclared identifier 'cfg'
+  919 |     if (move_n > 0 && cand_n == 0 && cfg->gen.fallback_depth >= 1) {
+      |                                      ^~~
+pgbuild/mutants/p12748/m0832_synth.c:920:21: error: use of undeclared identifier 'cfg'
+  920 |         int depth = cfg->gen.fallback_depth;
+      |                     ^~~
+pgbuild/mutants/p12748/m0832_synth.c:932:28: error: use of undeclared identifier 'out'
+  932 |                 synth_fill(out, cfg, simplified, simplified_len, false, true);
+      |                            ^~~
+pgbuild/mutants/p12748/m0832_synth.c:932:33: error: use of undeclared identifier 'cfg'
+  932 |                 synth_fill(out, cfg, simplified, simplified_len, false, true);
+      |                                 ^~~
+17 errors generated.
+pgbuild/mutants/p12748/m0833_synth.c:859:37: error: expected ')'
+  859 |                     ct_synth_result /out) {
+      |                                     ^
+pgbuild/mutants/p12748/m0833_synth.c:858:20: note: to match this '('
+  858 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config *cfg,
+      |                    ^
+pgbuild/mutants/p12748/m0833_synth.c:858:5: error: conflicting types for 'ct_synth_target'
+  858 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config *cfg,
+      |     ^
+src\gen/synth.h:60:5: note: previous declaration is here
+   60 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config *cfg,
+      |     ^
+pgbuild/mutants/p12748/m0833_synth.c:860:9: error: use of undeclared identifier 'out'
+  860 |     if (out == NULL || cfg == NULL) {
+      |         ^~~
+pgbuild/mutants/p12748/m0833_synth.c:863:12: error: use of undeclared identifier 'out'
+  863 |     memset(out, 0, sizeof *out);
+      |            ^~~
+pgbuild/mutants/p12748/m0833_synth.c:863:28: error: use of undeclared identifier 'out'
+  863 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+pgbuild/mutants/p12748/m0833_synth.c:915:24: error: use of undeclared identifier 'out'
+  915 |             synth_fill(out, cfg, cands[best].seq, cands[best].len, cands[best].setup, false)) {
+      |                        ^~~
+pgbuild/mutants/p12748/m0833_synth.c:932:28: error: use of undeclared identifier 'out'
+  932 |                 synth_fill(out, cfg, simplified, simplified_len, false, true);
+      |                            ^~~
+7 errors generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_config exited -1073741819
+mutate: suite unit_synth_config exited -1073741795
+pgbuild/mutants/p12748/m0842_synth.c:863:27: error: expected expression
+  863 |     memset(out, 0, sizeof /out);
+      |                           ^
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited -1073741795
+pgbuild/mutants/p12748/m0873_synth.c:894:41: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  894 |     if (move_n > 0 || cand_n < cand_cap && cfg->gen.setup_bfs_depth >= 1) {
+      |                    ~~ ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p12748/m0873_synth.c:894:41: note: place parentheses around the '&&' expression to silence this warning
+  894 |     if (move_n > 0 || cand_n < cand_cap && cfg->gen.setup_bfs_depth >= 1) {
+      |                                         ^                               
+      |                       (                                                 )
+1 error generated.
+pgbuild/mutants/p12748/m0875_synth.c:894:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  894 |     if (move_n > 0 && cand_n < cand_cap || cfg->gen.setup_bfs_depth >= 1) {
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p12748/m0875_synth.c:894:20: note: place parentheses around the '&&' expression to silence this warning
+  894 |     if (move_n > 0 && cand_n < cand_cap || cfg->gen.setup_bfs_depth >= 1) {
+      |                    ^
+      |         (                              )
+1 error generated.
+mutate: suite unit_synth_scoring exited 1
+mutate: suite unit_synth_scoring exited 1
+mutate: suite unit_synth_scoring exited 1
+mutate: suite unit_synth_coverage exited -1073741795
+mutate: scope=src/gen/synth.c files=1 sites=928 suites=5
+SURVIVED  m0813 src/gen/synth.c:810 [int-1 1 -> 0]
+SURVIVED  m0814 src/gen/synth.c:812 [arith - -> +]
+SURVIVED  m0815 src/gen/synth.c:812 [int+1 1 -> 2]
+SURVIVED  m0816 src/gen/synth.c:812 [int-1 1 -> 0]
+SURVIVED  m0817 src/gen/synth.c:816 [int+1 0 -> 1]
+SURVIVED  m0818 src/gen/synth.c:816 [int-1 0 -> -1]
+SURVIVED  m0819 src/gen/synth.c:817 [int+1 0 -> 1]
+SURVIVED  m0820 src/gen/synth.c:817 [int-1 0 -> -1]
+SURVIVED  m0821 src/gen/synth.c:821 [arith + -> -]
+SURVIVED  m0822 src/gen/synth.c:821 [cmp <= -> <]
+SURVIVED  m0823 src/gen/synth.c:822 [arith * -> /]
+KILLED    m0824 src/gen/synth.c:822 [arith * -> /]
+          build break
+SURVIVED  m0825 src/gen/synth.c:823 [arith + -> -]
+SURVIVED  m0826 src/gen/synth.c:823 [arith * -> /]
+KILLED    m0827 src/gen/synth.c:823 [arith * -> /]
+          build break
+KILLED    m0828 src/gen/synth.c:824 [arith * -> /]
+          build break
+SURVIVED  m0829 src/gen/synth.c:824 [arith + -> -]
+SURVIVED  m0830 src/gen/synth.c:825 [bool true -> false]
+SURVIVED  m0831 src/gen/synth.c:828 [cmp < -> <=]
+KILLED    m0832 src/gen/synth.c:858 [arith * -> /]
+          build break
+KILLED    m0833 src/gen/synth.c:859 [arith * -> /]
+          build break
+KILLED    m0834 src/gen/synth.c:860 [cmp == -> !=]
+SURVIVED  m0835 src/gen/synth.c:860 [logic || -> &&]
+KILLED    m0836 src/gen/synth.c:860 [cmp == -> !=]
+SURVIVED  m0837 src/gen/synth.c:861 [arith - -> +]
+SURVIVED  m0838 src/gen/synth.c:861 [int+1 1 -> 2]
+SURVIVED  m0839 src/gen/synth.c:861 [int-1 1 -> 0]
+KILLED    m0840 src/gen/synth.c:863 [int+1 0 -> 1]
+KILLED    m0841 src/gen/synth.c:863 [int-1 0 -> -1]
+KILLED    m0842 src/gen/synth.c:863 [arith * -> /]
+          build break
+KILLED    m0843 src/gen/synth.c:864 [not-del ! -> (deleted)]
+SURVIVED  m0844 src/gen/synth.c:865 [arith - -> +]
+SURVIVED  m0845 src/gen/synth.c:865 [int+1 1 -> 2]
+SURVIVED  m0846 src/gen/synth.c:865 [int-1 1 -> 0]
+KILLED    m0847 src/gen/synth.c:867 [not-del ! -> (deleted)]
+KILLED    m0848 src/gen/synth.c:867 [logic && -> ||]
+SURVIVED  m0849 src/gen/synth.c:867 [cmp < -> <=]
+SURVIVED  m0850 src/gen/synth.c:867 [int+1 0 -> 1]
+SURVIVED  m0851 src/gen/synth.c:867 [int-1 0 -> -1]
+SURVIVED  m0852 src/gen/synth.c:868 [arith - -> +]
+SURVIVED  m0853 src/gen/synth.c:868 [int+1 1 -> 2]
+SURVIVED  m0854 src/gen/synth.c:868 [int-1 1 -> 0]
+SURVIVED  m0855 src/gen/synth.c:874 [cmp < -> <=]
+SURVIVED  m0856 src/gen/synth.c:877 [cmp > -> >=]
+KILLED    m0857 src/gen/synth.c:881 [int+1 0 -> 1]
+KILLED    m0858 src/gen/synth.c:881 [int-1 0 -> -1]
+SURVIVED  m0859 src/gen/synth.c:883 [int+1 0 -> 1]
+SURVIVED  m0860 src/gen/synth.c:883 [int-1 0 -> -1]
+SURVIVED  m0861 src/gen/synth.c:888 [cmp >= -> >]
+SURVIVED  m0862 src/gen/synth.c:888 [int+1 0 -> 1]
+SURVIVED  m0863 src/gen/synth.c:888 [int-1 0 -> -1]
+SURVIVED  m0864 src/gen/synth.c:888 [logic && -> ||]
+SURVIVED  m0865 src/gen/synth.c:889 [bool false -> true]
+SURVIVED  m0866 src/gen/synth.c:892 [arith * -> /]
+SURVIVED  m0867 src/gen/synth.c:892 [arith - -> +]
+SURVIVED  m0868 src/gen/synth.c:892 [int+1 1 -> 2]
+SURVIVED  m0869 src/gen/synth.c:892 [int-1 1 -> 0]
+SURVIVED  m0870 src/gen/synth.c:894 [cmp > -> >=]
+SURVIVED  m0871 src/gen/synth.c:894 [int+1 0 -> 1]
+SURVIVED  m0872 src/gen/synth.c:894 [int-1 0 -> -1]
+KILLED    m0873 src/gen/synth.c:894 [logic && -> ||]
+          build break
+SURVIVED  m0874 src/gen/synth.c:894 [cmp < -> <=]
+KILLED    m0875 src/gen/synth.c:894 [logic && -> ||]
+          build break
+SURVIVED  m0876 src/gen/synth.c:894 [cmp >= -> >]
+SURVIVED  m0877 src/gen/synth.c:894 [int+1 1 -> 2]
+SURVIVED  m0878 src/gen/synth.c:894 [int-1 1 -> 0]
+SURVIVED  m0879 src/gen/synth.c:896 [cmp > -> >=]
+SURVIVED  m0880 src/gen/synth.c:901 [cmp > -> >=]
+KILLED    m0881 src/gen/synth.c:901 [int+1 0 -> 1]
+SURVIVED  m0882 src/gen/synth.c:901 [int-1 0 -> -1]
+SURVIVED  m0883 src/gen/synth.c:902 [arith - -> +]
+SURVIVED  m0884 src/gen/synth.c:902 [int+1 1 -> 2]
+KILLED    m0885 src/gen/synth.c:902 [int-1 1 -> 0]
+KILLED    m0886 src/gen/synth.c:904 [int+1 0 -> 1]
+KILLED    m0887 src/gen/synth.c:904 [int-1 0 -> -mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p12748/m0906_synth.c:919:35: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  919 |     if (move_n > 0 || cand_n == 0 && cfg->gen.fallback_depth >= 1) {
+      |                    ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p12748/m0906_synth.c:919:35: note: place parentheses around the '&&' expression to silence this warning
+  919 |     if (move_n > 0 || cand_n == 0 && cfg->gen.fallback_depth >= 1) {
+      |                                   ^                              
+      |                       (                                          )
+1 error generated.
+pgbuild/mutants/p12748/m0910_synth.c:919:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  919 |     if (move_n > 0 && cand_n == 0 || cfg->gen.fallback_depth >= 1) {
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p12748/m0910_synth.c:919:20: note: place parentheses around the '&&' expression to silence this warning
+  919 |     if (move_n > 0 && cand_n == 0 || cfg->gen.fallback_depth >= 1) {
+      |                    ^
+      |         (                        )
+1 error generated.
+mutate: suite unit_synth_config exited 1
+mutate: suite unit_synth_config exited 1
+mutate: suite unit_synth_config exited 1
+mutate: 80 unexplained survivors
+1]
+KILLED    m0888 src/gen/synth.c:904 [cmp < -> <=]
+KILLED    m0889 src/gen/synth.c:906 [cmp != -> ==]
+SURVIVED  m0890 src/gen/synth.c:909 [cmp < -> <=]
+SURVIVED  m0891 src/gen/synth.c:909 [int+1 0 -> 1]
+KILLED    m0892 src/gen/synth.c:909 [int-1 0 -> -1]
+KILLED    m0893 src/gen/synth.c:909 [logic || -> &&]
+SURVIVED  m0894 src/gen/synth.c:909 [cmp < -> <=]
+KILLED    m0895 src/gen/synth.c:914 [cmp >= -> >]
+KILLED    m0896 src/gen/synth.c:914 [int+1 0 -> 1]
+SURVIVED  m0897 src/gen/synth.c:914 [int-1 0 -> -1]
+KILLED    m0898 src/gen/synth.c:914 [logic && -> ||]
+SURVIVED  m0899 src/gen/synth.c:915 [bool false -> true]
+KILLED    m0900 src/gen/synth.c:916 [ret-lit 0 -> 1]
+KILLED    m0901 src/gen/synth.c:916 [int+1 0 -> 1]
+KILLED    m0902 src/gen/synth.c:916 [int-1 0 -> -1]
+SURVIVED  m0903 src/gen/synth.c:919 [cmp > -> >=]
+SURVIVED  m0904 src/gen/synth.c:919 [int+1 0 -> 1]
+SURVIVED  m0905 src/gen/synth.c:919 [int-1 0 -> -1]
+KILLED    m0906 src/gen/synth.c:919 [logic && -> ||]
+          build break
+SURVIVED  m0907 src/gen/synth.c:919 [cmp == -> !=]
+SURVIVED  m0908 src/gen/synth.c:919 [int+1 0 -> 1]
+SURVIVED  m0909 src/gen/synth.c:919 [int-1 0 -> -1]
+KILLED    m0910 src/gen/synth.c:919 [logic && -> ||]
+          build break
+SURVIVED  m0911 src/gen/synth.c:919 [cmp >= -> >]
+SURVIVED  m0912 src/gen/synth.c:919 [int+1 1 -> 2]
+SURVIVED  m0913 src/gen/synth.c:919 [int-1 1 -> 0]
+SURVIVED  m0914 src/gen/synth.c:921 [cmp > -> >=]
+SURVIVED  m0915 src/gen/synth.c:925 [int+1 0 -> 1]
+SURVIVED  m0916 src/gen/synth.c:925 [int-1 0 -> -1]
+SURVIVED  m0917 src/gen/synth.c:930 [cmp >= -> >]
+SURVIVED  m0918 src/gen/synth.c:930 [int+1 0 -> 1]
+SURVIVED  m0919 src/gen/synth.c:930 [int-1 0 -> -1]
+SURVIVED  m0920 src/gen/synth.c:930 [logic && -> ||]
+SURVIVED  m0921 src/gen/synth.c:932 [bool false -> true]
+SURVIVED  m0922 src/gen/synth.c:932 [bool true -> false]
+SURVIVED  m0923 src/gen/synth.c:933 [ret-lit 0 -> 1]
+SURVIVED  m0924 src/gen/synth.c:933 [int+1 0 -> 1]
+SURVIVED  m0925 src/gen/synth.c:933 [int-1 0 -> -1]
+KILLED    m0926 src/gen/synth.c:937 [ret-lit 0 -> 1]
+KILLED    m0927 src/gen/synth.c:937 [int+1 0 -> 1]
+KILLED    m0928 src/gen/synth.c:937 [int-1 0 -> -1]
+mutate: generated=116 build_failed=10 killed_by_tests=26 killed=36 survived=80 accepted=0 unexplained=80 skipped=812
+mutate: kill rate 36/116 = 31.0%, with accepted equivalents 36/116 = 31.0%
+mutate: wall 3354.8s
+make: *** [makefile:239: mutate] Error 1

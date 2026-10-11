@@ -1,0 +1,378 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+pgbuild/bin/mutate.exe src/gen/synth.c pgbuild unit_synth_table unit_synth_coverage unit_synth_config unit_synth_bh unit_synth_scoring
+pgbuild/mutants/p31204/m0233_synth.c:270:61: error: expected expression
+  270 |         memcpy(seq + len, inv_ins, (size_t)ins_len * sizeof /ins);
+      |                                                             ^
+1 error generated.
+pgbuild/mutants/p31204/m0234_synth.c:272:38: error: expected expression
+  272 |         seq[len++] = ct_move_inverse(/a);
+      |                                      ^
+1 error generated.
+pgbuild/mutants/p31204/m0235_synth.c:277:45: error: expected ')'
+  277 | static bool synth_dedup_perms(const ct_move /x, const ct_move *y) {
+      |                                             ^
+pgbuild/mutants/p31204/m0235_synth.c:277:30: note: to match this '('
+  277 | static bool synth_dedup_perms(const ct_move /x, const ct_move *y) {
+      |                              ^
+pgbuild/mutants/p31204/m0235_synth.c:280:26: error: use of undeclared identifier 'x'
+  280 |     if (ct_sticker_perm(*x, CT_SYNTH_N, px) != 0) {
+      |                          ^
+pgbuild/mutants/p31204/m0235_synth.c:283:26: error: use of undeclared identifier 'y'
+  283 |     if (ct_sticker_perm(*y, CT_SYNTH_N, py) != 0) {
+      |                          ^
+pgbuild/mutants/p31204/m0235_synth.c:327:46: error: too many arguments to function call, expected 1, have 2
+  327 |             if (synth_dedup_perms(&cands[i], &cands[j])) {
+      |                 ~~~~~~~~~~~~~~~~~            ^~~~~~~~~
+pgbuild/mutants/p31204/m0235_synth.c:277:13: note: 'synth_dedup_perms' declared here
+  277 | static bool synth_dedup_perms(const ct_move /x, const ct_move *y) {
+      |             ^                 ~~~~~~~~~~~~~
+4 errors generated.
+pgbuild/mutants/p31204/m0236_synth.c:277:63: error: expected ')'
+  277 | static bool synth_dedup_perms(const ct_move *x, const ct_move /y) {
+      |                                                               ^
+pgbuild/mutants/p31204/m0236_synth.c:277:30: note: to match this '('
+  277 | static bool synth_dedup_perms(const ct_move *x, const ct_move /y) {
+      |                              ^
+pgbuild/mutants/p31204/m0236_synth.c:283:26: error: use of undeclared identifier 'y'
+  283 |     if (ct_sticker_perm(*y, CT_SYNTH_N, py) != 0) {
+      |                          ^
+pgbuild/mutants/p31204/m0236_synth.c:327:46: error: passing 'ct_move *' to parameter of incompatible type 'ct_move'; remove &
+  327 |             if (synth_dedup_perms(&cands[i], &cands[j])) {
+      |                                              ^~~~~~~~~
+pgbuild/mutants/p31204/m0236_synth.c:277:63: note: passing argument to parameter here
+  277 | static bool synth_dedup_perms(const ct_move *x, const ct_move /y) {
+      |                                                               ^
+3 errors generated.
+pgbuild/mutants/p31204/m0237_synth.c:278:16: error: zero size arrays are an extension [-Werror,-Wzero-length-array]
+  278 |     uint8_t px[CT_CUBE_FACE_COUNT / CT_CUBE_STRIDE * CT_CUBE_STRIDE];
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+pgbuild/mutants/p31204/m0239_synth.c:279:16: error: zero size arrays are an extension [-Werror,-Wzero-length-array]
+  279 |     uint8_t py[CT_CUBE_FACE_COUNT / CT_CUBE_STRIDE * CT_CUBE_STRIDE];
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+pgbuild/mutants/p31204/m0241_synth.c:280:25: error: expected expression
+  280 |     if (ct_sticker_perm(/x, CT_SYNTH_N, px) != 0) {
+      |                         ^
+1 error generated.
+pgbuild/mutants/p31204/m0246_synth.c:283:25: error: expected expression
+  283 |     if (ct_sticker_perm(/y, CT_SYNTH_N, py) != 0) {
+      |                         ^
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741795
+pgbuild/mutants/p31204/m0284_synth.c:337:23: error: expected identifier or '('
+  337 |         const ct_move /a = &cands[uniq[ai]];
+      |                       ^
+pgbuild/mutants/p31204/m0284_synth.c:339:28: error: use of undeclared identifier 'a'
+  339 |             synth_try_pair(a, &cands[uniq[ii]], 1, true);
+      |                            ^
+pgbuild/mutants/p31204/m0284_synth.c:340:28: error: use of undeclared identifier 'a'
+  340 |             synth_try_pair(a, &cands[uniq[ii]], 1, false);
+      |                            ^
+pgbuild/mutants/p31204/m0284_synth.c:354:32: error: use of undeclared identifier 'a'
+  354 |                 synth_try_pair(a, ins, CT_SYNTH_CYCLE_LEN, true);
+      |                                ^
+pgbuild/mutants/p31204/m0284_synth.c:355:32: error: use of undeclared identifier 'a'
+  355 |                 synth_try_pair(a, ins, CT_SYNTH_CYCLE_LEN, false);
+      |                                ^
+pgbuild/mutants/p31204/m0284_synth.c:359:32: error: use of undeclared identifier 'a'
+  359 |                 synth_try_pair(a, ins, CT_SYNTH_INSERT_LEN, true);
+      |                                ^
+pgbuild/mutants/p31204/m0284_synth.c:360:32: error: use of undeclared identifier 'a'
+  360 |                 synth_try_pair(a, ins, CT_SYNTH_INSERT_LEN, false);
+      |                                ^
+pgbuild/mutants/p31204/m0284_synth.c:363:32: error: use of undeclared identifier 'a'
+  363 |                 synth_try_pair(a, ins, CT_SYNTH_INSERT_LEN, true);
+      |                                ^
+pgbuild/mutants/p31204/m0284_synth.c:364:32: error: use of undeclared identifier 'a'
+  364 |                 synth_try_pair(a, ins, CT_SYNTH_INSERT_LEN, false);
+      |                                ^
+9 errors generated.
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited -1073741795
+pgbuild/mutants/p31204/m0297_synth.c:343:27: error: expected identifier or '('
+  343 |             const ct_move /x = &cands[uniq[xi]];
+      |                           ^
+pgbuild/mutants/p31204/m0297_synth.c:344:46: error: use of undeclared identifier 'x'
+  344 |             ct_move x_inv = ct_move_inverse(*x);
+      |                                              ^
+pgbuild/mutants/p31204/m0297_synth.c:346:23: error: use of undeclared identifier 'x'
+  346 |             ins[0] = *x;
+      |                       ^
+pgbuild/mutants/p31204/m0297_synth.c:348:45: error: use of undeclared identifier 'x'
+  348 |                 if (cands[uniq[yi]].face == x->face) {
+      |                                             ^
+pgbuild/mutants/p31204/m0297_synth.c:361:38: error: use of undeclared identifier 'x'
+  361 |                 ins[CT_SYNTH_TWO] = *x;
+      |                                      ^
+pgbuild/mutants/p31204/m0297_synth.c:362:60: error: use of undeclared identifier 'x'
+  362 |                 ins[CT_SYNTH_INSERT_LEN - CT_SYNTH_ONE] = *x;
+      |                                                            ^
+6 errors generated.
+pgbuild/mutants/p31204/m0298_synth.c:344:45: error: expected expression
+  344 |             ct_move x_inv = ct_move_inverse(/x);
+      |                                             ^
+1 error generated.
+pgbuild/mutants/p31204/m0300_synth.c:346:13: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  346 |             ins[-1] = *x;
+      |             ^   ~~
+pgbuild/mutants/p31204/m0300_synth.c:345:13: note: array 'ins' declared here
+  345 |             ct_move ins[CT_SYNTH_INSERT_LEN];
+      |             ^
+1 error generated.
+pgbuild/mutants/p31204/m0301_synth.c:346:22: error: expected expression
+  346 |             ins[0] = /x;
+      |                      ^
+1 error generated.
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_coverage exited 1
+mutate: scope=src/gen/synth.c files=1 sites=928 suites=5
+KILLED    m0233 src/gen/synth.c:270 [arith * -> /]
+          build break
+KILLED    m0234 src/gen/synth.c:272 [arith * -> /]
+          build break
+KILLED    m0235 src/gen/synth.c:277 [arith * -> /]
+          build break
+KILLED    m0236 src/gen/synth.c:277 [arith * -> /]
+          build break
+KILLED    m0237 src/gen/synth.c:278 [arith * -> /]
+          build break
+SURVIVED  m0238 src/gen/synth.c:278 [arith * -> /]
+KILLED    m0239 src/gen/synth.c:279 [arith * -> /]
+          build break
+SURVIVED  m0240 src/gen/synth.c:279 [arith * -> /]
+KILLED    m0241 src/gen/synth.c:280 [arith * -> /]
+          build break
+SURVIVED  m0242 src/gen/synth.c:280 [cmp != -> ==]
+SURVIVED  m0243 src/gen/synth.c:280 [int+1 0 -> 1]
+SURVIVED  m0244 src/gen/synth.c:280 [int-1 0 -> -1]
+SURVIVED  m0245 src/gen/synth.c:281 [bool false -> true]
+KILLED    m0246 src/gen/synth.c:283 [arith * -> /]
+          build break
+SURVIVED  m0247 src/gen/synth.c:283 [cmp != -> ==]
+SURVIVED  m0248 src/gen/synth.c:283 [int+1 0 -> 1]
+SURVIVED  m0249 src/gen/synth.c:283 [int-1 0 -> -1]
+SURVIVED  m0250 src/gen/synth.c:284 [bool false -> true]
+KILLED    m0251 src/gen/synth.c:286 [cmp == -> !=]
+KILLED    m0252 src/gen/synth.c:286 [int+1 0 -> 1]
+KILLED    m0253 src/gen/synth.c:286 [int-1 0 -> -1]
+SURVIVED  m0254 src/gen/synth.c:290 [int+1 0 -> 1]
+KILLED    m0255 src/gen/synth.c:290 [int-1 0 -> -1]
+KILLED    m0256 src/gen/synth.c:290 [cmp < -> <=]
+KILLED    m0257 src/gen/synth.c:291 [bool false -> true]
+KILLED    m0258 src/gen/synth.c:292 [bool false -> true]
+KILLED    m0259 src/gen/synth.c:296 [int+1 0 -> 1]
+KILLED    m0260 src/gen/synth.c:296 [int-1 0 -> -1]
+KILLED    m0261 src/gen/synth.c:296 [cmp < -> <=]
+KILLED    m0262 src/gen/synth.c:302 [bool true -> false]
+KILLED    m0263 src/gen/synth.c:306 [bool true -> false]
+SURVIVED  m0264 src/gen/synth.c:315 [cmp <= -> <]
+SURVIVED  m0265 src/gen/synth.c:315 [int+1 0 -> 1]
+SURVIVED  m0266 src/gen/synth.c:315 [int-1 0 -> -1]
+SURVIVED  m0267 src/gen/synth.c:316 [arith - -> +]
+SURVIVED  m0268 src/gen/synth.c:316 [int+1 1 -> 2]
+SURVIVED  m0269 src/gen/synth.c:316 [int-1 1 -> 0]
+SURVIVED  m0270 src/gen/synth.c:319 [int+1 0 -> 1]
+KILLED    m0271 src/gen/synth.c:319 [int-1 0 -> -1]
+SURVIVED  m0272 src/gen/synth.c:321 [int+1 0 -> 1]
+KILLED    m0273 src/gen/synth.c:321 [int-1 0 -> -1]
+SURVIVED  m0274 src/gen/synth.c:321 [cmp < -> <=]
+KILLED    m0275 src/gen/synth.c:322 [bool true -> false]
+SURVIVED  m0276 src/gen/synth.c:323 [int+1 0 -> 1]
+KILLED    m0277 src/gen/synth.c:323 [int-1 0 -> -1]
+KILLED    m0278 src/gen/synth.c:323 [cmp < -> <=]
+SURVIVED  m0279 src/gen/synth.c:324 [not-del ! -> (deleted)]
+SURVIVED  m0280 src/gen/synth.c:328 [bool false -> true]
+SURVIVED  m0281 src/gen/synth.c:336 [int+1 0 -> 1]
+KILLED    m0282 src/gen/synth.c:336 [int-1 0 -> -1]
+SURVIVED  m0283 src/gen/synth.c:336 [cmp < -> <=]
+KILLED    m0284 src/gen/synth.c:337 [arith * -> /]
+          build break
+SURVIVED  m0285 src/gen/synth.c:338 [int+1 0 -> 1]
+KILLED    m0286 src/gen/synth.c:338 [int-1 0 -> -1]
+SURVIVED  m0287 src/gen/synth.c:338 [cmp < -> <=]
+SURVIVED  m0288 src/gen/synth.c:339 [int+1 1 -> 2]
+SURVIVED  m0289 src/gen/synth.c:339 [int-1 1 -> 0]
+SURVIVED  m0290 src/gen/synth.c:339 [bool true -> false]
+SURVIVED  m0291 src/gen/synth.c:340 [int+1 1 -> 2]
+SURVIVED  m0292 src/gen/synth.c:340 [int-1 1 -> 0]
+SURVIVED  m0293 src/gen/synth.c:340 [bool false -> true]
+SURVIVED  m0294 src/gen/synth.c:342 [int+1 0 -> 1]
+KILLED    m0295 src/gen/synth.c:342 [int-1 0 -> -1]
+SURVIVED  m0296 src/gen/synth.c:342 [cmp < -> <=]
+KILLED    m0297 src/gen/synth.c:343 [arith * -> /]
+          build break
+KILLED    m0298 src/gen/synth.c:344 [arith * -> /]
+          build break
+SURVIVED  m0299 src/gen/synth.c:346 [int+1 0 -> 1]
+KILLED    m0300 src/gen/synth.c:346 [int-1 0 -> -1]
+          build break
+KILLED    m0301 src/gen/synth.c:346 [arith * -> /]
+          build break
+SURVIVED  m0302 src/gen/synth.c:347 [int+1 0 -> 1]
+KILLED    m0303 src/gen/synth.c:347 [int-1 0 -> -1]
+SURVIVED  m0304 src/gen/synth.c:347 [cmp < -> <=]
+KILLEDmutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p31204/m0310_synth.c:358:17: error: array index 6 is past the end of the array (that has type 'ct_move[5]') [-Werror,-Warray-bounds]
+  358 |                 ins[CT_SYNTH_INSERT_LEN + CT_SYNTH_ONE] = x_inv;
+      |                 ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p31204/m0310_synth.c:345:13: note: array 'ins' declared here
+  345 |             ct_move ins[CT_SYNTH_INSERT_LEN];
+      |             ^
+1 error generated.
+pgbuild/mutants/p31204/m0313_synth.c:361:37: error: expected expression
+  361 |                 ins[CT_SYNTH_TWO] = /x;
+      |                                     ^
+1 error generated.
+pgbuild/mutants/p31204/m0314_synth.c:362:17: error: array index 6 is past the end of the array (that has type 'ct_move[5]') [-Werror,-Warray-bounds]
+  362 |                 ins[CT_SYNTH_INSERT_LEN + CT_SYNTH_ONE] = *x;
+      |                 ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p31204/m0314_synth.c:345:13: note: array 'ins' declared here
+  345 |             ct_move ins[CT_SYNTH_INSERT_LEN];
+      |             ^
+1 error generated.
+pgbuild/mutants/p31204/m0315_synth.c:362:59: error: expected expression
+  362 |                 ins[CT_SYNTH_INSERT_LEN - CT_SYNTH_ONE] = /x;
+      |                                                           ^
+1 error generated.
+pgbuild/mutants/p31204/m0318_synth.c:375:61: error: expected expression
+  375 |     synth_entries = calloc((size_t)CT_SYNTH_KEY_MAX, sizeof /synth_entries);
+      |                                                             ^
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741819
+mutate: suite unit_synth_table exited -1073741819
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741819
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p31204/m0338_synth.c:397:75: error: expected ')'
+  397 | int ct_synth_table_entry(int index, int key[CT_SYNTH_KEY_FIELDS], ct_move /out, int cap) {
+      |                                                                           ^
+pgbuild/mutants/p31204/m0338_synth.c:397:25: note: to match this '('
+  397 | int ct_synth_table_entry(int index, int key[CT_SYNTH_KEY_FIELDS], ct_move /out, int cap) {
+      |                         ^
+pgbuild/mutants/p31204/m0338_synth.c:397:5: error: conflicting types for 'ct_synth_table_entry'
+  397 | int ct_synth_table_entry(int index, int key[CT_SYNTH_KEY_FIELDS], ct_move /out, int cap) {
+      |     ^
+src\gen/synth.h:59:5: note: previous declaration is here
+   59 | int ct_synth_table_entry(int index, int key[CT_SYNTH_KEY_FIELDS], ct_move *out, int cap);
+      |     ^
+pgbuild/mutants/p31204/m0338_synth.c:402:9: error: use of undeclared identifier 'out'
+  402 |     if (out == NULL || cap < (int)e->len) {
+      |         ^~~
+pgbuild/mutants/p31204/m0338_synth.c:402:24: error: use of undeclared identifier 'cap'
+  402 |     if (out == NULL || cap < (int)e->len) {
+      |                        ^~~
+pgbuild/mutants/p31204/m0338_synth.c:408:12: error: use of undeclared identifier 'out'
+  408 |     memcpy(out, e->seq, (size_t)e->len * sizeof *out);
+      |            ^~~
+pgbuild/mutants/p31204/m0338_synth.c:408:50: error: use of undeclared identifier 'out'
+  408 |     memcpy(out, e->seq, (size_t)e->len * sizeof *out);
+      |                                                  ^~~
+6 errors generated.
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p31204/m0340_synth.c:398:22: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  398 |     if (!synth_built && index < 0 || index >= synth_count || key == NULL) {
+      |         ~~~~~~~~~~~~~^~~~~~~~~~~~ ~~
+pgbuild/mutants/p31204/m0340_synth.c:398:22: note: place parentheses around the '&&' expression to silence this warning
+  398 |     if (!synth_built && index < 0 || index >= synth_count || key == NULL) {
+      |                      ^
+      |         (                        )
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p31204/m0344_synth.c:398:35: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  398 |     if (!synth_built || index < 0 && index >= synth_count || key == NULL) {
+      |                      ~~ ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p31204/m0344_synth.c:398:35: note: place parentheses around the '&&' expression to silence this warning
+  398 |     if (!synth_built || index < 0 && index >= synth_count || key == NULL) {
+      |                                   ^
+      |                         (                                )
+1 error generated.
+pgbuild/mutants/p31204/m0346_synth.c:398:59: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  398 |     if (!synth_built || index < 0 || index >= synth_count && key == NULL) {
+      |                                   ~~ ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+pgbuild/mutants/p31204/m0346_synth.c:398:59: note: place parentheses around the '&&' expression to silence this warning
+  398 |     if (!synth_built || index < 0 || index >= synth_count && key == NULL) {
+      |                                      ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: 58 unexplained survivors
+    m0305 src/gen/synth.c:348 [cmp == -> !=]
+KILLED    m0306 src/gen/synth.c:352 [int+1 1 -> 2]
+KILLED    m0307 src/gen/synth.c:352 [int-1 1 -> 0]
+SURVIVED  m0308 src/gen/synth.c:354 [bool true -> false]
+SURVIVED  m0309 src/gen/synth.c:355 [bool false -> true]
+KILLED    m0310 src/gen/synth.c:358 [arith - -> +]
+          build break
+SURVIVED  m0311 src/gen/synth.c:359 [bool true -> false]
+SURVIVED  m0312 src/gen/synth.c:360 [bool false -> true]
+KILLED    m0313 src/gen/synth.c:361 [arith * -> /]
+          build break
+KILLED    m0314 src/gen/synth.c:362 [arith - -> +]
+          build break
+KILLED    m0315 src/gen/synth.c:362 [arith * -> /]
+          build break
+SURVIVED  m0316 src/gen/synth.c:363 [bool true -> false]
+SURVIVED  m0317 src/gen/synth.c:364 [bool false -> true]
+KILLED    m0318 src/gen/synth.c:375 [arith * -> /]
+          build break
+KILLED    m0319 src/gen/synth.c:376 [cmp == -> !=]
+SURVIVED  m0320 src/gen/synth.c:377 [arith - -> +]
+SURVIVED  m0321 src/gen/synth.c:377 [int+1 1 -> 2]
+SURVIVED  m0322 src/gen/synth.c:377 [int-1 1 -> 0]
+KILLED    m0323 src/gen/synth.c:379 [int+1 0 -> 1]
+KILLED    m0324 src/gen/synth.c:379 [int-1 0 -> -1]
+KILLED    m0325 src/gen/synth.c:380 [int+1 0 -> 1]
+KILLED    m0326 src/gen/synth.c:380 [int-1 0 -> -1]
+SURVIVED  m0327 src/gen/synth.c:381 [cmp < -> <=]
+SURVIVED  m0328 src/gen/synth.c:381 [int+1 0 -> 1]
+SURVIVED  m0329 src/gen/synth.c:381 [int-1 0 -> -1]
+SURVIVED  m0330 src/gen/synth.c:384 [arith - -> +]
+SURVIVED  m0331 src/gen/synth.c:384 [int+1 1 -> 2]
+SURVIVED  m0332 src/gen/synth.c:384 [int-1 1 -> 0]
+KILLED    m0333 src/gen/synth.c:386 [bool true -> false]
+KILLED    m0334 src/gen/synth.c:391 [not-del ! -> (deleted)]
+SURVIVED  m0335 src/gen/synth.c:392 [arith - -> +]
+SURVIVED  m0336 src/gen/synth.c:392 [int+1 1 -> 2]
+SURVIVED  m0337 src/gen/synth.c:392 [int-1 1 -> 0]
+KILLED    m0338 src/gen/synth.c:397 [arith * -> /]
+          build break
+KILLED    m0339 src/gen/synth.c:398 [not-del ! -> (deleted)]
+KILLED    m0340 src/gen/synth.c:398 [logic || -> &&]
+          build break
+KILLED    m0341 src/gen/synth.c:398 [cmp < -> <=]
+KILLED    m0342 src/gen/synth.c:398 [int+1 0 -> 1]
+SURVIVED  m0343 src/gen/synth.c:398 [int-1 0 -> -1]
+KILLED    m0344 src/gen/synth.c:398 [logic || -> &&]
+          build break
+SURVIVED  m0345 src/gen/synth.c:398 [cmp >= -> >]
+KILLED    m0346 src/gen/synth.c:398 [logic || -> &&]
+          build break
+KILLED    m0347 src/gen/synth.c:398 [cmp == -> !=]
+KILLED    m0348 src/gen/synth.c:399 [arith - -> +]
+mutate: generated=116 build_failed=22 killed_by_tests=36 killed=58 survived=58 accepted=0 unexplained=58 skipped=812
+mutate: kill rate 58/116 = 50.0%, with accepted equivalents 58/116 = 50.0%
+mutate: wall 2558.9s
+make: *** [makefile:239: mutate] Error 1

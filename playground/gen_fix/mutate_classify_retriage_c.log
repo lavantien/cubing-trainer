@@ -1,0 +1,121 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+pgbuild/bin/mutate.exe src/gen/classify.c pgbuild unit_classify unit_classify_stress unit_classify_fixture unit_classify_special unit_classify_synth_table unit_classify_synth_results unit_classify_gates
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_gates exited 1
+mutate: suite unit_classify_gates exited 1
+mutate: suite unit_classify_gates exited 1
+mutate: suite unit_classify_gates exited 1
+mutate: suite unit_classify_gates exited 1
+pgbuild/mutants/p40316/m0652_classify.c:667:55: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  667 |         bool corner_cycle = info.corner || !info.edge && info.corner_exact;
+      |                                         ~~ ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p40316/m0652_classify.c:667:55: note: place parentheses around the '&&' expression to silence this warning
+  667 |         bool corner_cycle = info.corner || !info.edge && info.corner_exact;
+      |                                                       ^                   
+      |                                            (                              )
+1 error generated.
+mutate: scope=src/gen/classify.c files=1 sites=745 suites=7
+SURVIVED  m0435 src/gen/classify.c:406 [cmp > -> >=]
+SURVIVED  m0436 src/gen/classify.c:407 [bool false -> true]
+SURVIVED  m0440 src/gen/classify.c:410 [int-1 0 -> -1]
+SURVIVED  m0442 src/gen/classify.c:410 [int+1 1 -> 2]
+SURVIVED  m0461 src/gen/classify.c:417 [logic || -> &&]
+SURVIVED  m0468 src/gen/classify.c:420 [arith + -> -]
+SURVIVED  m0469 src/gen/classify.c:420 [arith * -> /]
+SURVIVED  m0470 src/gen/classify.c:420 [int+1 2 -> 3]
+SURVIVED  m0471 src/gen/classify.c:420 [int-1 2 -> 1]
+SURVIVED  m0472 src/gen/classify.c:420 [arith + -> -]
+SURVIVED  m0473 src/gen/classify.c:420 [arith * -> /]
+SURVIVED  m0474 src/gen/classify.c:420 [int+1 2 -> 3]
+SURVIVED  m0475 src/gen/classify.c:420 [int-1 2 -> 1]
+SURVIVED  m0476 src/gen/classify.c:421 [int+1 0 -> 1]
+SURVIVED  m0477 src/gen/classify.c:421 [int-1 0 -> -1]
+SURVIVED  m0478 src/gen/classify.c:422 [arith * -> /]
+SURVIVED  m0481 src/gen/classify.c:424 [int+1 2 -> 3]
+SURVIVED  m0482 src/gen/classify.c:424 [int-1 2 -> 1]
+SURVIVED  m0483 src/gen/classify.c:424 [arith * -> /]
+SURVIVED  m0490 src/gen/classify.c:427 [int+1 2 -> 3]
+SURVIVED  m0491 src/gen/classify.c:427 [int-1 2 -> 1]
+SURVIVED  m0498 src/gen/classify.c:431 [int+1 2 -> 3]
+SURVIVED  m0499 src/gen/classify.c:431 [int-1 2 -> 1]
+SURVIVED  m0500 src/gen/classify.c:431 [arith * -> /]
+SURVIVED  m0507 src/gen/classify.c:434 [int+1 2 -> 3]
+SURVIVED  m0514 src/gen/classify.c:438 [arith + -> -]
+SURVIVED  m0515 src/gen/classify.c:438 [int+1 1 -> 2]
+SURVIVED  m0516 src/gen/classify.c:438 [int-1 1 -> 0]
+SURVIVED  m0518 src/gen/classify.c:440 [arith * -> /]
+SURVIVED  m0520 src/gen/classify.c:444 [cmp < -> <=]
+SURVIVED  m0521 src/gen/classify.c:444 [int+1 0 -> 1]
+SURVIVED  m0522 src/gen/classify.c:444 [int-1 0 -> -1]
+SURVIVED  m0523 src/gen/classify.c:445 [bool false -> true]
+KILLED    m0529 src/gen/classify.c:453 [int+1 1 -> 2]
+KILLED    m0530 src/gen/classify.c:453 [int-1 1 -> 0]
+SURVIVED  m0550 src/gen/classify.c:469 [bool false -> true]
+SURVIVED  m0556 src/gen/classify.c:484 [logic && -> ||]
+SURVIVED  m0558 src/gen/classify.c:487 [logic && -> ||]
+SURVIVED  m0564 src/gen/classify.c:496 [logic && -> ||]
+SURVIVED  m0566 src/gen/classify.c:499 [logic && -> ||]
+SURVIVED  m0568 src/gen/classify.c:502 [logic && -> ||]
+SURVIVED  m0570 src/gen/classify.c:505 [bool false -> true]
+SURVIVED  m0573 src/gen/classify.c:513 [logic && -> ||]
+SURVIVED  m0575 src/gen/classify.c:514 [logic && -> ||]
+SURVIVED  m0595 src/gen/classify.c:529 [int+1 1 -> 2]
+SURVIVED  m0596 src/gen/classify.c:529 [int-1 1 -> 0]
+SURVIVED  m0599 src/gen/classify.c:530 [int+1 1 -> 2]
+SURVIVED  m0600 src/gen/classify.c:530 [int-1 1 -> 0]
+SURVIVED  m0617 src/gen/classify.c:537 [arith + -> -]
+SURVIVED  m0618 src/gen/classify.c:537 [arith + -> -]
+SURVIVED  m0625 src/gen/classify.c:550 [cmp < -> <=]
+SURVIVED  m0626 src/gen/classify.c:550 [int+1 0 -> 1]
+SURVIVED  m0627 src/gen/classify.c:550 [int-1 0 -> -1]
+SURVIVED  m0628 src/gen/classify.c:551 [int+1 0 -> 1]
+SURVIVED  m0629 src/gen/classify.c:551 [int-1 0 -> -1]
+KILLED    m0646 src/gen/classify.c:636 [int+1 0 -> 1]
+KILLED    m0647 src/gen/classify.c:636 [int-1 0 -> -1]
+KILLED    m0648 src/gen/classify.c:641 [cmp > -> >=]
+KILLED    m0649 src/gen/classify.c:648 [cmp < -> <=]
+KILLED    m0650 src/gen/classify.c:648 [int+1 0 -> 1]
+SURVIVED  m0651 src/gen/classify.c:648 [int-1 0 -> -1]
+KILLED    m0652 src/gen/classify.c:667 [logic && -> ||]
+          build break
+SURVIVED  m0662 src/gen/classify.c:674 [arith * -> /]
+SURVIVED  m0663 src/gen/classify.c:674 [int+1 2 -> 3]
+SURVIVED  m0664 src/gen/classify.c:674 [int-1 2 -> 1]
+SURVIVED  m0665 src/gen/classify.c:674 [arith + -> -]
+SURVIVED  m0666 src/gen/classify.c:674 [int+1 1 -> 2]
+SURVIVED  m0667 src/gen/classify.c:674 [int-1 1 -> 0]
+SURVIVED  m0668 src/gen/classify.c:675 [int+1 0 -> 1]
+SURVIVED  m0670 src/gen/classify.c:677 [int+1 0 -> 1]
+SURVIVED  m0672 src/gen/classify.c:677 [cmp < -> <=]
+SURVIVED  m0673 src/gen/classify.c:677 [logic && -> ||]
+SURVIVED  m0674 src/gen/classify.c:677 [cmp < -> <=]
+SURVIVED  m0675 src/gen/clasmutate: 74 unexplained survivors
+sify.c:677 [arith / -> *]
+SURVIVED  m0676 src/gen/classify.c:677 [int+1 0 -> 1]
+SURVIVED  m0677 src/gen/classify.c:677 [int-1 0 -> -1]
+SURVIVED  m0680 src/gen/classify.c:680 [int+1 1 -> 2]
+SURVIVED  m0681 src/gen/classify.c:680 [int-1 1 -> 0]
+SURVIVED  m0682 src/gen/classify.c:680 [cmp < -> <=]
+SURVIVED  m0685 src/gen/classify.c:686 [cmp < -> <=]
+SURVIVED  m0691 src/gen/classify.c:688 [cmp <= -> <]
+SURVIVED  m0699 src/gen/classify.c:690 [cmp == -> !=]
+SURVIVED  m0702 src/gen/classify.c:695 [arith * -> /]
+SURVIVED  m0721 src/gen/classify.c:703 [bool true -> false]
+SURVIVED  m0727 src/gen/classify.c:728 [logic || -> &&]
+SURVIVED  m0731 src/gen/classify.c:733 [int-1 0 -> -1]
+SURVIVED  m0735 src/gen/classify.c:740 [cmp > -> >=]
+SURVIVED  m0739 src/gen/classify.c:747 [cmp > -> >=]
+SURVIVED  m0742 src/gen/classify.c:757 [cmp <= -> <]
+ACCEPTED  m0573 src/gen/classify.c:513 [logic && -> ||] :: decide corner flag logic mutants are equivalent: cl_decide only runs inside the single-orbit gate in ct_classify, so info->corner and info->edge are never both true or both false at any call
+ACCEPTED  m0575 src/gen/classify.c:514 [logic && -> ||] :: decide edge flag logic mutants are equivalent: cl_decide only runs inside the single-orbit gate in ct_classify, so info->corner and info->edge are never both true or both false at any call
+ACCEPTED  m0625 src/gen/classify.c:550 [cmp < -> <=] :: fmt width check mutants are equivalent: the formatted spans hold at most 5 moves at n = 3, about 24 characters against the 48-character buffer, so the failure branch is unreachable
+ACCEPTED  m0626 src/gen/classify.c:550 [int+1 0 -> 1] :: fmt width check mutants are equivalent: the formatted spans hold at most 5 moves at n = 3, about 24 characters against the 48-character buffer, so the failure branch is unreachable
+ACCEPTED  m0627 src/gen/classify.c:550 [int-1 0 -> -1] :: fmt width check mutants are equivalent: the formatted spans hold at most 5 moves at n = 3, about 24 characters against the 48-character buffer, so the failure branch is unreachable
+ACCEPTED  m0628 src/gen/classify.c:551 [int+1 0 -> 1] :: fmt guard write mutants are equivalent: the guarded branch is unreachable because the spans never exceed the format buffer
+ACCEPTED  m0629 src/gen/classify.c:551 [int-1 0 -> -1] :: fmt guard write mutants are equivalent: the guarded branch is unreachable because the spans never exceed the format buffer
+mutate: generated=89 build_failed=1 killed_by_tests=7 killed=8 survived=81 accepted=7 unexplained=74 skipped=656
+mutate: kill rate 8/89 = 9.0%, with accepted equivalents 15/89 = 16.9%
+mutate: wall 823.9s
+make: *** [makefile:239: mutate] Error 1

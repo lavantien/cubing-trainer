@@ -1,0 +1,320 @@
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741819
+mutate: suite unit_synth_config exited -1073740940
+mutate: suite unit_synth_config exited -1073741819
+mutate: suite unit_synth_config exited -1073741795
+pgr3a/mutants/p32964/m0743_synth.c:764:17: error: expected identifier or '('
+  764 |             int /fwd_frontier = malloc((size_t)frontier_cap * sizeof *fwd_frontier);
+      |                 ^
+pgr3a/mutants/p32964/m0743_synth.c:768:18: error: use of undeclared identifier 'fwd_frontier'; did you mean 'bwd_frontier'?
+  768 |             ok = fwd_frontier != NULL && bwd_frontier != NULL && fwd_next != NULL &&
+      |                  ^~~~~~~~~~~~
+      |                  bwd_frontier
+pgr3a/mutants/p32964/m0743_synth.c:765:18: note: 'bwd_frontier' declared here
+  765 |             int *bwd_frontier = malloc((size_t)frontier_cap * sizeof *bwd_frontier);
+      |                  ^
+pgr3a/mutants/p32964/m0743_synth.c:772:17: error: use of undeclared identifier 'fwd_frontier'; did you mean 'bwd_frontier'?
+  772 |                 fwd_frontier[0] = 0;
+      |                 ^~~~~~~~~~~~
+      |                 bwd_frontier
+pgr3a/mutants/p32964/m0743_synth.c:765:18: note: 'bwd_frontier' declared here
+  765 |             int *bwd_frontier = malloc((size_t)frontier_cap * sizeof *bwd_frontier);
+      |                  ^
+pgr3a/mutants/p32964/m0743_synth.c:781:50: error: use of undeclared identifier 'fwd_frontier'; did you mean 'bwd_frontier'?
+  781 |                     int *frontier = expand_fwd ? fwd_frontier : bwd_frontier;
+      |                                                  ^~~~~~~~~~~~
+      |                                                  bwd_frontier
+pgr3a/mutants/p32964/m0743_synth.c:765:18: note: 'bwd_frontier' declared here
+  765 |             int *bwd_frontier = malloc((size_t)frontier_cap * sizeof *bwd_frontier);
+      |                  ^
+pgr3a/mutants/p32964/m0743_synth.c:835:25: error: use of undeclared identifier 'fwd_frontier'; did you mean 'bwd_frontier'?
+  835 |                         fwd_frontier = fwd_next;
+      |                         ^~~~~~~~~~~~
+      |                         bwd_frontier
+pgr3a/mutants/p32964/m0743_synth.c:765:18: note: 'bwd_frontier' declared here
+  765 |             int *bwd_frontier = malloc((size_t)frontier_cap * sizeof *bwd_frontier);
+      |                  ^
+pgr3a/mutants/p32964/m0743_synth.c:845:18: error: use of undeclared identifier 'fwd_frontier'; did you mean 'bwd_frontier'?
+  845 |             free(fwd_frontier);
+      |                  ^~~~~~~~~~~~
+      |                  bwd_frontier
+pgr3a/mutants/p32964/m0743_synth.c:765:18: note: 'bwd_frontier' declared here
+  765 |             int *bwd_frontier = malloc((size_t)frontier_cap * sizeof *bwd_frontier);
+      |                  ^
+6 errors generated.
+pgr3a/mutants/p32964/m0745_synth.c:764:70: error: expected expression
+  764 |             int *fwd_frontier = malloc((size_t)frontier_cap * sizeof /fwd_frontier);
+      |                                                                      ^
+1 error generated.
+pgr3a/mutants/p32964/m0746_synth.c:765:17: error: expected identifier or '('
+  765 |             int /bwd_frontier = malloc((size_t)frontier_cap * sizeof *bwd_frontier);
+      |                 ^
+pgr3a/mutants/p32964/m0746_synth.c:768:42: error: use of undeclared identifier 'bwd_frontier'; did you mean 'fwd_frontier'?
+  768 |             ok = fwd_frontier != NULL && bwd_frontier != NULL && fwd_next != NULL &&
+      |                                          ^~~~~~~~~~~~
+      |                                          fwd_frontier
+pgr3a/mutants/p32964/m0746_synth.c:764:18: note: 'fwd_frontier' declared here
+  764 |             int *fwd_frontier = malloc((size_t)frontier_cap * sizeof *fwd_frontier);
+      |                  ^
+pgr3a/mutants/p32964/m0746_synth.c:775:21: error: use of undeclared identifier 'bwd_frontier'; did you mean 'fwd_frontier'?
+  775 |                     bwd_frontier[bwd_len++] = v;
+      |                     ^~~~~~~~~~~~
+      |                     fwd_frontier
+pgr3a/mutants/p32964/m0746_synth.c:764:18: note: 'fwd_frontier' declared here
+  764 |             int *fwd_frontier = malloc((size_t)frontier_cap * sizeof *fwd_frontier);
+      |                  ^
+pgr3a/mutants/p32964/m0746_synth.c:781:65: error: use of undeclared identifier 'bwd_frontier'; did you mean 'fwd_frontier'?
+  781 |                     int *frontier = expand_fwd ? fwd_frontier : bwd_frontier;
+      |                                                                 ^~~~~~~~~~~~
+      |                                                                 fwd_frontier
+pgr3a/mutants/p32964/m0746_synth.c:764:18: note: 'fwd_frontier' declared here
+  764 |             int *fwd_frontier = malloc((size_t)frontier_cap * sizeof *fwd_frontier);
+      |                  ^
+pgr3a/mutants/p32964/m0746_synth.c:839:25: error: use of undeclared identifier 'bwd_frontier'; did you mean 'fwd_frontier'?
+  839 |                         bwd_frontier = bwd_next;
+      |                         ^~~~~~~~~~~~
+      |                         fwd_frontier
+pgr3a/mutants/p32964/m0746_synth.c:764:18: note: 'fwd_frontier' declared here
+  764 |             int *fwd_frontier = malloc((size_t)frontier_cap * sizeof *fwd_frontier);
+      |                  ^
+pgr3a/mutants/p32964/m0746_synth.c:846:18: error: use of undeclared identifier 'bwd_frontier'; did you mean 'fwd_frontier'?
+  846 |             free(bwd_frontier);
+      |                  ^~~~~~~~~~~~
+      |                  fwd_frontier
+pgr3a/mutants/p32964/m0746_synth.c:764:18: note: 'fwd_frontier' declared here
+  764 |             int *fwd_frontier = malloc((size_t)frontier_cap * sizeof *fwd_frontier);
+      |                  ^
+6 errors generated.
+pgr3a/mutants/p32964/m0748_synth.c:765:70: error: expected expression
+  765 |             int *bwd_frontier = malloc((size_t)frontier_cap * sizeof /bwd_frontier);
+      |                                                                      ^
+1 error generated.
+pgr3a/mutants/p32964/m0749_synth.c:766:17: error: expected identifier or '('
+  766 |             int /fwd_next = malloc((size_t)frontier_cap * sizeof *fwd_next);
+      |                 ^
+pgr3a/mutants/p32964/m0749_synth.c:768:66: error: use of undeclared identifier 'fwd_next'; did you mean 'bwd_next'?
+  768 |             ok = fwd_frontier != NULL && bwd_frontier != NULL && fwd_next != NULL &&
+      |                                                                  ^~~~~~~~
+      |                                                                  bwd_next
+pgr3a/mutants/p32964/m0749_synth.c:767:18: note: 'bwd_next' declared here
+  767 |             int *bwd_next = malloc((size_t)frontier_cap * sizeof *bwd_next);
+      |                  ^
+pgr3a/mutants/p32964/m0749_synth.c:782:46: error: use of undeclared identifier 'fwd_next'; did you mean 'bwd_next'?
+  782 |                     int *next = expand_fwd ? fwd_next : bwd_next;
+      |                                              ^~~~~~~~
+      |                                              bwd_next
+pgr3a/mutants/p32964/m0749_synth.c:767:18: note: 'bwd_next' declared here
+  767 |             int *bwd_next = malloc((size_t)frontier_cap * sizeof *bwd_next);
+      |                  ^
+pgr3a/mutants/p32964/m0749_synth.c:835:40: error: use of undeclared identifier 'fwd_next'; did you mean 'bwd_next'?
+  835 |                         fwd_frontier = fwd_next;
+      |                                        ^~~~~~~~
+      |                                        bwd_next
+pgr3a/mutants/p32964/m0749_synth.c:767:18: note: 'bwd_next' declared here
+  767 |             int *bwd_next = malloc((size_t)frontier_cap * sizeof *bwd_next);
+      |                  ^
+pgr3a/mutants/p32964/m0749_synth.c:836:25: error: use of undeclared identifier 'fwd_next'; did you mean 'bwd_next'?
+  836 |                         fwd_next = frontier;
+      |                         ^~~~~~~~
+      |                         bwd_next
+pgr3a/mutants/p32964/m0749_synth.c:767:18: note: 'bwd_next' declared here
+  767 |             int *bwd_next = malloc((size_t)frontier_cap * sizeof *bwd_next);
+      |                  ^
+pgr3a/mutants/p32964/m0749_synth.c:847:18: error: use of undeclared identifier 'fwd_next'; did you mean 'bwd_next'?
+  847 |             free(fwd_next);
+      |                  ^~~~~~~~
+      |                  bwd_next
+pgr3a/mutants/p32964/m0749_synth.c:767:18: note: 'bwd_next' declared here
+  767 |             int *bwd_next = malloc((size_t)frontier_cap * sizeof *bwd_next);
+      |                  ^
+6 errors generated.
+pgr3a/mutants/p32964/m0751_synth.c:766:66: error: expected expression
+  766 |             int *fwd_next = malloc((size_t)frontier_cap * sizeof /fwd_next);
+      |                                                                  ^
+1 error generated.
+pgr3a/mutants/p32964/m0752_synth.c:767:17: error: expected identifier or '('
+  767 |             int /bwd_next = malloc((size_t)frontier_cap * sizeof *bwd_next);
+      |                 ^
+pgr3a/mutants/p32964/m0752_synth.c:769:18: error: use of undeclared identifier 'bwd_next'; did you mean 'fwd_next'?
+  769 |                  bwd_next != NULL;
+      |                  ^~~~~~~~
+      |                  fwd_next
+pgr3a/mutants/p32964/m0752_synth.c:766:18: note: 'fwd_next' declared here
+  766 |             int *fwd_next = malloc((size_t)frontier_cap * sizeof *fwd_next);
+      |                  ^
+pgr3a/mutants/p32964/m0752_synth.c:782:57: error: use of undeclared identifier 'bwd_next'; did you mean 'fwd_next'?
+  782 |                     int *next = expand_fwd ? fwd_next : bwd_next;
+      |                                                         ^~~~~~~~
+      |                                                         fwd_next
+pgr3a/mutants/p32964/m0752_synth.c:766:18: note: 'fwd_next' declared here
+  766 |             int *fwd_next = malloc((size_t)frontier_cap * sizeof *fwd_next);
+      |                  ^
+pgr3a/mutants/p32964/m0752_synth.c:839:40: error: use of undeclared identifier 'bwd_next'; did you mean 'fwd_next'?
+  839 |                         bwd_frontier = bwd_next;
+      |                                        ^~~~~~~~
+      |                                        fwd_next
+pgr3a/mutants/p32964/m0752_synth.c:766:18: note: 'fwd_next' declared here
+  766 |             int *fwd_next = malloc((size_t)frontier_cap * sizeof *fwd_next);
+      |                  ^
+pgr3a/mutants/p32964/m0752_synth.c:840:25: error: use of undeclared identifier 'bwd_next'; did you mean 'fwd_next'?
+  840 |                         bwd_next = frontier;
+      |                         ^~~~~~~~
+      |                         fwd_next
+pgr3a/mutants/p32964/m0752_synth.c:766:18: note: 'fwd_next' declared here
+  766 |             int *fwd_next = malloc((size_t)frontier_cap * sizeof *fwd_next);
+      |                  ^
+pgr3a/mutants/p32964/m0752_synth.c:848:18: error: use of undeclared identifier 'bwd_next'; did you mean 'fwd_next'?
+  848 |             free(bwd_next);
+      |                  ^~~~~~~~
+      |                  fwd_next
+pgr3a/mutants/p32964/m0752_synth.c:766:18: note: 'fwd_next' declared here
+  766 |             int *fwd_next = malloc((size_t)frontier_cap * sizeof *fwd_next);
+      |                  ^
+6 errors generated.
+pgr3a/mutants/p32964/m0754_synth.c:767:66: error: expected expression
+  767 |             int *bwd_next = malloc((size_t)frontier_cap * sizeof /bwd_next);
+      |                                                                  ^
+1 error generated.
+pgr3a/mutants/p32964/m0756_synth.c:768:83: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  768 |             ok = fwd_frontier != NULL || bwd_frontier != NULL && fwd_next != NULL &&
+      |                                       ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  769 |                  bwd_next != NULL;
+      |                  ~~~~~~~~~~~~~~~~
+pgr3a/mutants/p32964/m0756_synth.c:768:83: note: place parentheses around the '&&' expression to silence this warning
+  768 |             ok = fwd_frontier != NULL || bwd_frontier != NULL && fwd_next != NULL &&
+      |                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  769 |                  bwd_next != NULL;
+      |                  ~~~~~~~~~~~~~~~~
+1 error generated.
+pgr3a/mutants/p32964/m0758_synth.c:768:39: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  768 |             ok = fwd_frontier != NULL && bwd_frontier != NULL || fwd_next != NULL &&
+      |                  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~ ~~
+pgr3a/mutants/p32964/m0758_synth.c:768:39: note: place parentheses around the '&&' expression to silence this warning
+  768 |             ok = fwd_frontier != NULL && bwd_frontier != NULL || fwd_next != NULL &&
+      |                  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+pgr3a/mutants/p32964/m0758_synth.c:768:83: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  768 |             ok = fwd_frontier != NULL && bwd_frontier != NULL || fwd_next != NULL &&
+      |                                                               ~~ ~~~~~~~~~~~~~~~~~^~
+  769 |                  bwd_next != NULL;
+      |                  ~~~~~~~~~~~~~~~~
+pgr3a/mutants/p32964/m0758_synth.c:768:83: note: place parentheses around the '&&' expression to silence this warning
+  768 |             ok = fwd_frontier != NULL && bwd_frontier != NULL || fwd_next != NULL &&
+      |                                                                  ~~~~~~~~~~~~~~~~~^~
+  769 |                  bwd_next != NULL;
+      |                  ~~~~~~~~~~~~~~~~
+2 errors generated.
+pgr3a/mutants/p32964/m0760_synth.c:768:63: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  768 |             ok = fwd_frontier != NULL && bwd_frontier != NULL && fwd_next != NULL ||
+      |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~ ~~
+pgr3a/mutants/p32964/m0760_synth.c:768:63: note: place parentheses around the '&&' expression to silence this warning
+  768 |             ok = fwd_frontier != NULL && bwd_frontier != NULL && fwd_next != NULL ||
+      |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741819
+mutate: suite unit_synth_config exited -1073740940
+mutate: suite unit_synth_config exited -1073741795
+pgr3a/mutants/p32964/m0779_synth.c:779:35: error: expected identifier or '('
+  779 |                     ct_synth_side /side = expand_fwd ? &fwd : &bwd;
+      |                                   ^
+pgr3a/mutants/p32964/m0779_synth.c:788:33: error: use of undeclared identifier 'side'
+  788 |                             if (side->nodes[node_idx].parent >= 0 &&
+      |                                 ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:789:33: error: use of undeclared identifier 'side'
+  789 |                                 side->nodes[node_idx].move.face == moves[mi].face) {
+      |                                 ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:794:44: error: use of undeclared identifier 'side'
+  794 |                                 child[q] = side->nodes[node_idx].state[perm_inv[mi][q]];
+      |                                            ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:796:60: error: use of undeclared identifier 'side'
+  796 |                             int own_slot = synth_side_slot(side, child);
+      |                                                            ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:797:33: error: use of undeclared identifier 'side'
+  797 |                             if (side->hash[own_slot] != 0) {
+      |                                 ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:800:33: error: use of undeclared identifier 'side'
+  800 |                             if (side->count >= CT_SYNTH_FALLBACK_NODES) {
+      |                                 ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:803:36: error: use of undeclared identifier 'side'
+  803 |                             memcpy(side->nodes[side->count].state, child, (size_t)CT_SYNTH_CELLS);
+      |                                    ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:803:48: error: use of undeclared identifier 'side'
+  803 |                             memcpy(side->nodes[side->count].state, child, (size_t)CT_SYNTH_CELLS);
+      |                                                ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:804:29: error: use of undeclared identifier 'side'
+  804 |                             side->nodes[side->count].parent = node_idx;
+      |                             ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:804:41: error: use of undeclared identifier 'side'
+  804 |                             side->nodes[side->count].parent = node_idx;
+      |                                         ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:805:29: error: use of undeclared identifier 'side'
+  805 |                             side->nodes[side->count].move = moves[mi];
+      |                             ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:805:41: error: use of undeclared identifier 'side'
+  805 |                             side->nodes[side->count].move = moves[mi];
+      |                                         ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:806:29: error: use of undeclared identifier 'side'
+  806 |                             side->hash[own_slot] = side->count + 1;
+      |                             ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:806:52: error: use of undeclared identifier 'side'
+  806 |                             side->hash[own_slot] = side->count + 1;
+      |                                                    ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:810:50: error: use of undeclared identifier 'side'
+  810 |                                     expand_fwd ? side->count : other->hash[other_slot] - 1;
+      |                                                  ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:812:80: error: use of undeclared identifier 'side'
+  812 |                                     expand_fwd ? other->hash[other_slot] - 1 : side->count;
+      |                                                                                ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:829:48: error: use of undeclared identifier 'side'
+  829 |                                 next[nlen++] = side->count;
+      |                                                ^~~~
+pgr3a/mutants/p32964/m0779_synth.c:831:29: error: use of undeclared identifier 'side'
+  831 |                             side->count++;
+      |                             ^~~~
+19 errors generated.
+pgr3a/mutants/p32964/m0780_synth.c:780:35: error: expected identifier or '('
+  780 |                     ct_synth_side /other = expand_fwd ? &bwd : &fwd;
+      |                                   ^
+pgr3a/mutants/p32964/m0780_synth.c:807:62: error: use of undeclared identifier 'other'
+  807 |                             int other_slot = synth_side_slot(other, child);
+      |                                                              ^~~~~
+pgr3a/mutants/p32964/m0780_synth.c:808:33: error: use of undeclared identifier 'other'
+  808 |                             if (other->hash[other_slot] != 0) {
+      |                                 ^~~~~
+pgr3a/mutants/p32964/m0780_synth.c:810:64: error: use of undeclared identifier 'other'
+  810 |                                     expand_fwd ? side->count : other->hash[other_slot] - 1;
+      |                                                                ^~~~~
+pgr3a/mutants/p32964/m0780_synth.c:812:50: error: use of undeclared identifier 'other'
+  812 |                                     expand_fwd ? other->hash[other_slot] - 1 : side->count;
+      |                                                  ^~~~~
+5 errors generated.
+pgr3a/mutants/p32964/m0781_synth.c:781:25: error: expected identifier or '('
+  781 |                     int /frontier = expand_fwd ? fwd_frontier : bwd_frontier;
+      |                         ^
+pgr3a/mutants/p32964/m0781_synth.c:786:40: error: use of undeclared identifier 'frontier'
+  786 |                         int node_idx = frontier[fi];
+      |                                        ^~~~~~~~
+pgr3a/mutants/p32964/m0781_synth.c:836:36: error: use of undeclared identifier 'frontier'
+  836 |                         fwd_next = frontier;
+      |                                    ^~~~~~~~
+pgr3a/mutants/p32964/m0781_synth.c:840:36: error: use of undeclared identifier 'frontier'
+  840 |                         bwd_next = frontier;
+      |                                    ^~~~~~~~
+4 errors generated.
+pgr3a/mutants/p32964/m0782_synth.c:782:25: error: expected identifier or '('
+  782 |                     int /next = expand_fwd ? fwd_next : bwd_next;
+      |                         ^
+pgr3a/mutants/p32964/m0782_synth.c:829:33: error: use of undeclared identifier 'next'
+  829 |                                 next[nlen++] = side->count;
+      |                                 ^~~~
+2 errors generated.
+mutate: suite unit_synth_config exited -1073740940
+mutate: suite unit_synth_config exited -1073741819
+mutate: suite unit_synth_config exited -1073741819
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741819
+mutate: suite unit_synth_config exited -1073741819
+mutate: suite unit_synth_config exited -1073741819

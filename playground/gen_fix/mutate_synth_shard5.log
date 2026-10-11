@@ -1,0 +1,440 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+pgbuild/bin/mutate.exe src/gen/synth.c pgbuild unit_synth_table unit_synth_coverage unit_synth_config unit_synth_bh unit_synth_scoring
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+pgbuild/mutants/p520/m0586_synth.c:652:19: error: expected identifier or '('
+  652 |         const int /sticker_of =
+      |                   ^
+pgbuild/mutants/p520/m0586_synth.c:654:23: error: use of undeclared identifier 'sticker_of'; did you mean 'stickers'?
+  654 |         stickers[i] = sticker_of[key_cells[i]];
+      |                       ^~~~~~~~~~
+      |                       stickers
+pgbuild/mutants/p520/m0586_synth.c:648:9: note: 'stickers' declared here
+  648 |     int stickers[CT_SYNTH_CYCLE_LEN];
+      |         ^
+2 errors generated.
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+pgbuild/mutants/p520/m0614_synth.c:676:17: error: expected identifier or '('
+  676 |         uint8_t /state = states[v];
+      |                 ^
+pgbuild/mutants/p520/m0614_synth.c:678:13: error: use of undeclared identifier 'state'; did you mean 'states'?
+  678 |             state[q] = (uint8_t)q;
+      |             ^~~~~
+      |             states
+pgbuild/mutants/p520/m0614_synth.c:646:41: note: 'states' declared here
+  646 |                                 uint8_t states[][CT_SYNTH_CELLS]) {
+      |                                         ^
+pgbuild/mutants/p520/m0614_synth.c:678:22: error: array type 'uint8_t[54]' (aka 'unsigned char[54]') is not assignable
+  678 |             state[q] = (uint8_t)q;
+      |             ~~~~~~~~ ^
+pgbuild/mutants/p520/m0614_synth.c:680:9: error: use of undeclared identifier 'state'; did you mean 'states'?
+  680 |         state[c1] = (uint8_t)cb;
+      |         ^~~~~
+      |         states
+pgbuild/mutants/p520/m0614_synth.c:646:41: note: 'states' declared here
+  646 |                                 uint8_t states[][CT_SYNTH_CELLS]) {
+      |                                         ^
+pgbuild/mutants/p520/m0614_synth.c:680:19: error: array type 'uint8_t[54]' (aka 'unsigned char[54]') is not assignable
+  680 |         state[c1] = (uint8_t)cb;
+      |         ~~~~~~~~~ ^
+pgbuild/mutants/p520/m0614_synth.c:681:9: error: use of undeclared identifier 'state'; did you mean 'states'?
+  681 |         state[c2] = (uint8_t)c1;
+      |         ^~~~~
+      |         states
+pgbuild/mutants/p520/m0614_synth.c:646:41: note: 'states' declared here
+  646 |                                 uint8_t states[][CT_SYNTH_CELLS]) {
+      |                                         ^
+pgbuild/mutants/p520/m0614_synth.c:681:19: error: array type 'uint8_t[54]' (aka 'unsigned char[54]') is not assignable
+  681 |         state[c2] = (uint8_t)c1;
+      |         ~~~~~~~~~ ^
+pgbuild/mutants/p520/m0614_synth.c:682:9: error: use of undeclared identifier 'state'; did you mean 'states'?
+  682 |         state[cb] = (uint8_t)c2;
+      |         ^~~~~
+      |         states
+pgbuild/mutants/p520/m0614_synth.c:646:41: note: 'states' declared here
+  646 |                                 uint8_t states[][CT_SYNTH_CELLS]) {
+      |                                         ^
+pgbuild/mutants/p520/m0614_synth.c:682:19: error: array type 'uint8_t[54]' (aka 'unsigned char[54]') is not assignable
+  682 |         state[cb] = (uint8_t)c2;
+      |         ~~~~~~~~~ ^
+pgbuild/mutants/p520/m0614_synth.c:693:17: error: use of undeclared identifier 'state'; did you mean 'states'?
+  693 |                 state[synth_sticker_cell_of(orbit, mates[next][dst_j])] =
+      |                 ^~~~~
+      |                 states
+pgbuild/mutants/p520/m0614_synth.c:646:41: note: 'states' declared here
+  646 |                                 uint8_t states[][CT_SYNTH_CELLS]) {
+      |                                         ^
+pgbuild/mutants/p520/m0614_synth.c:693:73: error: array type 'uint8_t[54]' (aka 'unsigned char[54]') is not assignable
+  693 |                 state[synth_sticker_cell_of(orbit, mates[next][dst_j])] =
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^
+11 errors generated.
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+pgbuild/mutants/p520/m0639_synth.c:701:52: error: expected ')'
+  701 | static void synth_path_to_root(const ct_synth_side /side, int node, ct_move *out, int *out_len) {
+      |                                                    ^
+pgbuild/mutants/p520/m0639_synth.c:701:31: note: to match this '('
+  701 | static void synth_path_to_root(const ct_synth_side /side, int node, ct_move *out, int *out_len) {
+      |                               ^
+pgbuild/mutants/p520/m0639_synth.c:704:15: error: use of undeclared identifier 'node'
+  704 |     int cur = node;
+      |               ^~~~
+pgbuild/mutants/p520/m0639_synth.c:705:12: error: use of undeclared identifier 'side'
+  705 |     while (side->nodes[cur].parent >= 0) {
+      |            ^~~~
+pgbuild/mutants/p520/m0639_synth.c:706:22: error: use of undeclared identifier 'side'
+  706 |         rev[len++] = side->nodes[cur].move;
+      |                      ^~~~
+pgbuild/mutants/p520/m0639_synth.c:707:15: error: use of undeclared identifier 'side'
+  707 |         cur = side->nodes[cur].parent;
+      |               ^~~~
+pgbuild/mutants/p520/m0639_synth.c:710:9: error: use of undeclared identifier 'out'
+  710 |         out[i] = rev[len - 1 - i];
+      |         ^~~
+pgbuild/mutants/p520/m0639_synth.c:712:6: error: use of undeclared identifier 'out_len'
+  712 |     *out_len = len;
+      |      ^~~~~~~
+pgbuild/mutants/p520/m0639_synth.c:818:58: error: too many arguments to function call, expected 1, have 4
+  818 |                                 synth_path_to_root(&fwd, fwd_node, fseq, &fseq_len);
+      |                                 ~~~~~~~~~~~~~~~~~~       ^~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p520/m0639_synth.c:701:13: note: 'synth_path_to_root' declared here
+  701 | static void synth_path_to_root(const ct_synth_side /side, int node, ct_move *out, int *out_len) {
+      |             ^                  ~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p520/m0639_synth.c:819:58: error: too many arguments to function call, expected 1, have 4
+  819 |                                 synth_path_to_root(&bwd, bwd_node, bseq, &bseq_len);
+      |                                 ~~~~~~~~~~~~~~~~~~       ^~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p520/m0639_synth.c:701:13: note: 'synth_path_to_root' declared here
+  701 | static void synth_path_to_root(const ct_synth_side /side, int node, ct_move *out, int *out_len) {
+      |             ^                  ~~~~~~~~~~~~~~~~~~~
+9 errors generated.
+pgbuild/mutants/p520/m0640_synth.c:701:77: error: expected ')'
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move /out, int *out_len) {
+      |                                                                             ^
+pgbuild/mutants/p520/m0640_synth.c:701:31: note: to match this '('
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move /out, int *out_len) {
+      |                               ^
+pgbuild/mutants/p520/m0640_synth.c:710:9: error: use of undeclared identifier 'out'
+  710 |         out[i] = rev[len - 1 - i];
+      |         ^~~
+pgbuild/mutants/p520/m0640_synth.c:712:6: error: use of undeclared identifier 'out_len'
+  712 |     *out_len = len;
+      |      ^~~~~~~
+pgbuild/mutants/p520/m0640_synth.c:818:74: error: too many arguments to function call, expected 3, have 4
+  818 |                                 synth_path_to_root(&fwd, fwd_node, fseq, &fseq_len);
+      |                                 ~~~~~~~~~~~~~~~~~~                       ^~~~~~~~~
+pgbuild/mutants/p520/m0640_synth.c:701:13: note: 'synth_path_to_root' declared here
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move /out, int *out_len) {
+      |             ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p520/m0640_synth.c:819:74: error: too many arguments to function call, expected 3, have 4
+  819 |                                 synth_path_to_root(&bwd, bwd_node, bseq, &bseq_len);
+      |                                 ~~~~~~~~~~~~~~~~~~                       ^~~~~~~~~
+pgbuild/mutants/p520/m0640_synth.c:701:13: note: 'synth_path_to_root' declared here
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move /out, int *out_len) {
+      |             ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+5 errors generated.
+pgbuild/mutants/p520/m0641_synth.c:701:87: error: expected ')'
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move *out, int /out_len) {
+      |                                                                                       ^
+pgbuild/mutants/p520/m0641_synth.c:701:31: note: to match this '('
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move *out, int /out_len) {
+      |                               ^
+pgbuild/mutants/p520/m0641_synth.c:712:6: error: use of undeclared identifier 'out_len'
+  712 |     *out_len = len;
+      |      ^~~~~~~
+pgbuild/mutants/p520/m0641_synth.c:818:74: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  818 |                                 synth_path_to_root(&fwd, fwd_node, fseq, &fseq_len);
+      |                                                                          ^~~~~~~~~
+pgbuild/mutants/p520/m0641_synth.c:701:87: note: passing argument to parameter here
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move *out, int /out_len) {
+      |                                                                                       ^
+pgbuild/mutants/p520/m0641_synth.c:819:74: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  819 |                                 synth_path_to_root(&bwd, bwd_node, bseq, &bseq_len);
+      |                                                                          ^~~~~~~~~
+pgbuild/mutants/p520/m0641_synth.c:701:87: note: passing argument to parameter here
+  701 | static void synth_path_to_root(const ct_synth_side *side, int node, ct_move *out, int /out_len) {
+      |                                                                                       ^
+4 errors generated.
+pgbuild/mutants/p520/m0654_synth.c:712:5: error: expected expression
+  712 |     /out_len = len;
+      |     ^
+1 error generated.
+pgbuild/mutants/p520/m0655_synth.c:715:77: error: expected ')'
+  715 | static bool synth_fallback(int orbit, int cb, int c1, int c2, const ct_move /moves, int move_n,
+      |                                                                             ^
+pgbuild/mutants/p520/m0655_synth.c:715:27: note: to match this '('
+  715 | static bool synth_fallback(int orbit, int cb, int c1, int c2, const ct_move /moves, int move_n,
+      |                           ^
+pgbuild/mutants/p520/m0655_synth.c:719:25: error: use of undeclared identifier 'move_n'
+  719 |     for (int i = 0; i < move_n; i++) {
+      |                         ^~~~~~
+pgbuild/mutants/p520/m0655_synth.c:722:25: error: use of undeclared identifier 'moves'
+  722 |         ct_apply(&cube, moves[i]);
+      |                         ^~~~~
+pgbuild/mutants/p520/m0655_synth.c:777:45: error: use of undeclared identifier 'max_depth'
+  777 |                 for (int level = 0; level < max_depth && !found; level++) {
+      |                                             ^~~~~~~~~
+pgbuild/mutants/p520/m0655_synth.c:787:47: error: use of undeclared identifier 'move_n'
+  787 |                         for (int mi = 0; mi < move_n; mi++) {
+      |                                               ^~~~~~
+pgbuild/mutants/p520/m0655_synth.c:789:68: error: use of undeclared identifier 'moves'
+  789 |                                 side->nodes[node_idx].move.face == moves[mi].face) {
+      |                                                                    ^~~~~
+pgbuild/mutants/p520/m0655_synth.c:805:61: error: use of undeclared identifier 'moves'
+  805 |                             side->nodes[side->count].move = moves[mi];
+      |                                                             ^~~~~
+pgbuild/mutants/p520/m0655_synth.c:822:44: error: use of undeclared identifier 'out'
+  822 |                                     memcpy(out, fseq, (size_t)fseq_len * sizeof *fseq);
+      |                                            ^~~
+pgbuild/mutants/p520/m0655_synth.c:823:44: error: use of undeclared identifier 'out'
+  823 |                                     memcpy(out + fseq_len, binv, (size_t)binv_len * sizeof *binv);
+      |                                            ^~~
+pgbuild/mutants/p520/m0655_synth.c:824:38: error: use of undeclared identifier 'out_len'
+  824 |                                     *out_len = fseq_len + binv_len;
+      |                                      ^~~~~~~
+pgbuild/mutants/p520/m0655_synth.c:926:55: error: too many arguments to function call, expected 5, have 9
+  926 |         if (synth_fallback(orbit, cb, c1, c2, subset, move_n, depth, seq, &seq_len)) {
+      |             ~~~~~~~~~~~~~~                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p520/m0655_synth.c:715:13: note: 'synth_fallback' declared here
+  715 | static bool synth_fallback(int orbit, int cb, int c1, int c2, const ct_move /moves, int move_n,
+      |             ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+11 errors generated.
+pgbuild/mutants/p520/m0656_synth.c:716:51: error: expected ')'
+  716 |                            int max_depth, ct_move /out, int *out_len) {
+      |                                                   ^
+pgbuild/mutants/p520/m0656_synth.c:715:27: note: to match this '('
+  715 | static bool synth_fallback(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
+      |                           ^
+pgbuild/mutants/p520/m0656_synth.c:822:44: error: use of undeclared identifier 'out'
+  822 |                                     memcpy(out, fseq, (size_t)fseq_len * sizeof *fseq);
+      |                                            ^~~
+pgbuild/mutants/p520/m0656_synth.c:823:44: error: use of undeclared identifier 'out'
+  823 |                                     memcpy(out + fseq_len, binv, (size_t)binv_len * sizeof *binv);
+      |                                            ^~~
+pgbuild/mutants/p520/m0656_synth.c:824:38: error: use of undeclared identifier 'out_len'
+  824 |                                     *out_len = fseq_len + binv_len;
+      |                                      ^~~~~~~
+pgbuild/mutants/p520/m0656_synth.c:926:75: error: too many arguments to function call, expected 8, have 9
+  926 |         if (synth_fallback(orbit, cb, c1, c2, subset, move_n, depth, seq, &seq_len)) {
+      |             ~~~~~~~~~~~~~~                                                ^~~~~~~~
+pgbuild/mutants/p520/m0656_synth.c:715:13: note: 'synth_fallback' declared here
+  715 | static bool synth_fallback(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
+      |             ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  716 |                            int max_depth, ct_move /out, int *out_len) {
+      |                            ~~~~~~~~~~~~~~~~~~~~~~
+5 errors generated.
+mutate: scope=src/gen/synth.c files=1 sites=928 suites=5
+SURVIVED  m0581 src/gen/synth.c:640 [int+1 1 -> 2]
+SURVIVED  m0582 src/gen/synth.c:640 [int-1 1 -> 0]
+SURVIVED  m0583 src/gen/synth.c:651 [int+1 0 -> 1]
+KILLED    m0584 src/gen/synth.c:651 [int-1 0 -> -1]
+KILLED    m0585 src/gen/synth.c:651 [cmp < -> <=]
+KILLED    m0586 src/gen/synth.c:652 [arith * -> /]
+          build break
+SURVIVED  m0587 src/gen/synth.c:653 [cmp == -> !=]
+SURVIVED  m0588 src/gen/synth.c:655 [cmp == -> !=]
+SURVIVED  m0589 src/gen/synth.c:656 [ret-lit 0 -> 1]
+SURVIVED  m0590 src/gen/synth.c:656 [int+1 0 -> 1]
+SURVIVED  m0591 src/gen/synth.c:656 [int-1 0 -> -1]
+SURVIVED  m0592 src/gen/synth.c:659 [int+1 0 -> 1]
+KILLED    m0593 src/gen/synth.c:659 [int-1 0 -> -1]
+KILLED    m0594 src/gen/synth.c:659 [cmp < -> <=]
+SURVIVED  m0595 src/gen/synth.c:661 [int+1 0 -> 1]
+KILLED    m0596 src/gen/synth.c:661 [int-1 0 -> -1]
+SURVIVED  m0597 src/gen/synth.c:662 [int+1 0 -> 1]
+SURVIVED  m0598 src/gen/synth.c:662 [int-1 0 -> -1]
+SURVIVED  m0599 src/gen/synth.c:662 [cmp < -> <=]
+KILLED    m0600 src/gen/synth.c:663 [cmp != -> ==]
+KILLED    m0601 src/gen/synth.c:663 [logic || -> &&]
+SURVIVED  m0602 src/gen/synth.c:663 [cmp == -> !=]
+KILLED    m0603 src/gen/synth.c:669 [int+1 1 -> 2]
+SURVIVED  m0604 src/gen/synth.c:669 [int-1 1 -> 0]
+SURVIVED  m0605 src/gen/synth.c:670 [int+1 0 -> 1]
+KILLED    m0606 src/gen/synth.c:670 [int-1 0 -> -1]
+KILLED    m0607 src/gen/synth.c:670 [cmp < -> <=]
+SURVIVED  m0608 src/gen/synth.c:671 [cmp > -> >=]
+SURVIVED  m0609 src/gen/synth.c:671 [int+1 1 -> 2]
+SURVIVED  m0610 src/gen/synth.c:671 [int-1 1 -> 0]
+SURVIVED  m0611 src/gen/synth.c:675 [int+1 0 -> 1]
+SURVIVED  m0612 src/gen/synth.c:675 [int-1 0 -> -1]
+SURVIVED  m0613 src/gen/synth.c:675 [cmp < -> <=]
+KILLED    m0614 src/gen/synth.c:676 [arith * -> /]
+          build break
+SURVIVED  m0615 src/gen/synth.c:677 [int+1 0 -> 1]
+SURVIVED  m0616 src/gen/synth.c:677 [int-1 0 -> -1]
+SURVIVED  m0617 src/gen/synth.c:677 [cmp < -> <=]
+SURVIVED  m0618 src/gen/synth.c:684 [int+1 0 -> 1]
+KILLED    m0619 src/gen/synth.c:684 [int-1 0 -> -1]
+KILLED    m0620 src/gen/synth.c:684 [cmp < -> <=]
+KILLED    m0621 src/gen/synth.c:685 [arith + -> -]
+SURVIVED  m0622 src/gen/synth.c:685 [int+1 1 -> 2]
+SURVIVED  m0623 src/gen/synth.c:685 [int-1 1 -> 0]
+SURVIVED  m0624 src/gen/synth.c:686 [int+1 0 -> 1]
+SURVIVED  m0625 src/gen/synth.c:686 [int-1 0 -> -1]
+SURVIVED  m0626 src/gen/synth.c:687 [cmp > -> >=]
+SURVIVED  m0627 src/gen/synth.c:687 [int+1 1 -> 2]
+SURVIVED  m0628 src/gen/synth.c:687 [int-1 1 -> 0]
+SURVIVED  m0629 src/gen/synth.c:691 [int+1 0 -> 1]
+KILLED    m0630 src/gen/synth.c:691 [int-1 0 -> -1]
+KILLED    m0631 src/gen/synth.c:691 [cmp < -> <=]
+SURVIVED  m0632 src/gen/synth.c:692 [cmp == -> !=]
+SURVIVED  m0633 src/gen/synth.c:692 [int+1 1 -> 2]
+SURVIVED  m0634 src/gen/synth.c:692 [int-1 1 -> 0]
+KILLED    m0635 src/gen/synth.c:692 [arith - -> +]
+KILLED    m0636 src/gen/synth.c:692 [int+1 1 -> 2]
+SURVIVED  m0637 src/gen/synth.c:692 [int-1 1 -> 0]
+SURVIVED  m0638 src/gen/synth.c:692 [arith - -> +]
+KILLED    m0639 src/gen/synth.c:701 [arith * -> /]
+          build break
+KILLED    m0640 src/gen/synth.c:701 [arith * -> /]
+          build break
+KILLED    m0641 src/gen/synth.c:701 [arith * -> /]
+          build break
+SURVIVED  m0642 src/gen/synth.c:703 [int+1 0 -> 1]
+SURVIVED  m0643 src/gen/synth.c:703 [int-1 0 -> -1]
+SURVIVED  m0644 src/gen/synth.c:705 [cmp >= -> >]
+SURVIVED  m0645 src/gen/synth.c:705 [int+1 0 -> 1]
+SURVIVED  m0646 src/gen/synth.c:705 [int-1 0 -> -1]
+SURVIVED  m0647 src/gen/synth.c:709 [int+1 0 -> 1]
+SURVIVED  m0648 src/gen/synth.c:709 [int-1 0 -> -1]
+SURVIVED  m0649 src/gen/synth.c:709 [cmp < -> <=]
+SURVIVED  m0650 src/gen/synth.c:710 [arith - -> +]
+SURVIVED  m0651 src/gen/synth.c:710 [int+1 1 -> 2]
+SURVIVED  m0652 src/gen/synth.c:710 [int-1 1 -> 0]
+SURVIVED  m0653 src/gen/synth.c:710 [arith - -> +]
+KILLED    m0654 src/gen/synth.c:712 [arith * -> /]
+          build break
+KILLED    m0655 src/gen/synth.c:715 [arith * -> /]
+          build break
+KILLED    m0656 src/gen/synth.c:716 [arith * -> /]
+   pgbuild/mutants/p520/m0657_synth.c:716:61: error: expected ')'
+  716 |                            int max_depth, ct_move *out, int /out_len) {
+      |                                                             ^
+pgbuild/mutants/p520/m0657_synth.c:715:27: note: to match this '('
+  715 | static bool synth_fallback(int orbit, int cb, int c1, int c2, const ct_move *moves, int move_n,
+      |                           ^
+pgbuild/mutants/p520/m0657_synth.c:824:38: error: use of undeclared identifier 'out_len'
+  824 |                                     *out_len = fseq_len + binv_len;
+      |                                      ^~~~~~~
+pgbuild/mutants/p520/m0657_synth.c:926:75: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  926 |         if (synth_fallback(orbit, cb, c1, c2, subset, move_n, depth, seq, &seq_len)) {
+      |                                                                           ^~~~~~~~
+pgbuild/mutants/p520/m0657_synth.c:716:61: note: passing argument to parameter here
+  716 |                            int max_depth, ct_move *out, int /out_len) {
+      |                                                             ^
+3 errors generated.
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+mutate: suite unit_synth_config exited -1073741795
+pgbuild/mutants/p520/m0677_synth.c:732:65: error: expected expression
+  732 |     fwd.nodes = malloc((size_t)CT_SYNTH_FALLBACK_NODES * sizeof /fwd.nodes);
+      |                                                                 ^
+1 error generated.
+pgbuild/mutants/p520/m0679_synth.c:733:65: error: expected expression
+  733 |     bwd.nodes = malloc((size_t)CT_SYNTH_FALLBACK_NODES * sizeof /bwd.nodes);
+      |                                                                 ^
+1 error generated.
+pgbuild/mutants/p520/m0680_synth.c:734:62: error: expected expression
+  734 |     fwd.hash = calloc((size_t)CT_SYNTH_FALLBACK_HASH, sizeof /fwd.hash);
+      |                                                              ^
+1 error generated.
+pgbuild/mutants/p520/m0681_synth.c:735:62: error: expected expression
+  735 |     bwd.hash = calloc((size_t)CT_SYNTH_FALLBACK_HASH, sizeof /bwd.hash);
+      |                                                              ^
+1 error generated.
+pgbuild/mutants/p520/m0683_synth.c:736:74: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  736 |     bool ok = fwd.nodes != NULL || bwd.nodes != NULL && fwd.hash != NULL && bwd.hash != NULL;
+      |                                 ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p520/m0683_synth.c:736:74: note: place parentheses around the '&&' expression to silence this warning
+  736 |     bool ok = fwd.nodes != NULL || bwd.nodes != NULL && fwd.hash != NULL && bwd.hash != NULL;
+      |                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+1 error generated.
+pgbuild/mutants/p520/m0685_synth.c:736:33: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL || fwd.hash != NULL && bwd.hash != NULL;
+      |               ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p520/m0685_synth.c:736:33: note: place parentheses around the '&&' expression to silence this warning
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL || fwd.hash != NULL && bwd.hash != NULL;
+      |               ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p520/m0685_synth.c:736:74: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL || fwd.hash != NULL && bwd.hash != NULL;
+      |                                                      ~~ ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p520/m0685_synth.c:736:74: note: place parentheses around the '&&' expression to silence this warning
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL || fwd.hash != NULL && bwd.hash != NULL;
+      |                                                         ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+2 errors generated.
+pgbuild/mutants/p520/m0687_synth.c:736:54: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL && fwd.hash != NULL || bwd.hash != NULL;
+      |               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p520/m0687_synth.c:736:54: note: place parentheses around the '&&' expression to silence this warning
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL && fwd.hash != NULL || bwd.hash != NULL;
+      |               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite unit_synth_config exited -1073741819
+mutate: 77 unexplained survivors
+       build break
+KILLED    m0657 src/gen/synth.c:716 [arith * -> /]
+          build break
+KILLED    m0658 src/gen/synth.c:717 [arith * -> /]
+SURVIVED  m0659 src/gen/synth.c:717 [arith - -> +]
+SURVIVED  m0660 src/gen/synth.c:717 [int+1 1 -> 2]
+SURVIVED  m0661 src/gen/synth.c:717 [int-1 1 -> 0]
+KILLED    m0662 src/gen/synth.c:718 [arith * -> /]
+SURVIVED  m0663 src/gen/synth.c:718 [arith - -> +]
+SURVIVED  m0664 src/gen/synth.c:718 [int+1 1 -> 2]
+SURVIVED  m0665 src/gen/synth.c:718 [int-1 1 -> 0]
+SURVIVED  m0666 src/gen/synth.c:719 [int+1 0 -> 1]
+KILLED    m0667 src/gen/synth.c:719 [int-1 0 -> -1]
+SURVIVED  m0668 src/gen/synth.c:719 [cmp < -> <=]
+SURVIVED  m0669 src/gen/synth.c:724 [int+1 0 -> 1]
+KILLED    m0670 src/gen/synth.c:724 [int-1 0 -> -1]
+KILLED    m0671 src/gen/synth.c:724 [cmp < -> <=]
+SURVIVED  m0672 src/gen/synth.c:730 [int+1 0 -> 1]
+SURVIVED  m0673 src/gen/synth.c:730 [int-1 0 -> -1]
+SURVIVED  m0674 src/gen/synth.c:731 [int+1 0 -> 1]
+SURVIVED  m0675 src/gen/synth.c:731 [int-1 0 -> -1]
+SURVIVED  m0676 src/gen/synth.c:732 [arith * -> /]
+KILLED    m0677 src/gen/synth.c:732 [arith * -> /]
+          build break
+SURVIVED  m0678 src/gen/synth.c:733 [arith * -> /]
+KILLED    m0679 src/gen/synth.c:733 [arith * -> /]
+          build break
+KILLED    m0680 src/gen/synth.c:734 [arith * -> /]
+          build break
+KILLED    m0681 src/gen/synth.c:735 [arith * -> /]
+          build break
+SURVIVED  m0682 src/gen/synth.c:736 [cmp != -> ==]
+KILLED    m0683 src/gen/synth.c:736 [logic && -> ||]
+          build break
+SURVIVED  m0684 src/gen/synth.c:736 [cmp != -> ==]
+KILLED    m0685 src/gen/synth.c:736 [logic && -> ||]
+          build break
+SURVIVED  m0686 src/gen/synth.c:736 [cmp != -> ==]
+KILLED    m0687 src/gen/synth.c:736 [logic && -> ||]
+          build break
+SURVIVED  m0688 src/gen/synth.c:736 [cmp != -> ==]
+SURVIVED  m0689 src/gen/synth.c:737 [bool false -> true]
+SURVIVED  m0690 src/gen/synth.c:741 [cmp > -> >=]
+SURVIVED  m0691 src/gen/synth.c:741 [int+1 0 -> 1]
+SURVIVED  m0692 src/gen/synth.c:741 [int-1 0 -> -1]
+SURVIVED  m0693 src/gen/synth.c:743 [int+1 0 -> 1]
+SURVIVED  m0694 src/gen/synth.c:743 [int-1 0 -> -1]
+SURVIVED  m0695 src/gen/synth.c:744 [int+1 0 -> 1]
+KILLED    m0696 src/gen/synth.c:744 [int-1 0 -> -1]
+mutate: generated=116 build_failed=16 killed_by_tests=23 killed=39 survived=77 accepted=0 unexplained=77 skipped=812
+mutate: kill rate 39/116 = 33.6%, with accepted equivalents 39/116 = 33.6%
+mutate: wall 3309.4s
+make: *** [makefile:239: mutate] Error 1

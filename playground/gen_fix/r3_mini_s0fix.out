@@ -1,0 +1,16 @@
+mutate: scope=src/gen/synth.c files=1 sites=928 suites=11
+SURVIVED  m0085 src/gen/synth.c:121 [arith * -> /]
+SURVIVED  m0086 src/gen/synth.c:121 [arith + -> -]
+SURVIVED  m0087 src/gen/synth.c:122 [arith * -> /]
+SURVIVED  m0088 src/gen/synth.c:122 [arith + -> -]
+SURVIVED  m0089 src/gen/synth.c:123 [arith * -> /]
+SURVIVED  m0090 src/gen/synth.c:123 [arith + -> -]
+ACCEPTED  m0085 src/gen/synth.c:121 [arith * -> /] :: key hash first fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+ACCEPTED  m0086 src/gen/synth.c:121 [arith + -> -] :: key hash first fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+ACCEPTED  m0087 src/gen/synth.c:122 [arith * -> /] :: key hash second fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+ACCEPTED  m0088 src/gen/synth.c:122 [arith + -> -] :: key hash second fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+ACCEPTED  m0089 src/gen/synth.c:123 [arith * -> /] :: key hash third fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+ACCEPTED  m0090 src/gen/synth.c:123 [arith + -> -] :: key hash third fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+mutate: generated=6 build_failed=0 killed_by_tests=0 killed=0 survived=6 accepted=6 unexplained=0 skipped=922
+mutate: kill rate 0/6 = 0.0%, with accepted equivalents 6/6 = 100.0%
+mutate: wall 331.2s

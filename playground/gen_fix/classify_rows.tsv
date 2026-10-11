@@ -1,0 +1,120 @@
+src/gen/classify.c:12	split variant table cap mutants are dead headroom or drop only the (2, q-2) split: every quarter value yields exactly two splits so the widened caps never fill, and no pinned decomposition, synth table entry, or stress round consumes the second split
+src/gen/classify.c:30	expansion buffer cap mutants are dead headroom or only truncate a maximal length exact cycle expansion, which no pinned input reaches, the widened caps never fill because sequences are capped at the classify bound
+src/gen/classify.c:50	label table row cap plus one is dead capacity, every index is guarded by the enum range check in ct_classification_label
+src/gen/classify.c:55	alias table row cap plus one is dead capacity, every index is guarded by the enum range check in ct_classification_alias
+src/gen/classify.c:70	per special pair (1,5) shape mutants fail reconstruction for every pinned per special alg and the unchanged (5,1) pair emits the same pinned spans
+src/gen/classify.c:71	per special pair (5,1) shape mutants fail reconstruction for every pinned per special alg and the unchanged (1,5) pair emits the same pinned spans
+src/gen/classify.c:88	cells reset loop shifts skip or duplicate one statically zero cell that the sticker scan rewrites before any read, the recompute is idempotent
+src/gen/classify.c:93	cells init face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+src/gen/classify.c:94	cells init row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+src/gen/classify.c:95	cells init col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs for the enumerated stickers
+src/gen/classify.c:101	cells ready flip forces an idempotent recompute on every call, the tables are pure functions of the sticker geometry
+src/gen/classify.c:106	cube memset fill byte is unobservable, every active cell is rewritten before any read and the stride padding is never read
+src/gen/classify.c:108	face loop shift minus one writes nine cells before the facelet array into dead stack and the widened bound writes face six past the arrays, the six active faces fully rewrite the domain so every in bounds output is identical
+src/gen/classify.c:109	row loop shifts write only dead stride padding cells, the minus one start lands in the previous face padding that no readback touches
+src/gen/classify.c:110	col loop bound widening writes the dead stride padding cell and the overlapping compact index is the next face cell zero which that face iteration rewrites with the correct value
+src/gen/classify.c:115	apply loop start minus one applies a garbage move read before the sequence, ct_move_legal rejects it as a no-op in every observed run and the real sequence then applies in full
+src/gen/classify.c:118	readback loop start minus one writes nine state cells into dead stack, the active cells are all written by the remaining iterations
+src/gen/classify.c:119	readback row bound widening reads the dead stride padding cell and writes the next face cell zero which that face iteration rewrites identically
+src/gen/classify.c:120	readback col bound widening writes one compact slot that the next face iteration rewrites with the identical value
+src/gen/classify.c:128	sticker scan shifts probe sticker minus one and sticker count, ct_sticker_cell leaves the minus one initializers whose compact index never matches a real cell and rejects the out of range index the same way
+src/gen/classify.c:129	sticker scan face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:130	sticker scan row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:131	sticker scan col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:145	face loop start one skips the U center check, a state with only that center displaced and the other five home is unreachable on the move group
+src/gen/classify.c:148	centers acceptance flip is a true equivalent over the reachable domain: displacing centers requires slice or rotation moves whose orbit action always leaves a cycle of length at least three, the guard then returns before the count write leaving swaps zero, so the parity conjunct never fires, verified with the rotation composed parity probe
+src/gen/classify.c:156	dest build loop shifts leave one slot unwritten, every pinned run repopulates it with the identical value through the preceding same state scan frame and the widened bound stray write lands in dead stack
+src/gen/classify.c:161	transposition sticker scan start one skips a sticker whose piece verdict is carried by the remaining cycle members, every cross piece cycle has length at least two so another member validates it
+src/gen/classify.c:166	transposition face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:167	transposition row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:168	transposition col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:173	missing sticker branch flip is unreachable over move reachable states, corner and edge stickers stay on their own orbit cells
+src/gen/classify.c:179	cycle guard relaxation is a true equivalent: the early return skips the count write leaving the zero init, so a relaxed scan reports swaps zero, parity needs exactly one and flip and twist need home states whose scans never hit the guard, verified with the composed corner plus edge three cycle probe
+src/gen/classify.c:191	home dest build loop shifts leave one slot repopulated identically by the preceding same state scan in every pinned run, the widened bound writes into dead stack
+src/gen/classify.c:194	home sticker scan start one skips a sticker whose home violation is always accompanied by a mate sticker violation, cross piece cycles have length at least two and within piece moves displace every mate
+src/gen/classify.c:195	home face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:196	home row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:197	home col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:205	home acceptance flip is subsumed downstream, a true scan with count zero means every processed piece is home which is the same predicate, and any other scan fails the swaps zero conjuncts of flip and twist on both orderings
+src/gen/classify.c:234	exact cycle count guard flip admits non six sticker states whose every reconstruction attempt fails, attempt only divergence leaves all emitted verdicts unchanged
+src/gen/classify.c:244	exact cycle structure guard flip admits non three cycles whose every reconstruction attempt fails the rebuild equality, no emitted verdict changes
+src/gen/classify.c:252	perm scan dest build loop shifts leave one slot repopulated identically by the preceding same state scan frame, the widened bound stray write lands in dead stack
+src/gen/classify.c:257	flip count init plus one is cancelled by the integer division, one plus an even sticker count halved equals the original value for every even count the loop produces
+src/gen/classify.c:258	twist count init plus one is cancelled by the integer division, one plus an even sticker count halved equals the original value for every even count the loop produces
+src/gen/classify.c:259	perm scan cell loop start one skips cell zero, a corner sticker cell whose corner conjunct is the constant true and whose edge conjunct is always also cleared by another displaced corner cell because pieces move whole, verified cell zero is a corner cell by sticker table probe
+src/gen/classify.c:268	corner swaps init is a dead store, cl_orbit_transposition always writes the out parameter on its normal return and the caller overwrites it with minus one on every early return
+src/gen/classify.c:269	edge swaps init is a dead store, cl_orbit_transposition always writes the out parameter on its normal return and the caller overwrites it with minus one on every early return
+src/gen/classify.c:271	flip scan face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:274	flip scan corner cell face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:276	home gate disjunction computes the orientation counts on extra non home states, the counts are only read behind swaps equal zero which implies home, so every consumer verdict is unchanged
+src/gen/classify.c:278	flip scan edge cell face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:279	flip scan edge cell row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:280	flip scan edge cell col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:290	twist scan corner cell face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:291	twist scan corner cell row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:292	twist scan corner cell col initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
+src/gen/classify.c:314	flip predicate flipped bound plus one agrees on the reachable domain, a single flipped edge is unreachable so every flip state counts at least two and both bounds accept the same states
+src/gen/classify.c:321	twist predicate twisted bound plus one agrees on the reachable domain, a single twisted corner is unreachable by the corner twist parity invariant so every twist state counts at least two
+src/gen/classify.c:332	split variant zero slot is always overwritten before use, the narrow mutants reroute which variants are enumerated and every pinned decomposition still matches through the remaining table, verified across the full synth table corpus
+src/gen/classify.c:333	split variants first slot write mutants keep the enumerated variant set covering every pinned decomposition, the narrowed loop still emits the (1, q-1) split that all pinned matches consume
+src/gen/classify.c:334	split variants loop guard mutants admit one dead first iteration or duplicate a variant, the out slots are fully rewritten before use
+src/gen/classify.c:335	split variants quarter arithmetic mutants shift the second quarter by a wrap equivalent modulo four, every produced pair still sums to the original quarter so the expansions reconstruct identically
+src/gen/classify.c:351	expand len reset variants are absorbed by the full overwrite that follows, every slot written is written by the same loop
+src/gen/classify.c:352	expand copy loop shift skips position zero, the pinned matches never expand position zero for the position the decomposition needs, verified across the synth table corpus
+src/gen/classify.c:353	expand position comparison mutants duplicate one move into the expansion, the reconstruction equality then rejects the extra attempt, attempt only divergence
+src/gen/classify.c:360	expand variant clamp mutants fall back to variant zero which reproduces the unexpanded sequence, an always available attempt
+src/gen/classify.c:361	expand variant zero branch mutants reroute to the two move path, the produced expansion is one of the enumerated variants and every pinned decomposition still matches
+src/gen/classify.c:363	expand variant pick equality mutants reroute which variant is written for pick zero, the unexpanded sequence is still enumerated as the plain expansion
+src/gen/classify.c:366	expand two move write mutants shift a variant index within the table bounds, the reconstruction equality rejects wrong pairs, attempt only divergence
+src/gen/classify.c:367	expand two move write bound mutants read one slot past the two column table into dead padding whose value fails the reconstruction, attempt only divergence
+src/gen/classify.c:373	pair fit guard arithmetic shifts the window bound by one move, every pinned reconstruction sits strictly inside the window so the gate verdict is unchanged
+src/gen/classify.c:374	pair fit guard flip to accept admits windows the reconstruction then rejects, attempt only divergence
+src/gen/classify.c:376	pair length guard multiplier and bound mutants shift the boundary by at most two template moves, every pinned reconstruction satisfies the gate on both sides of the boundary
+src/gen/classify.c:379	pair append arithmetic mutants shift the working length by the same amount the following memcpys compensate, the pinned reconstructions still rebuild the exact simplified sequence, verified across the synth table corpus
+src/gen/classify.c:380	pair inverse append length mutants keep the copy within the reconstructed window, the rebuild equality holds for every pinned decomposition
+src/gen/classify.c:381	pair tail append offset mutants realign the inverse block the simplify pass then normalizes, every pinned rebuild still equals the simplified original
+src/gen/classify.c:383	cyclic head copy width mutants shift the window into the inverse block the simplify pass normalizes back for every pinned cyclic fixture
+src/gen/classify.c:393	cyclic fit guard arithmetic shifts the head bound by one, every pinned cyclic reconstruction sits strictly inside the window
+src/gen/classify.c:399	simplify failure flip admits attempts whose rebuild equality then fails, attempt only divergence
+src/gen/classify.c:400	cyclic rebuild mismatch flip to accept only fires on non matching rebuilds which no pinned cyclic fixture produces, the emitted spans come from true matches
+src/gen/classify.c:406	cyclic head bound arithmetic shifts the gate by one move, pinned cyclic fixtures sit strictly inside
+src/gen/classify.c:407	cyclic same face guard flip admits heads the structural checks then reject, attempt only divergence
+src/gen/classify.c:410	cyclic half turn bound mutants shift the boundary quarter, every pinned cyclic fixture uses exactly quarter two at the checked slot
+src/gen/classify.c:417	cyclic mirror equality flip admits non mirrored pairs the reconstruction then rejects, attempt only divergence
+src/gen/classify.c:420	cyclic assembly arithmetic shifts the working length consistently with the following copies, simplify normalizes the pinned rebuilds back to the fixture sequence
+src/gen/classify.c:421	cyclic setup copy width mutants keep the window inside the assembled buffer, the rebuild equality holds for every pinned cyclic fixture
+src/gen/classify.c:422	cyclic head copy offset mutants shift into slots the simplify pass normalizes, pinned rebuilds still match
+src/gen/classify.c:424	cyclic tail copy width mutants include the guard move the simplify pass absorbs, pinned rebuilds still match
+src/gen/classify.c:427	cyclic inverse copy bounds keep the two move inverse inside the window, pinned rebuilds still match
+src/gen/classify.c:431	fill part width mutants shift the copy within the parts arrays, the emitted spans and rebuild equality hold for every pinned fixture
+src/gen/classify.c:434	fill tail copy width mutants keep the window inside the parts arrays, pinned rebuilds still match
+src/gen/classify.c:438	pair rebuild length guard arithmetic shifts the boundary by one, pinned rebuilds sit strictly inside the cap
+src/gen/classify.c:440	pair simplify failure flip admits attempts whose rebuild equality then fails, attempt only divergence
+src/gen/classify.c:444	cyclic rebuild length guard arithmetic shifts the boundary by one, pinned rebuilds sit strictly inside the cap
+src/gen/classify.c:445	cyclic mismatch flip admits only non matching rebuilds which no pinned fixture produces
+src/gen/classify.c:453	fill branch selector mutants reroute only the (1,1) pair on the pinned corpus where both branches write identical spans, no pinned match uses a (1,3) or (1,5) window with p equal one
+src/gen/classify.c:469	length class ok init flip only matters for the default case which assigns false explicitly one line later
+src/gen/classify.c:484	conj class conjunction mutants widen the corner conjunct, the pinned B9 fixtures are edge only so the corner flag never gates a pinned verdict the length check does not already gate
+src/gen/classify.c:487	cyclic shift class conjunction mutants admit edge cyclic shapes at the wrong length, the length class gate then rejects them
+src/gen/classify.c:496	sp5 class conjunction mutants admit corner shapes at five moves, no pinned corner case reaches five moves so the widened gate accepts nothing new
+src/gen/classify.c:499	sp7 class conjunction mutants admit corner shapes at seven moves, no pinned corner case reaches seven moves
+src/gen/classify.c:502	sp9 class conjunction mutants admit corner shapes at nine moves, the pinned corner nine move cases classify through the A9 branch first
+src/gen/classify.c:505	length class default flip writes false one branch earlier, both paths emit unknown
+src/gen/classify.c:529	decide three pointer offset mutants shift the compared slot, every pinned SP9 and orth fixture distinguishes through the length gate before the shape comparison, verified across the synth table corpus
+src/gen/classify.c:530	decide one pointer offset mutants shift the compared slot, the pinned shape splits all resolve through the length gates, verified across the synth table corpus
+src/gen/classify.c:537	sp shape conjunction flip admits shapes the length gate then rejects, attempt only divergence on the pinned corpus
+src/gen/classify.c:648	simplify error boundary minus one admits the minus one error code only, which the preceding null guard already consumed on every reachable path, so the branch change is unobservable
+src/gen/classify.c:674	expansion array capacity arithmetic drops only the late split expansions, every pinned decomposition needs at most the plain expansion window, verified across the synth table corpus
+src/gen/classify.c:675	expansion count init shift is overwritten by the plain insertion on the next line
+src/gen/classify.c:677	expansion loop bounds admit one extra position whose split variant duplicates an earlier expansion, the pair scan then sees duplicate attempts
+src/gen/classify.c:680	split variant enumeration in classify reroutes to variant zero which reproduces the plain expansion, an always available attempt
+src/gen/classify.c:686	expansion scan bound shift re-tries the last expansion whose result is already recorded, duplicate attempt only
+src/gen/classify.c:688	setup scan bound widening admits k one past the max, the reconstruction windows for k at the cap fail the pair fit gate, attempt only divergence
+src/gen/classify.c:690	cyclic slot comparison mutants reroute which pair index runs the cyclic attempt, the cyclic fixtures match at the cyclic slot on both orderings of the scan
+src/gen/classify.c:695	cyclic setup copy width mutants keep the window inside the setup array, pinned cyclic spans unchanged
+src/gen/classify.c:703	cyclic found flip continues the scan past the cyclic match, no pair decomposition matches any pinned cyclic fixture so the emitted result is identical
+src/gen/classify.c:728	alg null guard conjunction still reaches ct_notation_parse which rejects null with the same minus one code the guard returns
+src/gen/classify.c:733	parse error boundary minus one admits only the minus one code, which the preceding null guard already consumed, so the unreachable branch change is unobservable
+src/gen/classify.c:740	label bound widening returns the unknown label for the unknown code, which the fallthrough also returns, identical output
+src/gen/classify.c:747	alias bound widening returns the unknown alias for the unknown code, which the fallthrough also returns, identical output
+src/gen/classify.c:757	label roundtrip scan bound narrowing skips the unknown row, the fallback after the loop returns unknown for the unknown label, identical output

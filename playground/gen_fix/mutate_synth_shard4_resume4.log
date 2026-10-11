@@ -1,0 +1,151 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+pgbuild/bin/mutate.exe src/gen/synth.c pgbuild unit_synth_table unit_synth_coverage unit_synth_config unit_synth_bh unit_synth_scoring
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited -1073741795
+pgbuild/mutants/p51828/m0555_synth.c:621:5: error: expected expression
+  621 |     /cand_n = ctx.cand_n;
+      |     ^
+1 error generated.
+pgbuild/mutants/p51828/m0561_synth.c:626:48: error: expected ')'
+  626 | static uint32_t synth_state_hash(const uint8_t /state) {
+      |                                                ^
+pgbuild/mutants/p51828/m0561_synth.c:626:33: note: to match this '('
+  626 | static uint32_t synth_state_hash(const uint8_t /state) {
+      |                                 ^
+pgbuild/mutants/p51828/m0561_synth.c:629:39: error: use of undeclared identifier 'state'
+  629 |         h = h * CT_SYNTH_STATE_MULT + state[i];
+      |                                       ^~~~~
+pgbuild/mutants/p51828/m0561_synth.c:635:35: error: incompatible pointer to integer conversion passing 'const uint8_t *' (aka 'const unsigned char *') to parameter of type 'uint8_t' (aka 'unsigned char') [-Wint-conversion]
+  635 |     uint32_t h = synth_state_hash(state) % (uint32_t)CT_SYNTH_FALLBACK_HASH;
+      |                                   ^~~~~
+pgbuild/mutants/p51828/m0561_synth.c:626:48: note: passing argument to parameter here
+  626 | static uint32_t synth_state_hash(const uint8_t /state) {
+      |                                                ^
+3 errors generated.
+pgbuild/mutants/p51828/m0569_synth.c:634:48: error: expected ')'
+  634 | static int synth_side_slot(const ct_synth_side /side, const uint8_t *state) {
+      |                                                ^
+pgbuild/mutants/p51828/m0569_synth.c:634:27: note: to match this '('
+  634 | static int synth_side_slot(const ct_synth_side /side, const uint8_t *state) {
+      |                           ^
+pgbuild/mutants/p51828/m0569_synth.c:635:35: error: use of undeclared identifier 'state'
+  635 |     uint32_t h = synth_state_hash(state) % (uint32_t)CT_SYNTH_FALLBACK_HASH;
+      |                                   ^~~~~
+pgbuild/mutants/p51828/m0569_synth.c:636:12: error: use of undeclared identifier 'side'
+  636 |     while (side->hash[h] != 0) {
+      |            ^~~~
+pgbuild/mutants/p51828/m0569_synth.c:637:20: error: use of undeclared identifier 'side'
+  637 |         if (memcmp(side->nodes[side->hash[h] - 1].state, state, (size_t)CT_SYNTH_CELLS) == 0) {
+      |                    ^~~~
+pgbuild/mutants/p51828/m0569_synth.c:637:32: error: use of undeclared identifier 'side'
+  637 |         if (memcmp(side->nodes[side->hash[h] - 1].state, state, (size_t)CT_SYNTH_CELLS) == 0) {
+      |                                ^~~~
+pgbuild/mutants/p51828/m0569_synth.c:637:58: error: use of undeclared identifier 'state'
+  637 |         if (memcmp(side->nodes[side->hash[h] - 1].state, state, (size_t)CT_SYNTH_CELLS) == 0) {
+      |                                                          ^~~~~
+pgbuild/mutants/p51828/m0569_synth.c:750:44: error: too many arguments to function call, expected 1, have 2
+  750 |             fwd.hash[synth_side_slot(&fwd, fwd.nodes[0].state)] = 1;
+      |                      ~~~~~~~~~~~~~~~       ^~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p51828/m0569_synth.c:634:12: note: 'synth_side_slot' declared here
+  634 | static int synth_side_slot(const ct_synth_side /side, const uint8_t *state) {
+      |            ^               ~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p51828/m0569_synth.c:753:50: error: too many arguments to function call, expected 1, have 2
+  753 |                 int slot = synth_side_slot(&bwd, variants[v]);
+      |                            ~~~~~~~~~~~~~~~       ^~~~~~~~~~~
+pgbuild/mutants/p51828/m0569_synth.c:634:12: note: 'synth_side_slot' declared here
+  634 | static int synth_side_slot(const ct_synth_side /side, const uint8_t *state) {
+      |            ^               ~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p51828/m0569_synth.c:796:66: error: too many arguments to function call, expected 1, have 2
+  796 |                             int own_slot = synth_side_slot(side, child);
+      |                                            ~~~~~~~~~~~~~~~       ^~~~~
+pgbuild/mutants/p51828/m0569_synth.c:634:12: note: 'synth_side_slot' declared here
+  634 | static int synth_side_slot(const ct_synth_side /side, const uint8_t *state) {
+      |            ^               ~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p51828/m0569_synth.c:807:69: error: too many arguments to function call, expected 1, have 2
+  807 |                             int other_slot = synth_side_slot(other, child);
+      |                                              ~~~~~~~~~~~~~~~        ^~~~~
+pgbuild/mutants/p51828/m0569_synth.c:634:12: note: 'synth_side_slot' declared here
+  634 | static int synth_side_slot(const ct_synth_side /side, const uint8_t *state) {
+      |            ^               ~~~~~~~~~~~~~~~~~~~
+10 errors generated.
+pgbuild/mutants/p51828/m0570_synth.c:634:69: error: expected ')'
+  634 | static int synth_side_slot(const ct_synth_side *side, const uint8_t /state) {
+      |                                                                     ^
+pgbuild/mutants/p51828/m0570_synth.c:634:27: note: to match this '('
+  634 | static int synth_side_slot(const ct_synth_side *side, const uint8_t /state) {
+      |                           ^
+pgbuild/mutants/p51828/m0570_synth.c:635:35: error: use of undeclared identifier 'state'
+  635 |     uint32_t h = synth_state_hash(state) % (uint32_t)CT_SYNTH_FALLBACK_HASH;
+      |                                   ^~~~~
+pgbuild/mutants/p51828/m0570_synth.c:637:58: error: use of undeclared identifier 'state'
+  637 |         if (memcmp(side->nodes[side->hash[h] - 1].state, state, (size_t)CT_SYNTH_CELLS) == 0) {
+      |                                                          ^~~~~
+pgbuild/mutants/p51828/m0570_synth.c:750:44: error: incompatible pointer to integer conversion passing 'uint8_t[54]' (aka 'unsigned char[54]') to parameter of type 'uint8_t' (aka 'unsigned char') [-Wint-conversion]
+  750 |             fwd.hash[synth_side_slot(&fwd, fwd.nodes[0].state)] = 1;
+      |                                            ^~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p51828/m0570_synth.c:634:69: note: passing argument to parameter here
+  634 | static int synth_side_slot(const ct_synth_side *side, const uint8_t /state) {
+      |                                                                     ^
+pgbuild/mutants/p51828/m0570_synth.c:753:50: error: incompatible pointer to integer conversion passing 'uint8_t[54]' (aka 'unsigned char[54]') to parameter of type 'uint8_t' (aka 'unsigned char') [-Wint-conversion]
+  753 |                 int slot = synth_side_slot(&bwd, variants[v]);
+      |                                                  ^~~~~~~~~~~
+pgbuild/mutants/p51828/m0570_synth.c:634:69: note: passing argument to parameter here
+  634 | static int synth_side_slot(const ct_synth_side *side, const uint8_t /state) {
+      |                                                                     ^
+pgbuild/mutants/p51828/m0570_synth.c:796:66: error: incompatible pointer to integer conversion passing 'uint8_t[54]' (aka 'unsigned char[54]') to parameter of type 'uint8_t' (aka 'unsigned char') [-Wint-conversion]
+  796 |                             int own_slot = synth_side_slot(side, child);
+      |                                                                  ^~~~~
+pgbuild/mutants/p51828/m0570_synth.c:634:69: note: passing argument to parameter here
+  634 | static int synth_side_slot(const ct_synth_side *side, const uint8_t /state) {
+      |                                                                     ^
+pgbuild/mutants/p51828/m0570_synth.c:807:69: error: incompatible pointer to integer conversion passing 'uint8_t[54]' (aka 'unsigned char[54]') to parameter of type 'uint8_t' (aka 'unsigned char') [-Wint-conversion]
+  807 |                             int other_slot = synth_side_slot(other, child);
+      |                                                                     ^~~~~
+pgbuild/mutants/p51828/m0570_synth.c:634:69: note: passing argument to parameter here
+  634 | static int synth_side_slot(const ct_synth_side *side, const uint8_t /state) {
+      |                                                                     ^
+7 errors generated.
+mutate: suite unit_synth_config exited -1073741819
+mutate: suite unit_synth_config exited -1073741819
+mutate: suite unit_synth_config exited -1073741819
+mutate: 19 unexplained survivors
+mutate: scope=src/gen/synth.c files=1 sites=928 suites=5
+KILLED    m0552 src/gen/synth.c:617 [not-del ! -> (deleted)]
+KILLED    m0553 src/gen/synth.c:619 [int+1 0 -> 1]
+KILLED    m0554 src/gen/synth.c:619 [int-1 0 -> -1]
+KILLED    m0555 src/gen/synth.c:621 [arith * -> /]
+          build break
+SURVIVED  m0556 src/gen/synth.c:624 [int+1 1u -> 2u]
+SURVIVED  m0557 src/gen/synth.c:624 [int-1 1u -> 0u]
+SURVIVED  m0558 src/gen/synth.c:624 [arith + -> -]
+SURVIVED  m0559 src/gen/synth.c:624 [arith + -> -]
+SURVIVED  m0560 src/gen/synth.c:624 [arith - -> +]
+KILLED    m0561 src/gen/synth.c:626 [arith * -> /]
+          build break
+SURVIVED  m0562 src/gen/synth.c:627 [int+1 0 -> 1]
+SURVIVED  m0563 src/gen/synth.c:627 [int-1 0 -> -1]
+SURVIVED  m0564 src/gen/synth.c:628 [int+1 0 -> 1]
+SURVIVED  m0565 src/gen/synth.c:628 [int-1 0 -> -1]
+SURVIVED  m0566 src/gen/synth.c:628 [cmp < -> <=]
+SURVIVED  m0567 src/gen/synth.c:629 [arith * -> /]
+SURVIVED  m0568 src/gen/synth.c:629 [arith + -> -]
+KILLED    m0569 src/gen/synth.c:634 [arith * -> /]
+          build break
+KILLED    m0570 src/gen/synth.c:634 [arith * -> /]
+          build break
+KILLED    m0571 src/gen/synth.c:636 [cmp != -> ==]
+KILLED    m0572 src/gen/synth.c:636 [int+1 0 -> 1]
+KILLED    m0573 src/gen/synth.c:636 [int-1 0 -> -1]
+SURVIVED  m0574 src/gen/synth.c:637 [arith - -> +]
+SURVIVED  m0575 src/gen/synth.c:637 [int+1 1 -> 2]
+SURVIVED  m0576 src/gen/synth.c:637 [int-1 1 -> 0]
+SURVIVED  m0577 src/gen/synth.c:637 [cmp == -> !=]
+SURVIVED  m0578 src/gen/synth.c:637 [int+1 0 -> 1]
+SURVIVED  m0579 src/gen/synth.c:637 [int-1 0 -> -1]
+SURVIVED  m0580 src/gen/synth.c:640 [arith + -> -]
+mutate: generated=29 build_failed=4 killed_by_tests=6 killed=10 survived=19 accepted=0 unexplained=19 skipped=899
+mutate: kill rate 10/29 = 34.5%, with accepted equivalents 10/29 = 34.5%
+mutate: wall 506.2s
+make: *** [makefile:239: mutate] Error 1

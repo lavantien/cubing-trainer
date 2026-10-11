@@ -1,0 +1,168 @@
+pgbuild/mutants/p41720/m0824_synth.c:822:81: error: expected expression
+  822 |                                     memcpy(out, fseq, (size_t)fseq_len * sizeof /fseq);
+      |                                                                                 ^
+1 error generated.
+pgbuild/mutants/p41720/m0827_synth.c:823:92: error: expected expression
+  823 |                                     memcpy(out + fseq_len, binv, (size_t)binv_len * sizeof /binv);
+      |                                                                                            ^
+1 error generated.
+pgbuild/mutants/p41720/m0828_synth.c:824:37: error: expected expression
+  824 |                                     /out_len = fseq_len + binv_len;
+      |                                     ^
+1 error generated.
+pgbuild/mutants/p41720/m0832_synth.c:858:76: error: expected ')'
+  858 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config /cfg,
+      |                                                                            ^
+pgbuild/mutants/p41720/m0832_synth.c:858:20: note: to match this '('
+  858 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config /cfg,
+      |                    ^
+pgbuild/mutants/p41720/m0832_synth.c:858:5: error: conflicting types for 'ct_synth_target'
+  858 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config /cfg,
+      |     ^
+src\gen/synth.h:60:5: note: previous declaration is here
+   60 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config *cfg,
+      |     ^
+pgbuild/mutants/p41720/m0832_synth.c:860:9: error: use of undeclared identifier 'out'
+  860 |     if (out == NULL || cfg == NULL) {
+      |         ^~~
+pgbuild/mutants/p41720/m0832_synth.c:860:24: error: use of undeclared identifier 'cfg'
+  860 |     if (out == NULL || cfg == NULL) {
+      |                        ^~~
+pgbuild/mutants/p41720/m0832_synth.c:863:12: error: use of undeclared identifier 'out'
+  863 |     memset(out, 0, sizeof *out);
+      |            ^~~
+pgbuild/mutants/p41720/m0832_synth.c:863:28: error: use of undeclared identifier 'out'
+  863 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+pgbuild/mutants/p41720/m0832_synth.c:873:20: error: use of undeclared identifier 'cfg'
+  873 |     int cand_cap = cfg->gen.candidate_max;
+      |                    ^~~
+pgbuild/mutants/p41720/m0832_synth.c:893:37: error: use of undeclared identifier 'cfg'
+  893 |     int move_n = synth_subset_moves(cfg->gen.preferred_moves, subset);
+      |                                     ^~~
+pgbuild/mutants/p41720/m0832_synth.c:894:44: error: use of undeclared identifier 'cfg'
+  894 |     if (move_n > 0 && cand_n < cand_cap && cfg->gen.setup_bfs_depth >= 1) {
+      |                                            ^~~
+pgbuild/mutants/p41720/m0832_synth.c:895:21: error: use of undeclared identifier 'cfg'
+  895 |         int depth = cfg->gen.setup_bfs_depth;
+      |                     ^~~
+pgbuild/mutants/p41720/m0832_synth.c:906:58: error: use of undeclared identifier 'cfg'
+  906 |             if (ct_score_alg(cands[i].seq, cands[i].len, cfg, &parts) != CT_SCORE_OK) {
+      |                                                          ^~~
+pgbuild/mutants/p41720/m0832_synth.c:915:24: error: use of undeclared identifier 'out'
+  915 |             synth_fill(out, cfg, cands[best].seq, cands[best].len, cands[best].setup, false)) {
+      |                        ^~~
+pgbuild/mutants/p41720/m0832_synth.c:915:29: error: use of undeclared identifier 'cfg'
+  915 |             synth_fill(out, cfg, cands[best].seq, cands[best].len, cands[best].setup, false)) {
+      |                             ^~~
+pgbuild/mutants/p41720/m0832_synth.c:919:38: error: use of undeclared identifier 'cfg'
+  919 |     if (move_n > 0 && cand_n == 0 && cfg->gen.fallback_depth >= 1) {
+      |                                      ^~~
+pgbuild/mutants/p41720/m0832_synth.c:920:21: error: use of undeclared identifier 'cfg'
+  920 |         int depth = cfg->gen.fallback_depth;
+      |                     ^~~
+pgbuild/mutants/p41720/m0832_synth.c:932:28: error: use of undeclared identifier 'out'
+  932 |                 synth_fill(out, cfg, simplified, simplified_len, false, true);
+      |                            ^~~
+pgbuild/mutants/p41720/m0832_synth.c:932:33: error: use of undeclared identifier 'cfg'
+  932 |                 synth_fill(out, cfg, simplified, simplified_len, false, true);
+      |                                 ^~~
+17 errors generated.
+pgbuild/mutants/p41720/m0833_synth.c:859:37: error: expected ')'
+  859 |                     ct_synth_result /out) {
+      |                                     ^
+pgbuild/mutants/p41720/m0833_synth.c:858:20: note: to match this '('
+  858 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config *cfg,
+      |                    ^
+pgbuild/mutants/p41720/m0833_synth.c:858:5: error: conflicting types for 'ct_synth_target'
+  858 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config *cfg,
+      |     ^
+src\gen/synth.h:60:5: note: previous declaration is here
+   60 | int ct_synth_target(int orbit, int buffer, int t1, int t2, const ct_config *cfg,
+      |     ^
+pgbuild/mutants/p41720/m0833_synth.c:860:9: error: use of undeclared identifier 'out'
+  860 |     if (out == NULL || cfg == NULL) {
+      |         ^~~
+pgbuild/mutants/p41720/m0833_synth.c:863:12: error: use of undeclared identifier 'out'
+  863 |     memset(out, 0, sizeof *out);
+      |            ^~~
+pgbuild/mutants/p41720/m0833_synth.c:863:28: error: use of undeclared identifier 'out'
+  863 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+pgbuild/mutants/p41720/m0833_synth.c:915:24: error: use of undeclared identifier 'out'
+  915 |             synth_fill(out, cfg, cands[best].seq, cands[best].len, cands[best].setup, false)) {
+      |                        ^~~
+pgbuild/mutants/p41720/m0833_synth.c:932:28: error: use of undeclared identifier 'out'
+  932 |                 synth_fill(out, cfg, simplified, simplified_len, false, true);
+      |                            ^~~
+7 errors generated.
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_bad_input exited -1073741795
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_bad_input exited 1
+mutate: suite unit_synth_bad_input exited 1
+mutate: suite unit_synth_scoring exited 1
+mutate: suite unit_synth_scoring exited -1073741795
+pgbuild/mutants/p41720/m0842_synth.c:863:27: error: expected expression
+  863 |     memset(out, 0, sizeof /out);
+      |                           ^
+1 error generated.
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_bad_input exited 1
+mutate: suite unit_synth_bad_input exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited -1073741795
+mutate: suite unit_synth_direct exited 1
+pgbuild/mutants/p41720/m0873_synth.c:894:41: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  894 |     if (move_n > 0 || cand_n < cand_cap && cfg->gen.setup_bfs_depth >= 1) {
+      |                    ~~ ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p41720/m0873_synth.c:894:41: note: place parentheses around the '&&' expression to silence this warning
+  894 |     if (move_n > 0 || cand_n < cand_cap && cfg->gen.setup_bfs_depth >= 1) {
+      |                                         ^                               
+      |                       (                                                 )
+1 error generated.
+pgbuild/mutants/p41720/m0875_synth.c:894:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  894 |     if (move_n > 0 && cand_n < cand_cap || cfg->gen.setup_bfs_depth >= 1) {
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p41720/m0875_synth.c:894:20: note: place parentheses around the '&&' expression to silence this warning
+  894 |     if (move_n > 0 && cand_n < cand_cap || cfg->gen.setup_bfs_depth >= 1) {
+      |                    ^
+      |         (                              )
+1 error generated.
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_scoring exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited -1073741795
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+pgbuild/mutants/p41720/m0906_synth.c:919:35: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  919 |     if (move_n > 0 || cand_n == 0 && cfg->gen.fallback_depth >= 1) {
+      |                    ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p41720/m0906_synth.c:919:35: note: place parentheses around the '&&' expression to silence this warning
+  919 |     if (move_n > 0 || cand_n == 0 && cfg->gen.fallback_depth >= 1) {
+      |                                   ^                              
+      |                       (                                          )
+1 error generated.
+pgbuild/mutants/p41720/m0910_synth.c:919:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  919 |     if (move_n > 0 && cand_n == 0 || cfg->gen.fallback_depth >= 1) {
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p41720/m0910_synth.c:919:20: note: place parentheses around the '&&' expression to silence this warning
+  919 |     if (move_n > 0 && cand_n == 0 || cfg->gen.fallback_depth >= 1) {
+      |                    ^
+      |         (                        )
+1 error generated.
+mutate: suite unit_synth_scoring exited 1
+mutate: suite unit_synth_scoring exited 1
+mutate: suite unit_synth_scoring exited 1

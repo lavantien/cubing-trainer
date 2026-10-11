@@ -1,0 +1,1280 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+pgbuild/bin/mutate.exe src/gen/classify.c pgbuild unit_classify unit_classify_stress unit_classify_fixture unit_classify_special unit_classify_synth_table unit_classify_synth_results unit_classify_gates
+pgbuild/mutants/p44448/m0501_classify.c:431:41: error: expected expression
+  431 |     memcpy(t + n, c, (size_t)2 * sizeof /t);
+      |                                         ^
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+pgbuild/mutants/p44448/m0519_classify.c:440:53: error: expected expression
+  440 |     memcpy(t + n, k_inv, (size_t)k_inv_len * sizeof /t);
+      |                                                     ^
+1 error generated.
+pgbuild/mutants/p44448/m0524_classify.c:450:46: error: expected ')'
+  450 | static void cl_fill_parts(ct_classify_result /r, const cl_exp *e, int k, int p, int q) {
+      |                                              ^
+pgbuild/mutants/p44448/m0524_classify.c:450:26: note: to match this '('
+  450 | static void cl_fill_parts(ct_classify_result /r, const cl_exp *e, int k, int p, int q) {
+      |                          ^
+pgbuild/mutants/p44448/m0524_classify.c:451:5: error: use of undeclared identifier 'r'
+  451 |     r->setup_len = k;
+      |     ^
+pgbuild/mutants/p44448/m0524_classify.c:451:20: error: use of undeclared identifier 'k'
+  451 |     r->setup_len = k;
+      |                    ^
+pgbuild/mutants/p44448/m0524_classify.c:452:12: error: use of undeclared identifier 'r'
+  452 |     memcpy(r->setup, e->m, (size_t)k * sizeof *r->setup);
+      |            ^
+pgbuild/mutants/p44448/m0524_classify.c:452:22: error: use of undeclared identifier 'e'
+  452 |     memcpy(r->setup, e->m, (size_t)k * sizeof *r->setup);
+      |                      ^
+pgbuild/mutants/p44448/m0524_classify.c:452:36: error: use of undeclared identifier 'k'
+  452 |     memcpy(r->setup, e->m, (size_t)k * sizeof *r->setup);
+      |                                    ^
+pgbuild/mutants/p44448/m0524_classify.c:452:48: error: use of undeclared identifier 'r'
+  452 |     memcpy(r->setup, e->m, (size_t)k * sizeof *r->setup);
+      |                                                ^
+pgbuild/mutants/p44448/m0524_classify.c:453:9: error: use of undeclared identifier 'p'
+  453 |     if (p == 1) {
+      |         ^
+pgbuild/mutants/p44448/m0524_classify.c:454:9: error: use of undeclared identifier 'r'
+  454 |         r->interchange_len = 1;
+      |         ^
+pgbuild/mutants/p44448/m0524_classify.c:455:9: error: use of undeclared identifier 'r'
+  455 |         r->interchange[0] = e->m[k];
+      |         ^
+pgbuild/mutants/p44448/m0524_classify.c:455:29: error: use of undeclared identifier 'e'
+  455 |         r->interchange[0] = e->m[k];
+      |                             ^
+pgbuild/mutants/p44448/m0524_classify.c:455:34: error: use of undeclared identifier 'k'
+  455 |         r->interchange[0] = e->m[k];
+      |                                  ^
+pgbuild/mutants/p44448/m0524_classify.c:456:9: error: use of undeclared identifier 'r'
+  456 |         r->insertion_len = q;
+      |         ^
+pgbuild/mutants/p44448/m0524_classify.c:456:28: error: use of undeclared identifier 'q'
+  456 |         r->insertion_len = q;
+      |                            ^
+pgbuild/mutants/p44448/m0524_classify.c:457:16: error: use of undeclared identifier 'r'
+  457 |         memcpy(r->insertion, e->m + k + 1, (size_t)q * sizeof *r->insertion);
+      |                ^
+pgbuild/mutants/p44448/m0524_classify.c:457:30: error: use of undeclared identifier 'e'
+  457 |         memcpy(r->insertion, e->m + k + 1, (size_t)q * sizeof *r->insertion);
+      |                              ^
+pgbuild/mutants/p44448/m0524_classify.c:457:37: error: use of undeclared identifier 'k'
+  457 |         memcpy(r->insertion, e->m + k + 1, (size_t)q * sizeof *r->insertion);
+      |                                     ^
+pgbuild/mutants/p44448/m0524_classify.c:457:52: error: use of undeclared identifier 'q'
+  457 |         memcpy(r->insertion, e->m + k + 1, (size_t)q * sizeof *r->insertion);
+      |                                                    ^
+pgbuild/mutants/p44448/m0524_classify.c:457:64: error: use of undeclared identifier 'r'
+  457 |         memcpy(r->insertion, e->m + k + 1, (size_t)q * sizeof *r->insertion);
+      |                                                                ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+pgbuild/mutants/p44448/m0525_classify.c:450:63: error: expected ')'
+  450 | static void cl_fill_parts(ct_classify_result *r, const cl_exp /e, int k, int p, int q) {
+      |                                                               ^
+pgbuild/mutants/p44448/m0525_classify.c:450:26: note: to match this '('
+  450 | static void cl_fill_parts(ct_classify_result *r, const cl_exp /e, int k, int p, int q) {
+      |                          ^
+pgbuild/mutants/p44448/m0525_classify.c:451:20: error: use of undeclared identifier 'k'
+  451 |     r->setup_len = k;
+      |                    ^
+pgbuild/mutants/p44448/m0525_classify.c:452:22: error: use of undeclared identifier 'e'
+  452 |     memcpy(r->setup, e->m, (size_t)k * sizeof *r->setup);
+      |                      ^
+pgbuild/mutants/p44448/m0525_classify.c:452:36: error: use of undeclared identifier 'k'
+  452 |     memcpy(r->setup, e->m, (size_t)k * sizeof *r->setup);
+      |                                    ^
+pgbuild/mutants/p44448/m0525_classify.c:453:9: error: use of undeclared identifier 'p'
+  453 |     if (p == 1) {
+      |         ^
+pgbuild/mutants/p44448/m0525_classify.c:455:29: error: use of undeclared identifier 'e'
+  455 |         r->interchange[0] = e->m[k];
+      |                             ^
+pgbuild/mutants/p44448/m0525_classify.c:455:34: error: use of undeclared identifier 'k'
+  455 |         r->interchange[0] = e->m[k];
+      |                                  ^
+pgbuild/mutants/p44448/m0525_classify.c:456:28: error: use of undeclared identifier 'q'
+  456 |         r->insertion_len = q;
+      |                            ^
+pgbuild/mutants/p44448/m0525_classify.c:457:30: error: use of undeclared identifier 'e'
+  457 |         memcpy(r->insertion, e->m + k + 1, (size_t)q * sizeof *r->insertion);
+      |                              ^
+pgbuild/mutants/p44448/m0525_classify.c:457:37: error: use of undeclared identifier 'k'
+  457 |         memcpy(r->insertion, e->m + k + 1, (size_t)q * sizeof *r->insertion);
+      |                                     ^
+pgbuild/mutants/p44448/m0525_classify.c:457:52: error: use of undeclared identifier 'q'
+  457 |         memcpy(r->insertion, e->m + k + 1, (size_t)q * sizeof *r->insertion);
+      |                                                    ^
+pgbuild/mutants/p44448/m0525_classify.c:460:28: error: use of undeclared identifier 'p'
+  460 |         r->insertion_len = p;
+      |                            ^
+pgbuild/mutants/p44448/m0525_classify.c:461:30: error: use of undeclared identifier 'e'
+  461 |         memcpy(r->insertion, e->m + k, (size_t)p * sizeof *r->insertion);
+      |                              ^
+pgbuild/mutants/p44448/m0525_classify.c:461:37: error: use of undeclared identifier 'k'
+  461 |         memcpy(r->insertion, e->m + k, (size_t)p * sizeof *r->insertion);
+      |                                     ^
+pgbuild/mutants/p44448/m0525_classify.c:461:48: error: use of undeclared identifier 'p'
+  461 |         memcpy(r->insertion, e->m + k, (size_t)p * sizeof *r->insertion);
+      |                                                ^
+pgbuild/mutants/p44448/m0525_classify.c:462:30: error: use of undeclared identifier 'q'
+  462 |         r->interchange_len = q;
+      |                              ^
+pgbuild/mutants/p44448/m0525_classify.c:463:32: error: use of undeclared identifier 'e'
+  463 |         memcpy(r->interchange, e->m + k + p, (size_t)q * sizeof *r->interchange);
+      |                                ^
+pgbuild/mutants/p44448/m0525_classify.c:463:39: error: use of undeclared identifier 'k'
+  463 |         memcpy(r->interchange, e->m + k + p, (size_t)q * sizeof *r->interchange);
+      |                                       ^
+pgbuild/mutants/p44448/m0525_classify.c:463:43: error: use of undeclared identifier 'p'
+  463 |         memcpy(r->interchange, e->m + k + p, (size_t)q * sizeof *r->interchange);
+      |                                           ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite unit_classify exited -1073741819
+pgbuild/mutants/p44448/m0527_classify.c:452:47: error: expected expression
+  452 |     memcpy(r->setup, e->m, (size_t)k * sizeof /r->setup);
+      |                                               ^
+1 error generated.
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited -1073741819
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited -1073741819
+pgbuild/mutants/p44448/m0534_classify.c:455:9: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  455 |         r->interchange[-1] = e->m[k];
+      |         ^              ~~
+src\gen/classify.h:24:5: note: array 'interchange' declared here
+   24 |     ct_move interchange[CT_CLASSIFY_PART_MAX];
+      |     ^
+1 error generated.
+mutate: suite unit_classify_fixture exited -1073741795
+mutate: suite unit_classify_fixture exited -1073741819
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited -1073741819
+pgbuild/mutants/p44448/m0540_classify.c:457:63: error: expected expression
+  457 |         memcpy(r->insertion, e->m + k + 1, (size_t)q * sizeof /r->insertion);
+      |                                                               ^
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741819
+pgbuild/mutants/p44448/m0544_classify.c:461:59: error: expected expression
+  461 |         memcpy(r->insertion, e->m + k, (size_t)p * sizeof /r->insertion);
+      |                                                           ^
+1 error generated.
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741819
+mutate: suite unit_classify exited -1073741819
+pgbuild/mutants/p44448/m0548_classify.c:463:65: error: expected expression
+  463 |         memcpy(r->interchange, e->m + k + p, (size_t)q * sizeof /r->interchange);
+      |                                                                 ^
+1 error generated.
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify_synth_results exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: scope=src/gen/classify.c files=1 sites=745 suites=7
+SURVIVED  m0499 src/gen/classify.c:431 [int-1 2 -> 1]
+SURVIVED  m0500 src/gen/classify.c:431 [arith * -> /]
+KILLED    m0501 src/gen/classify.c:431 [arith * -> /]
+          build break
+KILLED    m0502 src/gen/classify.c:432 [int+1 2 -> 3]
+KILLED    m0503 src/gen/classify.c:432 [int-1 2 -> 1]
+KILLED    m0504 src/gen/classify.c:433 [arith + -> -]
+KILLED    m0505 src/gen/classify.c:433 [int+1 2 -> 3]
+KILLED    m0506 src/gen/classify.c:433 [int-1 2 -> 1]
+SURVIVED  m0507 src/gen/classify.c:434 [int+1 2 -> 3]
+KILLED    m0508 src/gen/classify.c:434 [int-1 2 -> 1]
+KILLED    m0509 src/gen/classify.c:435 [int+1 2 -> 3]
+KILLED    m0510 src/gen/classify.c:435 [int-1 2 -> 1]
+KILLED    m0511 src/gen/classify.c:436 [arith + -> -]
+KILLED    m0512 src/gen/classify.c:437 [int+1 2 -> 3]
+KILLED    m0513 src/gen/classify.c:437 [int-1 2 -> 1]
+SURVIVED  m0514 src/gen/classify.c:438 [arith + -> -]
+SURVIVED  m0515 src/gen/classify.c:438 [int+1 1 -> 2]
+SURVIVED  m0516 src/gen/classify.c:438 [int-1 1 -> 0]
+KILLED    m0517 src/gen/classify.c:440 [arith + -> -]
+SURVIVED  m0518 src/gen/classify.c:440 [arith * -> /]
+KILLED    m0519 src/gen/classify.c:440 [arith * -> /]
+          build break
+SURVIVED  m0520 src/gen/classify.c:444 [cmp < -> <=]
+SURVIVED  m0521 src/gen/classify.c:444 [int+1 0 -> 1]
+SURVIVED  m0522 src/gen/classify.c:444 [int-1 0 -> -1]
+SURVIVED  m0523 src/gen/classify.c:445 [bool false -> true]
+KILLED    m0524 src/gen/classify.c:450 [arith * -> /]
+          build break
+KILLED    m0525 src/gen/classify.c:450 [arith * -> /]
+          build break
+KILLED    m0526 src/gen/classify.c:452 [arith * -> /]
+KILLED    m0527 src/gen/classify.c:452 [arith * -> /]
+          build break
+KILLED    m0528 src/gen/classify.c:453 [cmp == -> !=]
+KILLED    m0529 src/gen/classify.c:453 [int+1 1 -> 2]
+KILLED    m0530 src/gen/classify.c:453 [int-1 1 -> 0]
+KILLED    m0531 src/gen/classify.c:454 [int+1 1 -> 2]
+KILLED    m0532 src/gen/classify.c:454 [int-1 1 -> 0]
+KILLED    m0533 src/gen/classify.c:455 [int+1 0 -> 1]
+KILLED    m0534 src/gen/classify.c:455 [int-1 0 -> -1]
+          build break
+KILLED    m0535 src/gen/classify.c:457 [arith + -> -]
+KILLED    m0536 src/gen/classify.c:457 [arith + -> -]
+KILLED    m0537 src/gen/classify.c:457 [int+1 1 -> 2]
+KILLED    m0538 src/gen/classify.c:457 [int-1 1 -> 0]
+KILLED    m0539 src/gen/classify.c:457 [arith * -> /]
+KILLED    m0540 src/gen/classify.c:457 [arith * -> /]
+          build break
+KILLED    m0541 src/gen/classify.c:458 [bool false -> true]
+KILLED    m0542 src/gen/classify.c:461 [arith + -> -]
+KILLED    m0543 src/gen/classify.c:461 [arith * -> /]
+KILLED    m0544 src/gen/classify.c:461 [arith * -> /]
+          build break
+KILLED    m0545 src/gen/classify.c:463 [arith + -> -]
+KILLED    m0546 src/gen/classify.c:463 [arith + -> -]
+KILLED    m0547 src/gen/classify.c:463 [arith * -> /]
+KILLED    m0548 src/gen/classify.c:463 [arith * -> /]
+          build break
+KILLED    m0549 src/gen/classify.c:464 [bool true -> false]
+SURVIVED  m0550 src/gen/classify.c:469 [bool false -> true]
+KILLED    m0551 src/gen/classify.c:472 [cmp == -> !=]
+KILLED    m0552 src/gen/classify.c:475 [cmp == -> !=]
+KILLED    m0553 src/gen/classify.c:478 [logic && -> ||]
+KILLED    m0554 src/gen/classify.c:478 [cmp == -> !=]
+KILLED    m0555 src/gen/classify.c:481 [cmp == -> !=]
+SURVIVED  m0556 src/gen/classify.c:484 [logic && -> ||]
+KILLED    m0557 src/gen/classify.c:484 [cmp == -> !=]
+SURVIVED  m0558 src/gen/classify.c:487 [logic && -> ||]
+KILLED    m0559 src/gen/classify.c:487 [cmp == -> !=]
+KILLED    m0560 src/gen/classify.c:490 [logic && -> ||]
+KILLED    m0561 src/gen/classify.c:490 [cmp == -> !=]
+KILLED    m0562 src/gen/classify.c:493 [logic && -> ||]
+KILLED    m0563 src/gen/classify.c:493 [cmp == -> !=]
+SURVIVED  m0564 src/gen/classify.c:496 [logic && -> ||]
+KILLED    m0565 src/gen/classify.c:496 [cmp == -> !=]
+SURVIVED  m0566 src/gen/classify.c:499 [logic && -> ||]
+KILLED    m0567 src/gen/classify.c:499 [cmp == -> !=]
+SURVIVED  m0568 src/gen/classify.c:502 [logic && -> ||]
+KILLED    m0569 spgbuild/mutants/p44448/m0571_classify.c:511:49: error: expected ')'
+  511 | static ct_classification cl_decide(const cl_exp /e, int k, int p, int q, int n,
+      |                                                 ^
+pgbuild/mutants/p44448/m0571_classify.c:511:35: note: to match this '('
+  511 | static ct_classification cl_decide(const cl_exp /e, int k, int p, int q, int n,
+      |                                   ^
+pgbuild/mutants/p44448/m0571_classify.c:513:19: error: use of undeclared identifier 'info'
+  513 |     bool corner = info->corner && !info->edge;
+      |                   ^~~~
+pgbuild/mutants/p44448/m0571_classify.c:513:36: error: use of undeclared identifier 'info'
+  513 |     bool corner = info->corner && !info->edge;
+      |                                    ^~~~
+pgbuild/mutants/p44448/m0571_classify.c:514:17: error: use of undeclared identifier 'info'
+  514 |     bool edge = info->edge && !info->corner;
+      |                 ^~~~
+pgbuild/mutants/p44448/m0571_classify.c:514:32: error: use of undeclared identifier 'info'
+  514 |     bool edge = info->edge && !info->corner;
+      |                                ^~~~
+pgbuild/mutants/p44448/m0571_classify.c:516:9: error: use of undeclared identifier 'p'
+  516 |     if (p == CT_CLASSIFY_SPECIAL_LEN || q == CT_CLASSIFY_SPECIAL_LEN) {
+      |         ^
+pgbuild/mutants/p44448/m0571_classify.c:516:41: error: use of undeclared identifier 'q'
+  516 |     if (p == CT_CLASSIFY_SPECIAL_LEN || q == CT_CLASSIFY_SPECIAL_LEN) {
+      |                                         ^
+pgbuild/mutants/p44448/m0571_classify.c:518:16: error: use of undeclared identifier 'p'
+  518 |     } else if (p == 1 && q == 1) {
+      |                ^
+pgbuild/mutants/p44448/m0571_classify.c:518:26: error: use of undeclared identifier 'q'
+  518 |     } else if (p == 1 && q == 1) {
+      |                          ^
+pgbuild/mutants/p44448/m0571_classify.c:519:13: error: use of undeclared identifier 'n'
+  519 |         if (n == CT_CLASSIFY_SP5_MOVES) {
+      |             ^
+pgbuild/mutants/p44448/m0571_classify.c:521:20: error: use of undeclared identifier 'n'
+  521 |         } else if (n == CT_CLASSIFY_SP7_MOVES) {
+      |                    ^
+pgbuild/mutants/p44448/m0571_classify.c:523:20: error: use of undeclared identifier 'n'
+  523 |         } else if (n == CT_CLASSIFY_SP9_MOVES) {
+      |                    ^
+pgbuild/mutants/p44448/m0571_classify.c:529:32: error: use of undeclared identifier 'p'
+  529 |         const ct_move *three = p == CT_CLASSIFY_INSERT_LEN ? e->m + k : e->m + k + 1;
+      |                                ^
+pgbuild/mutants/p44448/m0571_classify.c:529:62: error: use of undeclared identifier 'e'
+  529 |         const ct_move *three = p == CT_CLASSIFY_INSERT_LEN ? e->m + k : e->m + k + 1;
+      |                                                              ^
+pgbuild/mutants/p44448/m0571_classify.c:529:69: error: use of undeclared identifier 'k'
+  529 |         const ct_move *three = p == CT_CLASSIFY_INSERT_LEN ? e->m + k : e->m + k + 1;
+      |                                                                     ^
+pgbuild/mutants/p44448/m0571_classify.c:529:73: error: use of undeclared identifier 'e'
+  529 |         const ct_move *three = p == CT_CLASSIFY_INSERT_LEN ? e->m + k : e->m + k + 1;
+      |                                                                         ^
+pgbuild/mutants/p44448/m0571_classify.c:529:80: error: use of undeclared identifier 'k'
+  529 |         const ct_move *three = p == CT_CLASSIFY_INSERT_LEN ? e->m + k : e->m + k + 1;
+      |                                                                                ^
+pgbuild/mutants/p44448/m0571_classify.c:530:30: error: use of undeclared identifier 'p'
+  530 |         const ct_move *one = p == 1 ? e->m + k : e->m + k + CT_CLASSIFY_INSERT_LEN;
+      |                              ^
+pgbuild/mutants/p44448/m0571_classify.c:530:39: error: use of undeclared identifier 'e'
+  530 |         const ct_move *one = p == 1 ? e->m + k : e->m + k + CT_CLASSIFY_INSERT_LEN;
+      |                                       ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+pgbuild/mutants/p44448/m0572_classify.c:512:55: error: expected ')'
+  512 |                                    const cl_perm_info /info) {
+      |                                                       ^
+pgbuild/mutants/p44448/m0572_classify.c:511:35: note: to match this '('
+  511 | static ct_classification cl_decide(const cl_exp *e, int k, int p, int q, int n,
+      |                                   ^
+pgbuild/mutants/p44448/m0572_classify.c:513:19: error: use of undeclared identifier 'info'
+  513 |     bool corner = info->corner && !info->edge;
+      |                   ^~~~
+pgbuild/mutants/p44448/m0572_classify.c:513:36: error: use of undeclared identifier 'info'
+  513 |     bool corner = info->corner && !info->edge;
+      |                                    ^~~~
+pgbuild/mutants/p44448/m0572_classify.c:514:17: error: use of undeclared identifier 'info'
+  514 |     bool edge = info->edge && !info->corner;
+      |                 ^~~~
+pgbuild/mutants/p44448/m0572_classify.c:514:32: error: use of undeclared identifier 'info'
+  514 |     bool edge = info->edge && !info->corner;
+      |                                ^~~~
+pgbuild/mutants/p44448/m0572_classify.c:709:88: error: passing 'cl_perm_info *' to parameter of incompatible type 'cl_perm_info'; remove &
+  709 |                                 cl_decide(e, k, cl_pairs[pi].p, cl_pairs[pi].q, s.len, &info);
+      |                                                                                        ^~~~~
+pgbuild/mutants/p44448/m0572_classify.c:512:55: note: passing argument to parameter here
+  512 |                                    const cl_perm_info /info) {
+      |                                                       ^
+6 errors generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p44448/m0590_classify.c:529:23: error: expected identifier or '('
+  529 |         const ct_move /three = p == CT_CLASSIFY_INSERT_LEN ? e->m + k : e->m + k + 1;
+      |                       ^
+pgbuild/mutants/p44448/m0590_classify.c:531:38: error: use of undeclared identifier 'three'
+  531 |         bool sp_shape = cl_move_same(three[1], one[0]);
+      |                                      ^~~~~
+2 errors generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p44448/m0597_classify.c:530:23: error: expected identifier or '('
+  530 |         const ct_move /one = p == 1 ? e->m + k : e->m + k + CT_CLASSIFY_INSERT_LEN;
+      |                       ^
+pgbuild/mutants/p44448/m0597_classify.c:531:48: error: use of undeclared identifier 'one'
+  531 |         bool sp_shape = cl_move_same(three[1], one[0]);
+      |                                                ^~~
+2 errors generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p44448/m0623_classify.c:548:34: error: expected ')'
+  548 | static void cl_fmt(const ct_move /m, int len, char *out, unsigned cap) {
+      |                                  ^
+pgbuild/mutants/p44448/m0623_classify.c:548:19: note: to match this '('
+  548 | static void cl_fmt(const ct_move /m, int len, char *out, unsigned cap) {
+      |                   ^
+pgbuild/mutants/p44448/m0623_classify.c:549:32: error: use of undeclared identifier 'm'
+  549 |     int w = ct_notation_format(m, len, CT_CLASSIFY_N, out, cap);
+      |                                ^
+pgbuild/mutants/p44448/m0623_classify.c:549:35: error: use of undeclared identifier 'len'
+  549 |     int w = ct_notation_format(m, len, CT_CLASSIFY_N, out, cap);
+      |                                   ^~~
+pgbuild/mutants/p44448/m0623_classify.c:549:55: error: use of undeclared identifier 'out'
+  549 |     int w = ct_notation_format(m, len, CT_CLASSIFY_N, out, cap);
+      |                                                       ^~~
+pgbuild/mutants/p44448/m0623_classify.c:549:60: error: use of undeclared identifier 'cap'
+  549 |     int w = ct_notation_format(m, len, CT_CLASSIFY_N, out, cap);
+      |                                                            ^~~
+pgbuild/mutants/p44448/m0623_classify.c:551:9: error: use of undeclared identifier 'out'
+  551 |         out[0] = '\0';
+      |         ^~~
+pgbuild/mutants/p44448/m0623_classify.c:563:22: error: too many arguments to function call, expected 1, have 4
+  563 |     cl_fmt(r->setup, r->setup_len, setup, sizeof setup);
+      |     ~~~~~~           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p44448/m0623_classify.c:548:13: note: 'cl_fmt' declared here
+  548 | static void cl_fmt(const ct_move /m, int len, char *out, unsigned cap) {
+      |             ^      ~~~~~~~~~~~~~
+pgbuild/mutants/p44448/m0623_classify.c:564:28: error: too many arguments to function call, expected 1, have 4
+  564 |     cl_fmt(r->interchange, r->interchange_len, inter, sizeof inter);
+      |     ~~~~~~                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p44448/m0623_classify.c:548:13: note: 'cl_fmt' declared here
+  548 | static void cl_fmt(const ct_move /m, int len, char *out, unsigned cap) {
+      |             ^      ~~~~~~~~~~~~~
+pgbuild/mutants/p44448/m0623_classify.c:565:26: error: too many arguments to function call, expected 1, have 4
+  565 |     cl_fmt(r->insertion, r->insertion_len, insert, sizeof insert);
+      |     ~~~~~~               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p44448/m0623_classify.c:548:13: note: 'cl_fmt' declared here
+  548 | static void cl_fmt(const ct_move /m, int len, char *out, unsigned cap) {
+      |             ^      ~~~~~~~~~~~~~
+9 errors generated.
+pgbuild/mutants/p44448/m0624_classify.c:548:52: error: expected ')'
+  548 | static void cl_fmt(const ct_move *m, int len, char /out, unsigned cap) {
+      |                                                    ^
+pgbuild/mutants/p44448/m0624_classify.c:548:19: note: to match this '('
+  548 | static void cl_fmt(const ct_move *m, int len, char /out, unsigned cap) {
+      |                   ^
+pgbuild/mutants/p44448/m0624_classify.c:549:55: error: use of undeclared identifier 'out'
+  549 |     int w = ct_notation_format(m, len, CT_CLASSIFY_N, out, cap);
+      |                                                       ^~~
+pgbuild/mutants/p44448/m0624_classify.c:549:60: error: use of undeclared identifier 'cap'
+  549 |     int w = ct_notation_format(m, len, CT_CLASSIFY_N, out, cap);
+      |                                                            ^~~
+pgbuild/mutants/p44448/m0624_classify.c:551:9: error: use of undeclared identifier 'out'
+  551 |         out[0] = '\0';
+      |         ^~~
+pgbuild/mutants/p44448/m0624_classify.c:563:43: error: too many arguments to function call, expected 3, have 4
+  563 |     cl_fmt(r->setup, r->setup_len, setup, sizeof setup);
+      |     ~~~~~~                                ^~~~~~~~~~~~
+pgbuild/mutants/p44448/m0624_classify.c:548:13: note: 'cl_fmt' declared here
+  548 | static void cl_fmt(const ct_move *m, int len, char /out, unsigned cap) {
+      |             ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p44448/m0624_classify.c:564:55: error: too many arguments to function call, expected 3, have 4
+  564 |     cl_fmt(r->interchange, r->interchange_len, inter, sizeof inter);
+      |     ~~~~~~                                            ^~~~~~~~~~~~
+pgbuild/mutants/p44448/m0624_classify.c:548:13: note: 'cl_fmt' declared here
+  548 | static void cl_fmt(const ct_move *m, int len, char /out, unsigned cap) {
+      |             ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p44448/m0624_classify.c:565:52: error: too many arguments to function call, expected 3, have 4
+  565 |     cl_fmt(r->insertion, r->insertion_len, insert, sizeof insert);
+      |     ~~~~~~                                         ^~~~~~~~~~~~~
+pgbuild/mutants/p44448/m0624_classify.c:548:13: note: 'cl_fmt' declared here
+  548 | static void cl_fmt(const ct_move *m, int len, char /out, unsigned cap) {
+      |             ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+7 errors generated.
+pgbuild/mutants/p44448/m0630_classify.c:555:45: error: expected ')'
+  555 | static void cl_set_label(ct_classify_result /r) {
+      |                                             ^
+pgbuild/mutants/p44448/m0630_classify.c:555:25: note: to match this '('
+  555 | static void cl_set_label(ct_classify_result /r) {
+      |                         ^
+pgbuild/mutants/p44448/m0630_classify.c:556:14: error: use of undeclared identifier 'r'
+  556 |     snprintf(r->label, sizeof r->label, "%s", cl_labels[r->cls]);
+      |              ^
+pgbuild/mutants/p44448/m0630_classify.c:556:31: error: use of undeclared identifier 'r'
+  556 |     snprintf(r->label, sizeof r->label, "%s", cl_labels[r->cls]);
+      |                               ^
+pgbuild/mutants/p44448/m0630_classify.c:556:57: error: use of undeclared identifier 'r'
+  556 |     snprintf(r->label, sizeof r->label, "%s", cl_labels[r->cls]);
+      |                                                         ^
+pgbuild/mutants/p44448/m0630_classify.c:637:22: error: passing 'ct_classify_result *' to parameter of incompatible type 'ct_classify_result'; dereference with *
+  637 |         cl_set_label(out);
+      |                      ^~~
+      |                      *
+pgbuild/mutants/p44448/m0630_classify.c:555:45: note: passing argument to parameter here
+  555 | static void cl_set_label(ct_classify_result /r) {
+      |                                             ^
+pgbuild/mutants/p44448/m0630_classify.c:642:22: error: passing 'ct_classify_result *' to parameter of incompatible type 'ct_classify_result'; dereference with *
+  642 |         cl_set_label(out);
+      |                      ^~~
+      |                      *
+pgbuild/mutants/p44448/m0630_classify.c:555:45: note: passing argument to parameter here
+  555 | static void cl_set_label(ct_classify_result /r) {
+      |                                             ^
+pgbuild/mutants/p44448/m0630_classify.c:649:22: error: passing 'ct_classify_result *' to parameter of incompatible type 'ct_classify_result'; dereference with *
+  649 |         cl_set_label(out);
+      |                      ^~~
+      |                      *
+pgbuild/mutants/p44448/m0630_classify.c:555:45: note: passing argument to parameter here
+  555 | static void cl_set_label(ct_classify_result /r) {
+      |                                             ^
+pgbuild/mutants/p44448/m0630_classify.c:722:18: error: passing 'ct_classify_result *' to parameter of incompatible type 'ct_classify_result'; dereference with *
+  722 |     cl_set_label(out);
+      |                  ^~~
+      |                  *
+pgbuild/mutants/p44448/m0630_classify.c:555:45: note: passing argument to parameter here
+  555 | static void cl_set_label(ct_classify_result /r) {
+      |                                             ^
+8 errors generated.
+pgbuild/mutants/p44448/m0631_classify.c:559:45: error: expected ')'
+  559 | static void cl_rationale(ct_classify_result /r, const cl_perm_info *info) {
+      |                                             ^
+pgbuild/mutants/p44448/m0631_classify.c:559:25: note: to match this '('
+  559 | static void cl_rationale(ct_classify_result /r, const cl_perm_info *info) {
+      |                         ^
+pgbuild/mutants/p44448/m0631_classify.c:563:12: error: use of undeclared identifier 'r'
+  563 |     cl_fmt(r->setup, r->setup_len, setup, sizeof setup);
+      |            ^
+pgbuild/mutants/p44448/m0631_classify.c:563:22: error: use of undeclared identifier 'r'
+  563 |     cl_fmt(r->setup, r->setup_len, setup, sizeof setup);
+      |                      ^
+pgbuild/mutants/p44448/m0631_classify.c:564:12: error: use of undeclared identifier 'r'
+  564 |     cl_fmt(r->interchange, r->interchange_len, inter, sizeof inter);
+      |            ^
+pgbuild/mutants/p44448/m0631_classify.c:564:28: error: use of undeclared identifier 'r'
+  564 |     cl_fmt(r->interchange, r->interchange_len, inter, sizeof inter);
+      |                            ^
+pgbuild/mutants/p44448/m0631_classify.c:565:12: error: use of undeclared identifier 'r'
+  565 |     cl_fmt(r->insertion, r->insertion_len, insert, sizeof insert);
+      |            ^
+pgbuild/mutants/p44448/m0631_classify.c:565:26: error: use of undeclared identifier 'r'
+  565 |     cl_fmt(r->insertion, r->insertion_len, insert, sizeof insert);
+      |                          ^
+pgbuild/mutants/p44448/m0631_classify.c:566:13: error: use of undeclared identifier 'r'
+  566 |     switch (r->cls) {
+      |             ^
+pgbuild/mutants/p44448/m0631_classify.c:568:18: error: use of undeclared identifier 'r'
+  568 |         snprintf(r->rationale, sizeof r->rationale,
+      |                  ^
+pgbuild/mutants/p44448/m0631_classify.c:568:39: error: use of undeclared identifier 'r'
+  568 |         snprintf(r->rationale, sizeof r->rationale,
+      |                                       ^
+pgbuild/mutants/p44448/m0631_classify.c:572:18: error: use of undeclared identifier 'r'
+  572 |         snprintf(r->rationale, sizeof r->rationale,
+      |                  ^
+pgbuild/mutants/p44448/m0631_classify.c:572:39: error: use of undeclared identifier 'r'
+  572 |         snprintf(r->rationale, sizeof r->rationale,
+      |                                       ^
+pgbuild/mutants/p44448/m0631_classify.c:577:18: error: use of undeclared identifier 'r'
+  577 |         snprintf(r->rationale, sizeof r->rationale,
+      |                  ^
+pgbuild/mutants/p44448/m0631_classify.c:577:39: error: use of undeclared identifier 'r'
+  577 |         snprintf(r->rationale, sizeof r->rationale,
+      |                                       ^
+pgbuild/mutants/p44448/m0631_classify.c:582:18: error: use of undeclared identifier 'r'
+  582 |         snprintf(r->rationale, sizeof r->rationale,
+      |                  ^
+pgbuild/mutants/p44448/m0631_classify.c:582:39: error: use of undeclared identifier 'r'
+  582 |         snprintf(r->rationale, sizeof r->rationale,
+      |                                       ^
+pgbuild/mutants/p44448/m0631_classify.c:586:18: error: use of undeclared identifier 'r'
+  586 |         snprintf(r->rationale, sizeof r->rationale,
+      |                  ^
+pgbuild/mutants/p44448/m0631_classify.c:586:39: error: use of undeclared identifier 'r'
+  586 |         snprintf(r->rationale, sizeof r->rationale,
+      |                                       ^
+pgbuild/mutants/p44448/m0631_classify.c:590:18: error: use of undeclared identifier 'r'
+  590 |         snprintf(r->rationale, sizeof r->rationale,
+      |                  ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+pgbuild/mutants/p44448/m0632_classify.c:559:68: error: expected ')'
+  559 | static void cl_rationale(ct_classify_result *r, const cl_perm_info /info) {
+      |                                                                    ^
+pgbuild/mutants/p44448/m0632_classify.c:559:25: note: to match this '('
+  559 | static void cl_rationale(ct_classify_result *r, const cl_perm_info /info) {
+      |                         ^
+pgbuild/mutants/p44448/m0632_classify.c:616:18: error: use of undeclared identifier 'info'
+  616 |                  info->flipped);
+      |                  ^~~~
+pgbuild/mutants/p44448/m0632_classify.c:620:18: error: use of undeclared identifier 'info'
+  620 |                  info->twisted);
+      |                  ^~~~
+pgbuild/mutants/p44448/m0632_classify.c:723:23: error: passing 'cl_perm_info *' to parameter of incompatible type 'cl_perm_info'; remove &
+  723 |     cl_rationale(out, &info);
+      |                       ^~~~~
+pgbuild/mutants/p44448/m0632_classify.c:559:68: note: passing argument to parameter here
+  559 | static void cl_rationale(ct_classify_result *r, const cl_perm_info /info) {
+      |                                                                    ^
+4 errors generated.
+pgbuild/mutants/p44448/m0633_classify.c:629:31: error: expected ')'
+  629 | int ct_classify(const ct_move /seq, int count, ct_classify_result *out) {
+      |                               ^
+pgbuild/mutants/p44448/m0633_classify.c:629:16: note: to match this '('
+  629 | int ct_classify(const ct_move /seq, int count, ct_classify_result *out) {
+      |                ^
+pgbuild/mutants/p44448/m0633_classify.c:629:5: error: conflicting types for 'ct_classify'
+  629 | int ct_classify(const ct_move /seq, int count, ct_classify_result *out) {
+      |     ^
+src\gen/classify.h:36:5: note: previous declaration is here
+   36 | int ct_classify(const ct_move *seq, int count, ct_classify_result *out);
+      |     ^
+pgbuild/mutants/p44448/m0633_classify.c:630:9: error: use of undeclared identifier 'seq'
+  630 |     if (seq == NULL || out == NULL || count < 0) {
+      |         ^~~
+pgbuild/mutants/p44448/m0633_classify.c:630:24: error: use of undeclared identifier 'out'
+  630 |     if (seq == NULL || out == NULL || count < 0) {
+      |                        ^~~
+pgbuild/mutants/p44448/m0633_classify.c:630:39: error: use of undeclared identifier 'count'
+  630 |     if (seq == NULL || out == NULL || count < 0) {
+      |                                       ^~~~~
+pgbuild/mutants/p44448/m0633_classify.c:633:12: error: use of undeclared identifier 'out'
+  633 |     memset(out, 0, sizeof *out);
+      |            ^~~
+pgbuild/mutants/p44448/m0633_classify.c:633:28: error: use of undeclared identifier 'out'
+  633 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+pgbuild/mutants/p44448/m0633_classify.c:634:5: error: use of undeclared identifier 'out'
+  634 |     out->cls = CT_CLS_UNKNOWN;
+      |     ^~~
+pgbuild/mutants/p44448/m0633_classify.c:636:9: error: use of undeclared identifier 'count'
+  636 |     if (count == 0) {
+      |         ^~~~~
+pgbuild/mutants/p44448/m0633_classify.c:637:22: error: use of undeclared identifier 'out'
+  637 |         cl_set_label(out);
+      |                      ^~~
+pgbuild/mutants/p44448/m0633_classify.c:638:18: error: use of undeclared identifier 'out'
+  638 |         snprintf(out->rationale, sizeof out->rationale, "empty sequence");
+      |                  ^~~
+pgbuild/mutants/p44448/m0633_classify.c:638:41: error: use of undeclared identifier 'out'
+  638 |         snprintf(out->rationale, sizeof out->rationale, "empty sequence");
+      |                                         ^~~
+pgbuild/mutants/p44448/m0633_classify.c:641:9: error: use of undeclared identifier 'count'
+  641 |     if (count > CT_CLASSIFY_MOVES_MAX) {
+      |         ^~~~~
+pgbuild/mutants/p44448/m0633_classify.c:642:22: error: use of undeclared identifier 'out'
+  642 |         cl_set_label(out);
+      |                      ^~~
+pgbuild/mutants/p44448/m0633_classify.c:643:18: error: use of undeclared identifier 'out'
+  643 |         snprintf(out->rationale, sizeof out->rationale, "sequence longer than the classify bound");
+      |                  ^~~
+pgbuild/mutants/p44448/m0633_classify.c:643:41: error: use of undeclared identifier 'out'
+  643 |         snprintf(out->rationale, sizeof out->rationale, "sequence longer than the classify bound");
+      |                                         ^~~
+pgbuild/mutants/p44448/m0633_classify.c:647:37: error: use of undeclared identifier 'seq'
+  647 |     int len = ct_transform_simplify(seq, count, s.m, CT_CLASSIFY_MOVES_MAX);
+      |                                     ^~~
+pgbuild/mutants/p44448/m0633_classify.c:647:42: error: use of undeclared identifier 'count'
+  647 |     int len = ct_transform_simplify(seq, count, s.m, CT_CLASSIFY_MOVES_MAX);
+      |                                          ^~~~~
+pgbuild/mutants/p44448/m0633_classify.c:649:22: error: use of undeclared identifier 'out'
+  649 |         cl_set_label(out);
+      |                      ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+pgbuild/mutants/p44448/m0634_classify.c:629:67: error: expected ')'
+  629 | int ct_classify(const ct_move *seq, int count, ct_classify_result /out) {
+      |                                                                   ^
+pgbuild/mutants/p44448/m0634_classify.c:629:16: note: to match this '('
+  629 | int ct_classify(const ct_move *seq, int count, ct_classify_result /out) {
+      |                ^
+pgbuild/mutants/p44448/m0634_classify.c:629:5: error: conflicting types for 'ct_classify'
+  629 | int ct_classify(const ct_move *seq, int count, ct_classify_result /out) {
+      |     ^
+src\gen/classify.h:36:5: note: previous declaration is here
+   36 | int ct_classify(const ct_move *seq, int count, ct_classify_result *out);
+      |     ^
+pgbuild/mutants/p44448/m0634_classify.c:630:24: error: use of undeclared identifier 'out'
+  630 |     if (seq == NULL || out == NULL || count < 0) {
+      |                        ^~~
+pgbuild/mutants/p44448/m0634_classify.c:633:12: error: use of undeclared identifier 'out'
+  633 |     memset(out, 0, sizeof *out);
+      |            ^~~
+pgbuild/mutants/p44448/m0634_classify.c:633:28: error: use of undeclared identifier 'out'
+  633 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+pgbuild/mutants/p44448/m0634_classify.c:634:5: error: use of undeclared identifier 'out'
+  634 |     out->cls = CT_CLS_UNKNOWN;
+      |     ^~~
+pgbuild/mutants/p44448/m0634_classify.c:637:22: error: use of undeclared identifier 'out'
+  637 |         cl_set_label(out);
+      |                      ^~~
+pgbuild/mutants/p44448/m0634_classify.c:638:18: error: use of undeclared identifier 'out'
+  638 |         snprintf(out->rationale, sizeof out->rationale, "empty sequence");
+      |                  ^~~
+pgbuild/mutants/p44448/m0634_classify.c:638:41: error: use of undeclared identifier 'out'
+  638 |         snprintf(out->rationale, sizeof out->rationale, "empty sequence");
+      |                                         ^~~
+pgbuild/mutants/p44448/m0634_classify.c:642:22: error: use of undeclared identifier 'out'
+  642 |         cl_set_label(out);
+      |                      ^~~
+pgbuild/mutants/p44448/m0634_classify.c:643:18: error: use of undeclared identifier 'out'
+  643 |         snprintf(out->rationale, sizeof out->rationale, "sequence longer than the classify bound");
+      |                  ^~~
+pgbuild/mutants/p44448/m0634_classify.c:643:41: error: use of undeclared identifier 'out'
+  643 |         snprintf(out->rationale, sizeof out->rationale, "sequence longer than the classify bound");
+      |                                         ^~~
+pgbuild/mutants/p44448/m0634_classify.c:649:22: error: use of undeclared identifier 'out'
+  649 |         cl_set_label(out);
+      |                      ^~~
+pgbuild/mutants/p44448/m0634_classify.c:650:18: error: use of undeclared identifier 'out'
+  650 |         snprintf(out->rationale, sizeof out->rationale, "invalid move in sequence");
+      |                  ^~~
+pgbuild/mutants/p44448/m0634_classify.c:650:41: error: use of undeclared identifier 'out'
+  650 |         snprintf(out->rationale, sizeof out->rationale, "invalid move in sequence");
+      |                                         ^~~
+pgbuild/mutants/p44448/m0634_classify.c:654:5: error: use of undeclared identifier 'out'
+  654 |     out->moves = s.len;
+      |     ^~~
+pgbuild/mutants/p44448/m0634_classify.c:655:5: error: use of undeclared identifier 'out'
+  655 |     out->qtm = ct_count_qtm(s.m, s.len);
+      |     ^~~
+pgbuild/mutants/p44448/m0634_classify.c:661:9: error: use of undeclared identifier 'out'
+  661 |         out->cls = CT_CLS_PARITY;
+      |         ^~~
+pgbuild/mutants/p44448/m0634_classify.c:663:9: error: use of undeclared identifier 'out'
+  663 |         out->cls = CT_CLS_FLIP;
+      |         ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite unit_classify exited 1
+pgbuild/mutants/p44448/m0636_classify.c:630:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  630 |     if (seq == NULL && out == NULL || count < 0) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p44448/m0636_classify.c:630:21: note: place parentheses around the '&&' expression to silence this warning
+  630 |     if (seq == NULL && out == NULL || count < 0) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite unit_classify exited 1
+pgbuild/mutants/p44448/m0638_classify.c:630:36: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  630 |     if (seq == NULL || out == NULL && count < 0) {
+      |                     ~~ ~~~~~~~~~~~~^~~~~~~~~~~~
+pgbuild/mutants/p44448/m0638_classify.c:630:36: note: place parentheses around the '&&' expression to silence this warning
+  630 |     if (seq == NULL || out == NULL && count < 0) {
+      |                                    ^           
+      |                        (                       )
+1 error generated.
+mutate: suite unit_classify exited 1
+rc/gen/classify.c:502 [cmp == -> !=]
+SURVIVED  m0570 src/gen/classify.c:505 [bool false -> true]
+KILLED    m0571 src/gen/classify.c:511 [arith * -> /]
+          build break
+KILLED    m0572 src/gen/classify.c:512 [arith * -> /]
+          build break
+SURVIVED  m0573 src/gen/classify.c:513 [logic && -> ||]
+KILLED    m0574 src/gen/classify.c:513 [not-del ! -> (deleted)]
+SURVIVED  m0575 src/gen/classify.c:514 [logic && -> ||]
+KILLED    m0576 src/gen/classify.c:514 [not-del ! -> (deleted)]
+KILLED    m0577 src/gen/classify.c:516 [cmp == -> !=]
+KILLED    m0578 src/gen/classify.c:516 [logic || -> &&]
+KILLED    m0579 src/gen/classify.c:516 [cmp == -> !=]
+KILLED    m0580 src/gen/classify.c:518 [cmp == -> !=]
+KILLED    m0581 src/gen/classify.c:518 [int+1 1 -> 2]
+KILLED    m0582 src/gen/classify.c:518 [int-1 1 -> 0]
+KILLED    m0583 src/gen/classify.c:518 [logic && -> ||]
+KILLED    m0584 src/gen/classify.c:518 [cmp == -> !=]
+KILLED    m0585 src/gen/classify.c:518 [int+1 1 -> 2]
+KILLED    m0586 src/gen/classify.c:518 [int-1 1 -> 0]
+KILLED    m0587 src/gen/classify.c:519 [cmp == -> !=]
+KILLED    m0588 src/gen/classify.c:521 [cmp == -> !=]
+KILLED    m0589 src/gen/classify.c:523 [cmp == -> !=]
+KILLED    m0590 src/gen/classify.c:529 [arith * -> /]
+          build break
+KILLED    m0591 src/gen/classify.c:529 [cmp == -> !=]
+KILLED    m0592 src/gen/classify.c:529 [arith + -> -]
+KILLED    m0593 src/gen/classify.c:529 [arith + -> -]
+KILLED    m0594 src/gen/classify.c:529 [arith + -> -]
+SURVIVED  m0595 src/gen/classify.c:529 [int+1 1 -> 2]
+SURVIVED  m0596 src/gen/classify.c:529 [int-1 1 -> 0]
+KILLED    m0597 src/gen/classify.c:530 [arith * -> /]
+          build break
+KILLED    m0598 src/gen/classify.c:530 [cmp == -> !=]
+SURVIVED  m0599 src/gen/classify.c:530 [int+1 1 -> 2]
+SURVIVED  m0600 src/gen/classify.c:530 [int-1 1 -> 0]
+KILLED    m0601 src/gen/classify.c:530 [arith + -> -]
+KILLED    m0602 src/gen/classify.c:530 [arith + -> -]
+KILLED    m0603 src/gen/classify.c:530 [arith + -> -]
+KILLED    m0604 src/gen/classify.c:531 [int+1 1 -> 2]
+KILLED    m0605 src/gen/classify.c:531 [int-1 1 -> 0]
+KILLED    m0606 src/gen/classify.c:531 [int+1 0 -> 1]
+KILLED    m0607 src/gen/classify.c:531 [int-1 0 -> -1]
+KILLED    m0608 src/gen/classify.c:532 [cmp == -> !=]
+KILLED    m0609 src/gen/classify.c:533 [cmp == -> !=]
+KILLED    m0610 src/gen/classify.c:533 [int+1 0 -> 1]
+KILLED    m0611 src/gen/classify.c:533 [int-1 0 -> -1]
+KILLED    m0612 src/gen/classify.c:535 [logic && -> ||]
+KILLED    m0613 src/gen/classify.c:535 [cmp == -> !=]
+KILLED    m0614 src/gen/classify.c:537 [int+1 2 -> 3]
+KILLED    m0615 src/gen/classify.c:537 [int-1 2 -> 1]
+KILLED    m0616 src/gen/classify.c:537 [arith * -> /]
+SURVIVED  m0617 src/gen/classify.c:537 [arith + -> -]
+SURVIVED  m0618 src/gen/classify.c:537 [arith + -> -]
+KILLED    m0619 src/gen/classify.c:537 [cmp == -> !=]
+KILLED    m0620 src/gen/classify.c:539 [logic && -> ||]
+KILLED    m0621 src/gen/classify.c:539 [cmp == -> !=]
+KILLED    m0622 src/gen/classify.c:542 [logic || -> &&]
+KILLED    m0623 src/gen/classify.c:548 [arith * -> /]
+          build break
+KILLED    m0624 src/gen/classify.c:548 [arith * -> /]
+          build break
+SURVIVED  m0625 src/gen/classify.c:550 [cmp < -> <=]
+SURVIVED  m0626 src/gen/classify.c:550 [int+1 0 -> 1]
+SURVIVED  m0627 src/gen/classify.c:550 [int-1 0 -> -1]
+SURVIVED  m0628 src/gen/classify.c:551 [int+1 0 -> 1]
+SURVIVED  m0629 src/gen/classify.c:551 [int-1 0 -> -1]
+KILLED    m0630 src/gen/classify.c:555 [arith * -> /]
+          build break
+KILLED    m0631 src/gen/classify.c:559 [arith * -> /]
+          build break
+KILLED    m0632 src/gen/classify.c:559 [arith * -> /]
+          build break
+KILLED    m0633 src/gen/classify.c:629 [arith * -> /]
+          build break
+KILLED    m0634 src/gen/classify.c:629 [arith * -> /]
+          build break
+KILLED    m0635 src/gen/classify.c:630 [cmp == -> !=]
+KILLED    m0636 src/gen/classify.c:630 [logic || -> &&]
+          build break
+KILLED    m0637 src/gen/classify.c:630 [cmp == -> !=]
+KILLED    m0638 src/gen/classify.c:630 [logic || -> &&]
+          build break
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify exited -1073741795
+pgbuild/mutants/p44448/m0644_classify.c:633:27: error: expected expression
+  633 |     memset(out, 0, sizeof /out);
+      |                           ^
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_gates exited 1
+mutate: suite unit_classify_gates exited 1
+mutate: suite unit_classify_gates exited 1
+mutate: suite unit_classify_gates exited 1
+mutate: suite unit_classify_gates exited 1
+pgbuild/mutants/p44448/m0652_classify.c:667:55: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  667 |         bool corner_cycle = info.corner || !info.edge && info.corner_exact;
+      |                                         ~~ ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p44448/m0652_classify.c:667:55: note: place parentheses around the '&&' expression to silence this warning
+  667 |         bool corner_cycle = info.corner || !info.edge && info.corner_exact;
+      |                                                       ^                   
+      |                                            (                              )
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p44448/m0654_classify.c:667:41: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  667 |         bool corner_cycle = info.corner && !info.edge || info.corner_exact;
+      |                             ~~~~~~~~~~~~^~~~~~~~~~~~~ ~~
+pgbuild/mutants/p44448/m0654_classify.c:667:41: note: place parentheses around the '&&' expression to silence this warning
+  667 |         bool corner_cycle = info.corner && !info.edge || info.corner_exact;
+      |                                         ^
+      |                             (                        )
+1 error generated.
+pgbuild/mutants/p44448/m0655_classify.c:668:53: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  668 |         bool edge_cycle = info.edge || !info.corner && info.edge_exact;
+      |                                     ~~ ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p44448/m0655_classify.c:668:53: note: place parentheses around the '&&' expression to silence this warning
+  668 |         bool edge_cycle = info.edge || !info.corner && info.edge_exact;
+      |                                                     ^                 
+      |                                        (                              )
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p44448/m0657_classify.c:668:37: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  668 |         bool edge_cycle = info.edge && !info.corner || info.edge_exact;
+      |                           ~~~~~~~~~~^~~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p44448/m0657_classify.c:668:37: note: place parentheses around the '&&' expression to silence this warning
+  668 |         bool edge_cycle = info.edge && !info.corner || info.edge_exact;
+      |                                     ^
+      |                           (                        )
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741819
+pgbuild/mutants/p44448/m0661_classify.c:673:57: error: expected expression
+  673 |             memcpy(plain.m, s.m, (size_t)s.len * sizeof /s.m);
+      |                                                         ^
+1 error generated.
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+pgbuild/mutants/p44448/m0678_classify.c:679:54: error: incompatible pointer types passing 'ct_move[3][3]' to parameter of type 'ct_move (*)[2]' [-Wincompatible-pointer-types]
+  679 |                 int vn = cl_split_variants(s.m[pos], vars);
+      |                                                      ^~~~
+pgbuild/mutants/p44448/m0678_classify.c:331:49: note: passing argument to parameter 'out' here
+  331 | static int cl_split_variants(ct_move m, ct_move out[CL_SPLIT_VARIANTS][2]) {
+      |                                                 ^
+1 error generated.
+pgbuild/mutants/p44448/m0679_classify.c:679:54: error: incompatible pointer types passing 'ct_move[3][1]' to parameter of type 'ct_move (*)[2]' [-Wincompatible-pointer-types]
+  679 |                 int vn = cl_split_variants(s.m[pos], vars);
+      |                                                      ^~~~
+pgbuild/mutants/p44448/m0679_classify.c:331:49: note: passing argument to parameter 'out' here
+  331 | static int cl_split_variants(ct_move m, ct_move out[CL_SPLIT_VARIANTS][2]) {
+      |                                                 ^
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741819
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p44448/m0688_classify.c:687:30: error: expected identifier or '('
+  687 |                 const cl_exp /e = &exps[ei];
+      |                              ^
+pgbuild/mutants/p44448/m0688_classify.c:691:47: error: use of undeclared identifier 'e'
+  691 |                             if (cl_try_cyclic(e, &s, k) &&
+      |                                               ^
+pgbuild/mutants/p44448/m0688_classify.c:695:52: error: use of undeclared identifier 'e'
+  695 |                                 memcpy(out->setup, e->m, (size_t)k * sizeof *out->setup);
+      |                                                    ^
+pgbuild/mutants/p44448/m0688_classify.c:697:53: error: use of undeclared identifier 'e'
+  697 |                                 out->insertion[0] = e->m[k];
+      |                                                     ^
+pgbuild/mutants/p44448/m0688_classify.c:698:53: error: use of undeclared identifier 'e'
+  698 |                                 out->insertion[1] = e->m[k + 1];
+      |                                                     ^
+pgbuild/mutants/p44448/m0688_classify.c:700:55: error: use of undeclared identifier 'e'
+  700 |                                 out->interchange[0] = e->m[k + 2];
+      |                                                       ^
+pgbuild/mutants/p44448/m0688_classify.c:707:41: error: use of undeclared identifier 'e'
+  707 |                         if (cl_try_pair(e, &s, k, cl_pairs[pi].p, cl_pairs[pi].q)) {
+      |                                         ^
+pgbuild/mutants/p44448/m0688_classify.c:709:43: error: use of undeclared identifier 'e'
+  709 |                                 cl_decide(e, k, cl_pairs[pi].p, cl_pairs[pi].q, s.len, &info);
+      |                                           ^
+pgbuild/mutants/p44448/m0688_classify.c:713:48: error: use of undeclared identifier 'e'
+  713 |                             cl_fill_parts(out, e, k, cl_pairs[pi].p, cl_pairs[pi].q);
+      |                                                ^
+9 errors generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify exited 1
+pgbuild/mutants/p44448/m0703_classify.c:695:77: error: expected expression
+  695 |                                 memcpy(out->setup, e->m, (size_t)k * sizeof /out->setup);
+      |                                                                             ^
+1 error generated.
+mutate: suite unit_classify_fixture exited -1073741819
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited -1073741819
+pgbuild/mutants/p44448/m0707_classify.c:697:33: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  697 |                                 out->insertion[-1] = e->m[k];
+      |                                 ^              ~~
+src\gen/classify.h:26:5: note: array 'insertion' declared here
+   26 |     ct_move insertion[CT_CLASSIFY_PART_MAX];
+      |     ^
+1 error generated.
+mutate: suite unit_classify_fixture exited -1073741819
+KILLED    m0639 src/gen/classify.c:630 [cmp < -> <=]
+KILLED    m0640 src/gen/classify.c:630 [int+1 0 -> 1]
+KILLED    m0641 src/gen/classify.c:630 [int-1 0 -> -1]
+KILLED    m0642 src/gen/classify.c:633 [int+1 0 -> 1]
+KILLED    m0643 src/gen/classify.c:633 [int-1 0 -> -1]
+KILLED    m0644 src/gen/classify.c:633 [arith * -> /]
+          build break
+KILLED    m0645 src/gen/classify.c:636 [cmp == -> !=]
+KILLED    m0646 src/gen/classify.c:636 [int+1 0 -> 1]
+KILLED    m0647 src/gen/classify.c:636 [int-1 0 -> -1]
+KILLED    m0648 src/gen/classify.c:641 [cmp > -> >=]
+KILLED    m0649 src/gen/classify.c:648 [cmp < -> <=]
+KILLED    m0650 src/gen/classify.c:648 [int+1 0 -> 1]
+SURVIVED  m0651 src/gen/classify.c:648 [int-1 0 -> -1]
+KILLED    m0652 src/gen/classify.c:667 [logic && -> ||]
+          build break
+KILLED    m0653 src/gen/classify.c:667 [not-del ! -> (deleted)]
+KILLED    m0654 src/gen/classify.c:667 [logic && -> ||]
+          build break
+KILLED    m0655 src/gen/classify.c:668 [logic && -> ||]
+          build break
+KILLED    m0656 src/gen/classify.c:668 [not-del ! -> (deleted)]
+KILLED    m0657 src/gen/classify.c:668 [logic && -> ||]
+          build break
+KILLED    m0658 src/gen/classify.c:669 [bool false -> true]
+KILLED    m0659 src/gen/classify.c:670 [logic || -> &&]
+KILLED    m0660 src/gen/classify.c:673 [arith * -> /]
+KILLED    m0661 src/gen/classify.c:673 [arith * -> /]
+          build break
+SURVIVED  m0662 src/gen/classify.c:674 [arith * -> /]
+SURVIVED  m0663 src/gen/classify.c:674 [int+1 2 -> 3]
+SURVIVED  m0664 src/gen/classify.c:674 [int-1 2 -> 1]
+SURVIVED  m0665 src/gen/classify.c:674 [arith + -> -]
+SURVIVED  m0666 src/gen/classify.c:674 [int+1 1 -> 2]
+SURVIVED  m0667 src/gen/classify.c:674 [int-1 1 -> 0]
+SURVIVED  m0668 src/gen/classify.c:675 [int+1 0 -> 1]
+KILLED    m0669 src/gen/classify.c:675 [int-1 0 -> -1]
+SURVIVED  m0670 src/gen/classify.c:677 [int+1 0 -> 1]
+KILLED    m0671 src/gen/classify.c:677 [int-1 0 -> -1]
+SURVIVED  m0672 src/gen/classify.c:677 [cmp < -> <=]
+SURVIVED  m0673 src/gen/classify.c:677 [logic && -> ||]
+SURVIVED  m0674 src/gen/classify.c:677 [cmp < -> <=]
+SURVIVED  m0675 src/gen/classify.c:677 [arith / -> *]
+SURVIVED  m0676 src/gen/classify.c:677 [int+1 0 -> 1]
+SURVIVED  m0677 src/gen/classify.c:677 [int-1 0 -> -1]
+KILLED    m0678 src/gen/classify.c:678 [int+1 2 -> 3]
+          build break
+KILLED    m0679 src/gen/classify.c:678 [int-1 2 -> 1]
+          build break
+SURVIVED  m0680 src/gen/classify.c:680 [int+1 1 -> 2]
+SURVIVED  m0681 src/gen/classify.c:680 [int-1 1 -> 0]
+SURVIVED  m0682 src/gen/classify.c:680 [cmp < -> <=]
+KILLED    m0683 src/gen/classify.c:686 [int+1 0 -> 1]
+KILLED    m0684 src/gen/classify.c:686 [int-1 0 -> -1]
+SURVIVED  m0685 src/gen/classify.c:686 [cmp < -> <=]
+KILLED    m0686 src/gen/classify.c:686 [logic && -> ||]
+KILLED    m0687 src/gen/classify.c:686 [not-del ! -> (deleted)]
+KILLED    m0688 src/gen/classify.c:687 [arith * -> /]
+          build break
+KILLED    m0689 src/gen/classify.c:688 [int+1 0 -> 1]
+KILLED    m0690 src/gen/classify.c:688 [int-1 0 -> -1]
+SURVIVED  m0691 src/gen/classify.c:688 [cmp <= -> <]
+KILLED    m0692 src/gen/classify.c:688 [logic && -> ||]
+KILLED    m0693 src/gen/classify.c:688 [not-del ! -> (deleted)]
+KILLED    m0694 src/gen/classify.c:689 [int+1 0 -> 1]
+KILLED    m0695 src/gen/classify.c:689 [int-1 0 -> -1]
+KILLED    m0696 src/gen/classify.c:689 [cmp < -> <=]
+KILLED    m0697 src/gen/classify.c:689 [logic && -> ||]
+KILLED    m0698 src/gen/classify.c:689 [not-del ! -> (deleted)]
+SURVIVED  m0699 src/gen/classify.c:690 [cmp == -> !=]
+KILLED    m0700 src/gen/classify.c:691 [logic && -> ||]
+KILLED    m0701 src/gen/classify.c:693 [cmp == -> !=]
+SURVIVED  m0702 src/gen/classify.c:695 [arith * -> /]
+KILLED    m0703 src/gen/classify.c:695 [arith * -> /]
+          build break
+KILLED    m0704 src/gen/classify.c:696 [int+1 2 -> 3]
+KILLED    m0705 src/gen/classify.c:696 [int-1 2 -> 1]
+KILLED    m0706 src/gen/classify.c:697 [int+1 0 -> 1]
+KILLED    m0707 src/gen/classify.c:697 [int-1 0 -> -1]
+          build break
+KILLED    m0708 src/gen/classify.c:698 [int+1 1 ->mutate: suite unit_classify_fixture exited -1073741819
+mutate: suite unit_classify_fixture exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p44448/m0716_classify.c:700:33: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  700 |                                 out->interchange[-1] = e->m[k + 2];
+      |                                 ^                ~~
+src\gen/classify.h:24:5: note: array 'interchange' declared here
+   24 |     ct_move interchange[CT_CLASSIFY_PART_MAX];
+      |     ^
+1 error generated.
+mutate: suite unit_classify_fixture exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+pgbuild/mutants/p44448/m0724_classify.c:727:32: error: expected ')'
+  727 | int ct_classify_alg(const char /alg, ct_classify_result *out) {
+      |                                ^
+pgbuild/mutants/p44448/m0724_classify.c:727:20: note: to match this '('
+  727 | int ct_classify_alg(const char /alg, ct_classify_result *out) {
+      |                    ^
+pgbuild/mutants/p44448/m0724_classify.c:727:5: error: conflicting types for 'ct_classify_alg'
+  727 | int ct_classify_alg(const char /alg, ct_classify_result *out) {
+      |     ^
+src\gen/classify.h:37:5: note: previous declaration is here
+   37 | int ct_classify_alg(const char *alg, ct_classify_result *out);
+      |     ^
+pgbuild/mutants/p44448/m0724_classify.c:728:9: error: use of undeclared identifier 'alg'
+  728 |     if (alg == NULL || out == NULL) {
+      |         ^~~
+pgbuild/mutants/p44448/m0724_classify.c:728:24: error: use of undeclared identifier 'out'
+  728 |     if (alg == NULL || out == NULL) {
+      |                        ^~~
+pgbuild/mutants/p44448/m0724_classify.c:732:31: error: use of undeclared identifier 'alg'
+  732 |     int n = ct_notation_parse(alg, CT_CLASSIFY_N, seq, CT_CLASSIFY_MOVES_MAX);
+      |                               ^~~
+pgbuild/mutants/p44448/m0724_classify.c:736:32: error: use of undeclared identifier 'out'
+  736 |     return ct_classify(seq, n, out);
+      |                                ^~~
+6 errors generated.
+pgbuild/mutants/p44448/m0725_classify.c:727:57: error: expected ')'
+  727 | int ct_classify_alg(const char *alg, ct_classify_result /out) {
+      |                                                         ^
+pgbuild/mutants/p44448/m0725_classify.c:727:20: note: to match this '('
+  727 | int ct_classify_alg(const char *alg, ct_classify_result /out) {
+      |                    ^
+pgbuild/mutants/p44448/m0725_classify.c:727:5: error: conflicting types for 'ct_classify_alg'
+  727 | int ct_classify_alg(const char *alg, ct_classify_result /out) {
+      |     ^
+src\gen/classify.h:37:5: note: previous declaration is here
+   37 | int ct_classify_alg(const char *alg, ct_classify_result *out);
+      |     ^
+pgbuild/mutants/p44448/m0725_classify.c:728:24: error: use of undeclared identifier 'out'
+  728 |     if (alg == NULL || out == NULL) {
+      |                        ^~~
+pgbuild/mutants/p44448/m0725_classify.c:736:32: error: use of undeclared identifier 'out'
+  736 |     return ct_classify(seq, n, out);
+      |                                ^~~
+4 errors generated.
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify exited 1
+pgbuild/mutants/p44448/m0732_classify.c:739:12: error: expected identifier or '('
+  739 | const char /ct_classification_label(ct_classification cls) {
+      |            ^
+1 error generated.
+mutate: suite unit_classify exited 1
+pgbuild/mutants/p44448/m0734_classify.c:740:27: error: non-overlapping comparisons always evaluate to false [-Werror,-Wtautological-overlap-compare]
+  740 |     if (cls < CT_CLS_PURE && cls > CT_CLS_UNKNOWN) {
+      |         ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+pgbuild/mutants/p44448/m0736_classify.c:746:12: error: expected identifier or '('
+  746 | const char /ct_classification_alias(ct_classification cls) {
+      |            ^
+1 error generated.
+mutate: suite unit_classify exited 1
+pgbuild/mutants/p44448/m0738_classify.c:747:27: error: non-overlapping comparisons always evaluate to false [-Werror,-Wtautological-overlap-compare]
+  747 |     if (cls < CT_CLS_PURE && cls > CT_CLS_UNKNOWN) {
+      |         ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+pgbuild/mutants/p44448/m0740_classify.c:753:59: error: expected ')'
+  753 | ct_classification ct_classification_from_label(const char /label) {
+      |                                                           ^
+pgbuild/mutants/p44448/m0740_classify.c:753:47: note: to match this '('
+  753 | ct_classification ct_classification_from_label(const char /label) {
+      |                                               ^
+pgbuild/mutants/p44448/m0740_classify.c:753:19: error: conflicting types for 'ct_classification_from_label'
+  753 | ct_classification ct_classification_from_label(const char /label) {
+      |                   ^
+src\gen/classify.h:40:19: note: previous declaration is here
+   40 | ct_classification ct_classification_from_label(const char *label);
+      |                   ^
+pgbuild/mutants/p44448/m0740_classify.c:754:9: error: use of undeclared identifier 'label'
+  754 |     if (label == NULL) {
+      |         ^~~~~
+pgbuild/mutants/p44448/m0740_classify.c:758:20: error: use of undeclared identifier 'label'
+  758 |         if (strcmp(label, cl_labels[i]) == 0) {
+      |                    ^~~~~
+4 errors generated.
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify exited 1
+ 2]
+KILLED    m0709 src/gen/classify.c:698 [int-1 1 -> 0]
+KILLED    m0710 src/gen/classify.c:698 [arith + -> -]
+KILLED    m0711 src/gen/classify.c:698 [int+1 1 -> 2]
+KILLED    m0712 src/gen/classify.c:698 [int-1 1 -> 0]
+KILLED    m0713 src/gen/classify.c:699 [int+1 1 -> 2]
+KILLED    m0714 src/gen/classify.c:699 [int-1 1 -> 0]
+KILLED    m0715 src/gen/classify.c:700 [int+1 0 -> 1]
+KILLED    m0716 src/gen/classify.c:700 [int-1 0 -> -1]
+          build break
+KILLED    m0717 src/gen/classify.c:700 [arith + -> -]
+KILLED    m0718 src/gen/classify.c:700 [int+1 2 -> 3]
+KILLED    m0719 src/gen/classify.c:700 [int-1 2 -> 1]
+KILLED    m0720 src/gen/classify.c:701 [bool true -> false]
+SURVIVED  m0721 src/gen/classify.c:703 [bool true -> false]
+KILLED    m0722 src/gen/classify.c:710 [cmp == -> !=]
+KILLED    m0723 src/gen/classify.c:715 [bool true -> false]
+KILLED    m0724 src/gen/classify.c:727 [arith * -> /]
+          build break
+KILLED    m0725 src/gen/classify.c:727 [arith * -> /]
+          build break
+KILLED    m0726 src/gen/classify.c:728 [cmp == -> !=]
+SURVIVED  m0727 src/gen/classify.c:728 [logic || -> &&]
+KILLED    m0728 src/gen/classify.c:728 [cmp == -> !=]
+KILLED    m0729 src/gen/classify.c:733 [cmp < -> <=]
+KILLED    m0730 src/gen/classify.c:733 [int+1 0 -> 1]
+SURVIVED  m0731 src/gen/classify.c:733 [int-1 0 -> -1]
+KILLED    m0732 src/gen/classify.c:739 [arith * -> /]
+          build break
+KILLED    m0733 src/gen/classify.c:740 [cmp < -> <=]
+KILLED    m0734 src/gen/classify.c:740 [logic || -> &&]
+          build break
+SURVIVED  m0735 src/gen/classify.c:740 [cmp > -> >=]
+KILLED    m0736 src/gen/classify.c:746 [arith * -> /]
+          build break
+KILLED    m0737 src/gen/classify.c:747 [cmp < -> <=]
+KILLED    m0738 src/gen/classify.c:747 [logic || -> &&]
+          build break
+SURVIVED  m0739 src/gen/classify.c:747 [cmp > -> >=]
+KILLED    m0740 src/gen/classify.c:753 [arith * -> /]
+          build break
+KILLED    m0741 src/gen/classify.c:754 [cmp == -> !=]
+SURVIVED  m0742 src/gen/classify.c:757 [cmp <= -> <]
+KILLED    m0743 src/gen/classify.c:758 [cmp == -> !=]
+KILLED    m0744 src/gen/classify.c:758 [int+1 0 -> 1]
+KILLED    m0745 src/gen/classify.c:758 [int-1 0 -> -1]
+ACCEPTED  m0499 src/gen/classify.c:431 [int-1 2 -> 1] :: fill part width mutants shift the copy within the parts arrays, the emitted spans and rebuild equality hold for every pinned fixture
+ACCEPTED  m0500 src/gen/classify.c:431 [arith * -> /] :: fill part width mutants shift the copy within the parts arrays, the emitted spans and rebuild equality hold for every pinned fixture
+ACCEPTED  m0507 src/gen/classify.c:434 [int+1 2 -> 3] :: fill tail copy width mutants keep the window inside the parts arrays, pinned rebuilds still match
+ACCEPTED  m0514 src/gen/classify.c:438 [arith + -> -] :: pair rebuild length guard arithmetic shifts the boundary by one, pinned rebuilds sit strictly inside the cap
+ACCEPTED  m0515 src/gen/classify.c:438 [int+1 1 -> 2] :: pair rebuild length guard arithmetic shifts the boundary by one, pinned rebuilds sit strictly inside the cap
+ACCEPTED  m0516 src/gen/classify.c:438 [int-1 1 -> 0] :: pair rebuild length guard arithmetic shifts the boundary by one, pinned rebuilds sit strictly inside the cap
+ACCEPTED  m0518 src/gen/classify.c:440 [arith * -> /] :: pair simplify failure flip admits attempts whose rebuild equality then fails, attempt only divergence
+ACCEPTED  m0520 src/gen/classify.c:444 [cmp < -> <=] :: cyclic rebuild length guard arithmetic shifts the boundary by one, pinned rebuilds sit strictly inside the cap
+ACCEPTED  m0521 src/gen/classify.c:444 [int+1 0 -> 1] :: cyclic rebuild length guard arithmetic shifts the boundary by one, pinned rebuilds sit strictly inside the cap
+ACCEPTED  m0522 src/gen/classify.c:444 [int-1 0 -> -1] :: cyclic rebuild length guard arithmetic shifts the boundary by one, pinned rebuilds sit strictly inside the cap
+ACCEPTED  m0523 src/gen/classify.c:445 [bool false -> true] :: cyclic mismatch flip admits only non matching rebuilds which no pinned fixture produces
+ACCEPTED  m0550 src/gen/classify.c:469 [bool false -> true] :: length class ok init flip only matters for the default case which assigns false explicitly one line later
+ACCEPTED  m0556 src/gen/classify.c:484 [logic && -> ||] :: conj class conjunction mutants widen the corner conjunct, the pinned B9 fixtures are edge only so the corner flag never gates a pinned verdict the length check does not already gate
+ACCEPTED  m0558 src/gen/classify.c:487 [logic && -> ||] :: cyclic shift class conjunction mutants admit edge cyclic shapes at the wrong length, the length class gate then rejects them
+ACCEPTED  m0564 src/gen/classify.c:496 [logic && -> ||] :: sp5 class conjunction mutants admit corner shapes at five moves, no pinned corner case reaches five moves so the widened gate accepts nothing new
+ACCEPTED  m0566 src/gen/classify.c:499 [logic && -> ||] :: sp7 class conjunction mutants admit corner shapes at seven moves, no pinned corner case reaches seven moves
+ACCEPTED  m0568 src/gen/classify.c:502 [logic && -> ||] :: sp9 class conjunction mutants admit corner shapes at nine moves, the pinned corner nine move cases classify through the A9 branch first
+ACCEPTED  m0570 src/gen/classify.c:505 [bool false -> true] :: length class default flip writes false one branch earlier, both paths emit unknown
+ACCEPTED  m0573 src/gen/classify.c:513 [logic && -> ||] :: decide corner flag logic mutants are equivalent: cl_decide only runs inside the single-orbit gate in ct_classify, so info->corner and info->edge are never both true or both false at any call
+ACCEPTED  m0575 src/gen/classify.c:514 [logic && -> ||] :: decide edge flag logic mutants are equivalent: cl_decide only runs inside the single-orbit gate in ct_classify, so info->corner and info->edge are never both true or both false at any call
+ACCEPTED  m0595 src/gen/classify.c:529 [int+1 1 -> 2] :: decide three pointer offset mutants shift the compared slot, every pinned SP9 and orth fixture distinguishes through the length gate before the shape comparison, verified across the synth table corpus
+ACCEPTED  m0596 src/gen/classify.c:529 [int-1 1 -> 0] :: decide three pointer offset mutants shift the compared slot, every pinned SP9 and orth fixture distinguishes through the length gate before the shape comparison, verified across the synth table corpus
+ACCEPTED  m0599 src/gen/classify.c:530 [int+1 1 -> 2] :: decide one pointer offset mutants shift the compared slot, the pinned shape splits all resolve through the length gates, verified across the synth table corpus
+ACCEPTED  m0600 src/gen/classify.c:530 [int-1 1 -> 0] :: decide one pointer offset mutants shift the compared slot, the pinned shape splits all resolve through the length gates, verified across the synth table corpus
+ACCEPTED  m0617 src/gen/classify.c:537 [arith + -> -] :: sp shape conjunction flip admits shapes the length gate then rejects, attempt only divergence on the pinned corpus
+ACCEPTED  m0618 src/gen/classify.c:537 [arith + -> -] :: sp shape conjunction flip admits shapes the length gate then rejects, attempt only divergence on the pinned corpus
+ACCEPTED  m0625 src/gen/classify.c:550 [cmp < -> <=] :: fmt width check mutants are equivalent: the formatted spans hold at most 5 moves at n = 3, about 24 characters against the 48-character buffer, so the failure branch is unreachable
+ACCEPTED  m0626 src/gen/classify.c:550 [int+1 0 -> 1] :: fmt width check mutants are equivalent: the formatted spans hold at most 5 moves at n = 3, about 24 characters against the 48-character buffer, so the failure branch is unreachable
+ACCEPTED  m0627 src/gen/classify.c:550 [int-1 0 -> -1] :: fmt width check mutants are equivalent: the formatted spans hold at most 5 moves at n = 3, about 24 characters against the 48-character buffer, so the failure branch is unreachable
+ACCEPTED  m0628 src/gen/classify.c:551 [int+1 0 -> 1] :: fmt guard write mutants are equivalent: the guarded branch is unreachable because the spans never exceed the format buffer
+ACCEPTED  m0629 src/gen/classify.c:551 [int-1 0 -> -1] :: fmt guard write mutants are equivalent: the guarded branch is unreachable because the spans never exceed the format buffer
+ACCEPTED  m0651 src/gen/classify.c:648 [int-1 0 -> -1] :: simplify error boundary minus one admits the minus one error code only, which the preceding null guard already consumed on every reachable path, so the branch change is unobservable
+ACCEPTED  m0662 src/gen/classify.c:674 [arith * -> /] :: expansion array capacity arithmetic drops only the late split expansions, every pinned decomposition needs at most the plain expansion window, verified across the synth table corpus
+ACCEPTED  m0663 src/gen/classify.c:674 [int+1 2 -> 3] :: expansion array capacity arithmetic drops only the late split expansions, every pinned decomposition needs at most the plain expansion window, verified across the synth table corpus
+ACCEPTED  m0664 src/gen/classify.c:674 [int-1 2 -> 1] :: expansion array capacity arithmetic drops only the late split expansions, every pinned decomposition needs at most the plain expansion window, verified across the synth table corpus
+ACCEPTED  m0665 src/gen/classify.c:674 [arith + -> -] :: expansion array capacity arithmetic drops only the late split expansions, every pinned decomposition needs at most the plain expansion window, verified across the synth table corpus
+ACCEPTED  m0666 src/gen/classify.c:674 [int+1 1 -> 2] :: expansion array capacity arithmetic drops only the late split expansions, every pinned decomposition needs at most the plain expansion window, verified across the synth table corpus
+ACCEPTED  m0667 src/gen/classify.c:674 [int-1 1 -> 0] :: expansion array capacity arithmetic drops only the late split expansions, every pinned decomposition needs at most the plain expansion window, verified across the synth table corpus
+ACCEPTED  m0668 src/gen/classify.c:675 [int+1 0 -> 1] :: expansion count init shift is overwritten by the plain insertion on the next line
+ACCEPTED  m0670 src/gen/classify.c:677 [int+1 0 -> 1] :: expansion loop bounds admit one extra position whose split variant duplicates an earlier expansion, the pair scan then sees duplicate attempts
+ACCEPTED  m0672 src/gen/classify.c:677 [cmp < -> <=] :: expansion loop bounds admit one extra position whose split variant duplicates an earlier expansion, the pair scan then sees duplicate attempts
+ACCEPTED  m0673 src/gen/classify.c:677 [logic && -> ||] :: expansion loop bounds admit one extra position whose split variant duplicates an earlier expansion, the pair scan then sees duplicate attempts
+ACCEPTED  m0674 src/gen/classify.c:677 [cmp < -> <=] :: expansion loop bounds admit one extra position whose split variant duplicates an earlier expansion, the pair scan then sees duplicate attempts
+ACCEPTED  m0675 src/gen/classify.c:677 [arith / -> *] :: expansion loop bounds admit one extra position whose split variant duplicates an earlier expansion, the pair scan then sees duplicate attempts
+ACCEPTED  m0676 src/gen/classify.c:677 [int+1 0 -> 1] :: expansion loop bounds admit one extra position whose split variant duplicates an earlier expansion, the pair scan then sees duplicate attempts
+ACCEPTED  m0677 src/gen/classify.c:677 [int-1 0 -> -1] :: expansion loop bounds admit one extra position whose split variant duplicates an earlier expansion, the pair scan then sees duplicate attempts
+ACCEPTED  m0680 src/gen/classify.c:680 [int+1 1 -> 2] :: split variant enumeration in classify reroutes to variant zero which reproduces the plain expansion, an always available attempt
+ACCEPTED  m0681 src/gen/classify.c:680 [int-1 1 -> 0] :: split variant enumeration in classify reroutes to variant zero which reproduces the plain expansion, an always available attempt
+ACCEPTED  m0682 src/gen/classify.c:680 [cmp < -> <=] :: split variant enumeration in classify reroutes to variant zero which reproduces the plain expansion, an always available attempt
+ACCEPTED  m0685 src/gen/classify.c:686 [cmp < -> <=] :: expansion scan bound shift re-tries the last expansion whose result is already recorded, duplicate attempt only
+ACCEPTED  m0691 src/gen/classify.c:688 [cmp <= -> <] :: setup scan bound widening admits k one past the max, the reconstruction windows for k at the cap fail the pair fit gate, attempt only divergence
+ACCEPTED  m0699 src/gen/classify.c:690 [cmp == -> !=] :: cyclic slot comparison mutants reroute which pair index runs the cyclic attempt, the cyclic fixtures match at the cyclic slot on both orderings of the scan
+ACCEPTED  m0702 src/gen/classify.c:695 [arith * -> /] :: cyclic setup copy width mutants keep the window inside the setup array, pinned cyclic spans unchanged
+ACCEPTED  m0721 src/gen/classify.c:703 [bool true -> false] :: cyclic found flip continues the scan past the cyclic match, no pair decomposition matches any pinned cyclic fixture so the emitted result is identical
+ACCEPTED  m0727 src/gen/classify.c:728 [logic || -> &&] :: alg null guard conjunction still reaches ct_notation_parse which rejects null with the same minus one code the guard returns
+ACCEPTED  m0731 src/gen/classify.c:733 [int-1 0 -> -1] :: parse error boundary minus one admits only the minus one code, which the preceding null guard already consumed, so the unreachable branch change is unobservable
+ACCEPTED  m0735 src/gen/classify.c:740 [cmp > -> >=] :: label bound widening returns the unknown label for the unknown code, which the fallthrough also returns, identical output
+ACCEPTED  m0739 src/gen/classify.c:747 [cmp > -> >=] :: alias bound widening returns the unknown alias for the unknown code, which the fallthrough also returns, identical output
+ACCEPTED  m0742 src/gen/classify.c:757 [cmp <= -> <] :: label roundtrip scan bound narrowing skips the unknown row, the fallback after the loop returns unknown for the unknown label, identical output
+mutate: generated=247 build_failed=41 killed_by_tests=147 killed=188 survived=59 accepted=59 unexplained=0 skipped=498
+mutate: kill rate 188/247 = 76.1%, with accepted equivalents 247/247 = 100.0%
+mutate: wall 1331.4s

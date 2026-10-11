@@ -1,0 +1,179 @@
+pgr3c/mutants/p36552/m0001_synth.c:24:19: error: expected member name or ';' after declaration specifiers
+   24 |     ct_synth_node /nodes;
+      |     ~~~~~~~~~~~~~ ^
+pgr3c/mutants/p36552/m0001_synth.c:24:18: error: expected ';' at end of declaration list
+   24 |     ct_synth_node /nodes;
+      |                  ^
+      |                  ;
+pgr3c/mutants/p36552/m0001_synth.c:637:26: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  637 |         if (memcmp(side->nodes[side->hash[h] - 1].state, state, (size_t)CT_SYNTH_CELLS) == 0) {
+      |                    ~~~~  ^
+pgr3c/mutants/p36552/m0001_synth.c:705:18: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  705 |     while (side->nodes[cur].parent >= 0) {
+      |            ~~~~  ^
+pgr3c/mutants/p36552/m0001_synth.c:706:28: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  706 |         rev[len++] = side->nodes[cur].move;
+      |                      ~~~~  ^
+pgr3c/mutants/p36552/m0001_synth.c:707:21: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  707 |         cur = side->nodes[cur].parent;
+      |               ~~~~  ^
+pgr3c/mutants/p36552/m0001_synth.c:732:9: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  732 |     fwd.nodes = malloc((size_t)CT_SYNTH_FALLBACK_NODES * sizeof *fwd.nodes);
+      |     ~~~ ^
+pgr3c/mutants/p36552/m0001_synth.c:732:70: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  732 |     fwd.nodes = malloc((size_t)CT_SYNTH_FALLBACK_NODES * sizeof *fwd.nodes);
+      |                                                                  ~~~ ^
+pgr3c/mutants/p36552/m0001_synth.c:733:9: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  733 |     bwd.nodes = malloc((size_t)CT_SYNTH_FALLBACK_NODES * sizeof *bwd.nodes);
+      |     ~~~ ^
+pgr3c/mutants/p36552/m0001_synth.c:733:70: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  733 |     bwd.nodes = malloc((size_t)CT_SYNTH_FALLBACK_NODES * sizeof *bwd.nodes);
+      |                                                                  ~~~ ^
+pgr3c/mutants/p36552/m0001_synth.c:736:19: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL && fwd.hash != NULL && bwd.hash != NULL;
+      |               ~~~ ^
+pgr3c/mutants/p36552/m0001_synth.c:736:40: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL && fwd.hash != NULL && bwd.hash != NULL;
+      |                                    ~~~ ^
+pgr3c/mutants/p36552/m0001_synth.c:746:21: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  746 |                 fwd.nodes[0].state[q] = (uint8_t)q;
+      |                 ~~~ ^
+pgr3c/mutants/p36552/m0001_synth.c:748:17: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  748 |             fwd.nodes[0].parent = -1;
+      |             ~~~ ^
+pgr3c/mutants/p36552/m0001_synth.c:749:17: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  749 |             fwd.nodes[0].move = (ct_move){0, 0, 0, 0};
+      |             ~~~ ^
+pgr3c/mutants/p36552/m0001_synth.c:750:48: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  750 |             fwd.hash[synth_side_slot(&fwd, fwd.nodes[0].state)] = 1;
+      |                                            ~~~ ^
+pgr3c/mutants/p36552/m0001_synth.c:757:28: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  757 |                 memcpy(bwd.nodes[bwd.count].state, variants[v], (size_t)CT_SYNTH_CELLS);
+      |                        ~~~ ^
+pgr3c/mutants/p36552/m0001_synth.c:758:21: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  758 |                 bwd.nodes[bwd.count].parent = -1;
+      |                 ~~~ ^
+pgr3c/mutants/p36552/m0001_synth.c:759:21: error: no member named 'nodes' in 'struct (unnamed at pgr3c/mutants/p36552/m0001_synth.c:23:9)'
+  759 |                 bwd.nodes[bwd.count].move = (ct_move){0, 0, 0, 0};
+      |                 ~~~ ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+pgr3c/mutants/p36552/m0002_synth.c:26:9: error: expected member name or ';' after declaration specifiers
+   26 |     int /hash;
+      |     ~~~ ^
+pgr3c/mutants/p36552/m0002_synth.c:26:8: error: expected ';' at end of declaration list
+   26 |     int /hash;
+      |        ^
+      |        ;
+pgr3c/mutants/p36552/m0002_synth.c:636:18: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  636 |     while (side->hash[h] != 0) {
+      |            ~~~~  ^
+pgr3c/mutants/p36552/m0002_synth.c:637:38: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  637 |         if (memcmp(side->nodes[side->hash[h] - 1].state, state, (size_t)CT_SYNTH_CELLS) == 0) {
+      |                                ~~~~  ^
+pgr3c/mutants/p36552/m0002_synth.c:734:9: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  734 |     fwd.hash = calloc((size_t)CT_SYNTH_FALLBACK_HASH, sizeof *fwd.hash);
+      |     ~~~ ^
+pgr3c/mutants/p36552/m0002_synth.c:734:67: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  734 |     fwd.hash = calloc((size_t)CT_SYNTH_FALLBACK_HASH, sizeof *fwd.hash);
+      |                                                               ~~~ ^
+pgr3c/mutants/p36552/m0002_synth.c:735:9: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  735 |     bwd.hash = calloc((size_t)CT_SYNTH_FALLBACK_HASH, sizeof *bwd.hash);
+      |     ~~~ ^
+pgr3c/mutants/p36552/m0002_synth.c:735:67: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  735 |     bwd.hash = calloc((size_t)CT_SYNTH_FALLBACK_HASH, sizeof *bwd.hash);
+      |                                                               ~~~ ^
+pgr3c/mutants/p36552/m0002_synth.c:736:61: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL && fwd.hash != NULL && bwd.hash != NULL;
+      |                                                         ~~~ ^
+pgr3c/mutants/p36552/m0002_synth.c:736:81: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  736 |     bool ok = fwd.nodes != NULL && bwd.nodes != NULL && fwd.hash != NULL && bwd.hash != NULL;
+      |                                                                             ~~~ ^
+pgr3c/mutants/p36552/m0002_synth.c:750:17: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  750 |             fwd.hash[synth_side_slot(&fwd, fwd.nodes[0].state)] = 1;
+      |             ~~~ ^
+pgr3c/mutants/p36552/m0002_synth.c:754:25: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  754 |                 if (bwd.hash[slot] != 0) {
+      |                     ~~~ ^
+pgr3c/mutants/p36552/m0002_synth.c:760:21: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  760 |                 bwd.hash[slot] = bwd.count + 1;
+      |                 ~~~ ^
+pgr3c/mutants/p36552/m0002_synth.c:797:39: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  797 |                             if (side->hash[own_slot] != 0) {
+      |                                 ~~~~  ^
+pgr3c/mutants/p36552/m0002_synth.c:806:35: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  806 |                             side->hash[own_slot] = side->count + 1;
+      |                             ~~~~  ^
+pgr3c/mutants/p36552/m0002_synth.c:808:40: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  808 |                             if (other->hash[other_slot] != 0) {
+      |                                 ~~~~~  ^
+pgr3c/mutants/p36552/m0002_synth.c:810:71: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  810 |                                     expand_fwd ? side->count : other->hash[other_slot] - 1;
+      |                                                                ~~~~~  ^
+pgr3c/mutants/p36552/m0002_synth.c:812:57: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  812 |                                     expand_fwd ? other->hash[other_slot] - 1 : side->count;
+      |                                                  ~~~~~  ^
+pgr3c/mutants/p36552/m0002_synth.c:853:14: error: no member named 'hash' in 'struct (unnamed at pgr3c/mutants/p36552/m0002_synth.c:23:9)'
+  853 |     free(fwd.hash);
+      |          ~~~ ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite unit_synth_setup exited 1
+pgr3c/mutants/p36552/m0007_synth.c:46:19: error: expected member name or ';' after declaration specifiers
+   46 |     ct_synth_cand /cands;
+      |     ~~~~~~~~~~~~~ ^
+pgr3c/mutants/p36552/m0007_synth.c:46:18: error: expected ';' at end of declaration list
+   46 |     ct_synth_cand /cands;
+      |                  ^
+      |                  ;
+pgr3c/mutants/p36552/m0007_synth.c:572:25: error: no member named 'cands' in 'struct (unnamed at pgr3c/mutants/p36552/m0007_synth.c:35:9)'
+  572 |     synth_cand_add(ctx->cands, &ctx->cand_n, ctx->cand_cap, simplified, simplified_len, true);
+      |                    ~~~  ^
+pgr3c/mutants/p36552/m0007_synth.c:614:9: error: no member named 'cands' in 'struct (unnamed at pgr3c/mutants/p36552/m0007_synth.c:35:9)'
+  614 |     ctx.cands = cands;
+      |     ~~~ ^
+4 errors generated.
+pgr3c/mutants/p36552/m0008_synth.c:52:23: error: expected identifier or '('
+   52 | static ct_synth_entry /synth_entries;
+      |                       ^
+pgr3c/mutants/p36552/m0008_synth.c:130:36: error: use of undeclared identifier 'synth_entries'
+  130 |         const ct_synth_entry *e = &synth_entries[synth_hash[h] - 1];
+      |                                    ^~~~~~~~~~~~~
+pgr3c/mutants/p36552/m0008_synth.c:174:30: error: use of undeclared identifier 'synth_entries'
+  174 |         ct_synth_entry *e = &synth_entries[synth_count];
+      |                              ^~~~~~~~~~~~~
+pgr3c/mutants/p36552/m0008_synth.c:185:26: error: use of undeclared identifier 'synth_entries'
+  185 |     ct_synth_entry *e = &synth_entries[synth_hash[slot] - 1];
+      |                          ^~~~~~~~~~~~~
+pgr3c/mutants/p36552/m0008_synth.c:197:13: error: use of undeclared identifier 'synth_entries'
+  197 |     return &synth_entries[synth_hash[slot] - 1];
+      |             ^~~~~~~~~~~~~
+pgr3c/mutants/p36552/m0008_synth.c:375:5: error: use of undeclared identifier 'synth_entries'
+  375 |     synth_entries = calloc((size_t)CT_SYNTH_KEY_MAX, sizeof *synth_entries);
+      |     ^~~~~~~~~~~~~
+pgr3c/mutants/p36552/m0008_synth.c:375:62: error: use of undeclared identifier 'synth_entries'
+  375 |     synth_entries = calloc((size_t)CT_SYNTH_KEY_MAX, sizeof *synth_entries);
+      |                                                              ^~~~~~~~~~~~~
+pgr3c/mutants/p36552/m0008_synth.c:376:9: error: use of undeclared identifier 'synth_entries'
+  376 |     if (synth_entries == NULL) {
+      |         ^~~~~~~~~~~~~
+pgr3c/mutants/p36552/m0008_synth.c:382:14: error: use of undeclared identifier 'synth_entries'
+  382 |         free(synth_entries);
+      |              ^~~~~~~~~~~~~
+pgr3c/mutants/p36552/m0008_synth.c:383:9: error: use of undeclared identifier 'synth_entries'
+  383 |         synth_entries = NULL;
+      |         ^~~~~~~~~~~~~
+pgr3c/mutants/p36552/m0008_synth.c:401:32: error: use of undeclared identifier 'synth_entries'
+  401 |     const ct_synth_entry *e = &synth_entries[index];
+      |                                ^~~~~~~~~~~~~
+11 errors generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741795

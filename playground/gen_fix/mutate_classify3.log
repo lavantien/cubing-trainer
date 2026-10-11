@@ -1,0 +1,623 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_classify.c -o build/tobj/tests/unit_classify.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/classify.c -o build/tobj/src/gen/classify.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build/bin/mutate.exe src/gen/classify.c build unit_classify unit_classify_stress unit_classify_fixture unit_classify_special unit_classify_synth_table unit_classify_synth_results
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+build/mutants/p52036/m0047_classify.c:52:57: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+   52 |     "SP5",  "SP7", "SP9", "parity",     "flip",         "twist",  "unknown",
+      |                                                         ^~~~~~~
+build/mutants/p52036/m0047_classify.c:741:16: error: array index 14 is past the end of the array (that has type 'const char[13][24]') [-Werror,-Warray-bounds]
+  741 |         return cl_labels[CT_CLS_UNKNOWN];
+      |                ^         ~~~~~~~~~~~~~~
+build/mutants/p52036/m0047_classify.c:50:1: note: array 'cl_labels' declared here
+   50 | static const char cl_labels[CT_CLS_UNKNOWN - 1][CT_CLASSIFY_LABEL_MAX] = {
+      | ^
+2 errors generated.
+build/mutants/p52036/m0049_classify.c:52:67: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+   52 |     "SP5",  "SP7", "SP9", "parity",     "flip",         "twist",  "unknown",
+      |                                                                   ^~~~~~~~~
+build/mutants/p52036/m0049_classify.c:741:16: error: array index 14 is past the end of the array (that has type 'const char[14][24]') [-Werror,-Warray-bounds]
+  741 |         return cl_labels[CT_CLS_UNKNOWN];
+      |                ^         ~~~~~~~~~~~~~~
+build/mutants/p52036/m0049_classify.c:50:1: note: array 'cl_labels' declared here
+   50 | static const char cl_labels[CT_CLS_UNKNOWN + 0][CT_CLASSIFY_LABEL_MAX] = {
+      | ^
+2 errors generated.
+build/mutants/p52036/m0050_classify.c:59:18: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+   59 |     "flip",      "twist",        "unknown",
+      |                  ^~~~~~~
+build/mutants/p52036/m0050_classify.c:748:16: error: array index 14 is past the end of the array (that has type 'const char[13][24]') [-Werror,-Warray-bounds]
+  748 |         return cl_aliases[CT_CLS_UNKNOWN];
+      |                ^          ~~~~~~~~~~~~~~
+build/mutants/p52036/m0050_classify.c:55:1: note: array 'cl_aliases' declared here
+   55 | static const char cl_aliases[CT_CLS_UNKNOWN - 1][CT_CLASSIFY_LABEL_MAX] = {
+      | ^
+2 errors generated.
+build/mutants/p52036/m0052_classify.c:59:34: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+   59 |     "flip",      "twist",        "unknown",
+      |                                  ^~~~~~~~~
+build/mutants/p52036/m0052_classify.c:748:16: error: array index 14 is past the end of the array (that has type 'const char[14][24]') [-Werror,-Warray-bounds]
+  748 |         return cl_aliases[CT_CLS_UNKNOWN];
+      |                ^          ~~~~~~~~~~~~~~
+build/mutants/p52036/m0052_classify.c:55:1: note: array 'cl_aliases' declared here
+   55 | static const char cl_aliases[CT_CLS_UNKNOWN + 0][CT_CLASSIFY_LABEL_MAX] = {
+      | ^
+2 errors generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_stress exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: scope=src/gen/classify.c files=1 sites=745 suites=6
+SURVIVED  m0001 src/gen/classify.c:12 [arith - -> +]
+SURVIVED  m0002 src/gen/classify.c:12 [int+1 1 -> 2]
+SURVIVED  m0003 src/gen/classify.c:12 [int-1 1 -> 0]
+KILLED    m0004 src/gen/classify.c:14 [int+1 2 -> 3]
+KILLED    m0005 src/gen/classify.c:14 [int-1 2 -> 1]
+KILLED    m0006 src/gen/classify.c:14 [arith * -> /]
+KILLED    m0007 src/gen/classify.c:14 [arith + -> -]
+KILLED    m0008 src/gen/classify.c:14 [int+1 2 -> 3]
+KILLED    m0009 src/gen/classify.c:14 [int-1 2 -> 1]
+KILLED    m0010 src/gen/classify.c:15 [arith / -> *]
+KILLED    m0011 src/gen/classify.c:15 [int+1 2 -> 3]
+KILLED    m0012 src/gen/classify.c:15 [int-1 2 -> 1]
+KILLED    m0013 src/gen/classify.c:16 [int+1 3 -> 4]
+KILLED    m0014 src/gen/classify.c:16 [int-1 3 -> 2]
+KILLED    m0015 src/gen/classify.c:17 [int+1 2 -> 3]
+KILLED    m0016 src/gen/classify.c:17 [int-1 2 -> 1]
+KILLED    m0017 src/gen/classify.c:17 [arith * -> /]
+KILLED    m0018 src/gen/classify.c:17 [arith + -> -]
+KILLED    m0019 src/gen/classify.c:17 [int+1 1 -> 2]
+KILLED    m0020 src/gen/classify.c:17 [int-1 1 -> 0]
+KILLED    m0021 src/gen/classify.c:18 [arith + -> -]
+KILLED    m0022 src/gen/classify.c:18 [int+1 1 -> 2]
+KILLED    m0023 src/gen/classify.c:18 [int-1 1 -> 0]
+KILLED    m0024 src/gen/classify.c:19 [arith + -> -]
+KILLED    m0025 src/gen/classify.c:19 [int+1 1 -> 2]
+KILLED    m0026 src/gen/classify.c:19 [int-1 1 -> 0]
+KILLED    m0027 src/gen/classify.c:19 [arith + -> -]
+KILLED    m0028 src/gen/classify.c:19 [int+1 1 -> 2]
+KILLED    m0029 src/gen/classify.c:19 [int-1 1 -> 0]
+KILLED    m0030 src/gen/classify.c:20 [int+1 2 -> 3]
+KILLED    m0031 src/gen/classify.c:20 [int-1 2 -> 1]
+KILLED    m0032 src/gen/classify.c:20 [arith * -> /]
+KILLED    m0033 src/gen/classify.c:20 [arith + -> -]
+KILLED    m0034 src/gen/classify.c:20 [int+1 1 -> 2]
+KILLED    m0035 src/gen/classify.c:20 [int-1 1 -> 0]
+KILLED    m0036 src/gen/classify.c:21 [int+1 2 -> 3]
+KILLED    m0037 src/gen/classify.c:21 [int-1 2 -> 1]
+KILLED    m0038 src/gen/classify.c:21 [arith * -> /]
+KILLED    m0039 src/gen/classify.c:21 [int+1 1 -> 2]
+KILLED    m0040 src/gen/classify.c:21 [int-1 1 -> 0]
+KILLED    m0041 src/gen/classify.c:21 [arith + -> -]
+KILLED    m0042 src/gen/classify.c:21 [int+1 1 -> 2]
+KILLED    m0043 src/gen/classify.c:21 [int-1 1 -> 0]
+SURVIVED  m0044 src/gen/classify.c:30 [arith + -> -]
+SURVIVED  m0045 src/gen/classify.c:30 [int+1 1 -> 2]
+SURVIVED  m0046 src/gen/classify.c:30 [int-1 1 -> 0]
+KILLED    m0047 src/gen/classify.c:50 [arith + -> -]
+          build break
+SURVIVED  m0048 src/gen/classify.c:50 [int+1 1 -> 2]
+KILLED    m0049 src/gen/classify.c:50 [int-1 1 -> 0]
+          build break
+KILLED    m0050 src/gen/classify.c:55 [arith + -> -]
+          build break
+SURVIVED  m0051 src/gen/classify.c:55 [int+1 1 -> 2]
+KILLED    m0052 src/gen/classify.c:55 [int-1 1 -> 0]
+          build break
+KILLED    m0053 src/gen/classify.c:67 [int+1 1 -> 2]
+KILLED    m0054 src/gen/classify.c:67 [int-1 1 -> 0]
+KILLED    m0055 src/gen/classify.c:67 [int+1 1 -> 2]
+KILLED    m0056 src/gen/classify.c:67 [int-1 1 -> 0]
+KILLED    m0057 src/gen/classify.c:68 [int+1 1 -> 2]
+KILLED    m0058 src/gen/classify.c:68 [int-1 1 -> 0]
+KILLED    m0059 src/gen/classify.c:69 [int+1 1 -> 2]
+KILLED    m0060 src/gen/classify.c:69 [int-1 1 -> 0]
+SURVIVED  m0061 src/gen/classify.c:70 [int+1 1 -> 2]
+SURVIVED  m0062 src/gen/classify.c:70 [int-1 1 -> 0]
+SURVIVED  m0063 src/gen/classify.c:71 [int+1 1 -> 2]
+SURVIVED  m0064 src/gen/classify.c:71 [int-1 1 -> 0]
+KILLED    m0065 src/gen/classify.c:77 [arith * -> /]
+KILLED    m0066 src/gen/classify.c:77 [arith * -> /]
+KILLED    m0067 src/gen/classify.c:77 [arith + -> -]
+KILLED    m0068 src/gen/classify.c:77 [arith * -> /]
+KILLED    m0069 src/gen/classify.c:77 [arith + -> -]
+KILLED    m0070 src/gen/classify.c:81 [arith * -> /]
+KILLED    m0071 src/gen/classify.c:81 [arith * -> /]
+KILLED    m0072 src/gen/classify.c:81 [arith + -> -]
+KILLED    m0073 src/gen/classify.c:81 [arith * -> /]
+KILLED    m0074 src/gen/classify.c:81 [arith + -> -]
+SURVIVED  m0075 src/gen/clmutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+build/mutants/p52036/m0095_classify.c:104:39: error: expected ')'
+  104 | static void cl_simulate(const ct_move /seq, int len, uint8_t out[CT_CLASSIFY_CELLS]) {
+      |                                       ^
+build/mutants/p52036/m0095_classify.c:104:24: note: to match this '('
+  104 | static void cl_simulate(const ct_move /seq, int len, uint8_t out[CT_CLASSIFY_CELLS]) {
+      |                        ^
+build/mutants/p52036/m0095_classify.c:115:25: error: use of undeclared identifier 'len'
+  115 |     for (int i = 0; i < len; i++) {
+      |                         ^~~
+build/mutants/p52036/m0095_classify.c:116:22: error: use of undeclared identifier 'seq'
+  116 |         ct_apply(&c, seq[i]);
+      |                      ^~~
+build/mutants/p52036/m0095_classify.c:121:17: error: use of undeclared identifier 'out'
+  121 |                 out[cl_compact_of(face, row, col)] = c.facelet[cl_raw_of(face, row, col)];
+      |                 ^~~
+build/mutants/p52036/m0095_classify.c:657:22: error: too many arguments to function call, expected 1, have 3
+  657 |     cl_simulate(s.m, s.len, st);
+      |     ~~~~~~~~~~~      ^~~~~~~~~
+build/mutants/p52036/m0095_classify.c:104:13: note: 'cl_simulate' declared here
+  104 | static void cl_simulate(const ct_move /seq, int len, uint8_t out[CT_CLASSIFY_CELLS]) {
+      |             ^           ~~~~~~~~~~~~~
+5 errors generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+build/mutants/p52036/m0143_classify.c:154:88: error: expected ')'
+  154 | static bool cl_orbit_transposition(const uint8_t st[CT_CLASSIFY_CELLS], int orbit, int /swaps) {
+      |                                                                                        ^
+build/mutants/p52036/m0143_classify.c:154:35: note: to match this '('
+  154 | static bool cl_orbit_transposition(const uint8_t st[CT_CLASSIFY_CELLS], int orbit, int /swaps) {
+      |                                   ^
+build/mutants/p52036/m0143_classify.c:185:6: error: use of undeclared identifier 'swaps'
+  185 |     *swaps = count;
+      |      ^~~~~
+build/mutants/p52036/m0143_classify.c:270:54: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  270 |     if (!cl_orbit_transposition(st, CT_ORBIT_CORNER, &info->corner_swaps)) {
+      |                                                      ^~~~~~~~~~~~~~~~~~~
+build/mutants/p52036/m0143_classify.c:154:88: note: passing argument to parameter here
+  154 | static bool cl_orbit_transposition(const uint8_t st[CT_CLASSIFY_CELLS], int orbit, int /swaps) {
+      |                                                                                        ^
+build/mutants/p52036/m0143_classify.c:273:52: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  273 |     if (!cl_orbit_transposition(st, CT_ORBIT_EDGE, &info->edge_swaps)) {
+      |                                                    ^~~~~~~~~~~~~~~~~
+build/mutants/p52036/m0143_classify.c:154:88: note: passing argument to parameter here
+  154 | static bool cl_orbit_transposition(const uint8_t st[CT_CLASSIFY_CELLS], int orbit, int /swaps) {
+      |                                                                                        ^
+4 errors generated.
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_stress exited 1
+assify.c:88 [int+1 0 -> 1]
+KILLED    m0076 src/gen/classify.c:88 [int-1 0 -> -1]
+KILLED    m0077 src/gen/classify.c:88 [cmp < -> <=]
+KILLED    m0078 src/gen/classify.c:89 [bool false -> true]
+KILLED    m0079 src/gen/classify.c:90 [bool false -> true]
+KILLED    m0080 src/gen/classify.c:92 [int+1 0 -> 1]
+KILLED    m0081 src/gen/classify.c:92 [int-1 0 -> -1]
+KILLED    m0082 src/gen/classify.c:92 [cmp < -> <=]
+SURVIVED  m0083 src/gen/classify.c:93 [arith - -> +]
+SURVIVED  m0084 src/gen/classify.c:93 [int+1 1 -> 2]
+SURVIVED  m0085 src/gen/classify.c:93 [int-1 1 -> 0]
+SURVIVED  m0086 src/gen/classify.c:94 [arith - -> +]
+SURVIVED  m0087 src/gen/classify.c:94 [int+1 1 -> 2]
+SURVIVED  m0088 src/gen/classify.c:94 [int-1 1 -> 0]
+SURVIVED  m0089 src/gen/classify.c:95 [arith - -> +]
+SURVIVED  m0090 src/gen/classify.c:95 [int+1 1 -> 2]
+SURVIVED  m0091 src/gen/classify.c:95 [int-1 1 -> 0]
+KILLED    m0092 src/gen/classify.c:97 [bool true -> false]
+KILLED    m0093 src/gen/classify.c:99 [bool true -> false]
+SURVIVED  m0094 src/gen/classify.c:101 [bool true -> false]
+KILLED    m0095 src/gen/classify.c:104 [arith * -> /]
+          build break
+SURVIVED  m0096 src/gen/classify.c:106 [int+1 0 -> 1]
+SURVIVED  m0097 src/gen/classify.c:106 [int-1 0 -> -1]
+KILLED    m0098 src/gen/classify.c:108 [int+1 0 -> 1]
+SURVIVED  m0099 src/gen/classify.c:108 [int-1 0 -> -1]
+SURVIVED  m0100 src/gen/classify.c:108 [cmp < -> <=]
+KILLED    m0101 src/gen/classify.c:109 [int+1 0 -> 1]
+SURVIVED  m0102 src/gen/classify.c:109 [int-1 0 -> -1]
+SURVIVED  m0103 src/gen/classify.c:109 [cmp < -> <=]
+KILLED    m0104 src/gen/classify.c:110 [int+1 0 -> 1]
+KILLED    m0105 src/gen/classify.c:110 [int-1 0 -> -1]
+SURVIVED  m0106 src/gen/classify.c:110 [cmp < -> <=]
+KILLED    m0107 src/gen/classify.c:115 [int+1 0 -> 1]
+SURVIVED  m0108 src/gen/classify.c:115 [int-1 0 -> -1]
+KILLED    m0109 src/gen/classify.c:115 [cmp < -> <=]
+KILLED    m0110 src/gen/classify.c:118 [int+1 0 -> 1]
+SURVIVED  m0111 src/gen/classify.c:118 [int-1 0 -> -1]
+SURVIVED  m0112 src/gen/classify.c:118 [cmp < -> <=]
+KILLED    m0113 src/gen/classify.c:119 [int+1 0 -> 1]
+KILLED    m0114 src/gen/classify.c:119 [int-1 0 -> -1]
+SURVIVED  m0115 src/gen/classify.c:119 [cmp < -> <=]
+KILLED    m0116 src/gen/classify.c:120 [int+1 0 -> 1]
+KILLED    m0117 src/gen/classify.c:120 [int-1 0 -> -1]
+SURVIVED  m0118 src/gen/classify.c:120 [cmp < -> <=]
+KILLED    m0119 src/gen/classify.c:128 [int+1 0 -> 1]
+SURVIVED  m0120 src/gen/classify.c:128 [int-1 0 -> -1]
+SURVIVED  m0121 src/gen/classify.c:128 [cmp < -> <=]
+SURVIVED  m0122 src/gen/classify.c:129 [arith - -> +]
+SURVIVED  m0123 src/gen/classify.c:129 [int+1 1 -> 2]
+SURVIVED  m0124 src/gen/classify.c:129 [int-1 1 -> 0]
+SURVIVED  m0125 src/gen/classify.c:130 [arith - -> +]
+SURVIVED  m0126 src/gen/classify.c:130 [int+1 1 -> 2]
+SURVIVED  m0127 src/gen/classify.c:130 [int-1 1 -> 0]
+SURVIVED  m0128 src/gen/classify.c:131 [arith - -> +]
+SURVIVED  m0129 src/gen/classify.c:131 [int+1 1 -> 2]
+SURVIVED  m0130 src/gen/classify.c:131 [int-1 1 -> 0]
+KILLED    m0131 src/gen/classify.c:133 [cmp == -> !=]
+KILLED    m0132 src/gen/classify.c:141 [cmp == -> !=]
+SURVIVED  m0133 src/gen/classify.c:145 [int+1 0 -> 1]
+KILLED    m0134 src/gen/classify.c:145 [int-1 0 -> -1]
+KILLED    m0135 src/gen/classify.c:145 [cmp < -> <=]
+KILLED    m0136 src/gen/classify.c:146 [int+1 1 -> 2]
+KILLED    m0137 src/gen/classify.c:146 [int-1 1 -> 0]
+KILLED    m0138 src/gen/classify.c:146 [int+1 1 -> 2]
+KILLED    m0139 src/gen/classify.c:146 [int-1 1 -> 0]
+KILLED    m0140 src/gen/classify.c:147 [cmp != -> ==]
+SURVIVED  m0141 src/gen/classify.c:148 [bool false -> true]
+KILLED    m0142 src/gen/classify.c:151 [bool true -> false]
+KILLED    m0143 src/gen/classify.c:154 [arith * -> /]
+          build break
+SURVIVED  m0144 src/gen/classify.c:156 [int+1 0 -> 1]
+SURVIVED  m0145 src/gen/classify.c:156 [int-1 0 -> -1]
+KILLED    m0146 src/gen/classify.c:156 [cmp < -> <=]
+KILLED    m0147 src/gen/classify.c:159 [bool false -> true]
+KILLED    m0148 src/gen/classify.c:160 [int+1 0 -> 1]
+KILLED    m0149 src/gen/classify.c:160 [int-1 0 -> -mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+build/mutants/p52036/m0168_classify.c:185:5: error: expected expression
+  185 |     /swaps = count;
+      |     ^
+1 error generated.
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+build/mutants/p52036/m0191_classify.c:212:89: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  212 |     return a.face == b.face || a.depth_from == b.depth_from && a.depth_to == b.depth_to &&
+      |                             ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  213 |            a.quarter == b.quarter;
+      |            ~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p52036/m0191_classify.c:212:89: note: place parentheses around the '&&' expression to silence this warning
+  212 |     return a.face == b.face || a.depth_from == b.depth_from && a.depth_to == b.depth_to &&
+      |                                                                                         ^
+      |                                (
+  213 |            a.quarter == b.quarter;
+      |                                  
+      |                                  )
+1 error generated.
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+build/mutants/p52036/m0193_classify.c:212:29: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  212 |     return a.face == b.face && a.depth_from == b.depth_from || a.depth_to == b.depth_to &&
+      |            ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build/mutants/p52036/m0193_classify.c:212:29: note: place parentheses around the '&&' expression to silence this warning
+  212 |     return a.face == b.face && a.depth_from == b.depth_from || a.depth_to == b.depth_to &&
+      |                             ^
+      |            (                                               )
+build/mutants/p52036/m0193_classify.c:212:89: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  212 |     return a.face == b.face && a.depth_from == b.depth_from || a.depth_to == b.depth_to &&
+      |                                                             ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  213 |            a.quarter == b.quarter;
+      |            ~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p52036/m0193_classify.c:212:89: note: place parentheses around the '&&' expression to silence this warning
+  212 |     return a.face == b.face && a.depth_from == b.depth_from || a.depth_to == b.depth_to &&
+      |                                                                                         ^
+      |                                                                (
+  213 |            a.quarter == b.quarter;
+      |                                  
+      |                                  )
+2 errors generated.
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+build/mutants/p52036/m0195_classify.c:212:61: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  212 |     return a.face == b.face && a.depth_from == b.depth_from && a.depth_to == b.depth_to ||
+      |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build/mutants/p52036/m0195_classify.c:212:61: note: place parentheses around the '&&' expression to silence this warning
+  212 |     return a.face == b.face && a.depth_from == b.depth_from && a.depth_to == b.depth_to ||
+      |                                                             ^
+      |            (                                                                           )
+1 error generated.
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+1]
+SURVIVED  m0150 src/gen/classify.c:161 [int+1 0 -> 1]
+KILLED    m0151 src/gen/classify.c:161 [int-1 0 -> -1]
+KILLED    m0152 src/gen/classify.c:161 [cmp < -> <=]
+SURVIVED  m0153 src/gen/classify.c:166 [arith - -> +]
+SURVIVED  m0154 src/gen/classify.c:166 [int+1 1 -> 2]
+SURVIVED  m0155 src/gen/classify.c:166 [int-1 1 -> 0]
+SURVIVED  m0156 src/gen/classify.c:167 [arith - -> +]
+SURVIVED  m0157 src/gen/classify.c:167 [int+1 1 -> 2]
+SURVIVED  m0158 src/gen/classify.c:167 [int-1 1 -> 0]
+SURVIVED  m0159 src/gen/classify.c:168 [arith - -> +]
+SURVIVED  m0160 src/gen/classify.c:168 [int+1 1 -> 2]
+SURVIVED  m0161 src/gen/classify.c:168 [int-1 1 -> 0]
+KILLED    m0162 src/gen/classify.c:172 [cmp == -> !=]
+SURVIVED  m0163 src/gen/classify.c:173 [bool false -> true]
+KILLED    m0164 src/gen/classify.c:176 [bool true -> false]
+KILLED    m0165 src/gen/classify.c:177 [cmp != -> ==]
+SURVIVED  m0166 src/gen/classify.c:179 [bool false -> true]
+KILLED    m0167 src/gen/classify.c:181 [bool true -> false]
+KILLED    m0168 src/gen/classify.c:185 [arith * -> /]
+          build break
+KILLED    m0169 src/gen/classify.c:186 [bool true -> false]
+SURVIVED  m0170 src/gen/classify.c:191 [int+1 0 -> 1]
+SURVIVED  m0171 src/gen/classify.c:191 [int-1 0 -> -1]
+KILLED    m0172 src/gen/classify.c:191 [cmp < -> <=]
+SURVIVED  m0173 src/gen/classify.c:194 [int+1 0 -> 1]
+KILLED    m0174 src/gen/classify.c:194 [int-1 0 -> -1]
+KILLED    m0175 src/gen/classify.c:194 [cmp < -> <=]
+SURVIVED  m0176 src/gen/classify.c:195 [arith - -> +]
+SURVIVED  m0177 src/gen/classify.c:195 [int+1 1 -> 2]
+SURVIVED  m0178 src/gen/classify.c:195 [int-1 1 -> 0]
+SURVIVED  m0179 src/gen/classify.c:196 [arith - -> +]
+SURVIVED  m0180 src/gen/classify.c:196 [int+1 1 -> 2]
+SURVIVED  m0181 src/gen/classify.c:196 [int-1 1 -> 0]
+SURVIVED  m0182 src/gen/classify.c:197 [arith - -> +]
+SURVIVED  m0183 src/gen/classify.c:197 [int+1 1 -> 2]
+SURVIVED  m0184 src/gen/classify.c:197 [int-1 1 -> 0]
+KILLED    m0185 src/gen/classify.c:201 [cmp == -> !=]
+          link break
+KILLED    m0186 src/gen/classify.c:202 [bool false -> true]
+          link break
+KILLED    m0187 src/gen/classify.c:204 [cmp != -> ==]
+          link break
+KILLED    m0188 src/gen/classify.c:205 [bool false -> true]
+          link break
+KILLED    m0189 src/gen/classify.c:208 [bool true -> false]
+          link break
+KILLED    m0190 src/gen/classify.c:212 [cmp == -> !=]
+          link break
+KILLED    m0191 src/gen/classify.c:212 [logic && -> ||]
+          build break
+KILLED    m0192 src/gen/classify.c:212 [cmp == -> !=]
+          link break
+KILLED    m0193 src/gen/classify.c:212 [logic && -> ||]
+          build break
+KILLED    m0194 src/gen/classify.c:212 [cmp == -> !=]
+          link break
+KILLED    m0195 src/gen/classify.c:212 [logic && -> ||]
+          build break
+KILLED    m0196 src/gen/classify.c:213 [cmp == -> !=]
+          link break
+KILLED    m0197 src/gen/classify.c:218 [int+1 0 -> 1]
+          link break
+KILLED    m0198 src/gen/classify.c:218 [int-1 0 -> -1]
+          link break
+KILLED    m0199 src/gen/classify.c:218 [cmp < -> <=]
+          link break
+KILLED    m0200 src/gen/classify.c:219 [arith - -> +]
+          link break
+KILLED    m0201 src/gen/classify.c:219 [int+1 1 -> 2]
+          link break
+KILLED    m0202 src/gen/classify.c:219 [int-1 1 -> 0]
+          link break
+KILLED    m0203 src/gen/classify.c:220 [arith - -> +]
+          link break
+KILLED    m0204 src/gen/classify.c:220 [int+1 1 -> 2]
+          link break
+KILLED    m0205 src/gen/classify.c:220 [int-1 1 -> 0]
+          link break
+KILLED    m0206 src/gen/classify.c:221 [arith - -> +]
+          link break
+KILLED    m0207 src/gen/classify.c:221 [int+1 1 -> 2]
+          link break
+KILLED    m0208 src/gen/classify.c:221 [int-1 1 -> 0]
+          link break
+KILLED    m0209 src/gen/classify.c:225 [cmp == -> !=]
+          link break
+KILLED    m0210 src/gen/classify.c:227 [int+1 0 -> 1]
+          link break
+KILLED    m0211 src/gen/classify.c:227 [int-1 0 -> -1]
+          link break
+KILLED    m0212 src/gen/classify.c:228 [int+1 0 -> 1]
+          link break
+KILLED    m0213 src/genclang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+clang: error: no such file or directory: 'build/tobj/tests/unit_pack_startup.o'
+mutate: suite unit_classify_fixture exited 1
+build/mutants/p52036/m0224_classify.c:243:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  243 |         if (c1 == c && c2 == c || c2 == c1 || st[c2] != (uint8_t)c) {
+      |             ~~~~~~~~^~~~~~~~~~ ~~
+build/mutants/p52036/m0224_classify.c:243:21: note: place parentheses around the '&&' expression to silence this warning
+  243 |         if (c1 == c && c2 == c || c2 == c1 || st[c2] != (uint8_t)c) {
+      |                     ^
+      |             (                 )
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+build/mutants/p52036/m0226_classify.c:243:32: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  243 |         if (c1 == c || c2 == c && c2 == c1 || st[c2] != (uint8_t)c) {
+      |                     ~~ ~~~~~~~~^~~~~~~~~~~
+build/mutants/p52036/m0226_classify.c:243:32: note: place parentheses around the '&&' expression to silence this warning
+  243 |         if (c1 == c || c2 == c && c2 == c1 || st[c2] != (uint8_t)c) {
+      |                                ^
+      |                        (                  )
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+build/mutants/p52036/m0228_classify.c:243:44: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  243 |         if (c1 == c || c2 == c || c2 == c1 && st[c2] != (uint8_t)c) {
+      |                                ~~ ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p52036/m0228_classify.c:243:44: note: place parentheses around the '&&' expression to silence this warning
+  243 |         if (c1 == c || c2 == c || c2 == c1 && st[c2] != (uint8_t)c) {
+      |                                            ^                      
+      |                                   (                               )
+1 error generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+build/mutants/p52036/m0232_classify.c:250:76: error: expected ')'
+  250 | static void cl_perm_scan(const uint8_t st[CT_CLASSIFY_CELLS], cl_perm_info /info) {
+      |                                                                            ^
+build/mutants/p52036/m0232_classify.c:250:25: note: to match this '('
+  250 | static void cl_perm_scan(const uint8_t st[CT_CLASSIFY_CELLS], cl_perm_info /info) {
+      |                         ^
+build/mutants/p52036/m0232_classify.c:255:5: error: use of undeclared identifier 'info'
+  255 |     info->corner = true;
+      |     ^~~~
+build/mutants/p52036/m0232_classify.c:256:5: error: use of undeclared identifier 'info'
+  256 |     info->edge = true;
+      |     ^~~~
+build/mutants/p52036/m0232_classify.c:257:5: error: use of undeclared identifier 'info'
+  257 |     info->flipped = 0;
+      |     ^~~~
+build/mutants/p52036/m0232_classify.c:258:5: error: use of undeclared identifier 'info'
+  258 |     info->twisted = 0;
+      |     ^~~~
+build/mutants/p52036/m0232_classify.c:263:9: error: use of undeclared identifier 'info'
+  263 |         info->corner = info->corner && cl_corner_cell[q];
+      |         ^~~~
+build/mutants/p52036/m0232_classify.c:263:24: error: use of undeclared identifier 'info'
+  263 |         info->corner = info->corner && cl_corner_cell[q];
+      |                        ^~~~
+build/mutants/p52036/m0232_classify.c:264:9: error: use of undeclared identifier 'info'
+  264 |         info->edge = info->edge && cl_edge_cell[q];
+      |         ^~~~
+build/mutants/p52036/m0232_classify.c:264:22: error: use of undeclared identifier 'info'
+  264 |         info->edge = info->edge && cl_edge_cell[q];
+      |                      ^~~~
+build/mutants/p52036/m0232_classify.c:266:5: error: use of undeclared identifier 'info'
+  266 |     info->corner_exact = cl_orbit_exact_cycle(st, CT_ORBIT_CORNER);
+      |     ^~~~
+build/mutants/p52036/m0232_classify.c:267:5: error: use of undeclared identifier 'info'
+  267 |     info->edge_exact = cl_orbit_exact_cycle(st, CT_ORBIT_EDGE);
+      |     ^~~~
+build/mutants/p52036/m0232_classify.c:268:5: error: use of undeclared identifier 'info'
+  268 |     info->corner_swaps = 0;
+      |     ^~~~
+build/mutants/p52036/m0232_classify.c:269:5: error: use of undeclared identifier 'info'
+  269 |     info->edge_swaps = 0;
+      |     ^~~~
+build/mutants/p52036/m0232_classify.c:270:55: error: use of undeclared identifier 'info'
+  270 |     if (!cl_orbit_transposition(st, CT_ORBIT_CORNER, &info->corner_swaps)) {
+      |                                                       ^~~~
+build/mutants/p52036/m0232_classify.c:271:9: error: use of undeclared identifier 'info'
+  271 |         info->corner_swaps = -1;
+      |         ^~~~
+build/mutants/p52036/m0232_classify.c:273:53: error: use of undeclared identifier 'info'
+  273 |     if (!cl_orbit_transposition(st, CT_ORBIT_EDGE, &info->edge_swaps)) {
+      |                                                     ^~~~
+build/mutants/p52036/m0232_classify.c:274:9: error: use of undeclared identifier 'info'
+  274 |         info->edge_swaps = -1;
+      |         ^~~~
+build/mutants/p52036/m0232_classify.c:285:17: error: use of undeclared identifier 'info'
+  285 |                 info->flipped++;
+      |                 ^~~~
+build/mutants/p52036/m0232_classify.c:288:9: error: use of undeclared identifier 'info'
+  288 |         info->flipped /= CT_TARGET_EDGE_STICKERS_PER_PIECE;
+      |         ^~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify exited -1073741795
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify_fixture exited 1
+mutate: suite unit_classify exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited 1
+mutate: suite unit_classify_special exited -1073741795
+mutate: suite unit_classify_special exited -1073741795
+make: *** [makefile:239: mutate] Error 1

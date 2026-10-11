@@ -1,0 +1,642 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+pgbuild/bin/mutate.exe src/gen/synth.c pgbuild unit_synth_table unit_synth_coverage unit_synth_config unit_synth_bh unit_synth_scoring
+pgbuild/mutants/p1192/m0117_synth.c:140:61: error: expected ')'
+  140 | static bool synth_move_less(const ct_move *x, const ct_move /y) {
+      |                                                             ^
+pgbuild/mutants/p1192/m0117_synth.c:140:28: note: to match this '('
+  140 | static bool synth_move_less(const ct_move *x, const ct_move /y) {
+      |                            ^
+pgbuild/mutants/p1192/m0117_synth.c:141:20: error: use of undeclared identifier 'y'
+  141 |     if (x->face != y->face) {
+      |                    ^
+pgbuild/mutants/p1192/m0117_synth.c:142:26: error: use of undeclared identifier 'y'
+  142 |         return x->face < y->face;
+      |                          ^
+pgbuild/mutants/p1192/m0117_synth.c:144:26: error: use of undeclared identifier 'y'
+  144 |     if (x->depth_from != y->depth_from) {
+      |                          ^
+pgbuild/mutants/p1192/m0117_synth.c:145:32: error: use of undeclared identifier 'y'
+  145 |         return x->depth_from < y->depth_from;
+      |                                ^
+pgbuild/mutants/p1192/m0117_synth.c:147:24: error: use of undeclared identifier 'y'
+  147 |     if (x->depth_to != y->depth_to) {
+      |                        ^
+pgbuild/mutants/p1192/m0117_synth.c:148:30: error: use of undeclared identifier 'y'
+  148 |         return x->depth_to < y->depth_to;
+      |                              ^
+pgbuild/mutants/p1192/m0117_synth.c:150:25: error: use of undeclared identifier 'y'
+  150 |     return x->quarter < y->quarter;
+      |                         ^
+pgbuild/mutants/p1192/m0117_synth.c:158:36: error: passing 'const ct_move *' to parameter of incompatible type 'ct_move'
+  158 |         if (synth_move_less(&a[i], &b[i])) {
+      |                                    ^~~~~
+pgbuild/mutants/p1192/m0117_synth.c:140:61: note: passing argument to parameter here
+  140 | static bool synth_move_less(const ct_move *x, const ct_move /y) {
+      |                                                             ^
+pgbuild/mutants/p1192/m0117_synth.c:161:36: error: passing 'const ct_move *' to parameter of incompatible type 'ct_move'
+  161 |         if (synth_move_less(&b[i], &a[i])) {
+      |                                    ^~~~~
+pgbuild/mutants/p1192/m0117_synth.c:140:61: note: passing argument to parameter here
+  140 | static bool synth_move_less(const ct_move *x, const ct_move /y) {
+      |                                                             ^
+10 errors generated.
+pgbuild/mutants/p1192/m0125_synth.c:153:44: error: expected ')'
+  153 | static bool synth_seq_better(const ct_move /a, int alen, const ct_move *b, int blen) {
+      |                                            ^
+pgbuild/mutants/p1192/m0125_synth.c:153:29: note: to match this '('
+  153 | static bool synth_seq_better(const ct_move /a, int alen, const ct_move *b, int blen) {
+      |                             ^
+pgbuild/mutants/p1192/m0125_synth.c:154:9: error: use of undeclared identifier 'alen'
+  154 |     if (alen != blen) {
+      |         ^~~~
+pgbuild/mutants/p1192/m0125_synth.c:154:17: error: use of undeclared identifier 'blen'; did you mean 'mblen'?
+  154 |     if (alen != blen) {
+      |                 ^~~~
+      |                 mblen
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\stdlib.h:345:23: note: 'mblen' declared here
+  345 |   _CRTIMP int __cdecl mblen(const char *_Ch,size_t _MaxCount);
+      |                       ^
+pgbuild/mutants/p1192/m0125_synth.c:155:16: error: use of undeclared identifier 'alen'
+  155 |         return alen < blen;
+      |                ^~~~
+pgbuild/mutants/p1192/m0125_synth.c:155:23: error: use of undeclared identifier 'blen'; did you mean 'mblen'?
+  155 |         return alen < blen;
+      |                       ^~~~
+      |                       mblen
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\stdlib.h:345:23: note: 'mblen' declared here
+  345 |   _CRTIMP int __cdecl mblen(const char *_Ch,size_t _MaxCount);
+      |                       ^
+pgbuild/mutants/p1192/m0125_synth.c:157:25: error: use of undeclared identifier 'alen'
+  157 |     for (int i = 0; i < alen; i++) {
+      |                         ^~~~
+pgbuild/mutants/p1192/m0125_synth.c:158:30: error: use of undeclared identifier 'a'
+  158 |         if (synth_move_less(&a[i], &b[i])) {
+      |                              ^
+pgbuild/mutants/p1192/m0125_synth.c:158:37: error: use of undeclared identifier 'b'
+  158 |         if (synth_move_less(&a[i], &b[i])) {
+      |                                     ^
+pgbuild/mutants/p1192/m0125_synth.c:161:30: error: use of undeclared identifier 'b'
+  161 |         if (synth_move_less(&b[i], &a[i])) {
+      |                              ^
+pgbuild/mutants/p1192/m0125_synth.c:161:37: error: use of undeclared identifier 'a'
+  161 |         if (synth_move_less(&b[i], &a[i])) {
+      |                                     ^
+pgbuild/mutants/p1192/m0125_synth.c:186:31: error: too many arguments to function call, expected 1, have 4
+  186 |     if (synth_seq_better(seq, len, e->seq, e->len)) {
+      |         ~~~~~~~~~~~~~~~~      ^~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p1192/m0125_synth.c:153:13: note: 'synth_seq_better' declared here
+  153 | static bool synth_seq_better(const ct_move /a, int alen, const ct_move *b, int blen) {
+      |             ^                ~~~~~~~~~~~~~
+11 errors generated.
+pgbuild/mutants/p1192/m0126_synth.c:153:72: error: expected ')'
+  153 | static bool synth_seq_better(const ct_move *a, int alen, const ct_move /b, int blen) {
+      |                                                                        ^
+pgbuild/mutants/p1192/m0126_synth.c:153:29: note: to match this '('
+  153 | static bool synth_seq_better(const ct_move *a, int alen, const ct_move /b, int blen) {
+      |                             ^
+pgbuild/mutants/p1192/m0126_synth.c:154:17: error: use of undeclared identifier 'blen'
+  154 |     if (alen != blen) {
+      |                 ^~~~
+pgbuild/mutants/p1192/m0126_synth.c:155:23: error: use of undeclared identifier 'blen'
+  155 |         return alen < blen;
+      |                       ^~~~
+pgbuild/mutants/p1192/m0126_synth.c:158:37: error: use of undeclared identifier 'b'
+  158 |         if (synth_move_less(&a[i], &b[i])) {
+      |                                     ^
+pgbuild/mutants/p1192/m0126_synth.c:161:30: error: use of undeclared identifier 'b'
+  161 |         if (synth_move_less(&b[i], &a[i])) {
+      |                              ^
+pgbuild/mutants/p1192/m0126_synth.c:186:44: error: too many arguments to function call, expected 3, have 4
+  186 |     if (synth_seq_better(seq, len, e->seq, e->len)) {
+      |         ~~~~~~~~~~~~~~~~                   ^~~~~~
+pgbuild/mutants/p1192/m0126_synth.c:153:13: note: 'synth_seq_better' declared here
+  153 | static bool synth_seq_better(const ct_move *a, int alen, const ct_move /b, int blen) {
+      |             ^                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+6 errors generated.
+pgbuild/mutants/p1192/m0135_synth.c:168:76: error: expected ')'
+  168 | static void synth_table_insert(int a, int b, int c, int dir, const ct_move /seq, int len) {
+      |                                                                            ^
+pgbuild/mutants/p1192/m0135_synth.c:168:31: note: to match this '('
+  168 | static void synth_table_insert(int a, int b, int c, int dir, const ct_move /seq, int len) {
+      |                               ^
+pgbuild/mutants/p1192/m0135_synth.c:179:27: error: use of undeclared identifier 'len'
+  179 |         e->len = (uint8_t)len;
+      |                           ^~~
+pgbuild/mutants/p1192/m0135_synth.c:180:24: error: use of undeclared identifier 'seq'
+  180 |         memcpy(e->seq, seq, (size_t)len * sizeof *seq);
+      |                        ^~~
+pgbuild/mutants/p1192/m0135_synth.c:180:37: error: use of undeclared identifier 'len'
+  180 |         memcpy(e->seq, seq, (size_t)len * sizeof *seq);
+      |                                     ^~~
+pgbuild/mutants/p1192/m0135_synth.c:180:51: error: use of undeclared identifier 'seq'
+  180 |         memcpy(e->seq, seq, (size_t)len * sizeof *seq);
+      |                                                   ^~~
+pgbuild/mutants/p1192/m0135_synth.c:186:26: error: use of undeclared identifier 'seq'
+  186 |     if (synth_seq_better(seq, len, e->seq, e->len)) {
+      |                          ^~~
+pgbuild/mutants/p1192/m0135_synth.c:186:31: error: use of undeclared identifier 'len'
+  186 |     if (synth_seq_better(seq, len, e->seq, e->len)) {
+      |                               ^~~
+pgbuild/mutants/p1192/m0135_synth.c:187:27: error: use of undeclared identifier 'len'
+  187 |         e->len = (uint8_t)len;
+      |                           ^~~
+pgbuild/mutants/p1192/m0135_synth.c:188:24: error: use of undeclared identifier 'seq'
+  188 |         memcpy(e->seq, seq, (size_t)len * sizeof *seq);
+      |                        ^~~
+pgbuild/mutants/p1192/m0135_synth.c:188:37: error: use of undeclared identifier 'len'
+  188 |         memcpy(e->seq, seq, (size_t)len * sizeof *seq);
+      |                                     ^~~
+pgbuild/mutants/p1192/m0135_synth.c:188:51: error: use of undeclared identifier 'seq'
+  188 |         memcpy(e->seq, seq, (size_t)len * sizeof *seq);
+      |                                                   ^~~
+pgbuild/mutants/p1192/m0135_synth.c:250:71: error: too many arguments to function call, expected 5, have 6
+  250 |         synth_table_insert(sorted[0], sorted[1], sorted[2], dir, seq, len);
+      |         ~~~~~~~~~~~~~~~~~~                                            ^~~
+pgbuild/mutants/p1192/m0135_synth.c:168:13: note: 'synth_table_insert' declared here
+  168 | static void synth_table_insert(int a, int b, int c, int dir, const ct_move /seq, int len) {
+      |             ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+12 errors generated.
+mutate: suite unit_synth_table exited -1073741819
+mutate: suite unit_synth_table exited -1073741819
+mutate: suite unit_synth_table exited -1073741819
+pgbuild/mutants/p1192/m0140_synth.c:174:24: error: expected identifier or '('
+  174 |         ct_synth_entry /e = &synth_entries[synth_count];
+      |                        ^
+pgbuild/mutants/p1192/m0140_synth.c:175:9: error: use of undeclared identifier 'e'
+  175 |         e->key[0] = (uint8_t)a;
+      |         ^
+pgbuild/mutants/p1192/m0140_synth.c:176:9: error: use of undeclared identifier 'e'
+  176 |         e->key[1] = (uint8_t)b;
+      |         ^
+pgbuild/mutants/p1192/m0140_synth.c:177:9: error: use of undeclared identifier 'e'
+  177 |         e->key[2] = (uint8_t)c;
+      |         ^
+pgbuild/mutants/p1192/m0140_synth.c:178:9: error: use of undeclared identifier 'e'
+  178 |         e->key[3] = (uint8_t)dir;
+      |         ^
+pgbuild/mutants/p1192/m0140_synth.c:179:9: error: use of undeclared identifier 'e'
+  179 |         e->len = (uint8_t)len;
+      |         ^
+pgbuild/mutants/p1192/m0140_synth.c:180:16: error: use of undeclared identifier 'e'
+  180 |         memcpy(e->seq, seq, (size_t)len * sizeof *seq);
+      |                ^
+7 errors generated.
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p1192/m0142_synth.c:175:9: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  175 |         e->key[-1] = (uint8_t)a;
+      |         ^      ~~
+pgbuild/mutants/p1192/m0142_synth.c:12:5: note: array 'key' declared here
+   12 |     uint8_t key[CT_SYNTH_KEY_FIELDS];
+      |     ^
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p1192/m0147_synth.c:178:9: error: array index 4 is past the end of the array (that has type 'uint8_t[4]' (aka 'unsigned char[4]')) [-Werror,-Warray-bounds]
+  178 |         e->key[4] = (uint8_t)dir;
+      |         ^      ~
+pgbuild/mutants/p1192/m0147_synth.c:12:5: note: array 'key' declared here
+   12 |     uint8_t key[CT_SYNTH_KEY_FIELDS];
+      |     ^
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p1192/m0150_synth.c:180:50: error: expected expression
+  180 |         memcpy(e->seq, seq, (size_t)len * sizeof /seq);
+      |                                                  ^
+1 error generated.
+mutate: suite unit_synth_table exited -1073741819
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p1192/m0154_synth.c:185:20: error: expected identifier or '('
+  185 |     ct_synth_entry /e = &synth_entries[synth_hash[slot] - 1];
+      |                    ^
+pgbuild/mutants/p1192/m0154_synth.c:186:36: error: use of undeclared identifier 'e'
+  186 |     if (synth_seq_better(seq, len, e->seq, e->len)) {
+      |                                    ^
+pgbuild/mutants/p1192/m0154_synth.c:186:44: error: use of undeclared identifier 'e'
+  186 |     if (synth_seq_better(seq, len, e->seq, e->len)) {
+      |                                            ^
+pgbuild/mutants/p1192/m0154_synth.c:187:9: error: use of undeclared identifier 'e'
+  187 |         e->len = (uint8_t)len;
+      |         ^
+pgbuild/mutants/p1192/m0154_synth.c:188:16: error: use of undeclared identifier 'e'
+  188 |         memcpy(e->seq, seq, (size_t)len * sizeof *seq);
+      |                ^
+5 errors generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741819
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p1192/m0159_synth.c:188:50: error: expected expression
+  188 |         memcpy(e->seq, seq, (size_t)len * sizeof /seq);
+      |                                                  ^
+1 error generated.
+pgbuild/mutants/p1192/m0160_synth.c:192:29: error: expected identifier or '('
+  192 | static const ct_synth_entry /synth_table_find(int a, int b, int c, int dir) {
+      |                             ^
+pgbuild/mutants/p1192/m0160_synth.c:507:35: error: use of undeclared identifier 'synth_table_find'; did you mean 'synth_table_insert'?
+  507 |         const ct_synth_entry *e = synth_table_find(sorted[0], sorted[1], sorted[2], want);
+      |                                   ^~~~~~~~~~~~~~~~
+      |                                   synth_table_insert
+pgbuild/mutants/p1192/m0160_synth.c:168:13: note: 'synth_table_insert' declared here
+  168 | static void synth_table_insert(int a, int b, int c, int dir, const ct_move *seq, int len) {
+      |             ^
+pgbuild/mutants/p1192/m0160_synth.c:507:89: error: too few arguments to function call, expected 6, have 4
+  507 |         const ct_synth_entry *e = synth_table_find(sorted[0], sorted[1], sorted[2], want);
+      |                                   ~~~~~~~~~~~~~~~~                                      ^
+pgbuild/mutants/p1192/m0160_synth.c:168:13: note: 'synth_table_insert' declared here
+  168 | static void synth_table_insert(int a, int b, int c, int dir, const ct_move *seq, int len) {
+      |             ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+mutate: suite unit_synth_coverage exited -1073741819
+mutate: suite unit_synth_coverage exited -1073741819
+mutate: suite unit_synth_coverage exited -1073741819
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited -1073741819
+pgbuild/mutants/p1192/m0167_synth.c:200:41: error: expected ')'
+  200 | static void synth_analyze(const ct_move /seq, int len) {
+      |                                         ^
+pgbuild/mutants/p1192/m0167_synth.c:200:26: note: to match this '('
+  200 | static void synth_analyze(const ct_move /seq, int len) {
+      |                          ^
+pgbuild/mutants/p1192/m0167_synth.c:203:28: error: use of undeclared identifier 'seq'
+  203 |     synth_apply_seq(&cube, seq, len);
+      |                            ^~~
+pgbuild/mutants/p1192/m0167_synth.c:203:33: error: use of undeclared identifier 'len'
+  203 |     synth_apply_seq(&cube, seq, len);
+      |                                 ^~~
+pgbuild/mutants/p1192/m0167_synth.c:250:66: error: use of undeclared identifier 'seq'
+  250 |         synth_table_insert(sorted[0], sorted[1], sorted[2], dir, seq, len);
+      |                                                                  ^~~
+pgbuild/mutants/p1192/m0167_synth.c:250:71: error: use of undeclared identifier 'len'
+  250 |         synth_table_insert(sorted[0], sorted[1], sorted[2], dir, seq, len);
+      |                                                                       ^~~
+pgbuild/mutants/p1192/m0167_synth.c:274:24: error: too many arguments to function call, expected 1, have 2
+  274 |     synth_analyze(seq, len);
+      |     ~~~~~~~~~~~~~      ^~~
+pgbuild/mutants/p1192/m0167_synth.c:200:13: note: 'synth_analyze' declared here
+  200 | static void synth_analyze(const ct_move /seq, int len) {
+      |             ^             ~~~~~~~~~~~~~
+6 errors generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited -1073741795
+mutate: scope=src/gen/synth.c files=1 sites=928 suites=5
+KILLED    m0117 src/gen/synth.c:140 [arith * -> /]
+          build break
+SURVIVED  m0118 src/gen/synth.c:141 [cmp != -> ==]
+SURVIVED  m0119 src/gen/synth.c:142 [cmp < -> <=]
+SURVIVED  m0120 src/gen/synth.c:144 [cmp != -> ==]
+SURVIVED  m0121 src/gen/synth.c:145 [cmp < -> <=]
+SURVIVED  m0122 src/gen/synth.c:147 [cmp != -> ==]
+SURVIVED  m0123 src/gen/synth.c:148 [cmp < -> <=]
+SURVIVED  m0124 src/gen/synth.c:150 [cmp < -> <=]
+KILLED    m0125 src/gen/synth.c:153 [arith * -> /]
+          build break
+KILLED    m0126 src/gen/synth.c:153 [arith * -> /]
+          build break
+SURVIVED  m0127 src/gen/synth.c:154 [cmp != -> ==]
+SURVIVED  m0128 src/gen/synth.c:155 [cmp < -> <=]
+SURVIVED  m0129 src/gen/synth.c:157 [int+1 0 -> 1]
+SURVIVED  m0130 src/gen/synth.c:157 [int-1 0 -> -1]
+SURVIVED  m0131 src/gen/synth.c:157 [cmp < -> <=]
+SURVIVED  m0132 src/gen/synth.c:159 [bool true -> false]
+SURVIVED  m0133 src/gen/synth.c:162 [bool false -> true]
+SURVIVED  m0134 src/gen/synth.c:165 [bool false -> true]
+KILLED    m0135 src/gen/synth.c:168 [arith * -> /]
+          build break
+KILLED    m0136 src/gen/synth.c:170 [cmp == -> !=]
+KILLED    m0137 src/gen/synth.c:170 [int+1 0 -> 1]
+KILLED    m0138 src/gen/synth.c:170 [int-1 0 -> -1]
+SURVIVED  m0139 src/gen/synth.c:171 [cmp >= -> >]
+KILLED    m0140 src/gen/synth.c:174 [arith * -> /]
+          build break
+KILLED    m0141 src/gen/synth.c:175 [int+1 0 -> 1]
+KILLED    m0142 src/gen/synth.c:175 [int-1 0 -> -1]
+          build break
+KILLED    m0143 src/gen/synth.c:176 [int+1 1 -> 2]
+KILLED    m0144 src/gen/synth.c:176 [int-1 1 -> 0]
+KILLED    m0145 src/gen/synth.c:177 [int+1 2 -> 3]
+KILLED    m0146 src/gen/synth.c:177 [int-1 2 -> 1]
+KILLED    m0147 src/gen/synth.c:178 [int+1 3 -> 4]
+          build break
+KILLED    m0148 src/gen/synth.c:178 [int-1 3 -> 2]
+KILLED    m0149 src/gen/synth.c:180 [arith * -> /]
+KILLED    m0150 src/gen/synth.c:180 [arith * -> /]
+          build break
+KILLED    m0151 src/gen/synth.c:181 [arith + -> -]
+KILLED    m0152 src/gen/synth.c:181 [int+1 1 -> 2]
+KILLED    m0153 src/gen/synth.c:181 [int-1 1 -> 0]
+KILLED    m0154 src/gen/synth.c:185 [arith * -> /]
+          build break
+KILLED    m0155 src/gen/synth.c:185 [arith - -> +]
+KILLED    m0156 src/gen/synth.c:185 [int+1 1 -> 2]
+KILLED    m0157 src/gen/synth.c:185 [int-1 1 -> 0]
+KILLED    m0158 src/gen/synth.c:188 [arith * -> /]
+KILLED    m0159 src/gen/synth.c:188 [arith * -> /]
+          build break
+KILLED    m0160 src/gen/synth.c:192 [arith * -> /]
+          build break
+KILLED    m0161 src/gen/synth.c:194 [cmp == -> !=]
+KILLED    m0162 src/gen/synth.c:194 [int+1 0 -> 1]
+KILLED    m0163 src/gen/synth.c:194 [int-1 0 -> -1]
+KILLED    m0164 src/gen/synth.c:197 [arith - -> +]
+KILLED    m0165 src/gen/synth.c:197 [int+1 1 -> 2]
+SURVIVED  m0166 src/gen/synth.c:197 [int-1 1 -> 0]
+KILLED    m0167 src/gen/synth.c:200 [arith * -> /]
+          build break
+KILLED    m0168 src/gen/synth.c:207 [int+1 0 -> 1]
+KILLED    m0169 src/gen/synth.c:207 [int-1 0 -> -1]
+KILLED    m0170 src/gen/synth.c:208 [bool true -> false]
+KILLED    m0171 src/gen/synth.c:209 [bool true -> false]
+SURVIVED  m0172 src/gen/synth.c:210 [int+1 0 -> 1]
+KILLED    m0173 src/gen/synth.c:210 [int-1 0 -> -1]
+KILLED    m0174 src/gen/synth.c:210 [cmp < -> <=]
+KILLED    m0175 src/gen/synth.c:211 [cmp == -> !=]
+KILLED    m0176 src/gen/synth.c:215 [logic && -> ||]
+KILLED    m0177 src/gen/synth.c:216 [logic && -> ||]
+KILLED    m0178 src/gen/synth.c:218 [cmp == -> !=]
+SURVIVED  m0179 src/gen/synth.c:218 [int+1 0 -> 1]
+SURVIVED  m0180 src/gen/synth.c:218 [int-1 0 -> -1]
+SURVIVED  m0181 src/gen/synth.c:218 [logic || -> &&]
+KILLED    m0182 src/gen/synth.c:218 [cmp == -> !=]
+KILLED    m0183 src/gen/synth.c:222 [cmp != -> ==]
+KILLED    m0184 src/gen/synth.c:222 [arith * -> /]
+SURVIVED  m0185 src/gen/synth.c:226 [int+1 0 -> 1]
+KILLED    m0186 src/gen/synth.c:226 [int-1 0 -> -1]
+KILLED    m0187 src/gen/synth.c:226 [cmp < -> <=]
+SURVIVED  m0188 src/gen/synth.c:229 [bool false -> true]
+SURVIVED  m0189 src/gen/synth.c:230 [int+1 0 -> 1]
+KILLED    mmutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p1192/m0204_synth.c:249:25: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  249 |         synth_cycle_key(cyc[-1], cyc[1], cyc[2], sorted, &dir);
+      |                         ^   ~~
+pgbuild/mutants/p1192/m0204_synth.c:235:9: note: array 'cyc' declared here
+  235 |         int cyc[CT_SYNTH_CYCLE_LEN];
+      |         ^
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p1192/m0207_synth.c:249:41: error: array index 3 is past the end of the array (that has type 'int[3]') [-Werror,-Warray-bounds]
+  249 |         synth_cycle_key(cyc[0], cyc[1], cyc[3], sorted, &dir);
+      |                                         ^   ~
+pgbuild/mutants/p1192/m0207_synth.c:235:9: note: array 'cyc' declared here
+  235 |         int cyc[CT_SYNTH_CYCLE_LEN];
+      |         ^
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p1192/m0210_synth.c:250:28: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  250 |         synth_table_insert(sorted[-1], sorted[1], sorted[2], dir, seq, len);
+      |                            ^      ~~
+pgbuild/mutants/p1192/m0210_synth.c:247:9: note: array 'sorted' declared here
+  247 |         int sorted[CT_SYNTH_CYCLE_LEN];
+      |         ^
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p1192/m0213_synth.c:250:50: error: array index 3 is past the end of the array (that has type 'int[3]') [-Werror,-Warray-bounds]
+  250 |         synth_table_insert(sorted[0], sorted[1], sorted[3], dir, seq, len);
+      |                                                  ^      ~
+pgbuild/mutants/p1192/m0213_synth.c:247:9: note: array 'sorted' declared here
+  247 |         int sorted[CT_SYNTH_CYCLE_LEN];
+      |         ^
+1 error generated.
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p1192/m0215_synth.c:254:42: error: expected ')'
+  254 | static void synth_try_pair(const ct_move /a, const ct_move *ins, int ins_len, bool a_first) {
+      |                                          ^
+pgbuild/mutants/p1192/m0215_synth.c:254:27: note: to match this '('
+  254 | static void synth_try_pair(const ct_move /a, const ct_move *ins, int ins_len, bool a_first) {
+      |                           ^
+pgbuild/mutants/p1192/m0215_synth.c:256:26: error: use of undeclared identifier 'ins'
+  256 |     ct_transform_inverse(ins, ins_len, inv_ins);
+      |                          ^~~
+pgbuild/mutants/p1192/m0215_synth.c:256:31: error: use of undeclared identifier 'ins_len'
+  256 |     ct_transform_inverse(ins, ins_len, inv_ins);
+      |                               ^~~~~~~
+pgbuild/mutants/p1192/m0215_synth.c:259:9: error: use of undeclared identifier 'a_first'
+  259 |     if (a_first) {
+      |         ^~~~~~~
+pgbuild/mutants/p1192/m0215_synth.c:260:23: error: use of undeclared identifier 'a'
+  260 |         seq[len++] = *a;
+      |                       ^
+pgbuild/mutants/p1192/m0215_synth.c:261:27: error: use of undeclared identifier 'ins'
+  261 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof *ins);
+      |                           ^~~
+pgbuild/mutants/p1192/m0215_synth.c:261:40: error: use of undeclared identifier 'ins_len'
+  261 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof *ins);
+      |                                        ^~~~~~~
+pgbuild/mutants/p1192/m0215_synth.c:261:58: error: use of undeclared identifier 'ins'
+  261 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof *ins);
+      |                                                          ^~~
+pgbuild/mutants/p1192/m0215_synth.c:262:16: error: use of undeclared identifier 'ins_len'
+  262 |         len += ins_len;
+      |                ^~~~~~~
+pgbuild/mutants/p1192/m0215_synth.c:263:39: error: use of undeclared identifier 'a'
+  263 |         seq[len++] = ct_move_inverse(*a);
+      |                                       ^
+pgbuild/mutants/p1192/m0215_synth.c:264:44: error: use of undeclared identifier 'ins_len'
+  264 |         memcpy(seq + len, inv_ins, (size_t)ins_len * sizeof *ins);
+      |                                            ^~~~~~~
+pgbuild/mutants/p1192/m0215_synth.c:264:62: error: use of undeclared identifier 'ins'
+  264 |         memcpy(seq + len, inv_ins, (size_t)ins_len * sizeof *ins);
+      |                                                              ^~~
+pgbuild/mutants/p1192/m0215_synth.c:265:16: error: use of undeclared identifier 'ins_len'
+  265 |         len += ins_len;
+      |                ^~~~~~~
+pgbuild/mutants/p1192/m0215_synth.c:267:27: error: use of undeclared identifier 'ins'
+  267 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof *ins);
+      |                           ^~~
+pgbuild/mutants/p1192/m0215_synth.c:267:40: error: use of undeclared identifier 'ins_len'
+  267 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof *ins);
+      |                                        ^~~~~~~
+pgbuild/mutants/p1192/m0215_synth.c:267:58: error: use of undeclared identifier 'ins'
+  267 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof *ins);
+      |                                                          ^~~
+pgbuild/mutants/p1192/m0215_synth.c:268:16: error: use of undeclared identifier 'ins_len'
+  268 |         len += ins_len;
+      |                ^~~~~~~
+pgbuild/mutants/p1192/m0215_synth.c:269:23: error: use of undeclared identifier 'a'
+  269 |         seq[len++] = *a;
+      |                       ^
+pgbuild/mutants/p1192/m0215_synth.c:270:44: error: use of undeclared identifier 'ins_len'
+  270 |         memcpy(seq + len, inv_ins, (size_t)ins_len * sizeof *ins);
+      |                                            ^~~~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+pgbuild/mutants/p1192/m0216_synth.c:254:60: error: expected ')'
+  254 | static void synth_try_pair(const ct_move *a, const ct_move /ins, int ins_len, bool a_first) {
+      |                                                            ^
+pgbuild/mutants/p1192/m0216_synth.c:254:27: note: to match this '('
+  254 | static void synth_try_pair(const ct_move *a, const ct_move /ins, int ins_len, bool a_first) {
+      |                           ^
+pgbuild/mutants/p1192/m0216_synth.c:256:26: error: use of undeclared identifier 'ins'
+  256 |     ct_transform_inverse(ins, ins_len, inv_ins);
+      |                          ^~~
+pgbuild/mutants/p1192/m0216_synth.c:256:31: error: use of undeclared identifier 'ins_len'
+  256 |     ct_transform_inverse(ins, ins_len, inv_ins);
+      |                               ^~~~~~~
+pgbuild/mutants/p1192/m0216_synth.c:259:9: error: use of undeclared identifier 'a_first'
+  259 |     if (a_first) {
+      |         ^~~~~~~
+pgbuild/mutants/p1192/m0216_synth.c:261:27: error: use of undeclared identifier 'ins'
+  261 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof *ins);
+      |                           ^~~
+pgbuild/mutants/p1192/m0216_synth.c:261:40: error: use of undeclared identifier 'ins_len'
+  261 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof *ins);
+      |                                        ^~~~~~~
+pgbuild/mutants/p1192/m0216_synth.c:261:58: error: use of undeclared identifier 'ins'
+  261 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof *ins);
+      |                                                          ^~~
+pgbuild/mutants/p1192/m0216_synth.c:262:16: error: use of undeclared identifier 'ins_len'
+  262 |         len += ins_len;
+      |                ^~~~~~~
+pgbuild/mutants/p1192/m0216_synth.c:264:44: error: use of undeclared identifier 'ins_len'
+  264 |         memcpy(seq + len, inv_ins, (size_t)ins_len * sizeof *ins);
+      |                                            ^~~~~~~
+pgbuild/mutants/p1192/m0216_synth.c:264:62: error: use of undeclared identifier 'ins'
+  264 |         memcpy(seq + len, inv_ins, (size_t)ins_len * sizeof *ins);
+      |                                                              ^~~
+pgbuild/mutants/p1192/m0216_synth.c:265:16: error: use of undeclared identifier 'ins_len'
+  265 |         len += ins_len;
+      |                ^~~~~~~
+pgbuild/mutants/p1192/m0216_synth.c:267:27: error: use of undeclared identifier 'ins'
+  267 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof *ins);
+      |                           ^~~
+pgbuild/mutants/p1192/m0216_synth.c:267:40: error: use of undeclared identifier 'ins_len'
+  267 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof *ins);
+      |                                        ^~~~~~~
+pgbuild/mutants/p1192/m0216_synth.c:267:58: error: use of undeclared identifier 'ins'
+  267 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof *ins);
+      |                                                          ^~~
+pgbuild/mutants/p1192/m0216_synth.c:268:16: error: use of undeclared identifier 'ins_len'
+  268 |         len += ins_len;
+      |                ^~~~~~~
+pgbuild/mutants/p1192/m0216_synth.c:270:44: error: use of undeclared identifier 'ins_len'
+  270 |         memcpy(seq + len, inv_ins, (size_t)ins_len * sizeof *ins);
+      |                                            ^~~~~~~
+pgbuild/mutants/p1192/m0216_synth.c:270:62: error: use of undeclared identifier 'ins'
+  270 |         memcpy(seq + len, inv_ins, (size_t)ins_len * sizeof *ins);
+      |                                                              ^~~
+pgbuild/mutants/p1192/m0216_synth.c:271:16: error: use of undeclared identifier 'ins_len'
+  271 |         len += ins_len;
+      |                ^~~~~~~
+pgbuild/mutants/p1192/m0216_synth.c:339:49: error: too many arguments to function call, expected 2, have 4
+  339 |             synth_try_pair(a, &cands[uniq[ii]], 1, true);
+      |             ~~~~~~~~~~~~~~                      ^~~~~~~
+pgbuild/mutants/p1192/m0216_synth.c:254:13: note: 'synth_try_pair' declared here
+  254 | static void synth_try_pair(const ct_move *a, const ct_move /ins, int ins_len, bool a_first) {
+      |             ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited -1073741795
+pgbuild/mutants/p1192/m0219_synth.c:260:22: error: expected expression
+  260 |         seq[len++] = /a;
+      |                      ^
+1 error generated.
+mutate: suite unit_synth_table exited -1073741795
+pgbuild/mutants/p1192/m0222_synth.c:261:57: error: expected expression
+  261 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof /ins);
+      |                                                         ^
+1 error generated.
+pgbuild/mutants/p1192/m0223_synth.c:263:38: error: expected expression
+  263 |         seq[len++] = ct_move_inverse(/a);
+      |                                      ^
+1 error generated.
+mutate: suite unit_synth_table exited -1073741795
+pgbuild/mutants/p1192/m0226_synth.c:264:61: error: expected expression
+  264 |         memcpy(seq + len, inv_ins, (size_t)ins_len * sizeof /ins);
+      |                                                             ^
+1 error generated.
+pgbuild/mutants/p1192/m0229_synth.c:267:57: error: expected expression
+  267 |         memcpy(seq + len, ins, (size_t)ins_len * sizeof /ins);
+      |                                                         ^
+1 error generated.
+pgbuild/mutants/p1192/m0230_synth.c:269:22: error: expected expression
+  269 |         seq[len++] = /a;
+      |                      ^
+1 error generated.
+mutate: suite unit_synth_table exited -1073741795
+mutate: 36 unexplained survivors
+0190 src/gen/synth.c:230 [int-1 0 -> -1]
+SURVIVED  m0191 src/gen/synth.c:230 [cmp < -> <=]
+KILLED    m0192 src/gen/synth.c:237 [int+1 0 -> 1]
+KILLED    m0193 src/gen/synth.c:237 [int-1 0 -> -1]
+SURVIVED  m0194 src/gen/synth.c:238 [cmp < -> <=]
+SURVIVED  m0195 src/gen/synth.c:238 [logic && -> ||]
+KILLED    m0196 src/gen/synth.c:238 [not-del ! -> (deleted)]
+SURVIVED  m0197 src/gen/synth.c:239 [bool true -> false]
+KILLED    m0198 src/gen/synth.c:244 [cmp != -> ==]
+SURVIVED  m0199 src/gen/synth.c:244 [logic || -> &&]
+KILLED    m0200 src/gen/synth.c:244 [cmp != -> ==]
+SURVIVED  m0201 src/gen/synth.c:248 [int+1 0 -> 1]
+SURVIVED  m0202 src/gen/synth.c:248 [int-1 0 -> -1]
+KILLED    m0203 src/gen/synth.c:249 [int+1 0 -> 1]
+KILLED    m0204 src/gen/synth.c:249 [int-1 0 -> -1]
+          build break
+KILLED    m0205 src/gen/synth.c:249 [int+1 1 -> 2]
+KILLED    m0206 src/gen/synth.c:249 [int-1 1 -> 0]
+KILLED    m0207 src/gen/synth.c:249 [int+1 2 -> 3]
+          build break
+KILLED    m0208 src/gen/synth.c:249 [int-1 2 -> 1]
+KILLED    m0209 src/gen/synth.c:250 [int+1 0 -> 1]
+KILLED    m0210 src/gen/synth.c:250 [int-1 0 -> -1]
+          build break
+KILLED    m0211 src/gen/synth.c:250 [int+1 1 -> 2]
+KILLED    m0212 src/gen/synth.c:250 [int-1 1 -> 0]
+KILLED    m0213 src/gen/synth.c:250 [int+1 2 -> 3]
+          build break
+KILLED    m0214 src/gen/synth.c:250 [int-1 2 -> 1]
+KILLED    m0215 src/gen/synth.c:254 [arith * -> /]
+          build break
+KILLED    m0216 src/gen/synth.c:254 [arith * -> /]
+          build break
+KILLED    m0217 src/gen/synth.c:258 [int+1 0 -> 1]
+KILLED    m0218 src/gen/synth.c:258 [int-1 0 -> -1]
+KILLED    m0219 src/gen/synth.c:260 [arith * -> /]
+          build break
+KILLED    m0220 src/gen/synth.c:261 [arith + -> -]
+SURVIVED  m0221 src/gen/synth.c:261 [arith * -> /]
+KILLED    m0222 src/gen/synth.c:261 [arith * -> /]
+          build break
+KILLED    m0223 src/gen/synth.c:263 [arith * -> /]
+          build break
+KILLED    m0224 src/gen/synth.c:264 [arith + -> -]
+SURVIVED  m0225 src/gen/synth.c:264 [arith * -> /]
+KILLED    m0226 src/gen/synth.c:264 [arith * -> /]
+          build break
+SURVIVED  m0227 src/gen/synth.c:267 [arith + -> -]
+SURVIVED  m0228 src/gen/synth.c:267 [arith * -> /]
+KILLED    m0229 src/gen/synth.c:267 [arith * -> /]
+          build break
+KILLED    m0230 src/gen/synth.c:269 [arith * -> /]
+          build break
+KILLED    m0231 src/gen/synth.c:270 [arith + -> -]
+SURVIVED  m0232 src/gen/synth.c:270 [arith * -> /]
+mutate: generated=116 build_failed=24 killed_by_tests=56 killed=80 survived=36 accepted=0 unexplained=36 skipped=812
+mutate: kill rate 80/116 = 69.0%, with accepted equivalents 80/116 = 69.0%
+mutate: wall 1645.9s
+make: *** [makefile:239: mutate] Error 1

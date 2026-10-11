@@ -1,0 +1,102 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+pgbuild/bin/mutate.exe src/gen/synth.c pgbuild unit_synth_table unit_synth_coverage unit_synth_config unit_synth_bh unit_synth_scoring
+pgbuild/mutants/p23512/m0077_synth.c:116:5: error: expected expression
+  116 |     /dir = next == sorted[1] ? 0 : 1;
+      |     ^
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741819
+mutate: suite unit_synth_table exited -1073741819
+mutate: suite unit_synth_table exited -1073741819
+pgbuild/mutants/p23512/m0094_synth.c:130:30: error: expected identifier or '('
+  130 |         const ct_synth_entry /e = &synth_entries[synth_hash[h] - 1];
+      |                              ^
+pgbuild/mutants/p23512/m0094_synth.c:131:13: error: use of undeclared identifier 'e'
+  131 |         if (e->key[0] == (uint8_t)a && e->key[1] == (uint8_t)b && e->key[2] == (uint8_t)c &&
+      |             ^
+pgbuild/mutants/p23512/m0094_synth.c:131:40: error: use of undeclared identifier 'e'
+  131 |         if (e->key[0] == (uint8_t)a && e->key[1] == (uint8_t)b && e->key[2] == (uint8_t)c &&
+      |                                        ^
+pgbuild/mutants/p23512/m0094_synth.c:131:67: error: use of undeclared identifier 'e'
+  131 |         if (e->key[0] == (uint8_t)a && e->key[1] == (uint8_t)b && e->key[2] == (uint8_t)c &&
+      |                                                                   ^
+pgbuild/mutants/p23512/m0094_synth.c:132:13: error: use of undeclared identifier 'e'
+  132 |             e->key[3] == (uint8_t)dir) {
+      |             ^
+5 errors generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741819
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+pgbuild/mutants/p23512/m0099_synth.c:131:13: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  131 |         if (e->key[-1] == (uint8_t)a && e->key[1] == (uint8_t)b && e->key[2] == (uint8_t)c &&
+      |             ^      ~~
+pgbuild/mutants/p23512/m0099_synth.c:12:5: note: array 'key' declared here
+   12 |     uint8_t key[CT_SYNTH_KEY_FIELDS];
+      |     ^
+1 error generated.
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p23512/m0101_synth.c:131:91: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  131 |         if (e->key[0] == (uint8_t)a || e->key[1] == (uint8_t)b && e->key[2] == (uint8_t)c &&
+      |                                     ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  132 |             e->key[3] == (uint8_t)dir) {
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p23512/m0101_synth.c:131:91: note: place parentheses around the '&&' expression to silence this warning
+  131 |         if (e->key[0] == (uint8_t)a || e->key[1] == (uint8_t)b && e->key[2] == (uint8_t)c &&
+      |                                                                                           ^
+      |                                        (
+  132 |             e->key[3] == (uint8_t)dir) {
+      |                                      
+      |                                      )
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p23512/m0105_synth.c:131:37: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  131 |         if (e->key[0] == (uint8_t)a && e->key[1] == (uint8_t)b || e->key[2] == (uint8_t)c &&
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p23512/m0105_synth.c:131:37: note: place parentheses around the '&&' expression to silence this warning
+  131 |         if (e->key[0] == (uint8_t)a && e->key[1] == (uint8_t)b || e->key[2] == (uint8_t)c &&
+      |                                     ^
+      |             (                                                 )
+pgbuild/mutants/p23512/m0105_synth.c:131:91: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  131 |         if (e->key[0] == (uint8_t)a && e->key[1] == (uint8_t)b || e->key[2] == (uint8_t)c &&
+      |                                                                ~~ ~~~~~~~~~~~~~~~~~~~~~~~~^~
+  132 |             e->key[3] == (uint8_t)dir) {
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~
+pgbuild/mutants/p23512/m0105_synth.c:131:91: note: place parentheses around the '&&' expression to silence this warning
+  131 |         if (e->key[0] == (uint8_t)a && e->key[1] == (uint8_t)b || e->key[2] == (uint8_t)c &&
+      |                                                                                           ^
+      |                                                                   (
+  132 |             e->key[3] == (uint8_t)dir) {
+      |                                      
+      |                                      )
+2 errors generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_table exited 1
+pgbuild/mutants/p23512/m0109_synth.c:131:64: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  131 |         if (e->key[0] == (uint8_t)a && e->key[1] == (uint8_t)b && e->key[2] == (uint8_t)c ||
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+pgbuild/mutants/p23512/m0109_synth.c:131:64: note: place parentheses around the '&&' expression to silence this warning
+  131 |         if (e->key[0] == (uint8_t)a && e->key[1] == (uint8_t)b && e->key[2] == (uint8_t)c ||
+      |                                                                ^
+      |             (                                                                            )
+1 error generated.
+pgbuild/mutants/p23512/m0110_synth.c:132:13: error: array index 4 is past the end of the array (that has type 'const uint8_t[4]' (aka 'const unsigned char[4]')) [-Werror,-Warray-bounds]
+  132 |             e->key[4] == (uint8_t)dir) {
+      |             ^      ~
+pgbuild/mutants/p23512/m0110_synth.c:12:5: note: array 'key' declared here
+   12 |     uint8_t key[CT_SYNTH_KEY_FIELDS];
+      |     ^
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_table exited 1
+make: *** [makefile:239: mutate] Error 127

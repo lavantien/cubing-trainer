@@ -1,0 +1,304 @@
+pgr3b/mutants/p10172/m0233_synth.c:270:61: error: expected expression
+  270 |         memcpy(seq + len, inv_ins, (size_t)ins_len * sizeof /ins);
+      |                                                             ^
+1 error generated.
+pgr3b/mutants/p10172/m0234_synth.c:272:38: error: expected expression
+  272 |         seq[len++] = ct_move_inverse(/a);
+      |                                      ^
+1 error generated.
+pgr3b/mutants/p10172/m0235_synth.c:277:45: error: expected ')'
+  277 | static bool synth_dedup_perms(const ct_move /x, const ct_move *y) {
+      |                                             ^
+pgr3b/mutants/p10172/m0235_synth.c:277:30: note: to match this '('
+  277 | static bool synth_dedup_perms(const ct_move /x, const ct_move *y) {
+      |                              ^
+pgr3b/mutants/p10172/m0235_synth.c:280:26: error: use of undeclared identifier 'x'
+  280 |     if (ct_sticker_perm(*x, CT_SYNTH_N, px) != 0) {
+      |                          ^
+pgr3b/mutants/p10172/m0235_synth.c:283:26: error: use of undeclared identifier 'y'
+  283 |     if (ct_sticker_perm(*y, CT_SYNTH_N, py) != 0) {
+      |                          ^
+pgr3b/mutants/p10172/m0235_synth.c:327:46: error: too many arguments to function call, expected 1, have 2
+  327 |             if (synth_dedup_perms(&cands[i], &cands[j])) {
+      |                 ~~~~~~~~~~~~~~~~~            ^~~~~~~~~
+pgr3b/mutants/p10172/m0235_synth.c:277:13: note: 'synth_dedup_perms' declared here
+  277 | static bool synth_dedup_perms(const ct_move /x, const ct_move *y) {
+      |             ^                 ~~~~~~~~~~~~~
+4 errors generated.
+pgr3b/mutants/p10172/m0236_synth.c:277:63: error: expected ')'
+  277 | static bool synth_dedup_perms(const ct_move *x, const ct_move /y) {
+      |                                                               ^
+pgr3b/mutants/p10172/m0236_synth.c:277:30: note: to match this '('
+  277 | static bool synth_dedup_perms(const ct_move *x, const ct_move /y) {
+      |                              ^
+pgr3b/mutants/p10172/m0236_synth.c:283:26: error: use of undeclared identifier 'y'
+  283 |     if (ct_sticker_perm(*y, CT_SYNTH_N, py) != 0) {
+      |                          ^
+pgr3b/mutants/p10172/m0236_synth.c:327:46: error: passing 'ct_move *' to parameter of incompatible type 'ct_move'; remove &
+  327 |             if (synth_dedup_perms(&cands[i], &cands[j])) {
+      |                                              ^~~~~~~~~
+pgr3b/mutants/p10172/m0236_synth.c:277:63: note: passing argument to parameter here
+  277 | static bool synth_dedup_perms(const ct_move *x, const ct_move /y) {
+      |                                                               ^
+3 errors generated.
+pgr3b/mutants/p10172/m0237_synth.c:278:16: error: zero size arrays are an extension [-Werror,-Wzero-length-array]
+  278 |     uint8_t px[CT_CUBE_FACE_COUNT / CT_CUBE_STRIDE * CT_CUBE_STRIDE];
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+pgr3b/mutants/p10172/m0239_synth.c:279:16: error: zero size arrays are an extension [-Werror,-Wzero-length-array]
+  279 |     uint8_t py[CT_CUBE_FACE_COUNT / CT_CUBE_STRIDE * CT_CUBE_STRIDE];
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+pgr3b/mutants/p10172/m0241_synth.c:280:25: error: expected expression
+  280 |     if (ct_sticker_perm(/x, CT_SYNTH_N, px) != 0) {
+      |                         ^
+1 error generated.
+pgr3b/mutants/p10172/m0246_synth.c:283:25: error: expected expression
+  283 |     if (ct_sticker_perm(/y, CT_SYNTH_N, py) != 0) {
+      |                         ^
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_gates exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_table exited -1073741795
+pgr3b/mutants/p10172/m0284_synth.c:337:23: error: expected identifier or '('
+  337 |         const ct_move /a = &cands[uniq[ai]];
+      |                       ^
+pgr3b/mutants/p10172/m0284_synth.c:339:28: error: use of undeclared identifier 'a'
+  339 |             synth_try_pair(a, &cands[uniq[ii]], 1, true);
+      |                            ^
+pgr3b/mutants/p10172/m0284_synth.c:340:28: error: use of undeclared identifier 'a'
+  340 |             synth_try_pair(a, &cands[uniq[ii]], 1, false);
+      |                            ^
+pgr3b/mutants/p10172/m0284_synth.c:354:32: error: use of undeclared identifier 'a'
+  354 |                 synth_try_pair(a, ins, CT_SYNTH_CYCLE_LEN, true);
+      |                                ^
+pgr3b/mutants/p10172/m0284_synth.c:355:32: error: use of undeclared identifier 'a'
+  355 |                 synth_try_pair(a, ins, CT_SYNTH_CYCLE_LEN, false);
+      |                                ^
+pgr3b/mutants/p10172/m0284_synth.c:359:32: error: use of undeclared identifier 'a'
+  359 |                 synth_try_pair(a, ins, CT_SYNTH_INSERT_LEN, true);
+      |                                ^
+pgr3b/mutants/p10172/m0284_synth.c:360:32: error: use of undeclared identifier 'a'
+  360 |                 synth_try_pair(a, ins, CT_SYNTH_INSERT_LEN, false);
+      |                                ^
+pgr3b/mutants/p10172/m0284_synth.c:363:32: error: use of undeclared identifier 'a'
+  363 |                 synth_try_pair(a, ins, CT_SYNTH_INSERT_LEN, true);
+      |                                ^
+pgr3b/mutants/p10172/m0284_synth.c:364:32: error: use of undeclared identifier 'a'
+  364 |                 synth_try_pair(a, ins, CT_SYNTH_INSERT_LEN, false);
+      |                                ^
+9 errors generated.
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited -1073741795
+pgr3b/mutants/p10172/m0297_synth.c:343:27: error: expected identifier or '('
+  343 |             const ct_move /x = &cands[uniq[xi]];
+      |                           ^
+pgr3b/mutants/p10172/m0297_synth.c:344:46: error: use of undeclared identifier 'x'
+  344 |             ct_move x_inv = ct_move_inverse(*x);
+      |                                              ^
+pgr3b/mutants/p10172/m0297_synth.c:346:23: error: use of undeclared identifier 'x'
+  346 |             ins[0] = *x;
+      |                       ^
+pgr3b/mutants/p10172/m0297_synth.c:348:45: error: use of undeclared identifier 'x'
+  348 |                 if (cands[uniq[yi]].face == x->face) {
+      |                                             ^
+pgr3b/mutants/p10172/m0297_synth.c:361:38: error: use of undeclared identifier 'x'
+  361 |                 ins[CT_SYNTH_TWO] = *x;
+      |                                      ^
+pgr3b/mutants/p10172/m0297_synth.c:362:60: error: use of undeclared identifier 'x'
+  362 |                 ins[CT_SYNTH_INSERT_LEN - CT_SYNTH_ONE] = *x;
+      |                                                            ^
+6 errors generated.
+pgr3b/mutants/p10172/m0298_synth.c:344:45: error: expected expression
+  344 |             ct_move x_inv = ct_move_inverse(/x);
+      |                                             ^
+1 error generated.
+pgr3b/mutants/p10172/m0300_synth.c:346:13: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  346 |             ins[-1] = *x;
+      |             ^   ~~
+pgr3b/mutants/p10172/m0300_synth.c:345:13: note: array 'ins' declared here
+  345 |             ct_move ins[CT_SYNTH_INSERT_LEN];
+      |             ^
+1 error generated.
+pgr3b/mutants/p10172/m0301_synth.c:346:22: error: expected expression
+  346 |             ins[0] = /x;
+      |                      ^
+1 error generated.
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_gates exited 1
+mutate: suite unit_synth_gates exited 1
+pgr3b/mutants/p10172/m0310_synth.c:358:17: error: array index 6 is past the end of the array (that has type 'ct_move[5]') [-Werror,-Warray-bounds]
+  358 |                 ins[CT_SYNTH_INSERT_LEN + CT_SYNTH_ONE] = x_inv;
+      |                 ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgr3b/mutants/p10172/m0310_synth.c:345:13: note: array 'ins' declared here
+  345 |             ct_move ins[CT_SYNTH_INSERT_LEN];
+      |             ^
+1 error generated.
+mutate: suite unit_synth_gates exited 1
+mutate: suite unit_synth_gates exited 1
+pgr3b/mutants/p10172/m0313_synth.c:361:37: error: expected expression
+  361 |                 ins[CT_SYNTH_TWO] = /x;
+      |                                     ^
+1 error generated.
+pgr3b/mutants/p10172/m0314_synth.c:362:17: error: array index 6 is past the end of the array (that has type 'ct_move[5]') [-Werror,-Warray-bounds]
+  362 |                 ins[CT_SYNTH_INSERT_LEN + CT_SYNTH_ONE] = *x;
+      |                 ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+pgr3b/mutants/p10172/m0314_synth.c:345:13: note: array 'ins' declared here
+  345 |             ct_move ins[CT_SYNTH_INSERT_LEN];
+      |             ^
+1 error generated.
+pgr3b/mutants/p10172/m0315_synth.c:362:59: error: expected expression
+  362 |                 ins[CT_SYNTH_INSERT_LEN - CT_SYNTH_ONE] = /x;
+      |                                                           ^
+1 error generated.
+pgr3b/mutants/p10172/m0318_synth.c:375:61: error: expected expression
+  375 |     synth_entries = calloc((size_t)CT_SYNTH_KEY_MAX, sizeof /synth_entries);
+      |                                                             ^
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741819
+mutate: suite unit_synth_table exited -1073741819
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741819
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+pgr3b/mutants/p10172/m0338_synth.c:397:75: error: expected ')'
+  397 | int ct_synth_table_entry(int index, int key[CT_SYNTH_KEY_FIELDS], ct_move /out, int cap) {
+      |                                                                           ^
+pgr3b/mutants/p10172/m0338_synth.c:397:25: note: to match this '('
+  397 | int ct_synth_table_entry(int index, int key[CT_SYNTH_KEY_FIELDS], ct_move /out, int cap) {
+      |                         ^
+pgr3b/mutants/p10172/m0338_synth.c:397:5: error: conflicting types for 'ct_synth_table_entry'
+  397 | int ct_synth_table_entry(int index, int key[CT_SYNTH_KEY_FIELDS], ct_move /out, int cap) {
+      |     ^
+src\gen/synth.h:59:5: note: previous declaration is here
+   59 | int ct_synth_table_entry(int index, int key[CT_SYNTH_KEY_FIELDS], ct_move *out, int cap);
+      |     ^
+pgr3b/mutants/p10172/m0338_synth.c:402:9: error: use of undeclared identifier 'out'
+  402 |     if (out == NULL || cap < (int)e->len) {
+      |         ^~~
+pgr3b/mutants/p10172/m0338_synth.c:402:24: error: use of undeclared identifier 'cap'
+  402 |     if (out == NULL || cap < (int)e->len) {
+      |                        ^~~
+pgr3b/mutants/p10172/m0338_synth.c:408:12: error: use of undeclared identifier 'out'
+  408 |     memcpy(out, e->seq, (size_t)e->len * sizeof *out);
+      |            ^~~
+pgr3b/mutants/p10172/m0338_synth.c:408:50: error: use of undeclared identifier 'out'
+  408 |     memcpy(out, e->seq, (size_t)e->len * sizeof *out);
+      |                                                  ^~~
+6 errors generated.
+mutate: suite unit_synth_table exited 1
+pgr3b/mutants/p10172/m0340_synth.c:398:22: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  398 |     if (!synth_built && index < 0 || index >= synth_count || key == NULL) {
+      |         ~~~~~~~~~~~~~^~~~~~~~~~~~ ~~
+pgr3b/mutants/p10172/m0340_synth.c:398:22: note: place parentheses around the '&&' expression to silence this warning
+  398 |     if (!synth_built && index < 0 || index >= synth_count || key == NULL) {
+      |                      ^
+      |         (                        )
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_gates exited -1073741819
+pgr3b/mutants/p10172/m0344_synth.c:398:35: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  398 |     if (!synth_built || index < 0 && index >= synth_count || key == NULL) {
+      |                      ~~ ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+pgr3b/mutants/p10172/m0344_synth.c:398:35: note: place parentheses around the '&&' expression to silence this warning
+  398 |     if (!synth_built || index < 0 && index >= synth_count || key == NULL) {
+      |                                   ^
+      |                         (                                )
+1 error generated.
+mutate: suite unit_synth_gates exited 1
+pgr3b/mutants/p10172/m0346_synth.c:398:59: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  398 |     if (!synth_built || index < 0 || index >= synth_count && key == NULL) {
+      |                                   ~~ ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+pgr3b/mutants/p10172/m0346_synth.c:398:59: note: place parentheses around the '&&' expression to silence this warning
+  398 |     if (!synth_built || index < 0 || index >= synth_count && key == NULL) {
+      |                                      ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_gates exited 1
+mutate: suite unit_synth_table exited 1
+pgr3b/mutants/p10172/m0351_synth.c:401:26: error: expected identifier or '('
+  401 |     const ct_synth_entry /e = &synth_entries[index];
+      |                          ^
+pgr3b/mutants/p10172/m0351_synth.c:402:35: error: use of undeclared identifier 'e'
+  402 |     if (out == NULL || cap < (int)e->len) {
+      |                                   ^
+pgr3b/mutants/p10172/m0351_synth.c:406:18: error: use of undeclared identifier 'e'
+  406 |         key[i] = e->key[i];
+      |                  ^
+pgr3b/mutants/p10172/m0351_synth.c:408:17: error: use of undeclared identifier 'e'
+  408 |     memcpy(out, e->seq, (size_t)e->len * sizeof *out);
+      |                 ^
+pgr3b/mutants/p10172/m0351_synth.c:408:33: error: use of undeclared identifier 'e'
+  408 |     memcpy(out, e->seq, (size_t)e->len * sizeof *out);
+      |                                 ^
+pgr3b/mutants/p10172/m0351_synth.c:409:12: error: use of undeclared identifier 'e'
+  409 |     return e->len;
+      |            ^
+6 errors generated.
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited 1
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited -1073741795
+mutate: suite unit_synth_table exited 1
+pgr3b/mutants/p10172/m0362_synth.c:408:49: error: expected expression
+  408 |     memcpy(out, e->seq, (size_t)e->len * sizeof /out);
+      |                                                 ^
+1 error generated.
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+pgr3b/mutants/p10172/m0365_synth.c:425:34: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+  425 |     if (orbit != CT_ORBIT_CORNER || orbit != CT_ORBIT_EDGE) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_bad_input exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_direct exited 1
+mutate: suite unit_synth_bad_input exited 1
+pgr3b/mutants/p10172/m0371_synth.c:428:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  428 |     if (buffer < 0 && t1 < 0 || t2 < 0) {
+      |         ~~~~~~~~~~~^~~~~~~~~ ~~
+pgr3b/mutants/p10172/m0371_synth.c:428:20: note: place parentheses around the '&&' expression to silence this warning
+  428 |     if (buffer < 0 && t1 < 0 || t2 < 0) {
+      |                    ^
+      |         (                   )
+1 error generated.
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_coverage exited 1
+mutate: suite unit_synth_bad_input exited 1
+pgr3b/mutants/p10172/m0375_synth.c:428:30: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  428 |     if (buffer < 0 || t1 < 0 && t2 < 0) {
+      |                    ~~ ~~~~~~~^~~~~~~~~
+pgr3b/mutants/p10172/m0375_synth.c:428:30: note: place parentheses around the '&&' expression to silence this warning
+  428 |     if (buffer < 0 || t1 < 0 && t2 < 0) {
+      |                              ^        
+      |                       (               )
+1 error generated.

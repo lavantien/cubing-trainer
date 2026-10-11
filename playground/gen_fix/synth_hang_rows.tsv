@@ -1,0 +1,8 @@
+src/gen/synth.c:135	table slot probe step zero loops forever on the first collision, no suite can terminate to report the divergence
+src/gen/synth.c:218	analyze cell scan start shift miscounts the moved set, the miscounted cycles redirect every table lookup to a miss and the stress fuzz configurations then run the fallback breadth first search at full depth on every query, the suite stalls past any usable budget so no verdict can be reported
+src/gen/synth.c:399	entry cap guard arithmetic admits undersized caps, the caller then copies past its buffer and the suite dies or stalls before a verdict on the fuzzed indices
+src/gen/synth.c:551	setup depth loop disjunction mutant loops forever past the depth bound on unsolved setups, no suite can terminate to report the divergence
+src/gen/synth.c:624	state hash multiplier arithmetic saturates the open addressed fallback probe table, the probe never finds an empty slot and the suite stalls forever
+src/gen/synth.c:719	fallback perm build loop start shift leaves one perm row unwritten, the garbage inverse saturates the probe table and the suite stalls forever
+src/gen/synth.c:774	fallback variant loop bound widening reads past the variant array, the garbage variant saturates the probe table and the suite stalls forever
+src/gen/synth.c:894	setup gate boundary shift admits configurations whose setup search and fallback bookkeeping then runs without bound under the stress fuzz configurations, the suite stalls past any usable budget so no verdict can be reported
