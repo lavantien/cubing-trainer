@@ -1,0 +1,6 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_algs.c -o build_scrnB/tobj/tests/unit_algs.o
+tests/unit_algs.c:119:13: error: no member named 'preferred_moves_edge' in 'struct ct_gen_cfg'
+  119 |     cfg.gen.preferred_moves_edge &= ~CT_MOVE_BIT_M;
+      |     ~~~~~~~ ^
+1 error generated.
+make: *** [makefile:106: build_scrnB/tobj/tests/unit_algs.o] Error 1

@@ -1,0 +1,165 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_scrn2/bin/mutate.exe src/app/shots.c build_scrn2 shots_settings_tab_clamp shots_arg_guards shots_state_guards shots_render_smoke e2e_run_shot_guards e2e_run_shot_render e2e_parse_shot_words
+mutate: scope=src/app/shots.c files=1 sites=119 suites=7
+KILLED    m0001 src/app/shots.c:13 [bool false -> true]
+KILLED    m0002 src/app/shots.c:15 [arith * -> /]
+          build break
+KILLED    m0003 src/app/shots.c:15 [arith * -> /]
+          build break
+KILLED    m0004 src/app/shots.c:16 [cmp == -> !=]
+KILLED    m0005 src/app/shots.c:16 [logic || -> &&]
+KILLED    m0006 src/app/shots.c:16 [not-del ! -> (deleted)]
+KILLED    m0007 src/app/shots.c:19 [cmp == -> !=]
+KILLED    m0008 src/app/shots.c:19 [logic || -> &&]
+SURVIVED  m0009 src/app/shots.c:19 [int+1 0 -> 1]
+KILLED    m0010 src/app/shots.c:19 [int-1 0 -> -1]
+KILLED    m0011 src/app/shots.c:19 [cmp == -> !=]
+KILLED    m0012 src/app/shots.c:25 [arith * -> /]
+          build break
+KILLED    m0013 src/app/shots.c:26 [not-del ! -> (deleted)]
+KILLED    m0014 src/app/shots.c:29 [not-del ! -> (deleted)]
+SURVIVED  m0015 src/app/shots.c:32 [bool true -> false]
+KILLED    m0016 src/app/shots.c:39 [arith * -> /]
+          build break
+KILLED    m0017 src/app/shots.c:42 [cmp == -> !=]
+SURVIVED  m0018 src/app/shots.c:42 [int+1 0 -> 1]
+KILLED    m0019 src/app/shots.c:42 [int-1 0 -> -1]
+          build break
+SURVIVED  m0020 src/app/shots.c:42 [logic || -> &&]
+SURVIVED  m0021 src/app/shots.c:42 [cmp >= -> >]
+KILLED    m0022 src/app/shots.c:45 [arith + -> -]
+SURVIVED  m0023 src/app/shots.c:45 [int+1 1 -> 2]
+KILLED    m0024 src/app/shots.c:45 [int-1 1 -> 0]
+KILLED    m0025 src/app/shots.c:46 [arith * -> /]
+          build break
+KILLED    m0026 src/app/shots.c:47 [arith * -> /]
+          build break
+SURVIVED  m0027 src/app/shots.c:48 [cmp != -> ==]
+SURVIVED  m0028 src/app/shots.c:48 [logic && -> ||]
+SURVIVED  m0029 src/app/shots.c:48 [cmp == -> !=]
+SURVIVED  m0030 src/app/shots.c:48 [logic || -> &&]
+SURVIVED  m0031 src/app/shots.c:48 [cmp > -> >=]
+SURVIVED  m0032 src/app/shots.c:51 [cmp == -> !=]
+KILLED    m0033 src/app/shots.c:51 [logic || -> &&]
+          build break
+SURVIVED  m0034 src/app/shots.c:51 [cmp == -> !=]
+KILLED    m0035 src/app/shots.c:51 [logic || -> &&]
+          build break
+SURVIVED  m0036 src/app/shots.c:51 [int+1 1 -> 2]
+SURVIVED  m0037 src/app/shots.c:51 [int-1 1 -> 0]
+SURVIVED  m0038 src/app/shots.c:51 [cmp == -> !=]
+KILLED    m0039 src/app/shots.c:54 [arith * -> /]
+          build break
+KILLED    m0040 src/app/shots.c:55 [cmp == -> !=]
+KILLED    m0041 src/app/shots.c:55 [int+1 0 -> 1]
+KILLED    m0042 src/app/shots.c:55 [int-1 0 -> -1]
+KILLED    m0043 src/app/shots.c:58 [arith * -> /]
+          build break
+KILLED    m0044 src/app/shots.c:58 [arith * -> /]
+          build break
+KILLED    m0045 src/app/shots.c:60 [cmp != -> ==]
+KILLED    m0046 src/app/shots.c:75 [arith * -> /]
+          build break
+KILLED    m0047 src/app/shots.c:75 [arith * -> /]
+          build break
+KILLED    m0048 src/app/shots.c:77 [cmp != -> ==]
+KILLED    m0049 src/app/shots.c:88 [bool false -> true]
+KILLED    m0050 src/app/shots.c:92 [arith * -> /]
+          build break
+KILLED    m0051 src/app/shots.c:92 [arith * -> /]
+          build break
+KILLED    m0052 src/app/shots.c:94 [cmp != -> ==]
+KILLED    m0053 src/app/shots.c:100 [arith * -> /]
+          build break
+KILLED    m0054 src/app/shots.c:101 [arith * -> /]
+          build break
+KILLED    m0055 src/app/shots.c:103 [cmp != -> ==]
+KILLED    m0056 src/app/shots.c:107 [cmp != -> ==]
+KILLED    m0057 src/app/shots.c:112 [arith * -> /]
+          build break
+KILLED    m0058 src/app/shots.c:113 [cmp == -> !=]
+SURVIVED  m0059 src/app/shots.c:113 [logic || -> &&]
+KILLED    m0060 src/app/shots.c:113 [cmp == -> !=]
+KILLED    m0061 src/app/shots.c:116 [cmp != -> ==]
+KILLED    m0062 src/app/shots.c:116 [logic || -> &&]
+          build break
+KILLED    m0063 src/app/shots.c:117 [cmp != -> ==]
+KILLED    m0064 src/app/shots.c:117 [logic || -> &&]
+          build break
+KILLED    m0065 src/app/shots.c:118 [cmp != -> ==]
+KILLED    m0066 src/app/shots.c:121 [cmp != -> ==]
+KILLED    m0067 src/app/shots.c:121 [logic && -> ||]
+KILLED    m0068 src/app/shots.c:122 [cmp != -> ==]
+KILLED    m0069 src/app/shots.c:128 [arith * -> /]
+          build break
+KILLED    m0070 src/app/shots.c:129 [arith * -> /]
+          build break
+KILLED    m0071 src/app/shots.c:131 [cmp != -> ==]
+KILLED    m0072 src/app/shots.c:135 [cmp != -> ==]
+KILLED    m0073 src/app/shots.c:140 [arith * -> /]
+          build break
+KILLED    m0074 src/app/shots.c:141 [cmp == -> !=]
+SURVIVED  m0075 src/app/shots.c:141 [logic || -> &&]
+KILLED    m0076 src/app/shots.c:141 [cmp == -> !=]
+KILLED    m0077 src/app/shots.c:144 [cmp != -> ==]
+KILLED    m0078 src/app/shots.c:144 [logic || -> &&]
+          build break
+KILLED    m0079 src/app/shots.c:145 [cmp != -> ==]
+KILLED    m0080 src/app/shots.c:145 [logic || -> &&]
+          build break
+KILLED    m0081 src/app/shots.c:146 [cmp != -> ==]
+KILLED    m0082 src/app/shots.c:146 [logic || -> &&]
+          build break
+KILLED    m0083 src/app/shots.c:147 [cmp != -> ==]
+KILLED    m0084 src/app/shots.c:153 [arith * -> /]
+          build break
+KILLED    m0085 src/app/shots.c:153 [arith * -> /]
+          build break
+KILLED    m0086 src/app/shots.c:155 [cmp != -> ==]
+KILLED    m0087 src/app/shots.c:159 [cmp != -> ==]
+KILLED    m0088 src/app/shots.c:164 [arith * -> /]
+          build break
+KILLED    m0089 src/app/shots.c:165 [cmp == -> !=]
+SURVIVED  m0090 src/app/shots.c:165 [logic || -> &&]
+KILLED    m0091 src/app/shots.c:165 [cmp == -> !=]
+KILLED    m0092 src/app/shots.c:175 [arith * -> /]
+          build break
+KILLED    m0093 src/app/shots.c:175 [arith * -> /]
+          build break
+KILLED    m0094 src/app/shots.c:175 [arith * -> /]
+          build break
+KILLED    m0095 src/app/shots.c:177 [cmp != -> ==]
+KILLED    m0096 src/app/shots.c:180 [cmp == -> !=]
+KILLED    m0097 src/app/shots.c:180 [logic || -> &&]
+KILLED    m0098 src/app/shots.c:180 [int+1 0 -> 1]
+KILLED    m0099 src/app/shots.c:180 [int-1 0 -> -1]
+KILLED    m0100 src/app/shots.c:180 [cmp == -> !=]
+KILLED    m0101 src/app/shots.c:184 [cmp != -> ==]
+KILLED    m0102 src/app/shots.c:189 [arith * -> /]
+          build break
+KILLED    m0103 src/app/shots.c:190 [cmp == -> !=]
+SURVIVED  m0104 src/app/shots.c:190 [logic || -> &&]
+KILLED    m0105 src/app/shots.c:190 [cmp == -> !=]
+SURVIVED  m0106 src/app/shots.c:195 [int+1 0 -> 1]
+SURVIVED  m0107 src/app/shots.c:195 [int-1 0 -> -1]
+KILLED    m0108 src/app/shots.c:195 [cmp != -> ==]
+KILLED    m0109 src/app/shots.c:199 [cmp != -> ==]
+KILLED    m0110 src/app/shots.c:206 [arith * -> /]
+          build break
+KILLED    m0111 src/app/shots.c:206 [arith * -> /]
+          build break
+KILLED    m0112 src/app/shots.c:208 [cmp != -> ==]
+KILLED    m0113 src/app/shots.c:211 [cmp < -> <=]
+KILLED    m0114 src/app/shots.c:211 [logic || -> &&]
+          build break
+KILLED    m0115 src/app/shots.c:211 [cmp >= -> >]
+KILLED    m0116 src/app/shots.c:215 [cmp != -> ==]
+KILLED    m0117 src/app/shots.c:224 [arith * -> /]
+          build break
+KILLED    m0118 src/app/shots.c:224 [arith * -> /]
+          build break
+KILLED    m0119 src/app/shots.c:226 [cmp != -> ==]
+mutate: generated=119 build_failed=39 killed_by_tests=58 killed=97 survived=22 accepted=0 unexplained=22 skipped=0
+mutate: kill rate 97/119 = 81.5%, with accepted equivalents 97/119 = 81.5%
+mutate: wall 273.8s

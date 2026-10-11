@@ -1,0 +1,1289 @@
+mutate: suite review_form_begin exited 1
+mutate: suite review_form_begin exited 1
+build_scrn2/mutants/p38944/m0013_screen_review.c:444:85: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+  444 |     const char *play_labels[CT_REVIEW_PLAY_COUNT] = {f->playing ? "pause" : "play", "step"};
+      |                                                                                     ^~~~~~
+1 error generated.
+mutate: suite review_screen_session_log exited 1
+build_scrn2/mutants/p38944/m0018_screen_review.c:270:10: error: array index 2 is past the end of the array (that has type 'int[2]') [-Werror,-Warray-bounds]
+  270 |     *d = parts[2];
+      |          ^     ~
+build_scrn2/mutants/p38944/m0018_screen_review.c:252:5: note: array 'parts' declared here
+  252 |     int parts[CT_REVIEW_ISO_FIELDS];
+      |     ^
+1 error generated.
+build_scrn2/mutants/p38944/m0019_screen_review.c:415:15: error: zero size arrays are an extension [-Werror,-Wzero-length-array]
+  415 |     char line[CT_REVIEW_LINE_MAX];
+      |               ^~~~~~~~~~~~~~~~~~
+1 error generated.
+build_scrn2/mutants/p38944/m0027_screen_review.c:31:19: error: expected identifier or '('
+   31 | static const char /const CT_REVIEW_GRADE_LABELS[CT_REVIEW_GRADE_COUNT] = {"again", "hard", "good",
+      |                   ^
+build_scrn2/mutants/p38944/m0027_screen_review.c:442:27: error: use of undeclared identifier 'CT_REVIEW_GRADE_LABELS'; did you mean 'CT_REVIEW_SPEED_LABELS'?
+  442 |                           CT_REVIEW_GRADE_LABELS, ct_review_on_grade);
+      |                           ^~~~~~~~~~~~~~~~~~~~~~
+      |                           CT_REVIEW_SPEED_LABELS
+build_scrn2/mutants/p38944/m0027_screen_review.c:33:26: note: 'CT_REVIEW_SPEED_LABELS' declared here
+   33 | static const char *const CT_REVIEW_SPEED_LABELS[CT_REVIEW_SPEED_COUNT] = {"0.5x", "1x", "2x"};
+      |                          ^
+2 errors generated.
+build_scrn2/mutants/p38944/m0028_screen_review.c:33:19: error: expected identifier or '('
+   33 | static const char /const CT_REVIEW_SPEED_LABELS[CT_REVIEW_SPEED_COUNT] = {"0.5x", "1x", "2x"};
+      |                   ^
+build_scrn2/mutants/p38944/m0028_screen_review.c:449:27: error: use of undeclared identifier 'CT_REVIEW_SPEED_LABELS'; did you mean 'CT_REVIEW_GRADE_LABELS'?
+  449 |                           CT_REVIEW_SPEED_LABELS, ct_review_on_speed);
+      |                           ^~~~~~~~~~~~~~~~~~~~~~
+      |                           CT_REVIEW_GRADE_LABELS
+build_scrn2/mutants/p38944/m0028_screen_review.c:31:26: note: 'CT_REVIEW_GRADE_LABELS' declared here
+   31 | static const char *const CT_REVIEW_GRADE_LABELS[CT_REVIEW_GRADE_COUNT] = {"again", "hard", "good",
+      |                          ^
+2 errors generated.
+build_scrn2/mutants/p38944/m0029_screen_review.c:48:16: error: expected identifier or '('
+   48 | ct_review_form /ct_screen_review_form(void) {
+      |                ^
+1 error generated.
+build_scrn2/mutants/p38944/m0030_screen_review.c:52:19: error: expected identifier or '('
+   52 | static const char /ct_review_pick_alg(const ct_card *c) {
+      |                   ^
+build_scrn2/mutants/p38944/m0030_screen_review.c:127:53: error: use of undeclared identifier 'ct_review_pick_alg'; did you mean 'ct_review_idle'?
+  127 |     snprintf(f->alg_text, sizeof f->alg_text, "%s", ct_review_pick_alg(&f->card));
+      |                                                     ^~~~~~~~~~~~~~~~~~
+      |                                                     ct_review_idle
+build_scrn2/mutants/p38944/m0030_screen_review.c:82:13: note: 'ct_review_idle' declared here
+   82 | static void ct_review_idle(ct_review_form *f) {
+      |             ^
+build_scrn2/mutants/p38944/m0030_screen_review.c:127:72: error: incompatible pointer types passing 'ct_card *' (aka 'struct ct_card *') to parameter of type 'ct_review_form *' [-Wincompatible-pointer-types]
+  127 |     snprintf(f->alg_text, sizeof f->alg_text, "%s", ct_review_pick_alg(&f->card));
+      |                                                                        ^~~~~~~~
+build_scrn2/mutants/p38944/m0030_screen_review.c:82:44: note: passing argument to parameter 'f' here
+   82 | static void ct_review_idle(ct_review_form *f) {
+      |                                            ^
+build_scrn2/mutants/p38944/m0030_screen_review.c:127:53: error: argument type 'void' is incomplete
+  127 |     snprintf(f->alg_text, sizeof f->alg_text, "%s", ct_review_pick_alg(&f->card));
+      |                                                     ^
+4 errors generated.
+build_scrn2/mutants/p38944/m0031_screen_review.c:52:53: error: expected ')'
+   52 | static const char *ct_review_pick_alg(const ct_card /c) {
+      |                                                     ^
+build_scrn2/mutants/p38944/m0031_screen_review.c:52:38: note: to match this '('
+   52 | static const char *ct_review_pick_alg(const ct_card /c) {
+      |                                      ^
+build_scrn2/mutants/p38944/m0031_screen_review.c:53:9: error: use of undeclared identifier 'c'
+   53 |     if (c->alg_3x3[0] != '\0') {
+      |         ^
+build_scrn2/mutants/p38944/m0031_screen_review.c:54:16: error: use of undeclared identifier 'c'
+   54 |         return c->alg_3x3;
+      |                ^
+build_scrn2/mutants/p38944/m0031_screen_review.c:56:9: error: use of undeclared identifier 'c'
+   56 |     if (c->alg_big[0] != '\0') {
+      |         ^
+build_scrn2/mutants/p38944/m0031_screen_review.c:57:16: error: use of undeclared identifier 'c'
+   57 |         return c->alg_big;
+      |                ^
+build_scrn2/mutants/p38944/m0031_screen_review.c:59:12: error: use of undeclared identifier 'c'
+   59 |     return c->alg_oh;
+      |            ^
+build_scrn2/mutants/p38944/m0031_screen_review.c:127:72: error: passing 'ct_card *' (aka 'struct ct_card *') to parameter of incompatible type 'ct_card' (aka 'struct ct_card'); remove &
+  127 |     snprintf(f->alg_text, sizeof f->alg_text, "%s", ct_review_pick_alg(&f->card));
+      |                                                                        ^~~~~~~~
+build_scrn2/mutants/p38944/m0031_screen_review.c:52:53: note: passing argument to parameter here
+   52 | static const char *ct_review_pick_alg(const ct_card /c) {
+      |                                                     ^
+7 errors generated.
+mutate: suite review_form_boundaries exited 1
+build_scrn2/mutants/p38944/m0033_screen_review.c:53:9: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   53 |     if (c->alg_3x3[-1] != '\0') {
+      |         ^          ~~
+src\storage\repo_cards.h:30:5: note: array 'alg_3x3' declared here
+   30 |     char alg_3x3[CT_CARD_ALG_MAX];
+      |     ^
+1 error generated.
+mutate: suite review_form_begin exited 1
+mutate: suite review_form_boundaries exited 1
+build_scrn2/mutants/p38944/m0036_screen_review.c:56:9: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   56 |     if (c->alg_big[-1] != '\0') {
+      |         ^          ~~
+src\storage\repo_cards.h:31:5: note: array 'alg_big' declared here
+   31 |     char alg_big[CT_CARD_ALG_MAX];
+      |     ^
+1 error generated.
+mutate: suite review_form_fallback exited 1
+build_scrn2/mutants/p38944/m0038_screen_review.c:62:40: error: expected ')'
+   62 | static void ct_review_scramble(ct_cube /cube, const ct_move *moves, int count) {
+      |                                        ^
+build_scrn2/mutants/p38944/m0038_screen_review.c:62:31: note: to match this '('
+   62 | static void ct_review_scramble(ct_cube /cube, const ct_move *moves, int count) {
+      |                               ^
+build_scrn2/mutants/p38944/m0038_screen_review.c:63:18: error: use of undeclared identifier 'cube'
+   63 |     ct_cube_init(cube, CT_REVIEW_CUBE_N);
+      |                  ^~~~
+build_scrn2/mutants/p38944/m0038_screen_review.c:65:34: error: use of undeclared identifier 'moves'
+   65 |     int n = ct_transform_inverse(moves, count, inv);
+      |                                  ^~~~~
+build_scrn2/mutants/p38944/m0038_screen_review.c:65:41: error: use of undeclared identifier 'count'
+   65 |     int n = ct_transform_inverse(moves, count, inv);
+      |                                         ^~~~~
+build_scrn2/mutants/p38944/m0038_screen_review.c:67:18: error: use of undeclared identifier 'cube'
+   67 |         ct_apply(cube, inv[i]);
+      |                  ^~~~
+build_scrn2/mutants/p38944/m0038_screen_review.c:134:34: error: too many arguments to function call, expected 1, have 3
+  134 |     ct_review_scramble(&f->cube, moves, n);
+      |     ~~~~~~~~~~~~~~~~~~           ^~~~~~~~
+build_scrn2/mutants/p38944/m0038_screen_review.c:62:13: note: 'ct_review_scramble' declared here
+   62 | static void ct_review_scramble(ct_cube /cube, const ct_move *moves, int count) {
+      |             ^                  ~~~~~~~
+build_scrn2/mutants/p38944/m0038_screen_review.c:150:34: error: too many arguments to function call, expected 1, have 3
+  150 |     ct_review_scramble(&f->cube, moves, n);
+      |     ~~~~~~~~~~~~~~~~~~           ^~~~~~~~
+build_scrn2/mutants/p38944/m0038_screen_review.c:62:13: note: 'ct_review_scramble' declared here
+   62 | static void ct_review_scramble(ct_cube /cube, const ct_move *moves, int count) {
+      |             ^                  ~~~~~~~
+build_scrn2/mutants/p38944/m0038_screen_review.c:219:34: error: too many arguments to function call, expected 1, have 3
+  219 |     ct_review_scramble(&f->cube, moves, n);
+      |     ~~~~~~~~~~~~~~~~~~           ^~~~~~~~
+build_scrn2/mutants/p38944/m0038_screen_review.c:62:13: note: 'ct_review_scramble' declared here
+   62 | static void ct_review_scramble(ct_cube /cube, const ct_move *moves, int count) {
+      |             ^                  ~~~~~~~
+8 errors generated.
+build_scrn2/mutants/p38944/m0039_screen_review.c:62:61: error: expected ')'
+   62 | static void ct_review_scramble(ct_cube *cube, const ct_move /moves, int count) {
+      |                                                             ^
+build_scrn2/mutants/p38944/m0039_screen_review.c:62:31: note: to match this '('
+   62 | static void ct_review_scramble(ct_cube *cube, const ct_move /moves, int count) {
+      |                               ^
+build_scrn2/mutants/p38944/m0039_screen_review.c:65:34: error: use of undeclared identifier 'moves'
+   65 |     int n = ct_transform_inverse(moves, count, inv);
+      |                                  ^~~~~
+build_scrn2/mutants/p38944/m0039_screen_review.c:65:41: error: use of undeclared identifier 'count'
+   65 |     int n = ct_transform_inverse(moves, count, inv);
+      |                                         ^~~~~
+build_scrn2/mutants/p38944/m0039_screen_review.c:134:41: error: too many arguments to function call, expected 2, have 3
+  134 |     ct_review_scramble(&f->cube, moves, n);
+      |     ~~~~~~~~~~~~~~~~~~                  ^
+build_scrn2/mutants/p38944/m0039_screen_review.c:62:13: note: 'ct_review_scramble' declared here
+   62 | static void ct_review_scramble(ct_cube *cube, const ct_move /moves, int count) {
+      |             ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0039_screen_review.c:150:41: error: too many arguments to function call, expected 2, have 3
+  150 |     ct_review_scramble(&f->cube, moves, n);
+      |     ~~~~~~~~~~~~~~~~~~                  ^
+build_scrn2/mutants/p38944/m0039_screen_review.c:62:13: note: 'ct_review_scramble' declared here
+   62 | static void ct_review_scramble(ct_cube *cube, const ct_move /moves, int count) {
+      |             ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0039_screen_review.c:219:41: error: too many arguments to function call, expected 2, have 3
+  219 |     ct_review_scramble(&f->cube, moves, n);
+      |     ~~~~~~~~~~~~~~~~~~                  ^
+build_scrn2/mutants/p38944/m0039_screen_review.c:62:13: note: 'ct_review_scramble' declared here
+   62 | static void ct_review_scramble(ct_cube *cube, const ct_move /moves, int count) {
+      |             ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+6 errors generated.
+mutate: suite review_form_begin exited 1
+mutate: suite review_form_begin exited -1073741795
+build_scrn2/mutants/p38944/m0043_screen_review.c:71:49: error: expected ')'
+   71 | static void ct_review_push_queue(ct_review_form /f, const ct_move *moves, int count) {
+      |                                                 ^
+build_scrn2/mutants/p38944/m0043_screen_review.c:71:33: note: to match this '('
+   71 | static void ct_review_push_queue(ct_review_form /f, const ct_move *moves, int count) {
+      |                                 ^
+build_scrn2/mutants/p38944/m0043_screen_review.c:72:19: error: use of undeclared identifier 'f'
+   72 |     ct_anim_init(&f->anim);
+      |                   ^
+build_scrn2/mutants/p38944/m0043_screen_review.c:73:25: error: use of undeclared identifier 'count'
+   73 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_scrn2/mutants/p38944/m0043_screen_review.c:74:23: error: use of undeclared identifier 'f'
+   74 |         ct_anim_push(&f->anim, moves[i]);
+      |                       ^
+build_scrn2/mutants/p38944/m0043_screen_review.c:74:32: error: use of undeclared identifier 'moves'
+   74 |         ct_anim_push(&f->anim, moves[i]);
+      |                                ^~~~~
+build_scrn2/mutants/p38944/m0043_screen_review.c:76:24: error: use of undeclared identifier 'f'
+   76 |     ct_anim_set_speed(&f->anim, f->speed);
+      |                        ^
+build_scrn2/mutants/p38944/m0043_screen_review.c:76:33: error: use of undeclared identifier 'f'
+   76 |     ct_anim_set_speed(&f->anim, f->speed);
+      |                                 ^
+build_scrn2/mutants/p38944/m0043_screen_review.c:77:20: error: use of undeclared identifier 'f'
+   77 |     ct_anim_pause(&f->anim);
+      |                    ^
+build_scrn2/mutants/p38944/m0043_screen_review.c:78:5: error: use of undeclared identifier 'f'
+   78 |     f->playing = false;
+      |     ^
+build_scrn2/mutants/p38944/m0043_screen_review.c:79:5: error: use of undeclared identifier 'f'
+   79 |     f->scrub_index = 0;
+      |     ^
+build_scrn2/mutants/p38944/m0043_screen_review.c:135:29: error: too many arguments to function call, expected 1, have 3
+  135 |     ct_review_push_queue(f, moves, n);
+      |     ~~~~~~~~~~~~~~~~~~~~    ^~~~~~~~
+build_scrn2/mutants/p38944/m0043_screen_review.c:71:13: note: 'ct_review_push_queue' declared here
+   71 | static void ct_review_push_queue(ct_review_form /f, const ct_move *moves, int count) {
+      |             ^                    ~~~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0043_screen_review.c:151:29: error: too many arguments to function call, expected 1, have 3
+  151 |     ct_review_push_queue(f, moves, n);
+      |     ~~~~~~~~~~~~~~~~~~~~    ^~~~~~~~
+build_scrn2/mutants/p38944/m0043_screen_review.c:71:13: note: 'ct_review_push_queue' declared here
+   71 | static void ct_review_push_queue(ct_review_form /f, const ct_move *moves, int count) {
+      |             ^                    ~~~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0043_screen_review.c:220:29: error: too many arguments to function call, expected 1, have 3
+  220 |     ct_review_push_queue(f, moves, n);
+      |     ~~~~~~~~~~~~~~~~~~~~    ^~~~~~~~
+build_scrn2/mutants/p38944/m0043_screen_review.c:71:13: note: 'ct_review_push_queue' declared here
+   71 | static void ct_review_push_queue(ct_review_form /f, const ct_move *moves, int count) {
+      |             ^                    ~~~~~~~~~~~~~~
+13 errors generated.
+build_scrn2/mutants/p38944/m0044_screen_review.c:71:67: error: expected ')'
+   71 | static void ct_review_push_queue(ct_review_form *f, const ct_move /moves, int count) {
+      |                                                                   ^
+build_scrn2/mutants/p38944/m0044_screen_review.c:71:33: note: to match this '('
+   71 | static void ct_review_push_queue(ct_review_form *f, const ct_move /moves, int count) {
+      |                                 ^
+build_scrn2/mutants/p38944/m0044_screen_review.c:73:25: error: use of undeclared identifier 'count'
+   73 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_scrn2/mutants/p38944/m0044_screen_review.c:74:32: error: use of undeclared identifier 'moves'
+   74 |         ct_anim_push(&f->anim, moves[i]);
+      |                                ^~~~~
+build_scrn2/mutants/p38944/m0044_screen_review.c:135:36: error: too many arguments to function call, expected 2, have 3
+  135 |     ct_review_push_queue(f, moves, n);
+      |     ~~~~~~~~~~~~~~~~~~~~           ^
+build_scrn2/mutants/p38944/m0044_screen_review.c:71:13: note: 'ct_review_push_queue' declared here
+   71 | static void ct_review_push_queue(ct_review_form *f, const ct_move /moves, int count) {
+      |             ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0044_screen_review.c:151:36: error: too many arguments to function call, expected 2, have 3
+  151 |     ct_review_push_queue(f, moves, n);
+      |     ~~~~~~~~~~~~~~~~~~~~           ^
+build_scrn2/mutants/p38944/m0044_screen_review.c:71:13: note: 'ct_review_push_queue' declared here
+   71 | static void ct_review_push_queue(ct_review_form *f, const ct_move /moves, int count) {
+      |             ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0044_screen_review.c:220:36: error: too many arguments to function call, expected 2, have 3
+  220 |     ct_review_push_queue(f, moves, n);
+      |     ~~~~~~~~~~~~~~~~~~~~           ^
+build_scrn2/mutants/p38944/m0044_screen_review.c:71:13: note: 'ct_review_push_queue' declared here
+   71 | static void ct_review_push_queue(ct_review_form *f, const ct_move /moves, int count) {
+      |             ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+6 errors generated.
+mutate: suite review_form_begin exited 1
+mutate: suite review_form_begin exited 1
+mutate: suite review_form_begin exited 1
+mutate: suite review_form_begin exited 1
+mutate: suite review_form_begin exited 1
+mutate: suite review_form_begin exited 1
+build_scrn2/mutants/p38944/m0051_screen_review.c:82:43: error: expected ')'
+   82 | static void ct_review_idle(ct_review_form /f) {
+      |                                           ^
+build_scrn2/mutants/p38944/m0051_screen_review.c:82:27: note: to match this '('
+   82 | static void ct_review_idle(ct_review_form /f) {
+      |                           ^
+build_scrn2/mutants/p38944/m0051_screen_review.c:83:13: error: use of undeclared identifier 'f'
+   83 |     memset(&f->card, 0, sizeof f->card);
+      |             ^
+build_scrn2/mutants/p38944/m0051_screen_review.c:83:32: error: use of undeclared identifier 'f'
+   83 |     memset(&f->card, 0, sizeof f->card);
+      |                                ^
+build_scrn2/mutants/p38944/m0051_screen_review.c:84:5: error: use of undeclared identifier 'f'
+   84 |     f->alg_text[0] = '\0';
+      |     ^
+build_scrn2/mutants/p38944/m0051_screen_review.c:85:5: error: use of undeclared identifier 'f'
+   85 |     f->move_count = 0;
+      |     ^
+build_scrn2/mutants/p38944/m0051_screen_review.c:86:19: error: use of undeclared identifier 'f'
+   86 |     ct_cube_init(&f->cube, CT_REVIEW_CUBE_N);
+      |                   ^
+build_scrn2/mutants/p38944/m0051_screen_review.c:87:19: error: use of undeclared identifier 'f'
+   87 |     ct_anim_init(&f->anim);
+      |                   ^
+build_scrn2/mutants/p38944/m0051_screen_review.c:88:5: error: use of undeclared identifier 'f'
+   88 |     f->revealed = false;
+      |     ^
+build_scrn2/mutants/p38944/m0051_screen_review.c:89:5: error: use of undeclared identifier 'f'
+   89 |     f->playing = false;
+      |     ^
+build_scrn2/mutants/p38944/m0051_screen_review.c:90:5: error: use of undeclared identifier 'f'
+   90 |     f->scrub_index = 0;
+      |     ^
+build_scrn2/mutants/p38944/m0051_screen_review.c:121:20: error: passing 'ct_review_form *' to parameter of incompatible type 'ct_review_form'; dereference with *
+  121 |     ct_review_idle(f);
+      |                    ^
+      |                    *
+build_scrn2/mutants/p38944/m0051_screen_review.c:82:43: note: passing argument to parameter here
+   82 | static void ct_review_idle(ct_review_form /f) {
+      |                                           ^
+11 errors generated.
+mutate: suite review_form_empty_deck exited 1
+mutate: suite review_form_empty_deck exited 1
+mutate: suite review_form_boundaries exited 1
+build_scrn2/mutants/p38944/m0055_screen_review.c:84:5: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   84 |     f->alg_text[-1] = '\0';
+      |     ^           ~~
+src\ui/ui.h:148:5: note: array 'alg_text' declared here
+  148 |     char alg_text[CT_CARD_ALG_MAX];
+      |     ^
+1 error generated.
+mutate: suite review_form_empty_deck exited 1
+mutate: suite review_form_empty_deck exited 1
+mutate: suite review_form_begin exited 1
+mutate: suite review_form_boundaries exited 1
+mutate: suite review_form_boundaries exited 1
+mutate: suite review_form_boundaries exited 1
+build_scrn2/mutants/p38944/m0062_screen_review.c:93:41: error: expected ')'
+   93 | int ct_review_form_begin(ct_review_form /f, sqlite3 *db, const char *deck, const char *now_iso,
+      |                                         ^
+build_scrn2/mutants/p38944/m0062_screen_review.c:93:25: note: to match this '('
+   93 | int ct_review_form_begin(ct_review_form /f, sqlite3 *db, const char *deck, const char *now_iso,
+      |                         ^
+build_scrn2/mutants/p38944/m0062_screen_review.c:93:5: error: conflicting types for 'ct_review_form_begin'
+   93 | int ct_review_form_begin(ct_review_form /f, sqlite3 *db, const char *deck, const char *now_iso,
+      |     ^
+src\ui/ui.h:157:5: note: previous declaration is here
+  157 | int ct_review_form_begin(ct_review_form *f, sqlite3 *db, const char *deck, const char *now_iso,
+      |     ^
+build_scrn2/mutants/p38944/m0062_screen_review.c:95:9: error: use of undeclared identifier 'f'
+   95 |     if (f == NULL) {
+      |         ^
+build_scrn2/mutants/p38944/m0062_screen_review.c:98:12: error: use of undeclared identifier 'f'
+   98 |     memset(f, 0, sizeof *f);
+      |            ^
+build_scrn2/mutants/p38944/m0062_screen_review.c:98:26: error: use of undeclared identifier 'f'
+   98 |     memset(f, 0, sizeof *f);
+      |                          ^
+build_scrn2/mutants/p38944/m0062_screen_review.c:99:5: error: use of undeclared identifier 'f'
+   99 |     f->db = db;
+      |     ^
+build_scrn2/mutants/p38944/m0062_screen_review.c:99:13: error: use of undeclared identifier 'db'
+   99 |     f->db = db;
+      |             ^~
+build_scrn2/mutants/p38944/m0062_screen_review.c:101:34: error: use of undeclared identifier 'f'
+  101 |     (void)ct_repo_settings_merge(f->db, &cfg);
+      |                                  ^
+build_scrn2/mutants/p38944/m0062_screen_review.c:103:32: error: use of undeclared identifier 'f'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                ^
+build_scrn2/mutants/p38944/m0062_screen_review.c:103:44: error: use of undeclared identifier 'db'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                            ^~
+build_scrn2/mutants/p38944/m0062_screen_review.c:103:65: error: use of undeclared identifier 'deck'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                 ^~~~
+build_scrn2/mutants/p38944/m0062_screen_review.c:103:71: error: use of undeclared identifier 'now_iso'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                       ^~~~~~~
+build_scrn2/mutants/p38944/m0062_screen_review.c:103:80: error: use of undeclared identifier 'today_day'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                                ^~~~~~~~~
+build_scrn2/mutants/p38944/m0062_screen_review.c:103:91: error: use of undeclared identifier 'limit'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                                           ^~~~~
+build_scrn2/mutants/p38944/m0062_screen_review.c:105:9: error: use of undeclared identifier 'f'
+  105 |         f->status = rc;
+      |         ^
+build_scrn2/mutants/p38944/m0062_screen_review.c:108:5: error: use of undeclared identifier 'f'
+  108 |     f->status = CT_SESSION_OK;
+      |     ^
+build_scrn2/mutants/p38944/m0062_screen_review.c:109:30: error: use of undeclared identifier 'f'
+  109 |     ct_review_form_load_case(f);
+      |                              ^
+17 errors generated.
+build_scrn2/mutants/p38944/m0063_screen_review.c:93:53: error: expected ')'
+   93 | int ct_review_form_begin(ct_review_form *f, sqlite3 /db, const char *deck, const char *now_iso,
+      |                                                     ^
+build_scrn2/mutants/p38944/m0063_screen_review.c:93:25: note: to match this '('
+   93 | int ct_review_form_begin(ct_review_form *f, sqlite3 /db, const char *deck, const char *now_iso,
+      |                         ^
+build_scrn2/mutants/p38944/m0063_screen_review.c:93:5: error: conflicting types for 'ct_review_form_begin'
+   93 | int ct_review_form_begin(ct_review_form *f, sqlite3 /db, const char *deck, const char *now_iso,
+      |     ^
+src\ui/ui.h:157:5: note: previous declaration is here
+  157 | int ct_review_form_begin(ct_review_form *f, sqlite3 *db, const char *deck, const char *now_iso,
+      |     ^
+build_scrn2/mutants/p38944/m0063_screen_review.c:93:53: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   93 | int ct_review_form_begin(ct_review_form *f, sqlite3 /db, const char *deck, const char *now_iso,
+      |                                                     ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_scrn2/mutants/p38944/m0063_screen_review.c:99:13: error: use of undeclared identifier 'db'
+   99 |     f->db = db;
+      |             ^~
+build_scrn2/mutants/p38944/m0063_screen_review.c:103:44: error: use of undeclared identifier 'db'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                            ^~
+build_scrn2/mutants/p38944/m0063_screen_review.c:103:65: error: use of undeclared identifier 'deck'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                 ^~~~
+build_scrn2/mutants/p38944/m0063_screen_review.c:103:71: error: use of undeclared identifier 'now_iso'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                       ^~~~~~~
+build_scrn2/mutants/p38944/m0063_screen_review.c:103:80: error: use of undeclared identifier 'today_day'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                                ^~~~~~~~~
+build_scrn2/mutants/p38944/m0063_screen_review.c:103:91: error: use of undeclared identifier 'limit'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                                           ^~~~~
+9 errors generated.
+build_scrn2/mutants/p38944/m0064_screen_review.c:93:69: error: expected ')'
+   93 | int ct_review_form_begin(ct_review_form *f, sqlite3 *db, const char /deck, const char *now_iso,
+      |                                                                     ^
+build_scrn2/mutants/p38944/m0064_screen_review.c:93:25: note: to match this '('
+   93 | int ct_review_form_begin(ct_review_form *f, sqlite3 *db, const char /deck, const char *now_iso,
+      |                         ^
+build_scrn2/mutants/p38944/m0064_screen_review.c:93:5: error: conflicting types for 'ct_review_form_begin'
+   93 | int ct_review_form_begin(ct_review_form *f, sqlite3 *db, const char /deck, const char *now_iso,
+      |     ^
+src\ui/ui.h:157:5: note: previous declaration is here
+  157 | int ct_review_form_begin(ct_review_form *f, sqlite3 *db, const char *deck, const char *now_iso,
+      |     ^
+build_scrn2/mutants/p38944/m0064_screen_review.c:103:65: error: use of undeclared identifier 'deck'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                 ^~~~
+build_scrn2/mutants/p38944/m0064_screen_review.c:103:71: error: use of undeclared identifier 'now_iso'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                       ^~~~~~~
+build_scrn2/mutants/p38944/m0064_screen_review.c:103:80: error: use of undeclared identifier 'today_day'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                                ^~~~~~~~~
+build_scrn2/mutants/p38944/m0064_screen_review.c:103:91: error: use of undeclared identifier 'limit'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                                           ^~~~~
+6 errors generated.
+build_scrn2/mutants/p38944/m0065_screen_review.c:93:87: error: expected ')'
+   93 | int ct_review_form_begin(ct_review_form *f, sqlite3 *db, const char *deck, const char /now_iso,
+      |                                                                                       ^
+build_scrn2/mutants/p38944/m0065_screen_review.c:93:25: note: to match this '('
+   93 | int ct_review_form_begin(ct_review_form *f, sqlite3 *db, const char *deck, const char /now_iso,
+      |                         ^
+build_scrn2/mutants/p38944/m0065_screen_review.c:93:5: error: conflicting types for 'ct_review_form_begin'
+   93 | int ct_review_form_begin(ct_review_form *f, sqlite3 *db, const char *deck, const char /now_iso,
+      |     ^
+src\ui/ui.h:157:5: note: previous declaration is here
+  157 | int ct_review_form_begin(ct_review_form *f, sqlite3 *db, const char *deck, const char *now_iso,
+      |     ^
+build_scrn2/mutants/p38944/m0065_screen_review.c:103:71: error: use of undeclared identifier 'now_iso'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                       ^~~~~~~
+build_scrn2/mutants/p38944/m0065_screen_review.c:103:80: error: use of undeclared identifier 'today_day'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                                ^~~~~~~~~
+build_scrn2/mutants/p38944/m0065_screen_review.c:103:91: error: use of undeclared identifier 'limit'
+  103 |     int rc = ct_session_begin(&f->session, db, &ct_review_fsrs, deck, now_iso, today_day, limit);
+      |                                                                                           ^~~~~
+5 errors generated.
+mutate: suite review_form_begin exited 1
+mutate: suite review_form_begin exited -1073740940
+mutate: suite review_form_begin exited -1073740940
+build_scrn2/mutants/p38944/m0069_screen_review.c:98:25: error: expected expression
+   98 |     memset(f, 0, sizeof /f);
+      |                         ^
+1 error generated.
+mutate: suite review_form_empty_status exited 1
+mutate: suite review_form_empty_status exited 1
+build_scrn2/mutants/p38944/m0073_screen_review.c:113:45: error: expected ')'
+  113 | int ct_review_form_load_case(ct_review_form /f) {
+      |                                             ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:113:29: note: to match this '('
+  113 | int ct_review_form_load_case(ct_review_form /f) {
+      |                             ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:113:5: error: conflicting types for 'ct_review_form_load_case'
+  113 | int ct_review_form_load_case(ct_review_form /f) {
+      |     ^
+src\ui/ui.h:159:5: note: previous declaration is here
+  159 | int ct_review_form_load_case(ct_review_form *f);
+      |     ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:114:9: error: use of undeclared identifier 'f'
+  114 |     if (f == NULL) {
+      |         ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:119:34: error: use of undeclared identifier 'f'
+  119 |     int rc = ct_session_current(&f->session, &card);
+      |                                  ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:120:5: error: use of undeclared identifier 'f'
+  120 |     f->speed = 1.0;
+      |     ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:121:20: error: use of undeclared identifier 'f'
+  121 |     ct_review_idle(f);
+      |                    ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:123:9: error: use of undeclared identifier 'f'
+  123 |         f->status = rc;
+      |         ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:126:5: error: use of undeclared identifier 'f'
+  126 |     f->card = card;
+      |     ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:127:14: error: use of undeclared identifier 'f'
+  127 |     snprintf(f->alg_text, sizeof f->alg_text, "%s", ct_review_pick_alg(&f->card));
+      |              ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:127:34: error: use of undeclared identifier 'f'
+  127 |     snprintf(f->alg_text, sizeof f->alg_text, "%s", ct_review_pick_alg(&f->card));
+      |                                  ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:127:73: error: use of undeclared identifier 'f'
+  127 |     snprintf(f->alg_text, sizeof f->alg_text, "%s", ct_review_pick_alg(&f->card));
+      |                                                                         ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:129:31: error: use of undeclared identifier 'f'
+  129 |     int n = ct_notation_parse(f->alg_text, CT_REVIEW_CUBE_N, moves, CT_ANIM_QUEUE_CAP);
+      |                               ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:133:5: error: use of undeclared identifier 'f'
+  133 |     f->move_count = n;
+      |     ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:134:25: error: use of undeclared identifier 'f'
+  134 |     ct_review_scramble(&f->cube, moves, n);
+      |                         ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:135:26: error: use of undeclared identifier 'f'
+  135 |     ct_review_push_queue(f, moves, n);
+      |                          ^
+build_scrn2/mutants/p38944/m0073_screen_review.c:136:5: error: use of undeclared identifier 'f'
+  136 |     f->status = CT_SESSION_OK;
+      |     ^
+16 errors generated.
+mutate: suite review_form_begin exited 1
+mutate: suite review_form_begin exited 1
+mutate: suite review_form_boundaries exited 1
+mutate: suite review_form_boundaries exited 1
+build_scrn2/mutants/p38944/m0083_screen_review.c:140:43: error: expected ')'
+  140 | void ct_review_form_reveal(ct_review_form /f) {
+      |                                           ^
+build_scrn2/mutants/p38944/m0083_screen_review.c:140:27: note: to match this '('
+  140 | void ct_review_form_reveal(ct_review_form /f) {
+      |                           ^
+build_scrn2/mutants/p38944/m0083_screen_review.c:140:6: error: conflicting types for 'ct_review_form_reveal'
+  140 | void ct_review_form_reveal(ct_review_form /f) {
+      |      ^
+src\ui/ui.h:160:6: note: previous declaration is here
+  160 | void ct_review_form_reveal(ct_review_form *f);
+      |      ^
+build_scrn2/mutants/p38944/m0083_screen_review.c:141:9: error: use of undeclared identifier 'f'
+  141 |     if (f == NULL) {
+      |         ^
+build_scrn2/mutants/p38944/m0083_screen_review.c:144:5: error: use of undeclared identifier 'f'
+  144 |     f->revealed = true;
+      |     ^
+build_scrn2/mutants/p38944/m0083_screen_review.c:146:31: error: use of undeclared identifier 'f'
+  146 |     int n = ct_notation_parse(f->alg_text, CT_REVIEW_CUBE_N, moves, CT_ANIM_QUEUE_CAP);
+      |                               ^
+build_scrn2/mutants/p38944/m0083_screen_review.c:150:25: error: use of undeclared identifier 'f'
+  150 |     ct_review_scramble(&f->cube, moves, n);
+      |                         ^
+build_scrn2/mutants/p38944/m0083_screen_review.c:151:26: error: use of undeclared identifier 'f'
+  151 |     ct_review_push_queue(f, moves, n);
+      |                          ^
+build_scrn2/mutants/p38944/m0083_screen_review.c:152:21: error: use of undeclared identifier 'f'
+  152 |     ct_anim_resume(&f->anim);
+      |                     ^
+build_scrn2/mutants/p38944/m0083_screen_review.c:153:5: error: use of undeclared identifier 'f'
+  153 |     f->playing = true;
+      |     ^
+9 errors generated.
+mutate: suite review_form_reveal_grade exited 1
+mutate: suite review_form_reveal_grade exited 1
+mutate: suite review_form_boundaries exited 1
+mutate: suite review_form_reveal_grade exited 1
+build_scrn2/mutants/p38944/m0092_screen_review.c:156:41: error: expected ')'
+  156 | int ct_review_form_grade(ct_review_form /f, ct_grade g, const char *now_iso) {
+      |                                         ^
+build_scrn2/mutants/p38944/m0092_screen_review.c:156:25: note: to match this '('
+  156 | int ct_review_form_grade(ct_review_form /f, ct_grade g, const char *now_iso) {
+      |                         ^
+build_scrn2/mutants/p38944/m0092_screen_review.c:156:5: error: conflicting types for 'ct_review_form_grade'
+  156 | int ct_review_form_grade(ct_review_form /f, ct_grade g, const char *now_iso) {
+      |     ^
+src\ui/ui.h:161:5: note: previous declaration is here
+  161 | int ct_review_form_grade(ct_review_form *f, ct_grade g, const char *now_iso);
+      |     ^
+build_scrn2/mutants/p38944/m0092_screen_review.c:157:9: error: use of undeclared identifier 'f'
+  157 |     if (f == NULL) {
+      |         ^
+build_scrn2/mutants/p38944/m0092_screen_review.c:160:32: error: use of undeclared identifier 'f'
+  160 |     int rc = ct_session_grade(&f->session, g, now_iso);
+      |                                ^
+build_scrn2/mutants/p38944/m0092_screen_review.c:160:44: error: use of undeclared identifier 'g'
+  160 |     int rc = ct_session_grade(&f->session, g, now_iso);
+      |                                            ^
+build_scrn2/mutants/p38944/m0092_screen_review.c:160:47: error: use of undeclared identifier 'now_iso'
+  160 |     int rc = ct_session_grade(&f->session, g, now_iso);
+      |                                               ^~~~~~~
+build_scrn2/mutants/p38944/m0092_screen_review.c:161:5: error: use of undeclared identifier 'f'
+  161 |     f->status = rc;
+      |     ^
+build_scrn2/mutants/p38944/m0092_screen_review.c:163:34: error: use of undeclared identifier 'f'
+  163 |         ct_review_form_load_case(f);
+      |                                  ^
+8 errors generated.
+build_scrn2/mutants/p38944/m0093_screen_review.c:156:68: error: expected ')'
+  156 | int ct_review_form_grade(ct_review_form *f, ct_grade g, const char /now_iso) {
+      |                                                                    ^
+build_scrn2/mutants/p38944/m0093_screen_review.c:156:25: note: to match this '('
+  156 | int ct_review_form_grade(ct_review_form *f, ct_grade g, const char /now_iso) {
+      |                         ^
+build_scrn2/mutants/p38944/m0093_screen_review.c:156:5: error: conflicting types for 'ct_review_form_grade'
+  156 | int ct_review_form_grade(ct_review_form *f, ct_grade g, const char /now_iso) {
+      |     ^
+src\ui/ui.h:161:5: note: previous declaration is here
+  161 | int ct_review_form_grade(ct_review_form *f, ct_grade g, const char *now_iso);
+      |     ^
+build_scrn2/mutants/p38944/m0093_screen_review.c:160:47: error: use of undeclared identifier 'now_iso'
+  160 |     int rc = ct_session_grade(&f->session, g, now_iso);
+      |                                               ^~~~~~~
+3 errors generated.
+mutate: suite review_form_reveal_grade exited 1
+mutate: suite review_form_reveal_grade exited 1
+build_scrn2/mutants/p38944/m0096_screen_review.c:168:47: error: expected ')'
+  168 | void ct_review_form_play_pause(ct_review_form /f) {
+      |                                               ^
+build_scrn2/mutants/p38944/m0096_screen_review.c:168:31: note: to match this '('
+  168 | void ct_review_form_play_pause(ct_review_form /f) {
+      |                               ^
+build_scrn2/mutants/p38944/m0096_screen_review.c:168:6: error: conflicting types for 'ct_review_form_play_pause'
+  168 | void ct_review_form_play_pause(ct_review_form /f) {
+      |      ^
+src\ui/ui.h:162:6: note: previous declaration is here
+  162 | void ct_review_form_play_pause(ct_review_form *f);
+      |      ^
+build_scrn2/mutants/p38944/m0096_screen_review.c:169:9: error: use of undeclared identifier 'f'
+  169 |     if (f == NULL) {
+      |         ^
+build_scrn2/mutants/p38944/m0096_screen_review.c:172:9: error: use of undeclared identifier 'f'
+  172 |     if (f->playing) {
+      |         ^
+build_scrn2/mutants/p38944/m0096_screen_review.c:173:24: error: use of undeclared identifier 'f'
+  173 |         ct_anim_pause(&f->anim);
+      |                        ^
+build_scrn2/mutants/p38944/m0096_screen_review.c:174:9: error: use of undeclared identifier 'f'
+  174 |         f->playing = false;
+      |         ^
+build_scrn2/mutants/p38944/m0096_screen_review.c:176:25: error: use of undeclared identifier 'f'
+  176 |         ct_anim_resume(&f->anim);
+      |                         ^
+build_scrn2/mutants/p38944/m0096_screen_review.c:177:9: error: use of undeclared identifier 'f'
+  177 |         f->playing = true;
+      |         ^
+8 errors generated.
+mutate: suite review_form_reveal_grade exited 1
+mutate: suite review_form_reveal_grade exited 1
+mutate: suite review_form_reveal_grade exited 1
+build_scrn2/mutants/p38944/m0100_screen_review.c:181:41: error: expected ')'
+  181 | void ct_review_form_step(ct_review_form /f) {
+      |                                         ^
+build_scrn2/mutants/p38944/m0100_screen_review.c:181:25: note: to match this '('
+  181 | void ct_review_form_step(ct_review_form /f) {
+      |                         ^
+build_scrn2/mutants/p38944/m0100_screen_review.c:181:6: error: conflicting types for 'ct_review_form_step'
+  181 | void ct_review_form_step(ct_review_form /f) {
+      |      ^
+src\ui/ui.h:163:6: note: previous declaration is here
+  163 | void ct_review_form_step(ct_review_form *f);
+      |      ^
+build_scrn2/mutants/p38944/m0100_screen_review.c:182:9: error: use of undeclared identifier 'f'
+  182 |     if (f == NULL) {
+      |         ^
+build_scrn2/mutants/p38944/m0100_screen_review.c:185:43: error: use of undeclared identifier 'f'
+  185 |     ct_anim_step_result r = ct_anim_step(&f->anim);
+      |                                           ^
+build_scrn2/mutants/p38944/m0100_screen_review.c:187:19: error: use of undeclared identifier 'f'
+  187 |         ct_apply(&f->cube, r.move);
+      |                   ^
+build_scrn2/mutants/p38944/m0100_screen_review.c:188:9: error: use of undeclared identifier 'f'
+  188 |         f->scrub_index = f->move_count - f->anim.count;
+      |         ^
+build_scrn2/mutants/p38944/m0100_screen_review.c:188:26: error: use of undeclared identifier 'f'
+  188 |         f->scrub_index = f->move_count - f->anim.count;
+      |                          ^
+build_scrn2/mutants/p38944/m0100_screen_review.c:188:42: error: use of undeclared identifier 'f'
+  188 |         f->scrub_index = f->move_count - f->anim.count;
+      |                                          ^
+8 errors generated.
+mutate: suite review_form_playback exited 1
+mutate: suite review_form_playback exited 1
+build_scrn2/mutants/p38944/m0103_screen_review.c:192:46: error: expected ')'
+  192 | void ct_review_form_set_speed(ct_review_form /f, double speed) {
+      |                                              ^
+build_scrn2/mutants/p38944/m0103_screen_review.c:192:30: note: to match this '('
+  192 | void ct_review_form_set_speed(ct_review_form /f, double speed) {
+      |                              ^
+build_scrn2/mutants/p38944/m0103_screen_review.c:192:6: error: conflicting types for 'ct_review_form_set_speed'
+  192 | void ct_review_form_set_speed(ct_review_form /f, double speed) {
+      |      ^
+src\ui/ui.h:164:6: note: previous declaration is here
+  164 | void ct_review_form_set_speed(ct_review_form *f, double speed);
+      |      ^
+build_scrn2/mutants/p38944/m0103_screen_review.c:193:9: error: use of undeclared identifier 'f'
+  193 |     if (f == NULL) {
+      |         ^
+build_scrn2/mutants/p38944/m0103_screen_review.c:196:9: error: use of undeclared identifier 'speed'
+  196 |     if (speed < CT_REVIEW_SPEED_MIN) {
+      |         ^~~~~
+build_scrn2/mutants/p38944/m0103_screen_review.c:197:9: error: use of undeclared identifier 'speed'
+  197 |         speed = CT_REVIEW_SPEED_MIN;
+      |         ^~~~~
+build_scrn2/mutants/p38944/m0103_screen_review.c:199:5: error: use of undeclared identifier 'f'
+  199 |     f->speed = speed;
+      |     ^
+build_scrn2/mutants/p38944/m0103_screen_review.c:199:16: error: use of undeclared identifier 'speed'
+  199 |     f->speed = speed;
+      |                ^~~~~
+build_scrn2/mutants/p38944/m0103_screen_review.c:200:24: error: use of undeclared identifier 'f'
+  200 |     ct_anim_set_speed(&f->anim, speed);
+      |                        ^
+build_scrn2/mutants/p38944/m0103_screen_review.c:200:33: error: use of undeclared identifier 'speed'
+  200 |     ct_anim_set_speed(&f->anim, speed);
+      |                                 ^~~~~
+9 errors generated.
+mutate: suite review_form_scrub exited 1
+build_scrn2/mutants/p38944/m0106_screen_review.c:203:41: error: expected ')'
+  203 | int ct_review_form_scrub(ct_review_form /f, int move_index) {
+      |                                         ^
+build_scrn2/mutants/p38944/m0106_screen_review.c:203:25: note: to match this '('
+  203 | int ct_review_form_scrub(ct_review_form /f, int move_index) {
+      |                         ^
+build_scrn2/mutants/p38944/m0106_screen_review.c:203:5: error: conflicting types for 'ct_review_form_scrub'
+  203 | int ct_review_form_scrub(ct_review_form /f, int move_index) {
+      |     ^
+src\ui/ui.h:165:5: note: previous declaration is here
+  165 | int ct_review_form_scrub(ct_review_form *f, int move_index);
+      |     ^
+build_scrn2/mutants/p38944/m0106_screen_review.c:204:9: error: use of undeclared identifier 'f'
+  204 |     if (f == NULL) {
+      |         ^
+build_scrn2/mutants/p38944/m0106_screen_review.c:207:16: error: use of undeclared identifier 'move_index'
+  207 |     int upto = move_index;
+      |                ^~~~~~~~~~
+build_scrn2/mutants/p38944/m0106_screen_review.c:211:16: error: use of undeclared identifier 'f'
+  211 |     if (upto > f->move_count) {
+      |                ^
+build_scrn2/mutants/p38944/m0106_screen_review.c:212:16: error: use of undeclared identifier 'f'
+  212 |         upto = f->move_count;
+      |                ^
+build_scrn2/mutants/p38944/m0106_screen_review.c:215:31: error: use of undeclared identifier 'f'
+  215 |     int n = ct_notation_parse(f->alg_text, CT_REVIEW_CUBE_N, moves, CT_ANIM_QUEUE_CAP);
+      |                               ^
+build_scrn2/mutants/p38944/m0106_screen_review.c:219:25: error: use of undeclared identifier 'f'
+  219 |     ct_review_scramble(&f->cube, moves, n);
+      |                         ^
+build_scrn2/mutants/p38944/m0106_screen_review.c:220:26: error: use of undeclared identifier 'f'
+  220 |     ct_review_push_queue(f, moves, n);
+      |                          ^
+build_scrn2/mutants/p38944/m0106_screen_review.c:222:35: error: use of undeclared identifier 'f'
+  222 |     int applied = ct_anim_prefix(&f->anim, upto, pre, CT_ANIM_QUEUE_CAP);
+      |                                   ^
+build_scrn2/mutants/p38944/m0106_screen_review.c:224:19: error: use of undeclared identifier 'f'
+  224 |         ct_apply(&f->cube, pre[i]);
+      |                   ^
+build_scrn2/mutants/p38944/m0106_screen_review.c:227:23: error: use of undeclared identifier 'f'
+  227 |         ct_anim_step(&f->anim);
+      |                       ^
+build_scrn2/mutants/p38944/m0106_screen_review.c:229:5: error: use of undeclared identifier 'f'
+  229 |     f->scrub_index = upto;
+      |     ^
+build_scrn2/mutants/p38944/m0106_screen_review.c:230:5: error: use of undeclared identifier 'f'
+  230 |     f->status = CT_SESSION_OK;
+      |     ^
+14 errors generated.
+mutate: suite review_form_scrub exited 1
+mutate: suite review_form_boundaries exited 1
+mutate: suite review_form_scrub exited 1
+mutate: suite review_form_scrub exited 1
+mutate: suite review_form_boundaries exited 1
+mutate: suite review_form_scrub exited 1
+mutate: suite review_form_scrub exited -1073741795
+mutate: suite review_form_scrub exited 1
+mutate: suite review_form_scrub exited 1
+mutate: suite review_form_scrub exited 1
+mutate: suite review_form_scrub exited 1
+build_scrn2/mutants/p38944/m0125_screen_review.c:234:40: error: expected ')'
+  234 | void ct_review_form_end(ct_review_form /f, const char *now_iso) {
+      |                                        ^
+build_scrn2/mutants/p38944/m0125_screen_review.c:234:24: note: to match this '('
+  234 | void ct_review_form_end(ct_review_form /f, const char *now_iso) {
+      |                        ^
+build_scrn2/mutants/p38944/m0125_screen_review.c:234:6: error: conflicting types for 'ct_review_form_end'
+  234 | void ct_review_form_end(ct_review_form /f, const char *now_iso) {
+      |      ^
+src\ui/ui.h:166:6: note: previous declaration is here
+  166 | void ct_review_form_end(ct_review_form *f, const char *now_iso);
+      |      ^
+build_scrn2/mutants/p38944/m0125_screen_review.c:235:9: error: use of undeclared identifier 'f'
+  235 |     if (f == NULL) {
+      |         ^
+build_scrn2/mutants/p38944/m0125_screen_review.c:238:5: error: use of undeclared identifier 'f'
+  238 |     f->status = ct_session_end(&f->session, now_iso);
+      |     ^
+build_scrn2/mutants/p38944/m0125_screen_review.c:238:33: error: use of undeclared identifier 'f'
+  238 |     f->status = ct_session_end(&f->session, now_iso);
+      |                                 ^
+build_scrn2/mutants/p38944/m0125_screen_review.c:238:45: error: use of undeclared identifier 'now_iso'
+  238 |     f->status = ct_session_end(&f->session, now_iso);
+      |                                             ^~~~~~~
+6 errors generated.
+build_scrn2/mutants/p38944/m0126_screen_review.c:234:55: error: expected ')'
+  234 | void ct_review_form_end(ct_review_form *f, const char /now_iso) {
+      |                                                       ^
+build_scrn2/mutants/p38944/m0126_screen_review.c:234:24: note: to match this '('
+  234 | void ct_review_form_end(ct_review_form *f, const char /now_iso) {
+      |                        ^
+build_scrn2/mutants/p38944/m0126_screen_review.c:234:6: error: conflicting types for 'ct_review_form_end'
+  234 | void ct_review_form_end(ct_review_form *f, const char /now_iso) {
+      |      ^
+src\ui/ui.h:166:6: note: previous declaration is here
+  166 | void ct_review_form_end(ct_review_form *f, const char *now_iso);
+      |      ^
+build_scrn2/mutants/p38944/m0126_screen_review.c:238:45: error: use of undeclared identifier 'now_iso'
+  238 |     f->status = ct_session_end(&f->session, now_iso);
+      |                                             ^~~~~~~
+3 errors generated.
+mutate: suite review_form_end exited 1
+mutate: suite review_screen_session_log exited 1
+mutate: suite review_screen_session_log exited 1
+mutate: suite review_screen_session_log exited 1
+build_scrn2/mutants/p38944/m0131_screen_review.c:251:42: error: expected ')'
+  251 | static int ct_review_iso_scan(const char /iso, long *y, int *m, int *d) {
+      |                                          ^
+build_scrn2/mutants/p38944/m0131_screen_review.c:251:30: note: to match this '('
+  251 | static int ct_review_iso_scan(const char /iso, long *y, int *m, int *d) {
+      |                              ^
+build_scrn2/mutants/p38944/m0131_screen_review.c:257:16: error: use of undeclared identifier 'iso'
+  257 |         while (iso[at] >= '0' && iso[at] <= '9') {
+      |                ^~~
+build_scrn2/mutants/p38944/m0131_screen_review.c:257:34: error: use of undeclared identifier 'iso'
+  257 |         while (iso[at] >= '0' && iso[at] <= '9') {
+      |                                  ^~~
+build_scrn2/mutants/p38944/m0131_screen_review.c:258:40: error: use of undeclared identifier 'iso'
+  258 |             v = v * CT_DECIMAL_BASE + (iso[at] - '0');
+      |                                        ^~~
+build_scrn2/mutants/p38944/m0131_screen_review.c:262:22: error: use of undeclared identifier 'iso'
+  262 |         if (!any || (iso[at] != '-' && iso[at] != 'T')) {
+      |                      ^~~
+build_scrn2/mutants/p38944/m0131_screen_review.c:262:40: error: use of undeclared identifier 'iso'
+  262 |         if (!any || (iso[at] != '-' && iso[at] != 'T')) {
+      |                                        ^~~
+build_scrn2/mutants/p38944/m0131_screen_review.c:268:6: error: use of undeclared identifier 'y'
+  268 |     *y = parts[0];
+      |      ^
+build_scrn2/mutants/p38944/m0131_screen_review.c:269:6: error: use of undeclared identifier 'm'
+  269 |     *m = parts[1];
+      |      ^
+build_scrn2/mutants/p38944/m0131_screen_review.c:270:6: error: use of undeclared identifier 'd'
+  270 |     *d = parts[2];
+      |      ^
+build_scrn2/mutants/p38944/m0131_screen_review.c:305:33: error: too many arguments to function call, expected 1, have 4
+  305 |     if (ct_review_iso_scan(now, &y, &m, &d) == CT_SESSION_OK) {
+      |         ~~~~~~~~~~~~~~~~~~      ^~~~~~~~~~
+build_scrn2/mutants/p38944/m0131_screen_review.c:251:12: note: 'ct_review_iso_scan' declared here
+  251 | static int ct_review_iso_scan(const char /iso, long *y, int *m, int *d) {
+      |            ^                  ~~~~~~~~~~
+10 errors generated.
+build_scrn2/mutants/p38944/m0132_screen_review.c:251:53: error: expected ')'
+  251 | static int ct_review_iso_scan(const char *iso, long /y, int *m, int *d) {
+      |                                                     ^
+build_scrn2/mutants/p38944/m0132_screen_review.c:251:30: note: to match this '('
+  251 | static int ct_review_iso_scan(const char *iso, long /y, int *m, int *d) {
+      |                              ^
+build_scrn2/mutants/p38944/m0132_screen_review.c:268:6: error: use of undeclared identifier 'y'
+  268 |     *y = parts[0];
+      |      ^
+build_scrn2/mutants/p38944/m0132_screen_review.c:269:6: error: use of undeclared identifier 'm'
+  269 |     *m = parts[1];
+      |      ^
+build_scrn2/mutants/p38944/m0132_screen_review.c:270:6: error: use of undeclared identifier 'd'
+  270 |     *d = parts[2];
+      |      ^
+build_scrn2/mutants/p38944/m0132_screen_review.c:305:37: error: too many arguments to function call, expected 2, have 4
+  305 |     if (ct_review_iso_scan(now, &y, &m, &d) == CT_SESSION_OK) {
+      |         ~~~~~~~~~~~~~~~~~~          ^~~~~~
+build_scrn2/mutants/p38944/m0132_screen_review.c:251:12: note: 'ct_review_iso_scan' declared here
+  251 | static int ct_review_iso_scan(const char *iso, long /y, int *m, int *d) {
+      |            ^                  ~~~~~~~~~~~~~~~~~~~~~
+5 errors generated.
+build_scrn2/mutants/p38944/m0133_screen_review.c:251:61: error: expected ')'
+  251 | static int ct_review_iso_scan(const char *iso, long *y, int /m, int *d) {
+      |                                                             ^
+build_scrn2/mutants/p38944/m0133_screen_review.c:251:30: note: to match this '('
+  251 | static int ct_review_iso_scan(const char *iso, long *y, int /m, int *d) {
+      |                              ^
+build_scrn2/mutants/p38944/m0133_screen_review.c:269:6: error: use of undeclared identifier 'm'
+  269 |     *m = parts[1];
+      |      ^
+build_scrn2/mutants/p38944/m0133_screen_review.c:270:6: error: use of undeclared identifier 'd'
+  270 |     *d = parts[2];
+      |      ^
+build_scrn2/mutants/p38944/m0133_screen_review.c:305:41: error: too many arguments to function call, expected 3, have 4
+  305 |     if (ct_review_iso_scan(now, &y, &m, &d) == CT_SESSION_OK) {
+      |         ~~~~~~~~~~~~~~~~~~              ^~
+build_scrn2/mutants/p38944/m0133_screen_review.c:251:12: note: 'ct_review_iso_scan' declared here
+  251 | static int ct_review_iso_scan(const char *iso, long *y, int /m, int *d) {
+      |            ^                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+build_scrn2/mutants/p38944/m0134_screen_review.c:251:69: error: expected ')'
+  251 | static int ct_review_iso_scan(const char *iso, long *y, int *m, int /d) {
+      |                                                                     ^
+build_scrn2/mutants/p38944/m0134_screen_review.c:251:30: note: to match this '('
+  251 | static int ct_review_iso_scan(const char *iso, long *y, int *m, int /d) {
+      |                              ^
+build_scrn2/mutants/p38944/m0134_screen_review.c:270:6: error: use of undeclared identifier 'd'
+  270 |     *d = parts[2];
+      |      ^
+build_scrn2/mutants/p38944/m0134_screen_review.c:305:41: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  305 |     if (ct_review_iso_scan(now, &y, &m, &d) == CT_SESSION_OK) {
+      |                                         ^~
+build_scrn2/mutants/p38944/m0134_screen_review.c:251:69: note: passing argument to parameter here
+  251 | static int ct_review_iso_scan(const char *iso, long *y, int *m, int /d) {
+      |                                                                     ^
+3 errors generated.
+mutate: suite review_screen_session_log exited 1
+mutate: suite review_screen_session_log exited -1073741795
+mutate: suite review_screen_session_log exited 1
+mutate: suite review_screen_session_log exited 1
+build_scrn2/mutants/p38944/m0144_screen_review.c:257:31: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+  257 |         while (iso[at] >= '0' || iso[at] <= '9') {
+      |                ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite review_screen_session_log exited 1
+mutate: suite review_screen_session_log exited 1
+mutate: suite review_screen_session_log exited 1
+build_scrn2/mutants/p38944/m0153_screen_review.c:262:37: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+  262 |         if (!any || (iso[at] != '-' || iso[at] != 'T')) {
+      |                      ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite review_screen_session_log exited 1
+build_scrn2/mutants/p38944/m0155_screen_review.c:268:5: error: expected expression
+  268 |     /y = parts[0];
+      |     ^
+1 error generated.
+build_scrn2/mutants/p38944/m0157_screen_review.c:268:10: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  268 |     *y = parts[-1];
+      |          ^     ~~
+build_scrn2/mutants/p38944/m0157_screen_review.c:252:5: note: array 'parts' declared here
+  252 |     int parts[CT_REVIEW_ISO_FIELDS];
+      |     ^
+1 error generated.
+build_scrn2/mutants/p38944/m0158_screen_review.c:269:5: error: expected expression
+  269 |     /m = parts[1];
+      |     ^
+1 error generated.
+build_scrn2/mutants/p38944/m0161_screen_review.c:270:5: error: expected expression
+  270 |     /d = parts[2];
+      |     ^
+1 error generated.
+build_scrn2/mutants/p38944/m0162_screen_review.c:270:10: error: array index 3 is past the end of the array (that has type 'int[3]') [-Werror,-Warray-bounds]
+  270 |     *d = parts[3];
+      |          ^     ~
+build_scrn2/mutants/p38944/m0162_screen_review.c:252:5: note: array 'parts' declared here
+  252 |     int parts[CT_REVIEW_ISO_FIELDS];
+      |     ^
+1 error generated.
+build_scrn2/mutants/p38944/m0164_screen_review.c:274:43: error: expected ')'
+  274 | static void ct_review_load_scheme(sqlite3 /db) {
+      |                                           ^
+build_scrn2/mutants/p38944/m0164_screen_review.c:274:34: note: to match this '('
+  274 | static void ct_review_load_scheme(sqlite3 /db) {
+      |                                  ^
+build_scrn2/mutants/p38944/m0164_screen_review.c:274:43: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  274 | static void ct_review_load_scheme(sqlite3 /db) {
+      |                                           ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_scrn2/mutants/p38944/m0164_screen_review.c:276:9: error: use of undeclared identifier 'db'
+  276 |     if (db == NULL) {
+      |         ^~
+build_scrn2/mutants/p38944/m0164_screen_review.c:281:34: error: use of undeclared identifier 'db'
+  281 |         if (ct_repo_settings_get(db, ct_color_scheme_keys[face], hex, (unsigned)sizeof hex) == 0) {
+      |                                  ^~
+build_scrn2/mutants/p38944/m0164_screen_review.c:292:27: error: argument type 'sqlite3' (aka 'struct sqlite3') is incomplete
+  292 |     ct_review_load_scheme(app->db);
+      |                           ^~~~~~~
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+5 errors generated.
+mutate: suite review_screen_session_log exited -1073741795
+mutate: suite review_screen_session_log exited -1073741795
+build_scrn2/mutants/p38944/m0172_screen_review.c:287:35: error: expected ')'
+  287 | static void ct_review_open(ct_app /app) {
+      |                                   ^
+build_scrn2/mutants/p38944/m0172_screen_review.c:287:27: note: to match this '('
+  287 | static void ct_review_open(ct_app /app) {
+      |                           ^
+build_scrn2/mutants/p38944/m0172_screen_review.c:292:27: error: use of undeclared identifier 'app'
+  292 |     ct_review_load_scheme(app->db);
+      |                           ^~~
+build_scrn2/mutants/p38944/m0172_screen_review.c:306:47: error: use of undeclared identifier 'app'
+  306 |         ct_review_form_begin(&ct_review.form, app->db, CT_UI_DEFAULT_DECK, now,
+      |                                               ^~~
+build_scrn2/mutants/p38944/m0172_screen_review.c:319:24: error: passing 'ct_app *' to parameter of incompatible type 'ct_app'; dereference with *
+  319 |         ct_review_open(app);
+      |                        ^~~
+      |                        *
+build_scrn2/mutants/p38944/m0172_screen_review.c:287:35: note: passing argument to parameter here
+  287 | static void ct_review_open(ct_app /app) {
+      |                                   ^
+4 errors generated.
+mutate: suite review_screen_session_log exited 1
+mutate: suite review_screen_session_log exited 1
+mutate: suite review_screen_session_log exited 1
+build_scrn2/mutants/p38944/m0186_screen_review.c:311:37: error: expected ')'
+  311 | void ct_screen_review_update(ct_app /app) {
+      |                                     ^
+build_scrn2/mutants/p38944/m0186_screen_review.c:311:29: note: to match this '('
+  311 | void ct_screen_review_update(ct_app /app) {
+      |                             ^
+build_scrn2/mutants/p38944/m0186_screen_review.c:311:6: error: conflicting types for 'ct_screen_review_update'
+  311 | void ct_screen_review_update(ct_app /app) {
+      |      ^
+src\ui/ui.h:168:6: note: previous declaration is here
+  168 | void ct_screen_review_update(ct_app *app);
+      |      ^
+build_scrn2/mutants/p38944/m0186_screen_review.c:312:9: error: use of undeclared identifier 'app'
+  312 |     if (app == NULL) {
+      |         ^~~
+build_scrn2/mutants/p38944/m0186_screen_review.c:315:51: error: use of undeclared identifier 'app'
+  315 |     if (!ct_review.opened || ct_review.form.db != app->db) {
+      |                                                   ^~~
+build_scrn2/mutants/p38944/m0186_screen_review.c:319:24: error: use of undeclared identifier 'app'
+  319 |         ct_review_open(app);
+      |                        ^~~
+build_scrn2/mutants/p38944/m0186_screen_review.c:325:9: error: use of undeclared identifier 'app'
+  325 |         app->screen = CT_SCREEN_MENU;
+      |         ^~~
+build_scrn2/mutants/p38944/m0186_screen_review.c:329:54: error: use of undeclared identifier 'app'
+  329 |     ct_anim_step_result r = ct_anim_update(&f->anim, app->fixed_dt, app->cfg.anim.move_seconds);
+      |                                                      ^~~
+build_scrn2/mutants/p38944/m0186_screen_review.c:329:69: error: use of undeclared identifier 'app'
+  329 |     ct_anim_step_result r = ct_anim_update(&f->anim, app->fixed_dt, app->cfg.anim.move_seconds);
+      |                                                                     ^~~
+8 errors generated.
+mutate: suite review_screen_session_log exited 1
+mutate: suite review_screen_session_log exited 1
+mutate: suite shots_review_reopen exited 1
+mutate: suite review_screen_session_log exited 1
+build_scrn2/mutants/p38944/m0192_screen_review.c:328:20: error: expected identifier or '('
+  328 |     ct_review_form /f = &ct_review.form;
+      |                    ^
+build_scrn2/mutants/p38944/m0192_screen_review.c:329:45: error: use of undeclared identifier 'f'
+  329 |     ct_anim_step_result r = ct_anim_update(&f->anim, app->fixed_dt, app->cfg.anim.move_seconds);
+      |                                             ^
+build_scrn2/mutants/p38944/m0192_screen_review.c:331:19: error: use of undeclared identifier 'f'
+  331 |         ct_apply(&f->cube, r.move);
+      |                   ^
+build_scrn2/mutants/p38944/m0192_screen_review.c:332:9: error: use of undeclared identifier 'f'
+  332 |         f->scrub_index = f->move_count - f->anim.count;
+      |         ^
+build_scrn2/mutants/p38944/m0192_screen_review.c:332:26: error: use of undeclared identifier 'f'
+  332 |         f->scrub_index = f->move_count - f->anim.count;
+      |                          ^
+build_scrn2/mutants/p38944/m0192_screen_review.c:332:42: error: use of undeclared identifier 'f'
+  332 |         f->scrub_index = f->move_count - f->anim.count;
+      |                                          ^
+build_scrn2/mutants/p38944/m0192_screen_review.c:333:30: error: use of undeclared identifier 'f'
+  333 |         if (!ct_anim_active(&f->anim)) {
+      |                              ^
+build_scrn2/mutants/p38944/m0192_screen_review.c:334:28: error: use of undeclared identifier 'f'
+  334 |             ct_anim_pause(&f->anim);
+      |                            ^
+build_scrn2/mutants/p38944/m0192_screen_review.c:335:13: error: use of undeclared identifier 'f'
+  335 |             f->playing = false;
+      |             ^
+build_scrn2/mutants/p38944/m0192_screen_review.c:338:31: error: use of undeclared identifier 'f'
+  338 |     if (!ct_session_has_next(&f->session)) {
+      |                               ^
+10 errors generated.
+mutate: suite review_screen_session_log exited 1
+build_scrn2/mutants/p38944/m0197_screen_review.c:348:19: error: expected identifier or '('
+  348 | static const char /ct_review_status_text(int status) {
+      |                   ^
+build_scrn2/mutants/p38944/m0197_screen_review.c:426:22: error: use of undeclared identifier 'ct_review_status_text'
+  426 |                      ct_review_status_text(f->status));
+      |                      ^~~~~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0197_screen_review.c:459:18: error: use of undeclared identifier 'ct_review_status_text'
+  459 |                  ct_review_status_text(f->status));
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+build_scrn2/mutants/p38944/m0198_screen_review.c:364:46: error: expected ')'
+  364 |                                   const char /const *labels, void (*on_click)(int)) {
+      |                                              ^
+build_scrn2/mutants/p38944/m0198_screen_review.c:363:34: note: to match this '('
+  363 | static void ct_review_row_buttons(int x, int y, int w, int btn_h, int count, int gap,
+      |                                  ^
+build_scrn2/mutants/p38944/m0198_screen_review.c:367:79: error: use of undeclared identifier 'labels'
+  367 |         if (GuiButton(ct_review_rect(x + i * (btn_w + gap), y, btn_w, btn_h), labels[i])) {
+      |                                                                               ^~~~~~
+build_scrn2/mutants/p38944/m0198_screen_review.c:368:13: error: use of undeclared identifier 'on_click'
+  368 |             on_click(i);
+      |             ^~~~~~~~
+build_scrn2/mutants/p38944/m0198_screen_review.c:442:51: error: too many arguments to function call, expected 7, have 8
+  441 |     ct_review_row_buttons(right_x, y, right_w, row_h, CT_REVIEW_GRADE_COUNT, margin,
+      |     ~~~~~~~~~~~~~~~~~~~~~
+  442 |                           CT_REVIEW_GRADE_LABELS, ct_review_on_grade);
+      |                                                   ^~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0198_screen_review.c:363:13: note: 'ct_review_row_buttons' declared here
+  363 | static void ct_review_row_buttons(int x, int y, int w, int btn_h, int count, int gap,
+      |             ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  364 |                                   const char /const *labels, void (*on_click)(int)) {
+      |                                   ~~~~~~~~~~
+build_scrn2/mutants/p38944/m0198_screen_review.c:446:27: error: too many arguments to function call, expected 7, have 8
+  445 |     ct_review_row_buttons(right_x, y, right_w, row_h, CT_REVIEW_PLAY_COUNT, margin, play_labels,
+      |     ~~~~~~~~~~~~~~~~~~~~~
+  446 |                           ct_review_on_play);
+      |                           ^~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0198_screen_review.c:363:13: note: 'ct_review_row_buttons' declared here
+  363 | static void ct_review_row_buttons(int x, int y, int w, int btn_h, int count, int gap,
+      |             ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  364 |                                   const char /const *labels, void (*on_click)(int)) {
+      |                                   ~~~~~~~~~~
+build_scrn2/mutants/p38944/m0198_screen_review.c:449:51: error: too many arguments to function call, expected 7, have 8
+  448 |     ct_review_row_buttons(right_x, y, right_w, row_h, CT_REVIEW_SPEED_COUNT, margin,
+      |     ~~~~~~~~~~~~~~~~~~~~~
+  449 |                           CT_REVIEW_SPEED_LABELS, ct_review_on_speed);
+      |                                                   ^~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0198_screen_review.c:363:13: note: 'ct_review_row_buttons' declared here
+  363 | static void ct_review_row_buttons(int x, int y, int w, int btn_h, int count, int gap,
+      |             ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  364 |                                   const char /const *labels, void (*on_click)(int)) {
+      |                                   ~~~~~~~~~~
+6 errors generated.
+build_scrn2/mutants/p38944/m0199_screen_review.c:364:53: error: expected ')'
+  364 |                                   const char *const /labels, void (*on_click)(int)) {
+      |                                                     ^
+build_scrn2/mutants/p38944/m0199_screen_review.c:363:34: note: to match this '('
+  363 | static void ct_review_row_buttons(int x, int y, int w, int btn_h, int count, int gap,
+      |                                  ^
+build_scrn2/mutants/p38944/m0199_screen_review.c:367:79: error: use of undeclared identifier 'labels'
+  367 |         if (GuiButton(ct_review_rect(x + i * (btn_w + gap), y, btn_w, btn_h), labels[i])) {
+      |                                                                               ^~~~~~
+build_scrn2/mutants/p38944/m0199_screen_review.c:368:13: error: use of undeclared identifier 'on_click'
+  368 |             on_click(i);
+      |             ^~~~~~~~
+build_scrn2/mutants/p38944/m0199_screen_review.c:442:51: error: too many arguments to function call, expected 7, have 8
+  441 |     ct_review_row_buttons(right_x, y, right_w, row_h, CT_REVIEW_GRADE_COUNT, margin,
+      |     ~~~~~~~~~~~~~~~~~~~~~
+  442 |                           CT_REVIEW_GRADE_LABELS, ct_review_on_grade);
+      |                                                   ^~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0199_screen_review.c:363:13: note: 'ct_review_row_buttons' declared here
+  363 | static void ct_review_row_buttons(int x, int y, int w, int btn_h, int count, int gap,
+      |             ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  364 |                                   const char *const /labels, void (*on_click)(int)) {
+      |                                   ~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0199_screen_review.c:446:27: error: too many arguments to function call, expected 7, have 8
+  445 |     ct_review_row_buttons(right_x, y, right_w, row_h, CT_REVIEW_PLAY_COUNT, margin, play_labels,
+      |     ~~~~~~~~~~~~~~~~~~~~~
+  446 |                           ct_review_on_play);
+      |                           ^~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0199_screen_review.c:363:13: note: 'ct_review_row_buttons' declared here
+  363 | static void ct_review_row_buttons(int x, int y, int w, int btn_h, int count, int gap,
+      |             ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  364 |                                   const char *const /labels, void (*on_click)(int)) {
+      |                                   ~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0199_screen_review.c:449:51: error: too many arguments to function call, expected 7, have 8
+  448 |     ct_review_row_buttons(right_x, y, right_w, row_h, CT_REVIEW_SPEED_COUNT, margin,
+      |     ~~~~~~~~~~~~~~~~~~~~~
+  449 |                           CT_REVIEW_SPEED_LABELS, ct_review_on_speed);
+      |                                                   ^~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p38944/m0199_screen_review.c:363:13: note: 'ct_review_row_buttons' declared here
+  363 | static void ct_review_row_buttons(int x, int y, int w, int btn_h, int count, int gap,
+      |             ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  364 |                                   const char *const /labels, void (*on_click)(int)) {
+      |                                   ~~~~~~~~~~~~
+6 errors generated.
+build_scrn2/mutants/p38944/m0200_screen_review.c:364:68: error: expected ')'
+  364 |                                   const char *const *labels, void (/on_click)(int)) {
+      |                                                                    ^
+build_scrn2/mutants/p38944/m0200_screen_review.c:364:67: note: to match this '('
+  364 |                                   const char *const *labels, void (/on_click)(int)) {
+      |                                                                   ^
+build_scrn2/mutants/p38944/m0200_screen_review.c:368:13: error: use of undeclared identifier 'on_click'
+  368 |             on_click(i);
+      |             ^~~~~~~~
+2 errors generated.
+build_scrn2/mutants/p38944/m0213_screen_review.c:380:20: error: expected identifier or '('
+  380 |     ct_review_form /f = &ct_review.form;
+      |                    ^
+build_scrn2/mutants/p38944/m0213_screen_review.c:382:35: error: use of undeclared identifier 'f'
+  382 |         ct_review_form_play_pause(f);
+      |                                   ^
+build_scrn2/mutants/p38944/m0213_screen_review.c:384:29: error: use of undeclared identifier 'f'
+  384 |         ct_review_form_step(f);
+      |                             ^
+3 errors generated.
+build_scrn2/mutants/p38944/m0217_screen_review.c:392:35: error: expected ')'
+  392 | void ct_screen_review_draw(ct_app /app) {
+      |                                   ^
+build_scrn2/mutants/p38944/m0217_screen_review.c:392:27: note: to match this '('
+  392 | void ct_screen_review_draw(ct_app /app) {
+      |                           ^
+build_scrn2/mutants/p38944/m0217_screen_review.c:392:6: error: conflicting types for 'ct_screen_review_draw'
+  392 | void ct_screen_review_draw(ct_app /app) {
+      |      ^
+src\ui/ui.h:169:6: note: previous declaration is here
+  169 | void ct_screen_review_draw(ct_app *app);
+      |      ^
+build_scrn2/mutants/p38944/m0217_screen_review.c:394:9: error: use of undeclared identifier 'app'
+  394 |     if (app == NULL) {
+      |         ^~~
+build_scrn2/mutants/p38944/m0217_screen_review.c:398:18: error: use of undeclared identifier 'app'
+  398 |     int w = (int)app->cfg.window.width;
+      |                  ^~~
+build_scrn2/mutants/p38944/m0217_screen_review.c:399:18: error: use of undeclared identifier 'app'
+  399 |     int h = (int)app->cfg.window.height;
+      |                  ^~~
+build_scrn2/mutants/p38944/m0217_screen_review.c:412:22: error: use of undeclared identifier 'app'
+  412 |                      app->cfg.anim.move_seconds);
+      |                      ^~~
+6 errors generated.
+build_scrn2/mutants/p38944/m0219_screen_review.c:397:20: error: expected identifier or '('
+  397 |     ct_review_form /f = &ct_review.form;
+      |                    ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:411:44: error: use of undeclared identifier 'f'
+  411 |     ct_renderer_draw(&ct_review.renderer, &f->cube, &f->anim, &ct_review.scheme, ct_review.camera,
+      |                                            ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:411:54: error: use of undeclared identifier 'f'
+  411 |     ct_renderer_draw(&ct_review.renderer, &f->cube, &f->anim, &ct_review.scheme, ct_review.camera,
+      |                                                      ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:416:44: error: use of undeclared identifier 'f'
+  416 |     snprintf(line, sizeof line, "deck %s", f->card.deck);
+      |                                            ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:419:44: error: use of undeclared identifier 'f'
+  419 |     snprintf(line, sizeof line, "case %s", f->card.case_key);
+      |                                            ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:423:9: error: use of undeclared identifier 'f'
+  423 |     if (f->card.id == 0) {
+      |         ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:426:44: error: use of undeclared identifier 'f'
+  426 |                      ct_review_status_text(f->status));
+      |                                            ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:430:14: error: use of undeclared identifier 'f'
+  430 |     DrawText(f->revealed ? f->alg_text : "hidden", right_x, y, text_size, RAYWHITE);
+      |              ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:430:28: error: use of undeclared identifier 'f'
+  430 |     DrawText(f->revealed ? f->alg_text : "hidden", right_x, y, text_size, RAYWHITE);
+      |                            ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:431:10: error: use of undeclared identifier 'f'
+  431 |     if (!f->revealed) {
+      |          ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:434:35: error: use of undeclared identifier 'f'
+  434 |             ct_review_form_reveal(f);
+      |                                   ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:438:50: error: use of undeclared identifier 'f'
+  438 |     snprintf(line, sizeof line, "move %d of %d", f->scrub_index, f->move_count);
+      |                                                  ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:438:66: error: use of undeclared identifier 'f'
+  438 |     snprintf(line, sizeof line, "move %d of %d", f->scrub_index, f->move_count);
+      |                                                                  ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:444:54: error: use of undeclared identifier 'f'
+  444 |     const char *play_labels[CT_REVIEW_PLAY_COUNT] = {f->playing ? "pause" : "play", "step"};
+      |                                                      ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:451:22: error: use of undeclared identifier 'f'
+  451 |     float v = (float)f->scrub_index;
+      |                      ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:453:9: error: use of undeclared identifier 'f'
+  453 |     if (f->move_count > 0 && GuiSlider(ct_review_rect(right_x, y, right_w, slider_h), "scrub", NULL,
+      |         ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:454:57: error: use of undeclared identifier 'f'
+  454 |                                        &v, 0.0f, (float)f->move_count)) {
+      |                                                         ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:455:30: error: use of undeclared identifier 'f'
+  455 |         ct_review_form_scrub(f, (int)v);
+      |                              ^
+build_scrn2/mutants/p38944/m0219_screen_review.c:459:40: error: use of undeclared identifier 'f'
+  459 |                  ct_review_status_text(f->status));
+      |                                        ^
+19 errors generated.
+build_scrn2/mutants/p38944/m0241_screen_review.c:444:16: error: expected identifier or '('
+  444 |     const char /play_labels[CT_REVIEW_PLAY_COUNT] = {f->playing ? "pause" : "play", "step"};
+      |                ^
+build_scrn2/mutants/p38944/m0241_screen_review.c:445:85: error: use of undeclared identifier 'play_labels'
+  445 |     ct_review_row_buttons(right_x, y, right_w, row_h, CT_REVIEW_PLAY_COUNT, margin, play_labels,
+      |                                                                                     ^~~~~~~~~~~
+2 errors generated.
