@@ -27,9 +27,9 @@ CT_SUITE(headless_render_guards) {
     CT_ASSERT_EQ(ct_headless_render_scene(-1, 3, NULL, "out.png"), CT_HEADLESS_E_ARG);
     CT_ASSERT_EQ(ct_headless_render_scene(CT_HEADLESS_SCENE_SOLVED, 1, NULL, "out.png"),
                  CT_HEADLESS_E_SIZE);
-    CT_ASSERT_EQ(ct_headless_render_scene(CT_HEADLESS_SCENE_SOLVED, CT_CUBE_MAX_N + 1, NULL,
-                                          "out.png"),
-                 CT_HEADLESS_E_SIZE);
+    CT_ASSERT_EQ(
+        ct_headless_render_scene(CT_HEADLESS_SCENE_SOLVED, CT_CUBE_MAX_N + 1, NULL, "out.png"),
+        CT_HEADLESS_E_SIZE);
     CT_ASSERT_EQ(ct_headless_render_scene(CT_HEADLESS_SCENE_SCRAMBLE, 3, "zz q", "out.png"),
                  CT_HEADLESS_E_ALG);
     CT_ASSERT_EQ(ct_headless_render_scene(CT_HEADLESS_SCENE_MID, 3, "7R", "out.png"),
@@ -45,8 +45,7 @@ CT_SUITE(headless_render_smoke) {
                  CT_HEADLESS_OK);
     CT_ASSERT_EQ(ct_headless_render_scene(CT_HEADLESS_SCENE_SCRAMBLE, 3, NULL, scramble_png),
                  CT_HEADLESS_OK);
-    CT_ASSERT_EQ(ct_headless_render_scene(CT_HEADLESS_SCENE_MID, 3, NULL, mid_png),
-                 CT_HEADLESS_OK);
+    CT_ASSERT_EQ(ct_headless_render_scene(CT_HEADLESS_SCENE_MID, 3, NULL, mid_png), CT_HEADLESS_OK);
     CT_ASSERT_EQ(ct_headless_render_scene(CT_HEADLESS_SCENE_SOLVED, CT_CUBE_MAX_N, NULL, big_png),
                  CT_HEADLESS_OK);
     const char *pngs[] = {solved_png, scramble_png, mid_png, big_png};
