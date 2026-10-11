@@ -375,7 +375,9 @@ src/gen/synth.c:506	lookup direction key arithmetic reroutes to the same stored 
 src/gen/synth.c:517	lookup length guards agree on the stored lengths, every table entry holds at least four moves
 src/gen/synth.c:519	lookup miss flip returns the zero length candidate whose validation then fails, attempt only divergence
 src/gen/synth.c:523	setup move slot zero keeps a stale first move that fails legality or duplicates the prior move, setup outcomes unchanged on the pinned corpus
+src/gen/synth.c:524	subset face loop start shift skips the face zero setup moves, the narrowed setup enumeration still resolves every pinned target, the mask independent direct candidate runs first
 src/gen/synth.c:528	subset move enumeration prunes only setup candidates, the mask independent direct candidate satisfies every pinned assertion
+src/gen/synth.c:540	setup target loop start shift leaves the buffer slot uninitialized, the stale cell fails the negative guard or misses the sequence lookup so the attempt returns, the mask independent direct candidate satisfies every pinned assertion
 src/gen/synth.c:541	setup target search boundary shifts keep the scan inside the state permutation, every target value is always located
 src/gen/synth.c:542	setup cell scan start shift skips cell zero placements recovered by the other depth first branches on the pinned corpus
 src/gen/synth.c:548	setup cell scan bound widening probes one dead slot whose value never matches a target
