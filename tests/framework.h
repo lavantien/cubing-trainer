@@ -6,6 +6,7 @@
 #include <stdint.h>
 
 #define CT_MAX_SUITES 512
+#define CT_TEST_GUARD_PNG "build/test_shots/guard.png"
 
 void ct_suite_register(const char *name, void (*fn)(void));
 int ct_run_all(const char *filter);

@@ -45,20 +45,20 @@ CT_SUITE(shots_arg_guards) {
     ct_app dead;
     shots_app(&dead, db);
     dead.running = false;
-    CT_ASSERT_EQ(ct_shots_menu(NULL, "out.png"), CT_SHOTS_E_ARG);
+    CT_ASSERT_EQ(ct_shots_menu(NULL, CT_TEST_GUARD_PNG), CT_SHOTS_E_ARG);
     CT_ASSERT_EQ(ct_shots_menu(&app, NULL), CT_SHOTS_E_ARG);
     CT_ASSERT_EQ(ct_shots_menu(&app, ""), CT_SHOTS_E_ARG);
-    CT_ASSERT_EQ(ct_shots_menu(&dead, "out.png"), CT_SHOTS_E_ARG);
+    CT_ASSERT_EQ(ct_shots_menu(&dead, CT_TEST_GUARD_PNG), CT_SHOTS_E_ARG);
     CT_ASSERT_EQ(ct_shots_trainer(&app, CT_EVENT_3X3, CT_METHOD_CFOP, 0, 0, NULL), CT_SHOTS_E_ARG);
     CT_ASSERT_EQ(ct_shots_chart(&app, CT_EVENT_3BLD, CT_METHOD_3STYLE, 1, 2, ""), CT_SHOTS_E_ARG);
-    CT_ASSERT_EQ(ct_shots_review(NULL, false, "out.png"), CT_SHOTS_E_ARG);
+    CT_ASSERT_EQ(ct_shots_review(NULL, false, CT_TEST_GUARD_PNG), CT_SHOTS_E_ARG);
     CT_ASSERT_EQ(ct_shots_cards(&app, "unfiled", true, NULL), CT_SHOTS_E_ARG);
-    CT_ASSERT_EQ(ct_shots_cards(&app, NULL, true, "out.png"), CT_SHOTS_E_ARG);
-    CT_ASSERT_EQ(ct_shots_cards(&app, "", true, "out.png"), CT_SHOTS_E_ARG);
+    CT_ASSERT_EQ(ct_shots_cards(&app, NULL, true, CT_TEST_GUARD_PNG), CT_SHOTS_E_ARG);
+    CT_ASSERT_EQ(ct_shots_cards(&app, "", true, CT_TEST_GUARD_PNG), CT_SHOTS_E_ARG);
     CT_ASSERT_EQ(ct_shots_settings(&app, CT_SETTINGS_TAB_GENERAL, ""), CT_SHOTS_E_ARG);
-    CT_ASSERT_EQ(ct_shots_stats(NULL, "out.png"), CT_SHOTS_E_ARG);
-    CT_ASSERT_EQ(ct_shots_settings(&app, CT_SETTINGS_TAB_COUNT, "out.png"), CT_SHOTS_E_ARG);
-    CT_ASSERT_EQ(ct_shots_settings(&app, -1, "out.png"), CT_SHOTS_E_ARG);
+    CT_ASSERT_EQ(ct_shots_stats(NULL, CT_TEST_GUARD_PNG), CT_SHOTS_E_ARG);
+    CT_ASSERT_EQ(ct_shots_settings(&app, CT_SETTINGS_TAB_COUNT, CT_TEST_GUARD_PNG), CT_SHOTS_E_ARG);
+    CT_ASSERT_EQ(ct_shots_settings(&app, -1, CT_TEST_GUARD_PNG), CT_SHOTS_E_ARG);
     ct_shots_close();
     ct_db_close(db);
 }
@@ -67,18 +67,18 @@ CT_SUITE(shots_state_guards) {
     sqlite3 *db = shots_db();
     ct_app app;
     shots_app(&app, db);
-    CT_ASSERT_EQ(ct_shots_cards(&app, "nosuchdeck", true, "out.png"), CT_SHOTS_E_STATE);
-    CT_ASSERT_EQ(ct_shots_trainer(&app, CT_EVENT_3X3, CT_METHOD_CFOP, 9, 0, "out.png"),
+    CT_ASSERT_EQ(ct_shots_cards(&app, "nosuchdeck", true, CT_TEST_GUARD_PNG), CT_SHOTS_E_STATE);
+    CT_ASSERT_EQ(ct_shots_trainer(&app, CT_EVENT_3X3, CT_METHOD_CFOP, 9, 0, CT_TEST_GUARD_PNG),
                  CT_SHOTS_E_STATE);
-    CT_ASSERT_EQ(ct_shots_trainer(&app, CT_EVENT_3X3, CT_METHOD_CFOP, 0, -2, "out.png"),
+    CT_ASSERT_EQ(ct_shots_trainer(&app, CT_EVENT_3X3, CT_METHOD_CFOP, 0, -2, CT_TEST_GUARD_PNG),
                  CT_SHOTS_E_STATE);
-    CT_ASSERT_EQ(ct_shots_chart(&app, CT_EVENT_3X3, CT_METHOD_CFOP, 0, 0, "out.png"),
+    CT_ASSERT_EQ(ct_shots_chart(&app, CT_EVENT_3X3, CT_METHOD_CFOP, 0, 0, CT_TEST_GUARD_PNG),
                  CT_SHOTS_E_STATE);
     CT_ASSERT_EQ(
-        ct_shots_chart(&app, CT_EVENT_3BLD, CT_METHOD_3STYLE, 1, CT_LETTER_STICKERS, "out.png"),
+        ct_shots_chart(&app, CT_EVENT_3BLD, CT_METHOD_3STYLE, 1, CT_LETTER_STICKERS, CT_TEST_GUARD_PNG),
         CT_SHOTS_E_STATE);
     CT_ASSERT_EQ(
-        ct_shots_trainer(&app, CT_EVENT_3X3, CT_METHOD_SARAH_INTERMEDIATE, 0, 0, "out.png"),
+        ct_shots_trainer(&app, CT_EVENT_3X3, CT_METHOD_SARAH_INTERMEDIATE, 0, 0, CT_TEST_GUARD_PNG),
         CT_SHOTS_E_STATE);
     ct_shots_close();
     ct_db_close(db);
