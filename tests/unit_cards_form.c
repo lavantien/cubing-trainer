@@ -302,3 +302,127 @@ CT_SUITE(cards_form_guards) {
     CT_ASSERT_EQ(ct_cards_form_delete(&f, db), CT_REPO_MISSING);
     ct_db_close(db);
 }
+
+static void seed_key_range(sqlite3 *db, const char *deck, int from, int to) {
+    for (int n = from; n <= to; n++) {
+        char key[CT_CARD_CASE_KEY_MAX];
+        snprintf(key, sizeof key, "new-%d", n);
+        seed(db, deck, key, "R U");
+    }
+}
+
+CT_SUITE(cards_form_boundaries) {
+    sqlite3 *db = form_db();
+    for (int i = 0; i < CT_CARDS_PAGE + 5; i++) {
+        char key[8];
+        snprintf(key, sizeof key, "p%d", i + 1);
+        seed(db, "page", key, "R U");
+    }
+    seed(db, "z", "z1", "R U R'");
+
+    ct_cards_form f;
+    ct_cards_form_open(&f, db, "");
+    CT_ASSERT_EQ(f.row_count, CT_CARDS_PAGE);
+    CT_ASSERT_EQ(f.status, CT_REPO_OK);
+    CT_ASSERT_EQ(f.selected, 0);
+    CT_ASSERT_STR_EQ(f.card.case_key, "p1");
+
+    ct_cards_form_open(&f, db, "z");
+    CT_ASSERT_EQ(f.row_count, 1);
+    CT_ASSERT_EQ(ct_cards_form_select(&f, 0), CT_REPO_OK);
+    CT_ASSERT_EQ(f.selected, 0);
+    CT_ASSERT_STR_EQ(f.card.case_key, "z1");
+
+    CT_ASSERT_EQ(ct_cards_form_select(&f, -1), CT_REPO_OK);
+    CT_ASSERT_EQ(f.selected, 0);
+    CT_ASSERT_STR_EQ(f.card.case_key, "z1");
+
+    CT_ASSERT_EQ(ct_cards_form_select(&f, 1), CT_REPO_OK);
+    CT_ASSERT_EQ(f.selected, 0);
+    CT_ASSERT_STR_EQ(f.card.case_key, "z1");
+    CT_ASSERT_EQ(f.status, CT_REPO_OK);
+
+    f.selected = 1;
+    ct_cards_form_cancel(&f);
+    CT_ASSERT_EQ(f.status, CT_REPO_OK);
+    CT_ASSERT_EQ(f.card.id, 0);
+
+    f.selected = 1;
+    CT_ASSERT_EQ(ct_cards_form_begin_edit(&f), CT_REPO_MISSING);
+    CT_ASSERT(!f.editing);
+
+    CT_ASSERT_EQ(ct_cards_form_select(&f, 0), CT_REPO_OK);
+    f.selected = 1;
+    CT_ASSERT_EQ(ct_cards_form_save(&f, db), CT_REPO_MISSING);
+    CT_ASSERT(!f.editing);
+
+    CT_ASSERT_EQ(ct_cards_form_select(&f, 0), CT_REPO_OK);
+    f.card.id = 0;
+    CT_ASSERT_EQ(ct_cards_form_save(&f, db), CT_REPO_MISSING);
+
+    ct_cards_form g;
+    ct_cards_form_open(&g, db, "");
+    CT_ASSERT_EQ(ct_cards_form_delete(&g, db), CT_REPO_OK);
+    ct_card gone;
+    CT_ASSERT_EQ(ct_repo_card_get(db, 1, &gone), CT_REPO_MISSING);
+
+    seed(db, "aa", "a1", "R U");
+    seed(db, "aa", "a2", "R U'");
+    long a3 = seed(db, "aa", "a3", "R");
+    seed(db, "bb", "b1", "U");
+    seed(db, "bb", "b2", "U'");
+
+    ct_cards_form h;
+    ct_cards_form_open(&h, db, "aa");
+    CT_ASSERT_EQ(h.row_count, 3);
+    snprintf(h.deck_filter, sizeof h.deck_filter, "%s", "bb");
+    ct_cards_form_reload(&h, db);
+    CT_ASSERT_EQ(h.row_count, 2);
+    h.selected = 2;
+    CT_ASSERT_EQ(ct_cards_form_delete(&h, db), CT_REPO_MISSING);
+    CT_ASSERT_EQ(ct_repo_card_get(db, a3, &gone), CT_REPO_OK);
+
+    ct_cards_form k;
+    ct_cards_form_open(&k, db, "bb");
+    CT_ASSERT_EQ(ct_cards_form_select(&k, 0), CT_REPO_OK);
+    k.ids[0] = 0;
+    CT_ASSERT_EQ(ct_cards_form_delete(&k, db), CT_REPO_MISSING);
+
+    ct_cards_form solo;
+    ct_cards_form_open(&solo, db, "solo");
+    CT_ASSERT_EQ(solo.row_count, 0);
+    CT_ASSERT_EQ(ct_cards_form_create(&solo, db, "solo"), CT_REPO_OK);
+    CT_ASSERT_EQ(solo.row_count, 1);
+    CT_ASSERT_EQ(solo.selected, 0);
+    CT_ASSERT_EQ(solo.card.id, solo.ids[0]);
+    CT_ASSERT_STR_EQ(solo.card.case_key, "new-1");
+    ct_db_close(db);
+}
+
+CT_SUITE(cards_form_create_retry) {
+    sqlite3 *db = form_db();
+    seed_key_range(db, "c64", 17, 80);
+    ct_cards_form f;
+    ct_cards_form_open(&f, db, "c64");
+    CT_ASSERT_EQ(f.row_count, CT_CARDS_PAGE);
+    CT_ASSERT_EQ(ct_cards_form_create(&f, db, "c64"), CT_REPO_OK);
+    ct_card back;
+    CT_ASSERT_EQ(ct_repo_card_get_by_key(db, "c64", "new-81", CT_DIR_FR, &back), CT_REPO_OK);
+    ct_db_close(db);
+
+    db = form_db();
+    seed_key_range(db, "c127", 17, 143);
+    ct_cards_form_open(&f, db, "c127");
+    CT_ASSERT_EQ(ct_cards_form_create(&f, db, "c127"), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_repo_card_get_by_key(db, "c127", "new-144", CT_DIR_FR, &back), CT_REPO_OK);
+    ct_db_close(db);
+
+    db = form_db();
+    seed_key_range(db, "c128", 17, 144);
+    ct_cards_form_open(&f, db, "c128");
+    CT_ASSERT_EQ(ct_cards_form_create(&f, db, "c128"), CT_REPO_CONFLICT);
+    CT_ASSERT_EQ(f.status, CT_REPO_CONFLICT);
+    CT_ASSERT_EQ(f.row_count, CT_CARDS_PAGE);
+    CT_ASSERT(!f.editing);
+    ct_db_close(db);
+}

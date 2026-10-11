@@ -1227,3 +1227,56 @@ src/ui/screen_menu.c:91	entry loop bound and offsets, consumed only by the rayli
 src/ui/screen_menu.c:92	entry rect stride, consumed only by the raylib draw path no gate suite exercises
 src/ui/screen_menu.c:97	quit rect stride, consumed only by the raylib draw path no gate suite exercises
 src/ui/screen_menu.c:99	quit button callback fires only inside the raylib draw loop no gate suite exercises
+src/ui/screen_cards.c:14	margin shift constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+src/ui/screen_cards.c:15	list width divisor constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+src/ui/screen_cards.c:16	field height shift constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+src/ui/screen_cards.c:17	label width divisor constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+src/ui/screen_cards.c:18	tag max feeds only the label buffer bound consumed by the draw-side label builder no headless suite exercises
+src/ui/screen_cards.c:19	label max feeds only the draw-side label buffer no headless suite exercises
+src/ui/screen_cards.c:21	button index base, the switch dispatch uses the same enum names so only the draw-side button row observes the shift
+src/ui/screen_cards.c:31	negative cap guard is unreachable, every caller passes the fixed page size 16
+src/ui/screen_cards.c:34	sqlite3_prepare_v2 treats any negative nByte as read to nul, the -1 mutant -2 is behaviorally identical
+src/ui/screen_cards.c:59	open memset fill byte is unobservable, reload and refresh rewrite every field any suite reads
+src/ui/screen_cards.c:60	selected sentinel mutants collapse before observation, with rows open assigns 0 right after and without rows reload clamps back to -1
+src/ui/screen_cards.c:84	rc zero boundary is identical in both branches, row_count stays 0 and status stays ok either way
+src/ui/screen_cards.c:85	copy loop overrun slot sits past row_count and no reader ever indexes it
+src/ui/screen_cards.c:89	rc zero boundary is identical in both branches, the same collapse as the deck list rc check
+src/ui/screen_cards.c:109	the zero clamp arm maps row 0 to itself, only the negative arm distinguishes and that mutant is killed
+src/ui/screen_cards.c:188	find loop overrun compares the zero filled slot past the rows which never matches a real id
+src/ui/screen_cards.c:252	label loop bound feeds only the draw-side list view no headless suite exercises
+src/ui/screen_cards.c:254	label db guard feeds only the draw-side label builder no headless suite exercises
+src/ui/screen_cards.c:255	label fetch failure branch feeds only the draw-side label builder no headless suite exercises
+src/ui/screen_cards.c:256	empty label write feeds only the draw-side list view no headless suite exercises
+src/ui/screen_cards.c:266	dirty reset runs only in the draw-side recompute and the dirty flag is write-only across the app
+src/ui/screen_cards.c:267	recompute guard runs only in the draw path, the dirty flag is write-only across the app
+src/ui/screen_cards.c:270	recompute fetch guard runs only in the draw path, the dirty flag is write-only across the app
+src/ui/screen_cards.c:273	dirty compare chain runs only in the draw-side recompute, the flag is write-only across the app
+src/ui/screen_cards.c:274	dirty compare chain continuation, draw path only, the flag is write-only across the app
+src/ui/screen_cards.c:275	dirty compare chain tail, draw path only, the flag is write-only across the app
+src/ui/screen_cards.c:286	field text box rect arithmetic, draw path only no headless suite exercises
+src/ui/screen_cards.c:303	field count constant, consumed only by the draw-side field loop no headless suite exercises
+src/ui/screen_cards.c:309	button loop bound feeds only the draw-side button row no headless suite exercises
+src/ui/screen_cards.c:310	button hit test feeds only the draw-side button row no headless suite exercises
+src/ui/screen_cards.c:317	deck pick ternary inside the new button callback, gui event branch no headless suite can trigger
+src/ui/screen_cards.c:341	cards update entry guard, no gate suite calls the cards update loop so both arms are unobserved
+src/ui/screen_cards.c:343	opened latch read, static cards screen state no gate suite observes
+src/ui/screen_cards.c:344	opened latch write, static cards screen state no gate suite observes
+src/ui/screen_cards.c:354	null guard after the background clear, draw path only
+src/ui/screen_cards.c:361	label width layout, draw path only
+src/ui/screen_cards.c:362	list width layout, draw path only
+src/ui/screen_cards.c:364	list y layout, draw path only
+src/ui/screen_cards.c:366	list height layout, draw path only
+src/ui/screen_cards.c:367	editor x layout, draw path only
+src/ui/screen_cards.c:368	editor width layout, draw path only
+src/ui/screen_cards.c:371	button y layout, draw path only
+src/ui/screen_cards.c:372	button width layout, draw path only
+src/ui/screen_cards.c:373	editor height layout, draw path only
+src/ui/screen_cards.c:374	fields y layout, draw path only
+src/ui/screen_cards.c:377	filter text box rect, draw path only
+src/ui/screen_cards.c:379	filter edit toggle, gui event state no headless suite can trigger
+src/ui/screen_cards.c:380	filter edit close branch, gui event branch no headless suite can trigger
+src/ui/screen_cards.c:392	field step layout, draw path only
+src/ui/screen_cards.c:393	field loop bound, draw path only
+src/ui/screen_cards.c:394	field buffer pointer arithmetic, draw path only
+src/ui/screen_cards.c:395	field placement, draw path only
+src/ui/screen_cards.c:402	status bar rect, draw path only
