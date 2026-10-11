@@ -36,6 +36,7 @@ The toolchain spelling is decided, evidence in playground/spike_link/REPORT.md. 
 | mutate | run the token mutation harness over the SCOPE directory or file with the optional SUITE filter |
 | e2e | run every tests/e2e/*.txt through cubing-trainer.exe --headless --script |
 | visual | render the 4 golden scenes fresh into build/visual and compare against tests/golden through tools/run_visual.py and tools/visual_check.py |
+| screenshots | seed a fresh CT_DATA_DIR sandbox and capture every feature point into docs/img/screens at fixed 1280x720 |
 | db-verify | build a migrated DB through tools/make_db.c, then check integrity, user_version, and 42 schema assertions through the sqlite3 CLI |
 | diagrams | render every docs/diagrams/*.mmd to PNG through tools/gen_diagrams.mjs |
 | memguard | run tools/memguard.ps1 to enforce the combined working set cap on project processes |
@@ -51,6 +52,72 @@ make release packages the trainer as build/cubing-trainer-\<git-describe\>.zip h
 
 make visual locks against concurrent runs through build/visual.lock and, for the animated mid scene, renders twice per gate and requires the pair to self-agree before comparing against the committed golden, retrying once on disagreement. Persistent pair disagreement exits 3 as an infra flake, self-agreement that mismatches the golden exits 2 as a regression signal with evidence copied under build/visual_evidence. This split exists because golden_mid_3 flips between two byte-stable rasterization outputs on this machine on a minutes timescale, independent of source and binary, while the static scenes never flip; the phenomenon, proof, and drifted sample are recorded in tests/golden/PROVENANCE.md and playground/m7_visual/.
 
+make screenshots drives the real exe end to end: it rebuilds cubing-trainer.exe, seeds a throwaway data directory under build/shots through playground/screens/seed.txt, then runs playground/screens/shots.txt against the same directory. Each shot command opens a hidden 1280x720 window, walks the real ct_ui_update and ct_ui_draw path into the target screen state, renders offscreen through LoadRenderTexture, and exports the PNG into docs/img/screens. Two consecutive runs over the same day produce byte-identical SHA-256 hashes for all 11 images, proven per run pair, while the stats session rows and the seeded review history embed real dates, so a corpus regenerated on a later date differs exactly there.
+
+## Usage
+
+`make run` opens the trainer windowed at the config default 1280x720. First start migrates the database, merges settings, and seeds every registered pack, so all screens have content before any configuration. The screenshots below are the real app in that seeded state, one per feature point.
+
+### Menu
+
+![menu](docs/img/screens/menu.png)
+
+Five buttons plus quit: trainers, cards, review, stats, and settings. Number keys 1 to 5 jump straight to a screen, clicking works the same, and escape returns to the menu from any screen, or quits from the menu itself.
+
+### Trainer selector
+
+![trainer](docs/img/screens/trainer.png)
+
+Three cascading lists walk event, then method, then list, one list per event, method, and stage triple registered in the packs. Curated lists read case keys from their seed rows, CFOP lists from the PLL, OLL, and F2L tables, and 3-style concept lists from the letter chart. The right pane names the current selection, counts its cases, and breaks the count down by group when a list carries several stages. Back and escape return to the menu.
+
+### Letter chart
+
+![chart](docs/img/screens/chart.png)
+
+Selecting a 3-style list swaps the third column for the 24-letter chart of that orbit, laid out face by face. The buffer sticker renders blue, the picked cell yellow, and clicking the yellow cell clears the pick. The case list under the grid fills with the target pairs for the picked sticker.
+
+### 3-style case view
+
+![case](docs/img/screens/case.png)
+
+Picking a case shows the case front, the stored or generated algorithm, and the structural decomposition under the alg: the setup, interchange, and insertion spans plus the BH class label, the same decomposition ct_classify_alg emits. Generation and saving run through the script runner today, trainer_generate synthesizes and caches the case and trainer_save turns it into a reviewable flashcard.
+
+### Review
+
+Before reveal the card shows only the cube state and the word hidden, so the move count and the alg stay undisclosed, and the reveal button is the interactive trigger:
+
+![review before reveal](docs/img/screens/review_hidden.png)
+
+After reveal the alg text appears with playback controls: play and pause toggle, step advances one move, the 0.5x, 1x, and 2x buttons set the animation speed, and the scrub slider jumps to any move. The cube animates the algorithm through the same renderer the windowed app uses. Grading with again, hard, good, or easy applies the FSRS update and advances to the next due card, and the session log records the run.
+
+![review after reveal](docs/img/screens/review_revealed.png)
+
+### Cards
+
+![cards](docs/img/screens/cards.png)
+
+The cards screen is the CRUD surface for flashcards. The deck filter narrows the list, new opens a fresh card, edit stages the selected card, and save and cancel commit or drop the staged form. Every card carries the variant fields alg 3x3, alg big, and alg oh plus front and notes, so one case serves the 3x3, big cube, and one-handed events. A card enters the review queue when its first due date arrives.
+
+### Settings
+
+![settings general tab](docs/img/screens/settings_general.png)
+
+Three tabs stage every preference. General edits the requested retention and the animation seconds and toggles the preferred move subset per face letter, the subset the generator searches under.
+
+![settings letters tab](docs/img/screens/settings_letters.png)
+
+Letters edits the stored letter scheme per sticker: pick a sticker in the corner or edge grid, type a letter, and the sticker that held that letter swaps with it, while duplicate letters and letters outside A to X are rejected at staging.
+
+![settings bld tab](docs/img/screens/settings_bld.png)
+
+Bld picks the corner and edge buffer stickers from the same grids and edits the face color scheme through live swatches with an RGB value box per channel. Save writes through the same dotted-key parser as ct_config_set, rows the parser rejects are counted and surfaced instead of dropped, and the app config re-merges on every save.
+
+### Stats
+
+![stats](docs/img/screens/stats.png)
+
+Stats aggregates the review history: the deck list selects a deck, the summary shows card and due counts with learning and review splits plus average stability and difficulty, the session list records past runs, the forecast bars count due cards over the next 30 days, the case accuracy heatmap colors every case by its hit rate with the row readable on hover, and the retention panel bars the actual recall per elapsed bucket with the predicted recall drawn as a marker line over them.
+
 ## Architecture
 
 Module tree:
@@ -58,7 +125,7 @@ Module tree:
 ```
 Makefile README.md
 db/migrations/001_init.sql  db/seeds/speffz.sql  db/seeds/speffz_source.md  db/seeds/packs/*.tsv (16 seed packs)  db/seeds/packs/PROVENANCE.md
-docs/diagrams/*.mmd  docs/diagrams/*.png (generated)  docs/reviews/*.md
+docs/diagrams/*.mmd  docs/diagrams/*.png (generated)  docs/img/screens/*.png (feature screenshots)  docs/reviews/*.md
 src/config/config.h config.c
 src/engine/cube.h cube.c notation.h notation.c transform.h transform.c geometry.h geometry.c geometry_sq1.h geometry_sq1.c geometry_clock.h geometry_clock.c
 src/render/renderer.h renderer.c anim.h anim.c
@@ -69,7 +136,7 @@ src/trainer/session.h session.c cfop.h cfop.c selector.h selector.c
 src/gen/targets.h targets.c interchange.h interchange.c synth.h synth.c score.h score.c classify.h classify.c
 src/stats/stats.h stats.c
 src/packs/packs.h packs.c provenance.h provenance.c seed_registry.h seed_registry.c
-src/app/main.c app.h app_loop.c headless.h headless.c paths.h paths.c script.h script.c script_expect.c
+src/app/main.c app.h app_loop.c headless.h headless.c paths.h paths.c script.h script.c script_expect.c script_internal.h script_shots.c shots.h shots.c
 tools/gen_diagrams.mjs run_lint.ps1 run_analyze.ps1 check_zero_comments.ps1 check_stray_constants.ps1 stray_constants_allow.txt memguard.ps1 memguard_sleeper.c mutate.c make_db.c db_schema_check.sql db_verify.py render_scene.c run_visual.py visual_check.py visual_selftest.py
 tests/framework.h framework.c test_main.c unit_*.c fuzz_engine.c fuzz_srs.c fuzz_db.c fuzz_config.c fuzz_main.c fixtures/ golden/ mutant_allowlist.txt
 ```
@@ -286,7 +353,8 @@ E2E: make e2e runs every tests/e2e/*.txt through cubing-trainer.exe --headless -
 | restart | restart | full app re-init, second settings merge and pack seeding pass |
 | cards screen | cards_open d, cards_new d, cards_select n, cards_edit, cards_field f v, cards_save, cards_delete | ct_cards_form over the flashcard table, fields alg3, algbig, algoh, front, notes |
 | cfop seeding | cfop_populate pll|oll|f2l | ct_cfop_populate deck creation |
-| scheduling setup | due deck key yyyy-mm-dd | seeds an srs_state row so the card enters the due queue |
+| scheduling setup | due deck key yyyy-mm-dd, due_in deck key days | seeds an srs_state row so the card enters the due queue, due_in relative to today |
+| review history seed | reviewed deck key grade yyyy-mm-dd stability elapsed | writes a review_log row so stats and retention curves have history |
 | review screen | review_begin, review_reveal, wait n, review_grade again|hard|good|easy, review_end | ct_review_form sessions against the real clock, wait advances the playback anim n fixed ticks |
 | settings screen | settings_open, settings_retention v, settings_move F on|off, settings_save | ct_settings_form staging and its transactional save |
 | trainer path | trainer_list event method n, trainer_case i, trainer_generate, trainer_save deck | selector lists, ct_synth_target plus classify, score, and the generated_alg cache, then a pre-filled flashcard |
@@ -298,6 +366,7 @@ E2E: make e2e runs every tests/e2e/*.txt through cubing-trainer.exe --headless -
 | expect cfg | expect cfg key op value | merged app config after restart, keys srs.request_retention, anim.move_seconds, gen.preferred_moves as letters |
 | expect genalg | expect genalg pair field op value | cached row for the live params hash, fields sequence, setup, interchange, insertion, classification, qtm, score |
 | expect algcount | expect algcount op n | generated_alg rows under the live params hash |
+| screenshots | shot_menu p, shot_trainer event method list pick p, shot_chart event method list cell p, shot_review hidden\|revealed p, shot_cards browse\|edit deck p, shot_settings general\|letters\|bld p, shot_stats p | renders the real screen state offscreen at 1280x720 and exports p, pick -1 leaves the trainer case unselected |
 
 Exit codes separate failure classes: 2 usage, 3 unreadable script, 4 parse error, 5 action failure, 6 failed expect, all naming the offending line on stderr. The parser, the injection runner, and the data-dir override are unit covered in tests/unit_e2e_script.c against in-memory databases, including a full restart merge and the pinned BC corner generation, while the case files verify through the real exe. The data directory resolves from CT_DATA_DIR first and %LOCALAPPDATA% second, read at runtime, which is the seam the e2e sandbox and the release smoke test share.
 
