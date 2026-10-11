@@ -793,3 +793,14 @@ src/storage/repo_settings.c:281	seed position loop bound and start mutants seed 
 src/storage/repo_settings.c:283	seed letter text array size mutants are equivalent, the bind copies exactly one byte so the zero padded extra cell is never read
 src/storage/repo_settings.c:288	seed letter bind length widening to two also binds the string terminator, sqlite stores the same single character text value
 src/storage/repo_settings.c:302	seed rollback guard flip runs a rollback after the commit on the success path, a no-op over the pinned healthy database
+src/packs/provenance.c:19	prime flag is consumed only as a boolean by the return test, any nonzero value is equivalent
+src/packs/provenance.c:36	bisection lower init never decides the root: every derived root of a prime shifted by the sqrt or cube shift is at least 1, and the minus one init converges through one extra midpoint to the same fixed point, pinned by the nist digest vectors
+src/packs/provenance.c:41	acceptance boundary differs only at an exact perfect square or cube hit: p times 2 to the shift carries prime exponent 1 for p, never a perfect power, so no reachable target distinguishes the strict comparison
+src/packs/provenance.c:59	cube flag is consumed only as a boolean by the shift and power selectors, any nonzero value is equivalent
+src/packs/provenance.c:61	ready flag mutants are idempotent: nonzero behaves as ready, and zero reruns the pure derive loops producing identical constants on every call, the nist digest vectors are unchanged
+src/packs/provenance.c:87	word loader init is shifted out of the 32 bit result by the four load iterations, any init value yields the same word
+src/packs/provenance.c:88	loop start minus one loads one byte before the block whose contribution is shifted past the 32 bit word by the remaining iterations, the loaded word is identical
+src/packs/provenance.c:97	first loop bound widening writes one slot past the block words that the message schedule overwrites at its first iteration, the round words are unchanged
+src/packs/provenance.c:139	null data arm mutants are unreachable over the pinned surface: every caller hashes a real buffer, and the length rewrite only feeds that arm
+src/packs/provenance.c:159	bit length loop start skips the top byte which is zero for every reachable message length under 2 to the 53 bytes, the pinned vectors including the 1000 byte pattern leave it zero
+src/packs/provenance.c:175	null out disjunct is unreachable: no pinned caller passes a null out, and the cap zero arm stores nothing either way since snprintf with size zero performs no store

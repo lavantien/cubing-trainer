@@ -104,6 +104,9 @@ CT_SUITE(packs_source_record) {
     ct_pack_source_record(one, (unsigned)sizeof one, "u", "r", "a");
     CT_ASSERT_EQ(one[0], 'u');
     CT_ASSERT_EQ(one[1], '\0');
+    char cap1[1] = {'Z'};
+    ct_pack_source_record(cap1, 1, "u", "r", "a");
+    CT_ASSERT_EQ(cap1[0], '\0');
 }
 
 CT_SUITE(packs_content_hash) {
