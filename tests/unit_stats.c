@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -317,6 +318,151 @@ CT_SUITE(stats_agg_heatmap) {
     CT_ASSERT_EQ(sorder[0], 0);
     CT_ASSERT_EQ(sorder[1], 1);
     CT_ASSERT_EQ(sorder[2], 2);
+}
+
+CT_SUITE(stats_agg_boundaries) {
+    ct_config cfg = ct_config_defaults();
+    ct_fsrs f;
+    ct_fsrs_init(&f, &cfg);
+    ct_review_row rows[2];
+    rows[0] = review_at(1.0, 0.0, CT_GOOD);
+    rows[1] = review_at(1.0, 1.0, CT_GOOD);
+
+    struct {
+        unsigned char pad_lo[64];
+        ct_retention_bucket b[2];
+        unsigned char pad_hi[64];
+    } box;
+    memset(&box, 0x01, sizeof box);
+    CT_ASSERT_EQ(ct_stats_retention(rows, 2, &f, box.b, 2), 2);
+    for (int i = 0; i < 64; i++) {
+        CT_ASSERT_EQ(box.pad_lo[i], 0x01);
+        CT_ASSERT_EQ(box.pad_hi[i], 0x01);
+    }
+
+    memset(&box, 0x01, sizeof box);
+    CT_ASSERT_EQ(ct_stats_retention(rows, 1, &f, box.b, -1), -1);
+    for (int i = 0; i < 64; i++) {
+        CT_ASSERT_EQ(box.pad_lo[i], 0x01);
+        CT_ASSERT_EQ(box.pad_hi[i], 0x01);
+    }
+
+    CT_ASSERT_EQ(ct_stats_retention(NULL, 1, &f, box.b, 2), -1);
+    CT_ASSERT_EQ(ct_stats_retention(rows, 2, &f, NULL, 1), -1);
+
+    ct_retention_bucket one = {0.25, 3, 1, 0.4};
+    ct_retention_summary s1 = ct_stats_retention_summary(&one, 1);
+    CT_ASSERT_DBL_EQ(s1.total_reviews, 3.0, 1e-12);
+    CT_ASSERT_DBL_EQ(s1.total_correct, 1.0, 1e-12);
+    CT_ASSERT_DBL_EQ(s1.weighted_error, fabs(0.4 - 1.0 / 3.0), 1e-9);
+    CT_ASSERT_DBL_EQ(s1.max_abs_error, fabs(0.4 - 1.0 / 3.0), 1e-9);
+    CT_ASSERT_EQ(s1.worst_bucket, 0);
+
+    struct {
+        ct_retention_bucket pad_lo;
+        ct_retention_bucket hand[2];
+        ct_retention_bucket pad;
+    } sbox;
+    sbox.pad_lo = (ct_retention_bucket){0.5, 7, 3, 0.5};
+    sbox.hand[0] = (ct_retention_bucket){0.25, 3, 1, 0.4};
+    sbox.hand[1] = (ct_retention_bucket){0.75, 1, 1, 0.9};
+    sbox.pad = (ct_retention_bucket){0.5, 7, 3, 0.5};
+    ct_retention_summary s2 = ct_stats_retention_summary(sbox.hand, 2);
+    CT_ASSERT_DBL_EQ(s2.total_reviews, 4.0, 1e-12);
+    CT_ASSERT_DBL_EQ(s2.total_correct, 2.0, 1e-12);
+    CT_ASSERT_DBL_EQ(s2.weighted_error, 0.3 / 4.0, 1e-9);
+    CT_ASSERT_DBL_EQ(s2.max_abs_error, 0.1, 1e-9);
+    CT_ASSERT_EQ(s2.worst_bucket, 1);
+
+    double a2[2] = {1.0, 2.0};
+    double b2[2] = {3.0, 6.0};
+    double d2[2] = {6.0, 3.0};
+    CT_ASSERT_DBL_EQ(ct_stats_correlation(a2, b2, 2), 1.0, 1e-12);
+    CT_ASSERT_DBL_EQ(ct_stats_correlation(a2, d2, 2), -1.0, 1e-12);
+
+    struct {
+        ct_due_forecast_row pad_lo;
+        ct_due_forecast_row fc[2];
+        ct_due_forecast_row pad;
+    } fbox;
+    memset(&fbox, 0, sizeof fbox);
+    fbox.pad_lo.due_count = 99;
+    fbox.fc[0].due_count = 5;
+    fbox.fc[1].due_count = 3;
+    fbox.pad.due_count = 99;
+    CT_ASSERT_EQ(ct_stats_forecast_total(fbox.fc, 2), 8);
+    CT_ASSERT_DBL_EQ(ct_stats_forecast_peak_day_ratio(fbox.fc, 2), 1.25, 1e-12);
+
+    ct_case_accuracy_row heat[7];
+    heat[0] = acc_row("mb", CT_DIR_FR, 0.9);
+    heat[1] = acc_row("aa", CT_DIR_FR, 0.5);
+    heat[2] = acc_row("ab", CT_DIR_FR, 0.5);
+    heat[3] = acc_row("zz", CT_DIR_FR, 0.1);
+    heat[4] = acc_row("ma", CT_DIR_FR, 0.9);
+    heat[5] = acc_row("k1", CT_DIR_FL, 0.5);
+    heat[6] = acc_row("k1", CT_DIR_FR, 0.5);
+
+    int order[8];
+    memset(order, 0x77, sizeof order);
+    CT_ASSERT_EQ(ct_stats_heatmap_rank(heat, 1, order, 7), 1);
+    CT_ASSERT_EQ(order[0], 0);
+    CT_ASSERT_EQ(order[1], 0x77777777);
+
+    CT_ASSERT_EQ(ct_stats_heatmap_rank(NULL, 1, order, 7), -1);
+    CT_ASSERT_EQ(ct_stats_heatmap_rank(heat, 7, NULL, 1), -1);
+
+    ct_case_accuracy_row pair[2];
+    pair[0] = acc_row("a", CT_DIR_FR, 0.1);
+    pair[1] = acc_row("b", CT_DIR_FR, 0.9);
+    int pair_order[2];
+    memset(pair_order, 0x77, sizeof pair_order);
+    CT_ASSERT_EQ(ct_stats_heatmap_rank(pair, 2, pair_order, 2), 2);
+    CT_ASSERT_EQ(pair_order[0], 0);
+    CT_ASSERT_EQ(pair_order[1], 1);
+
+    ct_case_accuracy_row skip[5];
+    skip[0] = acc_row("a", CT_DIR_FR, 0.9);
+    skip[1] = acc_row("b", CT_DIR_FR, 0.5);
+    skip[2] = acc_row("c", CT_DIR_FR, 0.3);
+    skip[3] = acc_row("d", CT_DIR_FR, 0.95);
+    skip[4] = acc_row("e", CT_DIR_FR, 0.6);
+    int skip_order[5];
+    CT_ASSERT_EQ(ct_stats_heatmap_rank(skip, 5, skip_order, 3), 3);
+    CT_ASSERT_EQ(skip_order[0], 2);
+    CT_ASSERT_EQ(skip_order[1], 1);
+    CT_ASSERT_EQ(skip_order[2], 4);
+
+    ct_case_accuracy_row skip_last[4];
+    skip_last[0] = acc_row("a", CT_DIR_FR, 0.9);
+    skip_last[1] = acc_row("b", CT_DIR_FR, 0.5);
+    skip_last[2] = acc_row("c", CT_DIR_FR, 0.3);
+    skip_last[3] = acc_row("d", CT_DIR_FR, 0.95);
+    int last_order[4];
+    CT_ASSERT_EQ(ct_stats_heatmap_rank(skip_last, 4, last_order, 3), 3);
+    CT_ASSERT_EQ(last_order[0], 2);
+    CT_ASSERT_EQ(last_order[1], 1);
+    CT_ASSERT_EQ(last_order[2], 0);
+
+    struct {
+        int pad_lo[2];
+        ct_case_accuracy_row rows[4];
+        int order[3];
+        int pad[2];
+    } hbox;
+    hbox.pad_lo[0] = 0x77;
+    hbox.pad_lo[1] = 0x77;
+    hbox.rows[0] = acc_row("a", CT_DIR_FR, 0.9);
+    hbox.rows[1] = acc_row("b", CT_DIR_FR, 0.5);
+    hbox.rows[2] = acc_row("c", CT_DIR_FR, 0.3);
+    hbox.rows[3] = acc_row("e", CT_DIR_FR, 0.6);
+    hbox.pad[0] = 0x77;
+    hbox.pad[1] = 0x77;
+    CT_ASSERT_EQ(ct_stats_heatmap_rank(hbox.rows, 4, hbox.order, 3), 3);
+    CT_ASSERT_EQ(hbox.order[0], 2);
+    CT_ASSERT_EQ(hbox.order[1], 1);
+    CT_ASSERT_EQ(hbox.order[2], 3);
+    CT_ASSERT_EQ(hbox.pad[0], 0x77);
+    CT_ASSERT_EQ(hbox.pad[1], 0x77);
 }
 
 CT_SUITE(stats_agg_malformed) {

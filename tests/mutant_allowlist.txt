@@ -1476,3 +1476,14 @@ src/trainer/cfop.c:150	reject return value, callers test the sign only, any nega
 src/trainer/cfop.c:154	populate deck copy length slack, the destination is zero filled first and the terminator lands from that fill
 src/trainer/cfop.c:155	populate key copy length slack, the destination is zero filled first and the terminator lands from that fill
 src/trainer/cfop.c:164	populate insert failure branch unreachable, insert returns only ok or conflict on the migrated schema
+src/stats/stats.c:8	tie arm comparison sits behind the accuracy inequality guard, both operators agree on every value that reaches it
+src/stats/stats.c:30	retention lower clamp boundary is idempotent at zero, retrievability never goes negative or nan
+src/stats/stats.c:33	retention upper clamp boundary is idempotent at one
+src/stats/stats.c:47	divide guard one weakening skips only single review buckets where dividing by one is an identity
+src/stats/stats.c:56	summary zero count weakening returns the same zeroed summary the early return builds
+src/stats/stats.c:88	correlation count weakenings collapse, a one point input returns zero through the zero variance path either way
+src/stats/stats.c:116	forecast total zero count weakening returns the same zero, the loop adds nothing
+src/stats/stats.c:127	peak ratio zero count weakening returns the same zero through the zero total path
+src/stats/stats.c:131	peak seed variants never change the ratio, equal maxima collapse to the same value
+src/stats/stats.c:134	equal peak update is an identity
+src/stats/stats.c:148	rank clamp boundary weakening maps count equal to cap to the same n
