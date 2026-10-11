@@ -1,0 +1,248 @@
+mkdir -p build_eslice/bin
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic tools/mutate.c -o build_eslice/bin/mutate.exe
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/test_main.c -o build_eslice/tobj/tests/test_main.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/framework.c -o build_eslice/tobj/tests/framework.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_algs.c -o build_eslice/tobj/tests/unit_algs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_anim.c -o build_eslice/tobj/tests/unit_anim.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_app_loop.c -o build_eslice/tobj/tests/unit_app_loop.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_app_paths.c -o build_eslice/tobj/tests/unit_app_paths.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cards.c -o build_eslice/tobj/tests/unit_cards.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cards_form.c -o build_eslice/tobj/tests/unit_cards_form.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cfop.c -o build_eslice/tobj/tests/unit_cfop.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_classify.c -o build_eslice/tobj/tests/unit_classify.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_config.c -o build_eslice/tobj/tests/unit_config.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cube.c -o build_eslice/tobj/tests/unit_cube.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_db.c -o build_eslice/tobj/tests/unit_db.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_e2e_script.c -o build_eslice/tobj/tests/unit_e2e_script.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_fsrs.c -o build_eslice/tobj/tests/unit_fsrs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_geometry.c -o build_eslice/tobj/tests/unit_geometry.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_geometry_clock.c -o build_eslice/tobj/tests/unit_geometry_clock.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_geometry_sq1.c -o build_eslice/tobj/tests/unit_geometry_sq1.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_headless.c -o build_eslice/tobj/tests/unit_headless.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_interchange.c -o build_eslice/tobj/tests/unit_interchange.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_letter_scheme.c -o build_eslice/tobj/tests/unit_letter_scheme.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_notation.c -o build_eslice/tobj/tests/unit_notation.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_pack_seeds.c -o build_eslice/tobj/tests/unit_pack_seeds.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_pack_seeds2.c -o build_eslice/tobj/tests/unit_pack_seeds2.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_pack_startup.c -o build_eslice/tobj/tests/unit_pack_startup.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_packs.c -o build_eslice/tobj/tests/unit_packs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_renderer.c -o build_eslice/tobj/tests/unit_renderer.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_review_form.c -o build_eslice/tobj/tests/unit_review_form.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_score.c -o build_eslice/tobj/tests/unit_score.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_selector.c -o build_eslice/tobj/tests/unit_selector.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_selector_packs.c -o build_eslice/tobj/tests/unit_selector_packs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_selector_screen.c -o build_eslice/tobj/tests/unit_selector_screen.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_session.c -o build_eslice/tobj/tests/unit_session.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_settings_form.c -o build_eslice/tobj/tests/unit_settings_form.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_settings_merge.c -o build_eslice/tobj/tests/unit_settings_merge.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_shots.c -o build_eslice/tobj/tests/unit_shots.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_smoke.c -o build_eslice/tobj/tests/unit_smoke.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_stats.c -o build_eslice/tobj/tests/unit_stats.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_stats_repo.c -o build_eslice/tobj/tests/unit_stats_repo.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_stats_screen.c -o build_eslice/tobj/tests/unit_stats_screen.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_synth.c -o build_eslice/tobj/tests/unit_synth.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_targets.c -o build_eslice/tobj/tests/unit_targets.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_transform.c -o build_eslice/tobj/tests/unit_transform.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_config.c -o build_eslice/tobj/tests/fuzz_config.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_db.c -o build_eslice/tobj/tests/fuzz_db.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_engine.c -o build_eslice/tobj/tests/fuzz_engine.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_main.c -o build_eslice/tobj/tests/fuzz_main.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_script.c -o build_eslice/tobj/tests/fuzz_script.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/fuzz_srs.c -o build_eslice/tobj/tests/fuzz_srs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/app_loop.c -o build_eslice/tobj/src/app/app_loop.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/headless.c -o build_eslice/tobj/src/app/headless.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/paths.c -o build_eslice/tobj/src/app/paths.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/script.c -o build_eslice/tobj/src/app/script.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/script_expect.c -o build_eslice/tobj/src/app/script_expect.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/script_shots.c -o build_eslice/tobj/src/app/script_shots.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/shots.c -o build_eslice/tobj/src/app/shots.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/config/config.c -o build_eslice/tobj/src/config/config.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/cube.c -o build_eslice/tobj/src/engine/cube.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/geometry.c -o build_eslice/tobj/src/engine/geometry.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/geometry_clock.c -o build_eslice/tobj/src/engine/geometry_clock.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/geometry_sq1.c -o build_eslice/tobj/src/engine/geometry_sq1.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/notation.c -o build_eslice/tobj/src/engine/notation.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/engine/transform.c -o build_eslice/tobj/src/engine/transform.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/classify.c -o build_eslice/tobj/src/gen/classify.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/interchange.c -o build_eslice/tobj/src/gen/interchange.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/score.c -o build_eslice/tobj/src/gen/score.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/synth.c -o build_eslice/tobj/src/gen/synth.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/gen/targets.c -o build_eslice/tobj/src/gen/targets.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/packs/packs.c -o build_eslice/tobj/src/packs/packs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/packs/provenance.c -o build_eslice/tobj/src/packs/provenance.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/packs/seed_registry.c -o build_eslice/tobj/src/packs/seed_registry.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/render/anim.c -o build_eslice/tobj/src/render/anim.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/render/renderer.c -o build_eslice/tobj/src/render/renderer.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/srs/fsrs.c -o build_eslice/tobj/src/srs/fsrs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/stats/stats.c -o build_eslice/tobj/src/stats/stats.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/db.c -o build_eslice/tobj/src/storage/db.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/migrate.c -o build_eslice/tobj/src/storage/migrate.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_algs.c -o build_eslice/tobj/src/storage/repo_algs.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_cards.c -o build_eslice/tobj/src/storage/repo_cards.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_reviews.c -o build_eslice/tobj/src/storage/repo_reviews.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_settings.c -o build_eslice/tobj/src/storage/repo_settings.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/storage/repo_stats.c -o build_eslice/tobj/src/storage/repo_stats.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/trainer/cfop.c -o build_eslice/tobj/src/trainer/cfop.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/trainer/selector.c -o build_eslice/tobj/src/trainer/selector.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/trainer/session.c -o build_eslice/tobj/src/trainer/session.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_cards.c -o build_eslice/tobj/src/ui/screen_cards.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_menu.c -o build_eslice/tobj/src/ui/screen_menu.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_review.c -o build_eslice/tobj/src/ui/screen_review.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_settings.c -o build_eslice/tobj/src/ui/screen_settings.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_stats.c -o build_eslice/tobj/src/ui/screen_stats.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_trainer.c -o build_eslice/tobj/src/ui/screen_trainer.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/widgets.c -o build_eslice/tobj/src/ui/widgets.o
+echo '#define RAYGUI_IMPLEMENTATION' > build_eslice/raygui_impl.c
+echo '#include "raygui.h"' >> build_eslice/raygui_impl.c
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -MMD -MP -Ithird_party/raylib/src -Ithird_party/raygui/src -Wno-error -c build_eslice/raygui_impl.c -o build_eslice/obj/raygui_impl.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/raudio.c -o build_eslice/obj/third_party/raylib/src/raudio.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rcore.c -o build_eslice/obj/third_party/raylib/src/rcore.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rglfw.c -o build_eslice/obj/third_party/raylib/src/rglfw.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rmodels.c -o build_eslice/obj/third_party/raylib/src/rmodels.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rshapes.c -o build_eslice/obj/third_party/raylib/src/rshapes.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rtext.c -o build_eslice/obj/third_party/raylib/src/rtext.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GNU_SOURCE -DUNICODE -fno-strict-aliasing -Wno-missing-braces -Wno-error -Ithird_party/raylib/src -Ithird_party/raylib/src/external/glfw/include -MMD -MP -c third_party/raylib/src/rtextures.c -o build_eslice/obj/third_party/raylib/src/rtextures.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -Ithird_party/sqlite -Wno-error -MMD -MP -c third_party/sqlite/sqlite3.c -o build_eslice/obj/third_party/sqlite/sqlite3.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_eslice/bin/mutate.exe src/gen/score.c build_eslice score_qtm score_subset score_subset_edge score_finger score_regrips score_total score_json score_errors
+mutate: scope=src/gen/score.c files=1 sites=113 suites=8
+KILLED    m0001 src/gen/score.c:23 [arith * -> /]
+          build break
+KILLED    m0002 src/gen/score.c:24 [cmp < -> <=]
+KILLED    m0003 src/gen/score.c:24 [int+1 0 -> 1]
+KILLED    m0004 src/gen/score.c:24 [int-1 0 -> -1]
+KILLED    m0005 src/gen/score.c:24 [logic || -> &&]
+KILLED    m0006 src/gen/score.c:24 [cmp == -> !=]
+KILLED    m0007 src/gen/score.c:24 [logic && -> ||]
+KILLED    m0008 src/gen/score.c:24 [cmp > -> >=]
+KILLED    m0009 src/gen/score.c:24 [int+1 0 -> 1]
+KILLED    m0010 src/gen/score.c:24 [int-1 0 -> -1]
+KILLED    m0011 src/gen/score.c:27 [int+1 0 -> 1]
+KILLED    m0012 src/gen/score.c:27 [int-1 0 -> -1]
+KILLED    m0013 src/gen/score.c:27 [cmp < -> <=]
+KILLED    m0014 src/gen/score.c:28 [cmp < -> <=]
+KILLED    m0015 src/gen/score.c:28 [int+1 0 -> 1]
+KILLED    m0016 src/gen/score.c:28 [int-1 0 -> -1]
+KILLED    m0017 src/gen/score.c:28 [logic || -> &&]
+KILLED    m0018 src/gen/score.c:28 [cmp >= -> >]
+KILLED    m0019 src/gen/score.c:31 [cmp < -> <=]
+KILLED    m0020 src/gen/score.c:31 [logic || -> &&]
+KILLED    m0021 src/gen/score.c:31 [cmp > -> >=]
+KILLED    m0022 src/gen/score.c:39 [int+1 0 -> 1]
+KILLED    m0023 src/gen/score.c:39 [int-1 0 -> -1]
+SURVIVED  m0024 src/gen/score.c:39 [cmp < -> <=]
+KILLED    m0025 src/gen/score.c:40 [int+1 1u -> 2u]
+KILLED    m0026 src/gen/score.c:40 [int-1 1u -> 0u]
+KILLED    m0027 src/gen/score.c:40 [cmp == -> !=]
+SURVIVED  m0028 src/gen/score.c:44 [arith - -> +]
+SURVIVED  m0029 src/gen/score.c:44 [int+1 1 -> 2]
+SURVIVED  m0030 src/gen/score.c:44 [int-1 1 -> 0]
+KILLED    m0031 src/gen/score.c:47 [arith * -> /]
+          build break
+KILLED    m0032 src/gen/score.c:49 [cmp != -> ==]
+KILLED    m0033 src/gen/score.c:49 [logic || -> &&]
+          build break
+KILLED    m0034 src/gen/score.c:49 [cmp != -> ==]
+KILLED    m0035 src/gen/score.c:49 [logic || -> &&]
+          build break
+KILLED    m0036 src/gen/score.c:50 [cmp != -> ==]
+KILLED    m0037 src/gen/score.c:65 [arith * -> /]
+          build break
+KILLED    m0038 src/gen/score.c:67 [cmp != -> ==]
+KILLED    m0039 src/gen/score.c:70 [int+1 0 -> 1]
+KILLED    m0040 src/gen/score.c:70 [int-1 0 -> -1]
+KILLED    m0041 src/gen/score.c:71 [int+1 0 -> 1]
+KILLED    m0042 src/gen/score.c:71 [int-1 0 -> -1]
+KILLED    m0043 src/gen/score.c:71 [cmp < -> <=]
+KILLED    m0044 src/gen/score.c:72 [cmp == -> !=]
+KILLED    m0045 src/gen/score.c:74 [cmp == -> !=]
+KILLED    m0046 src/gen/score.c:74 [logic || -> &&]
+KILLED    m0047 src/gen/score.c:75 [cmp == -> !=]
+KILLED    m0048 src/gen/score.c:76 [int+1 1 -> 2]
+KILLED    m0049 src/gen/score.c:76 [int-1 1 -> 0]
+KILLED    m0050 src/gen/score.c:82 [arith * -> /]
+          build break
+KILLED    m0051 src/gen/score.c:84 [cmp != -> ==]
+KILLED    m0052 src/gen/score.c:90 [int+1 0 -> 1]
+KILLED    m0053 src/gen/score.c:90 [int-1 0 -> -1]
+KILLED    m0054 src/gen/score.c:91 [int+1 0 -> 1]
+KILLED    m0055 src/gen/score.c:91 [int-1 0 -> -1]
+KILLED    m0056 src/gen/score.c:91 [cmp < -> <=]
+KILLED    m0057 src/gen/score.c:92 [cmp == -> !=]
+KILLED    m0058 src/gen/score.c:97 [cmp == -> !=]
+KILLED    m0059 src/gen/score.c:102 [cmp != -> ==]
+KILLED    m0060 src/gen/score.c:103 [int+1 1 -> 2]
+KILLED    m0061 src/gen/score.c:103 [int-1 1 -> 0]
+KILLED    m0062 src/gen/score.c:105 [cmp == -> !=]
+KILLED    m0063 src/gen/score.c:111 [arith * -> /]
+          build break
+KILLED    m0064 src/gen/score.c:111 [arith * -> /]
+          build break
+KILLED    m0065 src/gen/score.c:112 [arith * -> /]
+          build break
+KILLED    m0066 src/gen/score.c:113 [cmp == -> !=]
+KILLED    m0067 src/gen/score.c:113 [logic || -> &&]
+KILLED    m0068 src/gen/score.c:113 [cmp == -> !=]
+KILLED    m0069 src/gen/score.c:117 [cmp != -> ==]
+KILLED    m0070 src/gen/score.c:121 [cmp == -> !=]
+KILLED    m0071 src/gen/score.c:122 [int+1 0 -> 1]
+KILLED    m0072 src/gen/score.c:122 [int-1 0 -> -1]
+KILLED    m0073 src/gen/score.c:125 [int+1 0 -> 1]
+KILLED    m0074 src/gen/score.c:125 [int-1 0 -> -1]
+KILLED    m0075 src/gen/score.c:125 [cmp < -> <=]
+KILLED    m0076 src/gen/score.c:129 [cmp == -> !=]
+KILLED    m0077 src/gen/score.c:131 [cmp == -> !=]
+KILLED    m0078 src/gen/score.c:131 [logic || -> &&]
+          build break
+KILLED    m0079 src/gen/score.c:131 [cmp == -> !=]
+KILLED    m0080 src/gen/score.c:132 [int+1 1 -> 2]
+KILLED    m0081 src/gen/score.c:132 [int-1 1 -> 0]
+KILLED    m0082 src/gen/score.c:135 [cmp == -> !=]
+KILLED    m0083 src/gen/score.c:135 [int+1 0 -> 1]
+KILLED    m0084 src/gen/score.c:135 [int-1 0 -> -1]
+          build break
+KILLED    m0085 src/gen/score.c:138 [cmp == -> !=]
+KILLED    m0086 src/gen/score.c:145 [arith * -> /]
+KILLED    m0087 src/gen/score.c:145 [arith + -> -]
+KILLED    m0088 src/gen/score.c:145 [arith * -> /]
+KILLED    m0089 src/gen/score.c:145 [arith + -> -]
+KILLED    m0090 src/gen/score.c:146 [arith * -> /]
+KILLED    m0091 src/gen/score.c:146 [arith + -> -]
+KILLED    m0092 src/gen/score.c:146 [arith * -> /]
+KILLED    m0093 src/gen/score.c:150 [arith * -> /]
+          build break
+KILLED    m0094 src/gen/score.c:150 [arith * -> /]
+          build break
+KILLED    m0095 src/gen/score.c:151 [cmp == -> !=]
+KILLED    m0096 src/gen/score.c:151 [logic || -> &&]
+          build break
+KILLED    m0097 src/gen/score.c:151 [cmp == -> !=]
+KILLED    m0098 src/gen/score.c:151 [logic || -> &&]
+          build break
+KILLED    m0099 src/gen/score.c:151 [cmp == -> !=]
+KILLED    m0100 src/gen/score.c:151 [int+1 0 -> 1]
+KILLED    m0101 src/gen/score.c:151 [int-1 0 -> -1]
+          build break
+KILLED    m0102 src/gen/score.c:154 [not-del ! -> (deleted)]
+KILLED    m0103 src/gen/score.c:154 [logic || -> &&]
+          build break
+KILLED    m0104 src/gen/score.c:154 [not-del ! -> (deleted)]
+KILLED    m0105 src/gen/score.c:154 [logic || -> &&]
+          build break
+KILLED    m0106 src/gen/score.c:154 [not-del ! -> (deleted)]
+KILLED    m0107 src/gen/score.c:160 [int+1 0 -> 1]
+KILLED    m0108 src/gen/score.c:160 [int-1 0 -> -1]
+SURVIVED  m0109 src/gen/score.c:161 [cmp < -> <=]
+SURVIVED  m0110 src/gen/score.c:161 [int+1 0 -> 1]
+SURVIVED  m0111 src/gen/score.c:161 [int-1 0 -> -1]
+KILLED    m0112 src/gen/score.c:161 [logic || -> &&]
+KILLED    m0113 src/gen/score.c:161 [cmp >= -> >]
+ACCEPTED  m0024 src/gen/score.c:39 [cmp < -> <=] :: face bit loop bound mutant is equivalent: faces are validated to 0 to 5 before the call, so the extra iteration tests bit 1<<6 against a bit that is always one of bits 0 to 5 and never matches
+ACCEPTED  m0028 src/gen/score.c:44 [arith - -> +] :: face bit not-found return mutants are equivalent: every caller passes score_face_bits of a validated face, and 1<<i for i 0 to 5 covers all six bits, so the not-found return path is unreachable
+ACCEPTED  m0029 src/gen/score.c:44 [int+1 1 -> 2] :: face bit not-found return mutants are equivalent: every caller passes score_face_bits of a validated face, and 1<<i for i 0 to 5 covers all six bits, so the not-found return path is unreachable
+ACCEPTED  m0030 src/gen/score.c:44 [int-1 1 -> 0] :: face bit not-found return mutants are equivalent: every caller passes score_face_bits of a validated face, and 1<<i for i 0 to 5 covers all six bits, so the not-found return path is unreachable
+mutate: generated=113 build_failed=18 killed_by_tests=88 killed=106 survived=7 accepted=4 unexplained=3 skipped=0
+mutate: kill rate 106/113 = 93.8%, with accepted equivalents 110/113 = 97.3%
+mutate: wall 79.3s
+EXIT=2

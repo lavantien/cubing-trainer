@@ -1,0 +1,36 @@
+for suite in fuzz_notation_random_tokens fuzz_notation_garbage fuzz_notation_random_algs fuzz_transform_inverse fuzz_transform_simplify fuzz_transform_rotate_y fuzz_cube_invariants fuzz_cube_mirror fuzz_srs_walk fuzz_srs_elapsed fuzz_srs_grade_space fuzz_db_card_strings fuzz_db_review_rows fuzz_db_settings_keys fuzz_config_keys fuzz_config_moves fuzz_script_parse; do CT_FUZZ_LOOPS=10 build/bin/ct_tests.exe $suite || exit 1; done
+PASS fuzz_notation_random_tokens: pass=590856 fail=0 12ms
+total: pass=590856 fail=0 12ms
+PASS fuzz_notation_garbage: pass=100406 fail=0 27ms
+total: pass=100406 fail=0 27ms
+PASS fuzz_notation_random_algs: pass=2798735 fail=0 247ms
+total: pass=2798735 fail=0 247ms
+PASS fuzz_transform_inverse: pass=400001 fail=0 18145ms
+total: pass=400001 fail=0 18145ms
+PASS fuzz_transform_simplify: pass=800001 fail=0 19213ms
+total: pass=800001 fail=0 19213ms
+PASS fuzz_transform_rotate_y: pass=400001 fail=0 22626ms
+total: pass=400001 fail=0 22626ms
+PASS fuzz_cube_invariants: pass=4457145 fail=0 12953ms
+total: pass=4457145 fail=0 12953ms
+PASS fuzz_cube_mirror: pass=400001 fail=0 29056ms
+total: pass=400001 fail=0 29056ms
+PASS fuzz_srs_walk: pass=257768334 fail=0 3570ms
+total: pass=257768334 fail=0 3570ms
+PASS fuzz_srs_elapsed: pass=4073047 fail=0 46ms
+total: pass=4073047 fail=0 46ms
+PASS fuzz_srs_grade_space: pass=6062864 fail=0 91ms
+total: pass=6062864 fail=0 91ms
+PASS fuzz_db_card_strings: pass=33217 fail=0 6148ms
+total: pass=33217 fail=0 6148ms
+PASS fuzz_db_review_rows: pass=378465 fail=0 10417ms
+total: pass=378465 fail=0 10417ms
+PASS fuzz_db_settings_keys: pass=120001 fail=0 6816ms
+total: pass=120001 fail=0 6816ms
+PASS fuzz_config_keys: pass=355251 fail=0 60ms
+total: pass=355251 fail=0 60ms
+PASS fuzz_config_moves: pass=200001 fail=0 38ms
+total: pass=200001 fail=0 38ms
+PASS fuzz_script_parse: pass=300000 fail=0 5707ms
+total: pass=300000 fail=0 5707ms
+EXIT=0

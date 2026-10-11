@@ -1,0 +1,400 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_eslice/bin/mutate.exe src/config/config.c build_eslice config_constants config_enums config_face_helpers config_defaults config_set_roundtrip config_set_srs_weights config_set_errors config_preferred_moves config_finger_defaults config_finger_set config_domain_rejection config_gen_weights_negative config_gen_double_bounds config_clamping settings_form_moves settings_form_moves_format settings_merge_round_trip settings_merge_invalid_values settings_merge_unknown_keys settings_merge_guards settings_merge_rejected_count settings_merge_after_form_save settings_merge_overwrites_live_cfg alg_hash_deterministic alg_hash_mask_differs alg_hash_edge_mask_differs alg_hash_penalty_differs alg_hash_finger_differs alg_hash_format_pinned alg_hash_fail_closed_on_oversize alg_hash_canonical_boundary score_subset score_subset_edge score_finger score_total
+mutate: scope=src/config/config.c files=1 sites=304 suites=35
+KILLED    m0001 src/config/config.c:26 [arith * -> /]
+          build break
+KILLED    m0002 src/config/config.c:26 [arith * -> /]
+          build break
+KILLED    m0003 src/config/config.c:27 [cmp == -> !=]
+SURVIVED  m0004 src/config/config.c:27 [logic || -> &&]
+KILLED    m0005 src/config/config.c:27 [int+1 0 -> 1]
+KILLED    m0006 src/config/config.c:27 [int-1 0 -> -1]
+KILLED    m0007 src/config/config.c:27 [cmp == -> !=]
+SURVIVED  m0008 src/config/config.c:30 [int+1 0 -> 1]
+SURVIVED  m0009 src/config/config.c:30 [int-1 0 -> -1]
+KILLED    m0010 src/config/config.c:31 [arith * -> /]
+          build break
+KILLED    m0011 src/config/config.c:33 [cmp == -> !=]
+KILLED    m0012 src/config/config.c:33 [logic || -> &&]
+          build break
+KILLED    m0013 src/config/config.c:33 [int+1 0 -> 1]
+KILLED    m0014 src/config/config.c:33 [int-1 0 -> -1]
+KILLED    m0015 src/config/config.c:33 [cmp != -> ==]
+KILLED    m0016 src/config/config.c:33 [logic || -> &&]
+          build break
+KILLED    m0017 src/config/config.c:33 [cmp == -> !=]
+KILLED    m0018 src/config/config.c:33 [logic || -> &&]
+          build break
+KILLED    m0019 src/config/config.c:33 [not-del ! -> (deleted)]
+KILLED    m0020 src/config/config.c:36 [arith * -> /]
+          build break
+KILLED    m0021 src/config/config.c:40 [arith * -> /]
+          build break
+KILLED    m0022 src/config/config.c:40 [arith * -> /]
+          build break
+KILLED    m0023 src/config/config.c:41 [cmp == -> !=]
+SURVIVED  m0024 src/config/config.c:41 [logic || -> &&]
+KILLED    m0025 src/config/config.c:41 [int+1 0 -> 1]
+KILLED    m0026 src/config/config.c:41 [int-1 0 -> -1]
+KILLED    m0027 src/config/config.c:41 [cmp == -> !=]
+SURVIVED  m0028 src/config/config.c:44 [int+1 0 -> 1]
+SURVIVED  m0029 src/config/config.c:44 [int-1 0 -> -1]
+KILLED    m0030 src/config/config.c:45 [arith * -> /]
+          build break
+KILLED    m0031 src/config/config.c:46 [int+1 10 -> 11]
+KILLED    m0032 src/config/config.c:46 [int-1 10 -> 9]
+KILLED    m0033 src/config/config.c:47 [cmp == -> !=]
+KILLED    m0034 src/config/config.c:47 [logic || -> &&]
+          build break
+KILLED    m0035 src/config/config.c:47 [int+1 0 -> 1]
+KILLED    m0036 src/config/config.c:47 [int-1 0 -> -1]
+KILLED    m0037 src/config/config.c:47 [cmp != -> ==]
+KILLED    m0038 src/config/config.c:47 [logic || -> &&]
+          build break
+KILLED    m0039 src/config/config.c:47 [cmp == -> !=]
+KILLED    m0040 src/config/config.c:47 [logic || -> &&]
+          build break
+SURVIVED  m0041 src/config/config.c:47 [cmp < -> <=]
+KILLED    m0042 src/config/config.c:47 [logic || -> &&]
+          build break
+SURVIVED  m0043 src/config/config.c:47 [cmp > -> >=]
+KILLED    m0044 src/config/config.c:50 [arith * -> /]
+          build break
+KILLED    m0045 src/config/config.c:54 [arith * -> /]
+          build break
+KILLED    m0046 src/config/config.c:54 [arith * -> /]
+          build break
+KILLED    m0047 src/config/config.c:57 [cmp != -> ==]
+KILLED    m0048 src/config/config.c:60 [arith * -> /]
+          build break
+KILLED    m0049 src/config/config.c:64 [arith * -> /]
+          build break
+KILLED    m0050 src/config/config.c:64 [arith * -> /]
+          build break
+KILLED    m0051 src/config/config.c:66 [cmp != -> ==]
+KILLED    m0052 src/config/config.c:69 [arith * -> /]
+          build break
+SURVIVED  m0053 src/config/config.c:69 [cmp < -> <=]
+KILLED    m0054 src/config/config.c:70 [arith * -> /]
+          build break
+KILLED    m0055 src/config/config.c:75 [arith * -> /]
+          build break
+KILLED    m0056 src/config/config.c:75 [arith * -> /]
+          build break
+KILLED    m0057 src/config/config.c:77 [cmp != -> ==]
+KILLED    m0058 src/config/config.c:80 [arith * -> /]
+          build break
+SURVIVED  m0059 src/config/config.c:80 [cmp < -> <=]
+KILLED    m0060 src/config/config.c:81 [arith * -> /]
+          build break
+KILLED    m0061 src/config/config.c:83 [arith * -> /]
+          build break
+SURVIVED  m0062 src/config/config.c:83 [cmp > -> >=]
+KILLED    m0063 src/config/config.c:84 [arith * -> /]
+          build break
+KILLED    m0064 src/config/config.c:89 [arith * -> /]
+          build break
+KILLED    m0065 src/config/config.c:89 [arith * -> /]
+          build break
+KILLED    m0066 src/config/config.c:92 [cmp != -> ==]
+KILLED    m0067 src/config/config.c:95 [cmp < -> <=]
+KILLED    m0068 src/config/config.c:95 [logic || -> &&]
+KILLED    m0069 src/config/config.c:95 [cmp > -> >=]
+KILLED    m0070 src/config/config.c:98 [arith * -> /]
+          build break
+KILLED    m0071 src/config/config.c:102 [arith * -> /]
+          build break
+KILLED    m0072 src/config/config.c:102 [arith * -> /]
+          build break
+SURVIVED  m0073 src/config/config.c:103 [int+1 0 -> 1]
+SURVIVED  m0074 src/config/config.c:103 [int-1 0 -> -1]
+KILLED    m0075 src/config/config.c:105 [cmp != -> ==]
+KILLED    m0076 src/config/config.c:108 [arith * -> /]
+          build break
+SURVIVED  m0077 src/config/config.c:108 [cmp < -> <=]
+KILLED    m0078 src/config/config.c:112 [arith * -> /]
+          build break
+KILLED    m0079 src/config/config.c:112 [arith * -> /]
+          build break
+SURVIVED  m0080 src/config/config.c:113 [int+1 0 -> 1]
+SURVIVED  m0081 src/config/config.c:113 [int-1 0 -> -1]
+KILLED    m0082 src/config/config.c:115 [cmp != -> ==]
+KILLED    m0083 src/config/config.c:118 [cmp < -> <=]
+KILLED    m0084 src/config/config.c:121 [arith * -> /]
+          build break
+KILLED    m0085 src/config/config.c:127 [cmp != -> ==]
+KILLED    m0086 src/config/config.c:127 [int+1 0 -> 1]
+KILLED    m0087 src/config/config.c:127 [int-1 0 -> -1]
+          build break
+KILLED    m0088 src/config/config.c:131 [cmp != -> ==]
+KILLED    m0089 src/config/config.c:131 [int+1 0 -> 1]
+KILLED    m0090 src/config/config.c:131 [int-1 0 -> -1]
+          build break
+KILLED    m0091 src/config/config.c:138 [int+1 0 -> 1]
+KILLED    m0092 src/config/config.c:138 [int-1 0 -> -1]
+SURVIVED  m0093 src/config/config.c:138 [cmp < -> <=]
+KILLED    m0094 src/config/config.c:139 [int+1 1u -> 2u]
+KILLED    m0095 src/config/config.c:139 [int-1 1u -> 0u]
+KILLED    m0096 src/config/config.c:139 [cmp == -> !=]
+SURVIVED  m0097 src/config/config.c:143 [arith - -> +]
+SURVIVED  m0098 src/config/config.c:143 [int+1 1 -> 2]
+SURVIVED  m0099 src/config/config.c:143 [int-1 1 -> 0]
+KILLED    m0100 src/config/config.c:146 [arith * -> /]
+          build break
+KILLED    m0101 src/config/config.c:146 [arith * -> /]
+          build break
+KILLED    m0102 src/config/config.c:147 [int+1 0 -> 1]
+KILLED    m0103 src/config/config.c:147 [int-1 0 -> -1]
+KILLED    m0104 src/config/config.c:148 [arith * -> /]
+          build break
+KILLED    m0105 src/config/config.c:148 [arith * -> /]
+          build break
+KILLED    m0106 src/config/config.c:148 [cmp != -> ==]
+KILLED    m0107 src/config/config.c:149 [arith * -> /]
+          build break
+KILLED    m0108 src/config/config.c:150 [cmp == -> !=]
+KILLED    m0109 src/config/config.c:150 [int+1 0 -> 1]
+KILLED    m0110 src/config/config.c:150 [int-1 0 -> -1]
+          build break
+KILLED    m0111 src/config/config.c:150 [logic || -> &&]
+KILLED    m0112 src/config/config.c:150 [cmp != -> ==]
+KILLED    m0113 src/config/config.c:150 [int+1 0 -> 1]
+KILLED    m0114 src/config/config.c:150 [int-1 0 -> -1]
+KILLED    m0115 src/config/config.c:155 [cmp == -> !=]
+KILLED    m0116 src/config/config.c:155 [int+1 0 -> 1]
+KILLED    m0117 src/config/config.c:155 [int-1 0 -> -1]
+          build break
+KILLED    m0118 src/config/config.c:158 [arith * -> /]
+          build break
+SURVIVED  m0119 src/config/config.c:164 [int+1 0 -> 1]
+SURVIVED  m0120 src/config/config.c:164 [int-1 0 -> -1]
+SURVIVED  m0121 src/config/config.c:175 [int+1 0 -> 1]
+KILLED    m0122 src/config/config.c:175 [int-1 0 -> -1]
+KILLED    m0123 src/config/config.c:175 [cmp < -> <=]
+KILLED    m0124 src/config/config.c:176 [int+1 1u -> 2u]
+KILLED    m0125 src/config/config.c:176 [int-1 1u -> 0u]
+KILLED    m0126 src/config/config.c:201 [arith * -> /]
+          build break
+KILLED    m0127 src/config/config.c:201 [arith * -> /]
+          build break
+KILLED    m0128 src/config/config.c:201 [arith * -> /]
+          build break
+KILLED    m0129 src/config/config.c:202 [cmp == -> !=]
+KILLED    m0130 src/config/config.c:202 [logic || -> &&]
+          build break
+KILLED    m0131 src/config/config.c:202 [cmp == -> !=]
+KILLED    m0132 src/config/config.c:202 [logic || -> &&]
+          build break
+KILLED    m0133 src/config/config.c:202 [cmp == -> !=]
+KILLED    m0134 src/config/config.c:205 [cmp == -> !=]
+KILLED    m0135 src/config/config.c:205 [int+1 0 -> 1]
+KILLED    m0136 src/config/config.c:205 [int-1 0 -> -1]
+KILLED    m0137 src/config/config.c:209 [cmp == -> !=]
+KILLED    m0138 src/config/config.c:209 [int+1 0 -> 1]
+KILLED    m0139 src/config/config.c:209 [int-1 0 -> -1]
+KILLED    m0140 src/config/config.c:212 [arith - -> +]
+KILLED    m0141 src/config/config.c:212 [int+1 1 -> 2]
+KILLED    m0142 src/config/config.c:212 [int-1 1 -> 0]
+KILLED    m0143 src/config/config.c:212 [cmp == -> !=]
+KILLED    m0144 src/config/config.c:212 [int+1 0 -> 1]
+KILLED    m0145 src/config/config.c:212 [int-1 0 -> -1]
+KILLED    m0146 src/config/config.c:213 [arith * -> /]
+          build break
+KILLED    m0147 src/config/config.c:213 [arith + -> -]
+KILLED    m0148 src/config/config.c:213 [arith - -> +]
+KILLED    m0149 src/config/config.c:213 [int+1 1 -> 2]
+KILLED    m0150 src/config/config.c:213 [int-1 1 -> 0]
+KILLED    m0151 src/config/config.c:214 [int+1 0 -> 1]
+KILLED    m0152 src/config/config.c:214 [int-1 0 -> -1]
+KILLED    m0153 src/config/config.c:214 [cmp == -> !=]
+KILLED    m0154 src/config/config.c:217 [arith * -> /]
+          build break
+KILLED    m0155 src/config/config.c:217 [arith * -> /]
+          build break
+KILLED    m0156 src/config/config.c:217 [cmp != -> ==]
+KILLED    m0157 src/config/config.c:218 [arith * -> /]
+          build break
+KILLED    m0158 src/config/config.c:218 [cmp < -> <=]
+KILLED    m0159 src/config/config.c:218 [logic || -> &&]
+KILLED    m0160 src/config/config.c:218 [arith * -> /]
+          build break
+KILLED    m0161 src/config/config.c:218 [cmp > -> >=]
+KILLED    m0162 src/config/config.c:222 [int+1 0 -> 1]
+KILLED    m0163 src/config/config.c:222 [int-1 0 -> -1]
+KILLED    m0164 src/config/config.c:222 [cmp == -> !=]
+KILLED    m0165 src/config/config.c:222 [logic && -> ||]
+KILLED    m0166 src/config/config.c:222 [int+1 1 -> 2]
+KILLED    m0167 src/config/config.c:222 [int-1 1 -> 0]
+KILLED    m0168 src/config/config.c:222 [cmp != -> ==]
+SURVIVED  m0169 src/config/config.c:225 [int+1 0 -> 1]
+SURVIVED  m0170 src/config/config.c:225 [int-1 0 -> -1]
+KILLED    m0171 src/config/config.c:226 [arith * -> /]
+          build break
+KILLED    m0172 src/config/config.c:227 [int+1 10 -> 11]
+KILLED    m0173 src/config/config.c:227 [int-1 10 -> 9]
+KILLED    m0174 src/config/config.c:228 [int+1 0 -> 1]
+KILLED    m0175 src/config/config.c:228 [int-1 0 -> -1]
+KILLED    m0176 src/config/config.c:228 [cmp != -> ==]
+KILLED    m0177 src/config/config.c:228 [logic || -> &&]
+          build break
+KILLED    m0178 src/config/config.c:228 [cmp == -> !=]
+KILLED    m0179 src/config/config.c:228 [logic || -> &&]
+          build break
+KILLED    m0180 src/config/config.c:228 [cmp >= -> >]
+KILLED    m0181 src/config/config.c:233 [cmp == -> !=]
+KILLED    m0182 src/config/config.c:233 [int+1 0 -> 1]
+KILLED    m0183 src/config/config.c:233 [int-1 0 -> -1]
+KILLED    m0184 src/config/config.c:236 [cmp == -> !=]
+KILLED    m0185 src/config/config.c:236 [int+1 0 -> 1]
+KILLED    m0186 src/config/config.c:236 [int-1 0 -> -1]
+KILLED    m0187 src/config/config.c:239 [cmp == -> !=]
+KILLED    m0188 src/config/config.c:239 [int+1 0 -> 1]
+KILLED    m0189 src/config/config.c:239 [int-1 0 -> -1]
+KILLED    m0190 src/config/config.c:243 [cmp == -> !=]
+KILLED    m0191 src/config/config.c:243 [int+1 0 -> 1]
+KILLED    m0192 src/config/config.c:243 [int-1 0 -> -1]
+KILLED    m0193 src/config/config.c:247 [cmp == -> !=]
+KILLED    m0194 src/config/config.c:247 [int+1 0 -> 1]
+KILLED    m0195 src/config/config.c:247 [int-1 0 -> -1]
+KILLED    m0196 src/config/config.c:251 [cmp == -> !=]
+KILLED    m0197 src/config/config.c:251 [int+1 0 -> 1]
+KILLED    m0198 src/config/config.c:251 [int-1 0 -> -1]
+KILLED    m0199 src/config/config.c:255 [arith - -> +]
+KILLED    m0200 src/config/config.c:255 [int+1 1 -> 2]
+KILLED    m0201 src/config/config.c:255 [int-1 1 -> 0]
+KILLED    m0202 src/config/config.c:255 [cmp == -> !=]
+KILLED    m0203 src/config/config.c:255 [int+1 0 -> 1]
+KILLED    m0204 src/config/config.c:255 [int-1 0 -> -1]
+KILLED    m0205 src/config/config.c:256 [arith * -> /]
+          build break
+KILLED    m0206 src/config/config.c:256 [arith + -> -]
+KILLED    m0207 src/config/config.c:256 [arith - -> +]
+KILLED    m0208 src/config/config.c:256 [int+1 1 -> 2]
+KILLED    m0209 src/config/config.c:256 [int-1 1 -> 0]
+KILLED    m0210 src/config/config.c:257 [int+1 0 -> 1]
+          build break
+SURVIVED  m0211 src/config/config.c:257 [int-1 0 -> -1]
+KILLED    m0212 src/config/config.c:257 [cmp == -> !=]
+SURVIVED  m0213 src/config/config.c:257 [logic || -> &&]
+KILLED    m0214 src/config/config.c:257 [int+1 1 -> 2]
+KILLED    m0215 src/config/config.c:257 [int-1 1 -> 0]
+          build break
+KILLED    m0216 src/config/config.c:257 [cmp != -> ==]
+KILLED    m0217 src/config/config.c:260 [int+1 0 -> 1]
+KILLED    m0218 src/config/config.c:260 [int-1 0 -> -1]
+KILLED    m0219 src/config/config.c:261 [cmp == -> !=]
+KILLED    m0220 src/config/config.c:261 [int+1 0 -> 1]
+KILLED    m0221 src/config/config.c:261 [int-1 0 -> -1]
+          build break
+KILLED    m0222 src/config/config.c:261 [arith - -> +]
+SURVIVED  m0223 src/config/config.c:261 [int+1 1 -> 2]
+KILLED    m0224 src/config/config.c:261 [int-1 1 -> 0]
+KILLED    m0225 src/config/config.c:262 [cmp < -> <=]
+KILLED    m0226 src/config/config.c:262 [int+1 0 -> 1]
+KILLED    m0227 src/config/config.c:262 [int-1 0 -> -1]
+KILLED    m0228 src/config/config.c:265 [arith - -> +]
+KILLED    m0229 src/config/config.c:268 [arith - -> +]
+KILLED    m0230 src/config/config.c:268 [int+1 1 -> 2]
+KILLED    m0231 src/config/config.c:268 [int-1 1 -> 0]
+KILLED    m0232 src/config/config.c:268 [cmp == -> !=]
+KILLED    m0233 src/config/config.c:268 [int+1 0 -> 1]
+KILLED    m0234 src/config/config.c:268 [int-1 0 -> -1]
+KILLED    m0235 src/config/config.c:269 [arith * -> /]
+          build break
+KILLED    m0236 src/config/config.c:269 [arith + -> -]
+KILLED    m0237 src/config/config.c:269 [arith - -> +]
+KILLED    m0238 src/config/config.c:269 [int+1 1 -> 2]
+KILLED    m0239 src/config/config.c:269 [int-1 1 -> 0]
+KILLED    m0240 src/config/config.c:270 [int+1 0 -> 1]
+KILLED    m0241 src/config/config.c:270 [int-1 0 -> -1]
+KILLED    m0242 src/config/config.c:271 [cmp == -> !=]
+KILLED    m0243 src/config/config.c:271 [int+1 0 -> 1]
+KILLED    m0244 src/config/config.c:271 [int-1 0 -> -1]
+          build break
+KILLED    m0245 src/config/config.c:271 [arith - -> +]
+SURVIVED  m0246 src/config/config.c:271 [int+1 1 -> 2]
+KILLED    m0247 src/config/config.c:271 [int-1 1 -> 0]
+KILLED    m0248 src/config/config.c:272 [cmp < -> <=]
+KILLED    m0249 src/config/config.c:272 [int+1 0 -> 1]
+KILLED    m0250 src/config/config.c:272 [int-1 0 -> -1]
+KILLED    m0251 src/config/config.c:272 [logic || -> &&]
+KILLED    m0252 src/config/config.c:272 [cmp >= -> >]
+KILLED    m0253 src/config/config.c:276 [arith + -> -]
+KILLED    m0254 src/config/config.c:276 [int+1 1 -> 2]
+KILLED    m0255 src/config/config.c:276 [int-1 1 -> 0]
+KILLED    m0256 src/config/config.c:276 [cmp == -> !=]
+KILLED    m0257 src/config/config.c:276 [int+1 0 -> 1]
+KILLED    m0258 src/config/config.c:276 [int-1 0 -> -1]
+KILLED    m0259 src/config/config.c:278 [arith + -> -]
+KILLED    m0260 src/config/config.c:278 [int+1 1 -> 2]
+KILLED    m0261 src/config/config.c:278 [int-1 1 -> 0]
+KILLED    m0262 src/config/config.c:278 [cmp == -> !=]
+KILLED    m0263 src/config/config.c:278 [int+1 0 -> 1]
+KILLED    m0264 src/config/config.c:278 [int-1 0 -> -1]
+KILLED    m0265 src/config/config.c:283 [arith - -> +]
+KILLED    m0266 src/config/config.c:286 [cmp == -> !=]
+KILLED    m0267 src/config/config.c:286 [int+1 0 -> 1]
+KILLED    m0268 src/config/config.c:286 [int-1 0 -> -1]
+KILLED    m0269 src/config/config.c:289 [cmp == -> !=]
+KILLED    m0270 src/config/config.c:289 [int+1 0 -> 1]
+KILLED    m0271 src/config/config.c:289 [int-1 0 -> -1]
+KILLED    m0272 src/config/config.c:292 [cmp == -> !=]
+KILLED    m0273 src/config/config.c:292 [int+1 0 -> 1]
+KILLED    m0274 src/config/config.c:292 [int-1 0 -> -1]
+KILLED    m0275 src/config/config.c:295 [cmp == -> !=]
+KILLED    m0276 src/config/config.c:295 [int+1 0 -> 1]
+KILLED    m0277 src/config/config.c:295 [int-1 0 -> -1]
+KILLED    m0278 src/config/config.c:298 [cmp == -> !=]
+KILLED    m0279 src/config/config.c:298 [int+1 0 -> 1]
+KILLED    m0280 src/config/config.c:298 [int-1 0 -> -1]
+KILLED    m0281 src/config/config.c:301 [cmp == -> !=]
+KILLED    m0282 src/config/config.c:301 [int+1 0 -> 1]
+KILLED    m0283 src/config/config.c:301 [int-1 0 -> -1]
+KILLED    m0284 src/config/config.c:304 [cmp == -> !=]
+KILLED    m0285 src/config/config.c:304 [int+1 0 -> 1]
+KILLED    m0286 src/config/config.c:304 [int-1 0 -> -1]
+KILLED    m0287 src/config/config.c:307 [cmp == -> !=]
+KILLED    m0288 src/config/config.c:307 [int+1 0 -> 1]
+KILLED    m0289 src/config/config.c:307 [int-1 0 -> -1]
+KILLED    m0290 src/config/config.c:309 [cmp == -> !=]
+KILLED    m0291 src/config/config.c:309 [int+1 0 -> 1]
+KILLED    m0292 src/config/config.c:309 [int-1 0 -> -1]
+          build break
+KILLED    m0293 src/config/config.c:309 [logic || -> &&]
+          build break
+KILLED    m0294 src/config/config.c:309 [cmp >= -> >]
+KILLED    m0295 src/config/config.c:309 [logic || -> &&]
+          build break
+KILLED    m0296 src/config/config.c:309 [cmp != -> ==]
+KILLED    m0297 src/config/config.c:309 [logic || -> &&]
+          build break
+KILLED    m0298 src/config/config.c:310 [cmp != -> ==]
+KILLED    m0299 src/config/config.c:313 [arith + -> -]
+KILLED    m0300 src/config/config.c:313 [int+1 1 -> 2]
+KILLED    m0301 src/config/config.c:313 [int-1 1 -> 0]
+KILLED    m0302 src/config/config.c:316 [cmp == -> !=]
+KILLED    m0303 src/config/config.c:316 [int+1 0 -> 1]
+KILLED    m0304 src/config/config.c:316 [int-1 0 -> -1]
+ACCEPTED  m0004 src/config/config.c:27 [logic || -> &&] :: the null text arm is unreachable, ct_config_set rejects a null value before any parser runs
+ACCEPTED  m0008 src/config/config.c:30 [int+1 0 -> 1] :: the errno preset mutant to 1 or -1 never equals ERANGE and the strto functions leave errno untouched on success, the range check decides identically
+ACCEPTED  m0009 src/config/config.c:30 [int-1 0 -> -1] :: the errno preset mutant to 1 or -1 never equals ERANGE and the strto functions leave errno untouched on success, the range check decides identically
+ACCEPTED  m0024 src/config/config.c:41 [logic || -> &&] :: the null text arm is unreachable, ct_config_set rejects a null value before any parser runs
+ACCEPTED  m0028 src/config/config.c:44 [int+1 0 -> 1] :: the errno preset mutant to 1 or -1 never equals ERANGE and the strto functions leave errno untouched on success, the range check decides identically
+ACCEPTED  m0029 src/config/config.c:44 [int-1 0 -> -1] :: the errno preset mutant to 1 or -1 never equals ERANGE and the strto functions leave errno untouched on success, the range check decides identically
+ACCEPTED  m0053 src/config/config.c:69 [cmp < -> <=] :: the equality arm clamps to the value the field already holds, the write is idempotent
+ACCEPTED  m0059 src/config/config.c:80 [cmp < -> <=] :: the equality arm clamps to the value the field already holds, the write is idempotent
+ACCEPTED  m0062 src/config/config.c:83 [cmp > -> >=] :: the equality arm clamps to the value the field already holds, the write is idempotent
+ACCEPTED  m0073 src/config/config.c:103 [int+1 0 -> 1] :: the parsed initializer is a dead store, parse_long overwrites it on the only path that reads it
+ACCEPTED  m0074 src/config/config.c:103 [int-1 0 -> -1] :: the parsed initializer is a dead store, parse_long overwrites it on the only path that reads it
+ACCEPTED  m0077 src/config/config.c:108 [cmp < -> <=] :: the equality arm selects the clamp value the parsed long already equals
+ACCEPTED  m0080 src/config/config.c:113 [int+1 0 -> 1] :: the parsed initializer is a dead store, parse_long overwrites it on the only path that reads it
+ACCEPTED  m0081 src/config/config.c:113 [int-1 0 -> -1] :: the parsed initializer is a dead store, parse_long overwrites it on the only path that reads it
+ACCEPTED  m0093 src/config/config.c:138 [cmp < -> <=] :: the extra iteration compares 1u << 12 against single bit face tokens that never reach it
+ACCEPTED  m0097 src/config/config.c:143 [arith - -> +] :: the fallback is dead, every caller passes a nonzero single bit token the loop always finds
+ACCEPTED  m0098 src/config/config.c:143 [int+1 1 -> 2] :: the fallback is dead, every caller passes a nonzero single bit token the loop always finds
+ACCEPTED  m0099 src/config/config.c:143 [int-1 1 -> 0] :: the fallback is dead, every caller passes a nonzero single bit token the loop always finds
+mutate: generated=304 build_failed=70 killed_by_tests=205 killed=275 survived=29 accepted=18 unexplained=11 skipped=0
+mutate: kill rate 275/304 = 90.5%, with accepted equivalents 293/304 = 96.4%
+mutate: wall 233.8s
+EXIT=2

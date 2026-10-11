@@ -1,0 +1,9 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/script.c -o build/tobj/src/app/script.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/app/script_shots.c -o build/tobj/src/app/script_shots.o
+src/app/script_shots.c:136:5: error: call to undeclared library function 'snprintf' with type 'int (char *restrict, __size_t, const char *restrict, ...)' (aka 'int (char *restrict, unsigned long long, const char *restrict, ...)'); ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+  136 |     snprintf(row.due, sizeof row.due, "%s", date);
+      |     ^
+src/app/script_shots.c:136:5: note: include the header <stdio.h> or explicitly provide a declaration for 'snprintf'
+1 error generated.
+make: *** [makefile:106: build/tobj/src/app/script_shots.o] Error 1
+EXIT=2

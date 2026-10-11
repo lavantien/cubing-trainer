@@ -1,0 +1,385 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_eslice/bin/mutate.exe src/storage/repo_algs.c build_eslice alg_hash_deterministic alg_hash_scheme_differs alg_hash_mode_differs alg_hash_mask_differs alg_hash_edge_mask_differs alg_hash_fsrs_inert alg_hash_penalty_differs alg_hash_finger_differs alg_hash_bound_differs alg_hash_factor_differs alg_hash_candidate_differs alg_hash_buffer_differs alg_hash_map_differs alg_hash_format_pinned alg_hash_fail_closed_on_oversize alg_hash_canonical_boundary alg_put_get_roundtrip alg_put_upsert alg_count_list alg_stale alg_drop alg_text_bounds alg_read_boundaries alg_malformed
+mutate: scope=src/storage/repo_algs.c files=1 sites=290 suites=24
+KILLED    m0001 src/storage/repo_algs.c:34 [arith * -> /]
+          build break
+KILLED    m0002 src/storage/repo_algs.c:39 [arith * -> /]
+          build break
+KILLED    m0003 src/storage/repo_algs.c:43 [arith * -> /]
+          build break
+KILLED    m0004 src/storage/repo_algs.c:43 [arith * -> /]
+          build break
+KILLED    m0005 src/storage/repo_algs.c:45 [int+1 0 -> 1]
+KILLED    m0006 src/storage/repo_algs.c:45 [int-1 0 -> -1]
+KILLED    m0007 src/storage/repo_algs.c:48 [arith * -> /]
+          build break
+KILLED    m0008 src/storage/repo_algs.c:48 [arith * -> /]
+          build break
+KILLED    m0009 src/storage/repo_algs.c:49 [arith - -> +]
+SURVIVED  m0010 src/storage/repo_algs.c:49 [int+1 1 -> 2]
+KILLED    m0011 src/storage/repo_algs.c:49 [int-1 1 -> 0]
+KILLED    m0012 src/storage/repo_algs.c:52 [arith * -> /]
+          build break
+KILLED    m0013 src/storage/repo_algs.c:56 [arith * -> /]
+          build break
+KILLED    m0014 src/storage/repo_algs.c:60 [arith * -> /]
+          build break
+KILLED    m0015 src/storage/repo_algs.c:60 [arith * -> /]
+          build break
+KILLED    m0016 src/storage/repo_algs.c:62 [int+1 0 -> 1]
+KILLED    m0017 src/storage/repo_algs.c:62 [int-1 0 -> -1]
+KILLED    m0018 src/storage/repo_algs.c:65 [arith * -> /]
+          build break
+KILLED    m0019 src/storage/repo_algs.c:69 [arith * -> /]
+          build break
+KILLED    m0020 src/storage/repo_algs.c:73 [arith * -> /]
+          build break
+KILLED    m0021 src/storage/repo_algs.c:77 [arith * -> /]
+          build break
+KILLED    m0022 src/storage/repo_algs.c:77 [arith * -> /]
+          build break
+KILLED    m0023 src/storage/repo_algs.c:78 [arith * -> /]
+          build break
+KILLED    m0024 src/storage/repo_algs.c:79 [cmp == -> !=]
+SURVIVED  m0025 src/storage/repo_algs.c:80 [int+1 0 -> 1]
+SURVIVED  m0026 src/storage/repo_algs.c:80 [int-1 0 -> -1]
+KILLED    m0027 src/storage/repo_algs.c:83 [arith * -> /]
+          build break
+KILLED    m0028 src/storage/repo_algs.c:84 [cmp >= -> >]
+KILLED    m0029 src/storage/repo_algs.c:85 [arith - -> +]
+KILLED    m0030 src/storage/repo_algs.c:85 [int+1 1 -> 2]
+KILLED    m0031 src/storage/repo_algs.c:85 [int-1 1 -> 0]
+KILLED    m0032 src/storage/repo_algs.c:90 [arith * -> /]
+          build break
+KILLED    m0033 src/storage/repo_algs.c:90 [arith * -> /]
+          build break
+KILLED    m0034 src/storage/repo_algs.c:109 [arith * -> /]
+          build break
+KILLED    m0035 src/storage/repo_algs.c:109 [arith * -> /]
+          build break
+KILLED    m0036 src/storage/repo_algs.c:109 [arith * -> /]
+          build break
+KILLED    m0037 src/storage/repo_algs.c:112 [arith + -> -]
+KILLED    m0038 src/storage/repo_algs.c:112 [arith * -> /]
+          build break
+KILLED    m0039 src/storage/repo_algs.c:112 [arith - -> +]
+KILLED    m0040 src/storage/repo_algs.c:112 [arith * -> /]
+          build break
+SURVIVED  m0041 src/storage/repo_algs.c:114 [cmp < -> <=]
+SURVIVED  m0042 src/storage/repo_algs.c:114 [int+1 0 -> 1]
+SURVIVED  m0043 src/storage/repo_algs.c:114 [int-1 0 -> -1]
+KILLED    m0044 src/storage/repo_algs.c:117 [arith * -> /]
+          build break
+KILLED    m0045 src/storage/repo_algs.c:118 [arith * -> /]
+          build break
+KILLED    m0046 src/storage/repo_algs.c:118 [cmp >= -> >]
+KILLED    m0047 src/storage/repo_algs.c:124 [arith * -> /]
+          build break
+KILLED    m0048 src/storage/repo_algs.c:124 [arith * -> /]
+          build break
+KILLED    m0049 src/storage/repo_algs.c:124 [arith * -> /]
+          build break
+KILLED    m0050 src/storage/repo_algs.c:125 [int+1 0 -> 1]
+KILLED    m0051 src/storage/repo_algs.c:125 [int-1 0 -> -1]
+KILLED    m0052 src/storage/repo_algs.c:125 [cmp < -> <=]
+KILLED    m0053 src/storage/repo_algs.c:127 [cmp < -> <=]
+KILLED    m0054 src/storage/repo_algs.c:127 [logic || -> &&]
+KILLED    m0055 src/storage/repo_algs.c:127 [cmp > -> >=]
+KILLED    m0056 src/storage/repo_algs.c:129 [cmp != -> ==]
+KILLED    m0057 src/storage/repo_algs.c:136 [arith * -> /]
+          build break
+KILLED    m0058 src/storage/repo_algs.c:137 [arith * -> /]
+          build break
+KILLED    m0059 src/storage/repo_algs.c:138 [arith * -> /]
+          build break
+KILLED    m0060 src/storage/repo_algs.c:139 [int+1 0 -> 1]
+KILLED    m0061 src/storage/repo_algs.c:139 [int-1 0 -> -1]
+KILLED    m0062 src/storage/repo_algs.c:142 [int+1 0 -> 1]
+KILLED    m0063 src/storage/repo_algs.c:142 [int-1 0 -> -1]
+KILLED    m0064 src/storage/repo_algs.c:142 [cmp == -> !=]
+KILLED    m0065 src/storage/repo_algs.c:142 [logic && -> ||]
+KILLED    m0066 src/storage/repo_algs.c:142 [cmp < -> <=]
+KILLED    m0067 src/storage/repo_algs.c:143 [cmp == -> !=]
+KILLED    m0068 src/storage/repo_algs.c:143 [int+1 0 -> 1]
+KILLED    m0069 src/storage/repo_algs.c:143 [int-1 0 -> -1]
+KILLED    m0070 src/storage/repo_algs.c:145 [cmp == -> !=]
+KILLED    m0071 src/storage/repo_algs.c:148 [arith * -> /]
+KILLED    m0072 src/storage/repo_algs.c:149 [int+1 0 -> 1]
+KILLED    m0073 src/storage/repo_algs.c:149 [int-1 0 -> -1]
+KILLED    m0074 src/storage/repo_algs.c:149 [cmp == -> !=]
+KILLED    m0075 src/storage/repo_algs.c:149 [logic && -> ||]
+KILLED    m0076 src/storage/repo_algs.c:149 [cmp < -> <=]
+KILLED    m0077 src/storage/repo_algs.c:150 [arith / -> *]
+KILLED    m0078 src/storage/repo_algs.c:152 [cmp == -> !=]
+KILLED    m0079 src/storage/repo_algs.c:152 [int+1 0 -> 1]
+KILLED    m0080 src/storage/repo_algs.c:152 [int-1 0 -> -1]
+KILLED    m0081 src/storage/repo_algs.c:155 [cmp == -> !=]
+KILLED    m0082 src/storage/repo_algs.c:160 [cmp == -> !=]
+KILLED    m0083 src/storage/repo_algs.c:163 [cmp == -> !=]
+KILLED    m0084 src/storage/repo_algs.c:166 [cmp == -> !=]
+KILLED    m0085 src/storage/repo_algs.c:169 [cmp == -> !=]
+KILLED    m0086 src/storage/repo_algs.c:172 [cmp != -> ==]
+KILLED    m0087 src/storage/repo_algs.c:173 [int+1 0 -> 1]
+KILLED    m0088 src/storage/repo_algs.c:173 [int-1 0 -> -1]
+KILLED    m0089 src/storage/repo_algs.c:177 [arith * -> /]
+          build break
+KILLED    m0090 src/storage/repo_algs.c:178 [cmp != -> ==]
+KILLED    m0091 src/storage/repo_algs.c:181 [arith * -> /]
+          build break
+KILLED    m0092 src/storage/repo_algs.c:182 [not-del ! -> (deleted)]
+KILLED    m0093 src/storage/repo_algs.c:183 [ret-lit 0 -> 1]
+KILLED    m0094 src/storage/repo_algs.c:183 [int+1 0 -> 1]
+KILLED    m0095 src/storage/repo_algs.c:183 [int-1 0 -> -1]
+KILLED    m0096 src/storage/repo_algs.c:184 [not-del ! -> (deleted)]
+KILLED    m0097 src/storage/repo_algs.c:185 [ret-lit 0 -> 1]
+KILLED    m0098 src/storage/repo_algs.c:185 [int+1 0 -> 1]
+KILLED    m0099 src/storage/repo_algs.c:185 [int-1 0 -> -1]
+KILLED    m0100 src/storage/repo_algs.c:186 [not-del ! -> (deleted)]
+KILLED    m0101 src/storage/repo_algs.c:187 [ret-lit 0 -> 1]
+KILLED    m0102 src/storage/repo_algs.c:187 [int+1 0 -> 1]
+KILLED    m0103 src/storage/repo_algs.c:187 [int-1 0 -> -1]
+KILLED    m0104 src/storage/repo_algs.c:188 [not-del ! -> (deleted)]
+KILLED    m0105 src/storage/repo_algs.c:189 [ret-lit 0 -> 1]
+KILLED    m0106 src/storage/repo_algs.c:189 [int+1 0 -> 1]
+KILLED    m0107 src/storage/repo_algs.c:189 [int-1 0 -> -1]
+KILLED    m0108 src/storage/repo_algs.c:190 [not-del ! -> (deleted)]
+KILLED    m0109 src/storage/repo_algs.c:191 [ret-lit 0 -> 1]
+KILLED    m0110 src/storage/repo_algs.c:191 [int+1 0 -> 1]
+KILLED    m0111 src/storage/repo_algs.c:191 [int-1 0 -> -1]
+KILLED    m0112 src/storage/repo_algs.c:192 [not-del ! -> (deleted)]
+KILLED    m0113 src/storage/repo_algs.c:193 [ret-lit 0 -> 1]
+KILLED    m0114 src/storage/repo_algs.c:193 [int+1 0 -> 1]
+KILLED    m0115 src/storage/repo_algs.c:193 [int-1 0 -> -1]
+KILLED    m0116 src/storage/repo_algs.c:194 [ret-lit 1 -> 0]
+SURVIVED  m0117 src/storage/repo_algs.c:194 [int+1 1 -> 2]
+KILLED    m0118 src/storage/repo_algs.c:194 [int-1 1 -> 0]
+KILLED    m0119 src/storage/repo_algs.c:197 [arith * -> /]
+          build break
+KILLED    m0120 src/storage/repo_algs.c:197 [arith * -> /]
+          build break
+KILLED    m0121 src/storage/repo_algs.c:197 [arith * -> /]
+          build break
+KILLED    m0122 src/storage/repo_algs.c:198 [cmp == -> !=]
+KILLED    m0123 src/storage/repo_algs.c:200 [cmp == -> !=]
+KILLED    m0124 src/storage/repo_algs.c:200 [logic || -> &&]
+KILLED    m0125 src/storage/repo_algs.c:200 [not-del ! -> (deleted)]
+KILLED    m0126 src/storage/repo_algs.c:202 [not-del ! -> (deleted)]
+SURVIVED  m0127 src/storage/repo_algs.c:206 [int+1 0 -> 1]
+KILLED    m0128 src/storage/repo_algs.c:206 [int-1 0 -> -1]
+          build break
+KILLED    m0129 src/storage/repo_algs.c:206 [cmp == -> !=]
+KILLED    m0130 src/storage/repo_algs.c:208 [arith * -> /]
+          build break
+KILLED    m0131 src/storage/repo_algs.c:209 [arith - -> +]
+SURVIVED  m0132 src/storage/repo_algs.c:209 [int+1 1 -> 2]
+KILLED    m0133 src/storage/repo_algs.c:209 [int-1 1 -> 0]
+KILLED    m0134 src/storage/repo_algs.c:209 [cmp != -> ==]
+KILLED    m0135 src/storage/repo_algs.c:231 [cmp == -> !=]
+KILLED    m0136 src/storage/repo_algs.c:234 [arith * -> /]
+          build break
+KILLED    m0137 src/storage/repo_algs.c:234 [arith * -> /]
+          build break
+KILLED    m0138 src/storage/repo_algs.c:235 [arith * -> /]
+          build break
+KILLED    m0139 src/storage/repo_algs.c:235 [arith * -> /]
+          build break
+KILLED    m0140 src/storage/repo_algs.c:236 [cmp == -> !=]
+KILLED    m0141 src/storage/repo_algs.c:236 [logic || -> &&]
+KILLED    m0142 src/storage/repo_algs.c:236 [cmp == -> !=]
+KILLED    m0143 src/storage/repo_algs.c:238 [not-del ! -> (deleted)]
+KILLED    m0144 src/storage/repo_algs.c:240 [not-del ! -> (deleted)]
+SURVIVED  m0145 src/storage/repo_algs.c:242 [int+1 0 -> 1]
+SURVIVED  m0146 src/storage/repo_algs.c:242 [int-1 0 -> -1]
+KILLED    m0147 src/storage/repo_algs.c:242 [arith * -> /]
+          build break
+KILLED    m0148 src/storage/repo_algs.c:243 [arith * -> /]
+          build break
+KILLED    m0149 src/storage/repo_algs.c:244 [arith - -> +]
+SURVIVED  m0150 src/storage/repo_algs.c:244 [int+1 1 -> 2]
+KILLED    m0151 src/storage/repo_algs.c:244 [int-1 1 -> 0]
+KILLED    m0152 src/storage/repo_algs.c:244 [cmp != -> ==]
+KILLED    m0153 src/storage/repo_algs.c:256 [cmp == -> !=]
+KILLED    m0154 src/storage/repo_algs.c:262 [cmp == -> !=]
+KILLED    m0155 src/storage/repo_algs.c:265 [arith * -> /]
+          build break
+KILLED    m0156 src/storage/repo_algs.c:265 [arith * -> /]
+          build break
+KILLED    m0157 src/storage/repo_algs.c:266 [cmp == -> !=]
+KILLED    m0158 src/storage/repo_algs.c:266 [logic || -> &&]
+KILLED    m0159 src/storage/repo_algs.c:266 [not-del ! -> (deleted)]
+KILLED    m0160 src/storage/repo_algs.c:268 [arith * -> /]
+          build break
+KILLED    m0161 src/storage/repo_algs.c:269 [arith - -> +]
+SURVIVED  m0162 src/storage/repo_algs.c:269 [int+1 1 -> 2]
+KILLED    m0163 src/storage/repo_algs.c:269 [int-1 1 -> 0]
+KILLED    m0164 src/storage/repo_algs.c:269 [cmp != -> ==]
+KILLED    m0165 src/storage/repo_algs.c:273 [int+1 1 -> 2]
+KILLED    m0166 src/storage/repo_algs.c:273 [int-1 1 -> 0]
+KILLED    m0167 src/storage/repo_algs.c:273 [arith - -> +]
+SURVIVED  m0168 src/storage/repo_algs.c:273 [int+1 1 -> 2]
+KILLED    m0169 src/storage/repo_algs.c:273 [int-1 1 -> 0]
+KILLED    m0170 src/storage/repo_algs.c:275 [cmp == -> !=]
+KILLED    m0171 src/storage/repo_algs.c:275 [int+1 0 -> 1]
+KILLED    m0172 src/storage/repo_algs.c:275 [int-1 0 -> -1]
+KILLED    m0173 src/storage/repo_algs.c:280 [arith * -> /]
+          build break
+KILLED    m0174 src/storage/repo_algs.c:280 [arith * -> /]
+          build break
+KILLED    m0175 src/storage/repo_algs.c:280 [arith * -> /]
+          build break
+KILLED    m0176 src/storage/repo_algs.c:282 [cmp == -> !=]
+KILLED    m0177 src/storage/repo_algs.c:282 [logic || -> &&]
+KILLED    m0178 src/storage/repo_algs.c:282 [not-del ! -> (deleted)]
+KILLED    m0179 src/storage/repo_algs.c:284 [cmp < -> <=]
+KILLED    m0180 src/storage/repo_algs.c:284 [int+1 0 -> 1]
+KILLED    m0181 src/storage/repo_algs.c:284 [int-1 0 -> -1]
+KILLED    m0182 src/storage/repo_algs.c:284 [logic || -> &&]
+KILLED    m0183 src/storage/repo_algs.c:284 [cmp > -> >=]
+KILLED    m0184 src/storage/repo_algs.c:284 [int+1 0 -> 1]
+KILLED    m0185 src/storage/repo_algs.c:284 [int-1 0 -> -1]
+KILLED    m0186 src/storage/repo_algs.c:284 [logic && -> ||]
+KILLED    m0187 src/storage/repo_algs.c:284 [cmp == -> !=]
+KILLED    m0188 src/storage/repo_algs.c:286 [cmp == -> !=]
+KILLED    m0189 src/storage/repo_algs.c:286 [int+1 0 -> 1]
+KILLED    m0190 src/storage/repo_algs.c:286 [int-1 0 -> -1]
+KILLED    m0191 src/storage/repo_algs.c:288 [int+1 0 -> 1]
+KILLED    m0192 src/storage/repo_algs.c:288 [int-1 0 -> -1]
+KILLED    m0193 src/storage/repo_algs.c:288 [arith * -> /]
+KILLED    m0194 src/storage/repo_algs.c:288 [arith * -> /]
+          build break
+KILLED    m0195 src/storage/repo_algs.c:289 [arith * -> /]
+          build break
+KILLED    m0196 src/storage/repo_algs.c:290 [arith - -> +]
+SURVIVED  m0197 src/storage/repo_algs.c:290 [int+1 1 -> 2]
+KILLED    m0198 src/storage/repo_algs.c:290 [int-1 1 -> 0]
+KILLED    m0199 src/storage/repo_algs.c:290 [cmp != -> ==]
+KILLED    m0200 src/storage/repo_algs.c:298 [int+1 0 -> 1]
+KILLED    m0201 src/storage/repo_algs.c:298 [int-1 0 -> -1]
+KILLED    m0202 src/storage/repo_algs.c:300 [cmp < -> <=]
+KILLED    m0203 src/storage/repo_algs.c:300 [logic && -> ||]
+KILLED    m0204 src/storage/repo_algs.c:300 [cmp == -> !=]
+KILLED    m0205 src/storage/repo_algs.c:305 [cmp != -> ==]
+KILLED    m0206 src/storage/repo_algs.c:305 [logic && -> ||]
+KILLED    m0207 src/storage/repo_algs.c:305 [cmp != -> ==]
+KILLED    m0208 src/storage/repo_algs.c:310 [arith * -> /]
+          build break
+KILLED    m0209 src/storage/repo_algs.c:310 [arith * -> /]
+          build break
+KILLED    m0210 src/storage/repo_algs.c:310 [arith * -> /]
+          build break
+KILLED    m0211 src/storage/repo_algs.c:311 [cmp == -> !=]
+KILLED    m0212 src/storage/repo_algs.c:311 [logic || -> &&]
+KILLED    m0213 src/storage/repo_algs.c:311 [not-del ! -> (deleted)]
+KILLED    m0214 src/storage/repo_algs.c:313 [cmp < -> <=]
+KILLED    m0215 src/storage/repo_algs.c:313 [int+1 0 -> 1]
+KILLED    m0216 src/storage/repo_algs.c:313 [int-1 0 -> -1]
+KILLED    m0217 src/storage/repo_algs.c:313 [logic || -> &&]
+KILLED    m0218 src/storage/repo_algs.c:313 [cmp > -> >=]
+KILLED    m0219 src/storage/repo_algs.c:313 [int+1 0 -> 1]
+KILLED    m0220 src/storage/repo_algs.c:313 [int-1 0 -> -1]
+KILLED    m0221 src/storage/repo_algs.c:313 [logic && -> ||]
+KILLED    m0222 src/storage/repo_algs.c:313 [cmp == -> !=]
+KILLED    m0223 src/storage/repo_algs.c:315 [cmp == -> !=]
+KILLED    m0224 src/storage/repo_algs.c:315 [int+1 0 -> 1]
+KILLED    m0225 src/storage/repo_algs.c:315 [int-1 0 -> -1]
+KILLED    m0226 src/storage/repo_algs.c:317 [arith * -> /]
+          build break
+KILLED    m0227 src/storage/repo_algs.c:318 [arith - -> +]
+SURVIVED  m0228 src/storage/repo_algs.c:318 [int+1 1 -> 2]
+KILLED    m0229 src/storage/repo_algs.c:318 [int-1 1 -> 0]
+KILLED    m0230 src/storage/repo_algs.c:318 [cmp != -> ==]
+KILLED    m0231 src/storage/repo_algs.c:322 [int+1 1 -> 2]
+KILLED    m0232 src/storage/repo_algs.c:322 [int-1 1 -> 0]
+KILLED    m0233 src/storage/repo_algs.c:322 [arith - -> +]
+SURVIVED  m0234 src/storage/repo_algs.c:322 [int+1 1 -> 2]
+KILLED    m0235 src/storage/repo_algs.c:322 [int-1 1 -> 0]
+KILLED    m0236 src/storage/repo_algs.c:323 [int+1 0 -> 1]
+KILLED    m0237 src/storage/repo_algs.c:323 [int-1 0 -> -1]
+KILLED    m0238 src/storage/repo_algs.c:325 [cmp < -> <=]
+KILLED    m0239 src/storage/repo_algs.c:325 [logic && -> ||]
+KILLED    m0240 src/storage/repo_algs.c:325 [cmp == -> !=]
+KILLED    m0241 src/storage/repo_algs.c:326 [int+1 0 -> 1]
+KILLED    m0242 src/storage/repo_algs.c:326 [int-1 0 -> -1]
+KILLED    m0243 src/storage/repo_algs.c:330 [cmp != -> ==]
+KILLED    m0244 src/storage/repo_algs.c:330 [logic && -> ||]
+KILLED    m0245 src/storage/repo_algs.c:330 [cmp != -> ==]
+KILLED    m0246 src/storage/repo_algs.c:335 [arith * -> /]
+          build break
+KILLED    m0247 src/storage/repo_algs.c:335 [arith * -> /]
+          build break
+KILLED    m0248 src/storage/repo_algs.c:336 [cmp == -> !=]
+KILLED    m0249 src/storage/repo_algs.c:336 [logic || -> &&]
+KILLED    m0250 src/storage/repo_algs.c:336 [not-del ! -> (deleted)]
+KILLED    m0251 src/storage/repo_algs.c:338 [arith * -> /]
+          build break
+KILLED    m0252 src/storage/repo_algs.c:339 [arith - -> +]
+SURVIVED  m0253 src/storage/repo_algs.c:339 [int+1 1 -> 2]
+KILLED    m0254 src/storage/repo_algs.c:339 [int-1 1 -> 0]
+KILLED    m0255 src/storage/repo_algs.c:339 [cmp != -> ==]
+KILLED    m0256 src/storage/repo_algs.c:343 [int+1 1 -> 2]
+KILLED    m0257 src/storage/repo_algs.c:343 [int-1 1 -> 0]
+KILLED    m0258 src/storage/repo_algs.c:343 [arith - -> +]
+SURVIVED  m0259 src/storage/repo_algs.c:343 [int+1 1 -> 2]
+KILLED    m0260 src/storage/repo_algs.c:343 [int-1 1 -> 0]
+KILLED    m0261 src/storage/repo_algs.c:345 [cmp == -> !=]
+KILLED    m0262 src/storage/repo_algs.c:350 [arith * -> /]
+          build break
+KILLED    m0263 src/storage/repo_algs.c:350 [arith * -> /]
+          build break
+KILLED    m0264 src/storage/repo_algs.c:351 [cmp == -> !=]
+KILLED    m0265 src/storage/repo_algs.c:351 [logic || -> &&]
+KILLED    m0266 src/storage/repo_algs.c:351 [not-del ! -> (deleted)]
+KILLED    m0267 src/storage/repo_algs.c:353 [arith * -> /]
+          build break
+KILLED    m0268 src/storage/repo_algs.c:354 [arith - -> +]
+SURVIVED  m0269 src/storage/repo_algs.c:354 [int+1 1 -> 2]
+KILLED    m0270 src/storage/repo_algs.c:354 [int-1 1 -> 0]
+KILLED    m0271 src/storage/repo_algs.c:354 [cmp != -> ==]
+KILLED    m0272 src/storage/repo_algs.c:358 [int+1 1 -> 2]
+KILLED    m0273 src/storage/repo_algs.c:358 [int-1 1 -> 0]
+KILLED    m0274 src/storage/repo_algs.c:358 [arith - -> +]
+SURVIVED  m0275 src/storage/repo_algs.c:358 [int+1 1 -> 2]
+KILLED    m0276 src/storage/repo_algs.c:358 [int-1 1 -> 0]
+KILLED    m0277 src/storage/repo_algs.c:359 [int+1 2 -> 3]
+KILLED    m0278 src/storage/repo_algs.c:359 [int-1 2 -> 1]
+KILLED    m0279 src/storage/repo_algs.c:361 [cmp == -> !=]
+KILLED    m0280 src/storage/repo_algs.c:366 [arith * -> /]
+          build break
+KILLED    m0281 src/storage/repo_algs.c:367 [arith * -> /]
+          build break
+KILLED    m0282 src/storage/repo_algs.c:368 [cmp == -> !=]
+KILLED    m0283 src/storage/repo_algs.c:370 [int+1 0 -> 1]
+KILLED    m0284 src/storage/repo_algs.c:370 [int-1 0 -> -1]
+KILLED    m0285 src/storage/repo_algs.c:371 [cmp == -> !=]
+KILLED    m0286 src/storage/repo_algs.c:371 [logic || -> &&]
+KILLED    m0287 src/storage/repo_algs.c:371 [cmp == -> !=]
+KILLED    m0288 src/storage/repo_algs.c:375 [int+1 0 -> 1]
+KILLED    m0289 src/storage/repo_algs.c:375 [int-1 0 -> -1]
+          build break
+KILLED    m0290 src/storage/repo_algs.c:375 [cmp == -> !=]
+ACCEPTED  m0010 src/storage/repo_algs.c:49 [int+1 1 -> 2] :: sqlite3 treats any negative nByte as read-to-nul, so the -1 bind length mutant -2 is behaviorally identical
+ACCEPTED  m0025 src/storage/repo_algs.c:80 [int+1 0 -> 1] :: the null-column branch writes into an output struct that ct_repo_alg_get pre-zeroes wholesale, so the write index inside the field is unobservable, the byte before the first field is the orbit high byte, zero for every reachable orbit value
+ACCEPTED  m0026 src/storage/repo_algs.c:80 [int-1 0 -> -1] :: the null-column branch writes into an output struct that ct_repo_alg_get pre-zeroes wholesale, so the write index inside the field is unobservable, the byte before the first field is the orbit high byte, zero for every reachable orbit value
+ACCEPTED  m0041 src/storage/repo_algs.c:114 [cmp < -> <=] :: the vsnprintf guard is unreachable on both sides, every format here emits at least one character so n is never 0 and a negative return requires a wide string encoding error these narrow formats never produce
+ACCEPTED  m0042 src/storage/repo_algs.c:114 [int+1 0 -> 1] :: the vsnprintf guard is unreachable on both sides, every format here emits at least one character so n is never 0 and a negative return requires a wide string encoding error these narrow formats never produce
+ACCEPTED  m0043 src/storage/repo_algs.c:114 [int-1 0 -> -1] :: the vsnprintf guard is unreachable on both sides, every format here emits at least one character so n is never 0 and a negative return requires a wide string encoding error these narrow formats never produce
+ACCEPTED  m0117 src/storage/repo_algs.c:194 [int+1 1 -> 2] :: ct_alg_row_valid is consumed only through boolean negation, any nonzero return is equivalent
+ACCEPTED  m0127 src/storage/repo_algs.c:206 [int+1 0 -> 1] :: ct_now_utc_iso writes a 20 character stamp on every reachable path, now[1] is never nul so both indexes decide identically
+ACCEPTED  m0132 src/storage/repo_algs.c:209 [int+1 1 -> 2] :: sqlite3_prepare_v2 treats any negative sql length as read-to-nul, the -1 mutant -2 is behaviorally identical
+ACCEPTED  m0145 src/storage/repo_algs.c:242 [int+1 0 -> 1] :: the pre-query memset fill byte is unobservable, ct_alg_from_row overwrites every field before any assertion reads it on the row path and the missing path never reads out
+ACCEPTED  m0146 src/storage/repo_algs.c:242 [int-1 0 -> -1] :: the pre-query memset fill byte is unobservable, ct_alg_from_row overwrites every field before any assertion reads it on the row path and the missing path never reads out
+ACCEPTED  m0150 src/storage/repo_algs.c:244 [int+1 1 -> 2] :: prepare nByte -1 mutant -2 reads to the first nul identically
+ACCEPTED  m0162 src/storage/repo_algs.c:269 [int+1 1 -> 2] :: prepare nByte -1 mutant -2 reads to the first nul identically
+ACCEPTED  m0168 src/storage/repo_algs.c:273 [int+1 1 -> 2] :: bind length -1 mutant -2 is read-to-nul identically in sqlite3
+ACCEPTED  m0197 src/storage/repo_algs.c:290 [int+1 1 -> 2] :: prepare nByte -1 mutant -2 reads to the first nul identically
+ACCEPTED  m0228 src/storage/repo_algs.c:318 [int+1 1 -> 2] :: prepare nByte -1 mutant -2 reads to the first nul identically
+ACCEPTED  m0234 src/storage/repo_algs.c:322 [int+1 1 -> 2] :: bind length -1 mutant -2 is read-to-nul identically in sqlite3
+ACCEPTED  m0253 src/storage/repo_algs.c:339 [int+1 1 -> 2] :: prepare nByte -1 mutant -2 reads to the first nul identically
+ACCEPTED  m0259 src/storage/repo_algs.c:343 [int+1 1 -> 2] :: bind length -1 mutant -2 is read-to-nul identically in sqlite3
+ACCEPTED  m0269 src/storage/repo_algs.c:354 [int+1 1 -> 2] :: prepare nByte -1 mutant -2 reads to the first nul identically
+ACCEPTED  m0275 src/storage/repo_algs.c:358 [int+1 1 -> 2] :: bind length -1 mutant -2 is read-to-nul identically in sqlite3
+mutate: generated=290 build_failed=66 killed_by_tests=203 killed=269 survived=21 accepted=21 unexplained=0 skipped=0
+mutate: kill rate 269/290 = 92.8%, with accepted equivalents 290/290 = 100.0%
+mutate: wall 279.7s
+EXIT=0

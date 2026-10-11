@@ -1,0 +1,4 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_settings.c -o build_eslice/tobj/src/ui/screen_settings.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_eslice/bin/mutate.exe src/gen/synth.c build_eslice unit_synth_table unit_synth_direct unit_synth_setup unit_synth_coverage unit_synth_determinism unit_synth_scoring unit_synth_config unit_synth_bh unit_synth_bad_input unit_synth_stress unit_synth_gates score_subset score_subset_edge

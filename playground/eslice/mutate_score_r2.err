@@ -1,0 +1,546 @@
+build_eslice/mutants/p12856/m0001_score.c:23:42: error: expected ')'
+   23 | static int score_check_seq(const ct_move /seq, int count) {
+      |                                          ^
+build_eslice/mutants/p12856/m0001_score.c:23:27: note: to match this '('
+   23 | static int score_check_seq(const ct_move /seq, int count) {
+      |                           ^
+build_eslice/mutants/p12856/m0001_score.c:24:9: error: use of undeclared identifier 'count'
+   24 |     if (count < 0 || (seq == NULL && count > 0)) {
+      |         ^~~~~
+build_eslice/mutants/p12856/m0001_score.c:24:23: error: use of undeclared identifier 'seq'
+   24 |     if (count < 0 || (seq == NULL && count > 0)) {
+      |                       ^~~
+build_eslice/mutants/p12856/m0001_score.c:24:38: error: use of undeclared identifier 'count'
+   24 |     if (count < 0 || (seq == NULL && count > 0)) {
+      |                                      ^~~~~
+build_eslice/mutants/p12856/m0001_score.c:27:25: error: use of undeclared identifier 'count'
+   27 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_eslice/mutants/p12856/m0001_score.c:28:13: error: use of undeclared identifier 'seq'
+   28 |         if (seq[i].face < 0 || seq[i].face >= CT_CUBE_FACE_COUNT) {
+      |             ^~~
+build_eslice/mutants/p12856/m0001_score.c:28:32: error: use of undeclared identifier 'seq'
+   28 |         if (seq[i].face < 0 || seq[i].face >= CT_CUBE_FACE_COUNT) {
+      |                                ^~~
+build_eslice/mutants/p12856/m0001_score.c:31:13: error: use of undeclared identifier 'seq'
+   31 |         if (seq[i].quarter < CT_SCORE_QUARTER_CW || seq[i].quarter > CT_SCORE_QUARTER_CCW) {
+      |             ^~~
+build_eslice/mutants/p12856/m0001_score.c:31:53: error: use of undeclared identifier 'seq'
+   31 |         if (seq[i].quarter < CT_SCORE_QUARTER_CW || seq[i].quarter > CT_SCORE_QUARTER_CCW) {
+      |                                                     ^~~
+build_eslice/mutants/p12856/m0001_score.c:66:35: error: too many arguments to function call, expected 1, have 2
+   66 |     int rc = score_check_seq(seq, count);
+      |              ~~~~~~~~~~~~~~~      ^~~~~
+build_eslice/mutants/p12856/m0001_score.c:23:12: note: 'score_check_seq' declared here
+   23 | static int score_check_seq(const ct_move /seq, int count) {
+      |            ^               ~~~~~~~~~~~~~
+build_eslice/mutants/p12856/m0001_score.c:83:35: error: too many arguments to function call, expected 1, have 2
+   83 |     int rc = score_check_seq(seq, count);
+      |              ~~~~~~~~~~~~~~~      ^~~~~
+build_eslice/mutants/p12856/m0001_score.c:23:12: note: 'score_check_seq' declared here
+   23 | static int score_check_seq(const ct_move /seq, int count) {
+      |            ^               ~~~~~~~~~~~~~
+build_eslice/mutants/p12856/m0001_score.c:116:35: error: too many arguments to function call, expected 1, have 2
+  116 |     int rc = score_check_seq(seq, count);
+      |              ~~~~~~~~~~~~~~~      ^~~~~
+build_eslice/mutants/p12856/m0001_score.c:23:12: note: 'score_check_seq' declared here
+   23 | static int score_check_seq(const ct_move /seq, int count) {
+      |            ^               ~~~~~~~~~~~~~
+12 errors generated.
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_errors exited 1
+mutate: suite score_errors exited -1073741795
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_errors exited -1073741795
+mutate: suite score_qtm exited 1
+mutate: suite score_errors exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_errors exited 1
+mutate: suite score_errors exited 1
+mutate: suite score_errors exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_errors exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_subset exited -1073741795
+mutate: suite score_subset exited -1073741795
+mutate: suite score_subset exited 1
+mutate: suite score_subset exited -1073741795
+mutate: suite score_subset exited 1
+build_eslice/mutants/p12856/m0031_score.c:47:51: error: expected ')'
+   47 | static unsigned score_preferred_bit(const ct_move /m, ct_orbit orbit) {
+      |                                                   ^
+build_eslice/mutants/p12856/m0031_score.c:47:36: note: to match this '('
+   47 | static unsigned score_preferred_bit(const ct_move /m, ct_orbit orbit) {
+      |                                    ^
+build_eslice/mutants/p12856/m0031_score.c:48:36: error: use of undeclared identifier 'm'
+   48 |     unsigned bit = score_face_bits[m->face];
+      |                                    ^
+build_eslice/mutants/p12856/m0031_score.c:49:9: error: use of undeclared identifier 'orbit'
+   49 |     if (orbit != CT_ORBIT_EDGE || m->depth_from != CT_GEN_SLICE_DEPTH ||
+      |         ^~~~~
+build_eslice/mutants/p12856/m0031_score.c:49:35: error: use of undeclared identifier 'm'
+   49 |     if (orbit != CT_ORBIT_EDGE || m->depth_from != CT_GEN_SLICE_DEPTH ||
+      |                                   ^
+build_eslice/mutants/p12856/m0031_score.c:50:9: error: use of undeclared identifier 'm'
+   50 |         m->depth_to != CT_GEN_SLICE_DEPTH) {
+      |         ^
+build_eslice/mutants/p12856/m0031_score.c:53:13: error: use of undeclared identifier 'm'
+   53 |     switch (m->face) {
+      |             ^
+build_eslice/mutants/p12856/m0031_score.c:134:58: error: too many arguments to function call, expected 1, have 2
+  134 |         unsigned pref_bit = score_preferred_bit(&seq[i], orbit);
+      |                             ~~~~~~~~~~~~~~~~~~~          ^~~~~
+build_eslice/mutants/p12856/m0031_score.c:47:17: note: 'score_preferred_bit' declared here
+   47 | static unsigned score_preferred_bit(const ct_move /m, ct_orbit orbit) {
+      |                 ^                   ~~~~~~~~~~~~~
+7 errors generated.
+mutate: suite score_subset_edge exited 1
+build_eslice/mutants/p12856/m0033_score.c:49:32: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   49 |     if (orbit != CT_ORBIT_EDGE && m->depth_from != CT_GEN_SLICE_DEPTH ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_eslice/mutants/p12856/m0033_score.c:49:32: note: place parentheses around the '&&' expression to silence this warning
+   49 |     if (orbit != CT_ORBIT_EDGE && m->depth_from != CT_GEN_SLICE_DEPTH ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite score_subset_edge exited 1
+build_eslice/mutants/p12856/m0035_score.c:49:71: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   49 |     if (orbit != CT_ORBIT_EDGE || m->depth_from != CT_GEN_SLICE_DEPTH &&
+      |                                ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+   50 |         m->depth_to != CT_GEN_SLICE_DEPTH) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_eslice/mutants/p12856/m0035_score.c:49:71: note: place parentheses around the '&&' expression to silence this warning
+   49 |     if (orbit != CT_ORBIT_EDGE || m->depth_from != CT_GEN_SLICE_DEPTH &&
+      |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+   50 |         m->depth_to != CT_GEN_SLICE_DEPTH) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite score_subset_edge exited 1
+build_eslice/mutants/p12856/m0037_score.c:65:32: error: expected ')'
+   65 | int ct_count_qtm(const ct_move /seq, int count) {
+      |                                ^
+build_eslice/mutants/p12856/m0037_score.c:65:17: note: to match this '('
+   65 | int ct_count_qtm(const ct_move /seq, int count) {
+      |                 ^
+build_eslice/mutants/p12856/m0037_score.c:65:5: error: conflicting types for 'ct_count_qtm'
+   65 | int ct_count_qtm(const ct_move /seq, int count) {
+      |     ^
+src\gen/score.h:41:5: note: previous declaration is here
+   41 | int ct_count_qtm(const ct_move *seq, int count);
+      |     ^
+build_eslice/mutants/p12856/m0037_score.c:66:30: error: use of undeclared identifier 'seq'
+   66 |     int rc = score_check_seq(seq, count);
+      |                              ^~~
+build_eslice/mutants/p12856/m0037_score.c:66:35: error: use of undeclared identifier 'count'
+   66 |     int rc = score_check_seq(seq, count);
+      |                                   ^~~~~
+build_eslice/mutants/p12856/m0037_score.c:71:25: error: use of undeclared identifier 'count'
+   71 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_eslice/mutants/p12856/m0037_score.c:72:13: error: use of undeclared identifier 'seq'
+   72 |         if (seq[i].quarter == CT_SCORE_QUARTER_DOUBLE) {
+      |             ^~~
+build_eslice/mutants/p12856/m0037_score.c:74:20: error: use of undeclared identifier 'seq'
+   74 |         } else if (seq[i].quarter == CT_SCORE_QUARTER_CW ||
+      |                    ^~~
+build_eslice/mutants/p12856/m0037_score.c:75:20: error: use of undeclared identifier 'seq'
+   75 |                    seq[i].quarter == CT_SCORE_QUARTER_CCW) {
+      |                    ^~~
+8 errors generated.
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+mutate: suite score_qtm exited 1
+build_eslice/mutants/p12856/m0050_score.c:82:36: error: expected ')'
+   82 | int ct_count_regrips(const ct_move /seq, int count) {
+      |                                    ^
+build_eslice/mutants/p12856/m0050_score.c:82:21: note: to match this '('
+   82 | int ct_count_regrips(const ct_move /seq, int count) {
+      |                     ^
+build_eslice/mutants/p12856/m0050_score.c:82:5: error: conflicting types for 'ct_count_regrips'
+   82 | int ct_count_regrips(const ct_move /seq, int count) {
+      |     ^
+src\gen/score.h:42:5: note: previous declaration is here
+   42 | int ct_count_regrips(const ct_move *seq, int count);
+      |     ^
+build_eslice/mutants/p12856/m0050_score.c:83:30: error: use of undeclared identifier 'seq'
+   83 |     int rc = score_check_seq(seq, count);
+      |                              ^~~
+build_eslice/mutants/p12856/m0050_score.c:83:35: error: use of undeclared identifier 'count'
+   83 |     int rc = score_check_seq(seq, count);
+      |                                   ^~~~~
+build_eslice/mutants/p12856/m0050_score.c:91:25: error: use of undeclared identifier 'count'
+   91 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_eslice/mutants/p12856/m0050_score.c:92:13: error: use of undeclared identifier 'seq'
+   92 |         if (seq[i].face == prev) {
+      |             ^~~
+build_eslice/mutants/p12856/m0050_score.c:95:16: error: use of undeclared identifier 'seq'
+   95 |         prev = seq[i].face;
+      |                ^~~
+build_eslice/mutants/p12856/m0050_score.c:96:39: error: use of undeclared identifier 'seq'
+   96 |         int hand = score_hand_of_face[seq[i].face];
+      |                                       ^~~
+build_eslice/mutants/p12856/m0050_score.c:105:43: error: use of undeclared identifier 'seq'
+  105 |         grip[hand] = score_region_of_face[seq[i].face] == hand ? CT_SCORE_GRIP_HOME
+      |                                           ^~~
+9 errors generated.
+mutate: suite score_regrips exited 1
+mutate: suite score_regrips exited 1
+mutate: suite score_regrips exited 1
+mutate: suite score_regrips exited 1
+mutate: suite score_subset exited -1073741795
+mutate: suite score_regrips exited 1
+mutate: suite score_regrips exited 1
+mutate: suite score_subset exited -1073741795
+mutate: suite score_regrips exited 1
+mutate: suite score_regrips exited 1
+mutate: suite score_regrips exited 1
+mutate: suite score_regrips exited 1
+build_eslice/mutants/p12856/m0063_score.c:111:32: error: expected ')'
+  111 | int ct_score_alg(const ct_move /seq, int count, const ct_config *cfg, ct_orbit orbit,
+      |                                ^
+build_eslice/mutants/p12856/m0063_score.c:111:17: note: to match this '('
+  111 | int ct_score_alg(const ct_move /seq, int count, const ct_config *cfg, ct_orbit orbit,
+      |                 ^
+build_eslice/mutants/p12856/m0063_score.c:111:5: error: conflicting types for 'ct_score_alg'
+  111 | int ct_score_alg(const ct_move /seq, int count, const ct_config *cfg, ct_orbit orbit,
+      |     ^
+src\gen/score.h:38:5: note: previous declaration is here
+   38 | int ct_score_alg(const ct_move *seq, int count, const ct_config *cfg, ct_orbit orbit,
+      |     ^
+build_eslice/mutants/p12856/m0063_score.c:113:9: error: use of undeclared identifier 'cfg'
+  113 |     if (cfg == NULL || out == NULL) {
+      |         ^~~
+build_eslice/mutants/p12856/m0063_score.c:113:24: error: use of undeclared identifier 'out'
+  113 |     if (cfg == NULL || out == NULL) {
+      |                        ^~~
+build_eslice/mutants/p12856/m0063_score.c:116:30: error: use of undeclared identifier 'seq'
+  116 |     int rc = score_check_seq(seq, count);
+      |                              ^~~
+build_eslice/mutants/p12856/m0063_score.c:116:35: error: use of undeclared identifier 'count'
+  116 |     int rc = score_check_seq(seq, count);
+      |                                   ^~~~~
+build_eslice/mutants/p12856/m0063_score.c:121:9: error: use of undeclared identifier 'orbit'
+  121 |         orbit == CT_ORBIT_EDGE ? cfg->gen.preferred_moves_edge : cfg->gen.preferred_moves;
+      |         ^~~~~
+build_eslice/mutants/p12856/m0063_score.c:121:34: error: use of undeclared identifier 'cfg'
+  121 |         orbit == CT_ORBIT_EDGE ? cfg->gen.preferred_moves_edge : cfg->gen.preferred_moves;
+      |                                  ^~~
+build_eslice/mutants/p12856/m0063_score.c:121:66: error: use of undeclared identifier 'cfg'
+  121 |         orbit == CT_ORBIT_EDGE ? cfg->gen.preferred_moves_edge : cfg->gen.preferred_moves;
+      |                                                                  ^~~
+build_eslice/mutants/p12856/m0063_score.c:125:25: error: use of undeclared identifier 'count'
+  125 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_eslice/mutants/p12856/m0063_score.c:126:45: error: use of undeclared identifier 'seq'
+  126 |         unsigned face_bit = score_face_bits[seq[i].face];
+      |                                             ^~~
+build_eslice/mutants/p12856/m0063_score.c:128:23: error: use of undeclared identifier 'seq'
+  128 |         int quarter = seq[i].quarter;
+      |                       ^~~
+build_eslice/mutants/p12856/m0063_score.c:134:50: error: use of undeclared identifier 'seq'
+  134 |         unsigned pref_bit = score_preferred_bit(&seq[i], orbit);
+      |                                                  ^~~
+build_eslice/mutants/p12856/m0063_score.c:134:58: error: use of undeclared identifier 'orbit'
+  134 |         unsigned pref_bit = score_preferred_bit(&seq[i], orbit);
+      |                                                          ^~~~~
+build_eslice/mutants/p12856/m0063_score.c:136:23: error: use of undeclared identifier 'cfg'
+  136 |             subset += cfg->gen.penalty[score_face_bit_index(pref_bit)];
+      |                       ^~~
+build_eslice/mutants/p12856/m0063_score.c:139:19: error: use of undeclared identifier 'cfg'
+  139 |         finger += cfg->gen.finger_cost[idx][dir];
+      |                   ^~~
+build_eslice/mutants/p12856/m0063_score.c:141:5: error: use of undeclared identifier 'out'
+  141 |     out->qtm = qtm;
+      |     ^~~
+build_eslice/mutants/p12856/m0063_score.c:142:5: error: use of undeclared identifier 'out'
+  142 |     out->subset_penalty = subset;
+      |     ^~~
+build_eslice/mutants/p12856/m0063_score.c:143:5: error: use of undeclared identifier 'out'
+  143 |     out->regrips = ct_count_regrips(seq, count);
+      |     ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_eslice/mutants/p12856/m0064_score.c:111:65: error: expected ')'
+  111 | int ct_score_alg(const ct_move *seq, int count, const ct_config /cfg, ct_orbit orbit,
+      |                                                                 ^
+build_eslice/mutants/p12856/m0064_score.c:111:17: note: to match this '('
+  111 | int ct_score_alg(const ct_move *seq, int count, const ct_config /cfg, ct_orbit orbit,
+      |                 ^
+build_eslice/mutants/p12856/m0064_score.c:111:5: error: conflicting types for 'ct_score_alg'
+  111 | int ct_score_alg(const ct_move *seq, int count, const ct_config /cfg, ct_orbit orbit,
+      |     ^
+src\gen/score.h:38:5: note: previous declaration is here
+   38 | int ct_score_alg(const ct_move *seq, int count, const ct_config *cfg, ct_orbit orbit,
+      |     ^
+build_eslice/mutants/p12856/m0064_score.c:113:9: error: use of undeclared identifier 'cfg'
+  113 |     if (cfg == NULL || out == NULL) {
+      |         ^~~
+build_eslice/mutants/p12856/m0064_score.c:113:24: error: use of undeclared identifier 'out'
+  113 |     if (cfg == NULL || out == NULL) {
+      |                        ^~~
+build_eslice/mutants/p12856/m0064_score.c:121:9: error: use of undeclared identifier 'orbit'
+  121 |         orbit == CT_ORBIT_EDGE ? cfg->gen.preferred_moves_edge : cfg->gen.preferred_moves;
+      |         ^~~~~
+build_eslice/mutants/p12856/m0064_score.c:121:34: error: use of undeclared identifier 'cfg'
+  121 |         orbit == CT_ORBIT_EDGE ? cfg->gen.preferred_moves_edge : cfg->gen.preferred_moves;
+      |                                  ^~~
+build_eslice/mutants/p12856/m0064_score.c:121:66: error: use of undeclared identifier 'cfg'
+  121 |         orbit == CT_ORBIT_EDGE ? cfg->gen.preferred_moves_edge : cfg->gen.preferred_moves;
+      |                                                                  ^~~
+build_eslice/mutants/p12856/m0064_score.c:134:58: error: use of undeclared identifier 'orbit'
+  134 |         unsigned pref_bit = score_preferred_bit(&seq[i], orbit);
+      |                                                          ^~~~~
+build_eslice/mutants/p12856/m0064_score.c:136:23: error: use of undeclared identifier 'cfg'
+  136 |             subset += cfg->gen.penalty[score_face_bit_index(pref_bit)];
+      |                       ^~~
+build_eslice/mutants/p12856/m0064_score.c:139:19: error: use of undeclared identifier 'cfg'
+  139 |         finger += cfg->gen.finger_cost[idx][dir];
+      |                   ^~~
+build_eslice/mutants/p12856/m0064_score.c:141:5: error: use of undeclared identifier 'out'
+  141 |     out->qtm = qtm;
+      |     ^~~
+build_eslice/mutants/p12856/m0064_score.c:142:5: error: use of undeclared identifier 'out'
+  142 |     out->subset_penalty = subset;
+      |     ^~~
+build_eslice/mutants/p12856/m0064_score.c:143:5: error: use of undeclared identifier 'out'
+  143 |     out->regrips = ct_count_regrips(seq, count);
+      |     ^~~
+build_eslice/mutants/p12856/m0064_score.c:144:5: error: use of undeclared identifier 'out'
+  144 |     out->finger_penalty = finger;
+      |     ^~~
+build_eslice/mutants/p12856/m0064_score.c:145:5: error: use of undeclared identifier 'out'
+  145 |     out->total = cfg->gen.weight_len * (double)qtm + cfg->gen.weight_subset * subset +
+      |     ^~~
+build_eslice/mutants/p12856/m0064_score.c:145:18: error: use of undeclared identifier 'cfg'
+  145 |     out->total = cfg->gen.weight_len * (double)qtm + cfg->gen.weight_subset * subset +
+      |                  ^~~
+build_eslice/mutants/p12856/m0064_score.c:145:54: error: use of undeclared identifier 'cfg'
+  145 |     out->total = cfg->gen.weight_len * (double)qtm + cfg->gen.weight_subset * subset +
+      |                                                      ^~~
+build_eslice/mutants/p12856/m0064_score.c:146:18: error: use of undeclared identifier 'cfg'
+  146 |                  cfg->gen.weight_regrip * (double)out->regrips + cfg->gen.weight_finger * finger;
+      |                  ^~~
+build_eslice/mutants/p12856/m0064_score.c:146:51: error: use of undeclared identifier 'out'
+  146 |                  cfg->gen.weight_regrip * (double)out->regrips + cfg->gen.weight_finger * finger;
+      |                                                   ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_eslice/mutants/p12856/m0065_score.c:112:33: error: expected ')'
+  112 |                  ct_score_parts /out) {
+      |                                 ^
+build_eslice/mutants/p12856/m0065_score.c:111:17: note: to match this '('
+  111 | int ct_score_alg(const ct_move *seq, int count, const ct_config *cfg, ct_orbit orbit,
+      |                 ^
+build_eslice/mutants/p12856/m0065_score.c:111:5: error: conflicting types for 'ct_score_alg'
+  111 | int ct_score_alg(const ct_move *seq, int count, const ct_config *cfg, ct_orbit orbit,
+      |     ^
+src\gen/score.h:38:5: note: previous declaration is here
+   38 | int ct_score_alg(const ct_move *seq, int count, const ct_config *cfg, ct_orbit orbit,
+      |     ^
+build_eslice/mutants/p12856/m0065_score.c:113:24: error: use of undeclared identifier 'out'
+  113 |     if (cfg == NULL || out == NULL) {
+      |                        ^~~
+build_eslice/mutants/p12856/m0065_score.c:141:5: error: use of undeclared identifier 'out'
+  141 |     out->qtm = qtm;
+      |     ^~~
+build_eslice/mutants/p12856/m0065_score.c:142:5: error: use of undeclared identifier 'out'
+  142 |     out->subset_penalty = subset;
+      |     ^~~
+build_eslice/mutants/p12856/m0065_score.c:143:5: error: use of undeclared identifier 'out'
+  143 |     out->regrips = ct_count_regrips(seq, count);
+      |     ^~~
+build_eslice/mutants/p12856/m0065_score.c:144:5: error: use of undeclared identifier 'out'
+  144 |     out->finger_penalty = finger;
+      |     ^~~
+build_eslice/mutants/p12856/m0065_score.c:145:5: error: use of undeclared identifier 'out'
+  145 |     out->total = cfg->gen.weight_len * (double)qtm + cfg->gen.weight_subset * subset +
+      |     ^~~
+build_eslice/mutants/p12856/m0065_score.c:146:51: error: use of undeclared identifier 'out'
+  146 |                  cfg->gen.weight_regrip * (double)out->regrips + cfg->gen.weight_finger * finger;
+      |                                                   ^~~
+9 errors generated.
+mutate: suite score_subset exited 1
+mutate: suite score_errors exited -1073741795
+mutate: suite score_subset exited 1
+mutate: suite score_subset exited 1
+mutate: suite score_subset_edge exited 1
+mutate: suite score_total exited 1
+mutate: suite score_total exited 1
+mutate: suite score_subset_edge exited 1
+mutate: suite score_subset exited -1073741795
+mutate: suite score_subset_edge exited 1
+mutate: suite score_total exited 1
+mutate: suite score_total exited 1
+build_eslice/mutants/p12856/m0078_score.c:131:51: error: non-overlapping comparisons always evaluate to false [-Werror,-Wtautological-overlap-compare]
+  131 |         } else if (quarter == CT_SCORE_QUARTER_CW && quarter == CT_SCORE_QUARTER_CCW) {
+      |                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite score_total exited 1
+mutate: suite score_total exited 1
+mutate: suite score_total exited 1
+mutate: suite score_subset exited 1
+mutate: suite score_subset exited 1
+build_eslice/mutants/p12856/m0084_score.c:135:36: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  135 |         if ((preferred & pref_bit) == -1) {
+      |              ~~~~~~~~~~~~~~~~~~~~  ^  ~~
+1 error generated.
+mutate: suite score_finger exited 1
+mutate: suite score_total exited 1
+mutate: suite score_total exited 1
+mutate: suite score_total exited 1
+mutate: suite score_total exited 1
+mutate: suite score_total exited 1
+mutate: suite score_total exited 1
+mutate: suite score_total exited 1
+build_eslice/mutants/p12856/m0093_score.c:150:46: error: expected ')'
+  150 | int ct_score_parts_json(const ct_score_parts /p, char *out, unsigned cap) {
+      |                                              ^
+build_eslice/mutants/p12856/m0093_score.c:150:24: note: to match this '('
+  150 | int ct_score_parts_json(const ct_score_parts /p, char *out, unsigned cap) {
+      |                        ^
+build_eslice/mutants/p12856/m0093_score.c:150:5: error: conflicting types for 'ct_score_parts_json'
+  150 | int ct_score_parts_json(const ct_score_parts /p, char *out, unsigned cap) {
+      |     ^
+src\gen/score.h:40:5: note: previous declaration is here
+   40 | int ct_score_parts_json(const ct_score_parts *p, char *out, unsigned cap);
+      |     ^
+build_eslice/mutants/p12856/m0093_score.c:151:9: error: use of undeclared identifier 'p'
+  151 |     if (p == NULL || out == NULL || cap == 0) {
+      |         ^
+build_eslice/mutants/p12856/m0093_score.c:151:22: error: use of undeclared identifier 'out'
+  151 |     if (p == NULL || out == NULL || cap == 0) {
+      |                      ^~~
+build_eslice/mutants/p12856/m0093_score.c:151:37: error: use of undeclared identifier 'cap'
+  151 |     if (p == NULL || out == NULL || cap == 0) {
+      |                                     ^~~
+build_eslice/mutants/p12856/m0093_score.c:154:19: error: use of undeclared identifier 'p'
+  154 |     if (!isfinite(p->subset_penalty) || !isfinite(p->finger_penalty) || !isfinite(p->total)) {
+      |                   ^
+build_eslice/mutants/p12856/m0093_score.c:154:51: error: use of undeclared identifier 'p'
+  154 |     if (!isfinite(p->subset_penalty) || !isfinite(p->finger_penalty) || !isfinite(p->total)) {
+      |                                                   ^
+build_eslice/mutants/p12856/m0093_score.c:154:83: error: use of undeclared identifier 'p'
+  154 |     if (!isfinite(p->subset_penalty) || !isfinite(p->finger_penalty) || !isfinite(p->total)) {
+      |                                                                                   ^
+build_eslice/mutants/p12856/m0093_score.c:160:32: error: use of undeclared identifier 'p'
+  160 |         snprintf(NULL, 0, fmt, p->qtm, p->subset_penalty, p->regrips, p->finger_penalty, p->total);
+      |                                ^
+build_eslice/mutants/p12856/m0093_score.c:160:40: error: use of undeclared identifier 'p'
+  160 |         snprintf(NULL, 0, fmt, p->qtm, p->subset_penalty, p->regrips, p->finger_penalty, p->total);
+      |                                        ^
+build_eslice/mutants/p12856/m0093_score.c:160:59: error: use of undeclared identifier 'p'
+  160 |         snprintf(NULL, 0, fmt, p->qtm, p->subset_penalty, p->regrips, p->finger_penalty, p->total);
+      |                                                           ^
+build_eslice/mutants/p12856/m0093_score.c:160:71: error: use of undeclared identifier 'p'
+  160 |         snprintf(NULL, 0, fmt, p->qtm, p->subset_penalty, p->regrips, p->finger_penalty, p->total);
+      |                                                                       ^
+build_eslice/mutants/p12856/m0093_score.c:160:90: error: use of undeclared identifier 'p'
+  160 |         snprintf(NULL, 0, fmt, p->qtm, p->subset_penalty, p->regrips, p->finger_penalty, p->total);
+      |                                                                                          ^
+build_eslice/mutants/p12856/m0093_score.c:161:39: error: use of undeclared identifier 'cap'
+  161 |     if (need < 0 || (unsigned)need >= cap) {
+      |                                       ^~~
+build_eslice/mutants/p12856/m0093_score.c:164:14: error: use of undeclared identifier 'out'
+  164 |     snprintf(out, cap, fmt, p->qtm, p->subset_penalty, p->regrips, p->finger_penalty, p->total);
+      |              ^~~
+build_eslice/mutants/p12856/m0093_score.c:164:19: error: use of undeclared identifier 'cap'
+  164 |     snprintf(out, cap, fmt, p->qtm, p->subset_penalty, p->regrips, p->finger_penalty, p->total);
+      |                   ^~~
+build_eslice/mutants/p12856/m0093_score.c:164:29: error: use of undeclared identifier 'p'
+  164 |     snprintf(out, cap, fmt, p->qtm, p->subset_penalty, p->regrips, p->finger_penalty, p->total);
+      |                             ^
+build_eslice/mutants/p12856/m0093_score.c:164:37: error: use of undeclared identifier 'p'
+  164 |     snprintf(out, cap, fmt, p->qtm, p->subset_penalty, p->regrips, p->finger_penalty, p->total);
+      |                                     ^
+build_eslice/mutants/p12856/m0093_score.c:164:56: error: use of undeclared identifier 'p'
+  164 |     snprintf(out, cap, fmt, p->qtm, p->subset_penalty, p->regrips, p->finger_penalty, p->total);
+      |                                                        ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_eslice/mutants/p12856/m0094_score.c:150:55: error: expected ')'
+  150 | int ct_score_parts_json(const ct_score_parts *p, char /out, unsigned cap) {
+      |                                                       ^
+build_eslice/mutants/p12856/m0094_score.c:150:24: note: to match this '('
+  150 | int ct_score_parts_json(const ct_score_parts *p, char /out, unsigned cap) {
+      |                        ^
+build_eslice/mutants/p12856/m0094_score.c:150:5: error: conflicting types for 'ct_score_parts_json'
+  150 | int ct_score_parts_json(const ct_score_parts *p, char /out, unsigned cap) {
+      |     ^
+src\gen/score.h:40:5: note: previous declaration is here
+   40 | int ct_score_parts_json(const ct_score_parts *p, char *out, unsigned cap);
+      |     ^
+build_eslice/mutants/p12856/m0094_score.c:151:22: error: use of undeclared identifier 'out'
+  151 |     if (p == NULL || out == NULL || cap == 0) {
+      |                      ^~~
+build_eslice/mutants/p12856/m0094_score.c:151:37: error: use of undeclared identifier 'cap'
+  151 |     if (p == NULL || out == NULL || cap == 0) {
+      |                                     ^~~
+build_eslice/mutants/p12856/m0094_score.c:161:39: error: use of undeclared identifier 'cap'
+  161 |     if (need < 0 || (unsigned)need >= cap) {
+      |                                       ^~~
+build_eslice/mutants/p12856/m0094_score.c:164:14: error: use of undeclared identifier 'out'
+  164 |     snprintf(out, cap, fmt, p->qtm, p->subset_penalty, p->regrips, p->finger_penalty, p->total);
+      |              ^~~
+build_eslice/mutants/p12856/m0094_score.c:164:19: error: use of undeclared identifier 'cap'
+  164 |     snprintf(out, cap, fmt, p->qtm, p->subset_penalty, p->regrips, p->finger_penalty, p->total);
+      |                   ^~~
+7 errors generated.
+mutate: suite score_json exited 1
+build_eslice/mutants/p12856/m0096_score.c:151:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  151 |     if (p == NULL && out == NULL || cap == 0) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_eslice/mutants/p12856/m0096_score.c:151:19: note: place parentheses around the '&&' expression to silence this warning
+  151 |     if (p == NULL && out == NULL || cap == 0) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite score_json exited 1
+build_eslice/mutants/p12856/m0098_score.c:151:34: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  151 |     if (p == NULL || out == NULL && cap == 0) {
+      |                   ~~ ~~~~~~~~~~~~^~~~~~~~~~~
+build_eslice/mutants/p12856/m0098_score.c:151:34: note: place parentheses around the '&&' expression to silence this warning
+  151 |     if (p == NULL || out == NULL && cap == 0) {
+      |                                  ^          
+      |                      (                      )
+1 error generated.
+mutate: suite score_json exited 1
+mutate: suite score_errors exited 1
+build_eslice/mutants/p12856/m0101_score.c:151:41: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  151 |     if (p == NULL || out == NULL || cap == -1) {
+      |                                     ~~~ ^  ~~
+1 error generated.
+mutate: suite score_json exited 1
+build_eslice/mutants/p12856/m0103_score.c:154:38: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  154 |     if (!isfinite(p->subset_penalty) && !isfinite(p->finger_penalty) || !isfinite(p->total)) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_eslice/mutants/p12856/m0103_score.c:154:38: note: place parentheses around the '&&' expression to silence this warning
+  154 |     if (!isfinite(p->subset_penalty) && !isfinite(p->finger_penalty) || !isfinite(p->total)) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite score_json exited 1
+build_eslice/mutants/p12856/m0105_score.c:154:70: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  154 |     if (!isfinite(p->subset_penalty) || !isfinite(p->finger_penalty) && !isfinite(p->total)) {
+      |                                      ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
+build_eslice/mutants/p12856/m0105_score.c:154:70: note: place parentheses around the '&&' expression to silence this warning
+  154 |     if (!isfinite(p->subset_penalty) || !isfinite(p->finger_penalty) && !isfinite(p->total)) {
+      |                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite score_json exited 1
+mutate: suite score_json exited 1
+mutate: suite score_json exited 1
+mutate: suite score_json exited 1
+mutate: suite score_json exited 1

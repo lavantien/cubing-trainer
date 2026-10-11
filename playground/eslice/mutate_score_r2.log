@@ -1,0 +1,147 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_trainer.c -o build_eslice/tobj/src/ui/screen_trainer.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_eslice/bin/mutate.exe src/gen/score.c build_eslice score_qtm score_subset score_subset_edge score_finger score_regrips score_total score_json score_errors
+mutate: scope=src/gen/score.c files=1 sites=113 suites=8
+KILLED    m0001 src/gen/score.c:23 [arith * -> /]
+          build break
+KILLED    m0002 src/gen/score.c:24 [cmp < -> <=]
+KILLED    m0003 src/gen/score.c:24 [int+1 0 -> 1]
+KILLED    m0004 src/gen/score.c:24 [int-1 0 -> -1]
+KILLED    m0005 src/gen/score.c:24 [logic || -> &&]
+KILLED    m0006 src/gen/score.c:24 [cmp == -> !=]
+KILLED    m0007 src/gen/score.c:24 [logic && -> ||]
+KILLED    m0008 src/gen/score.c:24 [cmp > -> >=]
+KILLED    m0009 src/gen/score.c:24 [int+1 0 -> 1]
+KILLED    m0010 src/gen/score.c:24 [int-1 0 -> -1]
+KILLED    m0011 src/gen/score.c:27 [int+1 0 -> 1]
+KILLED    m0012 src/gen/score.c:27 [int-1 0 -> -1]
+KILLED    m0013 src/gen/score.c:27 [cmp < -> <=]
+KILLED    m0014 src/gen/score.c:28 [cmp < -> <=]
+KILLED    m0015 src/gen/score.c:28 [int+1 0 -> 1]
+KILLED    m0016 src/gen/score.c:28 [int-1 0 -> -1]
+KILLED    m0017 src/gen/score.c:28 [logic || -> &&]
+KILLED    m0018 src/gen/score.c:28 [cmp >= -> >]
+KILLED    m0019 src/gen/score.c:31 [cmp < -> <=]
+KILLED    m0020 src/gen/score.c:31 [logic || -> &&]
+KILLED    m0021 src/gen/score.c:31 [cmp > -> >=]
+KILLED    m0022 src/gen/score.c:39 [int+1 0 -> 1]
+KILLED    m0023 src/gen/score.c:39 [int-1 0 -> -1]
+SURVIVED  m0024 src/gen/score.c:39 [cmp < -> <=]
+KILLED    m0025 src/gen/score.c:40 [int+1 1u -> 2u]
+KILLED    m0026 src/gen/score.c:40 [int-1 1u -> 0u]
+KILLED    m0027 src/gen/score.c:40 [cmp == -> !=]
+SURVIVED  m0028 src/gen/score.c:44 [arith - -> +]
+SURVIVED  m0029 src/gen/score.c:44 [int+1 1 -> 2]
+SURVIVED  m0030 src/gen/score.c:44 [int-1 1 -> 0]
+KILLED    m0031 src/gen/score.c:47 [arith * -> /]
+          build break
+KILLED    m0032 src/gen/score.c:49 [cmp != -> ==]
+KILLED    m0033 src/gen/score.c:49 [logic || -> &&]
+          build break
+KILLED    m0034 src/gen/score.c:49 [cmp != -> ==]
+KILLED    m0035 src/gen/score.c:49 [logic || -> &&]
+          build break
+KILLED    m0036 src/gen/score.c:50 [cmp != -> ==]
+KILLED    m0037 src/gen/score.c:65 [arith * -> /]
+          build break
+KILLED    m0038 src/gen/score.c:67 [cmp != -> ==]
+KILLED    m0039 src/gen/score.c:70 [int+1 0 -> 1]
+KILLED    m0040 src/gen/score.c:70 [int-1 0 -> -1]
+KILLED    m0041 src/gen/score.c:71 [int+1 0 -> 1]
+KILLED    m0042 src/gen/score.c:71 [int-1 0 -> -1]
+KILLED    m0043 src/gen/score.c:71 [cmp < -> <=]
+KILLED    m0044 src/gen/score.c:72 [cmp == -> !=]
+KILLED    m0045 src/gen/score.c:74 [cmp == -> !=]
+KILLED    m0046 src/gen/score.c:74 [logic || -> &&]
+KILLED    m0047 src/gen/score.c:75 [cmp == -> !=]
+KILLED    m0048 src/gen/score.c:76 [int+1 1 -> 2]
+KILLED    m0049 src/gen/score.c:76 [int-1 1 -> 0]
+KILLED    m0050 src/gen/score.c:82 [arith * -> /]
+          build break
+KILLED    m0051 src/gen/score.c:84 [cmp != -> ==]
+KILLED    m0052 src/gen/score.c:90 [int+1 0 -> 1]
+KILLED    m0053 src/gen/score.c:90 [int-1 0 -> -1]
+KILLED    m0054 src/gen/score.c:91 [int+1 0 -> 1]
+KILLED    m0055 src/gen/score.c:91 [int-1 0 -> -1]
+KILLED    m0056 src/gen/score.c:91 [cmp < -> <=]
+KILLED    m0057 src/gen/score.c:92 [cmp == -> !=]
+KILLED    m0058 src/gen/score.c:97 [cmp == -> !=]
+KILLED    m0059 src/gen/score.c:102 [cmp != -> ==]
+KILLED    m0060 src/gen/score.c:103 [int+1 1 -> 2]
+KILLED    m0061 src/gen/score.c:103 [int-1 1 -> 0]
+KILLED    m0062 src/gen/score.c:105 [cmp == -> !=]
+KILLED    m0063 src/gen/score.c:111 [arith * -> /]
+          build break
+KILLED    m0064 src/gen/score.c:111 [arith * -> /]
+          build break
+KILLED    m0065 src/gen/score.c:112 [arith * -> /]
+          build break
+KILLED    m0066 src/gen/score.c:113 [cmp == -> !=]
+KILLED    m0067 src/gen/score.c:113 [logic || -> &&]
+KILLED    m0068 src/gen/score.c:113 [cmp == -> !=]
+KILLED    m0069 src/gen/score.c:117 [cmp != -> ==]
+KILLED    m0070 src/gen/score.c:121 [cmp == -> !=]
+KILLED    m0071 src/gen/score.c:122 [int+1 0 -> 1]
+KILLED    m0072 src/gen/score.c:122 [int-1 0 -> -1]
+KILLED    m0073 src/gen/score.c:125 [int+1 0 -> 1]
+KILLED    m0074 src/gen/score.c:125 [int-1 0 -> -1]
+KILLED    m0075 src/gen/score.c:125 [cmp < -> <=]
+KILLED    m0076 src/gen/score.c:129 [cmp == -> !=]
+KILLED    m0077 src/gen/score.c:131 [cmp == -> !=]
+KILLED    m0078 src/gen/score.c:131 [logic || -> &&]
+          build break
+KILLED    m0079 src/gen/score.c:131 [cmp == -> !=]
+KILLED    m0080 src/gen/score.c:132 [int+1 1 -> 2]
+KILLED    m0081 src/gen/score.c:132 [int-1 1 -> 0]
+KILLED    m0082 src/gen/score.c:135 [cmp == -> !=]
+KILLED    m0083 src/gen/score.c:135 [int+1 0 -> 1]
+KILLED    m0084 src/gen/score.c:135 [int-1 0 -> -1]
+          build break
+KILLED    m0085 src/gen/score.c:138 [cmp == -> !=]
+KILLED    m0086 src/gen/score.c:145 [arith * -> /]
+KILLED    m0087 src/gen/score.c:145 [arith + -> -]
+KILLED    m0088 src/gen/score.c:145 [arith * -> /]
+KILLED    m0089 src/gen/score.c:145 [arith + -> -]
+KILLED    m0090 src/gen/score.c:146 [arith * -> /]
+KILLED    m0091 src/gen/score.c:146 [arith + -> -]
+KILLED    m0092 src/gen/score.c:146 [arith * -> /]
+KILLED    m0093 src/gen/score.c:150 [arith * -> /]
+          build break
+KILLED    m0094 src/gen/score.c:150 [arith * -> /]
+          build break
+KILLED    m0095 src/gen/score.c:151 [cmp == -> !=]
+KILLED    m0096 src/gen/score.c:151 [logic || -> &&]
+          build break
+KILLED    m0097 src/gen/score.c:151 [cmp == -> !=]
+KILLED    m0098 src/gen/score.c:151 [logic || -> &&]
+          build break
+KILLED    m0099 src/gen/score.c:151 [cmp == -> !=]
+KILLED    m0100 src/gen/score.c:151 [int+1 0 -> 1]
+KILLED    m0101 src/gen/score.c:151 [int-1 0 -> -1]
+          build break
+KILLED    m0102 src/gen/score.c:154 [not-del ! -> (deleted)]
+KILLED    m0103 src/gen/score.c:154 [logic || -> &&]
+          build break
+KILLED    m0104 src/gen/score.c:154 [not-del ! -> (deleted)]
+KILLED    m0105 src/gen/score.c:154 [logic || -> &&]
+          build break
+KILLED    m0106 src/gen/score.c:154 [not-del ! -> (deleted)]
+KILLED    m0107 src/gen/score.c:160 [int+1 0 -> 1]
+KILLED    m0108 src/gen/score.c:160 [int-1 0 -> -1]
+SURVIVED  m0109 src/gen/score.c:161 [cmp < -> <=]
+SURVIVED  m0110 src/gen/score.c:161 [int+1 0 -> 1]
+SURVIVED  m0111 src/gen/score.c:161 [int-1 0 -> -1]
+KILLED    m0112 src/gen/score.c:161 [logic || -> &&]
+KILLED    m0113 src/gen/score.c:161 [cmp >= -> >]
+ACCEPTED  m0024 src/gen/score.c:39 [cmp < -> <=] :: face bit loop bound mutant is equivalent: faces are validated to 0 to 5 before the call, so the extra iteration tests bit 1<<6 against a bit that is always one of bits 0 to 5 and never matches
+ACCEPTED  m0028 src/gen/score.c:44 [arith - -> +] :: face bit not-found return mutants are equivalent: every caller passes score_face_bits of a validated face, and 1<<i for i 0 to 5 covers all six bits, so the not-found return path is unreachable
+ACCEPTED  m0029 src/gen/score.c:44 [int+1 1 -> 2] :: face bit not-found return mutants are equivalent: every caller passes score_face_bits of a validated face, and 1<<i for i 0 to 5 covers all six bits, so the not-found return path is unreachable
+ACCEPTED  m0030 src/gen/score.c:44 [int-1 1 -> 0] :: face bit not-found return mutants are equivalent: every caller passes score_face_bits of a validated face, and 1<<i for i 0 to 5 covers all six bits, so the not-found return path is unreachable
+ACCEPTED  m0109 src/gen/score.c:161 [cmp < -> <=] :: need sign check mutants are equivalent: need is snprintf's length of a fixed nonempty format, never 0 or negative, and a hypothetical -1 still reaches the cap rejection through the unsigned cast
+ACCEPTED  m0110 src/gen/score.c:161 [int+1 0 -> 1] :: need sign check mutants are equivalent: need is snprintf's length of a fixed nonempty format, never 0 or negative, and a hypothetical -1 still reaches the cap rejection through the unsigned cast
+ACCEPTED  m0111 src/gen/score.c:161 [int-1 0 -> -1] :: need sign check mutants are equivalent: need is snprintf's length of a fixed nonempty format, never 0 or negative, and a hypothetical -1 still reaches the cap rejection through the unsigned cast
+mutate: generated=113 build_failed=18 killed_by_tests=88 killed=106 survived=7 accepted=7 unexplained=0 skipped=0
+mutate: kill rate 106/113 = 93.8%, with accepted equivalents 113/113 = 100.0%
+mutate: wall 70.1s
+EXIT=0
