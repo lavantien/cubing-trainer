@@ -90,7 +90,7 @@ CT_FUZZ_SUITES += fuzz_db_card_strings fuzz_db_review_rows fuzz_db_settings_keys
 CT_FUZZ_SUITES += fuzz_config_keys fuzz_config_moves
 CT_FUZZ_SUITES += fuzz_script_parse
 
-.PHONY: all build vendor vendor-verify-selftest release release-verify-selftest test diagrams memguard memguard-selftest run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual visual-selftest db-verify
+.PHONY: all build vendor vendor-verify-selftest release release-verify-selftest test diagrams memguard memguard-selftest run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual visual-selftest db-verify chart
 
 all: build
 
@@ -134,6 +134,20 @@ $(RENDER_BIN): $(RENDER_OBJ) $(LIB_OBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ
 
 $(DBMAKE_BIN): $(DBMAKE_OBJ) $(LIB_OBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) | $(BINDIR)
 	$(CC) $(CROSS_LINK) -o $@ $(DBMAKE_OBJ) $(LIB_OBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) $(WINLIBS_LDLIBS)
+
+CHART_PROBE_OBJ := $(OBJDIR)/playground/buffer_ufr/probe_chart.o
+CHART_PROBE_BIN := $(BINDIR)/ct_chart_probe.exe
+CHART_TSV := playground/buffer_ufr/chart_buffer2.tsv
+
+chart: $(CHART_PROBE_BIN)
+	$(CHART_PROBE_BIN) > $(CHART_TSV)
+
+$(CHART_PROBE_OBJ): playground/buffer_ufr/probe_chart.c
+	@mkdir -p $(@D)
+	$(CC) $(CROSS_COMPILE) $(CFLAGS) $(DEPFLAGS) $(SRC_INCLUDES) -c $< -o $@
+
+$(CHART_PROBE_BIN): $(CHART_PROBE_OBJ) $(LIB_OBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) | $(BINDIR)
+	$(CC) $(CROSS_LINK) -o $@ $(CHART_PROBE_OBJ) $(LIB_OBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) $(WINLIBS_LDLIBS)
 
 spike: $(SPIKE_BIN)
 	$(SPIKE_BIN)
