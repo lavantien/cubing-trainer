@@ -1,0 +1,25 @@
+python -I tools/visual_selftest.py
+PASS golden_solved_3.png: verdict=missed hamming=0 mean_delta_r=0.000 g=0.000 b=0.000 cell_delta=0.000
+PASS golden_solved_7.png: verdict=missed hamming=0 mean_delta_r=0.000 g=0.000 b=0.000 cell_delta=0.000
+PASS golden_scramble_3.png: verdict=missed hamming=0 mean_delta_r=0.000 g=0.000 b=0.000 cell_delta=0.000
+PASS golden_mid_3.png: verdict=missed hamming=0 mean_delta_r=0.000 g=0.000 b=0.000 cell_delta=0.000
+PASS path_api_identity: verdict=missed hamming=0 mean_delta_r=0.000 g=0.000 b=0.000 cell_delta=0.000
+PASS swap_solved_3_red_green: verdict=caught hamming=0 mean_delta_r=0.000 g=0.000 b=0.000 cell_delta=118.090
+PASS swap_solved_3_red_white: verdict=caught hamming=6 mean_delta_r=0.042 g=0.358 b=0.335 cell_delta=144.738
+PASS swap_solved_3_green_white: verdict=caught hamming=6 mean_delta_r=0.427 g=0.045 b=0.347 cell_delta=172.469
+PASS swap_solved_3_red_orange: verdict=caught hamming=0 mean_delta_r=2.257 g=10.833 b=4.965 cell_delta=61.612
+PASS swap_scramble_3_red_green: verdict=caught hamming=2 mean_delta_r=2.427 g=1.973 b=0.074 cell_delta=118.090
+PASS swap_mid_3_red_green: verdict=caught hamming=1 mean_delta_r=8.076 g=6.566 b=0.246 cell_delta=118.090
+PASS swap_solved_7_red_green: verdict=caught hamming=0 mean_delta_r=0.000 g=0.000 b=0.000 cell_delta=125.147
+PASS swap_solved_3_bg_tint: verdict=caught hamming=0 mean_delta_r=0.460 g=0.460 b=0.460 cell_delta=3.382
+PASS sticker_recolor_green_blue: verdict=caught hamming=0 mean_delta_r=0.000 g=0.330 b=0.596 cell_delta=38.408
+PASS global_shift_3: verdict=caught hamming=0 mean_delta_r=2.640 g=2.744 b=2.744 cell_delta=3.000
+PASS near_one: verdict=missed hamming=0 mean_delta_r=0.000 g=0.000 b=0.000 cell_delta=0.000
+visual selftest: 16/16 cases met expectations
+rm -rf build_scrn2/visual && mkdir -p build_scrn2/visual
+python -I tools/run_visual.py build_scrn2/bin/render_scene.exe tests/golden build_scrn2/visual
+pass: golden_solved_3.png (single render)
+pass: golden_solved_7.png (single render)
+pass: golden_scramble_3.png (single render)
+pass: golden_mid_3.png (2 renders self-agree, golden match)
+visual: all scenes pass

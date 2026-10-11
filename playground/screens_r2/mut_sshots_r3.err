@@ -1,0 +1,1116 @@
+build_scrn2/mutants/p37672/m0001_script_shots.c:12:16: error: expected member name or ';' after declaration specifiers
+   12 |     const char /word;
+      |     ~~~~~~~~~~ ^
+build_scrn2/mutants/p37672/m0001_script_shots.c:12:15: error: expected ';' at end of declaration list
+   12 |     const char /word;
+      |               ^
+      |               ;
+build_scrn2/mutants/p37672/m0001_script_shots.c:74:37: error: invalid application of 'sizeof' to an incomplete type 'const struct (unnamed at build_scrn2/mutants/p37672/m0001_script_shots.c:11:14)[]'
+   74 |     for (unsigned i = 0; i < sizeof CT_SCRIPT_GRADES / sizeof CT_SCRIPT_GRADES[0]; i++) {
+      |                                     ^~~~~~~~~~~~~~~~
+build_scrn2/mutants/p37672/m0001_script_shots.c:75:40: error: no member named 'word' in 'struct (unnamed at build_scrn2/mutants/p37672/m0001_script_shots.c:11:14)'
+   75 |         if (strcmp(CT_SCRIPT_GRADES[i].word, word) == 0) {
+      |                    ~~~~~~~~~~~~~~~~~~~ ^
+4 errors generated.
+build_scrn2/mutants/p37672/m0002_script_shots.c:22:16: error: expected member name or ';' after declaration specifiers
+   22 |     const char /word;
+      |     ~~~~~~~~~~ ^
+build_scrn2/mutants/p37672/m0002_script_shots.c:22:15: error: expected ';' at end of declaration list
+   22 |     const char /word;
+      |               ^
+      |               ;
+build_scrn2/mutants/p37672/m0002_script_shots.c:52:37: error: invalid application of 'sizeof' to an incomplete type 'const struct (unnamed at build_scrn2/mutants/p37672/m0002_script_shots.c:21:14)[]'
+   52 |     for (unsigned i = 0; i < sizeof CT_SCRIPT_EVENTS / sizeof CT_SCRIPT_EVENTS[0]; i++) {
+      |                                     ^~~~~~~~~~~~~~~~
+build_scrn2/mutants/p37672/m0002_script_shots.c:53:40: error: no member named 'word' in 'struct (unnamed at build_scrn2/mutants/p37672/m0002_script_shots.c:21:14)'
+   53 |         if (strcmp(CT_SCRIPT_EVENTS[i].word, word) == 0) {
+      |                    ~~~~~~~~~~~~~~~~~~~ ^
+4 errors generated.
+build_scrn2/mutants/p37672/m0003_script_shots.c:37:16: error: expected member name or ';' after declaration specifiers
+   37 |     const char /word;
+      |     ~~~~~~~~~~ ^
+build_scrn2/mutants/p37672/m0003_script_shots.c:37:15: error: expected ';' at end of declaration list
+   37 |     const char /word;
+      |               ^
+      |               ;
+build_scrn2/mutants/p37672/m0003_script_shots.c:63:37: error: invalid application of 'sizeof' to an incomplete type 'const struct (unnamed at build_scrn2/mutants/p37672/m0003_script_shots.c:36:14)[]'
+   63 |     for (unsigned i = 0; i < sizeof CT_SCRIPT_METHODS / sizeof CT_SCRIPT_METHODS[0]; i++) {
+      |                                     ^~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p37672/m0003_script_shots.c:64:41: error: no member named 'word' in 'struct (unnamed at build_scrn2/mutants/p37672/m0003_script_shots.c:36:14)'
+   64 |         if (strcmp(CT_SCRIPT_METHODS[i].word, word) == 0) {
+      |                    ~~~~~~~~~~~~~~~~~~~~ ^
+4 errors generated.
+build_scrn2/mutants/p37672/m0004_script_shots.c:50:43: error: expected ')'
+   50 | ct_event ct_script_event_parse(const char /word, bool *ok) {
+      |                                           ^
+build_scrn2/mutants/p37672/m0004_script_shots.c:50:31: note: to match this '('
+   50 | ct_event ct_script_event_parse(const char /word, bool *ok) {
+      |                               ^
+build_scrn2/mutants/p37672/m0004_script_shots.c:50:10: error: conflicting types for 'ct_script_event_parse'
+   50 | ct_event ct_script_event_parse(const char /word, bool *ok) {
+      |          ^
+src\app/script_internal.h:27:10: note: previous declaration is here
+   27 | ct_event ct_script_event_parse(const char *word, bool *ok);
+      |          ^
+build_scrn2/mutants/p37672/m0004_script_shots.c:51:6: error: use of undeclared identifier 'ok'
+   51 |     *ok = false;
+      |      ^~
+build_scrn2/mutants/p37672/m0004_script_shots.c:53:46: error: use of undeclared identifier 'word'
+   53 |         if (strcmp(CT_SCRIPT_EVENTS[i].word, word) == 0) {
+      |                                              ^~~~
+build_scrn2/mutants/p37672/m0004_script_shots.c:54:14: error: use of undeclared identifier 'ok'
+   54 |             *ok = true;
+      |              ^~
+5 errors generated.
+build_scrn2/mutants/p37672/m0005_script_shots.c:50:55: error: expected ')'
+   50 | ct_event ct_script_event_parse(const char *word, bool /ok) {
+      |                                                       ^
+build_scrn2/mutants/p37672/m0005_script_shots.c:50:31: note: to match this '('
+   50 | ct_event ct_script_event_parse(const char *word, bool /ok) {
+      |                               ^
+build_scrn2/mutants/p37672/m0005_script_shots.c:50:10: error: conflicting types for 'ct_script_event_parse'
+   50 | ct_event ct_script_event_parse(const char *word, bool /ok) {
+      |          ^
+src\app/script_internal.h:27:10: note: previous declaration is here
+   27 | ct_event ct_script_event_parse(const char *word, bool *ok);
+      |          ^
+build_scrn2/mutants/p37672/m0005_script_shots.c:51:6: error: use of undeclared identifier 'ok'
+   51 |     *ok = false;
+      |      ^~
+build_scrn2/mutants/p37672/m0005_script_shots.c:54:14: error: use of undeclared identifier 'ok'
+   54 |             *ok = true;
+      |              ^~
+4 errors generated.
+build_scrn2/mutants/p37672/m0006_script_shots.c:51:5: error: expected expression
+   51 |     /ok = false;
+      |     ^
+1 error generated.
+mutate: suite e2e_run_shot_guards exited -1073741819
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited -1073741795
+mutate: suite e2e_run_shot_guards exited -1073741795
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_guards exited 1
+build_scrn2/mutants/p37672/m0017_script_shots.c:54:13: error: expected expression
+   54 |             /ok = true;
+      |             ^
+1 error generated.
+mutate: suite e2e_run_shot_guards exited 1
+build_scrn2/mutants/p37672/m0019_script_shots.c:61:45: error: expected ')'
+   61 | ct_method ct_script_method_parse(const char /word, bool *ok) {
+      |                                             ^
+build_scrn2/mutants/p37672/m0019_script_shots.c:61:33: note: to match this '('
+   61 | ct_method ct_script_method_parse(const char /word, bool *ok) {
+      |                                 ^
+build_scrn2/mutants/p37672/m0019_script_shots.c:61:11: error: conflicting types for 'ct_script_method_parse'
+   61 | ct_method ct_script_method_parse(const char /word, bool *ok) {
+      |           ^
+src\app/script_internal.h:28:11: note: previous declaration is here
+   28 | ct_method ct_script_method_parse(const char *word, bool *ok);
+      |           ^
+build_scrn2/mutants/p37672/m0019_script_shots.c:62:6: error: use of undeclared identifier 'ok'
+   62 |     *ok = false;
+      |      ^~
+build_scrn2/mutants/p37672/m0019_script_shots.c:64:47: error: use of undeclared identifier 'word'
+   64 |         if (strcmp(CT_SCRIPT_METHODS[i].word, word) == 0) {
+      |                                               ^~~~
+build_scrn2/mutants/p37672/m0019_script_shots.c:65:14: error: use of undeclared identifier 'ok'
+   65 |             *ok = true;
+      |              ^~
+5 errors generated.
+build_scrn2/mutants/p37672/m0020_script_shots.c:61:57: error: expected ')'
+   61 | ct_method ct_script_method_parse(const char *word, bool /ok) {
+      |                                                         ^
+build_scrn2/mutants/p37672/m0020_script_shots.c:61:33: note: to match this '('
+   61 | ct_method ct_script_method_parse(const char *word, bool /ok) {
+      |                                 ^
+build_scrn2/mutants/p37672/m0020_script_shots.c:61:11: error: conflicting types for 'ct_script_method_parse'
+   61 | ct_method ct_script_method_parse(const char *word, bool /ok) {
+      |           ^
+src\app/script_internal.h:28:11: note: previous declaration is here
+   28 | ct_method ct_script_method_parse(const char *word, bool *ok);
+      |           ^
+build_scrn2/mutants/p37672/m0020_script_shots.c:62:6: error: use of undeclared identifier 'ok'
+   62 |     *ok = false;
+      |      ^~
+build_scrn2/mutants/p37672/m0020_script_shots.c:65:14: error: use of undeclared identifier 'ok'
+   65 |             *ok = true;
+      |              ^~
+4 errors generated.
+build_scrn2/mutants/p37672/m0021_script_shots.c:62:5: error: expected expression
+   62 |     /ok = false;
+      |     ^
+1 error generated.
+mutate: suite e2e_run_script_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_script_guards exited -1073741795
+mutate: suite e2e_run_shot_render exited -1073741819
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_guards exited 1
+build_scrn2/mutants/p37672/m0032_script_shots.c:65:13: error: expected expression
+   65 |             /ok = true;
+      |             ^
+1 error generated.
+mutate: suite e2e_run_shot_guards exited 1
+build_scrn2/mutants/p37672/m0034_script_shots.c:72:43: error: expected ')'
+   72 | ct_grade ct_script_grade_parse(const char /word, bool *ok) {
+      |                                           ^
+build_scrn2/mutants/p37672/m0034_script_shots.c:72:31: note: to match this '('
+   72 | ct_grade ct_script_grade_parse(const char /word, bool *ok) {
+      |                               ^
+build_scrn2/mutants/p37672/m0034_script_shots.c:72:10: error: conflicting types for 'ct_script_grade_parse'
+   72 | ct_grade ct_script_grade_parse(const char /word, bool *ok) {
+      |          ^
+src\app/script_internal.h:29:10: note: previous declaration is here
+   29 | ct_grade ct_script_grade_parse(const char *word, bool *ok);
+      |          ^
+build_scrn2/mutants/p37672/m0034_script_shots.c:73:6: error: use of undeclared identifier 'ok'
+   73 |     *ok = false;
+      |      ^~
+build_scrn2/mutants/p37672/m0034_script_shots.c:75:46: error: use of undeclared identifier 'word'
+   75 |         if (strcmp(CT_SCRIPT_GRADES[i].word, word) == 0) {
+      |                                              ^~~~
+build_scrn2/mutants/p37672/m0034_script_shots.c:76:14: error: use of undeclared identifier 'ok'
+   76 |             *ok = true;
+      |              ^~
+5 errors generated.
+build_scrn2/mutants/p37672/m0035_script_shots.c:72:55: error: expected ')'
+   72 | ct_grade ct_script_grade_parse(const char *word, bool /ok) {
+      |                                                       ^
+build_scrn2/mutants/p37672/m0035_script_shots.c:72:31: note: to match this '('
+   72 | ct_grade ct_script_grade_parse(const char *word, bool /ok) {
+      |                               ^
+build_scrn2/mutants/p37672/m0035_script_shots.c:72:10: error: conflicting types for 'ct_script_grade_parse'
+   72 | ct_grade ct_script_grade_parse(const char *word, bool /ok) {
+      |          ^
+src\app/script_internal.h:29:10: note: previous declaration is here
+   29 | ct_grade ct_script_grade_parse(const char *word, bool *ok);
+      |          ^
+build_scrn2/mutants/p37672/m0035_script_shots.c:73:6: error: use of undeclared identifier 'ok'
+   73 |     *ok = false;
+      |      ^~
+build_scrn2/mutants/p37672/m0035_script_shots.c:76:14: error: use of undeclared identifier 'ok'
+   76 |             *ok = true;
+      |              ^~
+4 errors generated.
+build_scrn2/mutants/p37672/m0036_script_shots.c:73:5: error: expected expression
+   73 |     /ok = false;
+      |     ^
+1 error generated.
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited -1073741795
+mutate: suite e2e_run_reviewed_seed exited -1073741795
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+build_scrn2/mutants/p37672/m0047_script_shots.c:76:13: error: expected expression
+   76 |             /ok = true;
+      |             ^
+1 error generated.
+mutate: suite e2e_run_reviewed_seed exited 1
+build_scrn2/mutants/p37672/m0049_script_shots.c:83:36: error: expected ')'
+   83 | int ct_script_step_reviewed(ct_app /app, const ct_script *s, const ct_script_row *c, char *err,
+      |                                    ^
+build_scrn2/mutants/p37672/m0049_script_shots.c:83:28: note: to match this '('
+   83 | int ct_script_step_reviewed(ct_app /app, const ct_script *s, const ct_script_row *c, char *err,
+      |                            ^
+build_scrn2/mutants/p37672/m0049_script_shots.c:83:5: error: conflicting types for 'ct_script_step_reviewed'
+   83 | int ct_script_step_reviewed(ct_app /app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+src\app/script_internal.h:32:5: note: previous declaration is here
+   32 | int ct_script_step_reviewed(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+build_scrn2/mutants/p37672/m0049_script_shots.c:86:38: error: use of undeclared identifier 'app'
+   86 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                      ^~~
+build_scrn2/mutants/p37672/m0049_script_shots.c:86:61: error: use of undeclared identifier 's'
+   86 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                             ^
+build_scrn2/mutants/p37672/m0049_script_shots.c:86:64: error: use of undeclared identifier 'c'
+   86 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                ^
+build_scrn2/mutants/p37672/m0049_script_shots.c:86:85: error: use of undeclared identifier 's'
+   86 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                                     ^
+build_scrn2/mutants/p37672/m0049_script_shots.c:86:88: error: use of undeclared identifier 'c'
+   86 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                                        ^
+build_scrn2/mutants/p37672/m0049_script_shots.c:89:31: error: use of undeclared identifier 'err'
+   89 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0049_script_shots.c:89:36: error: use of undeclared identifier 'cap'
+   89 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0049_script_shots.c:89:41: error: use of undeclared identifier 'c'
+   89 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0049_script_shots.c:92:54: error: use of undeclared identifier 's'
+   92 |     ct_grade g = ct_script_grade_parse(ct_script_arg(s, c, 2), &found);
+      |                                                      ^
+build_scrn2/mutants/p37672/m0049_script_shots.c:92:57: error: use of undeclared identifier 'c'
+   92 |     ct_grade g = ct_script_grade_parse(ct_script_arg(s, c, 2), &found);
+      |                                                         ^
+build_scrn2/mutants/p37672/m0049_script_shots.c:94:31: error: use of undeclared identifier 'err'
+   94 |         return ct_script_fail(err, cap, c, "unknown grade", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0049_script_shots.c:94:36: error: use of undeclared identifier 'cap'
+   94 |         return ct_script_fail(err, cap, c, "unknown grade", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0049_script_shots.c:94:41: error: use of undeclared identifier 'c'
+   94 |         return ct_script_fail(err, cap, c, "unknown grade", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0049_script_shots.c:96:37: error: use of undeclared identifier 's'
+   96 |     const char *iso = ct_script_arg(s, c, 3);
+      |                                     ^
+build_scrn2/mutants/p37672/m0049_script_shots.c:96:40: error: use of undeclared identifier 'c'
+   96 |     const char *iso = ct_script_arg(s, c, 3);
+      |                                        ^
+build_scrn2/mutants/p37672/m0049_script_shots.c:98:31: error: use of undeclared identifier 'err'
+   98 |         return ct_script_fail(err, cap, c, "reviewed date is not a date", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0049_script_shots.c:98:36: error: use of undeclared identifier 'cap'
+   98 |         return ct_script_fail(err, cap, c, "reviewed date is not a date", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_scrn2/mutants/p37672/m0050_script_shots.c:83:58: error: expected ')'
+   83 | int ct_script_step_reviewed(ct_app *app, const ct_script /s, const ct_script_row *c, char *err,
+      |                                                          ^
+build_scrn2/mutants/p37672/m0050_script_shots.c:83:28: note: to match this '('
+   83 | int ct_script_step_reviewed(ct_app *app, const ct_script /s, const ct_script_row *c, char *err,
+      |                            ^
+build_scrn2/mutants/p37672/m0050_script_shots.c:83:5: error: conflicting types for 'ct_script_step_reviewed'
+   83 | int ct_script_step_reviewed(ct_app *app, const ct_script /s, const ct_script_row *c, char *err,
+      |     ^
+src\app/script_internal.h:32:5: note: previous declaration is here
+   32 | int ct_script_step_reviewed(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+build_scrn2/mutants/p37672/m0050_script_shots.c:86:61: error: use of undeclared identifier 's'
+   86 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                             ^
+build_scrn2/mutants/p37672/m0050_script_shots.c:86:64: error: use of undeclared identifier 'c'
+   86 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                ^
+build_scrn2/mutants/p37672/m0050_script_shots.c:86:85: error: use of undeclared identifier 's'
+   86 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                                     ^
+build_scrn2/mutants/p37672/m0050_script_shots.c:86:88: error: use of undeclared identifier 'c'
+   86 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                                        ^
+build_scrn2/mutants/p37672/m0050_script_shots.c:89:31: error: use of undeclared identifier 'err'
+   89 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0050_script_shots.c:89:36: error: use of undeclared identifier 'cap'
+   89 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0050_script_shots.c:89:41: error: use of undeclared identifier 'c'
+   89 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0050_script_shots.c:92:54: error: use of undeclared identifier 's'
+   92 |     ct_grade g = ct_script_grade_parse(ct_script_arg(s, c, 2), &found);
+      |                                                      ^
+build_scrn2/mutants/p37672/m0050_script_shots.c:92:57: error: use of undeclared identifier 'c'
+   92 |     ct_grade g = ct_script_grade_parse(ct_script_arg(s, c, 2), &found);
+      |                                                         ^
+build_scrn2/mutants/p37672/m0050_script_shots.c:94:31: error: use of undeclared identifier 'err'
+   94 |         return ct_script_fail(err, cap, c, "unknown grade", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0050_script_shots.c:94:36: error: use of undeclared identifier 'cap'
+   94 |         return ct_script_fail(err, cap, c, "unknown grade", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0050_script_shots.c:94:41: error: use of undeclared identifier 'c'
+   94 |         return ct_script_fail(err, cap, c, "unknown grade", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0050_script_shots.c:96:37: error: use of undeclared identifier 's'
+   96 |     const char *iso = ct_script_arg(s, c, 3);
+      |                                     ^
+build_scrn2/mutants/p37672/m0050_script_shots.c:96:40: error: use of undeclared identifier 'c'
+   96 |     const char *iso = ct_script_arg(s, c, 3);
+      |                                        ^
+build_scrn2/mutants/p37672/m0050_script_shots.c:98:31: error: use of undeclared identifier 'err'
+   98 |         return ct_script_fail(err, cap, c, "reviewed date is not a date", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0050_script_shots.c:98:36: error: use of undeclared identifier 'cap'
+   98 |         return ct_script_fail(err, cap, c, "reviewed date is not a date", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0050_script_shots.c:98:41: error: use of undeclared identifier 'c'
+   98 |         return ct_script_fail(err, cap, c, "reviewed date is not a date", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_scrn2/mutants/p37672/m0051_script_shots.c:83:82: error: expected ')'
+   83 | int ct_script_step_reviewed(ct_app *app, const ct_script *s, const ct_script_row /c, char *err,
+      |                                                                                  ^
+build_scrn2/mutants/p37672/m0051_script_shots.c:83:28: note: to match this '('
+   83 | int ct_script_step_reviewed(ct_app *app, const ct_script *s, const ct_script_row /c, char *err,
+      |                            ^
+build_scrn2/mutants/p37672/m0051_script_shots.c:83:5: error: conflicting types for 'ct_script_step_reviewed'
+   83 | int ct_script_step_reviewed(ct_app *app, const ct_script *s, const ct_script_row /c, char *err,
+      |     ^
+src\app/script_internal.h:32:5: note: previous declaration is here
+   32 | int ct_script_step_reviewed(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+build_scrn2/mutants/p37672/m0051_script_shots.c:86:64: error: use of undeclared identifier 'c'
+   86 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                ^
+build_scrn2/mutants/p37672/m0051_script_shots.c:86:88: error: use of undeclared identifier 'c'
+   86 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                                        ^
+build_scrn2/mutants/p37672/m0051_script_shots.c:89:31: error: use of undeclared identifier 'err'
+   89 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0051_script_shots.c:89:36: error: use of undeclared identifier 'cap'
+   89 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0051_script_shots.c:89:41: error: use of undeclared identifier 'c'
+   89 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0051_script_shots.c:92:57: error: use of undeclared identifier 'c'
+   92 |     ct_grade g = ct_script_grade_parse(ct_script_arg(s, c, 2), &found);
+      |                                                         ^
+build_scrn2/mutants/p37672/m0051_script_shots.c:94:31: error: use of undeclared identifier 'err'
+   94 |         return ct_script_fail(err, cap, c, "unknown grade", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0051_script_shots.c:94:36: error: use of undeclared identifier 'cap'
+   94 |         return ct_script_fail(err, cap, c, "unknown grade", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0051_script_shots.c:94:41: error: use of undeclared identifier 'c'
+   94 |         return ct_script_fail(err, cap, c, "unknown grade", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0051_script_shots.c:96:40: error: use of undeclared identifier 'c'
+   96 |     const char *iso = ct_script_arg(s, c, 3);
+      |                                        ^
+build_scrn2/mutants/p37672/m0051_script_shots.c:98:31: error: use of undeclared identifier 'err'
+   98 |         return ct_script_fail(err, cap, c, "reviewed date is not a date", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0051_script_shots.c:98:36: error: use of undeclared identifier 'cap'
+   98 |         return ct_script_fail(err, cap, c, "reviewed date is not a date", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0051_script_shots.c:98:41: error: use of undeclared identifier 'c'
+   98 |         return ct_script_fail(err, cap, c, "reviewed date is not a date", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0051_script_shots.c:102:43: error: use of undeclared identifier 'c'
+  102 |     if (ct_script_double(ct_script_arg(s, c, 4), &stability) != 0) {
+      |                                           ^
+build_scrn2/mutants/p37672/m0051_script_shots.c:103:31: error: use of undeclared identifier 'err'
+  103 |         return ct_script_fail(err, cap, c, "stability is not a number", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0051_script_shots.c:103:36: error: use of undeclared identifier 'cap'
+  103 |         return ct_script_fail(err, cap, c, "stability is not a number", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0051_script_shots.c:103:41: error: use of undeclared identifier 'c'
+  103 |         return ct_script_fail(err, cap, c, "stability is not a number", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_scrn2/mutants/p37672/m0052_script_shots.c:83:91: error: expected ')'
+   83 | int ct_script_step_reviewed(ct_app *app, const ct_script *s, const ct_script_row *c, char /err,
+      |                                                                                           ^
+build_scrn2/mutants/p37672/m0052_script_shots.c:83:28: note: to match this '('
+   83 | int ct_script_step_reviewed(ct_app *app, const ct_script *s, const ct_script_row *c, char /err,
+      |                            ^
+build_scrn2/mutants/p37672/m0052_script_shots.c:83:5: error: conflicting types for 'ct_script_step_reviewed'
+   83 | int ct_script_step_reviewed(ct_app *app, const ct_script *s, const ct_script_row *c, char /err,
+      |     ^
+src\app/script_internal.h:32:5: note: previous declaration is here
+   32 | int ct_script_step_reviewed(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+build_scrn2/mutants/p37672/m0052_script_shots.c:89:31: error: use of undeclared identifier 'err'
+   89 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0052_script_shots.c:89:36: error: use of undeclared identifier 'cap'
+   89 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0052_script_shots.c:94:31: error: use of undeclared identifier 'err'
+   94 |         return ct_script_fail(err, cap, c, "unknown grade", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0052_script_shots.c:94:36: error: use of undeclared identifier 'cap'
+   94 |         return ct_script_fail(err, cap, c, "unknown grade", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0052_script_shots.c:98:31: error: use of undeclared identifier 'err'
+   98 |         return ct_script_fail(err, cap, c, "reviewed date is not a date", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0052_script_shots.c:98:36: error: use of undeclared identifier 'cap'
+   98 |         return ct_script_fail(err, cap, c, "reviewed date is not a date", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0052_script_shots.c:103:31: error: use of undeclared identifier 'err'
+  103 |         return ct_script_fail(err, cap, c, "stability is not a number", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0052_script_shots.c:103:36: error: use of undeclared identifier 'cap'
+  103 |         return ct_script_fail(err, cap, c, "stability is not a number", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0052_script_shots.c:106:31: error: use of undeclared identifier 'err'
+  106 |         return ct_script_fail(err, cap, c, "elapsed is not a number", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0052_script_shots.c:106:36: error: use of undeclared identifier 'cap'
+  106 |         return ct_script_fail(err, cap, c, "elapsed is not a number", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0052_script_shots.c:111:33: error: use of undeclared identifier 'err'
+  111 |                : ct_script_fail(err, cap, c, "review log seed failed", CT_SCRIPT_EXIT_RUN);
+      |                                 ^~~
+build_scrn2/mutants/p37672/m0052_script_shots.c:111:38: error: use of undeclared identifier 'cap'
+  111 |                : ct_script_fail(err, cap, c, "review log seed failed", CT_SCRIPT_EXIT_RUN);
+      |                                      ^~~
+14 errors generated.
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+build_scrn2/mutants/p37672/m0062_script_shots.c:96:16: error: expected identifier or '('
+   96 |     const char /iso = ct_script_arg(s, c, 3);
+      |                ^
+build_scrn2/mutants/p37672/m0062_script_shots.c:97:27: error: use of undeclared identifier 'iso'
+   97 |     if (ct_script_iso_day(iso, &(long){0}) != 0) {
+      |                           ^~~
+build_scrn2/mutants/p37672/m0062_script_shots.c:108:55: error: use of undeclared identifier 'iso'
+  108 |     rc = ct_repo_review_log(app->db, card.id, (int)g, iso, stability, 0.0, elapsed, 0.0);
+      |                                                       ^~~
+3 errors generated.
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_shot_render exited -1073741819
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_reviewed_seed exited 1
+mutate: suite e2e_run_shot_render exited -1073741819
+build_scrn2/mutants/p37672/m0083_script_shots.c:114:34: error: expected ')'
+  114 | int ct_script_step_due_in(ct_app /app, const ct_script *s, const ct_script_row *c, char *err,
+      |                                  ^
+build_scrn2/mutants/p37672/m0083_script_shots.c:114:26: note: to match this '('
+  114 | int ct_script_step_due_in(ct_app /app, const ct_script *s, const ct_script_row *c, char *err,
+      |                          ^
+build_scrn2/mutants/p37672/m0083_script_shots.c:114:5: error: conflicting types for 'ct_script_step_due_in'
+  114 | int ct_script_step_due_in(ct_app /app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+src\app/script_internal.h:34:5: note: previous declaration is here
+   34 | int ct_script_step_due_in(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+build_scrn2/mutants/p37672/m0083_script_shots.c:117:38: error: use of undeclared identifier 'app'
+  117 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                      ^~~
+build_scrn2/mutants/p37672/m0083_script_shots.c:117:61: error: use of undeclared identifier 's'
+  117 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                             ^
+build_scrn2/mutants/p37672/m0083_script_shots.c:117:64: error: use of undeclared identifier 'c'
+  117 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                ^
+build_scrn2/mutants/p37672/m0083_script_shots.c:117:85: error: use of undeclared identifier 's'
+  117 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                                     ^
+build_scrn2/mutants/p37672/m0083_script_shots.c:117:88: error: use of undeclared identifier 'c'
+  117 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                                        ^
+build_scrn2/mutants/p37672/m0083_script_shots.c:120:31: error: use of undeclared identifier 'err'
+  120 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0083_script_shots.c:120:36: error: use of undeclared identifier 'cap'
+  120 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0083_script_shots.c:120:41: error: use of undeclared identifier 'c'
+  120 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0083_script_shots.c:123:38: error: use of undeclared identifier 's'
+  123 |     if (ct_script_long(ct_script_arg(s, c, 2), &days) != 0) {
+      |                                      ^
+build_scrn2/mutants/p37672/m0083_script_shots.c:123:41: error: use of undeclared identifier 'c'
+  123 |     if (ct_script_long(ct_script_arg(s, c, 2), &days) != 0) {
+      |                                         ^
+build_scrn2/mutants/p37672/m0083_script_shots.c:124:31: error: use of undeclared identifier 'err'
+  124 |         return ct_script_fail(err, cap, c, "days is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0083_script_shots.c:124:36: error: use of undeclared identifier 'cap'
+  124 |         return ct_script_fail(err, cap, c, "days is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0083_script_shots.c:124:41: error: use of undeclared identifier 'c'
+  124 |         return ct_script_fail(err, cap, c, "days is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0083_script_shots.c:129:31: error: use of undeclared identifier 'err'
+  129 |         return ct_script_fail(err, cap, c, "cannot read the clock", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0083_script_shots.c:129:36: error: use of undeclared identifier 'cap'
+  129 |         return ct_script_fail(err, cap, c, "cannot read the clock", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0083_script_shots.c:129:41: error: use of undeclared identifier 'c'
+  129 |         return ct_script_fail(err, cap, c, "cannot read the clock", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0083_script_shots.c:133:31: error: use of undeclared identifier 'err'
+  133 |         return ct_script_fail(err, cap, c, "days out of range", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_scrn2/mutants/p37672/m0084_script_shots.c:114:56: error: expected ')'
+  114 | int ct_script_step_due_in(ct_app *app, const ct_script /s, const ct_script_row *c, char *err,
+      |                                                        ^
+build_scrn2/mutants/p37672/m0084_script_shots.c:114:26: note: to match this '('
+  114 | int ct_script_step_due_in(ct_app *app, const ct_script /s, const ct_script_row *c, char *err,
+      |                          ^
+build_scrn2/mutants/p37672/m0084_script_shots.c:114:5: error: conflicting types for 'ct_script_step_due_in'
+  114 | int ct_script_step_due_in(ct_app *app, const ct_script /s, const ct_script_row *c, char *err,
+      |     ^
+src\app/script_internal.h:34:5: note: previous declaration is here
+   34 | int ct_script_step_due_in(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+build_scrn2/mutants/p37672/m0084_script_shots.c:117:61: error: use of undeclared identifier 's'
+  117 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                             ^
+build_scrn2/mutants/p37672/m0084_script_shots.c:117:64: error: use of undeclared identifier 'c'
+  117 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                ^
+build_scrn2/mutants/p37672/m0084_script_shots.c:117:85: error: use of undeclared identifier 's'
+  117 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                                     ^
+build_scrn2/mutants/p37672/m0084_script_shots.c:117:88: error: use of undeclared identifier 'c'
+  117 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                                        ^
+build_scrn2/mutants/p37672/m0084_script_shots.c:120:31: error: use of undeclared identifier 'err'
+  120 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0084_script_shots.c:120:36: error: use of undeclared identifier 'cap'
+  120 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0084_script_shots.c:120:41: error: use of undeclared identifier 'c'
+  120 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0084_script_shots.c:123:38: error: use of undeclared identifier 's'
+  123 |     if (ct_script_long(ct_script_arg(s, c, 2), &days) != 0) {
+      |                                      ^
+build_scrn2/mutants/p37672/m0084_script_shots.c:123:41: error: use of undeclared identifier 'c'
+  123 |     if (ct_script_long(ct_script_arg(s, c, 2), &days) != 0) {
+      |                                         ^
+build_scrn2/mutants/p37672/m0084_script_shots.c:124:31: error: use of undeclared identifier 'err'
+  124 |         return ct_script_fail(err, cap, c, "days is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0084_script_shots.c:124:36: error: use of undeclared identifier 'cap'
+  124 |         return ct_script_fail(err, cap, c, "days is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0084_script_shots.c:124:41: error: use of undeclared identifier 'c'
+  124 |         return ct_script_fail(err, cap, c, "days is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0084_script_shots.c:129:31: error: use of undeclared identifier 'err'
+  129 |         return ct_script_fail(err, cap, c, "cannot read the clock", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0084_script_shots.c:129:36: error: use of undeclared identifier 'cap'
+  129 |         return ct_script_fail(err, cap, c, "cannot read the clock", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0084_script_shots.c:129:41: error: use of undeclared identifier 'c'
+  129 |         return ct_script_fail(err, cap, c, "cannot read the clock", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0084_script_shots.c:133:31: error: use of undeclared identifier 'err'
+  133 |         return ct_script_fail(err, cap, c, "days out of range", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0084_script_shots.c:133:36: error: use of undeclared identifier 'cap'
+  133 |         return ct_script_fail(err, cap, c, "days out of range", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_scrn2/mutants/p37672/m0085_script_shots.c:114:80: error: expected ')'
+  114 | int ct_script_step_due_in(ct_app *app, const ct_script *s, const ct_script_row /c, char *err,
+      |                                                                                ^
+build_scrn2/mutants/p37672/m0085_script_shots.c:114:26: note: to match this '('
+  114 | int ct_script_step_due_in(ct_app *app, const ct_script *s, const ct_script_row /c, char *err,
+      |                          ^
+build_scrn2/mutants/p37672/m0085_script_shots.c:114:5: error: conflicting types for 'ct_script_step_due_in'
+  114 | int ct_script_step_due_in(ct_app *app, const ct_script *s, const ct_script_row /c, char *err,
+      |     ^
+src\app/script_internal.h:34:5: note: previous declaration is here
+   34 | int ct_script_step_due_in(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+build_scrn2/mutants/p37672/m0085_script_shots.c:117:64: error: use of undeclared identifier 'c'
+  117 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                ^
+build_scrn2/mutants/p37672/m0085_script_shots.c:117:88: error: use of undeclared identifier 'c'
+  117 |     int rc = ct_repo_card_get_by_key(app->db, ct_script_arg(s, c, 0), ct_script_arg(s, c, 1),
+      |                                                                                        ^
+build_scrn2/mutants/p37672/m0085_script_shots.c:120:31: error: use of undeclared identifier 'err'
+  120 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0085_script_shots.c:120:36: error: use of undeclared identifier 'cap'
+  120 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0085_script_shots.c:120:41: error: use of undeclared identifier 'c'
+  120 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0085_script_shots.c:123:41: error: use of undeclared identifier 'c'
+  123 |     if (ct_script_long(ct_script_arg(s, c, 2), &days) != 0) {
+      |                                         ^
+build_scrn2/mutants/p37672/m0085_script_shots.c:124:31: error: use of undeclared identifier 'err'
+  124 |         return ct_script_fail(err, cap, c, "days is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0085_script_shots.c:124:36: error: use of undeclared identifier 'cap'
+  124 |         return ct_script_fail(err, cap, c, "days is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0085_script_shots.c:124:41: error: use of undeclared identifier 'c'
+  124 |         return ct_script_fail(err, cap, c, "days is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0085_script_shots.c:129:31: error: use of undeclared identifier 'err'
+  129 |         return ct_script_fail(err, cap, c, "cannot read the clock", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0085_script_shots.c:129:36: error: use of undeclared identifier 'cap'
+  129 |         return ct_script_fail(err, cap, c, "cannot read the clock", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0085_script_shots.c:129:41: error: use of undeclared identifier 'c'
+  129 |         return ct_script_fail(err, cap, c, "cannot read the clock", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0085_script_shots.c:133:31: error: use of undeclared identifier 'err'
+  133 |         return ct_script_fail(err, cap, c, "days out of range", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0085_script_shots.c:133:36: error: use of undeclared identifier 'cap'
+  133 |         return ct_script_fail(err, cap, c, "days out of range", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0085_script_shots.c:133:41: error: use of undeclared identifier 'c'
+  133 |         return ct_script_fail(err, cap, c, "days out of range", CT_SCRIPT_EXIT_RUN);
+      |                                         ^
+build_scrn2/mutants/p37672/m0085_script_shots.c:140:46: error: use of undeclared identifier 'err'
+  140 |                             : ct_script_fail(err, cap, c, "srs seed failed", CT_SCRIPT_EXIT_RUN);
+      |                                              ^~~
+build_scrn2/mutants/p37672/m0085_script_shots.c:140:51: error: use of undeclared identifier 'cap'
+  140 |                             : ct_script_fail(err, cap, c, "srs seed failed", CT_SCRIPT_EXIT_RUN);
+      |                                                   ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_scrn2/mutants/p37672/m0086_script_shots.c:114:89: error: expected ')'
+  114 | int ct_script_step_due_in(ct_app *app, const ct_script *s, const ct_script_row *c, char /err,
+      |                                                                                         ^
+build_scrn2/mutants/p37672/m0086_script_shots.c:114:26: note: to match this '('
+  114 | int ct_script_step_due_in(ct_app *app, const ct_script *s, const ct_script_row *c, char /err,
+      |                          ^
+build_scrn2/mutants/p37672/m0086_script_shots.c:114:5: error: conflicting types for 'ct_script_step_due_in'
+  114 | int ct_script_step_due_in(ct_app *app, const ct_script *s, const ct_script_row *c, char /err,
+      |     ^
+src\app/script_internal.h:34:5: note: previous declaration is here
+   34 | int ct_script_step_due_in(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+build_scrn2/mutants/p37672/m0086_script_shots.c:120:31: error: use of undeclared identifier 'err'
+  120 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0086_script_shots.c:120:36: error: use of undeclared identifier 'cap'
+  120 |         return ct_script_fail(err, cap, c, "card not found", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0086_script_shots.c:124:31: error: use of undeclared identifier 'err'
+  124 |         return ct_script_fail(err, cap, c, "days is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0086_script_shots.c:124:36: error: use of undeclared identifier 'cap'
+  124 |         return ct_script_fail(err, cap, c, "days is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0086_script_shots.c:129:31: error: use of undeclared identifier 'err'
+  129 |         return ct_script_fail(err, cap, c, "cannot read the clock", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0086_script_shots.c:129:36: error: use of undeclared identifier 'cap'
+  129 |         return ct_script_fail(err, cap, c, "cannot read the clock", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0086_script_shots.c:133:31: error: use of undeclared identifier 'err'
+  133 |         return ct_script_fail(err, cap, c, "days out of range", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0086_script_shots.c:133:36: error: use of undeclared identifier 'cap'
+  133 |         return ct_script_fail(err, cap, c, "days out of range", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0086_script_shots.c:140:46: error: use of undeclared identifier 'err'
+  140 |                             : ct_script_fail(err, cap, c, "srs seed failed", CT_SCRIPT_EXIT_RUN);
+      |                                              ^~~
+build_scrn2/mutants/p37672/m0086_script_shots.c:140:51: error: use of undeclared identifier 'cap'
+  140 |                             : ct_script_fail(err, cap, c, "srs seed failed", CT_SCRIPT_EXIT_RUN);
+      |                                                   ^~~
+12 errors generated.
+mutate: suite e2e_run_shot_render exited -1073741819
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_shot_render exited -1073741819
+mutate: suite e2e_run_shot_render exited -1073741819
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_due_in exited 1
+mutate: suite e2e_run_shot_render exited -1073741819
+mutate: suite e2e_run_due_in exited 1
+build_scrn2/mutants/p37672/m0110_script_shots.c:143:32: error: expected ')'
+  143 | int ct_script_step_shot(ct_app /app, const ct_script *s, const ct_script_row *c, char *err,
+      |                                ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:143:24: note: to match this '('
+  143 | int ct_script_step_shot(ct_app /app, const ct_script *s, const ct_script_row *c, char *err,
+      |                        ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:143:5: error: conflicting types for 'ct_script_step_shot'
+  143 | int ct_script_step_shot(ct_app /app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+src\app/script_internal.h:30:5: note: previous declaration is here
+   30 | int ct_script_step_shot(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:146:13: error: use of undeclared identifier 'c'
+  146 |     switch (c->kind) {
+      |             ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:148:28: error: use of undeclared identifier 'app'
+  148 |         rc = ct_shots_menu(app, ct_script_arg(s, c, 0));
+      |                            ^~~
+build_scrn2/mutants/p37672/m0110_script_shots.c:148:47: error: use of undeclared identifier 's'
+  148 |         rc = ct_shots_menu(app, ct_script_arg(s, c, 0));
+      |                                               ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:148:50: error: use of undeclared identifier 'c'
+  148 |         rc = ct_shots_menu(app, ct_script_arg(s, c, 0));
+      |                                                  ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:151:37: error: use of undeclared identifier 'err'
+  151 |                    : ct_script_fail(err, cap, c, "screenshot capture failed", CT_SCRIPT_EXIT_RUN);
+      |                                     ^~~
+build_scrn2/mutants/p37672/m0110_script_shots.c:151:42: error: use of undeclared identifier 'cap'
+  151 |                    : ct_script_fail(err, cap, c, "screenshot capture failed", CT_SCRIPT_EXIT_RUN);
+      |                                          ^~~
+build_scrn2/mutants/p37672/m0110_script_shots.c:151:47: error: use of undeclared identifier 'c'
+  151 |                    : ct_script_fail(err, cap, c, "screenshot capture failed", CT_SCRIPT_EXIT_RUN);
+      |                                               ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:156:59: error: use of undeclared identifier 's'
+  156 |         ct_event ev = ct_script_event_parse(ct_script_arg(s, c, 0), &ev_ok);
+      |                                                           ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:156:62: error: use of undeclared identifier 'c'
+  156 |         ct_event ev = ct_script_event_parse(ct_script_arg(s, c, 0), &ev_ok);
+      |                                                              ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:157:60: error: use of undeclared identifier 's'
+  157 |         ct_method m = ct_script_method_parse(ct_script_arg(s, c, 1), &m_ok);
+      |                                                            ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:157:63: error: use of undeclared identifier 'c'
+  157 |         ct_method m = ct_script_method_parse(ct_script_arg(s, c, 1), &m_ok);
+      |                                                               ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:159:35: error: use of undeclared identifier 'err'
+  159 |             return ct_script_fail(err, cap, c, "unknown event or method", CT_SCRIPT_EXIT_RUN);
+      |                                   ^~~
+build_scrn2/mutants/p37672/m0110_script_shots.c:159:40: error: use of undeclared identifier 'cap'
+  159 |             return ct_script_fail(err, cap, c, "unknown event or method", CT_SCRIPT_EXIT_RUN);
+      |                                        ^~~
+build_scrn2/mutants/p37672/m0110_script_shots.c:159:45: error: use of undeclared identifier 'c'
+  159 |             return ct_script_fail(err, cap, c, "unknown event or method", CT_SCRIPT_EXIT_RUN);
+      |                                             ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:163:42: error: use of undeclared identifier 's'
+  163 |         if (ct_script_long(ct_script_arg(s, c, 2), &list_id) != 0) {
+      |                                          ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:163:45: error: use of undeclared identifier 'c'
+  163 |         if (ct_script_long(ct_script_arg(s, c, 2), &list_id) != 0) {
+      |                                             ^
+build_scrn2/mutants/p37672/m0110_script_shots.c:164:35: error: use of undeclared identifier 'err'
+  164 |             return ct_script_fail(err, cap, c, "list id is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                   ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_scrn2/mutants/p37672/m0111_script_shots.c:143:54: error: expected ')'
+  143 | int ct_script_step_shot(ct_app *app, const ct_script /s, const ct_script_row *c, char *err,
+      |                                                      ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:143:24: note: to match this '('
+  143 | int ct_script_step_shot(ct_app *app, const ct_script /s, const ct_script_row *c, char *err,
+      |                        ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:143:5: error: conflicting types for 'ct_script_step_shot'
+  143 | int ct_script_step_shot(ct_app *app, const ct_script /s, const ct_script_row *c, char *err,
+      |     ^
+src\app/script_internal.h:30:5: note: previous declaration is here
+   30 | int ct_script_step_shot(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:146:13: error: use of undeclared identifier 'c'
+  146 |     switch (c->kind) {
+      |             ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:148:47: error: use of undeclared identifier 's'
+  148 |         rc = ct_shots_menu(app, ct_script_arg(s, c, 0));
+      |                                               ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:148:50: error: use of undeclared identifier 'c'
+  148 |         rc = ct_shots_menu(app, ct_script_arg(s, c, 0));
+      |                                                  ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:151:37: error: use of undeclared identifier 'err'
+  151 |                    : ct_script_fail(err, cap, c, "screenshot capture failed", CT_SCRIPT_EXIT_RUN);
+      |                                     ^~~
+build_scrn2/mutants/p37672/m0111_script_shots.c:151:42: error: use of undeclared identifier 'cap'
+  151 |                    : ct_script_fail(err, cap, c, "screenshot capture failed", CT_SCRIPT_EXIT_RUN);
+      |                                          ^~~
+build_scrn2/mutants/p37672/m0111_script_shots.c:151:47: error: use of undeclared identifier 'c'
+  151 |                    : ct_script_fail(err, cap, c, "screenshot capture failed", CT_SCRIPT_EXIT_RUN);
+      |                                               ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:156:59: error: use of undeclared identifier 's'
+  156 |         ct_event ev = ct_script_event_parse(ct_script_arg(s, c, 0), &ev_ok);
+      |                                                           ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:156:62: error: use of undeclared identifier 'c'
+  156 |         ct_event ev = ct_script_event_parse(ct_script_arg(s, c, 0), &ev_ok);
+      |                                                              ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:157:60: error: use of undeclared identifier 's'
+  157 |         ct_method m = ct_script_method_parse(ct_script_arg(s, c, 1), &m_ok);
+      |                                                            ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:157:63: error: use of undeclared identifier 'c'
+  157 |         ct_method m = ct_script_method_parse(ct_script_arg(s, c, 1), &m_ok);
+      |                                                               ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:159:35: error: use of undeclared identifier 'err'
+  159 |             return ct_script_fail(err, cap, c, "unknown event or method", CT_SCRIPT_EXIT_RUN);
+      |                                   ^~~
+build_scrn2/mutants/p37672/m0111_script_shots.c:159:40: error: use of undeclared identifier 'cap'
+  159 |             return ct_script_fail(err, cap, c, "unknown event or method", CT_SCRIPT_EXIT_RUN);
+      |                                        ^~~
+build_scrn2/mutants/p37672/m0111_script_shots.c:159:45: error: use of undeclared identifier 'c'
+  159 |             return ct_script_fail(err, cap, c, "unknown event or method", CT_SCRIPT_EXIT_RUN);
+      |                                             ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:163:42: error: use of undeclared identifier 's'
+  163 |         if (ct_script_long(ct_script_arg(s, c, 2), &list_id) != 0) {
+      |                                          ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:163:45: error: use of undeclared identifier 'c'
+  163 |         if (ct_script_long(ct_script_arg(s, c, 2), &list_id) != 0) {
+      |                                             ^
+build_scrn2/mutants/p37672/m0111_script_shots.c:164:35: error: use of undeclared identifier 'err'
+  164 |             return ct_script_fail(err, cap, c, "list id is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                   ^~~
+build_scrn2/mutants/p37672/m0111_script_shots.c:164:40: error: use of undeclared identifier 'cap'
+  164 |             return ct_script_fail(err, cap, c, "list id is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                        ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_scrn2/mutants/p37672/m0112_script_shots.c:143:78: error: expected ')'
+  143 | int ct_script_step_shot(ct_app *app, const ct_script *s, const ct_script_row /c, char *err,
+      |                                                                              ^
+build_scrn2/mutants/p37672/m0112_script_shots.c:143:24: note: to match this '('
+  143 | int ct_script_step_shot(ct_app *app, const ct_script *s, const ct_script_row /c, char *err,
+      |                        ^
+build_scrn2/mutants/p37672/m0112_script_shots.c:143:5: error: conflicting types for 'ct_script_step_shot'
+  143 | int ct_script_step_shot(ct_app *app, const ct_script *s, const ct_script_row /c, char *err,
+      |     ^
+src\app/script_internal.h:30:5: note: previous declaration is here
+   30 | int ct_script_step_shot(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+build_scrn2/mutants/p37672/m0112_script_shots.c:146:13: error: use of undeclared identifier 'c'
+  146 |     switch (c->kind) {
+      |             ^
+build_scrn2/mutants/p37672/m0112_script_shots.c:148:50: error: use of undeclared identifier 'c'
+  148 |         rc = ct_shots_menu(app, ct_script_arg(s, c, 0));
+      |                                                  ^
+build_scrn2/mutants/p37672/m0112_script_shots.c:151:37: error: use of undeclared identifier 'err'
+  151 |                    : ct_script_fail(err, cap, c, "screenshot capture failed", CT_SCRIPT_EXIT_RUN);
+      |                                     ^~~
+build_scrn2/mutants/p37672/m0112_script_shots.c:151:42: error: use of undeclared identifier 'cap'
+  151 |                    : ct_script_fail(err, cap, c, "screenshot capture failed", CT_SCRIPT_EXIT_RUN);
+      |                                          ^~~
+build_scrn2/mutants/p37672/m0112_script_shots.c:151:47: error: use of undeclared identifier 'c'
+  151 |                    : ct_script_fail(err, cap, c, "screenshot capture failed", CT_SCRIPT_EXIT_RUN);
+      |                                               ^
+build_scrn2/mutants/p37672/m0112_script_shots.c:156:62: error: use of undeclared identifier 'c'
+  156 |         ct_event ev = ct_script_event_parse(ct_script_arg(s, c, 0), &ev_ok);
+      |                                                              ^
+build_scrn2/mutants/p37672/m0112_script_shots.c:157:63: error: use of undeclared identifier 'c'
+  157 |         ct_method m = ct_script_method_parse(ct_script_arg(s, c, 1), &m_ok);
+      |                                                               ^
+build_scrn2/mutants/p37672/m0112_script_shots.c:159:35: error: use of undeclared identifier 'err'
+  159 |             return ct_script_fail(err, cap, c, "unknown event or method", CT_SCRIPT_EXIT_RUN);
+      |                                   ^~~
+build_scrn2/mutants/p37672/m0112_script_shots.c:159:40: error: use of undeclared identifier 'cap'
+  159 |             return ct_script_fail(err, cap, c, "unknown event or method", CT_SCRIPT_EXIT_RUN);
+      |                                        ^~~
+build_scrn2/mutants/p37672/m0112_script_shots.c:159:45: error: use of undeclared identifier 'c'
+  159 |             return ct_script_fail(err, cap, c, "unknown event or method", CT_SCRIPT_EXIT_RUN);
+      |                                             ^
+build_scrn2/mutants/p37672/m0112_script_shots.c:163:45: error: use of undeclared identifier 'c'
+  163 |         if (ct_script_long(ct_script_arg(s, c, 2), &list_id) != 0) {
+      |                                             ^
+build_scrn2/mutants/p37672/m0112_script_shots.c:164:35: error: use of undeclared identifier 'err'
+  164 |             return ct_script_fail(err, cap, c, "list id is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                   ^~~
+build_scrn2/mutants/p37672/m0112_script_shots.c:164:40: error: use of undeclared identifier 'cap'
+  164 |             return ct_script_fail(err, cap, c, "list id is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                        ^~~
+build_scrn2/mutants/p37672/m0112_script_shots.c:164:45: error: use of undeclared identifier 'c'
+  164 |             return ct_script_fail(err, cap, c, "list id is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                             ^
+build_scrn2/mutants/p37672/m0112_script_shots.c:166:45: error: use of undeclared identifier 'c'
+  166 |         if (ct_script_long(ct_script_arg(s, c, 3), &pick) != 0) {
+      |                                             ^
+build_scrn2/mutants/p37672/m0112_script_shots.c:167:35: error: use of undeclared identifier 'err'
+  167 |             return ct_script_fail(err, cap, c, "pick index is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                   ^~~
+build_scrn2/mutants/p37672/m0112_script_shots.c:167:40: error: use of undeclared identifier 'cap'
+  167 |             return ct_script_fail(err, cap, c, "pick index is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                        ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_scrn2/mutants/p37672/m0113_script_shots.c:143:87: error: expected ')'
+  143 | int ct_script_step_shot(ct_app *app, const ct_script *s, const ct_script_row *c, char /err,
+      |                                                                                       ^
+build_scrn2/mutants/p37672/m0113_script_shots.c:143:24: note: to match this '('
+  143 | int ct_script_step_shot(ct_app *app, const ct_script *s, const ct_script_row *c, char /err,
+      |                        ^
+build_scrn2/mutants/p37672/m0113_script_shots.c:143:5: error: conflicting types for 'ct_script_step_shot'
+  143 | int ct_script_step_shot(ct_app *app, const ct_script *s, const ct_script_row *c, char /err,
+      |     ^
+src\app/script_internal.h:30:5: note: previous declaration is here
+   30 | int ct_script_step_shot(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+      |     ^
+build_scrn2/mutants/p37672/m0113_script_shots.c:151:37: error: use of undeclared identifier 'err'
+  151 |                    : ct_script_fail(err, cap, c, "screenshot capture failed", CT_SCRIPT_EXIT_RUN);
+      |                                     ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:151:42: error: use of undeclared identifier 'cap'
+  151 |                    : ct_script_fail(err, cap, c, "screenshot capture failed", CT_SCRIPT_EXIT_RUN);
+      |                                          ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:159:35: error: use of undeclared identifier 'err'
+  159 |             return ct_script_fail(err, cap, c, "unknown event or method", CT_SCRIPT_EXIT_RUN);
+      |                                   ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:159:40: error: use of undeclared identifier 'cap'
+  159 |             return ct_script_fail(err, cap, c, "unknown event or method", CT_SCRIPT_EXIT_RUN);
+      |                                        ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:164:35: error: use of undeclared identifier 'err'
+  164 |             return ct_script_fail(err, cap, c, "list id is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                   ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:164:40: error: use of undeclared identifier 'cap'
+  164 |             return ct_script_fail(err, cap, c, "list id is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                        ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:167:35: error: use of undeclared identifier 'err'
+  167 |             return ct_script_fail(err, cap, c, "pick index is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                   ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:167:40: error: use of undeclared identifier 'cap'
+  167 |             return ct_script_fail(err, cap, c, "pick index is not an integer", CT_SCRIPT_EXIT_RUN);
+      |                                        ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:186:35: error: use of undeclared identifier 'err'
+  186 |             return ct_script_fail(err, cap, c, "review state must be hidden or revealed",
+      |                                   ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:186:40: error: use of undeclared identifier 'cap'
+  186 |             return ct_script_fail(err, cap, c, "review state must be hidden or revealed",
+      |                                        ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:200:35: error: use of undeclared identifier 'err'
+  200 |             return ct_script_fail(err, cap, c, "cards state must be browse or edit",
+      |                                   ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:200:40: error: use of undeclared identifier 'cap'
+  200 |             return ct_script_fail(err, cap, c, "cards state must be browse or edit",
+      |                                        ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:216:35: error: use of undeclared identifier 'err'
+  216 |             return ct_script_fail(err, cap, c, "unknown settings tab", CT_SCRIPT_EXIT_RUN);
+      |                                   ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:216:40: error: use of undeclared identifier 'cap'
+  216 |             return ct_script_fail(err, cap, c, "unknown settings tab", CT_SCRIPT_EXIT_RUN);
+      |                                        ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:228:31: error: use of undeclared identifier 'err'
+  228 |         return ct_script_fail(err, cap, c, "screenshot write failed", CT_SCRIPT_EXIT_RUN);
+      |                               ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:228:36: error: use of undeclared identifier 'cap'
+  228 |         return ct_script_fail(err, cap, c, "screenshot write failed", CT_SCRIPT_EXIT_RUN);
+      |                                    ^~~
+build_scrn2/mutants/p37672/m0113_script_shots.c:232:33: error: use of undeclared identifier 'err'
+  232 |                : ct_script_fail(err, cap, c, "screenshot capture failed", CT_SCRIPT_EXIT_RUN);
+      |                                 ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited -1073741819
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_render exited -1073741819
+mutate: suite e2e_run_shot_render exited -1073741819
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+build_scrn2/mutants/p37672/m0143_script_shots.c:179:20: error: expected identifier or '('
+  179 |         const char /mode = ct_script_arg(s, c, 0);
+      |                    ^
+build_scrn2/mutants/p37672/m0143_script_shots.c:181:20: error: use of undeclared identifier 'mode'
+  181 |         if (strcmp(mode, "hidden") == 0) {
+      |                    ^~~~
+build_scrn2/mutants/p37672/m0143_script_shots.c:183:27: error: use of undeclared identifier 'mode'
+  183 |         } else if (strcmp(mode, "revealed") == 0) {
+      |                           ^~~~
+3 errors generated.
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_guards exited -1073741819
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+build_scrn2/mutants/p37672/m0156_script_shots.c:193:20: error: expected identifier or '('
+  193 |         const char /mode = ct_script_arg(s, c, 0);
+      |                    ^
+build_scrn2/mutants/p37672/m0156_script_shots.c:195:20: error: use of undeclared identifier 'mode'
+  195 |         if (strcmp(mode, "browse") == 0) {
+      |                    ^~~~
+build_scrn2/mutants/p37672/m0156_script_shots.c:197:27: error: use of undeclared identifier 'mode'
+  197 |         } else if (strcmp(mode, "edit") == 0) {
+      |                           ^~~~
+3 errors generated.
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_guards exited -1073741819
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_render exited -1073741819
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited -1073741819
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+build_scrn2/mutants/p37672/m0171_script_shots.c:207:20: error: expected identifier or '('
+  207 |         const char /mode = ct_script_arg(s, c, 0);
+      |                    ^
+build_scrn2/mutants/p37672/m0171_script_shots.c:209:20: error: use of undeclared identifier 'mode'
+  209 |         if (strcmp(mode, "general") == 0) {
+      |                    ^~~~
+build_scrn2/mutants/p37672/m0171_script_shots.c:211:27: error: use of undeclared identifier 'mode'
+  211 |         } else if (strcmp(mode, "letters") == 0) {
+      |                           ^~~~
+build_scrn2/mutants/p37672/m0171_script_shots.c:213:27: error: use of undeclared identifier 'mode'
+  213 |         } else if (strcmp(mode, "bld") == 0) {
+      |                           ^~~~
+4 errors generated.
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_guards exited -1073741819
+mutate: suite e2e_run_shot_guards exited -1073741819
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_guards exited 1
+mutate: suite e2e_run_shot_render exited 1
+mutate: suite e2e_run_shot_render exited 1
