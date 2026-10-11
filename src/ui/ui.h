@@ -43,13 +43,16 @@ void ct_cards_form_cancel(ct_cards_form *f);
 void ct_screen_cards_update(ct_app *app);
 void ct_screen_cards_draw(ct_app *app);
 
+ct_cards_form *ct_screen_cards_form(void);
+
 enum {
     CT_TRAINER_LISTS_MAX = CT_SELECTOR_LISTS_PER_PAIR_MAX,
     CT_TRAINER_FRONT_MAX = CT_PACK_FRONT_JSON_MAX,
     CT_TRAINER_ALG_MAX = CT_PACK_ALG_MAX,
     CT_TRAINER_CELL_NONE = -1,
     CT_TRAINER_NO_DETAIL = -1,
-    CT_TRAINER_ALG_CATEGORY = CT_ALG_CATEGORY_CHART
+    CT_TRAINER_ALG_CATEGORY = CT_ALG_CATEGORY_CHART,
+    CT_TRAINER_DECOMP_MAX = CT_ALG_SETUP_MAX + CT_CARD_CASE_KEY_MAX
 };
 
 typedef struct {
@@ -82,6 +85,9 @@ int ct_trainer_form_select_cell(ct_trainer_form *f, int sticker);
 int ct_trainer_form_clear_cell(ct_trainer_form *f);
 int ct_trainer_form_visible_count(const ct_trainer_form *f);
 int ct_trainer_form_nth_visible(const ct_trainer_form *f, int visible);
+int ct_trainer_decomp(const ct_trainer_form *f, char (*lines)[CT_TRAINER_DECOMP_MAX], int cap);
+
+ct_trainer_form *ct_screen_trainer_form(void);
 
 void ct_screen_trainer_update(ct_app *app);
 void ct_screen_trainer_draw(ct_app *app);
@@ -91,6 +97,13 @@ enum {
     CT_SETTINGS_CHANNELS = 3,
     CT_SETTINGS_COLOR_MAX = UCHAR_MAX,
     CT_SETTINGS_TEXT_MAX = (1 << 5),
+};
+
+enum {
+    CT_SETTINGS_TAB_GENERAL = 0,
+    CT_SETTINGS_TAB_LETTERS,
+    CT_SETTINGS_TAB_BLD,
+    CT_SETTINGS_TAB_COUNT
 };
 
 typedef struct {
@@ -121,6 +134,7 @@ void ct_settings_form_cancel(ct_settings_form *f);
 
 void ct_screen_settings_update(ct_app *app);
 void ct_screen_settings_draw(ct_app *app);
+int ct_screen_settings_select_tab(int tab);
 
 #define CT_REVIEW_SPEED_MIN (1.0 / (double)CT_ANIM_SPEED_EPS_SCALE)
 #define CT_UI_DEFAULT_DECK "unfiled"
@@ -153,6 +167,8 @@ void ct_review_form_end(ct_review_form *f, const char *now_iso);
 
 void ct_screen_review_update(ct_app *app);
 void ct_screen_review_draw(ct_app *app);
+
+ct_review_form *ct_screen_review_form(void);
 
 enum {
     CT_STATS_MAX_DECKS = CT_STATS_DECK_MAX,

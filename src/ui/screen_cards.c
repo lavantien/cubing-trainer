@@ -216,6 +216,10 @@ typedef struct {
 
 static ct_cards_screen ct_cards;
 
+ct_cards_form *ct_screen_cards_form(void) {
+    return &ct_cards.form;
+}
+
 static const char *ct_cards_dir_tag(int direction) {
     switch (direction) {
     case CT_DIR_FR:
@@ -340,7 +344,7 @@ static void ct_cards_buttons(ct_app *app, int x, int y, int gap, int btn_w, int 
 void ct_screen_cards_update(ct_app *app) {
     if (app == NULL)
         return;
-    if (!ct_cards.opened) {
+    if (!ct_cards.opened || ct_cards.form.db != app->db) {
         ct_cards.opened = true;
         ct_cards_form_open(&ct_cards.form, app->db, "");
     }

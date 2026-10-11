@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "gen/classify.h"
 #include "raygui.h"
 #include "raylib.h"
 #include "ui/ui.h"
@@ -16,7 +17,12 @@ enum {
     CT_TRAINER_KEY_MAX = CT_CARD_CASE_KEY_MAX,
     CT_TRAINER_EVENTS_MAX = CT_EVENT_FTO + 1,
     CT_TRAINER_CASES_MAX = CT_LETTER_STICKERS * CT_LETTER_STICKERS,
-    CT_TRAINER_HALF = 2
+    CT_TRAINER_HALF = 2,
+    CT_TRAINER_DETAIL_COL = 3,
+    CT_TRAINER_FRONT_ROW = 3,
+    CT_TRAINER_ALG_ROW = 4,
+    CT_TRAINER_DECOMP_FIRST_ROW = CT_TRAINER_ALG_ROW + 1,
+    CT_TRAINER_DECOMP_STEP_DIV = 2
 };
 
 static const char *const CT_TRAINER_EVENT_NAMES[] = {
@@ -306,6 +312,30 @@ int ct_trainer_form_nth_visible(const ct_trainer_form *f, int visible) {
     return -1;
 }
 
+int ct_trainer_decomp(const ct_trainer_form *f, char (*lines)[CT_TRAINER_DECOMP_MAX], int cap) {
+    if (f == NULL || lines == NULL || cap <= 0) {
+        return 0;
+    }
+    if (f->sel.case_index < 0 || f->alg_status != CT_REPO_OK || f->alg.sequence[0] == '\0') {
+        return 0;
+    }
+    int n = 0;
+    if (n < cap && f->alg.setup[0] != '\0') {
+        snprintf(lines[n++], CT_TRAINER_DECOMP_MAX, "setup %s", f->alg.setup);
+    }
+    if (n < cap && f->alg.interchange[0] != '\0') {
+        snprintf(lines[n++], CT_TRAINER_DECOMP_MAX, "interchange %s", f->alg.interchange);
+    }
+    if (n < cap && f->alg.insertion[0] != '\0') {
+        snprintf(lines[n++], CT_TRAINER_DECOMP_MAX, "insertion %s", f->alg.insertion);
+    }
+    if (n < cap) {
+        snprintf(lines[n++], CT_TRAINER_DECOMP_MAX, "class %s",
+                 ct_classification_label((ct_classification)f->alg.classification));
+    }
+    return n;
+}
+
 typedef struct {
     ct_trainer_form form;
     bool opened;
@@ -325,6 +355,10 @@ typedef struct {
 } ct_trainer_screen;
 
 static ct_trainer_screen ct_trainer;
+
+ct_trainer_form *ct_screen_trainer_form(void) {
+    return &ct_trainer.form;
+}
 
 static void ct_trainer_build_labels(ct_trainer_screen *s) {
     ct_trainer_form *f = &s->form;
@@ -394,7 +428,7 @@ void ct_screen_trainer_update(ct_app *app) {
     if (app == NULL) {
         return;
     }
-    if (!ct_trainer.opened) {
+    if (!ct_trainer.opened || ct_trainer.form.db != app->db) {
         ct_trainer.opened = true;
         ct_trainer_form_open(&ct_trainer.form, app->db);
     }
@@ -469,7 +503,7 @@ void ct_screen_trainer_draw(ct_app *app) {
     if (list_h < row_h) {
         list_h = row_h;
     }
-    int detail_x = margin + 2 * (col_w + margin);
+    int detail_x = margin + CT_TRAINER_DETAIL_COL * (col_w + margin);
     int detail_w = w - detail_x - margin;
 
     ct_trainer_build_labels(&ct_trainer);
@@ -540,11 +574,21 @@ void ct_screen_trainer_draw(ct_app *app) {
     GuiLabel(ct_trainer_rect(detail_x + margin, margin + 2 * row_h, detail_w - 2 * margin, row_h),
              line);
     if (f->sel.case_index >= 0) {
-        DrawText(f->front, detail_x + margin, margin + 3 * row_h, text_size, RAYWHITE);
+        DrawText(f->front, detail_x + margin, margin + CT_TRAINER_FRONT_ROW * row_h, text_size,
+                 RAYWHITE);
         DrawText(f->alg_text[0] != '\0' ? f->alg_text : "no alg", detail_x + margin,
-                 margin + 4 * row_h, text_size, f->alg_text[0] != '\0' ? RAYWHITE : GRAY);
+                 margin + CT_TRAINER_ALG_ROW * row_h, text_size,
+                 f->alg_text[0] != '\0' ? RAYWHITE : GRAY);
     } else {
-        DrawText("no case selected", detail_x + margin, margin + 3 * row_h, text_size, GRAY);
+        DrawText("no case selected", detail_x + margin, margin + CT_TRAINER_FRONT_ROW * row_h,
+                 text_size, GRAY);
+    }
+    char decomp[CT_TRAINER_DECOMP_LINES][CT_TRAINER_DECOMP_MAX];
+    int decomp_count = ct_trainer_decomp(f, decomp, CT_TRAINER_DECOMP_LINES);
+    int decomp_step = text_size + text_size / CT_TRAINER_DECOMP_STEP_DIV;
+    for (int i = 0; i < decomp_count; i++) {
+        DrawText(decomp[i], detail_x + margin,
+                 margin + CT_TRAINER_DECOMP_FIRST_ROW * row_h + i * decomp_step, text_size, GRAY);
     }
     if (GuiButton(ct_trainer_rect(detail_x, h - status_h - margin - row_h, detail_w, row_h),
                   "back")) {

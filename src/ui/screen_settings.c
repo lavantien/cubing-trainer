@@ -27,10 +27,6 @@ enum {
     CT_SETTINGS_ORBITS = 2,
     CT_SETTINGS_HEX_SHIFT = 4,
     CT_SETTINGS_HEX_ALPHA = ('9' - '0') + 1,
-    CT_SETTINGS_TAB_GENERAL = 0,
-    CT_SETTINGS_TAB_LETTERS,
-    CT_SETTINGS_TAB_BLD,
-    CT_SETTINGS_TAB_COUNT = 3,
     CT_SETTINGS_MARGIN_SHIFT = 5,
     CT_SETTINGS_ROW_H_SHIFT = 4,
     CT_SETTINGS_LABEL_W_DIV = 8,
@@ -603,24 +599,25 @@ static void ct_settings_draw_bld(ct_app *app, int x, int y, int w, int h) {
     int color_y = y + grid_h + margin;
     int color_h = h - (color_y - y);
     GuiGroupBox(ct_settings_rect(x, color_y, w, color_h), "colors");
-    int face_w = (w - 2 * pad) / CT_SETTINGS_FACE_COUNT;
-    int inner_y = color_y + pad;
-    int inner_h = color_h - 2 * pad;
+    int color_pad = margin / CT_SETTINGS_ORBITS;
+    int face_w = (w - 2 * color_pad) / CT_SETTINGS_FACE_COUNT;
+    int inner_y = color_y + color_pad;
+    int inner_h = color_h - 2 * color_pad;
     int swatch_h = inner_h / CT_SETTINGS_ORBITS;
-    int box_h = inner_h - swatch_h - margin;
+    int box_h = (inner_h - swatch_h - color_pad) / CT_SETTINGS_CHANNELS;
     for (int face = 0; face < CT_SETTINGS_FACE_COUNT; face++) {
         int fx = x + pad + face * face_w;
         GuiLabel(ct_settings_rect(fx, inner_y, face_w, row_h), CT_SETTINGS_FACE_NAMES[face]);
         Color c = {f->colors[face][0], f->colors[face][1], f->colors[face][2],
                    CT_SETTINGS_COLOR_MAX};
-        DrawRectangle(fx, inner_y + row_h, face_w - margin, swatch_h - row_h, c);
+        DrawRectangle(fx, inner_y + row_h, face_w - color_pad, swatch_h - row_h, c);
         for (int ch = 0; ch < CT_SETTINGS_CHANNELS; ch++) {
             int idx = face * CT_SETTINGS_CHANNELS + ch;
             bool edit = (ct_settings.chan_edit & (1u << idx)) != 0;
             if (!edit)
                 ct_settings.chan[face][ch] = f->colors[face][ch];
             int by = inner_y + swatch_h;
-            if (GuiValueBox(ct_settings_rect(fx, by + ch * box_h, face_w - margin, box_h), NULL,
+            if (GuiValueBox(ct_settings_rect(fx, by + ch * box_h, face_w - color_pad, box_h), NULL,
                             &ct_settings.chan[face][ch], 0, CT_SETTINGS_COLOR_MAX, edit) != 0) {
                 ct_settings.chan_edit ^= 1u << idx;
                 if (!(ct_settings.chan_edit & (1u << idx))) {
@@ -632,10 +629,21 @@ static void ct_settings_draw_bld(ct_app *app, int x, int y, int w, int h) {
     }
 }
 
+int ct_screen_settings_select_tab(int tab) {
+    if (tab < CT_SETTINGS_TAB_GENERAL) {
+        tab = CT_SETTINGS_TAB_GENERAL;
+    }
+    if (tab > CT_SETTINGS_TAB_BLD) {
+        tab = CT_SETTINGS_TAB_BLD;
+    }
+    ct_settings.tab = tab;
+    return ct_settings.tab;
+}
+
 void ct_screen_settings_update(ct_app *app) {
     if (app == NULL)
         return;
-    if (!ct_settings.opened) {
+    if (!ct_settings.opened || ct_settings.form.db != app->db) {
         ct_settings.opened = true;
         ct_settings.rejected = 0;
         ct_settings_form_open(&ct_settings.form, app->db);

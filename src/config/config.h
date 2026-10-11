@@ -226,6 +226,7 @@ typedef enum ct_cfg_status {
 #define CT_ISO_DATE_LEN 10
 #define CT_3STYLE_CORNER_BUFFER 2
 #define CT_3STYLE_EDGE_BUFFER 2
+#define CT_TRAINER_DECOMP_LINES 4
 #define CT_SCRIPT_ARGC 4
 #define CT_SCRIPT_TEXT_MAX 8192
 #define CT_SCRIPT_CMDS_MAX 128

@@ -303,6 +303,40 @@ CT_SUITE(trainer_form_chart_cells) {
     ct_db_close(db);
 }
 
+CT_SUITE(trainer_decomp_lines) {
+    ct_trainer_form f;
+    memset(&f, 0, sizeof f);
+    char lines[CT_TRAINER_DECOMP_LINES][CT_TRAINER_DECOMP_MAX];
+    CT_ASSERT_EQ(ct_trainer_decomp(NULL, lines, CT_TRAINER_DECOMP_LINES), 0);
+    CT_ASSERT_EQ(ct_trainer_decomp(&f, lines, 0), 0);
+    CT_ASSERT_EQ(ct_trainer_decomp(&f, lines, CT_TRAINER_DECOMP_LINES), 0);
+    f.sel.case_index = 0;
+    f.alg_status = CT_REPO_MISSING;
+    CT_ASSERT_EQ(ct_trainer_decomp(&f, lines, CT_TRAINER_DECOMP_LINES), 0);
+    f.alg_status = CT_REPO_OK;
+    CT_ASSERT_EQ(ct_trainer_decomp(&f, lines, CT_TRAINER_DECOMP_LINES), 0);
+    snprintf(f.alg.sequence, sizeof f.alg.sequence, "%s", "S");
+    snprintf(f.alg.setup, sizeof f.alg.setup, "%s", "x y");
+    snprintf(f.alg.interchange, sizeof f.alg.interchange, "%s", "R2 D2");
+    snprintf(f.alg.insertion, sizeof f.alg.insertion, "%s", "R' U' R");
+    f.alg.classification = CT_CLS_PER_SPECIAL;
+    CT_ASSERT_EQ(ct_trainer_decomp(&f, lines, CT_TRAINER_DECOMP_LINES), 4);
+    CT_ASSERT_STR_EQ(lines[0], "setup x y");
+    CT_ASSERT_STR_EQ(lines[1], "interchange R2 D2");
+    CT_ASSERT_STR_EQ(lines[2], "insertion R' U' R");
+    CT_ASSERT_STR_EQ(lines[3], "class per special");
+    f.alg.interchange[0] = '\0';
+    f.alg.classification = CT_CLS_SP7;
+    CT_ASSERT_EQ(ct_trainer_decomp(&f, lines, CT_TRAINER_DECOMP_LINES), 3);
+    CT_ASSERT_STR_EQ(lines[1], "insertion R' U' R");
+    CT_ASSERT_STR_EQ(lines[2], "class SP7");
+    memset(lines, 0, sizeof lines);
+    CT_ASSERT_EQ(ct_trainer_decomp(&f, lines, 2), 2);
+    CT_ASSERT_STR_EQ(lines[0], "setup x y");
+    CT_ASSERT_STR_EQ(lines[1], "insertion R' U' R");
+    CT_ASSERT_STR_EQ(lines[2], "");
+}
+
 CT_SUITE(trainer_form_letter_scheme_routed) {
     sqlite3 *db = tss_db();
     int scheme = ct_letter_scheme_default_id(db);

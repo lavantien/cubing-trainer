@@ -45,6 +45,10 @@ typedef struct {
 
 static ct_review_screen ct_review;
 
+ct_review_form *ct_screen_review_form(void) {
+    return &ct_review.form;
+}
+
 static const char *ct_review_pick_alg(const ct_card *c) {
     if (c->alg_3x3[0] != '\0') {
         return c->alg_3x3;
@@ -308,7 +312,10 @@ void ct_screen_review_update(ct_app *app) {
     if (app == NULL) {
         return;
     }
-    if (!ct_review.opened) {
+    if (!ct_review.opened || ct_review.form.db != app->db) {
+        if (ct_review.opened) {
+            ct_session_free(&ct_review.form.session);
+        }
         ct_review_open(app);
     }
     if (IsKeyPressed(KEY_ESCAPE)) {
@@ -421,6 +428,12 @@ void ct_screen_review_draw(ct_app *app) {
     }
 
     DrawText(f->revealed ? f->alg_text : "hidden", right_x, y, text_size, RAYWHITE);
+    if (!f->revealed) {
+        int reveal_w = right_w / CT_REVIEW_GRADE_COUNT;
+        if (GuiButton(ct_review_rect(right_x + right_w - reveal_w, y, reveal_w, row_h), "reveal")) {
+            ct_review_form_reveal(f);
+        }
+    }
     y += step;
     snprintf(line, sizeof line, "move %d of %d", f->scrub_index, f->move_count);
     GuiLabel(ct_review_rect(right_x, y, right_w, row_h), line);

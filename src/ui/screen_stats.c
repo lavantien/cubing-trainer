@@ -338,7 +338,7 @@ void ct_screen_stats_update(ct_app *app) {
     if (app == NULL) {
         return;
     }
-    if (!ct_stats.opened) {
+    if (!ct_stats.opened || ct_stats.view.db != app->db) {
         ct_stats.opened = true;
         char now[CT_STATS_STAMP_MAX];
         ct_now_utc_iso(now, sizeof now);
