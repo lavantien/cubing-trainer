@@ -976,3 +976,11 @@ src/render/renderer.c:225	quad fill loop bound inside the gl draw path, no headl
 src/render/renderer.c:227	corner order indexing inside the gl draw path mesh fill, no headless suite exercises it
 src/render/renderer.c:240	mesh triangle count inside the gl draw path, no headless suite exercises it
 src/render/renderer.c:243	mesh upload flag inside the gl draw path, no headless suite exercises it
+src/render/anim.c:29	queue slot zeroing start, every slot the accessors read is first written by push, the init is defensive
+src/render/anim.c:69	speed clamp lower boundary is idempotent, at the minimum both arms store the same value
+src/render/anim.c:85	prefix count clamp boundary is idempotent, at the queue count both arms store the same value
+src/render/anim.c:88	prefix cap clamp boundary is idempotent, at the cap both arms store the same value
+src/render/anim.c:91	prefix negative clamp boundary is idempotent, at zero both arms store zero
+src/render/anim.c:101	ease lower clamp boundary is idempotent, at zero both arms return zero
+src/render/anim.c:104	ease upper clamp boundary is idempotent, at one both arms return one
+src/render/anim.c:107	ease branch boundary, the cubic curve is continuous at the half point so both arms return one half

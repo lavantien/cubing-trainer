@@ -226,6 +226,12 @@ CT_SUITE(unit_anim_prefix) {
     CT_ASSERT_EQ(ct_anim_prefix(&a, 10, out, CT_ANIM_QUEUE_CAP), 2);
     CT_ASSERT(move_eq(out[0], m1));
     CT_ASSERT(move_eq(out[1], m2));
+
+    out[2] = move_make(CT_FACE_B, 3, 3, 3);
+    CT_ASSERT_EQ(ct_anim_prefix(&a, 2, out, 2), 2);
+    CT_ASSERT(move_eq(out[0], m1));
+    CT_ASSERT(move_eq(out[1], m2));
+    CT_ASSERT(move_eq(out[2], move_make(CT_FACE_B, 3, 3, 3)));
 }
 
 CT_SUITE(unit_anim_edges) {
