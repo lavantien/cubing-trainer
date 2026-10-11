@@ -1,0 +1,421 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/ui/screen_review.c build_close review_form_begin review_form_begin_garbage review_form_empty_deck review_form_reveal_grade review_form_playback review_form_scrub review_form_speed review_form_fallback review_form_end review_screen_session_log review_form_boundaries review_form_scrub_floor review_form_empty_status review_form_guards
+mutate: scope=src/ui/screen_review.c files=1 sites=245 suites=14
+SURVIVED  m0001 src/ui/screen_review.c:11 [arith / -> *]
+KILLED    m0002 src/ui/screen_review.c:14 [int+1 3 -> 4]
+KILLED    m0003 src/ui/screen_review.c:14 [int-1 3 -> 2]
+SURVIVED  m0004 src/ui/screen_review.c:15 [int+1 6 -> 7]
+SURVIVED  m0005 src/ui/screen_review.c:15 [int-1 6 -> 5]
+SURVIVED  m0006 src/ui/screen_review.c:16 [int+1 2 -> 3]
+SURVIVED  m0007 src/ui/screen_review.c:16 [int-1 2 -> 1]
+SURVIVED  m0008 src/ui/screen_review.c:17 [int+1 5 -> 6]
+SURVIVED  m0009 src/ui/screen_review.c:17 [int-1 5 -> 4]
+SURVIVED  m0010 src/ui/screen_review.c:18 [int+1 5 -> 6]
+SURVIVED  m0011 src/ui/screen_review.c:18 [int-1 5 -> 4]
+SURVIVED  m0012 src/ui/screen_review.c:20 [int+1 2 -> 3]
+KILLED    m0013 src/ui/screen_review.c:20 [int-1 2 -> 1]
+          build break
+SURVIVED  m0014 src/ui/screen_review.c:21 [arith / -> *]
+SURVIVED  m0015 src/ui/screen_review.c:21 [int+1 0 -> 1]
+SURVIVED  m0016 src/ui/screen_review.c:21 [int-1 0 -> -1]
+KILLED    m0017 src/ui/screen_review.c:22 [int+1 3 -> 4]
+KILLED    m0018 src/ui/screen_review.c:22 [int-1 3 -> 2]
+          build break
+KILLED    m0019 src/ui/screen_review.c:23 [arith + -> -]
+          build break
+SURVIVED  m0020 src/ui/screen_review.c:24 [int+1 4 -> 5]
+SURVIVED  m0021 src/ui/screen_review.c:24 [int-1 4 -> 3]
+SURVIVED  m0022 src/ui/screen_review.c:25 [int+1 2 -> 3]
+SURVIVED  m0023 src/ui/screen_review.c:25 [int-1 2 -> 1]
+SURVIVED  m0024 src/ui/screen_review.c:26 [arith * -> /]
+SURVIVED  m0025 src/ui/screen_review.c:26 [int+1 4 -> 5]
+SURVIVED  m0026 src/ui/screen_review.c:26 [int-1 4 -> 3]
+KILLED    m0027 src/ui/screen_review.c:31 [arith * -> /]
+          build break
+KILLED    m0028 src/ui/screen_review.c:33 [arith * -> /]
+          build break
+KILLED    m0029 src/ui/screen_review.c:48 [arith * -> /]
+          build break
+KILLED    m0030 src/ui/screen_review.c:48 [arith * -> /]
+          build break
+KILLED    m0031 src/ui/screen_review.c:49 [int+1 0 -> 1]
+KILLED    m0032 src/ui/screen_review.c:49 [int-1 0 -> -1]
+          build break
+KILLED    m0033 src/ui/screen_review.c:49 [cmp != -> ==]
+KILLED    m0034 src/ui/screen_review.c:52 [int+1 0 -> 1]
+KILLED    m0035 src/ui/screen_review.c:52 [int-1 0 -> -1]
+          build break
+KILLED    m0036 src/ui/screen_review.c:52 [cmp != -> ==]
+KILLED    m0037 src/ui/screen_review.c:58 [arith * -> /]
+          build break
+KILLED    m0038 src/ui/screen_review.c:58 [arith * -> /]
+          build break
+KILLED    m0039 src/ui/screen_review.c:62 [int+1 0 -> 1]
+KILLED    m0040 src/ui/screen_review.c:62 [int-1 0 -> -1]
+SURVIVED  m0041 src/ui/screen_review.c:62 [cmp < -> <=]
+KILLED    m0042 src/ui/screen_review.c:67 [arith * -> /]
+          build break
+KILLED    m0043 src/ui/screen_review.c:67 [arith * -> /]
+          build break
+KILLED    m0044 src/ui/screen_review.c:69 [int+1 0 -> 1]
+KILLED    m0045 src/ui/screen_review.c:69 [int-1 0 -> -1]
+KILLED    m0046 src/ui/screen_review.c:69 [cmp < -> <=]
+KILLED    m0047 src/ui/screen_review.c:74 [bool false -> true]
+KILLED    m0048 src/ui/screen_review.c:75 [int+1 0 -> 1]
+KILLED    m0049 src/ui/screen_review.c:75 [int-1 0 -> -1]
+KILLED    m0050 src/ui/screen_review.c:78 [arith * -> /]
+          build break
+KILLED    m0051 src/ui/screen_review.c:79 [int+1 0 -> 1]
+KILLED    m0052 src/ui/screen_review.c:79 [int-1 0 -> -1]
+KILLED    m0053 src/ui/screen_review.c:80 [int+1 0 -> 1]
+KILLED    m0054 src/ui/screen_review.c:80 [int-1 0 -> -1]
+          build break
+KILLED    m0055 src/ui/screen_review.c:81 [int+1 0 -> 1]
+KILLED    m0056 src/ui/screen_review.c:81 [int-1 0 -> -1]
+KILLED    m0057 src/ui/screen_review.c:84 [bool false -> true]
+KILLED    m0058 src/ui/screen_review.c:85 [bool false -> true]
+KILLED    m0059 src/ui/screen_review.c:86 [int+1 0 -> 1]
+KILLED    m0060 src/ui/screen_review.c:86 [int-1 0 -> -1]
+KILLED    m0061 src/ui/screen_review.c:89 [arith * -> /]
+          build break
+KILLED    m0062 src/ui/screen_review.c:89 [arith * -> /]
+          build break
+KILLED    m0063 src/ui/screen_review.c:89 [arith * -> /]
+          build break
+KILLED    m0064 src/ui/screen_review.c:89 [arith * -> /]
+          build break
+KILLED    m0065 src/ui/screen_review.c:91 [cmp == -> !=]
+KILLED    m0066 src/ui/screen_review.c:94 [int+1 0 -> 1]
+KILLED    m0067 src/ui/screen_review.c:94 [int-1 0 -> -1]
+KILLED    m0068 src/ui/screen_review.c:94 [arith * -> /]
+          build break
+KILLED    m0069 src/ui/screen_review.c:100 [cmp < -> <=]
+KILLED    m0070 src/ui/screen_review.c:100 [int+1 0 -> 1]
+SURVIVED  m0071 src/ui/screen_review.c:100 [int-1 0 -> -1]
+KILLED    m0072 src/ui/screen_review.c:109 [arith * -> /]
+          build break
+KILLED    m0073 src/ui/screen_review.c:110 [cmp == -> !=]
+SURVIVED  m0074 src/ui/screen_review.c:114 [int+1 0 -> 1]
+SURVIVED  m0075 src/ui/screen_review.c:114 [int-1 0 -> -1]
+KILLED    m0076 src/ui/screen_review.c:118 [cmp != -> ==]
+SURVIVED  m0077 src/ui/screen_review.c:126 [cmp < -> <=]
+SURVIVED  m0078 src/ui/screen_review.c:126 [int+1 0 -> 1]
+SURVIVED  m0079 src/ui/screen_review.c:126 [int-1 0 -> -1]
+KILLED    m0080 src/ui/screen_review.c:127 [int+1 0 -> 1]
+KILLED    m0081 src/ui/screen_review.c:127 [int-1 0 -> -1]
+KILLED    m0082 src/ui/screen_review.c:136 [arith * -> /]
+          build break
+KILLED    m0083 src/ui/screen_review.c:137 [cmp == -> !=]
+KILLED    m0084 src/ui/screen_review.c:140 [bool true -> false]
+SURVIVED  m0085 src/ui/screen_review.c:143 [cmp < -> <=]
+SURVIVED  m0086 src/ui/screen_review.c:143 [int+1 0 -> 1]
+SURVIVED  m0087 src/ui/screen_review.c:143 [int-1 0 -> -1]
+KILLED    m0088 src/ui/screen_review.c:144 [int+1 0 -> 1]
+SURVIVED  m0089 src/ui/screen_review.c:144 [int-1 0 -> -1]
+KILLED    m0090 src/ui/screen_review.c:149 [bool true -> false]
+KILLED    m0091 src/ui/screen_review.c:152 [arith * -> /]
+          build break
+KILLED    m0092 src/ui/screen_review.c:152 [arith * -> /]
+          build break
+KILLED    m0093 src/ui/screen_review.c:153 [cmp == -> !=]
+KILLED    m0094 src/ui/screen_review.c:158 [cmp == -> !=]
+KILLED    m0095 src/ui/screen_review.c:164 [arith * -> /]
+          build break
+KILLED    m0096 src/ui/screen_review.c:165 [cmp == -> !=]
+KILLED    m0097 src/ui/screen_review.c:170 [bool false -> true]
+KILLED    m0098 src/ui/screen_review.c:173 [bool true -> false]
+KILLED    m0099 src/ui/screen_review.c:177 [arith * -> /]
+          build break
+KILLED    m0100 src/ui/screen_review.c:178 [cmp == -> !=]
+KILLED    m0101 src/ui/screen_review.c:184 [arith - -> +]
+KILLED    m0102 src/ui/screen_review.c:188 [arith * -> /]
+          build break
+KILLED    m0103 src/ui/screen_review.c:189 [cmp == -> !=]
+SURVIVED  m0104 src/ui/screen_review.c:192 [cmp < -> <=]
+KILLED    m0105 src/ui/screen_review.c:199 [arith * -> /]
+          build break
+KILLED    m0106 src/ui/screen_review.c:200 [cmp == -> !=]
+SURVIVED  m0107 src/ui/screen_review.c:204 [cmp < -> <=]
+SURVIVED  m0108 src/ui/screen_review.c:204 [int+1 0 -> 1]
+KILLED    m0109 src/ui/screen_review.c:204 [int-1 0 -> -1]
+KILLED    m0110 src/ui/screen_review.c:205 [int+1 0 -> 1]
+KILLED    m0111 src/ui/screen_review.c:205 [int-1 0 -> -1]
+SURVIVED  m0112 src/ui/screen_review.c:207 [cmp > -> >=]
+SURVIVED  m0113 src/ui/screen_review.c:212 [cmp < -> <=]
+SURVIVED  m0114 src/ui/screen_review.c:212 [int+1 0 -> 1]
+SURVIVED  m0115 src/ui/screen_review.c:212 [int-1 0 -> -1]
+KILLED    m0116 src/ui/screen_review.c:213 [int+1 0 -> 1]
+SURVIVED  m0117 src/ui/screen_review.c:213 [int-1 0 -> -1]
+KILLED    m0118 src/ui/screen_review.c:219 [int+1 0 -> 1]
+KILLED    m0119 src/ui/screen_review.c:219 [int-1 0 -> -1]
+KILLED    m0120 src/ui/screen_review.c:219 [cmp < -> <=]
+KILLED    m0121 src/ui/screen_review.c:222 [int+1 0 -> 1]
+KILLED    m0122 src/ui/screen_review.c:222 [int-1 0 -> -1]
+KILLED    m0123 src/ui/screen_review.c:222 [cmp < -> <=]
+KILLED    m0124 src/ui/screen_review.c:230 [arith * -> /]
+          build break
+KILLED    m0125 src/ui/screen_review.c:230 [arith * -> /]
+          build break
+KILLED    m0126 src/ui/screen_review.c:231 [cmp == -> !=]
+KILLED    m0127 src/ui/screen_review.c:238 [logic || -> &&]
+KILLED    m0128 src/ui/screen_review.c:238 [cmp == -> !=]
+KILLED    m0129 src/ui/screen_review.c:244 [bool true -> false]
+KILLED    m0130 src/ui/screen_review.c:247 [arith * -> /]
+          build break
+KILLED    m0131 src/ui/screen_review.c:247 [arith * -> /]
+          build break
+KILLED    m0132 src/ui/screen_review.c:247 [arith * -> /]
+          build break
+KILLED    m0133 src/ui/screen_review.c:247 [arith * -> /]
+          build break
+SURVIVED  m0134 src/ui/screen_review.c:249 [int+1 0 -> 1]
+KILLED    m0135 src/ui/screen_review.c:249 [int-1 0 -> -1]
+SURVIVED  m0136 src/ui/screen_review.c:250 [int+1 0 -> 1]
+KILLED    m0137 src/ui/screen_review.c:250 [int-1 0 -> -1]
+KILLED    m0138 src/ui/screen_review.c:250 [cmp < -> <=]
+SURVIVED  m0139 src/ui/screen_review.c:251 [int+1 0 -> 1]
+SURVIVED  m0140 src/ui/screen_review.c:251 [int-1 0 -> -1]
+SURVIVED  m0141 src/ui/screen_review.c:252 [bool false -> true]
+KILLED    m0142 src/ui/screen_review.c:253 [cmp >= -> >]
+KILLED    m0143 src/ui/screen_review.c:253 [logic && -> ||]
+          build break
+SURVIVED  m0144 src/ui/screen_review.c:253 [cmp <= -> <]
+SURVIVED  m0145 src/ui/screen_review.c:254 [arith * -> /]
+SURVIVED  m0146 src/ui/screen_review.c:254 [arith + -> -]
+SURVIVED  m0147 src/ui/screen_review.c:254 [arith - -> +]
+KILLED    m0148 src/ui/screen_review.c:256 [bool true -> false]
+KILLED    m0149 src/ui/screen_review.c:258 [not-del ! -> (deleted)]
+SURVIVED  m0150 src/ui/screen_review.c:258 [logic || -> &&]
+KILLED    m0151 src/ui/screen_review.c:258 [cmp != -> ==]
+KILLED    m0152 src/ui/screen_review.c:258 [logic && -> ||]
+          build break
+KILLED    m0153 src/ui/screen_review.c:258 [cmp != -> ==]
+KILLED    m0154 src/ui/screen_review.c:264 [arith * -> /]
+          build break
+SURVIVED  m0155 src/ui/screen_review.c:264 [int+1 0 -> 1]
+KILLED    m0156 src/ui/screen_review.c:264 [int-1 0 -> -1]
+          build break
+KILLED    m0157 src/ui/screen_review.c:265 [arith * -> /]
+          build break
+SURVIVED  m0158 src/ui/screen_review.c:265 [int+1 1 -> 2]
+SURVIVED  m0159 src/ui/screen_review.c:265 [int-1 1 -> 0]
+KILLED    m0160 src/ui/screen_review.c:266 [arith * -> /]
+          build break
+KILLED    m0161 src/ui/screen_review.c:266 [int+1 2 -> 3]
+          build break
+SURVIVED  m0162 src/ui/screen_review.c:266 [int-1 2 -> 1]
+KILLED    m0163 src/ui/screen_review.c:270 [arith * -> /]
+          build break
+SURVIVED  m0164 src/ui/screen_review.c:272 [cmp == -> !=]
+SURVIVED  m0165 src/ui/screen_review.c:276 [int+1 0 -> 1]
+KILLED    m0166 src/ui/screen_review.c:276 [int-1 0 -> -1]
+KILLED    m0167 src/ui/screen_review.c:276 [cmp < -> <=]
+SURVIVED  m0168 src/ui/screen_review.c:277 [cmp == -> !=]
+SURVIVED  m0169 src/ui/screen_review.c:277 [int+1 0 -> 1]
+SURVIVED  m0170 src/ui/screen_review.c:277 [int-1 0 -> -1]
+KILLED    m0171 src/ui/screen_review.c:283 [arith * -> /]
+          build break
+KILLED    m0172 src/ui/screen_review.c:284 [bool true -> false]
+KILLED    m0173 src/ui/screen_review.c:285 [bool false -> true]
+SURVIVED  m0174 src/ui/screen_review.c:286 [int+1 0 -> 1]
+SURVIVED  m0175 src/ui/screen_review.c:286 [int-1 0 -> -1]
+SURVIVED  m0176 src/ui/screen_review.c:298 [int+1 0 -> 1]
+SURVIVED  m0177 src/ui/screen_review.c:298 [int-1 0 -> -1]
+SURVIVED  m0178 src/ui/screen_review.c:299 [int+1 0 -> 1]
+SURVIVED  m0179 src/ui/screen_review.c:299 [int-1 0 -> -1]
+SURVIVED  m0180 src/ui/screen_review.c:300 [int+1 0 -> 1]
+SURVIVED  m0181 src/ui/screen_review.c:300 [int-1 0 -> -1]
+KILLED    m0182 src/ui/screen_review.c:301 [cmp == -> !=]
+SURVIVED  m0183 src/ui/screen_review.c:303 [int+1 0 -> 1]
+SURVIVED  m0184 src/ui/screen_review.c:303 [int-1 0 -> -1]
+KILLED    m0185 src/ui/screen_review.c:307 [arith * -> /]
+          build break
+KILLED    m0186 src/ui/screen_review.c:308 [cmp == -> !=]
+KILLED    m0187 src/ui/screen_review.c:311 [not-del ! -> (deleted)]
+SURVIVED  m0188 src/ui/screen_review.c:317 [bool false -> true]
+KILLED    m0189 src/ui/screen_review.c:321 [arith * -> /]
+          build break
+SURVIVED  m0190 src/ui/screen_review.c:325 [arith - -> +]
+SURVIVED  m0191 src/ui/screen_review.c:326 [not-del ! -> (deleted)]
+SURVIVED  m0192 src/ui/screen_review.c:328 [bool false -> true]
+KILLED    m0193 src/ui/screen_review.c:331 [not-del ! -> (deleted)]
+KILLED    m0194 src/ui/screen_review.c:341 [arith * -> /]
+          build break
+KILLED    m0195 src/ui/screen_review.c:357 [arith * -> /]
+          build break
+KILLED    m0196 src/ui/screen_review.c:357 [arith * -> /]
+          build break
+KILLED    m0197 src/ui/screen_review.c:357 [arith * -> /]
+          build break
+SURVIVED  m0198 src/ui/screen_review.c:358 [arith - -> +]
+SURVIVED  m0199 src/ui/screen_review.c:358 [arith - -> +]
+SURVIVED  m0200 src/ui/screen_review.c:358 [int+1 1 -> 2]
+SURVIVED  m0201 src/ui/screen_review.c:358 [int-1 1 -> 0]
+SURVIVED  m0202 src/ui/screen_review.c:358 [arith * -> /]
+SURVIVED  m0203 src/ui/screen_review.c:358 [arith / -> *]
+SURVIVED  m0204 src/ui/screen_review.c:359 [int+1 0 -> 1]
+SURVIVED  m0205 src/ui/screen_review.c:359 [int-1 0 -> -1]
+SURVIVED  m0206 src/ui/screen_review.c:359 [cmp < -> <=]
+SURVIVED  m0207 src/ui/screen_review.c:360 [arith + -> -]
+SURVIVED  m0208 src/ui/screen_review.c:360 [arith * -> /]
+SURVIVED  m0209 src/ui/screen_review.c:360 [arith + -> -]
+KILLED    m0210 src/ui/screen_review.c:373 [arith * -> /]
+          build break
+SURVIVED  m0211 src/ui/screen_review.c:374 [cmp == -> !=]
+SURVIVED  m0212 src/ui/screen_review.c:374 [int+1 0 -> 1]
+SURVIVED  m0213 src/ui/screen_review.c:374 [int-1 0 -> -1]
+KILLED    m0214 src/ui/screen_review.c:385 [arith * -> /]
+          build break
+SURVIVED  m0215 src/ui/screen_review.c:387 [cmp == -> !=]
+KILLED    m0216 src/ui/screen_review.c:390 [arith * -> /]
+          build break
+SURVIVED  m0217 src/ui/screen_review.c:394 [arith / -> *]
+SURVIVED  m0218 src/ui/screen_review.c:397 [arith + -> -]
+SURVIVED  m0219 src/ui/screen_review.c:398 [arith - -> +]
+SURVIVED  m0220 src/ui/screen_review.c:398 [arith - -> +]
+SURVIVED  m0221 src/ui/screen_review.c:399 [arith + -> -]
+SURVIVED  m0222 src/ui/screen_review.c:403 [int+1 0 -> 1]
+SURVIVED  m0223 src/ui/screen_review.c:403 [int-1 0 -> -1]
+SURVIVED  m0224 src/ui/screen_review.c:403 [int+1 0 -> 1]
+SURVIVED  m0225 src/ui/screen_review.c:403 [int-1 0 -> -1]
+SURVIVED  m0226 src/ui/screen_review.c:416 [cmp == -> !=]
+SURVIVED  m0227 src/ui/screen_review.c:416 [int+1 0 -> 1]
+SURVIVED  m0228 src/ui/screen_review.c:416 [int-1 0 -> -1]
+SURVIVED  m0229 src/ui/screen_review.c:418 [arith - -> +]
+SURVIVED  m0230 src/ui/screen_review.c:418 [arith - -> +]
+SURVIVED  m0231 src/ui/screen_review.c:418 [int+1 2 -> 3]
+SURVIVED  m0232 src/ui/screen_review.c:418 [int-1 2 -> 1]
+SURVIVED  m0233 src/ui/screen_review.c:418 [arith * -> /]
+KILLED    m0234 src/ui/screen_review.c:431 [arith * -> /]
+          build break
+SURVIVED  m0235 src/ui/screen_review.c:439 [arith + -> -]
+SURVIVED  m0236 src/ui/screen_review.c:439 [arith / -> *]
+SURVIVED  m0237 src/ui/screen_review.c:440 [cmp > -> >=]
+SURVIVED  m0238 src/ui/screen_review.c:440 [int+1 0 -> 1]
+SURVIVED  m0239 src/ui/screen_review.c:440 [int-1 0 -> -1]
+SURVIVED  m0240 src/ui/screen_review.c:440 [logic && -> ||]
+SURVIVED  m0241 src/ui/screen_review.c:445 [arith - -> +]
+SURVIVED  m0242 src/ui/screen_review.c:445 [arith - -> +]
+SURVIVED  m0243 src/ui/screen_review.c:445 [int+1 2 -> 3]
+SURVIVED  m0244 src/ui/screen_review.c:445 [int-1 2 -> 1]
+SURVIVED  m0245 src/ui/screen_review.c:445 [arith * -> /]
+ACCEPTED  m0001 src/ui/screen_review.c:11 [arith / -> *] :: speed table first entry, consumed only by the gui speed callback no headless suite triggers
+ACCEPTED  m0004 src/ui/screen_review.c:15 [int+1 6 -> 7] :: margin shift constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+ACCEPTED  m0005 src/ui/screen_review.c:15 [int-1 6 -> 5] :: margin shift constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+ACCEPTED  m0006 src/ui/screen_review.c:16 [int+1 2 -> 3] :: pane width divisor, draw layout only
+ACCEPTED  m0007 src/ui/screen_review.c:16 [int-1 2 -> 1] :: pane width divisor, draw layout only
+ACCEPTED  m0008 src/ui/screen_review.c:17 [int+1 5 -> 6] :: field height shift, draw layout only
+ACCEPTED  m0009 src/ui/screen_review.c:17 [int-1 5 -> 4] :: field height shift, draw layout only
+ACCEPTED  m0010 src/ui/screen_review.c:18 [int+1 5 -> 6] :: text size shift, draw layout only
+ACCEPTED  m0011 src/ui/screen_review.c:18 [int-1 5 -> 4] :: text size shift, draw layout only
+ACCEPTED  m0012 src/ui/screen_review.c:20 [int+1 2 -> 3] :: play button count, consumed only by the draw-side play button row
+ACCEPTED  m0014 src/ui/screen_review.c:21 [arith / -> *] :: speed count constant, consumed only by the draw-side speed row and its label array
+ACCEPTED  m0015 src/ui/screen_review.c:21 [int+1 0 -> 1] :: speed count constant, consumed only by the draw-side speed row and its label array
+ACCEPTED  m0016 src/ui/screen_review.c:21 [int-1 0 -> -1] :: speed count constant, consumed only by the draw-side speed row and its label array
+ACCEPTED  m0020 src/ui/screen_review.c:24 [int+1 4 -> 5] :: camera distance, write-only screen state read only by the draw path
+ACCEPTED  m0021 src/ui/screen_review.c:24 [int-1 4 -> 3] :: camera distance, write-only screen state read only by the draw path
+ACCEPTED  m0022 src/ui/screen_review.c:25 [int+1 2 -> 3] :: camera offset, write-only screen state read only by the draw path
+ACCEPTED  m0023 src/ui/screen_review.c:25 [int-1 2 -> 1] :: camera offset, write-only screen state read only by the draw path
+ACCEPTED  m0024 src/ui/screen_review.c:26 [arith * -> /] :: camera fov compose, write-only screen state read only by the draw path
+ACCEPTED  m0025 src/ui/screen_review.c:26 [int+1 4 -> 5] :: camera fov compose, write-only screen state read only by the draw path
+ACCEPTED  m0026 src/ui/screen_review.c:26 [int-1 4 -> 3] :: camera fov compose, write-only screen state read only by the draw path
+ACCEPTED  m0041 src/ui/screen_review.c:62 [cmp < -> <=] :: scramble loop overrun applies parser frame residue one slot past the written inverses, it decodes as a zero turn on every suite alg so the extra apply is the identity
+ACCEPTED  m0071 src/ui/screen_review.c:100 [int-1 0 -> -1] :: minus one weakening at the begin gate only relaxes the rc minus one case, the form memset zeroes the session first so the deferred load reproduces the same error status
+ACCEPTED  m0074 src/ui/screen_review.c:114 [int+1 0 -> 1] :: local card fill byte, the failure path never reads the local and the success path overwrites every field
+ACCEPTED  m0075 src/ui/screen_review.c:114 [int-1 0 -> -1] :: local card fill byte, the failure path never reads the local and the success path overwrites every field
+ACCEPTED  m0077 src/ui/screen_review.c:126 [cmp < -> <=] :: weakened parse clamp maps a zero parse to itself, the minus one mutant is killed by the move count pin
+ACCEPTED  m0078 src/ui/screen_review.c:126 [int+1 0 -> 1] :: weakened parse clamp maps a zero parse to itself, the minus one mutant is killed by the move count pin
+ACCEPTED  m0079 src/ui/screen_review.c:126 [int-1 0 -> -1] :: weakened parse clamp maps a zero parse to itself, the minus one mutant is killed by the move count pin
+ACCEPTED  m0085 src/ui/screen_review.c:143 [cmp < -> <=] :: weakened parse clamp in reveal maps zero and minus one to an identical empty replay, the plus one mutant is killed by the empty queue pin
+ACCEPTED  m0086 src/ui/screen_review.c:143 [int+1 0 -> 1] :: weakened parse clamp in reveal maps zero and minus one to an identical empty replay, the plus one mutant is killed by the empty queue pin
+ACCEPTED  m0087 src/ui/screen_review.c:143 [int-1 0 -> -1] :: weakened parse clamp in reveal maps zero and minus one to an identical empty replay, the plus one mutant is killed by the empty queue pin
+ACCEPTED  m0089 src/ui/screen_review.c:144 [int-1 0 -> -1] :: minus one clamp replacement in reveal mirrors the original empty replay, no scramble or push happens either way
+ACCEPTED  m0104 src/ui/screen_review.c:192 [cmp < -> <=] :: speed min clamp boundary is idempotent, at the minimum both arms store the same value
+ACCEPTED  m0107 src/ui/screen_review.c:204 [cmp < -> <=] :: weakened negative scrub clamp maps zero to itself, the minus one mutant is killed by the floor pin
+ACCEPTED  m0108 src/ui/screen_review.c:204 [int+1 0 -> 1] :: weakened negative scrub clamp maps zero to itself, the minus one mutant is killed by the floor pin
+ACCEPTED  m0112 src/ui/screen_review.c:207 [cmp > -> >=] :: upper scrub clamp boundary is idempotent, at move_count both arms store the same value
+ACCEPTED  m0113 src/ui/screen_review.c:212 [cmp < -> <=] :: weakened parse clamp in scrub maps zero and minus one to an identical empty replay
+ACCEPTED  m0114 src/ui/screen_review.c:212 [int+1 0 -> 1] :: weakened parse clamp in scrub maps zero and minus one to an identical empty replay
+ACCEPTED  m0115 src/ui/screen_review.c:212 [int-1 0 -> -1] :: weakened parse clamp in scrub maps zero and minus one to an identical empty replay
+ACCEPTED  m0117 src/ui/screen_review.c:213 [int-1 0 -> -1] :: minus one clamp replacement in scrub mirrors the original empty replay
+ACCEPTED  m0134 src/ui/screen_review.c:249 [int+1 0 -> 1] :: iso scan start index feeds only the day seed of the auto-open session, no suite can pin the wall clock so the day is unobservable
+ACCEPTED  m0136 src/ui/screen_review.c:250 [int+1 0 -> 1] :: iso field start shift feeds only the unobservable day seed, the stamp still parses to a valid triple
+ACCEPTED  m0139 src/ui/screen_review.c:251 [int+1 0 -> 1] :: iso value accumulator init feeds only the unobservable day seed
+ACCEPTED  m0140 src/ui/screen_review.c:251 [int-1 0 -> -1] :: iso value accumulator init feeds only the unobservable day seed
+ACCEPTED  m0141 src/ui/screen_review.c:252 [bool false -> true] :: any flag flip only matters for a digitless field, the wall clock stamp always carries digits
+ACCEPTED  m0144 src/ui/screen_review.c:253 [cmp <= -> <] :: weakened digit bound drops trailing nines from the day seed, unobservable in the empty default-deck session
+ACCEPTED  m0145 src/ui/screen_review.c:254 [arith * -> /] :: digit accumulation arithmetic feeds only the unobservable day seed
+ACCEPTED  m0146 src/ui/screen_review.c:254 [arith + -> -] :: digit accumulation arithmetic feeds only the unobservable day seed
+ACCEPTED  m0147 src/ui/screen_review.c:254 [arith - -> +] :: digit accumulation arithmetic feeds only the unobservable day seed
+ACCEPTED  m0150 src/ui/screen_review.c:258 [logic || -> &&] :: separator guard conjunction flip only matters for a digitless field, the stamp always parses
+ACCEPTED  m0155 src/ui/screen_review.c:264 [int+1 0 -> 1] :: year store index, the day seed is unobservable in the empty default-deck session
+ACCEPTED  m0158 src/ui/screen_review.c:265 [int+1 1 -> 2] :: month store value, same unobservable day seed
+ACCEPTED  m0159 src/ui/screen_review.c:265 [int-1 1 -> 0] :: month store value, same unobservable day seed
+ACCEPTED  m0162 src/ui/screen_review.c:266 [int-1 2 -> 1] :: day store value, same unobservable day seed
+ACCEPTED  m0164 src/ui/screen_review.c:272 [cmp == -> !=] :: scheme loader null guard, the scheme is write-only state read only by the draw path
+ACCEPTED  m0165 src/ui/screen_review.c:276 [int+1 0 -> 1] :: scheme face loop bound, write-only scheme state read only by the draw path
+ACCEPTED  m0168 src/ui/screen_review.c:277 [cmp == -> !=] :: scheme settings probe, write-only scheme state read only by the draw path
+ACCEPTED  m0169 src/ui/screen_review.c:277 [int+1 0 -> 1] :: scheme settings probe, write-only scheme state read only by the draw path
+ACCEPTED  m0170 src/ui/screen_review.c:277 [int-1 0 -> -1] :: scheme settings probe, write-only scheme state read only by the draw path
+ACCEPTED  m0174 src/ui/screen_review.c:286 [int+1 0 -> 1] :: open form memset fill, the subsequent form begin memsets the same struct wholesale
+ACCEPTED  m0175 src/ui/screen_review.c:286 [int-1 0 -> -1] :: open form memset fill, the subsequent form begin memsets the same struct wholesale
+ACCEPTED  m0176 src/ui/screen_review.c:298 [int+1 0 -> 1] :: year holder init, overwritten on every scan success and unused on failure
+ACCEPTED  m0177 src/ui/screen_review.c:298 [int-1 0 -> -1] :: year holder init, overwritten on every scan success and unused on failure
+ACCEPTED  m0178 src/ui/screen_review.c:299 [int+1 0 -> 1] :: month holder init, overwritten on every scan success and unused on failure
+ACCEPTED  m0179 src/ui/screen_review.c:299 [int-1 0 -> -1] :: month holder init, overwritten on every scan success and unused on failure
+ACCEPTED  m0180 src/ui/screen_review.c:300 [int+1 0 -> 1] :: day holder init, overwritten on every scan success and unused on failure
+ACCEPTED  m0181 src/ui/screen_review.c:300 [int-1 0 -> -1] :: day holder init, overwritten on every scan success and unused on failure
+ACCEPTED  m0183 src/ui/screen_review.c:303 [int+1 0 -> 1] :: auto-open limit seed, one and minus one build the same empty default-deck queue
+ACCEPTED  m0184 src/ui/screen_review.c:303 [int-1 0 -> -1] :: auto-open limit seed, one and minus one build the same empty default-deck queue
+ACCEPTED  m0188 src/ui/screen_review.c:317 [bool false -> true] :: opened reset in the escape branch, raylib input branch no headless suite can trigger
+ACCEPTED  m0190 src/ui/screen_review.c:325 [arith - -> +] :: scrub index recompute in the frame completion branch, needs a live anim clock no headless suite drives
+ACCEPTED  m0191 src/ui/screen_review.c:326 [not-del ! -> (deleted)] :: anim drain check in the frame completion branch, same live-clock branch
+ACCEPTED  m0192 src/ui/screen_review.c:328 [bool false -> true] :: playing reset in the frame completion branch, same live-clock branch
+ACCEPTED  m0198 src/ui/screen_review.c:358 [arith - -> +] :: button row width split, draw path only
+ACCEPTED  m0199 src/ui/screen_review.c:358 [arith - -> +] :: button row width split, draw path only
+ACCEPTED  m0200 src/ui/screen_review.c:358 [int+1 1 -> 2] :: button row width split, draw path only
+ACCEPTED  m0201 src/ui/screen_review.c:358 [int-1 1 -> 0] :: button row width split, draw path only
+ACCEPTED  m0202 src/ui/screen_review.c:358 [arith * -> /] :: button row width split, draw path only
+ACCEPTED  m0203 src/ui/screen_review.c:358 [arith / -> *] :: button row width split, draw path only
+ACCEPTED  m0204 src/ui/screen_review.c:359 [int+1 0 -> 1] :: button row loop bound, draw path only
+ACCEPTED  m0205 src/ui/screen_review.c:359 [int-1 0 -> -1] :: button row loop bound, draw path only
+ACCEPTED  m0206 src/ui/screen_review.c:359 [cmp < -> <=] :: button row loop bound, draw path only
+ACCEPTED  m0207 src/ui/screen_review.c:360 [arith + -> -] :: button hit test arithmetic, draw path only
+ACCEPTED  m0208 src/ui/screen_review.c:360 [arith * -> /] :: button hit test arithmetic, draw path only
+ACCEPTED  m0209 src/ui/screen_review.c:360 [arith + -> -] :: button hit test arithmetic, draw path only
+ACCEPTED  m0211 src/ui/screen_review.c:374 [cmp == -> !=] :: play callback dispatch, gui event branch no headless suite can trigger
+ACCEPTED  m0212 src/ui/screen_review.c:374 [int+1 0 -> 1] :: play callback dispatch, gui event branch no headless suite can trigger
+ACCEPTED  m0213 src/ui/screen_review.c:374 [int-1 0 -> -1] :: play callback dispatch, gui event branch no headless suite can trigger
+ACCEPTED  m0215 src/ui/screen_review.c:387 [cmp == -> !=] :: null guard after the background clear, draw path only
+ACCEPTED  m0217 src/ui/screen_review.c:394 [arith / -> *] :: pane width layout, draw path only
+ACCEPTED  m0218 src/ui/screen_review.c:397 [arith + -> -] :: right pane x layout, draw path only
+ACCEPTED  m0219 src/ui/screen_review.c:398 [arith - -> +] :: right pane width layout, draw path only
+ACCEPTED  m0220 src/ui/screen_review.c:398 [arith - -> +] :: right pane width layout, draw path only
+ACCEPTED  m0221 src/ui/screen_review.c:399 [arith + -> -] :: row step layout, draw path only
+ACCEPTED  m0222 src/ui/screen_review.c:403 [int+1 0 -> 1] :: scissor pane bounds, draw path only
+ACCEPTED  m0223 src/ui/screen_review.c:403 [int-1 0 -> -1] :: scissor pane bounds, draw path only
+ACCEPTED  m0224 src/ui/screen_review.c:403 [int+1 0 -> 1] :: scissor pane bounds, draw path only
+ACCEPTED  m0225 src/ui/screen_review.c:403 [int-1 0 -> -1] :: scissor pane bounds, draw path only
+ACCEPTED  m0226 src/ui/screen_review.c:416 [cmp == -> !=] :: empty card branch, draw path only
+ACCEPTED  m0227 src/ui/screen_review.c:416 [int+1 0 -> 1] :: empty card branch, draw path only
+ACCEPTED  m0228 src/ui/screen_review.c:416 [int-1 0 -> -1] :: empty card branch, draw path only
+ACCEPTED  m0229 src/ui/screen_review.c:418 [arith - -> +] :: status bar rect in the empty branch, draw path only
+ACCEPTED  m0230 src/ui/screen_review.c:418 [arith - -> +] :: status bar rect in the empty branch, draw path only
+ACCEPTED  m0231 src/ui/screen_review.c:418 [int+1 2 -> 3] :: status bar rect in the empty branch, draw path only
+ACCEPTED  m0232 src/ui/screen_review.c:418 [int-1 2 -> 1] :: status bar rect in the empty branch, draw path only
+ACCEPTED  m0233 src/ui/screen_review.c:418 [arith * -> /] :: status bar rect in the empty branch, draw path only
+ACCEPTED  m0235 src/ui/screen_review.c:439 [arith + -> -] :: slider height layout, draw path only
+ACCEPTED  m0236 src/ui/screen_review.c:439 [arith / -> *] :: slider height layout, draw path only
+ACCEPTED  m0237 src/ui/screen_review.c:440 [cmp > -> >=] :: scrub slider, gui event state no headless suite can trigger
+ACCEPTED  m0238 src/ui/screen_review.c:440 [int+1 0 -> 1] :: scrub slider, gui event state no headless suite can trigger
+ACCEPTED  m0239 src/ui/screen_review.c:440 [int-1 0 -> -1] :: scrub slider, gui event state no headless suite can trigger
+ACCEPTED  m0240 src/ui/screen_review.c:440 [logic && -> ||] :: scrub slider, gui event state no headless suite can trigger
+ACCEPTED  m0241 src/ui/screen_review.c:445 [arith - -> +] :: status bar rect, draw path only
+ACCEPTED  m0242 src/ui/screen_review.c:445 [arith - -> +] :: status bar rect, draw path only
+ACCEPTED  m0243 src/ui/screen_review.c:445 [int+1 2 -> 3] :: status bar rect, draw path only
+ACCEPTED  m0244 src/ui/screen_review.c:445 [int-1 2 -> 1] :: status bar rect, draw path only
+ACCEPTED  m0245 src/ui/screen_review.c:445 [arith * -> /] :: status bar rect, draw path only
+mutate: generated=245 build_failed=53 killed_by_tests=76 killed=129 survived=116 accepted=116 unexplained=0 skipped=0
+mutate: kill rate 129/245 = 52.7%, with accepted equivalents 245/245 = 100.0%
+mutate: wall 230.3s

@@ -1,0 +1,213 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_headless.c -o build_close/tobj/tests/unit_headless.o
+clang --target=x86_64-w64-mingw32 -fuse-ld=lld -g -o build_close/bin/ct_tests.exe build_close/tobj/tests/test_main.o build_close/tobj/tests/framework.o build_close/tobj/tests/unit_algs.o build_close/tobj/tests/unit_anim.o build_close/tobj/tests/unit_app_paths.o build_close/tobj/tests/unit_cards.o build_close/tobj/tests/unit_cards_form.o build_close/tobj/tests/unit_cfop.o build_close/tobj/tests/unit_classify.o build_close/tobj/tests/unit_config.o build_close/tobj/tests/unit_cube.o build_close/tobj/tests/unit_db.o build_close/tobj/tests/unit_e2e_script.o build_close/tobj/tests/unit_fsrs.o build_close/tobj/tests/unit_geometry.o build_close/tobj/tests/unit_geometry_clock.o build_close/tobj/tests/unit_geometry_sq1.o build_close/tobj/tests/unit_headless.o build_close/tobj/tests/unit_interchange.o build_close/tobj/tests/unit_letter_scheme.o build_close/tobj/tests/unit_notation.o build_close/tobj/tests/unit_pack_seeds.o build_close/tobj/tests/unit_pack_seeds2.o build_close/tobj/tests/unit_pack_startup.o build_close/tobj/tests/unit_packs.o build_close/tobj/tests/unit_renderer.o build_close/tobj/tests/unit_review_form.o build_close/tobj/tests/unit_score.o build_close/tobj/tests/unit_selector.o build_close/tobj/tests/unit_selector_packs.o build_close/tobj/tests/unit_selector_screen.o build_close/tobj/tests/unit_session.o build_close/tobj/tests/unit_settings_form.o build_close/tobj/tests/unit_settings_merge.o build_close/tobj/tests/unit_smoke.o build_close/tobj/tests/unit_stats.o build_close/tobj/tests/unit_stats_repo.o build_close/tobj/tests/unit_stats_screen.o build_close/tobj/tests/unit_synth.o build_close/tobj/tests/unit_targets.o build_close/tobj/tests/unit_transform.o build_close/tobj/tests/fuzz_config.o build_close/tobj/tests/fuzz_db.o build_close/tobj/tests/fuzz_engine.o build_close/tobj/tests/fuzz_main.o build_close/tobj/tests/fuzz_script.o build_close/tobj/tests/fuzz_srs.o build_close/tobj/src/app/app_loop.o build_close/tobj/src/app/headless.o build_close/tobj/src/app/paths.o build_close/tobj/src/app/script.o build_close/tobj/src/app/script_expect.o build_close/tobj/src/config/config.o build_close/tobj/src/engine/cube.o build_close/tobj/src/engine/geometry.o build_close/tobj/src/engine/geometry_clock.o build_close/tobj/src/engine/geometry_sq1.o build_close/tobj/src/engine/notation.o build_close/tobj/src/engine/transform.o build_close/tobj/src/gen/classify.o build_close/tobj/src/gen/interchange.o build_close/tobj/src/gen/score.o build_close/tobj/src/gen/synth.o build_close/tobj/src/gen/targets.o build_close/tobj/src/packs/packs.o build_close/tobj/src/packs/provenance.o build_close/tobj/src/packs/seed_registry.o build_close/tobj/src/render/anim.o build_close/tobj/src/render/renderer.o build_close/tobj/src/srs/fsrs.o build_close/tobj/src/stats/stats.o build_close/tobj/src/storage/db.o build_close/tobj/src/storage/migrate.o build_close/tobj/src/storage/repo_algs.o build_close/tobj/src/storage/repo_cards.o build_close/tobj/src/storage/repo_reviews.o build_close/tobj/src/storage/repo_settings.o build_close/tobj/src/storage/repo_stats.o build_close/tobj/src/trainer/cfop.o build_close/tobj/src/trainer/selector.o build_close/tobj/src/trainer/session.o build_close/tobj/src/ui/screen_cards.o build_close/tobj/src/ui/screen_menu.o build_close/tobj/src/ui/screen_review.o build_close/tobj/src/ui/screen_settings.o build_close/tobj/src/ui/screen_stats.o build_close/tobj/src/ui/screen_trainer.o build_close/tobj/src/ui/widgets.o build_close/obj/raygui_impl.o build_close/obj/third_party/raylib/src/raudio.o build_close/obj/third_party/raylib/src/rcore.o build_close/obj/third_party/raylib/src/rglfw.o build_close/obj/third_party/raylib/src/rmodels.o build_close/obj/third_party/raylib/src/rshapes.o build_close/obj/third_party/raylib/src/rtext.o build_close/obj/third_party/raylib/src/rtextures.o build_close/obj/third_party/sqlite/sqlite3.o -static-libgcc -lopengl32 -lgdi32 -lwinmm
+build_close/bin/ct_tests.exe headless_render_smoke
+INFO: Initializing raylib 6.0
+INFO: Platform backend: DESKTOP (GLFW)
+INFO: Supported raylib modules:
+INFO:     > rcore:..... loaded (mandatory)
+INFO:     > rlgl:...... loaded (mandatory)
+INFO:     > rshapes:... loaded (optional)
+INFO:     > rtextures:. loaded (optional)
+INFO:     > rtext:..... loaded (optional)
+INFO:     > rmodels:... loaded (optional)
+INFO:     > raudio:.... loaded (optional)
+INFO: DISPLAY: Device initialized successfully 
+INFO:     > Display size: 3840 x 2160
+INFO:     > Screen size:  960 x 540
+INFO:     > Render size:  960 x 540
+INFO:     > Viewport offsets: 0, 0
+INFO: GLAD: OpenGL extensions loaded successfully
+INFO: GL: Supported extensions count: 404
+INFO: GL: OpenGL device information:
+INFO:     > Vendor:   NVIDIA Corporation
+INFO:     > Renderer: NVIDIA GeForce RTX 3080/PCIe/SSE2
+INFO:     > Version:  3.3.0 NVIDIA 617.42
+INFO:     > GLSL:     3.30 NVIDIA via Cg compiler
+INFO: GL: VAO extension detected, VAO functions loaded successfully
+INFO: GL: NPOT textures extension detected, full NPOT textures supported
+INFO: GL: DXT compressed textures supported
+INFO: GL: ETC2/EAC compressed textures supported
+INFO: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+INFO: TEXTURE: [ID 2] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 2] Default texture loaded successfully
+INFO: SHADER: [ID 1] Vertex shader compiled successfully
+INFO: SHADER: [ID 2] Fragment shader compiled successfully
+INFO: SHADER: [ID 3] Program shader loaded successfully
+INFO: SHADER: [ID 3] Default shader loaded successfully
+INFO: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+INFO: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+INFO: RLGL: Default OpenGL state initialized successfully
+INFO: TEXTURE: [ID 3] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Default font loaded successfully (224 glyphs)
+INFO: SYSTEM: Working Directory: C:\Users\lavantien\dev\github\cubing-trainer
+INFO: TEXTURE: [ID 4] Texture loaded successfully (960x540 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 1] Depth renderbuffer loaded successfully (32 bits)
+INFO: FBO: [ID 1] Framebuffer object created successfully
+INFO: VAO: [ID 2] Mesh uploaded successfully to VRAM (GPU)
+INFO: VAO: [ID 2] Unloaded vertex array data from VRAM (GPU)
+INFO: TEXTURE: [ID 4] Pixel data retrieved successfully
+INFO: FILEIO: [build/test_headless/solved.png] File saved successfully
+INFO: FILEIO: [build/test_headless/solved.png] Image exported successfully
+INFO: FBO: [ID 1] Unloaded framebuffer from VRAM (GPU)
+INFO: TEXTURE: [ID 3] Unloaded texture data from VRAM (GPU)
+INFO: SHADER: [ID 3] Default shader unloaded successfully
+INFO: TEXTURE: [ID 2] Default texture unloaded successfully
+INFO: Window closed successfully
+INFO: Initializing raylib 6.0
+INFO: Platform backend: DESKTOP (GLFW)
+INFO: Supported raylib modules:
+INFO:     > rcore:..... loaded (mandatory)
+INFO:     > rlgl:...... loaded (mandatory)
+INFO:     > rshapes:... loaded (optional)
+INFO:     > rtextures:. loaded (optional)
+INFO:     > rtext:..... loaded (optional)
+INFO:     > rmodels:... loaded (optional)
+INFO:     > raudio:.... loaded (optional)
+INFO: DISPLAY: Device initialized successfully 
+INFO:     > Display size: 3840 x 2160
+INFO:     > Screen size:  960 x 540
+INFO:     > Render size:  960 x 540
+INFO:     > Viewport offsets: 0, 0
+INFO: GLAD: OpenGL extensions loaded successfully
+INFO: GL: Supported extensions count: 404
+INFO: GL: OpenGL device information:
+INFO:     > Vendor:   NVIDIA Corporation
+INFO:     > Renderer: NVIDIA GeForce RTX 3080/PCIe/SSE2
+INFO:     > Version:  3.3.0 NVIDIA 617.42
+INFO:     > GLSL:     3.30 NVIDIA via Cg compiler
+INFO: GL: VAO extension detected, VAO functions loaded successfully
+INFO: GL: NPOT textures extension detected, full NPOT textures supported
+INFO: GL: DXT compressed textures supported
+INFO: GL: ETC2/EAC compressed textures supported
+INFO: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+INFO: TEXTURE: [ID 2] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 2] Default texture loaded successfully
+INFO: SHADER: [ID 1] Vertex shader compiled successfully
+INFO: SHADER: [ID 2] Fragment shader compiled successfully
+INFO: SHADER: [ID 3] Program shader loaded successfully
+INFO: SHADER: [ID 3] Default shader loaded successfully
+INFO: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+INFO: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+INFO: RLGL: Default OpenGL state initialized successfully
+INFO: TEXTURE: [ID 3] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Default font loaded successfully (224 glyphs)
+INFO: SYSTEM: Working Directory: C:\Users\lavantien\dev\github\cubing-trainer
+INFO: TEXTURE: [ID 4] Texture loaded successfully (960x540 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 1] Depth renderbuffer loaded successfully (32 bits)
+INFO: FBO: [ID 1] Framebuffer object created successfully
+INFO: VAO: [ID 2] Mesh uploaded successfully to VRAM (GPU)
+INFO: VAO: [ID 2] Unloaded vertex array data from VRAM (GPU)
+INFO: TEXTURE: [ID 4] Pixel data retrieved successfully
+INFO: FILEIO: [build/test_headless/scramble.png] File saved successfully
+INFO: FILEIO: [build/test_headless/scramble.png] Image exported successfully
+INFO: FBO: [ID 1] Unloaded framebuffer from VRAM (GPU)
+INFO: TEXTURE: [ID 3] Unloaded texture data from VRAM (GPU)
+INFO: SHADER: [ID 3] Default shader unloaded successfully
+INFO: TEXTURE: [ID 2] Default texture unloaded successfully
+INFO: Window closed successfully
+INFO: Initializing raylib 6.0
+INFO: Platform backend: DESKTOP (GLFW)
+INFO: Supported raylib modules:
+INFO:     > rcore:..... loaded (mandatory)
+INFO:     > rlgl:...... loaded (mandatory)
+INFO:     > rshapes:... loaded (optional)
+INFO:     > rtextures:. loaded (optional)
+INFO:     > rtext:..... loaded (optional)
+INFO:     > rmodels:... loaded (optional)
+INFO:     > raudio:.... loaded (optional)
+INFO: DISPLAY: Device initialized successfully 
+INFO:     > Display size: 3840 x 2160
+INFO:     > Screen size:  960 x 540
+INFO:     > Render size:  960 x 540
+INFO:     > Viewport offsets: 0, 0
+INFO: GLAD: OpenGL extensions loaded successfully
+INFO: GL: Supported extensions count: 404
+INFO: GL: OpenGL device information:
+INFO:     > Vendor:   NVIDIA Corporation
+INFO:     > Renderer: NVIDIA GeForce RTX 3080/PCIe/SSE2
+INFO:     > Version:  3.3.0 NVIDIA 617.42
+INFO:     > GLSL:     3.30 NVIDIA via Cg compiler
+INFO: GL: VAO extension detected, VAO functions loaded successfully
+INFO: GL: NPOT textures extension detected, full NPOT textures supported
+INFO: GL: DXT compressed textures supported
+INFO: GL: ETC2/EAC compressed textures supported
+INFO: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+INFO: TEXTURE: [ID 2] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 2] Default texture loaded successfully
+INFO: SHADER: [ID 1] Vertex shader compiled successfully
+INFO: SHADER: [ID 2] Fragment shader compiled successfully
+INFO: SHADER: [ID 3] Program shader loaded successfully
+INFO: SHADER: [ID 3] Default shader loaded successfully
+INFO: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+INFO: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+INFO: RLGL: Default OpenGL state initialized successfully
+INFO: TEXTURE: [ID 3] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Default font loaded successfully (224 glyphs)
+INFO: SYSTEM: Working Directory: C:\Users\lavantien\dev\github\cubing-trainer
+INFO: TEXTURE: [ID 4] Texture loaded successfully (960x540 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 1] Depth renderbuffer loaded successfully (32 bits)
+INFO: FBO: [ID 1] Framebuffer object created successfully
+INFO: VAO: [ID 2] Mesh uploaded successfully to VRAM (GPU)
+INFO: VAO: [ID 2] Unloaded vertex array data from VRAM (GPU)
+INFO: TEXTURE: [ID 4] Pixel data retrieved successfully
+INFO: FILEIO: [build/test_headless/mid.png] File saved successfully
+INFO: FILEIO: [build/test_headless/mid.png] Image exported successfully
+INFO: FBO: [ID 1] Unloaded framebuffer from VRAM (GPU)
+INFO: TEXTURE: [ID 3] Unloaded texture data from VRAM (GPU)
+INFO: SHADER: [ID 3] Default shader unloaded successfully
+INFO: TEXTURE: [ID 2] Default texture unloaded successfully
+INFO: Window closed successfully
+INFO: Initializing raylib 6.0
+INFO: Platform backend: DESKTOP (GLFW)
+INFO: Supported raylib modules:
+INFO:     > rcore:..... loaded (mandatory)
+INFO:     > rlgl:...... loaded (mandatory)
+INFO:     > rshapes:... loaded (optional)
+INFO:     > rtextures:. loaded (optional)
+INFO:     > rtext:..... loaded (optional)
+INFO:     > rmodels:... loaded (optional)
+INFO:     > raudio:.... loaded (optional)
+INFO: DISPLAY: Device initialized successfully 
+INFO:     > Display size: 3840 x 2160
+INFO:     > Screen size:  960 x 540
+INFO:     > Render size:  960 x 540
+INFO:     > Viewport offsets: 0, 0
+INFO: GLAD: OpenGL extensions loaded successfully
+INFO: GL: Supported extensions count: 404
+INFO: GL: OpenGL device information:
+INFO:     > Vendor:   NVIDIA Corporation
+INFO:     > Renderer: NVIDIA GeForce RTX 3080/PCIe/SSE2
+INFO:     > Version:  3.3.0 NVIDIA 617.42
+INFO:     > GLSL:     3.30 NVIDIA via Cg compiler
+INFO: GL: VAO extension detected, VAO functions loaded successfully
+INFO: GL: NPOT textures extension detected, full NPOT textures supported
+INFO: GL: DXT compressed textures supported
+INFO: GL: ETC2/EAC compressed textures supported
+INFO: PLATFORM: DESKTOP (GLFW - Win32): Initialized successfully
+INFO: TEXTURE: [ID 2] Texture loaded successfully (1x1 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 2] Default texture loaded successfully
+INFO: SHADER: [ID 1] Vertex shader compiled successfully
+INFO: SHADER: [ID 2] Fragment shader compiled successfully
+INFO: SHADER: [ID 3] Program shader loaded successfully
+INFO: SHADER: [ID 3] Default shader loaded successfully
+INFO: RLGL: Render batch vertex buffers loaded successfully in RAM (CPU)
+INFO: RLGL: Render batch vertex buffers loaded successfully in VRAM (GPU)
+INFO: RLGL: Default OpenGL state initialized successfully
+INFO: TEXTURE: [ID 3] Texture loaded successfully (128x128 | GRAY_ALPHA | 1 mipmaps)
+INFO: FONT: Default font loaded successfully (224 glyphs)
+INFO: SYSTEM: Working Directory: C:\Users\lavantien\dev\github\cubing-trainer
+INFO: TEXTURE: [ID 4] Texture loaded successfully (960x540 | R8G8B8A8 | 1 mipmaps)
+INFO: TEXTURE: [ID 1] Depth renderbuffer loaded successfully (32 bits)
+INFO: FBO: [ID 1] Framebuffer object created successfully
+INFO: VAO: [ID 2] Mesh uploaded successfully to VRAM (GPU)
+INFO: VAO: [ID 2] Unloaded vertex array data from VRAM (GPU)
+INFO: TEXTURE: [ID 4] Pixel data retrieved successfully
+INFO: FILEIO: [build/test_headless/big.png] File saved successfully
+INFO: FILEIO: [build/test_headless/big.png] Image exported successfully
+INFO: FBO: [ID 1] Unloaded framebuffer from VRAM (GPU)
+INFO: TEXTURE: [ID 3] Unloaded texture data from VRAM (GPU)
+INFO: SHADER: [ID 3] Default shader unloaded successfully
+INFO: TEXTURE: [ID 2] Default texture unloaded successfully
+INFO: Window closed successfully
+PASS headless_render_smoke: pass=16 fail=0 791ms
+total: pass=16 fail=0 791ms

@@ -1,0 +1,364 @@
+build_close/mutants/p10288/m0001_cfop.c:8:19: error: expected identifier or '('
+    8 | static const char /const ct_cfop_pll_cases[] = {"Aa", "Ab", "E",  "F",  "Ga", "Gb", "Gc",
+      |                   ^
+build_close/mutants/p10288/m0001_cfop.c:50:29: error: use of undeclared identifier 'ct_cfop_pll_cases'; did you mean 'ct_cfop_oll_cases'?
+   50 |         return (int)(sizeof ct_cfop_pll_cases / sizeof ct_cfop_pll_cases[0]);
+      |                             ^~~~~~~~~~~~~~~~~
+      |                             ct_cfop_oll_cases
+build_close/mutants/p10288/m0001_cfop.c:12:26: note: 'ct_cfop_oll_cases' declared here
+   12 | static const char *const ct_cfop_oll_cases[] = {
+      |                          ^
+build_close/mutants/p10288/m0001_cfop.c:50:56: error: use of undeclared identifier 'ct_cfop_pll_cases'; did you mean 'ct_cfop_oll_cases'?
+   50 |         return (int)(sizeof ct_cfop_pll_cases / sizeof ct_cfop_pll_cases[0]);
+      |                                                        ^~~~~~~~~~~~~~~~~
+      |                                                        ct_cfop_oll_cases
+build_close/mutants/p10288/m0001_cfop.c:12:26: note: 'ct_cfop_oll_cases' declared here
+   12 | static const char *const ct_cfop_oll_cases[] = {
+      |                          ^
+build_close/mutants/p10288/m0001_cfop.c:62:41: error: use of undeclared identifier 'ct_cfop_pll_cases'; did you mean 'ct_cfop_oll_cases'?
+   62 |         return snprintf(out, cap, "%s", ct_cfop_pll_cases[index]);
+      |                                         ^~~~~~~~~~~~~~~~~
+      |                                         ct_cfop_oll_cases
+build_close/mutants/p10288/m0001_cfop.c:12:26: note: 'ct_cfop_oll_cases' declared here
+   12 | static const char *const ct_cfop_oll_cases[] = {
+      |                          ^
+4 errors generated.
+build_close/mutants/p10288/m0002_cfop.c:12:19: error: expected identifier or '('
+   12 | static const char /const ct_cfop_oll_cases[] = {
+      |                   ^
+build_close/mutants/p10288/m0002_cfop.c:52:29: error: use of undeclared identifier 'ct_cfop_oll_cases'; did you mean 'ct_cfop_pll_cases'?
+   52 |         return (int)(sizeof ct_cfop_oll_cases / sizeof ct_cfop_oll_cases[0]);
+      |                             ^~~~~~~~~~~~~~~~~
+      |                             ct_cfop_pll_cases
+build_close/mutants/p10288/m0002_cfop.c:8:26: note: 'ct_cfop_pll_cases' declared here
+    8 | static const char *const ct_cfop_pll_cases[] = {"Aa", "Ab", "E",  "F",  "Ga", "Gb", "Gc",
+      |                          ^
+build_close/mutants/p10288/m0002_cfop.c:52:56: error: use of undeclared identifier 'ct_cfop_oll_cases'; did you mean 'ct_cfop_pll_cases'?
+   52 |         return (int)(sizeof ct_cfop_oll_cases / sizeof ct_cfop_oll_cases[0]);
+      |                                                        ^~~~~~~~~~~~~~~~~
+      |                                                        ct_cfop_pll_cases
+build_close/mutants/p10288/m0002_cfop.c:8:26: note: 'ct_cfop_pll_cases' declared here
+    8 | static const char *const ct_cfop_pll_cases[] = {"Aa", "Ab", "E",  "F",  "Ga", "Gb", "Gc",
+      |                          ^
+build_close/mutants/p10288/m0002_cfop.c:64:41: error: use of undeclared identifier 'ct_cfop_oll_cases'; did you mean 'ct_cfop_pll_cases'?
+   64 |         return snprintf(out, cap, "%s", ct_cfop_oll_cases[index]);
+      |                                         ^~~~~~~~~~~~~~~~~
+      |                                         ct_cfop_pll_cases
+build_close/mutants/p10288/m0002_cfop.c:8:26: note: 'ct_cfop_pll_cases' declared here
+    8 | static const char *const ct_cfop_pll_cases[] = {"Aa", "Ab", "E",  "F",  "Ga", "Gb", "Gc",
+      |                          ^
+4 errors generated.
+build_close/mutants/p10288/m0003_cfop.c:18:19: error: expected identifier or '('
+   18 | static const char /const ct_cfop_f2l_cases[] = {
+      |                   ^
+build_close/mutants/p10288/m0003_cfop.c:41:25: error: use of undeclared identifier 'ct_cfop_f2l_cases'
+   41 |     return (int)(sizeof ct_cfop_f2l_cases / sizeof ct_cfop_f2l_cases[0]);
+      |                         ^~~~~~~~~~~~~~~~~
+build_close/mutants/p10288/m0003_cfop.c:41:52: error: use of undeclared identifier 'ct_cfop_f2l_cases'
+   41 |     return (int)(sizeof ct_cfop_f2l_cases / sizeof ct_cfop_f2l_cases[0]);
+      |                                                    ^~~~~~~~~~~~~~~~~
+build_close/mutants/p10288/m0003_cfop.c:67:25: error: use of undeclared identifier 'ct_cfop_f2l_cases'
+   67 |                         ct_cfop_f2l_cases[index % ct_cfop_f2l_per_slot()]);
+      |                         ^~~~~~~~~~~~~~~~~
+4 errors generated.
+build_close/mutants/p10288/m0004_cfop.c:24:16: error: expected member name or ';' after declaration specifiers
+   24 |     const char /slot;
+      |     ~~~~~~~~~~ ^
+build_close/mutants/p10288/m0004_cfop.c:24:15: error: expected ';' at end of declaration list
+   24 |     const char /slot;
+      |               ^
+      |               ;
+build_close/mutants/p10288/m0004_cfop.c:55:29: error: invalid application of 'sizeof' to an incomplete type 'const struct (unnamed at build_close/mutants/p10288/m0004_cfop.c:23:14)[]'
+   55 |                (int)(sizeof ct_cfop_f2l_slots / sizeof ct_cfop_f2l_slots[0]);
+      |                             ^~~~~~~~~~~~~~~~~
+build_close/mutants/p10288/m0004_cfop.c:66:94: error: no member named 'slot' in 'struct (unnamed at build_close/mutants/p10288/m0004_cfop.c:23:14)'
+   66 |         return snprintf(out, cap, "%s.%s", ct_cfop_f2l_slots[index / ct_cfop_f2l_per_slot()].slot,
+      |                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^
+4 errors generated.
+build_close/mutants/p10288/m0005_cfop.c:30:16: error: expected member name or ';' after declaration specifiers
+   30 |     const char /deck;
+      |     ~~~~~~~~~~ ^
+build_close/mutants/p10288/m0005_cfop.c:30:15: error: expected ';' at end of declaration list
+   30 |     const char /deck;
+      |               ^
+      |               ;
+build_close/mutants/p10288/m0005_cfop.c:108:46: error: no member named 'deck' in 'struct (unnamed at build_close/mutants/p10288/m0005_cfop.c:29:14)'
+  108 |     const char *deck = ct_cfop_stages[stage].deck;
+      |                        ~~~~~~~~~~~~~~~~~~~~~ ^
+3 errors generated.
+build_close/mutants/p10288/m0006_cfop.c:31:16: error: expected member name or ';' after declaration specifiers
+   31 |     const char /tag;
+      |     ~~~~~~~~~~ ^
+build_close/mutants/p10288/m0006_cfop.c:31:15: error: expected ';' at end of declaration list
+   31 |     const char /tag;
+      |               ^
+      |               ;
+build_close/mutants/p10288/m0006_cfop.c:85:68: error: no member named 'tag' in 'struct (unnamed at build_close/mutants/p10288/m0006_cfop.c:29:14)'
+   85 |     len = snprintf(key, sizeof key, "%s.%s", ct_cfop_stages[stage].tag, name);
+      |                                              ~~~~~~~~~~~~~~~~~~~~~ ^
+build_close/mutants/p10288/m0006_cfop.c:158:40: error: no member named 'tag' in 'struct (unnamed at build_close/mutants/p10288/m0006_cfop.c:29:14)'
+  158 |                  ct_cfop_stages[stage].tag, name);
+      |                  ~~~~~~~~~~~~~~~~~~~~~ ^
+4 errors generated.
+mutate: suite cfop_case_counts exited 1
+mutate: suite cfop_case_counts exited 1
+mutate: suite cfop_case_counts exited 1
+mutate: suite cfop_case_counts exited 1
+mutate: suite cfop_case_counts exited 1
+mutate: suite cfop_case_counts exited 1
+mutate: suite cfop_case_counts exited 1
+mutate: suite cfop_case_counts exited 1
+mutate: suite cfop_case_counts exited 1
+mutate: suite cfop_case_counts exited 1
+mutate: suite cfop_case_counts exited 1
+mutate: suite cfop_case_counts exited 1
+build_close/mutants/p10288/m0029_cfop.c:59:62: error: expected ')'
+   59 | static int ct_cfop_case_name(ct_stage stage, int index, char /out, unsigned cap) {
+      |                                                              ^
+build_close/mutants/p10288/m0029_cfop.c:59:29: note: to match this '('
+   59 | static int ct_cfop_case_name(ct_stage stage, int index, char /out, unsigned cap) {
+      |                             ^
+build_close/mutants/p10288/m0029_cfop.c:62:25: error: use of undeclared identifier 'out'
+   62 |         return snprintf(out, cap, "%s", ct_cfop_pll_cases[index]);
+      |                         ^~~
+build_close/mutants/p10288/m0029_cfop.c:62:30: error: use of undeclared identifier 'cap'
+   62 |         return snprintf(out, cap, "%s", ct_cfop_pll_cases[index]);
+      |                              ^~~
+build_close/mutants/p10288/m0029_cfop.c:64:25: error: use of undeclared identifier 'out'
+   64 |         return snprintf(out, cap, "%s", ct_cfop_oll_cases[index]);
+      |                         ^~~
+build_close/mutants/p10288/m0029_cfop.c:64:30: error: use of undeclared identifier 'cap'
+   64 |         return snprintf(out, cap, "%s", ct_cfop_oll_cases[index]);
+      |                              ^~~
+build_close/mutants/p10288/m0029_cfop.c:66:25: error: use of undeclared identifier 'out'
+   66 |         return snprintf(out, cap, "%s.%s", ct_cfop_f2l_slots[index / ct_cfop_f2l_per_slot()].slot,
+      |                         ^~~
+build_close/mutants/p10288/m0029_cfop.c:66:30: error: use of undeclared identifier 'cap'
+   66 |         return snprintf(out, cap, "%s.%s", ct_cfop_f2l_slots[index / ct_cfop_f2l_per_slot()].slot,
+      |                              ^~~
+build_close/mutants/p10288/m0029_cfop.c:80:53: error: too many arguments to function call, expected 3, have 4
+   80 |     int len = ct_cfop_case_name(stage, index, name, sizeof name);
+      |               ~~~~~~~~~~~~~~~~~                     ^~~~~~~~~~~
+build_close/mutants/p10288/m0029_cfop.c:59:12: note: 'ct_cfop_case_name' declared here
+   59 | static int ct_cfop_case_name(ct_stage stage, int index, char /out, unsigned cap) {
+      |            ^                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p10288/m0029_cfop.c:148:53: error: too many arguments to function call, expected 3, have 4
+  148 |         int len = ct_cfop_case_name(stage, i, name, sizeof name);
+      |                   ~~~~~~~~~~~~~~~~~                 ^~~~~~~~~~~
+build_close/mutants/p10288/m0029_cfop.c:59:12: note: 'ct_cfop_case_name' declared here
+   59 | static int ct_cfop_case_name(ct_stage stage, int index, char /out, unsigned cap) {
+      |            ^                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+9 errors generated.
+mutate: suite cfop_f2l_keys exited -1073741795
+build_close/mutants/p10288/m0031_cfop.c:71:54: error: expected ')'
+   71 | int ct_cfop_case_key(ct_stage stage, int index, char /out, unsigned cap) {
+      |                                                      ^
+build_close/mutants/p10288/m0031_cfop.c:71:21: note: to match this '('
+   71 | int ct_cfop_case_key(ct_stage stage, int index, char /out, unsigned cap) {
+      |                     ^
+build_close/mutants/p10288/m0031_cfop.c:71:5: error: conflicting types for 'ct_cfop_case_key'
+   71 | int ct_cfop_case_key(ct_stage stage, int index, char /out, unsigned cap) {
+      |     ^
+src\trainer/cfop.h:9:5: note: previous declaration is here
+    9 | int ct_cfop_case_key(ct_stage stage, int index, char *out, unsigned cap);
+      |     ^
+build_close/mutants/p10288/m0031_cfop.c:72:9: error: use of undeclared identifier 'out'
+   72 |     if (out == NULL) {
+      |         ^~~
+build_close/mutants/p10288/m0031_cfop.c:86:68: error: use of undeclared identifier 'cap'
+   86 |     if (len < 0 || (unsigned)len >= sizeof key || (unsigned)len >= cap) {
+      |                                                                    ^~~
+build_close/mutants/p10288/m0031_cfop.c:89:12: error: use of undeclared identifier 'out'
+   89 |     memcpy(out, key, (size_t)len + 1);
+      |            ^~~
+5 errors generated.
+mutate: suite cfop_pll_keys exited 1
+mutate: suite cfop_pll_keys exited 1
+mutate: suite cfop_pll_keys exited 1
+build_close/mutants/p10288/m0039_cfop.c:76:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   76 |     if (count < 0 && index < 0 || index >= count) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~ ~~
+build_close/mutants/p10288/m0039_cfop.c:76:19: note: place parentheses around the '&&' expression to silence this warning
+   76 |     if (count < 0 && index < 0 || index >= count) {
+      |                   ^
+      |         (                     )
+1 error generated.
+mutate: suite cfop_pll_keys exited 1
+mutate: suite cfop_pll_keys exited 1
+mutate: suite cfop_pll_keys exited -1073741795
+build_close/mutants/p10288/m0043_cfop.c:76:32: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   76 |     if (count < 0 || index < 0 && index >= count) {
+      |                   ~~ ~~~~~~~~~~^~~~~~~~~~~~~~~~~
+build_close/mutants/p10288/m0043_cfop.c:76:32: note: place parentheses around the '&&' expression to silence this warning
+   76 |     if (count < 0 || index < 0 && index >= count) {
+      |                                ^                
+      |                      (                          )
+1 error generated.
+mutate: suite cfop_pll_keys exited -1073741795
+mutate: suite cfop_pll_keys exited 1
+mutate: suite cfop_pll_keys exited 1
+build_close/mutants/p10288/m0059_cfop.c:86:17: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   86 |     if (len < 0 && (unsigned)len >= sizeof key || (unsigned)len >= cap) {
+      |         ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p10288/m0059_cfop.c:86:17: note: place parentheses around the '&&' expression to silence this warning
+   86 |     if (len < 0 && (unsigned)len >= sizeof key || (unsigned)len >= cap) {
+      |                 ^
+      |         (                                     )
+1 error generated.
+build_close/mutants/p10288/m0061_cfop.c:86:48: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   86 |     if (len < 0 || (unsigned)len >= sizeof key && (unsigned)len >= cap) {
+      |                 ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p10288/m0061_cfop.c:86:48: note: place parentheses around the '&&' expression to silence this warning
+   86 |     if (len < 0 || (unsigned)len >= sizeof key && (unsigned)len >= cap) {
+      |                                                ^                      
+      |                    (                                                  )
+1 error generated.
+mutate: suite cfop_key_cap_safety exited 1
+mutate: suite cfop_key_cap_safety exited 1
+mutate: suite cfop_key_cap_safety exited 1
+mutate: suite cfop_pll_keys exited 1
+mutate: suite cfop_key_cap_safety exited 1
+mutate: suite cfop_pll_keys exited 1
+mutate: suite cfop_pll_keys exited 1
+mutate: suite cfop_pll_keys exited 1
+build_close/mutants/p10288/m0075_cfop.c:95:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   95 |     if (count < 0 && index < 0 || index >= count) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~ ~~
+build_close/mutants/p10288/m0075_cfop.c:95:19: note: place parentheses around the '&&' expression to silence this warning
+   95 |     if (count < 0 && index < 0 || index >= count) {
+      |                   ^
+      |         (                     )
+1 error generated.
+mutate: suite cfop_f2l_keys exited 1
+mutate: suite cfop_f2l_keys exited 1
+mutate: suite cfop_directions exited 1
+build_close/mutants/p10288/m0079_cfop.c:95:32: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   95 |     if (count < 0 || index < 0 && index >= count) {
+      |                   ~~ ~~~~~~~~~~^~~~~~~~~~~~~~~~~
+build_close/mutants/p10288/m0079_cfop.c:95:32: note: place parentheses around the '&&' expression to silence this warning
+   95 |     if (count < 0 || index < 0 && index >= count) {
+      |                                ^                
+      |                      (                          )
+1 error generated.
+mutate: suite cfop_directions exited 1
+mutate: suite cfop_directions exited 1
+mutate: suite cfop_directions exited 1
+mutate: suite cfop_f2l_keys exited 1
+mutate: suite cfop_f2l_keys exited -1073741795
+build_close/mutants/p10288/m0086_cfop.c:104:44: error: expected ')'
+  104 | int ct_cfop_deck_name(ct_stage stage, char /out, unsigned cap) {
+      |                                            ^
+build_close/mutants/p10288/m0086_cfop.c:104:22: note: to match this '('
+  104 | int ct_cfop_deck_name(ct_stage stage, char /out, unsigned cap) {
+      |                      ^
+build_close/mutants/p10288/m0086_cfop.c:104:5: error: conflicting types for 'ct_cfop_deck_name'
+  104 | int ct_cfop_deck_name(ct_stage stage, char /out, unsigned cap) {
+      |     ^
+src\trainer/cfop.h:11:5: note: previous declaration is here
+   11 | int ct_cfop_deck_name(ct_stage stage, char *out, unsigned cap);
+      |     ^
+build_close/mutants/p10288/m0086_cfop.c:105:9: error: use of undeclared identifier 'out'
+  105 |     if (out == NULL || !ct_cfop_stage_ok(stage)) {
+      |         ^~~
+build_close/mutants/p10288/m0086_cfop.c:110:9: error: use of undeclared identifier 'cap'
+  110 |     if (cap <= len) {
+      |         ^~~
+build_close/mutants/p10288/m0086_cfop.c:113:12: error: use of undeclared identifier 'out'
+  113 |     memcpy(out, deck, len + 1);
+      |            ^~~
+5 errors generated.
+mutate: suite cfop_deck_names exited 1
+mutate: suite cfop_deck_names exited -1073741795
+mutate: suite cfop_deck_names exited 1
+mutate: suite cfop_deck_names exited 1
+mutate: suite cfop_deck_names exited 1
+build_close/mutants/p10288/m0093_cfop.c:108:16: error: expected identifier or '('
+  108 |     const char /deck = ct_cfop_stages[stage].deck;
+      |                ^
+build_close/mutants/p10288/m0093_cfop.c:109:25: error: use of undeclared identifier 'deck'
+  109 |     size_t len = strlen(deck);
+      |                         ^~~~
+build_close/mutants/p10288/m0093_cfop.c:113:17: error: use of undeclared identifier 'deck'
+  113 |     memcpy(out, deck, len + 1);
+      |                 ^~~~
+3 errors generated.
+mutate: suite cfop_deck_names exited 1
+mutate: suite cfop_deck_names exited 1
+mutate: suite cfop_deck_names exited 1
+mutate: suite cfop_deck_names exited 1
+mutate: suite cfop_deck_names exited 1
+mutate: suite cfop_deck_names exited 1
+mutate: suite cfop_deck_names exited 1
+mutate: suite cfop_deck_names exited 1
+build_close/mutants/p10288/m0104_cfop.c:117:30: error: expected ')'
+  117 | int ct_cfop_populate(sqlite3 /db, ct_stage stage) {
+      |                              ^
+build_close/mutants/p10288/m0104_cfop.c:117:21: note: to match this '('
+  117 | int ct_cfop_populate(sqlite3 /db, ct_stage stage) {
+      |                     ^
+build_close/mutants/p10288/m0104_cfop.c:117:5: error: conflicting types for 'ct_cfop_populate'
+  117 | int ct_cfop_populate(sqlite3 /db, ct_stage stage) {
+      |     ^
+src\trainer/cfop.h:12:5: note: previous declaration is here
+   12 | int ct_cfop_populate(sqlite3 *db, ct_stage stage);
+      |     ^
+build_close/mutants/p10288/m0104_cfop.c:117:30: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  117 | int ct_cfop_populate(sqlite3 /db, ct_stage stage) {
+      |                              ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p10288/m0104_cfop.c:118:9: error: use of undeclared identifier 'db'
+  118 |     if (db == NULL) {
+      |         ^~
+build_close/mutants/p10288/m0104_cfop.c:121:36: error: use of undeclared identifier 'stage'
+  121 |     int count = ct_cfop_case_count(stage);
+      |                                    ^~~~~
+build_close/mutants/p10288/m0104_cfop.c:126:27: error: use of undeclared identifier 'stage'
+  126 |     if (ct_cfop_deck_name(stage, deck, sizeof deck) != 0) {
+      |                           ^~~~~
+build_close/mutants/p10288/m0104_cfop.c:132:30: error: use of undeclared identifier 'stage'
+  132 |         if (ct_cfop_case_key(stage, i, key, sizeof key) != 0) {
+      |                              ^~~~~
+build_close/mutants/p10288/m0104_cfop.c:135:48: error: use of undeclared identifier 'stage'
+  135 |         int direction = ct_cfop_case_direction(stage, i);
+      |                                                ^~~~~
+build_close/mutants/p10288/m0104_cfop.c:140:42: error: use of undeclared identifier 'db'
+  140 |         int rc = ct_repo_card_get_by_key(db, deck, key, direction, &existing);
+      |                                          ^~
+build_close/mutants/p10288/m0104_cfop.c:148:37: error: use of undeclared identifier 'stage'
+  148 |         int len = ct_cfop_case_name(stage, i, name, sizeof name);
+      |                                     ^~~~~
+build_close/mutants/p10288/m0104_cfop.c:158:33: error: use of undeclared identifier 'stage'
+  158 |                  ct_cfop_stages[stage].tag, name);
+      |                                 ^~~~~
+build_close/mutants/p10288/m0104_cfop.c:159:34: error: use of undeclared identifier 'db'
+  159 |         rc = ct_repo_card_insert(db, &c);
+      |                                  ^~
+12 errors generated.
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_oll_f2l exited 1
+mutate: suite cfop_populate_oll_f2l exited 1
+mutate: suite cfop_populate_oll_f2l exited 1
+mutate: suite cfop_populate_oll_f2l exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1
+mutate: suite cfop_populate_pll exited 1

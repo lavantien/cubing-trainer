@@ -1,0 +1,109 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/render/anim.c build_close unit_anim_ease unit_anim_queue unit_anim_speed unit_anim_pause unit_anim_prefix unit_anim_edges unit_anim_determinism
+mutate: scope=src/render/anim.c files=1 sites=84 suites=7
+KILLED    m0001 src/render/anim.c:3 [arith * -> /]
+          build break
+KILLED    m0002 src/render/anim.c:4 [arith + -> -]
+KILLED    m0003 src/render/anim.c:15 [arith * -> /]
+          build break
+KILLED    m0004 src/render/anim.c:16 [int+1 0 -> 1]
+KILLED    m0005 src/render/anim.c:16 [int-1 0 -> -1]
+KILLED    m0006 src/render/anim.c:16 [bool true -> false]
+KILLED    m0007 src/render/anim.c:17 [arith + -> -]
+KILLED    m0008 src/render/anim.c:17 [int+1 1 -> 2]
+KILLED    m0009 src/render/anim.c:17 [int-1 1 -> 0]
+KILLED    m0010 src/render/anim.c:23 [arith * -> /]
+          build break
+KILLED    m0011 src/render/anim.c:24 [int+1 0 -> 1]
+KILLED    m0012 src/render/anim.c:24 [int-1 0 -> -1]
+KILLED    m0013 src/render/anim.c:25 [int+1 0 -> 1]
+KILLED    m0014 src/render/anim.c:25 [int-1 0 -> -1]
+KILLED    m0015 src/render/anim.c:28 [bool true -> false]
+SURVIVED  m0016 src/render/anim.c:29 [int+1 0 -> 1]
+KILLED    m0017 src/render/anim.c:29 [int-1 0 -> -1]
+KILLED    m0018 src/render/anim.c:29 [cmp < -> <=]
+KILLED    m0019 src/render/anim.c:30 [int+1 0 -> 1]
+          build break
+KILLED    m0020 src/render/anim.c:30 [int-1 0 -> -1]
+          build break
+KILLED    m0021 src/render/anim.c:34 [arith * -> /]
+          build break
+KILLED    m0022 src/render/anim.c:35 [cmp >= -> >]
+KILLED    m0023 src/render/anim.c:36 [arith - -> +]
+KILLED    m0024 src/render/anim.c:36 [int+1 1 -> 2]
+KILLED    m0025 src/render/anim.c:36 [int-1 1 -> 0]
+KILLED    m0026 src/render/anim.c:38 [arith + -> -]
+KILLED    m0027 src/render/anim.c:40 [ret-lit 0 -> 1]
+KILLED    m0028 src/render/anim.c:40 [int+1 0 -> 1]
+KILLED    m0029 src/render/anim.c:40 [int-1 0 -> -1]
+KILLED    m0030 src/render/anim.c:43 [arith * -> /]
+          build break
+KILLED    m0031 src/render/anim.c:44 [cmp > -> >=]
+KILLED    m0032 src/render/anim.c:44 [int+1 0 -> 1]
+KILLED    m0033 src/render/anim.c:44 [int-1 0 -> -1]
+KILLED    m0034 src/render/anim.c:47 [arith * -> /]
+          build break
+KILLED    m0035 src/render/anim.c:48 [cmp == -> !=]
+KILLED    m0036 src/render/anim.c:48 [int+1 0 -> 1]
+KILLED    m0037 src/render/anim.c:48 [int-1 0 -> -1]
+KILLED    m0038 src/render/anim.c:49 [int+1 0 -> 1]
+          build break
+KILLED    m0039 src/render/anim.c:49 [int-1 0 -> -1]
+          build break
+KILLED    m0040 src/render/anim.c:49 [bool false -> true]
+KILLED    m0041 src/render/anim.c:52 [arith * -> /]
+KILLED    m0042 src/render/anim.c:53 [cmp >= -> >]
+KILLED    m0043 src/render/anim.c:57 [int+1 0 -> 1]
+KILLED    m0044 src/render/anim.c:57 [int-1 0 -> -1]
+KILLED    m0045 src/render/anim.c:57 [arith / -> *]
+KILLED    m0046 src/render/anim.c:57 [bool false -> true]
+KILLED    m0047 src/render/anim.c:60 [arith * -> /]
+          build break
+KILLED    m0048 src/render/anim.c:61 [cmp == -> !=]
+KILLED    m0049 src/render/anim.c:61 [int+1 0 -> 1]
+KILLED    m0050 src/render/anim.c:61 [int-1 0 -> -1]
+KILLED    m0051 src/render/anim.c:62 [int+1 0 -> 1]
+          build break
+KILLED    m0052 src/render/anim.c:62 [int-1 0 -> -1]
+          build break
+KILLED    m0053 src/render/anim.c:62 [bool false -> true]
+KILLED    m0054 src/render/anim.c:67 [arith * -> /]
+          build break
+KILLED    m0055 src/render/anim.c:68 [arith / -> *]
+SURVIVED  m0056 src/render/anim.c:69 [cmp < -> <=]
+KILLED    m0057 src/render/anim.c:75 [arith * -> /]
+          build break
+KILLED    m0058 src/render/anim.c:76 [bool false -> true]
+KILLED    m0059 src/render/anim.c:79 [arith * -> /]
+          build break
+KILLED    m0060 src/render/anim.c:80 [bool true -> false]
+KILLED    m0061 src/render/anim.c:83 [arith * -> /]
+          build break
+KILLED    m0062 src/render/anim.c:83 [arith * -> /]
+          build break
+SURVIVED  m0063 src/render/anim.c:85 [cmp > -> >=]
+SURVIVED  m0064 src/render/anim.c:88 [cmp > -> >=]
+SURVIVED  m0065 src/render/anim.c:91 [cmp < -> <=]
+SURVIVED  m0066 src/render/anim.c:91 [int+1 0 -> 1]
+KILLED    m0067 src/render/anim.c:91 [int-1 0 -> -1]
+KILLED    m0068 src/render/anim.c:92 [int+1 0 -> 1]
+KILLED    m0069 src/render/anim.c:92 [int-1 0 -> -1]
+KILLED    m0070 src/render/anim.c:94 [int+1 0 -> 1]
+KILLED    m0071 src/render/anim.c:94 [int-1 0 -> -1]
+SURVIVED  m0072 src/render/anim.c:94 [cmp < -> <=]
+SURVIVED  m0073 src/render/anim.c:101 [cmp < -> <=]
+SURVIVED  m0074 src/render/anim.c:104 [cmp > -> >=]
+SURVIVED  m0075 src/render/anim.c:107 [cmp < -> <=]
+KILLED    m0076 src/render/anim.c:108 [arith * -> /]
+KILLED    m0077 src/render/anim.c:108 [arith * -> /]
+KILLED    m0078 src/render/anim.c:108 [arith * -> /]
+KILLED    m0079 src/render/anim.c:110 [arith - -> +]
+KILLED    m0080 src/render/anim.c:110 [arith * -> /]
+KILLED    m0081 src/render/anim.c:111 [arith - -> +]
+KILLED    m0082 src/render/anim.c:111 [arith * -> /]
+KILLED    m0083 src/render/anim.c:111 [arith * -> /]
+KILLED    m0084 src/render/anim.c:111 [arith / -> *]
+mutate: generated=84 build_failed=18 killed_by_tests=56 killed=74 survived=10 accepted=0 unexplained=10 skipped=0
+mutate: kill rate 74/84 = 88.1%, with accepted equivalents 74/84 = 88.1%
+mutate: wall 43.6s

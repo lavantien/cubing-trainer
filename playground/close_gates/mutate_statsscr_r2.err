@@ -1,0 +1,1008 @@
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+build_close/mutants/p39684/m0035_screen_stats.c:138:48: error: 'session_labels' declared as an array with a negative size
+  138 |     char session_labels[CT_STATS_SESSIONS_MAX][CT_STATS_SCR_LABEL_MAX];
+      |                                                ^~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p39684/m0035_screen_stats.c:203:15: error: 'head' declared as an array with a negative size
+  203 |     char head[CT_STATS_SCR_LABEL_MAX];
+      |               ^~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p39684/m0035_screen_stats.c:273:15: error: 'head' declared as an array with a negative size
+  273 |     char head[CT_STATS_SCR_LABEL_MAX];
+      |               ^~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p39684/m0035_screen_stats.c:326:44: error: 'lines' declared as an array with a negative size
+  326 |     char lines[CT_STATS_SCR_SUMMARY_LINES][CT_STATS_SCR_LABEL_MAX];
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+build_close/mutants/p39684/m0036_screen_stats.c:260:14: error: 'buf' declared as an array with a negative size
+  260 |     char buf[CT_STATS_SCR_HOVER_MAX];
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+build_close/mutants/p39684/m0037_screen_stats.c:29:54: error: expected ')'
+   29 | static int ct_stats_view_deck_sections(ct_stats_view /v, const char *deck) {
+      |                                                      ^
+build_close/mutants/p39684/m0037_screen_stats.c:29:39: note: to match this '('
+   29 | static int ct_stats_view_deck_sections(ct_stats_view /v, const char *deck) {
+      |                                       ^
+build_close/mutants/p39684/m0037_screen_stats.c:30:36: error: use of undeclared identifier 'v'
+   30 |     int rc = ct_repo_case_accuracy(v->db, deck, v->cases, CT_STATS_MAX_CASES);
+      |                                    ^
+build_close/mutants/p39684/m0037_screen_stats.c:30:43: error: use of undeclared identifier 'deck'
+   30 |     int rc = ct_repo_case_accuracy(v->db, deck, v->cases, CT_STATS_MAX_CASES);
+      |                                           ^~~~
+build_close/mutants/p39684/m0037_screen_stats.c:30:49: error: use of undeclared identifier 'v'
+   30 |     int rc = ct_repo_case_accuracy(v->db, deck, v->cases, CT_STATS_MAX_CASES);
+      |                                                 ^
+build_close/mutants/p39684/m0037_screen_stats.c:34:5: error: use of undeclared identifier 'v'
+   34 |     v->case_count = rc;
+      |     ^
+build_close/mutants/p39684/m0037_screen_stats.c:35:31: error: use of undeclared identifier 'v'
+   35 |     if (ct_stats_heatmap_rank(v->cases, v->case_count, v->case_order, CT_STATS_MAX_CASES) < 0) {
+      |                               ^
+build_close/mutants/p39684/m0037_screen_stats.c:35:41: error: use of undeclared identifier 'v'
+   35 |     if (ct_stats_heatmap_rank(v->cases, v->case_count, v->case_order, CT_STATS_MAX_CASES) < 0) {
+      |                                         ^
+build_close/mutants/p39684/m0037_screen_stats.c:35:56: error: use of undeclared identifier 'v'
+   35 |     if (ct_stats_heatmap_rank(v->cases, v->case_count, v->case_order, CT_STATS_MAX_CASES) < 0) {
+      |                                                        ^
+build_close/mutants/p39684/m0037_screen_stats.c:38:37: error: use of undeclared identifier 'v'
+   38 |     int n_cards = ct_repo_card_list(v->db, deck, ct_stats_scr_cards, CT_STATS_MAX_CASES);
+      |                                     ^
+build_close/mutants/p39684/m0037_screen_stats.c:38:44: error: use of undeclared identifier 'deck'
+   38 |     int n_cards = ct_repo_card_list(v->db, deck, ct_stats_scr_cards, CT_STATS_MAX_CASES);
+      |                                            ^~~~
+build_close/mutants/p39684/m0037_screen_stats.c:45:38: error: use of undeclared identifier 'v'
+   45 |             ct_repo_reviews_for_card(v->db, ct_stats_scr_cards[i].id, ct_stats_scr_rows + n_rows,
+      |                                      ^
+build_close/mutants/p39684/m0037_screen_stats.c:56:59: error: use of undeclared identifier 'v'
+   56 |         ct_stats_retention(ct_stats_scr_rows, n_rows, &f, v->retention, CT_STATS_RETENTION_BUCKETS);
+      |                                                           ^
+build_close/mutants/p39684/m0037_screen_stats.c:60:5: error: use of undeclared identifier 'v'
+   60 |     v->retention_count = rc;
+      |     ^
+build_close/mutants/p39684/m0037_screen_stats.c:61:5: error: use of undeclared identifier 'v'
+   61 |     v->retention_summary = ct_stats_retention_summary(v->retention, v->retention_count);
+      |     ^
+build_close/mutants/p39684/m0037_screen_stats.c:61:55: error: use of undeclared identifier 'v'
+   61 |     v->retention_summary = ct_stats_retention_summary(v->retention, v->retention_count);
+      |                                                       ^
+build_close/mutants/p39684/m0037_screen_stats.c:61:69: error: use of undeclared identifier 'v'
+   61 |     v->retention_summary = ct_stats_retention_summary(v->retention, v->retention_count);
+      |                                                                     ^
+build_close/mutants/p39684/m0037_screen_stats.c:107:45: error: too many arguments to function call, expected 1, have 2
+  107 |     int rc = ct_stats_view_deck_sections(v, deck);
+      |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~    ^~~~
+build_close/mutants/p39684/m0037_screen_stats.c:29:12: note: 'ct_stats_view_deck_sections' declared here
+   29 | static int ct_stats_view_deck_sections(ct_stats_view /v, const char *deck) {
+      |            ^                           ~~~~~~~~~~~~~
+17 errors generated.
+build_close/mutants/p39684/m0038_screen_stats.c:29:69: error: expected ')'
+   29 | static int ct_stats_view_deck_sections(ct_stats_view *v, const char /deck) {
+      |                                                                     ^
+build_close/mutants/p39684/m0038_screen_stats.c:29:39: note: to match this '('
+   29 | static int ct_stats_view_deck_sections(ct_stats_view *v, const char /deck) {
+      |                                       ^
+build_close/mutants/p39684/m0038_screen_stats.c:30:43: error: use of undeclared identifier 'deck'
+   30 |     int rc = ct_repo_case_accuracy(v->db, deck, v->cases, CT_STATS_MAX_CASES);
+      |                                           ^~~~
+build_close/mutants/p39684/m0038_screen_stats.c:38:44: error: use of undeclared identifier 'deck'
+   38 |     int n_cards = ct_repo_card_list(v->db, deck, ct_stats_scr_cards, CT_STATS_MAX_CASES);
+      |                                            ^~~~
+build_close/mutants/p39684/m0038_screen_stats.c:107:45: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  107 |     int rc = ct_stats_view_deck_sections(v, deck);
+      |                                             ^~~~
+build_close/mutants/p39684/m0038_screen_stats.c:29:69: note: passing argument to parameter here
+   29 | static int ct_stats_view_deck_sections(ct_stats_view *v, const char /deck) {
+      |                                                                     ^
+4 errors generated.
+mutate: suite stats_screen_deck_switch exited 1
+mutate: suite stats_screen_deck_switch exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited -1073741795
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited -1073741795
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited -1073741795
+mutate: suite stats_screen_deck_switch exited 1
+mutate: suite stats_screen_deck_switch exited 1
+build_close/mutants/p39684/m0063_screen_stats.c:65:38: error: expected ')'
+   65 | int ct_stats_view_load(ct_stats_view /v, sqlite3 *db, const char *now_iso, const char *deck) {
+      |                                      ^
+build_close/mutants/p39684/m0063_screen_stats.c:65:23: note: to match this '('
+   65 | int ct_stats_view_load(ct_stats_view /v, sqlite3 *db, const char *now_iso, const char *deck) {
+      |                       ^
+build_close/mutants/p39684/m0063_screen_stats.c:65:5: error: conflicting types for 'ct_stats_view_load'
+   65 | int ct_stats_view_load(ct_stats_view /v, sqlite3 *db, const char *now_iso, const char *deck) {
+      |     ^
+src\ui/ui.h:184:5: note: previous declaration is here
+  184 | int ct_stats_view_load(ct_stats_view *v, sqlite3 *db, const char *now_iso, const char *deck);
+      |     ^
+build_close/mutants/p39684/m0063_screen_stats.c:66:9: error: use of undeclared identifier 'v'
+   66 |     if (v == NULL || db == NULL || !ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX)) {
+      |         ^
+build_close/mutants/p39684/m0063_screen_stats.c:66:22: error: use of undeclared identifier 'db'
+   66 |     if (v == NULL || db == NULL || !ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX)) {
+      |                      ^~
+build_close/mutants/p39684/m0063_screen_stats.c:66:53: error: use of undeclared identifier 'now_iso'
+   66 |     if (v == NULL || db == NULL || !ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX)) {
+      |                                                     ^~~~~~~
+build_close/mutants/p39684/m0063_screen_stats.c:69:12: error: use of undeclared identifier 'v'
+   69 |     memset(v, 0, sizeof *v);
+      |            ^
+build_close/mutants/p39684/m0063_screen_stats.c:69:26: error: use of undeclared identifier 'v'
+   69 |     memset(v, 0, sizeof *v);
+      |                          ^
+build_close/mutants/p39684/m0063_screen_stats.c:70:5: error: use of undeclared identifier 'v'
+   70 |     v->db = db;
+      |     ^
+build_close/mutants/p39684/m0063_screen_stats.c:70:13: error: use of undeclared identifier 'db'
+   70 |     v->db = db;
+      |             ^~
+build_close/mutants/p39684/m0063_screen_stats.c:71:5: error: use of undeclared identifier 'v'
+   71 |     v->deck_selected = -1;
+      |     ^
+build_close/mutants/p39684/m0063_screen_stats.c:72:14: error: use of undeclared identifier 'v'
+   72 |     snprintf(v->now_iso, sizeof v->now_iso, "%s", now_iso);
+      |              ^
+build_close/mutants/p39684/m0063_screen_stats.c:72:33: error: use of undeclared identifier 'v'
+   72 |     snprintf(v->now_iso, sizeof v->now_iso, "%s", now_iso);
+      |                                 ^
+build_close/mutants/p39684/m0063_screen_stats.c:72:51: error: use of undeclared identifier 'now_iso'
+   72 |     snprintf(v->now_iso, sizeof v->now_iso, "%s", now_iso);
+      |                                                   ^~~~~~~
+build_close/mutants/p39684/m0063_screen_stats.c:73:33: error: use of undeclared identifier 'db'
+   73 |     int rc = ct_repo_deck_stats(db, now_iso, v->decks, CT_STATS_MAX_DECKS);
+      |                                 ^~
+build_close/mutants/p39684/m0063_screen_stats.c:73:37: error: use of undeclared identifier 'now_iso'
+   73 |     int rc = ct_repo_deck_stats(db, now_iso, v->decks, CT_STATS_MAX_DECKS);
+      |                                     ^~~~~~~
+build_close/mutants/p39684/m0063_screen_stats.c:73:46: error: use of undeclared identifier 'v'
+   73 |     int rc = ct_repo_deck_stats(db, now_iso, v->decks, CT_STATS_MAX_DECKS);
+      |                                              ^
+build_close/mutants/p39684/m0063_screen_stats.c:77:5: error: use of undeclared identifier 'v'
+   77 |     v->deck_count = rc;
+      |     ^
+build_close/mutants/p39684/m0063_screen_stats.c:79:80: error: use of undeclared identifier 'now_iso'
+   79 |     snprintf(from_day, sizeof from_day, "%.*s", (int)CT_STATS_SCR_ISO_DAY_MAX, now_iso);
+      |                                                                                ^~~~~~~
+build_close/mutants/p39684/m0063_screen_stats.c:80:31: error: use of undeclared identifier 'db'
+   80 |     rc = ct_repo_due_forecast(db, from_day, CT_STATS_FORECAST_DAYS, v->forecast,
+      |                               ^~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p39684/m0064_screen_stats.c:65:50: error: expected ')'
+   65 | int ct_stats_view_load(ct_stats_view *v, sqlite3 /db, const char *now_iso, const char *deck) {
+      |                                                  ^
+build_close/mutants/p39684/m0064_screen_stats.c:65:23: note: to match this '('
+   65 | int ct_stats_view_load(ct_stats_view *v, sqlite3 /db, const char *now_iso, const char *deck) {
+      |                       ^
+build_close/mutants/p39684/m0064_screen_stats.c:65:5: error: conflicting types for 'ct_stats_view_load'
+   65 | int ct_stats_view_load(ct_stats_view *v, sqlite3 /db, const char *now_iso, const char *deck) {
+      |     ^
+src\ui/ui.h:184:5: note: previous declaration is here
+  184 | int ct_stats_view_load(ct_stats_view *v, sqlite3 *db, const char *now_iso, const char *deck);
+      |     ^
+build_close/mutants/p39684/m0064_screen_stats.c:65:50: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   65 | int ct_stats_view_load(ct_stats_view *v, sqlite3 /db, const char *now_iso, const char *deck) {
+      |                                                  ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p39684/m0064_screen_stats.c:66:22: error: use of undeclared identifier 'db'
+   66 |     if (v == NULL || db == NULL || !ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX)) {
+      |                      ^~
+build_close/mutants/p39684/m0064_screen_stats.c:66:53: error: use of undeclared identifier 'now_iso'
+   66 |     if (v == NULL || db == NULL || !ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX)) {
+      |                                                     ^~~~~~~
+build_close/mutants/p39684/m0064_screen_stats.c:70:13: error: use of undeclared identifier 'db'
+   70 |     v->db = db;
+      |             ^~
+build_close/mutants/p39684/m0064_screen_stats.c:72:51: error: use of undeclared identifier 'now_iso'
+   72 |     snprintf(v->now_iso, sizeof v->now_iso, "%s", now_iso);
+      |                                                   ^~~~~~~
+build_close/mutants/p39684/m0064_screen_stats.c:73:33: error: use of undeclared identifier 'db'
+   73 |     int rc = ct_repo_deck_stats(db, now_iso, v->decks, CT_STATS_MAX_DECKS);
+      |                                 ^~
+build_close/mutants/p39684/m0064_screen_stats.c:73:37: error: use of undeclared identifier 'now_iso'
+   73 |     int rc = ct_repo_deck_stats(db, now_iso, v->decks, CT_STATS_MAX_DECKS);
+      |                                     ^~~~~~~
+build_close/mutants/p39684/m0064_screen_stats.c:79:80: error: use of undeclared identifier 'now_iso'
+   79 |     snprintf(from_day, sizeof from_day, "%.*s", (int)CT_STATS_SCR_ISO_DAY_MAX, now_iso);
+      |                                                                                ^~~~~~~
+build_close/mutants/p39684/m0064_screen_stats.c:80:31: error: use of undeclared identifier 'db'
+   80 |     rc = ct_repo_due_forecast(db, from_day, CT_STATS_FORECAST_DAYS, v->forecast,
+      |                               ^~
+build_close/mutants/p39684/m0064_screen_stats.c:86:27: error: use of undeclared identifier 'db'
+   86 |     rc = ct_repo_sessions(db, v->sessions, CT_STATS_SESSIONS_MAX);
+      |                           ^~
+build_close/mutants/p39684/m0064_screen_stats.c:92:9: error: use of undeclared identifier 'deck'
+   92 |     if (deck != NULL && deck[0] != '\0') {
+      |         ^~~~
+build_close/mutants/p39684/m0064_screen_stats.c:92:25: error: use of undeclared identifier 'deck'
+   92 |     if (deck != NULL && deck[0] != '\0') {
+      |                         ^~~~
+build_close/mutants/p39684/m0064_screen_stats.c:93:16: error: use of undeclared identifier 'deck'
+   93 |         pick = deck;
+      |                ^~~~
+15 errors generated.
+build_close/mutants/p39684/m0065_screen_stats.c:65:66: error: expected ')'
+   65 | int ct_stats_view_load(ct_stats_view *v, sqlite3 *db, const char /now_iso, const char *deck) {
+      |                                                                  ^
+build_close/mutants/p39684/m0065_screen_stats.c:65:23: note: to match this '('
+   65 | int ct_stats_view_load(ct_stats_view *v, sqlite3 *db, const char /now_iso, const char *deck) {
+      |                       ^
+build_close/mutants/p39684/m0065_screen_stats.c:65:5: error: conflicting types for 'ct_stats_view_load'
+   65 | int ct_stats_view_load(ct_stats_view *v, sqlite3 *db, const char /now_iso, const char *deck) {
+      |     ^
+src\ui/ui.h:184:5: note: previous declaration is here
+  184 | int ct_stats_view_load(ct_stats_view *v, sqlite3 *db, const char *now_iso, const char *deck);
+      |     ^
+build_close/mutants/p39684/m0065_screen_stats.c:66:53: error: use of undeclared identifier 'now_iso'
+   66 |     if (v == NULL || db == NULL || !ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX)) {
+      |                                                     ^~~~~~~
+build_close/mutants/p39684/m0065_screen_stats.c:72:51: error: use of undeclared identifier 'now_iso'
+   72 |     snprintf(v->now_iso, sizeof v->now_iso, "%s", now_iso);
+      |                                                   ^~~~~~~
+build_close/mutants/p39684/m0065_screen_stats.c:73:37: error: use of undeclared identifier 'now_iso'
+   73 |     int rc = ct_repo_deck_stats(db, now_iso, v->decks, CT_STATS_MAX_DECKS);
+      |                                     ^~~~~~~
+build_close/mutants/p39684/m0065_screen_stats.c:79:80: error: use of undeclared identifier 'now_iso'
+   79 |     snprintf(from_day, sizeof from_day, "%.*s", (int)CT_STATS_SCR_ISO_DAY_MAX, now_iso);
+      |                                                                                ^~~~~~~
+build_close/mutants/p39684/m0065_screen_stats.c:92:9: error: use of undeclared identifier 'deck'
+   92 |     if (deck != NULL && deck[0] != '\0') {
+      |         ^~~~
+build_close/mutants/p39684/m0065_screen_stats.c:92:25: error: use of undeclared identifier 'deck'
+   92 |     if (deck != NULL && deck[0] != '\0') {
+      |                         ^~~~
+build_close/mutants/p39684/m0065_screen_stats.c:93:16: error: use of undeclared identifier 'deck'
+   93 |         pick = deck;
+      |                ^~~~
+9 errors generated.
+build_close/mutants/p39684/m0066_screen_stats.c:65:87: error: expected ')'
+   65 | int ct_stats_view_load(ct_stats_view *v, sqlite3 *db, const char *now_iso, const char /deck) {
+      |                                                                                       ^
+build_close/mutants/p39684/m0066_screen_stats.c:65:23: note: to match this '('
+   65 | int ct_stats_view_load(ct_stats_view *v, sqlite3 *db, const char *now_iso, const char /deck) {
+      |                       ^
+build_close/mutants/p39684/m0066_screen_stats.c:65:5: error: conflicting types for 'ct_stats_view_load'
+   65 | int ct_stats_view_load(ct_stats_view *v, sqlite3 *db, const char *now_iso, const char /deck) {
+      |     ^
+src\ui/ui.h:184:5: note: previous declaration is here
+  184 | int ct_stats_view_load(ct_stats_view *v, sqlite3 *db, const char *now_iso, const char *deck);
+      |     ^
+build_close/mutants/p39684/m0066_screen_stats.c:92:9: error: use of undeclared identifier 'deck'
+   92 |     if (deck != NULL && deck[0] != '\0') {
+      |         ^~~~
+build_close/mutants/p39684/m0066_screen_stats.c:92:25: error: use of undeclared identifier 'deck'
+   92 |     if (deck != NULL && deck[0] != '\0') {
+      |                         ^~~~
+build_close/mutants/p39684/m0066_screen_stats.c:93:16: error: use of undeclared identifier 'deck'
+   93 |         pick = deck;
+      |                ^~~~
+5 errors generated.
+mutate: suite stats_screen_view_load exited 1
+build_close/mutants/p39684/m0068_screen_stats.c:66:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   66 |     if (v == NULL && db == NULL || !ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX)) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~ ~~
+build_close/mutants/p39684/m0068_screen_stats.c:66:19: note: place parentheses around the '&&' expression to silence this warning
+   66 |     if (v == NULL && db == NULL || !ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX)) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~
+1 error generated.
+mutate: suite stats_screen_view_load exited 1
+build_close/mutants/p39684/m0070_screen_stats.c:66:33: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   66 |     if (v == NULL || db == NULL && !ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX)) {
+      |                   ~~ ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p39684/m0070_screen_stats.c:66:33: note: place parentheses around the '&&' expression to silence this warning
+   66 |     if (v == NULL || db == NULL && !ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX)) {
+      |                                 ^                                               
+      |                      (                                                          )
+1 error generated.
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_boundaries exited 1
+mutate: suite stats_screen_boundaries exited 1
+build_close/mutants/p39684/m0074_screen_stats.c:69:25: error: expected expression
+   69 |     memset(v, 0, sizeof /v);
+      |                         ^
+1 error generated.
+mutate: suite stats_screen_boundaries exited 1
+mutate: suite stats_screen_boundaries exited 1
+mutate: suite stats_screen_boundaries exited 1
+mutate: suite stats_screen_boundaries exited 1
+mutate: suite stats_screen_boundaries exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+build_close/mutants/p39684/m0090_screen_stats.c:91:16: error: expected identifier or '('
+   91 |     const char /pick = NULL;
+      |                ^
+build_close/mutants/p39684/m0090_screen_stats.c:93:9: error: use of undeclared identifier 'pick'
+   93 |         pick = deck;
+      |         ^~~~
+build_close/mutants/p39684/m0090_screen_stats.c:95:9: error: use of undeclared identifier 'pick'
+   95 |         pick = v->decks[0].deck;
+      |         ^~~~
+build_close/mutants/p39684/m0090_screen_stats.c:97:9: error: use of undeclared identifier 'pick'
+   97 |     if (pick == NULL) {
+      |         ^~~~
+build_close/mutants/p39684/m0090_screen_stats.c:100:41: error: use of undeclared identifier 'pick'
+  100 |     return ct_stats_view_select_deck(v, pick);
+      |                                         ^~~~
+5 errors generated.
+mutate: suite stats_screen_view_load exited -1073741795
+mutate: suite stats_screen_view_load exited -1073741795
+mutate: suite stats_screen_boundaries exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_boundaries exited 1
+mutate: suite stats_screen_boundaries exited 1
+mutate: suite stats_screen_boundaries exited 1
+mutate: suite stats_screen_view_load exited 1
+build_close/mutants/p39684/m0100_screen_stats.c:95:16: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   95 |         pick = v->decks[-1].deck;
+      |                ^        ~~
+src\ui/ui.h:168:5: note: array 'decks' declared here
+  168 |     ct_deck_stats decks[CT_STATS_MAX_DECKS];
+      |     ^
+1 error generated.
+mutate: suite stats_screen_view_load exited 1
+build_close/mutants/p39684/m0102_screen_stats.c:103:45: error: expected ')'
+  103 | int ct_stats_view_select_deck(ct_stats_view /v, const char *deck) {
+      |                                             ^
+build_close/mutants/p39684/m0102_screen_stats.c:103:30: note: to match this '('
+  103 | int ct_stats_view_select_deck(ct_stats_view /v, const char *deck) {
+      |                              ^
+build_close/mutants/p39684/m0102_screen_stats.c:103:5: error: conflicting types for 'ct_stats_view_select_deck'
+  103 | int ct_stats_view_select_deck(ct_stats_view /v, const char *deck) {
+      |     ^
+src\ui/ui.h:185:5: note: previous declaration is here
+  185 | int ct_stats_view_select_deck(ct_stats_view *v, const char *deck);
+      |     ^
+build_close/mutants/p39684/m0102_screen_stats.c:104:9: error: use of undeclared identifier 'v'
+  104 |     if (v == NULL || v->db == NULL || !ct_repo_text_ok(deck, CT_STATS_DECK_MAX)) {
+      |         ^
+build_close/mutants/p39684/m0102_screen_stats.c:104:22: error: use of undeclared identifier 'v'
+  104 |     if (v == NULL || v->db == NULL || !ct_repo_text_ok(deck, CT_STATS_DECK_MAX)) {
+      |                      ^
+build_close/mutants/p39684/m0102_screen_stats.c:104:56: error: use of undeclared identifier 'deck'
+  104 |     if (v == NULL || v->db == NULL || !ct_repo_text_ok(deck, CT_STATS_DECK_MAX)) {
+      |                                                        ^~~~
+build_close/mutants/p39684/m0102_screen_stats.c:107:42: error: use of undeclared identifier 'v'
+  107 |     int rc = ct_stats_view_deck_sections(v, deck);
+      |                                          ^
+build_close/mutants/p39684/m0102_screen_stats.c:107:45: error: use of undeclared identifier 'deck'
+  107 |     int rc = ct_stats_view_deck_sections(v, deck);
+      |                                             ^~~~
+build_close/mutants/p39684/m0102_screen_stats.c:111:5: error: use of undeclared identifier 'v'
+  111 |     v->deck_selected = -1;
+      |     ^
+build_close/mutants/p39684/m0102_screen_stats.c:112:25: error: use of undeclared identifier 'v'
+  112 |     for (int i = 0; i < v->deck_count; i++) {
+      |                         ^
+build_close/mutants/p39684/m0102_screen_stats.c:113:20: error: use of undeclared identifier 'v'
+  113 |         if (strcmp(v->decks[i].deck, deck) == 0) {
+      |                    ^
+build_close/mutants/p39684/m0102_screen_stats.c:113:38: error: use of undeclared identifier 'deck'
+  113 |         if (strcmp(v->decks[i].deck, deck) == 0) {
+      |                                      ^~~~
+build_close/mutants/p39684/m0102_screen_stats.c:114:13: error: use of undeclared identifier 'v'
+  114 |             v->deck_selected = i;
+      |             ^
+12 errors generated.
+build_close/mutants/p39684/m0103_screen_stats.c:103:60: error: expected ')'
+  103 | int ct_stats_view_select_deck(ct_stats_view *v, const char /deck) {
+      |                                                            ^
+build_close/mutants/p39684/m0103_screen_stats.c:103:30: note: to match this '('
+  103 | int ct_stats_view_select_deck(ct_stats_view *v, const char /deck) {
+      |                              ^
+build_close/mutants/p39684/m0103_screen_stats.c:103:5: error: conflicting types for 'ct_stats_view_select_deck'
+  103 | int ct_stats_view_select_deck(ct_stats_view *v, const char /deck) {
+      |     ^
+src\ui/ui.h:185:5: note: previous declaration is here
+  185 | int ct_stats_view_select_deck(ct_stats_view *v, const char *deck);
+      |     ^
+build_close/mutants/p39684/m0103_screen_stats.c:104:56: error: use of undeclared identifier 'deck'
+  104 |     if (v == NULL || v->db == NULL || !ct_repo_text_ok(deck, CT_STATS_DECK_MAX)) {
+      |                                                        ^~~~
+build_close/mutants/p39684/m0103_screen_stats.c:107:45: error: use of undeclared identifier 'deck'
+  107 |     int rc = ct_stats_view_deck_sections(v, deck);
+      |                                             ^~~~
+build_close/mutants/p39684/m0103_screen_stats.c:113:38: error: use of undeclared identifier 'deck'
+  113 |         if (strcmp(v->decks[i].deck, deck) == 0) {
+      |                                      ^~~~
+5 errors generated.
+mutate: suite stats_screen_view_load exited 1
+build_close/mutants/p39684/m0105_screen_stats.c:104:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  104 |     if (v == NULL && v->db == NULL || !ct_repo_text_ok(deck, CT_STATS_DECK_MAX)) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p39684/m0105_screen_stats.c:104:19: note: place parentheses around the '&&' expression to silence this warning
+  104 |     if (v == NULL && v->db == NULL || !ct_repo_text_ok(deck, CT_STATS_DECK_MAX)) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite stats_screen_view_load exited 1
+build_close/mutants/p39684/m0107_screen_stats.c:104:36: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  104 |     if (v == NULL || v->db == NULL && !ct_repo_text_ok(deck, CT_STATS_DECK_MAX)) {
+      |                   ~~ ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p39684/m0107_screen_stats.c:104:36: note: place parentheses around the '&&' expression to silence this warning
+  104 |     if (v == NULL || v->db == NULL && !ct_repo_text_ok(deck, CT_STATS_DECK_MAX)) {
+      |                                    ^                                           
+      |                      (                                                         )
+1 error generated.
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_deck_switch exited 1
+mutate: suite stats_screen_deck_switch exited 1
+mutate: suite stats_screen_deck_switch exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited -1073741795
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+mutate: suite stats_screen_view_load exited 1
+build_close/mutants/p39684/m0121_screen_stats.c:121:45: error: expected ')'
+  121 | int ct_stats_view_worst_cases(ct_stats_view /v, int n) {
+      |                                             ^
+build_close/mutants/p39684/m0121_screen_stats.c:121:30: note: to match this '('
+  121 | int ct_stats_view_worst_cases(ct_stats_view /v, int n) {
+      |                              ^
+build_close/mutants/p39684/m0121_screen_stats.c:121:5: error: conflicting types for 'ct_stats_view_worst_cases'
+  121 | int ct_stats_view_worst_cases(ct_stats_view /v, int n) {
+      |     ^
+src\ui/ui.h:186:5: note: previous declaration is here
+  186 | int ct_stats_view_worst_cases(ct_stats_view *v, int n);
+      |     ^
+build_close/mutants/p39684/m0121_screen_stats.c:122:9: error: use of undeclared identifier 'v'
+  122 |     if (v == NULL || n < 0) {
+      |         ^
+build_close/mutants/p39684/m0121_screen_stats.c:122:22: error: use of undeclared identifier 'n'
+  122 |     if (v == NULL || n < 0) {
+      |                      ^
+build_close/mutants/p39684/m0121_screen_stats.c:125:12: error: use of undeclared identifier 'n'
+  125 |     return n < v->case_count ? n : v->case_count;
+      |            ^
+build_close/mutants/p39684/m0121_screen_stats.c:125:16: error: use of undeclared identifier 'v'
+  125 |     return n < v->case_count ? n : v->case_count;
+      |                ^
+build_close/mutants/p39684/m0121_screen_stats.c:125:32: error: use of undeclared identifier 'n'
+  125 |     return n < v->case_count ? n : v->case_count;
+      |                                ^
+build_close/mutants/p39684/m0121_screen_stats.c:125:36: error: use of undeclared identifier 'v'
+  125 |     return n < v->case_count ? n : v->case_count;
+      |                                    ^
+8 errors generated.
+mutate: suite stats_screen_worst_cases exited 1
+mutate: suite stats_screen_worst_cases exited 1
+mutate: suite stats_screen_worst_cases exited 1
+mutate: suite stats_screen_worst_cases exited 1
+mutate: suite stats_screen_worst_cases exited 1
+mutate: suite stats_screen_worst_cases exited 1
+build_close/mutants/p39684/m0131_screen_stats.c:137:10: error: expected member name or ';' after declaration specifiers
+  137 |     char /deck_ptrs[CT_STATS_MAX_DECKS];
+      |     ~~~~ ^
+build_close/mutants/p39684/m0131_screen_stats.c:137:9: error: expected ';' at end of declaration list
+  137 |     char /deck_ptrs[CT_STATS_MAX_DECKS];
+      |         ^
+      |         ;
+build_close/mutants/p39684/m0131_screen_stats.c:185:18: error: no member named 'deck_ptrs' in 'struct (unnamed at build_close/mutants/p39684/m0131_screen_stats.c:128:9)'
+  185 |         ct_stats.deck_ptrs[i] = ct_stats.deck_labels[i];
+      |         ~~~~~~~~ ^
+build_close/mutants/p39684/m0131_screen_stats.c:383:79: error: no member named 'deck_ptrs' in 'struct (unnamed at build_close/mutants/p39684/m0131_screen_stats.c:128:9)'
+  383 |     if (GuiListViewEx(ct_stats_rect(left_x, deck_y, left_w, deck_h), ct_stats.deck_ptrs,
+      |                                                                      ~~~~~~~~ ^
+4 errors generated.
+build_close/mutants/p39684/m0132_screen_stats.c:139:10: error: expected member name or ';' after declaration specifiers
+  139 |     char /session_ptrs[CT_STATS_SESSIONS_MAX];
+      |     ~~~~ ^
+build_close/mutants/p39684/m0132_screen_stats.c:139:9: error: expected ';' at end of declaration list
+  139 |     char /session_ptrs[CT_STATS_SESSIONS_MAX];
+      |         ^
+      |         ;
+build_close/mutants/p39684/m0132_screen_stats.c:191:18: error: no member named 'session_ptrs' in 'struct (unnamed at build_close/mutants/p39684/m0132_screen_stats.c:128:9)'
+  191 |         ct_stats.session_ptrs[i] = ct_stats.session_labels[i];
+      |         ~~~~~~~~ ^
+build_close/mutants/p39684/m0132_screen_stats.c:394:32: error: no member named 'session_ptrs' in 'struct (unnamed at build_close/mutants/p39684/m0132_screen_stats.c:128:9)'
+  394 |                       ct_stats.session_ptrs, v->session_count, &ct_stats.session_scroll,
+      |                       ~~~~~~~~ ^
+4 errors generated.
+build_close/mutants/p39684/m0133_screen_stats.c:144:19: error: expected identifier or '('
+  144 | static const char /ct_stats_dir_tag(int direction) {
+      |                   ^
+build_close/mutants/p39684/m0133_screen_stats.c:262:14: error: use of undeclared identifier 'ct_stats_dir_tag'
+  262 |              ct_stats_dir_tag(row->direction), row->correct, row->reviews);
+      |              ^~~~~~~~~~~~~~~~
+2 errors generated.
+build_close/mutants/p39684/m0134_screen_stats.c:159:19: error: expected identifier or '('
+  159 | static const char /ct_stats_status_text(int status) {
+      |                   ^
+build_close/mutants/p39684/m0134_screen_stats.c:401:18: error: use of undeclared identifier 'ct_stats_status_text'
+  401 |                  ct_stats_status_text(ct_stats.status));
+      |                  ^~~~~~~~~~~~~~~~~~~~
+2 errors generated.
+build_close/mutants/p39684/m0135_screen_stats.c:182:19: error: expected identifier or '('
+  182 |     ct_stats_view /v = &ct_stats.view;
+      |                   ^
+build_close/mutants/p39684/m0135_screen_stats.c:183:25: error: use of undeclared identifier 'v'
+  183 |     for (int i = 0; i < v->deck_count; i++) {
+      |                         ^
+build_close/mutants/p39684/m0135_screen_stats.c:184:81: error: use of undeclared identifier 'v'
+  184 |         snprintf(ct_stats.deck_labels[i], sizeof ct_stats.deck_labels[i], "%s", v->decks[i].deck);
+      |                                                                                 ^
+build_close/mutants/p39684/m0135_screen_stats.c:187:25: error: use of undeclared identifier 'v'
+  187 |     for (int i = 0; i < v->session_count; i++) {
+      |                         ^
+build_close/mutants/p39684/m0135_screen_stats.c:188:36: error: use of undeclared identifier 'v'
+  188 |         const ct_session_row *s = &v->sessions[i];
+      |                                    ^
+5 errors generated.
+build_close/mutants/p39684/m0142_screen_stats.c:188:30: error: expected identifier or '('
+  188 |         const ct_session_row /s = &v->sessions[i];
+      |                              ^
+build_close/mutants/p39684/m0142_screen_stats.c:190:49: error: use of undeclared identifier 's'
+  190 |                  (int)CT_STATS_SCR_ISO_DAY_MAX, s->started_at, s->deck, s->n_cards);
+      |                                                 ^
+build_close/mutants/p39684/m0142_screen_stats.c:190:64: error: use of undeclared identifier 's'
+  190 |                  (int)CT_STATS_SCR_ISO_DAY_MAX, s->started_at, s->deck, s->n_cards);
+      |                                                                ^
+build_close/mutants/p39684/m0142_screen_stats.c:190:73: error: use of undeclared identifier 's'
+  190 |                  (int)CT_STATS_SCR_ISO_DAY_MAX, s->started_at, s->deck, s->n_cards);
+      |                                                                         ^
+4 errors generated.
+build_close/mutants/p39684/m0143_screen_stats.c:195:50: error: expected ')'
+  195 | static void ct_stats_draw_forecast(ct_stats_view /v, int x, int y, int w, int h, int row_h,
+      |                                                  ^
+build_close/mutants/p39684/m0143_screen_stats.c:195:35: note: to match this '('
+  195 | static void ct_stats_draw_forecast(ct_stats_view /v, int x, int y, int w, int h, int row_h,
+      |                                   ^
+build_close/mutants/p39684/m0143_screen_stats.c:197:31: error: use of undeclared identifier 'x'
+  197 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "forecast");
+      |                               ^
+build_close/mutants/p39684/m0143_screen_stats.c:197:34: error: use of undeclared identifier 'y'
+  197 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "forecast");
+      |                                  ^
+build_close/mutants/p39684/m0143_screen_stats.c:197:37: error: use of undeclared identifier 'w'
+  197 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "forecast");
+      |                                     ^
+build_close/mutants/p39684/m0143_screen_stats.c:197:40: error: use of undeclared identifier 'h'
+  197 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "forecast");
+      |                                        ^
+build_close/mutants/p39684/m0143_screen_stats.c:198:19: error: use of undeclared identifier 'x'
+  198 |     int inner_x = x + margin;
+      |                   ^
+build_close/mutants/p39684/m0143_screen_stats.c:198:23: error: use of undeclared identifier 'margin'
+  198 |     int inner_x = x + margin;
+      |                       ^~~~~~
+build_close/mutants/p39684/m0143_screen_stats.c:199:19: error: use of undeclared identifier 'y'
+  199 |     int inner_y = y + margin + row_h;
+      |                   ^
+build_close/mutants/p39684/m0143_screen_stats.c:199:23: error: use of undeclared identifier 'margin'
+  199 |     int inner_y = y + margin + row_h;
+      |                       ^~~~~~
+build_close/mutants/p39684/m0143_screen_stats.c:199:32: error: use of undeclared identifier 'row_h'
+  199 |     int inner_y = y + margin + row_h;
+      |                                ^~~~~
+build_close/mutants/p39684/m0143_screen_stats.c:200:19: error: use of undeclared identifier 'w'
+  200 |     int inner_w = w - 2 * margin;
+      |                   ^
+build_close/mutants/p39684/m0143_screen_stats.c:200:27: error: use of undeclared identifier 'margin'
+  200 |     int inner_w = w - 2 * margin;
+      |                           ^~~~~~
+build_close/mutants/p39684/m0143_screen_stats.c:201:19: error: use of undeclared identifier 'row_h'
+  201 |     int label_h = row_h >> CT_STATS_SCR_TEXT_SHIFT;
+      |                   ^~~~~
+build_close/mutants/p39684/m0143_screen_stats.c:202:19: error: use of undeclared identifier 'h'
+  202 |     int inner_h = h - (inner_y - y) - margin - label_h;
+      |                   ^
+build_close/mutants/p39684/m0143_screen_stats.c:202:34: error: use of undeclared identifier 'y'
+  202 |     int inner_h = h - (inner_y - y) - margin - label_h;
+      |                                  ^
+build_close/mutants/p39684/m0143_screen_stats.c:202:39: error: use of undeclared identifier 'margin'
+  202 |     int inner_h = h - (inner_y - y) - margin - label_h;
+      |                                       ^~~~~~
+build_close/mutants/p39684/m0143_screen_stats.c:205:38: error: use of undeclared identifier 'v'
+  205 |              ct_stats_forecast_total(v->forecast, v->forecast_count));
+      |                                      ^
+build_close/mutants/p39684/m0143_screen_stats.c:205:51: error: use of undeclared identifier 'v'
+  205 |              ct_stats_forecast_total(v->forecast, v->forecast_count));
+      |                                                   ^
+build_close/mutants/p39684/m0143_screen_stats.c:206:37: error: use of undeclared identifier 'y'
+  206 |     GuiLabel(ct_stats_rect(inner_x, y + margin, inner_w, row_h), head);
+      |                                     ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p39684/m0170_screen_stats.c:228:49: error: expected ')'
+  228 | static void ct_stats_draw_heatmap(ct_stats_view /v, int x, int y, int w, int h, int row_h,
+      |                                                 ^
+build_close/mutants/p39684/m0170_screen_stats.c:228:34: note: to match this '('
+  228 | static void ct_stats_draw_heatmap(ct_stats_view /v, int x, int y, int w, int h, int row_h,
+      |                                  ^
+build_close/mutants/p39684/m0170_screen_stats.c:230:31: error: use of undeclared identifier 'x'
+  230 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "case accuracy");
+      |                               ^
+build_close/mutants/p39684/m0170_screen_stats.c:230:34: error: use of undeclared identifier 'y'
+  230 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "case accuracy");
+      |                                  ^
+build_close/mutants/p39684/m0170_screen_stats.c:230:37: error: use of undeclared identifier 'w'
+  230 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "case accuracy");
+      |                                     ^
+build_close/mutants/p39684/m0170_screen_stats.c:230:40: error: use of undeclared identifier 'h'
+  230 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "case accuracy");
+      |                                        ^
+build_close/mutants/p39684/m0170_screen_stats.c:231:19: error: use of undeclared identifier 'x'
+  231 |     int inner_x = x + margin;
+      |                   ^
+build_close/mutants/p39684/m0170_screen_stats.c:231:23: error: use of undeclared identifier 'margin'
+  231 |     int inner_x = x + margin;
+      |                       ^~~~~~
+build_close/mutants/p39684/m0170_screen_stats.c:232:19: error: use of undeclared identifier 'y'
+  232 |     int inner_y = y + margin;
+      |                   ^
+build_close/mutants/p39684/m0170_screen_stats.c:232:23: error: use of undeclared identifier 'margin'
+  232 |     int inner_y = y + margin;
+      |                       ^~~~~~
+build_close/mutants/p39684/m0170_screen_stats.c:233:19: error: use of undeclared identifier 'w'
+  233 |     int inner_w = w - 2 * margin;
+      |                   ^
+build_close/mutants/p39684/m0170_screen_stats.c:233:27: error: use of undeclared identifier 'margin'
+  233 |     int inner_w = w - 2 * margin;
+      |                           ^~~~~~
+build_close/mutants/p39684/m0170_screen_stats.c:234:19: error: use of undeclared identifier 'h'
+  234 |     int inner_h = h - 2 * margin;
+      |                   ^
+build_close/mutants/p39684/m0170_screen_stats.c:234:27: error: use of undeclared identifier 'margin'
+  234 |     int inner_h = h - 2 * margin;
+      |                           ^~~~~~
+build_close/mutants/p39684/m0170_screen_stats.c:235:17: error: use of undeclared identifier 'row_h'
+  235 |     int small = row_h >> CT_STATS_SCR_TEXT_SHIFT;
+      |                 ^~~~~
+build_close/mutants/p39684/m0170_screen_stats.c:236:9: error: use of undeclared identifier 'v'
+  236 |     if (v->case_count <= 0) {
+      |         ^
+build_close/mutants/p39684/m0170_screen_stats.c:241:17: error: use of undeclared identifier 'v'
+  241 |     int rows = (v->case_count + cols - 1) / cols;
+      |                 ^
+build_close/mutants/p39684/m0170_screen_stats.c:246:25: error: use of undeclared identifier 'v'
+  246 |     for (int i = 0; i < v->case_count; i++) {
+      |                         ^
+build_close/mutants/p39684/m0170_screen_stats.c:250:49: error: use of undeclared identifier 'v'
+  250 |         DrawRectangleRec(cell, ct_heatmap_color(v->cases[i].accuracy));
+      |                                                 ^
+build_close/mutants/p39684/m0170_screen_stats.c:256:31: error: use of undeclared identifier 'v'
+  256 |     if (hover < 0 || hover >= v->case_count) {
+      |                               ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p39684/m0201_screen_stats.c:259:32: error: expected identifier or '('
+  259 |     const ct_case_accuracy_row /row = &v->cases[hover];
+      |                                ^
+build_close/mutants/p39684/m0201_screen_stats.c:261:61: error: use of undeclared identifier 'row'; did you mean 'rows'?
+  261 |     snprintf(buf, sizeof buf, "%s [%s] %ld of %ld correct", row->case_key,
+      |                                                             ^~~
+      |                                                             rows
+build_close/mutants/p39684/m0201_screen_stats.c:241:9: note: 'rows' declared here
+  241 |     int rows = (v->case_count + cols - 1) / cols;
+      |         ^
+build_close/mutants/p39684/m0201_screen_stats.c:261:66: error: member reference type 'int' is not a pointer
+  261 |     snprintf(buf, sizeof buf, "%s [%s] %ld of %ld correct", row->case_key,
+      |                                                             ~~~  ^
+build_close/mutants/p39684/m0201_screen_stats.c:262:31: error: use of undeclared identifier 'row'; did you mean 'rows'?
+  262 |              ct_stats_dir_tag(row->direction), row->correct, row->reviews);
+      |                               ^~~
+      |                               rows
+build_close/mutants/p39684/m0201_screen_stats.c:241:9: note: 'rows' declared here
+  241 |     int rows = (v->case_count + cols - 1) / cols;
+      |         ^
+build_close/mutants/p39684/m0201_screen_stats.c:262:36: error: member reference type 'int' is not a pointer
+  262 |              ct_stats_dir_tag(row->direction), row->correct, row->reviews);
+      |                               ~~~  ^
+build_close/mutants/p39684/m0201_screen_stats.c:262:48: error: use of undeclared identifier 'row'; did you mean 'rows'?
+  262 |              ct_stats_dir_tag(row->direction), row->correct, row->reviews);
+      |                                                ^~~
+      |                                                rows
+build_close/mutants/p39684/m0201_screen_stats.c:241:9: note: 'rows' declared here
+  241 |     int rows = (v->case_count + cols - 1) / cols;
+      |         ^
+build_close/mutants/p39684/m0201_screen_stats.c:262:53: error: member reference type 'int' is not a pointer
+  262 |              ct_stats_dir_tag(row->direction), row->correct, row->reviews);
+      |                                                ~~~  ^
+build_close/mutants/p39684/m0201_screen_stats.c:262:62: error: use of undeclared identifier 'row'; did you mean 'rows'?
+  262 |              ct_stats_dir_tag(row->direction), row->correct, row->reviews);
+      |                                                              ^~~
+      |                                                              rows
+build_close/mutants/p39684/m0201_screen_stats.c:241:9: note: 'rows' declared here
+  241 |     int rows = (v->case_count + cols - 1) / cols;
+      |         ^
+build_close/mutants/p39684/m0201_screen_stats.c:262:67: error: member reference type 'int' is not a pointer
+  262 |              ct_stats_dir_tag(row->direction), row->correct, row->reviews);
+      |                                                              ~~~  ^
+9 errors generated.
+build_close/mutants/p39684/m0205_screen_stats.c:266:51: error: expected ')'
+  266 | static void ct_stats_draw_retention(ct_stats_view /v, int x, int y, int w, int h, int row_h,
+      |                                                   ^
+build_close/mutants/p39684/m0205_screen_stats.c:266:36: note: to match this '('
+  266 | static void ct_stats_draw_retention(ct_stats_view /v, int x, int y, int w, int h, int row_h,
+      |                                    ^
+build_close/mutants/p39684/m0205_screen_stats.c:268:31: error: use of undeclared identifier 'x'
+  268 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "retention");
+      |                               ^
+build_close/mutants/p39684/m0205_screen_stats.c:268:34: error: use of undeclared identifier 'y'
+  268 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "retention");
+      |                                  ^
+build_close/mutants/p39684/m0205_screen_stats.c:268:37: error: use of undeclared identifier 'w'
+  268 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "retention");
+      |                                     ^
+build_close/mutants/p39684/m0205_screen_stats.c:268:40: error: use of undeclared identifier 'h'
+  268 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "retention");
+      |                                        ^
+build_close/mutants/p39684/m0205_screen_stats.c:269:19: error: use of undeclared identifier 'x'
+  269 |     int inner_x = x + margin;
+      |                   ^
+build_close/mutants/p39684/m0205_screen_stats.c:269:23: error: use of undeclared identifier 'margin'
+  269 |     int inner_x = x + margin;
+      |                       ^~~~~~
+build_close/mutants/p39684/m0205_screen_stats.c:270:19: error: use of undeclared identifier 'y'
+  270 |     int inner_y = y + margin + row_h;
+      |                   ^
+build_close/mutants/p39684/m0205_screen_stats.c:270:23: error: use of undeclared identifier 'margin'
+  270 |     int inner_y = y + margin + row_h;
+      |                       ^~~~~~
+build_close/mutants/p39684/m0205_screen_stats.c:270:32: error: use of undeclared identifier 'row_h'
+  270 |     int inner_y = y + margin + row_h;
+      |                                ^~~~~
+build_close/mutants/p39684/m0205_screen_stats.c:271:19: error: use of undeclared identifier 'w'
+  271 |     int inner_w = w - 2 * margin;
+      |                   ^
+build_close/mutants/p39684/m0205_screen_stats.c:271:27: error: use of undeclared identifier 'margin'
+  271 |     int inner_w = w - 2 * margin;
+      |                           ^~~~~~
+build_close/mutants/p39684/m0205_screen_stats.c:272:19: error: use of undeclared identifier 'h'
+  272 |     int inner_h = h - (inner_y - y) - margin;
+      |                   ^
+build_close/mutants/p39684/m0205_screen_stats.c:272:34: error: use of undeclared identifier 'y'
+  272 |     int inner_h = h - (inner_y - y) - margin;
+      |                                  ^
+build_close/mutants/p39684/m0205_screen_stats.c:272:39: error: use of undeclared identifier 'margin'
+  272 |     int inner_h = h - (inner_y - y) - margin;
+      |                                       ^~~~~~
+build_close/mutants/p39684/m0205_screen_stats.c:275:14: error: use of undeclared identifier 'v'
+  275 |              v->retention_summary.total_reviews, v->retention_summary.total_correct,
+      |              ^
+build_close/mutants/p39684/m0205_screen_stats.c:275:50: error: use of undeclared identifier 'v'
+  275 |              v->retention_summary.total_reviews, v->retention_summary.total_correct,
+      |                                                  ^
+build_close/mutants/p39684/m0205_screen_stats.c:276:14: error: use of undeclared identifier 'v'
+  276 |              v->retention_summary.weighted_error, v->retention_summary.max_abs_error,
+      |              ^
+build_close/mutants/p39684/m0205_screen_stats.c:276:51: error: use of undeclared identifier 'v'
+  276 |              v->retention_summary.weighted_error, v->retention_summary.max_abs_error,
+      |                                                   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p39684/m0260_screen_stats.c:315:46: error: expected ')'
+  315 | static void ct_stats_draw_deck(ct_stats_view /v, int x, int y, int w, int h, int row_h,
+      |                                              ^
+build_close/mutants/p39684/m0260_screen_stats.c:315:31: note: to match this '('
+  315 | static void ct_stats_draw_deck(ct_stats_view /v, int x, int y, int w, int h, int row_h,
+      |                               ^
+build_close/mutants/p39684/m0260_screen_stats.c:317:31: error: use of undeclared identifier 'x'
+  317 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "deck");
+      |                               ^
+build_close/mutants/p39684/m0260_screen_stats.c:317:34: error: use of undeclared identifier 'y'
+  317 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "deck");
+      |                                  ^
+build_close/mutants/p39684/m0260_screen_stats.c:317:37: error: use of undeclared identifier 'w'
+  317 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "deck");
+      |                                     ^
+build_close/mutants/p39684/m0260_screen_stats.c:317:40: error: use of undeclared identifier 'h'
+  317 |     GuiGroupBox(ct_stats_rect(x, y, w, h), "deck");
+      |                                        ^
+build_close/mutants/p39684/m0260_screen_stats.c:318:19: error: use of undeclared identifier 'x'
+  318 |     int inner_x = x + margin;
+      |                   ^
+build_close/mutants/p39684/m0260_screen_stats.c:318:23: error: use of undeclared identifier 'margin'
+  318 |     int inner_x = x + margin;
+      |                       ^~~~~~
+build_close/mutants/p39684/m0260_screen_stats.c:319:19: error: use of undeclared identifier 'y'
+  319 |     int inner_y = y + margin;
+      |                   ^
+build_close/mutants/p39684/m0260_screen_stats.c:319:23: error: use of undeclared identifier 'margin'
+  319 |     int inner_y = y + margin;
+      |                       ^~~~~~
+build_close/mutants/p39684/m0260_screen_stats.c:320:19: error: use of undeclared identifier 'w'
+  320 |     int inner_w = w - 2 * margin;
+      |                   ^
+build_close/mutants/p39684/m0260_screen_stats.c:320:27: error: use of undeclared identifier 'margin'
+  320 |     int inner_w = w - 2 * margin;
+      |                           ^~~~~~
+build_close/mutants/p39684/m0260_screen_stats.c:321:9: error: use of undeclared identifier 'v'
+  321 |     if (v->deck_selected < 0 || v->deck_selected >= v->deck_count) {
+      |         ^
+build_close/mutants/p39684/m0260_screen_stats.c:321:33: error: use of undeclared identifier 'v'
+  321 |     if (v->deck_selected < 0 || v->deck_selected >= v->deck_count) {
+      |                                 ^
+build_close/mutants/p39684/m0260_screen_stats.c:321:53: error: use of undeclared identifier 'v'
+  321 |     if (v->deck_selected < 0 || v->deck_selected >= v->deck_count) {
+      |                                                     ^
+build_close/mutants/p39684/m0260_screen_stats.c:322:59: error: use of undeclared identifier 'row_h'
+  322 |         GuiLabel(ct_stats_rect(inner_x, inner_y, inner_w, row_h), "no deck selected");
+      |                                                           ^~~~~
+build_close/mutants/p39684/m0260_screen_stats.c:325:31: error: use of undeclared identifier 'v'
+  325 |     const ct_deck_stats *d = &v->decks[v->deck_selected];
+      |                               ^
+build_close/mutants/p39684/m0260_screen_stats.c:325:40: error: use of undeclared identifier 'v'
+  325 |     const ct_deck_stats *d = &v->decks[v->deck_selected];
+      |                                        ^
+build_close/mutants/p39684/m0260_screen_stats.c:333:55: error: use of undeclared identifier 'row_h'
+  333 |         GuiLabel(ct_stats_rect(inner_x, inner_y + i * row_h, inner_w, row_h), lines[i]);
+      |                                                       ^~~~~
+build_close/mutants/p39684/m0260_screen_stats.c:333:71: error: use of undeclared identifier 'row_h'
+  333 |         GuiLabel(ct_stats_rect(inner_x, inner_y + i * row_h, inner_w, row_h), lines[i]);
+      |                                                                       ^~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p39684/m0272_screen_stats.c:325:25: error: expected identifier or '('
+  325 |     const ct_deck_stats /d = &v->decks[v->deck_selected];
+      |                         ^
+build_close/mutants/p39684/m0272_screen_stats.c:327:62: error: use of undeclared identifier 'd'
+  327 |     snprintf(lines[0], sizeof lines[0], "cards %ld due %ld", d->total_cards, d->due_now);
+      |                                                              ^
+build_close/mutants/p39684/m0272_screen_stats.c:327:78: error: use of undeclared identifier 'd'
+  327 |     snprintf(lines[0], sizeof lines[0], "cards %ld due %ld", d->total_cards, d->due_now);
+      |                                                                              ^
+build_close/mutants/p39684/m0272_screen_stats.c:328:68: error: use of undeclared identifier 'd'
+  328 |     snprintf(lines[1], sizeof lines[1], "learning %ld review %ld", d->learning, d->review_state);
+      |                                                                    ^
+build_close/mutants/p39684/m0272_screen_stats.c:328:81: error: use of undeclared identifier 'd'
+  328 |     snprintf(lines[1], sizeof lines[1], "learning %ld review %ld", d->learning, d->review_state);
+      |                                                                                 ^
+build_close/mutants/p39684/m0272_screen_stats.c:329:63: error: use of undeclared identifier 'd'
+  329 |     snprintf(lines[2], sizeof lines[2], "avg stability %.2f", d->avg_stability);
+      |                                                               ^
+build_close/mutants/p39684/m0272_screen_stats.c:331:60: error: use of undeclared identifier 'd'
+  331 |     snprintf(last, sizeof lines[0], "avg difficulty %.2f", d->avg_difficulty);
+      |                                                            ^
+7 errors generated.
+build_close/mutants/p39684/m0274_screen_stats.c:327:14: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  327 |     snprintf(lines[-1], sizeof lines[0], "cards %ld due %ld", d->total_cards, d->due_now);
+      |              ^     ~~
+build_close/mutants/p39684/m0274_screen_stats.c:326:5: note: array 'lines' declared here
+  326 |     char lines[CT_STATS_SCR_SUMMARY_LINES][CT_STATS_SCR_LABEL_MAX];
+      |     ^
+build_close/mutants/p39684/m0274_screen_stats.c:327:5: error: 'snprintf' size argument is too large; destination buffer has size 0, but size argument is 96 [-Werror,-Wfortify-source]
+  327 |     snprintf(lines[-1], sizeof lines[0], "cards %ld due %ld", d->total_cards, d->due_now);
+      |     ^
+2 errors generated.
+build_close/mutants/p39684/m0285_screen_stats.c:330:10: error: expected identifier or '('
+  330 |     char /last = lines[CT_STATS_SCR_SUMMARY_LINES - 1];
+      |          ^
+build_close/mutants/p39684/m0285_screen_stats.c:331:14: error: use of undeclared identifier 'last'
+  331 |     snprintf(last, sizeof lines[0], "avg difficulty %.2f", d->avg_difficulty);
+      |              ^~~~
+2 errors generated.
+build_close/mutants/p39684/m0286_screen_stats.c:330:18: error: array index 5 is past the end of the array (that has type 'char[4][96]') [-Werror,-Warray-bounds]
+  330 |     char *last = lines[CT_STATS_SCR_SUMMARY_LINES + 1];
+      |                  ^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p39684/m0286_screen_stats.c:326:5: note: array 'lines' declared here
+  326 |     char lines[CT_STATS_SCR_SUMMARY_LINES][CT_STATS_SCR_LABEL_MAX];
+      |     ^
+1 error generated.
+build_close/mutants/p39684/m0288_screen_stats.c:330:18: error: array index 4 is past the end of the array (that has type 'char[4][96]') [-Werror,-Warray-bounds]
+  330 |     char *last = lines[CT_STATS_SCR_SUMMARY_LINES - 0];
+      |                  ^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p39684/m0288_screen_stats.c:326:5: note: array 'lines' declared here
+  326 |     char lines[CT_STATS_SCR_SUMMARY_LINES][CT_STATS_SCR_LABEL_MAX];
+      |     ^
+1 error generated.
+build_close/mutants/p39684/m0296_screen_stats.c:337:36: error: expected ')'
+  337 | void ct_screen_stats_update(ct_app /app) {
+      |                                    ^
+build_close/mutants/p39684/m0296_screen_stats.c:337:28: note: to match this '('
+  337 | void ct_screen_stats_update(ct_app /app) {
+      |                            ^
+build_close/mutants/p39684/m0296_screen_stats.c:337:6: error: conflicting types for 'ct_screen_stats_update'
+  337 | void ct_screen_stats_update(ct_app /app) {
+      |      ^
+src\ui/ui.h:188:6: note: previous declaration is here
+  188 | void ct_screen_stats_update(ct_app *app);
+      |      ^
+build_close/mutants/p39684/m0296_screen_stats.c:338:9: error: use of undeclared identifier 'app'
+  338 |     if (app == NULL) {
+      |         ^~~
+build_close/mutants/p39684/m0296_screen_stats.c:345:62: error: use of undeclared identifier 'app'
+  345 |         ct_stats.status = ct_stats_view_load(&ct_stats.view, app->db, now, NULL);
+      |                                                              ^~~
+build_close/mutants/p39684/m0296_screen_stats.c:350:9: error: use of undeclared identifier 'app'
+  350 |         app->screen = CT_SCREEN_MENU;
+      |         ^~~
+5 errors generated.
+build_close/mutants/p39684/m0300_screen_stats.c:354:34: error: expected ')'
+  354 | void ct_screen_stats_draw(ct_app /app) {
+      |                                  ^
+build_close/mutants/p39684/m0300_screen_stats.c:354:26: note: to match this '('
+  354 | void ct_screen_stats_draw(ct_app /app) {
+      |                          ^
+build_close/mutants/p39684/m0300_screen_stats.c:354:6: error: conflicting types for 'ct_screen_stats_draw'
+  354 | void ct_screen_stats_draw(ct_app /app) {
+      |      ^
+src\ui/ui.h:189:6: note: previous declaration is here
+  189 | void ct_screen_stats_draw(ct_app *app);
+      |      ^
+build_close/mutants/p39684/m0300_screen_stats.c:356:9: error: use of undeclared identifier 'app'
+  356 |     if (app == NULL) {
+      |         ^~~
+build_close/mutants/p39684/m0300_screen_stats.c:360:18: error: use of undeclared identifier 'app'
+  360 |     int w = (int)app->cfg.window.width;
+      |                  ^~~
+build_close/mutants/p39684/m0300_screen_stats.c:361:18: error: use of undeclared identifier 'app'
+  361 |     int h = (int)app->cfg.window.height;
+      |                  ^~~
+5 errors generated.
+build_close/mutants/p39684/m0302_screen_stats.c:359:19: error: expected identifier or '('
+  359 |     ct_stats_view /v = &ct_stats.view;
+      |                   ^
+build_close/mutants/p39684/m0302_screen_stats.c:384:23: error: use of undeclared identifier 'v'
+  384 |                       v->deck_count, &ct_stats.deck_scroll, &active, NULL) &&
+      |                       ^
+build_close/mutants/p39684/m0302_screen_stats.c:385:33: error: use of undeclared identifier 'v'
+  385 |         active >= 0 && active < v->deck_count) {
+      |                                 ^
+build_close/mutants/p39684/m0302_screen_stats.c:387:53: error: use of undeclared identifier 'v'
+  387 |         ct_stats.status = ct_stats_view_select_deck(v, v->decks[active].deck);
+      |                                                     ^
+build_close/mutants/p39684/m0302_screen_stats.c:387:56: error: use of undeclared identifier 'v'
+  387 |         ct_stats.status = ct_stats_view_select_deck(v, v->decks[active].deck);
+      |                                                        ^
+build_close/mutants/p39684/m0302_screen_stats.c:389:24: error: use of undeclared identifier 'v'
+  389 |     ct_stats_draw_deck(v, left_x, summary_y, left_w, summary_h, row_h, margin);
+      |                        ^
+build_close/mutants/p39684/m0302_screen_stats.c:391:9: error: use of undeclared identifier 'v'
+  391 |     if (v->session_count > 0) {
+      |         ^
+build_close/mutants/p39684/m0302_screen_stats.c:394:46: error: use of undeclared identifier 'v'
+  394 |                       ct_stats.session_ptrs, v->session_count, &ct_stats.session_scroll,
+      |                                              ^
+build_close/mutants/p39684/m0302_screen_stats.c:397:28: error: use of undeclared identifier 'v'
+  397 |     ct_stats_draw_forecast(v, right_x, forecast_y, right_w, forecast_h, row_h, margin);
+      |                            ^
+build_close/mutants/p39684/m0302_screen_stats.c:398:27: error: use of undeclared identifier 'v'
+  398 |     ct_stats_draw_heatmap(v, right_x, heat_y, right_w, heat_h, row_h, margin);
+      |                           ^
+build_close/mutants/p39684/m0302_screen_stats.c:399:29: error: use of undeclared identifier 'v'
+  399 |     ct_stats_draw_retention(v, right_x, retention_y, right_w, retention_h, row_h, margin);
+      |                             ^
+11 errors generated.
+build_close/mutants/p39684/m0332_screen_stats.c:385:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  384 |                       v->deck_count, &ct_stats.deck_scroll, &active, NULL) ||
+      |                                                                            ~~
+  385 |         active >= 0 && active < v->deck_count) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p39684/m0332_screen_stats.c:385:21: note: place parentheses around the '&&' expression to silence this warning
+  385 |         active >= 0 && active < v->deck_count) {
+      |                     ^                        
+      |         (                                    )
+1 error generated.
+build_close/mutants/p39684/m0336_screen_stats.c:384:76: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  383 |     if (GuiListViewEx(ct_stats_rect(left_x, deck_y, left_w, deck_h), ct_stats.deck_ptrs,
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  384 |                       v->deck_count, &ct_stats.deck_scroll, &active, NULL) &&
+      |                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  385 |         active >= 0 || active < v->deck_count) {
+      |         ~~~~~~~~~~~ ~~
+build_close/mutants/p39684/m0336_screen_stats.c:384:76: note: place parentheses around the '&&' expression to silence this warning
+  383 |     if (GuiListViewEx(ct_stats_rect(left_x, deck_y, left_w, deck_h), ct_stats.deck_ptrs,
+      |         
+      |         (
+  384 |                       v->deck_count, &ct_stats.deck_scroll, &active, NULL) &&
+      |                                                                            ^
+  385 |         active >= 0 || active < v->deck_count) {
+      |                    )
+1 error generated.
+mutate: 7 unexplained survivors
+make: *** [makefile:242: mutate] Error 1

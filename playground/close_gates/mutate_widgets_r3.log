@@ -1,0 +1,178 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/ui/widgets.c build_close stats_screen_chart_layout stats_screen_heatmap_grid stats_screen_heatmap_color
+mutate: scope=src/ui/widgets.c files=1 sites=136 suites=3
+KILLED    m0001 src/ui/widgets.c:7 [int+1 4 -> 5]
+KILLED    m0002 src/ui/widgets.c:7 [int-1 4 -> 3]
+KILLED    m0003 src/ui/widgets.c:9 [arith * -> /]
+          build break
+KILLED    m0004 src/ui/widgets.c:9 [arith * -> /]
+          build break
+KILLED    m0005 src/ui/widgets.c:10 [cmp < -> <=]
+KILLED    m0006 src/ui/widgets.c:10 [int+1 0 -> 1]
+SURVIVED  m0007 src/ui/widgets.c:10 [int-1 0 -> -1]
+KILLED    m0008 src/ui/widgets.c:10 [logic || -> &&]
+          build break
+KILLED    m0009 src/ui/widgets.c:10 [cmp > -> >=]
+KILLED    m0010 src/ui/widgets.c:10 [int+1 0 -> 1]
+KILLED    m0011 src/ui/widgets.c:10 [int-1 0 -> -1]
+KILLED    m0012 src/ui/widgets.c:10 [logic && -> ||]
+KILLED    m0013 src/ui/widgets.c:10 [cmp == -> !=]
+KILLED    m0014 src/ui/widgets.c:10 [logic || -> &&]
+          build break
+KILLED    m0015 src/ui/widgets.c:10 [cmp > -> >=]
+KILLED    m0016 src/ui/widgets.c:10 [int+1 0 -> 1]
+KILLED    m0017 src/ui/widgets.c:10 [int-1 0 -> -1]
+KILLED    m0018 src/ui/widgets.c:10 [logic && -> ||]
+KILLED    m0019 src/ui/widgets.c:10 [cmp == -> !=]
+KILLED    m0020 src/ui/widgets.c:10 [logic || -> &&]
+          build break
+KILLED    m0021 src/ui/widgets.c:10 [cmp < -> <=]
+KILLED    m0022 src/ui/widgets.c:10 [int+1 0 -> 1]
+SURVIVED  m0023 src/ui/widgets.c:10 [int-1 0 -> -1]
+KILLED    m0024 src/ui/widgets.c:11 [arith - -> +]
+KILLED    m0025 src/ui/widgets.c:11 [int+1 1 -> 2]
+KILLED    m0026 src/ui/widgets.c:11 [int-1 1 -> 0]
+SURVIVED  m0027 src/ui/widgets.c:13 [cmp < -> <=]
+KILLED    m0028 src/ui/widgets.c:14 [cmp == -> !=]
+KILLED    m0029 src/ui/widgets.c:14 [int+1 0 -> 1]
+SURVIVED  m0030 src/ui/widgets.c:14 [int-1 0 -> -1]
+KILLED    m0031 src/ui/widgets.c:15 [ret-lit 0 -> 1]
+KILLED    m0032 src/ui/widgets.c:15 [int+1 0 -> 1]
+KILLED    m0033 src/ui/widgets.c:15 [int-1 0 -> -1]
+KILLED    m0034 src/ui/widgets.c:17 [arith / -> *]
+KILLED    m0035 src/ui/widgets.c:18 [arith / -> *]
+KILLED    m0036 src/ui/widgets.c:19 [arith - -> +]
+KILLED    m0037 src/ui/widgets.c:21 [int+1 0 -> 1]
+KILLED    m0038 src/ui/widgets.c:21 [int-1 0 -> -1]
+KILLED    m0039 src/ui/widgets.c:21 [cmp < -> <=]
+SURVIVED  m0040 src/ui/widgets.c:22 [logic && -> ||]
+SURVIVED  m0041 src/ui/widgets.c:22 [cmp > -> >=]
+KILLED    m0042 src/ui/widgets.c:26 [int+1 0 -> 1]
+KILLED    m0043 src/ui/widgets.c:26 [int-1 0 -> -1]
+KILLED    m0044 src/ui/widgets.c:26 [cmp < -> <=]
+KILLED    m0045 src/ui/widgets.c:27 [logic && -> ||]
+SURVIVED  m0046 src/ui/widgets.c:27 [cmp > -> >=]
+KILLED    m0047 src/ui/widgets.c:28 [cmp > -> >=]
+KILLED    m0048 src/ui/widgets.c:28 [arith * -> /]
+KILLED    m0049 src/ui/widgets.c:28 [arith / -> *]
+KILLED    m0050 src/ui/widgets.c:29 [arith + -> -]
+KILLED    m0051 src/ui/widgets.c:29 [arith * -> /]
+KILLED    m0052 src/ui/widgets.c:29 [arith + -> -]
+KILLED    m0053 src/ui/widgets.c:29 [arith / -> *]
+KILLED    m0054 src/ui/widgets.c:30 [arith + -> -]
+KILLED    m0055 src/ui/widgets.c:30 [arith - -> +]
+KILLED    m0056 src/ui/widgets.c:39 [arith * -> /]
+          build break
+KILLED    m0057 src/ui/widgets.c:40 [cmp <= -> <]
+KILLED    m0058 src/ui/widgets.c:40 [int+1 0 -> 1]
+KILLED    m0059 src/ui/widgets.c:40 [int-1 0 -> -1]
+KILLED    m0060 src/ui/widgets.c:40 [logic || -> &&]
+          build break
+SURVIVED  m0061 src/ui/widgets.c:40 [cmp <= -> <]
+KILLED    m0062 src/ui/widgets.c:40 [int+1 0 -> 1]
+SURVIVED  m0063 src/ui/widgets.c:40 [int-1 0 -> -1]
+KILLED    m0064 src/ui/widgets.c:40 [logic || -> &&]
+          build break
+KILLED    m0065 src/ui/widgets.c:40 [cmp < -> <=]
+KILLED    m0066 src/ui/widgets.c:40 [int+1 0 -> 1]
+KILLED    m0067 src/ui/widgets.c:40 [int-1 0 -> -1]
+KILLED    m0068 src/ui/widgets.c:40 [logic || -> &&]
+          build break
+KILLED    m0069 src/ui/widgets.c:40 [arith / -> *]
+KILLED    m0070 src/ui/widgets.c:40 [cmp >= -> >]
+KILLED    m0071 src/ui/widgets.c:40 [logic || -> &&]
+          build break
+KILLED    m0072 src/ui/widgets.c:40 [cmp == -> !=]
+KILLED    m0073 src/ui/widgets.c:41 [arith - -> +]
+KILLED    m0074 src/ui/widgets.c:41 [int+1 1 -> 2]
+KILLED    m0075 src/ui/widgets.c:41 [int-1 1 -> 0]
+KILLED    m0076 src/ui/widgets.c:43 [arith / -> *]
+KILLED    m0077 src/ui/widgets.c:44 [arith / -> *]
+KILLED    m0078 src/ui/widgets.c:46 [arith / -> *]
+KILLED    m0079 src/ui/widgets.c:47 [arith + -> -]
+KILLED    m0080 src/ui/widgets.c:47 [arith * -> /]
+KILLED    m0081 src/ui/widgets.c:48 [arith + -> -]
+KILLED    m0082 src/ui/widgets.c:48 [arith * -> /]
+KILLED    m0083 src/ui/widgets.c:51 [ret-lit 0 -> 1]
+KILLED    m0084 src/ui/widgets.c:51 [int+1 0 -> 1]
+KILLED    m0085 src/ui/widgets.c:51 [int-1 0 -> -1]
+SURVIVED  m0086 src/ui/widgets.c:55 [cmp <= -> <]
+KILLED    m0087 src/ui/widgets.c:55 [int+1 0 -> 1]
+SURVIVED  m0088 src/ui/widgets.c:55 [int-1 0 -> -1]
+KILLED    m0089 src/ui/widgets.c:55 [logic || -> &&]
+KILLED    m0090 src/ui/widgets.c:55 [cmp <= -> <]
+KILLED    m0091 src/ui/widgets.c:55 [int+1 0 -> 1]
+KILLED    m0092 src/ui/widgets.c:55 [int-1 0 -> -1]
+KILLED    m0093 src/ui/widgets.c:56 [arith - -> +]
+KILLED    m0094 src/ui/widgets.c:56 [int+1 1 -> 2]
+KILLED    m0095 src/ui/widgets.c:56 [int-1 1 -> 0]
+KILLED    m0096 src/ui/widgets.c:58 [cmp < -> <=]
+KILLED    m0097 src/ui/widgets.c:58 [logic || -> &&]
+          build break
+KILLED    m0098 src/ui/widgets.c:58 [cmp < -> <=]
+KILLED    m0099 src/ui/widgets.c:58 [logic || -> &&]
+          build break
+KILLED    m0100 src/ui/widgets.c:58 [cmp >= -> >]
+KILLED    m0101 src/ui/widgets.c:58 [arith + -> -]
+KILLED    m0102 src/ui/widgets.c:58 [logic || -> &&]
+          build break
+KILLED    m0103 src/ui/widgets.c:59 [cmp >= -> >]
+KILLED    m0104 src/ui/widgets.c:59 [arith + -> -]
+KILLED    m0105 src/ui/widgets.c:60 [arith - -> +]
+KILLED    m0106 src/ui/widgets.c:60 [int+1 1 -> 2]
+KILLED    m0107 src/ui/widgets.c:60 [int-1 1 -> 0]
+KILLED    m0108 src/ui/widgets.c:62 [arith - -> +]
+KILLED    m0109 src/ui/widgets.c:62 [arith * -> /]
+KILLED    m0110 src/ui/widgets.c:62 [arith / -> *]
+KILLED    m0111 src/ui/widgets.c:63 [arith - -> +]
+KILLED    m0112 src/ui/widgets.c:63 [arith * -> /]
+KILLED    m0113 src/ui/widgets.c:63 [arith / -> *]
+SURVIVED  m0114 src/ui/widgets.c:64 [cmp >= -> >]
+SURVIVED  m0115 src/ui/widgets.c:65 [arith - -> +]
+SURVIVED  m0116 src/ui/widgets.c:65 [int+1 1 -> 2]
+SURVIVED  m0117 src/ui/widgets.c:65 [int-1 1 -> 0]
+SURVIVED  m0118 src/ui/widgets.c:67 [cmp >= -> >]
+SURVIVED  m0119 src/ui/widgets.c:68 [arith - -> +]
+SURVIVED  m0120 src/ui/widgets.c:68 [int+1 1 -> 2]
+SURVIVED  m0121 src/ui/widgets.c:68 [int-1 1 -> 0]
+KILLED    m0122 src/ui/widgets.c:70 [arith * -> /]
+KILLED    m0123 src/ui/widgets.c:70 [arith + -> -]
+KILLED    m0124 src/ui/widgets.c:75 [not-del ! -> (deleted)]
+KILLED    m0125 src/ui/widgets.c:75 [logic || -> &&]
+SURVIVED  m0126 src/ui/widgets.c:75 [cmp < -> <=]
+SURVIVED  m0127 src/ui/widgets.c:78 [cmp > -> >=]
+KILLED    m0128 src/ui/widgets.c:81 [arith / -> *]
+SURVIVED  m0129 src/ui/widgets.c:84 [cmp < -> <=]
+KILLED    m0130 src/ui/widgets.c:86 [arith / -> *]
+KILLED    m0131 src/ui/widgets.c:88 [arith - -> +]
+KILLED    m0132 src/ui/widgets.c:88 [arith / -> *]
+KILLED    m0133 src/ui/widgets.c:91 [arith * -> /]
+KILLED    m0134 src/ui/widgets.c:91 [arith * -> /]
+KILLED    m0135 src/ui/widgets.c:91 [int+1 0 -> 1]
+KILLED    m0136 src/ui/widgets.c:91 [int-1 0 -> -1]
+ACCEPTED  m0007 src/ui/widgets.c:10 [int-1 0 -> -1] :: negative count and cap literals widened by one flow into the clamped n and return the same minus one through the empty loop
+ACCEPTED  m0023 src/ui/widgets.c:10 [int-1 0 -> -1] :: negative count and cap literals widened by one flow into the clamped n and return the same minus one through the empty loop
+ACCEPTED  m0027 src/ui/widgets.c:13 [cmp < -> <=] :: prefix clamp ternary boundary is idempotent, at count equal to cap both arms store the same value
+ACCEPTED  m0030 src/ui/widgets.c:14 [int-1 0 -> -1] :: zero fast path, falling through reaches the empty loop and returns the same zero
+ACCEPTED  m0040 src/ui/widgets.c:22 [logic && -> ||] :: max scan comparison at equality restores the same maximum, idempotent
+ACCEPTED  m0041 src/ui/widgets.c:22 [cmp > -> >=] :: max scan comparison at equality restores the same maximum, idempotent
+ACCEPTED  m0046 src/ui/widgets.c:27 [cmp > -> >=] :: bar value gate at zero, both arms of the ternary yield zero
+ACCEPTED  m0061 src/ui/widgets.c:40 [cmp <= -> <] :: zero rows and zero cols slip the weakened guard into the row bound or the pick clamps which reject them with the same minus one
+ACCEPTED  m0063 src/ui/widgets.c:40 [int-1 0 -> -1] :: zero rows and zero cols slip the weakened guard into the row bound or the pick clamps which reject them with the same minus one
+ACCEPTED  m0086 src/ui/widgets.c:55 [cmp <= -> <] :: zero cols slips the weakened pick guard into the clamps which return minus one, matching the guard outcome
+ACCEPTED  m0088 src/ui/widgets.c:55 [int-1 0 -> -1] :: zero cols slips the weakened pick guard into the clamps which return minus one, matching the guard outcome
+ACCEPTED  m0114 src/ui/widgets.c:64 [cmp >= -> >] :: pick col clamp reachable only when the coordinate reaches the far edge, which the bounds guard already rejects, defensive against float rounding
+ACCEPTED  m0115 src/ui/widgets.c:65 [arith - -> +] :: pick row clamp reachable only at the far edge the bounds guard rejects
+ACCEPTED  m0116 src/ui/widgets.c:65 [int+1 1 -> 2] :: pick row clamp reachable only at the far edge the bounds guard rejects
+ACCEPTED  m0117 src/ui/widgets.c:65 [int-1 1 -> 0] :: pick row clamp reachable only at the far edge the bounds guard rejects
+ACCEPTED  m0118 src/ui/widgets.c:67 [cmp >= -> >] :: pick row clamp reachable only at the far edge the bounds guard rejects
+ACCEPTED  m0119 src/ui/widgets.c:68 [arith - -> +] :: pick row clamp reachable only at the far edge the bounds guard rejects
+ACCEPTED  m0120 src/ui/widgets.c:68 [int+1 1 -> 2] :: pick row clamp reachable only at the far edge the bounds guard rejects
+ACCEPTED  m0121 src/ui/widgets.c:68 [int-1 1 -> 0] :: pick row clamp reachable only at the far edge the bounds guard rejects
+ACCEPTED  m0126 src/ui/widgets.c:75 [cmp < -> <=] :: accuracy lower clamp boundary is idempotent, at zero both arms store zero
+ACCEPTED  m0127 src/ui/widgets.c:78 [cmp > -> >=] :: accuracy upper clamp boundary is idempotent, at one both arms store one
+ACCEPTED  m0129 src/ui/widgets.c:84 [cmp < -> <=] :: color ramp is continuous at the half point, both arms yield full red and full green there
+mutate: generated=136 build_failed=13 killed_by_tests=101 killed=114 survived=22 accepted=22 unexplained=0 skipped=0
+mutate: kill rate 114/136 = 83.8%, with accepted equivalents 136/136 = 100.0%
+mutate: wall 80.3s

@@ -1,0 +1,19 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/render/renderer.c build_close unit_renderer_corners
+mutate: 10 unexplained survivors
+mutate: scope=src/render/renderer.c files=1 sites=306 suites=1
+SURVIVED  m0224 src/render/renderer.c:168 [arith + -> -]
+SURVIVED  m0225 src/render/renderer.c:168 [arith * -> /]
+SURVIVED  m0226 src/render/renderer.c:168 [arith * -> /]
+SURVIVED  m0229 src/render/renderer.c:168 [arith * -> /]
+SURVIVED  m0232 src/render/renderer.c:169 [arith * -> /]
+SURVIVED  m0233 src/render/renderer.c:169 [arith + -> -]
+SURVIVED  m0234 src/render/renderer.c:169 [arith * -> /]
+SURVIVED  m0235 src/render/renderer.c:169 [arith * -> /]
+SURVIVED  m0238 src/render/renderer.c:170 [arith * -> /]
+SURVIVED  m0241 src/render/renderer.c:170 [arith * -> /]
+mutate: generated=10 build_failed=0 killed_by_tests=0 killed=0 survived=10 accepted=0 unexplained=10 skipped=296
+mutate: kill rate 0/10 = 0.0%, with accepted equivalents 0/10 = 0.0%
+mutate: wall 8.2s
+make: *** [makefile:242: mutate] Error 1

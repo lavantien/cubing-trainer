@@ -1,0 +1,37 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/storage/repo_stats.c build_close stats_empty
+mutate: 28 unexplained survivors
+mutate: scope=src/storage/repo_stats.c files=1 sites=201 suites=1
+SURVIVED  m0014 src/storage/repo_stats.c:41 [int+1 0 -> 1]
+SURVIVED  m0021 src/storage/repo_stats.c:45 [int+1 0 -> 1]
+SURVIVED  m0022 src/storage/repo_stats.c:45 [int-1 0 -> -1]
+SURVIVED  m0023 src/storage/repo_stats.c:45 [arith * -> /]
+SURVIVED  m0027 src/storage/repo_stats.c:47 [int+1 1 -> 2]
+SURVIVED  m0033 src/storage/repo_stats.c:51 [int+1 1 -> 2]
+SURVIVED  m0058 src/storage/repo_stats.c:79 [int+1 0 -> 1]
+SURVIVED  m0071 src/storage/repo_stats.c:85 [int+1 0 -> 1]
+SURVIVED  m0072 src/storage/repo_stats.c:85 [int-1 0 -> -1]
+SURVIVED  m0073 src/storage/repo_stats.c:85 [arith * -> /]
+SURVIVED  m0077 src/storage/repo_stats.c:87 [int+1 1 -> 2]
+SURVIVED  m0083 src/storage/repo_stats.c:91 [int+1 1 -> 2]
+SURVIVED  m0109 src/storage/repo_stats.c:111 [int+1 0 -> 1]
+SURVIVED  m0116 src/storage/repo_stats.c:115 [int+1 0 -> 1]
+SURVIVED  m0117 src/storage/repo_stats.c:115 [int-1 0 -> -1]
+SURVIVED  m0118 src/storage/repo_stats.c:115 [arith * -> /]
+SURVIVED  m0122 src/storage/repo_stats.c:117 [int+1 1 -> 2]
+SURVIVED  m0130 src/storage/repo_stats.c:122 [int+1 1 -> 2]
+SURVIVED  m0150 src/storage/repo_stats.c:147 [cmp >= -> >]
+SURVIVED  m0153 src/storage/repo_stats.c:150 [int+1 1 -> 2]
+SURVIVED  m0159 src/storage/repo_stats.c:155 [int+1 1 -> 2]
+SURVIVED  m0162 src/storage/repo_stats.c:156 [int+1 1 -> 2]
+SURVIVED  m0165 src/storage/repo_stats.c:157 [int+1 1 -> 2]
+SURVIVED  m0176 src/storage/repo_stats.c:173 [int+1 0 -> 1]
+SURVIVED  m0183 src/storage/repo_stats.c:177 [int+1 0 -> 1]
+SURVIVED  m0184 src/storage/repo_stats.c:177 [int-1 0 -> -1]
+SURVIVED  m0185 src/storage/repo_stats.c:177 [arith * -> /]
+SURVIVED  m0189 src/storage/repo_stats.c:179 [int+1 1 -> 2]
+mutate: generated=28 build_failed=0 killed_by_tests=0 killed=0 survived=28 accepted=0 unexplained=28 skipped=173
+mutate: kill rate 0/28 = 0.0%, with accepted equivalents 0/28 = 0.0%
+mutate: wall 17.2s
+make: *** [makefile:242: mutate] Error 1

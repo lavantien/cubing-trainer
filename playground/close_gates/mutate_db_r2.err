@@ -1,0 +1,319 @@
+build_close/mutants/p9640/m0001_db.c:7:24: error: unterminated /* comment
+    7 | int ct_db_open(sqlite3 /*db, const char *path) {
+      |                        ^
+build_close/mutants/p9640/m0001_db.c:84:2: error: expected ')'
+   84 | }
+      |  ^
+build_close/mutants/p9640/m0001_db.c:7:15: note: to match this '('
+    7 | int ct_db_open(sqlite3 /*db, const char *path) {
+      |               ^
+build_close/mutants/p9640/m0001_db.c:84:2: error: expected function body after function declarator
+   84 | }
+      |  ^
+3 errors generated.
+build_close/mutants/p9640/m0002_db.c:7:25: error: expected ')'
+    7 | int ct_db_open(sqlite3 */db, const char *path) {
+      |                         ^
+build_close/mutants/p9640/m0002_db.c:7:15: note: to match this '('
+    7 | int ct_db_open(sqlite3 */db, const char *path) {
+      |               ^
+build_close/mutants/p9640/m0002_db.c:7:5: error: conflicting types for 'ct_db_open'
+    7 | int ct_db_open(sqlite3 */db, const char *path) {
+      |     ^
+src\storage/db.h:6:5: note: previous declaration is here
+    6 | int ct_db_open(sqlite3 **db, const char *path);
+      |     ^
+build_close/mutants/p9640/m0002_db.c:8:9: error: use of undeclared identifier 'db'
+    8 |     if (db == NULL || path == NULL)
+      |         ^~
+build_close/mutants/p9640/m0002_db.c:8:23: error: use of undeclared identifier 'path'
+    8 |     if (db == NULL || path == NULL)
+      |                       ^~~~
+build_close/mutants/p9640/m0002_db.c:10:6: error: use of undeclared identifier 'db'
+   10 |     *db = NULL;
+      |      ^~
+build_close/mutants/p9640/m0002_db.c:11:30: error: use of undeclared identifier 'path'
+   11 |     int rc = sqlite3_open_v2(path, db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, NULL);
+      |                              ^~~~
+build_close/mutants/p9640/m0002_db.c:11:36: error: use of undeclared identifier 'db'
+   11 |     int rc = sqlite3_open_v2(path, db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, NULL);
+      |                                    ^~
+build_close/mutants/p9640/m0002_db.c:13:14: error: use of undeclared identifier 'db'
+   13 |         if (*db != NULL) {
+      |              ^~
+build_close/mutants/p9640/m0002_db.c:14:28: error: use of undeclared identifier 'db'
+   14 |             sqlite3_close(*db);
+      |                            ^~
+build_close/mutants/p9640/m0002_db.c:15:14: error: use of undeclared identifier 'db'
+   15 |             *db = NULL;
+      |              ^~
+build_close/mutants/p9640/m0002_db.c:19:27: error: use of undeclared identifier 'db'
+   19 |     sqlite3_busy_timeout(*db, CT_DB_BUSY_TIMEOUT_MS);
+      |                           ^~
+build_close/mutants/p9640/m0002_db.c:21:24: error: use of undeclared identifier 'db'
+   21 |     rc = sqlite3_exec(*db, "PRAGMA foreign_keys=ON", NULL, NULL, &err);
+      |                        ^~
+build_close/mutants/p9640/m0002_db.c:24:35: error: use of undeclared identifier 'path'
+   24 |     if (rc == SQLITE_OK && strcmp(path, ":memory:") != 0) {
+      |                                   ^~~~
+build_close/mutants/p9640/m0002_db.c:25:28: error: use of undeclared identifier 'db'
+   25 |         rc = sqlite3_exec(*db, "PRAGMA journal_mode=WAL", NULL, NULL, &err);
+      |                            ^~
+build_close/mutants/p9640/m0002_db.c:29:24: error: use of undeclared identifier 'db'
+   29 |         sqlite3_close(*db);
+      |                        ^~
+build_close/mutants/p9640/m0002_db.c:30:10: error: use of undeclared identifier 'db'
+   30 |         *db = NULL;
+      |          ^~
+16 errors generated.
+build_close/mutants/p9640/m0003_db.c:7:41: error: expected ')'
+    7 | int ct_db_open(sqlite3 **db, const char /path) {
+      |                                         ^
+build_close/mutants/p9640/m0003_db.c:7:15: note: to match this '('
+    7 | int ct_db_open(sqlite3 **db, const char /path) {
+      |               ^
+build_close/mutants/p9640/m0003_db.c:7:5: error: conflicting types for 'ct_db_open'
+    7 | int ct_db_open(sqlite3 **db, const char /path) {
+      |     ^
+src\storage/db.h:6:5: note: previous declaration is here
+    6 | int ct_db_open(sqlite3 **db, const char *path);
+      |     ^
+build_close/mutants/p9640/m0003_db.c:8:23: error: use of undeclared identifier 'path'
+    8 |     if (db == NULL || path == NULL)
+      |                       ^~~~
+build_close/mutants/p9640/m0003_db.c:11:30: error: use of undeclared identifier 'path'
+   11 |     int rc = sqlite3_open_v2(path, db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, NULL);
+      |                              ^~~~
+build_close/mutants/p9640/m0003_db.c:24:35: error: use of undeclared identifier 'path'
+   24 |     if (rc == SQLITE_OK && strcmp(path, ":memory:") != 0) {
+      |                                   ^~~~
+5 errors generated.
+mutate: suite db_open exited 1
+mutate: suite db_open exited -1073741795
+mutate: suite db_open exited 1
+build_close/mutants/p9640/m0007_db.c:10:5: error: expected expression
+   10 |     /db = NULL;
+      |     ^
+1 error generated.
+mutate: suite db_open exited 1
+build_close/mutants/p9640/m0009_db.c:13:13: error: expected expression
+   13 |         if (/db != NULL) {
+      |             ^
+1 error generated.
+mutate: suite db_open exited 1
+build_close/mutants/p9640/m0011_db.c:14:27: error: expected expression
+   14 |             sqlite3_close(/db);
+      |                           ^
+1 error generated.
+build_close/mutants/p9640/m0012_db.c:15:13: error: expected expression
+   15 |             /db = NULL;
+      |             ^
+1 error generated.
+build_close/mutants/p9640/m0013_db.c:19:26: error: expected expression
+   19 |     sqlite3_busy_timeout(/db, CT_DB_BUSY_TIMEOUT_MS);
+      |                          ^
+1 error generated.
+build_close/mutants/p9640/m0014_db.c:20:10: error: expected identifier or '('
+   20 |     char /err = NULL;
+      |          ^
+build_close/mutants/p9640/m0014_db.c:21:67: error: use of undeclared identifier 'err'
+   21 |     rc = sqlite3_exec(*db, "PRAGMA foreign_keys=ON", NULL, NULL, &err);
+      |                                                                   ^~~
+build_close/mutants/p9640/m0014_db.c:22:18: error: use of undeclared identifier 'err'
+   22 |     sqlite3_free(err);
+      |                  ^~~
+build_close/mutants/p9640/m0014_db.c:23:5: error: use of undeclared identifier 'err'
+   23 |     err = NULL;
+      |     ^~~
+build_close/mutants/p9640/m0014_db.c:25:72: error: use of undeclared identifier 'err'
+   25 |         rc = sqlite3_exec(*db, "PRAGMA journal_mode=WAL", NULL, NULL, &err);
+      |                                                                        ^~~
+build_close/mutants/p9640/m0014_db.c:26:22: error: use of undeclared identifier 'err'
+   26 |         sqlite3_free(err);
+      |                      ^~~
+6 errors generated.
+build_close/mutants/p9640/m0015_db.c:21:23: error: expected expression
+   21 |     rc = sqlite3_exec(/db, "PRAGMA foreign_keys=ON", NULL, NULL, &err);
+      |                       ^
+1 error generated.
+mutate: suite db_open exited 1
+mutate: suite db_open exited 1
+mutate: suite db_open exited 1
+mutate: suite db_open exited 1
+build_close/mutants/p9640/m0021_db.c:25:27: error: expected expression
+   25 |         rc = sqlite3_exec(/db, "PRAGMA journal_mode=WAL", NULL, NULL, &err);
+      |                           ^
+1 error generated.
+mutate: suite db_open exited 1
+build_close/mutants/p9640/m0023_db.c:29:23: error: expected expression
+   29 |         sqlite3_close(/db);
+      |                       ^
+1 error generated.
+build_close/mutants/p9640/m0024_db.c:30:9: error: expected expression
+   30 |         /db = NULL;
+      |         ^
+1 error generated.
+build_close/mutants/p9640/m0025_db.c:36:26: error: expected ')'
+   36 | void ct_db_close(sqlite3 /db) {
+      |                          ^
+build_close/mutants/p9640/m0025_db.c:36:17: note: to match this '('
+   36 | void ct_db_close(sqlite3 /db) {
+      |                 ^
+build_close/mutants/p9640/m0025_db.c:36:6: error: conflicting types for 'ct_db_close'
+   36 | void ct_db_close(sqlite3 /db) {
+      |      ^
+src\storage/db.h:7:6: note: previous declaration is here
+    7 | void ct_db_close(sqlite3 *db);
+      |      ^
+build_close/mutants/p9640/m0025_db.c:36:26: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   36 | void ct_db_close(sqlite3 /db) {
+      |                          ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p9640/m0025_db.c:37:9: error: use of undeclared identifier 'db'
+   37 |     if (db == NULL)
+      |         ^~
+build_close/mutants/p9640/m0025_db.c:39:19: error: use of undeclared identifier 'db'
+   39 |     sqlite3_close(db);
+      |                   ^~
+5 errors generated.
+build_close/mutants/p9640/m0027_db.c:42:19: error: expected identifier or '('
+   42 | static const char /const ct_db_required_tables[] = {
+      |                   ^
+build_close/mutants/p9640/m0027_db.c:57:33: error: use of undeclared identifier 'ct_db_required_tables'
+   57 |     size_t table_count = sizeof ct_db_required_tables / sizeof ct_db_required_tables[0];
+      |                                 ^~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p9640/m0027_db.c:57:64: error: use of undeclared identifier 'ct_db_required_tables'
+   57 |     size_t table_count = sizeof ct_db_required_tables / sizeof ct_db_required_tables[0];
+      |                                                                ^~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p9640/m0027_db.c:61:34: error: use of undeclared identifier 'ct_db_required_tables'
+   61 |         sqlite3_bind_text(st, 1, ct_db_required_tables[i], -1, SQLITE_STATIC);
+      |                                  ^~~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+build_close/mutants/p9640/m0028_db.c:47:29: error: expected ')'
+   47 | int ct_db_schema_ok(sqlite3 /db) {
+      |                             ^
+build_close/mutants/p9640/m0028_db.c:47:20: note: to match this '('
+   47 | int ct_db_schema_ok(sqlite3 /db) {
+      |                    ^
+build_close/mutants/p9640/m0028_db.c:47:5: error: conflicting types for 'ct_db_schema_ok'
+   47 | int ct_db_schema_ok(sqlite3 /db) {
+      |     ^
+src\storage/db.h:10:5: note: previous declaration is here
+   10 | int ct_db_schema_ok(sqlite3 *db);
+      |     ^
+build_close/mutants/p9640/m0028_db.c:47:29: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   47 | int ct_db_schema_ok(sqlite3 /db) {
+      |                             ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p9640/m0028_db.c:48:9: error: use of undeclared identifier 'db'
+   48 |     if (db == NULL)
+      |         ^~
+build_close/mutants/p9640/m0028_db.c:51:28: error: use of undeclared identifier 'db'
+   51 |     if (sqlite3_prepare_v2(db, "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?", -1,
+      |                            ^~
+5 errors generated.
+mutate: suite migrate exited 1
+mutate: suite db_schema_assert exited 1
+mutate: suite db_schema_assert exited 1
+mutate: suite db_schema_assert exited 1
+build_close/mutants/p9640/m0033_db.c:50:18: error: expected identifier or '('
+   50 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p9640/m0033_db.c:52:29: error: use of undeclared identifier 'st'
+   52 |                            &st, NULL) != SQLITE_OK) {
+      |                             ^~
+build_close/mutants/p9640/m0033_db.c:53:26: error: use of undeclared identifier 'st'
+   53 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p9640/m0033_db.c:59:23: error: use of undeclared identifier 'st'
+   59 |         sqlite3_reset(st);
+      |                       ^~
+build_close/mutants/p9640/m0033_db.c:60:32: error: use of undeclared identifier 'st'
+   60 |         sqlite3_clear_bindings(st);
+      |                                ^~
+build_close/mutants/p9640/m0033_db.c:61:27: error: use of undeclared identifier 'st'
+   61 |         sqlite3_bind_text(st, 1, ct_db_required_tables[i], -1, SQLITE_STATIC);
+      |                           ^~
+build_close/mutants/p9640/m0033_db.c:62:26: error: use of undeclared identifier 'st'
+   62 |         if (sqlite3_step(st) != SQLITE_ROW) {
+      |                          ^~
+build_close/mutants/p9640/m0033_db.c:67:22: error: use of undeclared identifier 'st'
+   67 |     sqlite3_finalize(st);
+      |                      ^~
+8 errors generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited -1073741819
+mutate: suite migrate exited 1
+mutate: suite db_schema_assert exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited -1073741795
+mutate: suite db_schema_assert exited 1
+mutate: suite migrate_soundness exited 1
+mutate: suite migrate exited -1073741795
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate_soundness exited 1
+mutate: suite migrate_soundness exited 1
+build_close/mutants/p9640/m0057_db.c:71:27: error: expected ')'
+   71 | int ct_db_version(sqlite3 /db) {
+      |                           ^
+build_close/mutants/p9640/m0057_db.c:71:18: note: to match this '('
+   71 | int ct_db_version(sqlite3 /db) {
+      |                  ^
+build_close/mutants/p9640/m0057_db.c:71:5: error: conflicting types for 'ct_db_version'
+   71 | int ct_db_version(sqlite3 /db) {
+      |     ^
+src\storage/db.h:9:5: note: previous declaration is here
+    9 | int ct_db_version(sqlite3 *db);
+      |     ^
+build_close/mutants/p9640/m0057_db.c:71:27: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   71 | int ct_db_version(sqlite3 /db) {
+      |                           ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p9640/m0057_db.c:72:9: error: use of undeclared identifier 'db'
+   72 |     if (db == NULL)
+      |         ^~
+build_close/mutants/p9640/m0057_db.c:75:28: error: use of undeclared identifier 'db'
+   75 |     if (sqlite3_prepare_v2(db, "PRAGMA user_version", -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+5 errors generated.
+mutate: suite migrate exited 1
+mutate: suite db_open exited 1
+mutate: suite db_open exited 1
+mutate: suite db_open exited 1
+build_close/mutants/p9640/m0062_db.c:74:18: error: expected identifier or '('
+   74 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p9640/m0062_db.c:75:60: error: use of undeclared identifier 'st'
+   75 |     if (sqlite3_prepare_v2(db, "PRAGMA user_version", -1, &st, NULL) != SQLITE_OK) {
+      |                                                            ^~
+build_close/mutants/p9640/m0062_db.c:76:26: error: use of undeclared identifier 'st'
+   76 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p9640/m0062_db.c:80:22: error: use of undeclared identifier 'st'
+   80 |     if (sqlite3_step(st) == SQLITE_ROW)
+      |                      ^~
+build_close/mutants/p9640/m0062_db.c:81:32: error: use of undeclared identifier 'st'
+   81 |         v = sqlite3_column_int(st, 0);
+      |                                ^~
+build_close/mutants/p9640/m0062_db.c:82:22: error: use of undeclared identifier 'st'
+   82 |     sqlite3_finalize(st);
+      |                      ^~
+6 errors generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: 9 unexplained survivors
+make: *** [makefile:242: mutate] Error 1

@@ -1,0 +1,87 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/app/headless.c build_close headless_scene_id headless_render_guards headless_render_smoke
+mutate: scope=src/app/headless.c files=1 sites=60 suites=3
+SURVIVED  m0001 src/app/headless.c:32 [arith / -> *]
+SURVIVED  m0002 src/app/headless.c:32 [arith * -> /]
+SURVIVED  m0003 src/app/headless.c:32 [arith * -> /]
+KILLED    m0004 src/app/headless.c:35 [arith * -> /]
+          build break
+KILLED    m0005 src/app/headless.c:36 [cmp == -> !=]
+KILLED    m0006 src/app/headless.c:39 [cmp == -> !=]
+KILLED    m0007 src/app/headless.c:39 [int+1 0 -> 1]
+KILLED    m0008 src/app/headless.c:39 [int-1 0 -> -1]
+KILLED    m0009 src/app/headless.c:42 [cmp == -> !=]
+KILLED    m0010 src/app/headless.c:42 [int+1 0 -> 1]
+KILLED    m0011 src/app/headless.c:42 [int-1 0 -> -1]
+KILLED    m0012 src/app/headless.c:45 [cmp == -> !=]
+KILLED    m0013 src/app/headless.c:45 [int+1 0 -> 1]
+KILLED    m0014 src/app/headless.c:45 [int-1 0 -> -1]
+KILLED    m0015 src/app/headless.c:51 [arith * -> /]
+          build break
+KILLED    m0016 src/app/headless.c:51 [arith * -> /]
+          build break
+SURVIVED  m0017 src/app/headless.c:54 [cmp < -> <=]
+SURVIVED  m0018 src/app/headless.c:54 [int+1 0 -> 1]
+SURVIVED  m0019 src/app/headless.c:54 [int-1 0 -> -1]
+SURVIVED  m0020 src/app/headless.c:57 [int+1 0 -> 1]
+KILLED    m0021 src/app/headless.c:57 [int-1 0 -> -1]
+SURVIVED  m0022 src/app/headless.c:57 [cmp < -> <=]
+KILLED    m0023 src/app/headless.c:63 [arith * -> /]
+          build break
+KILLED    m0024 src/app/headless.c:63 [arith * -> /]
+          build break
+KILLED    m0025 src/app/headless.c:64 [cmp == -> !=]
+KILLED    m0026 src/app/headless.c:64 [logic || -> &&]
+KILLED    m0027 src/app/headless.c:64 [int+1 0 -> 1]
+KILLED    m0028 src/app/headless.c:64 [int-1 0 -> -1]
+KILLED    m0029 src/app/headless.c:64 [cmp == -> !=]
+KILLED    m0030 src/app/headless.c:67 [cmp != -> ==]
+KILLED    m0031 src/app/headless.c:67 [logic && -> ||]
+          build break
+KILLED    m0032 src/app/headless.c:67 [cmp != -> ==]
+KILLED    m0033 src/app/headless.c:67 [logic && -> ||]
+          build break
+KILLED    m0034 src/app/headless.c:68 [cmp != -> ==]
+KILLED    m0035 src/app/headless.c:71 [cmp < -> <=]
+KILLED    m0036 src/app/headless.c:71 [int+1 2 -> 3]
+KILLED    m0037 src/app/headless.c:71 [int-1 2 -> 1]
+KILLED    m0038 src/app/headless.c:71 [logic || -> &&]
+KILLED    m0039 src/app/headless.c:71 [cmp > -> >=]
+KILLED    m0040 src/app/headless.c:79 [arith * -> /]
+          build break
+KILLED    m0041 src/app/headless.c:81 [cmp == -> !=]
+KILLED    m0042 src/app/headless.c:82 [arith * -> /]
+          build break
+KILLED    m0043 src/app/headless.c:82 [cmp != -> ==]
+KILLED    m0044 src/app/headless.c:82 [logic && -> ||]
+SURVIVED  m0045 src/app/headless.c:82 [int+1 0 -> 1]
+KILLED    m0046 src/app/headless.c:82 [int-1 0 -> -1]
+KILLED    m0047 src/app/headless.c:82 [cmp != -> ==]
+KILLED    m0048 src/app/headless.c:84 [cmp != -> ==]
+KILLED    m0049 src/app/headless.c:89 [cmp == -> !=]
+KILLED    m0050 src/app/headless.c:90 [cmp != -> ==]
+KILLED    m0051 src/app/headless.c:90 [logic && -> ||]
+SURVIVED  m0052 src/app/headless.c:90 [int+1 0 -> 1]
+KILLED    m0053 src/app/headless.c:90 [int-1 0 -> -1]
+KILLED    m0054 src/app/headless.c:90 [cmp != -> ==]
+KILLED    m0055 src/app/headless.c:92 [cmp != -> ==]
+KILLED    m0056 src/app/headless.c:98 [cmp != -> ==]
+KILLED    m0057 src/app/headless.c:98 [int+1 0 -> 1]
+KILLED    m0058 src/app/headless.c:98 [int-1 0 -> -1]
+SURVIVED  m0059 src/app/headless.c:102 [arith * -> /]
+KILLED    m0060 src/app/headless.c:108 [not-del ! -> (deleted)]
+ACCEPTED  m0001 src/app/headless.c:32 [arith / -> *] :: the move seconds constant feeds only the mid scene animation elapsed value inside the render body, no gate suite observes the animation clock
+ACCEPTED  m0002 src/app/headless.c:32 [arith * -> /] :: the move seconds constant feeds only the mid scene animation elapsed value inside the render body, no gate suite observes the animation clock
+ACCEPTED  m0003 src/app/headless.c:32 [arith * -> /] :: the move seconds constant feeds only the mid scene animation elapsed value inside the render body, no gate suite observes the animation clock
+ACCEPTED  m0017 src/app/headless.c:54 [cmp < -> <=] :: count zero is unreachable because empty algs are gated by the callers, and the minus one parse code requires null args the render guards already rejected, only deeper negatives reach the check
+ACCEPTED  m0018 src/app/headless.c:54 [int+1 0 -> 1] :: count zero is unreachable because empty algs are gated by the callers, and the minus one parse code requires null args the render guards already rejected, only deeper negatives reach the check
+ACCEPTED  m0019 src/app/headless.c:54 [int-1 0 -> -1] :: count zero is unreachable because empty algs are gated by the callers, and the minus one parse code requires null args the render guards already rejected, only deeper negatives reach the check
+ACCEPTED  m0020 src/app/headless.c:57 [int+1 0 -> 1] :: the loop bound and start shifts apply a stack garbage move read before or past the sequence which ct_apply treats as a no-op, or trim the scramble to its first move, observable only through rendered pixels no gate suite pins
+ACCEPTED  m0022 src/app/headless.c:57 [cmp < -> <=] :: the loop bound and start shifts apply a stack garbage move read before or past the sequence which ct_apply treats as a no-op, or trim the scramble to its first move, observable only through rendered pixels no gate suite pins
+ACCEPTED  m0045 src/app/headless.c:82 [int+1 0 -> 1] :: the empty alg arm differs only by applying zero moves instead of the default scramble, ct_notation_parse of the empty string returns zero, pixel level only
+ACCEPTED  m0052 src/app/headless.c:90 [int+1 0 -> 1] :: the empty alg arm differs only by applying zero moves before the fixed mid move, ct_notation_parse of the empty string returns zero, pixel level only
+ACCEPTED  m0059 src/app/headless.c:102 [arith * -> /] :: the mid progress scaling feeds only the animation elapsed value inside the render body, no gate suite observes the animation clock
+mutate: generated=60 build_failed=9 killed_by_tests=40 killed=49 survived=11 accepted=11 unexplained=0 skipped=0
+mutate: kill rate 49/60 = 81.7%, with accepted equivalents 60/60 = 100.0%
+mutate: wall 52.6s

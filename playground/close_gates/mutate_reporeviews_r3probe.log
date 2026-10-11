@@ -1,0 +1,12 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cards.c -o build_close/tobj/tests/unit_cards.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/storage/repo_reviews.c build_close review_log_rows due_cards card_bad_args review_screen_session_log review_form_begin review_form_empty_deck review_form_fallback
+mutate: scope=src/storage/repo_reviews.c files=1 sites=109 suites=7
+KILLED    m0077 src/storage/repo_reviews.c:93 [int-1 0 -> -1]
+KILLED    m0078 src/storage/repo_reviews.c:93 [logic || -> &&]
+KILLED    m0080 src/storage/repo_reviews.c:93 [int+1 0 -> 1]
+SURVIVED  m0102 src/storage/repo_reviews.c:108 [cmp < -> <=]
+mutate: generated=4 build_failed=0 killed_by_tests=3 killed=3 survived=1 accepted=0 unexplained=1 skipped=105
+mutate: kill rate 3/4 = 75.0%, with accepted equivalents 3/4 = 75.0%
+mutate: wall 3.1s

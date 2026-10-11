@@ -1,0 +1,407 @@
+build_close/mutants/p25660/m0001_anim.c:3:41: error: expected ')'
+    3 | static ct_move ct_anim_at(const ct_anim /a, int i) {
+      |                                         ^
+build_close/mutants/p25660/m0001_anim.c:3:26: note: to match this '('
+    3 | static ct_move ct_anim_at(const ct_anim /a, int i) {
+      |                          ^
+build_close/mutants/p25660/m0001_anim.c:4:12: error: use of undeclared identifier 'a'
+    4 |     return a->moves[(a->head + i) % CT_ANIM_QUEUE_CAP];
+      |            ^
+build_close/mutants/p25660/m0001_anim.c:4:22: error: use of undeclared identifier 'a'
+    4 |     return a->moves[(a->head + i) % CT_ANIM_QUEUE_CAP];
+      |                      ^
+build_close/mutants/p25660/m0001_anim.c:4:32: error: use of undeclared identifier 'i'
+    4 |     return a->moves[(a->head + i) % CT_ANIM_QUEUE_CAP];
+      |                                ^
+build_close/mutants/p25660/m0001_anim.c:16:58: error: too many arguments to function call, expected 1, have 2
+   16 |     ct_anim_step_result r = ct_anim_result(ct_anim_at(a, 0), 1.0, true);
+      |                                            ~~~~~~~~~~    ^
+build_close/mutants/p25660/m0001_anim.c:3:16: note: 'ct_anim_at' declared here
+    3 | static ct_move ct_anim_at(const ct_anim /a, int i) {
+      |                ^          ~~~~~~~~~~~~~
+build_close/mutants/p25660/m0001_anim.c:57:41: error: too many arguments to function call, expected 1, have 2
+   57 |     return ct_anim_result(ct_anim_at(a, 0), ct_ease_cubic_in_out(a->elapsed / move_seconds), false);
+      |                           ~~~~~~~~~~    ^
+build_close/mutants/p25660/m0001_anim.c:3:16: note: 'ct_anim_at' declared here
+    3 | static ct_move ct_anim_at(const ct_anim /a, int i) {
+      |                ^          ~~~~~~~~~~~~~
+build_close/mutants/p25660/m0001_anim.c:95:32: error: too many arguments to function call, expected 1, have 2
+   95 |         out[i] = ct_anim_at(a, i);
+      |                  ~~~~~~~~~~    ^
+build_close/mutants/p25660/m0001_anim.c:3:16: note: 'ct_anim_at' declared here
+    3 | static ct_move ct_anim_at(const ct_anim /a, int i) {
+      |                ^          ~~~~~~~~~~~~~
+7 errors generated.
+mutate: suite unit_anim_prefix exited -1073741795
+build_close/mutants/p25660/m0003_anim.c:15:48: error: expected ')'
+   15 | static ct_anim_step_result ct_anim_pop(ct_anim /a) {
+      |                                                ^
+build_close/mutants/p25660/m0003_anim.c:15:39: note: to match this '('
+   15 | static ct_anim_step_result ct_anim_pop(ct_anim /a) {
+      |                                       ^
+build_close/mutants/p25660/m0003_anim.c:16:55: error: use of undeclared identifier 'a'
+   16 |     ct_anim_step_result r = ct_anim_result(ct_anim_at(a, 0), 1.0, true);
+      |                                                       ^
+build_close/mutants/p25660/m0003_anim.c:17:5: error: use of undeclared identifier 'a'
+   17 |     a->head = (a->head + 1) % CT_ANIM_QUEUE_CAP;
+      |     ^
+build_close/mutants/p25660/m0003_anim.c:17:16: error: use of undeclared identifier 'a'
+   17 |     a->head = (a->head + 1) % CT_ANIM_QUEUE_CAP;
+      |                ^
+build_close/mutants/p25660/m0003_anim.c:18:5: error: use of undeclared identifier 'a'
+   18 |     a->count--;
+      |     ^
+build_close/mutants/p25660/m0003_anim.c:19:5: error: use of undeclared identifier 'a'
+   19 |     a->elapsed = 0.0;
+      |     ^
+build_close/mutants/p25660/m0003_anim.c:54:32: error: passing 'ct_anim *' to parameter of incompatible type 'ct_anim'; dereference with *
+   54 |             return ct_anim_pop(a);
+      |                                ^
+      |                                *
+build_close/mutants/p25660/m0003_anim.c:15:48: note: passing argument to parameter here
+   15 | static ct_anim_step_result ct_anim_pop(ct_anim /a) {
+      |                                                ^
+build_close/mutants/p25660/m0003_anim.c:64:24: error: passing 'ct_anim *' to parameter of incompatible type 'ct_anim'; dereference with *
+   64 |     return ct_anim_pop(a);
+      |                        ^
+      |                        *
+build_close/mutants/p25660/m0003_anim.c:15:48: note: passing argument to parameter here
+   15 | static ct_anim_step_result ct_anim_pop(ct_anim /a) {
+      |                                                ^
+8 errors generated.
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited -1073741795
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited -1073741795
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited 1
+build_close/mutants/p25660/m0010_anim.c:23:27: error: expected ')'
+   23 | void ct_anim_init(ct_anim /a) {
+      |                           ^
+build_close/mutants/p25660/m0010_anim.c:23:18: note: to match this '('
+   23 | void ct_anim_init(ct_anim /a) {
+      |                  ^
+build_close/mutants/p25660/m0010_anim.c:23:6: error: conflicting types for 'ct_anim_init'
+   23 | void ct_anim_init(ct_anim /a) {
+      |      ^
+src\render/anim.h:24:6: note: previous declaration is here
+   24 | void ct_anim_init(ct_anim *a);
+      |      ^
+build_close/mutants/p25660/m0010_anim.c:24:5: error: use of undeclared identifier 'a'
+   24 |     a->count = 0;
+      |     ^
+build_close/mutants/p25660/m0010_anim.c:25:5: error: use of undeclared identifier 'a'
+   25 |     a->head = 0;
+      |     ^
+build_close/mutants/p25660/m0010_anim.c:26:5: error: use of undeclared identifier 'a'
+   26 |     a->elapsed = 0.0;
+      |     ^
+build_close/mutants/p25660/m0010_anim.c:27:5: error: use of undeclared identifier 'a'
+   27 |     a->speed = 1.0;
+      |     ^
+build_close/mutants/p25660/m0010_anim.c:28:5: error: use of undeclared identifier 'a'
+   28 |     a->playing = true;
+      |     ^
+build_close/mutants/p25660/m0010_anim.c:30:9: error: use of undeclared identifier 'a'
+   30 |         a->moves[i] = (ct_move){0};
+      |         ^
+8 errors generated.
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited -1073741795
+mutate: suite unit_anim_queue exited -1073741795
+build_close/mutants/p25660/m0019_anim.c:30:34: error: missing field 'depth_from' initializer [-Werror,-Wmissing-field-initializers]
+   30 |         a->moves[i] = (ct_move){1};
+      |                                  ^
+1 error generated.
+build_close/mutants/p25660/m0020_anim.c:30:35: error: missing field 'depth_from' initializer [-Werror,-Wmissing-field-initializers]
+   30 |         a->moves[i] = (ct_move){-1};
+      |                                   ^
+1 error generated.
+build_close/mutants/p25660/m0021_anim.c:34:26: error: expected ')'
+   34 | int ct_anim_push(ct_anim /a, ct_move m) {
+      |                          ^
+build_close/mutants/p25660/m0021_anim.c:34:17: note: to match this '('
+   34 | int ct_anim_push(ct_anim /a, ct_move m) {
+      |                 ^
+build_close/mutants/p25660/m0021_anim.c:34:5: error: conflicting types for 'ct_anim_push'
+   34 | int ct_anim_push(ct_anim /a, ct_move m) {
+      |     ^
+src\render/anim.h:25:5: note: previous declaration is here
+   25 | int ct_anim_push(ct_anim *a, ct_move m);
+      |     ^
+build_close/mutants/p25660/m0021_anim.c:35:9: error: use of undeclared identifier 'a'
+   35 |     if (a->count >= CT_ANIM_QUEUE_CAP) {
+      |         ^
+build_close/mutants/p25660/m0021_anim.c:38:5: error: use of undeclared identifier 'a'
+   38 |     a->moves[(a->head + a->count) % CT_ANIM_QUEUE_CAP] = m;
+      |     ^
+build_close/mutants/p25660/m0021_anim.c:38:15: error: use of undeclared identifier 'a'
+   38 |     a->moves[(a->head + a->count) % CT_ANIM_QUEUE_CAP] = m;
+      |               ^
+build_close/mutants/p25660/m0021_anim.c:38:25: error: use of undeclared identifier 'a'
+   38 |     a->moves[(a->head + a->count) % CT_ANIM_QUEUE_CAP] = m;
+      |                         ^
+build_close/mutants/p25660/m0021_anim.c:38:58: error: use of undeclared identifier 'm'
+   38 |     a->moves[(a->head + a->count) % CT_ANIM_QUEUE_CAP] = m;
+      |                                                          ^
+build_close/mutants/p25660/m0021_anim.c:39:5: error: use of undeclared identifier 'a'
+   39 |     a->count++;
+      |     ^
+8 errors generated.
+mutate: suite unit_anim_edges exited 1
+mutate: suite unit_anim_edges exited 1
+mutate: suite unit_anim_edges exited 1
+mutate: suite unit_anim_edges exited 1
+mutate: suite unit_anim_queue exited -1073741795
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited 1
+build_close/mutants/p25660/m0030_anim.c:43:35: error: expected ')'
+   43 | bool ct_anim_active(const ct_anim /a) {
+      |                                   ^
+build_close/mutants/p25660/m0030_anim.c:43:20: note: to match this '('
+   43 | bool ct_anim_active(const ct_anim /a) {
+      |                    ^
+build_close/mutants/p25660/m0030_anim.c:43:6: error: conflicting types for 'ct_anim_active'
+   43 | bool ct_anim_active(const ct_anim /a) {
+      |      ^
+src\render/anim.h:26:6: note: previous declaration is here
+   26 | bool ct_anim_active(const ct_anim *a);
+      |      ^
+build_close/mutants/p25660/m0030_anim.c:44:12: error: use of undeclared identifier 'a'
+   44 |     return a->count > 0;
+      |            ^
+3 errors generated.
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited 1
+build_close/mutants/p25660/m0034_anim.c:47:44: error: expected ')'
+   47 | ct_anim_step_result ct_anim_update(ct_anim /a, double dt, double move_seconds) {
+      |                                            ^
+build_close/mutants/p25660/m0034_anim.c:47:35: note: to match this '('
+   47 | ct_anim_step_result ct_anim_update(ct_anim /a, double dt, double move_seconds) {
+      |                                   ^
+build_close/mutants/p25660/m0034_anim.c:47:21: error: conflicting types for 'ct_anim_update'
+   47 | ct_anim_step_result ct_anim_update(ct_anim /a, double dt, double move_seconds) {
+      |                     ^
+src\render/anim.h:27:21: note: previous declaration is here
+   27 | ct_anim_step_result ct_anim_update(ct_anim *a, double dt, double move_seconds);
+      |                     ^
+build_close/mutants/p25660/m0034_anim.c:48:9: error: use of undeclared identifier 'a'
+   48 |     if (a->count == 0) {
+      |         ^
+build_close/mutants/p25660/m0034_anim.c:51:9: error: use of undeclared identifier 'a'
+   51 |     if (a->playing) {
+      |         ^
+build_close/mutants/p25660/m0034_anim.c:52:9: error: use of undeclared identifier 'a'
+   52 |         a->elapsed += dt * a->speed;
+      |         ^
+build_close/mutants/p25660/m0034_anim.c:52:23: error: use of undeclared identifier 'dt'
+   52 |         a->elapsed += dt * a->speed;
+      |                       ^~
+build_close/mutants/p25660/m0034_anim.c:52:28: error: use of undeclared identifier 'a'
+   52 |         a->elapsed += dt * a->speed;
+      |                            ^
+build_close/mutants/p25660/m0034_anim.c:53:13: error: use of undeclared identifier 'a'
+   53 |         if (a->elapsed >= move_seconds) {
+      |             ^
+build_close/mutants/p25660/m0034_anim.c:53:27: error: use of undeclared identifier 'move_seconds'
+   53 |         if (a->elapsed >= move_seconds) {
+      |                           ^~~~~~~~~~~~
+build_close/mutants/p25660/m0034_anim.c:54:32: error: use of undeclared identifier 'a'
+   54 |             return ct_anim_pop(a);
+      |                                ^
+build_close/mutants/p25660/m0034_anim.c:57:38: error: use of undeclared identifier 'a'
+   57 |     return ct_anim_result(ct_anim_at(a, 0), ct_ease_cubic_in_out(a->elapsed / move_seconds), false);
+      |                                      ^
+build_close/mutants/p25660/m0034_anim.c:57:66: error: use of undeclared identifier 'a'
+   57 |     return ct_anim_result(ct_anim_at(a, 0), ct_ease_cubic_in_out(a->elapsed / move_seconds), false);
+      |                                                                  ^
+build_close/mutants/p25660/m0034_anim.c:57:79: error: use of undeclared identifier 'move_seconds'
+   57 |     return ct_anim_result(ct_anim_at(a, 0), ct_ease_cubic_in_out(a->elapsed / move_seconds), false);
+      |                                                                               ^~~~~~~~~~~~
+13 errors generated.
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited 1
+build_close/mutants/p25660/m0038_anim.c:49:42: error: missing field 'depth_from' initializer [-Werror,-Wmissing-field-initializers]
+   49 |         return ct_anim_result((ct_move){1}, 0.0, false);
+      |                                          ^
+1 error generated.
+build_close/mutants/p25660/m0039_anim.c:49:43: error: missing field 'depth_from' initializer [-Werror,-Wmissing-field-initializers]
+   49 |         return ct_anim_result((ct_move){-1}, 0.0, false);
+      |                                           ^
+1 error generated.
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_speed exited 1
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited -1073741795
+mutate: suite unit_anim_queue exited 1
+mutate: suite unit_anim_queue exited 1
+build_close/mutants/p25660/m0047_anim.c:60:42: error: expected ')'
+   60 | ct_anim_step_result ct_anim_step(ct_anim /a) {
+      |                                          ^
+build_close/mutants/p25660/m0047_anim.c:60:33: note: to match this '('
+   60 | ct_anim_step_result ct_anim_step(ct_anim /a) {
+      |                                 ^
+build_close/mutants/p25660/m0047_anim.c:60:21: error: conflicting types for 'ct_anim_step'
+   60 | ct_anim_step_result ct_anim_step(ct_anim /a) {
+      |                     ^
+src\render/anim.h:28:21: note: previous declaration is here
+   28 | ct_anim_step_result ct_anim_step(ct_anim *a);
+      |                     ^
+build_close/mutants/p25660/m0047_anim.c:61:9: error: use of undeclared identifier 'a'
+   61 |     if (a->count == 0) {
+      |         ^
+build_close/mutants/p25660/m0047_anim.c:64:24: error: use of undeclared identifier 'a'
+   64 |     return ct_anim_pop(a);
+      |                        ^
+4 errors generated.
+mutate: suite unit_anim_pause exited 1
+mutate: suite unit_anim_pause exited 1
+mutate: suite unit_anim_pause exited 1
+build_close/mutants/p25660/m0051_anim.c:62:42: error: missing field 'depth_from' initializer [-Werror,-Wmissing-field-initializers]
+   62 |         return ct_anim_result((ct_move){1}, 0.0, false);
+      |                                          ^
+1 error generated.
+build_close/mutants/p25660/m0052_anim.c:62:43: error: missing field 'depth_from' initializer [-Werror,-Wmissing-field-initializers]
+   62 |         return ct_anim_result((ct_move){-1}, 0.0, false);
+      |                                           ^
+1 error generated.
+mutate: suite unit_anim_pause exited 1
+build_close/mutants/p25660/m0054_anim.c:67:32: error: expected ')'
+   67 | void ct_anim_set_speed(ct_anim /a, double speed) {
+      |                                ^
+build_close/mutants/p25660/m0054_anim.c:67:23: note: to match this '('
+   67 | void ct_anim_set_speed(ct_anim /a, double speed) {
+      |                       ^
+build_close/mutants/p25660/m0054_anim.c:67:6: error: conflicting types for 'ct_anim_set_speed'
+   67 | void ct_anim_set_speed(ct_anim /a, double speed) {
+      |      ^
+src\render/anim.h:29:6: note: previous declaration is here
+   29 | void ct_anim_set_speed(ct_anim *a, double speed);
+      |      ^
+build_close/mutants/p25660/m0054_anim.c:69:9: error: use of undeclared identifier 'speed'
+   69 |     if (speed < minimum) {
+      |         ^~~~~
+build_close/mutants/p25660/m0054_anim.c:70:9: error: use of undeclared identifier 'speed'
+   70 |         speed = minimum;
+      |         ^~~~~
+build_close/mutants/p25660/m0054_anim.c:72:5: error: use of undeclared identifier 'a'
+   72 |     a->speed = speed;
+      |     ^
+build_close/mutants/p25660/m0054_anim.c:72:16: error: use of undeclared identifier 'speed'
+   72 |     a->speed = speed;
+      |                ^~~~~
+6 errors generated.
+mutate: suite unit_anim_speed exited 1
+build_close/mutants/p25660/m0057_anim.c:75:28: error: expected ')'
+   75 | void ct_anim_pause(ct_anim /a) {
+      |                            ^
+build_close/mutants/p25660/m0057_anim.c:75:19: note: to match this '('
+   75 | void ct_anim_pause(ct_anim /a) {
+      |                   ^
+build_close/mutants/p25660/m0057_anim.c:75:6: error: conflicting types for 'ct_anim_pause'
+   75 | void ct_anim_pause(ct_anim /a) {
+      |      ^
+src\render/anim.h:30:6: note: previous declaration is here
+   30 | void ct_anim_pause(ct_anim *a);
+      |      ^
+build_close/mutants/p25660/m0057_anim.c:76:5: error: use of undeclared identifier 'a'
+   76 |     a->playing = false;
+      |     ^
+3 errors generated.
+mutate: suite unit_anim_pause exited 1
+build_close/mutants/p25660/m0059_anim.c:79:29: error: expected ')'
+   79 | void ct_anim_resume(ct_anim /a) {
+      |                             ^
+build_close/mutants/p25660/m0059_anim.c:79:20: note: to match this '('
+   79 | void ct_anim_resume(ct_anim /a) {
+      |                    ^
+build_close/mutants/p25660/m0059_anim.c:79:6: error: conflicting types for 'ct_anim_resume'
+   79 | void ct_anim_resume(ct_anim /a) {
+      |      ^
+src\render/anim.h:31:6: note: previous declaration is here
+   31 | void ct_anim_resume(ct_anim *a);
+      |      ^
+build_close/mutants/p25660/m0059_anim.c:80:5: error: use of undeclared identifier 'a'
+   80 |     a->playing = true;
+      |     ^
+3 errors generated.
+mutate: suite unit_anim_pause exited 1
+build_close/mutants/p25660/m0061_anim.c:83:34: error: expected ')'
+   83 | int ct_anim_prefix(const ct_anim /a, int upto, ct_move *out, int cap) {
+      |                                  ^
+build_close/mutants/p25660/m0061_anim.c:83:19: note: to match this '('
+   83 | int ct_anim_prefix(const ct_anim /a, int upto, ct_move *out, int cap) {
+      |                   ^
+build_close/mutants/p25660/m0061_anim.c:83:5: error: conflicting types for 'ct_anim_prefix'
+   83 | int ct_anim_prefix(const ct_anim /a, int upto, ct_move *out, int cap) {
+      |     ^
+src\render/anim.h:32:5: note: previous declaration is here
+   32 | int ct_anim_prefix(const ct_anim *a, int upto, ct_move *out, int cap);
+      |     ^
+build_close/mutants/p25660/m0061_anim.c:84:13: error: use of undeclared identifier 'upto'
+   84 |     int n = upto;
+      |             ^~~~
+build_close/mutants/p25660/m0061_anim.c:85:13: error: use of undeclared identifier 'a'
+   85 |     if (n > a->count) {
+      |             ^
+build_close/mutants/p25660/m0061_anim.c:86:13: error: use of undeclared identifier 'a'
+   86 |         n = a->count;
+      |             ^
+build_close/mutants/p25660/m0061_anim.c:88:13: error: use of undeclared identifier 'cap'
+   88 |     if (n > cap) {
+      |             ^~~
+build_close/mutants/p25660/m0061_anim.c:89:13: error: use of undeclared identifier 'cap'
+   89 |         n = cap;
+      |             ^~~
+build_close/mutants/p25660/m0061_anim.c:95:9: error: use of undeclared identifier 'out'
+   95 |         out[i] = ct_anim_at(a, i);
+      |         ^~~
+build_close/mutants/p25660/m0061_anim.c:95:29: error: use of undeclared identifier 'a'
+   95 |         out[i] = ct_anim_at(a, i);
+      |                             ^
+9 errors generated.
+build_close/mutants/p25660/m0062_anim.c:83:56: error: expected ')'
+   83 | int ct_anim_prefix(const ct_anim *a, int upto, ct_move /out, int cap) {
+      |                                                        ^
+build_close/mutants/p25660/m0062_anim.c:83:19: note: to match this '('
+   83 | int ct_anim_prefix(const ct_anim *a, int upto, ct_move /out, int cap) {
+      |                   ^
+build_close/mutants/p25660/m0062_anim.c:83:5: error: conflicting types for 'ct_anim_prefix'
+   83 | int ct_anim_prefix(const ct_anim *a, int upto, ct_move /out, int cap) {
+      |     ^
+src\render/anim.h:32:5: note: previous declaration is here
+   32 | int ct_anim_prefix(const ct_anim *a, int upto, ct_move *out, int cap);
+      |     ^
+build_close/mutants/p25660/m0062_anim.c:88:13: error: use of undeclared identifier 'cap'
+   88 |     if (n > cap) {
+      |             ^~~
+build_close/mutants/p25660/m0062_anim.c:89:13: error: use of undeclared identifier 'cap'
+   89 |         n = cap;
+      |             ^~~
+build_close/mutants/p25660/m0062_anim.c:95:9: error: use of undeclared identifier 'out'
+   95 |         out[i] = ct_anim_at(a, i);
+      |         ^~~
+5 errors generated.
+mutate: suite unit_anim_prefix exited 1
+mutate: suite unit_anim_prefix exited 1
+mutate: suite unit_anim_prefix exited 1
+mutate: suite unit_anim_prefix exited 1
+mutate: suite unit_anim_prefix exited -1073741795
+mutate: suite unit_anim_prefix exited 1
+mutate: suite unit_anim_ease exited 1
+mutate: suite unit_anim_ease exited 1
+mutate: suite unit_anim_ease exited 1
+mutate: suite unit_anim_ease exited 1
+mutate: suite unit_anim_ease exited 1
+mutate: suite unit_anim_ease exited 1
+mutate: suite unit_anim_ease exited 1
+mutate: suite unit_anim_ease exited 1
+mutate: suite unit_anim_ease exited 1

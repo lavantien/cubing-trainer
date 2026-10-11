@@ -1,0 +1,2421 @@
+build_close/mutants/p38260/m0001_repo_cards.c:36:18: error: expected member name or ';' after declaration specifiers
+   36 |     sqlite3_stmt /st;
+      |     ~~~~~~~~~~~~ ^
+build_close/mutants/p38260/m0001_repo_cards.c:36:5: error: field has incomplete type 'sqlite3_stmt' (aka 'struct sqlite3_stmt')
+   36 |     sqlite3_stmt /st;
+      |     ^
+third_party/sqlite\sqlite3.h:4303:16: note: forward declaration of 'struct sqlite3_stmt'
+ 4303 | typedef struct sqlite3_stmt sqlite3_stmt;
+      |                ^
+build_close/mutants/p38260/m0001_repo_cards.c:36:17: error: expected ';' at end of declaration list
+   36 |     sqlite3_stmt /st;
+      |                 ^
+      |                 ;
+build_close/mutants/p38260/m0001_repo_cards.c:46:8: error: no member named 'st' in 'struct ct_bind'
+   46 |     b->st = st;
+      |     ~  ^
+build_close/mutants/p38260/m0001_repo_cards.c:51:26: error: no member named 'st' in 'struct ct_bind'
+   51 |     sqlite3_bind_text(b->st, ++b->next, s, -1, SQLITE_STATIC);
+      |                       ~  ^
+build_close/mutants/p38260/m0001_repo_cards.c:55:25: error: no member named 'st' in 'struct ct_bind'
+   55 |     sqlite3_bind_int(b->st, ++b->next, v);
+      |                      ~  ^
+build_close/mutants/p38260/m0001_repo_cards.c:59:27: error: no member named 'st' in 'struct ct_bind'
+   59 |     sqlite3_bind_int64(b->st, ++b->next, v);
+      |                        ~  ^
+build_close/mutants/p38260/m0001_repo_cards.c:63:28: error: no member named 'st' in 'struct ct_bind'
+   63 |     sqlite3_bind_double(b->st, ++b->next, v);
+      |                         ~  ^
+8 errors generated.
+build_close/mutants/p38260/m0002_repo_cards.c:41:18: error: expected member name or ';' after declaration specifiers
+   41 |     sqlite3_stmt /st;
+      |     ~~~~~~~~~~~~ ^
+build_close/mutants/p38260/m0002_repo_cards.c:41:5: error: field has incomplete type 'sqlite3_stmt' (aka 'struct sqlite3_stmt')
+   41 |     sqlite3_stmt /st;
+      |     ^
+third_party/sqlite\sqlite3.h:4303:16: note: forward declaration of 'struct sqlite3_stmt'
+ 4303 | typedef struct sqlite3_stmt sqlite3_stmt;
+      |                ^
+build_close/mutants/p38260/m0002_repo_cards.c:41:17: error: expected ';' at end of declaration list
+   41 |     sqlite3_stmt /st;
+      |                 ^
+      |                 ;
+build_close/mutants/p38260/m0002_repo_cards.c:67:8: error: no member named 'st' in 'struct ct_read'
+   67 |     r->st = st;
+      |     ~  ^
+build_close/mutants/p38260/m0002_repo_cards.c:72:42: error: no member named 'st' in 'struct ct_read'
+   72 |     return (long)sqlite3_column_int64(r->st, r->col++);
+      |                                       ~  ^
+build_close/mutants/p38260/m0002_repo_cards.c:76:34: error: no member named 'st' in 'struct ct_read'
+   76 |     return sqlite3_column_int(r->st, r->col++);
+      |                               ~  ^
+build_close/mutants/p38260/m0002_repo_cards.c:80:37: error: no member named 'st' in 'struct ct_read'
+   80 |     return sqlite3_column_double(r->st, r->col++);
+      |                                  ~  ^
+build_close/mutants/p38260/m0002_repo_cards.c:84:53: error: no member named 'st' in 'struct ct_read'
+   84 |     const unsigned char *s = sqlite3_column_text(r->st, r->col++);
+      |                                                  ~  ^
+8 errors generated.
+build_close/mutants/p38260/m0003_repo_cards.c:45:34: error: expected ')'
+   45 | static void ct_bind_open(ct_bind /b, sqlite3_stmt *st) {
+      |                                  ^
+build_close/mutants/p38260/m0003_repo_cards.c:45:25: note: to match this '('
+   45 | static void ct_bind_open(ct_bind /b, sqlite3_stmt *st) {
+      |                         ^
+build_close/mutants/p38260/m0003_repo_cards.c:46:5: error: use of undeclared identifier 'b'
+   46 |     b->st = st;
+      |     ^
+build_close/mutants/p38260/m0003_repo_cards.c:46:13: error: use of undeclared identifier 'st'
+   46 |     b->st = st;
+      |             ^~
+build_close/mutants/p38260/m0003_repo_cards.c:47:5: error: use of undeclared identifier 'b'
+   47 |     b->next = 0;
+      |     ^
+build_close/mutants/p38260/m0003_repo_cards.c:183:22: error: too many arguments to function call, expected 1, have 2
+  183 |     ct_bind_open(&b, st);
+      |     ~~~~~~~~~~~~     ^~
+build_close/mutants/p38260/m0003_repo_cards.c:45:13: note: 'ct_bind_open' declared here
+   45 | static void ct_bind_open(ct_bind /b, sqlite3_stmt *st) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0003_repo_cards.c:224:22: error: too many arguments to function call, expected 1, have 2
+  224 |     ct_bind_open(&b, st);
+      |     ~~~~~~~~~~~~     ^~
+build_close/mutants/p38260/m0003_repo_cards.c:45:13: note: 'ct_bind_open' declared here
+   45 | static void ct_bind_open(ct_bind /b, sqlite3_stmt *st) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0003_repo_cards.c:284:22: error: too many arguments to function call, expected 1, have 2
+  284 |     ct_bind_open(&b, st);
+      |     ~~~~~~~~~~~~     ^~
+build_close/mutants/p38260/m0003_repo_cards.c:45:13: note: 'ct_bind_open' declared here
+   45 | static void ct_bind_open(ct_bind /b, sqlite3_stmt *st) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0003_repo_cards.c:383:22: error: too many arguments to function call, expected 1, have 2
+  383 |     ct_bind_open(&b, st);
+      |     ~~~~~~~~~~~~     ^~
+build_close/mutants/p38260/m0003_repo_cards.c:45:13: note: 'ct_bind_open' declared here
+   45 | static void ct_bind_open(ct_bind /b, sqlite3_stmt *st) {
+      |             ^            ~~~~~~~
+8 errors generated.
+build_close/mutants/p38260/m0004_repo_cards.c:45:51: error: expected ')'
+   45 | static void ct_bind_open(ct_bind *b, sqlite3_stmt /st) {
+      |                                                   ^
+build_close/mutants/p38260/m0004_repo_cards.c:45:25: note: to match this '('
+   45 | static void ct_bind_open(ct_bind *b, sqlite3_stmt /st) {
+      |                         ^
+build_close/mutants/p38260/m0004_repo_cards.c:45:51: error: variable has incomplete type 'sqlite3_stmt' (aka 'struct sqlite3_stmt')
+   45 | static void ct_bind_open(ct_bind *b, sqlite3_stmt /st) {
+      |                                                   ^
+third_party/sqlite\sqlite3.h:4303:16: note: forward declaration of 'struct sqlite3_stmt'
+ 4303 | typedef struct sqlite3_stmt sqlite3_stmt;
+      |                ^
+build_close/mutants/p38260/m0004_repo_cards.c:46:13: error: use of undeclared identifier 'st'
+   46 |     b->st = st;
+      |             ^~
+build_close/mutants/p38260/m0004_repo_cards.c:183:22: error: argument type 'sqlite3_stmt' (aka 'struct sqlite3_stmt') is incomplete
+  183 |     ct_bind_open(&b, st);
+      |                      ^~
+third_party/sqlite\sqlite3.h:4303:16: note: forward declaration of 'struct sqlite3_stmt'
+ 4303 | typedef struct sqlite3_stmt sqlite3_stmt;
+      |                ^
+build_close/mutants/p38260/m0004_repo_cards.c:224:22: error: argument type 'sqlite3_stmt' (aka 'struct sqlite3_stmt') is incomplete
+  224 |     ct_bind_open(&b, st);
+      |                      ^~
+third_party/sqlite\sqlite3.h:4303:16: note: forward declaration of 'struct sqlite3_stmt'
+ 4303 | typedef struct sqlite3_stmt sqlite3_stmt;
+      |                ^
+build_close/mutants/p38260/m0004_repo_cards.c:284:22: error: argument type 'sqlite3_stmt' (aka 'struct sqlite3_stmt') is incomplete
+  284 |     ct_bind_open(&b, st);
+      |                      ^~
+third_party/sqlite\sqlite3.h:4303:16: note: forward declaration of 'struct sqlite3_stmt'
+ 4303 | typedef struct sqlite3_stmt sqlite3_stmt;
+      |                ^
+build_close/mutants/p38260/m0004_repo_cards.c:383:22: error: argument type 'sqlite3_stmt' (aka 'struct sqlite3_stmt') is incomplete
+  383 |     ct_bind_open(&b, st);
+      |                      ^~
+third_party/sqlite\sqlite3.h:4303:16: note: forward declaration of 'struct sqlite3_stmt'
+ 4303 | typedef struct sqlite3_stmt sqlite3_stmt;
+      |                ^
+7 errors generated.
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+build_close/mutants/p38260/m0007_repo_cards.c:50:34: error: expected ')'
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |                                  ^
+build_close/mutants/p38260/m0007_repo_cards.c:50:25: note: to match this '('
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |                         ^
+build_close/mutants/p38260/m0007_repo_cards.c:51:23: error: use of undeclared identifier 'b'
+   51 |     sqlite3_bind_text(b->st, ++b->next, s, -1, SQLITE_STATIC);
+      |                       ^
+build_close/mutants/p38260/m0007_repo_cards.c:51:32: error: use of undeclared identifier 'b'
+   51 |     sqlite3_bind_text(b->st, ++b->next, s, -1, SQLITE_STATIC);
+      |                                ^
+build_close/mutants/p38260/m0007_repo_cards.c:51:41: error: use of undeclared identifier 's'
+   51 |     sqlite3_bind_text(b->st, ++b->next, s, -1, SQLITE_STATIC);
+      |                                         ^
+build_close/mutants/p38260/m0007_repo_cards.c:184:22: error: too many arguments to function call, expected 1, have 2
+  184 |     ct_bind_text(&b, c->deck);
+      |     ~~~~~~~~~~~~     ^~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:185:22: error: too many arguments to function call, expected 1, have 2
+  185 |     ct_bind_text(&b, c->case_key);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:187:22: error: too many arguments to function call, expected 1, have 2
+  187 |     ct_bind_text(&b, c->front_json);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:188:22: error: too many arguments to function call, expected 1, have 2
+  188 |     ct_bind_text(&b, c->alg_3x3);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:189:22: error: too many arguments to function call, expected 1, have 2
+  189 |     ct_bind_text(&b, c->alg_big);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:190:22: error: too many arguments to function call, expected 1, have 2
+  190 |     ct_bind_text(&b, c->alg_oh);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:191:22: error: too many arguments to function call, expected 1, have 2
+  191 |     ct_bind_text(&b, c->notes);
+      |     ~~~~~~~~~~~~     ^~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:192:22: error: too many arguments to function call, expected 1, have 2
+  192 |     ct_bind_text(&b, c->created_at);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:193:22: error: too many arguments to function call, expected 1, have 2
+  193 |     ct_bind_text(&b, c->updated_at);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:225:22: error: too many arguments to function call, expected 1, have 2
+  225 |     ct_bind_text(&b, c->deck);
+      |     ~~~~~~~~~~~~     ^~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:226:22: error: too many arguments to function call, expected 1, have 2
+  226 |     ct_bind_text(&b, c->case_key);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:228:22: error: too many arguments to function call, expected 1, have 2
+  228 |     ct_bind_text(&b, c->front_json);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:229:22: error: too many arguments to function call, expected 1, have 2
+  229 |     ct_bind_text(&b, c->alg_3x3);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:230:22: error: too many arguments to function call, expected 1, have 2
+  230 |     ct_bind_text(&b, c->alg_big);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:231:22: error: too many arguments to function call, expected 1, have 2
+  231 |     ct_bind_text(&b, c->alg_oh);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~
+build_close/mutants/p38260/m0007_repo_cards.c:50:13: note: 'ct_bind_text' declared here
+   50 | static void ct_bind_text(ct_bind /b, const char *s) {
+      |             ^            ~~~~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: error: expected ')'
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:50:25: note: to match this '('
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                         ^
+build_close/mutants/p38260/m0008_repo_cards.c:51:41: error: use of undeclared identifier 's'
+   51 |     sqlite3_bind_text(b->st, ++b->next, s, -1, SQLITE_STATIC);
+      |                                         ^
+build_close/mutants/p38260/m0008_repo_cards.c:184:22: error: incompatible pointer to integer conversion passing 'char[64]' to parameter of type 'char' [-Wint-conversion]
+  184 |     ct_bind_text(&b, c->deck);
+      |                      ^~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:185:22: error: incompatible pointer to integer conversion passing 'char[64]' to parameter of type 'char' [-Wint-conversion]
+  185 |     ct_bind_text(&b, c->case_key);
+      |                      ^~~~~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:187:22: error: incompatible pointer to integer conversion passing 'char[512]' to parameter of type 'char' [-Wint-conversion]
+  187 |     ct_bind_text(&b, c->front_json);
+      |                      ^~~~~~~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:188:22: error: incompatible pointer to integer conversion passing 'char[256]' to parameter of type 'char' [-Wint-conversion]
+  188 |     ct_bind_text(&b, c->alg_3x3);
+      |                      ^~~~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:189:22: error: incompatible pointer to integer conversion passing 'char[256]' to parameter of type 'char' [-Wint-conversion]
+  189 |     ct_bind_text(&b, c->alg_big);
+      |                      ^~~~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:190:22: error: incompatible pointer to integer conversion passing 'char[256]' to parameter of type 'char' [-Wint-conversion]
+  190 |     ct_bind_text(&b, c->alg_oh);
+      |                      ^~~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:191:22: error: incompatible pointer to integer conversion passing 'char[512]' to parameter of type 'char' [-Wint-conversion]
+  191 |     ct_bind_text(&b, c->notes);
+      |                      ^~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:192:22: error: incompatible pointer to integer conversion passing 'char[32]' to parameter of type 'char' [-Wint-conversion]
+  192 |     ct_bind_text(&b, c->created_at);
+      |                      ^~~~~~~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:193:22: error: incompatible pointer to integer conversion passing 'char[32]' to parameter of type 'char' [-Wint-conversion]
+  193 |     ct_bind_text(&b, c->updated_at);
+      |                      ^~~~~~~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:225:22: error: incompatible pointer to integer conversion passing 'const char[64]' to parameter of type 'char' [-Wint-conversion]
+  225 |     ct_bind_text(&b, c->deck);
+      |                      ^~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:226:22: error: incompatible pointer to integer conversion passing 'const char[64]' to parameter of type 'char' [-Wint-conversion]
+  226 |     ct_bind_text(&b, c->case_key);
+      |                      ^~~~~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:228:22: error: incompatible pointer to integer conversion passing 'const char[512]' to parameter of type 'char' [-Wint-conversion]
+  228 |     ct_bind_text(&b, c->front_json);
+      |                      ^~~~~~~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:229:22: error: incompatible pointer to integer conversion passing 'const char[256]' to parameter of type 'char' [-Wint-conversion]
+  229 |     ct_bind_text(&b, c->alg_3x3);
+      |                      ^~~~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:230:22: error: incompatible pointer to integer conversion passing 'const char[256]' to parameter of type 'char' [-Wint-conversion]
+  230 |     ct_bind_text(&b, c->alg_big);
+      |                      ^~~~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:231:22: error: incompatible pointer to integer conversion passing 'const char[256]' to parameter of type 'char' [-Wint-conversion]
+  231 |     ct_bind_text(&b, c->alg_oh);
+      |                      ^~~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:232:22: error: incompatible pointer to integer conversion passing 'const char[512]' to parameter of type 'char' [-Wint-conversion]
+  232 |     ct_bind_text(&b, c->notes);
+      |                      ^~~~~~~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+build_close/mutants/p38260/m0008_repo_cards.c:233:22: error: incompatible pointer to integer conversion passing 'char[32]' to parameter of type 'char' [-Wint-conversion]
+  233 |     ct_bind_text(&b, now);
+      |                      ^~~
+build_close/mutants/p38260/m0008_repo_cards.c:50:49: note: passing argument to parameter here
+   50 | static void ct_bind_text(ct_bind *b, const char /s) {
+      |                                                 ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+build_close/mutants/p38260/m0012_repo_cards.c:54:33: error: expected ')'
+   54 | static void ct_bind_int(ct_bind /b, int v) {
+      |                                 ^
+build_close/mutants/p38260/m0012_repo_cards.c:54:24: note: to match this '('
+   54 | static void ct_bind_int(ct_bind /b, int v) {
+      |                        ^
+build_close/mutants/p38260/m0012_repo_cards.c:55:22: error: use of undeclared identifier 'b'
+   55 |     sqlite3_bind_int(b->st, ++b->next, v);
+      |                      ^
+build_close/mutants/p38260/m0012_repo_cards.c:55:31: error: use of undeclared identifier 'b'
+   55 |     sqlite3_bind_int(b->st, ++b->next, v);
+      |                               ^
+build_close/mutants/p38260/m0012_repo_cards.c:55:40: error: use of undeclared identifier 'v'
+   55 |     sqlite3_bind_int(b->st, ++b->next, v);
+      |                                        ^
+build_close/mutants/p38260/m0012_repo_cards.c:186:21: error: too many arguments to function call, expected 1, have 2
+  186 |     ct_bind_int(&b, c->direction);
+      |     ~~~~~~~~~~~     ^~~~~~~~~~~~
+build_close/mutants/p38260/m0012_repo_cards.c:54:13: note: 'ct_bind_int' declared here
+   54 | static void ct_bind_int(ct_bind /b, int v) {
+      |             ^           ~~~~~~~
+build_close/mutants/p38260/m0012_repo_cards.c:227:21: error: too many arguments to function call, expected 1, have 2
+  227 |     ct_bind_int(&b, c->direction);
+      |     ~~~~~~~~~~~     ^~~~~~~~~~~~
+build_close/mutants/p38260/m0012_repo_cards.c:54:13: note: 'ct_bind_int' declared here
+   54 | static void ct_bind_int(ct_bind /b, int v) {
+      |             ^           ~~~~~~~
+build_close/mutants/p38260/m0012_repo_cards.c:287:21: error: too many arguments to function call, expected 1, have 2
+  287 |     ct_bind_int(&b, direction);
+      |     ~~~~~~~~~~~     ^~~~~~~~~
+build_close/mutants/p38260/m0012_repo_cards.c:54:13: note: 'ct_bind_int' declared here
+   54 | static void ct_bind_int(ct_bind /b, int v) {
+      |             ^           ~~~~~~~
+build_close/mutants/p38260/m0012_repo_cards.c:389:21: error: too many arguments to function call, expected 1, have 2
+  389 |     ct_bind_int(&b, row->reps);
+      |     ~~~~~~~~~~~     ^~~~~~~~~
+build_close/mutants/p38260/m0012_repo_cards.c:54:13: note: 'ct_bind_int' declared here
+   54 | static void ct_bind_int(ct_bind /b, int v) {
+      |             ^           ~~~~~~~
+build_close/mutants/p38260/m0012_repo_cards.c:390:21: error: too many arguments to function call, expected 1, have 2
+  390 |     ct_bind_int(&b, row->lapses);
+      |     ~~~~~~~~~~~     ^~~~~~~~~~~
+build_close/mutants/p38260/m0012_repo_cards.c:54:13: note: 'ct_bind_int' declared here
+   54 | static void ct_bind_int(ct_bind /b, int v) {
+      |             ^           ~~~~~~~
+build_close/mutants/p38260/m0012_repo_cards.c:391:21: error: too many arguments to function call, expected 1, have 2
+  391 |     ct_bind_int(&b, row->state);
+      |     ~~~~~~~~~~~     ^~~~~~~~~~
+build_close/mutants/p38260/m0012_repo_cards.c:54:13: note: 'ct_bind_int' declared here
+   54 | static void ct_bind_int(ct_bind /b, int v) {
+      |             ^           ~~~~~~~
+10 errors generated.
+build_close/mutants/p38260/m0013_repo_cards.c:58:35: error: expected ')'
+   58 | static void ct_bind_int64(ct_bind /b, sqlite3_int64 v) {
+      |                                   ^
+build_close/mutants/p38260/m0013_repo_cards.c:58:26: note: to match this '('
+   58 | static void ct_bind_int64(ct_bind /b, sqlite3_int64 v) {
+      |                          ^
+build_close/mutants/p38260/m0013_repo_cards.c:59:24: error: use of undeclared identifier 'b'
+   59 |     sqlite3_bind_int64(b->st, ++b->next, v);
+      |                        ^
+build_close/mutants/p38260/m0013_repo_cards.c:59:33: error: use of undeclared identifier 'b'
+   59 |     sqlite3_bind_int64(b->st, ++b->next, v);
+      |                                 ^
+build_close/mutants/p38260/m0013_repo_cards.c:59:42: error: use of undeclared identifier 'v'
+   59 |     sqlite3_bind_int64(b->st, ++b->next, v);
+      |                                          ^
+build_close/mutants/p38260/m0013_repo_cards.c:234:23: error: too many arguments to function call, expected 1, have 2
+  234 |     ct_bind_int64(&b, c->id);
+      |     ~~~~~~~~~~~~~     ^~~~~
+build_close/mutants/p38260/m0013_repo_cards.c:58:13: note: 'ct_bind_int64' declared here
+   58 | static void ct_bind_int64(ct_bind /b, sqlite3_int64 v) {
+      |             ^             ~~~~~~~
+build_close/mutants/p38260/m0013_repo_cards.c:384:23: error: too many arguments to function call, expected 1, have 2
+  384 |     ct_bind_int64(&b, card_id);
+      |     ~~~~~~~~~~~~~     ^~~~~~~
+build_close/mutants/p38260/m0013_repo_cards.c:58:13: note: 'ct_bind_int64' declared here
+   58 | static void ct_bind_int64(ct_bind /b, sqlite3_int64 v) {
+      |             ^             ~~~~~~~
+6 errors generated.
+build_close/mutants/p38260/m0014_repo_cards.c:62:36: error: expected ')'
+   62 | static void ct_bind_double(ct_bind /b, double v) {
+      |                                    ^
+build_close/mutants/p38260/m0014_repo_cards.c:62:27: note: to match this '('
+   62 | static void ct_bind_double(ct_bind /b, double v) {
+      |                           ^
+build_close/mutants/p38260/m0014_repo_cards.c:63:25: error: use of undeclared identifier 'b'
+   63 |     sqlite3_bind_double(b->st, ++b->next, v);
+      |                         ^
+build_close/mutants/p38260/m0014_repo_cards.c:63:34: error: use of undeclared identifier 'b'
+   63 |     sqlite3_bind_double(b->st, ++b->next, v);
+      |                                  ^
+build_close/mutants/p38260/m0014_repo_cards.c:63:43: error: use of undeclared identifier 'v'
+   63 |     sqlite3_bind_double(b->st, ++b->next, v);
+      |                                           ^
+build_close/mutants/p38260/m0014_repo_cards.c:385:24: error: too many arguments to function call, expected 1, have 2
+  385 |     ct_bind_double(&b, row->stability);
+      |     ~~~~~~~~~~~~~~     ^~~~~~~~~~~~~~
+build_close/mutants/p38260/m0014_repo_cards.c:62:13: note: 'ct_bind_double' declared here
+   62 | static void ct_bind_double(ct_bind /b, double v) {
+      |             ^              ~~~~~~~
+build_close/mutants/p38260/m0014_repo_cards.c:386:24: error: too many arguments to function call, expected 1, have 2
+  386 |     ct_bind_double(&b, row->difficulty);
+      |     ~~~~~~~~~~~~~~     ^~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0014_repo_cards.c:62:13: note: 'ct_bind_double' declared here
+   62 | static void ct_bind_double(ct_bind /b, double v) {
+      |             ^              ~~~~~~~
+6 errors generated.
+build_close/mutants/p38260/m0015_repo_cards.c:66:34: error: expected ')'
+   66 | static void ct_read_open(ct_read /r, sqlite3_stmt *st) {
+      |                                  ^
+build_close/mutants/p38260/m0015_repo_cards.c:66:25: note: to match this '('
+   66 | static void ct_read_open(ct_read /r, sqlite3_stmt *st) {
+      |                         ^
+build_close/mutants/p38260/m0015_repo_cards.c:67:5: error: use of undeclared identifier 'r'
+   67 |     r->st = st;
+      |     ^
+build_close/mutants/p38260/m0015_repo_cards.c:67:13: error: use of undeclared identifier 'st'
+   67 |     r->st = st;
+      |             ^~
+build_close/mutants/p38260/m0015_repo_cards.c:68:5: error: use of undeclared identifier 'r'
+   68 |     r->col = 0;
+      |     ^
+build_close/mutants/p38260/m0015_repo_cards.c:151:22: error: too many arguments to function call, expected 1, have 2
+  151 |     ct_read_open(&r, st);
+      |     ~~~~~~~~~~~~     ^~
+build_close/mutants/p38260/m0015_repo_cards.c:66:13: note: 'ct_read_open' declared here
+   66 | static void ct_read_open(ct_read /r, sqlite3_stmt *st) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0015_repo_cards.c:357:26: error: too many arguments to function call, expected 1, have 2
+  357 |         ct_read_open(&r, st);
+      |         ~~~~~~~~~~~~     ^~
+build_close/mutants/p38260/m0015_repo_cards.c:66:13: note: 'ct_read_open' declared here
+   66 | static void ct_read_open(ct_read /r, sqlite3_stmt *st) {
+      |             ^            ~~~~~~~
+6 errors generated.
+build_close/mutants/p38260/m0016_repo_cards.c:66:51: error: expected ')'
+   66 | static void ct_read_open(ct_read *r, sqlite3_stmt /st) {
+      |                                                   ^
+build_close/mutants/p38260/m0016_repo_cards.c:66:25: note: to match this '('
+   66 | static void ct_read_open(ct_read *r, sqlite3_stmt /st) {
+      |                         ^
+build_close/mutants/p38260/m0016_repo_cards.c:66:51: error: variable has incomplete type 'sqlite3_stmt' (aka 'struct sqlite3_stmt')
+   66 | static void ct_read_open(ct_read *r, sqlite3_stmt /st) {
+      |                                                   ^
+third_party/sqlite\sqlite3.h:4303:16: note: forward declaration of 'struct sqlite3_stmt'
+ 4303 | typedef struct sqlite3_stmt sqlite3_stmt;
+      |                ^
+build_close/mutants/p38260/m0016_repo_cards.c:67:13: error: use of undeclared identifier 'st'
+   67 |     r->st = st;
+      |             ^~
+build_close/mutants/p38260/m0016_repo_cards.c:151:22: error: argument type 'sqlite3_stmt' (aka 'struct sqlite3_stmt') is incomplete
+  151 |     ct_read_open(&r, st);
+      |                      ^~
+third_party/sqlite\sqlite3.h:4303:16: note: forward declaration of 'struct sqlite3_stmt'
+ 4303 | typedef struct sqlite3_stmt sqlite3_stmt;
+      |                ^
+build_close/mutants/p38260/m0016_repo_cards.c:357:26: error: argument type 'sqlite3_stmt' (aka 'struct sqlite3_stmt') is incomplete
+  357 |         ct_read_open(&r, st);
+      |                          ^~
+third_party/sqlite\sqlite3.h:4303:16: note: forward declaration of 'struct sqlite3_stmt'
+ 4303 | typedef struct sqlite3_stmt sqlite3_stmt;
+      |                ^
+5 errors generated.
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+build_close/mutants/p38260/m0019_repo_cards.c:71:34: error: expected ')'
+   71 | static long ct_read_long(ct_read /r) {
+      |                                  ^
+build_close/mutants/p38260/m0019_repo_cards.c:71:25: note: to match this '('
+   71 | static long ct_read_long(ct_read /r) {
+      |                         ^
+build_close/mutants/p38260/m0019_repo_cards.c:72:39: error: use of undeclared identifier 'r'
+   72 |     return (long)sqlite3_column_int64(r->st, r->col++);
+      |                                       ^
+build_close/mutants/p38260/m0019_repo_cards.c:72:46: error: use of undeclared identifier 'r'
+   72 |     return (long)sqlite3_column_int64(r->st, r->col++);
+      |                                              ^
+build_close/mutants/p38260/m0019_repo_cards.c:152:26: error: passing 'ct_read *' (aka 'struct ct_read *') to parameter of incompatible type 'ct_read' (aka 'struct ct_read'); remove &
+  152 |     c->id = ct_read_long(&r);
+      |                          ^~
+build_close/mutants/p38260/m0019_repo_cards.c:71:34: note: passing argument to parameter here
+   71 | static long ct_read_long(ct_read /r) {
+      |                                  ^
+4 errors generated.
+build_close/mutants/p38260/m0020_repo_cards.c:75:32: error: expected ')'
+   75 | static int ct_read_int(ct_read /r) {
+      |                                ^
+build_close/mutants/p38260/m0020_repo_cards.c:75:23: note: to match this '('
+   75 | static int ct_read_int(ct_read /r) {
+      |                       ^
+build_close/mutants/p38260/m0020_repo_cards.c:76:31: error: use of undeclared identifier 'r'
+   76 |     return sqlite3_column_int(r->st, r->col++);
+      |                               ^
+build_close/mutants/p38260/m0020_repo_cards.c:76:38: error: use of undeclared identifier 'r'
+   76 |     return sqlite3_column_int(r->st, r->col++);
+      |                                      ^
+build_close/mutants/p38260/m0020_repo_cards.c:155:32: error: passing 'ct_read *' (aka 'struct ct_read *') to parameter of incompatible type 'ct_read' (aka 'struct ct_read'); remove &
+  155 |     c->direction = ct_read_int(&r);
+      |                                ^~
+build_close/mutants/p38260/m0020_repo_cards.c:75:32: note: passing argument to parameter here
+   75 | static int ct_read_int(ct_read /r) {
+      |                                ^
+build_close/mutants/p38260/m0020_repo_cards.c:362:33: error: passing 'ct_read *' (aka 'struct ct_read *') to parameter of incompatible type 'ct_read' (aka 'struct ct_read'); remove &
+  362 |         out->reps = ct_read_int(&r);
+      |                                 ^~
+build_close/mutants/p38260/m0020_repo_cards.c:75:32: note: passing argument to parameter here
+   75 | static int ct_read_int(ct_read /r) {
+      |                                ^
+build_close/mutants/p38260/m0020_repo_cards.c:363:35: error: passing 'ct_read *' (aka 'struct ct_read *') to parameter of incompatible type 'ct_read' (aka 'struct ct_read'); remove &
+  363 |         out->lapses = ct_read_int(&r);
+      |                                   ^~
+build_close/mutants/p38260/m0020_repo_cards.c:75:32: note: passing argument to parameter here
+   75 | static int ct_read_int(ct_read /r) {
+      |                                ^
+build_close/mutants/p38260/m0020_repo_cards.c:364:34: error: passing 'ct_read *' (aka 'struct ct_read *') to parameter of incompatible type 'ct_read' (aka 'struct ct_read'); remove &
+  364 |         out->state = ct_read_int(&r);
+      |                                  ^~
+build_close/mutants/p38260/m0020_repo_cards.c:75:32: note: passing argument to parameter here
+   75 | static int ct_read_int(ct_read /r) {
+      |                                ^
+7 errors generated.
+build_close/mutants/p38260/m0021_repo_cards.c:79:38: error: expected ')'
+   79 | static double ct_read_double(ct_read /r) {
+      |                                      ^
+build_close/mutants/p38260/m0021_repo_cards.c:79:29: note: to match this '('
+   79 | static double ct_read_double(ct_read /r) {
+      |                             ^
+build_close/mutants/p38260/m0021_repo_cards.c:80:34: error: use of undeclared identifier 'r'
+   80 |     return sqlite3_column_double(r->st, r->col++);
+      |                                  ^
+build_close/mutants/p38260/m0021_repo_cards.c:80:41: error: use of undeclared identifier 'r'
+   80 |     return sqlite3_column_double(r->st, r->col++);
+      |                                         ^
+build_close/mutants/p38260/m0021_repo_cards.c:358:41: error: passing 'ct_read *' (aka 'struct ct_read *') to parameter of incompatible type 'ct_read' (aka 'struct ct_read'); remove &
+  358 |         out->stability = ct_read_double(&r);
+      |                                         ^~
+build_close/mutants/p38260/m0021_repo_cards.c:79:38: note: passing argument to parameter here
+   79 | static double ct_read_double(ct_read /r) {
+      |                                      ^
+build_close/mutants/p38260/m0021_repo_cards.c:359:42: error: passing 'ct_read *' (aka 'struct ct_read *') to parameter of incompatible type 'ct_read' (aka 'struct ct_read'); remove &
+  359 |         out->difficulty = ct_read_double(&r);
+      |                                          ^~
+build_close/mutants/p38260/m0021_repo_cards.c:79:38: note: passing argument to parameter here
+   79 | static double ct_read_double(ct_read /r) {
+      |                                      ^
+5 errors generated.
+build_close/mutants/p38260/m0022_repo_cards.c:83:34: error: expected ')'
+   83 | static void ct_read_text(ct_read /r, char *dst, size_t cap) {
+      |                                  ^
+build_close/mutants/p38260/m0022_repo_cards.c:83:25: note: to match this '('
+   83 | static void ct_read_text(ct_read /r, char *dst, size_t cap) {
+      |                         ^
+build_close/mutants/p38260/m0022_repo_cards.c:84:50: error: use of undeclared identifier 'r'
+   84 |     const unsigned char *s = sqlite3_column_text(r->st, r->col++);
+      |                                                  ^
+build_close/mutants/p38260/m0022_repo_cards.c:84:57: error: use of undeclared identifier 'r'
+   84 |     const unsigned char *s = sqlite3_column_text(r->st, r->col++);
+      |                                                         ^
+build_close/mutants/p38260/m0022_repo_cards.c:86:9: error: use of undeclared identifier 'dst'
+   86 |         dst[0] = '\0';
+      |         ^~~
+build_close/mutants/p38260/m0022_repo_cards.c:90:14: error: use of undeclared identifier 'cap'
+   90 |     if (n >= cap)
+      |              ^~~
+build_close/mutants/p38260/m0022_repo_cards.c:91:13: error: use of undeclared identifier 'cap'
+   91 |         n = cap - 1;
+      |             ^~~
+build_close/mutants/p38260/m0022_repo_cards.c:92:12: error: use of undeclared identifier 'dst'
+   92 |     memcpy(dst, s, n);
+      |            ^~~
+build_close/mutants/p38260/m0022_repo_cards.c:93:5: error: use of undeclared identifier 'dst'
+   93 |     dst[n] = '\0';
+      |     ^~~
+build_close/mutants/p38260/m0022_repo_cards.c:153:22: error: too many arguments to function call, expected 1, have 3
+  153 |     ct_read_text(&r, c->deck, sizeof c->deck);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read /r, char *dst, size_t cap) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:154:22: error: too many arguments to function call, expected 1, have 3
+  154 |     ct_read_text(&r, c->case_key, sizeof c->case_key);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read /r, char *dst, size_t cap) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:156:22: error: too many arguments to function call, expected 1, have 3
+  156 |     ct_read_text(&r, c->front_json, sizeof c->front_json);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read /r, char *dst, size_t cap) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:157:22: error: too many arguments to function call, expected 1, have 3
+  157 |     ct_read_text(&r, c->alg_3x3, sizeof c->alg_3x3);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read /r, char *dst, size_t cap) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:158:22: error: too many arguments to function call, expected 1, have 3
+  158 |     ct_read_text(&r, c->alg_big, sizeof c->alg_big);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read /r, char *dst, size_t cap) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:159:22: error: too many arguments to function call, expected 1, have 3
+  159 |     ct_read_text(&r, c->alg_oh, sizeof c->alg_oh);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read /r, char *dst, size_t cap) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:160:22: error: too many arguments to function call, expected 1, have 3
+  160 |     ct_read_text(&r, c->notes, sizeof c->notes);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read /r, char *dst, size_t cap) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:161:22: error: too many arguments to function call, expected 1, have 3
+  161 |     ct_read_text(&r, c->created_at, sizeof c->created_at);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read /r, char *dst, size_t cap) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:162:22: error: too many arguments to function call, expected 1, have 3
+  162 |     ct_read_text(&r, c->updated_at, sizeof c->updated_at);
+      |     ~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read /r, char *dst, size_t cap) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:360:26: error: too many arguments to function call, expected 1, have 3
+  360 |         ct_read_text(&r, out->due, sizeof out->due);
+      |         ~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read /r, char *dst, size_t cap) {
+      |             ^            ~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:361:26: error: too many arguments to function call, expected 1, have 3
+  361 |         ct_read_text(&r, out->last_review, sizeof out->last_review);
+      |         ~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0022_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read /r, char *dst, size_t cap) {
+      |             ^            ~~~~~~~
+19 errors generated.
+build_close/mutants/p38260/m0023_repo_cards.c:83:43: error: expected ')'
+   83 | static void ct_read_text(ct_read *r, char /dst, size_t cap) {
+      |                                           ^
+build_close/mutants/p38260/m0023_repo_cards.c:83:25: note: to match this '('
+   83 | static void ct_read_text(ct_read *r, char /dst, size_t cap) {
+      |                         ^
+build_close/mutants/p38260/m0023_repo_cards.c:86:9: error: use of undeclared identifier 'dst'
+   86 |         dst[0] = '\0';
+      |         ^~~
+build_close/mutants/p38260/m0023_repo_cards.c:90:14: error: use of undeclared identifier 'cap'
+   90 |     if (n >= cap)
+      |              ^~~
+build_close/mutants/p38260/m0023_repo_cards.c:91:13: error: use of undeclared identifier 'cap'
+   91 |         n = cap - 1;
+      |             ^~~
+build_close/mutants/p38260/m0023_repo_cards.c:92:12: error: use of undeclared identifier 'dst'
+   92 |     memcpy(dst, s, n);
+      |            ^~~
+build_close/mutants/p38260/m0023_repo_cards.c:93:5: error: use of undeclared identifier 'dst'
+   93 |     dst[n] = '\0';
+      |     ^~~
+build_close/mutants/p38260/m0023_repo_cards.c:153:31: error: too many arguments to function call, expected 2, have 3
+  153 |     ct_read_text(&r, c->deck, sizeof c->deck);
+      |     ~~~~~~~~~~~~              ^~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read *r, char /dst, size_t cap) {
+      |             ^            ~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:154:35: error: too many arguments to function call, expected 2, have 3
+  154 |     ct_read_text(&r, c->case_key, sizeof c->case_key);
+      |     ~~~~~~~~~~~~                  ^~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read *r, char /dst, size_t cap) {
+      |             ^            ~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:156:37: error: too many arguments to function call, expected 2, have 3
+  156 |     ct_read_text(&r, c->front_json, sizeof c->front_json);
+      |     ~~~~~~~~~~~~                    ^~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read *r, char /dst, size_t cap) {
+      |             ^            ~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:157:34: error: too many arguments to function call, expected 2, have 3
+  157 |     ct_read_text(&r, c->alg_3x3, sizeof c->alg_3x3);
+      |     ~~~~~~~~~~~~                 ^~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read *r, char /dst, size_t cap) {
+      |             ^            ~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:158:34: error: too many arguments to function call, expected 2, have 3
+  158 |     ct_read_text(&r, c->alg_big, sizeof c->alg_big);
+      |     ~~~~~~~~~~~~                 ^~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read *r, char /dst, size_t cap) {
+      |             ^            ~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:159:33: error: too many arguments to function call, expected 2, have 3
+  159 |     ct_read_text(&r, c->alg_oh, sizeof c->alg_oh);
+      |     ~~~~~~~~~~~~                ^~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read *r, char /dst, size_t cap) {
+      |             ^            ~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:160:32: error: too many arguments to function call, expected 2, have 3
+  160 |     ct_read_text(&r, c->notes, sizeof c->notes);
+      |     ~~~~~~~~~~~~               ^~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read *r, char /dst, size_t cap) {
+      |             ^            ~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:161:37: error: too many arguments to function call, expected 2, have 3
+  161 |     ct_read_text(&r, c->created_at, sizeof c->created_at);
+      |     ~~~~~~~~~~~~                    ^~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read *r, char /dst, size_t cap) {
+      |             ^            ~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:162:37: error: too many arguments to function call, expected 2, have 3
+  162 |     ct_read_text(&r, c->updated_at, sizeof c->updated_at);
+      |     ~~~~~~~~~~~~                    ^~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read *r, char /dst, size_t cap) {
+      |             ^            ~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:360:36: error: too many arguments to function call, expected 2, have 3
+  360 |         ct_read_text(&r, out->due, sizeof out->due);
+      |         ~~~~~~~~~~~~               ^~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read *r, char /dst, size_t cap) {
+      |             ^            ~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:361:44: error: too many arguments to function call, expected 2, have 3
+  361 |         ct_read_text(&r, out->last_review, sizeof out->last_review);
+      |         ~~~~~~~~~~~~                       ^~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0023_repo_cards.c:83:13: note: 'ct_read_text' declared here
+   83 | static void ct_read_text(ct_read *r, char /dst, size_t cap) {
+      |             ^            ~~~~~~~~~~~~~~~~
+17 errors generated.
+build_close/mutants/p38260/m0024_repo_cards.c:84:25: error: expected identifier or '('
+   84 |     const unsigned char /s = sqlite3_column_text(r->st, r->col++);
+      |                         ^
+build_close/mutants/p38260/m0024_repo_cards.c:85:9: error: use of undeclared identifier 's'
+   85 |     if (s == NULL) {
+      |         ^
+build_close/mutants/p38260/m0024_repo_cards.c:89:37: error: use of undeclared identifier 's'
+   89 |     size_t n = strlen((const char *)s);
+      |                                     ^
+build_close/mutants/p38260/m0024_repo_cards.c:92:17: error: use of undeclared identifier 's'
+   92 |     memcpy(dst, s, n);
+      |                 ^
+build_close/mutants/p38260/m0024_repo_cards.c:83:35: error: unused parameter 'r' [-Werror,-Wunused-parameter]
+   83 | static void ct_read_text(ct_read *r, char *dst, size_t cap) {
+      |                                   ^
+5 errors generated.
+mutate: suite card_insert_get exited 1
+build_close/mutants/p38260/m0028_repo_cards.c:89:35: error: expected ')'
+   89 |     size_t n = strlen((const char /)s);
+      |                                   ^
+build_close/mutants/p38260/m0028_repo_cards.c:89:23: note: to match this '('
+   89 |     size_t n = strlen((const char /)s);
+      |                       ^
+build_close/mutants/p38260/m0028_repo_cards.c:89:23: error: cast to smaller integer type 'char' from 'const unsigned char *' [-Werror,-Wpointer-to-int-cast]
+   89 |     size_t n = strlen((const char /)s);
+      |                       ^~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0028_repo_cards.c:89:23: error: incompatible integer to pointer conversion passing 'char' to parameter of type 'const char *' [-Wint-conversion]
+   89 |     size_t n = strlen((const char /)s);
+      |                       ^~~~~~~~~~~~~~~
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\string.h:64:37: note: passing argument to parameter '_Str' here
+   64 |   size_t __cdecl strlen(const char *_Str);
+      |                                     ^
+3 errors generated.
+build_close/mutants/p38260/m0033_repo_cards.c:96:26: error: expected ')'
+   96 | void ct_now_utc_iso(char /out, unsigned cap) {
+      |                          ^
+build_close/mutants/p38260/m0033_repo_cards.c:96:20: note: to match this '('
+   96 | void ct_now_utc_iso(char /out, unsigned cap) {
+      |                    ^
+build_close/mutants/p38260/m0033_repo_cards.c:96:6: error: conflicting types for 'ct_now_utc_iso'
+   96 | void ct_now_utc_iso(char /out, unsigned cap) {
+      |      ^
+src\storage/repo_cards.h:52:6: note: previous declaration is here
+   52 | void ct_now_utc_iso(char *out, unsigned cap);
+      |      ^
+build_close/mutants/p38260/m0033_repo_cards.c:97:9: error: use of undeclared identifier 'out'
+   97 |     if (out == NULL)
+      |         ^~~
+build_close/mutants/p38260/m0033_repo_cards.c:99:5: error: use of undeclared identifier 'out'
+   99 |     out[0] = '\0';
+      |     ^~~
+build_close/mutants/p38260/m0033_repo_cards.c:100:9: error: use of undeclared identifier 'cap'
+  100 |     if (cap < sizeof "0000-00-00T00:00:00Z")
+      |         ^~~
+build_close/mutants/p38260/m0033_repo_cards.c:106:14: error: use of undeclared identifier 'out'
+  106 |     strftime(out, (size_t)cap, "%Y-%m-%dT%H:%M:%SZ", utc);
+      |              ^~~
+build_close/mutants/p38260/m0033_repo_cards.c:106:27: error: use of undeclared identifier 'cap'
+  106 |     strftime(out, (size_t)cap, "%Y-%m-%dT%H:%M:%SZ", utc);
+      |                           ^~~
+7 errors generated.
+mutate: suite card_insert_get exited 1
+mutate: suite now_iso exited 1
+mutate: suite card_insert_get exited -1073741795
+build_close/mutants/p38260/m0038_repo_cards.c:103:21: error: expected identifier or '('
+  103 |     const struct tm /utc = gmtime(&now);
+      |                     ^
+build_close/mutants/p38260/m0038_repo_cards.c:104:9: error: use of undeclared identifier 'utc'
+  104 |     if (utc == NULL)
+      |         ^~~
+build_close/mutants/p38260/m0038_repo_cards.c:106:54: error: use of undeclared identifier 'utc'
+  106 |     strftime(out, (size_t)cap, "%Y-%m-%dT%H:%M:%SZ", utc);
+      |                                                      ^~~
+3 errors generated.
+mutate: suite card_insert_get exited 1
+build_close/mutants/p38260/m0040_repo_cards.c:109:39: error: expected ')'
+  109 | static int ct_card_text_ok(const char /s, unsigned max) {
+      |                                       ^
+build_close/mutants/p38260/m0040_repo_cards.c:109:27: note: to match this '('
+  109 | static int ct_card_text_ok(const char /s, unsigned max) {
+      |                           ^
+build_close/mutants/p38260/m0040_repo_cards.c:110:19: error: use of undeclared identifier 's'
+  110 |     return memchr(s, '\0', max) != NULL;
+      |                   ^
+build_close/mutants/p38260/m0040_repo_cards.c:110:28: error: use of undeclared identifier 'max'
+  110 |     return memchr(s, '\0', max) != NULL;
+      |                            ^~~
+build_close/mutants/p38260/m0040_repo_cards.c:136:41: error: too many arguments to function call, expected 1, have 2
+  136 |     if (!ct_card_text_ok(c->front_json, CT_CARD_FRONT_JSON_MAX))
+      |          ~~~~~~~~~~~~~~~                ^~~~~~~~~~~~~~~~~~~~~~
+src\storage/repo_cards.h:11:32: note: expanded from macro 'CT_CARD_FRONT_JSON_MAX'
+   11 | #define CT_CARD_FRONT_JSON_MAX (1 << 9)
+      |                                ^~~~~~~~
+build_close/mutants/p38260/m0040_repo_cards.c:109:12: note: 'ct_card_text_ok' declared here
+  109 | static int ct_card_text_ok(const char /s, unsigned max) {
+      |            ^               ~~~~~~~~~~
+build_close/mutants/p38260/m0040_repo_cards.c:138:38: error: too many arguments to function call, expected 1, have 2
+  138 |     if (!ct_card_text_ok(c->alg_3x3, CT_CARD_ALG_MAX))
+      |          ~~~~~~~~~~~~~~~             ^~~~~~~~~~~~~~~
+src\storage/repo_cards.h:10:25: note: expanded from macro 'CT_CARD_ALG_MAX'
+   10 | #define CT_CARD_ALG_MAX (1 << 8)
+      |                         ^~~~~~~~
+build_close/mutants/p38260/m0040_repo_cards.c:109:12: note: 'ct_card_text_ok' declared here
+  109 | static int ct_card_text_ok(const char /s, unsigned max) {
+      |            ^               ~~~~~~~~~~
+build_close/mutants/p38260/m0040_repo_cards.c:140:38: error: too many arguments to function call, expected 1, have 2
+  140 |     if (!ct_card_text_ok(c->alg_big, CT_CARD_ALG_MAX))
+      |          ~~~~~~~~~~~~~~~             ^~~~~~~~~~~~~~~
+src\storage/repo_cards.h:10:25: note: expanded from macro 'CT_CARD_ALG_MAX'
+   10 | #define CT_CARD_ALG_MAX (1 << 8)
+      |                         ^~~~~~~~
+build_close/mutants/p38260/m0040_repo_cards.c:109:12: note: 'ct_card_text_ok' declared here
+  109 | static int ct_card_text_ok(const char /s, unsigned max) {
+      |            ^               ~~~~~~~~~~
+build_close/mutants/p38260/m0040_repo_cards.c:142:37: error: too many arguments to function call, expected 1, have 2
+  142 |     if (!ct_card_text_ok(c->alg_oh, CT_CARD_ALG_MAX))
+      |          ~~~~~~~~~~~~~~~            ^~~~~~~~~~~~~~~
+src\storage/repo_cards.h:10:25: note: expanded from macro 'CT_CARD_ALG_MAX'
+   10 | #define CT_CARD_ALG_MAX (1 << 8)
+      |                         ^~~~~~~~
+build_close/mutants/p38260/m0040_repo_cards.c:109:12: note: 'ct_card_text_ok' declared here
+  109 | static int ct_card_text_ok(const char /s, unsigned max) {
+      |            ^               ~~~~~~~~~~
+build_close/mutants/p38260/m0040_repo_cards.c:144:36: error: too many arguments to function call, expected 1, have 2
+  144 |     if (!ct_card_text_ok(c->notes, CT_CARD_NOTES_MAX))
+      |          ~~~~~~~~~~~~~~~           ^~~~~~~~~~~~~~~~~
+src\storage/repo_cards.h:12:27: note: expanded from macro 'CT_CARD_NOTES_MAX'
+   12 | #define CT_CARD_NOTES_MAX (1 << 9)
+      |                           ^~~~~~~~
+build_close/mutants/p38260/m0040_repo_cards.c:109:12: note: 'ct_card_text_ok' declared here
+  109 | static int ct_card_text_ok(const char /s, unsigned max) {
+      |            ^               ~~~~~~~~~~
+8 errors generated.
+mutate: suite card_insert_get exited 1
+build_close/mutants/p38260/m0042_repo_cards.c:113:45: error: expected ')'
+  113 | static int ct_case_key_canonical(const char /key) {
+      |                                             ^
+build_close/mutants/p38260/m0042_repo_cards.c:113:33: note: to match this '('
+  113 | static int ct_case_key_canonical(const char /key) {
+      |                                 ^
+build_close/mutants/p38260/m0042_repo_cards.c:114:26: error: use of undeclared identifier 'key'
+  114 |     if (!ct_repo_text_ok(key, CT_CARD_CASE_KEY_MAX))
+      |                          ^~~
+build_close/mutants/p38260/m0042_repo_cards.c:116:58: error: use of undeclared identifier 'key'
+  116 |     for (const unsigned char *p = (const unsigned char *)key; *p != '\0'; p++) {
+      |                                                          ^~~
+build_close/mutants/p38260/m0042_repo_cards.c:132:32: error: incompatible pointer to integer conversion passing 'const char[64]' to parameter of type 'char' [-Wint-conversion]
+  132 |     if (!ct_case_key_canonical(c->case_key))
+      |                                ^~~~~~~~~~~
+build_close/mutants/p38260/m0042_repo_cards.c:113:45: note: passing argument to parameter here
+  113 | static int ct_case_key_canonical(const char /key) {
+      |                                             ^
+build_close/mutants/p38260/m0042_repo_cards.c:273:32: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  273 |     if (!ct_case_key_canonical(case_key))
+      |                                ^~~~~~~~
+build_close/mutants/p38260/m0042_repo_cards.c:113:45: note: passing argument to parameter here
+  113 | static int ct_case_key_canonical(const char /key) {
+      |                                             ^
+5 errors generated.
+mutate: suite card_insert_get exited 1
+mutate: suite card_get_by_key exited 1
+mutate: suite card_get_by_key exited 1
+mutate: suite card_get_by_key exited 1
+build_close/mutants/p38260/m0047_repo_cards.c:116:30: error: expected identifier or '('
+  116 |     for (const unsigned char /p = (const unsigned char *)key; *p != '\0'; p++) {
+      |                              ^
+build_close/mutants/p38260/m0047_repo_cards.c:116:63: error: expected ';' in 'for' statement specifier
+  116 |     for (const unsigned char /p = (const unsigned char *)key; *p != '\0'; p++) {
+      |                                                               ^
+build_close/mutants/p38260/m0047_repo_cards.c:116:64: error: use of undeclared identifier 'p'
+  116 |     for (const unsigned char /p = (const unsigned char *)key; *p != '\0'; p++) {
+      |                                                                ^
+build_close/mutants/p38260/m0047_repo_cards.c:116:75: error: use of undeclared identifier 'p'
+  116 |     for (const unsigned char /p = (const unsigned char *)key; *p != '\0'; p++) {
+      |                                                                           ^
+build_close/mutants/p38260/m0047_repo_cards.c:117:14: error: use of undeclared identifier 'p'
+  117 |         if (*p <= CT_CASE_KEY_FORBIDDEN || *p == CT_CASE_KEY_DELETE)
+      |              ^
+build_close/mutants/p38260/m0047_repo_cards.c:117:45: error: use of undeclared identifier 'p'
+  117 |         if (*p <= CT_CASE_KEY_FORBIDDEN || *p == CT_CASE_KEY_DELETE)
+      |                                             ^
+6 errors generated.
+build_close/mutants/p38260/m0048_repo_cards.c:116:56: error: expected ')'
+  116 |     for (const unsigned char *p = (const unsigned char /)key; *p != '\0'; p++) {
+      |                                                        ^
+build_close/mutants/p38260/m0048_repo_cards.c:116:35: note: to match this '('
+  116 |     for (const unsigned char *p = (const unsigned char /)key; *p != '\0'; p++) {
+      |                                   ^
+build_close/mutants/p38260/m0048_repo_cards.c:116:35: error: cast to smaller integer type 'unsigned char' from 'const char *' [-Werror,-Wpointer-to-int-cast]
+  116 |     for (const unsigned char *p = (const unsigned char /)key; *p != '\0'; p++) {
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0048_repo_cards.c:116:31: error: incompatible integer to pointer conversion initializing 'const unsigned char *' with an expression of type 'unsigned char' [-Wint-conversion]
+  116 |     for (const unsigned char *p = (const unsigned char /)key; *p != '\0'; p++) {
+      |                               ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+build_close/mutants/p38260/m0049_repo_cards.c:116:63: error: expected expression
+  116 |     for (const unsigned char *p = (const unsigned char *)key; /p != '\0'; p++) {
+      |                                                               ^
+1 error generated.
+mutate: suite card_write_boundaries exited 1
+build_close/mutants/p38260/m0051_repo_cards.c:117:13: error: expected expression
+  117 |         if (/p <= CT_CASE_KEY_FORBIDDEN || *p == CT_CASE_KEY_DELETE)
+      |             ^
+1 error generated.
+mutate: suite card_write_boundaries exited 1
+mutate: suite card_write_boundaries exited 1
+build_close/mutants/p38260/m0054_repo_cards.c:117:44: error: expected expression
+  117 |         if (*p <= CT_CASE_KEY_FORBIDDEN || /p == CT_CASE_KEY_DELETE)
+      |                                            ^
+1 error generated.
+mutate: suite card_insert_get exited 1
+mutate: suite card_write_boundaries exited 1
+mutate: suite card_write_boundaries exited 1
+mutate: suite card_write_boundaries exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_unique_conflict exited 1
+build_close/mutants/p38260/m0063_repo_cards.c:124:35: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+  124 |     return direction >= CT_DIR_FR || direction <= CT_DIR_BL;
+      |            ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite card_update exited 1
+build_close/mutants/p38260/m0065_repo_cards.c:127:40: error: expected ')'
+  127 | static int ct_card_valid(const ct_card /c) {
+      |                                        ^
+build_close/mutants/p38260/m0065_repo_cards.c:127:25: note: to match this '('
+  127 | static int ct_card_valid(const ct_card /c) {
+      |                         ^
+build_close/mutants/p38260/m0065_repo_cards.c:128:9: error: use of undeclared identifier 'c'
+  128 |     if (c == NULL)
+      |         ^
+build_close/mutants/p38260/m0065_repo_cards.c:130:26: error: use of undeclared identifier 'c'
+  130 |     if (!ct_repo_text_ok(c->deck, CT_CARD_DECK_MAX))
+      |                          ^
+build_close/mutants/p38260/m0065_repo_cards.c:132:32: error: use of undeclared identifier 'c'
+  132 |     if (!ct_case_key_canonical(c->case_key))
+      |                                ^
+build_close/mutants/p38260/m0065_repo_cards.c:134:26: error: use of undeclared identifier 'c'
+  134 |     if (!ct_direction_ok(c->direction))
+      |                          ^
+build_close/mutants/p38260/m0065_repo_cards.c:136:26: error: use of undeclared identifier 'c'
+  136 |     if (!ct_card_text_ok(c->front_json, CT_CARD_FRONT_JSON_MAX))
+      |                          ^
+build_close/mutants/p38260/m0065_repo_cards.c:138:26: error: use of undeclared identifier 'c'
+  138 |     if (!ct_card_text_ok(c->alg_3x3, CT_CARD_ALG_MAX))
+      |                          ^
+build_close/mutants/p38260/m0065_repo_cards.c:140:26: error: use of undeclared identifier 'c'
+  140 |     if (!ct_card_text_ok(c->alg_big, CT_CARD_ALG_MAX))
+      |                          ^
+build_close/mutants/p38260/m0065_repo_cards.c:142:26: error: use of undeclared identifier 'c'
+  142 |     if (!ct_card_text_ok(c->alg_oh, CT_CARD_ALG_MAX))
+      |                          ^
+build_close/mutants/p38260/m0065_repo_cards.c:144:26: error: use of undeclared identifier 'c'
+  144 |     if (!ct_card_text_ok(c->notes, CT_CARD_NOTES_MAX))
+      |                          ^
+build_close/mutants/p38260/m0065_repo_cards.c:168:28: error: passing 'ct_card *' (aka 'struct ct_card *') to parameter of incompatible type 'ct_card' (aka 'struct ct_card'); dereference with *
+  168 |     int rc = ct_card_valid(c);
+      |                            ^
+      |                            *
+build_close/mutants/p38260/m0065_repo_cards.c:127:40: note: passing argument to parameter here
+  127 | static int ct_card_valid(const ct_card /c) {
+      |                                        ^
+build_close/mutants/p38260/m0065_repo_cards.c:209:28: error: passing 'const ct_card *' (aka 'const struct ct_card *') to parameter of incompatible type 'ct_card' (aka 'struct ct_card')
+  209 |     int rc = ct_card_valid(c);
+      |                            ^
+build_close/mutants/p38260/m0065_repo_cards.c:127:40: note: passing argument to parameter here
+  127 | static int ct_card_valid(const ct_card /c) {
+      |                                        ^
+12 errors generated.
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+build_close/mutants/p38260/m0075_repo_cards.c:149:43: error: expected ')'
+  149 | static void ct_card_from_row(sqlite3_stmt /st, ct_card *c) {
+      |                                           ^
+build_close/mutants/p38260/m0075_repo_cards.c:149:29: note: to match this '('
+  149 | static void ct_card_from_row(sqlite3_stmt /st, ct_card *c) {
+      |                             ^
+build_close/mutants/p38260/m0075_repo_cards.c:149:43: error: variable has incomplete type 'sqlite3_stmt' (aka 'struct sqlite3_stmt')
+  149 | static void ct_card_from_row(sqlite3_stmt /st, ct_card *c) {
+      |                                           ^
+third_party/sqlite\sqlite3.h:4303:16: note: forward declaration of 'struct sqlite3_stmt'
+ 4303 | typedef struct sqlite3_stmt sqlite3_stmt;
+      |                ^
+build_close/mutants/p38260/m0075_repo_cards.c:151:22: error: use of undeclared identifier 'st'
+  151 |     ct_read_open(&r, st);
+      |                      ^~
+build_close/mutants/p38260/m0075_repo_cards.c:152:5: error: use of undeclared identifier 'c'
+  152 |     c->id = ct_read_long(&r);
+      |     ^
+build_close/mutants/p38260/m0075_repo_cards.c:153:22: error: use of undeclared identifier 'c'
+  153 |     ct_read_text(&r, c->deck, sizeof c->deck);
+      |                      ^
+build_close/mutants/p38260/m0075_repo_cards.c:153:38: error: use of undeclared identifier 'c'
+  153 |     ct_read_text(&r, c->deck, sizeof c->deck);
+      |                                      ^
+build_close/mutants/p38260/m0075_repo_cards.c:154:22: error: use of undeclared identifier 'c'
+  154 |     ct_read_text(&r, c->case_key, sizeof c->case_key);
+      |                      ^
+build_close/mutants/p38260/m0075_repo_cards.c:154:42: error: use of undeclared identifier 'c'
+  154 |     ct_read_text(&r, c->case_key, sizeof c->case_key);
+      |                                          ^
+build_close/mutants/p38260/m0075_repo_cards.c:155:5: error: use of undeclared identifier 'c'
+  155 |     c->direction = ct_read_int(&r);
+      |     ^
+build_close/mutants/p38260/m0075_repo_cards.c:156:22: error: use of undeclared identifier 'c'
+  156 |     ct_read_text(&r, c->front_json, sizeof c->front_json);
+      |                      ^
+build_close/mutants/p38260/m0075_repo_cards.c:156:44: error: use of undeclared identifier 'c'
+  156 |     ct_read_text(&r, c->front_json, sizeof c->front_json);
+      |                                            ^
+build_close/mutants/p38260/m0075_repo_cards.c:157:22: error: use of undeclared identifier 'c'
+  157 |     ct_read_text(&r, c->alg_3x3, sizeof c->alg_3x3);
+      |                      ^
+build_close/mutants/p38260/m0075_repo_cards.c:157:41: error: use of undeclared identifier 'c'
+  157 |     ct_read_text(&r, c->alg_3x3, sizeof c->alg_3x3);
+      |                                         ^
+build_close/mutants/p38260/m0075_repo_cards.c:158:22: error: use of undeclared identifier 'c'
+  158 |     ct_read_text(&r, c->alg_big, sizeof c->alg_big);
+      |                      ^
+build_close/mutants/p38260/m0075_repo_cards.c:158:41: error: use of undeclared identifier 'c'
+  158 |     ct_read_text(&r, c->alg_big, sizeof c->alg_big);
+      |                                         ^
+build_close/mutants/p38260/m0075_repo_cards.c:159:22: error: use of undeclared identifier 'c'
+  159 |     ct_read_text(&r, c->alg_oh, sizeof c->alg_oh);
+      |                      ^
+build_close/mutants/p38260/m0075_repo_cards.c:159:40: error: use of undeclared identifier 'c'
+  159 |     ct_read_text(&r, c->alg_oh, sizeof c->alg_oh);
+      |                                        ^
+build_close/mutants/p38260/m0075_repo_cards.c:160:22: error: use of undeclared identifier 'c'
+  160 |     ct_read_text(&r, c->notes, sizeof c->notes);
+      |                      ^
+build_close/mutants/p38260/m0075_repo_cards.c:160:39: error: use of undeclared identifier 'c'
+  160 |     ct_read_text(&r, c->notes, sizeof c->notes);
+      |                                       ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p38260/m0076_repo_cards.c:149:56: error: expected ')'
+  149 | static void ct_card_from_row(sqlite3_stmt *st, ct_card /c) {
+      |                                                        ^
+build_close/mutants/p38260/m0076_repo_cards.c:149:29: note: to match this '('
+  149 | static void ct_card_from_row(sqlite3_stmt *st, ct_card /c) {
+      |                             ^
+build_close/mutants/p38260/m0076_repo_cards.c:152:5: error: use of undeclared identifier 'c'
+  152 |     c->id = ct_read_long(&r);
+      |     ^
+build_close/mutants/p38260/m0076_repo_cards.c:153:22: error: use of undeclared identifier 'c'
+  153 |     ct_read_text(&r, c->deck, sizeof c->deck);
+      |                      ^
+build_close/mutants/p38260/m0076_repo_cards.c:153:38: error: use of undeclared identifier 'c'
+  153 |     ct_read_text(&r, c->deck, sizeof c->deck);
+      |                                      ^
+build_close/mutants/p38260/m0076_repo_cards.c:154:22: error: use of undeclared identifier 'c'
+  154 |     ct_read_text(&r, c->case_key, sizeof c->case_key);
+      |                      ^
+build_close/mutants/p38260/m0076_repo_cards.c:154:42: error: use of undeclared identifier 'c'
+  154 |     ct_read_text(&r, c->case_key, sizeof c->case_key);
+      |                                          ^
+build_close/mutants/p38260/m0076_repo_cards.c:155:5: error: use of undeclared identifier 'c'
+  155 |     c->direction = ct_read_int(&r);
+      |     ^
+build_close/mutants/p38260/m0076_repo_cards.c:156:22: error: use of undeclared identifier 'c'
+  156 |     ct_read_text(&r, c->front_json, sizeof c->front_json);
+      |                      ^
+build_close/mutants/p38260/m0076_repo_cards.c:156:44: error: use of undeclared identifier 'c'
+  156 |     ct_read_text(&r, c->front_json, sizeof c->front_json);
+      |                                            ^
+build_close/mutants/p38260/m0076_repo_cards.c:157:22: error: use of undeclared identifier 'c'
+  157 |     ct_read_text(&r, c->alg_3x3, sizeof c->alg_3x3);
+      |                      ^
+build_close/mutants/p38260/m0076_repo_cards.c:157:41: error: use of undeclared identifier 'c'
+  157 |     ct_read_text(&r, c->alg_3x3, sizeof c->alg_3x3);
+      |                                         ^
+build_close/mutants/p38260/m0076_repo_cards.c:158:22: error: use of undeclared identifier 'c'
+  158 |     ct_read_text(&r, c->alg_big, sizeof c->alg_big);
+      |                      ^
+build_close/mutants/p38260/m0076_repo_cards.c:158:41: error: use of undeclared identifier 'c'
+  158 |     ct_read_text(&r, c->alg_big, sizeof c->alg_big);
+      |                                         ^
+build_close/mutants/p38260/m0076_repo_cards.c:159:22: error: use of undeclared identifier 'c'
+  159 |     ct_read_text(&r, c->alg_oh, sizeof c->alg_oh);
+      |                      ^
+build_close/mutants/p38260/m0076_repo_cards.c:159:40: error: use of undeclared identifier 'c'
+  159 |     ct_read_text(&r, c->alg_oh, sizeof c->alg_oh);
+      |                                        ^
+build_close/mutants/p38260/m0076_repo_cards.c:160:22: error: use of undeclared identifier 'c'
+  160 |     ct_read_text(&r, c->notes, sizeof c->notes);
+      |                      ^
+build_close/mutants/p38260/m0076_repo_cards.c:160:39: error: use of undeclared identifier 'c'
+  160 |     ct_read_text(&r, c->notes, sizeof c->notes);
+      |                                       ^
+build_close/mutants/p38260/m0076_repo_cards.c:161:22: error: use of undeclared identifier 'c'
+  161 |     ct_read_text(&r, c->created_at, sizeof c->created_at);
+      |                      ^
+build_close/mutants/p38260/m0076_repo_cards.c:161:44: error: use of undeclared identifier 'c'
+  161 |     ct_read_text(&r, c->created_at, sizeof c->created_at);
+      |                                            ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p38260/m0077_repo_cards.c:165:33: error: expected ')'
+  165 | int ct_repo_card_insert(sqlite3 /db, ct_card *c) {
+      |                                 ^
+build_close/mutants/p38260/m0077_repo_cards.c:165:24: note: to match this '('
+  165 | int ct_repo_card_insert(sqlite3 /db, ct_card *c) {
+      |                        ^
+build_close/mutants/p38260/m0077_repo_cards.c:165:5: error: conflicting types for 'ct_repo_card_insert'
+  165 | int ct_repo_card_insert(sqlite3 /db, ct_card *c) {
+      |     ^
+src\storage/repo_cards.h:53:5: note: previous declaration is here
+   53 | int ct_repo_card_insert(sqlite3 *db, ct_card *c);
+      |     ^
+build_close/mutants/p38260/m0077_repo_cards.c:165:33: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  165 | int ct_repo_card_insert(sqlite3 /db, ct_card *c) {
+      |                                 ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p38260/m0077_repo_cards.c:166:9: error: use of undeclared identifier 'db'
+  166 |     if (db == NULL)
+      |         ^~
+build_close/mutants/p38260/m0077_repo_cards.c:168:28: error: use of undeclared identifier 'c'
+  168 |     int rc = ct_card_valid(c);
+      |                            ^
+build_close/mutants/p38260/m0077_repo_cards.c:175:12: error: use of undeclared identifier 'c'
+  175 |     memcpy(c->created_at, now, sizeof now);
+      |            ^
+build_close/mutants/p38260/m0077_repo_cards.c:176:12: error: use of undeclared identifier 'c'
+  176 |     memcpy(c->updated_at, now, sizeof now);
+      |            ^
+build_close/mutants/p38260/m0077_repo_cards.c:178:28: error: use of undeclared identifier 'db'
+  178 |     if (sqlite3_prepare_v2(db, CT_SQL_CARD_INSERT, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p38260/m0077_repo_cards.c:184:22: error: use of undeclared identifier 'c'
+  184 |     ct_bind_text(&b, c->deck);
+      |                      ^
+build_close/mutants/p38260/m0077_repo_cards.c:185:22: error: use of undeclared identifier 'c'
+  185 |     ct_bind_text(&b, c->case_key);
+      |                      ^
+build_close/mutants/p38260/m0077_repo_cards.c:186:21: error: use of undeclared identifier 'c'
+  186 |     ct_bind_int(&b, c->direction);
+      |                     ^
+build_close/mutants/p38260/m0077_repo_cards.c:187:22: error: use of undeclared identifier 'c'
+  187 |     ct_bind_text(&b, c->front_json);
+      |                      ^
+build_close/mutants/p38260/m0077_repo_cards.c:188:22: error: use of undeclared identifier 'c'
+  188 |     ct_bind_text(&b, c->alg_3x3);
+      |                      ^
+build_close/mutants/p38260/m0077_repo_cards.c:189:22: error: use of undeclared identifier 'c'
+  189 |     ct_bind_text(&b, c->alg_big);
+      |                      ^
+build_close/mutants/p38260/m0077_repo_cards.c:190:22: error: use of undeclared identifier 'c'
+  190 |     ct_bind_text(&b, c->alg_oh);
+      |                      ^
+build_close/mutants/p38260/m0077_repo_cards.c:191:22: error: use of undeclared identifier 'c'
+  191 |     ct_bind_text(&b, c->notes);
+      |                      ^
+build_close/mutants/p38260/m0077_repo_cards.c:192:22: error: use of undeclared identifier 'c'
+  192 |     ct_bind_text(&b, c->created_at);
+      |                      ^
+build_close/mutants/p38260/m0077_repo_cards.c:193:22: error: use of undeclared identifier 'c'
+  193 |     ct_bind_text(&b, c->updated_at);
+      |                      ^
+build_close/mutants/p38260/m0077_repo_cards.c:195:74: error: use of undeclared identifier 'db'
+  195 |     int ext = step == SQLITE_DONE ? SQLITE_OK : sqlite3_extended_errcode(db);
+      |                                                                          ^~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p38260/m0078_repo_cards.c:165:46: error: expected ')'
+  165 | int ct_repo_card_insert(sqlite3 *db, ct_card /c) {
+      |                                              ^
+build_close/mutants/p38260/m0078_repo_cards.c:165:24: note: to match this '('
+  165 | int ct_repo_card_insert(sqlite3 *db, ct_card /c) {
+      |                        ^
+build_close/mutants/p38260/m0078_repo_cards.c:165:5: error: conflicting types for 'ct_repo_card_insert'
+  165 | int ct_repo_card_insert(sqlite3 *db, ct_card /c) {
+      |     ^
+src\storage/repo_cards.h:53:5: note: previous declaration is here
+   53 | int ct_repo_card_insert(sqlite3 *db, ct_card *c);
+      |     ^
+build_close/mutants/p38260/m0078_repo_cards.c:168:28: error: use of undeclared identifier 'c'
+  168 |     int rc = ct_card_valid(c);
+      |                            ^
+build_close/mutants/p38260/m0078_repo_cards.c:175:12: error: use of undeclared identifier 'c'
+  175 |     memcpy(c->created_at, now, sizeof now);
+      |            ^
+build_close/mutants/p38260/m0078_repo_cards.c:176:12: error: use of undeclared identifier 'c'
+  176 |     memcpy(c->updated_at, now, sizeof now);
+      |            ^
+build_close/mutants/p38260/m0078_repo_cards.c:184:22: error: use of undeclared identifier 'c'
+  184 |     ct_bind_text(&b, c->deck);
+      |                      ^
+build_close/mutants/p38260/m0078_repo_cards.c:185:22: error: use of undeclared identifier 'c'
+  185 |     ct_bind_text(&b, c->case_key);
+      |                      ^
+build_close/mutants/p38260/m0078_repo_cards.c:186:21: error: use of undeclared identifier 'c'
+  186 |     ct_bind_int(&b, c->direction);
+      |                     ^
+build_close/mutants/p38260/m0078_repo_cards.c:187:22: error: use of undeclared identifier 'c'
+  187 |     ct_bind_text(&b, c->front_json);
+      |                      ^
+build_close/mutants/p38260/m0078_repo_cards.c:188:22: error: use of undeclared identifier 'c'
+  188 |     ct_bind_text(&b, c->alg_3x3);
+      |                      ^
+build_close/mutants/p38260/m0078_repo_cards.c:189:22: error: use of undeclared identifier 'c'
+  189 |     ct_bind_text(&b, c->alg_big);
+      |                      ^
+build_close/mutants/p38260/m0078_repo_cards.c:190:22: error: use of undeclared identifier 'c'
+  190 |     ct_bind_text(&b, c->alg_oh);
+      |                      ^
+build_close/mutants/p38260/m0078_repo_cards.c:191:22: error: use of undeclared identifier 'c'
+  191 |     ct_bind_text(&b, c->notes);
+      |                      ^
+build_close/mutants/p38260/m0078_repo_cards.c:192:22: error: use of undeclared identifier 'c'
+  192 |     ct_bind_text(&b, c->created_at);
+      |                      ^
+build_close/mutants/p38260/m0078_repo_cards.c:193:22: error: use of undeclared identifier 'c'
+  193 |     ct_bind_text(&b, c->updated_at);
+      |                      ^
+build_close/mutants/p38260/m0078_repo_cards.c:198:9: error: use of undeclared identifier 'c'
+  198 |         c->id = (long)sqlite3_last_insert_rowid(db);
+      |         ^
+16 errors generated.
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+build_close/mutants/p38260/m0082_repo_cards.c:173:9: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  173 |     if (now[-1] == '\0')
+      |         ^   ~~
+build_close/mutants/p38260/m0082_repo_cards.c:171:5: note: array 'now' declared here
+  171 |     char now[CT_CARD_STAMP_MAX];
+      |     ^
+1 error generated.
+mutate: suite card_insert_get exited 1
+build_close/mutants/p38260/m0084_repo_cards.c:177:18: error: expected identifier or '('
+  177 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p38260/m0084_repo_cards.c:178:57: error: use of undeclared identifier 'st'
+  178 |     if (sqlite3_prepare_v2(db, CT_SQL_CARD_INSERT, -1, &st, NULL) != SQLITE_OK) {
+      |                                                         ^~
+build_close/mutants/p38260/m0084_repo_cards.c:179:26: error: use of undeclared identifier 'st'
+  179 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p38260/m0084_repo_cards.c:183:22: error: use of undeclared identifier 'st'
+  183 |     ct_bind_open(&b, st);
+      |                      ^~
+build_close/mutants/p38260/m0084_repo_cards.c:194:29: error: use of undeclared identifier 'st'
+  194 |     int step = sqlite3_step(st);
+      |                             ^~
+build_close/mutants/p38260/m0084_repo_cards.c:196:22: error: use of undeclared identifier 'st'
+  196 |     sqlite3_finalize(st);
+      |                      ^~
+6 errors generated.
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_unique_conflict exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_unique_conflict exited 1
+build_close/mutants/p38260/m0092_repo_cards.c:206:33: error: expected ')'
+  206 | int ct_repo_card_update(sqlite3 /db, const ct_card *c) {
+      |                                 ^
+build_close/mutants/p38260/m0092_repo_cards.c:206:24: note: to match this '('
+  206 | int ct_repo_card_update(sqlite3 /db, const ct_card *c) {
+      |                        ^
+build_close/mutants/p38260/m0092_repo_cards.c:206:5: error: conflicting types for 'ct_repo_card_update'
+  206 | int ct_repo_card_update(sqlite3 /db, const ct_card *c) {
+      |     ^
+src\storage/repo_cards.h:54:5: note: previous declaration is here
+   54 | int ct_repo_card_update(sqlite3 *db, const ct_card *c);
+      |     ^
+build_close/mutants/p38260/m0092_repo_cards.c:206:33: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  206 | int ct_repo_card_update(sqlite3 /db, const ct_card *c) {
+      |                                 ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p38260/m0092_repo_cards.c:207:9: error: use of undeclared identifier 'db'
+  207 |     if (db == NULL)
+      |         ^~
+build_close/mutants/p38260/m0092_repo_cards.c:209:28: error: use of undeclared identifier 'c'
+  209 |     int rc = ct_card_valid(c);
+      |                            ^
+build_close/mutants/p38260/m0092_repo_cards.c:212:9: error: use of undeclared identifier 'c'
+  212 |     if (c->id <= 0)
+      |         ^
+build_close/mutants/p38260/m0092_repo_cards.c:219:28: error: use of undeclared identifier 'db'
+  219 |     if (sqlite3_prepare_v2(db, CT_SQL_CARD_UPDATE, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p38260/m0092_repo_cards.c:225:22: error: use of undeclared identifier 'c'
+  225 |     ct_bind_text(&b, c->deck);
+      |                      ^
+build_close/mutants/p38260/m0092_repo_cards.c:226:22: error: use of undeclared identifier 'c'
+  226 |     ct_bind_text(&b, c->case_key);
+      |                      ^
+build_close/mutants/p38260/m0092_repo_cards.c:227:21: error: use of undeclared identifier 'c'
+  227 |     ct_bind_int(&b, c->direction);
+      |                     ^
+build_close/mutants/p38260/m0092_repo_cards.c:228:22: error: use of undeclared identifier 'c'
+  228 |     ct_bind_text(&b, c->front_json);
+      |                      ^
+build_close/mutants/p38260/m0092_repo_cards.c:229:22: error: use of undeclared identifier 'c'
+  229 |     ct_bind_text(&b, c->alg_3x3);
+      |                      ^
+build_close/mutants/p38260/m0092_repo_cards.c:230:22: error: use of undeclared identifier 'c'
+  230 |     ct_bind_text(&b, c->alg_big);
+      |                      ^
+build_close/mutants/p38260/m0092_repo_cards.c:231:22: error: use of undeclared identifier 'c'
+  231 |     ct_bind_text(&b, c->alg_oh);
+      |                      ^
+build_close/mutants/p38260/m0092_repo_cards.c:232:22: error: use of undeclared identifier 'c'
+  232 |     ct_bind_text(&b, c->notes);
+      |                      ^
+build_close/mutants/p38260/m0092_repo_cards.c:234:23: error: use of undeclared identifier 'c'
+  234 |     ct_bind_int64(&b, c->id);
+      |                       ^
+build_close/mutants/p38260/m0092_repo_cards.c:236:74: error: use of undeclared identifier 'db'
+  236 |     int ext = step == SQLITE_DONE ? SQLITE_OK : sqlite3_extended_errcode(db);
+      |                                                                          ^~
+build_close/mutants/p38260/m0092_repo_cards.c:237:35: error: use of undeclared identifier 'db'
+  237 |     int changed = sqlite3_changes(db);
+      |                                   ^~
+18 errors generated.
+build_close/mutants/p38260/m0093_repo_cards.c:206:52: error: expected ')'
+  206 | int ct_repo_card_update(sqlite3 *db, const ct_card /c) {
+      |                                                    ^
+build_close/mutants/p38260/m0093_repo_cards.c:206:24: note: to match this '('
+  206 | int ct_repo_card_update(sqlite3 *db, const ct_card /c) {
+      |                        ^
+build_close/mutants/p38260/m0093_repo_cards.c:206:5: error: conflicting types for 'ct_repo_card_update'
+  206 | int ct_repo_card_update(sqlite3 *db, const ct_card /c) {
+      |     ^
+src\storage/repo_cards.h:54:5: note: previous declaration is here
+   54 | int ct_repo_card_update(sqlite3 *db, const ct_card *c);
+      |     ^
+build_close/mutants/p38260/m0093_repo_cards.c:209:28: error: use of undeclared identifier 'c'
+  209 |     int rc = ct_card_valid(c);
+      |                            ^
+build_close/mutants/p38260/m0093_repo_cards.c:212:9: error: use of undeclared identifier 'c'
+  212 |     if (c->id <= 0)
+      |         ^
+build_close/mutants/p38260/m0093_repo_cards.c:225:22: error: use of undeclared identifier 'c'
+  225 |     ct_bind_text(&b, c->deck);
+      |                      ^
+build_close/mutants/p38260/m0093_repo_cards.c:226:22: error: use of undeclared identifier 'c'
+  226 |     ct_bind_text(&b, c->case_key);
+      |                      ^
+build_close/mutants/p38260/m0093_repo_cards.c:227:21: error: use of undeclared identifier 'c'
+  227 |     ct_bind_int(&b, c->direction);
+      |                     ^
+build_close/mutants/p38260/m0093_repo_cards.c:228:22: error: use of undeclared identifier 'c'
+  228 |     ct_bind_text(&b, c->front_json);
+      |                      ^
+build_close/mutants/p38260/m0093_repo_cards.c:229:22: error: use of undeclared identifier 'c'
+  229 |     ct_bind_text(&b, c->alg_3x3);
+      |                      ^
+build_close/mutants/p38260/m0093_repo_cards.c:230:22: error: use of undeclared identifier 'c'
+  230 |     ct_bind_text(&b, c->alg_big);
+      |                      ^
+build_close/mutants/p38260/m0093_repo_cards.c:231:22: error: use of undeclared identifier 'c'
+  231 |     ct_bind_text(&b, c->alg_oh);
+      |                      ^
+build_close/mutants/p38260/m0093_repo_cards.c:232:22: error: use of undeclared identifier 'c'
+  232 |     ct_bind_text(&b, c->notes);
+      |                      ^
+build_close/mutants/p38260/m0093_repo_cards.c:234:23: error: use of undeclared identifier 'c'
+  234 |     ct_bind_int64(&b, c->id);
+      |                       ^
+13 errors generated.
+mutate: suite card_update exited 1
+mutate: suite card_update exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_update exited 1
+mutate: suite card_bad_args exited 1
+build_close/mutants/p38260/m0100_repo_cards.c:216:9: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  216 |     if (now[-1] == '\0')
+      |         ^   ~~
+build_close/mutants/p38260/m0100_repo_cards.c:214:5: note: array 'now' declared here
+  214 |     char now[CT_CARD_STAMP_MAX];
+      |     ^
+1 error generated.
+mutate: suite card_update exited 1
+build_close/mutants/p38260/m0102_repo_cards.c:218:18: error: expected identifier or '('
+  218 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p38260/m0102_repo_cards.c:219:57: error: use of undeclared identifier 'st'
+  219 |     if (sqlite3_prepare_v2(db, CT_SQL_CARD_UPDATE, -1, &st, NULL) != SQLITE_OK) {
+      |                                                         ^~
+build_close/mutants/p38260/m0102_repo_cards.c:220:26: error: use of undeclared identifier 'st'
+  220 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p38260/m0102_repo_cards.c:224:22: error: use of undeclared identifier 'st'
+  224 |     ct_bind_open(&b, st);
+      |                      ^~
+build_close/mutants/p38260/m0102_repo_cards.c:235:29: error: use of undeclared identifier 'st'
+  235 |     int step = sqlite3_step(st);
+      |                             ^~
+build_close/mutants/p38260/m0102_repo_cards.c:238:22: error: use of undeclared identifier 'st'
+  238 |     sqlite3_finalize(st);
+      |                      ^~
+6 errors generated.
+mutate: suite card_update exited 1
+mutate: suite card_update exited 1
+mutate: suite card_update exited 1
+mutate: suite card_update exited 1
+mutate: suite card_update exited 1
+mutate: suite card_update exited 1
+mutate: suite card_update exited 1
+mutate: suite card_update exited 1
+mutate: suite card_update exited 1
+build_close/mutants/p38260/m0113_repo_cards.c:247:30: error: expected ')'
+  247 | int ct_repo_card_get(sqlite3 /db, long id, ct_card *out) {
+      |                              ^
+build_close/mutants/p38260/m0113_repo_cards.c:247:21: note: to match this '('
+  247 | int ct_repo_card_get(sqlite3 /db, long id, ct_card *out) {
+      |                     ^
+build_close/mutants/p38260/m0113_repo_cards.c:247:5: error: conflicting types for 'ct_repo_card_get'
+  247 | int ct_repo_card_get(sqlite3 /db, long id, ct_card *out) {
+      |     ^
+src\storage/repo_cards.h:55:5: note: previous declaration is here
+   55 | int ct_repo_card_get(sqlite3 *db, long id, ct_card *out);
+      |     ^
+build_close/mutants/p38260/m0113_repo_cards.c:247:30: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  247 | int ct_repo_card_get(sqlite3 /db, long id, ct_card *out) {
+      |                              ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p38260/m0113_repo_cards.c:248:9: error: use of undeclared identifier 'db'
+  248 |     if (db == NULL || out == NULL || id <= 0)
+      |         ^~
+build_close/mutants/p38260/m0113_repo_cards.c:248:23: error: use of undeclared identifier 'out'
+  248 |     if (db == NULL || out == NULL || id <= 0)
+      |                       ^~~
+build_close/mutants/p38260/m0113_repo_cards.c:248:38: error: use of undeclared identifier 'id'
+  248 |     if (db == NULL || out == NULL || id <= 0)
+      |                                      ^~
+build_close/mutants/p38260/m0113_repo_cards.c:250:12: error: use of undeclared identifier 'out'
+  250 |     memset(out, 0, sizeof *out);
+      |            ^~~
+build_close/mutants/p38260/m0113_repo_cards.c:250:28: error: use of undeclared identifier 'out'
+  250 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+build_close/mutants/p38260/m0113_repo_cards.c:252:28: error: use of undeclared identifier 'db'
+  252 |     if (sqlite3_prepare_v2(db, CT_SQL_CARD_GET, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p38260/m0113_repo_cards.c:256:31: error: use of undeclared identifier 'id'
+  256 |     sqlite3_bind_int64(st, 1, id);
+      |                               ^~
+build_close/mutants/p38260/m0113_repo_cards.c:259:30: error: use of undeclared identifier 'out'
+  259 |         ct_card_from_row(st, out);
+      |                              ^~~
+11 errors generated.
+build_close/mutants/p38260/m0114_repo_cards.c:247:52: error: expected ')'
+  247 | int ct_repo_card_get(sqlite3 *db, long id, ct_card /out) {
+      |                                                    ^
+build_close/mutants/p38260/m0114_repo_cards.c:247:21: note: to match this '('
+  247 | int ct_repo_card_get(sqlite3 *db, long id, ct_card /out) {
+      |                     ^
+build_close/mutants/p38260/m0114_repo_cards.c:247:5: error: conflicting types for 'ct_repo_card_get'
+  247 | int ct_repo_card_get(sqlite3 *db, long id, ct_card /out) {
+      |     ^
+src\storage/repo_cards.h:55:5: note: previous declaration is here
+   55 | int ct_repo_card_get(sqlite3 *db, long id, ct_card *out);
+      |     ^
+build_close/mutants/p38260/m0114_repo_cards.c:248:23: error: use of undeclared identifier 'out'
+  248 |     if (db == NULL || out == NULL || id <= 0)
+      |                       ^~~
+build_close/mutants/p38260/m0114_repo_cards.c:250:12: error: use of undeclared identifier 'out'
+  250 |     memset(out, 0, sizeof *out);
+      |            ^~~
+build_close/mutants/p38260/m0114_repo_cards.c:250:28: error: use of undeclared identifier 'out'
+  250 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+build_close/mutants/p38260/m0114_repo_cards.c:259:30: error: use of undeclared identifier 'out'
+  259 |         ct_card_from_row(st, out);
+      |                              ^~~
+6 errors generated.
+mutate: suite card_insert_get exited 1
+build_close/mutants/p38260/m0116_repo_cards.c:248:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  248 |     if (db == NULL && out == NULL || id <= 0)
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_close/mutants/p38260/m0116_repo_cards.c:248:20: note: place parentheses around the '&&' expression to silence this warning
+  248 |     if (db == NULL && out == NULL || id <= 0)
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite card_insert_get exited 1
+build_close/mutants/p38260/m0118_repo_cards.c:248:35: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  248 |     if (db == NULL || out == NULL && id <= 0)
+      |                    ~~ ~~~~~~~~~~~~^~~~~~~~~~
+build_close/mutants/p38260/m0118_repo_cards.c:248:35: note: place parentheses around the '&&' expression to silence this warning
+  248 |     if (db == NULL || out == NULL && id <= 0)
+      |                                   ^         
+      |                       (                     )
+1 error generated.
+mutate: suite card_bad_args exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+build_close/mutants/p38260/m0124_repo_cards.c:250:27: error: expected expression
+  250 |     memset(out, 0, sizeof /out);
+      |                           ^
+1 error generated.
+build_close/mutants/p38260/m0125_repo_cards.c:251:18: error: expected identifier or '('
+  251 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p38260/m0125_repo_cards.c:252:54: error: use of undeclared identifier 'st'
+  252 |     if (sqlite3_prepare_v2(db, CT_SQL_CARD_GET, -1, &st, NULL) != SQLITE_OK) {
+      |                                                      ^~
+build_close/mutants/p38260/m0125_repo_cards.c:253:26: error: use of undeclared identifier 'st'
+  253 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p38260/m0125_repo_cards.c:256:24: error: use of undeclared identifier 'st'
+  256 |     sqlite3_bind_int64(st, 1, id);
+      |                        ^~
+build_close/mutants/p38260/m0125_repo_cards.c:257:29: error: use of undeclared identifier 'st'
+  257 |     int step = sqlite3_step(st);
+      |                             ^~
+build_close/mutants/p38260/m0125_repo_cards.c:259:26: error: use of undeclared identifier 'st'
+  259 |         ct_card_from_row(st, out);
+      |                          ^~
+build_close/mutants/p38260/m0125_repo_cards.c:260:26: error: use of undeclared identifier 'st'
+  260 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p38260/m0125_repo_cards.c:263:22: error: use of undeclared identifier 'st'
+  263 |     sqlite3_finalize(st);
+      |                      ^~
+8 errors generated.
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+build_close/mutants/p38260/m0134_repo_cards.c:267:37: error: expected ')'
+  267 | int ct_repo_card_get_by_key(sqlite3 /db, const char *deck, const char *case_key, int direction,
+      |                                     ^
+build_close/mutants/p38260/m0134_repo_cards.c:267:28: note: to match this '('
+  267 | int ct_repo_card_get_by_key(sqlite3 /db, const char *deck, const char *case_key, int direction,
+      |                            ^
+build_close/mutants/p38260/m0134_repo_cards.c:267:5: error: conflicting types for 'ct_repo_card_get_by_key'
+  267 | int ct_repo_card_get_by_key(sqlite3 /db, const char *deck, const char *case_key, int direction,
+      |     ^
+src\storage/repo_cards.h:56:5: note: previous declaration is here
+   56 | int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key, int direction,
+      |     ^
+build_close/mutants/p38260/m0134_repo_cards.c:267:37: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  267 | int ct_repo_card_get_by_key(sqlite3 /db, const char *deck, const char *case_key, int direction,
+      |                                     ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p38260/m0134_repo_cards.c:269:9: error: use of undeclared identifier 'db'
+  269 |     if (db == NULL || out == NULL)
+      |         ^~
+build_close/mutants/p38260/m0134_repo_cards.c:269:23: error: use of undeclared identifier 'out'
+  269 |     if (db == NULL || out == NULL)
+      |                       ^~~
+build_close/mutants/p38260/m0134_repo_cards.c:271:26: error: use of undeclared identifier 'deck'
+  271 |     if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX))
+      |                          ^~~~
+build_close/mutants/p38260/m0134_repo_cards.c:273:32: error: use of undeclared identifier 'case_key'
+  273 |     if (!ct_case_key_canonical(case_key))
+      |                                ^~~~~~~~
+build_close/mutants/p38260/m0134_repo_cards.c:275:26: error: use of undeclared identifier 'direction'
+  275 |     if (!ct_direction_ok(direction))
+      |                          ^~~~~~~~~
+build_close/mutants/p38260/m0134_repo_cards.c:277:12: error: use of undeclared identifier 'out'
+  277 |     memset(out, 0, sizeof *out);
+      |            ^~~
+build_close/mutants/p38260/m0134_repo_cards.c:277:28: error: use of undeclared identifier 'out'
+  277 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+build_close/mutants/p38260/m0134_repo_cards.c:279:28: error: use of undeclared identifier 'db'
+  279 |     if (sqlite3_prepare_v2(db, CT_SQL_CARD_GET_BY_KEY, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p38260/m0134_repo_cards.c:285:22: error: use of undeclared identifier 'deck'
+  285 |     ct_bind_text(&b, deck);
+      |                      ^~~~
+build_close/mutants/p38260/m0134_repo_cards.c:286:22: error: use of undeclared identifier 'case_key'
+  286 |     ct_bind_text(&b, case_key);
+      |                      ^~~~~~~~
+build_close/mutants/p38260/m0134_repo_cards.c:287:21: error: use of undeclared identifier 'direction'
+  287 |     ct_bind_int(&b, direction);
+      |                     ^~~~~~~~~
+build_close/mutants/p38260/m0134_repo_cards.c:290:30: error: use of undeclared identifier 'out'
+  290 |         ct_card_from_row(st, out);
+      |                              ^~~
+15 errors generated.
+build_close/mutants/p38260/m0135_repo_cards.c:267:53: error: expected ')'
+  267 | int ct_repo_card_get_by_key(sqlite3 *db, const char /deck, const char *case_key, int direction,
+      |                                                     ^
+build_close/mutants/p38260/m0135_repo_cards.c:267:28: note: to match this '('
+  267 | int ct_repo_card_get_by_key(sqlite3 *db, const char /deck, const char *case_key, int direction,
+      |                            ^
+build_close/mutants/p38260/m0135_repo_cards.c:267:5: error: conflicting types for 'ct_repo_card_get_by_key'
+  267 | int ct_repo_card_get_by_key(sqlite3 *db, const char /deck, const char *case_key, int direction,
+      |     ^
+src\storage/repo_cards.h:56:5: note: previous declaration is here
+   56 | int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key, int direction,
+      |     ^
+build_close/mutants/p38260/m0135_repo_cards.c:269:23: error: use of undeclared identifier 'out'
+  269 |     if (db == NULL || out == NULL)
+      |                       ^~~
+build_close/mutants/p38260/m0135_repo_cards.c:271:26: error: use of undeclared identifier 'deck'
+  271 |     if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX))
+      |                          ^~~~
+build_close/mutants/p38260/m0135_repo_cards.c:273:32: error: use of undeclared identifier 'case_key'
+  273 |     if (!ct_case_key_canonical(case_key))
+      |                                ^~~~~~~~
+build_close/mutants/p38260/m0135_repo_cards.c:275:26: error: use of undeclared identifier 'direction'
+  275 |     if (!ct_direction_ok(direction))
+      |                          ^~~~~~~~~
+build_close/mutants/p38260/m0135_repo_cards.c:277:12: error: use of undeclared identifier 'out'
+  277 |     memset(out, 0, sizeof *out);
+      |            ^~~
+build_close/mutants/p38260/m0135_repo_cards.c:277:28: error: use of undeclared identifier 'out'
+  277 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+build_close/mutants/p38260/m0135_repo_cards.c:285:22: error: use of undeclared identifier 'deck'
+  285 |     ct_bind_text(&b, deck);
+      |                      ^~~~
+build_close/mutants/p38260/m0135_repo_cards.c:286:22: error: use of undeclared identifier 'case_key'
+  286 |     ct_bind_text(&b, case_key);
+      |                      ^~~~~~~~
+build_close/mutants/p38260/m0135_repo_cards.c:287:21: error: use of undeclared identifier 'direction'
+  287 |     ct_bind_int(&b, direction);
+      |                     ^~~~~~~~~
+build_close/mutants/p38260/m0135_repo_cards.c:290:30: error: use of undeclared identifier 'out'
+  290 |         ct_card_from_row(st, out);
+      |                              ^~~
+12 errors generated.
+build_close/mutants/p38260/m0136_repo_cards.c:267:71: error: expected ')'
+  267 | int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char /case_key, int direction,
+      |                                                                       ^
+build_close/mutants/p38260/m0136_repo_cards.c:267:28: note: to match this '('
+  267 | int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char /case_key, int direction,
+      |                            ^
+build_close/mutants/p38260/m0136_repo_cards.c:267:5: error: conflicting types for 'ct_repo_card_get_by_key'
+  267 | int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char /case_key, int direction,
+      |     ^
+src\storage/repo_cards.h:56:5: note: previous declaration is here
+   56 | int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key, int direction,
+      |     ^
+build_close/mutants/p38260/m0136_repo_cards.c:269:23: error: use of undeclared identifier 'out'
+  269 |     if (db == NULL || out == NULL)
+      |                       ^~~
+build_close/mutants/p38260/m0136_repo_cards.c:273:32: error: use of undeclared identifier 'case_key'
+  273 |     if (!ct_case_key_canonical(case_key))
+      |                                ^~~~~~~~
+build_close/mutants/p38260/m0136_repo_cards.c:275:26: error: use of undeclared identifier 'direction'
+  275 |     if (!ct_direction_ok(direction))
+      |                          ^~~~~~~~~
+build_close/mutants/p38260/m0136_repo_cards.c:277:12: error: use of undeclared identifier 'out'
+  277 |     memset(out, 0, sizeof *out);
+      |            ^~~
+build_close/mutants/p38260/m0136_repo_cards.c:277:28: error: use of undeclared identifier 'out'
+  277 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+build_close/mutants/p38260/m0136_repo_cards.c:286:22: error: use of undeclared identifier 'case_key'
+  286 |     ct_bind_text(&b, case_key);
+      |                      ^~~~~~~~
+build_close/mutants/p38260/m0136_repo_cards.c:287:21: error: use of undeclared identifier 'direction'
+  287 |     ct_bind_int(&b, direction);
+      |                     ^~~~~~~~~
+build_close/mutants/p38260/m0136_repo_cards.c:290:30: error: use of undeclared identifier 'out'
+  290 |         ct_card_from_row(st, out);
+      |                              ^~~
+10 errors generated.
+build_close/mutants/p38260/m0137_repo_cards.c:268:37: error: expected ')'
+  268 |                             ct_card /out) {
+      |                                     ^
+build_close/mutants/p38260/m0137_repo_cards.c:267:28: note: to match this '('
+  267 | int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key, int direction,
+      |                            ^
+build_close/mutants/p38260/m0137_repo_cards.c:267:5: error: conflicting types for 'ct_repo_card_get_by_key'
+  267 | int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key, int direction,
+      |     ^
+src\storage/repo_cards.h:56:5: note: previous declaration is here
+   56 | int ct_repo_card_get_by_key(sqlite3 *db, const char *deck, const char *case_key, int direction,
+      |     ^
+build_close/mutants/p38260/m0137_repo_cards.c:269:23: error: use of undeclared identifier 'out'
+  269 |     if (db == NULL || out == NULL)
+      |                       ^~~
+build_close/mutants/p38260/m0137_repo_cards.c:277:12: error: use of undeclared identifier 'out'
+  277 |     memset(out, 0, sizeof *out);
+      |            ^~~
+build_close/mutants/p38260/m0137_repo_cards.c:277:28: error: use of undeclared identifier 'out'
+  277 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+build_close/mutants/p38260/m0137_repo_cards.c:290:30: error: use of undeclared identifier 'out'
+  290 |         ct_card_from_row(st, out);
+      |                              ^~~
+6 errors generated.
+mutate: suite card_get_by_key exited 1
+mutate: suite card_bad_args exited -1073741819
+mutate: suite card_get_by_key exited 1
+mutate: suite card_get_by_key exited 1
+mutate: suite card_get_by_key exited 1
+mutate: suite card_get_by_key exited 1
+build_close/mutants/p38260/m0146_repo_cards.c:277:27: error: expected expression
+  277 |     memset(out, 0, sizeof /out);
+      |                           ^
+1 error generated.
+build_close/mutants/p38260/m0147_repo_cards.c:278:18: error: expected identifier or '('
+  278 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p38260/m0147_repo_cards.c:279:61: error: use of undeclared identifier 'st'
+  279 |     if (sqlite3_prepare_v2(db, CT_SQL_CARD_GET_BY_KEY, -1, &st, NULL) != SQLITE_OK) {
+      |                                                             ^~
+build_close/mutants/p38260/m0147_repo_cards.c:280:26: error: use of undeclared identifier 'st'
+  280 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p38260/m0147_repo_cards.c:284:22: error: use of undeclared identifier 'st'
+  284 |     ct_bind_open(&b, st);
+      |                      ^~
+build_close/mutants/p38260/m0147_repo_cards.c:288:29: error: use of undeclared identifier 'st'
+  288 |     int step = sqlite3_step(st);
+      |                             ^~
+build_close/mutants/p38260/m0147_repo_cards.c:290:26: error: use of undeclared identifier 'st'
+  290 |         ct_card_from_row(st, out);
+      |                          ^~
+build_close/mutants/p38260/m0147_repo_cards.c:291:26: error: use of undeclared identifier 'st'
+  291 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p38260/m0147_repo_cards.c:294:22: error: use of undeclared identifier 'st'
+  294 |     sqlite3_finalize(st);
+      |                      ^~
+8 errors generated.
+mutate: suite card_get_by_key exited 1
+mutate: suite card_get_by_key exited 1
+mutate: suite card_get_by_key exited 1
+mutate: suite card_get_by_key exited 1
+mutate: suite card_get_by_key exited 1
+build_close/mutants/p38260/m0154_repo_cards.c:298:33: error: expected ')'
+  298 | int ct_repo_card_delete(sqlite3 /db, long id) {
+      |                                 ^
+build_close/mutants/p38260/m0154_repo_cards.c:298:24: note: to match this '('
+  298 | int ct_repo_card_delete(sqlite3 /db, long id) {
+      |                        ^
+build_close/mutants/p38260/m0154_repo_cards.c:298:5: error: conflicting types for 'ct_repo_card_delete'
+  298 | int ct_repo_card_delete(sqlite3 /db, long id) {
+      |     ^
+src\storage/repo_cards.h:58:5: note: previous declaration is here
+   58 | int ct_repo_card_delete(sqlite3 *db, long id);
+      |     ^
+build_close/mutants/p38260/m0154_repo_cards.c:298:33: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  298 | int ct_repo_card_delete(sqlite3 /db, long id) {
+      |                                 ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p38260/m0154_repo_cards.c:299:9: error: use of undeclared identifier 'db'
+  299 |     if (db == NULL || id <= 0)
+      |         ^~
+build_close/mutants/p38260/m0154_repo_cards.c:299:23: error: use of undeclared identifier 'id'
+  299 |     if (db == NULL || id <= 0)
+      |                       ^~
+build_close/mutants/p38260/m0154_repo_cards.c:302:28: error: use of undeclared identifier 'db'
+  302 |     if (sqlite3_prepare_v2(db, CT_SQL_CARD_DELETE, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p38260/m0154_repo_cards.c:306:31: error: use of undeclared identifier 'id'
+  306 |     sqlite3_bind_int64(st, 1, id);
+      |                               ^~
+build_close/mutants/p38260/m0154_repo_cards.c:308:35: error: use of undeclared identifier 'db'
+  308 |     int changed = sqlite3_changes(db);
+      |                                   ^~
+8 errors generated.
+mutate: suite card_insert_get exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_bad_args exited 1
+build_close/mutants/p38260/m0160_repo_cards.c:301:18: error: expected identifier or '('
+  301 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p38260/m0160_repo_cards.c:302:57: error: use of undeclared identifier 'st'
+  302 |     if (sqlite3_prepare_v2(db, CT_SQL_CARD_DELETE, -1, &st, NULL) != SQLITE_OK) {
+      |                                                         ^~
+build_close/mutants/p38260/m0160_repo_cards.c:303:26: error: use of undeclared identifier 'st'
+  303 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p38260/m0160_repo_cards.c:306:24: error: use of undeclared identifier 'st'
+  306 |     sqlite3_bind_int64(st, 1, id);
+      |                        ^~
+build_close/mutants/p38260/m0160_repo_cards.c:307:29: error: use of undeclared identifier 'st'
+  307 |     int step = sqlite3_step(st);
+      |                             ^~
+build_close/mutants/p38260/m0160_repo_cards.c:309:22: error: use of undeclared identifier 'st'
+  309 |     sqlite3_finalize(st);
+      |                      ^~
+6 errors generated.
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_insert_get exited 1
+mutate: suite card_delete_cascade exited 1
+build_close/mutants/p38260/m0171_repo_cards.c:316:31: error: expected ')'
+  316 | int ct_repo_card_list(sqlite3 /db, const char *deck, ct_card *out, int cap) {
+      |                               ^
+build_close/mutants/p38260/m0171_repo_cards.c:316:22: note: to match this '('
+  316 | int ct_repo_card_list(sqlite3 /db, const char *deck, ct_card *out, int cap) {
+      |                      ^
+build_close/mutants/p38260/m0171_repo_cards.c:316:5: error: conflicting types for 'ct_repo_card_list'
+  316 | int ct_repo_card_list(sqlite3 /db, const char *deck, ct_card *out, int cap) {
+      |     ^
+src\storage/repo_cards.h:59:5: note: previous declaration is here
+   59 | int ct_repo_card_list(sqlite3 *db, const char *deck, ct_card *out, int cap);
+      |     ^
+build_close/mutants/p38260/m0171_repo_cards.c:316:31: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  316 | int ct_repo_card_list(sqlite3 /db, const char *deck, ct_card *out, int cap) {
+      |                               ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p38260/m0171_repo_cards.c:317:9: error: use of undeclared identifier 'db'
+  317 |     if (db == NULL)
+      |         ^~
+build_close/mutants/p38260/m0171_repo_cards.c:319:26: error: use of undeclared identifier 'deck'
+  319 |     if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX))
+      |                          ^~~~
+build_close/mutants/p38260/m0171_repo_cards.c:321:9: error: use of undeclared identifier 'cap'
+  321 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p38260/m0171_repo_cards.c:321:21: error: use of undeclared identifier 'cap'
+  321 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p38260/m0171_repo_cards.c:321:32: error: use of undeclared identifier 'out'
+  321 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p38260/m0171_repo_cards.c:323:9: error: use of undeclared identifier 'cap'
+  323 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p38260/m0171_repo_cards.c:325:12: error: use of undeclared identifier 'out'
+  325 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p38260/m0171_repo_cards.c:325:28: error: use of undeclared identifier 'cap'
+  325 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p38260/m0171_repo_cards.c:325:42: error: use of undeclared identifier 'out'
+  325 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p38260/m0171_repo_cards.c:327:28: error: use of undeclared identifier 'db'
+  327 |     if (sqlite3_prepare_v2(db, CT_SQL_CARD_LIST, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p38260/m0171_repo_cards.c:331:30: error: use of undeclared identifier 'deck'
+  331 |     sqlite3_bind_text(st, 1, deck, -1, SQLITE_STATIC);
+      |                              ^~~~
+build_close/mutants/p38260/m0171_repo_cards.c:334:16: error: use of undeclared identifier 'cap'
+  334 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p38260/m0171_repo_cards.c:335:31: error: use of undeclared identifier 'out'
+  335 |         ct_card_from_row(st, &out[n]);
+      |                               ^~~
+16 errors generated.
+build_close/mutants/p38260/m0172_repo_cards.c:316:47: error: expected ')'
+  316 | int ct_repo_card_list(sqlite3 *db, const char /deck, ct_card *out, int cap) {
+      |                                               ^
+build_close/mutants/p38260/m0172_repo_cards.c:316:22: note: to match this '('
+  316 | int ct_repo_card_list(sqlite3 *db, const char /deck, ct_card *out, int cap) {
+      |                      ^
+build_close/mutants/p38260/m0172_repo_cards.c:316:5: error: conflicting types for 'ct_repo_card_list'
+  316 | int ct_repo_card_list(sqlite3 *db, const char /deck, ct_card *out, int cap) {
+      |     ^
+src\storage/repo_cards.h:59:5: note: previous declaration is here
+   59 | int ct_repo_card_list(sqlite3 *db, const char *deck, ct_card *out, int cap);
+      |     ^
+build_close/mutants/p38260/m0172_repo_cards.c:319:26: error: use of undeclared identifier 'deck'
+  319 |     if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX))
+      |                          ^~~~
+build_close/mutants/p38260/m0172_repo_cards.c:321:9: error: use of undeclared identifier 'cap'
+  321 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p38260/m0172_repo_cards.c:321:21: error: use of undeclared identifier 'cap'
+  321 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p38260/m0172_repo_cards.c:321:32: error: use of undeclared identifier 'out'
+  321 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p38260/m0172_repo_cards.c:323:9: error: use of undeclared identifier 'cap'
+  323 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p38260/m0172_repo_cards.c:325:12: error: use of undeclared identifier 'out'
+  325 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p38260/m0172_repo_cards.c:325:28: error: use of undeclared identifier 'cap'
+  325 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p38260/m0172_repo_cards.c:325:42: error: use of undeclared identifier 'out'
+  325 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p38260/m0172_repo_cards.c:331:30: error: use of undeclared identifier 'deck'
+  331 |     sqlite3_bind_text(st, 1, deck, -1, SQLITE_STATIC);
+      |                              ^~~~
+build_close/mutants/p38260/m0172_repo_cards.c:334:16: error: use of undeclared identifier 'cap'
+  334 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p38260/m0172_repo_cards.c:335:31: error: use of undeclared identifier 'out'
+  335 |         ct_card_from_row(st, &out[n]);
+      |                               ^~~
+13 errors generated.
+build_close/mutants/p38260/m0173_repo_cards.c:316:62: error: expected ')'
+  316 | int ct_repo_card_list(sqlite3 *db, const char *deck, ct_card /out, int cap) {
+      |                                                              ^
+build_close/mutants/p38260/m0173_repo_cards.c:316:22: note: to match this '('
+  316 | int ct_repo_card_list(sqlite3 *db, const char *deck, ct_card /out, int cap) {
+      |                      ^
+build_close/mutants/p38260/m0173_repo_cards.c:316:5: error: conflicting types for 'ct_repo_card_list'
+  316 | int ct_repo_card_list(sqlite3 *db, const char *deck, ct_card /out, int cap) {
+      |     ^
+src\storage/repo_cards.h:59:5: note: previous declaration is here
+   59 | int ct_repo_card_list(sqlite3 *db, const char *deck, ct_card *out, int cap);
+      |     ^
+build_close/mutants/p38260/m0173_repo_cards.c:321:9: error: use of undeclared identifier 'cap'
+  321 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p38260/m0173_repo_cards.c:321:21: error: use of undeclared identifier 'cap'
+  321 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p38260/m0173_repo_cards.c:321:32: error: use of undeclared identifier 'out'
+  321 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p38260/m0173_repo_cards.c:323:9: error: use of undeclared identifier 'cap'
+  323 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p38260/m0173_repo_cards.c:325:12: error: use of undeclared identifier 'out'
+  325 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p38260/m0173_repo_cards.c:325:28: error: use of undeclared identifier 'cap'
+  325 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p38260/m0173_repo_cards.c:325:42: error: use of undeclared identifier 'out'
+  325 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p38260/m0173_repo_cards.c:334:16: error: use of undeclared identifier 'cap'
+  334 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p38260/m0173_repo_cards.c:335:31: error: use of undeclared identifier 'out'
+  335 |         ct_card_from_row(st, &out[n]);
+      |                               ^~~
+11 errors generated.
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_bad_args exited -1073741819
+mutate: suite card_bad_args exited -1073741819
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+build_close/mutants/p38260/m0191_repo_cards.c:325:41: error: expected expression
+  325 |     memset(out, 0, (size_t)cap * sizeof /out);
+      |                                         ^
+1 error generated.
+build_close/mutants/p38260/m0192_repo_cards.c:326:18: error: expected identifier or '('
+  326 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p38260/m0192_repo_cards.c:327:55: error: use of undeclared identifier 'st'
+  327 |     if (sqlite3_prepare_v2(db, CT_SQL_CARD_LIST, -1, &st, NULL) != SQLITE_OK) {
+      |                                                       ^~
+build_close/mutants/p38260/m0192_repo_cards.c:328:26: error: use of undeclared identifier 'st'
+  328 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p38260/m0192_repo_cards.c:331:23: error: use of undeclared identifier 'st'
+  331 |     sqlite3_bind_text(st, 1, deck, -1, SQLITE_STATIC);
+      |                       ^~
+build_close/mutants/p38260/m0192_repo_cards.c:334:44: error: use of undeclared identifier 'st'
+  334 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                                            ^~
+build_close/mutants/p38260/m0192_repo_cards.c:335:26: error: use of undeclared identifier 'st'
+  335 |         ct_card_from_row(st, &out[n]);
+      |                          ^~
+build_close/mutants/p38260/m0192_repo_cards.c:338:22: error: use of undeclared identifier 'st'
+  338 |     sqlite3_finalize(st);
+      |                      ^~
+7 errors generated.
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited -1073741784
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+mutate: suite card_list exited 1
+build_close/mutants/p38260/m0210_repo_cards.c:344:29: error: expected ')'
+  344 | int ct_repo_srs_get(sqlite3 /db, long card_id, ct_srs_row *out) {
+      |                             ^
+build_close/mutants/p38260/m0210_repo_cards.c:344:20: note: to match this '('
+  344 | int ct_repo_srs_get(sqlite3 /db, long card_id, ct_srs_row *out) {
+      |                    ^
+build_close/mutants/p38260/m0210_repo_cards.c:344:5: error: conflicting types for 'ct_repo_srs_get'
+  344 | int ct_repo_srs_get(sqlite3 /db, long card_id, ct_srs_row *out) {
+      |     ^
+src\storage/repo_cards.h:60:5: note: previous declaration is here
+   60 | int ct_repo_srs_get(sqlite3 *db, long card_id, ct_srs_row *out);
+      |     ^
+build_close/mutants/p38260/m0210_repo_cards.c:344:29: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  344 | int ct_repo_srs_get(sqlite3 /db, long card_id, ct_srs_row *out) {
+      |                             ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p38260/m0210_repo_cards.c:345:9: error: use of undeclared identifier 'db'
+  345 |     if (db == NULL || out == NULL || card_id <= 0)
+      |         ^~
+build_close/mutants/p38260/m0210_repo_cards.c:345:23: error: use of undeclared identifier 'out'
+  345 |     if (db == NULL || out == NULL || card_id <= 0)
+      |                       ^~~
+build_close/mutants/p38260/m0210_repo_cards.c:345:38: error: use of undeclared identifier 'card_id'
+  345 |     if (db == NULL || out == NULL || card_id <= 0)
+      |                                      ^~~~~~~
+build_close/mutants/p38260/m0210_repo_cards.c:347:12: error: use of undeclared identifier 'out'
+  347 |     memset(out, 0, sizeof *out);
+      |            ^~~
+build_close/mutants/p38260/m0210_repo_cards.c:347:28: error: use of undeclared identifier 'out'
+  347 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+build_close/mutants/p38260/m0210_repo_cards.c:349:28: error: use of undeclared identifier 'db'
+  349 |     if (sqlite3_prepare_v2(db, CT_SQL_SRS_GET, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p38260/m0210_repo_cards.c:353:31: error: use of undeclared identifier 'card_id'
+  353 |     sqlite3_bind_int64(st, 1, card_id);
+      |                               ^~~~~~~
+build_close/mutants/p38260/m0210_repo_cards.c:358:9: error: use of undeclared identifier 'out'
+  358 |         out->stability = ct_read_double(&r);
+      |         ^~~
+build_close/mutants/p38260/m0210_repo_cards.c:359:9: error: use of undeclared identifier 'out'
+  359 |         out->difficulty = ct_read_double(&r);
+      |         ^~~
+build_close/mutants/p38260/m0210_repo_cards.c:360:26: error: use of undeclared identifier 'out'
+  360 |         ct_read_text(&r, out->due, sizeof out->due);
+      |                          ^~~
+build_close/mutants/p38260/m0210_repo_cards.c:360:43: error: use of undeclared identifier 'out'
+  360 |         ct_read_text(&r, out->due, sizeof out->due);
+      |                                           ^~~
+build_close/mutants/p38260/m0210_repo_cards.c:361:26: error: use of undeclared identifier 'out'
+  361 |         ct_read_text(&r, out->last_review, sizeof out->last_review);
+      |                          ^~~
+build_close/mutants/p38260/m0210_repo_cards.c:361:51: error: use of undeclared identifier 'out'
+  361 |         ct_read_text(&r, out->last_review, sizeof out->last_review);
+      |                                                   ^~~
+build_close/mutants/p38260/m0210_repo_cards.c:362:9: error: use of undeclared identifier 'out'
+  362 |         out->reps = ct_read_int(&r);
+      |         ^~~
+build_close/mutants/p38260/m0210_repo_cards.c:363:9: error: use of undeclared identifier 'out'
+  363 |         out->lapses = ct_read_int(&r);
+      |         ^~~
+build_close/mutants/p38260/m0210_repo_cards.c:364:9: error: use of undeclared identifier 'out'
+  364 |         out->state = ct_read_int(&r);
+      |         ^~~
+19 errors generated.
+build_close/mutants/p38260/m0211_repo_cards.c:344:59: error: expected ')'
+  344 | int ct_repo_srs_get(sqlite3 *db, long card_id, ct_srs_row /out) {
+      |                                                           ^
+build_close/mutants/p38260/m0211_repo_cards.c:344:20: note: to match this '('
+  344 | int ct_repo_srs_get(sqlite3 *db, long card_id, ct_srs_row /out) {
+      |                    ^
+build_close/mutants/p38260/m0211_repo_cards.c:344:5: error: conflicting types for 'ct_repo_srs_get'
+  344 | int ct_repo_srs_get(sqlite3 *db, long card_id, ct_srs_row /out) {
+      |     ^
+src\storage/repo_cards.h:60:5: note: previous declaration is here
+   60 | int ct_repo_srs_get(sqlite3 *db, long card_id, ct_srs_row *out);
+      |     ^
+build_close/mutants/p38260/m0211_repo_cards.c:345:23: error: use of undeclared identifier 'out'
+  345 |     if (db == NULL || out == NULL || card_id <= 0)
+      |                       ^~~
+build_close/mutants/p38260/m0211_repo_cards.c:347:12: error: use of undeclared identifier 'out'
+  347 |     memset(out, 0, sizeof *out);
+      |            ^~~
+build_close/mutants/p38260/m0211_repo_cards.c:347:28: error: use of undeclared identifier 'out'
+  347 |     memset(out, 0, sizeof *out);
+      |                            ^~~
+build_close/mutants/p38260/m0211_repo_cards.c:358:9: error: use of undeclared identifier 'out'
+  358 |         out->stability = ct_read_double(&r);
+      |         ^~~
+build_close/mutants/p38260/m0211_repo_cards.c:359:9: error: use of undeclared identifier 'out'
+  359 |         out->difficulty = ct_read_double(&r);
+      |         ^~~
+build_close/mutants/p38260/m0211_repo_cards.c:360:26: error: use of undeclared identifier 'out'
+  360 |         ct_read_text(&r, out->due, sizeof out->due);
+      |                          ^~~
+build_close/mutants/p38260/m0211_repo_cards.c:360:43: error: use of undeclared identifier 'out'
+  360 |         ct_read_text(&r, out->due, sizeof out->due);
+      |                                           ^~~
+build_close/mutants/p38260/m0211_repo_cards.c:361:26: error: use of undeclared identifier 'out'
+  361 |         ct_read_text(&r, out->last_review, sizeof out->last_review);
+      |                          ^~~
+build_close/mutants/p38260/m0211_repo_cards.c:361:51: error: use of undeclared identifier 'out'
+  361 |         ct_read_text(&r, out->last_review, sizeof out->last_review);
+      |                                                   ^~~
+build_close/mutants/p38260/m0211_repo_cards.c:362:9: error: use of undeclared identifier 'out'
+  362 |         out->reps = ct_read_int(&r);
+      |         ^~~
+build_close/mutants/p38260/m0211_repo_cards.c:363:9: error: use of undeclared identifier 'out'
+  363 |         out->lapses = ct_read_int(&r);
+      |         ^~~
+build_close/mutants/p38260/m0211_repo_cards.c:364:9: error: use of undeclared identifier 'out'
+  364 |         out->state = ct_read_int(&r);
+      |         ^~~
+14 errors generated.
+mutate: suite card_delete_cascade exited 1
+build_close/mutants/p38260/m0213_repo_cards.c:345:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  345 |     if (db == NULL && out == NULL || card_id <= 0)
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_close/mutants/p38260/m0213_repo_cards.c:345:20: note: place parentheses around the '&&' expression to silence this warning
+  345 |     if (db == NULL && out == NULL || card_id <= 0)
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite card_delete_cascade exited 1
+build_close/mutants/p38260/m0215_repo_cards.c:345:35: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  345 |     if (db == NULL || out == NULL && card_id <= 0)
+      |                    ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0215_repo_cards.c:345:35: note: place parentheses around the '&&' expression to silence this warning
+  345 |     if (db == NULL || out == NULL && card_id <= 0)
+      |                                   ^              
+      |                       (                          )
+1 error generated.
+mutate: suite srs_roundtrip exited 1
+mutate: suite card_delete_cascade exited 1
+mutate: suite srs_roundtrip exited 1
+mutate: suite card_delete_cascade exited 1
+mutate: suite card_delete_cascade exited 1
+build_close/mutants/p38260/m0221_repo_cards.c:347:27: error: expected expression
+  347 |     memset(out, 0, sizeof /out);
+      |                           ^
+1 error generated.
+build_close/mutants/p38260/m0222_repo_cards.c:348:18: error: expected identifier or '('
+  348 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p38260/m0222_repo_cards.c:349:53: error: use of undeclared identifier 'st'
+  349 |     if (sqlite3_prepare_v2(db, CT_SQL_SRS_GET, -1, &st, NULL) != SQLITE_OK) {
+      |                                                     ^~
+build_close/mutants/p38260/m0222_repo_cards.c:350:26: error: use of undeclared identifier 'st'
+  350 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p38260/m0222_repo_cards.c:353:24: error: use of undeclared identifier 'st'
+  353 |     sqlite3_bind_int64(st, 1, card_id);
+      |                        ^~
+build_close/mutants/p38260/m0222_repo_cards.c:354:29: error: use of undeclared identifier 'st'
+  354 |     int step = sqlite3_step(st);
+      |                             ^~
+build_close/mutants/p38260/m0222_repo_cards.c:357:26: error: use of undeclared identifier 'st'
+  357 |         ct_read_open(&r, st);
+      |                          ^~
+build_close/mutants/p38260/m0222_repo_cards.c:365:26: error: use of undeclared identifier 'st'
+  365 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p38260/m0222_repo_cards.c:368:22: error: use of undeclared identifier 'st'
+  368 |     sqlite3_finalize(st);
+      |                      ^~
+8 errors generated.
+mutate: suite card_delete_cascade exited 1
+mutate: suite card_delete_cascade exited 1
+mutate: suite card_delete_cascade exited 1
+mutate: suite srs_roundtrip exited 1
+mutate: suite srs_roundtrip exited 1
+mutate: suite card_delete_cascade exited 1
+mutate: suite card_delete_cascade exited 1
+build_close/mutants/p38260/m0231_repo_cards.c:372:29: error: expected ')'
+  372 | int ct_repo_srs_put(sqlite3 /db, long card_id, const ct_srs_row *row) {
+      |                             ^
+build_close/mutants/p38260/m0231_repo_cards.c:372:20: note: to match this '('
+  372 | int ct_repo_srs_put(sqlite3 /db, long card_id, const ct_srs_row *row) {
+      |                    ^
+build_close/mutants/p38260/m0231_repo_cards.c:372:5: error: conflicting types for 'ct_repo_srs_put'
+  372 | int ct_repo_srs_put(sqlite3 /db, long card_id, const ct_srs_row *row) {
+      |     ^
+src\storage/repo_cards.h:61:5: note: previous declaration is here
+   61 | int ct_repo_srs_put(sqlite3 *db, long card_id, const ct_srs_row *row);
+      |     ^
+build_close/mutants/p38260/m0231_repo_cards.c:372:29: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  372 | int ct_repo_srs_put(sqlite3 /db, long card_id, const ct_srs_row *row) {
+      |                             ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p38260/m0231_repo_cards.c:373:9: error: use of undeclared identifier 'db'
+  373 |     if (db == NULL || row == NULL || card_id <= 0)
+      |         ^~
+build_close/mutants/p38260/m0231_repo_cards.c:373:23: error: use of undeclared identifier 'row'
+  373 |     if (db == NULL || row == NULL || card_id <= 0)
+      |                       ^~~
+build_close/mutants/p38260/m0231_repo_cards.c:373:38: error: use of undeclared identifier 'card_id'
+  373 |     if (db == NULL || row == NULL || card_id <= 0)
+      |                                      ^~~~~~~
+build_close/mutants/p38260/m0231_repo_cards.c:375:26: error: use of undeclared identifier 'row'
+  375 |     if (!ct_repo_text_ok(row->due, CT_CARD_STAMP_MAX))
+      |                          ^~~
+build_close/mutants/p38260/m0231_repo_cards.c:378:28: error: use of undeclared identifier 'db'
+  378 |     if (sqlite3_prepare_v2(db, CT_SQL_SRS_PUT, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p38260/m0231_repo_cards.c:384:23: error: use of undeclared identifier 'card_id'
+  384 |     ct_bind_int64(&b, card_id);
+      |                       ^~~~~~~
+build_close/mutants/p38260/m0231_repo_cards.c:385:24: error: use of undeclared identifier 'row'
+  385 |     ct_bind_double(&b, row->stability);
+      |                        ^~~
+build_close/mutants/p38260/m0231_repo_cards.c:386:24: error: use of undeclared identifier 'row'
+  386 |     ct_bind_double(&b, row->difficulty);
+      |                        ^~~
+build_close/mutants/p38260/m0231_repo_cards.c:387:22: error: use of undeclared identifier 'row'
+  387 |     ct_bind_text(&b, row->due);
+      |                      ^~~
+build_close/mutants/p38260/m0231_repo_cards.c:388:22: error: use of undeclared identifier 'row'
+  388 |     ct_bind_text(&b, row->last_review);
+      |                      ^~~
+build_close/mutants/p38260/m0231_repo_cards.c:389:21: error: use of undeclared identifier 'row'
+  389 |     ct_bind_int(&b, row->reps);
+      |                     ^~~
+build_close/mutants/p38260/m0231_repo_cards.c:390:21: error: use of undeclared identifier 'row'
+  390 |     ct_bind_int(&b, row->lapses);
+      |                     ^~~
+build_close/mutants/p38260/m0231_repo_cards.c:391:21: error: use of undeclared identifier 'row'
+  391 |     ct_bind_int(&b, row->state);
+      |                     ^~~
+build_close/mutants/p38260/m0231_repo_cards.c:393:74: error: use of undeclared identifier 'db'
+  393 |     int ext = step == SQLITE_DONE ? SQLITE_OK : sqlite3_extended_errcode(db);
+      |                                                                          ^~
+17 errors generated.
+build_close/mutants/p38260/m0232_repo_cards.c:372:65: error: expected ')'
+  372 | int ct_repo_srs_put(sqlite3 *db, long card_id, const ct_srs_row /row) {
+      |                                                                 ^
+build_close/mutants/p38260/m0232_repo_cards.c:372:20: note: to match this '('
+  372 | int ct_repo_srs_put(sqlite3 *db, long card_id, const ct_srs_row /row) {
+      |                    ^
+build_close/mutants/p38260/m0232_repo_cards.c:372:5: error: conflicting types for 'ct_repo_srs_put'
+  372 | int ct_repo_srs_put(sqlite3 *db, long card_id, const ct_srs_row /row) {
+      |     ^
+src\storage/repo_cards.h:61:5: note: previous declaration is here
+   61 | int ct_repo_srs_put(sqlite3 *db, long card_id, const ct_srs_row *row);
+      |     ^
+build_close/mutants/p38260/m0232_repo_cards.c:373:23: error: use of undeclared identifier 'row'
+  373 |     if (db == NULL || row == NULL || card_id <= 0)
+      |                       ^~~
+build_close/mutants/p38260/m0232_repo_cards.c:375:26: error: use of undeclared identifier 'row'
+  375 |     if (!ct_repo_text_ok(row->due, CT_CARD_STAMP_MAX))
+      |                          ^~~
+build_close/mutants/p38260/m0232_repo_cards.c:385:24: error: use of undeclared identifier 'row'
+  385 |     ct_bind_double(&b, row->stability);
+      |                        ^~~
+build_close/mutants/p38260/m0232_repo_cards.c:386:24: error: use of undeclared identifier 'row'
+  386 |     ct_bind_double(&b, row->difficulty);
+      |                        ^~~
+build_close/mutants/p38260/m0232_repo_cards.c:387:22: error: use of undeclared identifier 'row'
+  387 |     ct_bind_text(&b, row->due);
+      |                      ^~~
+build_close/mutants/p38260/m0232_repo_cards.c:388:22: error: use of undeclared identifier 'row'
+  388 |     ct_bind_text(&b, row->last_review);
+      |                      ^~~
+build_close/mutants/p38260/m0232_repo_cards.c:389:21: error: use of undeclared identifier 'row'
+  389 |     ct_bind_int(&b, row->reps);
+      |                     ^~~
+build_close/mutants/p38260/m0232_repo_cards.c:390:21: error: use of undeclared identifier 'row'
+  390 |     ct_bind_int(&b, row->lapses);
+      |                     ^~~
+build_close/mutants/p38260/m0232_repo_cards.c:391:21: error: use of undeclared identifier 'row'
+  391 |     ct_bind_int(&b, row->state);
+      |                     ^~~
+11 errors generated.
+mutate: suite card_delete_cascade exited 1
+build_close/mutants/p38260/m0234_repo_cards.c:373:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  373 |     if (db == NULL && row == NULL || card_id <= 0)
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_close/mutants/p38260/m0234_repo_cards.c:373:20: note: place parentheses around the '&&' expression to silence this warning
+  373 |     if (db == NULL && row == NULL || card_id <= 0)
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite card_delete_cascade exited 1
+build_close/mutants/p38260/m0236_repo_cards.c:373:35: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  373 |     if (db == NULL || row == NULL && card_id <= 0)
+      |                    ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~
+build_close/mutants/p38260/m0236_repo_cards.c:373:35: note: place parentheses around the '&&' expression to silence this warning
+  373 |     if (db == NULL || row == NULL && card_id <= 0)
+      |                                   ^              
+      |                       (                          )
+1 error generated.
+mutate: suite card_bad_args exited 1
+mutate: suite card_delete_cascade exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_delete_cascade exited 1
+build_close/mutants/p38260/m0241_repo_cards.c:377:18: error: expected identifier or '('
+  377 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p38260/m0241_repo_cards.c:378:53: error: use of undeclared identifier 'st'
+  378 |     if (sqlite3_prepare_v2(db, CT_SQL_SRS_PUT, -1, &st, NULL) != SQLITE_OK) {
+      |                                                     ^~
+build_close/mutants/p38260/m0241_repo_cards.c:379:26: error: use of undeclared identifier 'st'
+  379 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p38260/m0241_repo_cards.c:383:22: error: use of undeclared identifier 'st'
+  383 |     ct_bind_open(&b, st);
+      |                      ^~
+build_close/mutants/p38260/m0241_repo_cards.c:392:29: error: use of undeclared identifier 'st'
+  392 |     int step = sqlite3_step(st);
+      |                             ^~
+build_close/mutants/p38260/m0241_repo_cards.c:394:22: error: use of undeclared identifier 'st'
+  394 |     sqlite3_finalize(st);
+      |                      ^~
+6 errors generated.
+mutate: suite card_delete_cascade exited 1
+mutate: suite card_delete_cascade exited 1
+mutate: suite card_delete_cascade exited 1
+mutate: suite srs_roundtrip exited 1
+mutate: suite card_delete_cascade exited 1
+mutate: suite srs_roundtrip exited 1
+mutate: suite srs_roundtrip exited 1
+mutate: 25 unexplained survivors
+make: *** [makefile:242: mutate] Error 1

@@ -1,0 +1,137 @@
+build_close/mutants/p42396/m0001_screen_menu.c:8:16: error: expected member name or ';' after declaration specifiers
+    8 |     const char /label;
+      |     ~~~~~~~~~~ ^
+build_close/mutants/p42396/m0001_screen_menu.c:8:15: error: expected ';' at end of declaration list
+    8 |     const char /label;
+      |               ^
+      |               ;
+build_close/mutants/p42396/m0001_screen_menu.c:48:35: error: invalid application of 'sizeof' to an incomplete type 'const ct_menu_entry[]' (aka 'const struct (unnamed at build_close/mutants/p42396/m0001_screen_menu.c:7:9)[]')
+   48 |     for (size_t i = 0; i < sizeof CT_MENU_ENTRIES / sizeof CT_MENU_ENTRIES[0]; i++) {
+      |                                   ^~~~~~~~~~~~~~~
+build_close/mutants/p42396/m0001_screen_menu.c:84:27: error: invalid application of 'sizeof' to an incomplete type 'const ct_menu_entry[]' (aka 'const struct (unnamed at build_close/mutants/p42396/m0001_screen_menu.c:7:9)[]')
+   84 |     size_t count = sizeof CT_MENU_ENTRIES / sizeof CT_MENU_ENTRIES[0];
+      |                           ^~~~~~~~~~~~~~~
+build_close/mutants/p42396/m0001_screen_menu.c:93:54: error: no member named 'label' in 'struct (unnamed at build_close/mutants/p42396/m0001_screen_menu.c:7:9)'
+   93 |         if (GuiButton(entry_rect, CT_MENU_ENTRIES[i].label)) {
+      |                                   ~~~~~~~~~~~~~~~~~~ ^
+5 errors generated.
+build_close/mutants/p42396/m0002_screen_menu.c:19:26: error: expected ')'
+   19 | void ct_ui_update(ct_app /app) {
+      |                          ^
+build_close/mutants/p42396/m0002_screen_menu.c:19:18: note: to match this '('
+   19 | void ct_ui_update(ct_app /app) {
+      |                  ^
+build_close/mutants/p42396/m0002_screen_menu.c:19:6: error: conflicting types for 'ct_ui_update'
+   19 | void ct_ui_update(ct_app /app) {
+      |      ^
+src\ui/ui.h:17:6: note: previous declaration is here
+   17 | void ct_ui_update(ct_app *app);
+      |      ^
+build_close/mutants/p42396/m0002_screen_menu.c:20:9: error: use of undeclared identifier 'app'
+   20 |     if (app->screen == CT_SCREEN_TRAINER) {
+      |         ^~~
+build_close/mutants/p42396/m0002_screen_menu.c:21:34: error: use of undeclared identifier 'app'
+   21 |         ct_screen_trainer_update(app);
+      |                                  ^~~
+build_close/mutants/p42396/m0002_screen_menu.c:24:9: error: use of undeclared identifier 'app'
+   24 |     if (app->screen == CT_SCREEN_CARDS) {
+      |         ^~~
+build_close/mutants/p42396/m0002_screen_menu.c:25:32: error: use of undeclared identifier 'app'
+   25 |         ct_screen_cards_update(app);
+      |                                ^~~
+build_close/mutants/p42396/m0002_screen_menu.c:28:9: error: use of undeclared identifier 'app'
+   28 |     if (app->screen == CT_SCREEN_REVIEW) {
+      |         ^~~
+build_close/mutants/p42396/m0002_screen_menu.c:29:33: error: use of undeclared identifier 'app'
+   29 |         ct_screen_review_update(app);
+      |                                 ^~~
+build_close/mutants/p42396/m0002_screen_menu.c:32:9: error: use of undeclared identifier 'app'
+   32 |     if (app->screen == CT_SCREEN_SETTINGS) {
+      |         ^~~
+build_close/mutants/p42396/m0002_screen_menu.c:33:35: error: use of undeclared identifier 'app'
+   33 |         ct_screen_settings_update(app);
+      |                                   ^~~
+build_close/mutants/p42396/m0002_screen_menu.c:36:9: error: use of undeclared identifier 'app'
+   36 |     if (app->screen == CT_SCREEN_STATS) {
+      |         ^~~
+build_close/mutants/p42396/m0002_screen_menu.c:37:32: error: use of undeclared identifier 'app'
+   37 |         ct_screen_stats_update(app);
+      |                                ^~~
+build_close/mutants/p42396/m0002_screen_menu.c:40:9: error: use of undeclared identifier 'app'
+   40 |     if (app->screen != CT_SCREEN_MENU) {
+      |         ^~~
+build_close/mutants/p42396/m0002_screen_menu.c:41:9: error: use of undeclared identifier 'app'
+   41 |         app->screen = CT_SCREEN_MENU;
+      |         ^~~
+build_close/mutants/p42396/m0002_screen_menu.c:45:9: error: use of undeclared identifier 'app'
+   45 |         app->running = false;
+      |         ^~~
+build_close/mutants/p42396/m0002_screen_menu.c:50:13: error: use of undeclared identifier 'app'
+   50 |             app->screen = CT_MENU_ENTRIES[i].screen;
+      |             ^~~
+16 errors generated.
+build_close/mutants/p42396/m0016_screen_menu.c:56:24: error: expected ')'
+   56 | void ct_ui_draw(ct_app /app) {
+      |                        ^
+build_close/mutants/p42396/m0016_screen_menu.c:56:16: note: to match this '('
+   56 | void ct_ui_draw(ct_app /app) {
+      |                ^
+build_close/mutants/p42396/m0016_screen_menu.c:56:6: error: conflicting types for 'ct_ui_draw'
+   56 | void ct_ui_draw(ct_app /app) {
+      |      ^
+src\ui/ui.h:18:6: note: previous declaration is here
+   18 | void ct_ui_draw(ct_app *app);
+      |      ^
+build_close/mutants/p42396/m0016_screen_menu.c:57:9: error: use of undeclared identifier 'app'
+   57 |     if (app->screen == CT_SCREEN_TRAINER) {
+      |         ^~~
+build_close/mutants/p42396/m0016_screen_menu.c:58:32: error: use of undeclared identifier 'app'
+   58 |         ct_screen_trainer_draw(app);
+      |                                ^~~
+build_close/mutants/p42396/m0016_screen_menu.c:61:9: error: use of undeclared identifier 'app'
+   61 |     if (app->screen == CT_SCREEN_CARDS) {
+      |         ^~~
+build_close/mutants/p42396/m0016_screen_menu.c:62:30: error: use of undeclared identifier 'app'
+   62 |         ct_screen_cards_draw(app);
+      |                              ^~~
+build_close/mutants/p42396/m0016_screen_menu.c:65:9: error: use of undeclared identifier 'app'
+   65 |     if (app->screen == CT_SCREEN_REVIEW) {
+      |         ^~~
+build_close/mutants/p42396/m0016_screen_menu.c:66:31: error: use of undeclared identifier 'app'
+   66 |         ct_screen_review_draw(app);
+      |                               ^~~
+build_close/mutants/p42396/m0016_screen_menu.c:69:9: error: use of undeclared identifier 'app'
+   69 |     if (app->screen == CT_SCREEN_SETTINGS) {
+      |         ^~~
+build_close/mutants/p42396/m0016_screen_menu.c:70:33: error: use of undeclared identifier 'app'
+   70 |         ct_screen_settings_draw(app);
+      |                                 ^~~
+build_close/mutants/p42396/m0016_screen_menu.c:73:9: error: use of undeclared identifier 'app'
+   73 |     if (app->screen == CT_SCREEN_STATS) {
+      |         ^~~
+build_close/mutants/p42396/m0016_screen_menu.c:74:30: error: use of undeclared identifier 'app'
+   74 |         ct_screen_stats_draw(app);
+      |                              ^~~
+build_close/mutants/p42396/m0016_screen_menu.c:78:18: error: use of undeclared identifier 'app'
+   78 |     int w = (int)app->cfg.window.width;
+      |                  ^~~
+build_close/mutants/p42396/m0016_screen_menu.c:79:18: error: use of undeclared identifier 'app'
+   79 |     int h = (int)app->cfg.window.height;
+      |                  ^~~
+build_close/mutants/p42396/m0016_screen_menu.c:94:13: error: use of undeclared identifier 'app'
+   94 |             app->screen = CT_MENU_ENTRIES[i].screen;
+      |             ^~~
+build_close/mutants/p42396/m0016_screen_menu.c:99:9: error: use of undeclared identifier 'app'
+   99 |         app->running = false;
+      |         ^~~
+16 errors generated.
+build_close/mutants/p42396/m0022_screen_menu.c:80:16: error: expected identifier or '('
+   80 |     const char /title = "cubing trainer";
+      |                ^
+build_close/mutants/p42396/m0022_screen_menu.c:82:36: error: use of undeclared identifier 'title'
+   82 |     int title_x = (w - MeasureText(title, title_size)) / 2;
+      |                                    ^~~~~
+build_close/mutants/p42396/m0022_screen_menu.c:83:14: error: use of undeclared identifier 'title'
+   83 |     DrawText(title, title_x, h / 8, title_size, RAYWHITE);
+      |              ^~~~~
+3 errors generated.

@@ -1,0 +1,501 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/storage/migrate.c build_close migrate migrate_name_edges migrate_backup migrate_error_paths migrate_soundness db_schema_assert pragmas
+mutate: scope=src/storage/migrate.c files=1 sites=337 suites=7
+KILLED    m0001 src/storage/migrate.c:18 [arith * -> /]
+          build break
+KILLED    m0002 src/storage/migrate.c:18 [arith * -> /]
+          build break
+KILLED    m0003 src/storage/migrate.c:19 [int+1 0 -> 1]
+KILLED    m0004 src/storage/migrate.c:19 [int-1 0 -> -1]
+KILLED    m0005 src/storage/migrate.c:22 [cmp == -> !=]
+KILLED    m0006 src/storage/migrate.c:22 [int+1 0 -> 1]
+KILLED    m0007 src/storage/migrate.c:22 [int-1 0 -> -1]
+          build break
+KILLED    m0008 src/storage/migrate.c:22 [logic || -> &&]
+KILLED    m0009 src/storage/migrate.c:22 [cmp != -> ==]
+KILLED    m0010 src/storage/migrate.c:23 [ret-lit 0 -> 1]
+KILLED    m0011 src/storage/migrate.c:23 [int+1 0 -> 1]
+KILLED    m0012 src/storage/migrate.c:23 [int-1 0 -> -1]
+SURVIVED  m0013 src/storage/migrate.c:25 [cmp < -> <=]
+SURVIVED  m0014 src/storage/migrate.c:25 [int+1 5 -> 6]
+SURVIVED  m0015 src/storage/migrate.c:25 [int-1 5 -> 4]
+KILLED    m0016 src/storage/migrate.c:25 [logic || -> &&]
+KILLED    m0017 src/storage/migrate.c:25 [arith + -> -]
+KILLED    m0018 src/storage/migrate.c:25 [arith - -> +]
+KILLED    m0019 src/storage/migrate.c:25 [int+1 4 -> 5]
+KILLED    m0020 src/storage/migrate.c:25 [int-1 4 -> 3]
+KILLED    m0021 src/storage/migrate.c:25 [cmp != -> ==]
+KILLED    m0022 src/storage/migrate.c:25 [int+1 0 -> 1]
+KILLED    m0023 src/storage/migrate.c:25 [int-1 0 -> -1]
+SURVIVED  m0024 src/storage/migrate.c:26 [ret-lit 0 -> 1]
+SURVIVED  m0025 src/storage/migrate.c:26 [int+1 0 -> 1]
+KILLED    m0026 src/storage/migrate.c:26 [int-1 0 -> -1]
+SURVIVED  m0027 src/storage/migrate.c:27 [cmp >= -> >]
+SURVIVED  m0028 src/storage/migrate.c:28 [ret-lit 0 -> 1]
+SURVIVED  m0029 src/storage/migrate.c:28 [int+1 0 -> 1]
+SURVIVED  m0030 src/storage/migrate.c:28 [int-1 0 -> -1]
+KILLED    m0031 src/storage/migrate.c:32 [arith * -> /]
+          build break
+SURVIVED  m0032 src/storage/migrate.c:33 [int+1 0 -> 1]
+SURVIVED  m0033 src/storage/migrate.c:33 [int-1 0 -> -1]
+KILLED    m0034 src/storage/migrate.c:35 [cmp == -> !=]
+KILLED    m0035 src/storage/migrate.c:35 [logic || -> &&]
+          build break
+KILLED    m0036 src/storage/migrate.c:35 [arith * -> /]
+          build break
+KILLED    m0037 src/storage/migrate.c:35 [cmp != -> ==]
+KILLED    m0038 src/storage/migrate.c:35 [logic || -> &&]
+          build break
+KILLED    m0039 src/storage/migrate.c:35 [cmp == -> !=]
+KILLED    m0040 src/storage/migrate.c:35 [logic || -> &&]
+          build break
+SURVIVED  m0041 src/storage/migrate.c:35 [cmp > -> >=]
+KILLED    m0042 src/storage/migrate.c:36 [arith - -> +]
+SURVIVED  m0043 src/storage/migrate.c:36 [int+1 1 -> 2]
+KILLED    m0044 src/storage/migrate.c:36 [int-1 1 -> 0]
+KILLED    m0045 src/storage/migrate.c:37 [arith * -> /]
+          build break
+KILLED    m0046 src/storage/migrate.c:38 [ret-lit 1 -> 0]
+SURVIVED  m0047 src/storage/migrate.c:38 [int+1 1 -> 2]
+KILLED    m0048 src/storage/migrate.c:38 [int-1 1 -> 0]
+KILLED    m0049 src/storage/migrate.c:41 [arith * -> /]
+          build break
+KILLED    m0050 src/storage/migrate.c:41 [arith * -> /]
+          build break
+KILLED    m0051 src/storage/migrate.c:42 [arith * -> /]
+          build break
+KILLED    m0052 src/storage/migrate.c:43 [arith * -> /]
+          build break
+KILLED    m0053 src/storage/migrate.c:44 [cmp != -> ==]
+SURVIVED  m0054 src/storage/migrate.c:45 [cmp < -> <=]
+KILLED    m0055 src/storage/migrate.c:45 [arith - -> +]
+SURVIVED  m0056 src/storage/migrate.c:45 [int+1 1 -> 2]
+SURVIVED  m0057 src/storage/migrate.c:45 [int-1 1 -> 0]
+SURVIVED  m0058 src/storage/migrate.c:45 [int+1 1 -> 2]
+KILLED    m0059 src/storage/migrate.c:45 [int-1 1 -> 0]
+KILLED    m0060 src/storage/migrate.c:49 [arith * -> /]
+          build break
+KILLED    m0061 src/storage/migrate.c:49 [arith * -> /]
+          build break
+KILLED    m0062 src/storage/migrate.c:50 [arith * -> /]
+          build break
+KILLED    m0063 src/storage/migrate.c:51 [cmp == -> !=]
+KILLED    m0064 src/storage/migrate.c:54 [int+1 0 -> 1]
+KILLED    m0065 src/storage/migrate.c:54 [int-1 0 -> -1]
+KILLED    m0066 src/storage/migrate.c:55 [arith * -> /]
+          build break
+KILLED    m0067 src/storage/migrate.c:55 [arith + -> -]
+SURVIVED  m0068 src/storage/migrate.c:55 [int+1 1 -> 2]
+SURVIVED  m0069 src/storage/migrate.c:55 [int-1 1 -> 0]
+KILLED    m0070 src/storage/migrate.c:56 [cmp == -> !=]
+KILLED    m0071 src/storage/migrate.c:61 [arith + -> -]
+KILLED    m0072 src/storage/migrate.c:61 [int+1 1 -> 2]
+KILLED    m0073 src/storage/migrate.c:61 [int-1 1 -> 0]
+SURVIVED  m0074 src/storage/migrate.c:61 [arith - -> +]
+KILLED    m0075 src/storage/migrate.c:62 [cmp == -> !=]
+SURVIVED  m0076 src/storage/migrate.c:62 [int+1 0 -> 1]
+KILLED    m0077 src/storage/migrate.c:62 [int-1 0 -> -1]
+          build break
+KILLED    m0078 src/storage/migrate.c:65 [cmp < -> <=]
+SURVIVED  m0079 src/storage/migrate.c:67 [cmp > -> >=]
+KILLED    m0080 src/storage/migrate.c:67 [arith - -> +]
+SURVIVED  m0081 src/storage/migrate.c:67 [int+1 1 -> 2]
+KILLED    m0082 src/storage/migrate.c:67 [int-1 1 -> 0]
+SURVIVED  m0083 src/storage/migrate.c:67 [arith / -> *]
+SURVIVED  m0084 src/storage/migrate.c:67 [int+1 2 -> 3]
+SURVIVED  m0085 src/storage/migrate.c:67 [int-1 2 -> 1]
+SURVIVED  m0086 src/storage/migrate.c:72 [int+1 2 -> 3]
+KILLED    m0087 src/storage/migrate.c:72 [int-1 2 -> 1]
+KILLED    m0088 src/storage/migrate.c:73 [arith * -> /]
+          build break
+SURVIVED  m0089 src/storage/migrate.c:73 [arith + -> -]
+SURVIVED  m0090 src/storage/migrate.c:73 [int+1 1 -> 2]
+SURVIVED  m0091 src/storage/migrate.c:73 [int-1 1 -> 0]
+KILLED    m0092 src/storage/migrate.c:74 [cmp == -> !=]
+KILLED    m0093 src/storage/migrate.c:86 [cmp != -> ==]
+KILLED    m0094 src/storage/migrate.c:92 [cmp != -> ==]
+KILLED    m0095 src/storage/migrate.c:92 [int+1 0 -> 1]
+KILLED    m0096 src/storage/migrate.c:92 [int-1 0 -> -1]
+KILLED    m0097 src/storage/migrate.c:99 [arith * -> /]
+          build break
+KILLED    m0098 src/storage/migrate.c:99 [arith * -> /]
+          build break
+KILLED    m0099 src/storage/migrate.c:100 [arith * -> /]
+          build break
+KILLED    m0100 src/storage/migrate.c:101 [cmp == -> !=]
+SURVIVED  m0101 src/storage/migrate.c:102 [ret-lit 0 -> 1]
+SURVIVED  m0102 src/storage/migrate.c:102 [int+1 0 -> 1]
+SURVIVED  m0103 src/storage/migrate.c:102 [int-1 0 -> -1]
+KILLED    m0104 src/storage/migrate.c:103 [arith * -> /]
+          build break
+KILLED    m0105 src/storage/migrate.c:104 [cmp == -> !=]
+KILLED    m0106 src/storage/migrate.c:106 [ret-lit 0 -> 1]
+KILLED    m0107 src/storage/migrate.c:106 [int+1 0 -> 1]
+KILLED    m0108 src/storage/migrate.c:106 [int-1 0 -> -1]
+SURVIVED  m0109 src/storage/migrate.c:109 [int+1 1 -> 2]
+KILLED    m0110 src/storage/migrate.c:109 [int-1 1 -> 0]
+KILLED    m0111 src/storage/migrate.c:111 [int+1 1 -> 2]
+KILLED    m0112 src/storage/migrate.c:111 [int-1 1 -> 0]
+KILLED    m0113 src/storage/migrate.c:112 [cmp == -> !=]
+SURVIVED  m0114 src/storage/migrate.c:112 [int+1 0 -> 1]
+KILLED    m0115 src/storage/migrate.c:112 [int-1 0 -> -1]
+          build break
+KILLED    m0116 src/storage/migrate.c:114 [int+1 1 -> 2]
+KILLED    m0117 src/storage/migrate.c:114 [int-1 1 -> 0]
+KILLED    m0118 src/storage/migrate.c:114 [cmp != -> ==]
+SURVIVED  m0119 src/storage/migrate.c:115 [int+1 0 -> 1]
+SURVIVED  m0120 src/storage/migrate.c:115 [int-1 0 -> -1]
+KILLED    m0121 src/storage/migrate.c:118 [cmp < -> <=]
+SURVIVED  m0122 src/storage/migrate.c:122 [int+1 0 -> 1]
+SURVIVED  m0123 src/storage/migrate.c:122 [int-1 0 -> -1]
+KILLED    m0124 src/storage/migrate.c:123 [cmp != -> ==]
+KILLED    m0125 src/storage/migrate.c:123 [int+1 0 -> 1]
+KILLED    m0126 src/storage/migrate.c:123 [int-1 0 -> -1]
+SURVIVED  m0127 src/storage/migrate.c:124 [int+1 0 -> 1]
+SURVIVED  m0128 src/storage/migrate.c:124 [int-1 0 -> -1]
+KILLED    m0129 src/storage/migrate.c:125 [cmp != -> ==]
+KILLED    m0130 src/storage/migrate.c:125 [int+1 0 -> 1]
+KILLED    m0131 src/storage/migrate.c:125 [int-1 0 -> -1]
+SURVIVED  m0132 src/storage/migrate.c:126 [int+1 0 -> 1]
+SURVIVED  m0133 src/storage/migrate.c:126 [int-1 0 -> -1]
+KILLED    m0134 src/storage/migrate.c:130 [arith * -> /]
+          build break
+KILLED    m0135 src/storage/migrate.c:130 [arith * -> /]
+          build break
+KILLED    m0136 src/storage/migrate.c:130 [arith * -> /]
+          build break
+KILLED    m0137 src/storage/migrate.c:130 [arith * -> /]
+          build break
+KILLED    m0138 src/storage/migrate.c:131 [arith * -> /]
+          build break
+KILLED    m0139 src/storage/migrate.c:132 [arith * -> /]
+          build break
+SURVIVED  m0140 src/storage/migrate.c:132 [int+1 0 -> 1]
+SURVIVED  m0141 src/storage/migrate.c:132 [int-1 0 -> -1]
+KILLED    m0142 src/storage/migrate.c:133 [arith * -> /]
+          build break
+KILLED    m0143 src/storage/migrate.c:134 [cmp == -> !=]
+KILLED    m0144 src/storage/migrate.c:135 [ret-lit 1 -> 0]
+SURVIVED  m0145 src/storage/migrate.c:135 [int+1 1 -> 2]
+KILLED    m0146 src/storage/migrate.c:135 [int-1 1 -> 0]
+KILLED    m0147 src/storage/migrate.c:136 [arith * -> /]
+          build break
+KILLED    m0148 src/storage/migrate.c:137 [int+1 0 -> 1]
+KILLED    m0149 src/storage/migrate.c:137 [int-1 0 -> -1]
+KILLED    m0150 src/storage/migrate.c:138 [int+1 0 -> 1]
+KILLED    m0151 src/storage/migrate.c:138 [int-1 0 -> -1]
+KILLED    m0152 src/storage/migrate.c:139 [arith * -> /]
+          build break
+KILLED    m0153 src/storage/migrate.c:140 [int+1 0 -> 1]
+KILLED    m0154 src/storage/migrate.c:140 [int-1 0 -> -1]
+KILLED    m0155 src/storage/migrate.c:141 [cmp != -> ==]
+SURVIVED  m0156 src/storage/migrate.c:142 [int+1 0 -> 1]
+SURVIVED  m0157 src/storage/migrate.c:142 [int-1 0 -> -1]
+KILLED    m0158 src/storage/migrate.c:144 [cmp == -> !=]
+KILLED    m0159 src/storage/migrate.c:144 [int+1 0 -> 1]
+KILLED    m0160 src/storage/migrate.c:144 [int-1 0 -> -1]
+SURVIVED  m0161 src/storage/migrate.c:146 [cmp < -> <=]
+SURVIVED  m0162 src/storage/migrate.c:146 [int+1 0 -> 1]
+KILLED    m0163 src/storage/migrate.c:146 [int-1 0 -> -1]
+SURVIVED  m0164 src/storage/migrate.c:147 [int+1 1 -> 2]
+KILLED    m0165 src/storage/migrate.c:147 [int-1 1 -> 0]
+SURVIVED  m0166 src/storage/migrate.c:151 [cmp >= -> >]
+SURVIVED  m0167 src/storage/migrate.c:152 [int+1 1 -> 2]
+SURVIVED  m0168 src/storage/migrate.c:152 [int-1 1 -> 0]
+KILLED    m0169 src/storage/migrate.c:155 [cmp == -> !=]
+KILLED    m0170 src/storage/migrate.c:156 [cmp == -> !=]
+KILLED    m0171 src/storage/migrate.c:156 [int+1 0 -> 1]
+KILLED    m0172 src/storage/migrate.c:156 [int-1 0 -> -1]
+          build break
+SURVIVED  m0173 src/storage/migrate.c:156 [int+1 8 -> 9]
+SURVIVED  m0174 src/storage/migrate.c:156 [int-1 8 -> 7]
+KILLED    m0175 src/storage/migrate.c:156 [arith * -> /]
+SURVIVED  m0176 src/storage/migrate.c:156 [int+1 2 -> 3]
+KILLED    m0177 src/storage/migrate.c:156 [int-1 2 -> 1]
+KILLED    m0178 src/storage/migrate.c:157 [arith * -> /]
+          build break
+KILLED    m0179 src/storage/migrate.c:157 [arith * -> /]
+KILLED    m0180 src/storage/migrate.c:157 [arith * -> /]
+          build break
+KILLED    m0181 src/storage/migrate.c:158 [cmp == -> !=]
+SURVIVED  m0182 src/storage/migrate.c:159 [int+1 1 -> 2]
+SURVIVED  m0183 src/storage/migrate.c:159 [int-1 1 -> 0]
+KILLED    m0184 src/storage/migrate.c:165 [arith + -> -]
+SURVIVED  m0185 src/storage/migrate.c:165 [int+1 1 -> 2]
+KILLED    m0186 src/storage/migrate.c:165 [int-1 1 -> 0]
+KILLED    m0187 src/storage/migrate.c:170 [cmp != -> ==]
+KILLED    m0188 src/storage/migrate.c:170 [int+1 0 -> 1]
+KILLED    m0189 src/storage/migrate.c:170 [int-1 0 -> -1]
+SURVIVED  m0190 src/storage/migrate.c:172 [ret-lit 1 -> 0]
+SURVIVED  m0191 src/storage/migrate.c:172 [int+1 1 -> 2]
+SURVIVED  m0192 src/storage/migrate.c:172 [int-1 1 -> 0]
+SURVIVED  m0193 src/storage/migrate.c:174 [cmp > -> >=]
+SURVIVED  m0194 src/storage/migrate.c:174 [int+1 1 -> 2]
+SURVIVED  m0195 src/storage/migrate.c:174 [int-1 1 -> 0]
+KILLED    m0196 src/storage/migrate.c:175 [arith * -> /]
+          build break
+KILLED    m0197 src/storage/migrate.c:176 [arith * -> /]
+          build break
+KILLED    m0198 src/storage/migrate.c:177 [arith * -> /]
+          build break
+KILLED    m0199 src/storage/migrate.c:178 [ret-lit 0 -> 1]
+KILLED    m0200 src/storage/migrate.c:178 [int+1 0 -> 1]
+KILLED    m0201 src/storage/migrate.c:178 [int-1 0 -> -1]
+KILLED    m0202 src/storage/migrate.c:181 [arith * -> /]
+          build break
+KILLED    m0203 src/storage/migrate.c:181 [arith * -> /]
+          build break
+KILLED    m0204 src/storage/migrate.c:182 [arith * -> /]
+          build break
+SURVIVED  m0205 src/storage/migrate.c:187 [cmp < -> <=]
+SURVIVED  m0206 src/storage/migrate.c:187 [int+1 0 -> 1]
+SURVIVED  m0207 src/storage/migrate.c:187 [int-1 0 -> -1]
+SURVIVED  m0208 src/storage/migrate.c:187 [logic || -> &&]
+SURVIVED  m0209 src/storage/migrate.c:187 [cmp >= -> >]
+SURVIVED  m0210 src/storage/migrate.c:188 [ret-lit 1 -> 0]
+SURVIVED  m0211 src/storage/migrate.c:188 [int+1 1 -> 2]
+SURVIVED  m0212 src/storage/migrate.c:188 [int-1 1 -> 0]
+KILLED    m0213 src/storage/migrate.c:189 [int+1 0 -> 1]
+KILLED    m0214 src/storage/migrate.c:189 [int-1 0 -> -1]
+SURVIVED  m0215 src/storage/migrate.c:189 [int+1 1 -> 2]
+KILLED    m0216 src/storage/migrate.c:189 [int-1 1 -> 0]
+KILLED    m0217 src/storage/migrate.c:192 [arith * -> /]
+          build break
+KILLED    m0218 src/storage/migrate.c:192 [arith * -> /]
+          build break
+KILLED    m0219 src/storage/migrate.c:193 [cmp == -> !=]
+SURVIVED  m0220 src/storage/migrate.c:193 [logic || -> &&]
+KILLED    m0221 src/storage/migrate.c:193 [cmp == -> !=]
+KILLED    m0222 src/storage/migrate.c:194 [ret-lit 1 -> 0]
+SURVIVED  m0223 src/storage/migrate.c:194 [int+1 1 -> 2]
+KILLED    m0224 src/storage/migrate.c:194 [int-1 1 -> 0]
+KILLED    m0225 src/storage/migrate.c:195 [arith * -> /]
+          build break
+SURVIVED  m0226 src/storage/migrate.c:196 [int+1 0 -> 1]
+SURVIVED  m0227 src/storage/migrate.c:196 [int-1 0 -> -1]
+KILLED    m0228 src/storage/migrate.c:197 [cmp != -> ==]
+KILLED    m0229 src/storage/migrate.c:197 [int+1 0 -> 1]
+KILLED    m0230 src/storage/migrate.c:197 [int-1 0 -> -1]
+KILLED    m0231 src/storage/migrate.c:198 [ret-lit 1 -> 0]
+SURVIVED  m0232 src/storage/migrate.c:198 [int+1 1 -> 2]
+KILLED    m0233 src/storage/migrate.c:198 [int-1 1 -> 0]
+KILLED    m0234 src/storage/migrate.c:200 [cmp < -> <=]
+KILLED    m0235 src/storage/migrate.c:200 [int+1 0 -> 1]
+SURVIVED  m0236 src/storage/migrate.c:200 [int-1 0 -> -1]
+SURVIVED  m0237 src/storage/migrate.c:202 [ret-lit 1 -> 0]
+SURVIVED  m0238 src/storage/migrate.c:202 [int+1 1 -> 2]
+SURVIVED  m0239 src/storage/migrate.c:202 [int-1 1 -> 0]
+KILLED    m0240 src/storage/migrate.c:204 [cmp > -> >=]
+KILLED    m0241 src/storage/migrate.c:204 [int+1 0 -> 1]
+KILLED    m0242 src/storage/migrate.c:204 [int-1 0 -> -1]
+KILLED    m0243 src/storage/migrate.c:205 [cmp > -> >=]
+KILLED    m0244 src/storage/migrate.c:205 [arith - -> +]
+KILLED    m0245 src/storage/migrate.c:205 [int+1 1 -> 2]
+KILLED    m0246 src/storage/migrate.c:205 [int-1 1 -> 0]
+KILLED    m0247 src/storage/migrate.c:207 [ret-lit 1 -> 0]
+SURVIVED  m0248 src/storage/migrate.c:207 [int+1 1 -> 2]
+KILLED    m0249 src/storage/migrate.c:207 [int-1 1 -> 0]
+KILLED    m0250 src/storage/migrate.c:209 [int+1 0 -> 1]
+KILLED    m0251 src/storage/migrate.c:209 [int-1 0 -> -1]
+KILLED    m0252 src/storage/migrate.c:210 [int+1 0 -> 1]
+KILLED    m0253 src/storage/migrate.c:210 [int-1 0 -> -1]
+KILLED    m0254 src/storage/migrate.c:210 [cmp < -> <=]
+KILLED    m0255 src/storage/migrate.c:211 [cmp <= -> <]
+KILLED    m0256 src/storage/migrate.c:214 [cmp == -> !=]
+KILLED    m0257 src/storage/migrate.c:214 [int+1 0 -> 1]
+KILLED    m0258 src/storage/migrate.c:214 [int-1 0 -> -1]
+KILLED    m0259 src/storage/migrate.c:214 [arith + -> -]
+KILLED    m0260 src/storage/migrate.c:214 [int+1 1ul -> 2ul]
+KILLED    m0261 src/storage/migrate.c:214 [int-1 1ul -> 0ul]
+KILLED    m0262 src/storage/migrate.c:214 [arith - -> +]
+KILLED    m0263 src/storage/migrate.c:214 [int+1 1 -> 2]
+KILLED    m0264 src/storage/migrate.c:214 [int-1 1 -> 0]
+KILLED    m0265 src/storage/migrate.c:214 [arith + -> -]
+KILLED    m0266 src/storage/migrate.c:214 [int+1 1ul -> 2ul]
+KILLED    m0267 src/storage/migrate.c:214 [int-1 1ul -> 0ul]
+KILLED    m0268 src/storage/migrate.c:215 [cmp != -> ==]
+KILLED    m0269 src/storage/migrate.c:217 [ret-lit 1 -> 0]
+SURVIVED  m0270 src/storage/migrate.c:217 [int+1 1 -> 2]
+KILLED    m0271 src/storage/migrate.c:217 [int-1 1 -> 0]
+SURVIVED  m0272 src/storage/migrate.c:219 [int+1 1 -> 2]
+KILLED    m0273 src/storage/migrate.c:219 [int-1 1 -> 0]
+KILLED    m0274 src/storage/migrate.c:222 [int+1 0 -> 1]
+KILLED    m0275 src/storage/migrate.c:222 [int-1 0 -> -1]
+KILLED    m0276 src/storage/migrate.c:223 [int+1 0 -> 1]
+KILLED    m0277 src/storage/migrate.c:223 [int-1 0 -> -1]
+KILLED    m0278 src/storage/migrate.c:223 [cmp < -> <=]
+KILLED    m0279 src/storage/migrate.c:224 [cmp > -> >=]
+SURVIVED  m0280 src/storage/migrate.c:225 [int+1 1 -> 2]
+KILLED    m0281 src/storage/migrate.c:225 [int-1 1 -> 0]
+KILLED    m0282 src/storage/migrate.c:229 [int+1 0 -> 1]
+KILLED    m0283 src/storage/migrate.c:229 [int-1 0 -> -1]
+KILLED    m0284 src/storage/migrate.c:231 [arith * -> /]
+          build break
+KILLED    m0285 src/storage/migrate.c:232 [cmp != -> ==]
+KILLED    m0286 src/storage/migrate.c:232 [logic && -> ||]
+          build break
+SURVIVED  m0287 src/storage/migrate.c:232 [int+1 0 -> 1]
+KILLED    m0288 src/storage/migrate.c:232 [int-1 0 -> -1]
+KILLED    m0289 src/storage/migrate.c:232 [cmp != -> ==]
+KILLED    m0290 src/storage/migrate.c:232 [logic && -> ||]
+          build break
+KILLED    m0291 src/storage/migrate.c:232 [cmp > -> >=]
+KILLED    m0292 src/storage/migrate.c:232 [int+1 0 -> 1]
+KILLED    m0293 src/storage/migrate.c:232 [int-1 0 -> -1]
+KILLED    m0294 src/storage/migrate.c:236 [int+1 0 -> 1]
+KILLED    m0295 src/storage/migrate.c:236 [int-1 0 -> -1]
+KILLED    m0296 src/storage/migrate.c:236 [cmp < -> <=]
+KILLED    m0297 src/storage/migrate.c:236 [logic && -> ||]
+KILLED    m0298 src/storage/migrate.c:236 [cmp == -> !=]
+KILLED    m0299 src/storage/migrate.c:236 [int+1 0 -> 1]
+KILLED    m0300 src/storage/migrate.c:236 [int-1 0 -> -1]
+KILLED    m0301 src/storage/migrate.c:237 [cmp <= -> <]
+SURVIVED  m0302 src/storage/migrate.c:241 [cmp < -> <=]
+SURVIVED  m0303 src/storage/migrate.c:241 [int+1 0 -> 1]
+SURVIVED  m0304 src/storage/migrate.c:241 [int-1 0 -> -1]
+SURVIVED  m0305 src/storage/migrate.c:241 [logic || -> &&]
+SURVIVED  m0306 src/storage/migrate.c:241 [cmp >= -> >]
+SURVIVED  m0307 src/storage/migrate.c:242 [int+1 1 -> 2]
+SURVIVED  m0308 src/storage/migrate.c:242 [int-1 1 -> 0]
+KILLED    m0309 src/storage/migrate.c:245 [arith * -> /]
+          build break
+KILLED    m0310 src/storage/migrate.c:246 [cmp == -> !=]
+SURVIVED  m0311 src/storage/migrate.c:247 [int+1 1 -> 2]
+KILLED    m0312 src/storage/migrate.c:247 [int-1 1 -> 0]
+SURVIVED  m0313 src/storage/migrate.c:253 [cmp < -> <=]
+SURVIVED  m0314 src/storage/migrate.c:253 [int+1 0 -> 1]
+SURVIVED  m0315 src/storage/migrate.c:253 [int-1 0 -> -1]
+SURVIVED  m0316 src/storage/migrate.c:253 [logic || -> &&]
+SURVIVED  m0317 src/storage/migrate.c:253 [cmp >= -> >]
+SURVIVED  m0318 src/storage/migrate.c:255 [int+1 1 -> 2]
+SURVIVED  m0319 src/storage/migrate.c:255 [int-1 1 -> 0]
+KILLED    m0320 src/storage/migrate.c:258 [arith * -> /]
+          build break
+KILLED    m0321 src/storage/migrate.c:260 [cmp == -> !=]
+KILLED    m0322 src/storage/migrate.c:262 [cmp == -> !=]
+KILLED    m0323 src/storage/migrate.c:264 [cmp == -> !=]
+KILLED    m0324 src/storage/migrate.c:266 [cmp != -> ==]
+SURVIVED  m0325 src/storage/migrate.c:270 [int+1 1 -> 2]
+KILLED    m0326 src/storage/migrate.c:270 [int-1 1 -> 0]
+KILLED    m0327 src/storage/migrate.c:276 [cmp != -> ==]
+KILLED    m0328 src/storage/migrate.c:276 [int+1 0 -> 1]
+KILLED    m0329 src/storage/migrate.c:276 [int-1 0 -> -1]
+KILLED    m0330 src/storage/migrate.c:276 [logic || -> &&]
+KILLED    m0331 src/storage/migrate.c:276 [not-del ! -> (deleted)]
+KILLED    m0332 src/storage/migrate.c:277 [ret-lit 1 -> 0]
+SURVIVED  m0333 src/storage/migrate.c:277 [int+1 1 -> 2]
+KILLED    m0334 src/storage/migrate.c:277 [int-1 1 -> 0]
+KILLED    m0335 src/storage/migrate.c:278 [ret-lit 0 -> 1]
+KILLED    m0336 src/storage/migrate.c:278 [int+1 0 -> 1]
+KILLED    m0337 src/storage/migrate.c:278 [int-1 0 -> -1]
+ACCEPTED  m0013 src/storage/migrate.c:25 [cmp < -> <=] :: minimum valid migration name is six bytes, the sub five and sub four length arms never fire past the prefix check
+ACCEPTED  m0014 src/storage/migrate.c:25 [int+1 5 -> 6] :: minimum valid migration name is six bytes, the sub five and sub four length arms never fire past the prefix check
+ACCEPTED  m0015 src/storage/migrate.c:25 [int-1 5 -> 4] :: minimum valid migration name is six bytes, the sub five and sub four length arms never fire past the prefix check
+ACCEPTED  m0024 src/storage/migrate.c:26 [ret-lit 0 -> 1] :: length reject arm unreachable, a name passing the digit prefix and underscore check is at least six bytes
+ACCEPTED  m0025 src/storage/migrate.c:26 [int+1 0 -> 1] :: length reject arm unreachable, a name passing the digit prefix and underscore check is at least six bytes
+ACCEPTED  m0027 src/storage/migrate.c:27 [cmp >= -> >] :: digit count bound lies beyond the 260 platform path limit, no reachable filename reaches it
+ACCEPTED  m0028 src/storage/migrate.c:28 [ret-lit 0 -> 1] :: digit count bound lies beyond the 260 platform path limit, no reachable filename reaches it
+ACCEPTED  m0029 src/storage/migrate.c:28 [int+1 0 -> 1] :: digit count bound lies beyond the 260 platform path limit, no reachable filename reaches it
+ACCEPTED  m0030 src/storage/migrate.c:28 [int-1 0 -> -1] :: digit count bound lies beyond the 260 platform path limit, no reachable filename reaches it
+ACCEPTED  m0032 src/storage/migrate.c:33 [int+1 0 -> 1] :: errno reset value, the following check compares against ERANGE only, any non-ERANGE residue behaves identically
+ACCEPTED  m0033 src/storage/migrate.c:33 [int-1 0 -> -1] :: errno reset value, the following check compares against ERANGE only, any non-ERANGE residue behaves identically
+ACCEPTED  m0041 src/storage/migrate.c:35 [cmp > -> >=] :: overflow boundary version cannot head a contiguous sequence, both arms fail the gap check with the same nonzero
+ACCEPTED  m0043 src/storage/migrate.c:36 [int+1 1 -> 2] :: parse reject value is sign only, the caller tests parsed below zero
+ACCEPTED  m0047 src/storage/migrate.c:38 [int+1 1 -> 2] :: any positive parse result is valid, only zero and the negatives are special cased
+ACCEPTED  m0054 src/storage/migrate.c:45 [cmp < -> <=] :: comparator sign variants preserve ordering, the equality boundary only matters for duplicate versions the gap check rejects
+ACCEPTED  m0056 src/storage/migrate.c:45 [int+1 1 -> 2] :: comparator sign variants preserve ordering, the equality boundary only matters for duplicate versions the gap check rejects
+ACCEPTED  m0057 src/storage/migrate.c:45 [int-1 1 -> 0] :: comparator sign variants preserve ordering, the equality boundary only matters for duplicate versions the gap check rejects
+ACCEPTED  m0058 src/storage/migrate.c:45 [int+1 1 -> 2] :: comparator sign variants preserve ordering, the equality boundary only matters for duplicate versions the gap check rejects
+ACCEPTED  m0068 src/storage/migrate.c:55 [int+1 1 -> 2] :: buffer headroom margins never engage for files under the copy buffer, all writes stay in bounds
+ACCEPTED  m0069 src/storage/migrate.c:55 [int-1 1 -> 0] :: buffer headroom margins never engage for files under the copy buffer, all writes stay in bounds
+ACCEPTED  m0074 src/storage/migrate.c:61 [arith - -> +] :: second read destination offset lands in allocator slack below the buffer that no suite reads, the content and terminator still land in place
+ACCEPTED  m0076 src/storage/migrate.c:62 [int+1 0 -> 1] :: one byte read break matches the end of stream break, both stop at the same offset
+ACCEPTED  m0079 src/storage/migrate.c:67 [cmp > -> >=] :: overflow guard arithmetic engages only near size_t limits, no reachable file grows the buffer that far
+ACCEPTED  m0081 src/storage/migrate.c:67 [int+1 1 -> 2] :: overflow guard arithmetic engages only near size_t limits, no reachable file grows the buffer that far
+ACCEPTED  m0083 src/storage/migrate.c:67 [arith / -> *] :: overflow guard arithmetic engages only near size_t limits, no reachable file grows the buffer that far
+ACCEPTED  m0084 src/storage/migrate.c:67 [int+1 2 -> 3] :: overflow guard arithmetic engages only near size_t limits, no reachable file grows the buffer that far
+ACCEPTED  m0085 src/storage/migrate.c:67 [int-1 2 -> 1] :: overflow guard arithmetic engages only near size_t limits, no reachable file grows the buffer that far
+ACCEPTED  m0086 src/storage/migrate.c:72 [int+1 2 -> 3] :: growth factor variants read the file to the end identically, only the truncating halving is observable
+ACCEPTED  m0089 src/storage/migrate.c:73 [arith + -> -] :: realloc headroom margins never engage below the overflow guard
+ACCEPTED  m0090 src/storage/migrate.c:73 [int+1 1 -> 2] :: realloc headroom margins never engage below the overflow guard
+ACCEPTED  m0091 src/storage/migrate.c:73 [int-1 1 -> 0] :: realloc headroom margins never engage below the overflow guard
+ACCEPTED  m0101 src/storage/migrate.c:102 [ret-lit 0 -> 1] :: source open failure unreachable, the caller passes the existing database path
+ACCEPTED  m0102 src/storage/migrate.c:102 [int+1 0 -> 1] :: source open failure unreachable, the caller passes the existing database path
+ACCEPTED  m0103 src/storage/migrate.c:102 [int-1 0 -> -1] :: source open failure unreachable, the caller passes the existing database path
+ACCEPTED  m0109 src/storage/migrate.c:109 [int+1 1 -> 2] :: ok flag init variants are truthy and overwritten on every path that reads it
+ACCEPTED  m0114 src/storage/migrate.c:112 [int+1 0 -> 1] :: one byte read break matches the end of stream break, both stop at the same offset
+ACCEPTED  m0119 src/storage/migrate.c:115 [int+1 0 -> 1] :: stream error arms unreachable without an io fault, no suite can force the write to fail
+ACCEPTED  m0120 src/storage/migrate.c:115 [int-1 0 -> -1] :: stream error arms unreachable without an io fault, no suite can force the write to fail
+ACCEPTED  m0122 src/storage/migrate.c:122 [int+1 0 -> 1] :: stream error arms unreachable without an io fault, no suite can force the read to fail
+ACCEPTED  m0123 src/storage/migrate.c:122 [int-1 0 -> -1] :: stream error arms unreachable without an io fault, no suite can force the read to fail
+ACCEPTED  m0127 src/storage/migrate.c:124 [int+1 0 -> 1] :: stream error arms unreachable without an io fault, no suite can force the close to fail
+ACCEPTED  m0128 src/storage/migrate.c:124 [int-1 0 -> -1] :: stream error arms unreachable without an io fault, no suite can force the close to fail
+ACCEPTED  m0132 src/storage/migrate.c:126 [int+1 0 -> 1] :: stream error arms unreachable without an io fault, no suite can force the close to fail
+ACCEPTED  m0133 src/storage/migrate.c:126 [int-1 0 -> -1] :: stream error arms unreachable without an io fault, no suite can force the close to fail
+ACCEPTED  m0140 src/storage/migrate.c:132 [int+1 0 -> 1] :: count init is overwritten on success and unread on every failure return
+ACCEPTED  m0141 src/storage/migrate.c:132 [int-1 0 -> -1] :: count init is overwritten on success and unread on every failure return
+ACCEPTED  m0145 src/storage/migrate.c:135 [int+1 1 -> 2] :: nonzero return variants are indistinguishable, the caller compares against zero
+ACCEPTED  m0156 src/storage/migrate.c:142 [int+1 0 -> 1] :: version init is overwritten by the parse or the entry is skipped before any read
+ACCEPTED  m0157 src/storage/migrate.c:142 [int-1 0 -> -1] :: version init is overwritten by the parse or the entry is skipped before any read
+ACCEPTED  m0161 src/storage/migrate.c:146 [cmp < -> <=] :: parsed zero already continued above, the widened abort sees only the negatives
+ACCEPTED  m0162 src/storage/migrate.c:146 [int+1 0 -> 1] :: parsed zero already continued above, the widened abort sees only the negatives
+ACCEPTED  m0164 src/storage/migrate.c:147 [int+1 1 -> 2] :: nonzero rc variants are indistinguishable, the caller compares against zero
+ACCEPTED  m0166 src/storage/migrate.c:151 [cmp >= -> >] :: name length bound lies at the 260 platform path limit, no reachable filename reaches it
+ACCEPTED  m0167 src/storage/migrate.c:152 [int+1 1 -> 2] :: length abort arm unreachable at the platform path limit, the rc variants never fire
+ACCEPTED  m0168 src/storage/migrate.c:152 [int-1 1 -> 0] :: length abort arm unreachable at the platform path limit, the rc variants never fire
+ACCEPTED  m0173 src/storage/migrate.c:156 [int+1 8 -> 9] :: initial capacity headroom and larger growth factors are invisible to the entry loop
+ACCEPTED  m0174 src/storage/migrate.c:156 [int-1 8 -> 7] :: initial capacity headroom and larger growth factors are invisible to the entry loop
+ACCEPTED  m0176 src/storage/migrate.c:156 [int+1 2 -> 3] :: initial capacity headroom and larger growth factors are invisible to the entry loop
+ACCEPTED  m0182 src/storage/migrate.c:159 [int+1 1 -> 2] :: allocation failure arm unreachable, no suite can force the realloc to fail
+ACCEPTED  m0183 src/storage/migrate.c:159 [int-1 1 -> 0] :: allocation failure arm unreachable, no suite can force the realloc to fail
+ACCEPTED  m0185 src/storage/migrate.c:165 [int+1 1 -> 2] :: extra copied byte lands after the nul terminator and is never read
+ACCEPTED  m0190 src/storage/migrate.c:172 [ret-lit 1 -> 0] :: nonzero return variants are indistinguishable, the caller compares against zero
+ACCEPTED  m0191 src/storage/migrate.c:172 [int+1 1 -> 2] :: nonzero return variants are indistinguishable, the caller compares against zero
+ACCEPTED  m0192 src/storage/migrate.c:172 [int-1 1 -> 0] :: nonzero return variants are indistinguishable, the caller compares against zero
+ACCEPTED  m0193 src/storage/migrate.c:174 [cmp > -> >=] :: sorting zero or one entry is a no-op, the boundary variants see nothing to order
+ACCEPTED  m0194 src/storage/migrate.c:174 [int+1 1 -> 2] :: sorting zero or one entry is a no-op, the boundary variants see nothing to order
+ACCEPTED  m0195 src/storage/migrate.c:174 [int-1 1 -> 0] :: sorting zero or one entry is a no-op, the boundary variants see nothing to order
+ACCEPTED  m0205 src/storage/migrate.c:187 [cmp < -> <=] :: capacity and sign arms lie beyond the 260 platform path limit, the suffix never reaches the boundary and snprintf failure is unreachable
+ACCEPTED  m0206 src/storage/migrate.c:187 [int+1 0 -> 1] :: capacity and sign arms lie beyond the 260 platform path limit, the suffix never reaches the boundary and snprintf failure is unreachable
+ACCEPTED  m0207 src/storage/migrate.c:187 [int-1 0 -> -1] :: capacity and sign arms lie beyond the 260 platform path limit, the suffix never reaches the boundary and snprintf failure is unreachable
+ACCEPTED  m0208 src/storage/migrate.c:187 [logic || -> &&] :: capacity and sign arms lie beyond the 260 platform path limit, the suffix never reaches the boundary and snprintf failure is unreachable
+ACCEPTED  m0209 src/storage/migrate.c:187 [cmp >= -> >] :: capacity and sign arms lie beyond the 260 platform path limit, the suffix never reaches the boundary and snprintf failure is unreachable
+ACCEPTED  m0210 src/storage/migrate.c:188 [ret-lit 1 -> 0] :: capacity arm lies beyond the 260 platform path limit, the return variants never fire
+ACCEPTED  m0211 src/storage/migrate.c:188 [int+1 1 -> 2] :: capacity arm lies beyond the 260 platform path limit, the return variants never fire
+ACCEPTED  m0212 src/storage/migrate.c:188 [int-1 1 -> 0] :: capacity arm lies beyond the 260 platform path limit, the return variants never fire
+ACCEPTED  m0215 src/storage/migrate.c:189 [int+1 1 -> 2] :: nonzero return variants are indistinguishable, the caller compares against zero
+ACCEPTED  m0220 src/storage/migrate.c:193 [logic || -> &&] :: each single null path is re-rejected downstream, the null handle by the version read and the null directory by the opendir failure
+ACCEPTED  m0223 src/storage/migrate.c:194 [int+1 1 -> 2] :: nonzero return variants are indistinguishable, the caller compares against zero
+ACCEPTED  m0226 src/storage/migrate.c:196 [int+1 0 -> 1] :: count init is overwritten by the collect call before any read
+ACCEPTED  m0227 src/storage/migrate.c:196 [int-1 0 -> -1] :: count init is overwritten by the collect call before any read
+ACCEPTED  m0232 src/storage/migrate.c:198 [int+1 1 -> 2] :: nonzero return variants are indistinguishable, the caller compares against zero
+ACCEPTED  m0236 src/storage/migrate.c:200 [int-1 0 -> -1] :: minus one version is unreachable through the public path, and even reaching it fails the gap check identically
+ACCEPTED  m0237 src/storage/migrate.c:202 [ret-lit 1 -> 0] :: version failure arm is unreachable through the public path, the return variants never fire
+ACCEPTED  m0238 src/storage/migrate.c:202 [int+1 1 -> 2] :: version failure arm is unreachable through the public path, the return variants never fire
+ACCEPTED  m0239 src/storage/migrate.c:202 [int-1 1 -> 0] :: version failure arm is unreachable through the public path, the return variants never fire
+ACCEPTED  m0248 src/storage/migrate.c:207 [int+1 1 -> 2] :: nonzero return variants are indistinguishable, the caller compares against zero
+ACCEPTED  m0270 src/storage/migrate.c:217 [int+1 1 -> 2] :: nonzero return variants are indistinguishable, the caller compares against zero
+ACCEPTED  m0272 src/storage/migrate.c:219 [int+1 1 -> 2] :: predecessor want equals current plus one by the contiguity the same loop enforces, the first pending index resolves identically
+ACCEPTED  m0280 src/storage/migrate.c:225 [int+1 1 -> 2] :: pending flag is consumed as a boolean, any nonzero value is equivalent
+ACCEPTED  m0287 src/storage/migrate.c:232 [int+1 0 -> 1] :: filename accessor returns a normalized absolute path on this platform, the second byte is never the terminator for any reachable database file
+ACCEPTED  m0302 src/storage/migrate.c:241 [cmp < -> <=] :: capacity arms lie beyond the 260 platform path limit, no reachable directory nesting reaches them
+ACCEPTED  m0303 src/storage/migrate.c:241 [int+1 0 -> 1] :: capacity arms lie beyond the 260 platform path limit, no reachable directory nesting reaches them
+ACCEPTED  m0304 src/storage/migrate.c:241 [int-1 0 -> -1] :: capacity arms lie beyond the 260 platform path limit, no reachable directory nesting reaches them
+ACCEPTED  m0305 src/storage/migrate.c:241 [logic || -> &&] :: capacity arms lie beyond the 260 platform path limit, no reachable directory nesting reaches them
+ACCEPTED  m0306 src/storage/migrate.c:241 [cmp >= -> >] :: capacity arms lie beyond the 260 platform path limit, no reachable directory nesting reaches them
+ACCEPTED  m0307 src/storage/migrate.c:242 [int+1 1 -> 2] :: nonzero rc variants are indistinguishable, the caller compares against zero, and the zeroing variant sits on the unreachable capacity arm
+ACCEPTED  m0308 src/storage/migrate.c:242 [int-1 1 -> 0] :: nonzero rc variants are indistinguishable, the caller compares against zero, and the zeroing variant sits on the unreachable capacity arm
+ACCEPTED  m0311 src/storage/migrate.c:247 [int+1 1 -> 2] :: read failure arm requires the migration file to vanish between collect and read, unreachable without a race
+ACCEPTED  m0313 src/storage/migrate.c:253 [cmp < -> <=] :: capacity arms lie beyond the 260 platform path limit, the pragma fits for every reachable version
+ACCEPTED  m0314 src/storage/migrate.c:253 [int+1 0 -> 1] :: capacity arms lie beyond the 260 platform path limit, the pragma fits for every reachable version
+ACCEPTED  m0315 src/storage/migrate.c:253 [int-1 0 -> -1] :: capacity arms lie beyond the 260 platform path limit, the pragma fits for every reachable version
+ACCEPTED  m0316 src/storage/migrate.c:253 [logic || -> &&] :: capacity arms lie beyond the 260 platform path limit, the pragma fits for every reachable version
+ACCEPTED  m0317 src/storage/migrate.c:253 [cmp >= -> >] :: capacity arms lie beyond the 260 platform path limit, the pragma fits for every reachable version
+ACCEPTED  m0318 src/storage/migrate.c:255 [int+1 1 -> 2] :: read failure arm requires the migration file to vanish between collect and read, unreachable without a race
+ACCEPTED  m0319 src/storage/migrate.c:255 [int-1 1 -> 0] :: read failure arm requires the migration file to vanish between collect and read, unreachable without a race
+ACCEPTED  m0325 src/storage/migrate.c:270 [int+1 1 -> 2] :: nonzero rc variants are indistinguishable, the caller compares against zero
+ACCEPTED  m0333 src/storage/migrate.c:277 [int+1 1 -> 2] :: nonzero return variants are indistinguishable, the caller compares against zero
+mutate: generated=337 build_failed=50 killed_by_tests=180 killed=230 survived=107 accepted=107 unexplained=0 skipped=0
+mutate: kill rate 230/337 = 68.2%, with accepted equivalents 337/337 = 100.0%
+mutate: wall 221.1s

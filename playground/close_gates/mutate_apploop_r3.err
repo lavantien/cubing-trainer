@@ -1,0 +1,191 @@
+build_close/mutants/p46060/m0001_app_loop.c:10:25: error: expected ')'
+   10 | void ct_app_init(ct_app /app) {
+      |                         ^
+build_close/mutants/p46060/m0001_app_loop.c:10:17: note: to match this '('
+   10 | void ct_app_init(ct_app /app) {
+      |                 ^
+build_close/mutants/p46060/m0001_app_loop.c:10:6: error: conflicting types for 'ct_app_init'
+   10 | void ct_app_init(ct_app /app) {
+      |      ^
+src\app/app.h:20:6: note: previous declaration is here
+   20 | void ct_app_init(ct_app *app);
+      |      ^
+build_close/mutants/p46060/m0001_app_loop.c:11:5: error: use of undeclared identifier 'app'
+   11 |     app->db = NULL;
+      |     ^~~
+build_close/mutants/p46060/m0001_app_loop.c:12:5: error: use of undeclared identifier 'app'
+   12 |     app->cfg = ct_config_defaults();
+      |     ^~~
+build_close/mutants/p46060/m0001_app_loop.c:13:5: error: use of undeclared identifier 'app'
+   13 |     app->screen = CT_SCREEN_MENU;
+      |     ^~~
+build_close/mutants/p46060/m0001_app_loop.c:14:5: error: use of undeclared identifier 'app'
+   14 |     app->running = false;
+      |     ^~~
+build_close/mutants/p46060/m0001_app_loop.c:15:5: error: use of undeclared identifier 'app'
+   15 |     app->acc = 0.0;
+      |     ^~~
+build_close/mutants/p46060/m0001_app_loop.c:16:5: error: use of undeclared identifier 'app'
+   16 |     app->fixed_dt = 1.0 / app->cfg.window.target_fps;
+      |     ^~~
+build_close/mutants/p46060/m0001_app_loop.c:16:27: error: use of undeclared identifier 'app'
+   16 |     app->fixed_dt = 1.0 / app->cfg.window.target_fps;
+      |                           ^~~
+build_close/mutants/p46060/m0001_app_loop.c:17:21: error: use of undeclared identifier 'app'
+   17 |     if (ct_data_dir(app->cfg.db.dir_name, app->db_path, (unsigned)sizeof app->db_path) != 0) {
+      |                     ^~~
+build_close/mutants/p46060/m0001_app_loop.c:17:43: error: use of undeclared identifier 'app'
+   17 |     if (ct_data_dir(app->cfg.db.dir_name, app->db_path, (unsigned)sizeof app->db_path) != 0) {
+      |                                           ^~~
+build_close/mutants/p46060/m0001_app_loop.c:17:74: error: use of undeclared identifier 'app'
+   17 |     if (ct_data_dir(app->cfg.db.dir_name, app->db_path, (unsigned)sizeof app->db_path) != 0) {
+      |                                                                          ^~~
+build_close/mutants/p46060/m0001_app_loop.c:18:9: error: use of undeclared identifier 'app'
+   18 |         app->db_path[0] = '\0';
+      |         ^~~
+build_close/mutants/p46060/m0001_app_loop.c:21:29: error: use of undeclared identifier 'app'
+   21 |     size_t dir_len = strlen(app->db_path);
+      |                             ^~~
+build_close/mutants/p46060/m0001_app_loop.c:22:33: error: use of undeclared identifier 'app'
+   22 |     int name_written = snprintf(app->db_path + dir_len, sizeof app->db_path - dir_len, "/%s",
+      |                                 ^~~
+build_close/mutants/p46060/m0001_app_loop.c:22:64: error: use of undeclared identifier 'app'
+   22 |     int name_written = snprintf(app->db_path + dir_len, sizeof app->db_path - dir_len, "/%s",
+      |                                                                ^~~
+build_close/mutants/p46060/m0001_app_loop.c:23:33: error: use of undeclared identifier 'app'
+   23 |                                 app->cfg.db.filename);
+      |                                 ^~~
+build_close/mutants/p46060/m0001_app_loop.c:24:60: error: use of undeclared identifier 'app'
+   24 |     if (name_written < 0 || (size_t)name_written >= sizeof app->db_path - dir_len) {
+      |                                                            ^~~
+build_close/mutants/p46060/m0001_app_loop.c:26:9: error: use of undeclared identifier 'app'
+   26 |         app->db_path[0] = '\0';
+      |         ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite app_init_failures exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+build_close/mutants/p46060/m0008_app_loop.c:18:9: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   18 |         app->db_path[-1] = '\0';
+      |         ^            ~~
+src\app/app.h:16:5: note: array 'db_path' declared here
+   16 |     char db_path[CT_DB_PATH_MAX];
+      |     ^
+1 error generated.
+mutate: suite pack_startup_real_app_init exited -1073741795
+build_close/mutants/p46060/m0018_app_loop.c:26:9: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   26 |         app->db_path[-1] = '\0';
+      |         ^            ~~
+src\app/app.h:16:5: note: array 'db_path' declared here
+   16 |     char db_path[CT_DB_PATH_MAX];
+      |     ^
+1 error generated.
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite app_init_failures exited 1
+build_close/mutants/p46060/m0023_app_loop.c:30:9: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   30 |         app->migrations_path[-1] = '\0';
+      |         ^                    ~~
+src\app/app.h:17:5: note: array 'migrations_path' declared here
+   17 |     char migrations_path[CT_APP_EXE_PATH_MAX];
+      |     ^
+1 error generated.
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+mutate: suite pack_startup_real_app_init exited 1
+build_close/mutants/p46060/m0040_app_loop.c:60:24: error: expected ')'
+   60 | void ct_app_run(ct_app /app) {
+      |                        ^
+build_close/mutants/p46060/m0040_app_loop.c:60:16: note: to match this '('
+   60 | void ct_app_run(ct_app /app) {
+      |                ^
+build_close/mutants/p46060/m0040_app_loop.c:60:6: error: conflicting types for 'ct_app_run'
+   60 | void ct_app_run(ct_app /app) {
+      |      ^
+src\app/app.h:21:6: note: previous declaration is here
+   21 | void ct_app_run(ct_app *app);
+      |      ^
+build_close/mutants/p46060/m0040_app_loop.c:61:9: error: use of undeclared identifier 'app'
+   61 |     if (app == NULL || !app->running) {
+      |         ^~~
+build_close/mutants/p46060/m0040_app_loop.c:61:25: error: use of undeclared identifier 'app'
+   61 |     if (app == NULL || !app->running) {
+      |                         ^~~
+build_close/mutants/p46060/m0040_app_loop.c:64:21: error: use of undeclared identifier 'app'
+   64 |     InitWindow((int)app->cfg.window.width, (int)app->cfg.window.height, "cubing-trainer");
+      |                     ^~~
+build_close/mutants/p46060/m0040_app_loop.c:64:49: error: use of undeclared identifier 'app'
+   64 |     InitWindow((int)app->cfg.window.width, (int)app->cfg.window.height, "cubing-trainer");
+      |                                                 ^~~
+build_close/mutants/p46060/m0040_app_loop.c:65:23: error: use of undeclared identifier 'app'
+   65 |     SetTargetFPS((int)app->cfg.window.target_fps);
+      |                       ^~~
+build_close/mutants/p46060/m0040_app_loop.c:66:12: error: use of undeclared identifier 'app'
+   66 |     while (app->running && !WindowShouldClose()) {
+      |            ^~~
+build_close/mutants/p46060/m0040_app_loop.c:67:9: error: use of undeclared identifier 'app'
+   67 |         app->acc += GetFrameTime();
+      |         ^~~
+build_close/mutants/p46060/m0040_app_loop.c:69:13: error: use of undeclared identifier 'app'
+   69 |             app->fixed_dt * (app->cfg.window.target_fps / (double)CT_LOOP_CATCHUP_STEPS);
+      |             ^~~
+build_close/mutants/p46060/m0040_app_loop.c:69:30: error: use of undeclared identifier 'app'
+   69 |             app->fixed_dt * (app->cfg.window.target_fps / (double)CT_LOOP_CATCHUP_STEPS);
+      |                              ^~~
+build_close/mutants/p46060/m0040_app_loop.c:70:13: error: use of undeclared identifier 'app'
+   70 |         if (app->acc > catchup_cap) {
+      |             ^~~
+build_close/mutants/p46060/m0040_app_loop.c:71:13: error: use of undeclared identifier 'app'
+   71 |             app->acc = catchup_cap;
+      |             ^~~
+build_close/mutants/p46060/m0040_app_loop.c:73:16: error: use of undeclared identifier 'app'
+   73 |         while (app->acc >= app->fixed_dt) {
+      |                ^~~
+build_close/mutants/p46060/m0040_app_loop.c:73:28: error: use of undeclared identifier 'app'
+   73 |         while (app->acc >= app->fixed_dt) {
+      |                            ^~~
+build_close/mutants/p46060/m0040_app_loop.c:74:26: error: use of undeclared identifier 'app'
+   74 |             ct_ui_update(app);
+      |                          ^~~
+build_close/mutants/p46060/m0040_app_loop.c:75:13: error: use of undeclared identifier 'app'
+   75 |             app->acc -= app->fixed_dt;
+      |             ^~~
+build_close/mutants/p46060/m0040_app_loop.c:75:25: error: use of undeclared identifier 'app'
+   75 |             app->acc -= app->fixed_dt;
+      |                         ^~~
+build_close/mutants/p46060/m0040_app_loop.c:78:20: error: use of undeclared identifier 'app'
+   78 |         ct_ui_draw(app);
+      |                    ^~~
+19 errors generated.
+build_close/mutants/p46060/m0050_app_loop.c:84:29: error: expected ')'
+   84 | void ct_app_shutdown(ct_app /app) {
+      |                             ^
+build_close/mutants/p46060/m0050_app_loop.c:84:21: note: to match this '('
+   84 | void ct_app_shutdown(ct_app /app) {
+      |                     ^
+build_close/mutants/p46060/m0050_app_loop.c:84:6: error: conflicting types for 'ct_app_shutdown'
+   84 | void ct_app_shutdown(ct_app /app) {
+      |      ^
+src\app/app.h:22:6: note: previous declaration is here
+   22 | void ct_app_shutdown(ct_app *app);
+      |      ^
+build_close/mutants/p46060/m0050_app_loop.c:85:17: error: use of undeclared identifier 'app'
+   85 |     ct_db_close(app->db);
+      |                 ^~~
+build_close/mutants/p46060/m0050_app_loop.c:86:5: error: use of undeclared identifier 'app'
+   86 |     app->db = NULL;
+      |     ^~~
+4 errors generated.

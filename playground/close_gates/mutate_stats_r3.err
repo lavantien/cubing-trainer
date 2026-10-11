@@ -1,0 +1,781 @@
+build_close/mutants/p44480/m0001_stats.c:6:51: error: expected ')'
+    6 | static int heat_before(const ct_case_accuracy_row /rows, int a, int b) {
+      |                                                   ^
+build_close/mutants/p44480/m0001_stats.c:6:23: note: to match this '('
+    6 | static int heat_before(const ct_case_accuracy_row /rows, int a, int b) {
+      |                       ^
+build_close/mutants/p44480/m0001_stats.c:7:9: error: use of undeclared identifier 'rows'
+    7 |     if (rows[a].accuracy != rows[b].accuracy) {
+      |         ^~~~
+build_close/mutants/p44480/m0001_stats.c:7:14: error: use of undeclared identifier 'a'
+    7 |     if (rows[a].accuracy != rows[b].accuracy) {
+      |              ^
+build_close/mutants/p44480/m0001_stats.c:7:29: error: use of undeclared identifier 'rows'
+    7 |     if (rows[a].accuracy != rows[b].accuracy) {
+      |                             ^~~~
+build_close/mutants/p44480/m0001_stats.c:7:34: error: use of undeclared identifier 'b'
+    7 |     if (rows[a].accuracy != rows[b].accuracy) {
+      |                                  ^
+build_close/mutants/p44480/m0001_stats.c:8:16: error: use of undeclared identifier 'rows'
+    8 |         return rows[a].accuracy < rows[b].accuracy;
+      |                ^~~~
+build_close/mutants/p44480/m0001_stats.c:8:21: error: use of undeclared identifier 'a'
+    8 |         return rows[a].accuracy < rows[b].accuracy;
+      |                     ^
+build_close/mutants/p44480/m0001_stats.c:8:35: error: use of undeclared identifier 'rows'
+    8 |         return rows[a].accuracy < rows[b].accuracy;
+      |                                   ^~~~
+build_close/mutants/p44480/m0001_stats.c:8:40: error: use of undeclared identifier 'b'
+    8 |         return rows[a].accuracy < rows[b].accuracy;
+      |                                        ^
+build_close/mutants/p44480/m0001_stats.c:10:19: error: use of undeclared identifier 'rows'
+   10 |     return strcmp(rows[a].case_key, rows[b].case_key) < 0;
+      |                   ^~~~
+build_close/mutants/p44480/m0001_stats.c:10:24: error: use of undeclared identifier 'a'
+   10 |     return strcmp(rows[a].case_key, rows[b].case_key) < 0;
+      |                        ^
+build_close/mutants/p44480/m0001_stats.c:10:37: error: use of undeclared identifier 'rows'
+   10 |     return strcmp(rows[a].case_key, rows[b].case_key) < 0;
+      |                                     ^~~~
+build_close/mutants/p44480/m0001_stats.c:10:42: error: use of undeclared identifier 'b'
+   10 |     return strcmp(rows[a].case_key, rows[b].case_key) < 0;
+      |                                          ^
+build_close/mutants/p44480/m0001_stats.c:153:42: error: too many arguments to function call, expected 1, have 3
+  153 |         if (i >= n && !heat_before(rows, i, order_out[n - 1])) {
+      |                        ~~~~~~~~~~~       ^~~~~~~~~~~~~~~~~~~
+build_close/mutants/p44480/m0001_stats.c:6:12: note: 'heat_before' declared here
+    6 | static int heat_before(const ct_case_accuracy_row /rows, int a, int b) {
+      |            ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p44480/m0001_stats.c:158:43: error: too many arguments to function call, expected 1, have 3
+  158 |         while (j > 0 && heat_before(rows, order_out[j], order_out[j - 1])) {
+      |                         ~~~~~~~~~~~       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p44480/m0001_stats.c:6:12: note: 'heat_before' declared here
+    6 | static int heat_before(const ct_case_accuracy_row /rows, int a, int b) {
+      |            ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+15 errors generated.
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+build_close/mutants/p44480/m0007_stats.c:13:44: error: expected ')'
+   13 | int ct_stats_retention(const ct_review_row /rows, int count, const ct_fsrs *f,
+      |                                            ^
+build_close/mutants/p44480/m0007_stats.c:13:23: note: to match this '('
+   13 | int ct_stats_retention(const ct_review_row /rows, int count, const ct_fsrs *f,
+      |                       ^
+build_close/mutants/p44480/m0007_stats.c:13:5: error: conflicting types for 'ct_stats_retention'
+   13 | int ct_stats_retention(const ct_review_row /rows, int count, const ct_fsrs *f,
+      |     ^
+src\stats/stats.h:23:5: note: previous declaration is here
+   23 | int ct_stats_retention(const ct_review_row *rows, int count, const ct_fsrs *f,
+      |     ^
+build_close/mutants/p44480/m0007_stats.c:15:11: error: use of undeclared identifier 'f'
+   15 |     (void)f;
+      |           ^
+build_close/mutants/p44480/m0007_stats.c:16:9: error: use of undeclared identifier 'count'
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |         ^~~~~
+build_close/mutants/p44480/m0007_stats.c:16:22: error: use of undeclared identifier 'buckets'
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                      ^~~~~~~
+build_close/mutants/p44480/m0007_stats.c:16:38: error: use of undeclared identifier 'count'
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                                      ^~~~~
+build_close/mutants/p44480/m0007_stats.c:16:51: error: use of undeclared identifier 'rows'
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                                                   ^~~~
+build_close/mutants/p44480/m0007_stats.c:16:69: error: use of undeclared identifier 'buckets'
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                                                                     ^~~~~~~
+build_close/mutants/p44480/m0007_stats.c:16:84: error: use of undeclared identifier 'out'
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                                                                                    ^~~
+build_close/mutants/p44480/m0007_stats.c:19:9: error: use of undeclared identifier 'buckets'
+   19 |     if (buckets == 0) {
+      |         ^~~~~~~
+build_close/mutants/p44480/m0007_stats.c:22:25: error: use of undeclared identifier 'buckets'
+   22 |     for (int i = 0; i < buckets; i++) {
+      |                         ^~~~~~~
+build_close/mutants/p44480/m0007_stats.c:23:9: error: use of undeclared identifier 'out'
+   23 |         out[i].bucket_mid = (2.0 * i + 1.0) / (2.0 * buckets);
+      |         ^~~
+build_close/mutants/p44480/m0007_stats.c:23:54: error: use of undeclared identifier 'buckets'
+   23 |         out[i].bucket_mid = (2.0 * i + 1.0) / (2.0 * buckets);
+      |                                                      ^~~~~~~
+build_close/mutants/p44480/m0007_stats.c:24:9: error: use of undeclared identifier 'out'
+   24 |         out[i].reviews = 0;
+      |         ^~~
+build_close/mutants/p44480/m0007_stats.c:25:9: error: use of undeclared identifier 'out'
+   25 |         out[i].actual_recall = 0;
+      |         ^~~
+build_close/mutants/p44480/m0007_stats.c:26:9: error: use of undeclared identifier 'out'
+   26 |         out[i].predicted_recall = 0.0;
+      |         ^~~
+build_close/mutants/p44480/m0007_stats.c:28:25: error: use of undeclared identifier 'count'
+   28 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_close/mutants/p44480/m0007_stats.c:29:43: error: use of undeclared identifier 'rows'
+   29 |         double r = ct_fsrs_retrievability(rows[i].stability, rows[i].elapsed_days);
+      |                                           ^~~~
+build_close/mutants/p44480/m0007_stats.c:29:62: error: use of undeclared identifier 'rows'
+   29 |         double r = ct_fsrs_retrievability(rows[i].stability, rows[i].elapsed_days);
+      |                                                              ^~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p44480/m0008_stats.c:13:76: error: expected ')'
+   13 | int ct_stats_retention(const ct_review_row *rows, int count, const ct_fsrs /f,
+      |                                                                            ^
+build_close/mutants/p44480/m0008_stats.c:13:23: note: to match this '('
+   13 | int ct_stats_retention(const ct_review_row *rows, int count, const ct_fsrs /f,
+      |                       ^
+build_close/mutants/p44480/m0008_stats.c:13:5: error: conflicting types for 'ct_stats_retention'
+   13 | int ct_stats_retention(const ct_review_row *rows, int count, const ct_fsrs /f,
+      |     ^
+src\stats/stats.h:23:5: note: previous declaration is here
+   23 | int ct_stats_retention(const ct_review_row *rows, int count, const ct_fsrs *f,
+      |     ^
+build_close/mutants/p44480/m0008_stats.c:15:11: error: use of undeclared identifier 'f'
+   15 |     (void)f;
+      |           ^
+build_close/mutants/p44480/m0008_stats.c:16:22: error: use of undeclared identifier 'buckets'
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                      ^~~~~~~
+build_close/mutants/p44480/m0008_stats.c:16:69: error: use of undeclared identifier 'buckets'
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                                                                     ^~~~~~~
+build_close/mutants/p44480/m0008_stats.c:16:84: error: use of undeclared identifier 'out'
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                                                                                    ^~~
+build_close/mutants/p44480/m0008_stats.c:19:9: error: use of undeclared identifier 'buckets'
+   19 |     if (buckets == 0) {
+      |         ^~~~~~~
+build_close/mutants/p44480/m0008_stats.c:22:25: error: use of undeclared identifier 'buckets'
+   22 |     for (int i = 0; i < buckets; i++) {
+      |                         ^~~~~~~
+build_close/mutants/p44480/m0008_stats.c:23:9: error: use of undeclared identifier 'out'
+   23 |         out[i].bucket_mid = (2.0 * i + 1.0) / (2.0 * buckets);
+      |         ^~~
+build_close/mutants/p44480/m0008_stats.c:23:54: error: use of undeclared identifier 'buckets'
+   23 |         out[i].bucket_mid = (2.0 * i + 1.0) / (2.0 * buckets);
+      |                                                      ^~~~~~~
+build_close/mutants/p44480/m0008_stats.c:24:9: error: use of undeclared identifier 'out'
+   24 |         out[i].reviews = 0;
+      |         ^~~
+build_close/mutants/p44480/m0008_stats.c:25:9: error: use of undeclared identifier 'out'
+   25 |         out[i].actual_recall = 0;
+      |         ^~~
+build_close/mutants/p44480/m0008_stats.c:26:9: error: use of undeclared identifier 'out'
+   26 |         out[i].predicted_recall = 0.0;
+      |         ^~~
+build_close/mutants/p44480/m0008_stats.c:36:29: error: use of undeclared identifier 'buckets'
+   36 |         int idx = (int)(r * buckets);
+      |                             ^~~~~~~
+build_close/mutants/p44480/m0008_stats.c:37:20: error: use of undeclared identifier 'buckets'
+   37 |         if (idx >= buckets) {
+      |                    ^~~~~~~
+build_close/mutants/p44480/m0008_stats.c:38:19: error: use of undeclared identifier 'buckets'
+   38 |             idx = buckets - 1;
+      |                   ^~~~~~~
+build_close/mutants/p44480/m0008_stats.c:40:9: error: use of undeclared identifier 'out'
+   40 |         out[idx].reviews++;
+      |         ^~~
+build_close/mutants/p44480/m0008_stats.c:42:13: error: use of undeclared identifier 'out'
+   42 |             out[idx].actual_recall++;
+      |             ^~~
+build_close/mutants/p44480/m0008_stats.c:44:9: error: use of undeclared identifier 'out'
+   44 |         out[idx].predicted_recall += r;
+      |         ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p44480/m0009_stats.c:14:44: error: expected ')'
+   14 |                        ct_retention_bucket /out, int buckets) {
+      |                                            ^
+build_close/mutants/p44480/m0009_stats.c:13:23: note: to match this '('
+   13 | int ct_stats_retention(const ct_review_row *rows, int count, const ct_fsrs *f,
+      |                       ^
+build_close/mutants/p44480/m0009_stats.c:13:5: error: conflicting types for 'ct_stats_retention'
+   13 | int ct_stats_retention(const ct_review_row *rows, int count, const ct_fsrs *f,
+      |     ^
+src\stats/stats.h:23:5: note: previous declaration is here
+   23 | int ct_stats_retention(const ct_review_row *rows, int count, const ct_fsrs *f,
+      |     ^
+build_close/mutants/p44480/m0009_stats.c:16:22: error: use of undeclared identifier 'buckets'
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                      ^~~~~~~
+build_close/mutants/p44480/m0009_stats.c:16:69: error: use of undeclared identifier 'buckets'
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                                                                     ^~~~~~~
+build_close/mutants/p44480/m0009_stats.c:16:84: error: use of undeclared identifier 'out'
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                                                                                    ^~~
+build_close/mutants/p44480/m0009_stats.c:19:9: error: use of undeclared identifier 'buckets'
+   19 |     if (buckets == 0) {
+      |         ^~~~~~~
+build_close/mutants/p44480/m0009_stats.c:22:25: error: use of undeclared identifier 'buckets'
+   22 |     for (int i = 0; i < buckets; i++) {
+      |                         ^~~~~~~
+build_close/mutants/p44480/m0009_stats.c:23:9: error: use of undeclared identifier 'out'
+   23 |         out[i].bucket_mid = (2.0 * i + 1.0) / (2.0 * buckets);
+      |         ^~~
+build_close/mutants/p44480/m0009_stats.c:23:54: error: use of undeclared identifier 'buckets'
+   23 |         out[i].bucket_mid = (2.0 * i + 1.0) / (2.0 * buckets);
+      |                                                      ^~~~~~~
+build_close/mutants/p44480/m0009_stats.c:24:9: error: use of undeclared identifier 'out'
+   24 |         out[i].reviews = 0;
+      |         ^~~
+build_close/mutants/p44480/m0009_stats.c:25:9: error: use of undeclared identifier 'out'
+   25 |         out[i].actual_recall = 0;
+      |         ^~~
+build_close/mutants/p44480/m0009_stats.c:26:9: error: use of undeclared identifier 'out'
+   26 |         out[i].predicted_recall = 0.0;
+      |         ^~~
+build_close/mutants/p44480/m0009_stats.c:36:29: error: use of undeclared identifier 'buckets'
+   36 |         int idx = (int)(r * buckets);
+      |                             ^~~~~~~
+build_close/mutants/p44480/m0009_stats.c:37:20: error: use of undeclared identifier 'buckets'
+   37 |         if (idx >= buckets) {
+      |                    ^~~~~~~
+build_close/mutants/p44480/m0009_stats.c:38:19: error: use of undeclared identifier 'buckets'
+   38 |             idx = buckets - 1;
+      |                   ^~~~~~~
+build_close/mutants/p44480/m0009_stats.c:40:9: error: use of undeclared identifier 'out'
+   40 |         out[idx].reviews++;
+      |         ^~~
+build_close/mutants/p44480/m0009_stats.c:42:13: error: use of undeclared identifier 'out'
+   42 |             out[idx].actual_recall++;
+      |             ^~~
+build_close/mutants/p44480/m0009_stats.c:44:9: error: use of undeclared identifier 'out'
+   44 |         out[idx].predicted_recall += r;
+      |         ^~~
+build_close/mutants/p44480/m0009_stats.c:46:25: error: use of undeclared identifier 'buckets'
+   46 |     for (int i = 0; i < buckets; i++) {
+      |                         ^~~~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite stats_agg_malformed exited 1
+mutate: suite stats_agg_malformed exited 1
+mutate: suite stats_agg_malformed exited 1
+build_close/mutants/p44480/m0013_stats.c:16:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   16 |     if (count < 0 && buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_close/mutants/p44480/m0013_stats.c:16:19: note: place parentheses around the '&&' expression to silence this warning
+   16 |     if (count < 0 && buckets < 0 || (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                   ^
+      |         (                       )
+1 error generated.
+mutate: suite stats_agg_malformed exited 1
+mutate: suite stats_agg_malformed exited 1
+mutate: suite stats_agg_boundaries exited 1
+build_close/mutants/p44480/m0017_stats.c:16:34: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   16 |     if (count < 0 || buckets < 0 && (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                   ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p44480/m0017_stats.c:16:34: note: place parentheses around the '&&' expression to silence this warning
+   16 |     if (count < 0 || buckets < 0 && (count > 0 && rows == NULL) || (buckets > 0 && out == NULL)) {
+      |                                  ^
+      |                      (                                         )
+1 error generated.
+mutate: suite stats_agg_malformed exited 1
+mutate: suite stats_agg_boundaries exited -1073741795
+mutate: suite stats_agg_malformed exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+build_close/mutants/p44480/m0023_stats.c:16:65: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) && (buckets > 0 && out == NULL)) {
+      |                                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p44480/m0023_stats.c:16:65: note: place parentheses around the '&&' expression to silence this warning
+   16 |     if (count < 0 || buckets < 0 || (count > 0 && rows == NULL) && (buckets > 0 && out == NULL)) {
+      |                                                                 ^                              
+      |                                     (                                                          )
+1 error generated.
+mutate: suite stats_agg_malformed exited 1
+mutate: suite stats_agg_boundaries exited -1073741795
+mutate: suite stats_agg_malformed exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention_granularity exited 1
+mutate: suite stats_agg_malformed exited -1073741795
+mutate: suite stats_agg_malformed exited 1
+mutate: suite stats_agg_malformed exited 1
+mutate: suite stats_agg_malformed exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention_granularity exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_retention exited 1
+mutate: suite stats_agg_retention exited 1
+build_close/mutants/p44480/m0067_stats.c:54:75: error: expected ')'
+   54 | ct_retention_summary ct_stats_retention_summary(const ct_retention_bucket /buckets, int count) {
+      |                                                                           ^
+build_close/mutants/p44480/m0067_stats.c:54:48: note: to match this '('
+   54 | ct_retention_summary ct_stats_retention_summary(const ct_retention_bucket /buckets, int count) {
+      |                                                ^
+build_close/mutants/p44480/m0067_stats.c:54:22: error: conflicting types for 'ct_stats_retention_summary'
+   54 | ct_retention_summary ct_stats_retention_summary(const ct_retention_bucket /buckets, int count) {
+      |                      ^
+src\stats/stats.h:25:22: note: previous declaration is here
+   25 | ct_retention_summary ct_stats_retention_summary(const ct_retention_bucket *buckets, int count);
+      |                      ^
+build_close/mutants/p44480/m0067_stats.c:56:9: error: use of undeclared identifier 'count'
+   56 |     if (count <= 0 || buckets == NULL) {
+      |         ^~~~~
+build_close/mutants/p44480/m0067_stats.c:56:23: error: use of undeclared identifier 'buckets'
+   56 |     if (count <= 0 || buckets == NULL) {
+      |                       ^~~~~~~
+build_close/mutants/p44480/m0067_stats.c:61:25: error: use of undeclared identifier 'count'
+   61 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_close/mutants/p44480/m0067_stats.c:62:18: error: use of undeclared identifier 'buckets'
+   62 |         total += buckets[i].reviews;
+      |                  ^~~~~~~
+build_close/mutants/p44480/m0067_stats.c:63:20: error: use of undeclared identifier 'buckets'
+   63 |         correct += buckets[i].actual_recall;
+      |                    ^~~~~~~
+build_close/mutants/p44480/m0067_stats.c:71:25: error: use of undeclared identifier 'count'
+   71 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_close/mutants/p44480/m0067_stats.c:72:13: error: use of undeclared identifier 'buckets'
+   72 |         if (buckets[i].reviews == 0) {
+      |             ^~~~~~~
+build_close/mutants/p44480/m0067_stats.c:75:33: error: use of undeclared identifier 'buckets'
+   75 |         double actual = (double)buckets[i].actual_recall / (double)buckets[i].reviews;
+      |                                 ^~~~~~~
+build_close/mutants/p44480/m0067_stats.c:75:68: error: use of undeclared identifier 'buckets'
+   75 |         double actual = (double)buckets[i].actual_recall / (double)buckets[i].reviews;
+      |                                                                    ^~~~~~~
+build_close/mutants/p44480/m0067_stats.c:76:27: error: use of undeclared identifier 'buckets'
+   76 |         double err = fabs(buckets[i].predicted_recall - actual);
+      |                           ^~~~~~~
+build_close/mutants/p44480/m0067_stats.c:77:29: error: use of undeclared identifier 'buckets'
+   77 |         weighted += (double)buckets[i].reviews * err;
+      |                             ^~~~~~~
+13 errors generated.
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_summary exited -1073741795
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+mutate: suite stats_agg_summary exited 1
+build_close/mutants/p44480/m0097_stats.c:87:42: error: expected ')'
+   87 | double ct_stats_correlation(const double /xs, const double *ys, int count) {
+      |                                          ^
+build_close/mutants/p44480/m0097_stats.c:87:28: note: to match this '('
+   87 | double ct_stats_correlation(const double /xs, const double *ys, int count) {
+      |                            ^
+build_close/mutants/p44480/m0097_stats.c:87:8: error: conflicting types for 'ct_stats_correlation'
+   87 | double ct_stats_correlation(const double /xs, const double *ys, int count) {
+      |        ^
+src\stats/stats.h:26:8: note: previous declaration is here
+   26 | double ct_stats_correlation(const double *xs, const double *ys, int count);
+      |        ^
+build_close/mutants/p44480/m0097_stats.c:88:9: error: use of undeclared identifier 'count'
+   88 |     if (count < 2 || xs == NULL || ys == NULL) {
+      |         ^~~~~
+build_close/mutants/p44480/m0097_stats.c:88:22: error: use of undeclared identifier 'xs'
+   88 |     if (count < 2 || xs == NULL || ys == NULL) {
+      |                      ^~
+build_close/mutants/p44480/m0097_stats.c:88:36: error: use of undeclared identifier 'ys'
+   88 |     if (count < 2 || xs == NULL || ys == NULL) {
+      |                                    ^~
+build_close/mutants/p44480/m0097_stats.c:93:25: error: use of undeclared identifier 'count'
+   93 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_close/mutants/p44480/m0097_stats.c:94:15: error: use of undeclared identifier 'xs'
+   94 |         mx += xs[i];
+      |               ^~
+build_close/mutants/p44480/m0097_stats.c:95:15: error: use of undeclared identifier 'ys'
+   95 |         my += ys[i];
+      |               ^~
+build_close/mutants/p44480/m0097_stats.c:97:19: error: use of undeclared identifier 'count'
+   97 |     mx /= (double)count;
+      |                   ^~~~~
+build_close/mutants/p44480/m0097_stats.c:98:19: error: use of undeclared identifier 'count'
+   98 |     my /= (double)count;
+      |                   ^~~~~
+build_close/mutants/p44480/m0097_stats.c:102:25: error: use of undeclared identifier 'count'
+  102 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_close/mutants/p44480/m0097_stats.c:103:21: error: use of undeclared identifier 'xs'
+  103 |         double dx = xs[i] - mx;
+      |                     ^~
+build_close/mutants/p44480/m0097_stats.c:104:21: error: use of undeclared identifier 'ys'
+  104 |         double dy = ys[i] - my;
+      |                     ^~
+13 errors generated.
+build_close/mutants/p44480/m0098_stats.c:87:60: error: expected ')'
+   87 | double ct_stats_correlation(const double *xs, const double /ys, int count) {
+      |                                                            ^
+build_close/mutants/p44480/m0098_stats.c:87:28: note: to match this '('
+   87 | double ct_stats_correlation(const double *xs, const double /ys, int count) {
+      |                            ^
+build_close/mutants/p44480/m0098_stats.c:87:8: error: conflicting types for 'ct_stats_correlation'
+   87 | double ct_stats_correlation(const double *xs, const double /ys, int count) {
+      |        ^
+src\stats/stats.h:26:8: note: previous declaration is here
+   26 | double ct_stats_correlation(const double *xs, const double *ys, int count);
+      |        ^
+build_close/mutants/p44480/m0098_stats.c:88:9: error: use of undeclared identifier 'count'
+   88 |     if (count < 2 || xs == NULL || ys == NULL) {
+      |         ^~~~~
+build_close/mutants/p44480/m0098_stats.c:88:36: error: use of undeclared identifier 'ys'
+   88 |     if (count < 2 || xs == NULL || ys == NULL) {
+      |                                    ^~
+build_close/mutants/p44480/m0098_stats.c:93:25: error: use of undeclared identifier 'count'
+   93 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_close/mutants/p44480/m0098_stats.c:95:15: error: use of undeclared identifier 'ys'
+   95 |         my += ys[i];
+      |               ^~
+build_close/mutants/p44480/m0098_stats.c:97:19: error: use of undeclared identifier 'count'
+   97 |     mx /= (double)count;
+      |                   ^~~~~
+build_close/mutants/p44480/m0098_stats.c:98:19: error: use of undeclared identifier 'count'
+   98 |     my /= (double)count;
+      |                   ^~~~~
+build_close/mutants/p44480/m0098_stats.c:102:25: error: use of undeclared identifier 'count'
+  102 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_close/mutants/p44480/m0098_stats.c:104:21: error: use of undeclared identifier 'ys'
+  104 |         double dy = ys[i] - my;
+      |                     ^~
+10 errors generated.
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_boundaries exited 1
+build_close/mutants/p44480/m0102_stats.c:88:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   88 |     if (count < 2 && xs == NULL || ys == NULL) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~ ~~
+build_close/mutants/p44480/m0102_stats.c:88:19: note: place parentheses around the '&&' expression to silence this warning
+   88 |     if (count < 2 && xs == NULL || ys == NULL) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~
+1 error generated.
+mutate: suite stats_agg_correlation exited 1
+build_close/mutants/p44480/m0104_stats.c:88:33: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   88 |     if (count < 2 || xs == NULL && ys == NULL) {
+      |                   ~~ ~~~~~~~~~~~^~~~~~~~~~~~~
+build_close/mutants/p44480/m0104_stats.c:88:33: note: place parentheses around the '&&' expression to silence this warning
+   88 |     if (count < 2 || xs == NULL && ys == NULL) {
+      |                      ~~~~~~~~~~~^~~~~~~~~~~~~
+1 error generated.
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+mutate: suite stats_agg_correlation exited 1
+build_close/mutants/p44480/m0122_stats.c:115:55: error: expected ')'
+  115 | int ct_stats_forecast_total(const ct_due_forecast_row /rows, int count) {
+      |                                                       ^
+build_close/mutants/p44480/m0122_stats.c:115:28: note: to match this '('
+  115 | int ct_stats_forecast_total(const ct_due_forecast_row /rows, int count) {
+      |                            ^
+build_close/mutants/p44480/m0122_stats.c:115:5: error: conflicting types for 'ct_stats_forecast_total'
+  115 | int ct_stats_forecast_total(const ct_due_forecast_row /rows, int count) {
+      |     ^
+src\stats/stats.h:27:5: note: previous declaration is here
+   27 | int ct_stats_forecast_total(const ct_due_forecast_row *rows, int count);
+      |     ^
+build_close/mutants/p44480/m0122_stats.c:116:9: error: use of undeclared identifier 'count'
+  116 |     if (count <= 0 || rows == NULL) {
+      |         ^~~~~
+build_close/mutants/p44480/m0122_stats.c:116:23: error: use of undeclared identifier 'rows'
+  116 |     if (count <= 0 || rows == NULL) {
+      |                       ^~~~
+build_close/mutants/p44480/m0122_stats.c:120:25: error: use of undeclared identifier 'count'
+  120 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_close/mutants/p44480/m0122_stats.c:121:18: error: use of undeclared identifier 'rows'
+  121 |         total += rows[i].due_count;
+      |                  ^~~~
+6 errors generated.
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited -1073741795
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_boundaries exited 1
+build_close/mutants/p44480/m0136_stats.c:126:67: error: expected ')'
+  126 | double ct_stats_forecast_peak_day_ratio(const ct_due_forecast_row /rows, int count) {
+      |                                                                   ^
+build_close/mutants/p44480/m0136_stats.c:126:40: note: to match this '('
+  126 | double ct_stats_forecast_peak_day_ratio(const ct_due_forecast_row /rows, int count) {
+      |                                        ^
+build_close/mutants/p44480/m0136_stats.c:126:8: error: conflicting types for 'ct_stats_forecast_peak_day_ratio'
+  126 | double ct_stats_forecast_peak_day_ratio(const ct_due_forecast_row /rows, int count) {
+      |        ^
+src\stats/stats.h:28:8: note: previous declaration is here
+   28 | double ct_stats_forecast_peak_day_ratio(const ct_due_forecast_row *rows, int count);
+      |        ^
+build_close/mutants/p44480/m0136_stats.c:127:9: error: use of undeclared identifier 'count'
+  127 |     if (count <= 0 || rows == NULL) {
+      |         ^~~~~
+build_close/mutants/p44480/m0136_stats.c:127:23: error: use of undeclared identifier 'rows'
+  127 |     if (count <= 0 || rows == NULL) {
+      |                       ^~~~
+build_close/mutants/p44480/m0136_stats.c:132:25: error: use of undeclared identifier 'count'
+  132 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_close/mutants/p44480/m0136_stats.c:133:18: error: use of undeclared identifier 'rows'
+  133 |         total += rows[i].due_count;
+      |                  ^~~~
+build_close/mutants/p44480/m0136_stats.c:134:13: error: use of undeclared identifier 'rows'
+  134 |         if (rows[i].due_count > peak) {
+      |             ^~~~
+build_close/mutants/p44480/m0136_stats.c:135:20: error: use of undeclared identifier 'rows'
+  135 |             peak = rows[i].due_count;
+      |                    ^~~~
+build_close/mutants/p44480/m0136_stats.c:141:52: error: use of undeclared identifier 'count'
+  141 |     return (double)peak / ((double)total / (double)count);
+      |                                                    ^~~~~
+9 errors generated.
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited -1073741795
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited 1
+mutate: suite stats_agg_forecast exited 1
+build_close/mutants/p44480/m0155_stats.c:144:54: error: expected ')'
+  144 | int ct_stats_heatmap_rank(const ct_case_accuracy_row /rows, int count, int *order_out, int cap) {
+      |                                                      ^
+build_close/mutants/p44480/m0155_stats.c:144:26: note: to match this '('
+  144 | int ct_stats_heatmap_rank(const ct_case_accuracy_row /rows, int count, int *order_out, int cap) {
+      |                          ^
+build_close/mutants/p44480/m0155_stats.c:144:5: error: conflicting types for 'ct_stats_heatmap_rank'
+  144 | int ct_stats_heatmap_rank(const ct_case_accuracy_row /rows, int count, int *order_out, int cap) {
+      |     ^
+src\stats/stats.h:29:5: note: previous declaration is here
+   29 | int ct_stats_heatmap_rank(const ct_case_accuracy_row *rows, int count, int *order_out, int cap);
+      |     ^
+build_close/mutants/p44480/m0155_stats.c:145:9: error: use of undeclared identifier 'count'
+  145 |     if (count < 0 || (count > 0 && rows == NULL) || (cap > 0 && order_out == NULL)) {
+      |         ^~~~~
+build_close/mutants/p44480/m0155_stats.c:145:23: error: use of undeclared identifier 'count'
+  145 |     if (count < 0 || (count > 0 && rows == NULL) || (cap > 0 && order_out == NULL)) {
+      |                       ^~~~~
+build_close/mutants/p44480/m0155_stats.c:145:36: error: use of undeclared identifier 'rows'
+  145 |     if (count < 0 || (count > 0 && rows == NULL) || (cap > 0 && order_out == NULL)) {
+      |                                    ^~~~
+build_close/mutants/p44480/m0155_stats.c:145:54: error: use of undeclared identifier 'cap'
+  145 |     if (count < 0 || (count > 0 && rows == NULL) || (cap > 0 && order_out == NULL)) {
+      |                                                      ^~~
+build_close/mutants/p44480/m0155_stats.c:145:65: error: use of undeclared identifier 'order_out'
+  145 |     if (count < 0 || (count > 0 && rows == NULL) || (cap > 0 && order_out == NULL)) {
+      |                                                                 ^~~~~~~~~
+build_close/mutants/p44480/m0155_stats.c:148:13: error: use of undeclared identifier 'count'
+  148 |     int n = count < cap ? count : cap;
+      |             ^~~~~
+build_close/mutants/p44480/m0155_stats.c:148:21: error: use of undeclared identifier 'cap'
+  148 |     int n = count < cap ? count : cap;
+      |                     ^~~
+build_close/mutants/p44480/m0155_stats.c:148:27: error: use of undeclared identifier 'count'
+  148 |     int n = count < cap ? count : cap;
+      |                           ^~~~~
+build_close/mutants/p44480/m0155_stats.c:148:35: error: use of undeclared identifier 'cap'
+  148 |     int n = count < cap ? count : cap;
+      |                                   ^~~
+build_close/mutants/p44480/m0155_stats.c:152:25: error: use of undeclared identifier 'count'
+  152 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_close/mutants/p44480/m0155_stats.c:153:36: error: use of undeclared identifier 'rows'
+  153 |         if (i >= n && !heat_before(rows, i, order_out[n - 1])) {
+      |                                    ^~~~
+build_close/mutants/p44480/m0155_stats.c:153:45: error: use of undeclared identifier 'order_out'
+  153 |         if (i >= n && !heat_before(rows, i, order_out[n - 1])) {
+      |                                             ^~~~~~~~~
+build_close/mutants/p44480/m0155_stats.c:157:9: error: use of undeclared identifier 'order_out'
+  157 |         order_out[j] = i;
+      |         ^~~~~~~~~
+build_close/mutants/p44480/m0155_stats.c:158:37: error: use of undeclared identifier 'rows'
+  158 |         while (j > 0 && heat_before(rows, order_out[j], order_out[j - 1])) {
+      |                                     ^~~~
+build_close/mutants/p44480/m0155_stats.c:158:43: error: use of undeclared identifier 'order_out'
+  158 |         while (j > 0 && heat_before(rows, order_out[j], order_out[j - 1])) {
+      |                                           ^~~~~~~~~
+build_close/mutants/p44480/m0155_stats.c:158:57: error: use of undeclared identifier 'order_out'
+  158 |         while (j > 0 && heat_before(rows, order_out[j], order_out[j - 1])) {
+      |                                                         ^~~~~~~~~
+build_close/mutants/p44480/m0155_stats.c:159:23: error: use of undeclared identifier 'order_out'
+  159 |             int tmp = order_out[j];
+      |                       ^~~~~~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p44480/m0156_stats.c:144:76: error: expected ')'
+  144 | int ct_stats_heatmap_rank(const ct_case_accuracy_row *rows, int count, int /order_out, int cap) {
+      |                                                                            ^
+build_close/mutants/p44480/m0156_stats.c:144:26: note: to match this '('
+  144 | int ct_stats_heatmap_rank(const ct_case_accuracy_row *rows, int count, int /order_out, int cap) {
+      |                          ^
+build_close/mutants/p44480/m0156_stats.c:144:5: error: conflicting types for 'ct_stats_heatmap_rank'
+  144 | int ct_stats_heatmap_rank(const ct_case_accuracy_row *rows, int count, int /order_out, int cap) {
+      |     ^
+src\stats/stats.h:29:5: note: previous declaration is here
+   29 | int ct_stats_heatmap_rank(const ct_case_accuracy_row *rows, int count, int *order_out, int cap);
+      |     ^
+build_close/mutants/p44480/m0156_stats.c:145:54: error: use of undeclared identifier 'cap'
+  145 |     if (count < 0 || (count > 0 && rows == NULL) || (cap > 0 && order_out == NULL)) {
+      |                                                      ^~~
+build_close/mutants/p44480/m0156_stats.c:145:65: error: use of undeclared identifier 'order_out'
+  145 |     if (count < 0 || (count > 0 && rows == NULL) || (cap > 0 && order_out == NULL)) {
+      |                                                                 ^~~~~~~~~
+build_close/mutants/p44480/m0156_stats.c:148:21: error: use of undeclared identifier 'cap'
+  148 |     int n = count < cap ? count : cap;
+      |                     ^~~
+build_close/mutants/p44480/m0156_stats.c:148:35: error: use of undeclared identifier 'cap'
+  148 |     int n = count < cap ? count : cap;
+      |                                   ^~~
+build_close/mutants/p44480/m0156_stats.c:153:45: error: use of undeclared identifier 'order_out'
+  153 |         if (i >= n && !heat_before(rows, i, order_out[n - 1])) {
+      |                                             ^~~~~~~~~
+build_close/mutants/p44480/m0156_stats.c:157:9: error: use of undeclared identifier 'order_out'
+  157 |         order_out[j] = i;
+      |         ^~~~~~~~~
+build_close/mutants/p44480/m0156_stats.c:158:43: error: use of undeclared identifier 'order_out'
+  158 |         while (j > 0 && heat_before(rows, order_out[j], order_out[j - 1])) {
+      |                                           ^~~~~~~~~
+build_close/mutants/p44480/m0156_stats.c:158:57: error: use of undeclared identifier 'order_out'
+  158 |         while (j > 0 && heat_before(rows, order_out[j], order_out[j - 1])) {
+      |                                                         ^~~~~~~~~
+build_close/mutants/p44480/m0156_stats.c:159:23: error: use of undeclared identifier 'order_out'
+  159 |             int tmp = order_out[j];
+      |                       ^~~~~~~~~
+build_close/mutants/p44480/m0156_stats.c:160:13: error: use of undeclared identifier 'order_out'
+  160 |             order_out[j] = order_out[j - 1];
+      |             ^~~~~~~~~
+build_close/mutants/p44480/m0156_stats.c:160:28: error: use of undeclared identifier 'order_out'
+  160 |             order_out[j] = order_out[j - 1];
+      |                            ^~~~~~~~~
+build_close/mutants/p44480/m0156_stats.c:161:13: error: use of undeclared identifier 'order_out'
+  161 |             order_out[j - 1] = tmp;
+      |             ^~~~~~~~~
+14 errors generated.
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+build_close/mutants/p44480/m0160_stats.c:145:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  145 |     if (count < 0 && (count > 0 && rows == NULL) || (cap > 0 && order_out == NULL)) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p44480/m0160_stats.c:145:19: note: place parentheses around the '&&' expression to silence this warning
+  145 |     if (count < 0 && (count > 0 && rows == NULL) || (cap > 0 && order_out == NULL)) {
+      |                   ^
+      |         (                                       )
+1 error generated.
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+build_close/mutants/p44480/m0166_stats.c:145:50: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  145 |     if (count < 0 || (count > 0 && rows == NULL) && (cap > 0 && order_out == NULL)) {
+      |                   ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p44480/m0166_stats.c:145:50: note: place parentheses around the '&&' expression to silence this warning
+  145 |     if (count < 0 || (count > 0 && rows == NULL) && (cap > 0 && order_out == NULL)) {
+      |                                                  ^                                
+      |                      (                                                            )
+1 error generated.
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_boundaries exited -1073741795
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited -1073741795
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_heatmap exited -1073741795
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_boundaries exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited -1073741819
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: suite stats_agg_heatmap exited 1
+mutate: 1 unexplained survivors
+make: *** [makefile:242: mutate] Error 1

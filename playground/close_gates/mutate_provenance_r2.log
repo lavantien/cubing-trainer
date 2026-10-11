@@ -1,0 +1,32 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/packs/provenance.c build_close packs_bad_args packs_bounds packs_content_hash packs_isolation packs_list packs_read_boundaries packs_sha256 packs_source_record packs_upsert packs_upsert_update alg_hash_deterministic alg_hash_format_pinned alg_hash_fail_closed_on_oversize alg_put_get_roundtrip
+build_close/mutants/p24112/m0001_provenance.c:15:44: error: expected ')'
+   15 | static unsigned ct_sha_next_prime(unsigned /n) {
+      |                                            ^
+build_close/mutants/p24112/m0001_provenance.c:15:34: note: to match this '('
+   15 | static unsigned ct_sha_next_prime(unsigned /n) {
+      |                                  ^
+build_close/mutants/p24112/m0001_provenance.c:17:23: error: use of undeclared identifier 'n'
+   17 |         unsigned c = *n;
+      |                       ^
+build_close/mutants/p24112/m0001_provenance.c:27:10: error: use of undeclared identifier 'n'
+   27 |         *n = c + 1;
+      |          ^
+build_close/mutants/p24112/m0001_provenance.c:55:61: error: incompatible pointer to integer conversion passing 'unsigned int *' to parameter of type 'unsigned int'; remove & [-Wint-conversion]
+   55 |         ct_sha_h0[i] = ct_sha_derive_root(ct_sha_next_prime(&n), 0);
+      |                                                             ^~
+build_close/mutants/p24112/m0001_provenance.c:15:44: note: passing argument to parameter here
+   15 | static unsigned ct_sha_next_prime(unsigned /n) {
+      |                                            ^
+build_close/mutants/p24112/m0001_provenance.c:59:60: error: incompatible pointer to integer conversion passing 'unsigned int *' to parameter of type 'unsigned int'; remove & [-Wint-conversion]
+   59 |         ct_sha_k[i] = ct_sha_derive_root(ct_sha_next_prime(&n), 1);
+      |                                                            ^~
+build_close/mutants/p24112/m0001_provenance.c:15:44: note: passing argument to parameter here
+   15 | static unsigned ct_sha_next_prime(unsigned /n) {
+      |                                            ^
+5 errors generated.
+build_close/mutants/p24112/m0002_provenance.c:17:22: error: expected expression
+   17 |         unsigned c = /n;
+      |                      ^
+1 error generated.

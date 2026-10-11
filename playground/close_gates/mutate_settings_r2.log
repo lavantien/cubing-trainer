@@ -1,0 +1,1052 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_settings_form.c -o build_close2/tobj/tests/unit_settings_form.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close2/bin/mutate.exe src/ui/screen_settings.c build_close2 settings_form_open settings_form_open_stored settings_form_open_fallbacks settings_form_letters settings_form_swap settings_form_colors settings_colors_scheme_round_trip settings_form_moves settings_form_clamps settings_form_buffers settings_form_save settings_form_cancel settings_form_guards settings_form_hex settings_form_boundaries settings_form_letter_edges settings_form_moves_format settings_form_open_dberror settings_form_swap_edges
+mutate: scope=src/ui/screen_settings.c files=1 sites=648 suites=19
+KILLED    m0001 src/ui/screen_settings.c:18 [arith * -> /]
+          build break
+SURVIVED  m0002 src/ui/screen_settings.c:22 [int+1 2 -> 3]
+KILLED    m0003 src/ui/screen_settings.c:22 [int-1 2 -> 1]
+          build break
+SURVIVED  m0004 src/ui/screen_settings.c:27 [int+1 2 -> 3]
+SURVIVED  m0005 src/ui/screen_settings.c:27 [int-1 2 -> 1]
+KILLED    m0006 src/ui/screen_settings.c:28 [int+1 4 -> 5]
+KILLED    m0007 src/ui/screen_settings.c:28 [int-1 4 -> 3]
+KILLED    m0008 src/ui/screen_settings.c:29 [arith - -> +]
+KILLED    m0009 src/ui/screen_settings.c:29 [arith + -> -]
+KILLED    m0010 src/ui/screen_settings.c:29 [int+1 1 -> 2]
+KILLED    m0011 src/ui/screen_settings.c:29 [int-1 1 -> 0]
+SURVIVED  m0012 src/ui/screen_settings.c:30 [int+1 0 -> 1]
+SURVIVED  m0013 src/ui/screen_settings.c:30 [int-1 0 -> -1]
+SURVIVED  m0014 src/ui/screen_settings.c:33 [int+1 3 -> 4]
+SURVIVED  m0015 src/ui/screen_settings.c:33 [int-1 3 -> 2]
+SURVIVED  m0016 src/ui/screen_settings.c:34 [int+1 5 -> 6]
+SURVIVED  m0017 src/ui/screen_settings.c:34 [int-1 5 -> 4]
+SURVIVED  m0018 src/ui/screen_settings.c:35 [int+1 4 -> 5]
+SURVIVED  m0019 src/ui/screen_settings.c:35 [int-1 4 -> 3]
+SURVIVED  m0020 src/ui/screen_settings.c:36 [int+1 8 -> 9]
+SURVIVED  m0021 src/ui/screen_settings.c:36 [int-1 8 -> 7]
+SURVIVED  m0022 src/ui/screen_settings.c:40 [int+1 2 -> 3]
+SURVIVED  m0023 src/ui/screen_settings.c:40 [int-1 2 -> 1]
+SURVIVED  m0024 src/ui/screen_settings.c:41 [int+1 1 -> 2]
+KILLED    m0025 src/ui/screen_settings.c:41 [int-1 1 -> 0]
+          build break
+SURVIVED  m0026 src/ui/screen_settings.c:41 [int+1 6 -> 7]
+SURVIVED  m0027 src/ui/screen_settings.c:41 [int-1 6 -> 5]
+KILLED    m0028 src/ui/screen_settings.c:44 [arith * -> /]
+          build break
+KILLED    m0029 src/ui/screen_settings.c:44 [arith * -> /]
+          build break
+KILLED    m0030 src/ui/screen_settings.c:45 [cmp == -> !=]
+KILLED    m0031 src/ui/screen_settings.c:47 [cmp == -> !=]
+KILLED    m0032 src/ui/screen_settings.c:53 [cmp >= -> >]
+KILLED    m0033 src/ui/screen_settings.c:53 [logic && -> ||]
+          build break
+KILLED    m0034 src/ui/screen_settings.c:53 [cmp <= -> <]
+KILLED    m0035 src/ui/screen_settings.c:54 [arith - -> +]
+KILLED    m0036 src/ui/screen_settings.c:55 [cmp >= -> >]
+KILLED    m0037 src/ui/screen_settings.c:55 [logic && -> ||]
+          build break
+KILLED    m0038 src/ui/screen_settings.c:55 [cmp <= -> <]
+KILLED    m0039 src/ui/screen_settings.c:56 [arith - -> +]
+KILLED    m0040 src/ui/screen_settings.c:56 [arith + -> -]
+KILLED    m0041 src/ui/screen_settings.c:57 [cmp >= -> >]
+KILLED    m0042 src/ui/screen_settings.c:57 [logic && -> ||]
+          build break
+KILLED    m0043 src/ui/screen_settings.c:57 [cmp <= -> <]
+KILLED    m0044 src/ui/screen_settings.c:58 [arith - -> +]
+KILLED    m0045 src/ui/screen_settings.c:58 [arith + -> -]
+KILLED    m0046 src/ui/screen_settings.c:59 [arith - -> +]
+SURVIVED  m0047 src/ui/screen_settings.c:59 [int+1 1 -> 2]
+KILLED    m0048 src/ui/screen_settings.c:59 [int-1 1 -> 0]
+KILLED    m0049 src/ui/screen_settings.c:62 [arith * -> /]
+          build break
+KILLED    m0050 src/ui/screen_settings.c:63 [cmp != -> ==]
+KILLED    m0051 src/ui/screen_settings.c:63 [int+1 2 -> 3]
+KILLED    m0052 src/ui/screen_settings.c:63 [int-1 2 -> 1]
+KILLED    m0053 src/ui/screen_settings.c:63 [arith * -> /]
+KILLED    m0054 src/ui/screen_settings.c:64 [bool false -> true]
+KILLED    m0055 src/ui/screen_settings.c:65 [int+1 0 -> 1]
+KILLED    m0056 src/ui/screen_settings.c:65 [int-1 0 -> -1]
+KILLED    m0057 src/ui/screen_settings.c:65 [cmp < -> <=]
+KILLED    m0058 src/ui/screen_settings.c:66 [int+1 2 -> 3]
+KILLED    m0059 src/ui/screen_settings.c:66 [int-1 2 -> 1]
+KILLED    m0060 src/ui/screen_settings.c:66 [arith * -> /]
+KILLED    m0061 src/ui/screen_settings.c:68 [arith + -> -]
+KILLED    m0062 src/ui/screen_settings.c:68 [int+1 1 -> 2]
+KILLED    m0063 src/ui/screen_settings.c:68 [int-1 1 -> 0]
+KILLED    m0064 src/ui/screen_settings.c:69 [cmp < -> <=]
+KILLED    m0065 src/ui/screen_settings.c:69 [int+1 0 -> 1]
+KILLED    m0066 src/ui/screen_settings.c:69 [int-1 0 -> -1]
+KILLED    m0067 src/ui/screen_settings.c:69 [logic || -> &&]
+KILLED    m0068 src/ui/screen_settings.c:69 [cmp < -> <=]
+KILLED    m0069 src/ui/screen_settings.c:69 [int+1 0 -> 1]
+KILLED    m0070 src/ui/screen_settings.c:69 [int-1 0 -> -1]
+KILLED    m0071 src/ui/screen_settings.c:70 [bool false -> true]
+KILLED    m0072 src/ui/screen_settings.c:73 [bool true -> false]
+KILLED    m0073 src/ui/screen_settings.c:76 [arith * -> /]
+          build break
+KILLED    m0074 src/ui/screen_settings.c:79 [cmp == -> !=]
+KILLED    m0075 src/ui/screen_settings.c:79 [int+1 0 -> 1]
+KILLED    m0076 src/ui/screen_settings.c:79 [int-1 0 -> -1]
+KILLED    m0077 src/ui/screen_settings.c:81 [cmp == -> !=]
+KILLED    m0078 src/ui/screen_settings.c:81 [int+1 0 -> 1]
+KILLED    m0079 src/ui/screen_settings.c:81 [int-1 0 -> -1]
+KILLED    m0080 src/ui/screen_settings.c:83 [cmp == -> !=]
+KILLED    m0081 src/ui/screen_settings.c:83 [int+1 0 -> 1]
+KILLED    m0082 src/ui/screen_settings.c:83 [int-1 0 -> -1]
+KILLED    m0083 src/ui/screen_settings.c:88 [cmp == -> !=]
+KILLED    m0084 src/ui/screen_settings.c:88 [int+1 0 -> 1]
+KILLED    m0085 src/ui/screen_settings.c:88 [int-1 0 -> -1]
+          build break
+KILLED    m0086 src/ui/screen_settings.c:91 [arith * -> /]
+          build break
+KILLED    m0087 src/ui/screen_settings.c:91 [arith * -> /]
+          build break
+KILLED    m0088 src/ui/screen_settings.c:93 [cmp != -> ==]
+KILLED    m0089 src/ui/screen_settings.c:93 [int+1 0 -> 1]
+KILLED    m0090 src/ui/screen_settings.c:93 [int-1 0 -> -1]
+SURVIVED  m0091 src/ui/screen_settings.c:95 [int+1 0 -> 1]
+SURVIVED  m0092 src/ui/screen_settings.c:95 [int-1 0 -> -1]
+KILLED    m0093 src/ui/screen_settings.c:96 [arith * -> /]
+          build break
+KILLED    m0094 src/ui/screen_settings.c:98 [cmp == -> !=]
+KILLED    m0095 src/ui/screen_settings.c:98 [logic || -> &&]
+          build break
+KILLED    m0096 src/ui/screen_settings.c:98 [int+1 0 -> 1]
+KILLED    m0097 src/ui/screen_settings.c:98 [int-1 0 -> -1]
+KILLED    m0098 src/ui/screen_settings.c:98 [cmp != -> ==]
+KILLED    m0099 src/ui/screen_settings.c:98 [logic || -> &&]
+          build break
+KILLED    m0100 src/ui/screen_settings.c:98 [cmp == -> !=]
+KILLED    m0101 src/ui/screen_settings.c:100 [cmp < -> <=]
+KILLED    m0102 src/ui/screen_settings.c:100 [int+1 0 -> 1]
+KILLED    m0103 src/ui/screen_settings.c:100 [int-1 0 -> -1]
+KILLED    m0104 src/ui/screen_settings.c:100 [logic || -> &&]
+KILLED    m0105 src/ui/screen_settings.c:100 [cmp >= -> >]
+KILLED    m0106 src/ui/screen_settings.c:105 [arith * -> /]
+          build break
+KILLED    m0107 src/ui/screen_settings.c:107 [int+1 0 -> 1]
+KILLED    m0108 src/ui/screen_settings.c:107 [int-1 0 -> -1]
+KILLED    m0109 src/ui/screen_settings.c:107 [cmp < -> <=]
+KILLED    m0110 src/ui/screen_settings.c:108 [arith * -> /]
+          build break
+KILLED    m0111 src/ui/screen_settings.c:109 [cmp == -> !=]
+KILLED    m0112 src/ui/screen_settings.c:109 [int+1 0 -> 1]
+KILLED    m0113 src/ui/screen_settings.c:109 [int-1 0 -> -1]
+KILLED    m0114 src/ui/screen_settings.c:109 [logic && -> ||]
+KILLED    m0115 src/ui/screen_settings.c:113 [not-del ! -> (deleted)]
+SURVIVED  m0116 src/ui/screen_settings.c:114 [int+1 0 -> 1]
+SURVIVED  m0117 src/ui/screen_settings.c:114 [int-1 0 -> -1]
+KILLED    m0118 src/ui/screen_settings.c:118 [arith * -> /]
+          build break
+KILLED    m0119 src/ui/screen_settings.c:118 [arith * -> /]
+          build break
+KILLED    m0120 src/ui/screen_settings.c:119 [cmp == -> !=]
+KILLED    m0121 src/ui/screen_settings.c:121 [int+1 0 -> 1]
+KILLED    m0122 src/ui/screen_settings.c:121 [int-1 0 -> -1]
+KILLED    m0123 src/ui/screen_settings.c:121 [arith * -> /]
+          build break
+KILLED    m0124 src/ui/screen_settings.c:123 [cmp == -> !=]
+KILLED    m0125 src/ui/screen_settings.c:128 [cmp <= -> <]
+SURVIVED  m0126 src/ui/screen_settings.c:128 [int+1 0 -> 1]
+KILLED    m0127 src/ui/screen_settings.c:128 [int-1 0 -> -1]
+KILLED    m0128 src/ui/screen_settings.c:129 [cmp != -> ==]
+KILLED    m0129 src/ui/screen_settings.c:129 [int+1 0 -> 1]
+KILLED    m0130 src/ui/screen_settings.c:129 [int-1 0 -> -1]
+SURVIVED  m0131 src/ui/screen_settings.c:135 [cmp <= -> <]
+KILLED    m0132 src/ui/screen_settings.c:135 [int+1 0 -> 1]
+SURVIVED  m0133 src/ui/screen_settings.c:135 [int-1 0 -> -1]
+KILLED    m0134 src/ui/screen_settings.c:140 [cmp < -> <=]
+KILLED    m0135 src/ui/screen_settings.c:140 [int+1 0 -> 1]
+KILLED    m0136 src/ui/screen_settings.c:140 [int-1 0 -> -1]
+KILLED    m0137 src/ui/screen_settings.c:151 [bool false -> true]
+KILLED    m0138 src/ui/screen_settings.c:155 [arith * -> /]
+          build break
+KILLED    m0139 src/ui/screen_settings.c:156 [cmp == -> !=]
+KILLED    m0140 src/ui/screen_settings.c:158 [arith * -> /]
+          build break
+KILLED    m0141 src/ui/screen_settings.c:159 [cmp == -> !=]
+KILLED    m0142 src/ui/screen_settings.c:159 [logic || -> &&]
+          build break
+KILLED    m0143 src/ui/screen_settings.c:159 [cmp < -> <=]
+KILLED    m0144 src/ui/screen_settings.c:159 [int+1 0 -> 1]
+KILLED    m0145 src/ui/screen_settings.c:159 [int-1 0 -> -1]
+KILLED    m0146 src/ui/screen_settings.c:159 [logic || -> &&]
+          build break
+KILLED    m0147 src/ui/screen_settings.c:159 [cmp >= -> >]
+KILLED    m0148 src/ui/screen_settings.c:163 [cmp < -> <=]
+KILLED    m0149 src/ui/screen_settings.c:163 [logic || -> &&]
+KILLED    m0150 src/ui/screen_settings.c:163 [cmp > -> >=]
+KILLED    m0151 src/ui/screen_settings.c:167 [int+1 0 -> 1]
+KILLED    m0152 src/ui/screen_settings.c:167 [int-1 0 -> -1]
+KILLED    m0153 src/ui/screen_settings.c:167 [cmp < -> <=]
+KILLED    m0154 src/ui/screen_settings.c:168 [cmp != -> ==]
+KILLED    m0155 src/ui/screen_settings.c:168 [logic && -> ||]
+KILLED    m0156 src/ui/screen_settings.c:168 [cmp == -> !=]
+KILLED    m0157 src/ui/screen_settings.c:173 [cmp == -> !=]
+KILLED    m0158 src/ui/screen_settings.c:178 [bool true -> false]
+KILLED    m0159 src/ui/screen_settings.c:183 [arith * -> /]
+          build break
+KILLED    m0160 src/ui/screen_settings.c:184 [cmp == -> !=]
+KILLED    m0161 src/ui/screen_settings.c:186 [arith * -> /]
+          build break
+KILLED    m0162 src/ui/screen_settings.c:187 [cmp == -> !=]
+KILLED    m0163 src/ui/screen_settings.c:187 [logic || -> &&]
+          build break
+KILLED    m0164 src/ui/screen_settings.c:187 [cmp < -> <=]
+KILLED    m0165 src/ui/screen_settings.c:187 [int+1 0 -> 1]
+KILLED    m0166 src/ui/screen_settings.c:187 [int-1 0 -> -1]
+KILLED    m0167 src/ui/screen_settings.c:187 [logic || -> &&]
+          build break
+KILLED    m0168 src/ui/screen_settings.c:187 [cmp >= -> >]
+KILLED    m0169 src/ui/screen_settings.c:191 [cmp < -> <=]
+SURVIVED  m0170 src/ui/screen_settings.c:191 [logic || -> &&]
+KILLED    m0171 src/ui/screen_settings.c:191 [cmp > -> >=]
+KILLED    m0172 src/ui/screen_settings.c:195 [arith - -> +]
+SURVIVED  m0173 src/ui/screen_settings.c:195 [int+1 1 -> 2]
+KILLED    m0174 src/ui/screen_settings.c:195 [int-1 1 -> 0]
+KILLED    m0175 src/ui/screen_settings.c:196 [int+1 0 -> 1]
+SURVIVED  m0176 src/ui/screen_settings.c:196 [int-1 0 -> -1]
+KILLED    m0177 src/ui/screen_settings.c:196 [cmp < -> <=]
+KILLED    m0178 src/ui/screen_settings.c:197 [cmp != -> ==]
+KILLED    m0179 src/ui/screen_settings.c:197 [logic && -> ||]
+KILLED    m0180 src/ui/screen_settings.c:197 [cmp == -> !=]
+KILLED    m0181 src/ui/screen_settings.c:201 [cmp < -> <=]
+KILLED    m0182 src/ui/screen_settings.c:201 [int+1 0 -> 1]
+KILLED    m0183 src/ui/screen_settings.c:201 [int-1 0 -> -1]
+KILLED    m0184 src/ui/screen_settings.c:201 [logic || -> &&]
+KILLED    m0185 src/ui/screen_settings.c:201 [cmp == -> !=]
+KILLED    m0186 src/ui/screen_settings.c:207 [bool true -> false]
+KILLED    m0187 src/ui/screen_settings.c:212 [arith * -> /]
+          build break
+KILLED    m0188 src/ui/screen_settings.c:213 [cmp == -> !=]
+KILLED    m0189 src/ui/screen_settings.c:215 [cmp < -> <=]
+KILLED    m0190 src/ui/screen_settings.c:215 [int+1 0 -> 1]
+KILLED    m0191 src/ui/screen_settings.c:215 [int-1 0 -> -1]
+KILLED    m0192 src/ui/screen_settings.c:215 [logic || -> &&]
+          build break
+KILLED    m0193 src/ui/screen_settings.c:215 [cmp >= -> >]
+KILLED    m0194 src/ui/screen_settings.c:215 [logic || -> &&]
+          build break
+KILLED    m0195 src/ui/screen_settings.c:215 [cmp < -> <=]
+KILLED    m0196 src/ui/screen_settings.c:215 [int+1 0 -> 1]
+KILLED    m0197 src/ui/screen_settings.c:215 [int-1 0 -> -1]
+KILLED    m0198 src/ui/screen_settings.c:215 [logic || -> &&]
+          build break
+KILLED    m0199 src/ui/screen_settings.c:216 [cmp >= -> >]
+KILLED    m0200 src/ui/screen_settings.c:216 [logic || -> &&]
+          build break
+KILLED    m0201 src/ui/screen_settings.c:216 [cmp < -> <=]
+KILLED    m0202 src/ui/screen_settings.c:216 [int+1 0 -> 1]
+KILLED    m0203 src/ui/screen_settings.c:216 [int-1 0 -> -1]
+KILLED    m0204 src/ui/screen_settings.c:216 [logic || -> &&]
+          build break
+KILLED    m0205 src/ui/screen_settings.c:216 [cmp > -> >=]
+KILLED    m0206 src/ui/screen_settings.c:221 [bool true -> false]
+KILLED    m0207 src/ui/screen_settings.c:226 [arith * -> /]
+          build break
+KILLED    m0208 src/ui/screen_settings.c:227 [cmp == -> !=]
+KILLED    m0209 src/ui/screen_settings.c:229 [cmp != -> ==]
+KILLED    m0210 src/ui/screen_settings.c:229 [int+1 0 -> 1]
+KILLED    m0211 src/ui/screen_settings.c:229 [int-1 0 -> -1]
+KILLED    m0212 src/ui/screen_settings.c:233 [bool false -> true]
+KILLED    m0213 src/ui/screen_settings.c:234 [int+1 0 -> 1]
+KILLED    m0214 src/ui/screen_settings.c:234 [int-1 0 -> -1]
+KILLED    m0215 src/ui/screen_settings.c:234 [cmp < -> <=]
+KILLED    m0216 src/ui/screen_settings.c:235 [int+1 1u -> 2u]
+KILLED    m0217 src/ui/screen_settings.c:235 [int-1 1u -> 0u]
+KILLED    m0218 src/ui/screen_settings.c:235 [cmp == -> !=]
+KILLED    m0219 src/ui/screen_settings.c:236 [bool true -> false]
+KILLED    m0220 src/ui/screen_settings.c:238 [not-del ! -> (deleted)]
+KILLED    m0221 src/ui/screen_settings.c:242 [cmp == -> !=]
+KILLED    m0222 src/ui/screen_settings.c:242 [int+1 0 -> 1]
+KILLED    m0223 src/ui/screen_settings.c:242 [int-1 0 -> -1]
+          build break
+KILLED    m0224 src/ui/screen_settings.c:247 [bool true -> false]
+KILLED    m0225 src/ui/screen_settings.c:252 [arith * -> /]
+          build break
+KILLED    m0226 src/ui/screen_settings.c:253 [cmp == -> !=]
+KILLED    m0227 src/ui/screen_settings.c:255 [not-del ! -> (deleted)]
+SURVIVED  m0228 src/ui/screen_settings.c:259 [cmp < -> <=]
+SURVIVED  m0229 src/ui/screen_settings.c:261 [cmp > -> >=]
+KILLED    m0230 src/ui/screen_settings.c:264 [bool true -> false]
+KILLED    m0231 src/ui/screen_settings.c:269 [arith * -> /]
+          build break
+KILLED    m0232 src/ui/screen_settings.c:270 [cmp == -> !=]
+KILLED    m0233 src/ui/screen_settings.c:272 [not-del ! -> (deleted)]
+SURVIVED  m0234 src/ui/screen_settings.c:276 [cmp < -> <=]
+KILLED    m0235 src/ui/screen_settings.c:279 [bool true -> false]
+KILLED    m0236 src/ui/screen_settings.c:284 [arith * -> /]
+          build break
+KILLED    m0237 src/ui/screen_settings.c:285 [cmp == -> !=]
+KILLED    m0238 src/ui/screen_settings.c:287 [cmp != -> ==]
+KILLED    m0239 src/ui/screen_settings.c:287 [logic && -> ||]
+          build break
+KILLED    m0240 src/ui/screen_settings.c:287 [cmp != -> ==]
+KILLED    m0241 src/ui/screen_settings.c:291 [cmp < -> <=]
+KILLED    m0242 src/ui/screen_settings.c:291 [int+1 0 -> 1]
+KILLED    m0243 src/ui/screen_settings.c:291 [int-1 0 -> -1]
+KILLED    m0244 src/ui/screen_settings.c:291 [logic || -> &&]
+KILLED    m0245 src/ui/screen_settings.c:291 [cmp >= -> >]
+KILLED    m0246 src/ui/screen_settings.c:295 [cmp == -> !=]
+KILLED    m0247 src/ui/screen_settings.c:299 [bool true -> false]
+KILLED    m0248 src/ui/screen_settings.c:304 [arith * -> /]
+          build break
+KILLED    m0249 src/ui/screen_settings.c:305 [int+1 0 -> 1]
+KILLED    m0250 src/ui/screen_settings.c:305 [int-1 0 -> -1]
+KILLED    m0251 src/ui/screen_settings.c:306 [int+1 0 -> 1]
+KILLED    m0252 src/ui/screen_settings.c:306 [int-1 0 -> -1]
+SURVIVED  m0253 src/ui/screen_settings.c:306 [cmp < -> <=]
+KILLED    m0254 src/ui/screen_settings.c:306 [logic && -> ||]
+KILLED    m0255 src/ui/screen_settings.c:306 [arith + -> -]
+SURVIVED  m0256 src/ui/screen_settings.c:306 [int+1 1 -> 2]
+SURVIVED  m0257 src/ui/screen_settings.c:306 [int-1 1 -> 0]
+SURVIVED  m0258 src/ui/screen_settings.c:306 [cmp < -> <=]
+KILLED    m0259 src/ui/screen_settings.c:307 [int+1 1u -> 2u]
+SURVIVED  m0260 src/ui/screen_settings.c:307 [int-1 1u -> 0u]
+KILLED    m0261 src/ui/screen_settings.c:307 [cmp != -> ==]
+KILLED    m0262 src/ui/screen_settings.c:307 [int+1 0 -> 1]
+KILLED    m0263 src/ui/screen_settings.c:307 [int-1 0 -> -1]
+KILLED    m0264 src/ui/screen_settings.c:309 [int+1 1u -> 2u]
+KILLED    m0265 src/ui/screen_settings.c:309 [int-1 1u -> 0u]
+KILLED    m0266 src/ui/screen_settings.c:310 [cmp != -> ==]
+KILLED    m0267 src/ui/screen_settings.c:310 [logic && -> ||]
+KILLED    m0268 src/ui/screen_settings.c:310 [int+1 1u -> 2u]
+KILLED    m0269 src/ui/screen_settings.c:310 [int-1 1u -> 0u]
+KILLED    m0270 src/ui/screen_settings.c:310 [cmp != -> ==]
+KILLED    m0271 src/ui/screen_settings.c:310 [int+1 0 -> 1]
+KILLED    m0272 src/ui/screen_settings.c:310 [int-1 0 -> -1]
+          build break
+KILLED    m0273 src/ui/screen_settings.c:316 [arith * -> /]
+          build break
+KILLED    m0274 src/ui/screen_settings.c:317 [cmp == -> !=]
+KILLED    m0275 src/ui/screen_settings.c:319 [cmp == -> !=]
+KILLED    m0276 src/ui/screen_settings.c:319 [logic || -> &&]
+KILLED    m0277 src/ui/screen_settings.c:319 [cmp <= -> <]
+KILLED    m0278 src/ui/screen_settings.c:319 [int+1 0 -> 1]
+KILLED    m0279 src/ui/screen_settings.c:319 [int-1 0 -> -1]
+KILLED    m0280 src/ui/screen_settings.c:323 [arith * -> /]
+          build break
+KILLED    m0281 src/ui/screen_settings.c:324 [cmp != -> ==]
+KILLED    m0282 src/ui/screen_settings.c:329 [cmp <= -> <]
+KILLED    m0283 src/ui/screen_settings.c:329 [logic && -> ||]
+KILLED    m0284 src/ui/screen_settings.c:329 [cmp == -> !=]
+KILLED    m0285 src/ui/screen_settings.c:330 [arith * -> /]
+          build break
+KILLED    m0286 src/ui/screen_settings.c:330 [cmp == -> !=]
+KILLED    m0287 src/ui/screen_settings.c:331 [int+1 0 -> 1]
+KILLED    m0288 src/ui/screen_settings.c:331 [int-1 0 -> -1]
+KILLED    m0289 src/ui/screen_settings.c:331 [cmp < -> <=]
+KILLED    m0290 src/ui/screen_settings.c:331 [logic && -> ||]
+KILLED    m0291 src/ui/screen_settings.c:331 [cmp == -> !=]
+KILLED    m0292 src/ui/screen_settings.c:332 [cmp == -> !=]
+KILLED    m0293 src/ui/screen_settings.c:334 [cmp != -> ==]
+KILLED    m0294 src/ui/screen_settings.c:334 [int+1 0 -> 1]
+KILLED    m0295 src/ui/screen_settings.c:334 [int-1 0 -> -1]
+KILLED    m0296 src/ui/screen_settings.c:339 [cmp == -> !=]
+KILLED    m0297 src/ui/screen_settings.c:341 [cmp != -> ==]
+KILLED    m0298 src/ui/screen_settings.c:341 [int+1 0 -> 1]
+KILLED    m0299 src/ui/screen_settings.c:341 [int-1 0 -> -1]
+KILLED    m0300 src/ui/screen_settings.c:344 [cmp == -> !=]
+KILLED    m0301 src/ui/screen_settings.c:346 [cmp != -> ==]
+KILLED    m0302 src/ui/screen_settings.c:346 [int+1 0 -> 1]
+KILLED    m0303 src/ui/screen_settings.c:346 [int-1 0 -> -1]
+KILLED    m0304 src/ui/screen_settings.c:349 [cmp == -> !=]
+KILLED    m0305 src/ui/screen_settings.c:351 [cmp != -> ==]
+KILLED    m0306 src/ui/screen_settings.c:351 [int+1 0 -> 1]
+KILLED    m0307 src/ui/screen_settings.c:351 [int-1 0 -> -1]
+KILLED    m0308 src/ui/screen_settings.c:354 [cmp == -> !=]
+KILLED    m0309 src/ui/screen_settings.c:356 [cmp != -> ==]
+KILLED    m0310 src/ui/screen_settings.c:356 [int+1 0 -> 1]
+KILLED    m0311 src/ui/screen_settings.c:356 [int-1 0 -> -1]
+KILLED    m0312 src/ui/screen_settings.c:359 [cmp == -> !=]
+KILLED    m0313 src/ui/screen_settings.c:361 [cmp != -> ==]
+KILLED    m0314 src/ui/screen_settings.c:361 [int+1 0 -> 1]
+KILLED    m0315 src/ui/screen_settings.c:361 [int-1 0 -> -1]
+KILLED    m0316 src/ui/screen_settings.c:364 [int+1 0 -> 1]
+KILLED    m0317 src/ui/screen_settings.c:364 [int-1 0 -> -1]
+KILLED    m0318 src/ui/screen_settings.c:364 [cmp < -> <=]
+KILLED    m0319 src/ui/screen_settings.c:364 [logic && -> ||]
+KILLED    m0320 src/ui/screen_settings.c:364 [cmp == -> !=]
+KILLED    m0321 src/ui/screen_settings.c:365 [int+1 0 -> 1]
+KILLED    m0322 src/ui/screen_settings.c:365 [int-1 0 -> -1]
+KILLED    m0323 src/ui/screen_settings.c:366 [int+1 1 -> 2]
+KILLED    m0324 src/ui/screen_settings.c:366 [int-1 1 -> 0]
+KILLED    m0325 src/ui/screen_settings.c:366 [int+1 2 -> 3]
+KILLED    m0326 src/ui/screen_settings.c:366 [int-1 2 -> 1]
+KILLED    m0327 src/ui/screen_settings.c:367 [cmp != -> ==]
+KILLED    m0328 src/ui/screen_settings.c:367 [int+1 0 -> 1]
+KILLED    m0329 src/ui/screen_settings.c:367 [int-1 0 -> -1]
+KILLED    m0330 src/ui/screen_settings.c:370 [cmp != -> ==]
+KILLED    m0331 src/ui/screen_settings.c:375 [cmp != -> ==]
+KILLED    m0332 src/ui/screen_settings.c:381 [bool false -> true]
+KILLED    m0333 src/ui/screen_settings.c:386 [arith * -> /]
+          build break
+KILLED    m0334 src/ui/screen_settings.c:387 [cmp == -> !=]
+SURVIVED  m0335 src/ui/screen_settings.c:399 [int+1 2 -> 3]
+SURVIVED  m0336 src/ui/screen_settings.c:399 [int-1 2 -> 1]
+SURVIVED  m0337 src/ui/screen_settings.c:407 [int+1 2 -> 3]
+KILLED    m0338 src/ui/screen_settings.c:407 [int-1 2 -> 1]
+          build break
+KILLED    m0339 src/ui/screen_settings.c:413 [arith * -> /]
+          build break
+SURVIVED  m0340 src/ui/screen_settings.c:436 [arith / -> *]
+SURVIVED  m0341 src/ui/screen_settings.c:438 [arith + -> -]
+SURVIVED  m0342 src/ui/screen_settings.c:438 [arith * -> /]
+SURVIVED  m0343 src/ui/screen_settings.c:438 [arith + -> -]
+SURVIVED  m0344 src/ui/screen_settings.c:438 [arith * -> /]
+KILLED    m0345 src/ui/screen_settings.c:441 [arith * -> /]
+          build break
+KILLED    m0346 src/ui/screen_settings.c:445 [arith * -> /]
+          build break
+KILLED    m0347 src/ui/screen_settings.c:446 [arith * -> /]
+          build break
+SURVIVED  m0348 src/ui/screen_settings.c:447 [int+1 0 -> 1]
+SURVIVED  m0349 src/ui/screen_settings.c:447 [int-1 0 -> -1]
+KILLED    m0350 src/ui/screen_settings.c:448 [arith * -> /]
+          build break
+SURVIVED  m0351 src/ui/screen_settings.c:450 [cmp == -> !=]
+KILLED    m0352 src/ui/screen_settings.c:450 [logic || -> &&]
+          build break
+SURVIVED  m0353 src/ui/screen_settings.c:450 [int+1 0 -> 1]
+SURVIVED  m0354 src/ui/screen_settings.c:450 [int-1 0 -> -1]
+SURVIVED  m0355 src/ui/screen_settings.c:450 [cmp != -> ==]
+KILLED    m0356 src/ui/screen_settings.c:450 [logic || -> &&]
+          build break
+SURVIVED  m0357 src/ui/screen_settings.c:450 [cmp == -> !=]
+SURVIVED  m0358 src/ui/screen_settings.c:459 [int+1 0 -> 1]
+SURVIVED  m0359 src/ui/screen_settings.c:459 [int-1 0 -> -1]
+SURVIVED  m0360 src/ui/screen_settings.c:459 [cmp < -> <=]
+KILLED    m0361 src/ui/screen_settings.c:460 [arith * -> /]
+          build break
+SURVIVED  m0362 src/ui/screen_settings.c:460 [cmp == -> !=]
+SURVIVED  m0363 src/ui/screen_settings.c:462 [int+1 0 -> 1]
+SURVIVED  m0364 src/ui/screen_settings.c:462 [int-1 0 -> -1]
+SURVIVED  m0365 src/ui/screen_settings.c:462 [cmp < -> <=]
+SURVIVED  m0366 src/ui/screen_settings.c:463 [int+1 0 -> 1]
+KILLED    m0367 src/ui/screen_settings.c:463 [int-1 0 -> -1]
+          build break
+SURVIVED  m0368 src/ui/screen_settings.c:463 [cmp != -> ==]
+KILLED    m0369 src/ui/screen_settings.c:464 [int+1 1 -> 2]
+          build break
+SURVIVED  m0370 src/ui/screen_settings.c:464 [int-1 1 -> 0]
+KILLED    m0371 src/ui/screen_settings.c:469 [arith * -> /]
+          build break
+KILLED    m0372 src/ui/screen_settings.c:470 [arith * -> /]
+          build break
+SURVIVED  m0373 src/ui/screen_settings.c:472 [arith / -> *]
+SURVIVED  m0374 src/ui/screen_settings.c:473 [arith + -> -]
+SURVIVED  m0375 src/ui/screen_settings.c:476 [arith + -> -]
+SURVIVED  m0376 src/ui/screen_settings.c:476 [arith - -> +]
+SURVIVED  m0377 src/ui/screen_settings.c:478 [not-del ! -> (deleted)]
+SURVIVED  m0378 src/ui/screen_settings.c:479 [not-del ! -> (deleted)]
+SURVIVED  m0379 src/ui/screen_settings.c:480 [bool true -> false]
+SURVIVED  m0380 src/ui/screen_settings.c:485 [not-del ! -> (deleted)]
+SURVIVED  m0381 src/ui/screen_settings.c:489 [arith + -> -]
+SURVIVED  m0382 src/ui/screen_settings.c:491 [arith + -> -]
+SURVIVED  m0383 src/ui/screen_settings.c:491 [arith - -> +]
+SURVIVED  m0384 src/ui/screen_settings.c:493 [not-del ! -> (deleted)]
+SURVIVED  m0385 src/ui/screen_settings.c:494 [not-del ! -> (deleted)]
+SURVIVED  m0386 src/ui/screen_settings.c:495 [bool false -> true]
+SURVIVED  m0387 src/ui/screen_settings.c:500 [not-del ! -> (deleted)]
+SURVIVED  m0388 src/ui/screen_settings.c:504 [arith + -> -]
+SURVIVED  m0389 src/ui/screen_settings.c:505 [arith + -> -]
+SURVIVED  m0390 src/ui/screen_settings.c:505 [arith - -> +]
+SURVIVED  m0391 src/ui/screen_settings.c:508 [arith - -> +]
+SURVIVED  m0392 src/ui/screen_settings.c:508 [int+1 2 -> 3]
+SURVIVED  m0393 src/ui/screen_settings.c:508 [int-1 2 -> 1]
+SURVIVED  m0394 src/ui/screen_settings.c:508 [arith * -> /]
+SURVIVED  m0395 src/ui/screen_settings.c:509 [arith - -> +]
+SURVIVED  m0396 src/ui/screen_settings.c:509 [int+1 2 -> 3]
+SURVIVED  m0397 src/ui/screen_settings.c:509 [int-1 2 -> 1]
+SURVIVED  m0398 src/ui/screen_settings.c:509 [arith * -> /]
+SURVIVED  m0399 src/ui/screen_settings.c:510 [arith / -> *]
+SURVIVED  m0400 src/ui/screen_settings.c:511 [arith / -> *]
+SURVIVED  m0401 src/ui/screen_settings.c:512 [int+1 0 -> 1]
+SURVIVED  m0402 src/ui/screen_settings.c:512 [int-1 0 -> -1]
+SURVIVED  m0403 src/ui/screen_settings.c:513 [int+1 0 -> 1]
+SURVIVED  m0404 src/ui/screen_settings.c:513 [int-1 0 -> -1]
+SURVIVED  m0405 src/ui/screen_settings.c:513 [cmp < -> <=]
+SURVIVED  m0406 src/ui/screen_settings.c:514 [int+1 1u -> 2u]
+SURVIVED  m0407 src/ui/screen_settings.c:514 [int-1 1u -> 0u]
+SURVIVED  m0408 src/ui/screen_settings.c:515 [cmp != -> ==]
+SURVIVED  m0409 src/ui/screen_settings.c:515 [int+1 0 -> 1]
+SURVIVED  m0410 src/ui/screen_settings.c:515 [int-1 0 -> -1]
+SURVIVED  m0411 src/ui/screen_settings.c:518 [arith / -> *]
+SURVIVED  m0412 src/ui/screen_settings.c:520 [cmp != -> ==]
+SURVIVED  m0413 src/ui/screen_settings.c:520 [int+1 0 -> 1]
+KILLED    m0414 src/ui/screen_settings.c:520 [int-1 0 -> -1]
+          build break
+SURVIVED  m0415 src/ui/screen_settings.c:521 [int+1 2 -> 3]
+KILLED    m0416 src/ui/screen_settings.c:521 [int-1 2 -> 1]
+          build break
+SURVIVED  m0417 src/ui/screen_settings.c:523 [arith + -> -]
+SURVIVED  m0418 src/ui/screen_settings.c:523 [arith + -> -]
+SURVIVED  m0419 src/ui/screen_settings.c:523 [arith * -> /]
+SURVIVED  m0420 src/ui/screen_settings.c:523 [arith + -> -]
+SURVIVED  m0421 src/ui/screen_settings.c:523 [arith + -> -]
+SURVIVED  m0422 src/ui/screen_settings.c:523 [arith * -> /]
+SURVIVED  m0423 src/ui/screen_settings.c:524 [cmp != -> ==]
+SURVIVED  m0424 src/ui/screen_settings.c:524 [int+1 0 -> 1]
+SURVIVED  m0425 src/ui/screen_settings.c:524 [int-1 0 -> -1]
+KILLED    m0426 src/ui/screen_settings.c:529 [arith * -> /]
+          build break
+SURVIVED  m0427 src/ui/screen_settings.c:531 [arith / -> *]
+SURVIVED  m0428 src/ui/screen_settings.c:532 [arith / -> *]
+SURVIVED  m0429 src/ui/screen_settings.c:533 [cmp == -> !=]
+SURVIVED  m0430 src/ui/screen_settings.c:534 [cmp == -> !=]
+SURVIVED  m0431 src/ui/screen_settings.c:534 [arith - -> +]
+SURVIVED  m0432 src/ui/screen_settings.c:534 [int+1 1 -> 2]
+SURVIVED  m0433 src/ui/screen_settings.c:534 [int-1 1 -> 0]
+SURVIVED  m0434 src/ui/screen_settings.c:535 [int+1 0 -> 1]
+SURVIVED  m0435 src/ui/screen_settings.c:535 [int-1 0 -> -1]
+SURVIVED  m0436 src/ui/screen_settings.c:535 [cmp < -> <=]
+KILLED    m0437 src/ui/screen_settings.c:543 [arith * -> /]
+          build break
+SURVIVED  m0438 src/ui/screen_settings.c:543 [cmp == -> !=]
+SURVIVED  m0439 src/ui/screen_settings.c:544 [int+1 0 -> 1]
+KILLED    m0440 src/ui/screen_settings.c:544 [int-1 0 -> -1]
+          build break
+SURVIVED  m0441 src/ui/screen_settings.c:545 [bool false -> true]
+SURVIVED  m0442 src/ui/screen_settings.c:548 [cmp == -> !=]
+SURVIVED  m0443 src/ui/screen_settings.c:550 [not-del ! -> (deleted)]
+KILLED    m0444 src/ui/screen_settings.c:550 [logic && -> ||]
+          build break
+SURVIVED  m0445 src/ui/screen_settings.c:550 [int+1 0 -> 1]
+KILLED    m0446 src/ui/screen_settings.c:550 [int-1 0 -> -1]
+          build break
+SURVIVED  m0447 src/ui/screen_settings.c:550 [cmp >= -> >]
+KILLED    m0448 src/ui/screen_settings.c:550 [logic && -> ||]
+          build break
+SURVIVED  m0449 src/ui/screen_settings.c:551 [int+1 0 -> 1]
+KILLED    m0450 src/ui/screen_settings.c:551 [int-1 0 -> -1]
+          build break
+SURVIVED  m0451 src/ui/screen_settings.c:551 [cmp <= -> <]
+KILLED    m0452 src/ui/screen_settings.c:551 [logic && -> ||]
+          build break
+SURVIVED  m0453 src/ui/screen_settings.c:552 [int+1 0 -> 1]
+KILLED    m0454 src/ui/screen_settings.c:552 [int-1 0 -> -1]
+          build break
+SURVIVED  m0455 src/ui/screen_settings.c:552 [cmp == -> !=]
+SURVIVED  m0456 src/ui/screen_settings.c:552 [int+1 0 -> 1]
+KILLED    m0457 src/ui/screen_settings.c:552 [int-1 0 -> -1]
+          build break
+KILLED    m0458 src/ui/screen_settings.c:557 [arith * -> /]
+          build break
+KILLED    m0459 src/ui/screen_settings.c:558 [arith * -> /]
+          build break
+SURVIVED  m0460 src/ui/screen_settings.c:560 [arith / -> *]
+SURVIVED  m0461 src/ui/screen_settings.c:564 [arith + -> -]
+SURVIVED  m0462 src/ui/screen_settings.c:566 [not-del ! -> (deleted)]
+SURVIVED  m0463 src/ui/screen_settings.c:567 [not-del ! -> (deleted)]
+KILLED    m0464 src/ui/screen_settings.c:567 [logic && -> ||]
+          build break
+SURVIVED  m0465 src/ui/screen_settings.c:567 [int+1 0 -> 1]
+KILLED    m0466 src/ui/screen_settings.c:567 [int-1 0 -> -1]
+          build break
+SURVIVED  m0467 src/ui/screen_settings.c:567 [cmp >= -> >]
+KILLED    m0468 src/ui/screen_settings.c:567 [logic && -> ||]
+          build break
+SURVIVED  m0469 src/ui/screen_settings.c:568 [int+1 0 -> 1]
+KILLED    m0470 src/ui/screen_settings.c:568 [int-1 0 -> -1]
+          build break
+SURVIVED  m0471 src/ui/screen_settings.c:568 [cmp <= -> <]
+SURVIVED  m0472 src/ui/screen_settings.c:570 [int+1 0 -> 1]
+KILLED    m0473 src/ui/screen_settings.c:570 [int-1 0 -> -1]
+          build break
+SURVIVED  m0474 src/ui/screen_settings.c:572 [arith + -> -]
+SURVIVED  m0475 src/ui/screen_settings.c:572 [int+1 2 -> 3]
+SURVIVED  m0476 src/ui/screen_settings.c:572 [int-1 2 -> 1]
+SURVIVED  m0477 src/ui/screen_settings.c:572 [arith * -> /]
+SURVIVED  m0478 src/ui/screen_settings.c:572 [arith - -> +]
+SURVIVED  m0479 src/ui/screen_settings.c:572 [int+1 2 -> 3]
+SURVIVED  m0480 src/ui/screen_settings.c:572 [int-1 2 -> 1]
+SURVIVED  m0481 src/ui/screen_settings.c:572 [arith * -> /]
+SURVIVED  m0482 src/ui/screen_settings.c:575 [arith + -> -]
+SURVIVED  m0483 src/ui/screen_settings.c:575 [arith + -> -]
+SURVIVED  m0484 src/ui/screen_settings.c:576 [arith - -> +]
+SURVIVED  m0485 src/ui/screen_settings.c:576 [arith - -> +]
+SURVIVED  m0486 src/ui/screen_settings.c:576 [arith - -> +]
+SURVIVED  m0487 src/ui/screen_settings.c:576 [arith / -> *]
+SURVIVED  m0488 src/ui/screen_settings.c:579 [arith + -> -]
+SURVIVED  m0489 src/ui/screen_settings.c:579 [arith + -> -]
+SURVIVED  m0490 src/ui/screen_settings.c:579 [arith - -> +]
+SURVIVED  m0491 src/ui/screen_settings.c:579 [int+1 2 -> 3]
+SURVIVED  m0492 src/ui/screen_settings.c:579 [int-1 2 -> 1]
+SURVIVED  m0493 src/ui/screen_settings.c:579 [arith * -> /]
+SURVIVED  m0494 src/ui/screen_settings.c:580 [arith - -> +]
+SURVIVED  m0495 src/ui/screen_settings.c:580 [int+1 2 -> 3]
+SURVIVED  m0496 src/ui/screen_settings.c:580 [int-1 2 -> 1]
+SURVIVED  m0497 src/ui/screen_settings.c:580 [arith * -> /]
+SURVIVED  m0498 src/ui/screen_settings.c:580 [bool false -> true]
+SURVIVED  m0499 src/ui/screen_settings.c:581 [arith + -> -]
+SURVIVED  m0500 src/ui/screen_settings.c:581 [arith + -> -]
+SURVIVED  m0501 src/ui/screen_settings.c:583 [arith + -> -]
+SURVIVED  m0502 src/ui/screen_settings.c:583 [arith + -> -]
+SURVIVED  m0503 src/ui/screen_settings.c:583 [arith - -> +]
+SURVIVED  m0504 src/ui/screen_settings.c:583 [int+1 2 -> 3]
+SURVIVED  m0505 src/ui/screen_settings.c:583 [int-1 2 -> 1]
+SURVIVED  m0506 src/ui/screen_settings.c:583 [arith * -> /]
+SURVIVED  m0507 src/ui/screen_settings.c:584 [arith - -> +]
+SURVIVED  m0508 src/ui/screen_settings.c:584 [int+1 2 -> 3]
+SURVIVED  m0509 src/ui/screen_settings.c:584 [int-1 2 -> 1]
+SURVIVED  m0510 src/ui/screen_settings.c:584 [arith * -> /]
+SURVIVED  m0511 src/ui/screen_settings.c:584 [bool false -> true]
+KILLED    m0512 src/ui/screen_settings.c:587 [arith * -> /]
+          build break
+KILLED    m0513 src/ui/screen_settings.c:588 [arith * -> /]
+          build break
+SURVIVED  m0514 src/ui/screen_settings.c:591 [arith - -> +]
+SURVIVED  m0515 src/ui/screen_settings.c:591 [arith / -> *]
+SURVIVED  m0516 src/ui/screen_settings.c:592 [arith - -> +]
+SURVIVED  m0517 src/ui/screen_settings.c:592 [arith - -> +]
+SURVIVED  m0518 src/ui/screen_settings.c:592 [arith - -> +]
+SURVIVED  m0519 src/ui/screen_settings.c:592 [arith - -> +]
+SURVIVED  m0520 src/ui/screen_settings.c:592 [arith / -> *]
+SURVIVED  m0521 src/ui/screen_settings.c:596 [arith + -> -]
+SURVIVED  m0522 src/ui/screen_settings.c:596 [arith + -> -]
+SURVIVED  m0523 src/ui/screen_settings.c:596 [arith - -> +]
+SURVIVED  m0524 src/ui/screen_settings.c:596 [int+1 2 -> 3]
+SURVIVED  m0525 src/ui/screen_settings.c:596 [int-1 2 -> 1]
+SURVIVED  m0526 src/ui/screen_settings.c:596 [arith * -> /]
+SURVIVED  m0527 src/ui/screen_settings.c:597 [arith - -> +]
+SURVIVED  m0528 src/ui/screen_settings.c:597 [int+1 2 -> 3]
+SURVIVED  m0529 src/ui/screen_settings.c:597 [int-1 2 -> 1]
+SURVIVED  m0530 src/ui/screen_settings.c:597 [arith * -> /]
+SURVIVED  m0531 src/ui/screen_settings.c:597 [bool true -> false]
+SURVIVED  m0532 src/ui/screen_settings.c:598 [arith + -> -]
+SURVIVED  m0533 src/ui/screen_settings.c:598 [arith + -> -]
+SURVIVED  m0534 src/ui/screen_settings.c:600 [arith + -> -]
+SURVIVED  m0535 src/ui/screen_settings.c:600 [arith + -> -]
+SURVIVED  m0536 src/ui/screen_settings.c:600 [arith - -> +]
+SURVIVED  m0537 src/ui/screen_settings.c:600 [int+1 2 -> 3]
+SURVIVED  m0538 src/ui/screen_settings.c:600 [int-1 2 -> 1]
+SURVIVED  m0539 src/ui/screen_settings.c:600 [arith * -> /]
+SURVIVED  m0540 src/ui/screen_settings.c:601 [arith - -> +]
+SURVIVED  m0541 src/ui/screen_settings.c:601 [int+1 2 -> 3]
+SURVIVED  m0542 src/ui/screen_settings.c:601 [int-1 2 -> 1]
+SURVIVED  m0543 src/ui/screen_settings.c:601 [arith * -> /]
+SURVIVED  m0544 src/ui/screen_settings.c:601 [bool true -> false]
+SURVIVED  m0545 src/ui/screen_settings.c:603 [arith + -> -]
+SURVIVED  m0546 src/ui/screen_settings.c:603 [arith + -> -]
+SURVIVED  m0547 src/ui/screen_settings.c:604 [arith - -> +]
+SURVIVED  m0548 src/ui/screen_settings.c:604 [arith - -> +]
+SURVIVED  m0549 src/ui/screen_settings.c:606 [arith - -> +]
+SURVIVED  m0550 src/ui/screen_settings.c:606 [int+1 2 -> 3]
+SURVIVED  m0551 src/ui/screen_settings.c:606 [int-1 2 -> 1]
+SURVIVED  m0552 src/ui/screen_settings.c:606 [arith * -> /]
+SURVIVED  m0553 src/ui/screen_settings.c:606 [arith / -> *]
+SURVIVED  m0554 src/ui/screen_settings.c:607 [arith + -> -]
+SURVIVED  m0555 src/ui/screen_settings.c:608 [arith - -> +]
+SURVIVED  m0556 src/ui/screen_settings.c:608 [int+1 2 -> 3]
+SURVIVED  m0557 src/ui/screen_settings.c:608 [int-1 2 -> 1]
+SURVIVED  m0558 src/ui/screen_settings.c:608 [arith * -> /]
+SURVIVED  m0559 src/ui/screen_settings.c:609 [arith / -> *]
+SURVIVED  m0560 src/ui/screen_settings.c:610 [arith - -> +]
+SURVIVED  m0561 src/ui/screen_settings.c:610 [arith - -> +]
+SURVIVED  m0562 src/ui/screen_settings.c:611 [int+1 0 -> 1]
+SURVIVED  m0563 src/ui/screen_settings.c:611 [int-1 0 -> -1]
+SURVIVED  m0564 src/ui/screen_settings.c:611 [cmp < -> <=]
+SURVIVED  m0565 src/ui/screen_settings.c:612 [arith + -> -]
+SURVIVED  m0566 src/ui/screen_settings.c:612 [arith + -> -]
+SURVIVED  m0567 src/ui/screen_settings.c:612 [arith * -> /]
+SURVIVED  m0568 src/ui/screen_settings.c:614 [int+1 0 -> 1]
+SURVIVED  m0569 src/ui/screen_settings.c:614 [int-1 0 -> -1]
+SURVIVED  m0570 src/ui/screen_settings.c:614 [int+1 1 -> 2]
+SURVIVED  m0571 src/ui/screen_settings.c:614 [int-1 1 -> 0]
+SURVIVED  m0572 src/ui/screen_settings.c:614 [int+1 2 -> 3]
+SURVIVED  m0573 src/ui/screen_settings.c:614 [int-1 2 -> 1]
+SURVIVED  m0574 src/ui/screen_settings.c:616 [arith + -> -]
+SURVIVED  m0575 src/ui/screen_settings.c:616 [arith - -> +]
+SURVIVED  m0576 src/ui/screen_settings.c:616 [arith - -> +]
+SURVIVED  m0577 src/ui/screen_settings.c:617 [int+1 0 -> 1]
+SURVIVED  m0578 src/ui/screen_settings.c:617 [int-1 0 -> -1]
+SURVIVED  m0579 src/ui/screen_settings.c:617 [cmp < -> <=]
+SURVIVED  m0580 src/ui/screen_settings.c:618 [arith * -> /]
+SURVIVED  m0581 src/ui/screen_settings.c:618 [arith + -> -]
+SURVIVED  m0582 src/ui/screen_settings.c:619 [int+1 1u -> 2u]
+SURVIVED  m0583 src/ui/screen_settings.c:619 [int-1 1u -> 0u]
+SURVIVED  m0584 src/ui/screen_settings.c:619 [cmp != -> ==]
+SURVIVED  m0585 src/ui/screen_settings.c:619 [int+1 0 -> 1]
+KILLED    m0586 src/ui/screen_settings.c:619 [int-1 0 -> -1]
+          build break
+SURVIVED  m0587 src/ui/screen_settings.c:620 [not-del ! -> (deleted)]
+SURVIVED  m0588 src/ui/screen_settings.c:622 [arith + -> -]
+SURVIVED  m0589 src/ui/screen_settings.c:623 [arith + -> -]
+SURVIVED  m0590 src/ui/screen_settings.c:623 [arith * -> /]
+SURVIVED  m0591 src/ui/screen_settings.c:623 [arith - -> +]
+SURVIVED  m0592 src/ui/screen_settings.c:624 [int+1 0 -> 1]
+SURVIVED  m0593 src/ui/screen_settings.c:624 [int-1 0 -> -1]
+SURVIVED  m0594 src/ui/screen_settings.c:624 [cmp != -> ==]
+SURVIVED  m0595 src/ui/screen_settings.c:624 [int+1 0 -> 1]
+SURVIVED  m0596 src/ui/screen_settings.c:624 [int-1 0 -> -1]
+SURVIVED  m0597 src/ui/screen_settings.c:625 [int+1 1u -> 2u]
+SURVIVED  m0598 src/ui/screen_settings.c:625 [int-1 1u -> 0u]
+SURVIVED  m0599 src/ui/screen_settings.c:626 [not-del ! -> (deleted)]
+SURVIVED  m0600 src/ui/screen_settings.c:626 [int+1 1u -> 2u]
+SURVIVED  m0601 src/ui/screen_settings.c:626 [int-1 1u -> 0u]
+KILLED    m0602 src/ui/screen_settings.c:635 [arith * -> /]
+          build break
+KILLED    m0603 src/ui/screen_settings.c:636 [cmp == -> !=]
+SURVIVED  m0604 src/ui/screen_settings.c:638 [not-del ! -> (deleted)]
+SURVIVED  m0605 src/ui/screen_settings.c:639 [bool true -> false]
+SURVIVED  m0606 src/ui/screen_settings.c:640 [int+1 0 -> 1]
+SURVIVED  m0607 src/ui/screen_settings.c:640 [int-1 0 -> -1]
+SURVIVED  m0608 src/ui/screen_settings.c:643 [int+1 0 -> 1]
+SURVIVED  m0609 src/ui/screen_settings.c:643 [int-1 0 -> -1]
+SURVIVED  m0610 src/ui/screen_settings.c:644 [int+1 0 -> 1]
+KILLED    m0611 src/ui/screen_settings.c:644 [int-1 0 -> -1]
+          build break
+SURVIVED  m0612 src/ui/screen_settings.c:644 [int+1 0 -> 1]
+KILLED    m0613 src/ui/screen_settings.c:644 [int-1 0 -> -1]
+          build break
+KILLED    m0614 src/ui/screen_settings.c:650 [arith * -> /]
+          build break
+SURVIVED  m0615 src/ui/screen_settings.c:652 [cmp == -> !=]
+KILLED    m0616 src/ui/screen_settings.c:654 [arith * -> /]
+          build break
+SURVIVED  m0617 src/ui/screen_settings.c:661 [arith - -> +]
+SURVIVED  m0618 src/ui/screen_settings.c:661 [arith - -> +]
+SURVIVED  m0619 src/ui/screen_settings.c:661 [arith - -> +]
+SURVIVED  m0620 src/ui/screen_settings.c:662 [arith - -> +]
+SURVIVED  m0621 src/ui/screen_settings.c:662 [int+1 2 -> 3]
+SURVIVED  m0622 src/ui/screen_settings.c:662 [int-1 2 -> 1]
+SURVIVED  m0623 src/ui/screen_settings.c:662 [arith * -> /]
+SURVIVED  m0624 src/ui/screen_settings.c:662 [arith - -> +]
+SURVIVED  m0625 src/ui/screen_settings.c:662 [arith / -> *]
+SURVIVED  m0626 src/ui/screen_settings.c:664 [arith + -> -]
+SURVIVED  m0627 src/ui/screen_settings.c:664 [arith + -> -]
+SURVIVED  m0628 src/ui/screen_settings.c:665 [arith - -> +]
+SURVIVED  m0629 src/ui/screen_settings.c:665 [int+1 2 -> 3]
+SURVIVED  m0630 src/ui/screen_settings.c:665 [int-1 2 -> 1]
+SURVIVED  m0631 src/ui/screen_settings.c:665 [arith * -> /]
+SURVIVED  m0632 src/ui/screen_settings.c:666 [arith - -> +]
+SURVIVED  m0633 src/ui/screen_settings.c:666 [arith - -> +]
+SURVIVED  m0634 src/ui/screen_settings.c:671 [cmp < -> <=]
+KILLED    m0635 src/ui/screen_settings.c:671 [logic || -> &&]
+          build break
+SURVIVED  m0636 src/ui/screen_settings.c:671 [cmp >= -> >]
+SURVIVED  m0637 src/ui/screen_settings.c:687 [cmp == -> !=]
+SURVIVED  m0638 src/ui/screen_settings.c:689 [cmp != -> ==]
+SURVIVED  m0639 src/ui/screen_settings.c:689 [int+1 0 -> 1]
+SURVIVED  m0640 src/ui/screen_settings.c:689 [int-1 0 -> -1]
+SURVIVED  m0641 src/ui/screen_settings.c:690 [int+1 0 -> 1]
+SURVIVED  m0642 src/ui/screen_settings.c:690 [int-1 0 -> -1]
+SURVIVED  m0643 src/ui/screen_settings.c:693 [arith + -> -]
+SURVIVED  m0644 src/ui/screen_settings.c:693 [arith + -> -]
+SURVIVED  m0645 src/ui/screen_settings.c:696 [cmp > -> >=]
+SURVIVED  m0646 src/ui/screen_settings.c:696 [int+1 0 -> 1]
+SURVIVED  m0647 src/ui/screen_settings.c:696 [int-1 0 -> -1]
+SURVIVED  m0648 src/ui/screen_settings.c:702 [arith - -> +]
+ACCEPTED  m0002 src/ui/screen_settings.c:22 [int+1 2 -> 3] :: face name array bound, consumed only by the draw path face labels no headless suite exercises
+ACCEPTED  m0004 src/ui/screen_settings.c:27 [int+1 2 -> 3] :: orbit count constant, consumed only by draw-side grid and label builders no headless suite exercises
+ACCEPTED  m0005 src/ui/screen_settings.c:27 [int-1 2 -> 1] :: orbit count constant, consumed only by draw-side grid and label builders no headless suite exercises
+ACCEPTED  m0012 src/ui/screen_settings.c:30 [int+1 0 -> 1] :: tab index base, consumed only by the draw-side tab dispatch and clamp no headless suite exercises
+ACCEPTED  m0013 src/ui/screen_settings.c:30 [int-1 0 -> -1] :: tab index base, consumed only by the draw-side tab dispatch and clamp no headless suite exercises
+ACCEPTED  m0014 src/ui/screen_settings.c:33 [int+1 3 -> 4] :: tab count bound, consumed only by the draw-side tab clamp no headless suite exercises
+ACCEPTED  m0015 src/ui/screen_settings.c:33 [int-1 3 -> 2] :: tab count bound, consumed only by the draw-side tab clamp no headless suite exercises
+ACCEPTED  m0016 src/ui/screen_settings.c:34 [int+1 5 -> 6] :: margin shift constant, draw layout only, no headless suite exercises the draw path
+ACCEPTED  m0017 src/ui/screen_settings.c:34 [int-1 5 -> 4] :: margin shift constant, draw layout only, no headless suite exercises the draw path
+ACCEPTED  m0018 src/ui/screen_settings.c:35 [int+1 4 -> 5] :: row height shift constant, draw layout only, no headless suite exercises the draw path
+ACCEPTED  m0019 src/ui/screen_settings.c:35 [int-1 4 -> 3] :: row height shift constant, draw layout only, no headless suite exercises the draw path
+ACCEPTED  m0020 src/ui/screen_settings.c:36 [int+1 8 -> 9] :: label width divisor, draw layout only, no headless suite exercises the draw path
+ACCEPTED  m0021 src/ui/screen_settings.c:36 [int-1 8 -> 7] :: label width divisor, draw layout only, no headless suite exercises the draw path
+ACCEPTED  m0022 src/ui/screen_settings.c:40 [int+1 2 -> 3] :: button count constant, draw layout only, no headless suite exercises the draw path
+ACCEPTED  m0023 src/ui/screen_settings.c:40 [int-1 2 -> 1] :: button count constant, draw layout only, no headless suite exercises the draw path
+ACCEPTED  m0024 src/ui/screen_settings.c:41 [int+1 1 -> 2] :: status text cap, the drawn status bar is the only consumer, truncation is invisible to headless suites
+ACCEPTED  m0026 src/ui/screen_settings.c:41 [int+1 6 -> 7] :: status text cap, the drawn status bar is the only consumer, truncation is invisible to headless suites
+ACCEPTED  m0027 src/ui/screen_settings.c:41 [int-1 6 -> 5] :: status text cap, the drawn status bar is the only consumer, truncation is invisible to headless suites
+ACCEPTED  m0047 src/ui/screen_settings.c:59 [int+1 1 -> 2] :: hex reject return value, callers test the sign only, any negative value is equivalent
+ACCEPTED  m0091 src/ui/screen_settings.c:95 [int+1 0 -> 1] :: errno reset value, the following check compares against ERANGE only, any non-ERANGE residue behaves identically
+ACCEPTED  m0092 src/ui/screen_settings.c:95 [int-1 0 -> -1] :: errno reset value, the following check compares against ERANGE only, any non-ERANGE residue behaves identically
+ACCEPTED  m0116 src/ui/screen_settings.c:114 [int+1 0 -> 1] :: zero fill fallback unreachable, the compiled-in default palette is valid six digit hex on every face
+ACCEPTED  m0117 src/ui/screen_settings.c:114 [int-1 0 -> -1] :: zero fill fallback unreachable, the compiled-in default palette is valid six digit hex on every face
+ACCEPTED  m0126 src/ui/screen_settings.c:128 [int+1 0 -> 1] :: widened missing-scheme guard reruns the idempotent speffz seed, on a healthy db the default and letters are unchanged, on a broken schema the seed fails exactly where the load would
+ACCEPTED  m0131 src/ui/screen_settings.c:135 [cmp <= -> <] :: second zero guard unreachable, a successful speffz seed always leaves a default scheme so the reread is at least 1
+ACCEPTED  m0133 src/ui/screen_settings.c:135 [int-1 0 -> -1] :: second zero guard unreachable, a successful speffz seed always leaves a default scheme so the reread is at least 1
+ACCEPTED  m0176 src/ui/screen_settings.c:196 [int-1 0 -> -1] :: holder probe at minus one stores the sentinel itself, any real holder match overwrites it later in the scan, identical outcome on every path
+ACCEPTED  m0228 src/ui/screen_settings.c:259 [cmp < -> <=] :: retention lower clamp boundary is idempotent, at the minimum both arms store the same value
+ACCEPTED  m0229 src/ui/screen_settings.c:261 [cmp > -> >=] :: retention upper clamp boundary is idempotent, at the maximum both arms store the same value
+ACCEPTED  m0234 src/ui/screen_settings.c:276 [cmp < -> <=] :: move seconds lower clamp boundary is idempotent, at the minimum both arms store the same value
+ACCEPTED  m0253 src/ui/screen_settings.c:306 [cmp < -> <=] :: loop and capacity guards never engage, the format writes at most 9 face chars into the 32 byte settings buffer
+ACCEPTED  m0256 src/ui/screen_settings.c:306 [int+1 1 -> 2] :: loop and capacity guards never engage, the format writes at most 9 face chars into the 32 byte settings buffer
+ACCEPTED  m0257 src/ui/screen_settings.c:306 [int-1 1 -> 0] :: loop and capacity guards never engage, the format writes at most 9 face chars into the 32 byte settings buffer
+ACCEPTED  m0258 src/ui/screen_settings.c:306 [cmp < -> <=] :: loop and capacity guards never engage, the format writes at most 9 face chars into the 32 byte settings buffer
+ACCEPTED  m0260 src/ui/screen_settings.c:307 [int-1 1u -> 0u] :: rotation probe zeroing unmasks rotation faces whose bits no reachable move mask contains, the config parser and the stage guard both strip them
+ACCEPTED  m0335 src/ui/screen_settings.c:399 [int+1 2 -> 3] :: letter edit buffer bound, consumed only by the draw-side letter text box no headless suite exercises
+ACCEPTED  m0336 src/ui/screen_settings.c:399 [int-1 2 -> 1] :: letter edit buffer bound, consumed only by the draw-side letter text box no headless suite exercises
+ACCEPTED  m0337 src/ui/screen_settings.c:407 [int+1 2 -> 3] :: label cell size, consumed only by the draw-side label grid no headless suite exercises
+ACCEPTED  m0340 src/ui/screen_settings.c:436 [arith / -> *] :: cell grid column arithmetic, consumed only by the draw path button layout no headless suite exercises
+ACCEPTED  m0341 src/ui/screen_settings.c:438 [arith + -> -] :: cell rect composition, consumed only by the draw path button layout no headless suite exercises
+ACCEPTED  m0342 src/ui/screen_settings.c:438 [arith * -> /] :: cell rect composition, consumed only by the draw path button layout no headless suite exercises
+ACCEPTED  m0343 src/ui/screen_settings.c:438 [arith + -> -] :: cell rect composition, consumed only by the draw path button layout no headless suite exercises
+ACCEPTED  m0344 src/ui/screen_settings.c:438 [arith * -> /] :: cell rect composition, consumed only by the draw path button layout no headless suite exercises
+ACCEPTED  m0348 src/ui/screen_settings.c:447 [int+1 0 -> 1] :: errno reset in the draw-side text apply helper, the check compares against ERANGE only and no headless suite calls the helper
+ACCEPTED  m0349 src/ui/screen_settings.c:447 [int-1 0 -> -1] :: errno reset in the draw-side text apply helper, the check compares against ERANGE only and no headless suite calls the helper
+ACCEPTED  m0351 src/ui/screen_settings.c:450 [cmp == -> !=] :: validation disjunct in the draw-side text apply helper, no headless suite calls the helper
+ACCEPTED  m0353 src/ui/screen_settings.c:450 [int+1 0 -> 1] :: validation disjunct in the draw-side text apply helper, no headless suite calls the helper
+ACCEPTED  m0354 src/ui/screen_settings.c:450 [int-1 0 -> -1] :: validation disjunct in the draw-side text apply helper, no headless suite calls the helper
+ACCEPTED  m0355 src/ui/screen_settings.c:450 [cmp != -> ==] :: validation disjunct in the draw-side text apply helper, no headless suite calls the helper
+ACCEPTED  m0357 src/ui/screen_settings.c:450 [cmp == -> !=] :: validation disjunct in the draw-side text apply helper, no headless suite calls the helper
+ACCEPTED  m0358 src/ui/screen_settings.c:459 [int+1 0 -> 1] :: label orbit loop bound, the label grid is write-only outside the draw path
+ACCEPTED  m0359 src/ui/screen_settings.c:459 [int-1 0 -> -1] :: label orbit loop bound, the label grid is write-only outside the draw path
+ACCEPTED  m0360 src/ui/screen_settings.c:459 [cmp < -> <=] :: label orbit loop bound, the label grid is write-only outside the draw path
+ACCEPTED  m0362 src/ui/screen_settings.c:460 [cmp == -> !=] :: label orbit ternary, the label grid is write-only outside the draw path
+ACCEPTED  m0363 src/ui/screen_settings.c:462 [int+1 0 -> 1] :: label sticker loop bound, the label grid is write-only outside the draw path
+ACCEPTED  m0364 src/ui/screen_settings.c:462 [int-1 0 -> -1] :: label sticker loop bound, the label grid is write-only outside the draw path
+ACCEPTED  m0365 src/ui/screen_settings.c:462 [cmp < -> <=] :: label sticker loop bound, the label grid is write-only outside the draw path
+ACCEPTED  m0366 src/ui/screen_settings.c:463 [int+1 0 -> 1] :: label dash placeholder, read only by the draw path
+ACCEPTED  m0368 src/ui/screen_settings.c:463 [cmp != -> ==] :: label dash placeholder, read only by the draw path
+ACCEPTED  m0370 src/ui/screen_settings.c:464 [int-1 1 -> 0] :: label terminator, read only by the draw path
+ACCEPTED  m0373 src/ui/screen_settings.c:472 [arith / -> *] :: label width layout, draw path only, no headless suite exercises it
+ACCEPTED  m0374 src/ui/screen_settings.c:473 [arith + -> -] :: row step layout, draw path only, no headless suite exercises it
+ACCEPTED  m0375 src/ui/screen_settings.c:476 [arith + -> -] :: retention text box rect, draw path only, no headless suite exercises it
+ACCEPTED  m0376 src/ui/screen_settings.c:476 [arith - -> +] :: retention text box rect, draw path only, no headless suite exercises it
+ACCEPTED  m0377 src/ui/screen_settings.c:478 [not-del ! -> (deleted)] :: retention edit toggle, gui event state no headless suite can trigger
+ACCEPTED  m0378 src/ui/screen_settings.c:479 [not-del ! -> (deleted)] :: retention edit close branch, gui event state no headless suite can trigger
+ACCEPTED  m0379 src/ui/screen_settings.c:480 [bool true -> false] :: retention apply inside the text box commit branch, gui event branch no headless suite can trigger
+ACCEPTED  m0380 src/ui/screen_settings.c:485 [not-del ! -> (deleted)] :: idle retention canonical refill, draw path only, no headless suite exercises it
+ACCEPTED  m0381 src/ui/screen_settings.c:489 [arith + -> -] :: second row offset, draw layout only, no headless suite exercises it
+ACCEPTED  m0382 src/ui/screen_settings.c:491 [arith + -> -] :: seconds text box rect, draw path only, no headless suite exercises it
+ACCEPTED  m0383 src/ui/screen_settings.c:491 [arith - -> +] :: seconds text box rect, draw path only, no headless suite exercises it
+ACCEPTED  m0384 src/ui/screen_settings.c:493 [not-del ! -> (deleted)] :: seconds edit toggle, gui event state no headless suite can trigger
+ACCEPTED  m0385 src/ui/screen_settings.c:494 [not-del ! -> (deleted)] :: seconds edit close branch, gui event state no headless suite can trigger
+ACCEPTED  m0386 src/ui/screen_settings.c:495 [bool false -> true] :: seconds apply inside the text box commit branch, gui event branch no headless suite can trigger
+ACCEPTED  m0387 src/ui/screen_settings.c:500 [not-del ! -> (deleted)] :: idle seconds canonical refill, draw path only, no headless suite exercises it
+ACCEPTED  m0388 src/ui/screen_settings.c:504 [arith + -> -] :: moves group y offset, draw layout only, no headless suite exercises it
+ACCEPTED  m0389 src/ui/screen_settings.c:505 [arith + -> -] :: moves group height, draw layout only, no headless suite exercises it
+ACCEPTED  m0390 src/ui/screen_settings.c:505 [arith - -> +] :: moves group height, draw layout only, no headless suite exercises it
+ACCEPTED  m0391 src/ui/screen_settings.c:508 [arith - -> +] :: moves grid width inset, draw layout only, no headless suite exercises it
+ACCEPTED  m0392 src/ui/screen_settings.c:508 [int+1 2 -> 3] :: moves grid width inset, draw layout only, no headless suite exercises it
+ACCEPTED  m0393 src/ui/screen_settings.c:508 [int-1 2 -> 1] :: moves grid width inset, draw layout only, no headless suite exercises it
+ACCEPTED  m0394 src/ui/screen_settings.c:508 [arith * -> /] :: moves grid width inset, draw layout only, no headless suite exercises it
+ACCEPTED  m0395 src/ui/screen_settings.c:509 [arith - -> +] :: moves grid height inset, draw layout only, no headless suite exercises it
+ACCEPTED  m0396 src/ui/screen_settings.c:509 [int+1 2 -> 3] :: moves grid height inset, draw layout only, no headless suite exercises it
+ACCEPTED  m0397 src/ui/screen_settings.c:509 [int-1 2 -> 1] :: moves grid height inset, draw layout only, no headless suite exercises it
+ACCEPTED  m0398 src/ui/screen_settings.c:509 [arith * -> /] :: moves grid height inset, draw layout only, no headless suite exercises it
+ACCEPTED  m0399 src/ui/screen_settings.c:510 [arith / -> *] :: move cell width, draw layout only, no headless suite exercises it
+ACCEPTED  m0400 src/ui/screen_settings.c:511 [arith / -> *] :: move cell height, draw layout only, no headless suite exercises it
+ACCEPTED  m0401 src/ui/screen_settings.c:512 [int+1 0 -> 1] :: shown counter init, drawn toggle placement bookkeeping only
+ACCEPTED  m0402 src/ui/screen_settings.c:512 [int-1 0 -> -1] :: shown counter init, drawn toggle placement bookkeeping only
+ACCEPTED  m0403 src/ui/screen_settings.c:513 [int+1 0 -> 1] :: face loop bound, drawn toggle count only, no headless suite exercises the draw path
+ACCEPTED  m0404 src/ui/screen_settings.c:513 [int-1 0 -> -1] :: face loop bound, drawn toggle count only, no headless suite exercises the draw path
+ACCEPTED  m0405 src/ui/screen_settings.c:513 [cmp < -> <=] :: face loop bound, drawn toggle count only, no headless suite exercises the draw path
+ACCEPTED  m0406 src/ui/screen_settings.c:514 [int+1 1u -> 2u] :: face bit pick, drawn toggle iteration only
+ACCEPTED  m0407 src/ui/screen_settings.c:514 [int-1 1u -> 0u] :: face bit pick, drawn toggle iteration only
+ACCEPTED  m0408 src/ui/screen_settings.c:515 [cmp != -> ==] :: rotation skip, drawn toggle set only
+ACCEPTED  m0409 src/ui/screen_settings.c:515 [int+1 0 -> 1] :: rotation skip, drawn toggle set only
+ACCEPTED  m0410 src/ui/screen_settings.c:515 [int-1 0 -> -1] :: rotation skip, drawn toggle set only
+ACCEPTED  m0411 src/ui/screen_settings.c:518 [arith / -> *] :: toggle column arithmetic, draw layout only
+ACCEPTED  m0412 src/ui/screen_settings.c:520 [cmp != -> ==] :: move mask on flag, drawn toggle state only
+ACCEPTED  m0413 src/ui/screen_settings.c:520 [int+1 0 -> 1] :: move mask on flag, drawn toggle state only
+ACCEPTED  m0415 src/ui/screen_settings.c:521 [int+1 2 -> 3] :: toggle label char, drawn toggle text only
+ACCEPTED  m0417 src/ui/screen_settings.c:523 [arith + -> -] :: toggle rect, draw layout only
+ACCEPTED  m0418 src/ui/screen_settings.c:523 [arith + -> -] :: toggle rect, draw layout only
+ACCEPTED  m0419 src/ui/screen_settings.c:523 [arith * -> /] :: toggle rect, draw layout only
+ACCEPTED  m0420 src/ui/screen_settings.c:523 [arith + -> -] :: toggle rect, draw layout only
+ACCEPTED  m0421 src/ui/screen_settings.c:523 [arith + -> -] :: toggle rect, draw layout only
+ACCEPTED  m0422 src/ui/screen_settings.c:523 [arith * -> /] :: toggle rect, draw layout only
+ACCEPTED  m0423 src/ui/screen_settings.c:524 [cmp != -> ==] :: stage call inside the toggle callback, gui event branch no headless suite can trigger
+ACCEPTED  m0424 src/ui/screen_settings.c:524 [int+1 0 -> 1] :: stage call inside the toggle callback, gui event branch no headless suite can trigger
+ACCEPTED  m0425 src/ui/screen_settings.c:524 [int-1 0 -> -1] :: stage call inside the toggle callback, gui event branch no headless suite can trigger
+ACCEPTED  m0427 src/ui/screen_settings.c:531 [arith / -> *] :: cell width divisor, draw layout only
+ACCEPTED  m0428 src/ui/screen_settings.c:532 [arith / -> *] :: cell height divisor, draw layout only
+ACCEPTED  m0429 src/ui/screen_settings.c:533 [cmp == -> !=] :: buffer selection ternary, drawn selection outline only
+ACCEPTED  m0430 src/ui/screen_settings.c:534 [cmp == -> !=] :: letter selection ternary, drawn selection outline only
+ACCEPTED  m0431 src/ui/screen_settings.c:534 [arith - -> +] :: letter selection ternary, drawn selection outline only
+ACCEPTED  m0432 src/ui/screen_settings.c:534 [int+1 1 -> 2] :: letter selection ternary, drawn selection outline only
+ACCEPTED  m0433 src/ui/screen_settings.c:534 [int-1 1 -> 0] :: letter selection ternary, drawn selection outline only
+ACCEPTED  m0434 src/ui/screen_settings.c:535 [int+1 0 -> 1] :: sticker loop bound, drawn grid iteration only
+ACCEPTED  m0435 src/ui/screen_settings.c:535 [int-1 0 -> -1] :: sticker loop bound, drawn grid iteration only
+ACCEPTED  m0436 src/ui/screen_settings.c:535 [cmp < -> <=] :: sticker loop bound, drawn grid iteration only
+ACCEPTED  m0438 src/ui/screen_settings.c:543 [cmp == -> !=] :: orbit array ternary inside the button callback, gui event branch no headless suite can trigger
+ACCEPTED  m0439 src/ui/screen_settings.c:544 [int+1 0 -> 1] :: letter buffer stash in the button callback, gui event state no headless suite can trigger
+ACCEPTED  m0441 src/ui/screen_settings.c:545 [bool false -> true] :: edit flag reset in the button callback, gui event state no headless suite can trigger
+ACCEPTED  m0442 src/ui/screen_settings.c:548 [cmp == -> !=] :: selected outline branch, drawn highlight only
+ACCEPTED  m0443 src/ui/screen_settings.c:550 [not-del ! -> (deleted)] :: duplicate outline guard, drawn highlight only
+ACCEPTED  m0445 src/ui/screen_settings.c:550 [int+1 0 -> 1] :: duplicate outline guard, drawn highlight only
+ACCEPTED  m0447 src/ui/screen_settings.c:550 [cmp >= -> >] :: duplicate outline guard, drawn highlight only
+ACCEPTED  m0449 src/ui/screen_settings.c:551 [int+1 0 -> 1] :: letter range check in the outline guard, drawn highlight only
+ACCEPTED  m0451 src/ui/screen_settings.c:551 [cmp <= -> <] :: letter range check in the outline guard, drawn highlight only
+ACCEPTED  m0453 src/ui/screen_settings.c:552 [int+1 0 -> 1] :: label match in the outline guard, drawn highlight only
+ACCEPTED  m0455 src/ui/screen_settings.c:552 [cmp == -> !=] :: label match in the outline guard, drawn highlight only
+ACCEPTED  m0456 src/ui/screen_settings.c:552 [int+1 0 -> 1] :: label match in the outline guard, drawn highlight only
+ACCEPTED  m0460 src/ui/screen_settings.c:560 [arith / -> *] :: label width divisor, draw layout only
+ACCEPTED  m0461 src/ui/screen_settings.c:564 [arith + -> -] :: letter text box rect, draw path only
+ACCEPTED  m0462 src/ui/screen_settings.c:566 [not-del ! -> (deleted)] :: letter edit toggle, gui event state no headless suite can trigger
+ACCEPTED  m0463 src/ui/screen_settings.c:567 [not-del ! -> (deleted)] :: edit close letter lower bound, gui event branch no headless suite can trigger
+ACCEPTED  m0465 src/ui/screen_settings.c:567 [int+1 0 -> 1] :: edit close letter lower bound, gui event branch no headless suite can trigger
+ACCEPTED  m0467 src/ui/screen_settings.c:567 [cmp >= -> >] :: edit close letter lower bound, gui event branch no headless suite can trigger
+ACCEPTED  m0469 src/ui/screen_settings.c:568 [int+1 0 -> 1] :: edit close letter upper bound, gui event branch no headless suite can trigger
+ACCEPTED  m0471 src/ui/screen_settings.c:568 [cmp <= -> <] :: edit close letter upper bound, gui event branch no headless suite can trigger
+ACCEPTED  m0472 src/ui/screen_settings.c:570 [int+1 0 -> 1] :: swap call inside the text box commit branch, gui event branch no headless suite can trigger
+ACCEPTED  m0474 src/ui/screen_settings.c:572 [arith + -> -] :: hint label rect, draw layout only
+ACCEPTED  m0475 src/ui/screen_settings.c:572 [int+1 2 -> 3] :: hint label rect, draw layout only
+ACCEPTED  m0476 src/ui/screen_settings.c:572 [int-1 2 -> 1] :: hint label rect, draw layout only
+ACCEPTED  m0477 src/ui/screen_settings.c:572 [arith * -> /] :: hint label rect, draw layout only
+ACCEPTED  m0478 src/ui/screen_settings.c:572 [arith - -> +] :: hint label rect, draw layout only
+ACCEPTED  m0479 src/ui/screen_settings.c:572 [int+1 2 -> 3] :: hint label rect, draw layout only
+ACCEPTED  m0480 src/ui/screen_settings.c:572 [int-1 2 -> 1] :: hint label rect, draw layout only
+ACCEPTED  m0481 src/ui/screen_settings.c:572 [arith * -> /] :: hint label rect, draw layout only
+ACCEPTED  m0482 src/ui/screen_settings.c:575 [arith + -> -] :: grid y offset, draw layout only
+ACCEPTED  m0483 src/ui/screen_settings.c:575 [arith + -> -] :: grid y offset, draw layout only
+ACCEPTED  m0484 src/ui/screen_settings.c:576 [arith - -> +] :: grid height divisor, draw layout only
+ACCEPTED  m0485 src/ui/screen_settings.c:576 [arith - -> +] :: grid height divisor, draw layout only
+ACCEPTED  m0486 src/ui/screen_settings.c:576 [arith - -> +] :: grid height divisor, draw layout only
+ACCEPTED  m0487 src/ui/screen_settings.c:576 [arith / -> *] :: grid height divisor, draw layout only
+ACCEPTED  m0488 src/ui/screen_settings.c:579 [arith + -> -] :: corner group rect, draw layout only
+ACCEPTED  m0489 src/ui/screen_settings.c:579 [arith + -> -] :: corner group rect, draw layout only
+ACCEPTED  m0490 src/ui/screen_settings.c:579 [arith - -> +] :: corner group rect, draw layout only
+ACCEPTED  m0491 src/ui/screen_settings.c:579 [int+1 2 -> 3] :: corner group rect, draw layout only
+ACCEPTED  m0492 src/ui/screen_settings.c:579 [int-1 2 -> 1] :: corner group rect, draw layout only
+ACCEPTED  m0493 src/ui/screen_settings.c:579 [arith * -> /] :: corner group rect, draw layout only
+ACCEPTED  m0494 src/ui/screen_settings.c:580 [arith - -> +] :: corner grid placement, draw layout only
+ACCEPTED  m0495 src/ui/screen_settings.c:580 [int+1 2 -> 3] :: corner grid placement, draw layout only
+ACCEPTED  m0496 src/ui/screen_settings.c:580 [int-1 2 -> 1] :: corner grid placement, draw layout only
+ACCEPTED  m0497 src/ui/screen_settings.c:580 [arith * -> /] :: corner grid placement, draw layout only
+ACCEPTED  m0498 src/ui/screen_settings.c:580 [bool false -> true] :: corner grid placement, draw layout only
+ACCEPTED  m0499 src/ui/screen_settings.c:581 [arith + -> -] :: edge y offset, draw layout only
+ACCEPTED  m0500 src/ui/screen_settings.c:581 [arith + -> -] :: edge y offset, draw layout only
+ACCEPTED  m0501 src/ui/screen_settings.c:583 [arith + -> -] :: edge group rect, draw layout only
+ACCEPTED  m0502 src/ui/screen_settings.c:583 [arith + -> -] :: edge group rect, draw layout only
+ACCEPTED  m0503 src/ui/screen_settings.c:583 [arith - -> +] :: edge group rect, draw layout only
+ACCEPTED  m0504 src/ui/screen_settings.c:583 [int+1 2 -> 3] :: edge group rect, draw layout only
+ACCEPTED  m0505 src/ui/screen_settings.c:583 [int-1 2 -> 1] :: edge group rect, draw layout only
+ACCEPTED  m0506 src/ui/screen_settings.c:583 [arith * -> /] :: edge group rect, draw layout only
+ACCEPTED  m0507 src/ui/screen_settings.c:584 [arith - -> +] :: edge grid placement, draw layout only
+ACCEPTED  m0508 src/ui/screen_settings.c:584 [int+1 2 -> 3] :: edge grid placement, draw layout only
+ACCEPTED  m0509 src/ui/screen_settings.c:584 [int-1 2 -> 1] :: edge grid placement, draw layout only
+ACCEPTED  m0510 src/ui/screen_settings.c:584 [arith * -> /] :: edge grid placement, draw layout only
+ACCEPTED  m0511 src/ui/screen_settings.c:584 [bool false -> true] :: edge grid placement, draw layout only
+ACCEPTED  m0514 src/ui/screen_settings.c:591 [arith - -> +] :: half width divisor, draw layout only
+ACCEPTED  m0515 src/ui/screen_settings.c:591 [arith / -> *] :: half width divisor, draw layout only
+ACCEPTED  m0516 src/ui/screen_settings.c:592 [arith - -> +] :: grid height divisor, draw layout only
+ACCEPTED  m0517 src/ui/screen_settings.c:592 [arith - -> +] :: grid height divisor, draw layout only
+ACCEPTED  m0518 src/ui/screen_settings.c:592 [arith - -> +] :: grid height divisor, draw layout only
+ACCEPTED  m0519 src/ui/screen_settings.c:592 [arith - -> +] :: grid height divisor, draw layout only
+ACCEPTED  m0520 src/ui/screen_settings.c:592 [arith / -> *] :: grid height divisor, draw layout only
+ACCEPTED  m0521 src/ui/screen_settings.c:596 [arith + -> -] :: corner buffer group rect, draw layout only
+ACCEPTED  m0522 src/ui/screen_settings.c:596 [arith + -> -] :: corner buffer group rect, draw layout only
+ACCEPTED  m0523 src/ui/screen_settings.c:596 [arith - -> +] :: corner buffer group rect, draw layout only
+ACCEPTED  m0524 src/ui/screen_settings.c:596 [int+1 2 -> 3] :: corner buffer group rect, draw layout only
+ACCEPTED  m0525 src/ui/screen_settings.c:596 [int-1 2 -> 1] :: corner buffer group rect, draw layout only
+ACCEPTED  m0526 src/ui/screen_settings.c:596 [arith * -> /] :: corner buffer group rect, draw layout only
+ACCEPTED  m0527 src/ui/screen_settings.c:597 [arith - -> +] :: corner buffer grid placement, draw layout only
+ACCEPTED  m0528 src/ui/screen_settings.c:597 [int+1 2 -> 3] :: corner buffer grid placement, draw layout only
+ACCEPTED  m0529 src/ui/screen_settings.c:597 [int-1 2 -> 1] :: corner buffer grid placement, draw layout only
+ACCEPTED  m0530 src/ui/screen_settings.c:597 [arith * -> /] :: corner buffer grid placement, draw layout only
+ACCEPTED  m0531 src/ui/screen_settings.c:597 [bool true -> false] :: corner buffer grid placement, draw layout only
+ACCEPTED  m0532 src/ui/screen_settings.c:598 [arith + -> -] :: edge x offset, draw layout only
+ACCEPTED  m0533 src/ui/screen_settings.c:598 [arith + -> -] :: edge x offset, draw layout only
+ACCEPTED  m0534 src/ui/screen_settings.c:600 [arith + -> -] :: edge buffer group rect, draw layout only
+ACCEPTED  m0535 src/ui/screen_settings.c:600 [arith + -> -] :: edge buffer group rect, draw layout only
+ACCEPTED  m0536 src/ui/screen_settings.c:600 [arith - -> +] :: edge buffer group rect, draw layout only
+ACCEPTED  m0537 src/ui/screen_settings.c:600 [int+1 2 -> 3] :: edge buffer group rect, draw layout only
+ACCEPTED  m0538 src/ui/screen_settings.c:600 [int-1 2 -> 1] :: edge buffer group rect, draw layout only
+ACCEPTED  m0539 src/ui/screen_settings.c:600 [arith * -> /] :: edge buffer group rect, draw layout only
+ACCEPTED  m0540 src/ui/screen_settings.c:601 [arith - -> +] :: edge buffer grid placement, draw layout only
+ACCEPTED  m0541 src/ui/screen_settings.c:601 [int+1 2 -> 3] :: edge buffer grid placement, draw layout only
+ACCEPTED  m0542 src/ui/screen_settings.c:601 [int-1 2 -> 1] :: edge buffer grid placement, draw layout only
+ACCEPTED  m0543 src/ui/screen_settings.c:601 [arith * -> /] :: edge buffer grid placement, draw layout only
+ACCEPTED  m0544 src/ui/screen_settings.c:601 [bool true -> false] :: edge buffer grid placement, draw layout only
+ACCEPTED  m0545 src/ui/screen_settings.c:603 [arith + -> -] :: color band y offset, draw layout only
+ACCEPTED  m0546 src/ui/screen_settings.c:603 [arith + -> -] :: color band y offset, draw layout only
+ACCEPTED  m0547 src/ui/screen_settings.c:604 [arith - -> +] :: color band height, draw layout only
+ACCEPTED  m0548 src/ui/screen_settings.c:604 [arith - -> +] :: color band height, draw layout only
+ACCEPTED  m0549 src/ui/screen_settings.c:606 [arith - -> +] :: face width divisor, draw layout only
+ACCEPTED  m0550 src/ui/screen_settings.c:606 [int+1 2 -> 3] :: face width divisor, draw layout only
+ACCEPTED  m0551 src/ui/screen_settings.c:606 [int-1 2 -> 1] :: face width divisor, draw layout only
+ACCEPTED  m0552 src/ui/screen_settings.c:606 [arith * -> /] :: face width divisor, draw layout only
+ACCEPTED  m0553 src/ui/screen_settings.c:606 [arith / -> *] :: face width divisor, draw layout only
+ACCEPTED  m0554 src/ui/screen_settings.c:607 [arith + -> -] :: inner y offset, draw layout only
+ACCEPTED  m0555 src/ui/screen_settings.c:608 [arith - -> +] :: inner height inset, draw layout only
+ACCEPTED  m0556 src/ui/screen_settings.c:608 [int+1 2 -> 3] :: inner height inset, draw layout only
+ACCEPTED  m0557 src/ui/screen_settings.c:608 [int-1 2 -> 1] :: inner height inset, draw layout only
+ACCEPTED  m0558 src/ui/screen_settings.c:608 [arith * -> /] :: inner height inset, draw layout only
+ACCEPTED  m0559 src/ui/screen_settings.c:609 [arith / -> *] :: swatch height divisor, draw layout only
+ACCEPTED  m0560 src/ui/screen_settings.c:610 [arith - -> +] :: value box height, draw layout only
+ACCEPTED  m0561 src/ui/screen_settings.c:610 [arith - -> +] :: value box height, draw layout only
+ACCEPTED  m0562 src/ui/screen_settings.c:611 [int+1 0 -> 1] :: face loop bound, drawn swatch and value box count only
+ACCEPTED  m0563 src/ui/screen_settings.c:611 [int-1 0 -> -1] :: face loop bound, drawn swatch and value box count only
+ACCEPTED  m0564 src/ui/screen_settings.c:611 [cmp < -> <=] :: face loop bound, drawn swatch and value box count only
+ACCEPTED  m0565 src/ui/screen_settings.c:612 [arith + -> -] :: face x offset, draw layout only
+ACCEPTED  m0566 src/ui/screen_settings.c:612 [arith + -> -] :: face x offset, draw layout only
+ACCEPTED  m0567 src/ui/screen_settings.c:612 [arith * -> /] :: face x offset, draw layout only
+ACCEPTED  m0568 src/ui/screen_settings.c:614 [int+1 0 -> 1] :: face label rect, draw layout only
+ACCEPTED  m0569 src/ui/screen_settings.c:614 [int-1 0 -> -1] :: face label rect, draw layout only
+ACCEPTED  m0570 src/ui/screen_settings.c:614 [int+1 1 -> 2] :: face label rect, draw layout only
+ACCEPTED  m0571 src/ui/screen_settings.c:614 [int-1 1 -> 0] :: face label rect, draw layout only
+ACCEPTED  m0572 src/ui/screen_settings.c:614 [int+1 2 -> 3] :: face label rect, draw layout only
+ACCEPTED  m0573 src/ui/screen_settings.c:614 [int-1 2 -> 1] :: face label rect, draw layout only
+ACCEPTED  m0574 src/ui/screen_settings.c:616 [arith + -> -] :: swatch color compose, drawn swatch only
+ACCEPTED  m0575 src/ui/screen_settings.c:616 [arith - -> +] :: swatch color compose, drawn swatch only
+ACCEPTED  m0576 src/ui/screen_settings.c:616 [arith - -> +] :: swatch color compose, drawn swatch only
+ACCEPTED  m0577 src/ui/screen_settings.c:617 [int+1 0 -> 1] :: channel loop bound, drawn value box count only
+ACCEPTED  m0578 src/ui/screen_settings.c:617 [int-1 0 -> -1] :: channel loop bound, drawn value box count only
+ACCEPTED  m0579 src/ui/screen_settings.c:617 [cmp < -> <=] :: channel loop bound, drawn value box count only
+ACCEPTED  m0580 src/ui/screen_settings.c:618 [arith * -> /] :: channel index compose, draw layout only
+ACCEPTED  m0581 src/ui/screen_settings.c:618 [arith + -> -] :: channel index compose, draw layout only
+ACCEPTED  m0582 src/ui/screen_settings.c:619 [int+1 1u -> 2u] :: channel edit flag pick, gui edit state no headless suite can trigger
+ACCEPTED  m0583 src/ui/screen_settings.c:619 [int-1 1u -> 0u] :: channel edit flag pick, gui edit state no headless suite can trigger
+ACCEPTED  m0584 src/ui/screen_settings.c:619 [cmp != -> ==] :: channel edit flag pick, gui edit state no headless suite can trigger
+ACCEPTED  m0585 src/ui/screen_settings.c:619 [int+1 0 -> 1] :: channel edit flag pick, gui edit state no headless suite can trigger
+ACCEPTED  m0587 src/ui/screen_settings.c:620 [not-del ! -> (deleted)] :: idle channel mirror, gui edit state no headless suite can trigger
+ACCEPTED  m0588 src/ui/screen_settings.c:622 [arith + -> -] :: value box y offset, draw layout only
+ACCEPTED  m0589 src/ui/screen_settings.c:623 [arith + -> -] :: value box rect, draw layout only
+ACCEPTED  m0590 src/ui/screen_settings.c:623 [arith * -> /] :: value box rect, draw layout only
+ACCEPTED  m0591 src/ui/screen_settings.c:623 [arith - -> +] :: value box rect, draw layout only
+ACCEPTED  m0592 src/ui/screen_settings.c:624 [int+1 0 -> 1] :: value box commit branch, gui event branch no headless suite can trigger
+ACCEPTED  m0593 src/ui/screen_settings.c:624 [int-1 0 -> -1] :: value box commit branch, gui event branch no headless suite can trigger
+ACCEPTED  m0594 src/ui/screen_settings.c:624 [cmp != -> ==] :: value box commit branch, gui event branch no headless suite can trigger
+ACCEPTED  m0595 src/ui/screen_settings.c:624 [int+1 0 -> 1] :: value box commit branch, gui event branch no headless suite can trigger
+ACCEPTED  m0596 src/ui/screen_settings.c:624 [int-1 0 -> -1] :: value box commit branch, gui event branch no headless suite can trigger
+ACCEPTED  m0597 src/ui/screen_settings.c:625 [int+1 1u -> 2u] :: edit flag toggle, gui event state no headless suite can trigger
+ACCEPTED  m0598 src/ui/screen_settings.c:625 [int-1 1u -> 0u] :: edit flag toggle, gui event state no headless suite can trigger
+ACCEPTED  m0599 src/ui/screen_settings.c:626 [not-del ! -> (deleted)] :: stage color call inside the commit branch, gui event branch no headless suite can trigger
+ACCEPTED  m0600 src/ui/screen_settings.c:626 [int+1 1u -> 2u] :: stage color call inside the commit branch, gui event branch no headless suite can trigger
+ACCEPTED  m0601 src/ui/screen_settings.c:626 [int-1 1u -> 0u] :: stage color call inside the commit branch, gui event branch no headless suite can trigger
+ACCEPTED  m0604 src/ui/screen_settings.c:638 [not-del ! -> (deleted)] :: opened flag branch, transient screen state read only by the draw path
+ACCEPTED  m0605 src/ui/screen_settings.c:639 [bool true -> false] :: opened latch write, transient screen state read only by the draw path
+ACCEPTED  m0606 src/ui/screen_settings.c:640 [int+1 0 -> 1] :: rejected counter reset, static screen state read only by the draw path
+ACCEPTED  m0607 src/ui/screen_settings.c:640 [int-1 0 -> -1] :: rejected counter reset, static screen state read only by the draw path
+ACCEPTED  m0608 src/ui/screen_settings.c:643 [int+1 0 -> 1] :: default sticker selection write, draw-side selection state only
+ACCEPTED  m0609 src/ui/screen_settings.c:643 [int-1 0 -> -1] :: default sticker selection write, draw-side selection state only
+ACCEPTED  m0610 src/ui/screen_settings.c:644 [int+1 0 -> 1] :: letter buffer seed from the staged map, draw-side edit buffer only
+ACCEPTED  m0612 src/ui/screen_settings.c:644 [int+1 0 -> 1] :: letter buffer seed from the staged map, draw-side edit buffer only
+ACCEPTED  m0615 src/ui/screen_settings.c:652 [cmp == -> !=] :: null guard after the background clear, unreachable without calling the draw function
+ACCEPTED  m0617 src/ui/screen_settings.c:661 [arith - -> +] :: button y offset, draw layout only
+ACCEPTED  m0618 src/ui/screen_settings.c:661 [arith - -> +] :: button y offset, draw layout only
+ACCEPTED  m0619 src/ui/screen_settings.c:661 [arith - -> +] :: button y offset, draw layout only
+ACCEPTED  m0620 src/ui/screen_settings.c:662 [arith - -> +] :: button width divisor, draw layout only
+ACCEPTED  m0621 src/ui/screen_settings.c:662 [int+1 2 -> 3] :: button width divisor, draw layout only
+ACCEPTED  m0622 src/ui/screen_settings.c:662 [int-1 2 -> 1] :: button width divisor, draw layout only
+ACCEPTED  m0623 src/ui/screen_settings.c:662 [arith * -> /] :: button width divisor, draw layout only
+ACCEPTED  m0624 src/ui/screen_settings.c:662 [arith - -> +] :: button width divisor, draw layout only
+ACCEPTED  m0625 src/ui/screen_settings.c:662 [arith / -> *] :: button width divisor, draw layout only
+ACCEPTED  m0626 src/ui/screen_settings.c:664 [arith + -> -] :: content y offset, draw layout only
+ACCEPTED  m0627 src/ui/screen_settings.c:664 [arith + -> -] :: content y offset, draw layout only
+ACCEPTED  m0628 src/ui/screen_settings.c:665 [arith - -> +] :: content width inset, draw layout only
+ACCEPTED  m0629 src/ui/screen_settings.c:665 [int+1 2 -> 3] :: content width inset, draw layout only
+ACCEPTED  m0630 src/ui/screen_settings.c:665 [int-1 2 -> 1] :: content width inset, draw layout only
+ACCEPTED  m0631 src/ui/screen_settings.c:665 [arith * -> /] :: content width inset, draw layout only
+ACCEPTED  m0632 src/ui/screen_settings.c:666 [arith - -> +] :: content height, draw layout only
+ACCEPTED  m0633 src/ui/screen_settings.c:666 [arith - -> +] :: content height, draw layout only
+ACCEPTED  m0634 src/ui/screen_settings.c:671 [cmp < -> <=] :: tab range clamp, draw-side tab state only
+ACCEPTED  m0636 src/ui/screen_settings.c:671 [cmp >= -> >] :: tab range clamp, draw-side tab state only
+ACCEPTED  m0637 src/ui/screen_settings.c:687 [cmp == -> !=] :: save branch inside the save button callback, gui event branch no headless suite can trigger
+ACCEPTED  m0638 src/ui/screen_settings.c:689 [cmp != -> ==] :: merge rejected counter inside the save callback, gui event branch no headless suite can trigger
+ACCEPTED  m0639 src/ui/screen_settings.c:689 [int+1 0 -> 1] :: merge rejected counter inside the save callback, gui event branch no headless suite can trigger
+ACCEPTED  m0640 src/ui/screen_settings.c:689 [int-1 0 -> -1] :: merge rejected counter inside the save callback, gui event branch no headless suite can trigger
+ACCEPTED  m0641 src/ui/screen_settings.c:690 [int+1 0 -> 1] :: rejected reset on merge failure, same gui event branch no headless suite can trigger
+ACCEPTED  m0642 src/ui/screen_settings.c:690 [int-1 0 -> -1] :: rejected reset on merge failure, same gui event branch no headless suite can trigger
+ACCEPTED  m0643 src/ui/screen_settings.c:693 [arith + -> -] :: cancel call inside the cancel button callback, gui event branch no headless suite can trigger
+ACCEPTED  m0644 src/ui/screen_settings.c:693 [arith + -> -] :: cancel call inside the cancel button callback, gui event branch no headless suite can trigger
+ACCEPTED  m0645 src/ui/screen_settings.c:696 [cmp > -> >=] :: rejected status branch, drawn status bar text only
+ACCEPTED  m0646 src/ui/screen_settings.c:696 [int+1 0 -> 1] :: rejected status branch, drawn status bar text only
+ACCEPTED  m0647 src/ui/screen_settings.c:696 [int-1 0 -> -1] :: rejected status branch, drawn status bar text only
+ACCEPTED  m0648 src/ui/screen_settings.c:702 [arith - -> +] :: status bar rect, draw layout only
+mutate: generated=648 build_failed=88 killed_by_tests=251 killed=339 survived=309 accepted=307 unexplained=2 skipped=0
+mutate: kill rate 339/648 = 52.3%, with accepted equivalents 646/648 = 99.7%
+mutate: wall 714.9s
+exit=2

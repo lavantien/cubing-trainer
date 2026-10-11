@@ -1,0 +1,648 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_stats_screen.c -o build_close/tobj/tests/unit_stats_screen.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/ui/screen_stats.c build_close stats_screen_view_load stats_screen_deck_switch stats_screen_worst_cases stats_screen_malformed stats_screen_chart_layout stats_screen_heatmap_grid stats_screen_heatmap_color stats_screen_boundaries
+mutate: scope=src/ui/screen_stats.c files=1 sites=355 suites=8
+SURVIVED  m0001 src/ui/screen_stats.c:10 [int+1 6 -> 7]
+SURVIVED  m0002 src/ui/screen_stats.c:10 [int-1 6 -> 5]
+SURVIVED  m0003 src/ui/screen_stats.c:11 [int+1 4 -> 5]
+SURVIVED  m0004 src/ui/screen_stats.c:11 [int-1 4 -> 3]
+SURVIVED  m0005 src/ui/screen_stats.c:12 [int+1 2 -> 3]
+SURVIVED  m0006 src/ui/screen_stats.c:12 [int-1 2 -> 1]
+SURVIVED  m0007 src/ui/screen_stats.c:13 [int+1 3 -> 4]
+SURVIVED  m0008 src/ui/screen_stats.c:13 [int-1 3 -> 2]
+SURVIVED  m0009 src/ui/screen_stats.c:14 [int+1 5 -> 6]
+SURVIVED  m0010 src/ui/screen_stats.c:14 [int-1 5 -> 4]
+SURVIVED  m0011 src/ui/screen_stats.c:15 [int+1 5 -> 6]
+SURVIVED  m0012 src/ui/screen_stats.c:15 [int-1 5 -> 4]
+SURVIVED  m0013 src/ui/screen_stats.c:16 [int+1 8 -> 9]
+SURVIVED  m0014 src/ui/screen_stats.c:16 [int-1 8 -> 7]
+SURVIVED  m0015 src/ui/screen_stats.c:17 [int+1 8 -> 9]
+SURVIVED  m0016 src/ui/screen_stats.c:17 [int-1 8 -> 7]
+SURVIVED  m0017 src/ui/screen_stats.c:18 [int+1 4 -> 5]
+SURVIVED  m0018 src/ui/screen_stats.c:18 [int-1 4 -> 3]
+KILLED    m0019 src/ui/screen_stats.c:19 [int+1 1 -> 2]
+KILLED    m0020 src/ui/screen_stats.c:19 [int-1 1 -> 0]
+KILLED    m0021 src/ui/screen_stats.c:19 [int+1 3 -> 4]
+KILLED    m0022 src/ui/screen_stats.c:19 [int-1 3 -> 2]
+KILLED    m0023 src/ui/screen_stats.c:19 [arith + -> -]
+KILLED    m0024 src/ui/screen_stats.c:19 [int+1 2 -> 3]
+KILLED    m0025 src/ui/screen_stats.c:19 [int-1 2 -> 1]
+SURVIVED  m0026 src/ui/screen_stats.c:20 [int+1 1 -> 2]
+SURVIVED  m0027 src/ui/screen_stats.c:20 [int-1 1 -> 0]
+SURVIVED  m0028 src/ui/screen_stats.c:20 [int+1 2 -> 3]
+SURVIVED  m0029 src/ui/screen_stats.c:20 [int-1 2 -> 1]
+SURVIVED  m0030 src/ui/screen_stats.c:20 [arith + -> -]
+SURVIVED  m0031 src/ui/screen_stats.c:20 [int+1 1 -> 2]
+SURVIVED  m0032 src/ui/screen_stats.c:20 [int-1 1 -> 0]
+SURVIVED  m0033 src/ui/screen_stats.c:21 [int+1 1 -> 2]
+SURVIVED  m0034 src/ui/screen_stats.c:21 [int-1 1 -> 0]
+KILLED    m0035 src/ui/screen_stats.c:22 [arith + -> -]
+          build break
+KILLED    m0036 src/ui/screen_stats.c:23 [arith + -> -]
+          build break
+KILLED    m0037 src/ui/screen_stats.c:29 [arith * -> /]
+          build break
+KILLED    m0038 src/ui/screen_stats.c:29 [arith * -> /]
+          build break
+KILLED    m0039 src/ui/screen_stats.c:31 [cmp < -> <=]
+KILLED    m0040 src/ui/screen_stats.c:31 [int+1 0 -> 1]
+SURVIVED  m0041 src/ui/screen_stats.c:31 [int-1 0 -> -1]
+KILLED    m0042 src/ui/screen_stats.c:35 [cmp < -> <=]
+KILLED    m0043 src/ui/screen_stats.c:35 [int+1 0 -> 1]
+SURVIVED  m0044 src/ui/screen_stats.c:35 [int-1 0 -> -1]
+SURVIVED  m0045 src/ui/screen_stats.c:39 [cmp < -> <=]
+SURVIVED  m0046 src/ui/screen_stats.c:39 [int+1 0 -> 1]
+SURVIVED  m0047 src/ui/screen_stats.c:39 [int-1 0 -> -1]
+KILLED    m0048 src/ui/screen_stats.c:42 [int+1 0 -> 1]
+KILLED    m0049 src/ui/screen_stats.c:42 [int-1 0 -> -1]
+KILLED    m0050 src/ui/screen_stats.c:43 [int+1 0 -> 1]
+KILLED    m0051 src/ui/screen_stats.c:43 [int-1 0 -> -1]
+KILLED    m0052 src/ui/screen_stats.c:43 [cmp < -> <=]
+KILLED    m0053 src/ui/screen_stats.c:43 [logic && -> ||]
+SURVIVED  m0054 src/ui/screen_stats.c:43 [cmp < -> <=]
+KILLED    m0055 src/ui/screen_stats.c:45 [arith + -> -]
+SURVIVED  m0056 src/ui/screen_stats.c:46 [arith - -> +]
+KILLED    m0057 src/ui/screen_stats.c:47 [cmp < -> <=]
+KILLED    m0058 src/ui/screen_stats.c:47 [int+1 0 -> 1]
+SURVIVED  m0059 src/ui/screen_stats.c:47 [int-1 0 -> -1]
+SURVIVED  m0060 src/ui/screen_stats.c:57 [cmp < -> <=]
+SURVIVED  m0061 src/ui/screen_stats.c:57 [int+1 0 -> 1]
+SURVIVED  m0062 src/ui/screen_stats.c:57 [int-1 0 -> -1]
+KILLED    m0063 src/ui/screen_stats.c:65 [arith * -> /]
+          build break
+KILLED    m0064 src/ui/screen_stats.c:65 [arith * -> /]
+          build break
+KILLED    m0065 src/ui/screen_stats.c:65 [arith * -> /]
+          build break
+KILLED    m0066 src/ui/screen_stats.c:65 [arith * -> /]
+          build break
+KILLED    m0067 src/ui/screen_stats.c:66 [cmp == -> !=]
+KILLED    m0068 src/ui/screen_stats.c:66 [logic || -> &&]
+          build break
+KILLED    m0069 src/ui/screen_stats.c:66 [cmp == -> !=]
+KILLED    m0070 src/ui/screen_stats.c:66 [logic || -> &&]
+          build break
+KILLED    m0071 src/ui/screen_stats.c:66 [not-del ! -> (deleted)]
+KILLED    m0072 src/ui/screen_stats.c:69 [int+1 0 -> 1]
+KILLED    m0073 src/ui/screen_stats.c:69 [int-1 0 -> -1]
+KILLED    m0074 src/ui/screen_stats.c:69 [arith * -> /]
+          build break
+KILLED    m0075 src/ui/screen_stats.c:71 [arith - -> +]
+KILLED    m0076 src/ui/screen_stats.c:71 [int+1 1 -> 2]
+KILLED    m0077 src/ui/screen_stats.c:71 [int-1 1 -> 0]
+KILLED    m0078 src/ui/screen_stats.c:74 [cmp < -> <=]
+KILLED    m0079 src/ui/screen_stats.c:74 [int+1 0 -> 1]
+SURVIVED  m0080 src/ui/screen_stats.c:74 [int-1 0 -> -1]
+KILLED    m0081 src/ui/screen_stats.c:78 [arith + -> -]
+SURVIVED  m0082 src/ui/screen_stats.c:78 [int+1 1 -> 2]
+KILLED    m0083 src/ui/screen_stats.c:78 [int-1 1 -> 0]
+SURVIVED  m0084 src/ui/screen_stats.c:82 [cmp < -> <=]
+SURVIVED  m0085 src/ui/screen_stats.c:82 [int+1 0 -> 1]
+SURVIVED  m0086 src/ui/screen_stats.c:82 [int-1 0 -> -1]
+KILLED    m0087 src/ui/screen_stats.c:87 [cmp < -> <=]
+KILLED    m0088 src/ui/screen_stats.c:87 [int+1 0 -> 1]
+SURVIVED  m0089 src/ui/screen_stats.c:87 [int-1 0 -> -1]
+KILLED    m0090 src/ui/screen_stats.c:91 [arith * -> /]
+          build break
+KILLED    m0091 src/ui/screen_stats.c:92 [cmp != -> ==]
+KILLED    m0092 src/ui/screen_stats.c:92 [logic && -> ||]
+KILLED    m0093 src/ui/screen_stats.c:92 [int+1 0 -> 1]
+KILLED    m0094 src/ui/screen_stats.c:92 [int-1 0 -> -1]
+KILLED    m0095 src/ui/screen_stats.c:92 [cmp != -> ==]
+KILLED    m0096 src/ui/screen_stats.c:94 [cmp > -> >=]
+KILLED    m0097 src/ui/screen_stats.c:94 [int+1 0 -> 1]
+KILLED    m0098 src/ui/screen_stats.c:94 [int-1 0 -> -1]
+KILLED    m0099 src/ui/screen_stats.c:95 [int+1 0 -> 1]
+KILLED    m0100 src/ui/screen_stats.c:95 [int-1 0 -> -1]
+          build break
+KILLED    m0101 src/ui/screen_stats.c:97 [cmp == -> !=]
+KILLED    m0102 src/ui/screen_stats.c:103 [arith * -> /]
+          build break
+KILLED    m0103 src/ui/screen_stats.c:103 [arith * -> /]
+          build break
+KILLED    m0104 src/ui/screen_stats.c:104 [cmp == -> !=]
+KILLED    m0105 src/ui/screen_stats.c:104 [logic || -> &&]
+          build break
+KILLED    m0106 src/ui/screen_stats.c:104 [cmp == -> !=]
+KILLED    m0107 src/ui/screen_stats.c:104 [logic || -> &&]
+          build break
+KILLED    m0108 src/ui/screen_stats.c:104 [not-del ! -> (deleted)]
+KILLED    m0109 src/ui/screen_stats.c:108 [cmp < -> <=]
+KILLED    m0110 src/ui/screen_stats.c:108 [int+1 0 -> 1]
+SURVIVED  m0111 src/ui/screen_stats.c:108 [int-1 0 -> -1]
+KILLED    m0112 src/ui/screen_stats.c:111 [arith - -> +]
+KILLED    m0113 src/ui/screen_stats.c:111 [int+1 1 -> 2]
+KILLED    m0114 src/ui/screen_stats.c:111 [int-1 1 -> 0]
+KILLED    m0115 src/ui/screen_stats.c:112 [int+1 0 -> 1]
+KILLED    m0116 src/ui/screen_stats.c:112 [int-1 0 -> -1]
+SURVIVED  m0117 src/ui/screen_stats.c:112 [cmp < -> <=]
+KILLED    m0118 src/ui/screen_stats.c:113 [cmp == -> !=]
+KILLED    m0119 src/ui/screen_stats.c:113 [int+1 0 -> 1]
+KILLED    m0120 src/ui/screen_stats.c:113 [int-1 0 -> -1]
+KILLED    m0121 src/ui/screen_stats.c:121 [arith * -> /]
+          build break
+KILLED    m0122 src/ui/screen_stats.c:122 [cmp == -> !=]
+KILLED    m0123 src/ui/screen_stats.c:122 [logic || -> &&]
+SURVIVED  m0124 src/ui/screen_stats.c:122 [cmp < -> <=]
+SURVIVED  m0125 src/ui/screen_stats.c:122 [int+1 0 -> 1]
+KILLED    m0126 src/ui/screen_stats.c:122 [int-1 0 -> -1]
+KILLED    m0127 src/ui/screen_stats.c:123 [ret-lit 0 -> 1]
+KILLED    m0128 src/ui/screen_stats.c:123 [int+1 0 -> 1]
+KILLED    m0129 src/ui/screen_stats.c:123 [int-1 0 -> -1]
+SURVIVED  m0130 src/ui/screen_stats.c:125 [cmp < -> <=]
+KILLED    m0131 src/ui/screen_stats.c:137 [arith * -> /]
+          build break
+KILLED    m0132 src/ui/screen_stats.c:139 [arith * -> /]
+          build break
+KILLED    m0133 src/ui/screen_stats.c:144 [arith * -> /]
+          build break
+KILLED    m0134 src/ui/screen_stats.c:159 [arith * -> /]
+          build break
+KILLED    m0135 src/ui/screen_stats.c:182 [arith * -> /]
+          build break
+SURVIVED  m0136 src/ui/screen_stats.c:183 [int+1 0 -> 1]
+SURVIVED  m0137 src/ui/screen_stats.c:183 [int-1 0 -> -1]
+SURVIVED  m0138 src/ui/screen_stats.c:183 [cmp < -> <=]
+SURVIVED  m0139 src/ui/screen_stats.c:187 [int+1 0 -> 1]
+SURVIVED  m0140 src/ui/screen_stats.c:187 [int-1 0 -> -1]
+SURVIVED  m0141 src/ui/screen_stats.c:187 [cmp < -> <=]
+KILLED    m0142 src/ui/screen_stats.c:188 [arith * -> /]
+          build break
+KILLED    m0143 src/ui/screen_stats.c:195 [arith * -> /]
+          build break
+SURVIVED  m0144 src/ui/screen_stats.c:198 [arith + -> -]
+SURVIVED  m0145 src/ui/screen_stats.c:199 [arith + -> -]
+SURVIVED  m0146 src/ui/screen_stats.c:199 [arith + -> -]
+SURVIVED  m0147 src/ui/screen_stats.c:200 [arith - -> +]
+SURVIVED  m0148 src/ui/screen_stats.c:200 [int+1 2 -> 3]
+SURVIVED  m0149 src/ui/screen_stats.c:200 [int-1 2 -> 1]
+SURVIVED  m0150 src/ui/screen_stats.c:200 [arith * -> /]
+SURVIVED  m0151 src/ui/screen_stats.c:202 [arith - -> +]
+SURVIVED  m0152 src/ui/screen_stats.c:202 [arith - -> +]
+SURVIVED  m0153 src/ui/screen_stats.c:202 [arith - -> +]
+SURVIVED  m0154 src/ui/screen_stats.c:202 [arith - -> +]
+SURVIVED  m0155 src/ui/screen_stats.c:206 [arith + -> -]
+SURVIVED  m0156 src/ui/screen_stats.c:210 [int+1 0 -> 1]
+SURVIVED  m0157 src/ui/screen_stats.c:210 [int-1 0 -> -1]
+SURVIVED  m0158 src/ui/screen_stats.c:210 [cmp < -> <=]
+SURVIVED  m0159 src/ui/screen_stats.c:215 [int+1 0 -> 1]
+SURVIVED  m0160 src/ui/screen_stats.c:215 [int-1 0 -> -1]
+SURVIVED  m0161 src/ui/screen_stats.c:215 [cmp < -> <=]
+SURVIVED  m0162 src/ui/screen_stats.c:216 [cmp > -> >=]
+SURVIVED  m0163 src/ui/screen_stats.c:219 [cmp != -> ==]
+SURVIVED  m0164 src/ui/screen_stats.c:219 [int+1 0 -> 1]
+SURVIVED  m0165 src/ui/screen_stats.c:219 [int-1 0 -> -1]
+SURVIVED  m0166 src/ui/screen_stats.c:222 [arith * -> /]
+SURVIVED  m0167 src/ui/screen_stats.c:222 [int+1 2 -> 3]
+SURVIVED  m0168 src/ui/screen_stats.c:222 [int-1 2 -> 1]
+SURVIVED  m0169 src/ui/screen_stats.c:224 [arith + -> -]
+KILLED    m0170 src/ui/screen_stats.c:228 [arith * -> /]
+          build break
+SURVIVED  m0171 src/ui/screen_stats.c:231 [arith + -> -]
+SURVIVED  m0172 src/ui/screen_stats.c:232 [arith + -> -]
+SURVIVED  m0173 src/ui/screen_stats.c:233 [arith - -> +]
+SURVIVED  m0174 src/ui/screen_stats.c:233 [int+1 2 -> 3]
+SURVIVED  m0175 src/ui/screen_stats.c:233 [int-1 2 -> 1]
+SURVIVED  m0176 src/ui/screen_stats.c:233 [arith * -> /]
+SURVIVED  m0177 src/ui/screen_stats.c:234 [arith - -> +]
+SURVIVED  m0178 src/ui/screen_stats.c:234 [int+1 2 -> 3]
+SURVIVED  m0179 src/ui/screen_stats.c:234 [int-1 2 -> 1]
+SURVIVED  m0180 src/ui/screen_stats.c:234 [arith * -> /]
+SURVIVED  m0181 src/ui/screen_stats.c:236 [cmp <= -> <]
+SURVIVED  m0182 src/ui/screen_stats.c:236 [int+1 0 -> 1]
+SURVIVED  m0183 src/ui/screen_stats.c:236 [int-1 0 -> -1]
+SURVIVED  m0184 src/ui/screen_stats.c:241 [arith + -> -]
+SURVIVED  m0185 src/ui/screen_stats.c:241 [arith - -> +]
+SURVIVED  m0186 src/ui/screen_stats.c:241 [int+1 1 -> 2]
+SURVIVED  m0187 src/ui/screen_stats.c:241 [int-1 1 -> 0]
+SURVIVED  m0188 src/ui/screen_stats.c:241 [arith / -> *]
+SURVIVED  m0189 src/ui/screen_stats.c:246 [int+1 0 -> 1]
+SURVIVED  m0190 src/ui/screen_stats.c:246 [int-1 0 -> -1]
+SURVIVED  m0191 src/ui/screen_stats.c:246 [cmp < -> <=]
+SURVIVED  m0192 src/ui/screen_stats.c:247 [cmp != -> ==]
+SURVIVED  m0193 src/ui/screen_stats.c:247 [int+1 0 -> 1]
+SURVIVED  m0194 src/ui/screen_stats.c:247 [int-1 0 -> -1]
+SURVIVED  m0195 src/ui/screen_stats.c:251 [cmp == -> !=]
+SURVIVED  m0196 src/ui/screen_stats.c:256 [cmp < -> <=]
+SURVIVED  m0197 src/ui/screen_stats.c:256 [int+1 0 -> 1]
+SURVIVED  m0198 src/ui/screen_stats.c:256 [int-1 0 -> -1]
+SURVIVED  m0199 src/ui/screen_stats.c:256 [logic || -> &&]
+SURVIVED  m0200 src/ui/screen_stats.c:256 [cmp >= -> >]
+KILLED    m0201 src/ui/screen_stats.c:259 [arith * -> /]
+          build break
+SURVIVED  m0202 src/ui/screen_stats.c:263 [arith + -> -]
+SURVIVED  m0203 src/ui/screen_stats.c:263 [arith - -> +]
+SURVIVED  m0204 src/ui/screen_stats.c:263 [arith - -> +]
+KILLED    m0205 src/ui/screen_stats.c:266 [arith * -> /]
+          build break
+SURVIVED  m0206 src/ui/screen_stats.c:269 [arith + -> -]
+SURVIVED  m0207 src/ui/screen_stats.c:270 [arith + -> -]
+SURVIVED  m0208 src/ui/screen_stats.c:270 [arith + -> -]
+SURVIVED  m0209 src/ui/screen_stats.c:271 [arith - -> +]
+SURVIVED  m0210 src/ui/screen_stats.c:271 [int+1 2 -> 3]
+SURVIVED  m0211 src/ui/screen_stats.c:271 [int-1 2 -> 1]
+SURVIVED  m0212 src/ui/screen_stats.c:271 [arith * -> /]
+SURVIVED  m0213 src/ui/screen_stats.c:272 [arith - -> +]
+SURVIVED  m0214 src/ui/screen_stats.c:272 [arith - -> +]
+SURVIVED  m0215 src/ui/screen_stats.c:272 [arith - -> +]
+SURVIVED  m0216 src/ui/screen_stats.c:278 [arith + -> -]
+SURVIVED  m0217 src/ui/screen_stats.c:282 [int+1 0 -> 1]
+SURVIVED  m0218 src/ui/screen_stats.c:282 [int-1 0 -> -1]
+SURVIVED  m0219 src/ui/screen_stats.c:282 [cmp < -> <=]
+SURVIVED  m0220 src/ui/screen_stats.c:283 [cmp > -> >=]
+SURVIVED  m0221 src/ui/screen_stats.c:283 [int+1 0 -> 1]
+SURVIVED  m0222 src/ui/screen_stats.c:283 [int-1 0 -> -1]
+SURVIVED  m0223 src/ui/screen_stats.c:284 [arith / -> *]
+SURVIVED  m0224 src/ui/screen_stats.c:288 [arith / -> *]
+SURVIVED  m0225 src/ui/screen_stats.c:289 [cmp < -> <=]
+SURVIVED  m0226 src/ui/screen_stats.c:289 [int+1 1 -> 2]
+SURVIVED  m0227 src/ui/screen_stats.c:289 [int-1 1 -> 0]
+SURVIVED  m0228 src/ui/screen_stats.c:290 [int+1 1 -> 2]
+SURVIVED  m0229 src/ui/screen_stats.c:290 [int-1 1 -> 0]
+SURVIVED  m0230 src/ui/screen_stats.c:292 [bool false -> true]
+SURVIVED  m0231 src/ui/screen_stats.c:293 [int+1 0 -> 1]
+SURVIVED  m0232 src/ui/screen_stats.c:293 [int-1 0 -> -1]
+SURVIVED  m0233 src/ui/screen_stats.c:294 [int+1 0 -> 1]
+SURVIVED  m0234 src/ui/screen_stats.c:294 [int-1 0 -> -1]
+SURVIVED  m0235 src/ui/screen_stats.c:295 [int+1 0 -> 1]
+SURVIVED  m0236 src/ui/screen_stats.c:295 [int-1 0 -> -1]
+SURVIVED  m0237 src/ui/screen_stats.c:295 [cmp < -> <=]
+SURVIVED  m0238 src/ui/screen_stats.c:296 [cmp > -> >=]
+SURVIVED  m0239 src/ui/screen_stats.c:296 [int+1 0 -> 1]
+SURVIVED  m0240 src/ui/screen_stats.c:296 [int-1 0 -> -1]
+SURVIVED  m0241 src/ui/screen_stats.c:296 [logic && -> ||]
+SURVIVED  m0242 src/ui/screen_stats.c:296 [cmp > -> >=]
+SURVIVED  m0243 src/ui/screen_stats.c:299 [cmp == -> !=]
+SURVIVED  m0244 src/ui/screen_stats.c:299 [int+1 0 -> 1]
+SURVIVED  m0245 src/ui/screen_stats.c:299 [int-1 0 -> -1]
+SURVIVED  m0246 src/ui/screen_stats.c:302 [arith + -> -]
+SURVIVED  m0247 src/ui/screen_stats.c:302 [arith / -> *]
+SURVIVED  m0248 src/ui/screen_stats.c:303 [arith + -> -]
+SURVIVED  m0249 src/ui/screen_stats.c:303 [arith - -> +]
+SURVIVED  m0250 src/ui/screen_stats.c:304 [arith * -> /]
+SURVIVED  m0251 src/ui/screen_stats.c:305 [arith - -> +]
+SURVIVED  m0252 src/ui/screen_stats.c:305 [arith - -> +]
+SURVIVED  m0253 src/ui/screen_stats.c:305 [arith * -> /]
+SURVIVED  m0254 src/ui/screen_stats.c:305 [int+1 2 -> 3]
+SURVIVED  m0255 src/ui/screen_stats.c:305 [int-1 2 -> 1]
+SURVIVED  m0256 src/ui/screen_stats.c:305 [arith * -> /]
+SURVIVED  m0257 src/ui/screen_stats.c:305 [int+1 2 -> 3]
+SURVIVED  m0258 src/ui/screen_stats.c:305 [int-1 2 -> 1]
+SURVIVED  m0259 src/ui/screen_stats.c:309 [bool true -> false]
+KILLED    m0260 src/ui/screen_stats.c:315 [arith * -> /]
+          build break
+SURVIVED  m0261 src/ui/screen_stats.c:318 [arith + -> -]
+SURVIVED  m0262 src/ui/screen_stats.c:319 [arith + -> -]
+SURVIVED  m0263 src/ui/screen_stats.c:320 [arith - -> +]
+SURVIVED  m0264 src/ui/screen_stats.c:320 [int+1 2 -> 3]
+SURVIVED  m0265 src/ui/screen_stats.c:320 [int-1 2 -> 1]
+SURVIVED  m0266 src/ui/screen_stats.c:320 [arith * -> /]
+SURVIVED  m0267 src/ui/screen_stats.c:321 [cmp < -> <=]
+SURVIVED  m0268 src/ui/screen_stats.c:321 [int+1 0 -> 1]
+SURVIVED  m0269 src/ui/screen_stats.c:321 [int-1 0 -> -1]
+SURVIVED  m0270 src/ui/screen_stats.c:321 [logic || -> &&]
+SURVIVED  m0271 src/ui/screen_stats.c:321 [cmp >= -> >]
+KILLED    m0272 src/ui/screen_stats.c:325 [arith * -> /]
+          build break
+SURVIVED  m0273 src/ui/screen_stats.c:327 [int+1 0 -> 1]
+KILLED    m0274 src/ui/screen_stats.c:327 [int-1 0 -> -1]
+          build break
+SURVIVED  m0275 src/ui/screen_stats.c:327 [int+1 0 -> 1]
+SURVIVED  m0276 src/ui/screen_stats.c:327 [int-1 0 -> -1]
+SURVIVED  m0277 src/ui/screen_stats.c:328 [int+1 1 -> 2]
+SURVIVED  m0278 src/ui/screen_stats.c:328 [int-1 1 -> 0]
+SURVIVED  m0279 src/ui/screen_stats.c:328 [int+1 1 -> 2]
+SURVIVED  m0280 src/ui/screen_stats.c:328 [int-1 1 -> 0]
+SURVIVED  m0281 src/ui/screen_stats.c:329 [int+1 2 -> 3]
+SURVIVED  m0282 src/ui/screen_stats.c:329 [int-1 2 -> 1]
+SURVIVED  m0283 src/ui/screen_stats.c:329 [int+1 2 -> 3]
+SURVIVED  m0284 src/ui/screen_stats.c:329 [int-1 2 -> 1]
+KILLED    m0285 src/ui/screen_stats.c:330 [arith * -> /]
+          build break
+KILLED    m0286 src/ui/screen_stats.c:330 [arith - -> +]
+          build break
+SURVIVED  m0287 src/ui/screen_stats.c:330 [int+1 1 -> 2]
+KILLED    m0288 src/ui/screen_stats.c:330 [int-1 1 -> 0]
+          build break
+SURVIVED  m0289 src/ui/screen_stats.c:331 [int+1 0 -> 1]
+SURVIVED  m0290 src/ui/screen_stats.c:331 [int-1 0 -> -1]
+SURVIVED  m0291 src/ui/screen_stats.c:332 [int+1 0 -> 1]
+SURVIVED  m0292 src/ui/screen_stats.c:332 [int-1 0 -> -1]
+SURVIVED  m0293 src/ui/screen_stats.c:332 [cmp < -> <=]
+SURVIVED  m0294 src/ui/screen_stats.c:333 [arith + -> -]
+SURVIVED  m0295 src/ui/screen_stats.c:333 [arith * -> /]
+KILLED    m0296 src/ui/screen_stats.c:337 [arith * -> /]
+          build break
+SURVIVED  m0297 src/ui/screen_stats.c:338 [cmp == -> !=]
+SURVIVED  m0298 src/ui/screen_stats.c:341 [not-del ! -> (deleted)]
+SURVIVED  m0299 src/ui/screen_stats.c:342 [bool true -> false]
+KILLED    m0300 src/ui/screen_stats.c:354 [arith * -> /]
+          build break
+SURVIVED  m0301 src/ui/screen_stats.c:356 [cmp == -> !=]
+KILLED    m0302 src/ui/screen_stats.c:359 [arith * -> /]
+          build break
+SURVIVED  m0303 src/ui/screen_stats.c:366 [arith / -> *]
+SURVIVED  m0304 src/ui/screen_stats.c:369 [arith + -> -]
+SURVIVED  m0305 src/ui/screen_stats.c:369 [arith + -> -]
+SURVIVED  m0306 src/ui/screen_stats.c:370 [arith * -> /]
+SURVIVED  m0307 src/ui/screen_stats.c:370 [arith + -> -]
+SURVIVED  m0308 src/ui/screen_stats.c:370 [int+1 2 -> 3]
+SURVIVED  m0309 src/ui/screen_stats.c:370 [int-1 2 -> 1]
+SURVIVED  m0310 src/ui/screen_stats.c:370 [arith * -> /]
+SURVIVED  m0311 src/ui/screen_stats.c:371 [arith + -> -]
+SURVIVED  m0312 src/ui/screen_stats.c:371 [arith + -> -]
+SURVIVED  m0313 src/ui/screen_stats.c:372 [arith - -> +]
+SURVIVED  m0314 src/ui/screen_stats.c:372 [arith - -> +]
+SURVIVED  m0315 src/ui/screen_stats.c:372 [arith - -> +]
+SURVIVED  m0316 src/ui/screen_stats.c:372 [int+1 2 -> 3]
+SURVIVED  m0317 src/ui/screen_stats.c:372 [int-1 2 -> 1]
+SURVIVED  m0318 src/ui/screen_stats.c:372 [arith * -> /]
+SURVIVED  m0319 src/ui/screen_stats.c:373 [arith + -> -]
+SURVIVED  m0320 src/ui/screen_stats.c:373 [arith + -> -]
+SURVIVED  m0321 src/ui/screen_stats.c:374 [arith - -> +]
+SURVIVED  m0322 src/ui/screen_stats.c:374 [arith - -> +]
+SURVIVED  m0323 src/ui/screen_stats.c:375 [arith / -> *]
+SURVIVED  m0324 src/ui/screen_stats.c:377 [arith / -> *]
+SURVIVED  m0325 src/ui/screen_stats.c:378 [arith + -> -]
+SURVIVED  m0326 src/ui/screen_stats.c:378 [arith + -> -]
+SURVIVED  m0327 src/ui/screen_stats.c:379 [arith + -> -]
+SURVIVED  m0328 src/ui/screen_stats.c:379 [arith + -> -]
+SURVIVED  m0329 src/ui/screen_stats.c:380 [arith - -> +]
+SURVIVED  m0330 src/ui/screen_stats.c:380 [arith - -> +]
+SURVIVED  m0331 src/ui/screen_stats.c:380 [arith - -> +]
+KILLED    m0332 src/ui/screen_stats.c:384 [logic && -> ||]
+          build break
+SURVIVED  m0333 src/ui/screen_stats.c:385 [cmp >= -> >]
+SURVIVED  m0334 src/ui/screen_stats.c:385 [int+1 0 -> 1]
+SURVIVED  m0335 src/ui/screen_stats.c:385 [int-1 0 -> -1]
+KILLED    m0336 src/ui/screen_stats.c:385 [logic && -> ||]
+          build break
+SURVIVED  m0337 src/ui/screen_stats.c:385 [cmp < -> <=]
+SURVIVED  m0338 src/ui/screen_stats.c:391 [cmp > -> >=]
+SURVIVED  m0339 src/ui/screen_stats.c:391 [int+1 0 -> 1]
+SURVIVED  m0340 src/ui/screen_stats.c:391 [int-1 0 -> -1]
+SURVIVED  m0341 src/ui/screen_stats.c:392 [arith + -> -]
+SURVIVED  m0342 src/ui/screen_stats.c:392 [arith + -> -]
+SURVIVED  m0343 src/ui/screen_stats.c:392 [arith - -> +]
+SURVIVED  m0344 src/ui/screen_stats.c:392 [int+1 2 -> 3]
+SURVIVED  m0345 src/ui/screen_stats.c:392 [int-1 2 -> 1]
+SURVIVED  m0346 src/ui/screen_stats.c:392 [arith * -> /]
+SURVIVED  m0347 src/ui/screen_stats.c:393 [arith - -> +]
+SURVIVED  m0348 src/ui/screen_stats.c:393 [int+1 2 -> 3]
+SURVIVED  m0349 src/ui/screen_stats.c:393 [int-1 2 -> 1]
+SURVIVED  m0350 src/ui/screen_stats.c:393 [arith * -> /]
+SURVIVED  m0351 src/ui/screen_stats.c:400 [arith - -> +]
+SURVIVED  m0352 src/ui/screen_stats.c:400 [arith - -> +]
+SURVIVED  m0353 src/ui/screen_stats.c:400 [int+1 2 -> 3]
+SURVIVED  m0354 src/ui/screen_stats.c:400 [int-1 2 -> 1]
+SURVIVED  m0355 src/ui/screen_stats.c:400 [arith * -> /]
+ACCEPTED  m0001 src/ui/screen_stats.c:10 [int+1 6 -> 7] :: margin shift constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+ACCEPTED  m0002 src/ui/screen_stats.c:10 [int-1 6 -> 5] :: margin shift constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+ACCEPTED  m0003 src/ui/screen_stats.c:11 [int+1 4 -> 5] :: row height shift constant, draw layout only
+ACCEPTED  m0004 src/ui/screen_stats.c:11 [int-1 4 -> 3] :: row height shift constant, draw layout only
+ACCEPTED  m0005 src/ui/screen_stats.c:12 [int+1 2 -> 3] :: left width shift constant, draw layout only
+ACCEPTED  m0006 src/ui/screen_stats.c:12 [int-1 2 -> 1] :: left width shift constant, draw layout only
+ACCEPTED  m0007 src/ui/screen_stats.c:13 [int+1 3 -> 4] :: forecast height divisor, draw layout only
+ACCEPTED  m0008 src/ui/screen_stats.c:13 [int-1 3 -> 2] :: forecast height divisor, draw layout only
+ACCEPTED  m0009 src/ui/screen_stats.c:14 [int+1 5 -> 6] :: deck pane height divisor, draw layout only
+ACCEPTED  m0010 src/ui/screen_stats.c:14 [int-1 5 -> 4] :: deck pane height divisor, draw layout only
+ACCEPTED  m0011 src/ui/screen_stats.c:15 [int+1 5 -> 6] :: heatmap height divisor, draw layout only
+ACCEPTED  m0012 src/ui/screen_stats.c:15 [int-1 5 -> 4] :: heatmap height divisor, draw layout only
+ACCEPTED  m0013 src/ui/screen_stats.c:16 [int+1 8 -> 9] :: heatmap column count, draw grid only
+ACCEPTED  m0014 src/ui/screen_stats.c:16 [int-1 8 -> 7] :: heatmap column count, draw grid only
+ACCEPTED  m0015 src/ui/screen_stats.c:17 [int+1 8 -> 9] :: mark size divisor, draw marker only
+ACCEPTED  m0016 src/ui/screen_stats.c:17 [int-1 8 -> 7] :: mark size divisor, draw marker only
+ACCEPTED  m0017 src/ui/screen_stats.c:18 [int+1 4 -> 5] :: summary line count, draw summary rows only
+ACCEPTED  m0018 src/ui/screen_stats.c:18 [int-1 4 -> 3] :: summary line count, draw summary rows only
+ACCEPTED  m0026 src/ui/screen_stats.c:20 [int+1 1 -> 2] :: forecast label step, draw label cadence only
+ACCEPTED  m0027 src/ui/screen_stats.c:20 [int-1 1 -> 0] :: forecast label step, draw label cadence only
+ACCEPTED  m0028 src/ui/screen_stats.c:20 [int+1 2 -> 3] :: forecast label step, draw label cadence only
+ACCEPTED  m0029 src/ui/screen_stats.c:20 [int-1 2 -> 1] :: forecast label step, draw label cadence only
+ACCEPTED  m0030 src/ui/screen_stats.c:20 [arith + -> -] :: forecast label step, draw label cadence only
+ACCEPTED  m0031 src/ui/screen_stats.c:20 [int+1 1 -> 2] :: forecast label step, draw label cadence only
+ACCEPTED  m0032 src/ui/screen_stats.c:20 [int-1 1 -> 0] :: forecast label step, draw label cadence only
+ACCEPTED  m0033 src/ui/screen_stats.c:21 [int+1 1 -> 2] :: small text shift, draw font size only
+ACCEPTED  m0034 src/ui/screen_stats.c:21 [int-1 1 -> 0] :: small text shift, draw font size only
+ACCEPTED  m0041 src/ui/screen_stats.c:31 [int-1 0 -> -1] :: case accuracy error guard minus one relaxation, no suite call makes the repo return exactly minus one here
+ACCEPTED  m0044 src/ui/screen_stats.c:35 [int-1 0 -> -1] :: heatmap rank guard minus one relaxation, the rank call succeeds on every suite input
+ACCEPTED  m0045 src/ui/screen_stats.c:39 [cmp < -> <=] :: card list error guard minus one relaxation, no suite call makes the repo return exactly minus one here
+ACCEPTED  m0046 src/ui/screen_stats.c:39 [int+1 0 -> 1] :: card list error guard minus one relaxation, no suite call makes the repo return exactly minus one here
+ACCEPTED  m0047 src/ui/screen_stats.c:39 [int-1 0 -> -1] :: card list error guard minus one relaxation, no suite call makes the repo return exactly minus one here
+ACCEPTED  m0054 src/ui/screen_stats.c:43 [cmp < -> <=] :: row cap weakening runs one extra card query at a zero remaining cap which writes nothing
+ACCEPTED  m0056 src/ui/screen_stats.c:46 [arith - -> +] :: review row cap arithmetic flip only matters past the row budget, suite decks hold at most 16 reviews
+ACCEPTED  m0059 src/ui/screen_stats.c:47 [int-1 0 -> -1] :: review fetch error guard minus one relaxation, no suite call makes the repo return exactly minus one here
+ACCEPTED  m0060 src/ui/screen_stats.c:57 [cmp < -> <=] :: retention error guard, the call args are a static array with a constant bucket count so no variant fires
+ACCEPTED  m0061 src/ui/screen_stats.c:57 [int+1 0 -> 1] :: retention error guard, the call args are a static array with a constant bucket count so no variant fires
+ACCEPTED  m0062 src/ui/screen_stats.c:57 [int-1 0 -> -1] :: retention error guard, the call args are a static array with a constant bucket count so no variant fires
+ACCEPTED  m0082 src/ui/screen_stats.c:78 [int+1 1 -> 2] :: from_day buffer bound slack, snprintf writes at most eleven bytes either way
+ACCEPTED  m0084 src/ui/screen_stats.c:82 [cmp < -> <=] :: forecast error guard, the row count is a constant day span so the weakened boundaries never fire
+ACCEPTED  m0085 src/ui/screen_stats.c:82 [int+1 0 -> 1] :: forecast error guard, the row count is a constant day span so the weakened boundaries never fire
+ACCEPTED  m0086 src/ui/screen_stats.c:82 [int-1 0 -> -1] :: forecast error guard, the row count is a constant day span so the weakened boundaries never fire
+ACCEPTED  m0089 src/ui/screen_stats.c:87 [int-1 0 -> -1] :: sessions error guard minus one relaxation, no suite call makes the repo return exactly minus one here
+ACCEPTED  m0111 src/ui/screen_stats.c:108 [int-1 0 -> -1] :: deck sections error guard minus one relaxation, no suite call makes the path return exactly minus one here
+ACCEPTED  m0117 src/ui/screen_stats.c:112 [cmp < -> <=] :: deck match loop overrun compares the zero filled name slot past the decks, never matches a real deck
+ACCEPTED  m0124 src/ui/screen_stats.c:122 [cmp < -> <=] :: worst cases negative guard weakening maps zero to the same zero result
+ACCEPTED  m0125 src/ui/screen_stats.c:122 [int+1 0 -> 1] :: worst cases negative guard weakening maps zero to the same zero result
+ACCEPTED  m0130 src/ui/screen_stats.c:125 [cmp < -> <=] :: worst cases clamp boundary weakening maps n equal to case_count to the same value
+ACCEPTED  m0136 src/ui/screen_stats.c:183 [int+1 0 -> 1] :: deck label loop bound feeds only the draw-side deck list view no headless suite exercises
+ACCEPTED  m0137 src/ui/screen_stats.c:183 [int-1 0 -> -1] :: deck label loop bound feeds only the draw-side deck list view no headless suite exercises
+ACCEPTED  m0138 src/ui/screen_stats.c:183 [cmp < -> <=] :: deck label loop bound feeds only the draw-side deck list view no headless suite exercises
+ACCEPTED  m0139 src/ui/screen_stats.c:187 [int+1 0 -> 1] :: session label loop bound feeds only the draw-side session list view no headless suite exercises
+ACCEPTED  m0140 src/ui/screen_stats.c:187 [int-1 0 -> -1] :: session label loop bound feeds only the draw-side session list view no headless suite exercises
+ACCEPTED  m0141 src/ui/screen_stats.c:187 [cmp < -> <=] :: session label loop bound feeds only the draw-side session list view no headless suite exercises
+ACCEPTED  m0144 src/ui/screen_stats.c:198 [arith + -> -] :: forecast inner x layout, draw path only
+ACCEPTED  m0145 src/ui/screen_stats.c:199 [arith + -> -] :: forecast inner y layout, draw path only
+ACCEPTED  m0146 src/ui/screen_stats.c:199 [arith + -> -] :: forecast inner y layout, draw path only
+ACCEPTED  m0147 src/ui/screen_stats.c:200 [arith - -> +] :: forecast inner width layout, draw path only
+ACCEPTED  m0148 src/ui/screen_stats.c:200 [int+1 2 -> 3] :: forecast inner width layout, draw path only
+ACCEPTED  m0149 src/ui/screen_stats.c:200 [int-1 2 -> 1] :: forecast inner width layout, draw path only
+ACCEPTED  m0150 src/ui/screen_stats.c:200 [arith * -> /] :: forecast inner width layout, draw path only
+ACCEPTED  m0151 src/ui/screen_stats.c:202 [arith - -> +] :: forecast inner height layout, draw path only
+ACCEPTED  m0152 src/ui/screen_stats.c:202 [arith - -> +] :: forecast inner height layout, draw path only
+ACCEPTED  m0153 src/ui/screen_stats.c:202 [arith - -> +] :: forecast inner height layout, draw path only
+ACCEPTED  m0154 src/ui/screen_stats.c:202 [arith - -> +] :: forecast inner height layout, draw path only
+ACCEPTED  m0155 src/ui/screen_stats.c:206 [arith + -> -] :: forecast head label rect, draw path only
+ACCEPTED  m0156 src/ui/screen_stats.c:210 [int+1 0 -> 1] :: forecast value loop bound, draw path only
+ACCEPTED  m0157 src/ui/screen_stats.c:210 [int-1 0 -> -1] :: forecast value loop bound, draw path only
+ACCEPTED  m0158 src/ui/screen_stats.c:210 [cmp < -> <=] :: forecast value loop bound, draw path only
+ACCEPTED  m0159 src/ui/screen_stats.c:215 [int+1 0 -> 1] :: forecast bar loop bound, draw path only
+ACCEPTED  m0160 src/ui/screen_stats.c:215 [int-1 0 -> -1] :: forecast bar loop bound, draw path only
+ACCEPTED  m0161 src/ui/screen_stats.c:215 [cmp < -> <=] :: forecast bar loop bound, draw path only
+ACCEPTED  m0162 src/ui/screen_stats.c:216 [cmp > -> >=] :: forecast bar visibility, draw path only
+ACCEPTED  m0163 src/ui/screen_stats.c:219 [cmp != -> ==] :: forecast label cadence, draw path only
+ACCEPTED  m0164 src/ui/screen_stats.c:219 [int+1 0 -> 1] :: forecast label cadence, draw path only
+ACCEPTED  m0165 src/ui/screen_stats.c:219 [int-1 0 -> -1] :: forecast label cadence, draw path only
+ACCEPTED  m0166 src/ui/screen_stats.c:222 [arith * -> /] :: forecast label buffer size, draw path only
+ACCEPTED  m0167 src/ui/screen_stats.c:222 [int+1 2 -> 3] :: forecast label buffer size, draw path only
+ACCEPTED  m0168 src/ui/screen_stats.c:222 [int-1 2 -> 1] :: forecast label buffer size, draw path only
+ACCEPTED  m0169 src/ui/screen_stats.c:224 [arith + -> -] :: forecast day label placement, draw path only
+ACCEPTED  m0171 src/ui/screen_stats.c:231 [arith + -> -] :: heatmap inner x layout, draw path only
+ACCEPTED  m0172 src/ui/screen_stats.c:232 [arith + -> -] :: heatmap inner y layout, draw path only
+ACCEPTED  m0173 src/ui/screen_stats.c:233 [arith - -> +] :: heatmap inner width layout, draw path only
+ACCEPTED  m0174 src/ui/screen_stats.c:233 [int+1 2 -> 3] :: heatmap inner width layout, draw path only
+ACCEPTED  m0175 src/ui/screen_stats.c:233 [int-1 2 -> 1] :: heatmap inner width layout, draw path only
+ACCEPTED  m0176 src/ui/screen_stats.c:233 [arith * -> /] :: heatmap inner width layout, draw path only
+ACCEPTED  m0177 src/ui/screen_stats.c:234 [arith - -> +] :: heatmap inner height layout, draw path only
+ACCEPTED  m0178 src/ui/screen_stats.c:234 [int+1 2 -> 3] :: heatmap inner height layout, draw path only
+ACCEPTED  m0179 src/ui/screen_stats.c:234 [int-1 2 -> 1] :: heatmap inner height layout, draw path only
+ACCEPTED  m0180 src/ui/screen_stats.c:234 [arith * -> /] :: heatmap inner height layout, draw path only
+ACCEPTED  m0181 src/ui/screen_stats.c:236 [cmp <= -> <] :: heatmap empty branch, draw path only
+ACCEPTED  m0182 src/ui/screen_stats.c:236 [int+1 0 -> 1] :: heatmap empty branch, draw path only
+ACCEPTED  m0183 src/ui/screen_stats.c:236 [int-1 0 -> -1] :: heatmap empty branch, draw path only
+ACCEPTED  m0184 src/ui/screen_stats.c:241 [arith + -> -] :: heatmap row count arithmetic, draw grid only
+ACCEPTED  m0185 src/ui/screen_stats.c:241 [arith - -> +] :: heatmap row count arithmetic, draw grid only
+ACCEPTED  m0186 src/ui/screen_stats.c:241 [int+1 1 -> 2] :: heatmap row count arithmetic, draw grid only
+ACCEPTED  m0187 src/ui/screen_stats.c:241 [int-1 1 -> 0] :: heatmap row count arithmetic, draw grid only
+ACCEPTED  m0188 src/ui/screen_stats.c:241 [arith / -> *] :: heatmap row count arithmetic, draw grid only
+ACCEPTED  m0189 src/ui/screen_stats.c:246 [int+1 0 -> 1] :: heatmap cell loop bound, draw path only
+ACCEPTED  m0190 src/ui/screen_stats.c:246 [int-1 0 -> -1] :: heatmap cell loop bound, draw path only
+ACCEPTED  m0191 src/ui/screen_stats.c:246 [cmp < -> <=] :: heatmap cell loop bound, draw path only
+ACCEPTED  m0192 src/ui/screen_stats.c:247 [cmp != -> ==] :: heatmap cell guard, draw path only
+ACCEPTED  m0193 src/ui/screen_stats.c:247 [int+1 0 -> 1] :: heatmap cell guard, draw path only
+ACCEPTED  m0194 src/ui/screen_stats.c:247 [int-1 0 -> -1] :: heatmap cell guard, draw path only
+ACCEPTED  m0195 src/ui/screen_stats.c:251 [cmp == -> !=] :: heatmap hover outline, draw path only
+ACCEPTED  m0196 src/ui/screen_stats.c:256 [cmp < -> <=] :: heatmap hover range guard, draw path only
+ACCEPTED  m0197 src/ui/screen_stats.c:256 [int+1 0 -> 1] :: heatmap hover range guard, draw path only
+ACCEPTED  m0198 src/ui/screen_stats.c:256 [int-1 0 -> -1] :: heatmap hover range guard, draw path only
+ACCEPTED  m0199 src/ui/screen_stats.c:256 [logic || -> &&] :: heatmap hover range guard, draw path only
+ACCEPTED  m0200 src/ui/screen_stats.c:256 [cmp >= -> >] :: heatmap hover range guard, draw path only
+ACCEPTED  m0202 src/ui/screen_stats.c:263 [arith + -> -] :: heatmap hover text placement, draw path only
+ACCEPTED  m0203 src/ui/screen_stats.c:263 [arith - -> +] :: heatmap hover text placement, draw path only
+ACCEPTED  m0204 src/ui/screen_stats.c:263 [arith - -> +] :: heatmap hover text placement, draw path only
+ACCEPTED  m0206 src/ui/screen_stats.c:269 [arith + -> -] :: retention inner x layout, draw path only
+ACCEPTED  m0207 src/ui/screen_stats.c:270 [arith + -> -] :: retention inner y layout, draw path only
+ACCEPTED  m0208 src/ui/screen_stats.c:270 [arith + -> -] :: retention inner y layout, draw path only
+ACCEPTED  m0209 src/ui/screen_stats.c:271 [arith - -> +] :: retention inner width layout, draw path only
+ACCEPTED  m0210 src/ui/screen_stats.c:271 [int+1 2 -> 3] :: retention inner width layout, draw path only
+ACCEPTED  m0211 src/ui/screen_stats.c:271 [int-1 2 -> 1] :: retention inner width layout, draw path only
+ACCEPTED  m0212 src/ui/screen_stats.c:271 [arith * -> /] :: retention inner width layout, draw path only
+ACCEPTED  m0213 src/ui/screen_stats.c:272 [arith - -> +] :: retention inner height layout, draw path only
+ACCEPTED  m0214 src/ui/screen_stats.c:272 [arith - -> +] :: retention inner height layout, draw path only
+ACCEPTED  m0215 src/ui/screen_stats.c:272 [arith - -> +] :: retention inner height layout, draw path only
+ACCEPTED  m0216 src/ui/screen_stats.c:278 [arith + -> -] :: retention head label rect, draw path only
+ACCEPTED  m0217 src/ui/screen_stats.c:282 [int+1 0 -> 1] :: retention rate loop bound, draw path only
+ACCEPTED  m0218 src/ui/screen_stats.c:282 [int-1 0 -> -1] :: retention rate loop bound, draw path only
+ACCEPTED  m0219 src/ui/screen_stats.c:282 [cmp < -> <=] :: retention rate loop bound, draw path only
+ACCEPTED  m0220 src/ui/screen_stats.c:283 [cmp > -> >=] :: retention rate ternary, draw chart feed only
+ACCEPTED  m0221 src/ui/screen_stats.c:283 [int+1 0 -> 1] :: retention rate ternary, draw chart feed only
+ACCEPTED  m0222 src/ui/screen_stats.c:283 [int-1 0 -> -1] :: retention rate ternary, draw chart feed only
+ACCEPTED  m0224 src/ui/screen_stats.c:288 [arith / -> *] :: retention mark size divisor, draw marker only
+ACCEPTED  m0225 src/ui/screen_stats.c:289 [cmp < -> <=] :: retention mark floor guard, draw marker only
+ACCEPTED  m0226 src/ui/screen_stats.c:289 [int+1 1 -> 2] :: retention mark floor guard, draw marker only
+ACCEPTED  m0227 src/ui/screen_stats.c:289 [int-1 1 -> 0] :: retention mark floor guard, draw marker only
+ACCEPTED  m0228 src/ui/screen_stats.c:290 [int+1 1 -> 2] :: retention mark floor value, draw marker only
+ACCEPTED  m0229 src/ui/screen_stats.c:290 [int-1 1 -> 0] :: retention mark floor value, draw marker only
+ACCEPTED  m0230 src/ui/screen_stats.c:292 [bool false -> true] :: retention line state flag, draw path only
+ACCEPTED  m0231 src/ui/screen_stats.c:293 [int+1 0 -> 1] :: retention prev x state, draw path only
+ACCEPTED  m0232 src/ui/screen_stats.c:293 [int-1 0 -> -1] :: retention prev x state, draw path only
+ACCEPTED  m0233 src/ui/screen_stats.c:294 [int+1 0 -> 1] :: retention prev y state, draw path only
+ACCEPTED  m0234 src/ui/screen_stats.c:294 [int-1 0 -> -1] :: retention prev y state, draw path only
+ACCEPTED  m0235 src/ui/screen_stats.c:295 [int+1 0 -> 1] :: retention point loop bound, draw path only
+ACCEPTED  m0236 src/ui/screen_stats.c:295 [int-1 0 -> -1] :: retention point loop bound, draw path only
+ACCEPTED  m0237 src/ui/screen_stats.c:295 [cmp < -> <=] :: retention point loop bound, draw path only
+ACCEPTED  m0238 src/ui/screen_stats.c:296 [cmp > -> >=] :: retention bar visibility, draw path only
+ACCEPTED  m0239 src/ui/screen_stats.c:296 [int+1 0 -> 1] :: retention bar visibility, draw path only
+ACCEPTED  m0240 src/ui/screen_stats.c:296 [int-1 0 -> -1] :: retention bar visibility, draw path only
+ACCEPTED  m0241 src/ui/screen_stats.c:296 [logic && -> ||] :: retention bar visibility, draw path only
+ACCEPTED  m0242 src/ui/screen_stats.c:296 [cmp > -> >=] :: retention bar visibility, draw path only
+ACCEPTED  m0243 src/ui/screen_stats.c:299 [cmp == -> !=] :: retention empty bucket skip, draw path only
+ACCEPTED  m0244 src/ui/screen_stats.c:299 [int+1 0 -> 1] :: retention empty bucket skip, draw path only
+ACCEPTED  m0245 src/ui/screen_stats.c:299 [int-1 0 -> -1] :: retention empty bucket skip, draw path only
+ACCEPTED  m0246 src/ui/screen_stats.c:302 [arith + -> -] :: retention point x compose, draw path only
+ACCEPTED  m0247 src/ui/screen_stats.c:302 [arith / -> *] :: retention point x compose, draw path only
+ACCEPTED  m0248 src/ui/screen_stats.c:303 [arith + -> -] :: retention point y compose, draw path only
+ACCEPTED  m0249 src/ui/screen_stats.c:303 [arith - -> +] :: retention point y compose, draw path only
+ACCEPTED  m0251 src/ui/screen_stats.c:305 [arith - -> +] :: retention marker rect, draw path only
+ACCEPTED  m0252 src/ui/screen_stats.c:305 [arith - -> +] :: retention marker rect, draw path only
+ACCEPTED  m0253 src/ui/screen_stats.c:305 [arith * -> /] :: retention marker rect, draw path only
+ACCEPTED  m0254 src/ui/screen_stats.c:305 [int+1 2 -> 3] :: retention marker rect, draw path only
+ACCEPTED  m0255 src/ui/screen_stats.c:305 [int-1 2 -> 1] :: retention marker rect, draw path only
+ACCEPTED  m0256 src/ui/screen_stats.c:305 [arith * -> /] :: retention marker rect, draw path only
+ACCEPTED  m0257 src/ui/screen_stats.c:305 [int+1 2 -> 3] :: retention marker rect, draw path only
+ACCEPTED  m0258 src/ui/screen_stats.c:305 [int-1 2 -> 1] :: retention marker rect, draw path only
+ACCEPTED  m0259 src/ui/screen_stats.c:309 [bool true -> false] :: retention line latch, draw path only
+ACCEPTED  m0261 src/ui/screen_stats.c:318 [arith + -> -] :: deck summary inner x layout, draw path only
+ACCEPTED  m0262 src/ui/screen_stats.c:319 [arith + -> -] :: deck summary inner y layout, draw path only
+ACCEPTED  m0263 src/ui/screen_stats.c:320 [arith - -> +] :: deck summary inner width layout, draw path only
+ACCEPTED  m0264 src/ui/screen_stats.c:320 [int+1 2 -> 3] :: deck summary inner width layout, draw path only
+ACCEPTED  m0265 src/ui/screen_stats.c:320 [int-1 2 -> 1] :: deck summary inner width layout, draw path only
+ACCEPTED  m0266 src/ui/screen_stats.c:320 [arith * -> /] :: deck summary inner width layout, draw path only
+ACCEPTED  m0267 src/ui/screen_stats.c:321 [cmp < -> <=] :: deck summary selection guard, draw path only
+ACCEPTED  m0268 src/ui/screen_stats.c:321 [int+1 0 -> 1] :: deck summary selection guard, draw path only
+ACCEPTED  m0269 src/ui/screen_stats.c:321 [int-1 0 -> -1] :: deck summary selection guard, draw path only
+ACCEPTED  m0270 src/ui/screen_stats.c:321 [logic || -> &&] :: deck summary selection guard, draw path only
+ACCEPTED  m0271 src/ui/screen_stats.c:321 [cmp >= -> >] :: deck summary selection guard, draw path only
+ACCEPTED  m0273 src/ui/screen_stats.c:327 [int+1 0 -> 1] :: deck summary line text, draw path only
+ACCEPTED  m0275 src/ui/screen_stats.c:327 [int+1 0 -> 1] :: deck summary line text, draw path only
+ACCEPTED  m0276 src/ui/screen_stats.c:327 [int-1 0 -> -1] :: deck summary line text, draw path only
+ACCEPTED  m0277 src/ui/screen_stats.c:328 [int+1 1 -> 2] :: deck summary line text, draw path only
+ACCEPTED  m0278 src/ui/screen_stats.c:328 [int-1 1 -> 0] :: deck summary line text, draw path only
+ACCEPTED  m0279 src/ui/screen_stats.c:328 [int+1 1 -> 2] :: deck summary line text, draw path only
+ACCEPTED  m0280 src/ui/screen_stats.c:328 [int-1 1 -> 0] :: deck summary line text, draw path only
+ACCEPTED  m0281 src/ui/screen_stats.c:329 [int+1 2 -> 3] :: deck summary line text, draw path only
+ACCEPTED  m0282 src/ui/screen_stats.c:329 [int-1 2 -> 1] :: deck summary line text, draw path only
+ACCEPTED  m0283 src/ui/screen_stats.c:329 [int+1 2 -> 3] :: deck summary line text, draw path only
+ACCEPTED  m0284 src/ui/screen_stats.c:329 [int-1 2 -> 1] :: deck summary line text, draw path only
+ACCEPTED  m0287 src/ui/screen_stats.c:330 [int+1 1 -> 2] :: deck summary last line pointer, draw path only
+ACCEPTED  m0289 src/ui/screen_stats.c:331 [int+1 0 -> 1] :: deck summary last line text, draw path only
+ACCEPTED  m0290 src/ui/screen_stats.c:331 [int-1 0 -> -1] :: deck summary last line text, draw path only
+ACCEPTED  m0291 src/ui/screen_stats.c:332 [int+1 0 -> 1] :: deck summary label loop bound, draw path only
+ACCEPTED  m0292 src/ui/screen_stats.c:332 [int-1 0 -> -1] :: deck summary label loop bound, draw path only
+ACCEPTED  m0293 src/ui/screen_stats.c:332 [cmp < -> <=] :: deck summary label loop bound, draw path only
+ACCEPTED  m0294 src/ui/screen_stats.c:333 [arith + -> -] :: deck summary label rect, draw path only
+ACCEPTED  m0295 src/ui/screen_stats.c:333 [arith * -> /] :: deck summary label rect, draw path only
+ACCEPTED  m0297 src/ui/screen_stats.c:338 [cmp == -> !=] :: stats update entry guard, no gate suite calls the stats update loop so both arms are unobserved
+ACCEPTED  m0298 src/ui/screen_stats.c:341 [not-del ! -> (deleted)] :: stats opened latch read, static screen state no gate suite observes
+ACCEPTED  m0299 src/ui/screen_stats.c:342 [bool true -> false] :: stats opened latch write, static screen state no gate suite observes
+ACCEPTED  m0301 src/ui/screen_stats.c:356 [cmp == -> !=] :: null guard after the background clear, draw path only
+ACCEPTED  m0303 src/ui/screen_stats.c:366 [arith / -> *] :: deck pane height layout, draw path only
+ACCEPTED  m0304 src/ui/screen_stats.c:369 [arith + -> -] :: summary y layout, draw path only
+ACCEPTED  m0305 src/ui/screen_stats.c:369 [arith + -> -] :: summary y layout, draw path only
+ACCEPTED  m0306 src/ui/screen_stats.c:370 [arith * -> /] :: summary height layout, draw path only
+ACCEPTED  m0307 src/ui/screen_stats.c:370 [arith + -> -] :: summary height layout, draw path only
+ACCEPTED  m0308 src/ui/screen_stats.c:370 [int+1 2 -> 3] :: summary height layout, draw path only
+ACCEPTED  m0309 src/ui/screen_stats.c:370 [int-1 2 -> 1] :: summary height layout, draw path only
+ACCEPTED  m0310 src/ui/screen_stats.c:370 [arith * -> /] :: summary height layout, draw path only
+ACCEPTED  m0311 src/ui/screen_stats.c:371 [arith + -> -] :: sessions y layout, draw path only
+ACCEPTED  m0312 src/ui/screen_stats.c:371 [arith + -> -] :: sessions y layout, draw path only
+ACCEPTED  m0313 src/ui/screen_stats.c:372 [arith - -> +] :: sessions height layout, draw path only
+ACCEPTED  m0314 src/ui/screen_stats.c:372 [arith - -> +] :: sessions height layout, draw path only
+ACCEPTED  m0315 src/ui/screen_stats.c:372 [arith - -> +] :: sessions height layout, draw path only
+ACCEPTED  m0316 src/ui/screen_stats.c:372 [int+1 2 -> 3] :: sessions height layout, draw path only
+ACCEPTED  m0317 src/ui/screen_stats.c:372 [int-1 2 -> 1] :: sessions height layout, draw path only
+ACCEPTED  m0318 src/ui/screen_stats.c:372 [arith * -> /] :: sessions height layout, draw path only
+ACCEPTED  m0319 src/ui/screen_stats.c:373 [arith + -> -] :: right pane x layout, draw path only
+ACCEPTED  m0320 src/ui/screen_stats.c:373 [arith + -> -] :: right pane x layout, draw path only
+ACCEPTED  m0321 src/ui/screen_stats.c:374 [arith - -> +] :: right pane width layout, draw path only
+ACCEPTED  m0322 src/ui/screen_stats.c:374 [arith - -> +] :: right pane width layout, draw path only
+ACCEPTED  m0323 src/ui/screen_stats.c:375 [arith / -> *] :: forecast height layout, draw path only
+ACCEPTED  m0324 src/ui/screen_stats.c:377 [arith / -> *] :: heatmap height layout, draw path only
+ACCEPTED  m0325 src/ui/screen_stats.c:378 [arith + -> -] :: heatmap y layout, draw path only
+ACCEPTED  m0326 src/ui/screen_stats.c:378 [arith + -> -] :: heatmap y layout, draw path only
+ACCEPTED  m0327 src/ui/screen_stats.c:379 [arith + -> -] :: retention y layout, draw path only
+ACCEPTED  m0328 src/ui/screen_stats.c:379 [arith + -> -] :: retention y layout, draw path only
+ACCEPTED  m0329 src/ui/screen_stats.c:380 [arith - -> +] :: retention height layout, draw path only
+ACCEPTED  m0330 src/ui/screen_stats.c:380 [arith - -> +] :: retention height layout, draw path only
+ACCEPTED  m0331 src/ui/screen_stats.c:380 [arith - -> +] :: retention height layout, draw path only
+ACCEPTED  m0333 src/ui/screen_stats.c:385 [cmp >= -> >] :: deck list view guard, gui event state no headless suite can trigger
+ACCEPTED  m0334 src/ui/screen_stats.c:385 [int+1 0 -> 1] :: deck list view guard, gui event state no headless suite can trigger
+ACCEPTED  m0335 src/ui/screen_stats.c:385 [int-1 0 -> -1] :: deck list view guard, gui event state no headless suite can trigger
+ACCEPTED  m0337 src/ui/screen_stats.c:385 [cmp < -> <=] :: deck list view guard, gui event state no headless suite can trigger
+ACCEPTED  m0338 src/ui/screen_stats.c:391 [cmp > -> >=] :: session list guard, draw path only
+ACCEPTED  m0339 src/ui/screen_stats.c:391 [int+1 0 -> 1] :: session list guard, draw path only
+ACCEPTED  m0340 src/ui/screen_stats.c:391 [int-1 0 -> -1] :: session list guard, draw path only
+ACCEPTED  m0341 src/ui/screen_stats.c:392 [arith + -> -] :: session list view rect, draw path only
+ACCEPTED  m0342 src/ui/screen_stats.c:392 [arith + -> -] :: session list view rect, draw path only
+ACCEPTED  m0343 src/ui/screen_stats.c:392 [arith - -> +] :: session list view rect, draw path only
+ACCEPTED  m0344 src/ui/screen_stats.c:392 [int+1 2 -> 3] :: session list view rect, draw path only
+ACCEPTED  m0345 src/ui/screen_stats.c:392 [int-1 2 -> 1] :: session list view rect, draw path only
+ACCEPTED  m0346 src/ui/screen_stats.c:392 [arith * -> /] :: session list view rect, draw path only
+ACCEPTED  m0351 src/ui/screen_stats.c:400 [arith - -> +] :: status bar rect, draw path only
+ACCEPTED  m0352 src/ui/screen_stats.c:400 [arith - -> +] :: status bar rect, draw path only
+ACCEPTED  m0353 src/ui/screen_stats.c:400 [int+1 2 -> 3] :: status bar rect, draw path only
+ACCEPTED  m0354 src/ui/screen_stats.c:400 [int-1 2 -> 1] :: status bar rect, draw path only
+ACCEPTED  m0355 src/ui/screen_stats.c:400 [arith * -> /] :: status bar rect, draw path only
+mutate: generated=355 build_failed=39 killed_by_tests=63 killed=102 survived=253 accepted=246 unexplained=7 skipped=0
+mutate: kill rate 102/355 = 28.7%, with accepted equivalents 348/355 = 98.0%
+mutate: wall 324.3s

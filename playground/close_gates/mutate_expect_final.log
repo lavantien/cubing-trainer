@@ -1,0 +1,524 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/app/script_expect.c build_close e2e_parse_flow e2e_parse_comments_and_quotes e2e_parse_errors e2e_parse_caps e2e_run_review_loop e2e_run_expect_failure e2e_run_cfop_cards e2e_run_settings_form e2e_run_restart_merge e2e_run_trainer_generate e2e_run_trainer_edge_generate e2e_run_script_guards e2e_run_expect_surfaces e2e_run_expect_srs_reviews e2e_run_expect_genalg e2e_run_expect_cfg e2e_run_expect_reviews_cap
+mutate: scope=src/app/script_expect.c files=1 sites=414 suites=17
+KILLED    m0001 src/app/script_expect.c:7 [arith * -> /]
+          build break
+KILLED    m0002 src/app/script_expect.c:12 [arith * -> /]
+          build break
+KILLED    m0003 src/app/script_expect.c:12 [arith * -> /]
+          build break
+KILLED    m0004 src/app/script_expect.c:12 [arith * -> /]
+          build break
+KILLED    m0005 src/app/script_expect.c:13 [cmp == -> !=]
+KILLED    m0006 src/app/script_expect.c:13 [int+1 0 -> 1]
+KILLED    m0007 src/app/script_expect.c:13 [int-1 0 -> -1]
+KILLED    m0008 src/app/script_expect.c:16 [cmp == -> !=]
+KILLED    m0009 src/app/script_expect.c:16 [int+1 0 -> 1]
+KILLED    m0010 src/app/script_expect.c:16 [int-1 0 -> -1]
+KILLED    m0011 src/app/script_expect.c:19 [cmp == -> !=]
+KILLED    m0012 src/app/script_expect.c:19 [int+1 0 -> 1]
+KILLED    m0013 src/app/script_expect.c:19 [int-1 0 -> -1]
+KILLED    m0014 src/app/script_expect.c:22 [cmp == -> !=]
+KILLED    m0015 src/app/script_expect.c:22 [int+1 0 -> 1]
+KILLED    m0016 src/app/script_expect.c:22 [int-1 0 -> -1]
+KILLED    m0017 src/app/script_expect.c:25 [cmp == -> !=]
+KILLED    m0018 src/app/script_expect.c:25 [int+1 0 -> 1]
+KILLED    m0019 src/app/script_expect.c:25 [int-1 0 -> -1]
+KILLED    m0020 src/app/script_expect.c:28 [cmp == -> !=]
+KILLED    m0021 src/app/script_expect.c:28 [int+1 0 -> 1]
+KILLED    m0022 src/app/script_expect.c:28 [int-1 0 -> -1]
+KILLED    m0023 src/app/script_expect.c:31 [cmp == -> !=]
+KILLED    m0024 src/app/script_expect.c:31 [int+1 0 -> 1]
+KILLED    m0025 src/app/script_expect.c:31 [int-1 0 -> -1]
+KILLED    m0026 src/app/script_expect.c:37 [arith * -> /]
+          build break
+KILLED    m0027 src/app/script_expect.c:37 [arith * -> /]
+          build break
+KILLED    m0028 src/app/script_expect.c:37 [arith * -> /]
+          build break
+KILLED    m0029 src/app/script_expect.c:38 [int+1 0 -> 1]
+KILLED    m0030 src/app/script_expect.c:38 [int-1 0 -> -1]
+KILLED    m0031 src/app/script_expect.c:38 [cmp < -> <=]
+KILLED    m0032 src/app/script_expect.c:38 [arith / -> *]
+SURVIVED  m0033 src/app/script_expect.c:38 [int+1 0 -> 1]
+SURVIVED  m0034 src/app/script_expect.c:38 [int-1 0 -> -1]
+KILLED    m0035 src/app/script_expect.c:39 [cmp != -> ==]
+KILLED    m0036 src/app/script_expect.c:39 [int+1 0 -> 1]
+KILLED    m0037 src/app/script_expect.c:39 [int-1 0 -> -1]
+KILLED    m0038 src/app/script_expect.c:44 [arith * -> /]
+          build break
+KILLED    m0039 src/app/script_expect.c:45 [arith - -> +]
+SURVIVED  m0040 src/app/script_expect.c:45 [int+1 1 -> 2]
+KILLED    m0041 src/app/script_expect.c:45 [int-1 1 -> 0]
+KILLED    m0042 src/app/script_expect.c:45 [cmp != -> ==]
+SURVIVED  m0043 src/app/script_expect.c:47 [arith - -> +]
+SURVIVED  m0044 src/app/script_expect.c:47 [int+1 1 -> 2]
+SURVIVED  m0045 src/app/script_expect.c:47 [int-1 1 -> 0]
+KILLED    m0046 src/app/script_expect.c:50 [arith * -> /]
+          build break
+KILLED    m0047 src/app/script_expect.c:50 [cmp == -> !=]
+KILLED    m0048 src/app/script_expect.c:50 [int+1 0 -> 1]
+KILLED    m0049 src/app/script_expect.c:50 [int-1 0 -> -1]
+SURVIVED  m0050 src/app/script_expect.c:50 [arith - -> +]
+SURVIVED  m0051 src/app/script_expect.c:50 [int+1 1 -> 2]
+SURVIVED  m0052 src/app/script_expect.c:50 [int-1 1 -> 0]
+KILLED    m0053 src/app/script_expect.c:52 [cmp == -> !=]
+KILLED    m0054 src/app/script_expect.c:52 [int+1 0 -> 1]
+KILLED    m0055 src/app/script_expect.c:52 [int-1 0 -> -1]
+SURVIVED  m0056 src/app/script_expect.c:52 [arith - -> +]
+SURVIVED  m0057 src/app/script_expect.c:52 [int+1 1 -> 2]
+SURVIVED  m0058 src/app/script_expect.c:52 [int-1 1 -> 0]
+SURVIVED  m0059 src/app/script_expect.c:54 [arith - -> +]
+SURVIVED  m0060 src/app/script_expect.c:54 [int+1 1 -> 2]
+KILLED    m0061 src/app/script_expect.c:54 [int-1 1 -> 0]
+KILLED    m0062 src/app/script_expect.c:57 [arith * -> /]
+          build break
+KILLED    m0063 src/app/script_expect.c:57 [arith * -> /]
+          build break
+KILLED    m0064 src/app/script_expect.c:57 [arith * -> /]
+          build break
+KILLED    m0065 src/app/script_expect.c:58 [arith * -> /]
+          build break
+KILLED    m0066 src/app/script_expect.c:61 [cmp < -> <=]
+KILLED    m0067 src/app/script_expect.c:61 [int+1 0 -> 1]
+SURVIVED  m0068 src/app/script_expect.c:61 [int-1 0 -> -1]
+KILLED    m0069 src/app/script_expect.c:61 [logic || -> &&]
+KILLED    m0070 src/app/script_expect.c:61 [cmp != -> ==]
+KILLED    m0071 src/app/script_expect.c:61 [int+1 0 -> 1]
+KILLED    m0072 src/app/script_expect.c:61 [int-1 0 -> -1]
+KILLED    m0073 src/app/script_expect.c:65 [int+1 0 -> 1]
+KILLED    m0074 src/app/script_expect.c:65 [int-1 0 -> -1]
+KILLED    m0075 src/app/script_expect.c:65 [cmp != -> ==]
+KILLED    m0076 src/app/script_expect.c:65 [int+1 0 -> 1]
+KILLED    m0077 src/app/script_expect.c:65 [int-1 0 -> -1]
+KILLED    m0078 src/app/script_expect.c:68 [not-del ! -> (deleted)]
+KILLED    m0079 src/app/script_expect.c:70 [int+1 0 -> 1]
+KILLED    m0080 src/app/script_expect.c:70 [int-1 0 -> -1]
+KILLED    m0081 src/app/script_expect.c:70 [int+1 1 -> 2]
+KILLED    m0082 src/app/script_expect.c:70 [int-1 1 -> 0]
+KILLED    m0083 src/app/script_expect.c:73 [ret-lit 0 -> 1]
+KILLED    m0084 src/app/script_expect.c:73 [int+1 0 -> 1]
+KILLED    m0085 src/app/script_expect.c:73 [int-1 0 -> -1]
+KILLED    m0086 src/app/script_expect.c:76 [arith * -> /]
+          build break
+KILLED    m0087 src/app/script_expect.c:76 [arith * -> /]
+          build break
+KILLED    m0088 src/app/script_expect.c:76 [arith * -> /]
+          build break
+KILLED    m0089 src/app/script_expect.c:77 [arith * -> /]
+          build break
+KILLED    m0090 src/app/script_expect.c:77 [arith * -> /]
+          build break
+KILLED    m0091 src/app/script_expect.c:80 [cmp != -> ==]
+KILLED    m0092 src/app/script_expect.c:83 [ret-lit 0 -> 1]
+KILLED    m0093 src/app/script_expect.c:83 [int+1 0 -> 1]
+KILLED    m0094 src/app/script_expect.c:83 [int-1 0 -> -1]
+KILLED    m0095 src/app/script_expect.c:86 [arith * -> /]
+          build break
+KILLED    m0096 src/app/script_expect.c:86 [arith * -> /]
+          build break
+KILLED    m0097 src/app/script_expect.c:86 [arith * -> /]
+          build break
+KILLED    m0098 src/app/script_expect.c:86 [arith * -> /]
+          build break
+KILLED    m0099 src/app/script_expect.c:89 [int+1 0 -> 1]
+KILLED    m0100 src/app/script_expect.c:89 [int-1 0 -> -1]
+KILLED    m0101 src/app/script_expect.c:89 [int+1 1 -> 2]
+KILLED    m0102 src/app/script_expect.c:89 [int-1 1 -> 0]
+KILLED    m0103 src/app/script_expect.c:90 [cmp != -> ==]
+KILLED    m0104 src/app/script_expect.c:90 [int+1 0 -> 1]
+KILLED    m0105 src/app/script_expect.c:90 [int-1 0 -> -1]
+KILLED    m0106 src/app/script_expect.c:93 [arith * -> /]
+          build break
+KILLED    m0107 src/app/script_expect.c:94 [cmp == -> !=]
+KILLED    m0108 src/app/script_expect.c:97 [cmp == -> !=]
+KILLED    m0109 src/app/script_expect.c:97 [int+1 0 -> 1]
+KILLED    m0110 src/app/script_expect.c:97 [int-1 0 -> -1]
+KILLED    m0111 src/app/script_expect.c:98 [cmp == -> !=]
+KILLED    m0112 src/app/script_expect.c:98 [int+1 0 -> 1]
+KILLED    m0113 src/app/script_expect.c:98 [int-1 0 -> -1]
+KILLED    m0114 src/app/script_expect.c:99 [cmp != -> ==]
+KILLED    m0115 src/app/script_expect.c:105 [ret-lit 0 -> 1]
+KILLED    m0116 src/app/script_expect.c:105 [int+1 0 -> 1]
+KILLED    m0117 src/app/script_expect.c:105 [int-1 0 -> -1]
+KILLED    m0118 src/app/script_expect.c:108 [arith * -> /]
+          build break
+KILLED    m0119 src/app/script_expect.c:108 [arith * -> /]
+          build break
+KILLED    m0120 src/app/script_expect.c:108 [arith * -> /]
+          build break
+KILLED    m0121 src/app/script_expect.c:108 [arith * -> /]
+          build break
+KILLED    m0122 src/app/script_expect.c:111 [int+1 0 -> 1]
+KILLED    m0123 src/app/script_expect.c:111 [int-1 0 -> -1]
+KILLED    m0124 src/app/script_expect.c:111 [int+1 1 -> 2]
+KILLED    m0125 src/app/script_expect.c:111 [int-1 1 -> 0]
+KILLED    m0126 src/app/script_expect.c:112 [cmp != -> ==]
+KILLED    m0127 src/app/script_expect.c:112 [int+1 0 -> 1]
+KILLED    m0128 src/app/script_expect.c:112 [int-1 0 -> -1]
+KILLED    m0129 src/app/script_expect.c:116 [cmp != -> ==]
+KILLED    m0130 src/app/script_expect.c:119 [arith * -> /]
+          build break
+KILLED    m0131 src/app/script_expect.c:119 [int+1 2 -> 3]
+KILLED    m0132 src/app/script_expect.c:119 [int-1 2 -> 1]
+KILLED    m0133 src/app/script_expect.c:120 [arith * -> /]
+          build break
+KILLED    m0134 src/app/script_expect.c:121 [cmp == -> !=]
+KILLED    m0135 src/app/script_expect.c:121 [int+1 0 -> 1]
+KILLED    m0136 src/app/script_expect.c:121 [int-1 0 -> -1]
+KILLED    m0137 src/app/script_expect.c:123 [cmp == -> !=]
+KILLED    m0138 src/app/script_expect.c:123 [int+1 0 -> 1]
+KILLED    m0139 src/app/script_expect.c:123 [int-1 0 -> -1]
+SURVIVED  m0140 src/app/script_expect.c:124 [int+1 0 -> 1]
+SURVIVED  m0141 src/app/script_expect.c:124 [int-1 0 -> -1]
+KILLED    m0142 src/app/script_expect.c:125 [cmp != -> ==]
+KILLED    m0143 src/app/script_expect.c:125 [int+1 0 -> 1]
+KILLED    m0144 src/app/script_expect.c:125 [int-1 0 -> -1]
+SURVIVED  m0145 src/app/script_expect.c:128 [int+1 0 -> 1]
+SURVIVED  m0146 src/app/script_expect.c:128 [int-1 0 -> -1]
+KILLED    m0147 src/app/script_expect.c:128 [cmp != -> ==]
+KILLED    m0148 src/app/script_expect.c:128 [int+1 0 -> 1]
+KILLED    m0149 src/app/script_expect.c:128 [int-1 0 -> -1]
+KILLED    m0150 src/app/script_expect.c:133 [cmp != -> ==]
+KILLED    m0151 src/app/script_expect.c:133 [int+1 0 -> 1]
+KILLED    m0152 src/app/script_expect.c:133 [int-1 0 -> -1]
+KILLED    m0153 src/app/script_expect.c:137 [ret-lit 0 -> 1]
+KILLED    m0154 src/app/script_expect.c:137 [int+1 0 -> 1]
+KILLED    m0155 src/app/script_expect.c:137 [int-1 0 -> -1]
+KILLED    m0156 src/app/script_expect.c:140 [cmp == -> !=]
+KILLED    m0157 src/app/script_expect.c:140 [int+1 0 -> 1]
+KILLED    m0158 src/app/script_expect.c:140 [int-1 0 -> -1]
+KILLED    m0159 src/app/script_expect.c:142 [cmp == -> !=]
+KILLED    m0160 src/app/script_expect.c:142 [int+1 0 -> 1]
+KILLED    m0161 src/app/script_expect.c:142 [int-1 0 -> -1]
+KILLED    m0162 src/app/script_expect.c:144 [cmp == -> !=]
+KILLED    m0163 src/app/script_expect.c:144 [int+1 0 -> 1]
+KILLED    m0164 src/app/script_expect.c:144 [int-1 0 -> -1]
+KILLED    m0165 src/app/script_expect.c:151 [cmp < -> <=]
+KILLED    m0166 src/app/script_expect.c:151 [int+1 0 -> 1]
+SURVIVED  m0167 src/app/script_expect.c:151 [int-1 0 -> -1]
+KILLED    m0168 src/app/script_expect.c:151 [logic || -> &&]
+          build break
+KILLED    m0169 src/app/script_expect.c:151 [cmp != -> ==]
+KILLED    m0170 src/app/script_expect.c:151 [int+1 0 -> 1]
+KILLED    m0171 src/app/script_expect.c:151 [int-1 0 -> -1]
+KILLED    m0172 src/app/script_expect.c:154 [not-del ! -> (deleted)]
+KILLED    m0173 src/app/script_expect.c:159 [ret-lit 0 -> 1]
+KILLED    m0174 src/app/script_expect.c:159 [int+1 0 -> 1]
+KILLED    m0175 src/app/script_expect.c:159 [int-1 0 -> -1]
+KILLED    m0176 src/app/script_expect.c:162 [arith * -> /]
+          build break
+KILLED    m0177 src/app/script_expect.c:162 [arith * -> /]
+          build break
+KILLED    m0178 src/app/script_expect.c:162 [arith * -> /]
+          build break
+KILLED    m0179 src/app/script_expect.c:163 [arith * -> /]
+          build break
+KILLED    m0180 src/app/script_expect.c:165 [int+1 0 -> 1]
+KILLED    m0181 src/app/script_expect.c:165 [int-1 0 -> -1]
+KILLED    m0182 src/app/script_expect.c:165 [int+1 1 -> 2]
+KILLED    m0183 src/app/script_expect.c:165 [int-1 1 -> 0]
+KILLED    m0184 src/app/script_expect.c:166 [cmp != -> ==]
+KILLED    m0185 src/app/script_expect.c:166 [int+1 0 -> 1]
+KILLED    m0186 src/app/script_expect.c:166 [int-1 0 -> -1]
+KILLED    m0187 src/app/script_expect.c:171 [cmp < -> <=]
+KILLED    m0188 src/app/script_expect.c:171 [int+1 0 -> 1]
+SURVIVED  m0189 src/app/script_expect.c:171 [int-1 0 -> -1]
+KILLED    m0190 src/app/script_expect.c:175 [int+1 0 -> 1]
+KILLED    m0191 src/app/script_expect.c:175 [int-1 0 -> -1]
+KILLED    m0192 src/app/script_expect.c:176 [int+1 0 -> 1]
+KILLED    m0193 src/app/script_expect.c:176 [int-1 0 -> -1]
+KILLED    m0194 src/app/script_expect.c:176 [cmp < -> <=]
+KILLED    m0195 src/app/script_expect.c:177 [cmp > -> >=]
+KILLED    m0196 src/app/script_expect.c:177 [int+1 0 -> 1]
+KILLED    m0197 src/app/script_expect.c:177 [int-1 0 -> -1]
+KILLED    m0198 src/app/script_expect.c:177 [logic && -> ||]
+KILLED    m0199 src/app/script_expect.c:177 [arith + -> -]
+SURVIVED  m0200 src/app/script_expect.c:177 [int+1 1 -> 2]
+KILLED    m0201 src/app/script_expect.c:177 [int-1 1 -> 0]
+KILLED    m0202 src/app/script_expect.c:177 [cmp < -> <=]
+KILLED    m0203 src/app/script_expect.c:180 [arith + -> -]
+KILLED    m0204 src/app/script_expect.c:180 [arith - -> +]
+KILLED    m0205 src/app/script_expect.c:183 [cmp != -> ==]
+KILLED    m0206 src/app/script_expect.c:183 [int+1 0 -> 1]
+KILLED    m0207 src/app/script_expect.c:183 [int-1 0 -> -1]
+KILLED    m0208 src/app/script_expect.c:183 [logic && -> ||]
+          build break
+KILLED    m0209 src/app/script_expect.c:183 [cmp != -> ==]
+KILLED    m0210 src/app/script_expect.c:183 [int+1 3 -> 4]
+KILLED    m0211 src/app/script_expect.c:183 [int-1 3 -> 2]
+KILLED    m0212 src/app/script_expect.c:186 [cmp == -> !=]
+KILLED    m0213 src/app/script_expect.c:186 [int+1 0 -> 1]
+KILLED    m0214 src/app/script_expect.c:186 [int-1 0 -> -1]
+KILLED    m0215 src/app/script_expect.c:187 [cmp != -> ==]
+KILLED    m0216 src/app/script_expect.c:187 [cmp == -> !=]
+KILLED    m0217 src/app/script_expect.c:187 [int+1 0 -> 1]
+KILLED    m0218 src/app/script_expect.c:187 [int-1 0 -> -1]
+KILLED    m0219 src/app/script_expect.c:189 [int+1 2 -> 3]
+KILLED    m0220 src/app/script_expect.c:189 [int-1 2 -> 1]
+KILLED    m0221 src/app/script_expect.c:192 [ret-lit 0 -> 1]
+KILLED    m0222 src/app/script_expect.c:192 [int+1 0 -> 1]
+KILLED    m0223 src/app/script_expect.c:192 [int-1 0 -> -1]
+KILLED    m0224 src/app/script_expect.c:195 [arith * -> /]
+          build break
+KILLED    m0225 src/app/script_expect.c:195 [arith * -> /]
+          build break
+KILLED    m0226 src/app/script_expect.c:195 [arith * -> /]
+          build break
+KILLED    m0227 src/app/script_expect.c:196 [arith * -> /]
+          build break
+KILLED    m0228 src/app/script_expect.c:198 [int+1 0 -> 1]
+KILLED    m0229 src/app/script_expect.c:198 [int-1 0 -> -1]
+KILLED    m0230 src/app/script_expect.c:198 [cmp != -> ==]
+KILLED    m0231 src/app/script_expect.c:198 [int+1 0 -> 1]
+KILLED    m0232 src/app/script_expect.c:198 [int-1 0 -> -1]
+KILLED    m0233 src/app/script_expect.c:201 [int+1 2 -> 3]
+KILLED    m0234 src/app/script_expect.c:201 [int-1 2 -> 1]
+KILLED    m0235 src/app/script_expect.c:201 [cmp == -> !=]
+KILLED    m0236 src/app/script_expect.c:201 [int+1 0 -> 1]
+KILLED    m0237 src/app/script_expect.c:201 [int-1 0 -> -1]
+KILLED    m0238 src/app/script_expect.c:202 [cmp == -> !=]
+KILLED    m0239 src/app/script_expect.c:202 [int+1 0 -> 1]
+KILLED    m0240 src/app/script_expect.c:202 [int-1 0 -> -1]
+KILLED    m0241 src/app/script_expect.c:203 [cmp != -> ==]
+KILLED    m0242 src/app/script_expect.c:205 [int+1 1 -> 2]
+KILLED    m0243 src/app/script_expect.c:205 [int-1 1 -> 0]
+KILLED    m0244 src/app/script_expect.c:208 [ret-lit 0 -> 1]
+KILLED    m0245 src/app/script_expect.c:208 [int+1 0 -> 1]
+KILLED    m0246 src/app/script_expect.c:208 [int-1 0 -> -1]
+KILLED    m0247 src/app/script_expect.c:211 [arith * -> /]
+          build break
+KILLED    m0248 src/app/script_expect.c:211 [arith * -> /]
+          build break
+KILLED    m0249 src/app/script_expect.c:212 [int+1 0 -> 1]
+KILLED    m0250 src/app/script_expect.c:212 [int-1 0 -> -1]
+KILLED    m0251 src/app/script_expect.c:213 [arith * -> /]
+          build break
+KILLED    m0252 src/app/script_expect.c:213 [arith * -> /]
+          build break
+KILLED    m0253 src/app/script_expect.c:213 [cmp != -> ==]
+KILLED    m0254 src/app/script_expect.c:214 [arith * -> /]
+          build break
+KILLED    m0255 src/app/script_expect.c:215 [cmp == -> !=]
+KILLED    m0256 src/app/script_expect.c:215 [int+1 0 -> 1]
+KILLED    m0257 src/app/script_expect.c:215 [int-1 0 -> -1]
+          build break
+KILLED    m0258 src/app/script_expect.c:215 [logic || -> &&]
+KILLED    m0259 src/app/script_expect.c:215 [cmp != -> ==]
+KILLED    m0260 src/app/script_expect.c:215 [int+1 0 -> 1]
+KILLED    m0261 src/app/script_expect.c:215 [int-1 0 -> -1]
+SURVIVED  m0262 src/app/script_expect.c:216 [arith - -> +]
+SURVIVED  m0263 src/app/script_expect.c:216 [int+1 1 -> 2]
+KILLED    m0264 src/app/script_expect.c:216 [int-1 1 -> 0]
+KILLED    m0265 src/app/script_expect.c:220 [arith * -> /]
+          build break
+KILLED    m0266 src/app/script_expect.c:221 [ret-lit 0 -> 1]
+KILLED    m0267 src/app/script_expect.c:221 [int+1 0 -> 1]
+KILLED    m0268 src/app/script_expect.c:221 [int-1 0 -> -1]
+KILLED    m0269 src/app/script_expect.c:224 [arith * -> /]
+          build break
+KILLED    m0270 src/app/script_expect.c:224 [arith * -> /]
+          build break
+KILLED    m0271 src/app/script_expect.c:224 [arith * -> /]
+          build break
+KILLED    m0272 src/app/script_expect.c:224 [arith * -> /]
+          build break
+KILLED    m0273 src/app/script_expect.c:226 [arith * -> /]
+          build break
+KILLED    m0274 src/app/script_expect.c:226 [int+1 0 -> 1]
+KILLED    m0275 src/app/script_expect.c:226 [int-1 0 -> -1]
+KILLED    m0276 src/app/script_expect.c:227 [arith * -> /]
+          build break
+KILLED    m0277 src/app/script_expect.c:229 [cmp == -> !=]
+KILLED    m0278 src/app/script_expect.c:229 [int+1 0 -> 1]
+KILLED    m0279 src/app/script_expect.c:229 [int-1 0 -> -1]
+KILLED    m0280 src/app/script_expect.c:229 [logic || -> &&]
+KILLED    m0281 src/app/script_expect.c:229 [cmp == -> !=]
+KILLED    m0282 src/app/script_expect.c:229 [int+1 0 -> 1]
+KILLED    m0283 src/app/script_expect.c:229 [int-1 0 -> -1]
+KILLED    m0284 src/app/script_expect.c:231 [cmp != -> ==]
+KILLED    m0285 src/app/script_expect.c:231 [int+1 0 -> 1]
+KILLED    m0286 src/app/script_expect.c:231 [int-1 0 -> -1]
+KILLED    m0287 src/app/script_expect.c:234 [cmp == -> !=]
+KILLED    m0288 src/app/script_expect.c:234 [int+1 0 -> 1]
+KILLED    m0289 src/app/script_expect.c:234 [int-1 0 -> -1]
+KILLED    m0290 src/app/script_expect.c:236 [not-del ! -> (deleted)]
+KILLED    m0291 src/app/script_expect.c:238 [int+1 1 -> 2]
+KILLED    m0292 src/app/script_expect.c:238 [int-1 1 -> 0]
+KILLED    m0293 src/app/script_expect.c:241 [ret-lit 0 -> 1]
+KILLED    m0294 src/app/script_expect.c:241 [int+1 0 -> 1]
+KILLED    m0295 src/app/script_expect.c:241 [int-1 0 -> -1]
+KILLED    m0296 src/app/script_expect.c:243 [cmp == -> !=]
+KILLED    m0297 src/app/script_expect.c:243 [int+1 0 -> 1]
+KILLED    m0298 src/app/script_expect.c:243 [int-1 0 -> -1]
+KILLED    m0299 src/app/script_expect.c:245 [cmp != -> ==]
+KILLED    m0300 src/app/script_expect.c:245 [int+1 0 -> 1]
+KILLED    m0301 src/app/script_expect.c:245 [int-1 0 -> -1]
+KILLED    m0302 src/app/script_expect.c:249 [cmp != -> ==]
+KILLED    m0303 src/app/script_expect.c:254 [ret-lit 0 -> 1]
+KILLED    m0304 src/app/script_expect.c:254 [int+1 0 -> 1]
+KILLED    m0305 src/app/script_expect.c:254 [int-1 0 -> -1]
+KILLED    m0306 src/app/script_expect.c:259 [arith * -> /]
+          build break
+KILLED    m0307 src/app/script_expect.c:259 [arith * -> /]
+          build break
+KILLED    m0308 src/app/script_expect.c:259 [arith * -> /]
+          build break
+KILLED    m0309 src/app/script_expect.c:260 [arith * -> /]
+          build break
+KILLED    m0310 src/app/script_expect.c:260 [arith * -> /]
+          build break
+KILLED    m0311 src/app/script_expect.c:261 [not-del ! -> (deleted)]
+KILLED    m0312 src/app/script_expect.c:267 [cmp < -> <=]
+KILLED    m0313 src/app/script_expect.c:267 [int+1 0 -> 1]
+SURVIVED  m0314 src/app/script_expect.c:267 [int-1 0 -> -1]
+KILLED    m0315 src/app/script_expect.c:267 [logic || -> &&]
+          build break
+KILLED    m0316 src/app/script_expect.c:267 [cmp != -> ==]
+KILLED    m0317 src/app/script_expect.c:267 [int+1 0 -> 1]
+KILLED    m0318 src/app/script_expect.c:267 [int-1 0 -> -1]
+KILLED    m0319 src/app/script_expect.c:271 [not-del ! -> (deleted)]
+KILLED    m0320 src/app/script_expect.c:273 [int+1 0 -> 1]
+KILLED    m0321 src/app/script_expect.c:273 [int-1 0 -> -1]
+KILLED    m0322 src/app/script_expect.c:276 [ret-lit 0 -> 1]
+KILLED    m0323 src/app/script_expect.c:276 [int+1 0 -> 1]
+KILLED    m0324 src/app/script_expect.c:276 [int-1 0 -> -1]
+KILLED    m0325 src/app/script_expect.c:279 [arith * -> /]
+          build break
+KILLED    m0326 src/app/script_expect.c:279 [arith * -> /]
+          build break
+KILLED    m0327 src/app/script_expect.c:279 [arith * -> /]
+          build break
+KILLED    m0328 src/app/script_expect.c:280 [arith * -> /]
+          build break
+KILLED    m0329 src/app/script_expect.c:280 [arith * -> /]
+          build break
+KILLED    m0330 src/app/script_expect.c:281 [not-del ! -> (deleted)]
+KILLED    m0331 src/app/script_expect.c:286 [int+1 0 -> 1]
+KILLED    m0332 src/app/script_expect.c:286 [int-1 0 -> -1]
+KILLED    m0333 src/app/script_expect.c:287 [cmp != -> ==]
+KILLED    m0334 src/app/script_expect.c:290 [arith * -> /]
+          build break
+KILLED    m0335 src/app/script_expect.c:290 [int+1 1 -> 2]
+KILLED    m0336 src/app/script_expect.c:290 [int-1 1 -> 0]
+KILLED    m0337 src/app/script_expect.c:291 [arith * -> /]
+          build break
+KILLED    m0338 src/app/script_expect.c:292 [cmp == -> !=]
+KILLED    m0339 src/app/script_expect.c:292 [int+1 0 -> 1]
+KILLED    m0340 src/app/script_expect.c:292 [int-1 0 -> -1]
+KILLED    m0341 src/app/script_expect.c:292 [logic || -> &&]
+          build break
+KILLED    m0342 src/app/script_expect.c:292 [cmp == -> !=]
+KILLED    m0343 src/app/script_expect.c:292 [int+1 0 -> 1]
+KILLED    m0344 src/app/script_expect.c:292 [int-1 0 -> -1]
+KILLED    m0345 src/app/script_expect.c:292 [logic || -> &&]
+          build break
+KILLED    m0346 src/app/script_expect.c:293 [cmp == -> !=]
+KILLED    m0347 src/app/script_expect.c:293 [int+1 0 -> 1]
+KILLED    m0348 src/app/script_expect.c:293 [int-1 0 -> -1]
+KILLED    m0349 src/app/script_expect.c:293 [logic || -> &&]
+          build break
+KILLED    m0350 src/app/script_expect.c:293 [cmp == -> !=]
+KILLED    m0351 src/app/script_expect.c:293 [int+1 0 -> 1]
+KILLED    m0352 src/app/script_expect.c:293 [int-1 0 -> -1]
+KILLED    m0353 src/app/script_expect.c:294 [arith * -> /]
+          build break
+KILLED    m0354 src/app/script_expect.c:294 [cmp == -> !=]
+KILLED    m0355 src/app/script_expect.c:294 [int+1 0 -> 1]
+KILLED    m0356 src/app/script_expect.c:294 [int-1 0 -> -1]
+KILLED    m0357 src/app/script_expect.c:295 [cmp == -> !=]
+KILLED    m0358 src/app/script_expect.c:295 [int+1 0 -> 1]
+KILLED    m0359 src/app/script_expect.c:295 [int-1 0 -> -1]
+KILLED    m0360 src/app/script_expect.c:296 [cmp == -> !=]
+KILLED    m0361 src/app/script_expect.c:296 [int+1 0 -> 1]
+KILLED    m0362 src/app/script_expect.c:296 [int-1 0 -> -1]
+KILLED    m0363 src/app/script_expect.c:298 [cmp != -> ==]
+KILLED    m0364 src/app/script_expect.c:298 [int+1 0 -> 1]
+KILLED    m0365 src/app/script_expect.c:298 [int-1 0 -> -1]
+KILLED    m0366 src/app/script_expect.c:303 [ret-lit 0 -> 1]
+KILLED    m0367 src/app/script_expect.c:303 [int+1 0 -> 1]
+KILLED    m0368 src/app/script_expect.c:303 [int-1 0 -> -1]
+KILLED    m0369 src/app/script_expect.c:305 [cmp == -> !=]
+KILLED    m0370 src/app/script_expect.c:305 [int+1 0 -> 1]
+KILLED    m0371 src/app/script_expect.c:305 [int-1 0 -> -1]
+KILLED    m0372 src/app/script_expect.c:306 [cmp != -> ==]
+KILLED    m0373 src/app/script_expect.c:306 [int+1 0 -> 1]
+KILLED    m0374 src/app/script_expect.c:306 [int-1 0 -> -1]
+KILLED    m0375 src/app/script_expect.c:311 [ret-lit 0 -> 1]
+KILLED    m0376 src/app/script_expect.c:311 [int+1 0 -> 1]
+KILLED    m0377 src/app/script_expect.c:311 [int-1 0 -> -1]
+KILLED    m0378 src/app/script_expect.c:313 [cmp == -> !=]
+KILLED    m0379 src/app/script_expect.c:313 [int+1 0 -> 1]
+KILLED    m0380 src/app/script_expect.c:313 [int-1 0 -> -1]
+KILLED    m0381 src/app/script_expect.c:316 [cmp < -> <=]
+KILLED    m0382 src/app/script_expect.c:316 [int+1 0 -> 1]
+SURVIVED  m0383 src/app/script_expect.c:316 [int-1 0 -> -1]
+KILLED    m0384 src/app/script_expect.c:316 [logic || -> &&]
+          build break
+KILLED    m0385 src/app/script_expect.c:316 [cmp != -> ==]
+KILLED    m0386 src/app/script_expect.c:316 [int+1 0 -> 1]
+KILLED    m0387 src/app/script_expect.c:316 [int-1 0 -> -1]
+KILLED    m0388 src/app/script_expect.c:319 [not-del ! -> (deleted)]
+KILLED    m0389 src/app/script_expect.c:321 [int+1 2 -> 3]
+KILLED    m0390 src/app/script_expect.c:321 [int-1 2 -> 1]
+KILLED    m0391 src/app/script_expect.c:324 [ret-lit 0 -> 1]
+KILLED    m0392 src/app/script_expect.c:324 [int+1 0 -> 1]
+KILLED    m0393 src/app/script_expect.c:324 [int-1 0 -> -1]
+KILLED    m0394 src/app/script_expect.c:326 [cmp == -> !=]
+KILLED    m0395 src/app/script_expect.c:326 [int+1 0 -> 1]
+KILLED    m0396 src/app/script_expect.c:326 [int-1 0 -> -1]
+KILLED    m0397 src/app/script_expect.c:329 [cmp < -> <=]
+KILLED    m0398 src/app/script_expect.c:329 [int+1 0 -> 1]
+SURVIVED  m0399 src/app/script_expect.c:329 [int-1 0 -> -1]
+KILLED    m0400 src/app/script_expect.c:329 [logic || -> &&]
+          build break
+KILLED    m0401 src/app/script_expect.c:329 [cmp != -> ==]
+KILLED    m0402 src/app/script_expect.c:329 [int+1 0 -> 1]
+KILLED    m0403 src/app/script_expect.c:329 [int-1 0 -> -1]
+KILLED    m0404 src/app/script_expect.c:333 [not-del ! -> (deleted)]
+KILLED    m0405 src/app/script_expect.c:335 [int+1 2 -> 3]
+KILLED    m0406 src/app/script_expect.c:335 [int-1 2 -> 1]
+KILLED    m0407 src/app/script_expect.c:338 [ret-lit 0 -> 1]
+KILLED    m0408 src/app/script_expect.c:338 [int+1 0 -> 1]
+KILLED    m0409 src/app/script_expect.c:338 [int-1 0 -> -1]
+KILLED    m0410 src/app/script_expect.c:343 [arith * -> /]
+          build break
+KILLED    m0411 src/app/script_expect.c:343 [arith * -> /]
+          build break
+KILLED    m0412 src/app/script_expect.c:343 [arith * -> /]
+          build break
+KILLED    m0413 src/app/script_expect.c:343 [arith * -> /]
+          build break
+KILLED    m0414 src/app/script_expect.c:344 [arith * -> /]
+          build break
+ACCEPTED  m0033 src/app/script_expect.c:38 [int+1 0 -> 1] :: element size operands pick sizeof of another char pointer entry, the quotient, the bound, and every in range match stay identical
+ACCEPTED  m0034 src/app/script_expect.c:38 [int-1 0 -> -1] :: element size operands pick sizeof of another char pointer entry, the quotient, the bound, and every in range match stay identical
+ACCEPTED  m0040 src/app/script_expect.c:45 [int+1 1 -> 2] :: sqlite takes any negative nbyte as the strlen path, the amalgamation branches only on nbyte >= 0
+ACCEPTED  m0043 src/app/script_expect.c:47 [arith - -> +] :: prepare failure arm never runs over fixed valid statements on the migrated schema, and every return variant is nonzero so the caller reports the same unknown table
+ACCEPTED  m0044 src/app/script_expect.c:47 [int+1 1 -> 2] :: prepare failure arm never runs over fixed valid statements on the migrated schema, and every return variant is nonzero so the caller reports the same unknown table
+ACCEPTED  m0045 src/app/script_expect.c:47 [int-1 1 -> 0] :: prepare failure arm never runs over fixed valid statements on the migrated schema, and every return variant is nonzero so the caller reports the same unknown table
+ACCEPTED  m0050 src/app/script_expect.c:50 [arith - -> +] :: step failure arm never runs because count queries always return a row, and the minus one out value is never observed past the caller's return check
+ACCEPTED  m0051 src/app/script_expect.c:50 [int+1 1 -> 2] :: step failure arm never runs because count queries always return a row, and the minus one out value is never observed past the caller's return check
+ACCEPTED  m0052 src/app/script_expect.c:50 [int-1 1 -> 0] :: step failure arm never runs because count queries always return a row, and the minus one out value is never observed past the caller's return check
+ACCEPTED  m0056 src/app/script_expect.c:52 [arith - -> +] :: step failure arm never runs, and the return variants collapse in the caller's zero comparison
+ACCEPTED  m0057 src/app/script_expect.c:52 [int+1 1 -> 2] :: step failure arm never runs, and the return variants collapse in the caller's zero comparison
+ACCEPTED  m0058 src/app/script_expect.c:52 [int-1 1 -> 0] :: step failure arm never runs, and the return variants collapse in the caller's zero comparison
+ACCEPTED  m0059 src/app/script_expect.c:54 [arith - -> +] :: fallthrough return only runs for names absent from the table list, where the mutated nonzero values collapse in the caller's zero comparison
+ACCEPTED  m0060 src/app/script_expect.c:54 [int+1 1 -> 2] :: fallthrough return only runs for names absent from the table list, where the mutated nonzero values collapse in the caller's zero comparison
+ACCEPTED  m0068 src/app/script_expect.c:61 [int-1 0 -> -1] :: the operator token is validated at parse time, the runtime op is never negative, so the minus one variant rejects the same empty set
+ACCEPTED  m0140 src/app/script_expect.c:124 [int+1 0 -> 1] :: the day seed is dead, ct_script_now overwrites the out param on the only path that reads it and nothing reads day after
+ACCEPTED  m0141 src/app/script_expect.c:124 [int-1 0 -> -1] :: the day seed is dead, ct_script_now overwrites the out param on the only path that reads it and nothing reads day after
+ACCEPTED  m0145 src/app/script_expect.c:128 [int+1 0 -> 1] :: the compound literal seed is dead, ct_script_iso_day overwrites the out param on the success return and never reads it
+ACCEPTED  m0146 src/app/script_expect.c:128 [int-1 0 -> -1] :: the compound literal seed is dead, ct_script_iso_day overwrites the out param on the success return and never reads it
+ACCEPTED  m0167 src/app/script_expect.c:151 [int-1 0 -> -1] :: the operator token is validated at parse time, the runtime op is never negative, so the minus one variant rejects the same empty set
+ACCEPTED  m0189 src/app/script_expect.c:171 [int-1 0 -> -1] :: the repo reviews query returns only nonnegative counts or the guarded error, n below minus one and n below zero reject the same reachable set
+ACCEPTED  m0200 src/app/script_expect.c:177 [int+1 1 -> 2] :: ratings are single digits so the comma guard only ever sees odd offsets, at plus two shifts the boundary onto the unreachable even offset
+ACCEPTED  m0262 src/app/script_expect.c:216 [arith - -> +] :: return one and two collapse into the caller's nonzero check with the same not a move set error
+ACCEPTED  m0263 src/app/script_expect.c:216 [int+1 1 -> 2] :: return one and two collapse into the caller's nonzero check with the same not a move set error
+ACCEPTED  m0314 src/app/script_expect.c:267 [int-1 0 -> -1] :: the operator token is validated at parse time, the runtime op is never negative, so the minus one variant rejects the same empty set
+ACCEPTED  m0383 src/app/script_expect.c:316 [int-1 0 -> -1] :: the operator token is validated at parse time, the runtime op is never negative, so the minus one variant rejects the same empty set
+ACCEPTED  m0399 src/app/script_expect.c:329 [int-1 0 -> -1] :: the operator token is validated at parse time, the runtime op is never negative, so the minus one variant rejects the same empty set
+mutate: generated=414 build_failed=76 killed_by_tests=311 killed=387 survived=27 accepted=27 unexplained=0 skipped=0
+mutate: kill rate 387/414 = 93.5%, with accepted equivalents 414/414 = 100.0%
+mutate: wall 2369.2s

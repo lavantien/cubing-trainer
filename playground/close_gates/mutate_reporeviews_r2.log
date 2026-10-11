@@ -1,0 +1,138 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cards.c -o build_close/tobj/tests/unit_cards.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/storage/repo_reviews.c build_close review_log_rows due_cards card_bad_args review_screen_session_log review_form_begin review_form_empty_deck review_form_fallback
+mutate: scope=src/storage/repo_reviews.c files=1 sites=109 suites=7
+KILLED    m0001 src/storage/repo_reviews.c:17 [arith * -> /]
+          build break
+KILLED    m0002 src/storage/repo_reviews.c:17 [arith * -> /]
+          build break
+KILLED    m0003 src/storage/repo_reviews.c:20 [cmp == -> !=]
+KILLED    m0004 src/storage/repo_reviews.c:20 [logic || -> &&]
+KILLED    m0005 src/storage/repo_reviews.c:20 [cmp <= -> <]
+KILLED    m0006 src/storage/repo_reviews.c:20 [int+1 0 -> 1]
+KILLED    m0007 src/storage/repo_reviews.c:20 [int-1 0 -> -1]
+KILLED    m0008 src/storage/repo_reviews.c:22 [cmp < -> <=]
+KILLED    m0009 src/storage/repo_reviews.c:22 [logic || -> &&]
+          build break
+KILLED    m0010 src/storage/repo_reviews.c:22 [cmp > -> >=]
+KILLED    m0011 src/storage/repo_reviews.c:24 [not-del ! -> (deleted)]
+KILLED    m0012 src/storage/repo_reviews.c:26 [arith * -> /]
+          build break
+KILLED    m0013 src/storage/repo_reviews.c:27 [arith - -> +]
+SURVIVED  m0014 src/storage/repo_reviews.c:27 [int+1 1 -> 2]
+KILLED    m0015 src/storage/repo_reviews.c:27 [int-1 1 -> 0]
+KILLED    m0016 src/storage/repo_reviews.c:27 [cmp != -> ==]
+KILLED    m0017 src/storage/repo_reviews.c:31 [int+1 0 -> 1]
+KILLED    m0018 src/storage/repo_reviews.c:31 [int-1 0 -> -1]
+KILLED    m0019 src/storage/repo_reviews.c:34 [arith - -> +]
+SURVIVED  m0020 src/storage/repo_reviews.c:34 [int+1 1 -> 2]
+KILLED    m0021 src/storage/repo_reviews.c:34 [int-1 1 -> 0]
+KILLED    m0022 src/storage/repo_reviews.c:40 [cmp == -> !=]
+KILLED    m0023 src/storage/repo_reviews.c:42 [cmp == -> !=]
+KILLED    m0024 src/storage/repo_reviews.c:44 [cmp == -> !=]
+KILLED    m0025 src/storage/repo_reviews.c:46 [cmp == -> !=]
+KILLED    m0026 src/storage/repo_reviews.c:51 [arith * -> /]
+          build break
+KILLED    m0027 src/storage/repo_reviews.c:51 [arith * -> /]
+          build break
+KILLED    m0028 src/storage/repo_reviews.c:52 [cmp == -> !=]
+KILLED    m0029 src/storage/repo_reviews.c:52 [logic || -> &&]
+KILLED    m0030 src/storage/repo_reviews.c:52 [cmp <= -> <]
+KILLED    m0031 src/storage/repo_reviews.c:52 [int+1 0 -> 1]
+KILLED    m0032 src/storage/repo_reviews.c:52 [int-1 0 -> -1]
+KILLED    m0033 src/storage/repo_reviews.c:54 [cmp < -> <=]
+KILLED    m0034 src/storage/repo_reviews.c:54 [int+1 0 -> 1]
+KILLED    m0035 src/storage/repo_reviews.c:54 [int-1 0 -> -1]
+KILLED    m0036 src/storage/repo_reviews.c:54 [logic || -> &&]
+KILLED    m0037 src/storage/repo_reviews.c:54 [cmp > -> >=]
+KILLED    m0038 src/storage/repo_reviews.c:54 [int+1 0 -> 1]
+KILLED    m0039 src/storage/repo_reviews.c:54 [int-1 0 -> -1]
+KILLED    m0040 src/storage/repo_reviews.c:54 [logic && -> ||]
+KILLED    m0041 src/storage/repo_reviews.c:54 [cmp == -> !=]
+KILLED    m0042 src/storage/repo_reviews.c:56 [cmp == -> !=]
+KILLED    m0043 src/storage/repo_reviews.c:56 [int+1 0 -> 1]
+KILLED    m0044 src/storage/repo_reviews.c:56 [int-1 0 -> -1]
+KILLED    m0045 src/storage/repo_reviews.c:58 [int+1 0 -> 1]
+KILLED    m0046 src/storage/repo_reviews.c:58 [int-1 0 -> -1]
+KILLED    m0047 src/storage/repo_reviews.c:58 [arith * -> /]
+KILLED    m0048 src/storage/repo_reviews.c:58 [arith * -> /]
+          build break
+KILLED    m0049 src/storage/repo_reviews.c:59 [arith * -> /]
+          build break
+KILLED    m0050 src/storage/repo_reviews.c:60 [arith - -> +]
+SURVIVED  m0051 src/storage/repo_reviews.c:60 [int+1 1 -> 2]
+KILLED    m0052 src/storage/repo_reviews.c:60 [int-1 1 -> 0]
+KILLED    m0053 src/storage/repo_reviews.c:60 [cmp != -> ==]
+KILLED    m0054 src/storage/repo_reviews.c:64 [int+1 1 -> 2]
+KILLED    m0055 src/storage/repo_reviews.c:64 [int-1 1 -> 0]
+KILLED    m0056 src/storage/repo_reviews.c:65 [int+1 0 -> 1]
+KILLED    m0057 src/storage/repo_reviews.c:65 [int-1 0 -> -1]
+KILLED    m0058 src/storage/repo_reviews.c:67 [cmp < -> <=]
+KILLED    m0059 src/storage/repo_reviews.c:67 [logic && -> ||]
+KILLED    m0060 src/storage/repo_reviews.c:67 [cmp == -> !=]
+KILLED    m0061 src/storage/repo_reviews.c:68 [int+1 0 -> 1]
+KILLED    m0062 src/storage/repo_reviews.c:68 [int-1 0 -> -1]
+KILLED    m0063 src/storage/repo_reviews.c:72 [arith * -> /]
+          build break
+KILLED    m0064 src/storage/repo_reviews.c:73 [arith * -> /]
+          build break
+KILLED    m0065 src/storage/repo_reviews.c:81 [cmp != -> ==]
+KILLED    m0066 src/storage/repo_reviews.c:81 [logic && -> ||]
+KILLED    m0067 src/storage/repo_reviews.c:81 [cmp != -> ==]
+KILLED    m0068 src/storage/repo_reviews.c:86 [arith * -> /]
+          build break
+KILLED    m0069 src/storage/repo_reviews.c:86 [arith * -> /]
+          build break
+KILLED    m0070 src/storage/repo_reviews.c:86 [arith * -> /]
+          build break
+KILLED    m0071 src/storage/repo_reviews.c:86 [arith * -> /]
+          build break
+KILLED    m0072 src/storage/repo_reviews.c:87 [cmp == -> !=]
+KILLED    m0073 src/storage/repo_reviews.c:89 [not-del ! -> (deleted)]
+KILLED    m0074 src/storage/repo_reviews.c:91 [not-del ! -> (deleted)]
+KILLED    m0075 src/storage/repo_reviews.c:93 [cmp < -> <=]
+KILLED    m0076 src/storage/repo_reviews.c:93 [int+1 0 -> 1]
+SURVIVED  m0077 src/storage/repo_reviews.c:93 [int-1 0 -> -1]
+SURVIVED  m0078 src/storage/repo_reviews.c:93 [logic || -> &&]
+KILLED    m0079 src/storage/repo_reviews.c:93 [cmp > -> >=]
+SURVIVED  m0080 src/storage/repo_reviews.c:93 [int+1 0 -> 1]
+KILLED    m0081 src/storage/repo_reviews.c:93 [int-1 0 -> -1]
+KILLED    m0082 src/storage/repo_reviews.c:93 [logic && -> ||]
+KILLED    m0083 src/storage/repo_reviews.c:93 [cmp == -> !=]
+KILLED    m0084 src/storage/repo_reviews.c:95 [cmp == -> !=]
+KILLED    m0085 src/storage/repo_reviews.c:95 [int+1 0 -> 1]
+KILLED    m0086 src/storage/repo_reviews.c:95 [int-1 0 -> -1]
+KILLED    m0087 src/storage/repo_reviews.c:97 [arith * -> /]
+          build break
+KILLED    m0088 src/storage/repo_reviews.c:98 [arith - -> +]
+SURVIVED  m0089 src/storage/repo_reviews.c:98 [int+1 1 -> 2]
+KILLED    m0090 src/storage/repo_reviews.c:98 [int-1 1 -> 0]
+KILLED    m0091 src/storage/repo_reviews.c:98 [cmp != -> ==]
+KILLED    m0092 src/storage/repo_reviews.c:102 [int+1 0 -> 1]
+KILLED    m0093 src/storage/repo_reviews.c:102 [int-1 0 -> -1]
+KILLED    m0094 src/storage/repo_reviews.c:103 [arith - -> +]
+SURVIVED  m0095 src/storage/repo_reviews.c:103 [int+1 1 -> 2]
+KILLED    m0096 src/storage/repo_reviews.c:103 [int-1 1 -> 0]
+KILLED    m0097 src/storage/repo_reviews.c:104 [arith - -> +]
+SURVIVED  m0098 src/storage/repo_reviews.c:104 [int+1 1 -> 2]
+KILLED    m0099 src/storage/repo_reviews.c:104 [int-1 1 -> 0]
+KILLED    m0100 src/storage/repo_reviews.c:106 [int+1 0 -> 1]
+KILLED    m0101 src/storage/repo_reviews.c:106 [int-1 0 -> -1]
+SURVIVED  m0102 src/storage/repo_reviews.c:108 [cmp < -> <=]
+KILLED    m0103 src/storage/repo_reviews.c:108 [logic && -> ||]
+KILLED    m0104 src/storage/repo_reviews.c:108 [cmp == -> !=]
+KILLED    m0105 src/storage/repo_reviews.c:109 [int+1 0 -> 1]
+KILLED    m0106 src/storage/repo_reviews.c:109 [int-1 0 -> -1]
+KILLED    m0107 src/storage/repo_reviews.c:113 [cmp != -> ==]
+KILLED    m0108 src/storage/repo_reviews.c:113 [logic && -> ||]
+KILLED    m0109 src/storage/repo_reviews.c:113 [cmp != -> ==]
+ACCEPTED  m0014 src/storage/repo_reviews.c:27 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+ACCEPTED  m0020 src/storage/repo_reviews.c:34 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two binds the same stamp
+ACCEPTED  m0051 src/storage/repo_reviews.c:60 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+ACCEPTED  m0089 src/storage/repo_reviews.c:98 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+ACCEPTED  m0095 src/storage/repo_reviews.c:103 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two binds the same deck text
+ACCEPTED  m0098 src/storage/repo_reviews.c:104 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two binds the same stamp
+mutate: generated=109 build_failed=15 killed_by_tests=84 killed=99 survived=10 accepted=6 unexplained=4 skipped=0
+mutate: kill rate 99/109 = 90.8%, with accepted equivalents 105/109 = 96.3%
+mutate: wall 61.7s

@@ -1,0 +1,156 @@
+build_close/mutants/p48088/m0001_main.c:7:44: error: unterminated /* comment
+    7 | static int ct_main_scripted(int argc, char /*argv, ct_app *app) {
+      |                                            ^
+build_close/mutants/p48088/m0001_main.c:36:2: error: expected ')'
+   36 | }
+      |  ^
+build_close/mutants/p48088/m0001_main.c:7:28: note: to match this '('
+    7 | static int ct_main_scripted(int argc, char /*argv, ct_app *app) {
+      |                            ^
+build_close/mutants/p48088/m0001_main.c:36:2: error: expected function body after function declarator
+   36 | }
+      |  ^
+3 errors generated.
+build_close/mutants/p48088/m0002_main.c:7:45: error: expected ')'
+    7 | static int ct_main_scripted(int argc, char */argv, ct_app *app) {
+      |                                             ^
+build_close/mutants/p48088/m0002_main.c:7:28: note: to match this '('
+    7 | static int ct_main_scripted(int argc, char */argv, ct_app *app) {
+      |                            ^
+build_close/mutants/p48088/m0002_main.c:8:42: error: use of undeclared identifier 'argv'; did you mean 'argc'?
+    8 |     if (argc != CT_SCRIPT_ARGC || strcmp(argv[1], "--headless") != 0 ||
+      |                                          ^~~~
+      |                                          argc
+build_close/mutants/p48088/m0002_main.c:7:33: note: 'argc' declared here
+    7 | static int ct_main_scripted(int argc, char */argv, ct_app *app) {
+      |                                 ^
+build_close/mutants/p48088/m0002_main.c:8:46: error: subscripted value is not an array, pointer, or vector
+    8 |     if (argc != CT_SCRIPT_ARGC || strcmp(argv[1], "--headless") != 0 ||
+      |                                          ~~~~^~
+build_close/mutants/p48088/m0002_main.c:9:16: error: use of undeclared identifier 'argv'; did you mean 'argc'?
+    9 |         strcmp(argv[2], "--script") != 0) {
+      |                ^~~~
+      |                argc
+build_close/mutants/p48088/m0002_main.c:7:33: note: 'argc' declared here
+    7 | static int ct_main_scripted(int argc, char */argv, ct_app *app) {
+      |                                 ^
+build_close/mutants/p48088/m0002_main.c:9:20: error: subscripted value is not an array, pointer, or vector
+    9 |         strcmp(argv[2], "--script") != 0) {
+      |                ~~~~^~
+build_close/mutants/p48088/m0002_main.c:13:17: error: use of undeclared identifier 'app'
+   13 |     ct_app_init(app);
+      |                 ^~~
+build_close/mutants/p48088/m0002_main.c:14:10: error: use of undeclared identifier 'app'
+   14 |     if (!app->running) {
+      |          ^~~
+build_close/mutants/p48088/m0002_main.c:15:25: error: use of undeclared identifier 'app'
+   15 |         ct_app_shutdown(app);
+      |                         ^~~
+build_close/mutants/p48088/m0002_main.c:18:34: error: use of undeclared identifier 'app'
+   18 |     int rc = ct_app_run_scripted(app, argv[3]);
+      |                                  ^~~
+build_close/mutants/p48088/m0002_main.c:18:39: error: use of undeclared identifier 'argv'; did you mean 'argc'?
+   18 |     int rc = ct_app_run_scripted(app, argv[3]);
+      |                                       ^~~~
+      |                                       argc
+build_close/mutants/p48088/m0002_main.c:7:33: note: 'argc' declared here
+    7 | static int ct_main_scripted(int argc, char */argv, ct_app *app) {
+      |                                 ^
+build_close/mutants/p48088/m0002_main.c:18:43: error: subscripted value is not an array, pointer, or vector
+   18 |     int rc = ct_app_run_scripted(app, argv[3]);
+      |                                       ~~~~^~
+build_close/mutants/p48088/m0002_main.c:19:21: error: use of undeclared identifier 'app'
+   19 |     ct_app_shutdown(app);
+      |                     ^~~
+build_close/mutants/p48088/m0002_main.c:26:45: error: too many arguments to function call, expected 2, have 3
+   26 |         return ct_main_scripted(argc, argv, &app);
+      |                ~~~~~~~~~~~~~~~~             ^~~~
+build_close/mutants/p48088/m0002_main.c:7:12: note: 'ct_main_scripted' declared here
+    7 | static int ct_main_scripted(int argc, char */argv, ct_app *app) {
+      |            ^                ~~~~~~~~~~~~~~~~
+13 errors generated.
+build_close/mutants/p48088/m0003_main.c:7:59: error: expected ')'
+    7 | static int ct_main_scripted(int argc, char **argv, ct_app /app) {
+      |                                                           ^
+build_close/mutants/p48088/m0003_main.c:7:28: note: to match this '('
+    7 | static int ct_main_scripted(int argc, char **argv, ct_app /app) {
+      |                            ^
+build_close/mutants/p48088/m0003_main.c:13:17: error: use of undeclared identifier 'app'
+   13 |     ct_app_init(app);
+      |                 ^~~
+build_close/mutants/p48088/m0003_main.c:14:10: error: use of undeclared identifier 'app'
+   14 |     if (!app->running) {
+      |          ^~~
+build_close/mutants/p48088/m0003_main.c:15:25: error: use of undeclared identifier 'app'
+   15 |         ct_app_shutdown(app);
+      |                         ^~~
+build_close/mutants/p48088/m0003_main.c:18:34: error: use of undeclared identifier 'app'
+   18 |     int rc = ct_app_run_scripted(app, argv[3]);
+      |                                  ^~~
+build_close/mutants/p48088/m0003_main.c:19:21: error: use of undeclared identifier 'app'
+   19 |     ct_app_shutdown(app);
+      |                     ^~~
+build_close/mutants/p48088/m0003_main.c:26:45: error: passing 'ct_app *' to parameter of incompatible type 'ct_app'; remove &
+   26 |         return ct_main_scripted(argc, argv, &app);
+      |                                             ^~~~
+build_close/mutants/p48088/m0003_main.c:7:59: note: passing argument to parameter here
+    7 | static int ct_main_scripted(int argc, char **argv, ct_app /app) {
+      |                                                           ^
+7 errors generated.
+build_close/mutants/p48088/m0005_main.c:8:32: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+    8 |     if (argc != CT_SCRIPT_ARGC && strcmp(argv[1], "--headless") != 0 ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p48088/m0005_main.c:8:32: note: place parentheses around the '&&' expression to silence this warning
+    8 |     if (argc != CT_SCRIPT_ARGC && strcmp(argv[1], "--headless") != 0 ||
+      |                                ^
+      |         (                                                           )
+1 error generated.
+build_close/mutants/p48088/m0011_main.c:8:70: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+    8 |     if (argc != CT_SCRIPT_ARGC || strcmp(argv[1], "--headless") != 0 &&
+      |                                ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+    9 |         strcmp(argv[2], "--script") != 0) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p48088/m0011_main.c:8:70: note: place parentheses around the '&&' expression to silence this warning
+    8 |     if (argc != CT_SCRIPT_ARGC || strcmp(argv[1], "--headless") != 0 &&
+      |                                                                      ^
+      |                                   (
+    9 |         strcmp(argv[2], "--script") != 0) {
+      |                                         
+      |                                         )
+1 error generated.
+build_close/mutants/p48088/m0023_main.c:23:25: error: unterminated /* comment
+   23 | int main(int argc, char /*argv) {
+      |                         ^
+build_close/mutants/p48088/m0023_main.c:36:2: error: expected ')'
+   36 | }
+      |  ^
+build_close/mutants/p48088/m0023_main.c:23:9: note: to match this '('
+   23 | int main(int argc, char /*argv) {
+      |         ^
+build_close/mutants/p48088/m0023_main.c:36:2: error: expected function body after function declarator
+   36 | }
+      |  ^
+3 errors generated.
+build_close/mutants/p48088/m0024_main.c:23:26: error: expected ')'
+   23 | int main(int argc, char */argv) {
+      |                          ^
+build_close/mutants/p48088/m0024_main.c:23:9: note: to match this '('
+   23 | int main(int argc, char */argv) {
+      |         ^
+build_close/mutants/p48088/m0024_main.c:23:5: error: second parameter of 'main' (argument array) must be of type 'char **'
+   23 | int main(int argc, char */argv) {
+      |     ^
+build_close/mutants/p48088/m0024_main.c:26:39: error: use of undeclared identifier 'argv'; did you mean 'argc'?
+   26 |         return ct_main_scripted(argc, argv, &app);
+      |                                       ^~~~
+      |                                       argc
+build_close/mutants/p48088/m0024_main.c:23:14: note: 'argc' declared here
+   23 | int main(int argc, char */argv) {
+      |              ^
+build_close/mutants/p48088/m0024_main.c:26:39: error: incompatible integer to pointer conversion passing 'int' to parameter of type 'char **' [-Wint-conversion]
+   26 |         return ct_main_scripted(argc, argv, &app);
+      |                                       ^~~~
+build_close/mutants/p48088/m0024_main.c:7:46: note: passing argument to parameter 'argv' here
+    7 | static int ct_main_scripted(int argc, char **argv, ct_app *app) {
+      |                                              ^
+4 errors generated.

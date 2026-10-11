@@ -1,0 +1,628 @@
+build_close/mutants/p30036/m0001_repo_reviews.c:17:32: error: expected ')'
+   17 | int ct_repo_review_log(sqlite3 /db, long card_id, int rating, const char *reviewed_at,
+      |                                ^
+build_close/mutants/p30036/m0001_repo_reviews.c:17:23: note: to match this '('
+   17 | int ct_repo_review_log(sqlite3 /db, long card_id, int rating, const char *reviewed_at,
+      |                       ^
+build_close/mutants/p30036/m0001_repo_reviews.c:17:5: error: conflicting types for 'ct_repo_review_log'
+   17 | int ct_repo_review_log(sqlite3 /db, long card_id, int rating, const char *reviewed_at,
+      |     ^
+src/storage\repo_reviews.h:17:5: note: previous declaration is here
+   17 | int ct_repo_review_log(sqlite3 *db, long card_id, int rating, const char *reviewed_at,
+      |     ^
+build_close/mutants/p30036/m0001_repo_reviews.c:17:32: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   17 | int ct_repo_review_log(sqlite3 /db, long card_id, int rating, const char *reviewed_at,
+      |                                ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p30036/m0001_repo_reviews.c:20:9: error: use of undeclared identifier 'db'
+   20 |     if (db == NULL || card_id <= 0)
+      |         ^~
+build_close/mutants/p30036/m0001_repo_reviews.c:20:23: error: use of undeclared identifier 'card_id'
+   20 |     if (db == NULL || card_id <= 0)
+      |                       ^~~~~~~
+build_close/mutants/p30036/m0001_repo_reviews.c:22:9: error: use of undeclared identifier 'rating'
+   22 |     if (rating < CT_AGAIN || rating > CT_EASY)
+      |         ^~~~~~
+build_close/mutants/p30036/m0001_repo_reviews.c:22:30: error: use of undeclared identifier 'rating'
+   22 |     if (rating < CT_AGAIN || rating > CT_EASY)
+      |                              ^~~~~~
+build_close/mutants/p30036/m0001_repo_reviews.c:24:26: error: use of undeclared identifier 'reviewed_at'
+   24 |     if (!ct_repo_text_ok(reviewed_at, CT_CARD_STAMP_MAX))
+      |                          ^~~~~~~~~~~
+build_close/mutants/p30036/m0001_repo_reviews.c:27:28: error: use of undeclared identifier 'db'
+   27 |     if (sqlite3_prepare_v2(db, CT_SQL_REVIEW_INSERT, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p30036/m0001_repo_reviews.c:32:34: error: use of undeclared identifier 'card_id'
+   32 |     sqlite3_bind_int64(st, ++ix, card_id);
+      |                                  ^~~~~~~
+build_close/mutants/p30036/m0001_repo_reviews.c:33:32: error: use of undeclared identifier 'rating'
+   33 |     sqlite3_bind_int(st, ++ix, rating);
+      |                                ^~~~~~
+build_close/mutants/p30036/m0001_repo_reviews.c:34:33: error: use of undeclared identifier 'reviewed_at'
+   34 |     sqlite3_bind_text(st, ++ix, reviewed_at, -1, SQLITE_STATIC);
+      |                                 ^~~~~~~~~~~
+build_close/mutants/p30036/m0001_repo_reviews.c:35:35: error: use of undeclared identifier 'stability'
+   35 |     sqlite3_bind_double(st, ++ix, stability);
+      |                                   ^~~~~~~~~
+build_close/mutants/p30036/m0001_repo_reviews.c:36:35: error: use of undeclared identifier 'difficulty'
+   36 |     sqlite3_bind_double(st, ++ix, difficulty);
+      |                                   ^~~~~~~~~~
+build_close/mutants/p30036/m0001_repo_reviews.c:37:35: error: use of undeclared identifier 'elapsed_days'
+   37 |     sqlite3_bind_double(st, ++ix, elapsed_days);
+      |                                   ^~~~~~~~~~~~
+build_close/mutants/p30036/m0001_repo_reviews.c:38:35: error: use of undeclared identifier 'scheduled_days'
+   38 |     sqlite3_bind_double(st, ++ix, scheduled_days);
+      |                                   ^~~~~~~~~~~~~~
+build_close/mutants/p30036/m0001_repo_reviews.c:40:74: error: use of undeclared identifier 'db'
+   40 |     int ext = step == SQLITE_DONE ? SQLITE_OK : sqlite3_extended_errcode(db);
+      |                                                                          ^~
+17 errors generated.
+build_close/mutants/p30036/m0002_repo_reviews.c:17:74: error: expected ')'
+   17 | int ct_repo_review_log(sqlite3 *db, long card_id, int rating, const char /reviewed_at,
+      |                                                                          ^
+build_close/mutants/p30036/m0002_repo_reviews.c:17:23: note: to match this '('
+   17 | int ct_repo_review_log(sqlite3 *db, long card_id, int rating, const char /reviewed_at,
+      |                       ^
+build_close/mutants/p30036/m0002_repo_reviews.c:17:5: error: conflicting types for 'ct_repo_review_log'
+   17 | int ct_repo_review_log(sqlite3 *db, long card_id, int rating, const char /reviewed_at,
+      |     ^
+src/storage\repo_reviews.h:17:5: note: previous declaration is here
+   17 | int ct_repo_review_log(sqlite3 *db, long card_id, int rating, const char *reviewed_at,
+      |     ^
+build_close/mutants/p30036/m0002_repo_reviews.c:24:26: error: use of undeclared identifier 'reviewed_at'
+   24 |     if (!ct_repo_text_ok(reviewed_at, CT_CARD_STAMP_MAX))
+      |                          ^~~~~~~~~~~
+build_close/mutants/p30036/m0002_repo_reviews.c:34:33: error: use of undeclared identifier 'reviewed_at'
+   34 |     sqlite3_bind_text(st, ++ix, reviewed_at, -1, SQLITE_STATIC);
+      |                                 ^~~~~~~~~~~
+build_close/mutants/p30036/m0002_repo_reviews.c:35:35: error: use of undeclared identifier 'stability'
+   35 |     sqlite3_bind_double(st, ++ix, stability);
+      |                                   ^~~~~~~~~
+build_close/mutants/p30036/m0002_repo_reviews.c:36:35: error: use of undeclared identifier 'difficulty'
+   36 |     sqlite3_bind_double(st, ++ix, difficulty);
+      |                                   ^~~~~~~~~~
+build_close/mutants/p30036/m0002_repo_reviews.c:37:35: error: use of undeclared identifier 'elapsed_days'
+   37 |     sqlite3_bind_double(st, ++ix, elapsed_days);
+      |                                   ^~~~~~~~~~~~
+build_close/mutants/p30036/m0002_repo_reviews.c:38:35: error: use of undeclared identifier 'scheduled_days'
+   38 |     sqlite3_bind_double(st, ++ix, scheduled_days);
+      |                                   ^~~~~~~~~~~~~~
+8 errors generated.
+mutate: suite review_log_rows exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite review_log_rows exited 1
+build_close/mutants/p30036/m0009_repo_reviews.c:22:27: error: non-overlapping comparisons always evaluate to false [-Werror,-Wtautological-overlap-compare]
+   22 |     if (rating < CT_AGAIN && rating > CT_EASY)
+      |         ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+build_close/mutants/p30036/m0012_repo_reviews.c:26:18: error: expected identifier or '('
+   26 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p30036/m0012_repo_reviews.c:27:59: error: use of undeclared identifier 'st'
+   27 |     if (sqlite3_prepare_v2(db, CT_SQL_REVIEW_INSERT, -1, &st, NULL) != SQLITE_OK) {
+      |                                                           ^~
+build_close/mutants/p30036/m0012_repo_reviews.c:28:26: error: use of undeclared identifier 'st'
+   28 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p30036/m0012_repo_reviews.c:32:24: error: use of undeclared identifier 'st'
+   32 |     sqlite3_bind_int64(st, ++ix, card_id);
+      |                        ^~
+build_close/mutants/p30036/m0012_repo_reviews.c:33:22: error: use of undeclared identifier 'st'
+   33 |     sqlite3_bind_int(st, ++ix, rating);
+      |                      ^~
+build_close/mutants/p30036/m0012_repo_reviews.c:34:23: error: use of undeclared identifier 'st'
+   34 |     sqlite3_bind_text(st, ++ix, reviewed_at, -1, SQLITE_STATIC);
+      |                       ^~
+build_close/mutants/p30036/m0012_repo_reviews.c:35:25: error: use of undeclared identifier 'st'
+   35 |     sqlite3_bind_double(st, ++ix, stability);
+      |                         ^~
+build_close/mutants/p30036/m0012_repo_reviews.c:36:25: error: use of undeclared identifier 'st'
+   36 |     sqlite3_bind_double(st, ++ix, difficulty);
+      |                         ^~
+build_close/mutants/p30036/m0012_repo_reviews.c:37:25: error: use of undeclared identifier 'st'
+   37 |     sqlite3_bind_double(st, ++ix, elapsed_days);
+      |                         ^~
+build_close/mutants/p30036/m0012_repo_reviews.c:38:25: error: use of undeclared identifier 'st'
+   38 |     sqlite3_bind_double(st, ++ix, scheduled_days);
+      |                         ^~
+build_close/mutants/p30036/m0012_repo_reviews.c:39:29: error: use of undeclared identifier 'st'
+   39 |     int step = sqlite3_step(st);
+      |                             ^~
+build_close/mutants/p30036/m0012_repo_reviews.c:41:22: error: use of undeclared identifier 'st'
+   41 |     sqlite3_finalize(st);
+      |                      ^~
+12 errors generated.
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+build_close/mutants/p30036/m0026_repo_reviews.c:51:38: error: expected ')'
+   51 | int ct_repo_reviews_for_card(sqlite3 /db, long card_id, ct_review_row *out, int cap) {
+      |                                      ^
+build_close/mutants/p30036/m0026_repo_reviews.c:51:29: note: to match this '('
+   51 | int ct_repo_reviews_for_card(sqlite3 /db, long card_id, ct_review_row *out, int cap) {
+      |                             ^
+build_close/mutants/p30036/m0026_repo_reviews.c:51:5: error: conflicting types for 'ct_repo_reviews_for_card'
+   51 | int ct_repo_reviews_for_card(sqlite3 /db, long card_id, ct_review_row *out, int cap) {
+      |     ^
+src/storage\repo_reviews.h:20:5: note: previous declaration is here
+   20 | int ct_repo_reviews_for_card(sqlite3 *db, long card_id, ct_review_row *out, int cap);
+      |     ^
+build_close/mutants/p30036/m0026_repo_reviews.c:51:38: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   51 | int ct_repo_reviews_for_card(sqlite3 /db, long card_id, ct_review_row *out, int cap) {
+      |                                      ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p30036/m0026_repo_reviews.c:52:9: error: use of undeclared identifier 'db'
+   52 |     if (db == NULL || card_id <= 0)
+      |         ^~
+build_close/mutants/p30036/m0026_repo_reviews.c:52:23: error: use of undeclared identifier 'card_id'
+   52 |     if (db == NULL || card_id <= 0)
+      |                       ^~~~~~~
+build_close/mutants/p30036/m0026_repo_reviews.c:54:9: error: use of undeclared identifier 'cap'
+   54 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p30036/m0026_repo_reviews.c:54:21: error: use of undeclared identifier 'cap'
+   54 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p30036/m0026_repo_reviews.c:54:32: error: use of undeclared identifier 'out'
+   54 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p30036/m0026_repo_reviews.c:56:9: error: use of undeclared identifier 'cap'
+   56 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p30036/m0026_repo_reviews.c:58:12: error: use of undeclared identifier 'out'
+   58 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p30036/m0026_repo_reviews.c:58:28: error: use of undeclared identifier 'cap'
+   58 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p30036/m0026_repo_reviews.c:58:42: error: use of undeclared identifier 'out'
+   58 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p30036/m0026_repo_reviews.c:60:28: error: use of undeclared identifier 'db'
+   60 |     if (sqlite3_prepare_v2(db, CT_SQL_REVIEWS_FOR_CARD, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p30036/m0026_repo_reviews.c:64:31: error: use of undeclared identifier 'card_id'
+   64 |     sqlite3_bind_int64(st, 1, card_id);
+      |                               ^~~~~~~
+build_close/mutants/p30036/m0026_repo_reviews.c:67:16: error: use of undeclared identifier 'cap'
+   67 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p30036/m0026_repo_reviews.c:69:9: error: use of undeclared identifier 'out'
+   69 |         out[n].id = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p30036/m0026_repo_reviews.c:70:9: error: use of undeclared identifier 'out'
+   70 |         out[n].card_id = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p30036/m0026_repo_reviews.c:71:9: error: use of undeclared identifier 'out'
+   71 |         out[n].rating = sqlite3_column_int(st, col++);
+      |         ^~~
+build_close/mutants/p30036/m0026_repo_reviews.c:73:18: error: use of undeclared identifier 'out'
+   73 |         snprintf(out[n].reviewed_at, sizeof out[n].reviewed_at, "%s", at ? (const char *)at : "");
+      |                  ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p30036/m0027_repo_reviews.c:51:71: error: expected ')'
+   51 | int ct_repo_reviews_for_card(sqlite3 *db, long card_id, ct_review_row /out, int cap) {
+      |                                                                       ^
+build_close/mutants/p30036/m0027_repo_reviews.c:51:29: note: to match this '('
+   51 | int ct_repo_reviews_for_card(sqlite3 *db, long card_id, ct_review_row /out, int cap) {
+      |                             ^
+build_close/mutants/p30036/m0027_repo_reviews.c:51:5: error: conflicting types for 'ct_repo_reviews_for_card'
+   51 | int ct_repo_reviews_for_card(sqlite3 *db, long card_id, ct_review_row /out, int cap) {
+      |     ^
+src/storage\repo_reviews.h:20:5: note: previous declaration is here
+   20 | int ct_repo_reviews_for_card(sqlite3 *db, long card_id, ct_review_row *out, int cap);
+      |     ^
+build_close/mutants/p30036/m0027_repo_reviews.c:54:9: error: use of undeclared identifier 'cap'
+   54 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:54:21: error: use of undeclared identifier 'cap'
+   54 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:54:32: error: use of undeclared identifier 'out'
+   54 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:56:9: error: use of undeclared identifier 'cap'
+   56 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:58:12: error: use of undeclared identifier 'out'
+   58 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:58:28: error: use of undeclared identifier 'cap'
+   58 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:58:42: error: use of undeclared identifier 'out'
+   58 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:67:16: error: use of undeclared identifier 'cap'
+   67 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:69:9: error: use of undeclared identifier 'out'
+   69 |         out[n].id = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:70:9: error: use of undeclared identifier 'out'
+   70 |         out[n].card_id = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:71:9: error: use of undeclared identifier 'out'
+   71 |         out[n].rating = sqlite3_column_int(st, col++);
+      |         ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:73:18: error: use of undeclared identifier 'out'
+   73 |         snprintf(out[n].reviewed_at, sizeof out[n].reviewed_at, "%s", at ? (const char *)at : "");
+      |                  ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:73:45: error: use of undeclared identifier 'out'
+   73 |         snprintf(out[n].reviewed_at, sizeof out[n].reviewed_at, "%s", at ? (const char *)at : "");
+      |                                             ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:74:9: error: use of undeclared identifier 'out'
+   74 |         out[n].stability = sqlite3_column_double(st, col++);
+      |         ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:75:9: error: use of undeclared identifier 'out'
+   75 |         out[n].difficulty = sqlite3_column_double(st, col++);
+      |         ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:76:9: error: use of undeclared identifier 'out'
+   76 |         out[n].elapsed_days = sqlite3_column_double(st, col++);
+      |         ^~~
+build_close/mutants/p30036/m0027_repo_reviews.c:77:9: error: use of undeclared identifier 'out'
+   77 |         out[n].scheduled_days = sqlite3_column_double(st, col++);
+      |         ^~~
+19 errors generated.
+mutate: suite review_log_rows exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_bad_args exited -1073741819
+mutate: suite card_bad_args exited -1073741819
+mutate: suite card_bad_args exited 1
+mutate: suite card_bad_args exited -1073741819
+mutate: suite card_bad_args exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+build_close/mutants/p30036/m0048_repo_reviews.c:58:41: error: expected expression
+   58 |     memset(out, 0, (size_t)cap * sizeof /out);
+      |                                         ^
+1 error generated.
+build_close/mutants/p30036/m0049_repo_reviews.c:59:18: error: expected identifier or '('
+   59 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p30036/m0049_repo_reviews.c:60:62: error: use of undeclared identifier 'st'
+   60 |     if (sqlite3_prepare_v2(db, CT_SQL_REVIEWS_FOR_CARD, -1, &st, NULL) != SQLITE_OK) {
+      |                                                              ^~
+build_close/mutants/p30036/m0049_repo_reviews.c:61:26: error: use of undeclared identifier 'st'
+   61 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p30036/m0049_repo_reviews.c:64:24: error: use of undeclared identifier 'st'
+   64 |     sqlite3_bind_int64(st, 1, card_id);
+      |                        ^~
+build_close/mutants/p30036/m0049_repo_reviews.c:67:44: error: use of undeclared identifier 'st'
+   67 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                                            ^~
+build_close/mutants/p30036/m0049_repo_reviews.c:69:48: error: use of undeclared identifier 'st'
+   69 |         out[n].id = (long)sqlite3_column_int64(st, col++);
+      |                                                ^~
+build_close/mutants/p30036/m0049_repo_reviews.c:70:53: error: use of undeclared identifier 'st'
+   70 |         out[n].card_id = (long)sqlite3_column_int64(st, col++);
+      |                                                     ^~
+build_close/mutants/p30036/m0049_repo_reviews.c:71:44: error: use of undeclared identifier 'st'
+   71 |         out[n].rating = sqlite3_column_int(st, col++);
+      |                                            ^~
+build_close/mutants/p30036/m0049_repo_reviews.c:72:55: error: use of undeclared identifier 'st'
+   72 |         const unsigned char *at = sqlite3_column_text(st, col++);
+      |                                                       ^~
+build_close/mutants/p30036/m0049_repo_reviews.c:74:50: error: use of undeclared identifier 'st'
+   74 |         out[n].stability = sqlite3_column_double(st, col++);
+      |                                                  ^~
+build_close/mutants/p30036/m0049_repo_reviews.c:75:51: error: use of undeclared identifier 'st'
+   75 |         out[n].difficulty = sqlite3_column_double(st, col++);
+      |                                                   ^~
+build_close/mutants/p30036/m0049_repo_reviews.c:76:53: error: use of undeclared identifier 'st'
+   76 |         out[n].elapsed_days = sqlite3_column_double(st, col++);
+      |                                                     ^~
+build_close/mutants/p30036/m0049_repo_reviews.c:77:55: error: use of undeclared identifier 'st'
+   77 |         out[n].scheduled_days = sqlite3_column_double(st, col++);
+      |                                                       ^~
+build_close/mutants/p30036/m0049_repo_reviews.c:80:22: error: use of undeclared identifier 'st'
+   80 |     sqlite3_finalize(st);
+      |                      ^~
+14 errors generated.
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+build_close/mutants/p30036/m0063_repo_reviews.c:72:29: error: expected identifier or '('
+   72 |         const unsigned char /at = sqlite3_column_text(st, col++);
+      |                             ^
+build_close/mutants/p30036/m0063_repo_reviews.c:73:71: error: use of undeclared identifier 'at'
+   73 |         snprintf(out[n].reviewed_at, sizeof out[n].reviewed_at, "%s", at ? (const char *)at : "");
+      |                                                                       ^~
+build_close/mutants/p30036/m0063_repo_reviews.c:73:90: error: use of undeclared identifier 'at'
+   73 |         snprintf(out[n].reviewed_at, sizeof out[n].reviewed_at, "%s", at ? (const char *)at : "");
+      |                                                                                          ^~
+3 errors generated.
+build_close/mutants/p30036/m0064_repo_reviews.c:73:88: error: expected ')'
+   73 |         snprintf(out[n].reviewed_at, sizeof out[n].reviewed_at, "%s", at ? (const char /)at : "");
+      |                                                                                        ^
+build_close/mutants/p30036/m0064_repo_reviews.c:73:76: note: to match this '('
+   73 |         snprintf(out[n].reviewed_at, sizeof out[n].reviewed_at, "%s", at ? (const char /)at : "");
+      |                                                                            ^
+build_close/mutants/p30036/m0064_repo_reviews.c:73:76: error: cast to smaller integer type 'char' from 'const unsigned char *' [-Werror,-Wpointer-to-int-cast]
+   73 |         snprintf(out[n].reviewed_at, sizeof out[n].reviewed_at, "%s", at ? (const char /)at : "");
+      |                                                                            ^~~~~~~~~~~~~~~~
+build_close/mutants/p30036/m0064_repo_reviews.c:73:74: error: pointer/integer type mismatch in conditional expression ('int' and 'char *') [-Werror,-Wconditional-type-mismatch]
+   73 |         snprintf(out[n].reviewed_at, sizeof out[n].reviewed_at, "%s", at ? (const char /)at : "");
+      |                                                                          ^ ~~~~~~~~~~~~~~~~   ~~
+3 errors generated.
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+mutate: suite review_log_rows exited 1
+build_close/mutants/p30036/m0068_repo_reviews.c:86:31: error: expected ')'
+   86 | int ct_repo_due_cards(sqlite3 /db, const char *deck, const char *now_iso, long *ids, int cap) {
+      |                               ^
+build_close/mutants/p30036/m0068_repo_reviews.c:86:22: note: to match this '('
+   86 | int ct_repo_due_cards(sqlite3 /db, const char *deck, const char *now_iso, long *ids, int cap) {
+      |                      ^
+build_close/mutants/p30036/m0068_repo_reviews.c:86:5: error: conflicting types for 'ct_repo_due_cards'
+   86 | int ct_repo_due_cards(sqlite3 /db, const char *deck, const char *now_iso, long *ids, int cap) {
+      |     ^
+src/storage\repo_reviews.h:21:5: note: previous declaration is here
+   21 | int ct_repo_due_cards(sqlite3 *db, const char *deck, const char *now_iso, long *ids, int cap);
+      |     ^
+build_close/mutants/p30036/m0068_repo_reviews.c:86:31: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   86 | int ct_repo_due_cards(sqlite3 /db, const char *deck, const char *now_iso, long *ids, int cap) {
+      |                               ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p30036/m0068_repo_reviews.c:87:9: error: use of undeclared identifier 'db'
+   87 |     if (db == NULL)
+      |         ^~
+build_close/mutants/p30036/m0068_repo_reviews.c:89:26: error: use of undeclared identifier 'deck'
+   89 |     if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX))
+      |                          ^~~~
+build_close/mutants/p30036/m0068_repo_reviews.c:91:26: error: use of undeclared identifier 'now_iso'
+   91 |     if (!ct_repo_text_ok(now_iso, CT_CARD_STAMP_MAX))
+      |                          ^~~~~~~
+build_close/mutants/p30036/m0068_repo_reviews.c:93:9: error: use of undeclared identifier 'cap'
+   93 |     if (cap < 0 || (cap > 0 && ids == NULL))
+      |         ^~~
+build_close/mutants/p30036/m0068_repo_reviews.c:93:21: error: use of undeclared identifier 'cap'
+   93 |     if (cap < 0 || (cap > 0 && ids == NULL))
+      |                     ^~~
+build_close/mutants/p30036/m0068_repo_reviews.c:93:32: error: use of undeclared identifier 'ids'
+   93 |     if (cap < 0 || (cap > 0 && ids == NULL))
+      |                                ^~~
+build_close/mutants/p30036/m0068_repo_reviews.c:95:9: error: use of undeclared identifier 'cap'
+   95 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p30036/m0068_repo_reviews.c:98:28: error: use of undeclared identifier 'db'
+   98 |     if (sqlite3_prepare_v2(db, CT_SQL_DUE_CARDS, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p30036/m0068_repo_reviews.c:103:33: error: use of undeclared identifier 'deck'
+  103 |     sqlite3_bind_text(st, ++ix, deck, -1, SQLITE_STATIC);
+      |                                 ^~~~
+build_close/mutants/p30036/m0068_repo_reviews.c:104:33: error: use of undeclared identifier 'now_iso'
+  104 |     sqlite3_bind_text(st, ++ix, now_iso, -1, SQLITE_STATIC);
+      |                                 ^~~~~~~
+build_close/mutants/p30036/m0068_repo_reviews.c:105:32: error: use of undeclared identifier 'cap'
+  105 |     sqlite3_bind_int(st, ++ix, cap);
+      |                                ^~~
+build_close/mutants/p30036/m0068_repo_reviews.c:108:16: error: use of undeclared identifier 'cap'
+  108 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p30036/m0068_repo_reviews.c:109:9: error: use of undeclared identifier 'ids'
+  109 |         ids[n] = (long)sqlite3_column_int64(st, 0);
+      |         ^~~
+16 errors generated.
+build_close/mutants/p30036/m0069_repo_reviews.c:86:47: error: expected ')'
+   86 | int ct_repo_due_cards(sqlite3 *db, const char /deck, const char *now_iso, long *ids, int cap) {
+      |                                               ^
+build_close/mutants/p30036/m0069_repo_reviews.c:86:22: note: to match this '('
+   86 | int ct_repo_due_cards(sqlite3 *db, const char /deck, const char *now_iso, long *ids, int cap) {
+      |                      ^
+build_close/mutants/p30036/m0069_repo_reviews.c:86:5: error: conflicting types for 'ct_repo_due_cards'
+   86 | int ct_repo_due_cards(sqlite3 *db, const char /deck, const char *now_iso, long *ids, int cap) {
+      |     ^
+src/storage\repo_reviews.h:21:5: note: previous declaration is here
+   21 | int ct_repo_due_cards(sqlite3 *db, const char *deck, const char *now_iso, long *ids, int cap);
+      |     ^
+build_close/mutants/p30036/m0069_repo_reviews.c:89:26: error: use of undeclared identifier 'deck'
+   89 |     if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX))
+      |                          ^~~~
+build_close/mutants/p30036/m0069_repo_reviews.c:91:26: error: use of undeclared identifier 'now_iso'
+   91 |     if (!ct_repo_text_ok(now_iso, CT_CARD_STAMP_MAX))
+      |                          ^~~~~~~
+build_close/mutants/p30036/m0069_repo_reviews.c:93:9: error: use of undeclared identifier 'cap'
+   93 |     if (cap < 0 || (cap > 0 && ids == NULL))
+      |         ^~~
+build_close/mutants/p30036/m0069_repo_reviews.c:93:21: error: use of undeclared identifier 'cap'
+   93 |     if (cap < 0 || (cap > 0 && ids == NULL))
+      |                     ^~~
+build_close/mutants/p30036/m0069_repo_reviews.c:93:32: error: use of undeclared identifier 'ids'
+   93 |     if (cap < 0 || (cap > 0 && ids == NULL))
+      |                                ^~~
+build_close/mutants/p30036/m0069_repo_reviews.c:95:9: error: use of undeclared identifier 'cap'
+   95 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p30036/m0069_repo_reviews.c:103:33: error: use of undeclared identifier 'deck'
+  103 |     sqlite3_bind_text(st, ++ix, deck, -1, SQLITE_STATIC);
+      |                                 ^~~~
+build_close/mutants/p30036/m0069_repo_reviews.c:104:33: error: use of undeclared identifier 'now_iso'
+  104 |     sqlite3_bind_text(st, ++ix, now_iso, -1, SQLITE_STATIC);
+      |                                 ^~~~~~~
+build_close/mutants/p30036/m0069_repo_reviews.c:105:32: error: use of undeclared identifier 'cap'
+  105 |     sqlite3_bind_int(st, ++ix, cap);
+      |                                ^~~
+build_close/mutants/p30036/m0069_repo_reviews.c:108:16: error: use of undeclared identifier 'cap'
+  108 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p30036/m0069_repo_reviews.c:109:9: error: use of undeclared identifier 'ids'
+  109 |         ids[n] = (long)sqlite3_column_int64(st, 0);
+      |         ^~~
+13 errors generated.
+build_close/mutants/p30036/m0070_repo_reviews.c:86:65: error: expected ')'
+   86 | int ct_repo_due_cards(sqlite3 *db, const char *deck, const char /now_iso, long *ids, int cap) {
+      |                                                                 ^
+build_close/mutants/p30036/m0070_repo_reviews.c:86:22: note: to match this '('
+   86 | int ct_repo_due_cards(sqlite3 *db, const char *deck, const char /now_iso, long *ids, int cap) {
+      |                      ^
+build_close/mutants/p30036/m0070_repo_reviews.c:86:5: error: conflicting types for 'ct_repo_due_cards'
+   86 | int ct_repo_due_cards(sqlite3 *db, const char *deck, const char /now_iso, long *ids, int cap) {
+      |     ^
+src/storage\repo_reviews.h:21:5: note: previous declaration is here
+   21 | int ct_repo_due_cards(sqlite3 *db, const char *deck, const char *now_iso, long *ids, int cap);
+      |     ^
+build_close/mutants/p30036/m0070_repo_reviews.c:91:26: error: use of undeclared identifier 'now_iso'
+   91 |     if (!ct_repo_text_ok(now_iso, CT_CARD_STAMP_MAX))
+      |                          ^~~~~~~
+build_close/mutants/p30036/m0070_repo_reviews.c:93:9: error: use of undeclared identifier 'cap'
+   93 |     if (cap < 0 || (cap > 0 && ids == NULL))
+      |         ^~~
+build_close/mutants/p30036/m0070_repo_reviews.c:93:21: error: use of undeclared identifier 'cap'
+   93 |     if (cap < 0 || (cap > 0 && ids == NULL))
+      |                     ^~~
+build_close/mutants/p30036/m0070_repo_reviews.c:93:32: error: use of undeclared identifier 'ids'
+   93 |     if (cap < 0 || (cap > 0 && ids == NULL))
+      |                                ^~~
+build_close/mutants/p30036/m0070_repo_reviews.c:95:9: error: use of undeclared identifier 'cap'
+   95 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p30036/m0070_repo_reviews.c:104:33: error: use of undeclared identifier 'now_iso'
+  104 |     sqlite3_bind_text(st, ++ix, now_iso, -1, SQLITE_STATIC);
+      |                                 ^~~~~~~
+build_close/mutants/p30036/m0070_repo_reviews.c:105:32: error: use of undeclared identifier 'cap'
+  105 |     sqlite3_bind_int(st, ++ix, cap);
+      |                                ^~~
+build_close/mutants/p30036/m0070_repo_reviews.c:108:16: error: use of undeclared identifier 'cap'
+  108 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p30036/m0070_repo_reviews.c:109:9: error: use of undeclared identifier 'ids'
+  109 |         ids[n] = (long)sqlite3_column_int64(st, 0);
+      |         ^~~
+11 errors generated.
+build_close/mutants/p30036/m0071_repo_reviews.c:86:80: error: expected ')'
+   86 | int ct_repo_due_cards(sqlite3 *db, const char *deck, const char *now_iso, long /ids, int cap) {
+      |                                                                                ^
+build_close/mutants/p30036/m0071_repo_reviews.c:86:22: note: to match this '('
+   86 | int ct_repo_due_cards(sqlite3 *db, const char *deck, const char *now_iso, long /ids, int cap) {
+      |                      ^
+build_close/mutants/p30036/m0071_repo_reviews.c:86:5: error: conflicting types for 'ct_repo_due_cards'
+   86 | int ct_repo_due_cards(sqlite3 *db, const char *deck, const char *now_iso, long /ids, int cap) {
+      |     ^
+src/storage\repo_reviews.h:21:5: note: previous declaration is here
+   21 | int ct_repo_due_cards(sqlite3 *db, const char *deck, const char *now_iso, long *ids, int cap);
+      |     ^
+build_close/mutants/p30036/m0071_repo_reviews.c:93:9: error: use of undeclared identifier 'cap'
+   93 |     if (cap < 0 || (cap > 0 && ids == NULL))
+      |         ^~~
+build_close/mutants/p30036/m0071_repo_reviews.c:93:21: error: use of undeclared identifier 'cap'
+   93 |     if (cap < 0 || (cap > 0 && ids == NULL))
+      |                     ^~~
+build_close/mutants/p30036/m0071_repo_reviews.c:93:32: error: use of undeclared identifier 'ids'
+   93 |     if (cap < 0 || (cap > 0 && ids == NULL))
+      |                                ^~~
+build_close/mutants/p30036/m0071_repo_reviews.c:95:9: error: use of undeclared identifier 'cap'
+   95 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p30036/m0071_repo_reviews.c:105:32: error: use of undeclared identifier 'cap'
+  105 |     sqlite3_bind_int(st, ++ix, cap);
+      |                                ^~~
+build_close/mutants/p30036/m0071_repo_reviews.c:108:16: error: use of undeclared identifier 'cap'
+  108 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p30036/m0071_repo_reviews.c:109:9: error: use of undeclared identifier 'ids'
+  109 |         ids[n] = (long)sqlite3_column_int64(st, 0);
+      |         ^~~
+9 errors generated.
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite card_bad_args exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite card_bad_args exited 1
+build_close/mutants/p30036/m0087_repo_reviews.c:97:18: error: expected identifier or '('
+   97 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p30036/m0087_repo_reviews.c:98:55: error: use of undeclared identifier 'st'
+   98 |     if (sqlite3_prepare_v2(db, CT_SQL_DUE_CARDS, -1, &st, NULL) != SQLITE_OK) {
+      |                                                       ^~
+build_close/mutants/p30036/m0087_repo_reviews.c:99:26: error: use of undeclared identifier 'st'
+   99 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p30036/m0087_repo_reviews.c:103:23: error: use of undeclared identifier 'st'
+  103 |     sqlite3_bind_text(st, ++ix, deck, -1, SQLITE_STATIC);
+      |                       ^~
+build_close/mutants/p30036/m0087_repo_reviews.c:104:23: error: use of undeclared identifier 'st'
+  104 |     sqlite3_bind_text(st, ++ix, now_iso, -1, SQLITE_STATIC);
+      |                       ^~
+build_close/mutants/p30036/m0087_repo_reviews.c:105:22: error: use of undeclared identifier 'st'
+  105 |     sqlite3_bind_int(st, ++ix, cap);
+      |                      ^~
+build_close/mutants/p30036/m0087_repo_reviews.c:108:44: error: use of undeclared identifier 'st'
+  108 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                                            ^~
+build_close/mutants/p30036/m0087_repo_reviews.c:109:45: error: use of undeclared identifier 'st'
+  109 |         ids[n] = (long)sqlite3_column_int64(st, 0);
+      |                                             ^~
+build_close/mutants/p30036/m0087_repo_reviews.c:112:22: error: use of undeclared identifier 'st'
+  112 |     sqlite3_finalize(st);
+      |                      ^~
+9 errors generated.
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1
+mutate: suite due_cards exited 1

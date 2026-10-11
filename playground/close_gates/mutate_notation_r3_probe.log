@@ -1,0 +1,42 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/engine/notation.c build_close notation_gate_edges
+mutate: 1 unexplained survivors
+mutate: scope=src/engine/notation.c files=1 sites=297 suites=1
+SURVIVED  m0017 src/engine/notation.c:28 [int+1 0 -> 1]
+SURVIVED  m0018 src/engine/notation.c:28 [int-1 0 -> -1]
+SURVIVED  m0043 src/engine/notation.c:60 [cmp > -> >=]
+SURVIVED  m0044 src/engine/notation.c:60 [int+1 0 -> 1]
+SURVIVED  m0062 src/engine/notation.c:66 [cmp >= -> >]
+SURVIVED  m0068 src/engine/notation.c:72 [cmp >= -> >]
+SURVIVED  m0070 src/engine/notation.c:72 [cmp <= -> <]
+SURVIVED  m0077 src/engine/notation.c:76 [int+1 1 -> 2]
+SURVIVED  m0089 src/engine/notation.c:83 [cmp < -> <=]
+SURVIVED  m0092 src/engine/notation.c:84 [int+1 1 -> 2]
+SURVIVED  m0138 src/engine/notation.c:122 [int-1 1 -> 0]
+SURVIVED  m0180 src/engine/notation.c:152 [int-1 0 -> -1]
+SURVIVED  m0204 src/engine/notation.c:169 [int-1 1 -> 0]
+SURVIVED  m0265 src/engine/notation.c:205 [int+1 0 -> 1]
+SURVIVED  m0274 src/engine/notation.c:211 [cmp < -> <=]
+SURVIVED  m0275 src/engine/notation.c:211 [int+1 0 -> 1]
+SURVIVED  m0276 src/engine/notation.c:211 [int-1 0 -> -1]
+ACCEPTED  m0017 src/engine/notation.c:28 [int+1 0 -> 1] :: sizeof operand index is unevaluated, the entry size is identical at any index so the loop bound is unchanged
+ACCEPTED  m0018 src/engine/notation.c:28 [int-1 0 -> -1] :: sizeof operand index is unevaluated, the entry size is identical at any index so the loop bound is unchanged
+ACCEPTED  m0043 src/engine/notation.c:60 [cmp > -> >=] :: span guard edges, an empty span reads the nul which fails the digit test, and a one character token carries no digit prefix so skipping the probe parses it identically
+ACCEPTED  m0044 src/engine/notation.c:60 [int+1 0 -> 1] :: span guard edges, an empty span reads the nul which fails the digit test, and a one character token carries no digit prefix so skipping the probe parses it identically
+ACCEPTED  m0062 src/engine/notation.c:66 [cmp >= -> >] :: token end widened read sees the delimiter or nul which no table entry matches, rejected identically
+ACCEPTED  m0068 src/engine/notation.c:72 [cmp >= -> >] :: lowercase bound edges, the letters a and z resolve in the table or have no uppercase entry, the fallback is never taken for them
+ACCEPTED  m0070 src/engine/notation.c:72 [cmp <= -> <] :: lowercase bound edges, the letters a and z resolve in the table or have no uppercase entry, the fallback is never taken for them
+ACCEPTED  m0077 src/engine/notation.c:76 [int+1 1 -> 2] :: wide flag is consumed as a boolean, any nonzero value is equivalent
+ACCEPTED  m0089 src/engine/notation.c:83 [cmp < -> <=] :: wide marker probe past the token reads the delimiter or nul which never equals w
+ACCEPTED  m0092 src/engine/notation.c:84 [int+1 1 -> 2] :: wide flag is consumed as a boolean, any nonzero value is equivalent
+ACCEPTED  m0138 src/engine/notation.c:122 [int-1 1 -> 0] :: depth lower bound is structurally unreachable, every arm yields at least one
+ACCEPTED  m0180 src/engine/notation.c:152 [int-1 0 -> -1] :: input error code minus one is unreachable inside the loop, the caller prevalidated n and the move pointer
+ACCEPTED  m0265 src/engine/notation.c:205 [int+1 0 -> 1] :: lone move list guard widened, the single read is rejected by the per move null guard inside format one with the same input error
+ACCEPTED  m0274 src/engine/notation.c:211 [cmp < -> <=] :: input error code minus one is unreachable from the loop caller, and a successful format returns at least one so a zero result never occurs
+ACCEPTED  m0275 src/engine/notation.c:211 [int+1 0 -> 1] :: input error code minus one is unreachable from the loop caller, and a successful format returns at least one so a zero result never occurs
+ACCEPTED  m0276 src/engine/notation.c:211 [int-1 0 -> -1] :: input error code minus one is unreachable from the loop caller, and a successful format returns at least one so a zero result never occurs
+mutate: generated=17 build_failed=0 killed_by_tests=0 killed=0 survived=17 accepted=16 unexplained=1 skipped=280
+mutate: kill rate 0/17 = 0.0%, with accepted equivalents 16/17 = 94.1%
+mutate: wall 10.4s
+make: *** [makefile:242: mutate] Error 1

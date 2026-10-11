@@ -1,0 +1,19 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_e2e_script.c -o build_close/tobj/tests/unit_e2e_script.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/app/script_expect.c build_close e2e_run_expect_surfaces e2e_run_expect_reviews_cap
+mutate: suite e2e_run_expect_reviews_cap exited 1
+mutate: suite e2e_run_expect_reviews_cap exited 1
+mutate: suite e2e_run_expect_reviews_cap exited 1
+mutate: suite e2e_run_expect_reviews_cap exited 1
+mutate: 1 unexplained survivors
+mutate: scope=src/app/script_expect.c files=1 sites=414 suites=2
+KILLED    m0199 src/app/script_expect.c:177 [arith + -> -]
+SURVIVED  m0200 src/app/script_expect.c:177 [int+1 1 -> 2]
+KILLED    m0201 src/app/script_expect.c:177 [int-1 1 -> 0]
+KILLED    m0202 src/app/script_expect.c:177 [cmp < -> <=]
+KILLED    m0204 src/app/script_expect.c:180 [arith - -> +]
+mutate: generated=5 build_failed=0 killed_by_tests=4 killed=4 survived=1 accepted=0 unexplained=1 skipped=409
+mutate: kill rate 4/5 = 80.0%, with accepted equivalents 4/5 = 80.0%
+mutate: wall 4.5s
+make: *** [makefile:242: mutate] Error 1

@@ -1,0 +1,899 @@
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+build_close/mutants/p18392/m0012_notation.c:27:32: error: expected identifier or '('
+   27 | static const ct_notation_entry /ct_notation_find(char c) {
+      |                                ^
+build_close/mutants/p18392/m0012_notation.c:70:34: error: use of undeclared identifier 'ct_notation_find'; did you mean 'ct_notation_middle'?
+   70 |     const ct_notation_entry *e = ct_notation_find(c);
+      |                                  ^~~~~~~~~~~~~~~~
+      |                                  ct_notation_middle
+build_close/mutants/p18392/m0012_notation.c:23:12: note: 'ct_notation_middle' declared here
+   23 | static int ct_notation_middle(int n) {
+      |            ^
+build_close/mutants/p18392/m0012_notation.c:70:30: error: incompatible integer to pointer conversion initializing 'const ct_notation_entry *' with an expression of type 'int' [-Wint-conversion]
+   70 |     const ct_notation_entry *e = ct_notation_find(c);
+      |                              ^   ~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p18392/m0012_notation.c:73:42: error: use of undeclared identifier 'ct_notation_find'; did you mean 'ct_notation_middle'?
+   73 |         const ct_notation_entry *upper = ct_notation_find((char)(c - 'a' + 'A'));
+      |                                          ^~~~~~~~~~~~~~~~
+      |                                          ct_notation_middle
+build_close/mutants/p18392/m0012_notation.c:23:12: note: 'ct_notation_middle' declared here
+   23 | static int ct_notation_middle(int n) {
+      |            ^
+build_close/mutants/p18392/m0012_notation.c:73:34: error: incompatible integer to pointer conversion initializing 'const ct_notation_entry *' with an expression of type 'int' [-Wint-conversion]
+   73 |         const ct_notation_entry *upper = ct_notation_find((char)(c - 'a' + 'A'));
+      |                                  ^       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+5 errors generated.
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited -1073741795
+mutate: suite notation_goldens exited -1073741795
+mutate: suite notation_goldens exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_roundtrip exited 1
+mutate: suite notation_roundtrip exited 1
+mutate: suite notation_roundtrip exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+build_close/mutants/p18392/m0032_notation.c:55:46: error: expected ')'
+   55 | static int ct_notation_parse_span(const char /s, size_t len, int n, ct_move *out) {
+      |                                              ^
+build_close/mutants/p18392/m0032_notation.c:55:34: note: to match this '('
+   55 | static int ct_notation_parse_span(const char /s, size_t len, int n, ct_move *out) {
+      |                                  ^
+build_close/mutants/p18392/m0032_notation.c:56:9: error: use of undeclared identifier 's'
+   56 |     if (s == NULL || out == NULL || !ct_notation_valid_n(n))
+      |         ^
+build_close/mutants/p18392/m0032_notation.c:56:22: error: use of undeclared identifier 'out'
+   56 |     if (s == NULL || out == NULL || !ct_notation_valid_n(n))
+      |                      ^~~
+build_close/mutants/p18392/m0032_notation.c:56:58: error: use of undeclared identifier 'n'
+   56 |     if (s == NULL || out == NULL || !ct_notation_valid_n(n))
+      |                                                          ^
+build_close/mutants/p18392/m0032_notation.c:60:9: error: use of undeclared identifier 'len'
+   60 |     if (len > 0 && s[0] >= '0' && s[0] <= '9') {
+      |         ^~~
+build_close/mutants/p18392/m0032_notation.c:60:20: error: use of undeclared identifier 's'
+   60 |     if (len > 0 && s[0] >= '0' && s[0] <= '9') {
+      |                    ^
+build_close/mutants/p18392/m0032_notation.c:60:35: error: use of undeclared identifier 's'
+   60 |     if (len > 0 && s[0] >= '0' && s[0] <= '9') {
+      |                                   ^
+build_close/mutants/p18392/m0032_notation.c:61:17: error: use of undeclared identifier 's'
+   61 |         digit = s[0] - '0';
+      |                 ^
+build_close/mutants/p18392/m0032_notation.c:66:14: error: use of undeclared identifier 'len'
+   66 |     if (i >= len)
+      |              ^~~
+build_close/mutants/p18392/m0032_notation.c:68:14: error: use of undeclared identifier 's'
+   68 |     char c = s[i];
+      |              ^
+build_close/mutants/p18392/m0032_notation.c:83:58: error: use of undeclared identifier 'len'
+   83 |     if (!wide && e->kind == CT_NOTATION_KIND_FACE && i < len && s[i] == 'w') {
+      |                                                          ^~~
+build_close/mutants/p18392/m0032_notation.c:83:65: error: use of undeclared identifier 's'
+   83 |     if (!wide && e->kind == CT_NOTATION_KIND_FACE && i < len && s[i] == 'w') {
+      |                                                                 ^
+build_close/mutants/p18392/m0032_notation.c:90:16: error: use of undeclared identifier 'len'
+   90 |     while (i < len) {
+      |                ^~~
+build_close/mutants/p18392/m0032_notation.c:91:13: error: use of undeclared identifier 's'
+   91 |         if (s[i] == '2') {
+      |             ^
+build_close/mutants/p18392/m0032_notation.c:94:20: error: use of undeclared identifier 's'
+   94 |         } else if (s[i] == '\'') {
+      |                    ^
+build_close/mutants/p18392/m0032_notation.c:111:14: error: use of undeclared identifier 'n'
+  111 |         to = n;
+      |              ^
+build_close/mutants/p18392/m0032_notation.c:113:35: error: use of undeclared identifier 'n'
+  113 |         from = ct_notation_middle(n);
+      |                                   ^
+build_close/mutants/p18392/m0032_notation.c:122:39: error: use of undeclared identifier 'n'
+  122 |     if (from < 1 || from > to || to > n)
+      |                                       ^
+build_close/mutants/p18392/m0032_notation.c:124:5: error: use of undeclared identifier 'out'
+  124 |     out->face = e->face;
+      |     ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p18392/m0033_notation.c:55:77: error: expected ')'
+   55 | static int ct_notation_parse_span(const char *s, size_t len, int n, ct_move /out) {
+      |                                                                             ^
+build_close/mutants/p18392/m0033_notation.c:55:34: note: to match this '('
+   55 | static int ct_notation_parse_span(const char *s, size_t len, int n, ct_move /out) {
+      |                                  ^
+build_close/mutants/p18392/m0033_notation.c:56:22: error: use of undeclared identifier 'out'
+   56 |     if (s == NULL || out == NULL || !ct_notation_valid_n(n))
+      |                      ^~~
+build_close/mutants/p18392/m0033_notation.c:124:5: error: use of undeclared identifier 'out'
+  124 |     out->face = e->face;
+      |     ^~~
+build_close/mutants/p18392/m0033_notation.c:125:5: error: use of undeclared identifier 'out'
+  125 |     out->depth_from = from;
+      |     ^~~
+build_close/mutants/p18392/m0033_notation.c:126:5: error: use of undeclared identifier 'out'
+  126 |     out->depth_to = to;
+      |     ^~~
+build_close/mutants/p18392/m0033_notation.c:127:5: error: use of undeclared identifier 'out'
+  127 |     out->quarter = quarter;
+      |     ^~~
+build_close/mutants/p18392/m0033_notation.c:134:60: error: passing 'ct_move *' to parameter of incompatible type 'ct_move'; dereference with *
+  134 |     return ct_notation_parse_span(token, strlen(token), n, out);
+      |                                                            ^~~
+      |                                                            *
+build_close/mutants/p18392/m0033_notation.c:55:77: note: passing argument to parameter here
+   55 | static int ct_notation_parse_span(const char *s, size_t len, int n, ct_move /out) {
+      |                                                                             ^
+build_close/mutants/p18392/m0033_notation.c:151:67: error: passing 'ct_move *' to parameter of incompatible type 'ct_move'; remove &
+  151 |         int r = ct_notation_parse_span(alg + start, i - start, n, &m);
+      |                                                                   ^~
+build_close/mutants/p18392/m0033_notation.c:55:77: note: passing argument to parameter here
+   55 | static int ct_notation_parse_span(const char *s, size_t len, int n, ct_move /out) {
+      |                                                                             ^
+8 errors generated.
+mutate: suite notation_goldens exited 1
+build_close/mutants/p18392/m0035_notation.c:56:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   56 |     if (s == NULL && out == NULL || !ct_notation_valid_n(n))
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_close/mutants/p18392/m0035_notation.c:56:19: note: place parentheses around the '&&' expression to silence this warning
+   56 |     if (s == NULL && out == NULL || !ct_notation_valid_n(n))
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite notation_goldens exited 1
+build_close/mutants/p18392/m0037_notation.c:56:34: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   56 |     if (s == NULL || out == NULL && !ct_notation_valid_n(n))
+      |                   ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p18392/m0037_notation.c:56:34: note: place parentheses around the '&&' expression to silence this warning
+   56 |     if (s == NULL || out == NULL && !ct_notation_valid_n(n))
+      |                                  ^                         
+      |                      (                                     )
+1 error generated.
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+build_close/mutants/p18392/m0046_notation.c:60:32: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   60 |     if (len > 0 || s[0] >= '0' && s[0] <= '9') {
+      |                 ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~
+build_close/mutants/p18392/m0046_notation.c:60:32: note: place parentheses around the '&&' expression to silence this warning
+   60 |     if (len > 0 || s[0] >= '0' && s[0] <= '9') {
+      |                                ^             
+      |                    (                         )
+1 error generated.
+mutate: suite notation_errors exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_errors exited 1
+build_close/mutants/p18392/m0050_notation.c:60:17: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   60 |     if (len > 0 && s[0] >= '0' || s[0] <= '9') {
+      |         ~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_close/mutants/p18392/m0050_notation.c:60:17: note: place parentheses around the '&&' expression to silence this warning
+   60 |     if (len > 0 && s[0] >= '0' || s[0] <= '9') {
+      |                 ^
+      |         (                     )
+1 error generated.
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_errors exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+build_close/mutants/p18392/m0058_notation.c:62:43: error: non-overlapping comparisons always evaluate to false [-Werror,-Wtautological-overlap-compare]
+   62 |         if (digit < CT_NOTATION_DIGIT_MIN && digit > CT_NOTATION_DIGIT_MAX)
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+build_close/mutants/p18392/m0063_notation.c:70:29: error: expected identifier or '('
+   70 |     const ct_notation_entry /e = ct_notation_find(c);
+      |                             ^
+build_close/mutants/p18392/m0063_notation.c:72:9: error: use of undeclared identifier 'e'
+   72 |     if (e == NULL && c >= 'a' && c <= 'z') {
+      |         ^
+build_close/mutants/p18392/m0063_notation.c:75:13: error: use of undeclared identifier 'e'
+   75 |             e = upper;
+      |             ^
+build_close/mutants/p18392/m0063_notation.c:79:9: error: use of undeclared identifier 'e'
+   79 |     if (e == NULL)
+      |         ^
+build_close/mutants/p18392/m0063_notation.c:81:23: error: use of undeclared identifier 'e'
+   81 |     if (digit != 0 && e->kind != CT_NOTATION_KIND_FACE)
+      |                       ^
+build_close/mutants/p18392/m0063_notation.c:83:18: error: use of undeclared identifier 'e'
+   83 |     if (!wide && e->kind == CT_NOTATION_KIND_FACE && i < len && s[i] == 'w') {
+      |                  ^
+build_close/mutants/p18392/m0063_notation.c:109:9: error: use of undeclared identifier 'e'
+  109 |     if (e->kind == CT_NOTATION_KIND_ROTATION) {
+      |         ^
+build_close/mutants/p18392/m0063_notation.c:112:16: error: use of undeclared identifier 'e'
+  112 |     } else if (e->kind == CT_NOTATION_KIND_SLICE) {
+      |                ^
+build_close/mutants/p18392/m0063_notation.c:124:17: error: use of undeclared identifier 'e'
+  124 |     out->face = e->face;
+      |                 ^
+9 errors generated.
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+build_close/mutants/p18392/m0067_notation.c:72:31: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   72 |     if (e == NULL || c >= 'a' && c <= 'z') {
+      |                   ~~ ~~~~~~~~~^~~~~~~~~~~
+build_close/mutants/p18392/m0067_notation.c:72:31: note: place parentheses around the '&&' expression to silence this warning
+   72 |     if (e == NULL || c >= 'a' && c <= 'z') {
+      |                               ^          
+      |                      (                   )
+1 error generated.
+build_close/mutants/p18392/m0069_notation.c:72:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   72 |     if (e == NULL && c >= 'a' || c <= 'z') {
+      |         ~~~~~~~~~~^~~~~~~~~~~ ~~
+build_close/mutants/p18392/m0069_notation.c:72:19: note: place parentheses around the '&&' expression to silence this warning
+   72 |     if (e == NULL && c >= 'a' || c <= 'z') {
+      |                   ^
+      |         (                    )
+1 error generated.
+build_close/mutants/p18392/m0071_notation.c:73:33: error: expected identifier or '('
+   73 |         const ct_notation_entry /upper = ct_notation_find((char)(c - 'a' + 'A'));
+      |                                 ^
+build_close/mutants/p18392/m0071_notation.c:74:13: error: use of undeclared identifier 'upper'
+   74 |         if (upper != NULL && upper->kind == CT_NOTATION_KIND_FACE) {
+      |             ^~~~~
+build_close/mutants/p18392/m0071_notation.c:74:30: error: use of undeclared identifier 'upper'
+   74 |         if (upper != NULL && upper->kind == CT_NOTATION_KIND_FACE) {
+      |                              ^~~~~
+build_close/mutants/p18392/m0071_notation.c:75:17: error: use of undeclared identifier 'upper'
+   75 |             e = upper;
+      |                 ^~~~~
+4 errors generated.
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_errors exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+build_close/mutants/p18392/m0086_notation.c:83:62: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   83 |     if (!wide || e->kind == CT_NOTATION_KIND_FACE && i < len && s[i] == 'w') {
+      |               ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+build_close/mutants/p18392/m0086_notation.c:83:62: note: place parentheses around the '&&' expression to silence this warning
+   83 |     if (!wide || e->kind == CT_NOTATION_KIND_FACE && i < len && s[i] == 'w') {
+      |                                                              ^             
+      |                  (                                                         )
+1 error generated.
+mutate: suite notation_goldens exited 1
+build_close/mutants/p18392/m0088_notation.c:83:15: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   83 |     if (!wide && e->kind == CT_NOTATION_KIND_FACE || i < len && s[i] == 'w') {
+      |         ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p18392/m0088_notation.c:83:15: note: place parentheses around the '&&' expression to silence this warning
+   83 |     if (!wide && e->kind == CT_NOTATION_KIND_FACE || i < len && s[i] == 'w') {
+      |               ^
+      |         (                                        )
+build_close/mutants/p18392/m0088_notation.c:83:62: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   83 |     if (!wide && e->kind == CT_NOTATION_KIND_FACE || i < len && s[i] == 'w') {
+      |                                                   ~~ ~~~~~~~~^~~~~~~~~~~~~~
+build_close/mutants/p18392/m0088_notation.c:83:62: note: place parentheses around the '&&' expression to silence this warning
+   83 |     if (!wide && e->kind == CT_NOTATION_KIND_FACE || i < len && s[i] == 'w') {
+      |                                                              ^             
+      |                                                      (                     )
+2 errors generated.
+build_close/mutants/p18392/m0090_notation.c:83:51: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   83 |     if (!wide && e->kind == CT_NOTATION_KIND_FACE && i < len || s[i] == 'w') {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~ ~~
+build_close/mutants/p18392/m0090_notation.c:83:51: note: place parentheses around the '&&' expression to silence this warning
+   83 |     if (!wide && e->kind == CT_NOTATION_KIND_FACE && i < len || s[i] == 'w') {
+      |                                                   ^
+      |         (                                                   )
+1 error generated.
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_errors exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_errors exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_errors exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+build_close/mutants/p18392/m0139_notation.c:122:18: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  122 |     if (from < 1 && from > to || to > n)
+      |         ~~~~~~~~~^~~~~~~~~~~~ ~~
+build_close/mutants/p18392/m0139_notation.c:122:18: note: place parentheses around the '&&' expression to silence this warning
+  122 |     if (from < 1 && from > to || to > n)
+      |                  ^
+      |         (                    )
+1 error generated.
+mutate: suite notation_goldens exited 1
+build_close/mutants/p18392/m0141_notation.c:122:31: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  122 |     if (from < 1 || from > to && to > n)
+      |                  ~~ ~~~~~~~~~~^~~~~~~~~
+build_close/mutants/p18392/m0141_notation.c:122:31: note: place parentheses around the '&&' expression to silence this warning
+  122 |     if (from < 1 || from > to && to > n)
+      |                               ^        
+      |                     (                  )
+1 error generated.
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+mutate: suite notation_goldens exited 1
+build_close/mutants/p18392/m0146_notation.c:131:38: error: expected ')'
+  131 | int ct_notation_parse_one(const char /token, int n, ct_move *out) {
+      |                                      ^
+build_close/mutants/p18392/m0146_notation.c:131:26: note: to match this '('
+  131 | int ct_notation_parse_one(const char /token, int n, ct_move *out) {
+      |                          ^
+build_close/mutants/p18392/m0146_notation.c:131:5: error: conflicting types for 'ct_notation_parse_one'
+  131 | int ct_notation_parse_one(const char /token, int n, ct_move *out) {
+      |     ^
+src\engine/notation.h:28:5: note: previous declaration is here
+   28 | int ct_notation_parse_one(const char *token, int n, ct_move *out);
+      |     ^
+build_close/mutants/p18392/m0146_notation.c:132:9: error: use of undeclared identifier 'token'
+  132 |     if (token == NULL || out == NULL)
+      |         ^~~~~
+build_close/mutants/p18392/m0146_notation.c:132:26: error: use of undeclared identifier 'out'
+  132 |     if (token == NULL || out == NULL)
+      |                          ^~~
+build_close/mutants/p18392/m0146_notation.c:134:35: error: use of undeclared identifier 'token'
+  134 |     return ct_notation_parse_span(token, strlen(token), n, out);
+      |                                   ^~~~~
+build_close/mutants/p18392/m0146_notation.c:134:49: error: use of undeclared identifier 'token'
+  134 |     return ct_notation_parse_span(token, strlen(token), n, out);
+      |                                                 ^~~~~
+build_close/mutants/p18392/m0146_notation.c:134:57: error: use of undeclared identifier 'n'
+  134 |     return ct_notation_parse_span(token, strlen(token), n, out);
+      |                                                         ^
+build_close/mutants/p18392/m0146_notation.c:134:60: error: use of undeclared identifier 'out'
+  134 |     return ct_notation_parse_span(token, strlen(token), n, out);
+      |                                                            ^~~
+8 errors generated.
+build_close/mutants/p18392/m0147_notation.c:131:61: error: expected ')'
+  131 | int ct_notation_parse_one(const char *token, int n, ct_move /out) {
+      |                                                             ^
+build_close/mutants/p18392/m0147_notation.c:131:26: note: to match this '('
+  131 | int ct_notation_parse_one(const char *token, int n, ct_move /out) {
+      |                          ^
+build_close/mutants/p18392/m0147_notation.c:131:5: error: conflicting types for 'ct_notation_parse_one'
+  131 | int ct_notation_parse_one(const char *token, int n, ct_move /out) {
+      |     ^
+src\engine/notation.h:28:5: note: previous declaration is here
+   28 | int ct_notation_parse_one(const char *token, int n, ct_move *out);
+      |     ^
+build_close/mutants/p18392/m0147_notation.c:132:26: error: use of undeclared identifier 'out'
+  132 |     if (token == NULL || out == NULL)
+      |                          ^~~
+build_close/mutants/p18392/m0147_notation.c:134:60: error: use of undeclared identifier 'out'
+  134 |     return ct_notation_parse_span(token, strlen(token), n, out);
+      |                                                            ^~~
+4 errors generated.
+mutate: suite notation_goldens exited 1
+mutate: suite notation_alg exited -1073741819
+mutate: suite notation_goldens exited 1
+build_close/mutants/p18392/m0151_notation.c:137:34: error: expected ')'
+  137 | int ct_notation_parse(const char /alg, int n, ct_move *out, int cap) {
+      |                                  ^
+build_close/mutants/p18392/m0151_notation.c:137:22: note: to match this '('
+  137 | int ct_notation_parse(const char /alg, int n, ct_move *out, int cap) {
+      |                      ^
+build_close/mutants/p18392/m0151_notation.c:137:5: error: conflicting types for 'ct_notation_parse'
+  137 | int ct_notation_parse(const char /alg, int n, ct_move *out, int cap) {
+      |     ^
+src\engine/notation.h:26:5: note: previous declaration is here
+   26 | int ct_notation_parse(const char *alg, int n, ct_move *out, int cap);
+      |     ^
+build_close/mutants/p18392/m0151_notation.c:138:9: error: use of undeclared identifier 'alg'
+  138 |     if (alg == NULL || !ct_notation_valid_n(n) || cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p18392/m0151_notation.c:138:45: error: use of undeclared identifier 'n'
+  138 |     if (alg == NULL || !ct_notation_valid_n(n) || cap < 0 || (cap > 0 && out == NULL))
+      |                                             ^
+build_close/mutants/p18392/m0151_notation.c:138:51: error: use of undeclared identifier 'cap'
+  138 |     if (alg == NULL || !ct_notation_valid_n(n) || cap < 0 || (cap > 0 && out == NULL))
+      |                                                   ^~~
+build_close/mutants/p18392/m0151_notation.c:138:63: error: use of undeclared identifier 'cap'
+  138 |     if (alg == NULL || !ct_notation_valid_n(n) || cap < 0 || (cap > 0 && out == NULL))
+      |                                                               ^~~
+build_close/mutants/p18392/m0151_notation.c:138:74: error: use of undeclared identifier 'out'
+  138 |     if (alg == NULL || !ct_notation_valid_n(n) || cap < 0 || (cap > 0 && out == NULL))
+      |                                                                          ^~~
+build_close/mutants/p18392/m0151_notation.c:142:12: error: use of undeclared identifier 'alg'
+  142 |     while (alg[i] != '\0') {
+      |            ^~~
+build_close/mutants/p18392/m0151_notation.c:143:16: error: use of undeclared identifier 'alg'
+  143 |         while (alg[i] == ' ')
+      |                ^~~
+build_close/mutants/p18392/m0151_notation.c:145:13: error: use of undeclared identifier 'alg'
+  145 |         if (alg[i] == '\0')
+      |             ^~~
+build_close/mutants/p18392/m0151_notation.c:148:16: error: use of undeclared identifier 'alg'
+  148 |         while (alg[i] != '\0' && alg[i] != ' ')
+      |                ^~~
+build_close/mutants/p18392/m0151_notation.c:148:34: error: use of undeclared identifier 'alg'
+  148 |         while (alg[i] != '\0' && alg[i] != ' ')
+      |                                  ^~~
+build_close/mutants/p18392/m0151_notation.c:151:40: error: use of undeclared identifier 'alg'
+  151 |         int r = ct_notation_parse_span(alg + start, i - start, n, &m);
+      |                                        ^~~
+build_close/mutants/p18392/m0151_notation.c:151:64: error: use of undeclared identifier 'n'
+  151 |         int r = ct_notation_parse_span(alg + start, i - start, n, &m);
+      |                                                                ^
+build_close/mutants/p18392/m0151_notation.c:154:22: error: use of undeclared identifier 'cap'
+  154 |         if (count == cap)
+      |                      ^~~
+build_close/mutants/p18392/m0151_notation.c:156:9: error: use of undeclared identifier 'out'
+  156 |         out[count] = m;
+      |         ^~~
+16 errors generated.
+build_close/mutants/p18392/m0152_notation.c:137:55: error: expected ')'
+  137 | int ct_notation_parse(const char *alg, int n, ct_move /out, int cap) {
+      |                                                       ^
+build_close/mutants/p18392/m0152_notation.c:137:22: note: to match this '('
+  137 | int ct_notation_parse(const char *alg, int n, ct_move /out, int cap) {
+      |                      ^
+build_close/mutants/p18392/m0152_notation.c:137:5: error: conflicting types for 'ct_notation_parse'
+  137 | int ct_notation_parse(const char *alg, int n, ct_move /out, int cap) {
+      |     ^
+src\engine/notation.h:26:5: note: previous declaration is here
+   26 | int ct_notation_parse(const char *alg, int n, ct_move *out, int cap);
+      |     ^
+build_close/mutants/p18392/m0152_notation.c:138:51: error: use of undeclared identifier 'cap'
+  138 |     if (alg == NULL || !ct_notation_valid_n(n) || cap < 0 || (cap > 0 && out == NULL))
+      |                                                   ^~~
+build_close/mutants/p18392/m0152_notation.c:138:63: error: use of undeclared identifier 'cap'
+  138 |     if (alg == NULL || !ct_notation_valid_n(n) || cap < 0 || (cap > 0 && out == NULL))
+      |                                                               ^~~
+build_close/mutants/p18392/m0152_notation.c:138:74: error: use of undeclared identifier 'out'
+  138 |     if (alg == NULL || !ct_notation_valid_n(n) || cap < 0 || (cap > 0 && out == NULL))
+      |                                                                          ^~~
+build_close/mutants/p18392/m0152_notation.c:154:22: error: use of undeclared identifier 'cap'
+  154 |         if (count == cap)
+      |                      ^~~
+build_close/mutants/p18392/m0152_notation.c:156:9: error: use of undeclared identifier 'out'
+  156 |         out[count] = m;
+      |         ^~~
+7 errors generated.
+mutate: suite notation_alg exited 1
+build_close/mutants/p18392/m0154_notation.c:138:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  138 |     if (alg == NULL && !ct_notation_valid_n(n) || cap < 0 || (cap > 0 && out == NULL))
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p18392/m0154_notation.c:138:21: note: place parentheses around the '&&' expression to silence this warning
+  138 |     if (alg == NULL && !ct_notation_valid_n(n) || cap < 0 || (cap > 0 && out == NULL))
+      |                     ^
+      |         (                                     )
+1 error generated.
+mutate: suite notation_alg exited 1
+build_close/mutants/p18392/m0156_notation.c:138:48: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  138 |     if (alg == NULL || !ct_notation_valid_n(n) && cap < 0 || (cap > 0 && out == NULL))
+      |                     ~~ ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+build_close/mutants/p18392/m0156_notation.c:138:48: note: place parentheses around the '&&' expression to silence this warning
+  138 |     if (alg == NULL || !ct_notation_valid_n(n) && cap < 0 || (cap > 0 && out == NULL))
+      |                                                ^
+      |                        (                                 )
+1 error generated.
+build_close/mutants/p18392/m0160_notation.c:138:59: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  138 |     if (alg == NULL || !ct_notation_valid_n(n) || cap < 0 && (cap > 0 && out == NULL))
+      |                                                ~~ ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p18392/m0160_notation.c:138:59: note: place parentheses around the '&&' expression to silence this warning
+  138 |     if (alg == NULL || !ct_notation_valid_n(n) || cap < 0 && (cap > 0 && out == NULL))
+      |                                                           ^                          
+      |                                                   (                                  )
+1 error generated.
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_suffix_order exited 1
+mutate: suite notation_alg exited -1073741795
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+build_close/mutants/p18392/m0174_notation.c:148:31: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+  148 |         while (alg[i] != '\0' || alg[i] != ' ')
+      |                ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+build_close/mutants/p18392/m0182_notation.c:162:42: error: expected ')'
+  162 | int ct_notation_format_one(const ct_move /m, int n, char *out, unsigned cap) {
+      |                                          ^
+build_close/mutants/p18392/m0182_notation.c:162:27: note: to match this '('
+  162 | int ct_notation_format_one(const ct_move /m, int n, char *out, unsigned cap) {
+      |                           ^
+build_close/mutants/p18392/m0182_notation.c:162:5: error: conflicting types for 'ct_notation_format_one'
+  162 | int ct_notation_format_one(const ct_move /m, int n, char *out, unsigned cap) {
+      |     ^
+src\engine/notation.h:29:5: note: previous declaration is here
+   29 | int ct_notation_format_one(const ct_move *m, int n, char *out, unsigned cap);
+      |     ^
+build_close/mutants/p18392/m0182_notation.c:163:9: error: use of undeclared identifier 'm'
+  163 |     if (m == NULL || out == NULL || !ct_notation_valid_n(n))
+      |         ^
+build_close/mutants/p18392/m0182_notation.c:163:22: error: use of undeclared identifier 'out'
+  163 |     if (m == NULL || out == NULL || !ct_notation_valid_n(n))
+      |                      ^~~
+build_close/mutants/p18392/m0182_notation.c:163:58: error: use of undeclared identifier 'n'
+  163 |     if (m == NULL || out == NULL || !ct_notation_valid_n(n))
+      |                                                          ^
+build_close/mutants/p18392/m0182_notation.c:165:9: error: use of undeclared identifier 'm'
+  165 |     if (m->face < 0 || m->face >= CT_CUBE_FACE_COUNT)
+      |         ^
+build_close/mutants/p18392/m0182_notation.c:165:24: error: use of undeclared identifier 'm'
+  165 |     if (m->face < 0 || m->face >= CT_CUBE_FACE_COUNT)
+      |                        ^
+build_close/mutants/p18392/m0182_notation.c:167:9: error: use of undeclared identifier 'm'
+  167 |     if (m->quarter < 1 || m->quarter > CT_MOVE_QUARTERS - 1)
+      |         ^
+build_close/mutants/p18392/m0182_notation.c:167:27: error: use of undeclared identifier 'm'
+  167 |     if (m->quarter < 1 || m->quarter > CT_MOVE_QUARTERS - 1)
+      |                           ^
+build_close/mutants/p18392/m0182_notation.c:169:9: error: use of undeclared identifier 'm'
+  169 |     if (m->depth_from < 1 || m->depth_from > m->depth_to || m->depth_to > n)
+      |         ^
+build_close/mutants/p18392/m0182_notation.c:169:30: error: use of undeclared identifier 'm'
+  169 |     if (m->depth_from < 1 || m->depth_from > m->depth_to || m->depth_to > n)
+      |                              ^
+build_close/mutants/p18392/m0182_notation.c:169:46: error: use of undeclared identifier 'm'
+  169 |     if (m->depth_from < 1 || m->depth_from > m->depth_to || m->depth_to > n)
+      |                                              ^
+build_close/mutants/p18392/m0182_notation.c:169:61: error: use of undeclared identifier 'm'
+  169 |     if (m->depth_from < 1 || m->depth_from > m->depth_to || m->depth_to > n)
+      |                                                             ^
+build_close/mutants/p18392/m0182_notation.c:169:75: error: use of undeclared identifier 'n'
+  169 |     if (m->depth_from < 1 || m->depth_from > m->depth_to || m->depth_to > n)
+      |                                                                           ^
+build_close/mutants/p18392/m0182_notation.c:173:37: error: use of undeclared identifier 'n'
+  173 |     int middle = ct_notation_middle(n);
+      |                                     ^
+build_close/mutants/p18392/m0182_notation.c:175:9: error: use of undeclared identifier 'm'
+  175 |     if (m->depth_from == 1 && m->depth_to == n)
+      |         ^
+build_close/mutants/p18392/m0182_notation.c:175:31: error: use of undeclared identifier 'm'
+  175 |     if (m->depth_from == 1 && m->depth_to == n)
+      |                               ^
+build_close/mutants/p18392/m0182_notation.c:175:46: error: use of undeclared identifier 'n'
+  175 |     if (m->depth_from == 1 && m->depth_to == n)
+      |                                              ^
+build_close/mutants/p18392/m0182_notation.c:176:46: error: use of undeclared identifier 'm'
+  176 |         letter = ct_notation_rotation_letter(m->face);
+      |                                              ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p18392/m0183_notation.c:162:58: error: expected ')'
+  162 | int ct_notation_format_one(const ct_move *m, int n, char /out, unsigned cap) {
+      |                                                          ^
+build_close/mutants/p18392/m0183_notation.c:162:27: note: to match this '('
+  162 | int ct_notation_format_one(const ct_move *m, int n, char /out, unsigned cap) {
+      |                           ^
+build_close/mutants/p18392/m0183_notation.c:162:5: error: conflicting types for 'ct_notation_format_one'
+  162 | int ct_notation_format_one(const ct_move *m, int n, char /out, unsigned cap) {
+      |     ^
+src\engine/notation.h:29:5: note: previous declaration is here
+   29 | int ct_notation_format_one(const ct_move *m, int n, char *out, unsigned cap);
+      |     ^
+build_close/mutants/p18392/m0183_notation.c:163:22: error: use of undeclared identifier 'out'
+  163 |     if (m == NULL || out == NULL || !ct_notation_valid_n(n))
+      |                      ^~~
+build_close/mutants/p18392/m0183_notation.c:197:19: error: use of undeclared identifier 'cap'
+  197 |     if (len + 1 > cap)
+      |                   ^~~
+build_close/mutants/p18392/m0183_notation.c:199:12: error: use of undeclared identifier 'out'
+  199 |     memcpy(out, buf, len);
+      |            ^~~
+build_close/mutants/p18392/m0183_notation.c:200:5: error: use of undeclared identifier 'out'
+  200 |     out[len] = '\0';
+      |     ^~~
+6 errors generated.
+mutate: suite notation_canonical exited 1
+build_close/mutants/p18392/m0185_notation.c:163:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  163 |     if (m == NULL && out == NULL || !ct_notation_valid_n(n))
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_close/mutants/p18392/m0185_notation.c:163:19: note: place parentheses around the '&&' expression to silence this warning
+  163 |     if (m == NULL && out == NULL || !ct_notation_valid_n(n))
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite notation_canonical exited 1
+build_close/mutants/p18392/m0187_notation.c:163:34: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  163 |     if (m == NULL || out == NULL && !ct_notation_valid_n(n))
+      |                   ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p18392/m0187_notation.c:163:34: note: place parentheses around the '&&' expression to silence this warning
+  163 |     if (m == NULL || out == NULL && !ct_notation_valid_n(n))
+      |                                  ^                         
+      |                      (                                     )
+1 error generated.
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_alg exited -1073741795
+mutate: suite notation_alg exited -1073741795
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+build_close/mutants/p18392/m0205_notation.c:169:27: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  169 |     if (m->depth_from < 1 && m->depth_from > m->depth_to || m->depth_to > n)
+      |         ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p18392/m0205_notation.c:169:27: note: place parentheses around the '&&' expression to silence this warning
+  169 |     if (m->depth_from < 1 && m->depth_from > m->depth_to || m->depth_to > n)
+      |                           ^
+      |         (                                               )
+1 error generated.
+mutate: suite notation_canonical exited 1
+build_close/mutants/p18392/m0207_notation.c:169:58: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  169 |     if (m->depth_from < 1 || m->depth_from > m->depth_to && m->depth_to > n)
+      |                           ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build_close/mutants/p18392/m0207_notation.c:169:58: note: place parentheses around the '&&' expression to silence this warning
+  169 |     if (m->depth_from < 1 || m->depth_from > m->depth_to && m->depth_to > n)
+      |                                                          ^                 
+      |                              (                                             )
+1 error generated.
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited -1073741795
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+build_close/mutants/p18392/m0221_notation.c:177:48: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  177 |     if (letter == 0 || m->depth_from == middle && m->depth_to == middle)
+      |                     ~~ ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p18392/m0221_notation.c:177:48: note: place parentheses around the '&&' expression to silence this warning
+  177 |     if (letter == 0 || m->depth_from == middle && m->depth_to == middle)
+      |                                                ^                       
+      |                        (                                               )
+1 error generated.
+mutate: suite notation_canonical exited 1
+build_close/mutants/p18392/m0223_notation.c:177:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  177 |     if (letter == 0 && m->depth_from == middle || m->depth_to == middle)
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p18392/m0223_notation.c:177:21: note: place parentheses around the '&&' expression to silence this warning
+  177 |     if (letter == 0 && m->depth_from == middle || m->depth_to == middle)
+      |                     ^
+      |         (                                     )
+1 error generated.
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_canonical exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+build_close/mutants/p18392/m0254_notation.c:204:38: error: expected ')'
+  204 | int ct_notation_format(const ct_move /moves, int count, int n, char *out, unsigned cap) {
+      |                                      ^
+build_close/mutants/p18392/m0254_notation.c:204:23: note: to match this '('
+  204 | int ct_notation_format(const ct_move /moves, int count, int n, char *out, unsigned cap) {
+      |                       ^
+build_close/mutants/p18392/m0254_notation.c:204:5: error: conflicting types for 'ct_notation_format'
+  204 | int ct_notation_format(const ct_move /moves, int count, int n, char *out, unsigned cap) {
+      |     ^
+src\engine/notation.h:27:5: note: previous declaration is here
+   27 | int ct_notation_format(const ct_move *moves, int count, int n, char *out, unsigned cap);
+      |     ^
+build_close/mutants/p18392/m0254_notation.c:205:9: error: use of undeclared identifier 'out'
+  205 |     if (out == NULL || !ct_notation_valid_n(n) || count < 0 || (count > 0 && moves == NULL))
+      |         ^~~
+build_close/mutants/p18392/m0254_notation.c:205:45: error: use of undeclared identifier 'n'
+  205 |     if (out == NULL || !ct_notation_valid_n(n) || count < 0 || (count > 0 && moves == NULL))
+      |                                             ^
+build_close/mutants/p18392/m0254_notation.c:205:51: error: use of undeclared identifier 'count'
+  205 |     if (out == NULL || !ct_notation_valid_n(n) || count < 0 || (count > 0 && moves == NULL))
+      |                                                   ^~~~~
+build_close/mutants/p18392/m0254_notation.c:205:65: error: use of undeclared identifier 'count'
+  205 |     if (out == NULL || !ct_notation_valid_n(n) || count < 0 || (count > 0 && moves == NULL))
+      |                                                                 ^~~~~
+build_close/mutants/p18392/m0254_notation.c:205:78: error: use of undeclared identifier 'moves'
+  205 |     if (out == NULL || !ct_notation_valid_n(n) || count < 0 || (count > 0 && moves == NULL))
+      |                                                                              ^~~~~
+build_close/mutants/p18392/m0254_notation.c:208:25: error: use of undeclared identifier 'count'
+  208 |     for (int k = 0; k < count; k++) {
+      |                         ^~~~~
+build_close/mutants/p18392/m0254_notation.c:210:41: error: use of undeclared identifier 'moves'
+  210 |         int r = ct_notation_format_one(&moves[k], n, buf, sizeof buf);
+      |                                         ^~~~~
+build_close/mutants/p18392/m0254_notation.c:210:51: error: use of undeclared identifier 'n'
+  210 |         int r = ct_notation_format_one(&moves[k], n, buf, sizeof buf);
+      |                                                   ^
+build_close/mutants/p18392/m0254_notation.c:215:21: error: use of undeclared identifier 'cap'
+  215 |     if (total + 1 > cap)
+      |                     ^~~
+build_close/mutants/p18392/m0254_notation.c:218:25: error: use of undeclared identifier 'count'
+  218 |     for (int k = 0; k < count; k++) {
+      |                         ^~~~~
+build_close/mutants/p18392/m0254_notation.c:220:13: error: use of undeclared identifier 'out'
+  220 |             out[pos++] = ' ';
+      |             ^~~
+build_close/mutants/p18392/m0254_notation.c:222:41: error: use of undeclared identifier 'moves'
+  222 |         int r = ct_notation_format_one(&moves[k], n, buf, sizeof buf);
+      |                                         ^~~~~
+build_close/mutants/p18392/m0254_notation.c:222:51: error: use of undeclared identifier 'n'
+  222 |         int r = ct_notation_format_one(&moves[k], n, buf, sizeof buf);
+      |                                                   ^
+build_close/mutants/p18392/m0254_notation.c:223:16: error: use of undeclared identifier 'out'
+  223 |         memcpy(out + pos, buf, (size_t)r);
+      |                ^~~
+build_close/mutants/p18392/m0254_notation.c:226:5: error: use of undeclared identifier 'out'
+  226 |     out[pos] = '\0';
+      |     ^~~
+17 errors generated.
+build_close/mutants/p18392/m0255_notation.c:204:69: error: expected ')'
+  204 | int ct_notation_format(const ct_move *moves, int count, int n, char /out, unsigned cap) {
+      |                                                                     ^
+build_close/mutants/p18392/m0255_notation.c:204:23: note: to match this '('
+  204 | int ct_notation_format(const ct_move *moves, int count, int n, char /out, unsigned cap) {
+      |                       ^
+build_close/mutants/p18392/m0255_notation.c:204:5: error: conflicting types for 'ct_notation_format'
+  204 | int ct_notation_format(const ct_move *moves, int count, int n, char /out, unsigned cap) {
+      |     ^
+src\engine/notation.h:27:5: note: previous declaration is here
+   27 | int ct_notation_format(const ct_move *moves, int count, int n, char *out, unsigned cap);
+      |     ^
+build_close/mutants/p18392/m0255_notation.c:205:9: error: use of undeclared identifier 'out'
+  205 |     if (out == NULL || !ct_notation_valid_n(n) || count < 0 || (count > 0 && moves == NULL))
+      |         ^~~
+build_close/mutants/p18392/m0255_notation.c:215:21: error: use of undeclared identifier 'cap'
+  215 |     if (total + 1 > cap)
+      |                     ^~~
+build_close/mutants/p18392/m0255_notation.c:220:13: error: use of undeclared identifier 'out'
+  220 |             out[pos++] = ' ';
+      |             ^~~
+build_close/mutants/p18392/m0255_notation.c:223:16: error: use of undeclared identifier 'out'
+  223 |         memcpy(out + pos, buf, (size_t)r);
+      |                ^~~
+build_close/mutants/p18392/m0255_notation.c:226:5: error: use of undeclared identifier 'out'
+  226 |     out[pos] = '\0';
+      |     ^~~
+7 errors generated.
+mutate: suite notation_alg exited 1
+build_close/mutants/p18392/m0257_notation.c:205:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  205 |     if (out == NULL && !ct_notation_valid_n(n) || count < 0 || (count > 0 && moves == NULL))
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p18392/m0257_notation.c:205:21: note: place parentheses around the '&&' expression to silence this warning
+  205 |     if (out == NULL && !ct_notation_valid_n(n) || count < 0 || (count > 0 && moves == NULL))
+      |                     ^
+      |         (                                     )
+1 error generated.
+mutate: suite notation_alg exited 1
+build_close/mutants/p18392/m0259_notation.c:205:48: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  205 |     if (out == NULL || !ct_notation_valid_n(n) && count < 0 || (count > 0 && moves == NULL))
+      |                     ~~ ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+build_close/mutants/p18392/m0259_notation.c:205:48: note: place parentheses around the '&&' expression to silence this warning
+  205 |     if (out == NULL || !ct_notation_valid_n(n) && count < 0 || (count > 0 && moves == NULL))
+      |                                                ^
+      |                        (                                   )
+1 error generated.
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+build_close/mutants/p18392/m0263_notation.c:205:61: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  205 |     if (out == NULL || !ct_notation_valid_n(n) || count < 0 && (count > 0 && moves == NULL))
+      |                                                ~~ ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p18392/m0263_notation.c:205:61: note: place parentheses around the '&&' expression to silence this warning
+  205 |     if (out == NULL || !ct_notation_valid_n(n) || count < 0 && (count > 0 && moves == NULL))
+      |                                                             ^                              
+      |                                                   (                                        )
+1 error generated.
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited -1073741819
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited -1073741819
+mutate: suite notation_alg exited -1073741819
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: suite notation_alg exited 1
+mutate: 30 unexplained survivors
+make: *** [makefile:242: mutate] Error 1

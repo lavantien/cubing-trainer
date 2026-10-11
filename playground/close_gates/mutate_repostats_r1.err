@@ -1,0 +1,1277 @@
+build_close/mutants/p5804/m0001_repo_stats.c:32:32: error: expected ')'
+   32 | static void ct_stats_text(char /dst, size_t cap, const unsigned char *src) {
+      |                                ^
+build_close/mutants/p5804/m0001_repo_stats.c:32:26: note: to match this '('
+   32 | static void ct_stats_text(char /dst, size_t cap, const unsigned char *src) {
+      |                          ^
+build_close/mutants/p5804/m0001_repo_stats.c:33:14: error: use of undeclared identifier 'dst'
+   33 |     snprintf(dst, cap, "%s", src ? (const char *)src : "");
+      |              ^~~
+build_close/mutants/p5804/m0001_repo_stats.c:33:19: error: use of undeclared identifier 'cap'
+   33 |     snprintf(dst, cap, "%s", src ? (const char *)src : "");
+      |                   ^~~
+build_close/mutants/p5804/m0001_repo_stats.c:33:30: error: use of undeclared identifier 'src'
+   33 |     snprintf(dst, cap, "%s", src ? (const char *)src : "");
+      |                              ^~~
+build_close/mutants/p5804/m0001_repo_stats.c:33:50: error: use of undeclared identifier 'src'
+   33 |     snprintf(dst, cap, "%s", src ? (const char *)src : "");
+      |                                                  ^~~
+build_close/mutants/p5804/m0001_repo_stats.c:56:36: error: too many arguments to function call, expected 1, have 3
+   56 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |         ~~~~~~~~~~~~~              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p5804/m0001_repo_stats.c:32:13: note: 'ct_stats_text' declared here
+   32 | static void ct_stats_text(char /dst, size_t cap, const unsigned char *src) {
+      |             ^             ~~~~
+build_close/mutants/p5804/m0001_repo_stats.c:96:35: error: too many arguments to function call, expected 1, have 3
+   96 |         ct_stats_text(out[n].day, sizeof out[n].day, sqlite3_column_text(st, 0));
+      |         ~~~~~~~~~~~~~             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p5804/m0001_repo_stats.c:32:13: note: 'ct_stats_text' declared here
+   32 | static void ct_stats_text(char /dst, size_t cap, const unsigned char *src) {
+      |             ^             ~~~~
+build_close/mutants/p5804/m0001_repo_stats.c:127:40: error: too many arguments to function call, expected 1, have 3
+  127 |         ct_stats_text(out[n].case_key, sizeof out[n].case_key, sqlite3_column_text(st, col++));
+      |         ~~~~~~~~~~~~~                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p5804/m0001_repo_stats.c:32:13: note: 'ct_stats_text' declared here
+   32 | static void ct_stats_text(char /dst, size_t cap, const unsigned char *src) {
+      |             ^             ~~~~
+build_close/mutants/p5804/m0001_repo_stats.c:188:36: error: too many arguments to function call, expected 1, have 3
+  188 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |         ~~~~~~~~~~~~~              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p5804/m0001_repo_stats.c:32:13: note: 'ct_stats_text' declared here
+   32 | static void ct_stats_text(char /dst, size_t cap, const unsigned char *src) {
+      |             ^             ~~~~
+build_close/mutants/p5804/m0001_repo_stats.c:189:42: error: too many arguments to function call, expected 1, have 3
+  189 |         ct_stats_text(out[n].started_at, sizeof out[n].started_at, sqlite3_column_text(st, col++));
+      |         ~~~~~~~~~~~~~                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p5804/m0001_repo_stats.c:32:13: note: 'ct_stats_text' declared here
+   32 | static void ct_stats_text(char /dst, size_t cap, const unsigned char *src) {
+      |             ^             ~~~~
+build_close/mutants/p5804/m0001_repo_stats.c:190:40: error: too many arguments to function call, expected 1, have 3
+  190 |         ct_stats_text(out[n].ended_at, sizeof out[n].ended_at, sqlite3_column_text(st, col++));
+      |         ~~~~~~~~~~~~~                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p5804/m0001_repo_stats.c:32:13: note: 'ct_stats_text' declared here
+   32 | static void ct_stats_text(char /dst, size_t cap, const unsigned char *src) {
+      |             ^             ~~~~
+11 errors generated.
+build_close/mutants/p5804/m0002_repo_stats.c:32:70: error: expected ')'
+   32 | static void ct_stats_text(char *dst, size_t cap, const unsigned char /src) {
+      |                                                                      ^
+build_close/mutants/p5804/m0002_repo_stats.c:32:26: note: to match this '('
+   32 | static void ct_stats_text(char *dst, size_t cap, const unsigned char /src) {
+      |                          ^
+build_close/mutants/p5804/m0002_repo_stats.c:33:30: error: use of undeclared identifier 'src'
+   33 |     snprintf(dst, cap, "%s", src ? (const char *)src : "");
+      |                              ^~~
+build_close/mutants/p5804/m0002_repo_stats.c:33:50: error: use of undeclared identifier 'src'
+   33 |     snprintf(dst, cap, "%s", src ? (const char *)src : "");
+      |                                                  ^~~
+build_close/mutants/p5804/m0002_repo_stats.c:56:56: error: incompatible pointer to integer conversion passing 'const unsigned char *' to parameter of type 'unsigned char' [-Wint-conversion]
+   56 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p5804/m0002_repo_stats.c:32:70: note: passing argument to parameter here
+   32 | static void ct_stats_text(char *dst, size_t cap, const unsigned char /src) {
+      |                                                                      ^
+build_close/mutants/p5804/m0002_repo_stats.c:96:54: error: incompatible pointer to integer conversion passing 'const unsigned char *' to parameter of type 'unsigned char' [-Wint-conversion]
+   96 |         ct_stats_text(out[n].day, sizeof out[n].day, sqlite3_column_text(st, 0));
+      |                                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p5804/m0002_repo_stats.c:32:70: note: passing argument to parameter here
+   32 | static void ct_stats_text(char *dst, size_t cap, const unsigned char /src) {
+      |                                                                      ^
+build_close/mutants/p5804/m0002_repo_stats.c:127:64: error: incompatible pointer to integer conversion passing 'const unsigned char *' to parameter of type 'unsigned char' [-Wint-conversion]
+  127 |         ct_stats_text(out[n].case_key, sizeof out[n].case_key, sqlite3_column_text(st, col++));
+      |                                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p5804/m0002_repo_stats.c:32:70: note: passing argument to parameter here
+   32 | static void ct_stats_text(char *dst, size_t cap, const unsigned char /src) {
+      |                                                                      ^
+build_close/mutants/p5804/m0002_repo_stats.c:188:56: error: incompatible pointer to integer conversion passing 'const unsigned char *' to parameter of type 'unsigned char' [-Wint-conversion]
+  188 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p5804/m0002_repo_stats.c:32:70: note: passing argument to parameter here
+   32 | static void ct_stats_text(char *dst, size_t cap, const unsigned char /src) {
+      |                                                                      ^
+build_close/mutants/p5804/m0002_repo_stats.c:189:68: error: incompatible pointer to integer conversion passing 'const unsigned char *' to parameter of type 'unsigned char' [-Wint-conversion]
+  189 |         ct_stats_text(out[n].started_at, sizeof out[n].started_at, sqlite3_column_text(st, col++));
+      |                                                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p5804/m0002_repo_stats.c:32:70: note: passing argument to parameter here
+   32 | static void ct_stats_text(char *dst, size_t cap, const unsigned char /src) {
+      |                                                                      ^
+build_close/mutants/p5804/m0002_repo_stats.c:190:64: error: incompatible pointer to integer conversion passing 'const unsigned char *' to parameter of type 'unsigned char' [-Wint-conversion]
+  190 |         ct_stats_text(out[n].ended_at, sizeof out[n].ended_at, sqlite3_column_text(st, col++));
+      |                                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p5804/m0002_repo_stats.c:32:70: note: passing argument to parameter here
+   32 | static void ct_stats_text(char *dst, size_t cap, const unsigned char /src) {
+      |                                                                      ^
+9 errors generated.
+build_close/mutants/p5804/m0003_repo_stats.c:33:48: error: expected ')'
+   33 |     snprintf(dst, cap, "%s", src ? (const char /)src : "");
+      |                                                ^
+build_close/mutants/p5804/m0003_repo_stats.c:33:36: note: to match this '('
+   33 |     snprintf(dst, cap, "%s", src ? (const char /)src : "");
+      |                                    ^
+build_close/mutants/p5804/m0003_repo_stats.c:33:36: error: cast to smaller integer type 'char' from 'const unsigned char *' [-Werror,-Wpointer-to-int-cast]
+   33 |     snprintf(dst, cap, "%s", src ? (const char /)src : "");
+      |                                    ^~~~~~~~~~~~~~~~~
+build_close/mutants/p5804/m0003_repo_stats.c:33:34: error: pointer/integer type mismatch in conditional expression ('int' and 'char *') [-Werror,-Wconditional-type-mismatch]
+   33 |     snprintf(dst, cap, "%s", src ? (const char /)src : "");
+      |                                  ^ ~~~~~~~~~~~~~~~~~   ~~
+3 errors generated.
+build_close/mutants/p5804/m0004_repo_stats.c:36:32: error: expected ')'
+   36 | int ct_repo_deck_stats(sqlite3 /db, const char *now_iso, ct_deck_stats *out, int cap) {
+      |                                ^
+build_close/mutants/p5804/m0004_repo_stats.c:36:23: note: to match this '('
+   36 | int ct_repo_deck_stats(sqlite3 /db, const char *now_iso, ct_deck_stats *out, int cap) {
+      |                       ^
+build_close/mutants/p5804/m0004_repo_stats.c:36:5: error: conflicting types for 'ct_repo_deck_stats'
+   36 | int ct_repo_deck_stats(sqlite3 /db, const char *now_iso, ct_deck_stats *out, int cap) {
+      |     ^
+src/storage\repo_stats.h:40:5: note: previous declaration is here
+   40 | int ct_repo_deck_stats(sqlite3 *db, const char *now_iso, ct_deck_stats *out, int cap);
+      |     ^
+build_close/mutants/p5804/m0004_repo_stats.c:36:32: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   36 | int ct_repo_deck_stats(sqlite3 /db, const char *now_iso, ct_deck_stats *out, int cap) {
+      |                                ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p5804/m0004_repo_stats.c:37:9: error: use of undeclared identifier 'db'
+   37 |     if (db == NULL)
+      |         ^~
+build_close/mutants/p5804/m0004_repo_stats.c:39:26: error: use of undeclared identifier 'now_iso'
+   39 |     if (!ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX))
+      |                          ^~~~~~~
+build_close/mutants/p5804/m0004_repo_stats.c:41:9: error: use of undeclared identifier 'cap'
+   41 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p5804/m0004_repo_stats.c:41:21: error: use of undeclared identifier 'cap'
+   41 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p5804/m0004_repo_stats.c:41:32: error: use of undeclared identifier 'out'
+   41 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p5804/m0004_repo_stats.c:43:9: error: use of undeclared identifier 'cap'
+   43 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p5804/m0004_repo_stats.c:45:12: error: use of undeclared identifier 'out'
+   45 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p5804/m0004_repo_stats.c:45:28: error: use of undeclared identifier 'cap'
+   45 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p5804/m0004_repo_stats.c:45:42: error: use of undeclared identifier 'out'
+   45 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p5804/m0004_repo_stats.c:47:28: error: use of undeclared identifier 'db'
+   47 |     if (sqlite3_prepare_v2(db, CT_SQL_DECK_STATS, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p5804/m0004_repo_stats.c:51:30: error: use of undeclared identifier 'now_iso'
+   51 |     sqlite3_bind_text(st, 1, now_iso, -1, SQLITE_STATIC);
+      |                              ^~~~~~~
+build_close/mutants/p5804/m0004_repo_stats.c:54:16: error: use of undeclared identifier 'cap'
+   54 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p5804/m0004_repo_stats.c:56:23: error: use of undeclared identifier 'out'
+   56 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                       ^~~
+build_close/mutants/p5804/m0004_repo_stats.c:56:43: error: use of undeclared identifier 'out'
+   56 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                                           ^~~
+build_close/mutants/p5804/m0004_repo_stats.c:57:9: error: use of undeclared identifier 'out'
+   57 |         out[n].total_cards = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0004_repo_stats.c:58:9: error: use of undeclared identifier 'out'
+   58 |         out[n].due_now = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p5804/m0005_repo_stats.c:36:48: error: expected ')'
+   36 | int ct_repo_deck_stats(sqlite3 *db, const char /now_iso, ct_deck_stats *out, int cap) {
+      |                                                ^
+build_close/mutants/p5804/m0005_repo_stats.c:36:23: note: to match this '('
+   36 | int ct_repo_deck_stats(sqlite3 *db, const char /now_iso, ct_deck_stats *out, int cap) {
+      |                       ^
+build_close/mutants/p5804/m0005_repo_stats.c:36:5: error: conflicting types for 'ct_repo_deck_stats'
+   36 | int ct_repo_deck_stats(sqlite3 *db, const char /now_iso, ct_deck_stats *out, int cap) {
+      |     ^
+src/storage\repo_stats.h:40:5: note: previous declaration is here
+   40 | int ct_repo_deck_stats(sqlite3 *db, const char *now_iso, ct_deck_stats *out, int cap);
+      |     ^
+build_close/mutants/p5804/m0005_repo_stats.c:39:26: error: use of undeclared identifier 'now_iso'
+   39 |     if (!ct_repo_text_ok(now_iso, CT_STATS_STAMP_MAX))
+      |                          ^~~~~~~
+build_close/mutants/p5804/m0005_repo_stats.c:41:9: error: use of undeclared identifier 'cap'
+   41 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:41:21: error: use of undeclared identifier 'cap'
+   41 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:41:32: error: use of undeclared identifier 'out'
+   41 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:43:9: error: use of undeclared identifier 'cap'
+   43 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:45:12: error: use of undeclared identifier 'out'
+   45 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:45:28: error: use of undeclared identifier 'cap'
+   45 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:45:42: error: use of undeclared identifier 'out'
+   45 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:51:30: error: use of undeclared identifier 'now_iso'
+   51 |     sqlite3_bind_text(st, 1, now_iso, -1, SQLITE_STATIC);
+      |                              ^~~~~~~
+build_close/mutants/p5804/m0005_repo_stats.c:54:16: error: use of undeclared identifier 'cap'
+   54 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:56:23: error: use of undeclared identifier 'out'
+   56 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                       ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:56:43: error: use of undeclared identifier 'out'
+   56 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                                           ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:57:9: error: use of undeclared identifier 'out'
+   57 |         out[n].total_cards = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:58:9: error: use of undeclared identifier 'out'
+   58 |         out[n].due_now = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:59:9: error: use of undeclared identifier 'out'
+   59 |         out[n].learning = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:60:9: error: use of undeclared identifier 'out'
+   60 |         out[n].review_state = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0005_repo_stats.c:61:9: error: use of undeclared identifier 'out'
+   61 |         out[n].avg_stability = sqlite3_column_double(st, col++);
+      |         ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p5804/m0006_repo_stats.c:36:72: error: expected ')'
+   36 | int ct_repo_deck_stats(sqlite3 *db, const char *now_iso, ct_deck_stats /out, int cap) {
+      |                                                                        ^
+build_close/mutants/p5804/m0006_repo_stats.c:36:23: note: to match this '('
+   36 | int ct_repo_deck_stats(sqlite3 *db, const char *now_iso, ct_deck_stats /out, int cap) {
+      |                       ^
+build_close/mutants/p5804/m0006_repo_stats.c:36:5: error: conflicting types for 'ct_repo_deck_stats'
+   36 | int ct_repo_deck_stats(sqlite3 *db, const char *now_iso, ct_deck_stats /out, int cap) {
+      |     ^
+src/storage\repo_stats.h:40:5: note: previous declaration is here
+   40 | int ct_repo_deck_stats(sqlite3 *db, const char *now_iso, ct_deck_stats *out, int cap);
+      |     ^
+build_close/mutants/p5804/m0006_repo_stats.c:41:9: error: use of undeclared identifier 'cap'
+   41 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:41:21: error: use of undeclared identifier 'cap'
+   41 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:41:32: error: use of undeclared identifier 'out'
+   41 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:43:9: error: use of undeclared identifier 'cap'
+   43 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:45:12: error: use of undeclared identifier 'out'
+   45 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:45:28: error: use of undeclared identifier 'cap'
+   45 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:45:42: error: use of undeclared identifier 'out'
+   45 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:54:16: error: use of undeclared identifier 'cap'
+   54 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:56:23: error: use of undeclared identifier 'out'
+   56 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                       ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:56:43: error: use of undeclared identifier 'out'
+   56 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                                           ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:57:9: error: use of undeclared identifier 'out'
+   57 |         out[n].total_cards = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:58:9: error: use of undeclared identifier 'out'
+   58 |         out[n].due_now = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:59:9: error: use of undeclared identifier 'out'
+   59 |         out[n].learning = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:60:9: error: use of undeclared identifier 'out'
+   60 |         out[n].review_state = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:61:9: error: use of undeclared identifier 'out'
+   61 |         out[n].avg_stability = sqlite3_column_double(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0006_repo_stats.c:62:9: error: use of undeclared identifier 'out'
+   62 |         out[n].avg_difficulty = sqlite3_column_double(st, col++);
+      |         ^~~
+18 errors generated.
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_malformed exited 1
+mutate: suite stats_malformed exited 1
+mutate: suite stats_malformed exited -1073741819
+mutate: suite stats_malformed exited -1073741819
+mutate: suite stats_malformed exited 1
+mutate: suite stats_malformed exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_deck_aggregates exited 1
+mutate: suite stats_deck_aggregates exited 1
+mutate: suite stats_malformed exited 1
+build_close/mutants/p5804/m0024_repo_stats.c:45:41: error: expected expression
+   45 |     memset(out, 0, (size_t)cap * sizeof /out);
+      |                                         ^
+1 error generated.
+build_close/mutants/p5804/m0025_repo_stats.c:46:18: error: expected identifier or '('
+   46 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p5804/m0025_repo_stats.c:47:56: error: use of undeclared identifier 'st'
+   47 |     if (sqlite3_prepare_v2(db, CT_SQL_DECK_STATS, -1, &st, NULL) != SQLITE_OK) {
+      |                                                        ^~
+build_close/mutants/p5804/m0025_repo_stats.c:48:26: error: use of undeclared identifier 'st'
+   48 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p5804/m0025_repo_stats.c:51:23: error: use of undeclared identifier 'st'
+   51 |     sqlite3_bind_text(st, 1, now_iso, -1, SQLITE_STATIC);
+      |                       ^~
+build_close/mutants/p5804/m0025_repo_stats.c:54:44: error: use of undeclared identifier 'st'
+   54 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                                            ^~
+build_close/mutants/p5804/m0025_repo_stats.c:56:76: error: use of undeclared identifier 'st'
+   56 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                                                                            ^~
+build_close/mutants/p5804/m0025_repo_stats.c:57:57: error: use of undeclared identifier 'st'
+   57 |         out[n].total_cards = (long)sqlite3_column_int64(st, col++);
+      |                                                         ^~
+build_close/mutants/p5804/m0025_repo_stats.c:58:53: error: use of undeclared identifier 'st'
+   58 |         out[n].due_now = (long)sqlite3_column_int64(st, col++);
+      |                                                     ^~
+build_close/mutants/p5804/m0025_repo_stats.c:59:54: error: use of undeclared identifier 'st'
+   59 |         out[n].learning = (long)sqlite3_column_int64(st, col++);
+      |                                                      ^~
+build_close/mutants/p5804/m0025_repo_stats.c:60:58: error: use of undeclared identifier 'st'
+   60 |         out[n].review_state = (long)sqlite3_column_int64(st, col++);
+      |                                                          ^~
+build_close/mutants/p5804/m0025_repo_stats.c:61:54: error: use of undeclared identifier 'st'
+   61 |         out[n].avg_stability = sqlite3_column_double(st, col++);
+      |                                                      ^~
+build_close/mutants/p5804/m0025_repo_stats.c:62:55: error: use of undeclared identifier 'st'
+   62 |         out[n].avg_difficulty = sqlite3_column_double(st, col++);
+      |                                                       ^~
+build_close/mutants/p5804/m0025_repo_stats.c:65:22: error: use of undeclared identifier 'st'
+   65 |     sqlite3_finalize(st);
+      |                      ^~
+13 errors generated.
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_deck_aggregates exited 1
+mutate: suite stats_deck_aggregates exited 1
+mutate: suite stats_deck_aggregates exited 1
+mutate: suite stats_deck_aggregates exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_deck_aggregates exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_deck_aggregates exited 1
+mutate: suite stats_deck_aggregates exited 1
+mutate: suite stats_deck_aggregates exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+build_close/mutants/p5804/m0045_repo_stats.c:71:34: error: expected ')'
+   71 | int ct_repo_due_forecast(sqlite3 /db, const char *from_day, int days, ct_due_forecast_row *out,
+      |                                  ^
+build_close/mutants/p5804/m0045_repo_stats.c:71:25: note: to match this '('
+   71 | int ct_repo_due_forecast(sqlite3 /db, const char *from_day, int days, ct_due_forecast_row *out,
+      |                         ^
+build_close/mutants/p5804/m0045_repo_stats.c:71:5: error: conflicting types for 'ct_repo_due_forecast'
+   71 | int ct_repo_due_forecast(sqlite3 /db, const char *from_day, int days, ct_due_forecast_row *out,
+      |     ^
+src/storage\repo_stats.h:41:5: note: previous declaration is here
+   41 | int ct_repo_due_forecast(sqlite3 *db, const char *from_day, int days, ct_due_forecast_row *out,
+      |     ^
+build_close/mutants/p5804/m0045_repo_stats.c:71:34: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   71 | int ct_repo_due_forecast(sqlite3 /db, const char *from_day, int days, ct_due_forecast_row *out,
+      |                                  ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p5804/m0045_repo_stats.c:73:9: error: use of undeclared identifier 'db'
+   73 |     if (db == NULL)
+      |         ^~
+build_close/mutants/p5804/m0045_repo_stats.c:75:26: error: use of undeclared identifier 'from_day'
+   75 |     if (!ct_repo_text_ok(from_day, CT_STATS_DAY_MAX))
+      |                          ^~~~~~~~
+build_close/mutants/p5804/m0045_repo_stats.c:77:9: error: use of undeclared identifier 'days'
+   77 |     if (days < 0)
+      |         ^~~~
+build_close/mutants/p5804/m0045_repo_stats.c:79:9: error: use of undeclared identifier 'cap'
+   79 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p5804/m0045_repo_stats.c:79:21: error: use of undeclared identifier 'cap'
+   79 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p5804/m0045_repo_stats.c:79:32: error: use of undeclared identifier 'out'
+   79 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p5804/m0045_repo_stats.c:81:9: error: use of undeclared identifier 'days'
+   81 |     if (days == 0)
+      |         ^~~~
+build_close/mutants/p5804/m0045_repo_stats.c:83:9: error: use of undeclared identifier 'cap'
+   83 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p5804/m0045_repo_stats.c:84:16: error: use of undeclared identifier 'days'
+   84 |         return days;
+      |                ^~~~
+build_close/mutants/p5804/m0045_repo_stats.c:85:12: error: use of undeclared identifier 'out'
+   85 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p5804/m0045_repo_stats.c:85:28: error: use of undeclared identifier 'cap'
+   85 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p5804/m0045_repo_stats.c:85:42: error: use of undeclared identifier 'out'
+   85 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p5804/m0045_repo_stats.c:87:28: error: use of undeclared identifier 'db'
+   87 |     if (sqlite3_prepare_v2(db, CT_SQL_DUE_FORECAST, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p5804/m0045_repo_stats.c:91:30: error: use of undeclared identifier 'from_day'
+   91 |     sqlite3_bind_text(st, 1, from_day, -1, SQLITE_STATIC);
+      |                              ^~~~~~~~
+build_close/mutants/p5804/m0045_repo_stats.c:92:29: error: use of undeclared identifier 'days'
+   92 |     sqlite3_bind_int(st, 2, days);
+      |                             ^~~~
+build_close/mutants/p5804/m0045_repo_stats.c:95:16: error: use of undeclared identifier 'cap'
+   95 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p5804/m0046_repo_stats.c:71:50: error: expected ')'
+   71 | int ct_repo_due_forecast(sqlite3 *db, const char /from_day, int days, ct_due_forecast_row *out,
+      |                                                  ^
+build_close/mutants/p5804/m0046_repo_stats.c:71:25: note: to match this '('
+   71 | int ct_repo_due_forecast(sqlite3 *db, const char /from_day, int days, ct_due_forecast_row *out,
+      |                         ^
+build_close/mutants/p5804/m0046_repo_stats.c:71:5: error: conflicting types for 'ct_repo_due_forecast'
+   71 | int ct_repo_due_forecast(sqlite3 *db, const char /from_day, int days, ct_due_forecast_row *out,
+      |     ^
+src/storage\repo_stats.h:41:5: note: previous declaration is here
+   41 | int ct_repo_due_forecast(sqlite3 *db, const char *from_day, int days, ct_due_forecast_row *out,
+      |     ^
+build_close/mutants/p5804/m0046_repo_stats.c:75:26: error: use of undeclared identifier 'from_day'
+   75 |     if (!ct_repo_text_ok(from_day, CT_STATS_DAY_MAX))
+      |                          ^~~~~~~~
+build_close/mutants/p5804/m0046_repo_stats.c:77:9: error: use of undeclared identifier 'days'
+   77 |     if (days < 0)
+      |         ^~~~
+build_close/mutants/p5804/m0046_repo_stats.c:79:9: error: use of undeclared identifier 'cap'
+   79 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p5804/m0046_repo_stats.c:79:21: error: use of undeclared identifier 'cap'
+   79 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p5804/m0046_repo_stats.c:79:32: error: use of undeclared identifier 'out'
+   79 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p5804/m0046_repo_stats.c:81:9: error: use of undeclared identifier 'days'
+   81 |     if (days == 0)
+      |         ^~~~
+build_close/mutants/p5804/m0046_repo_stats.c:83:9: error: use of undeclared identifier 'cap'
+   83 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p5804/m0046_repo_stats.c:84:16: error: use of undeclared identifier 'days'
+   84 |         return days;
+      |                ^~~~
+build_close/mutants/p5804/m0046_repo_stats.c:85:12: error: use of undeclared identifier 'out'
+   85 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p5804/m0046_repo_stats.c:85:28: error: use of undeclared identifier 'cap'
+   85 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p5804/m0046_repo_stats.c:85:42: error: use of undeclared identifier 'out'
+   85 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p5804/m0046_repo_stats.c:91:30: error: use of undeclared identifier 'from_day'
+   91 |     sqlite3_bind_text(st, 1, from_day, -1, SQLITE_STATIC);
+      |                              ^~~~~~~~
+build_close/mutants/p5804/m0046_repo_stats.c:92:29: error: use of undeclared identifier 'days'
+   92 |     sqlite3_bind_int(st, 2, days);
+      |                             ^~~~
+build_close/mutants/p5804/m0046_repo_stats.c:95:16: error: use of undeclared identifier 'cap'
+   95 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p5804/m0046_repo_stats.c:96:23: error: use of undeclared identifier 'out'
+   96 |         ct_stats_text(out[n].day, sizeof out[n].day, sqlite3_column_text(st, 0));
+      |                       ^~~
+build_close/mutants/p5804/m0046_repo_stats.c:96:42: error: use of undeclared identifier 'out'
+   96 |         ct_stats_text(out[n].day, sizeof out[n].day, sqlite3_column_text(st, 0));
+      |                                          ^~~
+build_close/mutants/p5804/m0046_repo_stats.c:97:9: error: use of undeclared identifier 'out'
+   97 |         out[n].due_count = (long)sqlite3_column_int64(st, 1);
+      |         ^~~
+19 errors generated.
+build_close/mutants/p5804/m0047_repo_stats.c:71:91: error: expected ')'
+   71 | int ct_repo_due_forecast(sqlite3 *db, const char *from_day, int days, ct_due_forecast_row /out,
+      |                                                                                           ^
+build_close/mutants/p5804/m0047_repo_stats.c:71:25: note: to match this '('
+   71 | int ct_repo_due_forecast(sqlite3 *db, const char *from_day, int days, ct_due_forecast_row /out,
+      |                         ^
+build_close/mutants/p5804/m0047_repo_stats.c:71:5: error: conflicting types for 'ct_repo_due_forecast'
+   71 | int ct_repo_due_forecast(sqlite3 *db, const char *from_day, int days, ct_due_forecast_row /out,
+      |     ^
+src/storage\repo_stats.h:41:5: note: previous declaration is here
+   41 | int ct_repo_due_forecast(sqlite3 *db, const char *from_day, int days, ct_due_forecast_row *out,
+      |     ^
+build_close/mutants/p5804/m0047_repo_stats.c:79:9: error: use of undeclared identifier 'cap'
+   79 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p5804/m0047_repo_stats.c:79:21: error: use of undeclared identifier 'cap'
+   79 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p5804/m0047_repo_stats.c:79:32: error: use of undeclared identifier 'out'
+   79 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p5804/m0047_repo_stats.c:83:9: error: use of undeclared identifier 'cap'
+   83 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p5804/m0047_repo_stats.c:85:12: error: use of undeclared identifier 'out'
+   85 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p5804/m0047_repo_stats.c:85:28: error: use of undeclared identifier 'cap'
+   85 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p5804/m0047_repo_stats.c:85:42: error: use of undeclared identifier 'out'
+   85 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p5804/m0047_repo_stats.c:95:16: error: use of undeclared identifier 'cap'
+   95 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p5804/m0047_repo_stats.c:96:23: error: use of undeclared identifier 'out'
+   96 |         ct_stats_text(out[n].day, sizeof out[n].day, sqlite3_column_text(st, 0));
+      |                       ^~~
+build_close/mutants/p5804/m0047_repo_stats.c:96:42: error: use of undeclared identifier 'out'
+   96 |         ct_stats_text(out[n].day, sizeof out[n].day, sqlite3_column_text(st, 0));
+      |                                          ^~~
+build_close/mutants/p5804/m0047_repo_stats.c:97:9: error: use of undeclared identifier 'out'
+   97 |         out[n].due_count = (long)sqlite3_column_int64(st, 1);
+      |         ^~~
+13 errors generated.
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_malformed exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_malformed exited -1073741819
+mutate: suite stats_malformed exited -1073741819
+mutate: suite stats_forecast exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_forecast exited 1
+build_close/mutants/p5804/m0074_repo_stats.c:85:41: error: expected expression
+   85 |     memset(out, 0, (size_t)cap * sizeof /out);
+      |                                         ^
+1 error generated.
+build_close/mutants/p5804/m0075_repo_stats.c:86:18: error: expected identifier or '('
+   86 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p5804/m0075_repo_stats.c:87:58: error: use of undeclared identifier 'st'
+   87 |     if (sqlite3_prepare_v2(db, CT_SQL_DUE_FORECAST, -1, &st, NULL) != SQLITE_OK) {
+      |                                                          ^~
+build_close/mutants/p5804/m0075_repo_stats.c:88:26: error: use of undeclared identifier 'st'
+   88 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p5804/m0075_repo_stats.c:91:23: error: use of undeclared identifier 'st'
+   91 |     sqlite3_bind_text(st, 1, from_day, -1, SQLITE_STATIC);
+      |                       ^~
+build_close/mutants/p5804/m0075_repo_stats.c:92:22: error: use of undeclared identifier 'st'
+   92 |     sqlite3_bind_int(st, 2, days);
+      |                      ^~
+build_close/mutants/p5804/m0075_repo_stats.c:95:44: error: use of undeclared identifier 'st'
+   95 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                                            ^~
+build_close/mutants/p5804/m0075_repo_stats.c:96:74: error: use of undeclared identifier 'st'
+   96 |         ct_stats_text(out[n].day, sizeof out[n].day, sqlite3_column_text(st, 0));
+      |                                                                          ^~
+build_close/mutants/p5804/m0075_repo_stats.c:97:55: error: use of undeclared identifier 'st'
+   97 |         out[n].due_count = (long)sqlite3_column_int64(st, 1);
+      |                                                       ^~
+build_close/mutants/p5804/m0075_repo_stats.c:100:22: error: use of undeclared identifier 'st'
+  100 |     sqlite3_finalize(st);
+      |                      ^~
+9 errors generated.
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_forecast exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+build_close/mutants/p5804/m0099_repo_stats.c:106:35: error: expected ')'
+  106 | int ct_repo_case_accuracy(sqlite3 /db, const char *deck, ct_case_accuracy_row *out, int cap) {
+      |                                   ^
+build_close/mutants/p5804/m0099_repo_stats.c:106:26: note: to match this '('
+  106 | int ct_repo_case_accuracy(sqlite3 /db, const char *deck, ct_case_accuracy_row *out, int cap) {
+      |                          ^
+build_close/mutants/p5804/m0099_repo_stats.c:106:5: error: conflicting types for 'ct_repo_case_accuracy'
+  106 | int ct_repo_case_accuracy(sqlite3 /db, const char *deck, ct_case_accuracy_row *out, int cap) {
+      |     ^
+src/storage\repo_stats.h:43:5: note: previous declaration is here
+   43 | int ct_repo_case_accuracy(sqlite3 *db, const char *deck, ct_case_accuracy_row *out, int cap);
+      |     ^
+build_close/mutants/p5804/m0099_repo_stats.c:106:35: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  106 | int ct_repo_case_accuracy(sqlite3 /db, const char *deck, ct_case_accuracy_row *out, int cap) {
+      |                                   ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p5804/m0099_repo_stats.c:107:9: error: use of undeclared identifier 'db'
+  107 |     if (db == NULL)
+      |         ^~
+build_close/mutants/p5804/m0099_repo_stats.c:109:26: error: use of undeclared identifier 'deck'
+  109 |     if (!ct_repo_text_ok(deck, CT_STATS_DECK_MAX))
+      |                          ^~~~
+build_close/mutants/p5804/m0099_repo_stats.c:111:9: error: use of undeclared identifier 'cap'
+  111 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p5804/m0099_repo_stats.c:111:21: error: use of undeclared identifier 'cap'
+  111 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p5804/m0099_repo_stats.c:111:32: error: use of undeclared identifier 'out'
+  111 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p5804/m0099_repo_stats.c:113:9: error: use of undeclared identifier 'cap'
+  113 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p5804/m0099_repo_stats.c:115:12: error: use of undeclared identifier 'out'
+  115 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p5804/m0099_repo_stats.c:115:28: error: use of undeclared identifier 'cap'
+  115 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p5804/m0099_repo_stats.c:115:42: error: use of undeclared identifier 'out'
+  115 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p5804/m0099_repo_stats.c:117:28: error: use of undeclared identifier 'db'
+  117 |     if (sqlite3_prepare_v2(db, CT_SQL_CASE_ACCURACY, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p5804/m0099_repo_stats.c:122:30: error: use of undeclared identifier 'deck'
+  122 |     sqlite3_bind_text(st, 2, deck, -1, SQLITE_STATIC);
+      |                              ^~~~
+build_close/mutants/p5804/m0099_repo_stats.c:125:16: error: use of undeclared identifier 'cap'
+  125 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p5804/m0099_repo_stats.c:127:23: error: use of undeclared identifier 'out'
+  127 |         ct_stats_text(out[n].case_key, sizeof out[n].case_key, sqlite3_column_text(st, col++));
+      |                       ^~~
+build_close/mutants/p5804/m0099_repo_stats.c:127:47: error: use of undeclared identifier 'out'
+  127 |         ct_stats_text(out[n].case_key, sizeof out[n].case_key, sqlite3_column_text(st, col++));
+      |                                               ^~~
+build_close/mutants/p5804/m0099_repo_stats.c:128:9: error: use of undeclared identifier 'out'
+  128 |         out[n].direction = sqlite3_column_int(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0099_repo_stats.c:129:9: error: use of undeclared identifier 'out'
+  129 |         out[n].reviews = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p5804/m0100_repo_stats.c:106:51: error: expected ')'
+  106 | int ct_repo_case_accuracy(sqlite3 *db, const char /deck, ct_case_accuracy_row *out, int cap) {
+      |                                                   ^
+build_close/mutants/p5804/m0100_repo_stats.c:106:26: note: to match this '('
+  106 | int ct_repo_case_accuracy(sqlite3 *db, const char /deck, ct_case_accuracy_row *out, int cap) {
+      |                          ^
+build_close/mutants/p5804/m0100_repo_stats.c:106:5: error: conflicting types for 'ct_repo_case_accuracy'
+  106 | int ct_repo_case_accuracy(sqlite3 *db, const char /deck, ct_case_accuracy_row *out, int cap) {
+      |     ^
+src/storage\repo_stats.h:43:5: note: previous declaration is here
+   43 | int ct_repo_case_accuracy(sqlite3 *db, const char *deck, ct_case_accuracy_row *out, int cap);
+      |     ^
+build_close/mutants/p5804/m0100_repo_stats.c:109:26: error: use of undeclared identifier 'deck'
+  109 |     if (!ct_repo_text_ok(deck, CT_STATS_DECK_MAX))
+      |                          ^~~~
+build_close/mutants/p5804/m0100_repo_stats.c:111:9: error: use of undeclared identifier 'cap'
+  111 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:111:21: error: use of undeclared identifier 'cap'
+  111 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:111:32: error: use of undeclared identifier 'out'
+  111 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:113:9: error: use of undeclared identifier 'cap'
+  113 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:115:12: error: use of undeclared identifier 'out'
+  115 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:115:28: error: use of undeclared identifier 'cap'
+  115 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:115:42: error: use of undeclared identifier 'out'
+  115 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:122:30: error: use of undeclared identifier 'deck'
+  122 |     sqlite3_bind_text(st, 2, deck, -1, SQLITE_STATIC);
+      |                              ^~~~
+build_close/mutants/p5804/m0100_repo_stats.c:125:16: error: use of undeclared identifier 'cap'
+  125 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:127:23: error: use of undeclared identifier 'out'
+  127 |         ct_stats_text(out[n].case_key, sizeof out[n].case_key, sqlite3_column_text(st, col++));
+      |                       ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:127:47: error: use of undeclared identifier 'out'
+  127 |         ct_stats_text(out[n].case_key, sizeof out[n].case_key, sqlite3_column_text(st, col++));
+      |                                               ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:128:9: error: use of undeclared identifier 'out'
+  128 |         out[n].direction = sqlite3_column_int(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:129:9: error: use of undeclared identifier 'out'
+  129 |         out[n].reviews = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:130:9: error: use of undeclared identifier 'out'
+  130 |         out[n].correct = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:131:9: error: use of undeclared identifier 'out'
+  131 |         out[n].accuracy = (double)out[n].correct / (double)out[n].reviews;
+      |         ^~~
+build_close/mutants/p5804/m0100_repo_stats.c:131:35: error: use of undeclared identifier 'out'
+  131 |         out[n].accuracy = (double)out[n].correct / (double)out[n].reviews;
+      |                                   ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p5804/m0101_repo_stats.c:106:79: error: expected ')'
+  106 | int ct_repo_case_accuracy(sqlite3 *db, const char *deck, ct_case_accuracy_row /out, int cap) {
+      |                                                                               ^
+build_close/mutants/p5804/m0101_repo_stats.c:106:26: note: to match this '('
+  106 | int ct_repo_case_accuracy(sqlite3 *db, const char *deck, ct_case_accuracy_row /out, int cap) {
+      |                          ^
+build_close/mutants/p5804/m0101_repo_stats.c:106:5: error: conflicting types for 'ct_repo_case_accuracy'
+  106 | int ct_repo_case_accuracy(sqlite3 *db, const char *deck, ct_case_accuracy_row /out, int cap) {
+      |     ^
+src/storage\repo_stats.h:43:5: note: previous declaration is here
+   43 | int ct_repo_case_accuracy(sqlite3 *db, const char *deck, ct_case_accuracy_row *out, int cap);
+      |     ^
+build_close/mutants/p5804/m0101_repo_stats.c:111:9: error: use of undeclared identifier 'cap'
+  111 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:111:21: error: use of undeclared identifier 'cap'
+  111 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:111:32: error: use of undeclared identifier 'out'
+  111 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:113:9: error: use of undeclared identifier 'cap'
+  113 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:115:12: error: use of undeclared identifier 'out'
+  115 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:115:28: error: use of undeclared identifier 'cap'
+  115 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:115:42: error: use of undeclared identifier 'out'
+  115 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:125:16: error: use of undeclared identifier 'cap'
+  125 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:127:23: error: use of undeclared identifier 'out'
+  127 |         ct_stats_text(out[n].case_key, sizeof out[n].case_key, sqlite3_column_text(st, col++));
+      |                       ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:127:47: error: use of undeclared identifier 'out'
+  127 |         ct_stats_text(out[n].case_key, sizeof out[n].case_key, sqlite3_column_text(st, col++));
+      |                                               ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:128:9: error: use of undeclared identifier 'out'
+  128 |         out[n].direction = sqlite3_column_int(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:129:9: error: use of undeclared identifier 'out'
+  129 |         out[n].reviews = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:130:9: error: use of undeclared identifier 'out'
+  130 |         out[n].correct = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:131:9: error: use of undeclared identifier 'out'
+  131 |         out[n].accuracy = (double)out[n].correct / (double)out[n].reviews;
+      |         ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:131:35: error: use of undeclared identifier 'out'
+  131 |         out[n].accuracy = (double)out[n].correct / (double)out[n].reviews;
+      |                                   ^~~
+build_close/mutants/p5804/m0101_repo_stats.c:131:60: error: use of undeclared identifier 'out'
+  131 |         out[n].accuracy = (double)out[n].correct / (double)out[n].reviews;
+      |                                                            ^~~
+18 errors generated.
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_malformed exited 1
+mutate: suite stats_malformed exited 1
+mutate: suite stats_malformed exited -1073741819
+mutate: suite stats_malformed exited -1073741819
+mutate: suite stats_malformed exited 1
+mutate: suite stats_malformed exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_case_accuracy exited 1
+mutate: suite stats_malformed exited 1
+mutate: suite stats_malformed exited 1
+build_close/mutants/p5804/m0119_repo_stats.c:115:41: error: expected expression
+  115 |     memset(out, 0, (size_t)cap * sizeof /out);
+      |                                         ^
+1 error generated.
+build_close/mutants/p5804/m0120_repo_stats.c:116:18: error: expected identifier or '('
+  116 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p5804/m0120_repo_stats.c:117:59: error: use of undeclared identifier 'st'
+  117 |     if (sqlite3_prepare_v2(db, CT_SQL_CASE_ACCURACY, -1, &st, NULL) != SQLITE_OK) {
+      |                                                           ^~
+build_close/mutants/p5804/m0120_repo_stats.c:118:26: error: use of undeclared identifier 'st'
+  118 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p5804/m0120_repo_stats.c:121:22: error: use of undeclared identifier 'st'
+  121 |     sqlite3_bind_int(st, 1, CT_AGAIN);
+      |                      ^~
+build_close/mutants/p5804/m0120_repo_stats.c:122:23: error: use of undeclared identifier 'st'
+  122 |     sqlite3_bind_text(st, 2, deck, -1, SQLITE_STATIC);
+      |                       ^~
+build_close/mutants/p5804/m0120_repo_stats.c:125:44: error: use of undeclared identifier 'st'
+  125 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                                            ^~
+build_close/mutants/p5804/m0120_repo_stats.c:127:84: error: use of undeclared identifier 'st'
+  127 |         ct_stats_text(out[n].case_key, sizeof out[n].case_key, sqlite3_column_text(st, col++));
+      |                                                                                    ^~
+build_close/mutants/p5804/m0120_repo_stats.c:128:47: error: use of undeclared identifier 'st'
+  128 |         out[n].direction = sqlite3_column_int(st, col++);
+      |                                               ^~
+build_close/mutants/p5804/m0120_repo_stats.c:129:53: error: use of undeclared identifier 'st'
+  129 |         out[n].reviews = (long)sqlite3_column_int64(st, col++);
+      |                                                     ^~
+build_close/mutants/p5804/m0120_repo_stats.c:130:53: error: use of undeclared identifier 'st'
+  130 |         out[n].correct = (long)sqlite3_column_int64(st, col++);
+      |                                                     ^~
+build_close/mutants/p5804/m0120_repo_stats.c:134:22: error: use of undeclared identifier 'st'
+  134 |     sqlite3_finalize(st);
+      |                      ^~
+11 errors generated.
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_case_accuracy exited 1
+mutate: suite stats_case_accuracy exited 1
+mutate: suite stats_case_accuracy exited 1
+mutate: suite stats_case_accuracy exited 1
+mutate: suite stats_case_accuracy exited 1
+mutate: suite stats_case_accuracy exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_case_accuracy exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_case_accuracy exited 1
+mutate: suite stats_case_accuracy exited 1
+mutate: suite stats_case_accuracy exited 1
+mutate: suite stats_case_accuracy exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+build_close/mutants/p5804/m0143_repo_stats.c:140:33: error: expected ')'
+  140 | int ct_repo_session_log(sqlite3 /db, const ct_session_row *row) {
+      |                                 ^
+build_close/mutants/p5804/m0143_repo_stats.c:140:24: note: to match this '('
+  140 | int ct_repo_session_log(sqlite3 /db, const ct_session_row *row) {
+      |                        ^
+build_close/mutants/p5804/m0143_repo_stats.c:140:5: error: conflicting types for 'ct_repo_session_log'
+  140 | int ct_repo_session_log(sqlite3 /db, const ct_session_row *row) {
+      |     ^
+src/storage\repo_stats.h:44:5: note: previous declaration is here
+   44 | int ct_repo_session_log(sqlite3 *db, const ct_session_row *row);
+      |     ^
+build_close/mutants/p5804/m0143_repo_stats.c:140:33: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  140 | int ct_repo_session_log(sqlite3 /db, const ct_session_row *row) {
+      |                                 ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p5804/m0143_repo_stats.c:141:9: error: use of undeclared identifier 'db'
+  141 |     if (db == NULL || row == NULL)
+      |         ^~
+build_close/mutants/p5804/m0143_repo_stats.c:141:23: error: use of undeclared identifier 'row'
+  141 |     if (db == NULL || row == NULL)
+      |                       ^~~
+build_close/mutants/p5804/m0143_repo_stats.c:143:26: error: use of undeclared identifier 'row'
+  143 |     if (!ct_repo_text_ok(row->deck, CT_STATS_DECK_MAX))
+      |                          ^~~
+build_close/mutants/p5804/m0143_repo_stats.c:145:26: error: use of undeclared identifier 'row'
+  145 |     if (!ct_repo_text_ok(row->started_at, CT_STATS_STAMP_MAX))
+      |                          ^~~
+build_close/mutants/p5804/m0143_repo_stats.c:147:16: error: use of undeclared identifier 'row'
+  147 |     if (strlen(row->ended_at) >= CT_STATS_STAMP_MAX)
+      |                ^~~
+build_close/mutants/p5804/m0143_repo_stats.c:150:28: error: use of undeclared identifier 'db'
+  150 |     if (sqlite3_prepare_v2(db, CT_SQL_SESSION_INSERT, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p5804/m0143_repo_stats.c:155:33: error: use of undeclared identifier 'row'
+  155 |     sqlite3_bind_text(st, ++ix, row->deck, -1, SQLITE_STATIC);
+      |                                 ^~~
+build_close/mutants/p5804/m0143_repo_stats.c:156:33: error: use of undeclared identifier 'row'
+  156 |     sqlite3_bind_text(st, ++ix, row->started_at, -1, SQLITE_STATIC);
+      |                                 ^~~
+build_close/mutants/p5804/m0143_repo_stats.c:157:33: error: use of undeclared identifier 'row'
+  157 |     sqlite3_bind_text(st, ++ix, row->ended_at, -1, SQLITE_STATIC);
+      |                                 ^~~
+build_close/mutants/p5804/m0143_repo_stats.c:158:32: error: use of undeclared identifier 'row'
+  158 |     sqlite3_bind_int(st, ++ix, row->n_cards);
+      |                                ^~~
+build_close/mutants/p5804/m0143_repo_stats.c:159:32: error: use of undeclared identifier 'row'
+  159 |     sqlite3_bind_int(st, ++ix, row->n_again);
+      |                                ^~~
+build_close/mutants/p5804/m0143_repo_stats.c:160:32: error: use of undeclared identifier 'row'
+  160 |     sqlite3_bind_int(st, ++ix, row->n_hard);
+      |                                ^~~
+build_close/mutants/p5804/m0143_repo_stats.c:161:32: error: use of undeclared identifier 'row'
+  161 |     sqlite3_bind_int(st, ++ix, row->n_good);
+      |                                ^~~
+build_close/mutants/p5804/m0143_repo_stats.c:162:32: error: use of undeclared identifier 'row'
+  162 |     sqlite3_bind_int(st, ++ix, row->n_easy);
+      |                                ^~~
+17 errors generated.
+build_close/mutants/p5804/m0144_repo_stats.c:140:59: error: expected ')'
+  140 | int ct_repo_session_log(sqlite3 *db, const ct_session_row /row) {
+      |                                                           ^
+build_close/mutants/p5804/m0144_repo_stats.c:140:24: note: to match this '('
+  140 | int ct_repo_session_log(sqlite3 *db, const ct_session_row /row) {
+      |                        ^
+build_close/mutants/p5804/m0144_repo_stats.c:140:5: error: conflicting types for 'ct_repo_session_log'
+  140 | int ct_repo_session_log(sqlite3 *db, const ct_session_row /row) {
+      |     ^
+src/storage\repo_stats.h:44:5: note: previous declaration is here
+   44 | int ct_repo_session_log(sqlite3 *db, const ct_session_row *row);
+      |     ^
+build_close/mutants/p5804/m0144_repo_stats.c:141:23: error: use of undeclared identifier 'row'
+  141 |     if (db == NULL || row == NULL)
+      |                       ^~~
+build_close/mutants/p5804/m0144_repo_stats.c:143:26: error: use of undeclared identifier 'row'
+  143 |     if (!ct_repo_text_ok(row->deck, CT_STATS_DECK_MAX))
+      |                          ^~~
+build_close/mutants/p5804/m0144_repo_stats.c:145:26: error: use of undeclared identifier 'row'
+  145 |     if (!ct_repo_text_ok(row->started_at, CT_STATS_STAMP_MAX))
+      |                          ^~~
+build_close/mutants/p5804/m0144_repo_stats.c:147:16: error: use of undeclared identifier 'row'
+  147 |     if (strlen(row->ended_at) >= CT_STATS_STAMP_MAX)
+      |                ^~~
+build_close/mutants/p5804/m0144_repo_stats.c:155:33: error: use of undeclared identifier 'row'
+  155 |     sqlite3_bind_text(st, ++ix, row->deck, -1, SQLITE_STATIC);
+      |                                 ^~~
+build_close/mutants/p5804/m0144_repo_stats.c:156:33: error: use of undeclared identifier 'row'
+  156 |     sqlite3_bind_text(st, ++ix, row->started_at, -1, SQLITE_STATIC);
+      |                                 ^~~
+build_close/mutants/p5804/m0144_repo_stats.c:157:33: error: use of undeclared identifier 'row'
+  157 |     sqlite3_bind_text(st, ++ix, row->ended_at, -1, SQLITE_STATIC);
+      |                                 ^~~
+build_close/mutants/p5804/m0144_repo_stats.c:158:32: error: use of undeclared identifier 'row'
+  158 |     sqlite3_bind_int(st, ++ix, row->n_cards);
+      |                                ^~~
+build_close/mutants/p5804/m0144_repo_stats.c:159:32: error: use of undeclared identifier 'row'
+  159 |     sqlite3_bind_int(st, ++ix, row->n_again);
+      |                                ^~~
+build_close/mutants/p5804/m0144_repo_stats.c:160:32: error: use of undeclared identifier 'row'
+  160 |     sqlite3_bind_int(st, ++ix, row->n_hard);
+      |                                ^~~
+build_close/mutants/p5804/m0144_repo_stats.c:161:32: error: use of undeclared identifier 'row'
+  161 |     sqlite3_bind_int(st, ++ix, row->n_good);
+      |                                ^~~
+build_close/mutants/p5804/m0144_repo_stats.c:162:32: error: use of undeclared identifier 'row'
+  162 |     sqlite3_bind_int(st, ++ix, row->n_easy);
+      |                                ^~~
+14 errors generated.
+mutate: suite stats_sessions exited 1
+mutate: suite stats_malformed exited -1073741795
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+build_close/mutants/p5804/m0151_repo_stats.c:149:18: error: expected identifier or '('
+  149 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p5804/m0151_repo_stats.c:150:60: error: use of undeclared identifier 'st'
+  150 |     if (sqlite3_prepare_v2(db, CT_SQL_SESSION_INSERT, -1, &st, NULL) != SQLITE_OK) {
+      |                                                            ^~
+build_close/mutants/p5804/m0151_repo_stats.c:151:26: error: use of undeclared identifier 'st'
+  151 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p5804/m0151_repo_stats.c:155:23: error: use of undeclared identifier 'st'
+  155 |     sqlite3_bind_text(st, ++ix, row->deck, -1, SQLITE_STATIC);
+      |                       ^~
+build_close/mutants/p5804/m0151_repo_stats.c:156:23: error: use of undeclared identifier 'st'
+  156 |     sqlite3_bind_text(st, ++ix, row->started_at, -1, SQLITE_STATIC);
+      |                       ^~
+build_close/mutants/p5804/m0151_repo_stats.c:157:23: error: use of undeclared identifier 'st'
+  157 |     sqlite3_bind_text(st, ++ix, row->ended_at, -1, SQLITE_STATIC);
+      |                       ^~
+build_close/mutants/p5804/m0151_repo_stats.c:158:22: error: use of undeclared identifier 'st'
+  158 |     sqlite3_bind_int(st, ++ix, row->n_cards);
+      |                      ^~
+build_close/mutants/p5804/m0151_repo_stats.c:159:22: error: use of undeclared identifier 'st'
+  159 |     sqlite3_bind_int(st, ++ix, row->n_again);
+      |                      ^~
+build_close/mutants/p5804/m0151_repo_stats.c:160:22: error: use of undeclared identifier 'st'
+  160 |     sqlite3_bind_int(st, ++ix, row->n_hard);
+      |                      ^~
+build_close/mutants/p5804/m0151_repo_stats.c:161:22: error: use of undeclared identifier 'st'
+  161 |     sqlite3_bind_int(st, ++ix, row->n_good);
+      |                      ^~
+build_close/mutants/p5804/m0151_repo_stats.c:162:22: error: use of undeclared identifier 'st'
+  162 |     sqlite3_bind_int(st, ++ix, row->n_easy);
+      |                      ^~
+build_close/mutants/p5804/m0151_repo_stats.c:163:29: error: use of undeclared identifier 'st'
+  163 |     int step = sqlite3_step(st);
+      |                             ^~
+build_close/mutants/p5804/m0151_repo_stats.c:164:22: error: use of undeclared identifier 'st'
+  164 |     sqlite3_finalize(st);
+      |                      ^~
+13 errors generated.
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+build_close/mutants/p5804/m0168_repo_stats.c:170:30: error: expected ')'
+  170 | int ct_repo_sessions(sqlite3 /db, ct_session_row *out, int cap) {
+      |                              ^
+build_close/mutants/p5804/m0168_repo_stats.c:170:21: note: to match this '('
+  170 | int ct_repo_sessions(sqlite3 /db, ct_session_row *out, int cap) {
+      |                     ^
+build_close/mutants/p5804/m0168_repo_stats.c:170:5: error: conflicting types for 'ct_repo_sessions'
+  170 | int ct_repo_sessions(sqlite3 /db, ct_session_row *out, int cap) {
+      |     ^
+src/storage\repo_stats.h:45:5: note: previous declaration is here
+   45 | int ct_repo_sessions(sqlite3 *db, ct_session_row *out, int cap);
+      |     ^
+build_close/mutants/p5804/m0168_repo_stats.c:170:30: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  170 | int ct_repo_sessions(sqlite3 /db, ct_session_row *out, int cap) {
+      |                              ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p5804/m0168_repo_stats.c:171:9: error: use of undeclared identifier 'db'
+  171 |     if (db == NULL)
+      |         ^~
+build_close/mutants/p5804/m0168_repo_stats.c:173:9: error: use of undeclared identifier 'cap'
+  173 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p5804/m0168_repo_stats.c:173:21: error: use of undeclared identifier 'cap'
+  173 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p5804/m0168_repo_stats.c:173:32: error: use of undeclared identifier 'out'
+  173 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p5804/m0168_repo_stats.c:175:9: error: use of undeclared identifier 'cap'
+  175 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p5804/m0168_repo_stats.c:177:12: error: use of undeclared identifier 'out'
+  177 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p5804/m0168_repo_stats.c:177:28: error: use of undeclared identifier 'cap'
+  177 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p5804/m0168_repo_stats.c:177:42: error: use of undeclared identifier 'out'
+  177 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p5804/m0168_repo_stats.c:179:28: error: use of undeclared identifier 'db'
+  179 |     if (sqlite3_prepare_v2(db, CT_SQL_SESSIONS, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_close/mutants/p5804/m0168_repo_stats.c:185:16: error: use of undeclared identifier 'cap'
+  185 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p5804/m0168_repo_stats.c:187:9: error: use of undeclared identifier 'out'
+  187 |         out[n].id = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0168_repo_stats.c:188:23: error: use of undeclared identifier 'out'
+  188 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                       ^~~
+build_close/mutants/p5804/m0168_repo_stats.c:188:43: error: use of undeclared identifier 'out'
+  188 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                                           ^~~
+build_close/mutants/p5804/m0168_repo_stats.c:189:23: error: use of undeclared identifier 'out'
+  189 |         ct_stats_text(out[n].started_at, sizeof out[n].started_at, sqlite3_column_text(st, col++));
+      |                       ^~~
+build_close/mutants/p5804/m0168_repo_stats.c:189:49: error: use of undeclared identifier 'out'
+  189 |         ct_stats_text(out[n].started_at, sizeof out[n].started_at, sqlite3_column_text(st, col++));
+      |                                                 ^~~
+build_close/mutants/p5804/m0168_repo_stats.c:190:23: error: use of undeclared identifier 'out'
+  190 |         ct_stats_text(out[n].ended_at, sizeof out[n].ended_at, sqlite3_column_text(st, col++));
+      |                       ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p5804/m0169_repo_stats.c:170:50: error: expected ')'
+  170 | int ct_repo_sessions(sqlite3 *db, ct_session_row /out, int cap) {
+      |                                                  ^
+build_close/mutants/p5804/m0169_repo_stats.c:170:21: note: to match this '('
+  170 | int ct_repo_sessions(sqlite3 *db, ct_session_row /out, int cap) {
+      |                     ^
+build_close/mutants/p5804/m0169_repo_stats.c:170:5: error: conflicting types for 'ct_repo_sessions'
+  170 | int ct_repo_sessions(sqlite3 *db, ct_session_row /out, int cap) {
+      |     ^
+src/storage\repo_stats.h:45:5: note: previous declaration is here
+   45 | int ct_repo_sessions(sqlite3 *db, ct_session_row *out, int cap);
+      |     ^
+build_close/mutants/p5804/m0169_repo_stats.c:173:9: error: use of undeclared identifier 'cap'
+  173 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |         ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:173:21: error: use of undeclared identifier 'cap'
+  173 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                     ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:173:32: error: use of undeclared identifier 'out'
+  173 |     if (cap < 0 || (cap > 0 && out == NULL))
+      |                                ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:175:9: error: use of undeclared identifier 'cap'
+  175 |     if (cap == 0)
+      |         ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:177:12: error: use of undeclared identifier 'out'
+  177 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |            ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:177:28: error: use of undeclared identifier 'cap'
+  177 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                            ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:177:42: error: use of undeclared identifier 'out'
+  177 |     memset(out, 0, (size_t)cap * sizeof *out);
+      |                                          ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:185:16: error: use of undeclared identifier 'cap'
+  185 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:187:9: error: use of undeclared identifier 'out'
+  187 |         out[n].id = (long)sqlite3_column_int64(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:188:23: error: use of undeclared identifier 'out'
+  188 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                       ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:188:43: error: use of undeclared identifier 'out'
+  188 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                                           ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:189:23: error: use of undeclared identifier 'out'
+  189 |         ct_stats_text(out[n].started_at, sizeof out[n].started_at, sqlite3_column_text(st, col++));
+      |                       ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:189:49: error: use of undeclared identifier 'out'
+  189 |         ct_stats_text(out[n].started_at, sizeof out[n].started_at, sqlite3_column_text(st, col++));
+      |                                                 ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:190:23: error: use of undeclared identifier 'out'
+  190 |         ct_stats_text(out[n].ended_at, sizeof out[n].ended_at, sqlite3_column_text(st, col++));
+      |                       ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:190:47: error: use of undeclared identifier 'out'
+  190 |         ct_stats_text(out[n].ended_at, sizeof out[n].ended_at, sqlite3_column_text(st, col++));
+      |                                               ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:191:9: error: use of undeclared identifier 'out'
+  191 |         out[n].n_cards = sqlite3_column_int(st, col++);
+      |         ^~~
+build_close/mutants/p5804/m0169_repo_stats.c:192:9: error: use of undeclared identifier 'out'
+  192 |         out[n].n_again = sqlite3_column_int(st, col++);
+      |         ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite stats_empty exited 1
+mutate: suite stats_malformed exited 1
+mutate: suite stats_malformed exited 1
+mutate: suite stats_malformed exited -1073741819
+mutate: suite stats_malformed exited -1073741819
+mutate: suite stats_malformed exited 1
+mutate: suite stats_malformed exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_malformed exited 1
+mutate: suite stats_malformed exited 1
+build_close/mutants/p5804/m0186_repo_stats.c:177:41: error: expected expression
+  177 |     memset(out, 0, (size_t)cap * sizeof /out);
+      |                                         ^
+1 error generated.
+build_close/mutants/p5804/m0187_repo_stats.c:178:18: error: expected identifier or '('
+  178 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_close/mutants/p5804/m0187_repo_stats.c:179:54: error: use of undeclared identifier 'st'
+  179 |     if (sqlite3_prepare_v2(db, CT_SQL_SESSIONS, -1, &st, NULL) != SQLITE_OK) {
+      |                                                      ^~
+build_close/mutants/p5804/m0187_repo_stats.c:180:26: error: use of undeclared identifier 'st'
+  180 |         sqlite3_finalize(st);
+      |                          ^~
+build_close/mutants/p5804/m0187_repo_stats.c:185:44: error: use of undeclared identifier 'st'
+  185 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                                            ^~
+build_close/mutants/p5804/m0187_repo_stats.c:187:48: error: use of undeclared identifier 'st'
+  187 |         out[n].id = (long)sqlite3_column_int64(st, col++);
+      |                                                ^~
+build_close/mutants/p5804/m0187_repo_stats.c:188:76: error: use of undeclared identifier 'st'
+  188 |         ct_stats_text(out[n].deck, sizeof out[n].deck, sqlite3_column_text(st, col++));
+      |                                                                            ^~
+build_close/mutants/p5804/m0187_repo_stats.c:189:88: error: use of undeclared identifier 'st'
+  189 |         ct_stats_text(out[n].started_at, sizeof out[n].started_at, sqlite3_column_text(st, col++));
+      |                                                                                        ^~
+build_close/mutants/p5804/m0187_repo_stats.c:190:84: error: use of undeclared identifier 'st'
+  190 |         ct_stats_text(out[n].ended_at, sizeof out[n].ended_at, sqlite3_column_text(st, col++));
+      |                                                                                    ^~
+build_close/mutants/p5804/m0187_repo_stats.c:191:45: error: use of undeclared identifier 'st'
+  191 |         out[n].n_cards = sqlite3_column_int(st, col++);
+      |                                             ^~
+build_close/mutants/p5804/m0187_repo_stats.c:192:45: error: use of undeclared identifier 'st'
+  192 |         out[n].n_again = sqlite3_column_int(st, col++);
+      |                                             ^~
+build_close/mutants/p5804/m0187_repo_stats.c:193:44: error: use of undeclared identifier 'st'
+  193 |         out[n].n_hard = sqlite3_column_int(st, col++);
+      |                                            ^~
+build_close/mutants/p5804/m0187_repo_stats.c:194:44: error: use of undeclared identifier 'st'
+  194 |         out[n].n_good = sqlite3_column_int(st, col++);
+      |                                            ^~
+build_close/mutants/p5804/m0187_repo_stats.c:195:44: error: use of undeclared identifier 'st'
+  195 |         out[n].n_easy = sqlite3_column_int(st, col++);
+      |                                            ^~
+build_close/mutants/p5804/m0187_repo_stats.c:198:22: error: use of undeclared identifier 'st'
+  198 |     sqlite3_finalize(st);
+      |                      ^~
+14 errors generated.
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_sessions exited 1
+mutate: suite stats_empty exited 1
+mutate: suite stats_empty exited 1
+mutate: 28 unexplained survivors
+make: *** [makefile:242: mutate] Error 1

@@ -1,0 +1,340 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/storage/repo_cards.c build_close card_insert_get card_unique_conflict card_update card_delete_cascade card_list card_get_by_key srs_roundtrip card_write_boundaries card_bad_args now_iso
+mutate: scope=src/storage/repo_cards.c files=1 sites=249 suites=10
+KILLED    m0001 src/storage/repo_cards.c:36 [arith * -> /]
+          build break
+KILLED    m0002 src/storage/repo_cards.c:41 [arith * -> /]
+          build break
+KILLED    m0003 src/storage/repo_cards.c:45 [arith * -> /]
+          build break
+KILLED    m0004 src/storage/repo_cards.c:45 [arith * -> /]
+          build break
+KILLED    m0005 src/storage/repo_cards.c:47 [int+1 0 -> 1]
+KILLED    m0006 src/storage/repo_cards.c:47 [int-1 0 -> -1]
+KILLED    m0007 src/storage/repo_cards.c:50 [arith * -> /]
+          build break
+KILLED    m0008 src/storage/repo_cards.c:50 [arith * -> /]
+          build break
+KILLED    m0009 src/storage/repo_cards.c:51 [arith - -> +]
+SURVIVED  m0010 src/storage/repo_cards.c:51 [int+1 1 -> 2]
+KILLED    m0011 src/storage/repo_cards.c:51 [int-1 1 -> 0]
+KILLED    m0012 src/storage/repo_cards.c:54 [arith * -> /]
+          build break
+KILLED    m0013 src/storage/repo_cards.c:58 [arith * -> /]
+          build break
+KILLED    m0014 src/storage/repo_cards.c:62 [arith * -> /]
+          build break
+KILLED    m0015 src/storage/repo_cards.c:66 [arith * -> /]
+          build break
+KILLED    m0016 src/storage/repo_cards.c:66 [arith * -> /]
+          build break
+KILLED    m0017 src/storage/repo_cards.c:68 [int+1 0 -> 1]
+KILLED    m0018 src/storage/repo_cards.c:68 [int-1 0 -> -1]
+KILLED    m0019 src/storage/repo_cards.c:71 [arith * -> /]
+          build break
+KILLED    m0020 src/storage/repo_cards.c:75 [arith * -> /]
+          build break
+KILLED    m0021 src/storage/repo_cards.c:79 [arith * -> /]
+          build break
+KILLED    m0022 src/storage/repo_cards.c:83 [arith * -> /]
+          build break
+KILLED    m0023 src/storage/repo_cards.c:83 [arith * -> /]
+          build break
+KILLED    m0024 src/storage/repo_cards.c:84 [arith * -> /]
+          build break
+KILLED    m0025 src/storage/repo_cards.c:85 [cmp == -> !=]
+SURVIVED  m0026 src/storage/repo_cards.c:86 [int+1 0 -> 1]
+SURVIVED  m0027 src/storage/repo_cards.c:86 [int-1 0 -> -1]
+KILLED    m0028 src/storage/repo_cards.c:89 [arith * -> /]
+          build break
+KILLED    m0029 src/storage/repo_cards.c:90 [cmp >= -> >]
+KILLED    m0030 src/storage/repo_cards.c:91 [arith - -> +]
+KILLED    m0031 src/storage/repo_cards.c:91 [int+1 1 -> 2]
+KILLED    m0032 src/storage/repo_cards.c:91 [int-1 1 -> 0]
+KILLED    m0033 src/storage/repo_cards.c:96 [arith * -> /]
+          build break
+KILLED    m0034 src/storage/repo_cards.c:97 [cmp == -> !=]
+KILLED    m0035 src/storage/repo_cards.c:99 [int+1 0 -> 1]
+KILLED    m0036 src/storage/repo_cards.c:99 [int-1 0 -> -1]
+KILLED    m0037 src/storage/repo_cards.c:100 [cmp < -> <=]
+KILLED    m0038 src/storage/repo_cards.c:103 [arith * -> /]
+          build break
+KILLED    m0039 src/storage/repo_cards.c:104 [cmp == -> !=]
+KILLED    m0040 src/storage/repo_cards.c:109 [arith * -> /]
+          build break
+KILLED    m0041 src/storage/repo_cards.c:110 [cmp != -> ==]
+KILLED    m0042 src/storage/repo_cards.c:113 [arith * -> /]
+          build break
+KILLED    m0043 src/storage/repo_cards.c:114 [not-del ! -> (deleted)]
+KILLED    m0044 src/storage/repo_cards.c:115 [ret-lit 0 -> 1]
+KILLED    m0045 src/storage/repo_cards.c:115 [int+1 0 -> 1]
+KILLED    m0046 src/storage/repo_cards.c:115 [int-1 0 -> -1]
+KILLED    m0047 src/storage/repo_cards.c:116 [arith * -> /]
+          build break
+KILLED    m0048 src/storage/repo_cards.c:116 [arith * -> /]
+          build break
+KILLED    m0049 src/storage/repo_cards.c:116 [arith * -> /]
+          build break
+KILLED    m0050 src/storage/repo_cards.c:116 [cmp != -> ==]
+KILLED    m0051 src/storage/repo_cards.c:117 [arith * -> /]
+          build break
+KILLED    m0052 src/storage/repo_cards.c:117 [cmp <= -> <]
+KILLED    m0053 src/storage/repo_cards.c:117 [logic || -> &&]
+KILLED    m0054 src/storage/repo_cards.c:117 [arith * -> /]
+          build break
+KILLED    m0055 src/storage/repo_cards.c:117 [cmp == -> !=]
+KILLED    m0056 src/storage/repo_cards.c:118 [ret-lit 0 -> 1]
+KILLED    m0057 src/storage/repo_cards.c:118 [int+1 0 -> 1]
+KILLED    m0058 src/storage/repo_cards.c:118 [int-1 0 -> -1]
+KILLED    m0059 src/storage/repo_cards.c:120 [ret-lit 1 -> 0]
+SURVIVED  m0060 src/storage/repo_cards.c:120 [int+1 1 -> 2]
+KILLED    m0061 src/storage/repo_cards.c:120 [int-1 1 -> 0]
+KILLED    m0062 src/storage/repo_cards.c:124 [cmp >= -> >]
+KILLED    m0063 src/storage/repo_cards.c:124 [logic && -> ||]
+          build break
+KILLED    m0064 src/storage/repo_cards.c:124 [cmp <= -> <]
+KILLED    m0065 src/storage/repo_cards.c:127 [arith * -> /]
+          build break
+KILLED    m0066 src/storage/repo_cards.c:128 [cmp == -> !=]
+KILLED    m0067 src/storage/repo_cards.c:130 [not-del ! -> (deleted)]
+KILLED    m0068 src/storage/repo_cards.c:132 [not-del ! -> (deleted)]
+KILLED    m0069 src/storage/repo_cards.c:134 [not-del ! -> (deleted)]
+KILLED    m0070 src/storage/repo_cards.c:136 [not-del ! -> (deleted)]
+KILLED    m0071 src/storage/repo_cards.c:138 [not-del ! -> (deleted)]
+KILLED    m0072 src/storage/repo_cards.c:140 [not-del ! -> (deleted)]
+KILLED    m0073 src/storage/repo_cards.c:142 [not-del ! -> (deleted)]
+KILLED    m0074 src/storage/repo_cards.c:144 [not-del ! -> (deleted)]
+KILLED    m0075 src/storage/repo_cards.c:149 [arith * -> /]
+          build break
+KILLED    m0076 src/storage/repo_cards.c:149 [arith * -> /]
+          build break
+KILLED    m0077 src/storage/repo_cards.c:165 [arith * -> /]
+          build break
+KILLED    m0078 src/storage/repo_cards.c:165 [arith * -> /]
+          build break
+KILLED    m0079 src/storage/repo_cards.c:166 [cmp == -> !=]
+KILLED    m0080 src/storage/repo_cards.c:169 [cmp != -> ==]
+SURVIVED  m0081 src/storage/repo_cards.c:173 [int+1 0 -> 1]
+KILLED    m0082 src/storage/repo_cards.c:173 [int-1 0 -> -1]
+          build break
+KILLED    m0083 src/storage/repo_cards.c:173 [cmp == -> !=]
+KILLED    m0084 src/storage/repo_cards.c:177 [arith * -> /]
+          build break
+KILLED    m0085 src/storage/repo_cards.c:178 [arith - -> +]
+SURVIVED  m0086 src/storage/repo_cards.c:178 [int+1 1 -> 2]
+KILLED    m0087 src/storage/repo_cards.c:178 [int-1 1 -> 0]
+KILLED    m0088 src/storage/repo_cards.c:178 [cmp != -> ==]
+KILLED    m0089 src/storage/repo_cards.c:195 [cmp == -> !=]
+KILLED    m0090 src/storage/repo_cards.c:197 [cmp == -> !=]
+KILLED    m0091 src/storage/repo_cards.c:201 [cmp == -> !=]
+KILLED    m0092 src/storage/repo_cards.c:206 [arith * -> /]
+          build break
+KILLED    m0093 src/storage/repo_cards.c:206 [arith * -> /]
+          build break
+KILLED    m0094 src/storage/repo_cards.c:207 [cmp == -> !=]
+KILLED    m0095 src/storage/repo_cards.c:210 [cmp != -> ==]
+KILLED    m0096 src/storage/repo_cards.c:212 [cmp <= -> <]
+KILLED    m0097 src/storage/repo_cards.c:212 [int+1 0 -> 1]
+KILLED    m0098 src/storage/repo_cards.c:212 [int-1 0 -> -1]
+SURVIVED  m0099 src/storage/repo_cards.c:216 [int+1 0 -> 1]
+KILLED    m0100 src/storage/repo_cards.c:216 [int-1 0 -> -1]
+          build break
+KILLED    m0101 src/storage/repo_cards.c:216 [cmp == -> !=]
+KILLED    m0102 src/storage/repo_cards.c:218 [arith * -> /]
+          build break
+KILLED    m0103 src/storage/repo_cards.c:219 [arith - -> +]
+SURVIVED  m0104 src/storage/repo_cards.c:219 [int+1 1 -> 2]
+KILLED    m0105 src/storage/repo_cards.c:219 [int-1 1 -> 0]
+KILLED    m0106 src/storage/repo_cards.c:219 [cmp != -> ==]
+KILLED    m0107 src/storage/repo_cards.c:236 [cmp == -> !=]
+KILLED    m0108 src/storage/repo_cards.c:239 [cmp == -> !=]
+KILLED    m0109 src/storage/repo_cards.c:240 [cmp == -> !=]
+KILLED    m0110 src/storage/repo_cards.c:240 [int+1 0 -> 1]
+KILLED    m0111 src/storage/repo_cards.c:240 [int-1 0 -> -1]
+KILLED    m0112 src/storage/repo_cards.c:242 [cmp == -> !=]
+KILLED    m0113 src/storage/repo_cards.c:247 [arith * -> /]
+          build break
+KILLED    m0114 src/storage/repo_cards.c:247 [arith * -> /]
+          build break
+KILLED    m0115 src/storage/repo_cards.c:248 [cmp == -> !=]
+KILLED    m0116 src/storage/repo_cards.c:248 [logic || -> &&]
+          build break
+KILLED    m0117 src/storage/repo_cards.c:248 [cmp == -> !=]
+KILLED    m0118 src/storage/repo_cards.c:248 [logic || -> &&]
+          build break
+KILLED    m0119 src/storage/repo_cards.c:248 [cmp <= -> <]
+KILLED    m0120 src/storage/repo_cards.c:248 [int+1 0 -> 1]
+KILLED    m0121 src/storage/repo_cards.c:248 [int-1 0 -> -1]
+KILLED    m0122 src/storage/repo_cards.c:250 [int+1 0 -> 1]
+KILLED    m0123 src/storage/repo_cards.c:250 [int-1 0 -> -1]
+KILLED    m0124 src/storage/repo_cards.c:250 [arith * -> /]
+          build break
+KILLED    m0125 src/storage/repo_cards.c:251 [arith * -> /]
+          build break
+KILLED    m0126 src/storage/repo_cards.c:252 [arith - -> +]
+SURVIVED  m0127 src/storage/repo_cards.c:252 [int+1 1 -> 2]
+KILLED    m0128 src/storage/repo_cards.c:252 [int-1 1 -> 0]
+KILLED    m0129 src/storage/repo_cards.c:252 [cmp != -> ==]
+KILLED    m0130 src/storage/repo_cards.c:256 [int+1 1 -> 2]
+KILLED    m0131 src/storage/repo_cards.c:256 [int-1 1 -> 0]
+KILLED    m0132 src/storage/repo_cards.c:258 [cmp == -> !=]
+KILLED    m0133 src/storage/repo_cards.c:264 [cmp == -> !=]
+KILLED    m0134 src/storage/repo_cards.c:267 [arith * -> /]
+          build break
+KILLED    m0135 src/storage/repo_cards.c:267 [arith * -> /]
+          build break
+KILLED    m0136 src/storage/repo_cards.c:267 [arith * -> /]
+          build break
+KILLED    m0137 src/storage/repo_cards.c:268 [arith * -> /]
+          build break
+KILLED    m0138 src/storage/repo_cards.c:269 [cmp == -> !=]
+KILLED    m0139 src/storage/repo_cards.c:269 [logic || -> &&]
+KILLED    m0140 src/storage/repo_cards.c:269 [cmp == -> !=]
+KILLED    m0141 src/storage/repo_cards.c:271 [not-del ! -> (deleted)]
+KILLED    m0142 src/storage/repo_cards.c:273 [not-del ! -> (deleted)]
+KILLED    m0143 src/storage/repo_cards.c:275 [not-del ! -> (deleted)]
+KILLED    m0144 src/storage/repo_cards.c:277 [int+1 0 -> 1]
+KILLED    m0145 src/storage/repo_cards.c:277 [int-1 0 -> -1]
+KILLED    m0146 src/storage/repo_cards.c:277 [arith * -> /]
+          build break
+KILLED    m0147 src/storage/repo_cards.c:278 [arith * -> /]
+          build break
+KILLED    m0148 src/storage/repo_cards.c:279 [arith - -> +]
+SURVIVED  m0149 src/storage/repo_cards.c:279 [int+1 1 -> 2]
+KILLED    m0150 src/storage/repo_cards.c:279 [int-1 1 -> 0]
+KILLED    m0151 src/storage/repo_cards.c:279 [cmp != -> ==]
+KILLED    m0152 src/storage/repo_cards.c:289 [cmp == -> !=]
+KILLED    m0153 src/storage/repo_cards.c:295 [cmp == -> !=]
+KILLED    m0154 src/storage/repo_cards.c:298 [arith * -> /]
+          build break
+KILLED    m0155 src/storage/repo_cards.c:299 [cmp == -> !=]
+KILLED    m0156 src/storage/repo_cards.c:299 [logic || -> &&]
+KILLED    m0157 src/storage/repo_cards.c:299 [cmp <= -> <]
+KILLED    m0158 src/storage/repo_cards.c:299 [int+1 0 -> 1]
+KILLED    m0159 src/storage/repo_cards.c:299 [int-1 0 -> -1]
+KILLED    m0160 src/storage/repo_cards.c:301 [arith * -> /]
+          build break
+KILLED    m0161 src/storage/repo_cards.c:302 [arith - -> +]
+SURVIVED  m0162 src/storage/repo_cards.c:302 [int+1 1 -> 2]
+KILLED    m0163 src/storage/repo_cards.c:302 [int-1 1 -> 0]
+KILLED    m0164 src/storage/repo_cards.c:302 [cmp != -> ==]
+KILLED    m0165 src/storage/repo_cards.c:306 [int+1 1 -> 2]
+KILLED    m0166 src/storage/repo_cards.c:306 [int-1 1 -> 0]
+KILLED    m0167 src/storage/repo_cards.c:310 [cmp == -> !=]
+KILLED    m0168 src/storage/repo_cards.c:311 [cmp == -> !=]
+KILLED    m0169 src/storage/repo_cards.c:311 [int+1 0 -> 1]
+KILLED    m0170 src/storage/repo_cards.c:311 [int-1 0 -> -1]
+KILLED    m0171 src/storage/repo_cards.c:316 [arith * -> /]
+          build break
+KILLED    m0172 src/storage/repo_cards.c:316 [arith * -> /]
+          build break
+KILLED    m0173 src/storage/repo_cards.c:316 [arith * -> /]
+          build break
+KILLED    m0174 src/storage/repo_cards.c:317 [cmp == -> !=]
+KILLED    m0175 src/storage/repo_cards.c:319 [not-del ! -> (deleted)]
+KILLED    m0176 src/storage/repo_cards.c:321 [cmp < -> <=]
+KILLED    m0177 src/storage/repo_cards.c:321 [int+1 0 -> 1]
+KILLED    m0178 src/storage/repo_cards.c:321 [int-1 0 -> -1]
+KILLED    m0179 src/storage/repo_cards.c:321 [logic || -> &&]
+KILLED    m0180 src/storage/repo_cards.c:321 [cmp > -> >=]
+KILLED    m0181 src/storage/repo_cards.c:321 [int+1 0 -> 1]
+KILLED    m0182 src/storage/repo_cards.c:321 [int-1 0 -> -1]
+KILLED    m0183 src/storage/repo_cards.c:321 [logic && -> ||]
+KILLED    m0184 src/storage/repo_cards.c:321 [cmp == -> !=]
+KILLED    m0185 src/storage/repo_cards.c:323 [cmp == -> !=]
+KILLED    m0186 src/storage/repo_cards.c:323 [int+1 0 -> 1]
+KILLED    m0187 src/storage/repo_cards.c:323 [int-1 0 -> -1]
+KILLED    m0188 src/storage/repo_cards.c:325 [int+1 0 -> 1]
+KILLED    m0189 src/storage/repo_cards.c:325 [int-1 0 -> -1]
+KILLED    m0190 src/storage/repo_cards.c:325 [arith * -> /]
+KILLED    m0191 src/storage/repo_cards.c:325 [arith * -> /]
+          build break
+KILLED    m0192 src/storage/repo_cards.c:326 [arith * -> /]
+          build break
+KILLED    m0193 src/storage/repo_cards.c:327 [arith - -> +]
+SURVIVED  m0194 src/storage/repo_cards.c:327 [int+1 1 -> 2]
+KILLED    m0195 src/storage/repo_cards.c:327 [int-1 1 -> 0]
+KILLED    m0196 src/storage/repo_cards.c:327 [cmp != -> ==]
+KILLED    m0197 src/storage/repo_cards.c:331 [int+1 1 -> 2]
+KILLED    m0198 src/storage/repo_cards.c:331 [int-1 1 -> 0]
+KILLED    m0199 src/storage/repo_cards.c:331 [arith - -> +]
+SURVIVED  m0200 src/storage/repo_cards.c:331 [int+1 1 -> 2]
+KILLED    m0201 src/storage/repo_cards.c:331 [int-1 1 -> 0]
+KILLED    m0202 src/storage/repo_cards.c:332 [int+1 0 -> 1]
+KILLED    m0203 src/storage/repo_cards.c:332 [int-1 0 -> -1]
+KILLED    m0204 src/storage/repo_cards.c:334 [cmp < -> <=]
+KILLED    m0205 src/storage/repo_cards.c:334 [logic && -> ||]
+KILLED    m0206 src/storage/repo_cards.c:334 [cmp == -> !=]
+KILLED    m0207 src/storage/repo_cards.c:339 [cmp != -> ==]
+KILLED    m0208 src/storage/repo_cards.c:339 [logic && -> ||]
+KILLED    m0209 src/storage/repo_cards.c:339 [cmp != -> ==]
+KILLED    m0210 src/storage/repo_cards.c:344 [arith * -> /]
+          build break
+KILLED    m0211 src/storage/repo_cards.c:344 [arith * -> /]
+          build break
+KILLED    m0212 src/storage/repo_cards.c:345 [cmp == -> !=]
+KILLED    m0213 src/storage/repo_cards.c:345 [logic || -> &&]
+          build break
+KILLED    m0214 src/storage/repo_cards.c:345 [cmp == -> !=]
+KILLED    m0215 src/storage/repo_cards.c:345 [logic || -> &&]
+          build break
+KILLED    m0216 src/storage/repo_cards.c:345 [cmp <= -> <]
+KILLED    m0217 src/storage/repo_cards.c:345 [int+1 0 -> 1]
+KILLED    m0218 src/storage/repo_cards.c:345 [int-1 0 -> -1]
+KILLED    m0219 src/storage/repo_cards.c:347 [int+1 0 -> 1]
+KILLED    m0220 src/storage/repo_cards.c:347 [int-1 0 -> -1]
+KILLED    m0221 src/storage/repo_cards.c:347 [arith * -> /]
+          build break
+KILLED    m0222 src/storage/repo_cards.c:348 [arith * -> /]
+          build break
+KILLED    m0223 src/storage/repo_cards.c:349 [arith - -> +]
+SURVIVED  m0224 src/storage/repo_cards.c:349 [int+1 1 -> 2]
+KILLED    m0225 src/storage/repo_cards.c:349 [int-1 1 -> 0]
+KILLED    m0226 src/storage/repo_cards.c:349 [cmp != -> ==]
+KILLED    m0227 src/storage/repo_cards.c:353 [int+1 1 -> 2]
+KILLED    m0228 src/storage/repo_cards.c:353 [int-1 1 -> 0]
+KILLED    m0229 src/storage/repo_cards.c:355 [cmp == -> !=]
+KILLED    m0230 src/storage/repo_cards.c:369 [cmp == -> !=]
+KILLED    m0231 src/storage/repo_cards.c:372 [arith * -> /]
+          build break
+KILLED    m0232 src/storage/repo_cards.c:372 [arith * -> /]
+          build break
+KILLED    m0233 src/storage/repo_cards.c:373 [cmp == -> !=]
+KILLED    m0234 src/storage/repo_cards.c:373 [logic || -> &&]
+          build break
+KILLED    m0235 src/storage/repo_cards.c:373 [cmp == -> !=]
+KILLED    m0236 src/storage/repo_cards.c:373 [logic || -> &&]
+          build break
+KILLED    m0237 src/storage/repo_cards.c:373 [cmp <= -> <]
+KILLED    m0238 src/storage/repo_cards.c:373 [int+1 0 -> 1]
+KILLED    m0239 src/storage/repo_cards.c:373 [int-1 0 -> -1]
+KILLED    m0240 src/storage/repo_cards.c:375 [not-del ! -> (deleted)]
+KILLED    m0241 src/storage/repo_cards.c:377 [arith * -> /]
+          build break
+KILLED    m0242 src/storage/repo_cards.c:378 [arith - -> +]
+SURVIVED  m0243 src/storage/repo_cards.c:378 [int+1 1 -> 2]
+KILLED    m0244 src/storage/repo_cards.c:378 [int-1 1 -> 0]
+KILLED    m0245 src/storage/repo_cards.c:378 [cmp != -> ==]
+KILLED    m0246 src/storage/repo_cards.c:393 [cmp == -> !=]
+KILLED    m0247 src/storage/repo_cards.c:395 [cmp == -> !=]
+KILLED    m0248 src/storage/repo_cards.c:397 [cmp == -> !=]
+KILLED    m0249 src/storage/repo_cards.c:399 [cmp == -> !=]
+ACCEPTED  m0010 src/storage/repo_cards.c:51 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two binds the same text
+ACCEPTED  m0026 src/storage/repo_cards.c:86 [int+1 0 -> 1] :: null text arm unreachable, every column the readers touch is not null under the schema
+ACCEPTED  m0027 src/storage/repo_cards.c:86 [int-1 0 -> -1] :: null text arm unreachable, every column the readers touch is not null under the schema
+ACCEPTED  m0060 src/storage/repo_cards.c:120 [int+1 1 -> 2] :: case key reject value is boolean, any nonzero is equivalent
+ACCEPTED  m0081 src/storage/repo_cards.c:173 [int+1 0 -> 1] :: clock failure guard unreachable, a working gmtime always fills the stamp
+ACCEPTED  m0086 src/storage/repo_cards.c:178 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+ACCEPTED  m0099 src/storage/repo_cards.c:216 [int+1 0 -> 1] :: clock failure guard unreachable, a working gmtime always fills the stamp
+ACCEPTED  m0104 src/storage/repo_cards.c:219 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+ACCEPTED  m0127 src/storage/repo_cards.c:252 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+ACCEPTED  m0149 src/storage/repo_cards.c:279 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+ACCEPTED  m0162 src/storage/repo_cards.c:302 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+ACCEPTED  m0194 src/storage/repo_cards.c:327 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+ACCEPTED  m0200 src/storage/repo_cards.c:331 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two binds the same deck text
+ACCEPTED  m0224 src/storage/repo_cards.c:349 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+ACCEPTED  m0243 src/storage/repo_cards.c:378 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+mutate: generated=249 build_failed=69 killed_by_tests=165 killed=234 survived=15 accepted=15 unexplained=0 skipped=0
+mutate: kill rate 234/249 = 94.0%, with accepted equivalents 249/249 = 100.0%
+mutate: wall 195.9s

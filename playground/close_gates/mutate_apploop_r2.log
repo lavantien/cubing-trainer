@@ -1,0 +1,84 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/app/app_loop.c build_close pack_startup_real_app_init app_init_failures
+mutate: scope=src/app/app_loop.c files=1 sites=50 suites=2
+KILLED    m0001 src/app/app_loop.c:10 [arith * -> /]
+          build break
+KILLED    m0002 src/app/app_loop.c:14 [bool false -> true]
+SURVIVED  m0003 src/app/app_loop.c:16 [arith / -> *]
+KILLED    m0004 src/app/app_loop.c:17 [cmp != -> ==]
+KILLED    m0005 src/app/app_loop.c:17 [int+1 0 -> 1]
+KILLED    m0006 src/app/app_loop.c:17 [int-1 0 -> -1]
+SURVIVED  m0007 src/app/app_loop.c:18 [int+1 0 -> 1]
+KILLED    m0008 src/app/app_loop.c:18 [int-1 0 -> -1]
+          build break
+KILLED    m0009 src/app/app_loop.c:22 [arith + -> -]
+SURVIVED  m0010 src/app/app_loop.c:22 [arith - -> +]
+SURVIVED  m0011 src/app/app_loop.c:24 [cmp < -> <=]
+SURVIVED  m0012 src/app/app_loop.c:24 [int+1 0 -> 1]
+SURVIVED  m0013 src/app/app_loop.c:24 [int-1 0 -> -1]
+SURVIVED  m0014 src/app/app_loop.c:24 [logic || -> &&]
+SURVIVED  m0015 src/app/app_loop.c:24 [cmp >= -> >]
+SURVIVED  m0016 src/app/app_loop.c:24 [arith - -> +]
+SURVIVED  m0017 src/app/app_loop.c:26 [int+1 0 -> 1]
+KILLED    m0018 src/app/app_loop.c:26 [int-1 0 -> -1]
+          build break
+KILLED    m0019 src/app/app_loop.c:29 [cmp != -> ==]
+KILLED    m0020 src/app/app_loop.c:29 [int+1 0 -> 1]
+KILLED    m0021 src/app/app_loop.c:29 [int-1 0 -> -1]
+KILLED    m0022 src/app/app_loop.c:30 [int+1 0 -> 1]
+KILLED    m0023 src/app/app_loop.c:30 [int-1 0 -> -1]
+          build break
+KILLED    m0024 src/app/app_loop.c:33 [cmp != -> ==]
+KILLED    m0025 src/app/app_loop.c:33 [int+1 0 -> 1]
+KILLED    m0026 src/app/app_loop.c:33 [int-1 0 -> -1]
+KILLED    m0027 src/app/app_loop.c:38 [cmp != -> ==]
+KILLED    m0028 src/app/app_loop.c:38 [int+1 0 -> 1]
+KILLED    m0029 src/app/app_loop.c:38 [int-1 0 -> -1]
+KILLED    m0030 src/app/app_loop.c:45 [cmp != -> ==]
+KILLED    m0031 src/app/app_loop.c:45 [int+1 0 -> 1]
+KILLED    m0032 src/app/app_loop.c:45 [int-1 0 -> -1]
+SURVIVED  m0033 src/app/app_loop.c:47 [cmp != -> ==]
+SURVIVED  m0034 src/app/app_loop.c:47 [int+1 0 -> 1]
+SURVIVED  m0035 src/app/app_loop.c:47 [int-1 0 -> -1]
+KILLED    m0036 src/app/app_loop.c:51 [cmp != -> ==]
+KILLED    m0037 src/app/app_loop.c:51 [int+1 0 -> 1]
+KILLED    m0038 src/app/app_loop.c:51 [int-1 0 -> -1]
+KILLED    m0039 src/app/app_loop.c:57 [bool true -> false]
+KILLED    m0040 src/app/app_loop.c:60 [arith * -> /]
+          build break
+SURVIVED  m0041 src/app/app_loop.c:61 [cmp == -> !=]
+SURVIVED  m0042 src/app/app_loop.c:61 [logic || -> &&]
+SURVIVED  m0043 src/app/app_loop.c:61 [not-del ! -> (deleted)]
+SURVIVED  m0044 src/app/app_loop.c:66 [logic && -> ||]
+SURVIVED  m0045 src/app/app_loop.c:66 [not-del ! -> (deleted)]
+SURVIVED  m0046 src/app/app_loop.c:69 [arith * -> /]
+SURVIVED  m0047 src/app/app_loop.c:69 [arith / -> *]
+SURVIVED  m0048 src/app/app_loop.c:70 [cmp > -> >=]
+SURVIVED  m0049 src/app/app_loop.c:73 [cmp >= -> >]
+KILLED    m0050 src/app/app_loop.c:84 [arith * -> /]
+          build break
+ACCEPTED  m0003 src/app/app_loop.c:16 [arith / -> *] :: the fixed timestep constant feeds only the raylib frame loop no gate suite exercises
+ACCEPTED  m0007 src/app/app_loop.c:18 [int+1 0 -> 1] :: ct_data_dir returns only zero or minus one over the reachable surface, the shifted comparison decides identically on both
+ACCEPTED  m0010 src/app/app_loop.c:22 [arith - -> +] :: the capacity arithmetic arm sits on path lengths beyond every reachable harness db path
+ACCEPTED  m0011 src/app/app_loop.c:24 [cmp < -> <=] :: the guard family sits on path lengths beyond every reachable harness db path, written zero is unreachable for the slash filename format, and a negative written slips into the unsigned cast comparison which rejects it identically
+ACCEPTED  m0012 src/app/app_loop.c:24 [int+1 0 -> 1] :: the guard family sits on path lengths beyond every reachable harness db path, written zero is unreachable for the slash filename format, and a negative written slips into the unsigned cast comparison which rejects it identically
+ACCEPTED  m0013 src/app/app_loop.c:24 [int-1 0 -> -1] :: the guard family sits on path lengths beyond every reachable harness db path, written zero is unreachable for the slash filename format, and a negative written slips into the unsigned cast comparison which rejects it identically
+ACCEPTED  m0014 src/app/app_loop.c:24 [logic || -> &&] :: the guard family sits on path lengths beyond every reachable harness db path, written zero is unreachable for the slash filename format, and a negative written slips into the unsigned cast comparison which rejects it identically
+ACCEPTED  m0015 src/app/app_loop.c:24 [cmp >= -> >] :: the guard family sits on path lengths beyond every reachable harness db path, written zero is unreachable for the slash filename format, and a negative written slips into the unsigned cast comparison which rejects it identically
+ACCEPTED  m0016 src/app/app_loop.c:24 [arith - -> +] :: the guard family sits on path lengths beyond every reachable harness db path, written zero is unreachable for the slash filename format, and a negative written slips into the unsigned cast comparison which rejects it identically
+ACCEPTED  m0033 src/app/app_loop.c:47 [cmp != -> ==] :: the branch only selects the stderr diagnostic, seeding runs inside the condition either way, and the call returns only zero or negative over the reachable flow
+ACCEPTED  m0034 src/app/app_loop.c:47 [int+1 0 -> 1] :: the branch only selects the stderr diagnostic, seeding runs inside the condition either way, and the call returns only zero or negative over the reachable flow
+ACCEPTED  m0035 src/app/app_loop.c:47 [int-1 0 -> -1] :: the branch only selects the stderr diagnostic, seeding runs inside the condition either way, and the call returns only zero or negative over the reachable flow
+ACCEPTED  m0041 src/app/app_loop.c:61 [cmp == -> !=] :: the run guard feeds only the raylib frame loop no gate suite exercises
+ACCEPTED  m0042 src/app/app_loop.c:61 [logic || -> &&] :: the run guard feeds only the raylib frame loop no gate suite exercises
+ACCEPTED  m0043 src/app/app_loop.c:61 [not-del ! -> (deleted)] :: the run guard feeds only the raylib frame loop no gate suite exercises
+ACCEPTED  m0044 src/app/app_loop.c:66 [logic && -> ||] :: inside the raylib frame loop no gate suite exercises
+ACCEPTED  m0045 src/app/app_loop.c:66 [not-del ! -> (deleted)] :: inside the raylib frame loop no gate suite exercises
+ACCEPTED  m0046 src/app/app_loop.c:69 [arith * -> /] :: inside the raylib frame loop no gate suite exercises
+ACCEPTED  m0047 src/app/app_loop.c:69 [arith / -> *] :: inside the raylib frame loop no gate suite exercises
+ACCEPTED  m0048 src/app/app_loop.c:70 [cmp > -> >=] :: inside the raylib frame loop no gate suite exercises
+ACCEPTED  m0049 src/app/app_loop.c:73 [cmp >= -> >] :: inside the raylib frame loop no gate suite exercises
+mutate: generated=50 build_failed=6 killed_by_tests=22 killed=28 survived=22 accepted=21 unexplained=1 skipped=0
+mutate: kill rate 28/50 = 56.0%, with accepted equivalents 49/50 = 98.0%
+mutate: wall 31.4s

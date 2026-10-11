@@ -1,0 +1,961 @@
+build_close/mutants/p37000/m0001_migrate.c:18:41: error: expected ')'
+   18 | static int ct_mig_parse_name(const char /name, unsigned long *version) {
+      |                                         ^
+build_close/mutants/p37000/m0001_migrate.c:18:29: note: to match this '('
+   18 | static int ct_mig_parse_name(const char /name, unsigned long *version) {
+      |                             ^
+build_close/mutants/p37000/m0001_migrate.c:20:35: error: use of undeclared identifier 'name'
+   20 |     while (isdigit((unsigned char)name[i]))
+      |                                   ^~~~
+build_close/mutants/p37000/m0001_migrate.c:22:19: error: use of undeclared identifier 'name'
+   22 |     if (i == 0 || name[i] != '_')
+      |                   ^~~~
+build_close/mutants/p37000/m0001_migrate.c:24:25: error: use of undeclared identifier 'name'
+   24 |     size_t len = strlen(name);
+      |                         ^~~~
+build_close/mutants/p37000/m0001_migrate.c:25:27: error: use of undeclared identifier 'name'
+   25 |     if (len < 5 || strcmp(name + len - 4, ".sql") != 0)
+      |                           ^~~~
+build_close/mutants/p37000/m0001_migrate.c:30:20: error: use of undeclared identifier 'name'
+   30 |     memcpy(digits, name, i);
+      |                    ^~~~
+build_close/mutants/p37000/m0001_migrate.c:37:6: error: use of undeclared identifier 'version'
+   37 |     *version = v;
+      |      ^~~~~~~
+build_close/mutants/p37000/m0001_migrate.c:143:53: error: too many arguments to function call, expected 1, have 2
+  143 |         int parsed = ct_mig_parse_name(ent->d_name, &version);
+      |                      ~~~~~~~~~~~~~~~~~              ^~~~~~~~
+build_close/mutants/p37000/m0001_migrate.c:18:12: note: 'ct_mig_parse_name' declared here
+   18 | static int ct_mig_parse_name(const char /name, unsigned long *version) {
+      |            ^                 ~~~~~~~~~~
+8 errors generated.
+build_close/mutants/p37000/m0002_migrate.c:18:62: error: expected ')'
+   18 | static int ct_mig_parse_name(const char *name, unsigned long /version) {
+      |                                                              ^
+build_close/mutants/p37000/m0002_migrate.c:18:29: note: to match this '('
+   18 | static int ct_mig_parse_name(const char *name, unsigned long /version) {
+      |                             ^
+build_close/mutants/p37000/m0002_migrate.c:37:6: error: use of undeclared identifier 'version'
+   37 |     *version = v;
+      |      ^~~~~~~
+build_close/mutants/p37000/m0002_migrate.c:143:53: error: incompatible pointer to integer conversion passing 'unsigned long *' to parameter of type 'unsigned long'; remove & [-Wint-conversion]
+  143 |         int parsed = ct_mig_parse_name(ent->d_name, &version);
+      |                                                     ^~~~~~~~
+build_close/mutants/p37000/m0002_migrate.c:18:62: note: passing argument to parameter here
+   18 | static int ct_mig_parse_name(const char *name, unsigned long /version) {
+      |                                                              ^
+3 errors generated.
+mutate: suite migrate exited -1073741795
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0007_migrate.c:22:11: error: comparison of integers of different signs: 'size_t' (aka 'unsigned long long') and 'int' [-Werror,-Wsign-compare]
+   22 |     if (i == -1 || name[i] != '_')
+      |         ~ ^  ~~
+1 error generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0031_migrate.c:32:10: error: expected identifier or '('
+   32 |     char /end = NULL;
+      |          ^
+build_close/mutants/p37000/m0031_migrate.c:34:40: error: use of undeclared identifier 'end'
+   34 |     unsigned long v = strtoul(digits, &end, CT_DECIMAL_BASE);
+      |                                        ^~~
+build_close/mutants/p37000/m0031_migrate.c:35:9: error: use of undeclared identifier 'end'
+   35 |     if (end == NULL || *end != '\0' || errno == ERANGE || v > (unsigned long)LONG_MAX)
+      |         ^~~
+build_close/mutants/p37000/m0031_migrate.c:35:25: error: use of undeclared identifier 'end'
+   35 |     if (end == NULL || *end != '\0' || errno == ERANGE || v > (unsigned long)LONG_MAX)
+      |                         ^~~
+4 errors generated.
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0035_migrate.c:35:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   35 |     if (end == NULL && *end != '\0' || errno == ERANGE || v > (unsigned long)LONG_MAX)
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~ ~~
+build_close/mutants/p37000/m0035_migrate.c:35:21: note: place parentheses around the '&&' expression to silence this warning
+   35 |     if (end == NULL && *end != '\0' || errno == ERANGE || v > (unsigned long)LONG_MAX)
+      |                     ^
+      |         (                          )
+1 error generated.
+build_close/mutants/p37000/m0036_migrate.c:35:24: error: expected expression
+   35 |     if (end == NULL || /end != '\0' || errno == ERANGE || v > (unsigned long)LONG_MAX)
+      |                        ^
+1 error generated.
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0038_migrate.c:35:37: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   35 |     if (end == NULL || *end != '\0' && errno == ERANGE || v > (unsigned long)LONG_MAX)
+      |                     ~~ ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build_close/mutants/p37000/m0038_migrate.c:35:37: note: place parentheses around the '&&' expression to silence this warning
+   35 |     if (end == NULL || *end != '\0' && errno == ERANGE || v > (unsigned long)LONG_MAX)
+      |                        ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0040_migrate.c:35:56: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   35 |     if (end == NULL || *end != '\0' || errno == ERANGE && v > (unsigned long)LONG_MAX)
+      |                                     ~~ ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p37000/m0040_migrate.c:35:56: note: place parentheses around the '&&' expression to silence this warning
+   35 |     if (end == NULL || *end != '\0' || errno == ERANGE && v > (unsigned long)LONG_MAX)
+      |                                        ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite migrate_soundness exited 1
+mutate: suite migrate_soundness exited 1
+build_close/mutants/p37000/m0045_migrate.c:37:5: error: expected expression
+   37 |     /version = v;
+      |     ^
+1 error generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0049_migrate.c:41:34: error: expected ')'
+   41 | static int ct_mig_cmp(const void /a, const void *b) {
+      |                                  ^
+build_close/mutants/p37000/m0049_migrate.c:41:22: note: to match this '('
+   41 | static int ct_mig_cmp(const void /a, const void *b) {
+      |                      ^
+build_close/mutants/p37000/m0049_migrate.c:41:22: error: 'void' as parameter must not have type qualifiers
+   41 | static int ct_mig_cmp(const void /a, const void *b) {
+      |                      ^
+build_close/mutants/p37000/m0049_migrate.c:42:30: error: use of undeclared identifier 'a'
+   42 |     const ct_migration *ma = a;
+      |                              ^
+build_close/mutants/p37000/m0049_migrate.c:43:30: error: use of undeclared identifier 'b'
+   43 |     const ct_migration *mb = b;
+      |                              ^
+build_close/mutants/p37000/m0049_migrate.c:175:38: error: incompatible function pointer types passing 'int (void)' to parameter of type 'int (*)(const void *, const void *) __attribute__((cdecl))' [-Wincompatible-function-pointer-types]
+  175 |         qsort(migs, n, sizeof *migs, ct_mig_cmp);
+      |                                      ^~~~~~~~~~
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\stdlib.h:327:93: note: passing argument to parameter '_PtFuncCompare' here
+  327 |   void __cdecl qsort(void *_Base,size_t _NumOfElements,size_t _SizeOfElements,int (__cdecl *_PtFuncCompare)(const void *,const void *));
+      |                                                                                             ^
+5 errors generated.
+build_close/mutants/p37000/m0050_migrate.c:41:49: error: expected ')'
+   41 | static int ct_mig_cmp(const void *a, const void /b) {
+      |                                                 ^
+build_close/mutants/p37000/m0050_migrate.c:41:22: note: to match this '('
+   41 | static int ct_mig_cmp(const void *a, const void /b) {
+      |                      ^
+build_close/mutants/p37000/m0050_migrate.c:41:49: error: 'void' must be the first and only parameter if specified
+   41 | static int ct_mig_cmp(const void *a, const void /b) {
+      |                                                 ^
+build_close/mutants/p37000/m0050_migrate.c:43:30: error: use of undeclared identifier 'b'
+   43 |     const ct_migration *mb = b;
+      |                              ^
+build_close/mutants/p37000/m0050_migrate.c:175:38: error: incompatible function pointer types passing 'int (const void *, int)' to parameter of type 'int (*)(const void *, const void *) __attribute__((cdecl))' [-Wincompatible-function-pointer-types]
+  175 |         qsort(migs, n, sizeof *migs, ct_mig_cmp);
+      |                                      ^~~~~~~~~~
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\stdlib.h:327:93: note: passing argument to parameter '_PtFuncCompare' here
+  327 |   void __cdecl qsort(void *_Base,size_t _NumOfElements,size_t _SizeOfElements,int (__cdecl *_PtFuncCompare)(const void *,const void *));
+      |                                                                                             ^
+4 errors generated.
+build_close/mutants/p37000/m0051_migrate.c:42:24: error: expected identifier or '('
+   42 |     const ct_migration /ma = a;
+      |                        ^
+build_close/mutants/p37000/m0051_migrate.c:44:9: error: use of undeclared identifier 'ma'
+   44 |     if (ma->version != mb->version)
+      |         ^~
+build_close/mutants/p37000/m0051_migrate.c:45:16: error: use of undeclared identifier 'ma'
+   45 |         return ma->version < mb->version ? -1 : 1;
+      |                ^~
+build_close/mutants/p37000/m0051_migrate.c:46:19: error: use of undeclared identifier 'ma'
+   46 |     return strcmp(ma->name, mb->name);
+      |                   ^~
+build_close/mutants/p37000/m0051_migrate.c:41:35: error: unused parameter 'a' [-Werror,-Wunused-parameter]
+   41 | static int ct_mig_cmp(const void *a, const void *b) {
+      |                                   ^
+5 errors generated.
+build_close/mutants/p37000/m0052_migrate.c:43:24: error: expected identifier or '('
+   43 |     const ct_migration /mb = b;
+      |                        ^
+build_close/mutants/p37000/m0052_migrate.c:44:24: error: use of undeclared identifier 'mb'
+   44 |     if (ma->version != mb->version)
+      |                        ^~
+build_close/mutants/p37000/m0052_migrate.c:45:30: error: use of undeclared identifier 'mb'
+   45 |         return ma->version < mb->version ? -1 : 1;
+      |                              ^~
+build_close/mutants/p37000/m0052_migrate.c:46:29: error: use of undeclared identifier 'mb'
+   46 |     return strcmp(ma->name, mb->name);
+      |                             ^~
+build_close/mutants/p37000/m0052_migrate.c:41:50: error: unused parameter 'b' [-Werror,-Wunused-parameter]
+   41 | static int ct_mig_cmp(const void *a, const void *b) {
+      |                                                  ^
+5 errors generated.
+mutate: suite migrate_error_paths exited 1
+build_close/mutants/p37000/m0060_migrate.c:49:13: error: expected identifier or '('
+   49 | static char /ct_mig_read_file(const char *path) {
+      |             ^
+build_close/mutants/p37000/m0060_migrate.c:245:21: error: use of undeclared identifier 'ct_mig_read_file'; did you mean 'ct_mig_copy_file'?
+  245 |         char *sql = ct_mig_read_file(path);
+      |                     ^~~~~~~~~~~~~~~~
+      |                     ct_mig_copy_file
+build_close/mutants/p37000/m0060_migrate.c:99:12: note: 'ct_mig_copy_file' declared here
+   99 | static int ct_mig_copy_file(const char *from, const char *to) {
+      |            ^
+build_close/mutants/p37000/m0060_migrate.c:245:42: error: too few arguments to function call, expected 2, have 1
+  245 |         char *sql = ct_mig_read_file(path);
+      |                     ~~~~~~~~~~~~~~~~     ^
+build_close/mutants/p37000/m0060_migrate.c:99:12: note: 'ct_mig_copy_file' declared here
+   99 | static int ct_mig_copy_file(const char *from, const char *to) {
+      |            ^                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+build_close/mutants/p37000/m0061_migrate.c:49:42: error: expected ')'
+   49 | static char *ct_mig_read_file(const char /path) {
+      |                                          ^
+build_close/mutants/p37000/m0061_migrate.c:49:30: note: to match this '('
+   49 | static char *ct_mig_read_file(const char /path) {
+      |                              ^
+build_close/mutants/p37000/m0061_migrate.c:50:21: error: use of undeclared identifier 'path'
+   50 |     FILE *f = fopen(path, "rb");
+      |                     ^~~~
+build_close/mutants/p37000/m0061_migrate.c:245:38: error: incompatible pointer to integer conversion passing 'char[520]' to parameter of type 'char' [-Wint-conversion]
+  245 |         char *sql = ct_mig_read_file(path);
+      |                                      ^~~~
+build_close/mutants/p37000/m0061_migrate.c:49:42: note: passing argument to parameter here
+   49 | static char *ct_mig_read_file(const char /path) {
+      |                                          ^
+3 errors generated.
+build_close/mutants/p37000/m0062_migrate.c:50:10: error: expected identifier or '('
+   50 |     FILE /f = fopen(path, "rb");
+      |          ^
+build_close/mutants/p37000/m0062_migrate.c:51:9: error: use of undeclared identifier 'f'
+   51 |     if (f == NULL)
+      |         ^
+build_close/mutants/p37000/m0062_migrate.c:57:16: error: use of undeclared identifier 'f'
+   57 |         fclose(f);
+      |                ^
+build_close/mutants/p37000/m0062_migrate.c:61:51: error: use of undeclared identifier 'f'
+   61 |         size_t n = fread(buf + len, 1, cap - len, f);
+      |                                                   ^
+build_close/mutants/p37000/m0062_migrate.c:69:20: error: use of undeclared identifier 'f'
+   69 |             fclose(f);
+      |                    ^
+build_close/mutants/p37000/m0062_migrate.c:76:20: error: use of undeclared identifier 'f'
+   76 |             fclose(f);
+      |                    ^
+build_close/mutants/p37000/m0062_migrate.c:81:16: error: use of undeclared identifier 'f'
+   81 |     if (ferror(f)) {
+      |                ^
+build_close/mutants/p37000/m0062_migrate.c:83:16: error: use of undeclared identifier 'f'
+   83 |         fclose(f);
+      |                ^
+build_close/mutants/p37000/m0062_migrate.c:88:16: error: use of undeclared identifier 'f'
+   88 |         fclose(f);
+      |                ^
+build_close/mutants/p37000/m0062_migrate.c:92:16: error: use of undeclared identifier 'f'
+   92 |     if (fclose(f) != 0) {
+      |                ^
+build_close/mutants/p37000/m0062_migrate.c:49:43: error: unused parameter 'path' [-Werror,-Wunused-parameter]
+   49 | static char *ct_mig_read_file(const char *path) {
+      |                                           ^
+11 errors generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited -1073741795
+build_close/mutants/p37000/m0066_migrate.c:55:10: error: expected identifier or '('
+   55 |     char /buf = malloc(cap + 1);
+      |          ^
+build_close/mutants/p37000/m0066_migrate.c:56:9: error: use of undeclared identifier 'buf'
+   56 |     if (buf == NULL) {
+      |         ^~~
+build_close/mutants/p37000/m0066_migrate.c:61:26: error: use of undeclared identifier 'buf'
+   61 |         size_t n = fread(buf + len, 1, cap - len, f);
+      |                          ^~~
+build_close/mutants/p37000/m0066_migrate.c:68:18: error: use of undeclared identifier 'buf'
+   68 |             free(buf);
+      |                  ^~~
+build_close/mutants/p37000/m0066_migrate.c:73:31: error: use of undeclared identifier 'buf'
+   73 |         char *grown = realloc(buf, cap + 1);
+      |                               ^~~
+build_close/mutants/p37000/m0066_migrate.c:75:18: error: use of undeclared identifier 'buf'
+   75 |             free(buf);
+      |                  ^~~
+build_close/mutants/p37000/m0066_migrate.c:79:9: error: use of undeclared identifier 'buf'
+   79 |         buf = grown;
+      |         ^~~
+build_close/mutants/p37000/m0066_migrate.c:82:14: error: use of undeclared identifier 'buf'
+   82 |         free(buf);
+      |              ^~~
+build_close/mutants/p37000/m0066_migrate.c:86:16: error: use of undeclared identifier 'buf'
+   86 |     if (memchr(buf, '\0', len) != NULL) {
+      |                ^~~
+build_close/mutants/p37000/m0066_migrate.c:87:14: error: use of undeclared identifier 'buf'
+   87 |         free(buf);
+      |              ^~~
+build_close/mutants/p37000/m0066_migrate.c:91:5: error: use of undeclared identifier 'buf'
+   91 |     buf[len] = '\0';
+      |     ^~~
+build_close/mutants/p37000/m0066_migrate.c:93:14: error: use of undeclared identifier 'buf'
+   93 |         free(buf);
+      |              ^~~
+build_close/mutants/p37000/m0066_migrate.c:96:12: error: use of undeclared identifier 'buf'
+   96 |     return buf;
+      |            ^~~
+13 errors generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0077_migrate.c:62:15: error: comparison of integers of different signs: 'size_t' (aka 'unsigned long long') and 'int' [-Werror,-Wsign-compare]
+   62 |         if (n == -1)
+      |             ~ ^  ~~
+1 error generated.
+build_close/mutants/p37000/m0088_migrate.c:73:14: error: expected identifier or '('
+   73 |         char /grown = realloc(buf, cap + 1);
+      |              ^
+build_close/mutants/p37000/m0088_migrate.c:74:13: error: use of undeclared identifier 'grown'
+   74 |         if (grown == NULL) {
+      |             ^~~~~
+build_close/mutants/p37000/m0088_migrate.c:79:15: error: use of undeclared identifier 'grown'
+   79 |         buf = grown;
+      |               ^~~~~
+3 errors generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0097_migrate.c:99:40: error: expected ')'
+   99 | static int ct_mig_copy_file(const char /from, const char *to) {
+      |                                        ^
+build_close/mutants/p37000/m0097_migrate.c:99:28: note: to match this '('
+   99 | static int ct_mig_copy_file(const char /from, const char *to) {
+      |                            ^
+build_close/mutants/p37000/m0097_migrate.c:100:23: error: use of undeclared identifier 'from'
+  100 |     FILE *src = fopen(from, "rb");
+      |                       ^~~~
+build_close/mutants/p37000/m0097_migrate.c:103:23: error: use of undeclared identifier 'to'
+  103 |     FILE *dst = fopen(to, "wb");
+      |                       ^~
+build_close/mutants/p37000/m0097_migrate.c:189:37: error: too many arguments to function call, expected 1, have 2
+  189 |     return ct_mig_copy_file(dbpath, bak) ? 0 : 1;
+      |            ~~~~~~~~~~~~~~~~         ^~~
+build_close/mutants/p37000/m0097_migrate.c:99:12: note: 'ct_mig_copy_file' declared here
+   99 | static int ct_mig_copy_file(const char /from, const char *to) {
+      |            ^                ~~~~~~~~~~
+4 errors generated.
+build_close/mutants/p37000/m0098_migrate.c:99:58: error: expected ')'
+   99 | static int ct_mig_copy_file(const char *from, const char /to) {
+      |                                                          ^
+build_close/mutants/p37000/m0098_migrate.c:99:28: note: to match this '('
+   99 | static int ct_mig_copy_file(const char *from, const char /to) {
+      |                            ^
+build_close/mutants/p37000/m0098_migrate.c:103:23: error: use of undeclared identifier 'to'
+  103 |     FILE *dst = fopen(to, "wb");
+      |                       ^~
+build_close/mutants/p37000/m0098_migrate.c:189:37: error: incompatible pointer to integer conversion passing 'char[520]' to parameter of type 'char' [-Wint-conversion]
+  189 |     return ct_mig_copy_file(dbpath, bak) ? 0 : 1;
+      |                                     ^~~
+build_close/mutants/p37000/m0098_migrate.c:99:58: note: passing argument to parameter here
+   99 | static int ct_mig_copy_file(const char *from, const char /to) {
+      |                                                          ^
+3 errors generated.
+build_close/mutants/p37000/m0099_migrate.c:100:10: error: expected identifier or '('
+  100 |     FILE /src = fopen(from, "rb");
+      |          ^
+build_close/mutants/p37000/m0099_migrate.c:101:9: error: use of undeclared identifier 'src'
+  101 |     if (src == NULL)
+      |         ^~~
+build_close/mutants/p37000/m0099_migrate.c:105:16: error: use of undeclared identifier 'src'
+  105 |         fclose(src);
+      |                ^~~
+build_close/mutants/p37000/m0099_migrate.c:111:46: error: use of undeclared identifier 'src'
+  111 |         size_t n = fread(buf, 1, sizeof buf, src);
+      |                                              ^~~
+build_close/mutants/p37000/m0099_migrate.c:121:16: error: use of undeclared identifier 'src'
+  121 |     if (ferror(src))
+      |                ^~~
+build_close/mutants/p37000/m0099_migrate.c:123:16: error: use of undeclared identifier 'src'
+  123 |     if (fclose(src) != 0)
+      |                ^~~
+build_close/mutants/p37000/m0099_migrate.c:99:41: error: unused parameter 'from' [-Werror,-Wunused-parameter]
+   99 | static int ct_mig_copy_file(const char *from, const char *to) {
+      |                                         ^
+7 errors generated.
+mutate: suite migrate_backup exited 1
+build_close/mutants/p37000/m0104_migrate.c:103:10: error: expected identifier or '('
+  103 |     FILE /dst = fopen(to, "wb");
+      |          ^
+build_close/mutants/p37000/m0104_migrate.c:104:9: error: use of undeclared identifier 'dst'
+  104 |     if (dst == NULL) {
+      |         ^~~
+build_close/mutants/p37000/m0104_migrate.c:114:31: error: use of undeclared identifier 'dst'
+  114 |         if (fwrite(buf, 1, n, dst) != n) {
+      |                               ^~~
+build_close/mutants/p37000/m0104_migrate.c:125:16: error: use of undeclared identifier 'dst'
+  125 |     if (fclose(dst) != 0)
+      |                ^~~
+build_close/mutants/p37000/m0104_migrate.c:99:59: error: unused parameter 'to' [-Werror,-Wunused-parameter]
+   99 | static int ct_mig_copy_file(const char *from, const char *to) {
+      |                                                           ^
+5 errors generated.
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited -1073741819
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+build_close/mutants/p37000/m0115_migrate.c:112:15: error: comparison of integers of different signs: 'size_t' (aka 'unsigned long long') and 'int' [-Werror,-Wsign-compare]
+  112 |         if (n == -1)
+      |             ~ ^  ~~
+1 error generated.
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+build_close/mutants/p37000/m0134_migrate.c:130:38: error: expected ')'
+  130 | static int ct_mig_collect(const char /dir, ct_migration **out, size_t *count) {
+      |                                      ^
+build_close/mutants/p37000/m0134_migrate.c:130:26: note: to match this '('
+  130 | static int ct_mig_collect(const char /dir, ct_migration **out, size_t *count) {
+      |                          ^
+build_close/mutants/p37000/m0134_migrate.c:131:6: error: use of undeclared identifier 'out'
+  131 |     *out = NULL;
+      |      ^~~
+build_close/mutants/p37000/m0134_migrate.c:132:6: error: use of undeclared identifier 'count'
+  132 |     *count = 0;
+      |      ^~~~~
+build_close/mutants/p37000/m0134_migrate.c:133:22: error: use of undeclared identifier 'dir'; did you mean 'div'?
+  133 |     DIR *d = opendir(dir);
+      |                      ^~~
+      |                      div
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\stdlib.h:332:17: note: 'div' declared here
+  332 |   div_t __cdecl div(int _Numerator,int _Denominator);
+      |                 ^
+build_close/mutants/p37000/m0134_migrate.c:133:22: error: incompatible pointer types passing 'div_t (int, int) __attribute__((cdecl))' (aka 'struct _div_t (int, int)') to parameter of type 'const char *' [-Wincompatible-pointer-types]
+  133 |     DIR *d = opendir(dir);
+      |                      ^~~
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\dirent.h:67:50: note: passing argument to parameter here
+   67 | DIR* __cdecl __MINGW_NOTHROW opendir (const char*);
+      |                                                  ^
+build_close/mutants/p37000/m0134_migrate.c:176:6: error: use of undeclared identifier 'out'
+  176 |     *out = migs;
+      |      ^~~
+build_close/mutants/p37000/m0134_migrate.c:177:6: error: use of undeclared identifier 'count'
+  177 |     *count = n;
+      |      ^~~~~
+build_close/mutants/p37000/m0134_migrate.c:197:40: error: too many arguments to function call, expected 1, have 3
+  197 |     if (ct_mig_collect(migrations_dir, &migs, &count) != 0)
+      |         ~~~~~~~~~~~~~~                 ^~~~~~~~~~~~~
+build_close/mutants/p37000/m0134_migrate.c:130:12: note: 'ct_mig_collect' declared here
+  130 | static int ct_mig_collect(const char /dir, ct_migration **out, size_t *count) {
+      |            ^              ~~~~~~~~~~
+8 errors generated.
+build_close/mutants/p37000/m0135_migrate.c:130:57: error: unterminated /* comment
+  130 | static int ct_mig_collect(const char *dir, ct_migration /*out, size_t *count) {
+      |                                                         ^
+build_close/mutants/p37000/m0135_migrate.c:279:2: error: expected ')'
+  279 | }
+      |  ^
+build_close/mutants/p37000/m0135_migrate.c:130:26: note: to match this '('
+  130 | static int ct_mig_collect(const char *dir, ct_migration /*out, size_t *count) {
+      |                          ^
+build_close/mutants/p37000/m0135_migrate.c:279:2: error: expected function body after function declarator
+  279 | }
+      |  ^
+3 errors generated.
+build_close/mutants/p37000/m0136_migrate.c:130:58: error: expected ')'
+  130 | static int ct_mig_collect(const char *dir, ct_migration */out, size_t *count) {
+      |                                                          ^
+build_close/mutants/p37000/m0136_migrate.c:130:26: note: to match this '('
+  130 | static int ct_mig_collect(const char *dir, ct_migration */out, size_t *count) {
+      |                          ^
+build_close/mutants/p37000/m0136_migrate.c:131:6: error: use of undeclared identifier 'out'
+  131 |     *out = NULL;
+      |      ^~~
+build_close/mutants/p37000/m0136_migrate.c:132:6: error: use of undeclared identifier 'count'
+  132 |     *count = 0;
+      |      ^~~~~
+build_close/mutants/p37000/m0136_migrate.c:176:6: error: use of undeclared identifier 'out'
+  176 |     *out = migs;
+      |      ^~~
+build_close/mutants/p37000/m0136_migrate.c:177:6: error: use of undeclared identifier 'count'
+  177 |     *count = n;
+      |      ^~~~~
+build_close/mutants/p37000/m0136_migrate.c:197:47: error: too many arguments to function call, expected 2, have 3
+  197 |     if (ct_mig_collect(migrations_dir, &migs, &count) != 0)
+      |         ~~~~~~~~~~~~~~                        ^~~~~~
+build_close/mutants/p37000/m0136_migrate.c:130:12: note: 'ct_mig_collect' declared here
+  130 | static int ct_mig_collect(const char *dir, ct_migration */out, size_t *count) {
+      |            ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+6 errors generated.
+build_close/mutants/p37000/m0137_migrate.c:130:71: error: expected ')'
+  130 | static int ct_mig_collect(const char *dir, ct_migration **out, size_t /count) {
+      |                                                                       ^
+build_close/mutants/p37000/m0137_migrate.c:130:26: note: to match this '('
+  130 | static int ct_mig_collect(const char *dir, ct_migration **out, size_t /count) {
+      |                          ^
+build_close/mutants/p37000/m0137_migrate.c:132:6: error: use of undeclared identifier 'count'
+  132 |     *count = 0;
+      |      ^~~~~
+build_close/mutants/p37000/m0137_migrate.c:177:6: error: use of undeclared identifier 'count'
+  177 |     *count = n;
+      |      ^~~~~
+build_close/mutants/p37000/m0137_migrate.c:197:47: error: incompatible pointer to integer conversion passing 'size_t *' (aka 'unsigned long long *') to parameter of type 'size_t' (aka 'unsigned long long'); remove & [-Wint-conversion]
+  197 |     if (ct_mig_collect(migrations_dir, &migs, &count) != 0)
+      |                                               ^~~~~~
+build_close/mutants/p37000/m0137_migrate.c:130:71: note: passing argument to parameter here
+  130 | static int ct_mig_collect(const char *dir, ct_migration **out, size_t /count) {
+      |                                                                       ^
+4 errors generated.
+build_close/mutants/p37000/m0138_migrate.c:131:5: error: expected expression
+  131 |     /out = NULL;
+      |     ^
+1 error generated.
+build_close/mutants/p37000/m0139_migrate.c:132:5: error: expected expression
+  132 |     /count = 0;
+      |     ^
+1 error generated.
+build_close/mutants/p37000/m0142_migrate.c:133:9: error: expected identifier or '('
+  133 |     DIR /d = opendir(dir);
+      |         ^
+build_close/mutants/p37000/m0142_migrate.c:134:9: error: use of undeclared identifier 'd'
+  134 |     if (d == NULL)
+      |         ^
+build_close/mutants/p37000/m0142_migrate.c:141:27: error: use of undeclared identifier 'd'
+  141 |     while ((ent = readdir(d)) != NULL) {
+      |                           ^
+build_close/mutants/p37000/m0142_migrate.c:169:14: error: use of undeclared identifier 'd'
+  169 |     closedir(d);
+      |              ^
+build_close/mutants/p37000/m0142_migrate.c:130:39: error: unused parameter 'dir' [-Werror,-Wunused-parameter]
+  130 | static int ct_mig_collect(const char *dir, ct_migration **out, size_t *count) {
+      |                                       ^
+5 errors generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0147_migrate.c:136:18: error: expected identifier or '('
+  136 |     ct_migration /migs = NULL;
+      |                  ^
+build_close/mutants/p37000/m0147_migrate.c:157:40: error: use of undeclared identifier 'migs'
+  157 |             ct_migration *nm = realloc(migs, ncap * sizeof *nm);
+      |                                        ^~~~
+build_close/mutants/p37000/m0147_migrate.c:162:13: error: use of undeclared identifier 'migs'
+  162 |             migs = nm;
+      |             ^~~~
+build_close/mutants/p37000/m0147_migrate.c:165:16: error: use of undeclared identifier 'migs'
+  165 |         memcpy(migs[n].name, ent->d_name, name_len + 1);
+      |                ^~~~
+build_close/mutants/p37000/m0147_migrate.c:166:9: error: use of undeclared identifier 'migs'
+  166 |         migs[n].version = version;
+      |         ^~~~
+build_close/mutants/p37000/m0147_migrate.c:171:14: error: use of undeclared identifier 'migs'
+  171 |         free(migs);
+      |              ^~~~
+build_close/mutants/p37000/m0147_migrate.c:175:15: error: use of undeclared identifier 'migs'
+  175 |         qsort(migs, n, sizeof *migs, ct_mig_cmp);
+      |               ^~~~
+build_close/mutants/p37000/m0147_migrate.c:175:32: error: use of undeclared identifier 'migs'
+  175 |         qsort(migs, n, sizeof *migs, ct_mig_cmp);
+      |                                ^~~~
+build_close/mutants/p37000/m0147_migrate.c:176:12: error: use of undeclared identifier 'migs'
+  176 |     *out = migs;
+      |            ^~~~
+9 errors generated.
+mutate: suite migrate exited -1073741795
+mutate: suite migrate exited -1073741795
+mutate: suite migrate exited -1073741795
+mutate: suite migrate exited -1073741795
+build_close/mutants/p37000/m0152_migrate.c:139:19: error: expected identifier or '('
+  139 |     struct dirent /ent;
+      |                   ^
+build_close/mutants/p37000/m0152_migrate.c:141:13: error: use of undeclared identifier 'ent'; did you mean 'int'?
+  141 |     while ((ent = readdir(d)) != NULL) {
+      |             ^~~
+build_close/mutants/p37000/m0152_migrate.c:143:40: error: use of undeclared identifier 'ent'
+  143 |         int parsed = ct_mig_parse_name(ent->d_name, &version);
+      |                                        ^~~
+build_close/mutants/p37000/m0152_migrate.c:150:34: error: use of undeclared identifier 'ent'
+  150 |         size_t name_len = strlen(ent->d_name);
+      |                                  ^~~
+build_close/mutants/p37000/m0152_migrate.c:165:30: error: use of undeclared identifier 'ent'
+  165 |         memcpy(migs[n].name, ent->d_name, name_len + 1);
+      |                              ^~~
+5 errors generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate_soundness exited 1
+mutate: suite migrate_soundness exited 1
+mutate: suite migrate_soundness exited 1
+mutate: suite migrate exited -1073741795
+mutate: suite migrate_error_paths exited -1073740940
+mutate: suite migrate_backup exited -1073740940
+build_close/mutants/p37000/m0172_migrate.c:156:31: error: comparison of integers of different signs: 'size_t' (aka 'unsigned long long') and 'int' [-Werror,-Wsign-compare]
+  156 |             size_t ncap = cap == -1 ? 8 : cap * 2;
+      |                           ~~~ ^  ~~
+1 error generated.
+build_close/mutants/p37000/m0178_migrate.c:157:26: error: expected identifier or '('
+  157 |             ct_migration /nm = realloc(migs, ncap * sizeof *nm);
+      |                          ^
+build_close/mutants/p37000/m0178_migrate.c:158:17: error: use of undeclared identifier 'nm'
+  158 |             if (nm == NULL) {
+      |                 ^~
+build_close/mutants/p37000/m0178_migrate.c:162:20: error: use of undeclared identifier 'nm'
+  162 |             migs = nm;
+      |                    ^~
+3 errors generated.
+mutate: suite migrate exited -1073740940
+build_close/mutants/p37000/m0180_migrate.c:157:60: error: expected expression
+  157 |             ct_migration *nm = realloc(migs, ncap * sizeof /nm);
+      |                                                            ^
+1 error generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0196_migrate.c:175:31: error: expected expression
+  175 |         qsort(migs, n, sizeof /migs, ct_mig_cmp);
+      |                               ^
+1 error generated.
+build_close/mutants/p37000/m0197_migrate.c:176:5: error: expected expression
+  176 |     /out = migs;
+      |     ^
+1 error generated.
+build_close/mutants/p37000/m0198_migrate.c:177:5: error: expected expression
+  177 |     /count = n;
+      |     ^
+1 error generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0202_migrate.c:181:34: error: expected ')'
+  181 | static int ct_mig_backup(sqlite3 /db, const char *dbpath) {
+      |                                  ^
+build_close/mutants/p37000/m0202_migrate.c:181:25: note: to match this '('
+  181 | static int ct_mig_backup(sqlite3 /db, const char *dbpath) {
+      |                         ^
+build_close/mutants/p37000/m0202_migrate.c:181:34: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  181 | static int ct_mig_backup(sqlite3 /db, const char *dbpath) {
+      |                                  ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p37000/m0202_migrate.c:183:18: error: use of undeclared identifier 'db'
+  183 |     sqlite3_exec(db, "PRAGMA wal_checkpoint(TRUNCATE)", NULL, NULL, &err);
+      |                  ^~
+build_close/mutants/p37000/m0202_migrate.c:186:55: error: use of undeclared identifier 'dbpath'
+  186 |     int bak_len = snprintf(bak, sizeof bak, "%s.bak", dbpath);
+      |                                                       ^~~~~~
+build_close/mutants/p37000/m0202_migrate.c:189:29: error: use of undeclared identifier 'dbpath'
+  189 |     return ct_mig_copy_file(dbpath, bak) ? 0 : 1;
+      |                             ^~~~~~
+build_close/mutants/p37000/m0202_migrate.c:233:36: error: too many arguments to function call, expected 1, have 2
+  233 |             rc = ct_mig_backup(db, dbpath);
+      |                  ~~~~~~~~~~~~~     ^~~~~~
+build_close/mutants/p37000/m0202_migrate.c:181:12: note: 'ct_mig_backup' declared here
+  181 | static int ct_mig_backup(sqlite3 /db, const char *dbpath) {
+      |            ^             ~~~~~~~
+6 errors generated.
+build_close/mutants/p37000/m0203_migrate.c:181:50: error: expected ')'
+  181 | static int ct_mig_backup(sqlite3 *db, const char /dbpath) {
+      |                                                  ^
+build_close/mutants/p37000/m0203_migrate.c:181:25: note: to match this '('
+  181 | static int ct_mig_backup(sqlite3 *db, const char /dbpath) {
+      |                         ^
+build_close/mutants/p37000/m0203_migrate.c:186:55: error: use of undeclared identifier 'dbpath'
+  186 |     int bak_len = snprintf(bak, sizeof bak, "%s.bak", dbpath);
+      |                                                       ^~~~~~
+build_close/mutants/p37000/m0203_migrate.c:189:29: error: use of undeclared identifier 'dbpath'
+  189 |     return ct_mig_copy_file(dbpath, bak) ? 0 : 1;
+      |                             ^~~~~~
+build_close/mutants/p37000/m0203_migrate.c:233:36: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  233 |             rc = ct_mig_backup(db, dbpath);
+      |                                    ^~~~~~
+build_close/mutants/p37000/m0203_migrate.c:181:50: note: passing argument to parameter here
+  181 | static int ct_mig_backup(sqlite3 *db, const char /dbpath) {
+      |                                                  ^
+4 errors generated.
+build_close/mutants/p37000/m0204_migrate.c:182:10: error: expected identifier or '('
+  182 |     char /err = NULL;
+      |          ^
+build_close/mutants/p37000/m0204_migrate.c:183:70: error: use of undeclared identifier 'err'
+  183 |     sqlite3_exec(db, "PRAGMA wal_checkpoint(TRUNCATE)", NULL, NULL, &err);
+      |                                                                      ^~~
+build_close/mutants/p37000/m0204_migrate.c:184:18: error: use of undeclared identifier 'err'
+  184 |     sqlite3_free(err);
+      |                  ^~~
+3 errors generated.
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_error_paths exited 1
+build_close/mutants/p37000/m0217_migrate.c:192:27: error: expected ')'
+  192 | int ct_db_migrate(sqlite3 /db, const char *migrations_dir) {
+      |                           ^
+build_close/mutants/p37000/m0217_migrate.c:192:18: note: to match this '('
+  192 | int ct_db_migrate(sqlite3 /db, const char *migrations_dir) {
+      |                  ^
+build_close/mutants/p37000/m0217_migrate.c:192:5: error: conflicting types for 'ct_db_migrate'
+  192 | int ct_db_migrate(sqlite3 /db, const char *migrations_dir) {
+      |     ^
+src\storage/db.h:8:5: note: previous declaration is here
+    8 | int ct_db_migrate(sqlite3 *db, const char *migrations_dir);
+      |     ^
+build_close/mutants/p37000/m0217_migrate.c:192:27: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  192 | int ct_db_migrate(sqlite3 /db, const char *migrations_dir) {
+      |                           ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_close/mutants/p37000/m0217_migrate.c:193:9: error: use of undeclared identifier 'db'
+  193 |     if (db == NULL || migrations_dir == NULL)
+      |         ^~
+build_close/mutants/p37000/m0217_migrate.c:193:23: error: use of undeclared identifier 'migrations_dir'
+  193 |     if (db == NULL || migrations_dir == NULL)
+      |                       ^~~~~~~~~~~~~~
+build_close/mutants/p37000/m0217_migrate.c:197:24: error: use of undeclared identifier 'migrations_dir'
+  197 |     if (ct_mig_collect(migrations_dir, &migs, &count) != 0)
+      |                        ^~~~~~~~~~~~~~
+build_close/mutants/p37000/m0217_migrate.c:199:33: error: use of undeclared identifier 'db'
+  199 |     int current = ct_db_version(db);
+      |                                 ^~
+build_close/mutants/p37000/m0217_migrate.c:231:50: error: use of undeclared identifier 'db'
+  231 |         const char *dbpath = sqlite3_db_filename(db, "main");
+      |                                                  ^~
+build_close/mutants/p37000/m0217_migrate.c:233:32: error: use of undeclared identifier 'db'
+  233 |             rc = ct_mig_backup(db, dbpath);
+      |                                ^~
+build_close/mutants/p37000/m0217_migrate.c:240:61: error: use of undeclared identifier 'migrations_dir'
+  240 |         int path_len = snprintf(path, sizeof path, "%s/%s", migrations_dir, migs[i].name);
+      |                                                             ^~~~~~~~~~~~~~
+build_close/mutants/p37000/m0217_migrate.c:259:33: error: use of undeclared identifier 'db'
+  259 |         int step = sqlite3_exec(db, "BEGIN", NULL, NULL, &err);
+      |                                 ^~
+build_close/mutants/p37000/m0217_migrate.c:261:33: error: use of undeclared identifier 'db'
+  261 |             step = sqlite3_exec(db, sql, NULL, NULL, &err);
+      |                                 ^~
+build_close/mutants/p37000/m0217_migrate.c:263:33: error: use of undeclared identifier 'db'
+  263 |             step = sqlite3_exec(db, pragma, NULL, NULL, &err);
+      |                                 ^~
+build_close/mutants/p37000/m0217_migrate.c:265:33: error: use of undeclared identifier 'db'
+  265 |             step = sqlite3_exec(db, "COMMIT", NULL, NULL, &err);
+      |                                 ^~
+build_close/mutants/p37000/m0217_migrate.c:269:26: error: use of undeclared identifier 'db'
+  269 |             sqlite3_exec(db, "ROLLBACK", NULL, NULL, NULL);
+      |                          ^~
+build_close/mutants/p37000/m0217_migrate.c:276:37: error: use of undeclared identifier 'db'
+  276 |     if (rc != 0 || !ct_db_schema_ok(db))
+      |                                     ^~
+16 errors generated.
+build_close/mutants/p37000/m0218_migrate.c:192:43: error: expected ')'
+  192 | int ct_db_migrate(sqlite3 *db, const char /migrations_dir) {
+      |                                           ^
+build_close/mutants/p37000/m0218_migrate.c:192:18: note: to match this '('
+  192 | int ct_db_migrate(sqlite3 *db, const char /migrations_dir) {
+      |                  ^
+build_close/mutants/p37000/m0218_migrate.c:192:5: error: conflicting types for 'ct_db_migrate'
+  192 | int ct_db_migrate(sqlite3 *db, const char /migrations_dir) {
+      |     ^
+src\storage/db.h:8:5: note: previous declaration is here
+    8 | int ct_db_migrate(sqlite3 *db, const char *migrations_dir);
+      |     ^
+build_close/mutants/p37000/m0218_migrate.c:193:23: error: use of undeclared identifier 'migrations_dir'
+  193 |     if (db == NULL || migrations_dir == NULL)
+      |                       ^~~~~~~~~~~~~~
+build_close/mutants/p37000/m0218_migrate.c:197:24: error: use of undeclared identifier 'migrations_dir'
+  197 |     if (ct_mig_collect(migrations_dir, &migs, &count) != 0)
+      |                        ^~~~~~~~~~~~~~
+build_close/mutants/p37000/m0218_migrate.c:240:61: error: use of undeclared identifier 'migrations_dir'
+  240 |         int path_len = snprintf(path, sizeof path, "%s/%s", migrations_dir, migs[i].name);
+      |                                                             ^~~~~~~~~~~~~~
+5 errors generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0225_migrate.c:195:18: error: expected identifier or '('
+  195 |     ct_migration /migs = NULL;
+      |                  ^
+build_close/mutants/p37000/m0225_migrate.c:197:41: error: use of undeclared identifier 'migs'
+  197 |     if (ct_mig_collect(migrations_dir, &migs, &count) != 0)
+      |                                         ^~~~
+build_close/mutants/p37000/m0225_migrate.c:201:14: error: use of undeclared identifier 'migs'
+  201 |         free(migs);
+      |              ^~~~
+build_close/mutants/p37000/m0225_migrate.c:205:29: error: use of undeclared identifier 'migs'
+  205 |         if (current > (long)migs[count - 1].version) {
+      |                             ^~~~
+build_close/mutants/p37000/m0225_migrate.c:206:18: error: use of undeclared identifier 'migs'
+  206 |             free(migs);
+      |                  ^~~~
+build_close/mutants/p37000/m0225_migrate.c:211:23: error: use of undeclared identifier 'migs'
+  211 |             if ((long)migs[i].version <= current)
+      |                       ^~~~
+build_close/mutants/p37000/m0225_migrate.c:214:68: error: use of undeclared identifier 'migs'
+  214 |                 seen_pending == 0 ? (unsigned long)current + 1ul : migs[i - 1].version + 1ul;
+      |                                                                    ^~~~
+build_close/mutants/p37000/m0225_migrate.c:215:17: error: use of undeclared identifier 'migs'
+  215 |             if (migs[i].version != want) {
+      |                 ^~~~
+build_close/mutants/p37000/m0225_migrate.c:216:22: error: use of undeclared identifier 'migs'
+  216 |                 free(migs);
+      |                      ^~~~
+build_close/mutants/p37000/m0225_migrate.c:224:19: error: use of undeclared identifier 'migs'
+  224 |         if ((long)migs[i].version > current) {
+      |                   ^~~~
+build_close/mutants/p37000/m0225_migrate.c:237:19: error: use of undeclared identifier 'migs'
+  237 |         if ((long)migs[i].version <= current)
+      |                   ^~~~
+build_close/mutants/p37000/m0225_migrate.c:240:77: error: use of undeclared identifier 'migs'
+  240 |         int path_len = snprintf(path, sizeof path, "%s/%s", migrations_dir, migs[i].name);
+      |                                                                             ^~~~
+build_close/mutants/p37000/m0225_migrate.c:252:74: error: use of undeclared identifier 'migs'
+  252 |             snprintf(pragma, sizeof pragma, "PRAGMA user_version = %lu", migs[i].version);
+      |                                                                          ^~~~
+build_close/mutants/p37000/m0225_migrate.c:275:10: error: use of undeclared identifier 'migs'
+  275 |     free(migs);
+      |          ^~~~
+14 errors generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited -1073741795
+mutate: suite migrate_soundness exited 1
+mutate: suite migrate_soundness exited 1
+mutate: suite migrate exited -1073741795
+mutate: suite migrate exited -1073741795
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited -1073741795
+mutate: suite migrate exited -1073741795
+mutate: suite migrate exited -1073741795
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate_error_paths exited -1073741795
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0284_migrate.c:231:20: error: expected identifier or '('
+  231 |         const char /dbpath = sqlite3_db_filename(db, "main");
+      |                    ^
+build_close/mutants/p37000/m0284_migrate.c:232:13: error: use of undeclared identifier 'dbpath'
+  232 |         if (dbpath != NULL && dbpath[0] != '\0' && current > 0) {
+      |             ^~~~~~
+build_close/mutants/p37000/m0284_migrate.c:232:31: error: use of undeclared identifier 'dbpath'
+  232 |         if (dbpath != NULL && dbpath[0] != '\0' && current > 0) {
+      |                               ^~~~~~
+build_close/mutants/p37000/m0284_migrate.c:233:36: error: use of undeclared identifier 'dbpath'
+  233 |             rc = ct_mig_backup(db, dbpath);
+      |                                    ^~~~~~
+4 errors generated.
+mutate: suite migrate_backup exited 1
+build_close/mutants/p37000/m0286_migrate.c:232:49: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  232 |         if (dbpath != NULL || dbpath[0] != '\0' && current > 0) {
+      |                            ~~ ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+build_close/mutants/p37000/m0286_migrate.c:232:49: note: place parentheses around the '&&' expression to silence this warning
+  232 |         if (dbpath != NULL || dbpath[0] != '\0' && current > 0) {
+      |                                                 ^             
+      |                               (                               )
+1 error generated.
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+build_close/mutants/p37000/m0290_migrate.c:232:28: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  232 |         if (dbpath != NULL && dbpath[0] != '\0' || current > 0) {
+      |             ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p37000/m0290_migrate.c:232:28: note: place parentheses around the '&&' expression to silence this warning
+  232 |         if (dbpath != NULL && dbpath[0] != '\0' || current > 0) {
+      |                            ^
+      |             (                                  )
+1 error generated.
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+build_close/mutants/p37000/m0309_migrate.c:245:14: error: expected identifier or '('
+  245 |         char /sql = ct_mig_read_file(path);
+      |              ^
+build_close/mutants/p37000/m0309_migrate.c:246:13: error: use of undeclared identifier 'sql'
+  246 |         if (sql == NULL) {
+      |             ^~~
+build_close/mutants/p37000/m0309_migrate.c:254:18: error: use of undeclared identifier 'sql'
+  254 |             free(sql);
+      |                  ^~~
+build_close/mutants/p37000/m0309_migrate.c:261:37: error: use of undeclared identifier 'sql'
+  261 |             step = sqlite3_exec(db, sql, NULL, NULL, &err);
+      |                                     ^~~
+build_close/mutants/p37000/m0309_migrate.c:273:14: error: use of undeclared identifier 'sql'
+  273 |         free(sql);
+      |              ^~~
+5 errors generated.
+mutate: suite migrate exited 1
+mutate: suite migrate_soundness exited 1
+build_close/mutants/p37000/m0320_migrate.c:258:14: error: expected identifier or '('
+  258 |         char /err = NULL;
+      |              ^
+build_close/mutants/p37000/m0320_migrate.c:259:59: error: use of undeclared identifier 'err'
+  259 |         int step = sqlite3_exec(db, "BEGIN", NULL, NULL, &err);
+      |                                                           ^~~
+build_close/mutants/p37000/m0320_migrate.c:261:55: error: use of undeclared identifier 'err'
+  261 |             step = sqlite3_exec(db, sql, NULL, NULL, &err);
+      |                                                       ^~~
+build_close/mutants/p37000/m0320_migrate.c:263:58: error: use of undeclared identifier 'err'
+  263 |             step = sqlite3_exec(db, pragma, NULL, NULL, &err);
+      |                                                          ^~~
+build_close/mutants/p37000/m0320_migrate.c:265:60: error: use of undeclared identifier 'err'
+  265 |             step = sqlite3_exec(db, "COMMIT", NULL, NULL, &err);
+      |                                                            ^~~
+build_close/mutants/p37000/m0320_migrate.c:267:26: error: use of undeclared identifier 'err'
+  267 |             sqlite3_free(err);
+      |                          ^~~
+build_close/mutants/p37000/m0320_migrate.c:268:13: error: use of undeclared identifier 'err'
+  268 |             err = NULL;
+      |             ^~~
+build_close/mutants/p37000/m0320_migrate.c:272:22: error: use of undeclared identifier 'err'
+  272 |         sqlite3_free(err);
+      |                      ^~~
+8 errors generated.
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate_backup exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate_error_paths exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: suite migrate exited 1
+mutate: 136 unexplained survivors
+make: *** [makefile:242: mutate] Error 1

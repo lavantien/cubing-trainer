@@ -1,0 +1,217 @@
+build_close/mutants/p4092/m0004_headless.c:35:37: error: expected ')'
+   35 | int ct_headless_scene_id(const char /name) {
+      |                                     ^
+build_close/mutants/p4092/m0004_headless.c:35:25: note: to match this '('
+   35 | int ct_headless_scene_id(const char /name) {
+      |                         ^
+build_close/mutants/p4092/m0004_headless.c:35:5: error: conflicting types for 'ct_headless_scene_id'
+   35 | int ct_headless_scene_id(const char /name) {
+      |     ^
+src\app/headless.h:20:5: note: previous declaration is here
+   20 | int ct_headless_scene_id(const char *name);
+      |     ^
+build_close/mutants/p4092/m0004_headless.c:36:9: error: use of undeclared identifier 'name'
+   36 |     if (name == NULL) {
+      |         ^~~~
+build_close/mutants/p4092/m0004_headless.c:39:16: error: use of undeclared identifier 'name'
+   39 |     if (strcmp(name, "solved") == 0) {
+      |                ^~~~
+build_close/mutants/p4092/m0004_headless.c:42:16: error: use of undeclared identifier 'name'
+   42 |     if (strcmp(name, "scramble") == 0) {
+      |                ^~~~
+build_close/mutants/p4092/m0004_headless.c:45:16: error: use of undeclared identifier 'name'
+   45 |     if (strcmp(name, "mid") == 0) {
+      |                ^~~~
+6 errors generated.
+mutate: suite headless_scene_id exited -1073741819
+mutate: suite headless_scene_id exited 1
+mutate: suite headless_scene_id exited 1
+mutate: suite headless_scene_id exited 1
+mutate: suite headless_scene_id exited 1
+mutate: suite headless_scene_id exited 1
+mutate: suite headless_scene_id exited 1
+mutate: suite headless_scene_id exited 1
+mutate: suite headless_scene_id exited 1
+mutate: suite headless_scene_id exited 1
+build_close/mutants/p4092/m0015_headless.c:51:30: error: expected ')'
+   51 | static int apply_alg(ct_cube /cube, const char *alg) {
+      |                              ^
+build_close/mutants/p4092/m0015_headless.c:51:21: note: to match this '('
+   51 | static int apply_alg(ct_cube /cube, const char *alg) {
+      |                     ^
+build_close/mutants/p4092/m0015_headless.c:53:35: error: use of undeclared identifier 'alg'
+   53 |     int count = ct_notation_parse(alg, cube->n, moves, CT_ANIM_QUEUE_CAP);
+      |                                   ^~~
+build_close/mutants/p4092/m0015_headless.c:53:40: error: use of undeclared identifier 'cube'
+   53 |     int count = ct_notation_parse(alg, cube->n, moves, CT_ANIM_QUEUE_CAP);
+      |                                        ^~~~
+build_close/mutants/p4092/m0015_headless.c:58:18: error: use of undeclared identifier 'cube'
+   58 |         ct_apply(cube, moves[i]);
+      |                  ^~~~
+build_close/mutants/p4092/m0015_headless.c:83:35: error: too many arguments to function call, expected 1, have 2
+   83 |         int rc = apply_alg(&cube, scramble);
+      |                  ~~~~~~~~~        ^~~~~~~~
+build_close/mutants/p4092/m0015_headless.c:51:12: note: 'apply_alg' declared here
+   51 | static int apply_alg(ct_cube /cube, const char *alg) {
+      |            ^         ~~~~~~~
+build_close/mutants/p4092/m0015_headless.c:91:39: error: too many arguments to function call, expected 1, have 2
+   91 |             int rc = apply_alg(&cube, alg);
+      |                      ~~~~~~~~~        ^~~
+build_close/mutants/p4092/m0015_headless.c:51:12: note: 'apply_alg' declared here
+   51 | static int apply_alg(ct_cube /cube, const char *alg) {
+      |            ^         ~~~~~~~
+6 errors generated.
+build_close/mutants/p4092/m0016_headless.c:51:48: error: expected ')'
+   51 | static int apply_alg(ct_cube *cube, const char /alg) {
+      |                                                ^
+build_close/mutants/p4092/m0016_headless.c:51:21: note: to match this '('
+   51 | static int apply_alg(ct_cube *cube, const char /alg) {
+      |                     ^
+build_close/mutants/p4092/m0016_headless.c:53:35: error: use of undeclared identifier 'alg'
+   53 |     int count = ct_notation_parse(alg, cube->n, moves, CT_ANIM_QUEUE_CAP);
+      |                                   ^~~
+build_close/mutants/p4092/m0016_headless.c:83:35: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+   83 |         int rc = apply_alg(&cube, scramble);
+      |                                   ^~~~~~~~
+build_close/mutants/p4092/m0016_headless.c:51:48: note: passing argument to parameter here
+   51 | static int apply_alg(ct_cube *cube, const char /alg) {
+      |                                                ^
+build_close/mutants/p4092/m0016_headless.c:91:39: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+   91 |             int rc = apply_alg(&cube, alg);
+      |                                       ^~~
+build_close/mutants/p4092/m0016_headless.c:51:48: note: passing argument to parameter here
+   51 | static int apply_alg(ct_cube *cube, const char /alg) {
+      |                                                ^
+4 errors generated.
+mutate: suite headless_render_smoke exited -1073741795
+build_close/mutants/p4092/m0023_headless.c:63:59: error: expected ')'
+   63 | int ct_headless_render_scene(int scene, int n, const char /alg, const char *out_path) {
+      |                                                           ^
+build_close/mutants/p4092/m0023_headless.c:63:29: note: to match this '('
+   63 | int ct_headless_render_scene(int scene, int n, const char /alg, const char *out_path) {
+      |                             ^
+build_close/mutants/p4092/m0023_headless.c:63:5: error: conflicting types for 'ct_headless_render_scene'
+   63 | int ct_headless_render_scene(int scene, int n, const char /alg, const char *out_path) {
+      |     ^
+src\app/headless.h:21:5: note: previous declaration is here
+   21 | int ct_headless_render_scene(int scene, int n, const char *alg, const char *out_path);
+      |     ^
+build_close/mutants/p4092/m0023_headless.c:64:9: error: use of undeclared identifier 'out_path'
+   64 |     if (out_path == NULL || out_path[0] == '\0') {
+      |         ^~~~~~~~
+build_close/mutants/p4092/m0023_headless.c:64:29: error: use of undeclared identifier 'out_path'
+   64 |     if (out_path == NULL || out_path[0] == '\0') {
+      |                             ^~~~~~~~
+build_close/mutants/p4092/m0023_headless.c:82:33: error: use of undeclared identifier 'alg'
+   82 |         const char *scramble = (alg != NULL && alg[0] != '\0') ? alg : CT_HEADLESS_SCRAMBLE_ALG;
+      |                                 ^~~
+build_close/mutants/p4092/m0023_headless.c:82:48: error: use of undeclared identifier 'alg'
+   82 |         const char *scramble = (alg != NULL && alg[0] != '\0') ? alg : CT_HEADLESS_SCRAMBLE_ALG;
+      |                                                ^~~
+build_close/mutants/p4092/m0023_headless.c:82:66: error: use of undeclared identifier 'alg'
+   82 |         const char *scramble = (alg != NULL && alg[0] != '\0') ? alg : CT_HEADLESS_SCRAMBLE_ALG;
+      |                                                                  ^~~
+build_close/mutants/p4092/m0023_headless.c:90:13: error: use of undeclared identifier 'alg'
+   90 |         if (alg != NULL && alg[0] != '\0') {
+      |             ^~~
+build_close/mutants/p4092/m0023_headless.c:90:28: error: use of undeclared identifier 'alg'
+   90 |         if (alg != NULL && alg[0] != '\0') {
+      |                            ^~~
+build_close/mutants/p4092/m0023_headless.c:91:39: error: use of undeclared identifier 'alg'
+   91 |             int rc = apply_alg(&cube, alg);
+      |                                       ^~~
+build_close/mutants/p4092/m0023_headless.c:125:39: error: use of undeclared identifier 'out_path'
+  125 |     bool written = ExportImage(frame, out_path);
+      |                                       ^~~~~~~~
+11 errors generated.
+build_close/mutants/p4092/m0024_headless.c:63:76: error: expected ')'
+   63 | int ct_headless_render_scene(int scene, int n, const char *alg, const char /out_path) {
+      |                                                                            ^
+build_close/mutants/p4092/m0024_headless.c:63:29: note: to match this '('
+   63 | int ct_headless_render_scene(int scene, int n, const char *alg, const char /out_path) {
+      |                             ^
+build_close/mutants/p4092/m0024_headless.c:63:5: error: conflicting types for 'ct_headless_render_scene'
+   63 | int ct_headless_render_scene(int scene, int n, const char *alg, const char /out_path) {
+      |     ^
+src\app/headless.h:21:5: note: previous declaration is here
+   21 | int ct_headless_render_scene(int scene, int n, const char *alg, const char *out_path);
+      |     ^
+build_close/mutants/p4092/m0024_headless.c:64:9: error: use of undeclared identifier 'out_path'
+   64 |     if (out_path == NULL || out_path[0] == '\0') {
+      |         ^~~~~~~~
+build_close/mutants/p4092/m0024_headless.c:64:29: error: use of undeclared identifier 'out_path'
+   64 |     if (out_path == NULL || out_path[0] == '\0') {
+      |                             ^~~~~~~~
+build_close/mutants/p4092/m0024_headless.c:125:39: error: use of undeclared identifier 'out_path'
+  125 |     bool written = ExportImage(frame, out_path);
+      |                                       ^~~~~~~~
+5 errors generated.
+mutate: suite headless_render_guards exited -1073741795
+mutate: suite headless_render_guards exited -1073741795
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_guards exited 1
+build_close/mutants/p4092/m0031_headless.c:67:82: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   67 |     if (scene != CT_HEADLESS_SCENE_SOLVED || scene != CT_HEADLESS_SCENE_SCRAMBLE &&
+      |                                           ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+   68 |         scene != CT_HEADLESS_SCENE_MID) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p4092/m0031_headless.c:67:82: note: place parentheses around the '&&' expression to silence this warning
+   67 |     if (scene != CT_HEADLESS_SCENE_SOLVED || scene != CT_HEADLESS_SCENE_SCRAMBLE &&
+      |                                                                                  ^
+      |                                              (
+   68 |         scene != CT_HEADLESS_SCENE_MID) {
+      |                                       
+      |                                       )
+1 error generated.
+mutate: suite headless_render_guards exited 1
+build_close/mutants/p4092/m0033_headless.c:67:43: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   67 |     if (scene != CT_HEADLESS_SCENE_SOLVED && scene != CT_HEADLESS_SCENE_SCRAMBLE ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p4092/m0033_headless.c:67:43: note: place parentheses around the '&&' expression to silence this warning
+   67 |     if (scene != CT_HEADLESS_SCENE_SOLVED && scene != CT_HEADLESS_SCENE_SCRAMBLE ||
+      |                                           ^
+      |         (                                                                       )
+1 error generated.
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_smoke exited 1
+mutate: suite headless_render_smoke exited 1
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_smoke exited 1
+build_close/mutants/p4092/m0040_headless.c:79:19: error: expected identifier or '('
+   79 |     const ct_anim /anim_view = NULL;
+      |                   ^
+build_close/mutants/p4092/m0040_headless.c:103:9: error: use of undeclared identifier 'anim_view'
+  103 |         anim_view = &anim;
+      |         ^~~~~~~~~
+build_close/mutants/p4092/m0040_headless.c:120:40: error: use of undeclared identifier 'anim_view'
+  120 |     ct_renderer_draw(&renderer, &cube, anim_view, &scheme, cam, headless_move_seconds());
+      |                                        ^~~~~~~~~
+3 errors generated.
+mutate: suite headless_render_guards exited 1
+build_close/mutants/p4092/m0042_headless.c:82:20: error: expected identifier or '('
+   82 |         const char /scramble = (alg != NULL && alg[0] != '\0') ? alg : CT_HEADLESS_SCRAMBLE_ALG;
+      |                    ^
+build_close/mutants/p4092/m0042_headless.c:83:35: error: use of undeclared identifier 'scramble'
+   83 |         int rc = apply_alg(&cube, scramble);
+      |                                   ^~~~~~~~
+2 errors generated.
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_smoke exited -1073741795
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_smoke exited -1073741795
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_guards exited 1
+mutate: suite headless_render_smoke exited 1
+mutate: suite headless_render_smoke exited 1
+mutate: suite headless_render_smoke exited 1
+mutate: suite headless_render_smoke exited 1
+mutate: 11 unexplained survivors
+make: *** [makefile:242: mutate] Error 1

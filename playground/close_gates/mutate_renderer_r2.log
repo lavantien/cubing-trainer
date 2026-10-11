@@ -1,0 +1,464 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/render/renderer.c build_close unit_renderer_draw_signature unit_renderer_init unit_renderer_counts unit_renderer_geometry unit_renderer_corners unit_renderer_colors unit_renderer_scheme_hex unit_renderer_slab unit_renderer_slab_invalid
+mutate: scope=src/render/renderer.c files=1 sites=306 suites=9
+KILLED    m0001 src/render/renderer.c:8 [arith * -> /]
+          build break
+KILLED    m0002 src/render/renderer.c:13 [int+1 2 -> 3]
+KILLED    m0003 src/render/renderer.c:13 [int-1 2 -> 1]
+KILLED    m0004 src/render/renderer.c:14 [int+1 3 -> 4]
+KILLED    m0005 src/render/renderer.c:14 [int-1 3 -> 2]
+KILLED    m0006 src/render/renderer.c:15 [arith * -> /]
+KILLED    m0007 src/render/renderer.c:16 [int+1 4 -> 5]
+KILLED    m0008 src/render/renderer.c:16 [int-1 4 -> 3]
+KILLED    m0009 src/render/renderer.c:17 [arith - -> +]
+KILLED    m0010 src/render/renderer.c:17 [arith + -> -]
+KILLED    m0011 src/render/renderer.c:17 [int+1 1 -> 2]
+KILLED    m0012 src/render/renderer.c:17 [int-1 1 -> 0]
+KILLED    m0013 src/render/renderer.c:22 [cmp >= -> >]
+KILLED    m0014 src/render/renderer.c:22 [logic && -> ||]
+          build break
+KILLED    m0015 src/render/renderer.c:22 [cmp <= -> <]
+KILLED    m0016 src/render/renderer.c:23 [arith - -> +]
+KILLED    m0017 src/render/renderer.c:25 [cmp >= -> >]
+KILLED    m0018 src/render/renderer.c:25 [logic && -> ||]
+          build break
+KILLED    m0019 src/render/renderer.c:25 [cmp <= -> <]
+KILLED    m0020 src/render/renderer.c:26 [arith - -> +]
+KILLED    m0021 src/render/renderer.c:26 [arith + -> -]
+KILLED    m0022 src/render/renderer.c:28 [cmp >= -> >]
+KILLED    m0023 src/render/renderer.c:28 [logic && -> ||]
+          build break
+KILLED    m0024 src/render/renderer.c:28 [cmp <= -> <]
+KILLED    m0025 src/render/renderer.c:29 [arith - -> +]
+KILLED    m0026 src/render/renderer.c:29 [arith + -> -]
+KILLED    m0027 src/render/renderer.c:31 [arith - -> +]
+SURVIVED  m0028 src/render/renderer.c:31 [int+1 1 -> 2]
+KILLED    m0029 src/render/renderer.c:31 [int-1 1 -> 0]
+KILLED    m0030 src/render/renderer.c:34 [arith * -> /]
+          build break
+KILLED    m0031 src/render/renderer.c:34 [arith * -> /]
+          build break
+KILLED    m0032 src/render/renderer.c:35 [cmp == -> !=]
+KILLED    m0033 src/render/renderer.c:35 [logic || -> &&]
+          build break
+KILLED    m0034 src/render/renderer.c:35 [cmp == -> !=]
+KILLED    m0035 src/render/renderer.c:35 [logic || -> &&]
+          build break
+KILLED    m0036 src/render/renderer.c:35 [cmp < -> <=]
+KILLED    m0037 src/render/renderer.c:35 [int+1 0 -> 1]
+KILLED    m0038 src/render/renderer.c:35 [int-1 0 -> -1]
+KILLED    m0039 src/render/renderer.c:35 [logic || -> &&]
+          build break
+KILLED    m0040 src/render/renderer.c:35 [cmp >= -> >]
+KILLED    m0041 src/render/renderer.c:36 [bool false -> true]
+KILLED    m0042 src/render/renderer.c:38 [cmp != -> ==]
+KILLED    m0043 src/render/renderer.c:39 [bool false -> true]
+KILLED    m0044 src/render/renderer.c:42 [int+1 0 -> 1]
+KILLED    m0045 src/render/renderer.c:42 [int-1 0 -> -1]
+KILLED    m0046 src/render/renderer.c:42 [cmp < -> <=]
+KILLED    m0047 src/render/renderer.c:43 [arith * -> /]
+KILLED    m0048 src/render/renderer.c:45 [arith + -> -]
+KILLED    m0049 src/render/renderer.c:45 [int+1 1 -> 2]
+KILLED    m0050 src/render/renderer.c:45 [int-1 1 -> 0]
+KILLED    m0051 src/render/renderer.c:46 [cmp < -> <=]
+KILLED    m0052 src/render/renderer.c:46 [int+1 0 -> 1]
+KILLED    m0053 src/render/renderer.c:46 [int-1 0 -> -1]
+KILLED    m0054 src/render/renderer.c:46 [logic || -> &&]
+KILLED    m0055 src/render/renderer.c:46 [cmp < -> <=]
+KILLED    m0056 src/render/renderer.c:46 [int+1 0 -> 1]
+KILLED    m0057 src/render/renderer.c:46 [int-1 0 -> -1]
+KILLED    m0058 src/render/renderer.c:47 [bool false -> true]
+KILLED    m0059 src/render/renderer.c:51 [int+1 0 -> 1]
+KILLED    m0060 src/render/renderer.c:51 [int-1 0 -> -1]
+KILLED    m0061 src/render/renderer.c:51 [int+1 1 -> 2]
+KILLED    m0062 src/render/renderer.c:51 [int-1 1 -> 0]
+KILLED    m0063 src/render/renderer.c:51 [int+1 2 -> 3]
+KILLED    m0064 src/render/renderer.c:51 [int-1 2 -> 1]
+KILLED    m0065 src/render/renderer.c:52 [bool true -> false]
+SURVIVED  m0066 src/render/renderer.c:56 [cmp < -> <=]
+SURVIVED  m0067 src/render/renderer.c:59 [cmp > -> >=]
+KILLED    m0068 src/render/renderer.c:76 [arith * -> /]
+          build break
+SURVIVED  m0069 src/render/renderer.c:77 [cmp < -> <=]
+SURVIVED  m0070 src/render/renderer.c:80 [cmp > -> >=]
+KILLED    m0071 src/render/renderer.c:89 [not-del ! -> (deleted)]
+KILLED    m0072 src/render/renderer.c:90 [bool false -> true]
+KILLED    m0073 src/render/renderer.c:93 [arith * -> /]
+KILLED    m0074 src/render/renderer.c:93 [arith + -> -]
+KILLED    m0075 src/render/renderer.c:93 [arith * -> /]
+KILLED    m0076 src/render/renderer.c:93 [arith + -> -]
+KILLED    m0077 src/render/renderer.c:93 [arith * -> /]
+KILLED    m0078 src/render/renderer.c:94 [arith - -> +]
+KILLED    m0079 src/render/renderer.c:94 [int+1 1 -> 2]
+KILLED    m0080 src/render/renderer.c:94 [int-1 1 -> 0]
+KILLED    m0081 src/render/renderer.c:95 [arith - -> +]
+KILLED    m0082 src/render/renderer.c:95 [int+1 2 -> 3]
+KILLED    m0083 src/render/renderer.c:95 [int-1 2 -> 1]
+KILLED    m0084 src/render/renderer.c:95 [arith * -> /]
+KILLED    m0085 src/render/renderer.c:95 [arith - -> +]
+KILLED    m0086 src/render/renderer.c:95 [int+1 1 -> 2]
+KILLED    m0087 src/render/renderer.c:95 [int-1 1 -> 0]
+KILLED    m0088 src/render/renderer.c:96 [arith - -> +]
+KILLED    m0089 src/render/renderer.c:96 [int+1 2 -> 3]
+KILLED    m0090 src/render/renderer.c:96 [int-1 2 -> 1]
+KILLED    m0091 src/render/renderer.c:96 [arith * -> /]
+KILLED    m0092 src/render/renderer.c:96 [arith - -> +]
+KILLED    m0093 src/render/renderer.c:96 [int+1 1 -> 2]
+KILLED    m0094 src/render/renderer.c:96 [int-1 1 -> 0]
+KILLED    m0095 src/render/renderer.c:97 [cmp >= -> >]
+KILLED    m0096 src/render/renderer.c:97 [logic && -> ||]
+KILLED    m0097 src/render/renderer.c:97 [cmp <= -> <]
+SURVIVED  m0098 src/render/renderer.c:103 [arith * -> /]
+SURVIVED  m0099 src/render/renderer.c:103 [arith + -> -]
+SURVIVED  m0100 src/render/renderer.c:103 [arith * -> /]
+SURVIVED  m0101 src/render/renderer.c:103 [arith + -> -]
+SURVIVED  m0102 src/render/renderer.c:103 [arith * -> /]
+SURVIVED  m0103 src/render/renderer.c:104 [arith * -> /]
+SURVIVED  m0104 src/render/renderer.c:104 [arith - -> +]
+SURVIVED  m0105 src/render/renderer.c:104 [arith * -> /]
+SURVIVED  m0106 src/render/renderer.c:104 [arith * -> /]
+SURVIVED  m0107 src/render/renderer.c:104 [arith - -> +]
+SURVIVED  m0108 src/render/renderer.c:104 [arith * -> /]
+SURVIVED  m0109 src/render/renderer.c:105 [arith * -> /]
+SURVIVED  m0110 src/render/renderer.c:105 [arith - -> +]
+SURVIVED  m0111 src/render/renderer.c:105 [arith * -> /]
+SURVIVED  m0112 src/render/renderer.c:107 [arith * -> /]
+SURVIVED  m0113 src/render/renderer.c:107 [arith + -> -]
+SURVIVED  m0114 src/render/renderer.c:107 [arith * -> /]
+SURVIVED  m0115 src/render/renderer.c:107 [arith + -> -]
+SURVIVED  m0116 src/render/renderer.c:107 [arith * -> /]
+SURVIVED  m0117 src/render/renderer.c:107 [arith * -> /]
+SURVIVED  m0118 src/render/renderer.c:107 [arith - -> +]
+SURVIVED  m0119 src/render/renderer.c:108 [arith * -> /]
+SURVIVED  m0120 src/render/renderer.c:108 [arith + -> -]
+SURVIVED  m0121 src/render/renderer.c:108 [arith * -> /]
+SURVIVED  m0122 src/render/renderer.c:108 [arith + -> -]
+SURVIVED  m0123 src/render/renderer.c:108 [arith * -> /]
+SURVIVED  m0124 src/render/renderer.c:108 [arith * -> /]
+SURVIVED  m0125 src/render/renderer.c:108 [arith - -> +]
+SURVIVED  m0126 src/render/renderer.c:109 [arith * -> /]
+SURVIVED  m0127 src/render/renderer.c:109 [arith + -> -]
+SURVIVED  m0128 src/render/renderer.c:109 [arith * -> /]
+SURVIVED  m0129 src/render/renderer.c:109 [arith + -> -]
+SURVIVED  m0130 src/render/renderer.c:109 [arith * -> /]
+SURVIVED  m0131 src/render/renderer.c:109 [arith * -> /]
+SURVIVED  m0132 src/render/renderer.c:109 [arith - -> +]
+KILLED    m0133 src/render/renderer.c:113 [arith * -> /]
+          build break
+KILLED    m0134 src/render/renderer.c:113 [arith * -> /]
+          build break
+KILLED    m0135 src/render/renderer.c:113 [arith * -> /]
+          build break
+KILLED    m0136 src/render/renderer.c:114 [arith * -> /]
+          build break
+KILLED    m0137 src/render/renderer.c:115 [cmp == -> !=]
+KILLED    m0138 src/render/renderer.c:115 [logic || -> &&]
+          build break
+KILLED    m0139 src/render/renderer.c:115 [cmp == -> !=]
+KILLED    m0140 src/render/renderer.c:115 [logic || -> &&]
+          build break
+KILLED    m0141 src/render/renderer.c:115 [cmp == -> !=]
+KILLED    m0142 src/render/renderer.c:115 [logic || -> &&]
+          build break
+KILLED    m0143 src/render/renderer.c:115 [cmp == -> !=]
+KILLED    m0144 src/render/renderer.c:115 [logic || -> &&]
+          build break
+SURVIVED  m0145 src/render/renderer.c:115 [cmp <= -> <]
+KILLED    m0146 src/render/renderer.c:115 [int+1 0 -> 1]
+SURVIVED  m0147 src/render/renderer.c:115 [int-1 0 -> -1]
+KILLED    m0148 src/render/renderer.c:115 [logic || -> &&]
+          build break
+KILLED    m0149 src/render/renderer.c:115 [cmp != -> ==]
+KILLED    m0150 src/render/renderer.c:116 [ret-lit 0 -> 1]
+KILLED    m0151 src/render/renderer.c:116 [int+1 0 -> 1]
+KILLED    m0152 src/render/renderer.c:116 [int-1 0 -> -1]
+KILLED    m0153 src/render/renderer.c:118 [cmp < -> <=]
+KILLED    m0154 src/render/renderer.c:118 [int+1 2 -> 3]
+KILLED    m0155 src/render/renderer.c:118 [int-1 2 -> 1]
+KILLED    m0156 src/render/renderer.c:118 [logic || -> &&]
+KILLED    m0157 src/render/renderer.c:118 [cmp > -> >=]
+KILLED    m0158 src/render/renderer.c:119 [ret-lit 0 -> 1]
+KILLED    m0159 src/render/renderer.c:119 [int+1 0 -> 1]
+KILLED    m0160 src/render/renderer.c:119 [int-1 0 -> -1]
+KILLED    m0161 src/render/renderer.c:122 [arith / -> *]
+KILLED    m0162 src/render/renderer.c:122 [arith * -> /]
+KILLED    m0163 src/render/renderer.c:122 [arith - -> +]
+KILLED    m0164 src/render/renderer.c:122 [int+1 1 -> 2]
+KILLED    m0165 src/render/renderer.c:122 [int-1 1 -> 0]
+KILLED    m0166 src/render/renderer.c:123 [arith * -> /]
+KILLED    m0167 src/render/renderer.c:123 [arith - -> +]
+KILLED    m0168 src/render/renderer.c:124 [arith * -> /]
+KILLED    m0169 src/render/renderer.c:124 [arith * -> /]
+KILLED    m0170 src/render/renderer.c:125 [int+1 0 -> 1]
+          build break
+KILLED    m0171 src/render/renderer.c:125 [int-1 0 -> -1]
+          build break
+SURVIVED  m0172 src/render/renderer.c:128 [cmp != -> ==]
+SURVIVED  m0173 src/render/renderer.c:128 [int+1 0 -> 1]
+SURVIVED  m0174 src/render/renderer.c:128 [int-1 0 -> -1]
+SURVIVED  m0175 src/render/renderer.c:130 [cmp != -> ==]
+SURVIVED  m0176 src/render/renderer.c:130 [int+1 0 -> 1]
+SURVIVED  m0177 src/render/renderer.c:130 [int-1 0 -> -1]
+KILLED    m0178 src/render/renderer.c:136 [int+1 0 -> 1]
+KILLED    m0179 src/render/renderer.c:136 [int-1 0 -> -1]
+KILLED    m0180 src/render/renderer.c:137 [int+1 0 -> 1]
+KILLED    m0181 src/render/renderer.c:137 [int-1 0 -> -1]
+KILLED    m0182 src/render/renderer.c:137 [cmp < -> <=]
+KILLED    m0183 src/render/renderer.c:138 [arith * -> /]
+          build break
+KILLED    m0184 src/render/renderer.c:139 [int+1 0 -> 1]
+KILLED    m0185 src/render/renderer.c:139 [int-1 0 -> -1]
+KILLED    m0186 src/render/renderer.c:139 [cmp < -> <=]
+KILLED    m0187 src/render/renderer.c:140 [int+1 0 -> 1]
+KILLED    m0188 src/render/renderer.c:140 [int-1 0 -> -1]
+KILLED    m0189 src/render/renderer.c:140 [cmp < -> <=]
+KILLED    m0190 src/render/renderer.c:141 [cmp >= -> >]
+KILLED    m0191 src/render/renderer.c:145 [arith * -> /]
+KILLED    m0192 src/render/renderer.c:145 [arith * -> /]
+KILLED    m0193 src/render/renderer.c:145 [arith + -> -]
+KILLED    m0194 src/render/renderer.c:145 [arith * -> /]
+KILLED    m0195 src/render/renderer.c:145 [arith + -> -]
+KILLED    m0196 src/render/renderer.c:146 [cmp >= -> >]
+KILLED    m0197 src/render/renderer.c:147 [arith - -> +]
+KILLED    m0198 src/render/renderer.c:147 [int+1 1 -> 2]
+KILLED    m0199 src/render/renderer.c:147 [int-1 1 -> 0]
+KILLED    m0200 src/render/renderer.c:152 [arith * -> /]
+KILLED    m0201 src/render/renderer.c:152 [arith + -> -]
+KILLED    m0202 src/render/renderer.c:152 [arith * -> /]
+KILLED    m0203 src/render/renderer.c:153 [arith * -> /]
+KILLED    m0204 src/render/renderer.c:153 [arith + -> -]
+KILLED    m0205 src/render/renderer.c:153 [arith * -> /]
+KILLED    m0206 src/render/renderer.c:154 [arith * -> /]
+KILLED    m0207 src/render/renderer.c:154 [arith + -> -]
+KILLED    m0208 src/render/renderer.c:154 [arith * -> /]
+SURVIVED  m0209 src/render/renderer.c:157 [logic && -> ||]
+KILLED    m0210 src/render/renderer.c:162 [arith * -> /]
+          build break
+SURVIVED  m0211 src/render/renderer.c:163 [int+1 2 -> 3]
+KILLED    m0212 src/render/renderer.c:163 [int-1 2 -> 1]
+          build break
+KILLED    m0213 src/render/renderer.c:164 [arith - -> +]
+KILLED    m0214 src/render/renderer.c:164 [arith - -> +]
+KILLED    m0215 src/render/renderer.c:164 [arith - -> +]
+KILLED    m0216 src/render/renderer.c:164 [arith - -> +]
+KILLED    m0217 src/render/renderer.c:165 [int+1 0 -> 1]
+KILLED    m0218 src/render/renderer.c:165 [int-1 0 -> -1]
+KILLED    m0219 src/render/renderer.c:165 [cmp < -> <=]
+KILLED    m0220 src/render/renderer.c:166 [int+1 0 -> 1]
+KILLED    m0221 src/render/renderer.c:166 [int-1 0 -> -1]
+          build break
+KILLED    m0222 src/render/renderer.c:167 [int+1 1 -> 2]
+          build break
+KILLED    m0223 src/render/renderer.c:167 [int-1 1 -> 0]
+SURVIVED  m0224 src/render/renderer.c:168 [arith + -> -]
+SURVIVED  m0225 src/render/renderer.c:168 [arith * -> /]
+SURVIVED  m0226 src/render/renderer.c:168 [arith * -> /]
+KILLED    m0227 src/render/renderer.c:168 [arith + -> -]
+KILLED    m0228 src/render/renderer.c:168 [arith * -> /]
+SURVIVED  m0229 src/render/renderer.c:168 [arith * -> /]
+KILLED    m0230 src/render/renderer.c:169 [arith + -> -]
+KILLED    m0231 src/render/renderer.c:169 [arith * -> /]
+SURVIVED  m0232 src/render/renderer.c:169 [arith * -> /]
+SURVIVED  m0233 src/render/renderer.c:169 [arith + -> -]
+SURVIVED  m0234 src/render/renderer.c:169 [arith * -> /]
+SURVIVED  m0235 src/render/renderer.c:169 [arith * -> /]
+KILLED    m0236 src/render/renderer.c:170 [arith + -> -]
+KILLED    m0237 src/render/renderer.c:170 [arith * -> /]
+SURVIVED  m0238 src/render/renderer.c:170 [arith * -> /]
+KILLED    m0239 src/render/renderer.c:170 [arith + -> -]
+KILLED    m0240 src/render/renderer.c:170 [arith * -> /]
+SURVIVED  m0241 src/render/renderer.c:170 [arith * -> /]
+KILLED    m0242 src/render/renderer.c:180 [arith * -> /]
+          build break
+KILLED    m0243 src/render/renderer.c:180 [arith * -> /]
+          build break
+KILLED    m0244 src/render/renderer.c:180 [arith * -> /]
+          build break
+KILLED    m0245 src/render/renderer.c:181 [arith * -> /]
+          build break
+KILLED    m0246 src/render/renderer.c:182 [int+1 0 -> 1]
+          build break
+KILLED    m0247 src/render/renderer.c:182 [int-1 0 -> -1]
+          build break
+SURVIVED  m0248 src/render/renderer.c:183 [bool false -> true]
+KILLED    m0249 src/render/renderer.c:186 [arith * -> /]
+          build break
+KILLED    m0250 src/render/renderer.c:186 [arith * -> /]
+          build break
+KILLED    m0251 src/render/renderer.c:186 [arith * -> /]
+          build break
+KILLED    m0252 src/render/renderer.c:187 [arith * -> /]
+          build break
+SURVIVED  m0253 src/render/renderer.c:188 [cmp == -> !=]
+KILLED    m0254 src/render/renderer.c:188 [logic || -> &&]
+          build break
+SURVIVED  m0255 src/render/renderer.c:188 [cmp == -> !=]
+KILLED    m0256 src/render/renderer.c:188 [logic || -> &&]
+          build break
+SURVIVED  m0257 src/render/renderer.c:188 [cmp == -> !=]
+SURVIVED  m0258 src/render/renderer.c:192 [bool false -> true]
+KILLED    m0259 src/render/renderer.c:193 [int+1 0 -> 1]
+          build break
+KILLED    m0260 src/render/renderer.c:193 [int-1 0 -> -1]
+          build break
+SURVIVED  m0261 src/render/renderer.c:195 [cmp != -> ==]
+SURVIVED  m0262 src/render/renderer.c:195 [logic && -> ||]
+SURVIVED  m0263 src/render/renderer.c:198 [arith / -> *]
+SURVIVED  m0264 src/render/renderer.c:200 [cmp != -> ==]
+SURVIVED  m0265 src/render/renderer.c:200 [int+1 0 -> 1]
+SURVIVED  m0266 src/render/renderer.c:200 [int-1 0 -> -1]
+SURVIVED  m0267 src/render/renderer.c:200 [cmp != -> ==]
+SURVIVED  m0268 src/render/renderer.c:200 [int+1 0 -> 1]
+SURVIVED  m0269 src/render/renderer.c:200 [int-1 0 -> -1]
+SURVIVED  m0270 src/render/renderer.c:202 [arith * -> /]
+SURVIVED  m0271 src/render/renderer.c:202 [arith * -> /]
+SURVIVED  m0272 src/render/renderer.c:202 [arith * -> /]
+SURVIVED  m0273 src/render/renderer.c:202 [arith - -> +]
+SURVIVED  m0274 src/render/renderer.c:203 [arith * -> /]
+SURVIVED  m0275 src/render/renderer.c:203 [arith / -> *]
+SURVIVED  m0276 src/render/renderer.c:204 [bool true -> false]
+SURVIVED  m0277 src/render/renderer.c:208 [cmp <= -> <]
+SURVIVED  m0278 src/render/renderer.c:208 [int+1 0 -> 1]
+SURVIVED  m0279 src/render/renderer.c:208 [int-1 0 -> -1]
+SURVIVED  m0280 src/render/renderer.c:211 [arith * -> /]
+KILLED    m0281 src/render/renderer.c:212 [arith * -> /]
+          build break
+SURVIVED  m0282 src/render/renderer.c:212 [arith * -> /]
+SURVIVED  m0283 src/render/renderer.c:212 [arith * -> /]
+KILLED    m0284 src/render/renderer.c:213 [arith * -> /]
+          build break
+SURVIVED  m0285 src/render/renderer.c:213 [arith * -> /]
+SURVIVED  m0286 src/render/renderer.c:213 [arith * -> /]
+SURVIVED  m0287 src/render/renderer.c:214 [cmp == -> !=]
+SURVIVED  m0288 src/render/renderer.c:214 [logic || -> &&]
+SURVIVED  m0289 src/render/renderer.c:214 [cmp == -> !=]
+SURVIVED  m0290 src/render/renderer.c:223 [int+1 0 -> 1]
+SURVIVED  m0291 src/render/renderer.c:223 [int-1 0 -> -1]
+SURVIVED  m0292 src/render/renderer.c:224 [int+1 0 -> 1]
+SURVIVED  m0293 src/render/renderer.c:224 [int-1 0 -> -1]
+SURVIVED  m0294 src/render/renderer.c:225 [int+1 0 -> 1]
+SURVIVED  m0295 src/render/renderer.c:225 [int-1 0 -> -1]
+SURVIVED  m0296 src/render/renderer.c:225 [cmp < -> <=]
+KILLED    m0297 src/render/renderer.c:226 [arith * -> /]
+          build break
+SURVIVED  m0298 src/render/renderer.c:227 [int+1 0 -> 1]
+SURVIVED  m0299 src/render/renderer.c:227 [int-1 0 -> -1]
+SURVIVED  m0300 src/render/renderer.c:227 [cmp < -> <=]
+KILLED    m0301 src/render/renderer.c:238 [int+1 0 -> 1]
+          build break
+KILLED    m0302 src/render/renderer.c:238 [int-1 0 -> -1]
+          build break
+SURVIVED  m0303 src/render/renderer.c:240 [arith * -> /]
+SURVIVED  m0304 src/render/renderer.c:240 [int+1 2 -> 3]
+SURVIVED  m0305 src/render/renderer.c:240 [int-1 2 -> 1]
+SURVIVED  m0306 src/render/renderer.c:243 [bool true -> false]
+ACCEPTED  m0028 src/render/renderer.c:31 [int+1 1 -> 2] :: hex reject return value, callers test the sign only, any negative value is equivalent
+ACCEPTED  m0066 src/render/renderer.c:56 [cmp < -> <=] :: inset clamp lower boundary is idempotent, at the bound both arms return the same value
+ACCEPTED  m0067 src/render/renderer.c:59 [cmp > -> >=] :: inset clamp upper boundary is idempotent, at the bound both arms return the same value
+ACCEPTED  m0069 src/render/renderer.c:77 [cmp < -> <=] :: cube n clamp lower boundary is idempotent, at the minimum both arms store the same value
+ACCEPTED  m0070 src/render/renderer.c:80 [cmp > -> >=] :: cube n clamp upper boundary is idempotent, at the maximum both arms store the same value
+ACCEPTED  m0098 src/render/renderer.c:103 [arith * -> /] :: axis angle math in the rotation helper, reachable only from the draw path with an active animation no headless suite exercises
+ACCEPTED  m0099 src/render/renderer.c:103 [arith + -> -] :: axis angle math in the rotation helper, reachable only from the draw path with an active animation no headless suite exercises
+ACCEPTED  m0100 src/render/renderer.c:103 [arith * -> /] :: axis angle math in the rotation helper, reachable only from the draw path with an active animation no headless suite exercises
+ACCEPTED  m0101 src/render/renderer.c:103 [arith + -> -] :: axis angle math in the rotation helper, reachable only from the draw path with an active animation no headless suite exercises
+ACCEPTED  m0102 src/render/renderer.c:103 [arith * -> /] :: axis angle math in the rotation helper, reachable only from the draw path with an active animation no headless suite exercises
+ACCEPTED  m0103 src/render/renderer.c:104 [arith * -> /] :: cross product terms of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0104 src/render/renderer.c:104 [arith - -> +] :: cross product terms of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0105 src/render/renderer.c:104 [arith * -> /] :: cross product terms of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0106 src/render/renderer.c:104 [arith * -> /] :: cross product terms of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0107 src/render/renderer.c:104 [arith - -> +] :: cross product terms of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0108 src/render/renderer.c:104 [arith * -> /] :: cross product terms of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0109 src/render/renderer.c:105 [arith * -> /] :: cross product terms of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0110 src/render/renderer.c:105 [arith - -> +] :: cross product terms of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0111 src/render/renderer.c:105 [arith * -> /] :: cross product terms of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0112 src/render/renderer.c:107 [arith * -> /] :: rodrigues x term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0113 src/render/renderer.c:107 [arith + -> -] :: rodrigues x term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0114 src/render/renderer.c:107 [arith * -> /] :: rodrigues x term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0115 src/render/renderer.c:107 [arith + -> -] :: rodrigues x term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0116 src/render/renderer.c:107 [arith * -> /] :: rodrigues x term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0117 src/render/renderer.c:107 [arith * -> /] :: rodrigues x term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0118 src/render/renderer.c:107 [arith - -> +] :: rodrigues x term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0119 src/render/renderer.c:108 [arith * -> /] :: rodrigues y term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0120 src/render/renderer.c:108 [arith + -> -] :: rodrigues y term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0121 src/render/renderer.c:108 [arith * -> /] :: rodrigues y term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0122 src/render/renderer.c:108 [arith + -> -] :: rodrigues y term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0123 src/render/renderer.c:108 [arith * -> /] :: rodrigues y term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0124 src/render/renderer.c:108 [arith * -> /] :: rodrigues y term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0125 src/render/renderer.c:108 [arith - -> +] :: rodrigues y term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0126 src/render/renderer.c:109 [arith * -> /] :: rodrigues z term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0127 src/render/renderer.c:109 [arith + -> -] :: rodrigues z term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0128 src/render/renderer.c:109 [arith * -> /] :: rodrigues z term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0129 src/render/renderer.c:109 [arith + -> -] :: rodrigues z term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0130 src/render/renderer.c:109 [arith * -> /] :: rodrigues z term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0131 src/render/renderer.c:109 [arith * -> /] :: rodrigues z term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0132 src/render/renderer.c:109 [arith - -> +] :: rodrigues z term of the draw-only rotation helper, no headless suite exercises it
+ACCEPTED  m0145 src/render/renderer.c:115 [cmp <= -> <] :: cap boundary shift moves only the cap zero case between the guard return and the clamped empty loop, both outcomes return zero
+ACCEPTED  m0147 src/render/renderer.c:115 [int-1 0 -> -1] :: cap boundary shift moves only the cap zero case between the guard return and the clamped empty loop, both outcomes return zero
+ACCEPTED  m0172 src/render/renderer.c:128 [cmp != -> ==] :: rotation axis pick, consumed only inside the draw path rotate branch no headless suite exercises
+ACCEPTED  m0173 src/render/renderer.c:128 [int+1 0 -> 1] :: rotation axis pick, consumed only inside the draw path rotate branch no headless suite exercises
+ACCEPTED  m0174 src/render/renderer.c:128 [int-1 0 -> -1] :: rotation axis pick, consumed only inside the draw path rotate branch no headless suite exercises
+ACCEPTED  m0175 src/render/renderer.c:130 [cmp != -> ==] :: rotation axis fallback pick, consumed only inside the draw path rotate branch no headless suite exercises
+ACCEPTED  m0176 src/render/renderer.c:130 [int+1 0 -> 1] :: rotation axis fallback pick, consumed only inside the draw path rotate branch no headless suite exercises
+ACCEPTED  m0177 src/render/renderer.c:130 [int-1 0 -> -1] :: rotation axis fallback pick, consumed only inside the draw path rotate branch no headless suite exercises
+ACCEPTED  m0209 src/render/renderer.c:157 [logic && -> ||] :: rotate conjunction widened to a disjunct still computes the identity at the quads entry angle of zero, nonzero angles live only in the draw path
+ACCEPTED  m0211 src/render/renderer.c:163 [int+1 2 -> 3] :: corner sign table column widening, the extra column is never read by the corner loop
+ACCEPTED  m0224 src/render/renderer.c:168 [arith + -> -] :: x corner term, the row tangent carries no x component in any face frame and the corner sign multipliers are exactly plus or minus one so division equals multiplication
+ACCEPTED  m0225 src/render/renderer.c:168 [arith * -> /] :: x corner term, the row tangent carries no x component in any face frame and the corner sign multipliers are exactly plus or minus one so division equals multiplication
+ACCEPTED  m0226 src/render/renderer.c:168 [arith * -> /] :: x corner term, the row tangent carries no x component in any face frame and the corner sign multipliers are exactly plus or minus one so division equals multiplication
+ACCEPTED  m0229 src/render/renderer.c:168 [arith * -> /] :: x corner term, the row tangent carries no x component in any face frame and the corner sign multipliers are exactly plus or minus one so division equals multiplication
+ACCEPTED  m0232 src/render/renderer.c:169 [arith * -> /] :: y corner term, the col tangent carries no y component in any face frame and the corner sign multipliers are exactly plus or minus one so division equals multiplication
+ACCEPTED  m0233 src/render/renderer.c:169 [arith + -> -] :: y corner term, the col tangent carries no y component in any face frame and the corner sign multipliers are exactly plus or minus one so division equals multiplication
+ACCEPTED  m0234 src/render/renderer.c:169 [arith * -> /] :: y corner term, the col tangent carries no y component in any face frame and the corner sign multipliers are exactly plus or minus one so division equals multiplication
+ACCEPTED  m0235 src/render/renderer.c:169 [arith * -> /] :: y corner term, the col tangent carries no y component in any face frame and the corner sign multipliers are exactly plus or minus one so division equals multiplication
+ACCEPTED  m0238 src/render/renderer.c:170 [arith * -> /] :: z corner term, the corner sign multipliers are exactly plus or minus one so division equals multiplication
+ACCEPTED  m0241 src/render/renderer.c:170 [arith * -> /] :: z corner term, the corner sign multipliers are exactly plus or minus one so division equals multiplication
+ACCEPTED  m0248 src/render/renderer.c:183 [bool false -> true] :: quads entry rotate flag with a zero move and zero angle reduces the rotation to the identity on every reachable path
+ACCEPTED  m0253 src/render/renderer.c:188 [cmp == -> !=] :: null guard polarity flips only which calls reach the gl draw path, both directions return with no observable state
+ACCEPTED  m0255 src/render/renderer.c:188 [cmp == -> !=] :: null guard polarity flips only which calls reach the gl draw path, both directions return with no observable state
+ACCEPTED  m0257 src/render/renderer.c:188 [cmp == -> !=] :: null guard polarity flips only which calls reach the gl draw path, both directions return with no observable state
+ACCEPTED  m0258 src/render/renderer.c:192 [bool false -> true] :: rotate flag init inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0261 src/render/renderer.c:195 [cmp != -> ==] :: anim branch inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0262 src/render/renderer.c:195 [logic && -> ||] :: anim branch inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0263 src/render/renderer.c:198 [arith / -> *] :: eased progress divide inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0264 src/render/renderer.c:200 [cmp != -> ==] :: rotation sign pick inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0265 src/render/renderer.c:200 [int+1 0 -> 1] :: rotation sign pick inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0266 src/render/renderer.c:200 [int-1 0 -> -1] :: rotation sign pick inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0267 src/render/renderer.c:200 [cmp != -> ==] :: rotation sign pick inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0268 src/render/renderer.c:200 [int+1 0 -> 1] :: rotation sign pick inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0269 src/render/renderer.c:200 [int-1 0 -> -1] :: rotation sign pick inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0270 src/render/renderer.c:202 [arith * -> /] :: rotation degrees product inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0271 src/render/renderer.c:202 [arith * -> /] :: rotation degrees product inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0272 src/render/renderer.c:202 [arith * -> /] :: rotation degrees product inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0273 src/render/renderer.c:202 [arith - -> +] :: rotation degrees product inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0274 src/render/renderer.c:203 [arith * -> /] :: radians conversion inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0275 src/render/renderer.c:203 [arith / -> *] :: radians conversion inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0276 src/render/renderer.c:204 [bool true -> false] :: rotate latch inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0277 src/render/renderer.c:208 [cmp <= -> <] :: emitted count guard inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0278 src/render/renderer.c:208 [int+1 0 -> 1] :: emitted count guard inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0279 src/render/renderer.c:208 [int-1 0 -> -1] :: emitted count guard inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0280 src/render/renderer.c:211 [arith * -> /] :: vertex count product inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0282 src/render/renderer.c:212 [arith * -> /] :: vertex buffer size inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0283 src/render/renderer.c:212 [arith * -> /] :: vertex buffer size inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0285 src/render/renderer.c:213 [arith * -> /] :: color buffer size inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0286 src/render/renderer.c:213 [arith * -> /] :: color buffer size inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0287 src/render/renderer.c:214 [cmp == -> !=] :: allocation failure guard, no headless suite can force the allocator to fail inside the draw path
+ACCEPTED  m0288 src/render/renderer.c:214 [logic || -> &&] :: allocation failure guard, no headless suite can force the allocator to fail inside the draw path
+ACCEPTED  m0289 src/render/renderer.c:214 [cmp == -> !=] :: allocation failure guard, no headless suite can force the allocator to fail inside the draw path
+ACCEPTED  m0290 src/render/renderer.c:223 [int+1 0 -> 1] :: vertex fill index init inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0291 src/render/renderer.c:223 [int-1 0 -> -1] :: vertex fill index init inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0292 src/render/renderer.c:224 [int+1 0 -> 1] :: vertex fill index step inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0293 src/render/renderer.c:224 [int-1 0 -> -1] :: vertex fill index step inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0294 src/render/renderer.c:225 [int+1 0 -> 1] :: quad fill loop bound inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0295 src/render/renderer.c:225 [int-1 0 -> -1] :: quad fill loop bound inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0296 src/render/renderer.c:225 [cmp < -> <=] :: quad fill loop bound inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0298 src/render/renderer.c:227 [int+1 0 -> 1] :: corner order indexing inside the gl draw path mesh fill, no headless suite exercises it
+ACCEPTED  m0299 src/render/renderer.c:227 [int-1 0 -> -1] :: corner order indexing inside the gl draw path mesh fill, no headless suite exercises it
+ACCEPTED  m0300 src/render/renderer.c:227 [cmp < -> <=] :: corner order indexing inside the gl draw path mesh fill, no headless suite exercises it
+ACCEPTED  m0303 src/render/renderer.c:240 [arith * -> /] :: mesh triangle count inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0304 src/render/renderer.c:240 [int+1 2 -> 3] :: mesh triangle count inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0305 src/render/renderer.c:240 [int-1 2 -> 1] :: mesh triangle count inside the gl draw path, no headless suite exercises it
+ACCEPTED  m0306 src/render/renderer.c:243 [bool true -> false] :: mesh upload flag inside the gl draw path, no headless suite exercises it
+mutate: generated=306 build_failed=45 killed_by_tests=155 killed=200 survived=106 accepted=106 unexplained=0 skipped=0
+mutate: kill rate 200/306 = 65.4%, with accepted equivalents 306/306 = 100.0%
+mutate: wall 225.3s

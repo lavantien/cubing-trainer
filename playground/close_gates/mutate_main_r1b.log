@@ -1,0 +1,48 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/app/main.c build_close e2e_parse_flow
+mutate: scope=src/app/main.c files=1 sites=34 suites=1
+KILLED    m0001 src/app/main.c:7 [arith * -> /]
+          build break
+KILLED    m0002 src/app/main.c:7 [arith * -> /]
+          build break
+KILLED    m0003 src/app/main.c:7 [arith * -> /]
+          build break
+SURVIVED  m0004 src/app/main.c:8 [cmp != -> ==]
+KILLED    m0005 src/app/main.c:8 [logic || -> &&]
+          build break
+SURVIVED  m0006 src/app/main.c:8 [int+1 1 -> 2]
+SURVIVED  m0007 src/app/main.c:8 [int-1 1 -> 0]
+SURVIVED  m0008 src/app/main.c:8 [cmp != -> ==]
+SURVIVED  m0009 src/app/main.c:8 [int+1 0 -> 1]
+SURVIVED  m0010 src/app/main.c:8 [int-1 0 -> -1]
+KILLED    m0011 src/app/main.c:8 [logic || -> &&]
+          build break
+SURVIVED  m0012 src/app/main.c:9 [int+1 2 -> 3]
+SURVIVED  m0013 src/app/main.c:9 [int-1 2 -> 1]
+SURVIVED  m0014 src/app/main.c:9 [cmp != -> ==]
+SURVIVED  m0015 src/app/main.c:9 [int+1 0 -> 1]
+SURVIVED  m0016 src/app/main.c:9 [int-1 0 -> -1]
+SURVIVED  m0017 src/app/main.c:14 [not-del ! -> (deleted)]
+SURVIVED  m0018 src/app/main.c:16 [ret-lit 1 -> 0]
+SURVIVED  m0019 src/app/main.c:16 [int+1 1 -> 2]
+SURVIVED  m0020 src/app/main.c:16 [int-1 1 -> 0]
+SURVIVED  m0021 src/app/main.c:18 [int+1 3 -> 4]
+SURVIVED  m0022 src/app/main.c:18 [int-1 3 -> 2]
+KILLED    m0023 src/app/main.c:23 [arith * -> /]
+          build break
+KILLED    m0024 src/app/main.c:23 [arith * -> /]
+          build break
+SURVIVED  m0025 src/app/main.c:25 [cmp > -> >=]
+SURVIVED  m0026 src/app/main.c:25 [int+1 1 -> 2]
+SURVIVED  m0027 src/app/main.c:25 [int-1 1 -> 0]
+SURVIVED  m0028 src/app/main.c:29 [not-del ! -> (deleted)]
+SURVIVED  m0029 src/app/main.c:31 [ret-lit 1 -> 0]
+SURVIVED  m0030 src/app/main.c:31 [int+1 1 -> 2]
+SURVIVED  m0031 src/app/main.c:31 [int-1 1 -> 0]
+SURVIVED  m0032 src/app/main.c:35 [ret-lit 0 -> 1]
+SURVIVED  m0033 src/app/main.c:35 [int+1 0 -> 1]
+SURVIVED  m0034 src/app/main.c:35 [int-1 0 -> -1]
+mutate: generated=34 build_failed=7 killed_by_tests=0 killed=7 survived=27 accepted=0 unexplained=27 skipped=0
+mutate: kill rate 7/34 = 20.6%, with accepted equivalents 7/34 = 20.6%
+mutate: wall 18.0s

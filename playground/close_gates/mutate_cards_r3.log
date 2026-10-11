@@ -1,0 +1,469 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_cards_form.c -o build_close/tobj/tests/unit_cards_form.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/ui/screen_cards.c build_close cards_form_open cards_form_select cards_form_edit_save cards_form_create cards_form_delete cards_form_cancel cards_form_status cards_form_guards cards_form_boundaries cards_form_create_retry
+mutate: scope=src/ui/screen_cards.c files=1 sites=290 suites=10
+SURVIVED  m0001 src/ui/screen_cards.c:14 [int+1 6 -> 7]
+SURVIVED  m0002 src/ui/screen_cards.c:14 [int-1 6 -> 5]
+SURVIVED  m0003 src/ui/screen_cards.c:15 [int+1 3 -> 4]
+SURVIVED  m0004 src/ui/screen_cards.c:15 [int-1 3 -> 2]
+SURVIVED  m0005 src/ui/screen_cards.c:16 [int+1 4 -> 5]
+SURVIVED  m0006 src/ui/screen_cards.c:16 [int-1 4 -> 3]
+SURVIVED  m0007 src/ui/screen_cards.c:17 [int+1 8 -> 9]
+SURVIVED  m0008 src/ui/screen_cards.c:17 [int-1 8 -> 7]
+SURVIVED  m0009 src/ui/screen_cards.c:18 [int+1 8 -> 9]
+SURVIVED  m0010 src/ui/screen_cards.c:18 [int-1 8 -> 7]
+SURVIVED  m0011 src/ui/screen_cards.c:19 [arith + -> -]
+KILLED    m0012 src/ui/screen_cards.c:20 [int+1 1 -> 2]
+KILLED    m0013 src/ui/screen_cards.c:20 [int-1 1 -> 0]
+KILLED    m0014 src/ui/screen_cards.c:20 [int+1 7 -> 8]
+KILLED    m0015 src/ui/screen_cards.c:20 [int-1 7 -> 6]
+SURVIVED  m0016 src/ui/screen_cards.c:21 [int+1 0 -> 1]
+KILLED    m0017 src/ui/screen_cards.c:21 [int-1 0 -> -1]
+          build break
+KILLED    m0018 src/ui/screen_cards.c:30 [arith * -> /]
+          build break
+KILLED    m0019 src/ui/screen_cards.c:30 [arith * -> /]
+          build break
+KILLED    m0020 src/ui/screen_cards.c:31 [cmp == -> !=]
+KILLED    m0021 src/ui/screen_cards.c:31 [logic || -> &&]
+          build break
+KILLED    m0022 src/ui/screen_cards.c:31 [cmp == -> !=]
+KILLED    m0023 src/ui/screen_cards.c:31 [logic || -> &&]
+          build break
+SURVIVED  m0024 src/ui/screen_cards.c:31 [cmp < -> <=]
+SURVIVED  m0025 src/ui/screen_cards.c:31 [int+1 0 -> 1]
+SURVIVED  m0026 src/ui/screen_cards.c:31 [int-1 0 -> -1]
+KILLED    m0027 src/ui/screen_cards.c:33 [arith * -> /]
+          build break
+KILLED    m0028 src/ui/screen_cards.c:34 [arith - -> +]
+SURVIVED  m0029 src/ui/screen_cards.c:34 [int+1 1 -> 2]
+KILLED    m0030 src/ui/screen_cards.c:34 [int-1 1 -> 0]
+KILLED    m0031 src/ui/screen_cards.c:34 [cmp != -> ==]
+KILLED    m0032 src/ui/screen_cards.c:38 [int+1 0 -> 1]
+KILLED    m0033 src/ui/screen_cards.c:38 [int-1 0 -> -1]
+KILLED    m0034 src/ui/screen_cards.c:40 [cmp < -> <=]
+KILLED    m0035 src/ui/screen_cards.c:40 [logic && -> ||]
+KILLED    m0036 src/ui/screen_cards.c:40 [cmp == -> !=]
+KILLED    m0037 src/ui/screen_cards.c:41 [int+1 0 -> 1]
+KILLED    m0038 src/ui/screen_cards.c:41 [int-1 0 -> -1]
+KILLED    m0039 src/ui/screen_cards.c:44 [cmp != -> ==]
+KILLED    m0040 src/ui/screen_cards.c:44 [logic && -> ||]
+KILLED    m0041 src/ui/screen_cards.c:44 [cmp != -> ==]
+KILLED    m0042 src/ui/screen_cards.c:49 [arith * -> /]
+          build break
+KILLED    m0043 src/ui/screen_cards.c:50 [int+1 0 -> 1]
+KILLED    m0044 src/ui/screen_cards.c:50 [int-1 0 -> -1]
+KILLED    m0045 src/ui/screen_cards.c:51 [cmp == -> !=]
+KILLED    m0046 src/ui/screen_cards.c:51 [logic || -> &&]
+          build break
+KILLED    m0047 src/ui/screen_cards.c:51 [cmp < -> <=]
+KILLED    m0048 src/ui/screen_cards.c:51 [int+1 0 -> 1]
+KILLED    m0049 src/ui/screen_cards.c:51 [int-1 0 -> -1]
+KILLED    m0050 src/ui/screen_cards.c:51 [logic || -> &&]
+          build break
+KILLED    m0051 src/ui/screen_cards.c:51 [cmp >= -> >]
+KILLED    m0052 src/ui/screen_cards.c:56 [arith * -> /]
+          build break
+KILLED    m0053 src/ui/screen_cards.c:56 [arith * -> /]
+          build break
+KILLED    m0054 src/ui/screen_cards.c:56 [arith * -> /]
+          build break
+KILLED    m0055 src/ui/screen_cards.c:57 [cmp == -> !=]
+SURVIVED  m0056 src/ui/screen_cards.c:59 [int+1 0 -> 1]
+SURVIVED  m0057 src/ui/screen_cards.c:59 [int-1 0 -> -1]
+KILLED    m0058 src/ui/screen_cards.c:59 [arith * -> /]
+          build break
+SURVIVED  m0059 src/ui/screen_cards.c:60 [arith - -> +]
+KILLED    m0060 src/ui/screen_cards.c:60 [int+1 1 -> 2]
+SURVIVED  m0061 src/ui/screen_cards.c:60 [int-1 1 -> 0]
+KILLED    m0062 src/ui/screen_cards.c:61 [cmp != -> ==]
+KILLED    m0063 src/ui/screen_cards.c:64 [cmp > -> >=]
+KILLED    m0064 src/ui/screen_cards.c:64 [int+1 0 -> 1]
+KILLED    m0065 src/ui/screen_cards.c:64 [int-1 0 -> -1]
+KILLED    m0066 src/ui/screen_cards.c:65 [int+1 0 -> 1]
+KILLED    m0067 src/ui/screen_cards.c:65 [int-1 0 -> -1]
+KILLED    m0068 src/ui/screen_cards.c:70 [arith * -> /]
+          build break
+KILLED    m0069 src/ui/screen_cards.c:70 [arith * -> /]
+          build break
+KILLED    m0070 src/ui/screen_cards.c:71 [cmp == -> !=]
+KILLED    m0071 src/ui/screen_cards.c:74 [bool false -> true]
+KILLED    m0072 src/ui/screen_cards.c:75 [bool false -> true]
+KILLED    m0073 src/ui/screen_cards.c:77 [cmp == -> !=]
+KILLED    m0074 src/ui/screen_cards.c:79 [int+1 0 -> 1]
+KILLED    m0075 src/ui/screen_cards.c:79 [int-1 0 -> -1]
+          build break
+KILLED    m0076 src/ui/screen_cards.c:79 [cmp == -> !=]
+SURVIVED  m0077 src/ui/screen_cards.c:84 [cmp >= -> >]
+SURVIVED  m0078 src/ui/screen_cards.c:84 [int+1 0 -> 1]
+SURVIVED  m0079 src/ui/screen_cards.c:84 [int-1 0 -> -1]
+KILLED    m0080 src/ui/screen_cards.c:85 [int+1 0 -> 1]
+KILLED    m0081 src/ui/screen_cards.c:85 [int-1 0 -> -1]
+KILLED    m0082 src/ui/screen_cards.c:85 [cmp < -> <=]
+SURVIVED  m0083 src/ui/screen_cards.c:89 [cmp < -> <=]
+SURVIVED  m0084 src/ui/screen_cards.c:89 [int+1 0 -> 1]
+KILLED    m0085 src/ui/screen_cards.c:89 [int-1 0 -> -1]
+KILLED    m0086 src/ui/screen_cards.c:90 [int+1 0 -> 1]
+KILLED    m0087 src/ui/screen_cards.c:90 [int-1 0 -> -1]
+KILLED    m0088 src/ui/screen_cards.c:96 [cmp >= -> >]
+KILLED    m0089 src/ui/screen_cards.c:97 [arith - -> +]
+KILLED    m0090 src/ui/screen_cards.c:97 [int+1 1 -> 2]
+KILLED    m0091 src/ui/screen_cards.c:97 [int-1 1 -> 0]
+KILLED    m0092 src/ui/screen_cards.c:101 [arith * -> /]
+          build break
+KILLED    m0093 src/ui/screen_cards.c:102 [cmp == -> !=]
+KILLED    m0094 src/ui/screen_cards.c:104 [cmp <= -> <]
+KILLED    m0095 src/ui/screen_cards.c:104 [int+1 0 -> 1]
+KILLED    m0096 src/ui/screen_cards.c:104 [int-1 0 -> -1]
+KILLED    m0097 src/ui/screen_cards.c:105 [arith - -> +]
+KILLED    m0098 src/ui/screen_cards.c:105 [int+1 1 -> 2]
+KILLED    m0099 src/ui/screen_cards.c:105 [int-1 1 -> 0]
+SURVIVED  m0100 src/ui/screen_cards.c:109 [cmp < -> <=]
+SURVIVED  m0101 src/ui/screen_cards.c:109 [int+1 0 -> 1]
+KILLED    m0102 src/ui/screen_cards.c:109 [int-1 0 -> -1]
+KILLED    m0103 src/ui/screen_cards.c:110 [int+1 0 -> 1]
+KILLED    m0104 src/ui/screen_cards.c:110 [int-1 0 -> -1]
+KILLED    m0105 src/ui/screen_cards.c:111 [cmp >= -> >]
+KILLED    m0106 src/ui/screen_cards.c:112 [arith - -> +]
+KILLED    m0107 src/ui/screen_cards.c:112 [int+1 1 -> 2]
+KILLED    m0108 src/ui/screen_cards.c:112 [int-1 1 -> 0]
+KILLED    m0109 src/ui/screen_cards.c:114 [cmp == -> !=]
+KILLED    m0110 src/ui/screen_cards.c:122 [arith * -> /]
+          build break
+KILLED    m0111 src/ui/screen_cards.c:123 [cmp == -> !=]
+KILLED    m0112 src/ui/screen_cards.c:125 [cmp < -> <=]
+KILLED    m0113 src/ui/screen_cards.c:125 [int+1 0 -> 1]
+KILLED    m0114 src/ui/screen_cards.c:125 [int-1 0 -> -1]
+KILLED    m0115 src/ui/screen_cards.c:125 [logic || -> &&]
+KILLED    m0116 src/ui/screen_cards.c:125 [cmp >= -> >]
+KILLED    m0117 src/ui/screen_cards.c:129 [bool true -> false]
+KILLED    m0118 src/ui/screen_cards.c:134 [arith * -> /]
+          build break
+KILLED    m0119 src/ui/screen_cards.c:134 [arith * -> /]
+          build break
+KILLED    m0120 src/ui/screen_cards.c:135 [cmp == -> !=]
+KILLED    m0121 src/ui/screen_cards.c:135 [logic || -> &&]
+KILLED    m0122 src/ui/screen_cards.c:135 [cmp == -> !=]
+KILLED    m0123 src/ui/screen_cards.c:137 [cmp < -> <=]
+KILLED    m0124 src/ui/screen_cards.c:137 [int+1 0 -> 1]
+KILLED    m0125 src/ui/screen_cards.c:137 [int-1 0 -> -1]
+KILLED    m0126 src/ui/screen_cards.c:137 [logic || -> &&]
+          build break
+KILLED    m0127 src/ui/screen_cards.c:137 [cmp >= -> >]
+KILLED    m0128 src/ui/screen_cards.c:137 [logic || -> &&]
+          build break
+KILLED    m0129 src/ui/screen_cards.c:137 [cmp <= -> <]
+KILLED    m0130 src/ui/screen_cards.c:137 [int+1 0 -> 1]
+KILLED    m0131 src/ui/screen_cards.c:137 [int-1 0 -> -1]
+KILLED    m0132 src/ui/screen_cards.c:143 [cmp == -> !=]
+KILLED    m0133 src/ui/screen_cards.c:144 [bool false -> true]
+KILLED    m0134 src/ui/screen_cards.c:145 [bool false -> true]
+KILLED    m0135 src/ui/screen_cards.c:150 [arith * -> /]
+          build break
+KILLED    m0136 src/ui/screen_cards.c:150 [arith * -> /]
+          build break
+KILLED    m0137 src/ui/screen_cards.c:151 [cmp == -> !=]
+KILLED    m0138 src/ui/screen_cards.c:151 [logic || -> &&]
+KILLED    m0139 src/ui/screen_cards.c:151 [cmp == -> !=]
+KILLED    m0140 src/ui/screen_cards.c:153 [cmp < -> <=]
+KILLED    m0141 src/ui/screen_cards.c:153 [int+1 0 -> 1]
+KILLED    m0142 src/ui/screen_cards.c:153 [int-1 0 -> -1]
+KILLED    m0143 src/ui/screen_cards.c:153 [logic || -> &&]
+          build break
+KILLED    m0144 src/ui/screen_cards.c:153 [cmp >= -> >]
+KILLED    m0145 src/ui/screen_cards.c:153 [logic || -> &&]
+          build break
+KILLED    m0146 src/ui/screen_cards.c:153 [cmp <= -> <]
+KILLED    m0147 src/ui/screen_cards.c:153 [int+1 0 -> 1]
+KILLED    m0148 src/ui/screen_cards.c:153 [int-1 0 -> -1]
+KILLED    m0149 src/ui/screen_cards.c:159 [cmp == -> !=]
+KILLED    m0150 src/ui/screen_cards.c:164 [arith * -> /]
+          build break
+KILLED    m0151 src/ui/screen_cards.c:164 [arith * -> /]
+          build break
+KILLED    m0152 src/ui/screen_cards.c:164 [arith * -> /]
+          build break
+KILLED    m0153 src/ui/screen_cards.c:165 [cmp == -> !=]
+KILLED    m0154 src/ui/screen_cards.c:165 [logic || -> &&]
+KILLED    m0155 src/ui/screen_cards.c:165 [cmp == -> !=]
+KILLED    m0156 src/ui/screen_cards.c:167 [not-del ! -> (deleted)]
+KILLED    m0157 src/ui/screen_cards.c:172 [int+1 0 -> 1]
+KILLED    m0158 src/ui/screen_cards.c:172 [int-1 0 -> -1]
+KILLED    m0159 src/ui/screen_cards.c:175 [arith + -> -]
+KILLED    m0160 src/ui/screen_cards.c:175 [int+1 1 -> 2]
+KILLED    m0161 src/ui/screen_cards.c:175 [int-1 1 -> 0]
+KILLED    m0162 src/ui/screen_cards.c:177 [int+1 0 -> 1]
+KILLED    m0163 src/ui/screen_cards.c:177 [int-1 0 -> -1]
+KILLED    m0164 src/ui/screen_cards.c:177 [cmp < -> <=]
+KILLED    m0165 src/ui/screen_cards.c:180 [cmp != -> ==]
+KILLED    m0166 src/ui/screen_cards.c:185 [cmp != -> ==]
+KILLED    m0167 src/ui/screen_cards.c:188 [int+1 0 -> 1]
+KILLED    m0168 src/ui/screen_cards.c:188 [int-1 0 -> -1]
+KILLED    m0169 src/ui/screen_cards.c:188 [cmp < -> <=]
+KILLED    m0170 src/ui/screen_cards.c:189 [cmp == -> !=]
+KILLED    m0171 src/ui/screen_cards.c:195 [bool true -> false]
+KILLED    m0172 src/ui/screen_cards.c:196 [bool false -> true]
+KILLED    m0173 src/ui/screen_cards.c:200 [arith * -> /]
+          build break
+KILLED    m0174 src/ui/screen_cards.c:201 [cmp == -> !=]
+KILLED    m0175 src/ui/screen_cards.c:203 [bool false -> true]
+KILLED    m0176 src/ui/screen_cards.c:204 [bool false -> true]
+KILLED    m0177 src/ui/screen_cards.c:214 [arith * -> /]
+          build break
+KILLED    m0178 src/ui/screen_cards.c:219 [arith * -> /]
+          build break
+KILLED    m0179 src/ui/screen_cards.c:234 [arith * -> /]
+          build break
+SURVIVED  m0180 src/ui/screen_cards.c:252 [int+1 0 -> 1]
+SURVIVED  m0181 src/ui/screen_cards.c:252 [int-1 0 -> -1]
+SURVIVED  m0182 src/ui/screen_cards.c:252 [cmp < -> <=]
+SURVIVED  m0183 src/ui/screen_cards.c:254 [cmp == -> !=]
+SURVIVED  m0184 src/ui/screen_cards.c:254 [logic || -> &&]
+SURVIVED  m0185 src/ui/screen_cards.c:255 [cmp != -> ==]
+SURVIVED  m0186 src/ui/screen_cards.c:256 [int+1 0 -> 1]
+KILLED    m0187 src/ui/screen_cards.c:256 [int-1 0 -> -1]
+          build break
+KILLED    m0188 src/ui/screen_cards.c:265 [arith * -> /]
+          build break
+SURVIVED  m0189 src/ui/screen_cards.c:266 [bool false -> true]
+SURVIVED  m0190 src/ui/screen_cards.c:267 [not-del ! -> (deleted)]
+KILLED    m0191 src/ui/screen_cards.c:267 [logic || -> &&]
+          build break
+SURVIVED  m0192 src/ui/screen_cards.c:267 [cmp == -> !=]
+KILLED    m0193 src/ui/screen_cards.c:267 [logic || -> &&]
+          build break
+SURVIVED  m0194 src/ui/screen_cards.c:267 [cmp <= -> <]
+SURVIVED  m0195 src/ui/screen_cards.c:267 [int+1 0 -> 1]
+SURVIVED  m0196 src/ui/screen_cards.c:267 [int-1 0 -> -1]
+SURVIVED  m0197 src/ui/screen_cards.c:270 [cmp != -> ==]
+SURVIVED  m0198 src/ui/screen_cards.c:273 [cmp != -> ==]
+SURVIVED  m0199 src/ui/screen_cards.c:273 [int+1 0 -> 1]
+SURVIVED  m0200 src/ui/screen_cards.c:273 [int-1 0 -> -1]
+KILLED    m0201 src/ui/screen_cards.c:273 [logic || -> &&]
+          build break
+SURVIVED  m0202 src/ui/screen_cards.c:273 [cmp != -> ==]
+SURVIVED  m0203 src/ui/screen_cards.c:273 [int+1 0 -> 1]
+SURVIVED  m0204 src/ui/screen_cards.c:273 [int-1 0 -> -1]
+KILLED    m0205 src/ui/screen_cards.c:273 [logic || -> &&]
+          build break
+SURVIVED  m0206 src/ui/screen_cards.c:274 [cmp != -> ==]
+SURVIVED  m0207 src/ui/screen_cards.c:274 [int+1 0 -> 1]
+SURVIVED  m0208 src/ui/screen_cards.c:274 [int-1 0 -> -1]
+KILLED    m0209 src/ui/screen_cards.c:274 [logic || -> &&]
+          build break
+SURVIVED  m0210 src/ui/screen_cards.c:275 [cmp != -> ==]
+SURVIVED  m0211 src/ui/screen_cards.c:275 [int+1 0 -> 1]
+SURVIVED  m0212 src/ui/screen_cards.c:275 [int-1 0 -> -1]
+KILLED    m0213 src/ui/screen_cards.c:275 [logic || -> &&]
+          build break
+SURVIVED  m0214 src/ui/screen_cards.c:275 [cmp != -> ==]
+SURVIVED  m0215 src/ui/screen_cards.c:275 [int+1 0 -> 1]
+SURVIVED  m0216 src/ui/screen_cards.c:275 [int-1 0 -> -1]
+KILLED    m0217 src/ui/screen_cards.c:283 [arith * -> /]
+          build break
+KILLED    m0218 src/ui/screen_cards.c:284 [arith * -> /]
+          build break
+SURVIVED  m0219 src/ui/screen_cards.c:286 [arith + -> -]
+SURVIVED  m0220 src/ui/screen_cards.c:286 [arith - -> +]
+KILLED    m0221 src/ui/screen_cards.c:290 [arith * -> /]
+          build break
+SURVIVED  m0222 src/ui/screen_cards.c:303 [arith / -> *]
+SURVIVED  m0223 src/ui/screen_cards.c:303 [int+1 0 -> 1]
+SURVIVED  m0224 src/ui/screen_cards.c:303 [int-1 0 -> -1]
+KILLED    m0225 src/ui/screen_cards.c:305 [arith * -> /]
+          build break
+KILLED    m0226 src/ui/screen_cards.c:306 [arith * -> /]
+          build break
+KILLED    m0227 src/ui/screen_cards.c:308 [arith * -> /]
+          build break
+SURVIVED  m0228 src/ui/screen_cards.c:309 [int+1 0 -> 1]
+SURVIVED  m0229 src/ui/screen_cards.c:309 [int-1 0 -> -1]
+SURVIVED  m0230 src/ui/screen_cards.c:309 [cmp < -> <=]
+SURVIVED  m0231 src/ui/screen_cards.c:310 [not-del ! -> (deleted)]
+SURVIVED  m0232 src/ui/screen_cards.c:310 [arith + -> -]
+SURVIVED  m0233 src/ui/screen_cards.c:310 [arith * -> /]
+SURVIVED  m0234 src/ui/screen_cards.c:310 [arith + -> -]
+SURVIVED  m0235 src/ui/screen_cards.c:317 [int+1 0 -> 1]
+KILLED    m0236 src/ui/screen_cards.c:317 [int-1 0 -> -1]
+          build break
+SURVIVED  m0237 src/ui/screen_cards.c:317 [cmp != -> ==]
+KILLED    m0238 src/ui/screen_cards.c:340 [arith * -> /]
+          build break
+SURVIVED  m0239 src/ui/screen_cards.c:341 [cmp == -> !=]
+SURVIVED  m0240 src/ui/screen_cards.c:343 [not-del ! -> (deleted)]
+SURVIVED  m0241 src/ui/screen_cards.c:344 [bool true -> false]
+KILLED    m0242 src/ui/screen_cards.c:352 [arith * -> /]
+          build break
+SURVIVED  m0243 src/ui/screen_cards.c:354 [cmp == -> !=]
+KILLED    m0244 src/ui/screen_cards.c:356 [arith * -> /]
+          build break
+SURVIVED  m0245 src/ui/screen_cards.c:361 [arith / -> *]
+SURVIVED  m0246 src/ui/screen_cards.c:362 [arith / -> *]
+SURVIVED  m0247 src/ui/screen_cards.c:362 [arith - -> +]
+SURVIVED  m0248 src/ui/screen_cards.c:364 [arith + -> -]
+SURVIVED  m0249 src/ui/screen_cards.c:364 [arith + -> -]
+SURVIVED  m0250 src/ui/screen_cards.c:366 [arith - -> +]
+SURVIVED  m0251 src/ui/screen_cards.c:366 [arith - -> +]
+SURVIVED  m0252 src/ui/screen_cards.c:366 [arith - -> +]
+SURVIVED  m0253 src/ui/screen_cards.c:366 [int+1 2 -> 3]
+SURVIVED  m0254 src/ui/screen_cards.c:366 [int-1 2 -> 1]
+SURVIVED  m0255 src/ui/screen_cards.c:366 [arith * -> /]
+SURVIVED  m0256 src/ui/screen_cards.c:367 [arith + -> -]
+SURVIVED  m0257 src/ui/screen_cards.c:367 [arith + -> -]
+SURVIVED  m0258 src/ui/screen_cards.c:368 [arith - -> +]
+SURVIVED  m0259 src/ui/screen_cards.c:368 [arith - -> +]
+SURVIVED  m0260 src/ui/screen_cards.c:371 [arith - -> +]
+SURVIVED  m0261 src/ui/screen_cards.c:371 [arith - -> +]
+SURVIVED  m0262 src/ui/screen_cards.c:371 [arith - -> +]
+SURVIVED  m0263 src/ui/screen_cards.c:372 [arith - -> +]
+SURVIVED  m0264 src/ui/screen_cards.c:372 [arith - -> +]
+SURVIVED  m0265 src/ui/screen_cards.c:372 [int+1 1 -> 2]
+SURVIVED  m0266 src/ui/screen_cards.c:372 [int-1 1 -> 0]
+SURVIVED  m0267 src/ui/screen_cards.c:372 [arith * -> /]
+SURVIVED  m0268 src/ui/screen_cards.c:372 [arith / -> *]
+SURVIVED  m0269 src/ui/screen_cards.c:373 [arith - -> +]
+SURVIVED  m0270 src/ui/screen_cards.c:373 [arith - -> +]
+SURVIVED  m0271 src/ui/screen_cards.c:374 [arith + -> -]
+SURVIVED  m0272 src/ui/screen_cards.c:374 [arith + -> -]
+SURVIVED  m0273 src/ui/screen_cards.c:377 [arith + -> -]
+SURVIVED  m0274 src/ui/screen_cards.c:377 [arith - -> +]
+SURVIVED  m0275 src/ui/screen_cards.c:379 [not-del ! -> (deleted)]
+SURVIVED  m0276 src/ui/screen_cards.c:380 [not-del ! -> (deleted)]
+SURVIVED  m0277 src/ui/screen_cards.c:392 [arith + -> -]
+SURVIVED  m0278 src/ui/screen_cards.c:393 [int+1 0 -> 1]
+SURVIVED  m0279 src/ui/screen_cards.c:393 [int-1 0 -> -1]
+SURVIVED  m0280 src/ui/screen_cards.c:393 [cmp < -> <=]
+KILLED    m0281 src/ui/screen_cards.c:394 [arith * -> /]
+          build break
+KILLED    m0282 src/ui/screen_cards.c:394 [arith * -> /]
+          build break
+SURVIVED  m0283 src/ui/screen_cards.c:394 [arith + -> -]
+SURVIVED  m0284 src/ui/screen_cards.c:395 [arith + -> -]
+SURVIVED  m0285 src/ui/screen_cards.c:395 [arith * -> /]
+SURVIVED  m0286 src/ui/screen_cards.c:402 [arith - -> +]
+SURVIVED  m0287 src/ui/screen_cards.c:402 [arith - -> +]
+SURVIVED  m0288 src/ui/screen_cards.c:402 [int+1 2 -> 3]
+SURVIVED  m0289 src/ui/screen_cards.c:402 [int-1 2 -> 1]
+SURVIVED  m0290 src/ui/screen_cards.c:402 [arith * -> /]
+ACCEPTED  m0001 src/ui/screen_cards.c:14 [int+1 6 -> 7] :: margin shift constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+ACCEPTED  m0002 src/ui/screen_cards.c:14 [int-1 6 -> 5] :: margin shift constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+ACCEPTED  m0003 src/ui/screen_cards.c:15 [int+1 3 -> 4] :: list width divisor constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+ACCEPTED  m0004 src/ui/screen_cards.c:15 [int-1 3 -> 2] :: list width divisor constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+ACCEPTED  m0005 src/ui/screen_cards.c:16 [int+1 4 -> 5] :: field height shift constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+ACCEPTED  m0006 src/ui/screen_cards.c:16 [int-1 4 -> 3] :: field height shift constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+ACCEPTED  m0007 src/ui/screen_cards.c:17 [int+1 8 -> 9] :: label width divisor constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+ACCEPTED  m0008 src/ui/screen_cards.c:17 [int-1 8 -> 7] :: label width divisor constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+ACCEPTED  m0009 src/ui/screen_cards.c:18 [int+1 8 -> 9] :: tag max feeds only the label buffer bound consumed by the draw-side label builder no headless suite exercises
+ACCEPTED  m0010 src/ui/screen_cards.c:18 [int-1 8 -> 7] :: tag max feeds only the label buffer bound consumed by the draw-side label builder no headless suite exercises
+ACCEPTED  m0011 src/ui/screen_cards.c:19 [arith + -> -] :: label max feeds only the draw-side label buffer no headless suite exercises
+ACCEPTED  m0016 src/ui/screen_cards.c:21 [int+1 0 -> 1] :: button index base, the switch dispatch uses the same enum names so only the draw-side button row observes the shift
+ACCEPTED  m0024 src/ui/screen_cards.c:31 [cmp < -> <=] :: negative cap guard is unreachable, every caller passes the fixed page size 16
+ACCEPTED  m0025 src/ui/screen_cards.c:31 [int+1 0 -> 1] :: negative cap guard is unreachable, every caller passes the fixed page size 16
+ACCEPTED  m0026 src/ui/screen_cards.c:31 [int-1 0 -> -1] :: negative cap guard is unreachable, every caller passes the fixed page size 16
+ACCEPTED  m0029 src/ui/screen_cards.c:34 [int+1 1 -> 2] :: sqlite3_prepare_v2 treats any negative nByte as read to nul, the -1 mutant -2 is behaviorally identical
+ACCEPTED  m0056 src/ui/screen_cards.c:59 [int+1 0 -> 1] :: open memset fill byte is unobservable, reload and refresh rewrite every field any suite reads
+ACCEPTED  m0057 src/ui/screen_cards.c:59 [int-1 0 -> -1] :: open memset fill byte is unobservable, reload and refresh rewrite every field any suite reads
+ACCEPTED  m0059 src/ui/screen_cards.c:60 [arith - -> +] :: selected sentinel mutants collapse before observation, with rows open assigns 0 right after and without rows reload clamps back to -1
+ACCEPTED  m0061 src/ui/screen_cards.c:60 [int-1 1 -> 0] :: selected sentinel mutants collapse before observation, with rows open assigns 0 right after and without rows reload clamps back to -1
+ACCEPTED  m0077 src/ui/screen_cards.c:84 [cmp >= -> >] :: rc zero boundary is identical in both branches, row_count stays 0 and status stays ok either way
+ACCEPTED  m0078 src/ui/screen_cards.c:84 [int+1 0 -> 1] :: rc zero boundary is identical in both branches, row_count stays 0 and status stays ok either way
+ACCEPTED  m0079 src/ui/screen_cards.c:84 [int-1 0 -> -1] :: rc zero boundary is identical in both branches, row_count stays 0 and status stays ok either way
+ACCEPTED  m0083 src/ui/screen_cards.c:89 [cmp < -> <=] :: rc zero boundary is identical in both branches, the same collapse as the deck list rc check
+ACCEPTED  m0084 src/ui/screen_cards.c:89 [int+1 0 -> 1] :: rc zero boundary is identical in both branches, the same collapse as the deck list rc check
+ACCEPTED  m0100 src/ui/screen_cards.c:109 [cmp < -> <=] :: the zero clamp arm maps row 0 to itself, only the negative arm distinguishes and that mutant is killed
+ACCEPTED  m0101 src/ui/screen_cards.c:109 [int+1 0 -> 1] :: the zero clamp arm maps row 0 to itself, only the negative arm distinguishes and that mutant is killed
+ACCEPTED  m0180 src/ui/screen_cards.c:252 [int+1 0 -> 1] :: label loop bound feeds only the draw-side list view no headless suite exercises
+ACCEPTED  m0181 src/ui/screen_cards.c:252 [int-1 0 -> -1] :: label loop bound feeds only the draw-side list view no headless suite exercises
+ACCEPTED  m0182 src/ui/screen_cards.c:252 [cmp < -> <=] :: label loop bound feeds only the draw-side list view no headless suite exercises
+ACCEPTED  m0183 src/ui/screen_cards.c:254 [cmp == -> !=] :: label db guard feeds only the draw-side label builder no headless suite exercises
+ACCEPTED  m0184 src/ui/screen_cards.c:254 [logic || -> &&] :: label db guard feeds only the draw-side label builder no headless suite exercises
+ACCEPTED  m0185 src/ui/screen_cards.c:255 [cmp != -> ==] :: label fetch failure branch feeds only the draw-side label builder no headless suite exercises
+ACCEPTED  m0186 src/ui/screen_cards.c:256 [int+1 0 -> 1] :: empty label write feeds only the draw-side list view no headless suite exercises
+ACCEPTED  m0189 src/ui/screen_cards.c:266 [bool false -> true] :: dirty reset runs only in the draw-side recompute and the dirty flag is write-only across the app
+ACCEPTED  m0190 src/ui/screen_cards.c:267 [not-del ! -> (deleted)] :: recompute guard runs only in the draw path, the dirty flag is write-only across the app
+ACCEPTED  m0192 src/ui/screen_cards.c:267 [cmp == -> !=] :: recompute guard runs only in the draw path, the dirty flag is write-only across the app
+ACCEPTED  m0194 src/ui/screen_cards.c:267 [cmp <= -> <] :: recompute guard runs only in the draw path, the dirty flag is write-only across the app
+ACCEPTED  m0195 src/ui/screen_cards.c:267 [int+1 0 -> 1] :: recompute guard runs only in the draw path, the dirty flag is write-only across the app
+ACCEPTED  m0196 src/ui/screen_cards.c:267 [int-1 0 -> -1] :: recompute guard runs only in the draw path, the dirty flag is write-only across the app
+ACCEPTED  m0197 src/ui/screen_cards.c:270 [cmp != -> ==] :: recompute fetch guard runs only in the draw path, the dirty flag is write-only across the app
+ACCEPTED  m0198 src/ui/screen_cards.c:273 [cmp != -> ==] :: dirty compare chain runs only in the draw-side recompute, the flag is write-only across the app
+ACCEPTED  m0199 src/ui/screen_cards.c:273 [int+1 0 -> 1] :: dirty compare chain runs only in the draw-side recompute, the flag is write-only across the app
+ACCEPTED  m0200 src/ui/screen_cards.c:273 [int-1 0 -> -1] :: dirty compare chain runs only in the draw-side recompute, the flag is write-only across the app
+ACCEPTED  m0202 src/ui/screen_cards.c:273 [cmp != -> ==] :: dirty compare chain runs only in the draw-side recompute, the flag is write-only across the app
+ACCEPTED  m0203 src/ui/screen_cards.c:273 [int+1 0 -> 1] :: dirty compare chain runs only in the draw-side recompute, the flag is write-only across the app
+ACCEPTED  m0204 src/ui/screen_cards.c:273 [int-1 0 -> -1] :: dirty compare chain runs only in the draw-side recompute, the flag is write-only across the app
+ACCEPTED  m0206 src/ui/screen_cards.c:274 [cmp != -> ==] :: dirty compare chain continuation, draw path only, the flag is write-only across the app
+ACCEPTED  m0207 src/ui/screen_cards.c:274 [int+1 0 -> 1] :: dirty compare chain continuation, draw path only, the flag is write-only across the app
+ACCEPTED  m0208 src/ui/screen_cards.c:274 [int-1 0 -> -1] :: dirty compare chain continuation, draw path only, the flag is write-only across the app
+ACCEPTED  m0210 src/ui/screen_cards.c:275 [cmp != -> ==] :: dirty compare chain tail, draw path only, the flag is write-only across the app
+ACCEPTED  m0211 src/ui/screen_cards.c:275 [int+1 0 -> 1] :: dirty compare chain tail, draw path only, the flag is write-only across the app
+ACCEPTED  m0212 src/ui/screen_cards.c:275 [int-1 0 -> -1] :: dirty compare chain tail, draw path only, the flag is write-only across the app
+ACCEPTED  m0214 src/ui/screen_cards.c:275 [cmp != -> ==] :: dirty compare chain tail, draw path only, the flag is write-only across the app
+ACCEPTED  m0215 src/ui/screen_cards.c:275 [int+1 0 -> 1] :: dirty compare chain tail, draw path only, the flag is write-only across the app
+ACCEPTED  m0216 src/ui/screen_cards.c:275 [int-1 0 -> -1] :: dirty compare chain tail, draw path only, the flag is write-only across the app
+ACCEPTED  m0219 src/ui/screen_cards.c:286 [arith + -> -] :: field text box rect arithmetic, draw path only no headless suite exercises
+ACCEPTED  m0220 src/ui/screen_cards.c:286 [arith - -> +] :: field text box rect arithmetic, draw path only no headless suite exercises
+ACCEPTED  m0222 src/ui/screen_cards.c:303 [arith / -> *] :: field count constant, consumed only by the draw-side field loop no headless suite exercises
+ACCEPTED  m0223 src/ui/screen_cards.c:303 [int+1 0 -> 1] :: field count constant, consumed only by the draw-side field loop no headless suite exercises
+ACCEPTED  m0224 src/ui/screen_cards.c:303 [int-1 0 -> -1] :: field count constant, consumed only by the draw-side field loop no headless suite exercises
+ACCEPTED  m0228 src/ui/screen_cards.c:309 [int+1 0 -> 1] :: button loop bound feeds only the draw-side button row no headless suite exercises
+ACCEPTED  m0229 src/ui/screen_cards.c:309 [int-1 0 -> -1] :: button loop bound feeds only the draw-side button row no headless suite exercises
+ACCEPTED  m0230 src/ui/screen_cards.c:309 [cmp < -> <=] :: button loop bound feeds only the draw-side button row no headless suite exercises
+ACCEPTED  m0231 src/ui/screen_cards.c:310 [not-del ! -> (deleted)] :: button hit test feeds only the draw-side button row no headless suite exercises
+ACCEPTED  m0232 src/ui/screen_cards.c:310 [arith + -> -] :: button hit test feeds only the draw-side button row no headless suite exercises
+ACCEPTED  m0233 src/ui/screen_cards.c:310 [arith * -> /] :: button hit test feeds only the draw-side button row no headless suite exercises
+ACCEPTED  m0234 src/ui/screen_cards.c:310 [arith + -> -] :: button hit test feeds only the draw-side button row no headless suite exercises
+ACCEPTED  m0235 src/ui/screen_cards.c:317 [int+1 0 -> 1] :: deck pick ternary inside the new button callback, gui event branch no headless suite can trigger
+ACCEPTED  m0237 src/ui/screen_cards.c:317 [cmp != -> ==] :: deck pick ternary inside the new button callback, gui event branch no headless suite can trigger
+ACCEPTED  m0239 src/ui/screen_cards.c:341 [cmp == -> !=] :: cards update entry guard, no gate suite calls the cards update loop so both arms are unobserved
+ACCEPTED  m0240 src/ui/screen_cards.c:343 [not-del ! -> (deleted)] :: opened latch read, static cards screen state no gate suite observes
+ACCEPTED  m0241 src/ui/screen_cards.c:344 [bool true -> false] :: opened latch write, static cards screen state no gate suite observes
+ACCEPTED  m0243 src/ui/screen_cards.c:354 [cmp == -> !=] :: null guard after the background clear, draw path only
+ACCEPTED  m0245 src/ui/screen_cards.c:361 [arith / -> *] :: label width layout, draw path only
+ACCEPTED  m0246 src/ui/screen_cards.c:362 [arith / -> *] :: list width layout, draw path only
+ACCEPTED  m0247 src/ui/screen_cards.c:362 [arith - -> +] :: list width layout, draw path only
+ACCEPTED  m0248 src/ui/screen_cards.c:364 [arith + -> -] :: list y layout, draw path only
+ACCEPTED  m0249 src/ui/screen_cards.c:364 [arith + -> -] :: list y layout, draw path only
+ACCEPTED  m0250 src/ui/screen_cards.c:366 [arith - -> +] :: list height layout, draw path only
+ACCEPTED  m0251 src/ui/screen_cards.c:366 [arith - -> +] :: list height layout, draw path only
+ACCEPTED  m0252 src/ui/screen_cards.c:366 [arith - -> +] :: list height layout, draw path only
+ACCEPTED  m0253 src/ui/screen_cards.c:366 [int+1 2 -> 3] :: list height layout, draw path only
+ACCEPTED  m0254 src/ui/screen_cards.c:366 [int-1 2 -> 1] :: list height layout, draw path only
+ACCEPTED  m0255 src/ui/screen_cards.c:366 [arith * -> /] :: list height layout, draw path only
+ACCEPTED  m0256 src/ui/screen_cards.c:367 [arith + -> -] :: editor x layout, draw path only
+ACCEPTED  m0257 src/ui/screen_cards.c:367 [arith + -> -] :: editor x layout, draw path only
+ACCEPTED  m0258 src/ui/screen_cards.c:368 [arith - -> +] :: editor width layout, draw path only
+ACCEPTED  m0259 src/ui/screen_cards.c:368 [arith - -> +] :: editor width layout, draw path only
+ACCEPTED  m0260 src/ui/screen_cards.c:371 [arith - -> +] :: button y layout, draw path only
+ACCEPTED  m0261 src/ui/screen_cards.c:371 [arith - -> +] :: button y layout, draw path only
+ACCEPTED  m0262 src/ui/screen_cards.c:371 [arith - -> +] :: button y layout, draw path only
+ACCEPTED  m0263 src/ui/screen_cards.c:372 [arith - -> +] :: button width layout, draw path only
+ACCEPTED  m0264 src/ui/screen_cards.c:372 [arith - -> +] :: button width layout, draw path only
+ACCEPTED  m0265 src/ui/screen_cards.c:372 [int+1 1 -> 2] :: button width layout, draw path only
+ACCEPTED  m0266 src/ui/screen_cards.c:372 [int-1 1 -> 0] :: button width layout, draw path only
+ACCEPTED  m0267 src/ui/screen_cards.c:372 [arith * -> /] :: button width layout, draw path only
+ACCEPTED  m0268 src/ui/screen_cards.c:372 [arith / -> *] :: button width layout, draw path only
+ACCEPTED  m0269 src/ui/screen_cards.c:373 [arith - -> +] :: editor height layout, draw path only
+ACCEPTED  m0270 src/ui/screen_cards.c:373 [arith - -> +] :: editor height layout, draw path only
+ACCEPTED  m0271 src/ui/screen_cards.c:374 [arith + -> -] :: fields y layout, draw path only
+ACCEPTED  m0272 src/ui/screen_cards.c:374 [arith + -> -] :: fields y layout, draw path only
+ACCEPTED  m0273 src/ui/screen_cards.c:377 [arith + -> -] :: filter text box rect, draw path only
+ACCEPTED  m0274 src/ui/screen_cards.c:377 [arith - -> +] :: filter text box rect, draw path only
+ACCEPTED  m0275 src/ui/screen_cards.c:379 [not-del ! -> (deleted)] :: filter edit toggle, gui event state no headless suite can trigger
+ACCEPTED  m0276 src/ui/screen_cards.c:380 [not-del ! -> (deleted)] :: filter edit close branch, gui event branch no headless suite can trigger
+ACCEPTED  m0277 src/ui/screen_cards.c:392 [arith + -> -] :: field step layout, draw path only
+ACCEPTED  m0278 src/ui/screen_cards.c:393 [int+1 0 -> 1] :: field loop bound, draw path only
+ACCEPTED  m0279 src/ui/screen_cards.c:393 [int-1 0 -> -1] :: field loop bound, draw path only
+ACCEPTED  m0280 src/ui/screen_cards.c:393 [cmp < -> <=] :: field loop bound, draw path only
+ACCEPTED  m0283 src/ui/screen_cards.c:394 [arith + -> -] :: field buffer pointer arithmetic, draw path only
+ACCEPTED  m0284 src/ui/screen_cards.c:395 [arith + -> -] :: field placement, draw path only
+ACCEPTED  m0285 src/ui/screen_cards.c:395 [arith * -> /] :: field placement, draw path only
+ACCEPTED  m0286 src/ui/screen_cards.c:402 [arith - -> +] :: status bar rect, draw path only
+ACCEPTED  m0287 src/ui/screen_cards.c:402 [arith - -> +] :: status bar rect, draw path only
+ACCEPTED  m0288 src/ui/screen_cards.c:402 [int+1 2 -> 3] :: status bar rect, draw path only
+ACCEPTED  m0289 src/ui/screen_cards.c:402 [int-1 2 -> 1] :: status bar rect, draw path only
+ACCEPTED  m0290 src/ui/screen_cards.c:402 [arith * -> /] :: status bar rect, draw path only
+mutate: generated=290 build_failed=53 killed_by_tests=119 killed=172 survived=118 accepted=118 unexplained=0 skipped=0
+mutate: kill rate 172/290 = 59.3%, with accepted equivalents 290/290 = 100.0%
+mutate: wall 246.5s

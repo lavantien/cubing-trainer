@@ -1,0 +1,588 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic tools/mutate.c -o build_close/bin/mutate.exe
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/packs/provenance.c build_close packs_bad_args packs_bounds packs_content_hash packs_isolation packs_list packs_read_boundaries packs_sha256 packs_source_record packs_upsert packs_upsert_update alg_hash_deterministic alg_hash_format_pinned alg_hash_fail_closed_on_oversize alg_put_get_roundtrip
+build_close/mutants/p30092/m0001_provenance.c:15:44: error: expected ')'
+   15 | static unsigned ct_sha_next_prime(unsigned /n) {
+      |                                            ^
+build_close/mutants/p30092/m0001_provenance.c:15:34: note: to match this '('
+   15 | static unsigned ct_sha_next_prime(unsigned /n) {
+      |                                  ^
+build_close/mutants/p30092/m0001_provenance.c:17:23: error: use of undeclared identifier 'n'
+   17 |         unsigned c = *n;
+      |                       ^
+build_close/mutants/p30092/m0001_provenance.c:27:10: error: use of undeclared identifier 'n'
+   27 |         *n = c + 1;
+      |          ^
+build_close/mutants/p30092/m0001_provenance.c:55:61: error: incompatible pointer to integer conversion passing 'unsigned int *' to parameter of type 'unsigned int'; remove & [-Wint-conversion]
+   55 |         ct_sha_h0[i] = ct_sha_derive_root(ct_sha_next_prime(&n), 0);
+      |                                                             ^~
+build_close/mutants/p30092/m0001_provenance.c:15:44: note: passing argument to parameter here
+   15 | static unsigned ct_sha_next_prime(unsigned /n) {
+      |                                            ^
+build_close/mutants/p30092/m0001_provenance.c:59:60: error: incompatible pointer to integer conversion passing 'unsigned int *' to parameter of type 'unsigned int'; remove & [-Wint-conversion]
+   59 |         ct_sha_k[i] = ct_sha_derive_root(ct_sha_next_prime(&n), 1);
+      |                                                            ^~
+build_close/mutants/p30092/m0001_provenance.c:15:44: note: passing argument to parameter here
+   15 | static unsigned ct_sha_next_prime(unsigned /n) {
+      |                                            ^
+5 errors generated.
+build_close/mutants/p30092/m0002_provenance.c:17:22: error: expected expression
+   17 |         unsigned c = /n;
+      |                      ^
+1 error generated.
+mutate: suite packs_bounds exited -1
+mutate: suite packs_bounds exited -1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+build_close/mutants/p30092/m0009_provenance.c:21:23: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+   21 |             if (c % d == -1) {
+      |                 ~~~~~ ^  ~~
+1 error generated.
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1
+build_close/mutants/p30092/m0014_provenance.c:27:9: error: expected expression
+   27 |         /n = c + 1;
+      |         ^
+1 error generated.
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1
+mutate: suite packs_bounds exited -1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1073741795
+build_close/mutants/p30092/m0044_provenance.c:86:54: error: expected ')'
+   86 | static uint32_t ct_sha_load_be32(const unsigned char /p) {
+      |                                                      ^
+build_close/mutants/p30092/m0044_provenance.c:86:33: note: to match this '('
+   86 | static uint32_t ct_sha_load_be32(const unsigned char /p) {
+      |                                 ^
+build_close/mutants/p30092/m0044_provenance.c:89:38: error: use of undeclared identifier 'p'
+   89 |         v = (v << CT_B8) | (uint32_t)p[i];
+      |                                      ^
+build_close/mutants/p30092/m0044_provenance.c:98:33: error: incompatible pointer to integer conversion passing 'const unsigned char *' to parameter of type 'unsigned char' [-Wint-conversion]
+   98 |         w[t] = ct_sha_load_be32(block + (size_t)t * CT_SHA_WORD_BYTES);
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p30092/m0044_provenance.c:86:54: note: passing argument to parameter here
+   86 | static uint32_t ct_sha_load_be32(const unsigned char /p) {
+      |                                                      ^
+3 errors generated.
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+build_close/mutants/p30092/m0050_provenance.c:94:80: error: expected ')'
+   94 | static void ct_sha_compress(uint32_t h[CT_SHA_WORD_COUNT], const unsigned char /block) {
+      |                                                                                ^
+build_close/mutants/p30092/m0050_provenance.c:94:28: note: to match this '('
+   94 | static void ct_sha_compress(uint32_t h[CT_SHA_WORD_COUNT], const unsigned char /block) {
+      |                            ^
+build_close/mutants/p30092/m0050_provenance.c:98:33: error: use of undeclared identifier 'block'
+   98 |         w[t] = ct_sha_load_be32(block + (size_t)t * CT_SHA_WORD_BYTES);
+      |                                 ^~~~~
+build_close/mutants/p30092/m0050_provenance.c:146:28: error: incompatible pointer to integer conversion passing 'const unsigned char *' to parameter of type 'unsigned char' [-Wint-conversion]
+  146 |         ct_sha_compress(h, p + done);
+      |                            ^~~~~~~~
+build_close/mutants/p30092/m0050_provenance.c:94:80: note: passing argument to parameter here
+   94 | static void ct_sha_compress(uint32_t h[CT_SHA_WORD_COUNT], const unsigned char /block) {
+      |                                                                                ^
+build_close/mutants/p30092/m0050_provenance.c:155:28: error: incompatible pointer to integer conversion passing 'unsigned char[128]' to parameter of type 'unsigned char' [-Wint-conversion]
+  155 |         ct_sha_compress(h, tail);
+      |                            ^~~~
+build_close/mutants/p30092/m0050_provenance.c:94:80: note: passing argument to parameter here
+   94 | static void ct_sha_compress(uint32_t h[CT_SHA_WORD_COUNT], const unsigned char /block) {
+      |                                                                                ^
+build_close/mutants/p30092/m0050_provenance.c:163:24: error: incompatible pointer to integer conversion passing 'unsigned char[128]' to parameter of type 'unsigned char' [-Wint-conversion]
+  163 |     ct_sha_compress(h, tail);
+      |                        ^~~~
+build_close/mutants/p30092/m0050_provenance.c:94:80: note: passing argument to parameter here
+   94 | static void ct_sha_compress(uint32_t h[CT_SHA_WORD_COUNT], const unsigned char /block) {
+      |                                                                                ^
+5 errors generated.
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: scope=src/packs/provenance.c files=1 sites=162 suites=14
+KILLED    m0001 src/packs/provenance.c:15 [arith * -> /]
+          build break
+KILLED    m0002 src/packs/provenance.c:17 [arith * -> /]
+          build break
+SURVIVED  m0003 src/packs/provenance.c:19 [int+1 1 -> 2]
+KILLED    m0004 src/packs/provenance.c:19 [int-1 1 -> 0]
+KILLED    m0005 src/packs/provenance.c:20 [arith * -> /]
+KILLED    m0006 src/packs/provenance.c:20 [cmp <= -> <]
+KILLED    m0007 src/packs/provenance.c:21 [cmp == -> !=]
+KILLED    m0008 src/packs/provenance.c:21 [int+1 0 -> 1]
+KILLED    m0009 src/packs/provenance.c:21 [int-1 0 -> -1]
+          build break
+KILLED    m0010 src/packs/provenance.c:22 [int+1 0 -> 1]
+KILLED    m0011 src/packs/provenance.c:22 [int-1 0 -> -1]
+KILLED    m0012 src/packs/provenance.c:25 [int+1 1 -> 2]
+KILLED    m0013 src/packs/provenance.c:25 [int-1 1 -> 0]
+KILLED    m0014 src/packs/provenance.c:27 [arith * -> /]
+          build break
+KILLED    m0015 src/packs/provenance.c:27 [arith + -> -]
+KILLED    m0016 src/packs/provenance.c:27 [int+1 1 -> 2]
+KILLED    m0017 src/packs/provenance.c:27 [int-1 1 -> 0]
+SURVIVED  m0018 src/packs/provenance.c:36 [int+1 0 -> 1]
+SURVIVED  m0019 src/packs/provenance.c:36 [int-1 0 -> -1]
+KILLED    m0020 src/packs/provenance.c:38 [arith + -> -]
+KILLED    m0021 src/packs/provenance.c:38 [int+1 1 -> 2]
+KILLED    m0022 src/packs/provenance.c:38 [int-1 1 -> 0]
+KILLED    m0023 src/packs/provenance.c:38 [cmp < -> <=]
+KILLED    m0024 src/packs/provenance.c:39 [arith + -> -]
+KILLED    m0025 src/packs/provenance.c:39 [arith - -> +]
+KILLED    m0026 src/packs/provenance.c:39 [arith / -> *]
+KILLED    m0027 src/packs/provenance.c:40 [arith * -> /]
+KILLED    m0028 src/packs/provenance.c:40 [arith * -> /]
+KILLED    m0029 src/packs/provenance.c:40 [arith * -> /]
+SURVIVED  m0030 src/packs/provenance.c:41 [cmp <= -> <]
+KILLED    m0031 src/packs/provenance.c:54 [int+1 0 -> 1]
+KILLED    m0032 src/packs/provenance.c:54 [int-1 0 -> -1]
+KILLED    m0033 src/packs/provenance.c:54 [cmp < -> <=]
+KILLED    m0034 src/packs/provenance.c:55 [int+1 0 -> 1]
+KILLED    m0035 src/packs/provenance.c:55 [int-1 0 -> -1]
+KILLED    m0036 src/packs/provenance.c:58 [int+1 0 -> 1]
+KILLED    m0037 src/packs/provenance.c:58 [int-1 0 -> -1]
+KILLED    m0038 src/packs/provenance.c:58 [cmp < -> <=]
+SURVIVED  m0039 src/packs/provenance.c:59 [int+1 1 -> 2]
+KILLED    m0040 src/packs/provenance.c:59 [int-1 1 -> 0]
+SURVIVED  m0041 src/packs/provenance.c:61 [int+1 1 -> 2]
+SURVIVED  m0042 src/packs/provenance.c:61 [int-1 1 -> 0]
+KILLED    m0043 src/packs/provenance.c:65 [arith - -> +]
+KILLED    m0044 src/packs/provenance.c:86 [arith * -> /]
+          build break
+SURVIVED  m0045 src/packs/provenance.c:87 [int+1 0 -> 1]
+SURVIVED  m0046 src/packs/provenance.c:87 [int-1 0 -> -1]
+KILLED    m0047 src/packs/provenance.c:88 [int+1 0 -> 1]
+SURVIVED  m0048 src/packs/provenance.c:88 [int-1 0 -> -1]
+KILLED    m0049 src/packs/provenance.c:88 [cmp < -> <=]
+KILLED    m0050 src/packs/provenance.c:94 [arith * -> /]
+          build break
+KILLED    m0051 src/packs/provenance.c:96 [arith / -> *]
+KILLED    m0052 src/packs/provenance.c:97 [int+1 0 -> 1]
+KILLED    m0053 src/packs/provenance.c:97 [int-1 0 -> -1]
+SURVIVED  m0054 src/packs/provenance.c:97 [cmp < -> <=]
+KILLED    m0055 src/packs/provenance.c:98 [arith + -> -]
+KILLED    m0056 src/packs/provenance.c:98 [arith * -> /]
+KILLED    m0057 src/packs/provenance.c:100 [cmp < -> <=]
+KILLED    m0058 src/packs/provenance.c:101 [arith - -> +]
+KILLED    m0059 src/packs/provenance.c:102 [arith - -> +]
+KILLED    m0060 src/packs/provenance.c:103 [arith - -> +]
+KILLED    m0061 src/packs/provenance.c:103 [arith + -> -]
+KILLED    m0062 src/packs/provenance.c:103 [arith + -> -]
+KILLED    m0063 src/packs/provenance.c:103 [arith - -> +]
+KILLED    m0064 src/packs/provenance.c:103 [arith + -> -]
+KILLED    m0065 src/packs/provenance.c:105 [int+1 0 -> 1]
+KILLED    m0066 src/packs/provenance.c:105 [int-1 0 -> -1]
+KILLED    m0067 src/packs/provenance.c:106 [int+1 1 -> 2]
+KILLED    m0068 src/packs/provenance.c:106 [int-1 1 -> 0]
+KILLED   mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+build_close/mutants/p30092/m0107_provenance.c:135:27: error: expected ')'
+  135 | void ct_sha256(const void /data, unsigned len, char hex_out[CT_SHA_HEX_MAX]) {
+      |                           ^
+build_close/mutants/p30092/m0107_provenance.c:135:15: note: to match this '('
+  135 | void ct_sha256(const void /data, unsigned len, char hex_out[CT_SHA_HEX_MAX]) {
+      |               ^
+build_close/mutants/p30092/m0107_provenance.c:135:15: error: 'void' as parameter must not have type qualifiers
+  135 | void ct_sha256(const void /data, unsigned len, char hex_out[CT_SHA_HEX_MAX]) {
+      |               ^
+build_close/mutants/p30092/m0107_provenance.c:135:6: error: conflicting types for 'ct_sha256'
+  135 | void ct_sha256(const void /data, unsigned len, char hex_out[CT_SHA_HEX_MAX]) {
+      |      ^
+src\packs/provenance.h:45:6: note: previous declaration is here
+   45 | void ct_sha256(const void *data, unsigned len, char hex_out[CT_SHA_HEX_MAX]);
+      |      ^
+build_close/mutants/p30092/m0107_provenance.c:136:9: error: use of undeclared identifier 'hex_out'
+  136 |     if (hex_out == NULL)
+      |         ^~~~~~~
+build_close/mutants/p30092/m0107_provenance.c:138:9: error: use of undeclared identifier 'data'
+  138 |     if (data == NULL)
+      |         ^~~~
+build_close/mutants/p30092/m0107_provenance.c:139:9: error: use of undeclared identifier 'len'
+  139 |         len = 0;
+      |         ^~~
+build_close/mutants/p30092/m0107_provenance.c:143:53: error: use of undeclared identifier 'data'
+  143 |     const unsigned char *p = (const unsigned char *)data;
+      |                                                     ^~~~
+build_close/mutants/p30092/m0107_provenance.c:145:12: error: use of undeclared identifier 'len'
+  145 |     while (len - done >= (unsigned)CT_SHA_BLOCK_BYTES) {
+      |            ^~~
+build_close/mutants/p30092/m0107_provenance.c:149:20: error: use of undeclared identifier 'len'
+  149 |     unsigned rem = len - done;
+      |                    ^~~
+build_close/mutants/p30092/m0107_provenance.c:158:51: error: use of undeclared identifier 'len'
+  158 |     unsigned long long bits = (unsigned long long)len * CT_B8;
+      |                                                   ^~~
+build_close/mutants/p30092/m0107_provenance.c:166:13: error: use of undeclared identifier 'hex_out'
+  166 |             hex_out[i * CT_B8 + j] =
+      |             ^~~~~~~
+build_close/mutants/p30092/m0107_provenance.c:170:5: error: use of undeclared identifier 'hex_out'
+  170 |     hex_out[CT_SHA_HEX_MAX - CT_B1] = '\0';
+      |     ^~~~~~~
+12 errors generated.
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+build_close/mutants/p30092/m0112_provenance.c:143:25: error: expected identifier or '('
+  143 |     const unsigned char /p = (const unsigned char *)data;
+      |                         ^
+build_close/mutants/p30092/m0112_provenance.c:146:28: error: use of undeclared identifier 'p'
+  146 |         ct_sha_compress(h, p + done);
+      |                            ^
+build_close/mutants/p30092/m0112_provenance.c:152:18: error: use of undeclared identifier 'p'
+  152 |     memcpy(tail, p + done, rem);
+      |                  ^
+3 errors generated.
+build_close/mutants/p30092/m0113_provenance.c:143:51: error: expected ')'
+  143 |     const unsigned char *p = (const unsigned char /)data;
+      |                                                   ^
+build_close/mutants/p30092/m0113_provenance.c:143:30: note: to match this '('
+  143 |     const unsigned char *p = (const unsigned char /)data;
+      |                              ^
+build_close/mutants/p30092/m0113_provenance.c:143:30: error: cast to smaller integer type 'unsigned char' from 'const void *' [-Werror,-Wvoid-pointer-to-int-cast]
+  143 |     const unsigned char *p = (const unsigned char /)data;
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p30092/m0113_provenance.c:143:26: error: incompatible integer to pointer conversion initializing 'const unsigned char *' with an expression of type 'unsigned char' [-Wint-conversion]
+  143 |     const unsigned char *p = (const unsigned char /)data;
+      |                          ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1073741819
+mutate: suite packs_bounds exited -1073741819
+mutate: suite packs_sha256 exited 1
+mutate: suite packs_sha256 exited 1
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_sha256 exited 1
+mutate: suite packs_sha256 exited 1
+mutate: suite packs_sha256 exited 1
+mutate: suite packs_sha256 exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_content_hash exited 1
+ m0069 src/packs/provenance.c:107 [int+1 2 -> 3]
+KILLED    m0070 src/packs/provenance.c:107 [int-1 2 -> 1]
+KILLED    m0071 src/packs/provenance.c:108 [int+1 3 -> 4]
+KILLED    m0072 src/packs/provenance.c:108 [int-1 3 -> 2]
+KILLED    m0073 src/packs/provenance.c:109 [int+1 4 -> 5]
+KILLED    m0074 src/packs/provenance.c:109 [int-1 4 -> 3]
+KILLED    m0075 src/packs/provenance.c:110 [int+1 5 -> 6]
+KILLED    m0076 src/packs/provenance.c:110 [int-1 5 -> 4]
+KILLED    m0077 src/packs/provenance.c:111 [int+1 6 -> 7]
+KILLED    m0078 src/packs/provenance.c:111 [int-1 6 -> 5]
+KILLED    m0079 src/packs/provenance.c:112 [int+1 7 -> 8]
+KILLED    m0080 src/packs/provenance.c:112 [int-1 7 -> 6]
+KILLED    m0081 src/packs/provenance.c:113 [int+1 0 -> 1]
+KILLED    m0082 src/packs/provenance.c:113 [int-1 0 -> -1]
+KILLED    m0083 src/packs/provenance.c:113 [cmp < -> <=]
+KILLED    m0084 src/packs/provenance.c:114 [arith + -> -]
+KILLED    m0085 src/packs/provenance.c:114 [arith + -> -]
+KILLED    m0086 src/packs/provenance.c:114 [arith + -> -]
+KILLED    m0087 src/packs/provenance.c:114 [arith + -> -]
+KILLED    m0088 src/packs/provenance.c:115 [arith + -> -]
+KILLED    m0089 src/packs/provenance.c:119 [arith + -> -]
+KILLED    m0090 src/packs/provenance.c:123 [arith + -> -]
+KILLED    m0091 src/packs/provenance.c:125 [int+1 0 -> 1]
+KILLED    m0092 src/packs/provenance.c:125 [int-1 0 -> -1]
+KILLED    m0093 src/packs/provenance.c:126 [int+1 1 -> 2]
+KILLED    m0094 src/packs/provenance.c:126 [int-1 1 -> 0]
+KILLED    m0095 src/packs/provenance.c:127 [int+1 2 -> 3]
+KILLED    m0096 src/packs/provenance.c:127 [int-1 2 -> 1]
+KILLED    m0097 src/packs/provenance.c:128 [int+1 3 -> 4]
+KILLED    m0098 src/packs/provenance.c:128 [int-1 3 -> 2]
+KILLED    m0099 src/packs/provenance.c:129 [int+1 4 -> 5]
+KILLED    m0100 src/packs/provenance.c:129 [int-1 4 -> 3]
+KILLED    m0101 src/packs/provenance.c:130 [int+1 5 -> 6]
+KILLED    m0102 src/packs/provenance.c:130 [int-1 5 -> 4]
+KILLED    m0103 src/packs/provenance.c:131 [int+1 6 -> 7]
+KILLED    m0104 src/packs/provenance.c:131 [int-1 6 -> 5]
+KILLED    m0105 src/packs/provenance.c:132 [int+1 7 -> 8]
+KILLED    m0106 src/packs/provenance.c:132 [int-1 7 -> 6]
+KILLED    m0107 src/packs/provenance.c:135 [arith * -> /]
+          build break
+KILLED    m0108 src/packs/provenance.c:136 [cmp == -> !=]
+KILLED    m0109 src/packs/provenance.c:138 [cmp == -> !=]
+SURVIVED  m0110 src/packs/provenance.c:139 [int+1 0 -> 1]
+SURVIVED  m0111 src/packs/provenance.c:139 [int-1 0 -> -1]
+KILLED    m0112 src/packs/provenance.c:143 [arith * -> /]
+          build break
+KILLED    m0113 src/packs/provenance.c:143 [arith * -> /]
+          build break
+KILLED    m0114 src/packs/provenance.c:144 [int+1 0 -> 1]
+KILLED    m0115 src/packs/provenance.c:144 [int-1 0 -> -1]
+KILLED    m0116 src/packs/provenance.c:145 [arith - -> +]
+KILLED    m0117 src/packs/provenance.c:145 [cmp >= -> >]
+KILLED    m0118 src/packs/provenance.c:146 [arith + -> -]
+KILLED    m0119 src/packs/provenance.c:149 [arith - -> +]
+KILLED    m0120 src/packs/provenance.c:150 [arith * -> /]
+KILLED    m0121 src/packs/provenance.c:151 [int+1 0 -> 1]
+KILLED    m0122 src/packs/provenance.c:151 [int-1 0 -> -1]
+KILLED    m0123 src/packs/provenance.c:152 [arith + -> -]
+KILLED    m0124 src/packs/provenance.c:153 [arith * -> /]
+KILLED    m0125 src/packs/provenance.c:154 [cmp >= -> >]
+KILLED    m0126 src/packs/provenance.c:154 [arith - -> +]
+KILLED    m0127 src/packs/provenance.c:156 [int+1 0 -> 1]
+KILLED    m0128 src/packs/provenance.c:156 [int-1 0 -> -1]
+KILLED    m0129 src/packs/provenance.c:158 [arith * -> /]
+SURVIVED  m0130 src/packs/provenance.c:159 [int+1 0 -> 1]
+KILLED    m0131 src/packs/provenance.c:159 [int-1 0 -> -1]
+KILLED    m0132 src/packs/provenance.c:159 [cmp < -> <=]
+KILLED    m0133 src/packs/provenance.c:160 [arith - -> +]
+KILLED    m0134 src/packs/provenance.c:160 [arith + -> -]
+KILLED    m0135 src/packs/provenance.c:161 [arith * -> /]
+KILLED    m0136 src/packs/provenance.c:161 [arith - -> +]
+KILLED    m0137 src/packs/provenance.c:161 [arith - -> +]
+KILLED    m0138 src/packs/provenanmutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_content_hash exited 1
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_bounds exited -1073741795
+mutate: suite packs_content_hash exited 1
+build_close/mutants/p30092/m0151_provenance.c:173:33: error: expected ')'
+  173 | void ct_pack_source_record(char /out, unsigned cap, const char *url, const char *retrieved_at,
+      |                                 ^
+build_close/mutants/p30092/m0151_provenance.c:173:27: note: to match this '('
+  173 | void ct_pack_source_record(char /out, unsigned cap, const char *url, const char *retrieved_at,
+      |                           ^
+build_close/mutants/p30092/m0151_provenance.c:173:6: error: conflicting types for 'ct_pack_source_record'
+  173 | void ct_pack_source_record(char /out, unsigned cap, const char *url, const char *retrieved_at,
+      |      ^
+src\packs/provenance.h:46:6: note: previous declaration is here
+   46 | void ct_pack_source_record(char *out, unsigned cap, const char *url, const char *retrieved_at,
+      |      ^
+build_close/mutants/p30092/m0151_provenance.c:175:9: error: use of undeclared identifier 'out'
+  175 |     if (out == NULL || cap == 0)
+      |         ^~~
+build_close/mutants/p30092/m0151_provenance.c:175:24: error: use of undeclared identifier 'cap'
+  175 |     if (out == NULL || cap == 0)
+      |                        ^~~
+build_close/mutants/p30092/m0151_provenance.c:177:14: error: use of undeclared identifier 'out'
+  177 |     snprintf(out, cap, "%s|%s|%s", url != NULL ? url : "", retrieved_at != NULL ? retrieved_at : "",
+      |              ^~~
+build_close/mutants/p30092/m0151_provenance.c:177:19: error: use of undeclared identifier 'cap'
+  177 |     snprintf(out, cap, "%s|%s|%s", url != NULL ? url : "", retrieved_at != NULL ? retrieved_at : "",
+      |                   ^~~
+build_close/mutants/p30092/m0151_provenance.c:177:36: error: use of undeclared identifier 'url'
+  177 |     snprintf(out, cap, "%s|%s|%s", url != NULL ? url : "", retrieved_at != NULL ? retrieved_at : "",
+      |                                    ^~~
+build_close/mutants/p30092/m0151_provenance.c:177:50: error: use of undeclared identifier 'url'
+  177 |     snprintf(out, cap, "%s|%s|%s", url != NULL ? url : "", retrieved_at != NULL ? retrieved_at : "",
+      |                                                  ^~~
+build_close/mutants/p30092/m0151_provenance.c:177:60: error: use of undeclared identifier 'retrieved_at'
+  177 |     snprintf(out, cap, "%s|%s|%s", url != NULL ? url : "", retrieved_at != NULL ? retrieved_at : "",
+      |                                                            ^~~~~~~~~~~~
+build_close/mutants/p30092/m0151_provenance.c:177:83: error: use of undeclared identifier 'retrieved_at'
+  177 |     snprintf(out, cap, "%s|%s|%s", url != NULL ? url : "", retrieved_at != NULL ? retrieved_at : "",
+      |                                                                                   ^~~~~~~~~~~~
+build_close/mutants/p30092/m0151_provenance.c:178:14: error: use of undeclared identifier 'alg'
+  178 |              alg != NULL ? alg : "");
+      |              ^~~
+build_close/mutants/p30092/m0151_provenance.c:178:28: error: use of undeclared identifier 'alg'
+  178 |              alg != NULL ? alg : "");
+      |                            ^~~
+12 errors generated.
+build_close/mutants/p30092/m0152_provenance.c:173:64: error: expected ')'
+  173 | void ct_pack_source_record(char *out, unsigned cap, const char /url, const char *retrieved_at,
+      |                                                                ^
+build_close/mutants/p30092/m0152_provenance.c:173:27: note: to match this '('
+  173 | void ct_pack_source_record(char *out, unsigned cap, const char /url, const char *retrieved_at,
+      |                           ^
+build_close/mutants/p30092/m0152_provenance.c:173:6: error: conflicting types for 'ct_pack_source_record'
+  173 | void ct_pack_source_record(char *out, unsigned cap, const char /url, const char *retrieved_at,
+      |      ^
+src\packs/provenance.h:46:6: note: previous declaration is here
+   46 | void ct_pack_source_record(char *out, unsigned cap, const char *url, const char *retrieved_at,
+      |      ^
+build_close/mutants/p30092/m0152_provenance.c:177:36: error: use of undeclared identifier 'url'
+  177 |     snprintf(out, cap, "%s|%s|%s", url != NULL ? url : "", retrieved_at != NULL ? retrieved_at : "",
+      |                                    ^~~
+build_close/mutants/p30092/m0152_provenance.c:177:50: error: use of undeclared identifier 'url'
+  177 |     snprintf(out, cap, "%s|%s|%s", url != NULL ? url : "", retrieved_at != NULL ? retrieved_at : "",
+      |                                                  ^~~
+build_close/mutants/p30092/m0152_provenance.c:177:60: error: use of undeclared identifier 'retrieved_at'
+  177 |     snprintf(out, cap, "%s|%s|%s", url != NULL ? url : "", retrieved_at != NULL ? retrieved_at : "",
+      |                                                            ^~~~~~~~~~~~
+build_close/mutants/p30092/m0152_provenance.c:177:83: error: use of undeclared identifier 'retrieved_at'
+  177 |     snprintf(out, cap, "%s|%s|%s", url != NULL ? url : "", retrieved_at != NULL ? retrieved_at : "",
+      |                                                                                   ^~~~~~~~~~~~
+build_close/mutants/p30092/m0152_provenance.c:178:14: error: use of undeclared identifier 'alg'
+  178 |              alg != NULL ? alg : "");
+      |              ^~~
+build_close/mutants/p30092/m0152_provenance.c:178:28: error: use of undeclared identifier 'alg'
+  178 |              alg != NULL ? alg : "");
+      |                            ^~~
+8 errors generated.
+build_close/mutants/p30092/m0153_provenance.c:173:81: error: expected ')'
+  173 | void ct_pack_source_record(char *out, unsigned cap, const char *url, const char /retrieved_at,
+      |                                                                                 ^
+build_close/mutants/p30092/m0153_provenance.c:173:27: note: to match this '('
+  173 | void ct_pack_source_record(char *out, unsigned cap, const char *url, const char /retrieved_at,
+      |                           ^
+build_close/mutants/p30092/m0153_provenance.c:173:6: error: conflicting types for 'ct_pack_source_record'
+  173 | void ct_pack_source_record(char *out, unsigned cap, const char *url, const char /retrieved_at,
+      |      ^
+src\packs/provenance.h:46:6: note: previous declaration is here
+   46 | void ct_pack_source_record(char *out, unsigned cap, const char *url, const char *retrieved_at,
+      |      ^
+build_close/mutants/p30092/m0153_provenance.c:177:60: error: use of undeclared identifier 'retrieved_at'
+  177 |     snprintf(out, cap, "%s|%s|%s", url != NULL ? url : "", retrieved_at != NULL ? retrieved_at : "",
+      |                                                            ^~~~~~~~~~~~
+build_close/mutants/p30092/m0153_provenance.c:177:83: error: use of undeclared identifier 'retrieved_at'
+  177 |     snprintf(out, cap, "%s|%s|%s", url != NULL ? url : "", retrieved_at != NULL ? retrieved_at : "",
+      |                                                                                   ^~~~~~~~~~~~
+build_close/mutants/p30092/m0153_provenance.c:178:14: error: use of undeclared identifier 'alg'
+  178 |              alg != NULL ? alg : "");
+      |              ^~~
+build_close/mutants/p30092/m0153_provenance.c:178:28: error: use of undeclared identifier 'alg'
+  178 |              alg != NULL ? alg : "");
+      |                            ^~~
+6 errors generated.
+build_close/mutants/p30092/m0154_provenance.c:174:39: error: expected ')'
+  174 |                            const char /alg) {
+      |                                       ^
+build_close/mutants/p30092/m0154_provenance.c:173:27: note: to match this '('
+  173 | void ct_pack_source_record(char *out, unsigned cap, const char *url, const char *retrieved_at,
+      |                           ^
+build_close/mutants/p30092/m0154_provenance.c:173:6: error: conflicting types for 'ct_pack_source_record'
+  173 | void ct_pack_source_record(char *out, unsigned cap, const char *url, const char *retrieved_at,
+      |      ^
+src\packs/provenance.h:46:6: note: previous declaration is here
+   46 | void ct_pack_source_record(char *out, unsigned cap, const char *url, const char *retrieved_at,
+      |      ^
+build_close/mutants/p30092/m0154_provenance.c:178:14: error: use of undeclared identifier 'alg'
+  178 |              alg != NULL ? alg : "");
+      |              ^~~
+build_close/mutants/p30092/m0154_provenance.c:178:28: error: use of undeclared identifier 'alg'
+  178 |              alg != NULL ? alg : "");
+      |                            ^~~
+4 errors generated.
+mutate: suite packs_source_record exited 1
+mutate: suite packs_source_record exited 1
+build_close/mutants/p30092/m0159_provenance.c:175:28: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  175 |     if (out == NULL || cap == -1)
+      |                        ~~~ ^  ~~
+1 error generated.
+mutate: suite packs_source_record exited 1
+mutate: suite packs_source_record exited 1
+mutate: suite packs_source_record exited 1
+mutate: 16 unexplained survivors
+ce.c:164 [int+1 0 -> 1]
+KILLED    m0139 src/packs/provenance.c:164 [int-1 0 -> -1]
+KILLED    m0140 src/packs/provenance.c:164 [cmp < -> <=]
+KILLED    m0141 src/packs/provenance.c:165 [int+1 0 -> 1]
+KILLED    m0142 src/packs/provenance.c:165 [int-1 0 -> -1]
+KILLED    m0143 src/packs/provenance.c:165 [cmp < -> <=]
+KILLED    m0144 src/packs/provenance.c:166 [arith * -> /]
+KILLED    m0145 src/packs/provenance.c:166 [arith + -> -]
+KILLED    m0146 src/packs/provenance.c:167 [arith * -> /]
+KILLED    m0147 src/packs/provenance.c:167 [arith - -> +]
+KILLED    m0148 src/packs/provenance.c:167 [arith - -> +]
+KILLED    m0149 src/packs/provenance.c:167 [arith - -> +]
+KILLED    m0150 src/packs/provenance.c:170 [arith - -> +]
+KILLED    m0151 src/packs/provenance.c:173 [arith * -> /]
+          build break
+KILLED    m0152 src/packs/provenance.c:173 [arith * -> /]
+          build break
+KILLED    m0153 src/packs/provenance.c:173 [arith * -> /]
+          build break
+KILLED    m0154 src/packs/provenance.c:174 [arith * -> /]
+          build break
+KILLED    m0155 src/packs/provenance.c:175 [cmp == -> !=]
+SURVIVED  m0156 src/packs/provenance.c:175 [logic || -> &&]
+KILLED    m0157 src/packs/provenance.c:175 [cmp == -> !=]
+SURVIVED  m0158 src/packs/provenance.c:175 [int+1 0 -> 1]
+KILLED    m0159 src/packs/provenance.c:175 [int-1 0 -> -1]
+          build break
+KILLED    m0160 src/packs/provenance.c:177 [cmp != -> ==]
+KILLED    m0161 src/packs/provenance.c:177 [cmp != -> ==]
+KILLED    m0162 src/packs/provenance.c:178 [cmp != -> ==]
+mutate: generated=162 build_failed=14 killed_by_tests=132 killed=146 survived=16 accepted=0 unexplained=16 skipped=0
+mutate: kill rate 146/162 = 90.1%, with accepted equivalents 146/162 = 90.1%
+mutate: wall 2533.4s
+make: *** [makefile:242: mutate] Error 1
+exit=2

@@ -1,0 +1,112 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_app_loop.c -o build_close/tobj/tests/unit_app_loop.o
+tests/unit_app_loop.c:17:30: error: use of undeclared identifier 'getenv'
+   17 |     const char *saved_data = getenv(CT_DATA_DIR_ENV);
+      |                              ^~~~~~
+tests/unit_app_loop.c:18:29: error: use of undeclared identifier 'getenv'
+   18 |     const char *saved_mig = getenv(CT_MIGRATIONS_ENV);
+      |                             ^~~~~~
+tests/unit_app_loop.c:33:18: error: use of undeclared identifier '_putenv'
+   33 |     CT_ASSERT_EQ(CT_APPLOOP_PUTENV(empty_data), 0);
+      |                  ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:33:18: error: use of undeclared identifier '_putenv'
+   33 |     CT_ASSERT_EQ(CT_APPLOOP_PUTENV(empty_data), 0);
+      |                  ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:34:18: error: use of undeclared identifier '_putenv'
+   34 |     CT_ASSERT_EQ(CT_APPLOOP_PUTENV(empty_mig), 0);
+      |                  ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:34:18: error: use of undeclared identifier '_putenv'
+   34 |     CT_ASSERT_EQ(CT_APPLOOP_PUTENV(empty_mig), 0);
+      |                  ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:47:18: error: use of undeclared identifier '_putenv'
+   47 |     CT_ASSERT_EQ(CT_APPLOOP_PUTENV(base), 0);
+      |                  ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:47:18: error: use of undeclared identifier '_putenv'
+   47 |     CT_ASSERT_EQ(CT_APPLOOP_PUTENV(base), 0);
+      |                  ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:48:18: error: use of undeclared identifier '_putenv'
+   48 |     CT_ASSERT_EQ(CT_APPLOOP_PUTENV(long_mig), 0);
+      |                  ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:48:18: error: use of undeclared identifier '_putenv'
+   48 |     CT_ASSERT_EQ(CT_APPLOOP_PUTENV(long_mig), 0);
+      |                  ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:57:18: error: use of undeclared identifier '_putenv'
+   57 |     CT_ASSERT_EQ(CT_APPLOOP_PUTENV(empty_mig), 0);
+      |                  ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:57:18: error: use of undeclared identifier '_putenv'
+   57 |     CT_ASSERT_EQ(CT_APPLOOP_PUTENV(empty_mig), 0);
+      |                  ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:61:22: error: use of undeclared identifier '_putenv'
+   61 |         CT_ASSERT_EQ(CT_APPLOOP_PUTENV(back), 0);
+      |                      ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:61:22: error: use of undeclared identifier '_putenv'
+   61 |         CT_ASSERT_EQ(CT_APPLOOP_PUTENV(back), 0);
+      |                      ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:63:22: error: use of undeclared identifier '_putenv'
+   63 |         CT_ASSERT_EQ(CT_APPLOOP_PUTENV(empty_data), 0);
+      |                      ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:63:22: error: use of undeclared identifier '_putenv'
+   63 |         CT_ASSERT_EQ(CT_APPLOOP_PUTENV(empty_data), 0);
+      |                      ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:68:22: error: use of undeclared identifier '_putenv'
+   68 |         CT_ASSERT_EQ(CT_APPLOOP_PUTENV(back), 0);
+      |                      ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:68:22: error: use of undeclared identifier '_putenv'
+   68 |         CT_ASSERT_EQ(CT_APPLOOP_PUTENV(back), 0);
+      |                      ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+tests/unit_app_loop.c:70:22: error: use of undeclared identifier '_putenv'
+   70 |         CT_ASSERT_EQ(CT_APPLOOP_PUTENV(empty_mig), 0);
+      |                      ^~~~~~~~~~~~~~~~~
+tests/unit_app_loop.c:11:27: note: expanded from macro 'CT_APPLOOP_PUTENV'
+   11 | #define CT_APPLOOP_PUTENV _putenv
+      |                           ^~~~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+make: *** [makefile:106: build_close/tobj/tests/unit_app_loop.o] Error 1

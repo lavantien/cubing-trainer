@@ -1,0 +1,108 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/storage/db.c build_close db_open migrate migrate_backup migrate_error_paths migrate_soundness db_schema_assert pragmas
+mutate: scope=src/storage/db.c files=1 sites=75 suites=7
+KILLED    m0001 src/storage/db.c:7 [arith * -> /]
+          build break
+KILLED    m0002 src/storage/db.c:7 [arith * -> /]
+          build break
+KILLED    m0003 src/storage/db.c:7 [arith * -> /]
+          build break
+KILLED    m0004 src/storage/db.c:8 [cmp == -> !=]
+KILLED    m0005 src/storage/db.c:8 [logic || -> &&]
+KILLED    m0006 src/storage/db.c:8 [cmp == -> !=]
+KILLED    m0007 src/storage/db.c:10 [arith * -> /]
+          build break
+KILLED    m0008 src/storage/db.c:12 [cmp != -> ==]
+KILLED    m0009 src/storage/db.c:13 [arith * -> /]
+          build break
+KILLED    m0010 src/storage/db.c:13 [cmp != -> ==]
+KILLED    m0011 src/storage/db.c:14 [arith * -> /]
+          build break
+KILLED    m0012 src/storage/db.c:15 [arith * -> /]
+          build break
+KILLED    m0013 src/storage/db.c:19 [arith * -> /]
+          build break
+KILLED    m0014 src/storage/db.c:20 [arith * -> /]
+          build break
+KILLED    m0015 src/storage/db.c:21 [arith * -> /]
+          build break
+KILLED    m0016 src/storage/db.c:24 [cmp == -> !=]
+SURVIVED  m0017 src/storage/db.c:24 [logic && -> ||]
+KILLED    m0018 src/storage/db.c:24 [cmp != -> ==]
+KILLED    m0019 src/storage/db.c:24 [int+1 0 -> 1]
+KILLED    m0020 src/storage/db.c:24 [int-1 0 -> -1]
+KILLED    m0021 src/storage/db.c:25 [arith * -> /]
+          build break
+KILLED    m0022 src/storage/db.c:28 [cmp != -> ==]
+KILLED    m0023 src/storage/db.c:29 [arith * -> /]
+          build break
+KILLED    m0024 src/storage/db.c:30 [arith * -> /]
+          build break
+KILLED    m0025 src/storage/db.c:36 [arith * -> /]
+          build break
+SURVIVED  m0026 src/storage/db.c:37 [cmp == -> !=]
+KILLED    m0027 src/storage/db.c:42 [arith * -> /]
+          build break
+KILLED    m0028 src/storage/db.c:47 [arith * -> /]
+          build break
+KILLED    m0029 src/storage/db.c:48 [cmp == -> !=]
+KILLED    m0030 src/storage/db.c:49 [ret-lit 0 -> 1]
+KILLED    m0031 src/storage/db.c:49 [int+1 0 -> 1]
+KILLED    m0032 src/storage/db.c:49 [int-1 0 -> -1]
+KILLED    m0033 src/storage/db.c:50 [arith * -> /]
+          build break
+KILLED    m0034 src/storage/db.c:51 [arith - -> +]
+SURVIVED  m0035 src/storage/db.c:51 [int+1 1 -> 2]
+KILLED    m0036 src/storage/db.c:51 [int-1 1 -> 0]
+KILLED    m0037 src/storage/db.c:52 [cmp != -> ==]
+SURVIVED  m0038 src/storage/db.c:54 [ret-lit 0 -> 1]
+SURVIVED  m0039 src/storage/db.c:54 [int+1 0 -> 1]
+SURVIVED  m0040 src/storage/db.c:54 [int-1 0 -> -1]
+KILLED    m0041 src/storage/db.c:56 [int+1 1 -> 2]
+KILLED    m0042 src/storage/db.c:56 [int-1 1 -> 0]
+KILLED    m0043 src/storage/db.c:57 [arith / -> *]
+SURVIVED  m0044 src/storage/db.c:57 [int+1 0 -> 1]
+SURVIVED  m0045 src/storage/db.c:57 [int-1 0 -> -1]
+KILLED    m0046 src/storage/db.c:58 [int+1 0 -> 1]
+KILLED    m0047 src/storage/db.c:58 [int-1 0 -> -1]
+KILLED    m0048 src/storage/db.c:58 [cmp < -> <=]
+KILLED    m0049 src/storage/db.c:61 [int+1 1 -> 2]
+KILLED    m0050 src/storage/db.c:61 [int-1 1 -> 0]
+KILLED    m0051 src/storage/db.c:61 [arith - -> +]
+SURVIVED  m0052 src/storage/db.c:61 [int+1 1 -> 2]
+KILLED    m0053 src/storage/db.c:61 [int-1 1 -> 0]
+KILLED    m0054 src/storage/db.c:62 [cmp != -> ==]
+KILLED    m0055 src/storage/db.c:63 [int+1 0 -> 1]
+KILLED    m0056 src/storage/db.c:63 [int-1 0 -> -1]
+KILLED    m0057 src/storage/db.c:71 [arith * -> /]
+          build break
+KILLED    m0058 src/storage/db.c:72 [cmp == -> !=]
+KILLED    m0059 src/storage/db.c:73 [arith - -> +]
+KILLED    m0060 src/storage/db.c:73 [int+1 1 -> 2]
+KILLED    m0061 src/storage/db.c:73 [int-1 1 -> 0]
+KILLED    m0062 src/storage/db.c:74 [arith * -> /]
+          build break
+KILLED    m0063 src/storage/db.c:75 [arith - -> +]
+SURVIVED  m0064 src/storage/db.c:75 [int+1 1 -> 2]
+KILLED    m0065 src/storage/db.c:75 [int-1 1 -> 0]
+KILLED    m0066 src/storage/db.c:75 [cmp != -> ==]
+SURVIVED  m0067 src/storage/db.c:77 [arith - -> +]
+SURVIVED  m0068 src/storage/db.c:77 [int+1 1 -> 2]
+SURVIVED  m0069 src/storage/db.c:77 [int-1 1 -> 0]
+SURVIVED  m0070 src/storage/db.c:79 [arith - -> +]
+SURVIVED  m0071 src/storage/db.c:79 [int+1 1 -> 2]
+SURVIVED  m0072 src/storage/db.c:79 [int-1 1 -> 0]
+KILLED    m0073 src/storage/db.c:80 [cmp == -> !=]
+KILLED    m0074 src/storage/db.c:81 [int+1 0 -> 1]
+KILLED    m0075 src/storage/db.c:81 [int-1 0 -> -1]
+ACCEPTED  m0064 src/storage/db.c:75 [int+1 1 -> 2] :: sqlite reads any negative byte count as nul terminated, minus two prepares the same pragma text
+ACCEPTED  m0067 src/storage/db.c:77 [arith - -> +] :: version prepare failure is unreachable through the public open path, the fixed pragma compiles on every healthy handle
+ACCEPTED  m0068 src/storage/db.c:77 [int+1 1 -> 2] :: version prepare failure is unreachable through the public open path, the fixed pragma compiles on every healthy handle
+ACCEPTED  m0069 src/storage/db.c:77 [int-1 1 -> 0] :: version prepare failure is unreachable through the public open path, the fixed pragma compiles on every healthy handle
+ACCEPTED  m0070 src/storage/db.c:79 [arith - -> +] :: version step fallback is unreachable, the user version pragma always yields a row on every handle the public path produces
+ACCEPTED  m0071 src/storage/db.c:79 [int+1 1 -> 2] :: version step fallback is unreachable, the user version pragma always yields a row on every handle the public path produces
+ACCEPTED  m0072 src/storage/db.c:79 [int-1 1 -> 0] :: version step fallback is unreachable, the user version pragma always yields a row on every handle the public path produces
+mutate: generated=75 build_failed=19 killed_by_tests=40 killed=59 survived=16 accepted=7 unexplained=9 skipped=0
+mutate: kill rate 59/75 = 78.7%, with accepted equivalents 66/75 = 88.0%
+mutate: wall 44.6s

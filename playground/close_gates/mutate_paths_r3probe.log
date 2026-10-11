@@ -1,0 +1,13 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_close/bin/mutate.exe src/app/paths.c build_close path_migrations_dir_override
+mutate: scope=src/app/paths.c files=1 sites=257 suites=1
+SURVIVED  m0126 src/app/paths.c:103 [int+1 0 -> 1]
+SURVIVED  m0128 src/app/paths.c:103 [logic || -> &&]
+SURVIVED  m0185 src/app/paths.c:136 [logic || -> &&]
+ACCEPTED  m0126 src/app/paths.c:103 [int+1 0 -> 1] :: GetModuleFileNameA never returns one on a reachable call, the zero and cap boundaries require api failures the harness never triggers, and the conjunction mutant disarms only that unreachable failure arm
+ACCEPTED  m0128 src/app/paths.c:103 [logic || -> &&] :: GetModuleFileNameA never returns one on a reachable call, the zero and cap boundaries require api failures the harness never triggers, and the conjunction mutant disarms only that unreachable failure arm
+ACCEPTED  m0185 src/app/paths.c:136 [logic || -> &&] :: cap one slips the guard and fails the override snprintf or the nested resource call with the same minus one, and the conjunction mutant passes null out into snprintf which fails its length check identically
+mutate: generated=3 build_failed=0 killed_by_tests=0 killed=0 survived=3 accepted=3 unexplained=0 skipped=254
+mutate: kill rate 0/3 = 0.0%, with accepted equivalents 3/3 = 100.0%
+mutate: wall 3.6s

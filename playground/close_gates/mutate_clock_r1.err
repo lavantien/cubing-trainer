@@ -1,0 +1,1099 @@
+build_close/mutants/p26848/m0001_geometry_clock.c:5:19: error: expected identifier or '('
+    5 | static const char /const ct_clock_names[CT_CLOCK_NAMES] = {"UR", "DR", "DL", "UL", "U",
+      |                   ^
+build_close/mutants/p26848/m0001_geometry_clock.c:136:25: error: use of undeclared identifier 'ct_clock_names'; did you mean 'ct_clock_vec'?
+  136 |         if ((int)strlen(ct_clock_names[k]) == letters &&
+      |                         ^~~~~~~~~~~~~~
+      |                         ct_clock_vec
+build_close/mutants/p26848/m0001_geometry_clock.c:8:21: note: 'ct_clock_vec' declared here
+    8 | static const int8_t ct_clock_vec[CT_CLOCK_NAMES][CT_CLOCK_CLOCKS] = {
+      |                     ^
+build_close/mutants/p26848/m0001_geometry_clock.c:136:25: error: passing 'const int8_t[18]' (aka 'const signed char[18]') to parameter of type 'const char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Werror,-Wpointer-sign]
+  136 |         if ((int)strlen(ct_clock_names[k]) == letters &&
+      |                         ^~~~~~~~~~~~~~~~~
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\string.h:64:37: note: passing argument to parameter '_Str' here
+   64 |   size_t __cdecl strlen(const char *_Str);
+      |                                     ^
+build_close/mutants/p26848/m0001_geometry_clock.c:137:28: error: use of undeclared identifier 'ct_clock_names'; did you mean 'ct_clock_vec'?
+  137 |             strncmp(token, ct_clock_names[k], (size_t)letters) == 0) {
+      |                            ^~~~~~~~~~~~~~
+      |                            ct_clock_vec
+build_close/mutants/p26848/m0001_geometry_clock.c:8:21: note: 'ct_clock_vec' declared here
+    8 | static const int8_t ct_clock_vec[CT_CLOCK_NAMES][CT_CLOCK_CLOCKS] = {
+      |                     ^
+build_close/mutants/p26848/m0001_geometry_clock.c:137:28: error: passing 'const int8_t[18]' (aka 'const signed char[18]') to parameter of type 'const char *' converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Werror,-Wpointer-sign]
+  137 |             strncmp(token, ct_clock_names[k], (size_t)letters) == 0) {
+      |                            ^~~~~~~~~~~~~~~~~
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\string.h:93:53: note: passing argument to parameter '_Str2' here
+   93 |   int __cdecl strncmp(const char *_Str1,const char *_Str2,size_t _MaxCount);
+      |                                                     ^
+5 errors generated.
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_identity exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_move_ids exited 1
+mutate: suite clock_move_ids exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_state exited 1
+build_close/mutants/p26848/m0369_geometry_clock.c:49:43: error: expected ')'
+   49 | void ct_clock_state_solved(ct_clock_state /state) {
+      |                                           ^
+build_close/mutants/p26848/m0369_geometry_clock.c:49:27: note: to match this '('
+   49 | void ct_clock_state_solved(ct_clock_state /state) {
+      |                           ^
+build_close/mutants/p26848/m0369_geometry_clock.c:49:6: error: conflicting types for 'ct_clock_state_solved'
+   49 | void ct_clock_state_solved(ct_clock_state /state) {
+      |      ^
+src\engine/geometry_clock.h:39:6: note: previous declaration is here
+   39 | void ct_clock_state_solved(ct_clock_state *state);
+      |      ^
+build_close/mutants/p26848/m0369_geometry_clock.c:50:9: error: use of undeclared identifier 'state'
+   50 |     if (state == NULL) {
+      |         ^~~~~
+build_close/mutants/p26848/m0369_geometry_clock.c:53:12: error: use of undeclared identifier 'state'
+   53 |     memset(state, 0, sizeof *state);
+      |            ^~~~~
+build_close/mutants/p26848/m0369_geometry_clock.c:53:30: error: use of undeclared identifier 'state'
+   53 |     memset(state, 0, sizeof *state);
+      |                              ^~~~~
+5 errors generated.
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited -1073741795
+build_close/mutants/p26848/m0373_geometry_clock.c:53:29: error: expected expression
+   53 |     memset(state, 0, sizeof /state);
+      |                             ^
+1 error generated.
+build_close/mutants/p26848/m0374_geometry_clock.c:56:35: error: expected ')'
+   56 | int ct_clock_apply(ct_clock_state /state, int move_id) {
+      |                                   ^
+build_close/mutants/p26848/m0374_geometry_clock.c:56:19: note: to match this '('
+   56 | int ct_clock_apply(ct_clock_state /state, int move_id) {
+      |                   ^
+build_close/mutants/p26848/m0374_geometry_clock.c:56:5: error: conflicting types for 'ct_clock_apply'
+   56 | int ct_clock_apply(ct_clock_state /state, int move_id) {
+      |     ^
+src\engine/geometry_clock.h:40:5: note: previous declaration is here
+   40 | int ct_clock_apply(ct_clock_state *state, int move_id);
+      |     ^
+build_close/mutants/p26848/m0374_geometry_clock.c:57:9: error: use of undeclared identifier 'state'
+   57 |     if (state == NULL || move_id < 0 || move_id >= CT_CLOCK_MOVES) {
+      |         ^~~~~
+build_close/mutants/p26848/m0374_geometry_clock.c:57:26: error: use of undeclared identifier 'move_id'
+   57 |     if (state == NULL || move_id < 0 || move_id >= CT_CLOCK_MOVES) {
+      |                          ^~~~~~~
+build_close/mutants/p26848/m0374_geometry_clock.c:57:41: error: use of undeclared identifier 'move_id'
+   57 |     if (state == NULL || move_id < 0 || move_id >= CT_CLOCK_MOVES) {
+      |                                         ^~~~~~~
+build_close/mutants/p26848/m0374_geometry_clock.c:60:9: error: use of undeclared identifier 'move_id'
+   60 |     if (move_id == CT_CLOCK_Y2) {
+      |         ^~~~~~~
+build_close/mutants/p26848/m0374_geometry_clock.c:62:29: error: use of undeclared identifier 'state'
+   62 |             uint8_t front = state->clocks[i];
+      |                             ^~~~~
+build_close/mutants/p26848/m0374_geometry_clock.c:63:13: error: use of undeclared identifier 'state'
+   63 |             state->clocks[i] = state->clocks[CT_CLOCK_FACE_CLOCKS + i];
+      |             ^~~~~
+build_close/mutants/p26848/m0374_geometry_clock.c:63:32: error: use of undeclared identifier 'state'
+   63 |             state->clocks[i] = state->clocks[CT_CLOCK_FACE_CLOCKS + i];
+      |                                ^~~~~
+build_close/mutants/p26848/m0374_geometry_clock.c:64:13: error: use of undeclared identifier 'state'
+   64 |             state->clocks[CT_CLOCK_FACE_CLOCKS + i] = front;
+      |             ^~~~~
+build_close/mutants/p26848/m0374_geometry_clock.c:66:9: error: use of undeclared identifier 'state'
+   66 |         state->flipped = !state->flipped;
+      |         ^~~~~
+build_close/mutants/p26848/m0374_geometry_clock.c:66:27: error: use of undeclared identifier 'state'
+   66 |         state->flipped = !state->flipped;
+      |                           ^~~~~
+build_close/mutants/p26848/m0374_geometry_clock.c:69:16: error: use of undeclared identifier 'move_id'
+   69 |     int name = move_id / CT_CLOCK_FORMS;
+      |                ^~~~~~~
+build_close/mutants/p26848/m0374_geometry_clock.c:70:36: error: use of undeclared identifier 'move_id'
+   70 |     int amount = clock_form_amount(move_id % CT_CLOCK_FORMS);
+      |                                    ^~~~~~~
+build_close/mutants/p26848/m0374_geometry_clock.c:76:23: error: use of undeclared identifier 'state'
+   76 |         int value = ((state->clocks[i] + factor * amount) % CT_CLOCK_HOURS + CT_CLOCK_HOURS) %
+      |                       ^~~~~
+build_close/mutants/p26848/m0374_geometry_clock.c:78:9: error: use of undeclared identifier 'state'
+   78 |         state->clocks[i] = (uint8_t)value;
+      |         ^~~~~
+16 errors generated.
+mutate: suite clock_state_vectors exited 1
+build_close/mutants/p26848/m0376_geometry_clock.c:57:23: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   57 |     if (state == NULL && move_id < 0 || move_id >= CT_CLOCK_MOVES) {
+      |         ~~~~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_close/mutants/p26848/m0376_geometry_clock.c:57:23: note: place parentheses around the '&&' expression to silence this warning
+   57 |     if (state == NULL && move_id < 0 || move_id >= CT_CLOCK_MOVES) {
+      |                       ^
+      |         (                           )
+1 error generated.
+mutate: suite clock_state exited 1
+build_close/mutants/p26848/m0380_geometry_clock.c:57:38: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   57 |     if (state == NULL || move_id < 0 && move_id >= CT_CLOCK_MOVES) {
+      |                       ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p26848/m0380_geometry_clock.c:57:38: note: place parentheses around the '&&' expression to silence this warning
+   57 |     if (state == NULL || move_id < 0 && move_id >= CT_CLOCK_MOVES) {
+      |                                      ^                           
+      |                          (                                       )
+1 error generated.
+mutate: suite clock_state exited -1073741795
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state exited 1
+mutate: suite clock_state exited -1073741795
+mutate: suite clock_state exited -1073741795
+mutate: suite clock_state exited 1
+mutate: suite clock_state exited 1
+mutate: suite clock_state exited 1
+mutate: suite clock_state_vectors exited -1073741795
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited -1073741795
+mutate: suite clock_state_vectors exited -1073741795
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+mutate: suite clock_state_vectors exited 1
+build_close/mutants/p26848/m0405_geometry_clock.c:83:50: error: expected ')'
+   83 | static int clock_move_facelets(const ct_geometry /g, int move_id, int n, uint8_t *perm) {
+      |                                                  ^
+build_close/mutants/p26848/m0405_geometry_clock.c:83:31: note: to match this '('
+   83 | static int clock_move_facelets(const ct_geometry /g, int move_id, int n, uint8_t *perm) {
+      |                               ^
+build_close/mutants/p26848/m0405_geometry_clock.c:84:9: error: use of undeclared identifier 'g'
+   84 |     if (g == NULL || !clock_valid_n(n) || perm == NULL || move_id < 0 ||
+      |         ^
+build_close/mutants/p26848/m0405_geometry_clock.c:84:37: error: use of undeclared identifier 'n'
+   84 |     if (g == NULL || !clock_valid_n(n) || perm == NULL || move_id < 0 ||
+      |                                     ^
+build_close/mutants/p26848/m0405_geometry_clock.c:84:43: error: use of undeclared identifier 'perm'
+   84 |     if (g == NULL || !clock_valid_n(n) || perm == NULL || move_id < 0 ||
+      |                                           ^~~~
+build_close/mutants/p26848/m0405_geometry_clock.c:84:59: error: use of undeclared identifier 'move_id'
+   84 |     if (g == NULL || !clock_valid_n(n) || perm == NULL || move_id < 0 ||
+      |                                                           ^~~~~~~
+build_close/mutants/p26848/m0405_geometry_clock.c:85:9: error: use of undeclared identifier 'move_id'
+   85 |         move_id >= CT_CLOCK_MOVES) {
+      |         ^~~~~~~
+build_close/mutants/p26848/m0405_geometry_clock.c:88:9: error: use of undeclared identifier 'move_id'
+   88 |     if (move_id != CT_CLOCK_Y2) {
+      |         ^~~~~~~
+build_close/mutants/p26848/m0405_geometry_clock.c:92:9: error: use of undeclared identifier 'perm'
+   92 |         perm[i] = (uint8_t)((i + CT_CLOCK_FACE_CLOCKS) % CT_CLOCK_CLOCKS);
+      |         ^~~~
+build_close/mutants/p26848/m0405_geometry_clock.c:171:22: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, int, int, uint8_t *)' (aka 'int (*)(const struct ct_geometry *, int, int, unsigned char *)') with an expression of type 'int (const ct_geometry)' (aka 'int (const struct ct_geometry)') [-Wincompatible-function-pointer-types]
+  171 |     .move_facelets = clock_move_facelets,
+      |                      ^~~~~~~~~~~~~~~~~~~
+9 errors generated.
+build_close/mutants/p26848/m0406_geometry_clock.c:83:82: error: expected ')'
+   83 | static int clock_move_facelets(const ct_geometry *g, int move_id, int n, uint8_t /perm) {
+      |                                                                                  ^
+build_close/mutants/p26848/m0406_geometry_clock.c:83:31: note: to match this '('
+   83 | static int clock_move_facelets(const ct_geometry *g, int move_id, int n, uint8_t /perm) {
+      |                               ^
+build_close/mutants/p26848/m0406_geometry_clock.c:84:43: error: use of undeclared identifier 'perm'
+   84 |     if (g == NULL || !clock_valid_n(n) || perm == NULL || move_id < 0 ||
+      |                                           ^~~~
+build_close/mutants/p26848/m0406_geometry_clock.c:92:9: error: use of undeclared identifier 'perm'
+   92 |         perm[i] = (uint8_t)((i + CT_CLOCK_FACE_CLOCKS) % CT_CLOCK_CLOCKS);
+      |         ^~~~
+build_close/mutants/p26848/m0406_geometry_clock.c:171:22: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, int, int, uint8_t *)' (aka 'int (*)(const struct ct_geometry *, int, int, unsigned char *)') with an expression of type 'int (const ct_geometry *, int, int, uint8_t)' (aka 'int (const struct ct_geometry *, int, int, unsigned char)') [-Wincompatible-function-pointer-types]
+  171 |     .move_facelets = clock_move_facelets,
+      |                      ^~~~~~~~~~~~~~~~~~~
+4 errors generated.
+mutate: suite clock_perm exited 1
+build_close/mutants/p26848/m0408_geometry_clock.c:84:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   84 |     if (g == NULL && !clock_valid_n(n) || perm == NULL || move_id < 0 ||
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p26848/m0408_geometry_clock.c:84:19: note: place parentheses around the '&&' expression to silence this warning
+   84 |     if (g == NULL && !clock_valid_n(n) || perm == NULL || move_id < 0 ||
+      |                   ^
+      |         (                             )
+1 error generated.
+mutate: suite clock_perm exited 1
+build_close/mutants/p26848/m0410_geometry_clock.c:84:40: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   84 |     if (g == NULL || !clock_valid_n(n) && perm == NULL || move_id < 0 ||
+      |                   ~~ ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+build_close/mutants/p26848/m0410_geometry_clock.c:84:40: note: place parentheses around the '&&' expression to silence this warning
+   84 |     if (g == NULL || !clock_valid_n(n) && perm == NULL || move_id < 0 ||
+      |                      ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite clock_perm exited 1
+build_close/mutants/p26848/m0412_geometry_clock.c:84:56: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   84 |     if (g == NULL || !clock_valid_n(n) || perm == NULL && move_id < 0 ||
+      |                                        ~~ ~~~~~~~~~~~~~^~~~~~~~~~~~~~
+build_close/mutants/p26848/m0412_geometry_clock.c:84:56: note: place parentheses around the '&&' expression to silence this warning
+   84 |     if (g == NULL || !clock_valid_n(n) || perm == NULL && move_id < 0 ||
+      |                                                        ^
+      |                                           (                          )
+1 error generated.
+mutate: suite clock_perm exited 1
+mutate: suite clock_perm exited 1
+build_close/mutants/p26848/m0416_geometry_clock.c:84:71: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   84 |     if (g == NULL || !clock_valid_n(n) || perm == NULL || move_id < 0 &&
+      |                                                        ~~ ~~~~~~~~~~~~^~
+   85 |         move_id >= CT_CLOCK_MOVES) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p26848/m0416_geometry_clock.c:84:71: note: place parentheses around the '&&' expression to silence this warning
+   84 |     if (g == NULL || !clock_valid_n(n) || perm == NULL || move_id < 0 &&
+      |                                                                       ^
+      |                                                           (
+   85 |         move_id >= CT_CLOCK_MOVES) {
+      |                                  
+      |                                  )
+1 error generated.
+mutate: suite clock_perm exited 1
+mutate: suite clock_perm exited 1
+mutate: suite clock_perm exited 1
+mutate: suite clock_perm exited 1
+mutate: suite clock_perm exited 1
+mutate: suite clock_perm exited 1
+build_close/mutants/p26848/m0426_geometry_clock.c:97:53: error: expected ')'
+   97 | static int clock_sticker_geometry(const ct_geometry /g, int sticker, int n, ct_v3 *pos,
+      |                                                     ^
+build_close/mutants/p26848/m0426_geometry_clock.c:97:34: note: to match this '('
+   97 | static int clock_sticker_geometry(const ct_geometry /g, int sticker, int n, ct_v3 *pos,
+      |                                  ^
+build_close/mutants/p26848/m0426_geometry_clock.c:99:9: error: use of undeclared identifier 'g'
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL || normal == NULL || sticker < 0 ||
+      |         ^
+build_close/mutants/p26848/m0426_geometry_clock.c:99:37: error: use of undeclared identifier 'n'
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL || normal == NULL || sticker < 0 ||
+      |                                     ^
+build_close/mutants/p26848/m0426_geometry_clock.c:99:43: error: use of undeclared identifier 'pos'
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL || normal == NULL || sticker < 0 ||
+      |                                           ^~~
+build_close/mutants/p26848/m0426_geometry_clock.c:99:58: error: use of undeclared identifier 'normal'
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL || normal == NULL || sticker < 0 ||
+      |                                                          ^~~~~~
+build_close/mutants/p26848/m0426_geometry_clock.c:99:76: error: use of undeclared identifier 'sticker'
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL || normal == NULL || sticker < 0 ||
+      |                                                                            ^~~~~~~
+build_close/mutants/p26848/m0426_geometry_clock.c:100:9: error: use of undeclared identifier 'sticker'
+  100 |         sticker >= CT_CLOCK_CLOCKS) {
+      |         ^~~~~~~
+build_close/mutants/p26848/m0426_geometry_clock.c:103:16: error: use of undeclared identifier 'sticker'
+  103 |     int face = sticker < CT_CLOCK_FACE_CLOCKS ? CT_FACE_F : CT_FACE_B;
+      |                ^~~~~~~
+build_close/mutants/p26848/m0426_geometry_clock.c:104:16: error: use of undeclared identifier 'sticker'
+  104 |     int rest = sticker % CT_CLOCK_FACE_CLOCKS;
+      |                ^~~~~~~
+build_close/mutants/p26848/m0426_geometry_clock.c:105:87: error: use of undeclared identifier 'pos'
+  105 |     ct_sticker_world(CT_CLOCK_GRID, face, rest / CT_CLOCK_GRID, rest % CT_CLOCK_GRID, pos, normal);
+      |                                                                                       ^~~
+build_close/mutants/p26848/m0426_geometry_clock.c:105:92: error: use of undeclared identifier 'normal'
+  105 |     ct_sticker_world(CT_CLOCK_GRID, face, rest / CT_CLOCK_GRID, rest % CT_CLOCK_GRID, pos, normal);
+      |                                                                                            ^~~~~~
+build_close/mutants/p26848/m0426_geometry_clock.c:173:25: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, int, int, ct_v3 *, ct_v3 *)' (aka 'int (*)(const struct ct_geometry *, int, int, ct_v3 *, ct_v3 *)') with an expression of type 'int (const ct_geometry)' (aka 'int (const struct ct_geometry)') [-Wincompatible-function-pointer-types]
+  173 |     .sticker_geometry = clock_sticker_geometry,
+      |                         ^~~~~~~~~~~~~~~~~~~~~~
+12 errors generated.
+build_close/mutants/p26848/m0427_geometry_clock.c:97:83: error: expected ')'
+   97 | static int clock_sticker_geometry(const ct_geometry *g, int sticker, int n, ct_v3 /pos,
+      |                                                                                   ^
+build_close/mutants/p26848/m0427_geometry_clock.c:97:34: note: to match this '('
+   97 | static int clock_sticker_geometry(const ct_geometry *g, int sticker, int n, ct_v3 /pos,
+      |                                  ^
+build_close/mutants/p26848/m0427_geometry_clock.c:99:43: error: use of undeclared identifier 'pos'
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL || normal == NULL || sticker < 0 ||
+      |                                           ^~~
+build_close/mutants/p26848/m0427_geometry_clock.c:99:58: error: use of undeclared identifier 'normal'
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL || normal == NULL || sticker < 0 ||
+      |                                                          ^~~~~~
+build_close/mutants/p26848/m0427_geometry_clock.c:105:87: error: use of undeclared identifier 'pos'
+  105 |     ct_sticker_world(CT_CLOCK_GRID, face, rest / CT_CLOCK_GRID, rest % CT_CLOCK_GRID, pos, normal);
+      |                                                                                       ^~~
+build_close/mutants/p26848/m0427_geometry_clock.c:105:92: error: use of undeclared identifier 'normal'
+  105 |     ct_sticker_world(CT_CLOCK_GRID, face, rest / CT_CLOCK_GRID, rest % CT_CLOCK_GRID, pos, normal);
+      |                                                                                            ^~~~~~
+build_close/mutants/p26848/m0427_geometry_clock.c:173:25: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, int, int, ct_v3 *, ct_v3 *)' (aka 'int (*)(const struct ct_geometry *, int, int, ct_v3 *, ct_v3 *)') with an expression of type 'int (const ct_geometry *, int, int, ct_v3)' (aka 'int (const struct ct_geometry *, int, int, ct_v3)') [-Wincompatible-function-pointer-types]
+  173 |     .sticker_geometry = clock_sticker_geometry,
+      |                         ^~~~~~~~~~~~~~~~~~~~~~
+6 errors generated.
+build_close/mutants/p26848/m0428_geometry_clock.c:98:41: error: expected ')'
+   98 |                                   ct_v3 /normal) {
+      |                                         ^
+build_close/mutants/p26848/m0428_geometry_clock.c:97:34: note: to match this '('
+   97 | static int clock_sticker_geometry(const ct_geometry *g, int sticker, int n, ct_v3 *pos,
+      |                                  ^
+build_close/mutants/p26848/m0428_geometry_clock.c:99:58: error: use of undeclared identifier 'normal'
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL || normal == NULL || sticker < 0 ||
+      |                                                          ^~~~~~
+build_close/mutants/p26848/m0428_geometry_clock.c:105:92: error: use of undeclared identifier 'normal'
+  105 |     ct_sticker_world(CT_CLOCK_GRID, face, rest / CT_CLOCK_GRID, rest % CT_CLOCK_GRID, pos, normal);
+      |                                                                                            ^~~~~~
+build_close/mutants/p26848/m0428_geometry_clock.c:173:25: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, int, int, ct_v3 *, ct_v3 *)' (aka 'int (*)(const struct ct_geometry *, int, int, ct_v3 *, ct_v3 *)') with an expression of type 'int (const ct_geometry *, int, int, ct_v3 *, ct_v3)' (aka 'int (const struct ct_geometry *, int, int, ct_v3 *, ct_v3)') [-Wincompatible-function-pointer-types]
+  173 |     .sticker_geometry = clock_sticker_geometry,
+      |                         ^~~~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+mutate: suite clock_stickers exited 1
+build_close/mutants/p26848/m0430_geometry_clock.c:99:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   99 |     if (g == NULL && !clock_valid_n(n) || pos == NULL || normal == NULL || sticker < 0 ||
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p26848/m0430_geometry_clock.c:99:19: note: place parentheses around the '&&' expression to silence this warning
+   99 |     if (g == NULL && !clock_valid_n(n) || pos == NULL || normal == NULL || sticker < 0 ||
+      |                   ^
+      |         (                             )
+1 error generated.
+mutate: suite clock_stickers exited 1
+build_close/mutants/p26848/m0432_geometry_clock.c:99:40: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   99 |     if (g == NULL || !clock_valid_n(n) && pos == NULL || normal == NULL || sticker < 0 ||
+      |                   ~~ ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+build_close/mutants/p26848/m0432_geometry_clock.c:99:40: note: place parentheses around the '&&' expression to silence this warning
+   99 |     if (g == NULL || !clock_valid_n(n) && pos == NULL || normal == NULL || sticker < 0 ||
+      |                      ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite clock_stickers exited 1
+build_close/mutants/p26848/m0434_geometry_clock.c:99:55: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL && normal == NULL || sticker < 0 ||
+      |                                        ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+build_close/mutants/p26848/m0434_geometry_clock.c:99:55: note: place parentheses around the '&&' expression to silence this warning
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL && normal == NULL || sticker < 0 ||
+      |                                           ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite clock_stickers exited 1
+build_close/mutants/p26848/m0436_geometry_clock.c:99:73: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL || normal == NULL && sticker < 0 ||
+      |                                                       ~~ ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+build_close/mutants/p26848/m0436_geometry_clock.c:99:73: note: place parentheses around the '&&' expression to silence this warning
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL || normal == NULL && sticker < 0 ||
+      |                                                                         ^
+      |                                                          (                            )
+1 error generated.
+mutate: suite clock_stickers exited 1
+mutate: suite clock_stickers exited 1
+mutate: suite clock_stickers exited 1
+build_close/mutants/p26848/m0440_geometry_clock.c:99:88: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL || normal == NULL || sticker < 0 &&
+      |                                                                         ~~ ~~~~~~~~~~~~^~
+  100 |         sticker >= CT_CLOCK_CLOCKS) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p26848/m0440_geometry_clock.c:99:88: note: place parentheses around the '&&' expression to silence this warning
+   99 |     if (g == NULL || !clock_valid_n(n) || pos == NULL || normal == NULL || sticker < 0 &&
+      |                                                                            ~~~~~~~~~~~~^~
+  100 |         sticker >= CT_CLOCK_CLOCKS) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite clock_stickers exited 1
+mutate: suite clock_stickers exited 1
+mutate: suite clock_stickers exited 1
+mutate: suite clock_stickers exited 1
+mutate: suite clock_stickers exited 1
+mutate: suite clock_stickers exited 1
+build_close/mutants/p26848/m0447_geometry_clock.c:109:46: error: expected ')'
+  109 | static int clock_turn_axis(const ct_geometry /g, int move_id, int n, ct_v3 *axis) {
+      |                                              ^
+build_close/mutants/p26848/m0447_geometry_clock.c:109:27: note: to match this '('
+  109 | static int clock_turn_axis(const ct_geometry /g, int move_id, int n, ct_v3 *axis) {
+      |                           ^
+build_close/mutants/p26848/m0447_geometry_clock.c:110:9: error: use of undeclared identifier 'g'
+  110 |     if (g == NULL || !clock_valid_n(n) || axis == NULL || move_id < 0 ||
+      |         ^
+build_close/mutants/p26848/m0447_geometry_clock.c:110:37: error: use of undeclared identifier 'n'
+  110 |     if (g == NULL || !clock_valid_n(n) || axis == NULL || move_id < 0 ||
+      |                                     ^
+build_close/mutants/p26848/m0447_geometry_clock.c:110:43: error: use of undeclared identifier 'axis'
+  110 |     if (g == NULL || !clock_valid_n(n) || axis == NULL || move_id < 0 ||
+      |                                           ^~~~
+build_close/mutants/p26848/m0447_geometry_clock.c:110:59: error: use of undeclared identifier 'move_id'
+  110 |     if (g == NULL || !clock_valid_n(n) || axis == NULL || move_id < 0 ||
+      |                                                           ^~~~~~~
+build_close/mutants/p26848/m0447_geometry_clock.c:111:9: error: use of undeclared identifier 'move_id'
+  111 |         move_id >= CT_CLOCK_MOVES) {
+      |         ^~~~~~~
+build_close/mutants/p26848/m0447_geometry_clock.c:114:9: error: use of undeclared identifier 'move_id'
+  114 |     if (move_id == CT_CLOCK_Y2) {
+      |         ^~~~~~~
+build_close/mutants/p26848/m0447_geometry_clock.c:115:10: error: use of undeclared identifier 'axis'
+  115 |         *axis = (ct_v3){0, 1, 0};
+      |          ^~~~
+build_close/mutants/p26848/m0447_geometry_clock.c:117:10: error: use of undeclared identifier 'axis'
+  117 |         *axis = (ct_v3){0, 0, 1};
+      |          ^~~~
+build_close/mutants/p26848/m0447_geometry_clock.c:174:18: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, int, int, ct_v3 *)' (aka 'int (*)(const struct ct_geometry *, int, int, ct_v3 *)') with an expression of type 'int (const ct_geometry)' (aka 'int (const struct ct_geometry)') [-Wincompatible-function-pointer-types]
+  174 |     .turn_axis = clock_turn_axis,
+      |                  ^~~~~~~~~~~~~~~
+10 errors generated.
+build_close/mutants/p26848/m0448_geometry_clock.c:109:76: error: expected ')'
+  109 | static int clock_turn_axis(const ct_geometry *g, int move_id, int n, ct_v3 /axis) {
+      |                                                                            ^
+build_close/mutants/p26848/m0448_geometry_clock.c:109:27: note: to match this '('
+  109 | static int clock_turn_axis(const ct_geometry *g, int move_id, int n, ct_v3 /axis) {
+      |                           ^
+build_close/mutants/p26848/m0448_geometry_clock.c:110:43: error: use of undeclared identifier 'axis'
+  110 |     if (g == NULL || !clock_valid_n(n) || axis == NULL || move_id < 0 ||
+      |                                           ^~~~
+build_close/mutants/p26848/m0448_geometry_clock.c:115:10: error: use of undeclared identifier 'axis'
+  115 |         *axis = (ct_v3){0, 1, 0};
+      |          ^~~~
+build_close/mutants/p26848/m0448_geometry_clock.c:117:10: error: use of undeclared identifier 'axis'
+  117 |         *axis = (ct_v3){0, 0, 1};
+      |          ^~~~
+build_close/mutants/p26848/m0448_geometry_clock.c:174:18: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, int, int, ct_v3 *)' (aka 'int (*)(const struct ct_geometry *, int, int, ct_v3 *)') with an expression of type 'int (const ct_geometry *, int, int, ct_v3)' (aka 'int (const struct ct_geometry *, int, int, ct_v3)') [-Wincompatible-function-pointer-types]
+  174 |     .turn_axis = clock_turn_axis,
+      |                  ^~~~~~~~~~~~~~~
+5 errors generated.
+mutate: suite clock_axis exited 1
+build_close/mutants/p26848/m0450_geometry_clock.c:110:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  110 |     if (g == NULL && !clock_valid_n(n) || axis == NULL || move_id < 0 ||
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p26848/m0450_geometry_clock.c:110:19: note: place parentheses around the '&&' expression to silence this warning
+  110 |     if (g == NULL && !clock_valid_n(n) || axis == NULL || move_id < 0 ||
+      |                   ^
+      |         (                             )
+1 error generated.
+mutate: suite clock_axis exited 1
+build_close/mutants/p26848/m0452_geometry_clock.c:110:40: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  110 |     if (g == NULL || !clock_valid_n(n) && axis == NULL || move_id < 0 ||
+      |                   ~~ ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+build_close/mutants/p26848/m0452_geometry_clock.c:110:40: note: place parentheses around the '&&' expression to silence this warning
+  110 |     if (g == NULL || !clock_valid_n(n) && axis == NULL || move_id < 0 ||
+      |                      ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite clock_axis exited 1
+build_close/mutants/p26848/m0454_geometry_clock.c:110:56: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  110 |     if (g == NULL || !clock_valid_n(n) || axis == NULL && move_id < 0 ||
+      |                                        ~~ ~~~~~~~~~~~~~^~~~~~~~~~~~~~
+build_close/mutants/p26848/m0454_geometry_clock.c:110:56: note: place parentheses around the '&&' expression to silence this warning
+  110 |     if (g == NULL || !clock_valid_n(n) || axis == NULL && move_id < 0 ||
+      |                                                        ^
+      |                                           (                          )
+1 error generated.
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+build_close/mutants/p26848/m0458_geometry_clock.c:110:71: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  110 |     if (g == NULL || !clock_valid_n(n) || axis == NULL || move_id < 0 &&
+      |                                                        ~~ ~~~~~~~~~~~~^~
+  111 |         move_id >= CT_CLOCK_MOVES) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p26848/m0458_geometry_clock.c:110:71: note: place parentheses around the '&&' expression to silence this warning
+  110 |     if (g == NULL || !clock_valid_n(n) || axis == NULL || move_id < 0 &&
+      |                                                                       ^
+      |                                                           (
+  111 |         move_id >= CT_CLOCK_MOVES) {
+      |                                  
+      |                                  )
+1 error generated.
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+build_close/mutants/p26848/m0461_geometry_clock.c:115:9: error: expected expression
+  115 |         /axis = (ct_v3){0, 1, 0};
+      |         ^
+1 error generated.
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+build_close/mutants/p26848/m0468_geometry_clock.c:117:9: error: expected expression
+  117 |         /axis = (ct_v3){0, 0, 1};
+      |         ^
+1 error generated.
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+mutate: suite clock_axis exited 1
+build_close/mutants/p26848/m0478_geometry_clock.c:122:52: error: expected ')'
+  122 | static int clock_move_from_token(const ct_geometry /g, const char *token, int n, ct_move *out) {
+      |                                                    ^
+build_close/mutants/p26848/m0478_geometry_clock.c:122:33: note: to match this '('
+  122 | static int clock_move_from_token(const ct_geometry /g, const char *token, int n, ct_move *out) {
+      |                                 ^
+build_close/mutants/p26848/m0478_geometry_clock.c:123:9: error: use of undeclared identifier 'g'
+  123 |     if (g == NULL || token == NULL || out == NULL || !clock_valid_n(n)) {
+      |         ^
+build_close/mutants/p26848/m0478_geometry_clock.c:123:22: error: use of undeclared identifier 'token'
+  123 |     if (g == NULL || token == NULL || out == NULL || !clock_valid_n(n)) {
+      |                      ^~~~~
+build_close/mutants/p26848/m0478_geometry_clock.c:123:39: error: use of undeclared identifier 'out'
+  123 |     if (g == NULL || token == NULL || out == NULL || !clock_valid_n(n)) {
+      |                                       ^~~
+build_close/mutants/p26848/m0478_geometry_clock.c:123:69: error: use of undeclared identifier 'n'
+  123 |     if (g == NULL || token == NULL || out == NULL || !clock_valid_n(n)) {
+      |                                                                     ^
+build_close/mutants/p26848/m0478_geometry_clock.c:126:16: error: use of undeclared identifier 'token'
+  126 |     if (strcmp(token, "y2") == 0) {
+      |                ^~~~~
+build_close/mutants/p26848/m0478_geometry_clock.c:127:10: error: use of undeclared identifier 'out'
+  127 |         *out = (ct_move){CT_CLOCK_MOVE_Y2, 0, 0, 0};
+      |          ^~~
+build_close/mutants/p26848/m0478_geometry_clock.c:131:12: error: use of undeclared identifier 'token'
+  131 |     while (token[letters] >= 'A' && token[letters] <= 'Z') {
+      |            ^~~~~
+build_close/mutants/p26848/m0478_geometry_clock.c:131:37: error: use of undeclared identifier 'token'
+  131 |     while (token[letters] >= 'A' && token[letters] <= 'Z') {
+      |                                     ^~~~~
+build_close/mutants/p26848/m0478_geometry_clock.c:137:21: error: use of undeclared identifier 'token'
+  137 |             strncmp(token, ct_clock_names[k], (size_t)letters) == 0) {
+      |                     ^~~~~
+build_close/mutants/p26848/m0478_geometry_clock.c:142:21: error: use of undeclared identifier 'token'
+  142 |     if (name < 0 || token[letters] < '0' || token[letters] > '6') {
+      |                     ^~~~~
+build_close/mutants/p26848/m0478_geometry_clock.c:142:45: error: use of undeclared identifier 'token'
+  142 |     if (name < 0 || token[letters] < '0' || token[letters] > '6') {
+      |                                             ^~~~~
+build_close/mutants/p26848/m0478_geometry_clock.c:145:18: error: use of undeclared identifier 'token'
+  145 |     int amount = token[letters] - '0';
+      |                  ^~~~~
+build_close/mutants/p26848/m0478_geometry_clock.c:146:17: error: use of undeclared identifier 'token'
+  146 |     char sign = token[letters + 1];
+      |                 ^~~~~
+build_close/mutants/p26848/m0478_geometry_clock.c:160:9: error: use of undeclared identifier 'token'
+  160 |     if (token[letters + 2] != '\0') {
+      |         ^~~~~
+build_close/mutants/p26848/m0478_geometry_clock.c:163:6: error: use of undeclared identifier 'out'
+  163 |     *out = (ct_move){name, amount, 0, 0};
+      |      ^~~
+build_close/mutants/p26848/m0478_geometry_clock.c:175:24: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, const char *, int, ct_move *)' (aka 'int (*)(const struct ct_geometry *, const char *, int, ct_move *)') with an expression of type 'int (const ct_geometry)' (aka 'int (const struct ct_geometry)') [-Wincompatible-function-pointer-types]
+  175 |     .move_from_token = clock_move_from_token,
+      |                        ^~~~~~~~~~~~~~~~~~~~~
+17 errors generated.
+build_close/mutants/p26848/m0479_geometry_clock.c:122:67: error: expected ')'
+  122 | static int clock_move_from_token(const ct_geometry *g, const char /token, int n, ct_move *out) {
+      |                                                                   ^
+build_close/mutants/p26848/m0479_geometry_clock.c:122:33: note: to match this '('
+  122 | static int clock_move_from_token(const ct_geometry *g, const char /token, int n, ct_move *out) {
+      |                                 ^
+build_close/mutants/p26848/m0479_geometry_clock.c:123:22: error: use of undeclared identifier 'token'
+  123 |     if (g == NULL || token == NULL || out == NULL || !clock_valid_n(n)) {
+      |                      ^~~~~
+build_close/mutants/p26848/m0479_geometry_clock.c:123:39: error: use of undeclared identifier 'out'
+  123 |     if (g == NULL || token == NULL || out == NULL || !clock_valid_n(n)) {
+      |                                       ^~~
+build_close/mutants/p26848/m0479_geometry_clock.c:123:69: error: use of undeclared identifier 'n'
+  123 |     if (g == NULL || token == NULL || out == NULL || !clock_valid_n(n)) {
+      |                                                                     ^
+build_close/mutants/p26848/m0479_geometry_clock.c:126:16: error: use of undeclared identifier 'token'
+  126 |     if (strcmp(token, "y2") == 0) {
+      |                ^~~~~
+build_close/mutants/p26848/m0479_geometry_clock.c:127:10: error: use of undeclared identifier 'out'
+  127 |         *out = (ct_move){CT_CLOCK_MOVE_Y2, 0, 0, 0};
+      |          ^~~
+build_close/mutants/p26848/m0479_geometry_clock.c:131:12: error: use of undeclared identifier 'token'
+  131 |     while (token[letters] >= 'A' && token[letters] <= 'Z') {
+      |            ^~~~~
+build_close/mutants/p26848/m0479_geometry_clock.c:131:37: error: use of undeclared identifier 'token'
+  131 |     while (token[letters] >= 'A' && token[letters] <= 'Z') {
+      |                                     ^~~~~
+build_close/mutants/p26848/m0479_geometry_clock.c:137:21: error: use of undeclared identifier 'token'
+  137 |             strncmp(token, ct_clock_names[k], (size_t)letters) == 0) {
+      |                     ^~~~~
+build_close/mutants/p26848/m0479_geometry_clock.c:142:21: error: use of undeclared identifier 'token'
+  142 |     if (name < 0 || token[letters] < '0' || token[letters] > '6') {
+      |                     ^~~~~
+build_close/mutants/p26848/m0479_geometry_clock.c:142:45: error: use of undeclared identifier 'token'
+  142 |     if (name < 0 || token[letters] < '0' || token[letters] > '6') {
+      |                                             ^~~~~
+build_close/mutants/p26848/m0479_geometry_clock.c:145:18: error: use of undeclared identifier 'token'
+  145 |     int amount = token[letters] - '0';
+      |                  ^~~~~
+build_close/mutants/p26848/m0479_geometry_clock.c:146:17: error: use of undeclared identifier 'token'
+  146 |     char sign = token[letters + 1];
+      |                 ^~~~~
+build_close/mutants/p26848/m0479_geometry_clock.c:160:9: error: use of undeclared identifier 'token'
+  160 |     if (token[letters + 2] != '\0') {
+      |         ^~~~~
+build_close/mutants/p26848/m0479_geometry_clock.c:163:6: error: use of undeclared identifier 'out'
+  163 |     *out = (ct_move){name, amount, 0, 0};
+      |      ^~~
+build_close/mutants/p26848/m0479_geometry_clock.c:175:24: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, const char *, int, ct_move *)' (aka 'int (*)(const struct ct_geometry *, const char *, int, ct_move *)') with an expression of type 'int (const ct_geometry *, const char)' (aka 'int (const struct ct_geometry *, const char)') [-Wincompatible-function-pointer-types]
+  175 |     .move_from_token = clock_move_from_token,
+      |                        ^~~~~~~~~~~~~~~~~~~~~
+16 errors generated.
+build_close/mutants/p26848/m0480_geometry_clock.c:122:90: error: expected ')'
+  122 | static int clock_move_from_token(const ct_geometry *g, const char *token, int n, ct_move /out) {
+      |                                                                                          ^
+build_close/mutants/p26848/m0480_geometry_clock.c:122:33: note: to match this '('
+  122 | static int clock_move_from_token(const ct_geometry *g, const char *token, int n, ct_move /out) {
+      |                                 ^
+build_close/mutants/p26848/m0480_geometry_clock.c:123:39: error: use of undeclared identifier 'out'
+  123 |     if (g == NULL || token == NULL || out == NULL || !clock_valid_n(n)) {
+      |                                       ^~~
+build_close/mutants/p26848/m0480_geometry_clock.c:127:10: error: use of undeclared identifier 'out'
+  127 |         *out = (ct_move){CT_CLOCK_MOVE_Y2, 0, 0, 0};
+      |          ^~~
+build_close/mutants/p26848/m0480_geometry_clock.c:163:6: error: use of undeclared identifier 'out'
+  163 |     *out = (ct_move){name, amount, 0, 0};
+      |      ^~~
+build_close/mutants/p26848/m0480_geometry_clock.c:175:24: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, const char *, int, ct_move *)' (aka 'int (*)(const struct ct_geometry *, const char *, int, ct_move *)') with an expression of type 'int (const ct_geometry *, const char *, int, ct_move)' (aka 'int (const struct ct_geometry *, const char *, int, ct_move)') [-Wincompatible-function-pointer-types]
+  175 |     .move_from_token = clock_move_from_token,
+      |                        ^~~~~~~~~~~~~~~~~~~~~
+5 errors generated.
+mutate: suite clock_token exited 1
+build_close/mutants/p26848/m0482_geometry_clock.c:123:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  123 |     if (g == NULL && token == NULL || out == NULL || !clock_valid_n(n)) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p26848/m0482_geometry_clock.c:123:19: note: place parentheses around the '&&' expression to silence this warning
+  123 |     if (g == NULL && token == NULL || out == NULL || !clock_valid_n(n)) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite clock_token exited 1
+build_close/mutants/p26848/m0484_geometry_clock.c:123:36: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  123 |     if (g == NULL || token == NULL && out == NULL || !clock_valid_n(n)) {
+      |                   ~~ ~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+build_close/mutants/p26848/m0484_geometry_clock.c:123:36: note: place parentheses around the '&&' expression to silence this warning
+  123 |     if (g == NULL || token == NULL && out == NULL || !clock_valid_n(n)) {
+      |                      ~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite clock_token exited 1
+build_close/mutants/p26848/m0486_geometry_clock.c:123:51: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  123 |     if (g == NULL || token == NULL || out == NULL && !clock_valid_n(n)) {
+      |                                    ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p26848/m0486_geometry_clock.c:123:51: note: place parentheses around the '&&' expression to silence this warning
+  123 |     if (g == NULL || token == NULL || out == NULL && !clock_valid_n(n)) {
+      |                                                   ^                   
+      |                                       (                               )
+1 error generated.
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+build_close/mutants/p26848/m0491_geometry_clock.c:127:9: error: expected expression
+  127 |         /out = (ct_move){CT_CLOCK_MOVE_Y2, 0, 0, 0};
+      |         ^
+1 error generated.
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+build_close/mutants/p26848/m0501_geometry_clock.c:131:34: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+  131 |     while (token[letters] >= 'A' || token[letters] <= 'Z') {
+      |            ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited -1073741795
+mutate: suite clock_token exited -1073741795
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+build_close/mutants/p26848/m0517_geometry_clock.c:142:18: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  142 |     if (name < 0 && token[letters] < '0' || token[letters] > '6') {
+      |         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_close/mutants/p26848/m0517_geometry_clock.c:142:18: note: place parentheses around the '&&' expression to silence this warning
+  142 |     if (name < 0 && token[letters] < '0' || token[letters] > '6') {
+      |                  ^
+      |         (                               )
+1 error generated.
+mutate: suite clock_token exited 1
+build_close/mutants/p26848/m0519_geometry_clock.c:142:42: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  142 |     if (name < 0 || token[letters] < '0' && token[letters] > '6') {
+      |                  ~~ ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p26848/m0519_geometry_clock.c:142:42: note: place parentheses around the '&&' expression to silence this warning
+  142 |     if (name < 0 || token[letters] < '0' && token[letters] > '6') {
+      |                                          ^                      
+      |                     (                                           )
+build_close/mutants/p26848/m0519_geometry_clock.c:142:42: error: non-overlapping comparisons always evaluate to false [-Werror,-Wtautological-overlap-compare]
+  142 |     if (name < 0 || token[letters] < '0' && token[letters] > '6') {
+      |                     ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+2 errors generated.
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+build_close/mutants/p26848/m0526_geometry_clock.c:147:21: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+  147 |     if (sign != '+' || sign != '-') {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+build_close/mutants/p26848/m0540_geometry_clock.c:163:5: error: expected expression
+  163 |     /out = (ct_move){name, amount, 0, 0};
+      |     ^
+1 error generated.
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+mutate: suite clock_token exited 1
+build_close/mutants/p26848/m0545_geometry_clock.c:178:19: error: expected identifier or '('
+  178 | const ct_geometry /ct_geometry_clock(void) {
+      |                   ^
+1 error generated.
+mutate: 20 unexplained survivors
+make: *** [makefile:242: mutate] Error 1

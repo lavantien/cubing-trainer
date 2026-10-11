@@ -1,0 +1,1082 @@
+build_close/mutants/p42660/m0001_renderer.c:8:12: error: expected identifier or '('
+    8 | const char /const ct_color_scheme_keys[CT_CUBE_FACE_COUNT] = {
+      |            ^
+1 error generated.
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+build_close/mutants/p42660/m0014_renderer.c:22:18: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+   22 |     if (c >= '0' || c <= '9') {
+      |         ~~~~~~~~~^~~~~~~~~~~
+1 error generated.
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+build_close/mutants/p42660/m0018_renderer.c:25:18: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+   25 |     if (c >= 'a' || c <= 'f') {
+      |         ~~~~~~~~~^~~~~~~~~~~
+1 error generated.
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+build_close/mutants/p42660/m0023_renderer.c:28:18: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+   28 |     if (c >= 'A' || c <= 'F') {
+      |         ~~~~~~~~~^~~~~~~~~~~
+1 error generated.
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+build_close/mutants/p42660/m0030_renderer.c:34:47: error: expected ')'
+   34 | bool ct_color_scheme_face_hex(ct_color_scheme /scheme, int face, const char *hex) {
+      |                                               ^
+build_close/mutants/p42660/m0030_renderer.c:34:30: note: to match this '('
+   34 | bool ct_color_scheme_face_hex(ct_color_scheme /scheme, int face, const char *hex) {
+      |                              ^
+build_close/mutants/p42660/m0030_renderer.c:34:6: error: conflicting types for 'ct_color_scheme_face_hex'
+   34 | bool ct_color_scheme_face_hex(ct_color_scheme /scheme, int face, const char *hex) {
+      |      ^
+src\render/renderer.h:26:6: note: previous declaration is here
+   26 | bool ct_color_scheme_face_hex(ct_color_scheme *scheme, int face, const char *hex);
+      |      ^
+build_close/mutants/p42660/m0030_renderer.c:35:9: error: use of undeclared identifier 'scheme'
+   35 |     if (scheme == NULL || hex == NULL || face < 0 || face >= CT_CUBE_FACE_COUNT) {
+      |         ^~~~~~
+build_close/mutants/p42660/m0030_renderer.c:35:27: error: use of undeclared identifier 'hex'
+   35 |     if (scheme == NULL || hex == NULL || face < 0 || face >= CT_CUBE_FACE_COUNT) {
+      |                           ^~~
+build_close/mutants/p42660/m0030_renderer.c:35:42: error: use of undeclared identifier 'face'
+   35 |     if (scheme == NULL || hex == NULL || face < 0 || face >= CT_CUBE_FACE_COUNT) {
+      |                                          ^~~~
+build_close/mutants/p42660/m0030_renderer.c:35:54: error: use of undeclared identifier 'face'
+   35 |     if (scheme == NULL || hex == NULL || face < 0 || face >= CT_CUBE_FACE_COUNT) {
+      |                                                      ^~~~
+build_close/mutants/p42660/m0030_renderer.c:38:16: error: use of undeclared identifier 'hex'
+   38 |     if (strlen(hex) != (size_t)ct_hex_len) {
+      |                ^~~
+build_close/mutants/p42660/m0030_renderer.c:44:32: error: use of undeclared identifier 'hex'
+   44 |         int hi = ct_hex_nibble(hex[off]);
+      |                                ^~~
+build_close/mutants/p42660/m0030_renderer.c:45:32: error: use of undeclared identifier 'hex'
+   45 |         int lo = ct_hex_nibble(hex[off + 1]);
+      |                                ^~~
+build_close/mutants/p42660/m0030_renderer.c:51:5: error: use of undeclared identifier 'scheme'
+   51 |     scheme->face[face] = (Color){rgb[0], rgb[1], rgb[2], ct_hex_alpha_opaque};
+      |     ^~~~~~
+build_close/mutants/p42660/m0030_renderer.c:51:18: error: use of undeclared identifier 'face'
+   51 |     scheme->face[face] = (Color){rgb[0], rgb[1], rgb[2], ct_hex_alpha_opaque};
+      |                  ^~~~
+11 errors generated.
+build_close/mutants/p42660/m0031_renderer.c:34:77: error: expected ')'
+   34 | bool ct_color_scheme_face_hex(ct_color_scheme *scheme, int face, const char /hex) {
+      |                                                                             ^
+build_close/mutants/p42660/m0031_renderer.c:34:30: note: to match this '('
+   34 | bool ct_color_scheme_face_hex(ct_color_scheme *scheme, int face, const char /hex) {
+      |                              ^
+build_close/mutants/p42660/m0031_renderer.c:34:6: error: conflicting types for 'ct_color_scheme_face_hex'
+   34 | bool ct_color_scheme_face_hex(ct_color_scheme *scheme, int face, const char /hex) {
+      |      ^
+src\render/renderer.h:26:6: note: previous declaration is here
+   26 | bool ct_color_scheme_face_hex(ct_color_scheme *scheme, int face, const char *hex);
+      |      ^
+build_close/mutants/p42660/m0031_renderer.c:35:27: error: use of undeclared identifier 'hex'
+   35 |     if (scheme == NULL || hex == NULL || face < 0 || face >= CT_CUBE_FACE_COUNT) {
+      |                           ^~~
+build_close/mutants/p42660/m0031_renderer.c:38:16: error: use of undeclared identifier 'hex'
+   38 |     if (strlen(hex) != (size_t)ct_hex_len) {
+      |                ^~~
+build_close/mutants/p42660/m0031_renderer.c:44:32: error: use of undeclared identifier 'hex'
+   44 |         int hi = ct_hex_nibble(hex[off]);
+      |                                ^~~
+build_close/mutants/p42660/m0031_renderer.c:45:32: error: use of undeclared identifier 'hex'
+   45 |         int lo = ct_hex_nibble(hex[off + 1]);
+      |                                ^~~
+6 errors generated.
+mutate: suite unit_renderer_scheme_hex exited 1
+build_close/mutants/p42660/m0033_renderer.c:35:24: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   35 |     if (scheme == NULL && hex == NULL || face < 0 || face >= CT_CUBE_FACE_COUNT) {
+      |         ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_close/mutants/p42660/m0033_renderer.c:35:24: note: place parentheses around the '&&' expression to silence this warning
+   35 |     if (scheme == NULL && hex == NULL || face < 0 || face >= CT_CUBE_FACE_COUNT) {
+      |         ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite unit_renderer_scheme_hex exited 1
+build_close/mutants/p42660/m0035_renderer.c:35:39: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   35 |     if (scheme == NULL || hex == NULL && face < 0 || face >= CT_CUBE_FACE_COUNT) {
+      |                        ~~ ~~~~~~~~~~~~^~~~~~~~~~~
+build_close/mutants/p42660/m0035_renderer.c:35:39: note: place parentheses around the '&&' expression to silence this warning
+   35 |     if (scheme == NULL || hex == NULL && face < 0 || face >= CT_CUBE_FACE_COUNT) {
+      |                                       ^
+      |                           (                      )
+1 error generated.
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+build_close/mutants/p42660/m0039_renderer.c:35:51: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   35 |     if (scheme == NULL || hex == NULL || face < 0 && face >= CT_CUBE_FACE_COUNT) {
+      |                                       ~~ ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p42660/m0039_renderer.c:35:51: note: place parentheses around the '&&' expression to silence this warning
+   35 |     if (scheme == NULL || hex == NULL || face < 0 && face >= CT_CUBE_FACE_COUNT) {
+      |                                                   ^                            
+      |                                          (                                     )
+1 error generated.
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited -1073741795
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited -1073741795
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited -1073741795
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited -1073741795
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited -1073741795
+mutate: suite unit_renderer_scheme_hex exited 1
+mutate: suite unit_renderer_scheme_hex exited 1
+build_close/mutants/p42660/m0068_renderer.c:76:35: error: expected ')'
+   76 | void ct_renderer_init(ct_renderer /r, int n) {
+      |                                   ^
+build_close/mutants/p42660/m0068_renderer.c:76:22: note: to match this '('
+   76 | void ct_renderer_init(ct_renderer /r, int n) {
+      |                      ^
+build_close/mutants/p42660/m0068_renderer.c:76:6: error: conflicting types for 'ct_renderer_init'
+   76 | void ct_renderer_init(ct_renderer /r, int n) {
+      |      ^
+src\render/renderer.h:39:6: note: previous declaration is here
+   39 | void ct_renderer_init(ct_renderer *r, int n);
+      |      ^
+build_close/mutants/p42660/m0068_renderer.c:77:9: error: use of undeclared identifier 'n'
+   77 |     if (n < CT_CUBE_MIN_N) {
+      |         ^
+build_close/mutants/p42660/m0068_renderer.c:78:9: error: use of undeclared identifier 'n'
+   78 |         n = CT_CUBE_MIN_N;
+      |         ^
+build_close/mutants/p42660/m0068_renderer.c:80:9: error: use of undeclared identifier 'n'
+   80 |     if (n > CT_CUBE_MAX_N) {
+      |         ^
+build_close/mutants/p42660/m0068_renderer.c:81:9: error: use of undeclared identifier 'n'
+   81 |         n = CT_CUBE_MAX_N;
+      |         ^
+build_close/mutants/p42660/m0068_renderer.c:83:5: error: use of undeclared identifier 'r'
+   83 |     r->n = n;
+      |     ^
+build_close/mutants/p42660/m0068_renderer.c:83:12: error: use of undeclared identifier 'n'
+   83 |     r->n = n;
+      |            ^
+build_close/mutants/p42660/m0068_renderer.c:84:5: error: use of undeclared identifier 'r'
+   84 |     r->cube_size = CT_RENDERER_DEFAULT_CUBE_SIZE;
+      |     ^
+build_close/mutants/p42660/m0068_renderer.c:85:5: error: use of undeclared identifier 'r'
+   85 |     r->sticker_inset = CT_RENDERER_DEFAULT_INSET;
+      |     ^
+10 errors generated.
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab_invalid exited 1
+mutate: suite unit_renderer_slab exited -1073741795
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited -1073741795
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited -1073741795
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited -1073741795
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited -1073741795
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+mutate: suite unit_renderer_slab exited 1
+build_close/mutants/p42660/m0133_renderer.c:113:41: error: expected ')'
+  113 | static int emit_quads(const ct_renderer /r, const ct_cube *c, const ct_color_scheme *cs,
+      |                                         ^
+build_close/mutants/p42660/m0133_renderer.c:113:22: note: to match this '('
+  113 | static int emit_quads(const ct_renderer /r, const ct_cube *c, const ct_color_scheme *cs,
+      |                      ^
+build_close/mutants/p42660/m0133_renderer.c:115:9: error: use of undeclared identifier 'r'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |         ^
+build_close/mutants/p42660/m0133_renderer.c:115:22: error: use of undeclared identifier 'c'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                      ^
+build_close/mutants/p42660/m0133_renderer.c:115:35: error: use of undeclared identifier 'cs'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                   ^~
+build_close/mutants/p42660/m0133_renderer.c:115:49: error: use of undeclared identifier 'out'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                                 ^~~
+build_close/mutants/p42660/m0133_renderer.c:115:64: error: use of undeclared identifier 'cap'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                                                ^~~
+build_close/mutants/p42660/m0133_renderer.c:115:76: error: use of undeclared identifier 'r'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                                                            ^
+build_close/mutants/p42660/m0133_renderer.c:115:84: error: use of undeclared identifier 'c'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                                                                    ^
+build_close/mutants/p42660/m0133_renderer.c:118:9: error: use of undeclared identifier 'c'
+  118 |     if (c->n < 2 || c->n > CT_CUBE_MAX_N) {
+      |         ^
+build_close/mutants/p42660/m0133_renderer.c:118:21: error: use of undeclared identifier 'c'
+  118 |     if (c->n < 2 || c->n > CT_CUBE_MAX_N) {
+      |                     ^
+build_close/mutants/p42660/m0133_renderer.c:121:26: error: use of undeclared identifier 'r'
+  121 |     float inset = clampf(r->sticker_inset, 0.0f, CT_RENDERER_INSET_MAX);
+      |                          ^
+build_close/mutants/p42660/m0133_renderer.c:122:18: error: use of undeclared identifier 'r'
+  122 |     float step = r->cube_size / (2.0f * (float)(c->n - 1));
+      |                  ^
+build_close/mutants/p42660/m0133_renderer.c:122:49: error: use of undeclared identifier 'c'
+  122 |     float step = r->cube_size / (2.0f * (float)(c->n - 1));
+      |                                                 ^
+build_close/mutants/p42660/m0133_renderer.c:126:9: error: use of undeclared identifier 'rotate'
+  126 |     if (rotate) {
+      |         ^~~~~~
+build_close/mutants/p42660/m0133_renderer.c:127:34: error: use of undeclared identifier 'm'
+  127 |         ct_v3 normal = ct_frames[m.face].normal;
+      |                                  ^
+build_close/mutants/p42660/m0133_renderer.c:139:33: error: use of undeclared identifier 'c'
+  139 |         for (int row = 0; row < c->n; row++) {
+      |                                 ^
+build_close/mutants/p42660/m0133_renderer.c:140:37: error: use of undeclared identifier 'c'
+  140 |             for (int col = 0; col < c->n; col++) {
+      |                                     ^
+build_close/mutants/p42660/m0133_renderer.c:141:30: error: use of undeclared identifier 'cap'
+  141 |                 if (count >= cap) {
+      |                              ^~~
+build_close/mutants/p42660/m0133_renderer.c:145:21: error: use of undeclared identifier 'c'
+  145 |                     c->facelet[face * CT_CUBE_STRIDE * CT_CUBE_STRIDE + row * CT_CUBE_STRIDE + col];
+      |                     ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p42660/m0134_renderer.c:113:59: error: expected ')'
+  113 | static int emit_quads(const ct_renderer *r, const ct_cube /c, const ct_color_scheme *cs,
+      |                                                           ^
+build_close/mutants/p42660/m0134_renderer.c:113:22: note: to match this '('
+  113 | static int emit_quads(const ct_renderer *r, const ct_cube /c, const ct_color_scheme *cs,
+      |                      ^
+build_close/mutants/p42660/m0134_renderer.c:115:22: error: use of undeclared identifier 'c'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                      ^
+build_close/mutants/p42660/m0134_renderer.c:115:35: error: use of undeclared identifier 'cs'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                   ^~
+build_close/mutants/p42660/m0134_renderer.c:115:49: error: use of undeclared identifier 'out'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                                 ^~~
+build_close/mutants/p42660/m0134_renderer.c:115:64: error: use of undeclared identifier 'cap'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                                                ^~~
+build_close/mutants/p42660/m0134_renderer.c:115:84: error: use of undeclared identifier 'c'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                                                                    ^
+build_close/mutants/p42660/m0134_renderer.c:118:9: error: use of undeclared identifier 'c'
+  118 |     if (c->n < 2 || c->n > CT_CUBE_MAX_N) {
+      |         ^
+build_close/mutants/p42660/m0134_renderer.c:118:21: error: use of undeclared identifier 'c'
+  118 |     if (c->n < 2 || c->n > CT_CUBE_MAX_N) {
+      |                     ^
+build_close/mutants/p42660/m0134_renderer.c:122:49: error: use of undeclared identifier 'c'
+  122 |     float step = r->cube_size / (2.0f * (float)(c->n - 1));
+      |                                                 ^
+build_close/mutants/p42660/m0134_renderer.c:126:9: error: use of undeclared identifier 'rotate'
+  126 |     if (rotate) {
+      |         ^~~~~~
+build_close/mutants/p42660/m0134_renderer.c:127:34: error: use of undeclared identifier 'm'
+  127 |         ct_v3 normal = ct_frames[m.face].normal;
+      |                                  ^
+build_close/mutants/p42660/m0134_renderer.c:139:33: error: use of undeclared identifier 'c'
+  139 |         for (int row = 0; row < c->n; row++) {
+      |                                 ^
+build_close/mutants/p42660/m0134_renderer.c:140:37: error: use of undeclared identifier 'c'
+  140 |             for (int col = 0; col < c->n; col++) {
+      |                                     ^
+build_close/mutants/p42660/m0134_renderer.c:141:30: error: use of undeclared identifier 'cap'
+  141 |                 if (count >= cap) {
+      |                              ^~~
+build_close/mutants/p42660/m0134_renderer.c:145:21: error: use of undeclared identifier 'c'
+  145 |                     c->facelet[face * CT_CUBE_STRIDE * CT_CUBE_STRIDE + row * CT_CUBE_STRIDE + col];
+      |                     ^
+build_close/mutants/p42660/m0134_renderer.c:151:34: error: use of undeclared identifier 'c'
+  151 |                 ct_sticker_world(c->n, face, row, col, &lattice, &normal);
+      |                                  ^
+build_close/mutants/p42660/m0134_renderer.c:157:21: error: use of undeclared identifier 'rotate'
+  157 |                 if (rotate && ct_renderer_slab_contains(c->n, m, lattice)) {
+      |                     ^~~~~~
+build_close/mutants/p42660/m0134_renderer.c:157:57: error: use of undeclared identifier 'c'
+  157 |                 if (rotate && ct_renderer_slab_contains(c->n, m, lattice)) {
+      |                                                         ^
+build_close/mutants/p42660/m0134_renderer.c:157:63: error: use of undeclared identifier 'm'
+  157 |                 if (rotate && ct_renderer_slab_contains(c->n, m, lattice)) {
+      |                                                               ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_close/mutants/p42660/m0135_renderer.c:113:85: error: expected ')'
+  113 | static int emit_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme /cs,
+      |                                                                                     ^
+build_close/mutants/p42660/m0135_renderer.c:113:22: note: to match this '('
+  113 | static int emit_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme /cs,
+      |                      ^
+build_close/mutants/p42660/m0135_renderer.c:115:35: error: use of undeclared identifier 'cs'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                   ^~
+build_close/mutants/p42660/m0135_renderer.c:115:49: error: use of undeclared identifier 'out'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                                 ^~~
+build_close/mutants/p42660/m0135_renderer.c:115:64: error: use of undeclared identifier 'cap'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                                                ^~~
+build_close/mutants/p42660/m0135_renderer.c:126:9: error: use of undeclared identifier 'rotate'
+  126 |     if (rotate) {
+      |         ^~~~~~
+build_close/mutants/p42660/m0135_renderer.c:127:34: error: use of undeclared identifier 'm'
+  127 |         ct_v3 normal = ct_frames[m.face].normal;
+      |                                  ^
+build_close/mutants/p42660/m0135_renderer.c:141:30: error: use of undeclared identifier 'cap'
+  141 |                 if (count >= cap) {
+      |                              ^~~
+build_close/mutants/p42660/m0135_renderer.c:157:21: error: use of undeclared identifier 'rotate'
+  157 |                 if (rotate && ct_renderer_slab_contains(c->n, m, lattice)) {
+      |                     ^~~~~~
+build_close/mutants/p42660/m0135_renderer.c:157:63: error: use of undeclared identifier 'm'
+  157 |                 if (rotate && ct_renderer_slab_contains(c->n, m, lattice)) {
+      |                                                               ^
+build_close/mutants/p42660/m0135_renderer.c:158:54: error: use of undeclared identifier 'angle_rad'
+  158 |                     center = v3_rotate(center, axis, angle_rad);
+      |                                                      ^~~~~~~~~
+build_close/mutants/p42660/m0135_renderer.c:159:64: error: use of undeclared identifier 'angle_rad'
+  159 |                     tangent_row = v3_rotate(tangent_row, axis, angle_rad);
+      |                                                                ^~~~~~~~~
+build_close/mutants/p42660/m0135_renderer.c:160:64: error: use of undeclared identifier 'angle_rad'
+  160 |                     tangent_col = v3_rotate(tangent_col, axis, angle_rad);
+      |                                                                ^~~~~~~~~
+build_close/mutants/p42660/m0135_renderer.c:162:39: error: use of undeclared identifier 'out'
+  162 |                 ct_sticker_quad *q = &out[count];
+      |                                       ^~~
+build_close/mutants/p42660/m0135_renderer.c:172:26: error: use of undeclared identifier 'cs'
+  172 |                 q->col = cs->face[value];
+      |                          ^~
+build_close/mutants/p42660/m0135_renderer.c:183:33: error: too many arguments to function call, expected 3, have 8
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |            ~~~~~~~~~~           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p42660/m0135_renderer.c:113:12: note: 'emit_quads' declared here
+  113 | static int emit_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme /cs,
+      |            ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p42660/m0135_renderer.c:207:41: error: too many arguments to function call, expected 3, have 8
+  207 |     int count = emit_quads(r, base, cs, quads, CT_RENDERER_MAX_QUADS, rotate, m, angle_rad);
+      |                 ~~~~~~~~~~              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p42660/m0135_renderer.c:113:12: note: 'emit_quads' declared here
+  113 | static int emit_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme /cs,
+      |            ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+16 errors generated.
+build_close/mutants/p42660/m0136_renderer.c:114:39: error: expected ')'
+  114 |                       ct_sticker_quad /out, int cap, bool rotate, ct_move m, float angle_rad) {
+      |                                       ^
+build_close/mutants/p42660/m0136_renderer.c:113:22: note: to match this '('
+  113 | static int emit_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme *cs,
+      |                      ^
+build_close/mutants/p42660/m0136_renderer.c:115:49: error: use of undeclared identifier 'out'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                                 ^~~
+build_close/mutants/p42660/m0136_renderer.c:115:64: error: use of undeclared identifier 'cap'
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                                                                ^~~
+build_close/mutants/p42660/m0136_renderer.c:126:9: error: use of undeclared identifier 'rotate'
+  126 |     if (rotate) {
+      |         ^~~~~~
+build_close/mutants/p42660/m0136_renderer.c:127:34: error: use of undeclared identifier 'm'
+  127 |         ct_v3 normal = ct_frames[m.face].normal;
+      |                                  ^
+build_close/mutants/p42660/m0136_renderer.c:141:30: error: use of undeclared identifier 'cap'
+  141 |                 if (count >= cap) {
+      |                              ^~~
+build_close/mutants/p42660/m0136_renderer.c:157:21: error: use of undeclared identifier 'rotate'
+  157 |                 if (rotate && ct_renderer_slab_contains(c->n, m, lattice)) {
+      |                     ^~~~~~
+build_close/mutants/p42660/m0136_renderer.c:157:63: error: use of undeclared identifier 'm'
+  157 |                 if (rotate && ct_renderer_slab_contains(c->n, m, lattice)) {
+      |                                                               ^
+build_close/mutants/p42660/m0136_renderer.c:158:54: error: use of undeclared identifier 'angle_rad'
+  158 |                     center = v3_rotate(center, axis, angle_rad);
+      |                                                      ^~~~~~~~~
+build_close/mutants/p42660/m0136_renderer.c:159:64: error: use of undeclared identifier 'angle_rad'
+  159 |                     tangent_row = v3_rotate(tangent_row, axis, angle_rad);
+      |                                                                ^~~~~~~~~
+build_close/mutants/p42660/m0136_renderer.c:160:64: error: use of undeclared identifier 'angle_rad'
+  160 |                     tangent_col = v3_rotate(tangent_col, axis, angle_rad);
+      |                                                                ^~~~~~~~~
+build_close/mutants/p42660/m0136_renderer.c:162:39: error: use of undeclared identifier 'out'
+  162 |                 ct_sticker_quad *q = &out[count];
+      |                                       ^~~
+build_close/mutants/p42660/m0136_renderer.c:183:38: error: too many arguments to function call, expected 4, have 8
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |            ~~~~~~~~~~                ^~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p42660/m0136_renderer.c:113:12: note: 'emit_quads' declared here
+  113 | static int emit_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme *cs,
+      |            ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  114 |                       ct_sticker_quad /out, int cap, bool rotate, ct_move m, float angle_rad) {
+      |                       ~~~~~~~~~~~~~~~
+build_close/mutants/p42660/m0136_renderer.c:207:48: error: too many arguments to function call, expected 4, have 8
+  207 |     int count = emit_quads(r, base, cs, quads, CT_RENDERER_MAX_QUADS, rotate, m, angle_rad);
+      |                 ~~~~~~~~~~                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_close/mutants/p42660/m0136_renderer.c:113:12: note: 'emit_quads' declared here
+  113 | static int emit_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme *cs,
+      |            ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  114 |                       ct_sticker_quad /out, int cap, bool rotate, ct_move m, float angle_rad) {
+      |                       ~~~~~~~~~~~~~~~
+14 errors generated.
+mutate: suite unit_renderer_counts exited 1
+build_close/mutants/p42660/m0138_renderer.c:115:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  115 |     if (r == NULL && c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~ ~~
+build_close/mutants/p42660/m0138_renderer.c:115:19: note: place parentheses around the '&&' expression to silence this warning
+  115 |     if (r == NULL && c == NULL || cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~
+1 error generated.
+mutate: suite unit_renderer_counts exited 1
+build_close/mutants/p42660/m0140_renderer.c:115:32: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  115 |     if (r == NULL || c == NULL && cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                   ~~ ~~~~~~~~~~^~~~~~~~~~~~~
+build_close/mutants/p42660/m0140_renderer.c:115:32: note: place parentheses around the '&&' expression to silence this warning
+  115 |     if (r == NULL || c == NULL && cs == NULL || out == NULL || cap <= 0 || r->n != c->n) {
+      |                      ~~~~~~~~~~^~~~~~~~~~~~~
+1 error generated.
+mutate: suite unit_renderer_counts exited 1
+build_close/mutants/p42660/m0142_renderer.c:115:46: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  115 |     if (r == NULL || c == NULL || cs == NULL && out == NULL || cap <= 0 || r->n != c->n) {
+      |                                ~~ ~~~~~~~~~~~^~~~~~~~~~~~~~
+build_close/mutants/p42660/m0142_renderer.c:115:46: note: place parentheses around the '&&' expression to silence this warning
+  115 |     if (r == NULL || c == NULL || cs == NULL && out == NULL || cap <= 0 || r->n != c->n) {
+      |                                   ~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite unit_renderer_counts exited 1
+build_close/mutants/p42660/m0144_renderer.c:115:61: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL && cap <= 0 || r->n != c->n) {
+      |                                              ~~ ~~~~~~~~~~~~^~~~~~~~~~~
+build_close/mutants/p42660/m0144_renderer.c:115:61: note: place parentheses around the '&&' expression to silence this warning
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL && cap <= 0 || r->n != c->n) {
+      |                                                             ^
+      |                                                 (                      )
+1 error generated.
+mutate: suite unit_renderer_counts exited 1
+build_close/mutants/p42660/m0148_renderer.c:115:73: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 && r->n != c->n) {
+      |                                                             ~~ ~~~~~~~~~^~~~~~~~~~~~~~~
+build_close/mutants/p42660/m0148_renderer.c:115:73: note: place parentheses around the '&&' expression to silence this warning
+  115 |     if (r == NULL || c == NULL || cs == NULL || out == NULL || cap <= 0 && r->n != c->n) {
+      |                                                                         ^              
+      |                                                                (                       )
+1 error generated.
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+build_close/mutants/p42660/m0170_renderer.c:125:22: error: missing field 'y' initializer [-Werror,-Wmissing-field-initializers]
+  125 |     Vector3 axis = {1};
+      |                      ^
+1 error generated.
+build_close/mutants/p42660/m0171_renderer.c:125:23: error: missing field 'y' initializer [-Werror,-Wmissing-field-initializers]
+  125 |     Vector3 axis = {-1};
+      |                       ^
+1 error generated.
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited -1073741795
+mutate: suite unit_renderer_counts exited 1
+build_close/mutants/p42660/m0183_renderer.c:138:29: error: expected identifier or '('
+  138 |         const ct_face_frame /fr = &ct_frames[face];
+      |                             ^
+build_close/mutants/p42660/m0183_renderer.c:152:68: error: use of undeclared identifier 'fr'
+  152 |                 Vector3 center = {(float)lattice.x * step + (float)fr->normal.x * outset,
+      |                                                                    ^~
+build_close/mutants/p42660/m0183_renderer.c:153:68: error: use of undeclared identifier 'fr'
+  153 |                                   (float)lattice.y * step + (float)fr->normal.y * outset,
+      |                                                                    ^~
+build_close/mutants/p42660/m0183_renderer.c:154:68: error: use of undeclared identifier 'fr'
+  154 |                                   (float)lattice.z * step + (float)fr->normal.z * outset};
+      |                                                                    ^~
+build_close/mutants/p42660/m0183_renderer.c:155:47: error: use of undeclared identifier 'fr'
+  155 |                 Vector3 tangent_row = {(float)fr->row.x, (float)fr->row.y, (float)fr->row.z};
+      |                                               ^~
+build_close/mutants/p42660/m0183_renderer.c:155:65: error: use of undeclared identifier 'fr'
+  155 |                 Vector3 tangent_row = {(float)fr->row.x, (float)fr->row.y, (float)fr->row.z};
+      |                                                                 ^~
+build_close/mutants/p42660/m0183_renderer.c:155:83: error: use of undeclared identifier 'fr'
+  155 |                 Vector3 tangent_row = {(float)fr->row.x, (float)fr->row.y, (float)fr->row.z};
+      |                                                                                   ^~
+build_close/mutants/p42660/m0183_renderer.c:156:47: error: use of undeclared identifier 'fr'
+  156 |                 Vector3 tangent_col = {(float)fr->col.x, (float)fr->col.y, (float)fr->col.z};
+      |                                               ^~
+build_close/mutants/p42660/m0183_renderer.c:156:65: error: use of undeclared identifier 'fr'
+  156 |                 Vector3 tangent_col = {(float)fr->col.x, (float)fr->col.y, (float)fr->col.z};
+      |                                                                 ^~
+build_close/mutants/p42660/m0183_renderer.c:156:83: error: use of undeclared identifier 'fr'
+  156 |                 Vector3 tangent_col = {(float)fr->col.x, (float)fr->col.y, (float)fr->col.z};
+      |                                                                                   ^~
+10 errors generated.
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_colors exited 1
+mutate: suite unit_renderer_colors exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_colors exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_counts exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+build_close/mutants/p42660/m0210_renderer.c:162:33: error: expected identifier or '('
+  162 |                 ct_sticker_quad /q = &out[count];
+      |                                 ^
+build_close/mutants/p42660/m0210_renderer.c:168:21: error: use of undeclared identifier 'q'
+  168 |                     q->pos[k].x = center.x + tangent_row.x * half * sx + tangent_col.x * half * sy;
+      |                     ^
+build_close/mutants/p42660/m0210_renderer.c:169:21: error: use of undeclared identifier 'q'
+  169 |                     q->pos[k].y = center.y + tangent_row.y * half * sx + tangent_col.y * half * sy;
+      |                     ^
+build_close/mutants/p42660/m0210_renderer.c:170:21: error: use of undeclared identifier 'q'
+  170 |                     q->pos[k].z = center.z + tangent_row.z * half * sx + tangent_col.z * half * sy;
+      |                     ^
+build_close/mutants/p42660/m0210_renderer.c:172:17: error: use of undeclared identifier 'q'
+  172 |                 q->col = cs->face[value];
+      |                 ^
+5 errors generated.
+build_close/mutants/p42660/m0212_renderer.c:164:29: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+  164 |                     {-1.0f, -1.0f}, {1.0f, -1.0f}, {1.0f, 1.0f}, {-1.0f, 1.0f}};
+      |                             ^~~~~
+build_close/mutants/p42660/m0212_renderer.c:164:44: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+  164 |                     {-1.0f, -1.0f}, {1.0f, -1.0f}, {1.0f, 1.0f}, {-1.0f, 1.0f}};
+      |                                            ^~~~~
+build_close/mutants/p42660/m0212_renderer.c:164:59: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+  164 |                     {-1.0f, -1.0f}, {1.0f, -1.0f}, {1.0f, 1.0f}, {-1.0f, 1.0f}};
+      |                                                           ^~~~
+build_close/mutants/p42660/m0212_renderer.c:164:74: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+  164 |                     {-1.0f, -1.0f}, {1.0f, -1.0f}, {1.0f, 1.0f}, {-1.0f, 1.0f}};
+      |                                                                          ^~~~
+build_close/mutants/p42660/m0212_renderer.c:167:32: error: array index 1 is past the end of the array (that has type 'const float[1]') [-Werror,-Warray-bounds]
+  167 |                     float sy = corner_signs[k][1];
+      |                                ^               ~
+build_close/mutants/p42660/m0212_renderer.c:163:17: note: array 'corner_signs' declared here
+  163 |                 static const float corner_signs[CT_QUAD_CORNER_COUNT][1] = {
+      |                 ^
+5 errors generated.
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_counts exited -1073741795
+mutate: suite unit_renderer_counts exited -1073741795
+mutate: suite unit_renderer_geometry exited 1
+build_close/mutants/p42660/m0221_renderer.c:166:32: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  166 |                     float sx = corner_signs[k][-1];
+      |                                ^               ~~
+build_close/mutants/p42660/m0221_renderer.c:163:17: note: array 'corner_signs' declared here
+  163 |                 static const float corner_signs[CT_QUAD_CORNER_COUNT][2] = {
+      |                 ^
+1 error generated.
+build_close/mutants/p42660/m0222_renderer.c:167:32: error: array index 2 is past the end of the array (that has type 'const float[2]') [-Werror,-Warray-bounds]
+  167 |                     float sy = corner_signs[k][2];
+      |                                ^               ~
+build_close/mutants/p42660/m0222_renderer.c:163:17: note: array 'corner_signs' declared here
+  163 |                 static const float corner_signs[CT_QUAD_CORNER_COUNT][2] = {
+      |                 ^
+1 error generated.
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+mutate: suite unit_renderer_geometry exited 1
+build_close/mutants/p42660/m0242_renderer.c:180:41: error: expected ')'
+  180 | int ct_renderer_quads(const ct_renderer /r, const ct_cube *c, const ct_color_scheme *cs,
+      |                                         ^
+build_close/mutants/p42660/m0242_renderer.c:180:22: note: to match this '('
+  180 | int ct_renderer_quads(const ct_renderer /r, const ct_cube *c, const ct_color_scheme *cs,
+      |                      ^
+build_close/mutants/p42660/m0242_renderer.c:180:5: error: conflicting types for 'ct_renderer_quads'
+  180 | int ct_renderer_quads(const ct_renderer /r, const ct_cube *c, const ct_color_scheme *cs,
+      |     ^
+src\render/renderer.h:40:5: note: previous declaration is here
+   40 | int ct_renderer_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme *cs,
+      |     ^
+build_close/mutants/p42660/m0242_renderer.c:183:23: error: use of undeclared identifier 'r'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                       ^
+build_close/mutants/p42660/m0242_renderer.c:183:26: error: use of undeclared identifier 'c'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                          ^
+build_close/mutants/p42660/m0242_renderer.c:183:29: error: use of undeclared identifier 'cs'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                             ^~
+build_close/mutants/p42660/m0242_renderer.c:183:33: error: use of undeclared identifier 'out'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                                 ^~~
+build_close/mutants/p42660/m0242_renderer.c:183:38: error: use of undeclared identifier 'cap'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                                      ^~~
+7 errors generated.
+build_close/mutants/p42660/m0243_renderer.c:180:59: error: expected ')'
+  180 | int ct_renderer_quads(const ct_renderer *r, const ct_cube /c, const ct_color_scheme *cs,
+      |                                                           ^
+build_close/mutants/p42660/m0243_renderer.c:180:22: note: to match this '('
+  180 | int ct_renderer_quads(const ct_renderer *r, const ct_cube /c, const ct_color_scheme *cs,
+      |                      ^
+build_close/mutants/p42660/m0243_renderer.c:180:5: error: conflicting types for 'ct_renderer_quads'
+  180 | int ct_renderer_quads(const ct_renderer *r, const ct_cube /c, const ct_color_scheme *cs,
+      |     ^
+src\render/renderer.h:40:5: note: previous declaration is here
+   40 | int ct_renderer_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme *cs,
+      |     ^
+build_close/mutants/p42660/m0243_renderer.c:183:26: error: use of undeclared identifier 'c'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                          ^
+build_close/mutants/p42660/m0243_renderer.c:183:29: error: use of undeclared identifier 'cs'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                             ^~
+build_close/mutants/p42660/m0243_renderer.c:183:33: error: use of undeclared identifier 'out'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                                 ^~~
+build_close/mutants/p42660/m0243_renderer.c:183:38: error: use of undeclared identifier 'cap'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                                      ^~~
+6 errors generated.
+build_close/mutants/p42660/m0244_renderer.c:180:85: error: expected ')'
+  180 | int ct_renderer_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme /cs,
+      |                                                                                     ^
+build_close/mutants/p42660/m0244_renderer.c:180:22: note: to match this '('
+  180 | int ct_renderer_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme /cs,
+      |                      ^
+build_close/mutants/p42660/m0244_renderer.c:180:5: error: conflicting types for 'ct_renderer_quads'
+  180 | int ct_renderer_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme /cs,
+      |     ^
+src\render/renderer.h:40:5: note: previous declaration is here
+   40 | int ct_renderer_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme *cs,
+      |     ^
+build_close/mutants/p42660/m0244_renderer.c:183:29: error: use of undeclared identifier 'cs'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                             ^~
+build_close/mutants/p42660/m0244_renderer.c:183:33: error: use of undeclared identifier 'out'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                                 ^~~
+build_close/mutants/p42660/m0244_renderer.c:183:38: error: use of undeclared identifier 'cap'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                                      ^~~
+5 errors generated.
+build_close/mutants/p42660/m0245_renderer.c:181:39: error: expected ')'
+  181 |                       ct_sticker_quad /out, int cap) {
+      |                                       ^
+build_close/mutants/p42660/m0245_renderer.c:180:22: note: to match this '('
+  180 | int ct_renderer_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme *cs,
+      |                      ^
+build_close/mutants/p42660/m0245_renderer.c:180:5: error: conflicting types for 'ct_renderer_quads'
+  180 | int ct_renderer_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme *cs,
+      |     ^
+src\render/renderer.h:40:5: note: previous declaration is here
+   40 | int ct_renderer_quads(const ct_renderer *r, const ct_cube *c, const ct_color_scheme *cs,
+      |     ^
+build_close/mutants/p42660/m0245_renderer.c:183:33: error: use of undeclared identifier 'out'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                                 ^~~
+build_close/mutants/p42660/m0245_renderer.c:183:38: error: use of undeclared identifier 'cap'
+  183 |     return emit_quads(r, c, cs, out, cap, false, none, 0.0f);
+      |                                      ^~~
+4 errors generated.
+build_close/mutants/p42660/m0246_renderer.c:182:22: error: missing field 'depth_from' initializer [-Werror,-Wmissing-field-initializers]
+  182 |     ct_move none = {1};
+      |                      ^
+1 error generated.
+build_close/mutants/p42660/m0247_renderer.c:182:23: error: missing field 'depth_from' initializer [-Werror,-Wmissing-field-initializers]
+  182 |     ct_move none = {-1};
+      |                       ^
+1 error generated.
+build_close/mutants/p42660/m0249_renderer.c:186:41: error: expected ')'
+  186 | void ct_renderer_draw(const ct_renderer /r, const ct_cube *base, const ct_anim *anim,
+      |                                         ^
+build_close/mutants/p42660/m0249_renderer.c:186:22: note: to match this '('
+  186 | void ct_renderer_draw(const ct_renderer /r, const ct_cube *base, const ct_anim *anim,
+      |                      ^
+build_close/mutants/p42660/m0249_renderer.c:186:6: error: conflicting types for 'ct_renderer_draw'
+  186 | void ct_renderer_draw(const ct_renderer /r, const ct_cube *base, const ct_anim *anim,
+      |      ^
+src\render/renderer.h:43:6: note: previous declaration is here
+   43 | void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim *anim,
+      |      ^
+build_close/mutants/p42660/m0249_renderer.c:188:9: error: use of undeclared identifier 'r'
+  188 |     if (r == NULL || base == NULL || cs == NULL) {
+      |         ^
+build_close/mutants/p42660/m0249_renderer.c:188:22: error: use of undeclared identifier 'base'
+  188 |     if (r == NULL || base == NULL || cs == NULL) {
+      |                      ^~~~
+build_close/mutants/p42660/m0249_renderer.c:188:38: error: use of undeclared identifier 'cs'
+  188 |     if (r == NULL || base == NULL || cs == NULL) {
+      |                                      ^~
+build_close/mutants/p42660/m0249_renderer.c:195:9: error: use of undeclared identifier 'anim'
+  195 |     if (anim != NULL && ct_anim_active(anim)) {
+      |         ^~~~
+build_close/mutants/p42660/m0249_renderer.c:195:40: error: use of undeclared identifier 'anim'
+  195 |     if (anim != NULL && ct_anim_active(anim)) {
+      |                                        ^~~~
+build_close/mutants/p42660/m0249_renderer.c:196:13: error: use of undeclared identifier 'anim'
+  196 |         m = anim->moves[anim->head];
+      |             ^~~~
+build_close/mutants/p42660/m0249_renderer.c:196:25: error: use of undeclared identifier 'anim'
+  196 |         m = anim->moves[anim->head];
+      |                         ^~~~
+build_close/mutants/p42660/m0249_renderer.c:197:31: error: use of undeclared identifier 'r'
+  197 |         if (ct_move_legal(&m, r->n)) {
+      |                               ^
+build_close/mutants/p42660/m0249_renderer.c:198:49: error: use of undeclared identifier 'anim'
+  198 |             double eased = ct_ease_cubic_in_out(anim->elapsed / move_seconds);
+      |                                                 ^~~~
+build_close/mutants/p42660/m0249_renderer.c:198:65: error: use of undeclared identifier 'move_seconds'
+  198 |             double eased = ct_ease_cubic_in_out(anim->elapsed / move_seconds);
+      |                                                                 ^~~~~~~~~~~~
+build_close/mutants/p42660/m0249_renderer.c:207:28: error: use of undeclared identifier 'r'
+  207 |     int count = emit_quads(r, base, cs, quads, CT_RENDERER_MAX_QUADS, rotate, m, angle_rad);
+      |                            ^
+build_close/mutants/p42660/m0249_renderer.c:207:31: error: use of undeclared identifier 'base'
+  207 |     int count = emit_quads(r, base, cs, quads, CT_RENDERER_MAX_QUADS, rotate, m, angle_rad);
+      |                               ^~~~
+build_close/mutants/p42660/m0249_renderer.c:207:37: error: use of undeclared identifier 'cs'
+  207 |     int count = emit_quads(r, base, cs, quads, CT_RENDERER_MAX_QUADS, rotate, m, angle_rad);
+      |                                     ^~
+build_close/mutants/p42660/m0249_renderer.c:246:17: error: use of undeclared identifier 'cam'
+  246 |     BeginMode3D(cam);
+      |                 ^~~
+16 errors generated.
+build_close/mutants/p42660/m0250_renderer.c:186:59: error: expected ')'
+  186 | void ct_renderer_draw(const ct_renderer *r, const ct_cube /base, const ct_anim *anim,
+      |                                                           ^
+build_close/mutants/p42660/m0250_renderer.c:186:22: note: to match this '('
+  186 | void ct_renderer_draw(const ct_renderer *r, const ct_cube /base, const ct_anim *anim,
+      |                      ^
+build_close/mutants/p42660/m0250_renderer.c:186:6: error: conflicting types for 'ct_renderer_draw'
+  186 | void ct_renderer_draw(const ct_renderer *r, const ct_cube /base, const ct_anim *anim,
+      |      ^
+src\render/renderer.h:43:6: note: previous declaration is here
+   43 | void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim *anim,
+      |      ^
+build_close/mutants/p42660/m0250_renderer.c:188:22: error: use of undeclared identifier 'base'
+  188 |     if (r == NULL || base == NULL || cs == NULL) {
+      |                      ^~~~
+build_close/mutants/p42660/m0250_renderer.c:188:38: error: use of undeclared identifier 'cs'
+  188 |     if (r == NULL || base == NULL || cs == NULL) {
+      |                                      ^~
+build_close/mutants/p42660/m0250_renderer.c:195:9: error: use of undeclared identifier 'anim'
+  195 |     if (anim != NULL && ct_anim_active(anim)) {
+      |         ^~~~
+build_close/mutants/p42660/m0250_renderer.c:195:40: error: use of undeclared identifier 'anim'
+  195 |     if (anim != NULL && ct_anim_active(anim)) {
+      |                                        ^~~~
+build_close/mutants/p42660/m0250_renderer.c:196:13: error: use of undeclared identifier 'anim'
+  196 |         m = anim->moves[anim->head];
+      |             ^~~~
+build_close/mutants/p42660/m0250_renderer.c:196:25: error: use of undeclared identifier 'anim'
+  196 |         m = anim->moves[anim->head];
+      |                         ^~~~
+build_close/mutants/p42660/m0250_renderer.c:198:49: error: use of undeclared identifier 'anim'
+  198 |             double eased = ct_ease_cubic_in_out(anim->elapsed / move_seconds);
+      |                                                 ^~~~
+build_close/mutants/p42660/m0250_renderer.c:198:65: error: use of undeclared identifier 'move_seconds'
+  198 |             double eased = ct_ease_cubic_in_out(anim->elapsed / move_seconds);
+      |                                                                 ^~~~~~~~~~~~
+build_close/mutants/p42660/m0250_renderer.c:207:31: error: use of undeclared identifier 'base'
+  207 |     int count = emit_quads(r, base, cs, quads, CT_RENDERER_MAX_QUADS, rotate, m, angle_rad);
+      |                               ^~~~
+build_close/mutants/p42660/m0250_renderer.c:207:37: error: use of undeclared identifier 'cs'
+  207 |     int count = emit_quads(r, base, cs, quads, CT_RENDERER_MAX_QUADS, rotate, m, angle_rad);
+      |                                     ^~
+build_close/mutants/p42660/m0250_renderer.c:246:17: error: use of undeclared identifier 'cam'
+  246 |     BeginMode3D(cam);
+      |                 ^~~
+13 errors generated.
+build_close/mutants/p42660/m0251_renderer.c:186:80: error: expected ')'
+  186 | void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim /anim,
+      |                                                                                ^
+build_close/mutants/p42660/m0251_renderer.c:186:22: note: to match this '('
+  186 | void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim /anim,
+      |                      ^
+build_close/mutants/p42660/m0251_renderer.c:186:6: error: conflicting types for 'ct_renderer_draw'
+  186 | void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim /anim,
+      |      ^
+src\render/renderer.h:43:6: note: previous declaration is here
+   43 | void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim *anim,
+      |      ^
+build_close/mutants/p42660/m0251_renderer.c:188:38: error: use of undeclared identifier 'cs'
+  188 |     if (r == NULL || base == NULL || cs == NULL) {
+      |                                      ^~
+build_close/mutants/p42660/m0251_renderer.c:195:9: error: use of undeclared identifier 'anim'
+  195 |     if (anim != NULL && ct_anim_active(anim)) {
+      |         ^~~~
+build_close/mutants/p42660/m0251_renderer.c:195:40: error: use of undeclared identifier 'anim'
+  195 |     if (anim != NULL && ct_anim_active(anim)) {
+      |                                        ^~~~
+build_close/mutants/p42660/m0251_renderer.c:196:13: error: use of undeclared identifier 'anim'
+  196 |         m = anim->moves[anim->head];
+      |             ^~~~
+build_close/mutants/p42660/m0251_renderer.c:196:25: error: use of undeclared identifier 'anim'
+  196 |         m = anim->moves[anim->head];
+      |                         ^~~~
+build_close/mutants/p42660/m0251_renderer.c:198:49: error: use of undeclared identifier 'anim'
+  198 |             double eased = ct_ease_cubic_in_out(anim->elapsed / move_seconds);
+      |                                                 ^~~~
+build_close/mutants/p42660/m0251_renderer.c:198:65: error: use of undeclared identifier 'move_seconds'
+  198 |             double eased = ct_ease_cubic_in_out(anim->elapsed / move_seconds);
+      |                                                                 ^~~~~~~~~~~~
+build_close/mutants/p42660/m0251_renderer.c:207:37: error: use of undeclared identifier 'cs'
+  207 |     int count = emit_quads(r, base, cs, quads, CT_RENDERER_MAX_QUADS, rotate, m, angle_rad);
+      |                                     ^~
+build_close/mutants/p42660/m0251_renderer.c:246:17: error: use of undeclared identifier 'cam'
+  246 |     BeginMode3D(cam);
+      |                 ^~~
+11 errors generated.
+build_close/mutants/p42660/m0252_renderer.c:187:45: error: expected ')'
+  187 |                       const ct_color_scheme /cs, Camera3D cam, double move_seconds) {
+      |                                             ^
+build_close/mutants/p42660/m0252_renderer.c:186:22: note: to match this '('
+  186 | void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim *anim,
+      |                      ^
+build_close/mutants/p42660/m0252_renderer.c:186:6: error: conflicting types for 'ct_renderer_draw'
+  186 | void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim *anim,
+      |      ^
+src\render/renderer.h:43:6: note: previous declaration is here
+   43 | void ct_renderer_draw(const ct_renderer *r, const ct_cube *base, const ct_anim *anim,
+      |      ^
+build_close/mutants/p42660/m0252_renderer.c:188:38: error: use of undeclared identifier 'cs'
+  188 |     if (r == NULL || base == NULL || cs == NULL) {
+      |                                      ^~
+build_close/mutants/p42660/m0252_renderer.c:198:65: error: use of undeclared identifier 'move_seconds'
+  198 |             double eased = ct_ease_cubic_in_out(anim->elapsed / move_seconds);
+      |                                                                 ^~~~~~~~~~~~
+build_close/mutants/p42660/m0252_renderer.c:207:37: error: use of undeclared identifier 'cs'
+  207 |     int count = emit_quads(r, base, cs, quads, CT_RENDERER_MAX_QUADS, rotate, m, angle_rad);
+      |                                     ^~
+build_close/mutants/p42660/m0252_renderer.c:246:17: error: use of undeclared identifier 'cam'
+  246 |     BeginMode3D(cam);
+      |                 ^~~
+6 errors generated.
+build_close/mutants/p42660/m0254_renderer.c:188:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  188 |     if (r == NULL && base == NULL || cs == NULL) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~ ~~
+build_close/mutants/p42660/m0254_renderer.c:188:19: note: place parentheses around the '&&' expression to silence this warning
+  188 |     if (r == NULL && base == NULL || cs == NULL) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~
+1 error generated.
+build_close/mutants/p42660/m0256_renderer.c:188:35: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  188 |     if (r == NULL || base == NULL && cs == NULL) {
+      |                   ~~ ~~~~~~~~~~~~~^~~~~~~~~~~~~
+build_close/mutants/p42660/m0256_renderer.c:188:35: note: place parentheses around the '&&' expression to silence this warning
+  188 |     if (r == NULL || base == NULL && cs == NULL) {
+      |                      ~~~~~~~~~~~~~^~~~~~~~~~~~~
+1 error generated.
+build_close/mutants/p42660/m0259_renderer.c:193:19: error: missing field 'depth_from' initializer [-Werror,-Wmissing-field-initializers]
+  193 |     ct_move m = {1};
+      |                   ^
+1 error generated.
+build_close/mutants/p42660/m0260_renderer.c:193:20: error: missing field 'depth_from' initializer [-Werror,-Wmissing-field-initializers]
+  193 |     ct_move m = {-1};
+      |                    ^
+1 error generated.
+build_close/mutants/p42660/m0281_renderer.c:212:11: error: expected identifier or '('
+  212 |     float /verts = malloc(sizeof(float) * (size_t)vcount * CT_MESH_FLOATS_PER_VERT);
+      |           ^
+build_close/mutants/p42660/m0281_renderer.c:214:9: error: use of undeclared identifier 'verts'
+  214 |     if (verts == NULL || cols == NULL) {
+      |         ^~~~~
+build_close/mutants/p42660/m0281_renderer.c:215:14: error: use of undeclared identifier 'verts'
+  215 |         free(verts);
+      |              ^~~~~
+build_close/mutants/p42660/m0281_renderer.c:229:13: error: use of undeclared identifier 'verts'
+  229 |             verts[vi++] = p.x;
+      |             ^~~~~
+build_close/mutants/p42660/m0281_renderer.c:230:13: error: use of undeclared identifier 'verts'
+  230 |             verts[vi++] = p.y;
+      |             ^~~~~
+build_close/mutants/p42660/m0281_renderer.c:231:13: error: use of undeclared identifier 'verts'
+  231 |             verts[vi++] = p.z;
+      |             ^~~~~
+build_close/mutants/p42660/m0281_renderer.c:241:21: error: use of undeclared identifier 'verts'
+  241 |     mesh.vertices = verts;
+      |                     ^~~~~
+7 errors generated.
+build_close/mutants/p42660/m0284_renderer.c:213:19: error: expected identifier or '('
+  213 |     unsigned char /cols = malloc(sizeof(unsigned char) * (size_t)vcount * CT_MESH_BYTES_PER_COLOR);
+      |                   ^
+build_close/mutants/p42660/m0284_renderer.c:214:26: error: use of undeclared identifier 'cols'; did you mean 'cos'?
+  214 |     if (verts == NULL || cols == NULL) {
+      |                          ^~~~
+      |                          cos
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\math.h:183:18: note: 'cos' declared here
+  183 |   double __cdecl cos(double _X);
+      |                  ^
+build_close/mutants/p42660/m0284_renderer.c:214:26: error: comparison of function 'cos' equal to a null pointer is always false [-Werror,-Wtautological-pointer-compare]
+  214 |     if (verts == NULL || cols == NULL) {
+      |                          ^~~~    ~~~~
+build_close/mutants/p42660/m0284_renderer.c:214:26: note: prefix with the address-of operator to silence this warning
+  214 |     if (verts == NULL || cols == NULL) {
+      |                          ^
+      |                          &
+build_close/mutants/p42660/m0284_renderer.c:216:14: error: use of undeclared identifier 'cols'; did you mean 'cos'?
+  216 |         free(cols);
+      |              ^~~~
+      |              cos
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\math.h:183:18: note: 'cos' declared here
+  183 |   double __cdecl cos(double _X);
+      |                  ^
+build_close/mutants/p42660/m0284_renderer.c:216:14: error: passing 'double (double)' to parameter of type 'void *' converts between void pointer and function pointer [-Werror,-Wpedantic]
+  216 |         free(cols);
+      |              ^~~~
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\stdlib.h:456:27: note: passing argument to parameter '_Memory' here
+  456 |   void __cdecl free(void *_Memory);
+      |                           ^
+build_close/mutants/p42660/m0284_renderer.c:216:14: error: attempt to call free on non-heap object 'cos' [-Werror,-Wfree-nonheap-object]
+  216 |         free(cols);
+      |              ^
+build_close/mutants/p42660/m0284_renderer.c:232:13: error: use of undeclared identifier 'cols'; did you mean 'cos'?
+  232 |             cols[ci++] = q->col.r;
+      |             ^~~~
+      |             cos
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\math.h:183:18: note: 'cos' declared here
+  183 |   double __cdecl cos(double _X);
+      |                  ^
+build_close/mutants/p42660/m0284_renderer.c:232:13: error: subscript of pointer to function type 'double (double)'
+  232 |             cols[ci++] = q->col.r;
+      |             ^~~~
+build_close/mutants/p42660/m0284_renderer.c:233:13: error: use of undeclared identifier 'cols'; did you mean 'cos'?
+  233 |             cols[ci++] = q->col.g;
+      |             ^~~~
+      |             cos
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\math.h:183:18: note: 'cos' declared here
+  183 |   double __cdecl cos(double _X);
+      |                  ^
+build_close/mutants/p42660/m0284_renderer.c:233:13: error: subscript of pointer to function type 'double (double)'
+  233 |             cols[ci++] = q->col.g;
+      |             ^~~~
+build_close/mutants/p42660/m0284_renderer.c:234:13: error: use of undeclared identifier 'cols'; did you mean 'cos'?
+  234 |             cols[ci++] = q->col.b;
+      |             ^~~~
+      |             cos
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\math.h:183:18: note: 'cos' declared here
+  183 |   double __cdecl cos(double _X);
+      |                  ^
+build_close/mutants/p42660/m0284_renderer.c:234:13: error: subscript of pointer to function type 'double (double)'
+  234 |             cols[ci++] = q->col.b;
+      |             ^~~~
+build_close/mutants/p42660/m0284_renderer.c:235:13: error: use of undeclared identifier 'cols'; did you mean 'cos'?
+  235 |             cols[ci++] = q->col.a;
+      |             ^~~~
+      |             cos
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\math.h:183:18: note: 'cos' declared here
+  183 |   double __cdecl cos(double _X);
+      |                  ^
+build_close/mutants/p42660/m0284_renderer.c:235:13: error: subscript of pointer to function type 'double (double)'
+  235 |             cols[ci++] = q->col.a;
+      |             ^~~~
+build_close/mutants/p42660/m0284_renderer.c:242:19: error: use of undeclared identifier 'cols'; did you mean 'cos'?
+  242 |     mesh.colors = cols;
+      |                   ^~~~
+      |                   cos
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\math.h:183:18: note: 'cos' declared here
+  183 |   double __cdecl cos(double _X);
+      |                  ^
+build_close/mutants/p42660/m0284_renderer.c:242:17: error: incompatible pointer types assigning to 'unsigned char *' from 'double (double)' [-Wincompatible-pointer-types]
+  242 |     mesh.colors = cols;
+      |                 ^ ~~~~
+16 errors generated.
+build_close/mutants/p42660/m0297_renderer.c:226:31: error: expected identifier or '('
+  226 |         const ct_sticker_quad /q = &quads[i];
+      |                               ^
+build_close/mutants/p42660/m0297_renderer.c:228:25: error: use of undeclared identifier 'q'
+  228 |             Vector3 p = q->pos[corner_order[k]];
+      |                         ^
+build_close/mutants/p42660/m0297_renderer.c:232:26: error: use of undeclared identifier 'q'
+  232 |             cols[ci++] = q->col.r;
+      |                          ^
+build_close/mutants/p42660/m0297_renderer.c:233:26: error: use of undeclared identifier 'q'
+  233 |             cols[ci++] = q->col.g;
+      |                          ^
+build_close/mutants/p42660/m0297_renderer.c:234:26: error: use of undeclared identifier 'q'
+  234 |             cols[ci++] = q->col.b;
+      |                          ^
+build_close/mutants/p42660/m0297_renderer.c:235:26: error: use of undeclared identifier 'q'
+  235 |             cols[ci++] = q->col.a;
+      |                          ^
+6 errors generated.
+build_close/mutants/p42660/m0301_renderer.c:238:19: error: missing field 'triangleCount' initializer [-Werror,-Wmissing-field-initializers]
+  238 |     Mesh mesh = {1};
+      |                   ^
+1 error generated.
+build_close/mutants/p42660/m0302_renderer.c:238:20: error: missing field 'triangleCount' initializer [-Werror,-Wmissing-field-initializers]
+  238 |     Mesh mesh = {-1};
+      |                    ^
+1 error generated.
