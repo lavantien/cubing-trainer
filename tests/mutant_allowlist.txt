@@ -1184,3 +1184,19 @@ src/app/main.c:25	argc dispatch sits outside the gate suite surface, the app fil
 src/app/main.c:29	interactive init failure latch sits outside the gate suite surface, every pinned e2e invocation inits a running app
 src/app/main.c:31	interactive init failure exit code sits outside the gate suite surface, every pinned e2e invocation inits successfully
 src/app/main.c:35	interactive success exit code sits outside the gate suite surface, the e2e target pins the scripted exit path instead
+src/app/script_expect.c:38	element size operands pick sizeof of another char pointer entry, the quotient, the bound, and every in range match stay identical
+src/app/script_expect.c:45	sqlite takes any negative nbyte as the strlen path, the amalgamation branches only on nbyte >= 0
+src/app/script_expect.c:47	prepare failure arm never runs over fixed valid statements on the migrated schema, and every return variant is nonzero so the caller reports the same unknown table
+src/app/script_expect.c:50	step failure arm never runs because count queries always return a row, and the minus one out value is never observed past the caller's return check
+src/app/script_expect.c:52	step failure arm never runs, and the return variants collapse in the caller's zero comparison
+src/app/script_expect.c:54	fallthrough return only runs for names absent from the table list, where the mutated nonzero values collapse in the caller's zero comparison
+src/app/script_expect.c:61	the operator token is validated at parse time, the runtime op is never negative, so the minus one variant rejects the same empty set
+src/app/script_expect.c:124	the day seed is dead, ct_script_now overwrites the out param on the only path that reads it and nothing reads day after
+src/app/script_expect.c:128	the compound literal seed is dead, ct_script_iso_day overwrites the out param on the success return and never reads it
+src/app/script_expect.c:151	the operator token is validated at parse time, the runtime op is never negative, so the minus one variant rejects the same empty set
+src/app/script_expect.c:171	the repo reviews query returns only nonnegative counts or the guarded error, n below minus one and n below zero reject the same reachable set
+src/app/script_expect.c:177	ratings are single digits so the comma guard only ever sees odd offsets, at plus two shifts the boundary onto the unreachable even offset
+src/app/script_expect.c:216	return one and two collapse into the caller's nonzero check with the same not a move set error
+src/app/script_expect.c:267	the operator token is validated at parse time, the runtime op is never negative, so the minus one variant rejects the same empty set
+src/app/script_expect.c:316	the operator token is validated at parse time, the runtime op is never negative, so the minus one variant rejects the same empty set
+src/app/script_expect.c:329	the operator token is validated at parse time, the runtime op is never negative, so the minus one variant rejects the same empty set

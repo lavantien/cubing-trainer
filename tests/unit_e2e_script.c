@@ -50,6 +50,36 @@ static int e2e_run(ct_app *app, const char *text, char *err) {
     return ct_script_run(app, &rt, &script, err, CT_SCRIPT_ERR_MAX);
 }
 
+static const char e2e_reviews_cap_setup[] = "cards_open unfiled\n"
+                                            "cards_new unfiled\n"
+                                            "cards_field alg3 \"R U R'\"\n"
+                                            "cards_save\n"
+                                            "due unfiled new-1 2020-01-01\n";
+
+static void e2e_reviews_cap_case(int cycles, const char *want, int want_rc) {
+    sqlite3 *db = e2e_db();
+    ct_app app;
+    e2e_app(&app, db);
+    char err[CT_SCRIPT_ERR_MAX];
+    char chunk[2048];
+    int done = 0;
+    while (done < cycles) {
+        int take = done == 0 ? (cycles - done < 30 ? cycles - done : 30)
+                             : (cycles - done < 32 ? cycles - done : 32);
+        int at = snprintf(chunk, sizeof chunk, "%s", done == 0 ? e2e_reviews_cap_setup : "");
+        for (int i = 0; i < take; i++) {
+            at += snprintf(chunk + at, sizeof chunk - (size_t)at,
+                           "review_begin\nreview_reveal\nreview_grade again\nreview_end\n");
+        }
+        CT_ASSERT_EQ(e2e_run(&app, chunk, err), 0);
+        done += take;
+    }
+    char final[CT_SCRIPT_ERR_MAX + 64];
+    snprintf(final, sizeof final, "expect reviews unfiled new-1 == %s\n", want);
+    CT_ASSERT_EQ(e2e_run(&app, final, err), want_rc);
+    ct_db_close(db);
+}
+
 static const char e2e_review_text[] = "cards_open unfiled\n"
                                       "cards_new unfiled\n"
                                       "cards_field alg3 \"R U R'\"\n"
@@ -199,9 +229,198 @@ CT_SUITE(e2e_run_expect_failure) {
                                "expect count flashcard == 5\n";
     CT_ASSERT_EQ(e2e_run(&app, text, err), CT_SCRIPT_EXIT_EXPECT);
     CT_ASSERT(strstr(err, "line 2") != NULL);
+    CT_ASSERT(strstr(err, "count flashcard is 0, expected == 5") != NULL);
     static const char dbl_text[] = "expect cfg srs.request_retention == 0.95\n";
     CT_ASSERT_EQ(e2e_run(&app, dbl_text, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "cfg srs.request_retention is 0.9, expected == 0.95") != NULL);
     ct_db_close(db);
+}
+
+CT_SUITE(e2e_run_expect_surfaces) {
+    sqlite3 *db = e2e_db();
+    ct_app app;
+    e2e_app(&app, db);
+    char err[CT_SCRIPT_ERR_MAX];
+    static const char tables[] = "expect count settings != 99999999\n";
+    CT_ASSERT_EQ(e2e_run(&app, tables, err), 0);
+    static const char unknown[] = "expect count bogus == 1\n";
+    CT_ASSERT_EQ(e2e_run(&app, unknown, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "unknown table") != NULL);
+    static const char master[] = "expect count sqlite_master == 1\n";
+    CT_ASSERT_EQ(e2e_run(&app, master, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "unknown table") != NULL);
+    static const char fields[] = "cfop_populate pll\n"
+                                 "expect card cfop_pll pll.Aa deck == cfop_pll\n"
+                                 "expect card cfop_pll pll.Aa key == pll.Aa\n";
+    CT_ASSERT_EQ(e2e_run(&app, fields, err), 0);
+    static const char wrong_notes[] = "cfop_populate pll\n"
+                                      "expect card cfop_pll pll.Aa notes == wrong\n";
+    CT_ASSERT_EQ(e2e_run(&app, wrong_notes, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "card notes is [], expected == [wrong]") != NULL);
+    static const char bad_field[] = "cfop_populate pll\n"
+                                    "expect card cfop_pll pll.Aa wat == x\n";
+    CT_ASSERT_EQ(e2e_run(&app, bad_field, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "unknown card field") != NULL);
+    ct_db_close(db);
+}
+
+CT_SUITE(e2e_run_expect_srs_reviews) {
+    sqlite3 *db = e2e_db();
+    ct_app app;
+    e2e_app(&app, db);
+    char err[CT_SCRIPT_ERR_MAX];
+    static const char setup[] = "cards_open unfiled\n"
+                                "cards_new unfiled\n"
+                                "cards_field alg3 \"R U R'\"\n"
+                                "cards_save\n"
+                                "due unfiled new-1 2020-01-01\n";
+    char passing[256];
+    snprintf(passing, sizeof passing,
+             "%s"
+             "expect srs unfiled new-1 due == 2020-01-01\n"
+             "expect reviews unfiled new-1 != 9\n",
+             setup);
+    CT_ASSERT_EQ(e2e_run(&app, passing, err), 0);
+    char notadate[256];
+    snprintf(notadate, sizeof notadate, "%sexpect srs unfiled new-1 due == notadate\n",
+             setup);
+    CT_ASSERT_EQ(e2e_run(&app, notadate, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "due value is not a date") != NULL);
+    char wrong_day[256];
+    snprintf(wrong_day, sizeof wrong_day, "%sexpect srs unfiled new-1 due == 2021-01-01\n",
+             setup);
+    CT_ASSERT_EQ(e2e_run(&app, wrong_day, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "due is [2020-01-01], expected [2021-01-01]") != NULL);
+    char wrong_reps[256];
+    snprintf(wrong_reps, sizeof wrong_reps, "%sexpect srs unfiled new-1 reps == 5\n",
+             setup);
+    CT_ASSERT_EQ(e2e_run(&app, wrong_reps, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "srs reps is 0, expected == 5") != NULL);
+    char wrong_lapses[256];
+    snprintf(wrong_lapses, sizeof wrong_lapses,
+             "%sexpect srs unfiled new-1 lapses == 7\n", setup);
+    CT_ASSERT_EQ(e2e_run(&app, wrong_lapses, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "srs lapses is 0, expected == 7") != NULL);
+    char wrong_reviews[256];
+    snprintf(wrong_reviews, sizeof wrong_reviews,
+             "%sexpect reviews unfiled new-1 == 9\n", setup);
+    CT_ASSERT_EQ(e2e_run(&app, wrong_reviews, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "ratings are [], expected == [9]") != NULL);
+    char bad_op[256];
+    snprintf(bad_op, sizeof bad_op, "%sexpect reviews unfiled new-1 <= 9\n", setup);
+    CT_ASSERT_EQ(e2e_run(&app, bad_op, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "reviews supports == or !=") != NULL);
+    ct_db_close(db);
+}
+
+CT_SUITE(e2e_run_expect_genalg) {
+    sqlite3 *db = e2e_db();
+    ct_app app;
+    e2e_app(&app, db);
+    char err[CT_SCRIPT_ERR_MAX];
+    static const char setup[] = "trainer_list 3bld 3style 0\n"
+                                "trainer_case 0\n"
+                                "trainer_generate\n";
+    char passing[512];
+    snprintf(passing, sizeof passing,
+             "%s"
+             "expect genalg AB setup == \"U' R2 Uw\"\n"
+             "expect genalg AB interchange == R2\n"
+             "expect genalg AB insertion == \"R R Uw' F2 Uw\"\n"
+             "expect genalg AB score == 31.2\n"
+             "expect genalg AB score >= 31.19\n"
+             "expect genalg AB score <= 31.21\n",
+             setup);
+    CT_ASSERT_EQ(e2e_run(&app, passing, err), 0);
+    char wrong_score[256];
+    snprintf(wrong_score, sizeof wrong_score, "%sexpect genalg AB score >= 999\n", setup);
+    CT_ASSERT_EQ(e2e_run(&app, wrong_score, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "genalg score is 31.2, expected >= 999") != NULL);
+    char bad_score[256];
+    snprintf(bad_score, sizeof bad_score, "%sexpect genalg AB score == abc\n", setup);
+    CT_ASSERT_EQ(e2e_run(&app, bad_score, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "bad score operator or value") != NULL);
+    char wrong_qtm[256];
+    snprintf(wrong_qtm, sizeof wrong_qtm, "%sexpect genalg AB qtm == 19\n", setup);
+    CT_ASSERT_EQ(e2e_run(&app, wrong_qtm, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "genalg qtm is 18, expected == 19") != NULL);
+    char wrong_algcount[256];
+    snprintf(wrong_algcount, sizeof wrong_algcount, "%sexpect algcount == 2\n", setup);
+    CT_ASSERT_EQ(e2e_run(&app, wrong_algcount, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "algcount is 1, expected == 2") != NULL);
+    char bad_field[256];
+    snprintf(bad_field, sizeof bad_field, "%sexpect genalg AB wat == 1\n", setup);
+    CT_ASSERT_EQ(e2e_run(&app, bad_field, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "unknown genalg field") != NULL);
+    ct_db_close(db);
+}
+
+CT_SUITE(e2e_run_expect_reviews_cap) {
+    char want255[CT_SCRIPT_ERR_MAX];
+    int w = 0;
+    for (int i = 0; i < 127; i++) {
+        want255[w++] = '1';
+        want255[w++] = ',';
+    }
+    want255[w++] = '1';
+    want255[w] = '\0';
+    e2e_reviews_cap_case(129, want255, 0);
+    char want256[CT_SCRIPT_ERR_MAX + 2];
+    w = 0;
+    for (int i = 0; i < 127; i++) {
+        want256[w++] = '1';
+        want256[w++] = ',';
+    }
+    want256[w++] = '1';
+    want256[w++] = '1';
+    want256[w] = '\0';
+    e2e_reviews_cap_case(130, want256, CT_SCRIPT_EXIT_EXPECT);
+}
+
+CT_SUITE(e2e_run_expect_cfg) {
+    char dir[CT_DB_PATH_MAX];
+    snprintf(dir, sizeof dir, "build/test_e2e_script/p%ld", (long)CT_E2E_PID);
+    char binding[CT_DB_PATH_MAX + 32];
+    snprintf(binding, sizeof binding, "CT_DATA_DIR=%s", dir);
+    CT_ASSERT_EQ(CT_E2E_PUTENV(binding), 0);
+    CT_ASSERT_EQ(CT_E2E_PUTENV("CT_MIGRATIONS_DIR=db/migrations"), 0);
+    sqlite3 *db = e2e_db();
+    ct_app app;
+    e2e_app(&app, db);
+    char err[CT_SCRIPT_ERR_MAX];
+    static const char saved[] = "restart\n"
+                                "settings_open\n"
+                                "settings_retention 0.85\n"
+                                "settings_move U off\n"
+                                "settings_move R off\n"
+                                "settings_move F on\n"
+                                "settings_save\n";
+    char passing[512];
+    snprintf(passing, sizeof passing,
+             "%s"
+             "restart\n"
+             "expect cfg gen.preferred_moves == DF\n"
+             "expect cfg anim.move_seconds == 0.25\n"
+             "expect setting srs.request_retention == 0.850000\n",
+             saved);
+    CT_ASSERT_EQ(e2e_run(&app, passing, err), 0);
+    char wrong_setting[256];
+    snprintf(wrong_setting, sizeof wrong_setting,
+             "%sexpect setting srs.request_retention == 0.9\n", saved);
+    CT_ASSERT_EQ(e2e_run(&app, wrong_setting, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "setting is [0.850000], expected == [0.9]") != NULL);
+    static const char bad_moves[] = "expect cfg gen.preferred_moves == ZQ\n";
+    CT_ASSERT_EQ(e2e_run(&app, bad_moves, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "cfg value is not a move set") != NULL);
+    static const char bad_double[] = "expect cfg anim.move_seconds == abc\n";
+    CT_ASSERT_EQ(e2e_run(&app, bad_double, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "cfg value is not a number") != NULL);
+    static const char bad_key[] = "expect cfg bogus.key == 1\n";
+    CT_ASSERT_EQ(e2e_run(&app, bad_key, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "unknown cfg key") != NULL);
+    ct_app_shutdown(&app);
+    CT_ASSERT_EQ(CT_E2E_PUTENV("CT_DATA_DIR="), 0);
+    CT_ASSERT_EQ(CT_E2E_PUTENV("CT_MIGRATIONS_DIR="), 0);
 }
 
 CT_SUITE(e2e_run_cfop_cards) {
