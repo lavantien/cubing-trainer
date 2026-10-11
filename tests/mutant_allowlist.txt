@@ -1131,3 +1131,30 @@ src/storage/repo_reviews.c:104	sqlite reads any negative byte count as nul termi
 src/storage/repo_reviews.c:56	cap zero falls through to the empty loop and returns the same zero rows
 src/storage/repo_reviews.c:95	cap zero falls through to the limit zero query and returns the same zero rows
 src/storage/repo_reviews.c:108	the bound cap is also bound as the SQL LIMIT so sqlite3_step never returns ROW once n reaches cap, the widened loop bound re-checks the same DONE step and exits identically
+src/app/paths.c:37	UNC scan init shift is absorbed by the separator while loop which recounts from the shifted index, both arms reach the same first component offset
+src/app/paths.c:40	the extra component iteration lands on a separator or an already returned terminator, both orderings return the same index
+src/app/paths.c:53	the mutant equality value one is unreachable from _mkdir, and every suite success follows an EEXIST component that leaves errno stale at EEXIST so the fallthrough arm still returns zero
+src/app/paths.c:56	posix branch of the mkdir helper is excluded by the preprocessor on this platform build, the mutant never compiles into the binary
+src/app/paths.c:57	posix branch of the mkdir helper is excluded by the preprocessor on this platform build, the mutant never compiles into the binary
+src/app/paths.c:70	the widened bound reads the nul terminator which is never a separator, the extra iteration is a no-op continue
+src/app/paths.c:80	the shifted index reads one byte at or past the terminator, whichever byte it sees the skip arm returns zero and the fallthrough arm hits the EEXIST left by the loop own prefix mkdir, both return zero
+src/app/paths.c:86	cap one slips the guard and fails the snprintf truncation check one line later with the same minus one
+src/app/paths.c:95	written zero is unreachable, the format always emits at least the separator slash, and a negative written slips into the unsigned cast comparison which rejects it identically
+src/app/paths.c:103	GetModuleFileNameA never returns one on a reachable call, the zero and cap boundaries require api failures the harness never triggers, and the conjunction mutant disarms only that unreachable failure arm
+src/app/paths.c:104	guard return payload mutants are sign only for the nonzero variants and the zero variant sits on the failure arm the harness never reaches
+src/app/paths.c:107	linux arm of ct_exe_path is excluded by the preprocessor on this platform build
+src/app/paths.c:108	linux arm of ct_exe_path is excluded by the preprocessor on this platform build
+src/app/paths.c:109	linux arm of ct_exe_path is excluded by the preprocessor on this platform build
+src/app/paths.c:110	linux arm of ct_exe_path is excluded by the preprocessor on this platform build
+src/app/paths.c:111	linux arm of ct_exe_path is excluded by the preprocessor on this platform build
+src/app/paths.c:115	fallback arm of ct_exe_path is excluded by the preprocessor on this platform build
+src/app/paths.c:120	cap one slips the guard and fails the nested snprintf truncation or the resource call with the same minus one
+src/app/paths.c:121	guard return payload mutants are sign only for the nonzero variants and the zero variant sits on the null argument arm no caller reaches
+src/app/paths.c:125	ct_exe_path succeeds on every harness call, the failure arm and its return variants never run
+src/app/paths.c:136	cap one slips the guard and fails the override snprintf or the nested resource call with the same minus one, and the conjunction mutant passes null out into snprintf which fails its length check identically
+src/app/paths.c:139	the byte before every reachable env value is the equals separator of the putenv entry, never nul, and the unset case short circuits at the null check
+src/app/paths.c:141	written zero is unreachable for a bare nonempty override string, and a negative written slips into the unsigned cast comparison which rejects it identically
+src/app/paths.c:151	cap one slips the guard and fails the data dir snprintf truncation check with the same minus one
+src/app/paths.c:155	the byte before every reachable env value is the equals separator of the putenv entry, never nul, and the null case short circuits at the first arm
+src/app/paths.c:158	the byte before every reachable env value is the equals separator of the putenv entry, never nul, and the null case short circuits at the first arm
+src/app/paths.c:166	written zero is unreachable for a slash joined pair of strings, and a negative written slips into the unsigned cast comparison which rejects it identically
