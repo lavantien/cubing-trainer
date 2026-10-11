@@ -739,6 +739,18 @@ src/app/script.c:896	scripted entry oversize boundary mutant admits a file of ex
 src/app/script.c:907	scripted entry parse result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
 src/app/script.c:912	scripted entry parse rc init mutants are dead stores, the parse call overwrites rc before any read
 src/app/script.c:914	scripted entry run result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+src/app/script_shots.c:52	event table bound denominator mutant swaps the element sizeof for index one, both denominators are the same struct size so the loop count is identical
+src/app/script_shots.c:63	method table bound denominator mutant swaps the element sizeof for index one, both denominators are the same struct size so the loop count is identical
+src/app/script_shots.c:74	grade table bound denominator mutant swaps the element sizeof for index one, both denominators are the same struct size so the loop count is identical
+src/app/script_shots.c:91	found flag init is a dead store, the grade parse callee writes the flag on every path before the first read
+src/app/script_shots.c:97	day out parameter init feeds a compound literal the callee overwrites on success and nobody reads on failure, a dead store
+src/app/script_shots.c:122	days init is a dead store, the long parse callee overwrites it on every path that reads it
+src/app/script_shots.c:127	today init is a dead store, the clock read callee overwrites it on every path that reads it
+src/app/script_shots.c:154	event ok init is a dead store, the event parse callee writes the flag on every path before the first read
+src/app/script_shots.c:155	method ok init is a dead store, the method parse callee writes the flag on every path before the first read
+src/app/script_shots.c:161	list id init is a dead store, the long parse callee overwrites it on every path that reads it
+src/app/script_shots.c:162	pick init is a dead store, the long parse callee overwrites it on every path that reads it
+src/app/script_shots.c:225	default arm of the shot dispatch is dead, the caller routes only the seven shot kinds into this step so the fallback return is unreachable
 src/app/shots.c:32	window open flag mutant re-inits an already ready window, raylib 6 ignores the second init and every capture renders byte-identical, so no observable output changes
 src/app/shots.c:45	memcpy count mutant copies one byte past the source nul into the slot after the destination nul, every reader stops at the nul so the directory walk is identical
 src/app/shots.c:48	separator preference mutants are equivalents, a null last makes last_win > last true on this target so the flipped null test and the flipped logic still assign last_win, assigning null when no separator exists equals leaving last null, and the greater-equal arm differs only when both separators land on the same character which strrchr cannot produce

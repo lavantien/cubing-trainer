@@ -713,6 +713,20 @@ CT_SUITE(e2e_run_reviewed_seed) {
                                "expect count review_log == 3\n"
                                "expect reviews unfiled new-1 == 1,3,4\n";
     CT_ASSERT_EQ(e2e_run(&app, text, err), 0);
+    sqlite3_stmt *st = NULL;
+    CT_ASSERT_EQ(
+        sqlite3_prepare_v2(db, "select elapsed_days from review_log order by id", -1, &st, NULL),
+        SQLITE_OK);
+    double elapsed[3] = {0};
+    int rows = 0;
+    while (sqlite3_step(st) == SQLITE_ROW && rows < 3) {
+        elapsed[rows++] = sqlite3_column_double(st, 0);
+    }
+    sqlite3_finalize(st);
+    CT_ASSERT_EQ(rows, 3);
+    CT_ASSERT_DBL_EQ(elapsed[0], 0.5, 0.0001);
+    CT_ASSERT_DBL_EQ(elapsed[1], 3.25, 0.0001);
+    CT_ASSERT_DBL_EQ(elapsed[2], 4.0, 0.0001);
     static const char bad_grade[] = "reviewed unfiled new-1 superb 2026-01-02 2.5 0.5\n";
     CT_ASSERT_EQ(e2e_run(&app, bad_grade, err), CT_SCRIPT_EXIT_RUN);
     CT_ASSERT(strstr(err, "unknown grade") != NULL);
@@ -737,7 +751,9 @@ CT_SUITE(e2e_run_due_in) {
                                 "cards_new unfiled\n"
                                 "cards_save\n";
     static const char today[] = "due_in unfiled new-1 0\n"
-                                "expect srs unfiled new-1 due == today\n";
+                                "expect srs unfiled new-1 due == today\n"
+                                "expect srs unfiled new-1 reps == 0\n"
+                                "expect srs unfiled new-1 lapses == 0\n";
     char text[sizeof setup + sizeof today];
     snprintf(text, sizeof text, "%s%s", setup, today);
     CT_ASSERT_EQ(e2e_run(&app, text, err), 0);
@@ -810,13 +826,40 @@ CT_SUITE(e2e_run_shot_render) {
                                "shot_review hidden build/test_shots/review_hidden.png\n"
                                "shot_review revealed build/test_shots/review_revealed.png\n"
                                "shot_cards edit unfiled build/test_shots/cards.png\n"
+                               "shot_cards browse unfiled build/test_shots/cards_browse.png\n"
+                               "shot_settings general build/test_shots/settings_general.png\n"
                                "shot_settings letters build/test_shots/settings.png\n"
                                "shot_settings bld build/test_shots/settings_bld.png\n"
                                "shot_stats build/test_shots/stats.png\n";
     CT_ASSERT_EQ(e2e_run(&app, text, err), 0);
-    const char *pngs[] = {
-        "menu",  "trainer",  "chart",        "case", "review_hidden", "review_revealed",
-        "cards", "settings", "settings_bld", "stats"};
+    static const char hidden_state[] = "shot_review hidden build/test_shots/rh.png\n";
+    CT_ASSERT_EQ(e2e_run(&app, hidden_state, err), 0);
+    CT_ASSERT(ct_screen_review_form()->revealed == false);
+    static const char revealed_state[] = "shot_review revealed build/test_shots/rr.png\n";
+    CT_ASSERT_EQ(e2e_run(&app, revealed_state, err), 0);
+    CT_ASSERT(ct_screen_review_form()->revealed == true);
+    static const char browse_state[] = "shot_cards browse unfiled build/test_shots/cb.png\n";
+    CT_ASSERT_EQ(e2e_run(&app, browse_state, err), 0);
+    CT_ASSERT(ct_screen_cards_form()->editing == false);
+    static const char edit_state[] = "shot_cards edit unfiled build/test_shots/ce.png\n";
+    CT_ASSERT_EQ(e2e_run(&app, edit_state, err), 0);
+    CT_ASSERT(ct_screen_cards_form()->editing == true);
+    const char *pngs[] = {"menu",
+                          "trainer",
+                          "chart",
+                          "case",
+                          "review_hidden",
+                          "review_revealed",
+                          "cards",
+                          "cards_browse",
+                          "settings",
+                          "settings_general",
+                          "settings_bld",
+                          "stats",
+                          "rh",
+                          "rr",
+                          "cb",
+                          "ce"};
     for (unsigned i = 0; i < sizeof pngs / sizeof pngs[0]; i++) {
         char path[CT_DB_PATH_MAX];
         snprintf(path, sizeof path, "build/test_shots/%s.png", pngs[i]);
