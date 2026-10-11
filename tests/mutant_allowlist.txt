@@ -984,3 +984,17 @@ src/render/anim.c:91	prefix negative clamp boundary is idempotent, at zero both 
 src/render/anim.c:101	ease lower clamp boundary is idempotent, at zero both arms return zero
 src/render/anim.c:104	ease upper clamp boundary is idempotent, at one both arms return one
 src/render/anim.c:107	ease branch boundary, the cubic curve is continuous at the half point so both arms return one half
+src/ui/widgets.c:10	negative count and cap literals widened by one flow into the clamped n and return the same minus one through the empty loop
+src/ui/widgets.c:13	prefix clamp ternary boundary is idempotent, at count equal to cap both arms store the same value
+src/ui/widgets.c:14	zero fast path, falling through reaches the empty loop and returns the same zero
+src/ui/widgets.c:22	max scan comparison at equality restores the same maximum, idempotent
+src/ui/widgets.c:27	bar value gate at zero, both arms of the ternary yield zero
+src/ui/widgets.c:40	zero rows and zero cols slip the weakened guard into the row bound or the pick clamps which reject them with the same minus one
+src/ui/widgets.c:55	zero cols slips the weakened pick guard into the clamps which return minus one, matching the guard outcome
+src/ui/widgets.c:64	pick col clamp reachable only when the coordinate reaches the far edge, which the bounds guard already rejects, defensive against float rounding
+src/ui/widgets.c:65	pick row clamp reachable only at the far edge the bounds guard rejects
+src/ui/widgets.c:67	pick row clamp reachable only at the far edge the bounds guard rejects
+src/ui/widgets.c:68	pick row clamp reachable only at the far edge the bounds guard rejects
+src/ui/widgets.c:75	accuracy lower clamp boundary is idempotent, at zero both arms store zero
+src/ui/widgets.c:78	accuracy upper clamp boundary is idempotent, at one both arms store one
+src/ui/widgets.c:84	color ramp is continuous at the half point, both arms yield full red and full green there

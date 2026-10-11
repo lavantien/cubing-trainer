@@ -389,6 +389,26 @@ CT_SUITE(stats_screen_chart_layout) {
     bars[0].bar.x = 777.0;
     CT_ASSERT_EQ(ct_chart_layout(b, vals, 4, NULL, 0), 0);
     CT_ASSERT_DBL_EQ(bars[0].bar.x, 777.0, 1e-12);
+
+    CT_ASSERT_EQ(ct_chart_layout(b, NULL, 1, bars, 4), -1);
+    CT_ASSERT_EQ(ct_chart_layout(b, vals, 2, NULL, 1), -1);
+
+    struct {
+        double guard_lo;
+        double boxed[3];
+        double guard_hi;
+    } box = {1.0e9, {1.0, INFINITY, 3.0}, 2.0e9};
+    struct {
+        ct_chart_bar guard;
+        ct_chart_bar bars[3];
+    } outbox;
+    outbox.guard.bar.x = 777.0;
+    outbox.bars[2].bar.x = 778.0;
+    CT_ASSERT_EQ(ct_chart_layout(b, box.boxed, 3, outbox.bars, 2), 2);
+    CT_ASSERT_DBL_EQ(outbox.bars[0].bar.height, 100.0 / 3.0, 1e-4);
+    CT_ASSERT_DBL_EQ(outbox.bars[1].bar.height, 0.0, 1e-12);
+    CT_ASSERT_DBL_EQ(outbox.bars[2].bar.x, 778.0, 1e-12);
+    CT_ASSERT_DBL_EQ(outbox.guard.bar.x, 777.0, 1e-12);
 }
 
 CT_SUITE(stats_screen_heatmap_grid) {
@@ -436,6 +456,19 @@ CT_SUITE(stats_screen_heatmap_grid) {
     r.x = 777.0;
     CT_ASSERT_EQ(ct_heatmap_cell(b, 6, 4, 0, &r), 0);
     CT_ASSERT_DBL_EQ(r.x, 0.0, 1e-9);
+
+    CT_ASSERT_EQ(ct_heatmap_cell(b, 1, 1, 0, &r), 0);
+    CT_ASSERT_EQ(ct_heatmap_pick(b, 1, 4, origin), 0);
+    CT_ASSERT_EQ(ct_heatmap_pick(b, 6, 1, origin), 0);
+    Vector2 exact_origin = {0.0f, 0.0f};
+    CT_ASSERT_EQ(ct_heatmap_pick(b, 6, 4, exact_origin), 0);
+    Vector2 bottom_edge = {100.0f, 300.0f};
+    CT_ASSERT_EQ(ct_heatmap_pick(b, 6, 4, bottom_edge), -1);
+
+    Rectangle shifted = {10.0f, 20.0f, 240.0f, 300.0f};
+    Vector2 shifted_center = {10.0f + 100.0f, 20.0f + 112.5f};
+    CT_ASSERT_EQ(ct_heatmap_pick(shifted, 6, 4, shifted_center), 8);
+    CT_ASSERT_EQ(ct_heatmap_pick(shifted, 6, 4, exact_origin), -1);
 }
 
 CT_SUITE(stats_screen_heatmap_color) {
