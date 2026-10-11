@@ -691,4 +691,23 @@ CT_SUITE(transform_edges) {
     CT_ASSERT_EQ(out[0].quarter, 2);
     CT_ASSERT_EQ(ct_transform_mirror(half, 1, out), 1);
     CT_ASSERT_EQ(out[0].quarter, 2);
+
+    ct_move over_quarter[1] = {{CT_FACE_U, 1, 1, CT_MOVE_QUARTERS}};
+    CT_ASSERT_EQ(ct_transform_inverse(over_quarter, 1, out), -1);
+    CT_ASSERT_EQ(ct_transform_mirror(over_quarter, 1, out), -1);
+    ct_move zero_depth[1] = {{CT_FACE_U, 0, 0, 1}};
+    CT_ASSERT_EQ(ct_transform_inverse(zero_depth, 1, out), -1);
+    CT_ASSERT_EQ(ct_transform_rotate_y(zero_depth, 1, 1, out), -1);
+
+    CT_ASSERT_EQ(ct_transform_inverse(NULL, 0, NULL), 0);
+    CT_ASSERT_EQ(ct_transform_mirror(NULL, 0, NULL), 0);
+    CT_ASSERT_EQ(ct_transform_rotate_y(NULL, 0, 2, NULL), 0);
+    CT_ASSERT_EQ(ct_transform_simplify(NULL, 0, NULL, 0), 0);
+
+    CT_ASSERT_EQ(ct_transform_conjugate(alg, -1, alg, 0, out, 8), -1);
+    CT_ASSERT_EQ(ct_transform_conjugate(alg, 1, alg, -1, out, 8), -1);
+    CT_ASSERT_EQ(ct_transform_conjugate(alg, 1, alg, 1, out, 3), 3);
+    CT_ASSERT_EQ(ct_transform_conjugate(alg, 0, alg, 1, NULL, 1), -1);
+    CT_ASSERT_EQ(ct_transform_conjugate(alg, 0, alg, 0, NULL, 0), 0);
+    CT_ASSERT_EQ(ct_transform_simplify(alg, -1, out, 4), -1);
 }

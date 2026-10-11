@@ -1031,3 +1031,9 @@ src/engine/notation.c:152	input error code minus one is unreachable inside the l
 src/engine/notation.c:169	zero depth passes the weakened bound into the shape ladder which rejects it at the final else with the same move error
 src/engine/notation.c:205	lone move list guard widened, the single read is rejected by the per move null guard inside format one with the same input error
 src/engine/notation.c:211	input error code minus one is unreachable from the loop caller, and a successful format returns at least one so a zero result never occurs
+src/engine/transform.c:28	negative count slips the weakened guard and returns itself unchanged through the empty loop
+src/engine/transform.c:39	negative count slips the weakened guard and returns itself unchanged through the empty loop
+src/engine/transform.c:51	negative count slips the weakened guard and returns itself unchanged through the empty loop
+src/engine/transform.c:65	conjugate cap minus one flows into the total bound which rejects every nonnegative total the same way
+src/engine/transform.c:83	cap minus one flows into the output bound which rejects every nonnegative count the same way
+src/engine/transform.c:91	empty stack probe reads below the local array where no reachable call sequence places a matching face and depth tuple, the merge loop exits immediately
