@@ -1,0 +1,1068 @@
+mutate: suite geometry_identity exited 1
+build/mutants/p46492/m0002_geometry.c:7:35: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+    7 |     return n >= CT_GEOMETRY_MIN_N || n <= CT_GEOMETRY_MAX_N;
+      |            ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+build/mutants/p46492/m0021_geometry.c:23:51: error: expected ')'
+   23 | static int geo_decode(int move_id, int n, ct_move /out) {
+      |                                                   ^
+build/mutants/p46492/m0021_geometry.c:23:22: note: to match this '('
+   23 | static int geo_decode(int move_id, int n, ct_move /out) {
+      |                      ^
+build/mutants/p46492/m0021_geometry.c:24:28: error: use of undeclared identifier 'out'
+   24 |     if (!geo_valid_n(n) || out == NULL || move_id < 0 ||
+      |                            ^~~
+build/mutants/p46492/m0021_geometry.c:41:6: error: use of undeclared identifier 'out'
+   41 |     *out = (ct_move){face, from, from + pair, quarter};
+      |      ^~~
+build/mutants/p46492/m0021_geometry.c:74:32: error: passing 'ct_move *' to parameter of incompatible type 'ct_move'; remove &
+   74 |     if (geo_decode(move_id, n, &m) != 0) {
+      |                                ^~
+build/mutants/p46492/m0021_geometry.c:23:51: note: passing argument to parameter here
+   23 | static int geo_decode(int move_id, int n, ct_move /out) {
+      |                                                   ^
+build/mutants/p46492/m0021_geometry.c:117:32: error: passing 'ct_move *' to parameter of incompatible type 'ct_move'; remove &
+  117 |     if (geo_decode(move_id, n, &m) != 0) {
+      |                                ^~
+build/mutants/p46492/m0021_geometry.c:23:51: note: passing argument to parameter here
+   23 | static int geo_decode(int move_id, int n, ct_move /out) {
+      |                                                   ^
+build/mutants/p46492/m0021_geometry.c:160:32: error: passing 'ct_move *' to parameter of incompatible type 'ct_move'; remove &
+  160 |     if (geo_decode(move_id, n, &m) != 0) {
+      |                                ^~
+build/mutants/p46492/m0021_geometry.c:23:51: note: passing argument to parameter here
+   23 | static int geo_decode(int move_id, int n, ct_move /out) {
+      |                                                   ^
+6 errors generated.
+mutate: suite geometry_perm exited 1
+build/mutants/p46492/m0023_geometry.c:24:25: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   24 |     if (!geo_valid_n(n) && out == NULL || move_id < 0 ||
+      |         ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build/mutants/p46492/m0023_geometry.c:24:25: note: place parentheses around the '&&' expression to silence this warning
+   24 |     if (!geo_valid_n(n) && out == NULL || move_id < 0 ||
+      |         ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite geometry_perm exited 1
+build/mutants/p46492/m0025_geometry.c:24:40: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   24 |     if (!geo_valid_n(n) || out == NULL && move_id < 0 ||
+      |                         ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~
+build/mutants/p46492/m0025_geometry.c:24:40: note: place parentheses around the '&&' expression to silence this warning
+   24 |     if (!geo_valid_n(n) || out == NULL && move_id < 0 ||
+      |                                        ^
+      |                            (                         )
+1 error generated.
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_guards exited 1
+build/mutants/p46492/m0029_geometry.c:24:55: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   24 |     if (!geo_valid_n(n) || out == NULL || move_id < 0 &&
+      |                                        ~~ ~~~~~~~~~~~~^~
+   25 |         move_id >= geo_block(n) * CT_CUBE_FACE_COUNT) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p46492/m0029_geometry.c:24:55: note: place parentheses around the '&&' expression to silence this warning
+   24 |     if (!geo_valid_n(n) || out == NULL || move_id < 0 &&
+      |                                                       ^
+      |                                           (
+   25 |         move_id >= geo_block(n) * CT_CUBE_FACE_COUNT) {
+      |                                                     
+      |                                                     )
+1 error generated.
+mutate: suite geometry_fuzz exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited -1073741795
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited -1073741795
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited -1073741795
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited -1073741795
+build/mutants/p46492/m0050_geometry.c:41:5: error: expected expression
+   41 |     /out = (ct_move){face, from, from + pair, quarter};
+      |     ^
+1 error generated.
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+build/mutants/p46492/m0055_geometry.c:45:37: error: expected ')'
+   45 | static int geo_encode(const ct_move /m, int n) {
+      |                                     ^
+build/mutants/p46492/m0055_geometry.c:45:22: note: to match this '('
+   45 | static int geo_encode(const ct_move /m, int n) {
+      |                      ^
+build/mutants/p46492/m0055_geometry.c:46:22: error: use of undeclared identifier 'n'
+   46 |     if (!geo_valid_n(n) || m == NULL || m->depth_to > geo_half(n)) {
+      |                      ^
+build/mutants/p46492/m0055_geometry.c:46:28: error: use of undeclared identifier 'm'
+   46 |     if (!geo_valid_n(n) || m == NULL || m->depth_to > geo_half(n)) {
+      |                            ^
+build/mutants/p46492/m0055_geometry.c:46:41: error: use of undeclared identifier 'm'
+   46 |     if (!geo_valid_n(n) || m == NULL || m->depth_to > geo_half(n)) {
+      |                                         ^
+build/mutants/p46492/m0055_geometry.c:46:64: error: use of undeclared identifier 'n'
+   46 |     if (!geo_valid_n(n) || m == NULL || m->depth_to > geo_half(n)) {
+      |                                                                ^
+build/mutants/p46492/m0055_geometry.c:49:25: error: use of undeclared identifier 'n'
+   49 |     int half = geo_half(n);
+      |                         ^
+build/mutants/p46492/m0055_geometry.c:50:19: error: use of undeclared identifier 'm'
+   50 |     int before = (m->depth_from - 1) * half - (m->depth_from - 1) * (m->depth_from - 2) / 2;
+      |                   ^
+build/mutants/p46492/m0055_geometry.c:50:48: error: use of undeclared identifier 'm'
+   50 |     int before = (m->depth_from - 1) * half - (m->depth_from - 1) * (m->depth_from - 2) / 2;
+      |                                                ^
+build/mutants/p46492/m0055_geometry.c:50:70: error: use of undeclared identifier 'm'
+   50 |     int before = (m->depth_from - 1) * half - (m->depth_from - 1) * (m->depth_from - 2) / 2;
+      |                                                                      ^
+build/mutants/p46492/m0055_geometry.c:51:26: error: use of undeclared identifier 'm'
+   51 |     int pair = before + (m->depth_to - m->depth_from);
+      |                          ^
+build/mutants/p46492/m0055_geometry.c:51:40: error: use of undeclared identifier 'm'
+   51 |     int pair = before + (m->depth_to - m->depth_from);
+      |                                        ^
+build/mutants/p46492/m0055_geometry.c:52:12: error: use of undeclared identifier 'm'
+   52 |     return m->face * geo_block(n) + pair * (CT_MOVE_QUARTERS - 1) + (m->quarter - 1);
+      |            ^
+build/mutants/p46492/m0055_geometry.c:52:32: error: use of undeclared identifier 'n'
+   52 |     return m->face * geo_block(n) + pair * (CT_MOVE_QUARTERS - 1) + (m->quarter - 1);
+      |                                ^
+build/mutants/p46492/m0055_geometry.c:52:70: error: use of undeclared identifier 'm'
+   52 |     return m->face * geo_block(n) + pair * (CT_MOVE_QUARTERS - 1) + (m->quarter - 1);
+      |                                                                      ^
+build/mutants/p46492/m0055_geometry.c:133:29: error: too many arguments to function call, expected 1, have 2
+  133 |     int id = geo_encode(&m, n);
+      |              ~~~~~~~~~~     ^
+build/mutants/p46492/m0055_geometry.c:45:12: note: 'geo_encode' declared here
+   45 | static int geo_encode(const ct_move /m, int n) {
+      |            ^          ~~~~~~~~~~~~~
+15 errors generated.
+mutate: suite geometry_ordering exited 1
+build/mutants/p46492/m0057_geometry.c:46:25: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   46 |     if (!geo_valid_n(n) && m == NULL || m->depth_to > geo_half(n)) {
+      |         ~~~~~~~~~~~~~~~~^~~~~~~~~~~~ ~~
+build/mutants/p46492/m0057_geometry.c:46:25: note: place parentheses around the '&&' expression to silence this warning
+   46 |     if (!geo_valid_n(n) && m == NULL || m->depth_to > geo_half(n)) {
+      |         ~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+1 error generated.
+mutate: suite geometry_ordering exited 1
+build/mutants/p46492/m0059_geometry.c:46:38: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   46 |     if (!geo_valid_n(n) || m == NULL && m->depth_to > geo_half(n)) {
+      |                         ~~ ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p46492/m0059_geometry.c:46:38: note: place parentheses around the '&&' expression to silence this warning
+   46 |     if (!geo_valid_n(n) || m == NULL && m->depth_to > geo_half(n)) {
+      |                                      ^                           
+      |                            (                                     )
+1 error generated.
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_token exited 1
+mutate: suite geometry_ordering exited -1073741795
+mutate: scope=src/engine/geometry.c files=1 sites=220 suites=9
+KILLED    m0001 src/engine/geometry.c:7 [cmp >= -> >]
+KILLED    m0002 src/engine/geometry.c:7 [logic && -> ||]
+          build break
+KILLED    m0003 src/engine/geometry.c:7 [cmp <= -> <]
+KILLED    m0004 src/engine/geometry.c:11 [arith + -> -]
+KILLED    m0005 src/engine/geometry.c:11 [int+1 1 -> 2]
+KILLED    m0006 src/engine/geometry.c:11 [int-1 1 -> 0]
+KILLED    m0007 src/engine/geometry.c:11 [arith / -> *]
+KILLED    m0008 src/engine/geometry.c:11 [int+1 2 -> 3]
+KILLED    m0009 src/engine/geometry.c:11 [int-1 2 -> 1]
+KILLED    m0010 src/engine/geometry.c:16 [arith * -> /]
+KILLED    m0011 src/engine/geometry.c:16 [arith + -> -]
+KILLED    m0012 src/engine/geometry.c:16 [int+1 1 -> 2]
+KILLED    m0013 src/engine/geometry.c:16 [int-1 1 -> 0]
+KILLED    m0014 src/engine/geometry.c:16 [arith / -> *]
+KILLED    m0015 src/engine/geometry.c:16 [int+1 2 -> 3]
+KILLED    m0016 src/engine/geometry.c:16 [int-1 2 -> 1]
+KILLED    m0017 src/engine/geometry.c:20 [arith * -> /]
+KILLED    m0018 src/engine/geometry.c:20 [arith - -> +]
+KILLED    m0019 src/engine/geometry.c:20 [int+1 1 -> 2]
+KILLED    m0020 src/engine/geometry.c:20 [int-1 1 -> 0]
+KILLED    m0021 src/engine/geometry.c:23 [arith * -> /]
+          build break
+KILLED    m0022 src/engine/geometry.c:24 [not-del ! -> (deleted)]
+KILLED    m0023 src/engine/geometry.c:24 [logic || -> &&]
+          build break
+KILLED    m0024 src/engine/geometry.c:24 [cmp == -> !=]
+KILLED    m0025 src/engine/geometry.c:24 [logic || -> &&]
+          build break
+KILLED    m0026 src/engine/geometry.c:24 [cmp < -> <=]
+KILLED    m0027 src/engine/geometry.c:24 [int+1 0 -> 1]
+KILLED    m0028 src/engine/geometry.c:24 [int-1 0 -> -1]
+KILLED    m0029 src/engine/geometry.c:24 [logic || -> &&]
+          build break
+KILLED    m0030 src/engine/geometry.c:25 [cmp >= -> >]
+KILLED    m0031 src/engine/geometry.c:25 [arith * -> /]
+KILLED    m0032 src/engine/geometry.c:30 [arith / -> *]
+KILLED    m0033 src/engine/geometry.c:32 [arith / -> *]
+KILLED    m0034 src/engine/geometry.c:32 [arith - -> +]
+KILLED    m0035 src/engine/geometry.c:32 [int+1 1 -> 2]
+KILLED    m0036 src/engine/geometry.c:32 [int-1 1 -> 0]
+KILLED    m0037 src/engine/geometry.c:33 [arith - -> +]
+KILLED    m0038 src/engine/geometry.c:33 [int+1 1 -> 2]
+KILLED    m0039 src/engine/geometry.c:33 [int-1 1 -> 0]
+KILLED    m0040 src/engine/geometry.c:33 [arith + -> -]
+KILLED    m0041 src/engine/geometry.c:33 [int+1 1 -> 2]
+KILLED    m0042 src/engine/geometry.c:33 [int-1 1 -> 0]
+KILLED    m0043 src/engine/geometry.c:35 [int+1 1 -> 2]
+KILLED    m0044 src/engine/geometry.c:35 [int-1 1 -> 0]
+KILLED    m0045 src/engine/geometry.c:36 [cmp >= -> >]
+KILLED    m0046 src/engine/geometry.c:39 [arith - -> +]
+KILLED    m0047 src/engine/geometry.c:39 [arith + -> -]
+KILLED    m0048 src/engine/geometry.c:39 [int+1 1 -> 2]
+KILLED    m0049 src/engine/geometry.c:39 [int-1 1 -> 0]
+KILLED    m0050 src/engine/geometry.c:41 [arith * -> /]
+          build break
+KILLED    m0051 src/engine/geometry.c:41 [arith + -> -]
+KILLED    m0052 src/engine/geometry.c:42 [ret-lit 0 -> 1]
+KILLED    m0053 src/engine/geometry.c:42 [int+1 0 -> 1]
+KILLED    m0054 src/engine/geometry.c:42 [int-1 0 -> -1]
+KILLED    m0055 src/engine/geometry.c:45 [arith * -> /]
+          build break
+KILLED    m0056 src/engine/geometry.c:46 [not-del ! -> (deleted)]
+KILLED    m0057 src/engine/geometry.c:46 [logic || -> &&]
+          build break
+KILLED    m0058 src/engine/geometry.c:46 [cmp == -> !=]
+KILLED    m0059 src/engine/geometry.c:46 [logic || -> &&]
+          build break
+KILLED    m0060 src/engine/geometry.c:46 [cmp > -> >=]
+KILLED    m0061 src/engine/geometry.c:50 [arith - -> +]
+KILLED    m0062 src/engine/geometry.c:50 [int+1 1 -> 2]
+KILLED    m0063 src/engine/geometry.c:50 [int-1 1 -> 0]
+KILLED    m0064 src/engine/geometry.c:50 [arith * -> /]
+KILLED    m0065 src/engine/geometry.c:50 [arith - -> +]
+KILLED    m0066 src/engine/geometry.c:50 [arith - -> +]
+KILLED    m0067 src/engine/geometry.c:50 [int+1 1 -> 2]
+KILLED    m0068 src/engine/geometry.c:50 [int-1 1 -> 0]
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+mutate: suite geometry_identity exited 1
+build/mutants/p46492/m0093_geometry.c:69:48: error: expected ')'
+   69 | static int nxn_move_facelets(const ct_geometry /g, int move_id, int n, uint8_t *perm) {
+      |                                                ^
+build/mutants/p46492/m0093_geometry.c:69:29: note: to match this '('
+   69 | static int nxn_move_facelets(const ct_geometry /g, int move_id, int n, uint8_t *perm) {
+      |                             ^
+build/mutants/p46492/m0093_geometry.c:70:9: error: use of undeclared identifier 'g'
+   70 |     if (g == NULL || perm == NULL || n < CT_GEOMETRY_MIN_N || n > CT_GEOMETRY_PERM_MAX_N) {
+      |         ^
+build/mutants/p46492/m0093_geometry.c:70:22: error: use of undeclared identifier 'perm'
+   70 |     if (g == NULL || perm == NULL || n < CT_GEOMETRY_MIN_N || n > CT_GEOMETRY_PERM_MAX_N) {
+      |                      ^~~~
+build/mutants/p46492/m0093_geometry.c:70:38: error: use of undeclared identifier 'n'
+   70 |     if (g == NULL || perm == NULL || n < CT_GEOMETRY_MIN_N || n > CT_GEOMETRY_PERM_MAX_N) {
+      |                                      ^
+build/mutants/p46492/m0093_geometry.c:70:63: error: use of undeclared identifier 'n'
+   70 |     if (g == NULL || perm == NULL || n < CT_GEOMETRY_MIN_N || n > CT_GEOMETRY_PERM_MAX_N) {
+      |                                                               ^
+build/mutants/p46492/m0093_geometry.c:74:20: error: use of undeclared identifier 'move_id'
+   74 |     if (geo_decode(move_id, n, &m) != 0) {
+      |                    ^~~~~~~
+build/mutants/p46492/m0093_geometry.c:74:29: error: use of undeclared identifier 'n'
+   74 |     if (geo_decode(move_id, n, &m) != 0) {
+      |                             ^
+build/mutants/p46492/m0093_geometry.c:78:12: error: use of undeclared identifier 'perm'
+   78 |     memset(perm, 0, sizeof c.facelet);
+      |            ^~~~
+build/mutants/p46492/m0093_geometry.c:79:11: error: use of undeclared identifier 'n'
+   79 |     c.n = n;
+      |           ^
+build/mutants/p46492/m0093_geometry.c:81:33: error: use of undeclared identifier 'n'
+   81 |         for (int row = 0; row < n; row++) {
+      |                                 ^
+build/mutants/p46492/m0093_geometry.c:82:37: error: use of undeclared identifier 'n'
+   82 |             for (int col = 0; col < n; col++) {
+      |                                     ^
+build/mutants/p46492/m0093_geometry.c:84:38: error: use of undeclared identifier 'n'
+   84 |                     (uint8_t)(face * n * n + row * n + col);
+      |                                      ^
+build/mutants/p46492/m0093_geometry.c:84:42: error: use of undeclared identifier 'n'
+   84 |                     (uint8_t)(face * n * n + row * n + col);
+      |                                          ^
+build/mutants/p46492/m0093_geometry.c:84:52: error: use of undeclared identifier 'n'
+   84 |                     (uint8_t)(face * n * n + row * n + col);
+      |                                                    ^
+build/mutants/p46492/m0093_geometry.c:90:33: error: use of undeclared identifier 'n'
+   90 |         for (int row = 0; row < n; row++) {
+      |                                 ^
+build/mutants/p46492/m0093_geometry.c:91:37: error: use of undeclared identifier 'n'
+   91 |             for (int col = 0; col < n; col++) {
+      |                                     ^
+build/mutants/p46492/m0093_geometry.c:92:17: error: use of undeclared identifier 'perm'
+   92 |                 perm[c.facelet[face * CT_CUBE_STRIDE * CT_CUBE_STRIDE + row * CT_CUBE_STRIDE +
+      |                 ^~~~
+build/mutants/p46492/m0093_geometry.c:93:57: error: use of undeclared identifier 'n'
+   93 |                                col]] = (uint8_t)(face * n * n + row * n + col);
+      |                                                         ^
+build/mutants/p46492/m0093_geometry.c:93:61: error: use of undeclared identifier 'n'
+   93 |                                col]] = (uint8_t)(face * n * n + row * n + col);
+      |                                                             ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build/mutants/p46492/m0094_geometry.c:69:80: error: expected ')'
+   69 | static int nxn_move_facelets(const ct_geometry *g, int move_id, int n, uint8_t /perm) {
+      |                                                                                ^
+build/mutants/p46492/m0094_geometry.c:69:29: note: to match this '('
+   69 | static int nxn_move_facelets(const ct_geometry *g, int move_id, int n, uint8_t /perm) {
+      |                             ^
+build/mutants/p46492/m0094_geometry.c:70:22: error: use of undeclared identifier 'perm'
+   70 |     if (g == NULL || perm == NULL || n < CT_GEOMETRY_MIN_N || n > CT_GEOMETRY_PERM_MAX_N) {
+      |                      ^~~~
+build/mutants/p46492/m0094_geometry.c:78:12: error: use of undeclared identifier 'perm'
+   78 |     memset(perm, 0, sizeof c.facelet);
+      |            ^~~~
+build/mutants/p46492/m0094_geometry.c:92:17: error: use of undeclared identifier 'perm'
+   92 |                 perm[c.facelet[face * CT_CUBE_STRIDE * CT_CUBE_STRIDE + row * CT_CUBE_STRIDE +
+      |                 ^~~~
+build/mutants/p46492/m0094_geometry.c:145:22: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, int, int, uint8_t *)' (aka 'int (*)(const struct ct_geometry *, int, int, unsigned char *)') with an expression of type 'int (const ct_geometry *, int, int, uint8_t)' (aka 'int (const struct ct_geometry *, int, int, unsigned char)') [-Wincompatible-function-pointer-types]
+  145 |     .move_facelets = nxn_move_facelets,
+      |                      ^~~~~~~~~~~~~~~~~
+5 errors generated.
+mutate: suite geometry_perm exited 1
+build/mutants/p46492/m0096_geometry.c:70:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   70 |     if (g == NULL && perm == NULL || n < CT_GEOMETRY_MIN_N || n > CT_GEOMETRY_PERM_MAX_N) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~ ~~
+build/mutants/p46492/m0096_geometry.c:70:19: note: place parentheses around the '&&' expression to silence this warning
+   70 |     if (g == NULL && perm == NULL || n < CT_GEOMETRY_MIN_N || n > CT_GEOMETRY_PERM_MAX_N) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite geometry_perm exited 1
+build/mutants/p46492/m0098_geometry.c:70:35: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   70 |     if (g == NULL || perm == NULL && n < CT_GEOMETRY_MIN_N || n > CT_GEOMETRY_PERM_MAX_N) {
+      |                   ~~ ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p46492/m0098_geometry.c:70:35: note: place parentheses around the '&&' expression to silence this warning
+   70 |     if (g == NULL || perm == NULL && n < CT_GEOMETRY_MIN_N || n > CT_GEOMETRY_PERM_MAX_N) {
+      |                                   ^
+      |                      (                                    )
+1 error generated.
+mutate: suite geometry_perm exited 1
+build/mutants/p46492/m0100_geometry.c:70:60: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   70 |     if (g == NULL || perm == NULL || n < CT_GEOMETRY_MIN_N && n > CT_GEOMETRY_PERM_MAX_N) {
+      |                                   ~~ ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p46492/m0100_geometry.c:70:60: note: place parentheses around the '&&' expression to silence this warning
+   70 |     if (g == NULL || perm == NULL || n < CT_GEOMETRY_MIN_N && n > CT_GEOMETRY_PERM_MAX_N) {
+      |                                                            ^                            
+      |                                      (                                                  )
+build/mutants/p46492/m0100_geometry.c:70:60: error: non-overlapping comparisons always evaluate to false [-Werror,-Wtautological-overlap-compare]
+   70 |     if (g == NULL || perm == NULL || n < CT_GEOMETRY_MIN_N && n > CT_GEOMETRY_PERM_MAX_N) {
+      |                                      ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2 errors generated.
+mutate: suite geometry_fuzz exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+KILLED    m0069 src/engine/geometry.c:50 [arith * -> /]
+KILLED    m0070 src/engine/geometry.c:50 [arith - -> +]
+KILLED    m0071 src/engine/geometry.c:50 [int+1 2 -> 3]
+KILLED    m0072 src/engine/geometry.c:50 [int-1 2 -> 1]
+KILLED    m0073 src/engine/geometry.c:50 [arith / -> *]
+KILLED    m0074 src/engine/geometry.c:50 [int+1 2 -> 3]
+KILLED    m0075 src/engine/geometry.c:50 [int-1 2 -> 1]
+KILLED    m0076 src/engine/geometry.c:51 [arith + -> -]
+KILLED    m0077 src/engine/geometry.c:51 [arith - -> +]
+KILLED    m0078 src/engine/geometry.c:52 [arith * -> /]
+KILLED    m0079 src/engine/geometry.c:52 [arith + -> -]
+KILLED    m0080 src/engine/geometry.c:52 [arith * -> /]
+KILLED    m0081 src/engine/geometry.c:52 [arith - -> +]
+KILLED    m0082 src/engine/geometry.c:52 [int+1 1 -> 2]
+KILLED    m0083 src/engine/geometry.c:52 [int-1 1 -> 0]
+KILLED    m0084 src/engine/geometry.c:52 [arith + -> -]
+KILLED    m0085 src/engine/geometry.c:52 [arith - -> +]
+KILLED    m0086 src/engine/geometry.c:52 [int+1 1 -> 2]
+KILLED    m0087 src/engine/geometry.c:52 [int-1 1 -> 0]
+KILLED    m0088 src/engine/geometry.c:56 [not-del ! -> (deleted)]
+KILLED    m0089 src/engine/geometry.c:59 [arith * -> /]
+KILLED    m0090 src/engine/geometry.c:59 [arith * -> /]
+KILLED    m0091 src/engine/geometry.c:63 [not-del ! -> (deleted)]
+KILLED    m0092 src/engine/geometry.c:66 [arith * -> /]
+KILLED    m0093 src/engine/geometry.c:69 [arith * -> /]
+          build break
+KILLED    m0094 src/engine/geometry.c:69 [arith * -> /]
+          build break
+KILLED    m0095 src/engine/geometry.c:70 [cmp == -> !=]
+KILLED    m0096 src/engine/geometry.c:70 [logic || -> &&]
+          build break
+KILLED    m0097 src/engine/geometry.c:70 [cmp == -> !=]
+KILLED    m0098 src/engine/geometry.c:70 [logic || -> &&]
+          build break
+KILLED    m0099 src/engine/geometry.c:70 [cmp < -> <=]
+KILLED    m0100 src/engine/geometry.c:70 [logic || -> &&]
+          build break
+KILLED    m0101 src/engine/geometry.c:70 [cmp > -> >=]
+KILLED    m0102 src/engine/geometry.c:74 [cmp != -> ==]
+KILLED    m0103 src/engine/geometry.c:74 [int+1 0 -> 1]
+KILLED    m0104 src/engine/geometry.c:74 [int-1 0 -> -1]
+KILLED    m0105 src/engine/geometry.c:78 [int+1 0 -> 1]
+KILLED    m0106 src/engine/geometry.c:78 [int-1 0 -> -1]
+KILLED    m0107 src/engine/geometry.c:80 [int+1 0 -> 1]
+KILLED    m0108 src/engine/geometry.c:80 [int-1 0 -> -1]
+KILLED    m0109 src/engine/geometry.c:80 [cmp < -> <=]
+KILLED    m0110 src/engine/geometry.c:81 [int+1 0 -> 1]
+KILLED    m0111 src/engine/geometry.c:81 [int-1 0 -> -1]
+SURVIVED  m0112 src/engine/geometry.c:81 [cmp < -> <=]
+KILLED    m0113 src/engine/geometry.c:82 [int+1 0 -> 1]
+KILLED    m0114 src/engine/geometry.c:82 [int-1 0 -> -1]
+SURVIVED  m0115 src/engine/geometry.c:82 [cmp < -> <=]
+KILLED    m0116 src/engine/geometry.c:83 [arith * -> /]
+KILLED    m0117 src/engine/geometry.c:83 [arith * -> /]
+KILLED    m0118 src/engine/geometry.c:83 [arith + -> -]
+KILLED    m0119 src/engine/geometry.c:83 [arith * -> /]
+KILLED    m0120 src/engine/geometry.c:83 [arith + -> -]
+KILLED    m0121 src/engine/geometry.c:84 [arith * -> /]
+KILLED    m0122 src/engine/geometry.c:84 [arith * -> /]
+KILLED    m0123 src/engine/geometry.c:84 [arith + -> -]
+KILLED    m0124 src/engine/geometry.c:84 [arith * -> /]
+KILLED    m0125 src/engine/geometry.c:84 [arith + -> -]
+KILLED    m0126 src/engine/geometry.c:89 [int+1 0 -> 1]
+KILLED    m0127 src/engine/geometry.c:89 [int-1 0 -> -1]
+KILLED    m0128 src/engine/geometry.c:89 [cmp < -> <=]
+KILLED    m0129 src/engine/geometry.c:90 [int+1 0 -> 1]
+KILLED    m0130 src/engine/geometry.c:90 [int-1 0 -> -1]
+KILLED    m0131 src/engine/geometry.c:90 [cmp < -> <=]
+KILLED    m0132 src/engine/geometry.c:91 [int+1 0 -> 1]
+KILLED    m0133 src/engine/geometry.c:91 [int-1 0 -> -1]
+KILLED    m0134 src/engine/geometry.c:91 [cmp < -> <=]
+KILLED    m0135 src/engine/geometry.c:92 [arith * -> /]
+KILLED    m0136 src/engine/geometry.c:92 [arith * -> /]
+KILLED    m0137 src/engine/geometry.c:92 [arith + -> -]
+KILLED    m0138 src/engine/geometry.c:92 [arith * -> /]
+KILLED    m0139 src/engine/geometry.c:92mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+mutate: suite geometry_perm exited 1
+build/mutants/p46492/m0148_geometry.c:100:51: error: expected ')'
+  100 | static int nxn_sticker_geometry(const ct_geometry /g, int sticker, int n, ct_v3 *pos,
+      |                                                   ^
+build/mutants/p46492/m0148_geometry.c:100:32: note: to match this '('
+  100 | static int nxn_sticker_geometry(const ct_geometry /g, int sticker, int n, ct_v3 *pos,
+      |                                ^
+build/mutants/p46492/m0148_geometry.c:102:9: error: use of undeclared identifier 'g'
+  102 |     if (g == NULL || pos == NULL || normal == NULL || !geo_valid_n(n) || sticker < 0 ||
+      |         ^
+build/mutants/p46492/m0148_geometry.c:102:22: error: use of undeclared identifier 'pos'
+  102 |     if (g == NULL || pos == NULL || normal == NULL || !geo_valid_n(n) || sticker < 0 ||
+      |                      ^~~
+build/mutants/p46492/m0148_geometry.c:102:37: error: use of undeclared identifier 'normal'
+  102 |     if (g == NULL || pos == NULL || normal == NULL || !geo_valid_n(n) || sticker < 0 ||
+      |                                     ^~~~~~
+build/mutants/p46492/m0148_geometry.c:102:68: error: use of undeclared identifier 'n'
+  102 |     if (g == NULL || pos == NULL || normal == NULL || !geo_valid_n(n) || sticker < 0 ||
+      |                                                                    ^
+build/mutants/p46492/m0148_geometry.c:102:74: error: use of undeclared identifier 'sticker'
+  102 |     if (g == NULL || pos == NULL || normal == NULL || !geo_valid_n(n) || sticker < 0 ||
+      |                                                                          ^~~~~~~
+build/mutants/p46492/m0148_geometry.c:103:9: error: use of undeclared identifier 'sticker'
+  103 |         sticker >= CT_CUBE_FACE_COUNT * n * n) {
+      |         ^~~~~~~
+build/mutants/p46492/m0148_geometry.c:103:41: error: use of undeclared identifier 'n'
+  103 |         sticker >= CT_CUBE_FACE_COUNT * n * n) {
+      |                                         ^
+build/mutants/p46492/m0148_geometry.c:103:45: error: use of undeclared identifier 'n'
+  103 |         sticker >= CT_CUBE_FACE_COUNT * n * n) {
+      |                                             ^
+build/mutants/p46492/m0148_geometry.c:106:16: error: use of undeclared identifier 'sticker'
+  106 |     int face = sticker / (n * n);
+      |                ^~~~~~~
+build/mutants/p46492/m0148_geometry.c:106:27: error: use of undeclared identifier 'n'
+  106 |     int face = sticker / (n * n);
+      |                           ^
+build/mutants/p46492/m0148_geometry.c:106:31: error: use of undeclared identifier 'n'
+  106 |     int face = sticker / (n * n);
+      |                               ^
+build/mutants/p46492/m0148_geometry.c:107:16: error: use of undeclared identifier 'sticker'
+  107 |     int cell = sticker % (n * n);
+      |                ^~~~~~~
+build/mutants/p46492/m0148_geometry.c:107:27: error: use of undeclared identifier 'n'
+  107 |     int cell = sticker % (n * n);
+      |                           ^
+build/mutants/p46492/m0148_geometry.c:107:31: error: use of undeclared identifier 'n'
+  107 |     int cell = sticker % (n * n);
+      |                               ^
+build/mutants/p46492/m0148_geometry.c:108:22: error: use of undeclared identifier 'n'
+  108 |     ct_sticker_world(n, face, cell / n, cell % n, pos, normal);
+      |                      ^
+build/mutants/p46492/m0148_geometry.c:108:38: error: use of undeclared identifier 'n'
+  108 |     ct_sticker_world(n, face, cell / n, cell % n, pos, normal);
+      |                                      ^
+build/mutants/p46492/m0148_geometry.c:108:48: error: use of undeclared identifier 'n'
+  108 |     ct_sticker_world(n, face, cell / n, cell % n, pos, normal);
+      |                                                ^
+build/mutants/p46492/m0148_geometry.c:108:51: error: use of undeclared identifier 'pos'
+  108 |     ct_sticker_world(n, face, cell / n, cell % n, pos, normal);
+      |                                                   ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build/mutants/p46492/m0149_geometry.c:100:81: error: expected ')'
+  100 | static int nxn_sticker_geometry(const ct_geometry *g, int sticker, int n, ct_v3 /pos,
+      |                                                                                 ^
+build/mutants/p46492/m0149_geometry.c:100:32: note: to match this '('
+  100 | static int nxn_sticker_geometry(const ct_geometry *g, int sticker, int n, ct_v3 /pos,
+      |                                ^
+build/mutants/p46492/m0149_geometry.c:102:22: error: use of undeclared identifier 'pos'
+  102 |     if (g == NULL || pos == NULL || normal == NULL || !geo_valid_n(n) || sticker < 0 ||
+      |                      ^~~
+build/mutants/p46492/m0149_geometry.c:102:37: error: use of undeclared identifier 'normal'
+  102 |     if (g == NULL || pos == NULL || normal == NULL || !geo_valid_n(n) || sticker < 0 ||
+      |                                     ^~~~~~
+build/mutants/p46492/m0149_geometry.c:108:51: error: use of undeclared identifier 'pos'
+  108 |     ct_sticker_world(n, face, cell / n, cell % n, pos, normal);
+      |                                                   ^~~
+build/mutants/p46492/m0149_geometry.c:108:56: error: use of undeclared identifier 'normal'
+  108 |     ct_sticker_world(n, face, cell / n, cell % n, pos, normal);
+      |                                                        ^~~~~~
+build/mutants/p46492/m0149_geometry.c:146:25: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, int, int, ct_v3 *, ct_v3 *)' (aka 'int (*)(const struct ct_geometry *, int, int, ct_v3 *, ct_v3 *)') with an expression of type 'int (const ct_geometry *, int, int, ct_v3)' (aka 'int (const struct ct_geometry *, int, int, ct_v3)') [-Wincompatible-function-pointer-types]
+  146 |     .sticker_geometry = nxn_sticker_geometry,
+      |                         ^~~~~~~~~~~~~~~~~~~~
+6 errors generated.
+build/mutants/p46492/m0150_geometry.c:101:39: error: expected ')'
+  101 |                                 ct_v3 /normal) {
+      |                                       ^
+build/mutants/p46492/m0150_geometry.c:100:32: note: to match this '('
+  100 | static int nxn_sticker_geometry(const ct_geometry *g, int sticker, int n, ct_v3 *pos,
+      |                                ^
+build/mutants/p46492/m0150_geometry.c:102:37: error: use of undeclared identifier 'normal'
+  102 |     if (g == NULL || pos == NULL || normal == NULL || !geo_valid_n(n) || sticker < 0 ||
+      |                                     ^~~~~~
+build/mutants/p46492/m0150_geometry.c:108:56: error: use of undeclared identifier 'normal'
+  108 |     ct_sticker_world(n, face, cell / n, cell % n, pos, normal);
+      |                                                        ^~~~~~
+build/mutants/p46492/m0150_geometry.c:146:25: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, int, int, ct_v3 *, ct_v3 *)' (aka 'int (*)(const struct ct_geometry *, int, int, ct_v3 *, ct_v3 *)') with an expression of type 'int (const ct_geometry *, int, int, ct_v3 *, ct_v3)' (aka 'int (const struct ct_geometry *, int, int, ct_v3 *, ct_v3)') [-Wincompatible-function-pointer-types]
+  146 |     .sticker_geometry = nxn_sticker_geometry,
+      |                         ^~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+mutate: suite geometry_stickers exited 1
+build/mutants/p46492/m0152_geometry.c:102:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  102 |     if (g == NULL && pos == NULL || normal == NULL || !geo_valid_n(n) || sticker < 0 ||
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build/mutants/p46492/m0152_geometry.c:102:19: note: place parentheses around the '&&' expression to silence this warning
+  102 |     if (g == NULL && pos == NULL || normal == NULL || !geo_valid_n(n) || sticker < 0 ||
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite geometry_stickers exited 1
+build/mutants/p46492/m0154_geometry.c:102:34: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  102 |     if (g == NULL || pos == NULL && normal == NULL || !geo_valid_n(n) || sticker < 0 ||
+      |                   ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+build/mutants/p46492/m0154_geometry.c:102:34: note: place parentheses around the '&&' expression to silence this warning
+  102 |     if (g == NULL || pos == NULL && normal == NULL || !geo_valid_n(n) || sticker < 0 ||
+      |                      ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite geometry_stickers exited 1
+build/mutants/p46492/m0156_geometry.c:102:52: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  102 |     if (g == NULL || pos == NULL || normal == NULL && !geo_valid_n(n) || sticker < 0 ||
+      |                                  ~~ ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build/mutants/p46492/m0156_geometry.c:102:52: note: place parentheses around the '&&' expression to silence this warning
+  102 |     if (g == NULL || pos == NULL || normal == NULL && !geo_valid_n(n) || sticker < 0 ||
+      |                                                    ^
+      |                                     (                                )
+1 error generated.
+mutate: suite geometry_stickers exited 1
+build/mutants/p46492/m0158_geometry.c:102:71: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  102 |     if (g == NULL || pos == NULL || normal == NULL || !geo_valid_n(n) && sticker < 0 ||
+      |                                                    ~~ ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+build/mutants/p46492/m0158_geometry.c:102:71: note: place parentheses around the '&&' expression to silence this warning
+  102 |     if (g == NULL || pos == NULL || normal == NULL || !geo_valid_n(n) && sticker < 0 ||
+      |                                                                       ^
+      |                                                       (                             )
+1 error generated.
+mutate: suite geometry_stickers exited 1
+mutate: suite geometry_stickers exited 1
+mutate: suite geometry_stickers exited 1
+build/mutants/p46492/m0162_geometry.c:102:86: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  102 |     if (g == NULL || pos == NULL || normal == NULL || !geo_valid_n(n) || sticker < 0 &&
+      |                                                                       ~~ ~~~~~~~~~~~~^~
+  103 |         sticker >= CT_CUBE_FACE_COUNT * n * n) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p46492/m0162_geometry.c:102:86: note: place parentheses around the '&&' expression to silence this warning
+  102 |     if (g == NULL || pos == NULL || normal == NULL || !geo_valid_n(n) || sticker < 0 &&
+      |                                                                                      ^
+      |                                                                          (
+  103 |         sticker >= CT_CUBE_FACE_COUNT * n * n) {
+      |                                              
+      |                                              )
+1 error generated.
+mutate: suite geometry_stickers exited -1073741795
+mutate: suite geometry_stickers exited 1
+mutate: suite geometry_stickers exited 1
+mutate: suite geometry_stickers exited -1073741795
+mutate: suite geometry_stickers exited 1
+mutate: suite geometry_stickers exited 1
+mutate: suite geometry_stickers exited 1
+mutate: suite geometry_stickers exited 1
+mutate: suite geometry_stickers exited 1
+mutate: suite geometry_stickers exited 1
+build/mutants/p46492/m0173_geometry.c:112:44: error: expected ')'
+  112 | static int nxn_turn_axis(const ct_geometry /g, int move_id, int n, ct_v3 *axis) {
+      |                                            ^
+build/mutants/p46492/m0173_geometry.c:112:25: note: to match this '('
+  112 | static int nxn_turn_axis(const ct_geometry /g, int move_id, int n, ct_v3 *axis) {
+      |                         ^
+build/mutants/p46492/m0173_geometry.c:113:9: error: use of undeclared identifier 'g'
+  113 |     if (g == NULL || axis == NULL) {
+      |         ^
+build/mutants/p46492/m0173_geometry.c:113:22: error: use of undeclared identifier 'axis'
+  113 |     if (g == NULL || axis == NULL) {
+      |                      ^~~~
+build/mutants/p46492/m0173_geometry.c:117:20: error: use of undeclared identifier 'move_id'
+  117 |     if (geo_decode(move_id, n, &m) != 0) {
+      |                    ^~~~~~~
+build/mutants/p46492/m0173_geometry.c:117:29: error: use of undeclared identifier 'n'
+  117 |     if (geo_decode(move_id, n, &m) != 0) {
+      |                             ^
+build/mutants/p46492/m0173_geometry.c:121:22: error: use of undeclared identifier 'n'
+  121 |     ct_sticker_world(n, m.face, 0, 0, &center, axis);
+      |                      ^
+build/mutants/p46492/m0173_geometry.c:121:48: error: use of undeclared identifier 'axis'
+  121 |     ct_sticker_world(n, m.face, 0, 0, &center, axis);
+      |                                                ^~~~
+build/mutants/p46492/m0173_geometry.c:147:18: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, int, int, ct_v3 *)' (aka 'int (*)(const struct ct_geometry *, int, int, ct_v3 *)') with an expression of type 'int (const ct_geometry)' (aka 'int (const struct ct_geometry)') [-Wincompatible-function-pointer-types]
+  147 |     .turn_axis = nxn_turn_axis,
+      |                  ^~~~~~~~~~~~~
+8 errors generated.
+build/mutants/p46492/m0174_geometry.c:112:74: error: expected ')'
+  112 | static int nxn_turn_axis(const ct_geometry *g, int move_id, int n, ct_v3 /axis) {
+      |                                                                          ^
+build/mutants/p46492/m0174_geometry.c:112:25: note: to match this '('
+  112 | static int nxn_turn_axis(const ct_geometry *g, int move_id, int n, ct_v3 /axis) {
+      |                         ^
+build/mutants/p46492/m0174_geometry.c:113:22: error: use of undeclared identifier 'axis'
+  113 |     if (g == NULL || axis == NULL) {
+      |                      ^~~~
+build/mutants/p46492/m0174_geometry.c:121:48: error: use of undeclared identifier 'axis'
+  121 |     ct_sticker_world(n, m.face, 0, 0, &center, axis);
+      |                                                ^~~~
+build/mutants/p46492/m0174_geometry.c:147:18: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, int, int, ct_v3 *)' (aka 'int (*)(const struct ct_geometry *, int, int, ct_v3 *)') with an expression of type 'int (const ct_geometry *, int, int, ct_v3)' (aka 'int (const struct ct_geometry *, int, int, ct_v3)') [-Wincompatible-function-pointer-types]
+  147 |     .turn_axis = nxn_turn_axis,
+      |                  ^~~~~~~~~~~~~
+4 errors generated.
+mutate: suite geometry_axis exited 1
+mutate: suite geometry_guards exited -1073741795
+mutate: suite geometry_axis exited 1
+mutate: suite geometry_axis exited 1
+mutate: suite geometry_axis exited 1
+mutate: suite geometry_axis exited 1
+mutate: suite geometry_axis exited 1
+mutate: suite geometry_axis exited 1
+mutate: suite geometry_axis exited 1
+build/mutants/p46492/m0188_geometry.c:125:50: error: expected ')'
+  125 | static int nxn_move_from_token(const ct_geometry /g, const char *token, int n, ct_move *out) {
+      |                                                  ^
+build/mutants/p46492/m0188_geometry.c:125:31: note: to match this '('
+  125 | static int nxn_move_from_token(const ct_geometry /g, const char *token, int n, ct_move *out) {
+      |                               ^
+build/mutants/p46492/m0188_geometry.c:126:9: error: use of undeclared identifier 'g'
+  126 |     if (g == NULL || token == NULL || out == NULL || !geo_valid_n(n)) {
+      |         ^
+build/mutants/p46492/m0188_geometry.c:126:22: error: use of undeclared identifier 'token'
+  126 |     if (g == NULL || token == NULL || out == NULL || !geo_valid_n(n)) {
+      |                      ^~~~~
+build/mutants/p46492/m0188_geometry.c:126:39: error: use of undeclared identifier 'out'
+  126 |     if (g == NULL || token == NULL || out == NULL || !geo_valid_n(n)) {
+      |                                       ^~~
+build/mutants/p46492/m0188_geometry.c:126:67: error: use of undeclared identifier 'n'
+  126 |     if (g == NULL || token == NULL || out == NULL || !geo_valid_n(n)) {
+      |                                                                   ^
+build/mutants/p46492/m0188_geometry.c:130:31: error: use of undeclared identifier 'token'
+  130 |     if (ct_notation_parse_one(token, n, &m) != 0) {
+      |                               ^~~~~
+build/mutants/p46492/m0188_geometry.c:130:38: error: use of undeclared identifier 'n'
+  130 |     if (ct_notation_parse_one(token, n, &m) != 0) {
+      |                                      ^
+build/mutants/p46492/m0188_geometry.c:133:29: error: use of undeclared identifier 'n'
+  133 |     int id = geo_encode(&m, n);
+      |                             ^
+build/mutants/p46492/m0188_geometry.c:137:6: error: use of undeclared identifier 'out'
+  137 |     *out = m;
+      |      ^~~
+build/mutants/p46492/m0188_geometry.c:148:24: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, const char *, int, ct_move *)' (aka 'int (*)(const struct ct_geometry *, const char *, int, ct_move *)') with an expression of type 'int (const ct_geometry)' (aka 'int (const struct ct_geometry)') [-Wincompatible-function-pointer-types]
+  148 |     .move_from_token = nxn_move_from_token,
+      |                        ^~~~~~~~~~~~~~~~~~~
+10 errors generated.
+build/mutants/p46492/m0189_geometry.c:125:65: error: expected ')'
+  125 | static int nxn_move_from_token(const ct_geometry *g, const char /token, int n, ct_move *out) {
+      |                                                                 ^
+build/mutants/p46492/m0189_geometry.c:125:31: note: to match this '('
+  125 | static int nxn_move_from_token(const ct_geometry *g, const char /token, int n, ct_move *out) {
+      |                               ^
+build/mutants/p46492/m0189_geometry.c:126:22: error: use of undeclared identifier 'token'
+  126 |     if (g == NULL || token == NULL || out == NULL || !geo_valid_n(n)) {
+      |                      ^~~~~
+build/mutants/p46492/m0189_geometry.c:126:39: error: use of undeclared identifier 'out'
+  126 |     if (g == NULL || token == NULL || out == NULL || !geo_valid_n(n)) {
+      |                                       ^~~
+build/mutants/p46492/m0189_geometry.c:126:67: error: use of undeclared identifier 'n'
+  126 |     if (g == NULL || token == NULL || out == NULL || !geo_valid_n(n)) {
+      |                                                                   ^
+build/mutants/p46492/m0189_geometry.c:130:31: error: use of undeclared identifier 'token'
+  130 |     if (ct_notation_parse_one(token, n, &m) != 0) {
+      |                               ^~~~~
+build/mutants/p46492/m0189_geometry.c:130:38: error: use of undeclared identifier 'n'
+  130 |     if (ct_notation_parse_one(token, n, &m) != 0) {
+      |                                      ^
+build/mutants/p46492/m0189_geometry.c:133:29: error: use of undeclared identifier 'n'
+  133 |     int id = geo_encode(&m, n);
+      |                             ^
+build/mutants/p46492/m0189_geometry.c:137:6: error: use of undeclared identifier 'out'
+  137 |     *out = m;
+      |      ^~~
+build/mutants/p46492/m0189_geometry.c:148:24: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, const char *, int, ct_move *)' (aka 'int (*)(const struct ct_geometry *, const char *, int, ct_move *)') with an expression of type 'int (const ct_geometry *, const char)' (aka 'int (const struct ct_geometry *, const char)') [-Wincompatible-function-pointer-types]
+  148 |     .move_from_token = nxn_move_from_token,
+      |                        ^~~~~~~~~~~~~~~~~~~
+9 errors generated.
+build/mutants/p46492/m0190_geometry.c:125:88: error: expected ')'
+  125 | static int nxn_move_from_token(const ct_geometry *g, const char *token, int n, ct_move /out) {
+      |                                                                                        ^
+build/mutants/p46492/m0190_geometry.c:125:31: note: to match this '('
+  125 | static int nxn_move_from_token(const ct_geometry *g, const char *token, int n, ct_move /out) {
+      |                               ^
+build/mutants/p46492/m0190_geometry.c:126:39: error: use of undeclared identifier 'out'
+  126 |     if (g == NULL || token == NULL || out == NULL || !geo_valid_n(n)) {
+      |                                       ^~~
+build/mutants/p46492/m0190_geometry.c:137:6: error: use of undeclared identifier 'out'
+  137 |     *out = m;
+      |      ^~~
+build/mutants/p46492/m0190_geometry.c:148:24: error: incompatible function pointer types initializing 'int (*)(const ct_geometry *, const char *, int, ct_move *)' (aka 'int (*)(const struct ct_geometry *, const char *, int, ct_move *)') with an expression of type 'int (const ct_geometry *, const char *, int, ct_move)' (aka 'int (const struct ct_geometry *, const char *, int, ct_move)') [-Wincompatible-function-pointer-types]
+  148 |     .move_from_token = nxn_move_from_token,
+      |                        ^~~~~~~~~~~~~~~~~~~
+4 errors generated.
+mutate: suite geometry_ordering exited 1
+build/mutants/p46492/m0192_geometry.c:126:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  126 |     if (g == NULL && token == NULL || out == NULL || !geo_valid_n(n)) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~ ~~
+build/mutants/p46492/m0192_geometry.c:126:19: note: place parentheses around the '&&' expression to silence this warning
+  126 |     if (g == NULL && token == NULL || out == NULL || !geo_valid_n(n)) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite geometry_ordering exited 1
+build/mutants/p46492/m0194_geometry.c:126:36: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  126 |     if (g == NULL || token == NULL && out == NULL || !geo_valid_n(n)) {
+      |                   ~~ ~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+build/mutants/p46492/m0194_geometry.c:126:36: note: place parentheses around the '&&' expression to silence this warning
+  126 |     if (g == NULL || token == NULL && out == NULL || !geo_valid_n(n)) {
+      |                      ~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite geometry_ordering exited 1
+build/mutants/p46492/m0196_geometry.c:126:51: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  126 |     if (g == NULL || token == NULL || out == NULL && !geo_valid_n(n)) {
+      |                                    ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build/mutants/p46492/m0196_geometry.c:126:51: note: place parentheses around the '&&' expression to silence this warning
+  126 |     if (g == NULL || token == NULL || out == NULL && !geo_valid_n(n)) {
+      |                                                   ^                 
+      |                                       (                             )
+1 error generated.
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_ordering exited 1
+mutate: suite geometry_token exited 1
+build/mutants/p46492/m0204_geometry.c:137:5: error: expected expression
+  137 |     /out = m;
+      |     ^
+1 error generated.
+ [arith + -> -]
+KILLED    m0140 src/engine/geometry.c:93 [arith * -> /]
+KILLED    m0141 src/engine/geometry.c:93 [arith * -> /]
+KILLED    m0142 src/engine/geometry.c:93 [arith + -> -]
+KILLED    m0143 src/engine/geometry.c:93 [arith * -> /]
+KILLED    m0144 src/engine/geometry.c:93 [arith + -> -]
+KILLED    m0145 src/engine/geometry.c:97 [ret-lit 0 -> 1]
+KILLED    m0146 src/engine/geometry.c:97 [int+1 0 -> 1]
+KILLED    m0147 src/engine/geometry.c:97 [int-1 0 -> -1]
+KILLED    m0148 src/engine/geometry.c:100 [arith * -> /]
+          build break
+KILLED    m0149 src/engine/geometry.c:100 [arith * -> /]
+          build break
+KILLED    m0150 src/engine/geometry.c:101 [arith * -> /]
+          build break
+KILLED    m0151 src/engine/geometry.c:102 [cmp == -> !=]
+KILLED    m0152 src/engine/geometry.c:102 [logic || -> &&]
+          build break
+KILLED    m0153 src/engine/geometry.c:102 [cmp == -> !=]
+KILLED    m0154 src/engine/geometry.c:102 [logic || -> &&]
+          build break
+KILLED    m0155 src/engine/geometry.c:102 [cmp == -> !=]
+KILLED    m0156 src/engine/geometry.c:102 [logic || -> &&]
+          build break
+KILLED    m0157 src/engine/geometry.c:102 [not-del ! -> (deleted)]
+KILLED    m0158 src/engine/geometry.c:102 [logic || -> &&]
+          build break
+KILLED    m0159 src/engine/geometry.c:102 [cmp < -> <=]
+KILLED    m0160 src/engine/geometry.c:102 [int+1 0 -> 1]
+KILLED    m0161 src/engine/geometry.c:102 [int-1 0 -> -1]
+KILLED    m0162 src/engine/geometry.c:102 [logic || -> &&]
+          build break
+KILLED    m0163 src/engine/geometry.c:103 [cmp >= -> >]
+KILLED    m0164 src/engine/geometry.c:103 [arith * -> /]
+KILLED    m0165 src/engine/geometry.c:103 [arith * -> /]
+KILLED    m0166 src/engine/geometry.c:106 [arith / -> *]
+KILLED    m0167 src/engine/geometry.c:106 [arith * -> /]
+KILLED    m0168 src/engine/geometry.c:107 [arith * -> /]
+KILLED    m0169 src/engine/geometry.c:108 [arith / -> *]
+KILLED    m0170 src/engine/geometry.c:109 [ret-lit 0 -> 1]
+KILLED    m0171 src/engine/geometry.c:109 [int+1 0 -> 1]
+KILLED    m0172 src/engine/geometry.c:109 [int-1 0 -> -1]
+KILLED    m0173 src/engine/geometry.c:112 [arith * -> /]
+          build break
+KILLED    m0174 src/engine/geometry.c:112 [arith * -> /]
+          build break
+KILLED    m0175 src/engine/geometry.c:113 [cmp == -> !=]
+KILLED    m0176 src/engine/geometry.c:113 [logic || -> &&]
+KILLED    m0177 src/engine/geometry.c:113 [cmp == -> !=]
+KILLED    m0178 src/engine/geometry.c:117 [cmp != -> ==]
+KILLED    m0179 src/engine/geometry.c:117 [int+1 0 -> 1]
+KILLED    m0180 src/engine/geometry.c:117 [int-1 0 -> -1]
+SURVIVED  m0181 src/engine/geometry.c:121 [int+1 0 -> 1]
+SURVIVED  m0182 src/engine/geometry.c:121 [int-1 0 -> -1]
+SURVIVED  m0183 src/engine/geometry.c:121 [int+1 0 -> 1]
+SURVIVED  m0184 src/engine/geometry.c:121 [int-1 0 -> -1]
+KILLED    m0185 src/engine/geometry.c:122 [ret-lit 0 -> 1]
+KILLED    m0186 src/engine/geometry.c:122 [int+1 0 -> 1]
+KILLED    m0187 src/engine/geometry.c:122 [int-1 0 -> -1]
+KILLED    m0188 src/engine/geometry.c:125 [arith * -> /]
+          build break
+KILLED    m0189 src/engine/geometry.c:125 [arith * -> /]
+          build break
+KILLED    m0190 src/engine/geometry.c:125 [arith * -> /]
+          build break
+KILLED    m0191 src/engine/geometry.c:126 [cmp == -> !=]
+KILLED    m0192 src/engine/geometry.c:126 [logic || -> &&]
+          build break
+KILLED    m0193 src/engine/geometry.c:126 [cmp == -> !=]
+KILLED    m0194 src/engine/geometry.c:126 [logic || -> &&]
+          build break
+KILLED    m0195 src/engine/geometry.c:126 [cmp == -> !=]
+KILLED    m0196 src/engine/geometry.c:126 [logic || -> &&]
+          build break
+KILLED    m0197 src/engine/geometry.c:126 [not-del ! -> (deleted)]
+KILLED    m0198 src/engine/geometry.c:130 [cmp != -> ==]
+KILLED    m0199 src/engine/geometry.c:130 [int+1 0 -> 1]
+KILLED    m0200 src/engine/geometry.c:130 [int-1 0 -> -1]
+KILLED    m0201 src/engine/geometry.c:134 [cmp < -> <=]
+KILLED    m0202 src/engine/geometry.c:134 [int+1 0 -> 1]
+KILLED    m0203 src/engine/geometry.c:134 [int-1 0 -> -1]
+KILLED    m0204 src/engine/geometry.c:build/mutants/p46492/m0205_geometry.c:151:19: error: expected identifier or '('
+  151 | const ct_geometry /ct_geometry_nxn(void) {
+      |                   ^
+1 error generated.
+build/mutants/p46492/m0206_geometry.c:155:41: error: expected ')'
+  155 | int ct_geometry_apply(const ct_geometry /g, int move_id, int n, uint8_t *facelet) {
+      |                                         ^
+build/mutants/p46492/m0206_geometry.c:155:22: note: to match this '('
+  155 | int ct_geometry_apply(const ct_geometry /g, int move_id, int n, uint8_t *facelet) {
+      |                      ^
+build/mutants/p46492/m0206_geometry.c:155:5: error: conflicting types for 'ct_geometry_apply'
+  155 | int ct_geometry_apply(const ct_geometry /g, int move_id, int n, uint8_t *facelet) {
+      |     ^
+src\engine/geometry.h:29:5: note: previous declaration is here
+   29 | int ct_geometry_apply(const ct_geometry *g, int move_id, int n, uint8_t *facelet);
+      |     ^
+build/mutants/p46492/m0206_geometry.c:156:9: error: use of undeclared identifier 'g'
+  156 |     if (g == NULL || facelet == NULL || g != ct_geometry_nxn() || !geo_valid_n(n)) {
+      |         ^
+build/mutants/p46492/m0206_geometry.c:156:22: error: use of undeclared identifier 'facelet'
+  156 |     if (g == NULL || facelet == NULL || g != ct_geometry_nxn() || !geo_valid_n(n)) {
+      |                      ^~~~~~~
+build/mutants/p46492/m0206_geometry.c:156:41: error: use of undeclared identifier 'g'
+  156 |     if (g == NULL || facelet == NULL || g != ct_geometry_nxn() || !geo_valid_n(n)) {
+      |                                         ^
+build/mutants/p46492/m0206_geometry.c:156:80: error: use of undeclared identifier 'n'
+  156 |     if (g == NULL || facelet == NULL || g != ct_geometry_nxn() || !geo_valid_n(n)) {
+      |                                                                                ^
+build/mutants/p46492/m0206_geometry.c:160:20: error: use of undeclared identifier 'move_id'
+  160 |     if (geo_decode(move_id, n, &m) != 0) {
+      |                    ^~~~~~~
+build/mutants/p46492/m0206_geometry.c:160:29: error: use of undeclared identifier 'n'
+  160 |     if (geo_decode(move_id, n, &m) != 0) {
+      |                             ^
+build/mutants/p46492/m0206_geometry.c:164:11: error: use of undeclared identifier 'n'
+  164 |     c.n = n;
+      |           ^
+build/mutants/p46492/m0206_geometry.c:165:23: error: use of undeclared identifier 'facelet'
+  165 |     memcpy(c.facelet, facelet, sizeof c.facelet);
+      |                       ^~~~~~~
+build/mutants/p46492/m0206_geometry.c:167:12: error: use of undeclared identifier 'facelet'
+  167 |     memcpy(facelet, c.facelet, sizeof c.facelet);
+      |            ^~~~~~~
+11 errors generated.
+build/mutants/p46492/m0207_geometry.c:155:73: error: expected ')'
+  155 | int ct_geometry_apply(const ct_geometry *g, int move_id, int n, uint8_t /facelet) {
+      |                                                                         ^
+build/mutants/p46492/m0207_geometry.c:155:22: note: to match this '('
+  155 | int ct_geometry_apply(const ct_geometry *g, int move_id, int n, uint8_t /facelet) {
+      |                      ^
+build/mutants/p46492/m0207_geometry.c:155:5: error: conflicting types for 'ct_geometry_apply'
+  155 | int ct_geometry_apply(const ct_geometry *g, int move_id, int n, uint8_t /facelet) {
+      |     ^
+src\engine/geometry.h:29:5: note: previous declaration is here
+   29 | int ct_geometry_apply(const ct_geometry *g, int move_id, int n, uint8_t *facelet);
+      |     ^
+build/mutants/p46492/m0207_geometry.c:156:22: error: use of undeclared identifier 'facelet'
+  156 |     if (g == NULL || facelet == NULL || g != ct_geometry_nxn() || !geo_valid_n(n)) {
+      |                      ^~~~~~~
+build/mutants/p46492/m0207_geometry.c:165:23: error: use of undeclared identifier 'facelet'
+  165 |     memcpy(c.facelet, facelet, sizeof c.facelet);
+      |                       ^~~~~~~
+build/mutants/p46492/m0207_geometry.c:167:12: error: use of undeclared identifier 'facelet'
+  167 |     memcpy(facelet, c.facelet, sizeof c.facelet);
+      |            ^~~~~~~
+5 errors generated.
+mutate: suite geometry_apply exited 1
+build/mutants/p46492/m0209_geometry.c:156:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  156 |     if (g == NULL && facelet == NULL || g != ct_geometry_nxn() || !geo_valid_n(n)) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~~~ ~~
+build/mutants/p46492/m0209_geometry.c:156:19: note: place parentheses around the '&&' expression to silence this warning
+  156 |     if (g == NULL && facelet == NULL || g != ct_geometry_nxn() || !geo_valid_n(n)) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite geometry_apply exited 1
+build/mutants/p46492/m0211_geometry.c:156:38: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  156 |     if (g == NULL || facelet == NULL && g != ct_geometry_nxn() || !geo_valid_n(n)) {
+      |                   ~~ ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p46492/m0211_geometry.c:156:38: note: place parentheses around the '&&' expression to silence this warning
+  156 |     if (g == NULL || facelet == NULL && g != ct_geometry_nxn() || !geo_valid_n(n)) {
+      |                                      ^
+      |                      (                                        )
+1 error generated.
+mutate: suite geometry_apply exited 1
+build/mutants/p46492/m0213_geometry.c:156:64: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  156 |     if (g == NULL || facelet == NULL || g != ct_geometry_nxn() && !geo_valid_n(n)) {
+      |                                      ~~ ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build/mutants/p46492/m0213_geometry.c:156:64: note: place parentheses around the '&&' expression to silence this warning
+  156 |     if (g == NULL || facelet == NULL || g != ct_geometry_nxn() && !geo_valid_n(n)) {
+      |                                                                ^                 
+      |                                         (                                        )
+1 error generated.
+mutate: suite geometry_apply exited 1
+mutate: suite geometry_apply exited 1
+mutate: suite geometry_apply exited 1
+mutate: suite geometry_apply exited 1
+mutate: suite geometry_apply exited 1
+mutate: suite geometry_apply exited 1
+mutate: suite geometry_apply exited 1
+137 [arith * -> /]
+          build break
+KILLED    m0205 src/engine/geometry.c:151 [arith * -> /]
+          build break
+KILLED    m0206 src/engine/geometry.c:155 [arith * -> /]
+          build break
+KILLED    m0207 src/engine/geometry.c:155 [arith * -> /]
+          build break
+KILLED    m0208 src/engine/geometry.c:156 [cmp == -> !=]
+KILLED    m0209 src/engine/geometry.c:156 [logic || -> &&]
+          build break
+KILLED    m0210 src/engine/geometry.c:156 [cmp == -> !=]
+KILLED    m0211 src/engine/geometry.c:156 [logic || -> &&]
+          build break
+KILLED    m0212 src/engine/geometry.c:156 [cmp != -> ==]
+KILLED    m0213 src/engine/geometry.c:156 [logic || -> &&]
+          build break
+KILLED    m0214 src/engine/geometry.c:156 [not-del ! -> (deleted)]
+KILLED    m0215 src/engine/geometry.c:160 [cmp != -> ==]
+KILLED    m0216 src/engine/geometry.c:160 [int+1 0 -> 1]
+KILLED    m0217 src/engine/geometry.c:160 [int-1 0 -> -1]
+KILLED    m0218 src/engine/geometry.c:168 [ret-lit 0 -> 1]
+KILLED    m0219 src/engine/geometry.c:168 [int+1 0 -> 1]
+KILLED    m0220 src/engine/geometry.c:168 [int-1 0 -> -1]
+ACCEPTED  m0112 src/engine/geometry.c:81 [cmp < -> <=] :: row loop bound boundary mutant is equivalent: perm admits n only up to 6, so the extra row n iteration writes only dead stride padding cells that the active n by n readback and memcmp never read
+ACCEPTED  m0115 src/engine/geometry.c:82 [cmp < -> <=] :: col loop bound boundary mutant is equivalent: perm admits n only up to 6, so the extra col n iteration writes only dead stride padding cells that the active n by n readback and memcmp never read
+ACCEPTED  m0181 src/engine/geometry.c:121 [int+1 0 -> 1] :: cell argument mutants are equivalent: ct_sticker_world derives the axis output from the face normal only and never from row or col, and the center output is discarded here
+ACCEPTED  m0182 src/engine/geometry.c:121 [int-1 0 -> -1] :: cell argument mutants are equivalent: ct_sticker_world derives the axis output from the face normal only and never from row or col, and the center output is discarded here
+ACCEPTED  m0183 src/engine/geometry.c:121 [int+1 0 -> 1] :: cell argument mutants are equivalent: ct_sticker_world derives the axis output from the face normal only and never from row or col, and the center output is discarded here
+ACCEPTED  m0184 src/engine/geometry.c:121 [int-1 0 -> -1] :: cell argument mutants are equivalent: ct_sticker_world derives the axis output from the face normal only and never from row or col, and the center output is discarded here
+mutate: generated=220 build_failed=37 killed_by_tests=177 killed=214 survived=6 accepted=6 unexplained=0 skipped=0
+mutate: kill rate 214/220 = 97.3%, with accepted equivalents 220/220 = 100.0%
+mutate: wall 124.6s

@@ -1,0 +1,1 @@
+int main(void){int*p=(int*)__builtin_malloc(4);p[2]=7;__builtin_free(p);return 0;}

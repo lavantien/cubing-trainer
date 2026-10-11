@@ -1,0 +1,500 @@
+PASS fuzz_srs_walk: pass=25568386 fail=0 350ms
+PASS fuzz_srs_elapsed: pass=406753 fail=0 5ms
+PASS fuzz_srs_grade_space: pass=606320 fail=0 11ms
+PASS fuzz_script_parse: pass=30000 fail=0 511ms
+PASS fuzz_notation_random_tokens: pass=59011 fail=0 1ms
+PASS fuzz_notation_garbage: pass=10031 fail=0 2ms
+PASS fuzz_notation_random_algs: pass=279537 fail=0 20ms
+PASS fuzz_transform_inverse: pass=40001 fail=0 1874ms
+PASS fuzz_transform_simplify: pass=80001 fail=0 2503ms
+PASS fuzz_transform_rotate_y: pass=40001 fail=0 2454ms
+PASS fuzz_cube_invariants: pass=444512 fail=0 1299ms
+PASS fuzz_cube_mirror: pass=40001 fail=0 2829ms
+fuzz_db_card_strings: tests/fuzz_db.c:100: assert failed: ct_dbs_open(&db) == 0 == seed: 3552575488 vs 0
+FAIL fuzz_db_card_strings: pass=1 fail=1 1ms
+fuzz_db_review_rows: tests/fuzz_db.c:249: assert failed: ct_dbs_open(&db) == 0 == seed: 1592590336 vs 0
+FAIL fuzz_db_review_rows: pass=1 fail=1 1ms
+fuzz_db_settings_keys: tests/fuzz_db.c:381: assert failed: ct_dbs_open(&db) == 0 == seed: 1584861184 vs 0
+FAIL fuzz_db_settings_keys: pass=1 fail=1 0ms
+PASS fuzz_config_keys: pass=35555 fail=0 8ms
+PASS fuzz_config_moves: pass=20001 fail=0 4ms
+PASS transform_inverse_golden: pass=18 fail=0 0ms
+PASS transform_inverse_simulation: pass=1200 fail=0 73ms
+PASS transform_mirror_golden: pass=102 fail=0 0ms
+PASS transform_mirror_involution: pass=1200 fail=0 0ms
+PASS transform_mirror_inverse_commute: pass=2000 fail=0 1ms
+PASS transform_mirror_state_simulation: pass=812 fail=0 42ms
+PASS transform_rotate_y_golden: pass=282 fail=0 0ms
+PASS transform_rotate_y_simulation: pass=2400 fail=0 172ms
+PASS transform_rotate_y_fourfold: pass=2000 fail=0 1ms
+PASS transform_conjugate_expansion: pass=20 fail=0 0ms
+PASS transform_conjugate_simulation: pass=1206 fail=0 27ms
+PASS transform_simplify_golden: pass=21 fail=0 0ms
+PASS transform_simplify_properties: pass=2000 fail=0 50ms
+PASS transform_simplify_planted: pass=3600 fail=0 156ms
+PASS transform_simplify_cap_output_bound: pass=33 fail=0 0ms
+PASS transform_simplify_assembly_bound: pass=7 fail=0 0ms
+PASS transform_edges: pass=24 fail=0 0ms
+PASS unit_targets: pass=6758 fail=0 0ms
+PASS unit_synth_table: pass=508 fail=0 6030ms
+PASS unit_synth_direct: pass=18 fail=0 0ms
+PASS unit_synth_setup: pass=6 fail=0 0ms
+unit_synth_coverage: found=60 direct=47 setup=13 fallback=0
+PASS unit_synth_coverage: pass=229 fail=0 2ms
+PASS unit_synth_determinism: pass=6 fail=0 0ms
+PASS unit_synth_config: pass=24 fail=0 0ms
+unit_synth_bh: tests/unit_synth.c:477: assert failed: rows == TEST_FIXTURE_ROWS: 18446744073709551615 vs 10
+FAIL unit_synth_bh: pass=0 fail=1 1ms
+PASS unit_synth_bad_input: pass=10 fail=0 0ms
+PASS unit_synth_stress: pass=3432 fail=0 6ms
+stats_screen_view_load: tests/unit_stats_screen.c:50: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL stats_screen_view_load: pass=1 fail=1 1ms
+stats_screen_deck_switch: tests/unit_stats_screen.c:50: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL stats_screen_deck_switch: pass=1 fail=1 0ms
+stats_screen_worst_cases: tests/unit_stats_screen.c:50: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL stats_screen_worst_cases: pass=1 fail=1 1ms
+stats_screen_malformed: tests/unit_stats_screen.c:50: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL stats_screen_malformed: pass=1 fail=1 1ms
+PASS stats_screen_chart_layout: pass=63 fail=0 0ms
+PASS stats_screen_heatmap_grid: pass=97 fail=0 0ms
+PASS stats_screen_heatmap_color: pass=111 fail=0 0ms
+stats_empty: tests/unit_stats_repo.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL stats_empty: pass=1 fail=1 1ms
+stats_deck_aggregates: tests/unit_stats_repo.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL stats_deck_aggregates: pass=1 fail=1 0ms
+stats_forecast: tests/unit_stats_repo.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL stats_forecast: pass=1 fail=1 1ms
+stats_case_accuracy: tests/unit_stats_repo.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL stats_case_accuracy: pass=1 fail=1 0ms
+stats_sessions: tests/unit_stats_repo.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL stats_sessions: pass=1 fail=1 1ms
+stats_malformed: tests/unit_stats_repo.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL stats_malformed: pass=1 fail=1 1ms
+PASS stats_agg_retention: pass=72 fail=0 0ms
+PASS stats_agg_retention_granularity: pass=45 fail=0 0ms
+PASS stats_agg_summary: pass=19 fail=0 0ms
+PASS stats_agg_correlation: pass=10 fail=0 0ms
+PASS stats_agg_forecast: pass=14 fail=0 0ms
+PASS stats_agg_heatmap: pass=27 fail=0 0ms
+PASS stats_agg_malformed: pass=13 fail=0 0ms
+unit_smoke: tests/unit_smoke.c:41: assert failed: ct_sfc64_next(&gold) == gold_first[i]: 17973381696478207747 vs 4641564244219216254
+FAIL unit_smoke: pass=27 fail=1 0ms
+settings_merge_empty: tests/unit_settings_merge.c:20: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_merge_empty: pass=1 fail=1 1ms
+settings_merge_round_trip: tests/unit_settings_merge.c:20: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_merge_round_trip: pass=1 fail=1 0ms
+settings_merge_invalid_values: tests/unit_settings_merge.c:20: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_merge_invalid_values: pass=1 fail=1 1ms
+settings_merge_unknown_keys: tests/unit_settings_merge.c:20: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_merge_unknown_keys: pass=1 fail=1 0ms
+settings_merge_guards: tests/unit_settings_merge.c:20: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_merge_guards: pass=1 fail=1 1ms
+settings_merge_null_value: tests/unit_settings_merge.c:20: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_merge_null_value: pass=1 fail=1 1ms
+settings_merge_after_form_save: tests/unit_settings_merge.c:20: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_merge_after_form_save: pass=1 fail=1 0ms
+settings_merge_overwrites_live_cfg: tests/unit_settings_merge.c:20: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_merge_overwrites_live_cfg: pass=1 fail=1 1ms
+settings_merge_reaches_review: tests/unit_settings_merge.c:20: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_merge_reaches_review: pass=1 fail=1 1ms
+settings_form_open: tests/unit_settings_form.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_form_open: pass=1 fail=1 0ms
+settings_form_open_stored: tests/unit_settings_form.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_form_open_stored: pass=1 fail=1 1ms
+settings_form_open_fallbacks: tests/unit_settings_form.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_form_open_fallbacks: pass=1 fail=1 0ms
+settings_form_letters: tests/unit_settings_form.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_form_letters: pass=1 fail=1 0ms
+settings_form_swap: tests/unit_settings_form.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_form_swap: pass=1 fail=1 0ms
+settings_form_colors: tests/unit_settings_form.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_form_colors: pass=1 fail=1 0ms
+settings_colors_scheme_round_trip: tests/unit_settings_form.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_colors_scheme_round_trip: pass=1 fail=1 0ms
+settings_form_moves: tests/unit_settings_form.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_form_moves: pass=1 fail=1 1ms
+settings_form_clamps: tests/unit_settings_form.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_form_clamps: pass=1 fail=1 0ms
+settings_form_buffers: tests/unit_settings_form.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_form_buffers: pass=1 fail=1 1ms
+settings_form_save: tests/unit_settings_form.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_form_save: pass=1 fail=1 0ms
+settings_form_cancel: tests/unit_settings_form.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_form_cancel: pass=1 fail=1 0ms
+settings_form_guards: tests/unit_settings_form.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL settings_form_guards: pass=1 fail=1 1ms
+PASS session_day_numbers: pass=31 fail=0 0ms
+PASS session_iso_add_days: pass=46 fail=0 0ms
+PASS session_iso_add_days_domain: pass=20 fail=0 0ms
+session_stamp_boundaries: tests/unit_session.c:21: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL session_stamp_boundaries: pass=18 fail=1 0ms
+session_stale_last_review: tests/unit_session.c:21: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL session_stale_last_review: pass=1 fail=1 1ms
+session_flow_golden: tests/unit_session.c:21: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL session_flow_golden: pass=1 fail=1 0ms
+session_new_card: tests/unit_session.c:21: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL session_new_card: pass=1 fail=1 0ms
+session_absent_row: tests/unit_session.c:21: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL session_absent_row: pass=1 fail=1 1ms
+session_lapse: tests/unit_session.c:21: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL session_lapse: pass=1 fail=1 0ms
+session_same_day: tests/unit_session.c:21: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL session_same_day: pass=1 fail=1 0ms
+session_empty_deck: tests/unit_session.c:21: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL session_empty_deck: pass=1 fail=1 0ms
+session_limits: tests/unit_session.c:21: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL session_limits: pass=1 fail=1 0ms
+session_card_missing: tests/unit_session.c:21: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL session_card_missing: pass=1 fail=1 1ms
+session_bad_args: tests/unit_session.c:21: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL session_bad_args: pass=1 fail=1 0ms
+PASS session_free_safety: pass=4 fail=0 0ms
+trainer_form_open: tests/unit_selector_screen.c:29: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL trainer_form_open: pass=1 fail=1 1ms
+trainer_form_navigation: tests/unit_selector_screen.c:29: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL trainer_form_navigation: pass=1 fail=1 0ms
+trainer_form_case_detail: tests/unit_selector_screen.c:29: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL trainer_form_case_detail: pass=1 fail=1 1ms
+trainer_form_generated_alg: tests/unit_selector_screen.c:29: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL trainer_form_generated_alg: pass=1 fail=1 0ms
+trainer_form_chart_cells: tests/unit_selector_screen.c:29: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL trainer_form_chart_cells: pass=1 fail=1 0ms
+trainer_form_letter_scheme_routed: tests/unit_selector_screen.c:29: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL trainer_form_letter_scheme_routed: pass=1 fail=1 1ms
+selector_pack_reach: tests/unit_selector_packs.c:48: assert failed: ct_pack_seed_file(db, sp->path, sp->event, sp->method, sp->stage) == sp->rows: 18446744073709551613 vs 169
+FAIL selector_pack_reach: pass=0 fail=1 0ms
+selector_scheme_load: tests/unit_selector.c:154: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL selector_scheme_load: pass=1 fail=1 1ms
+PASS selector_events: pass=26 fail=0 0ms
+PASS selector_methods: pass=403 fail=0 0ms
+PASS selector_lists: pass=853 fail=0 0ms
+selector_case_counts: tests/unit_selector.c:128: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL selector_case_counts: pass=1 fail=1 1ms
+selector_case_keys: tests/unit_selector.c:128: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL selector_case_keys: pass=1 fail=1 0ms
+PASS selector_case_pairs: pass=21 fail=0 0ms
+selector_pack_cases: tests/unit_selector.c:128: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL selector_pack_cases: pass=1 fail=1 0ms
+PASS score_qtm: pass=7 fail=0 0ms
+PASS score_subset: pass=10 fail=0 0ms
+PASS score_finger: pass=46 fail=0 0ms
+PASS score_regrips: pass=14 fail=0 0ms
+PASS score_total: pass=24 fail=0 0ms
+PASS score_json: pass=16 fail=0 0ms
+PASS score_errors: pass=18 fail=0 0ms
+review_form_begin: tests/unit_review_form.c:19: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL review_form_begin: pass=1 fail=1 1ms
+review_form_begin_garbage: tests/unit_review_form.c:19: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL review_form_begin_garbage: pass=1 fail=1 0ms
+review_form_empty_deck: tests/unit_review_form.c:19: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL review_form_empty_deck: pass=1 fail=1 1ms
+review_form_reveal_grade: tests/unit_review_form.c:19: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL review_form_reveal_grade: pass=1 fail=1 1ms
+review_form_playback: tests/unit_review_form.c:19: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL review_form_playback: pass=1 fail=1 0ms
+review_form_scrub: tests/unit_review_form.c:19: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL review_form_scrub: pass=1 fail=1 1ms
+review_form_speed: tests/unit_review_form.c:19: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL review_form_speed: pass=1 fail=1 0ms
+review_form_fallback: tests/unit_review_form.c:19: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL review_form_fallback: pass=1 fail=1 1ms
+review_form_end: tests/unit_review_form.c:19: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL review_form_end: pass=1 fail=1 0ms
+review_screen_session_log: tests/unit_review_form.c:19: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL review_screen_session_log: pass=1 fail=1 1ms
+review_form_guards: tests/unit_review_form.c:19: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL review_form_guards: pass=1 fail=1 1ms
+PASS unit_renderer_draw_signature: pass=1 fail=0 0ms
+PASS unit_renderer_init: pass=8 fail=0 0ms
+PASS unit_renderer_counts: pass=66 fail=0 1ms
+PASS unit_renderer_geometry: pass=4912 fail=0 0ms
+PASS unit_renderer_corners: pass=111 fail=0 0ms
+PASS unit_renderer_colors: pass=408 fail=0 0ms
+PASS unit_renderer_scheme_hex: pass=85 fail=0 0ms
+PASS unit_renderer_slab: pass=213456 fail=0 2ms
+PASS unit_renderer_slab_invalid: pass=82 fail=0 0ms
+PASS packs_sha256: pass=6 fail=0 0ms
+PASS packs_source_record: pass=5 fail=0 0ms
+PASS packs_content_hash: pass=5 fail=0 0ms
+packs_upsert: tests/unit_packs.c:129: assert failed: ct_pack_upsert(db, &e) == CT_PACK_OK: 18446744073709551614 vs 0
+FAIL packs_upsert: pass=0 fail=1 1ms
+packs_upsert_update: tests/unit_packs.c:157: assert failed: ct_pack_upsert(db, &e) == CT_PACK_OK: 18446744073709551614 vs 0
+FAIL packs_upsert_update: pass=0 fail=1 0ms
+packs_list: tests/unit_packs.c:177: assert failed: ct_pack_upsert(db, &e) == CT_PACK_OK: 18446744073709551614 vs 0
+FAIL packs_list: pass=0 fail=1 1ms
+packs_isolation: tests/unit_packs.c:200: assert failed: ct_pack_upsert(db, &e) == CT_PACK_OK: 18446744073709551614 vs 0
+FAIL packs_isolation: pass=0 fail=1 0ms
+packs_bounds: tests/unit_packs.c:225: assert failed: ct_pack_upsert(db, &e) == CT_PACK_OK: 18446744073709551614 vs 0
+FAIL packs_bounds: pass=0 fail=1 0ms
+PASS packs_bad_args: pass=18 fail=0 0ms
+pack_startup_registry: tests/unit_pack_startup.c:116: assert failed: f != NULL
+FAIL pack_startup_registry: pass=5 fail=1 0ms
+pack_startup_seeds_all: tests/unit_pack_startup.c:65: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL pack_startup_seeds_all: pass=1 fail=1 0ms
+pack_startup_guards: tests/unit_pack_startup.c:65: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL pack_startup_guards: pass=1 fail=1 0ms
+pack_startup_partial: tests/unit_pack_startup.c:182: assert failed: CT_PACKSTART_MKDIR(CT_PACKSTART_TMP_DIR) == 0: 18446744073709551615 vs 0
+FAIL pack_startup_partial: pass=0 fail=1 1ms
+PASS pack_startup_real_app_init: pass=13 fail=0 112ms
+pack_seed_sq1_cubeshape: tests/unit_pack_seeds2.c:60: assert failed: ct_pack_seed_file(db, path, ev, m, st) == expected: 18446744073709551613 vs 169
+FAIL pack_seed_sq1_cubeshape: pass=0 fail=1 1ms
+pack_seed_sq1_co: tests/unit_pack_seeds2.c:60: assert failed: ct_pack_seed_file(db, path, ev, m, st) == expected: 18446744073709551613 vs 7
+FAIL pack_seed_sq1_co: pass=0 fail=1 1ms
+pack_seed_sq1_eo: tests/unit_pack_seeds2.c:60: assert failed: ct_pack_seed_file(db, path, ev, m, st) == expected: 18446744073709551613 vs 7
+FAIL pack_seed_sq1_eo: pass=0 fail=1 0ms
+pack_seed_sq1_cp: tests/unit_pack_seeds2.c:60: assert failed: ct_pack_seed_file(db, path, ev, m, st) == expected: 18446744073709551613 vs 16
+FAIL pack_seed_sq1_cp: pass=0 fail=1 1ms
+pack_seed_sq1_ep: tests/unit_pack_seeds2.c:60: assert failed: ct_pack_seed_file(db, path, ev, m, st) == expected: 18446744073709551613 vs 99
+FAIL pack_seed_sq1_ep: pass=0 fail=1 0ms
+pack_seed_clock: tests/unit_pack_seeds2.c:60: assert failed: ct_pack_seed_file(db, path, ev, m, st) == expected: 18446744073709551613 vs 14
+FAIL pack_seed_clock: pass=0 fail=1 0ms
+pack_seed_bigcube_parity: tests/unit_pack_seeds2.c:60: assert failed: ct_pack_seed_file(db, path, ev, m, st) == expected: 18446744073709551613 vs 5
+FAIL pack_seed_bigcube_parity: pass=0 fail=1 1ms
+pack_seed_loader: tests/unit_pack_seeds.c:94: assert failed: ct_pack_seed_file(db, CT_SEED_OK_PATH, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L) == 3: 18446744073709551614 vs 3
+FAIL pack_seed_loader: pass=3 fail=1 2ms
+pack_seed_loader_header: tests/unit_pack_seeds.c:121: assert failed: ct_pack_count(db, CT_EVENT_OH, CT_METHOD_CFOP, CT_STAGE_F2L) == 0: 18446744073709551614 vs 0
+FAIL pack_seed_loader_header: pass=4 fail=1 2ms
+pack_seed_loader_columns: tests/unit_pack_seeds.c:136: assert failed: ct_pack_seed_file(db, CT_SEED_BAD_PATH, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L) == 2: 18446744073709551614 vs 2
+FAIL pack_seed_loader_columns: pass=3 fail=1 2ms
+pack_seed_commit_rollback: tests/unit_pack_seeds.c:173: assert failed: sqlite3_exec(db, "DROP TABLE event_pack", NULL, NULL, NULL) == SQLITE_OK: 1 vs 0
+FAIL pack_seed_commit_rollback: pass=3 fail=1 0ms
+pack_seed_loader_crlf: tests/unit_pack_seeds.c:217: assert failed: ct_pack_seed_file(db, CT_SEED_CRLF_PATH, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L) == 1: 18446744073709551614 vs 1
+FAIL pack_seed_loader_crlf: pass=3 fail=1 2ms
+pack_seed_loader_rejects: tests/unit_pack_seeds.c:246: assert failed: ct_pack_count(db, CT_EVENT_3X3, CT_METHOD_CFOP, CT_STAGE_F2L) == 0: 18446744073709551614 vs 0
+FAIL pack_seed_loader_rejects: pass=4 fail=1 1ms
+pack_seed_cll: tests/unit_pack_seeds.c:265: assert failed: ct_pack_seed_file(db, path, ev, m, st) == expected: 18446744073709551613 vs 42
+FAIL pack_seed_cll: pass=0 fail=1 1ms
+pack_seed_sarah: tests/unit_pack_seeds.c:265: assert failed: ct_pack_seed_file(db, path, ev, m, st) == expected: 18446744073709551613 vs 15
+FAIL pack_seed_sarah: pass=0 fail=1 0ms
+pack_seed_l4e: tests/unit_pack_seeds.c:265: assert failed: ct_pack_seed_file(db, path, ev, m, st) == expected: 18446744073709551613 vs 35
+FAIL pack_seed_l4e: pass=0 fail=1 1ms
+pack_seed_4lll: tests/unit_pack_seeds.c:265: assert failed: ct_pack_seed_file(db, path, ev, m, st) == expected: 18446744073709551613 vs 39
+FAIL pack_seed_4lll: pass=0 fail=1 0ms
+PASS notation_goldens: pass=255 fail=0 0ms
+PASS notation_canonical: pass=295 fail=0 0ms
+PASS notation_roundtrip: pass=1836 fail=0 0ms
+PASS notation_alg: pass=26 fail=0 0ms
+PASS notation_errors: pass=45 fail=0 0ms
+PASS notation_suffix_order: pass=112 fail=0 0ms
+PASS notation_fuzz: pass=5200 fail=0 0ms
+PASS notation_engine: pass=56 fail=0 0ms
+settings_repo: tests/unit_letter_scheme.c:15: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL settings_repo: pass=1 fail=1 0ms
+letter_scheme_lifecycle: tests/unit_letter_scheme.c:15: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL letter_scheme_lifecycle: pass=1 fail=1 1ms
+letter_map_validation: tests/unit_letter_scheme.c:15: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL letter_map_validation: pass=1 fail=1 0ms
+speffz_seed: tests/unit_letter_scheme.c:15: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL speffz_seed: pass=1 fail=1 0ms
+speffz_seed_default: tests/unit_letter_scheme.c:15: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL speffz_seed_default: pass=1 fail=1 1ms
+speffz_sql_agreement: tests/unit_letter_scheme.c:15: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL speffz_sql_agreement: pass=1 fail=1 0ms
+PASS unit_interchange: pass=8344 fail=0 129ms
+PASS sq1_identity: pass=12 fail=0 0ms
+PASS sq1_token: pass=244 fail=0 0ms
+PASS sq1_move_ids: pass=722 fail=0 0ms
+PASS sq1_state: pass=23 fail=0 0ms
+PASS sq1_slash_legality: pass=9 fail=0 0ms
+PASS sq1_perm: pass=21041 fail=0 0ms
+PASS sq1_perm_convention: pass=7201 fail=0 0ms
+PASS sq1_perm_state: pass=174 fail=0 0ms
+PASS sq1_axis: pass=53 fail=0 0ms
+PASS sq1_stickers: pass=1215 fail=0 0ms
+PASS sq1_seed_snapshot: pass=99 fail=0 0ms
+PASS sq1_perm_state_coherence: pass=50674 fail=0 0ms
+PASS sq1_fuzz: pass=4069 fail=0 0ms
+PASS sq1_fuzz_long: pass=60151 fail=0 3ms
+PASS clock_identity: pass=11 fail=0 0ms
+PASS clock_token: pass=139 fail=0 0ms
+PASS clock_move_ids: pass=292 fail=0 0ms
+PASS clock_state_vectors: pass=540 fail=0 0ms
+PASS clock_state: pass=60 fail=0 0ms
+PASS clock_perm: pass=35 fail=0 0ms
+PASS clock_axis: pass=73 fail=0 0ms
+PASS clock_stickers: pass=203 fail=0 0ms
+PASS clock_scramble_form: pass=31 fail=0 0ms
+PASS clock_fuzz: pass=4003 fail=0 0ms
+PASS geometry_identity: pass=26 fail=0 0ms
+PASS geometry_ordering: pass=290 fail=0 0ms
+PASS geometry_perm: pass=28974 fail=0 1ms
+PASS geometry_stickers: pass=760 fail=0 0ms
+PASS geometry_axis: pass=2610 fail=0 0ms
+PASS geometry_token: pass=142 fail=0 0ms
+PASS geometry_apply: pass=178 fail=0 1ms
+PASS geometry_fuzz: pass=2918 fail=0 1ms
+PASS geometry_guards: pass=24 fail=0 0ms
+PASS fsrs_init: pass=6 fail=0 0ms
+PASS fsrs_golden_first_review: pass=32 fail=0 0ms
+PASS fsrs_golden_recall: pass=21 fail=0 0ms
+PASS fsrs_golden_forget: pass=8 fail=0 0ms
+PASS fsrs_golden_same_day: pass=31 fail=0 0ms
+PASS fsrs_golden_interval_table: pass=8 fail=0 0ms
+PASS fsrs_retrievability: pass=5 fail=0 0ms
+PASS fsrs_stability_properties: pass=2 fail=0 0ms
+PASS fsrs_interval_properties: pass=6 fail=0 0ms
+PASS fsrs_branch_selection: pass=5 fail=0 0ms
+PASS fsrs_state_machine: pass=60 fail=0 0ms
+PASS fsrs_clamp_proof: pass=8 fail=0 0ms
+PASS fsrs_nonfinite_difficulty: pass=93 fail=0 0ms
+PASS fsrs_negative_elapsed: pass=14 fail=0 0ms
+PASS fsrs_today_overflow: pass=4 fail=0 0ms
+PASS fsrs_invalid_grade: pass=16 fail=0 0ms
+PASS fsrs_degenerate_stability: pass=69 fail=0 0ms
+PASS fsrs_interval_boundaries: pass=2 fail=0 0ms
+PASS fsrs_random_walk: pass=10 fail=0 0ms
+PASS e2e_parse_flow: pass=20 fail=0 0ms
+PASS e2e_parse_comments_and_quotes: pass=5 fail=0 0ms
+PASS e2e_parse_errors: pass=12 fail=0 0ms
+PASS e2e_parse_caps: pass=3 fail=0 0ms
+e2e_run_review_loop: tests/unit_e2e_script.c:26: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL e2e_run_review_loop: pass=1 fail=1 0ms
+e2e_run_expect_failure: tests/unit_e2e_script.c:26: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL e2e_run_expect_failure: pass=1 fail=1 1ms
+e2e_run_cfop_cards: tests/unit_e2e_script.c:26: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL e2e_run_cfop_cards: pass=1 fail=1 0ms
+e2e_run_settings_form: tests/unit_e2e_script.c:26: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL e2e_run_settings_form: pass=1 fail=1 1ms
+e2e_run_restart_merge: tests/unit_e2e_script.c:26: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL e2e_run_restart_merge: pass=3 fail=1 0ms
+e2e_run_trainer_generate: tests/unit_e2e_script.c:26: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL e2e_run_trainer_generate: pass=1 fail=1 0ms
+PASS e2e_data_dir_override: pass=7 fail=0 2ms
+PASS db_open: pass=7 fail=0 18ms
+migrate: tests/unit_db.c:151: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL migrate: pass=1 fail=1 0ms
+migrate_backup: tests/unit_db.c:170: assert failed: copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/mig/001_init.sql")
+FAIL migrate_backup: pass=0 fail=1 1ms
+migrate_error_paths: tests/unit_db.c:221: assert failed: copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/migerr/001_init.sql")
+FAIL migrate_error_paths: pass=1 fail=1 1ms
+migrate_soundness: tests/unit_db.c:298: assert failed: copy_file("db/migrations/001_init.sql", CT_TEST_DIR "/migsnd/001_init.sql")
+FAIL migrate_soundness: pass=0 fail=1 1ms
+db_schema_assert: tests/unit_db.c:400: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL db_schema_assert: pass=3 fail=1 0ms
+pragmas: tests/unit_db.c:421: assert failed: ct_db_migrate(db, "db/migrations") == 0: 1 vs 0
+FAIL pragmas: pass=2 fail=1 0ms
+PASS cube_move_legal: pass=26 fail=0 0ms
+PASS cube_init: pass=24 fail=0 0ms
+PASS cube_frame_convention: pass=12 fail=0 0ms
+PASS cube_round_trip: pass=2502 fail=0 0ms
+PASS cube_turn_cycle: pass=300 fail=0 2ms
+PASS cube_wide: pass=18 fail=0 0ms
+PASS cube_u_grid: pass=3 fail=0 0ms
+PASS cube_u_strips: pass=6 fail=0 0ms
+PASS cube_f_strips: pass=6 fail=0 0ms
+PASS cube_move_invariants: pass=936 fail=0 5ms
+PASS cube_scramble_inverse: pass=404 fail=0 4ms
+PASS config_constants: pass=47 fail=0 0ms
+PASS config_enums: pass=83 fail=0 0ms
+PASS config_face_helpers: pass=31 fail=0 0ms
+PASS config_defaults: pass=54 fail=0 0ms
+PASS config_set_roundtrip: pass=40 fail=0 0ms
+PASS config_set_srs_weights: pass=38 fail=0 0ms
+PASS config_set_errors: pass=51 fail=0 0ms
+PASS config_preferred_moves: pass=28 fail=0 0ms
+PASS config_finger_defaults: pass=31 fail=0 0ms
+PASS config_finger_set: pass=28 fail=0 0ms
+PASS config_domain_rejection: pass=26 fail=0 0ms
+PASS config_gen_weights_negative: pass=40 fail=0 0ms
+PASS config_clamping: pass=28 fail=0 0ms
+PASS unit_classify: pass=65 fail=0 0ms
+unit_classify_stress: unknown=400 special=0 commutator=0
+PASS unit_classify_stress: pass=401 fail=0 7ms
+unit_classify_fixture: tests/unit_classify.c:506: assert failed: rows == TEST_FIXTURE_ROWS: 18446744073709551615 vs 21
+FAIL unit_classify_fixture: pass=0 fail=1 0ms
+unit_classify_synth_table: entries=4464 unknowns=0 pure=4032 a9=0 b9=0 orth=0 cyclic=0 column=0 perspecial=336 hsp=48 sp5=48 sp7=0 sp9=0
+PASS unit_classify_synth_table: pass=9211 fail=0 105ms
+unit_classify_synth_results: found=40 direct=30 setup=10 fallback=0 classified=38
+PASS unit_classify_synth_results: pass=202 fail=0 3ms
+PASS unit_classify_special: pass=14 fail=0 0ms
+PASS cfop_case_counts: pass=6 fail=0 0ms
+PASS cfop_pll_keys: pass=48 fail=0 0ms
+PASS cfop_oll_keys: pass=348 fail=0 0ms
+PASS cfop_f2l_keys: pass=668 fail=0 0ms
+PASS cfop_directions: pass=86 fail=0 0ms
+PASS cfop_deck_names: pass=11 fail=0 0ms
+PASS cfop_key_cap_safety: pass=8 fail=0 0ms
+cfop_populate_pll: tests/unit_cfop.c:24: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL cfop_populate_pll: pass=1 fail=1 0ms
+cfop_populate_oll_f2l: tests/unit_cfop.c:24: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL cfop_populate_oll_f2l: pass=1 fail=1 0ms
+cards_form_open: tests/unit_cards_form.c:11: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL cards_form_open: pass=1 fail=1 0ms
+cards_form_select: tests/unit_cards_form.c:11: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL cards_form_select: pass=1 fail=1 1ms
+cards_form_edit_save: tests/unit_cards_form.c:11: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL cards_form_edit_save: pass=1 fail=1 0ms
+cards_form_create: tests/unit_cards_form.c:11: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL cards_form_create: pass=1 fail=1 0ms
+cards_form_delete: tests/unit_cards_form.c:11: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL cards_form_delete: pass=1 fail=1 0ms
+cards_form_cancel: tests/unit_cards_form.c:11: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL cards_form_cancel: pass=1 fail=1 1ms
+cards_form_status: tests/unit_cards_form.c:11: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL cards_form_status: pass=1 fail=1 0ms
+cards_form_guards: tests/unit_cards_form.c:11: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL cards_form_guards: pass=1 fail=1 1ms
+card_insert_get: tests/unit_cards.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL card_insert_get: pass=1 fail=1 0ms
+card_unique_conflict: tests/unit_cards.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL card_unique_conflict: pass=1 fail=1 0ms
+card_update: tests/unit_cards.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL card_update: pass=1 fail=1 0ms
+card_delete_cascade: tests/unit_cards.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL card_delete_cascade: pass=1 fail=1 0ms
+card_list: tests/unit_cards.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL card_list: pass=1 fail=1 1ms
+card_get_by_key: tests/unit_cards.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL card_get_by_key: pass=1 fail=1 0ms
+srs_roundtrip: tests/unit_cards.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL srs_roundtrip: pass=1 fail=1 1ms
+review_log_rows: tests/unit_cards.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL review_log_rows: pass=1 fail=1 0ms
+due_cards: tests/unit_cards.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL due_cards: pass=1 fail=1 0ms
+card_write_boundaries: tests/unit_cards.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL card_write_boundaries: pass=1 fail=1 1ms
+card_bad_args: tests/unit_cards.c:15: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL card_bad_args: pass=1 fail=1 0ms
+PASS now_iso: pass=25 fail=0 0ms
+PASS path_root_len: pass=21 fail=0 0ms
+cubing-trainer: refusing to create an empty directory path
+PASS path_mkdirs_relative: pass=5 fail=0 4ms
+PASS path_mkdirs_drive: pass=6 fail=0 4ms
+PASS path_exe_relative: pass=11 fail=0 0ms
+cubing-trainer: resource path ../../db/migrations relative to the executable is too long
+PASS path_migrations_dir_override: pass=9 fail=0 0ms
+cubing-trainer: LOCALAPPDATA is not set, cannot locate the data directory
+cubing-trainer: data directory path too long
+PASS path_data_dir_env: pass=14 fail=0 3ms
+PASS unit_anim_ease: pass=44079 fail=0 0ms
+PASS unit_anim_queue: pass=37 fail=0 0ms
+PASS unit_anim_speed: pass=11 fail=0 0ms
+PASS unit_anim_pause: pass=22 fail=0 0ms
+PASS unit_anim_prefix: pass=15 fail=0 0ms
+PASS unit_anim_edges: pass=153 fail=0 0ms
+PASS unit_anim_determinism: pass=261 fail=0 0ms
+PASS alg_hash_deterministic: pass=66 fail=0 0ms
+PASS alg_hash_scheme_differs: pass=1 fail=0 0ms
+PASS alg_hash_mode_differs: pass=1 fail=0 0ms
+PASS alg_hash_mask_differs: pass=1 fail=0 0ms
+PASS alg_hash_fsrs_inert: pass=1 fail=0 0ms
+PASS alg_hash_penalty_differs: pass=1 fail=0 0ms
+PASS alg_hash_finger_differs: pass=1 fail=0 0ms
+PASS alg_hash_bound_differs: pass=1 fail=0 0ms
+PASS alg_hash_factor_differs: pass=1 fail=0 0ms
+PASS alg_hash_format_pinned: pass=1 fail=0 0ms
+alg_put_get_roundtrip: tests/unit_algs.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL alg_put_get_roundtrip: pass=1 fail=1 0ms
+alg_put_upsert: tests/unit_algs.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL alg_put_upsert: pass=1 fail=1 1ms
+alg_count_list: tests/unit_algs.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL alg_count_list: pass=1 fail=1 0ms
+alg_stale: tests/unit_algs.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL alg_stale: pass=1 fail=1 1ms
+alg_drop: tests/unit_algs.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL alg_drop: pass=1 fail=1 0ms
+alg_text_bounds: tests/unit_algs.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL alg_text_bounds: pass=1 fail=1 0ms
+alg_malformed: tests/unit_algs.c:14: assert failed: ct_db_migrate(db, "db/migrations") == CT_REPO_OK: 1 vs 0
+FAIL alg_malformed: pass=1 fail=1 1ms

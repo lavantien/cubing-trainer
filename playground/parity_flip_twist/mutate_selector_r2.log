@@ -1,0 +1,1977 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_mutsel/bin/mutate.exe src/trainer/selector.c build_mutsel selector_scheme_load selector_events selector_methods selector_lists selector_case_counts selector_case_keys selector_case_pairs selector_pack_cases selector_pack_reach selector_pack_groups trainer_form_navigation
+mutate: suite selector_events exited 1
+mutate: suite selector_events exited 1
+mutate: suite selector_events exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+build_mutsel/mutants/p48332/m0010_selector.c:76:44: error: zero size arrays are an extension [-Werror,-Wzero-length-array]
+   76 | static ct_pack_entry ct_selector_pack_rows[CT_SELECTOR_PACK_ROWS_MAX];
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite selector_case_keys exited 1
+build_mutsel/mutants/p48332/m0014_selector.c:160:16: error: zero size arrays are an extension [-Werror,-Wzero-length-array]
+  160 |     char value[CT_SELECTOR_SETTING_MAX];
+      |                ^~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite selector_case_keys exited -1073741795
+build_mutsel/mutants/p48332/m0018_selector.c:69:16: error: expected member name or ';' after declaration specifiers
+   69 |     const char /key;
+      |     ~~~~~~~~~~ ^
+build_mutsel/mutants/p48332/m0018_selector.c:69:15: error: expected ';' at end of declaration list
+   69 |     const char /key;
+      |               ^
+      |               ;
+build_mutsel/mutants/p48332/m0018_selector.c:162:21: error: invalid application of 'sizeof' to an incomplete type 'const struct (unnamed at build_mutsel/mutants/p48332/m0018_selector.c:68:14)[]'
+  162 |          i < sizeof ct_selector_buffer_keys / sizeof ct_selector_buffer_keys[0]; i++) {
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0018_selector.c:163:65: error: no member named 'key' in 'struct (unnamed at build_mutsel/mutants/p48332/m0018_selector.c:68:14)'
+  163 |         if (ct_repo_settings_get(db, ct_selector_buffer_keys[i].key, value,
+      |                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~ ^
+4 errors generated.
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited -1073741795
+mutate: suite selector_lists exited -1073741795
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_events exited 1
+build_mutsel/mutants/p48332/m0055_selector.c:103:59: error: expected ')'
+  103 | static int ct_selector_buffer_of(const ct_selector_scheme /scheme, ct_orbit orbit) {
+      |                                                           ^
+build_mutsel/mutants/p48332/m0055_selector.c:103:33: note: to match this '('
+  103 | static int ct_selector_buffer_of(const ct_selector_scheme /scheme, ct_orbit orbit) {
+      |                                 ^
+build_mutsel/mutants/p48332/m0055_selector.c:104:12: error: use of undeclared identifier 'orbit'
+  104 |     return orbit == CT_ORBIT_EDGE ? scheme->buffer_edge : scheme->buffer_corner;
+      |            ^~~~~
+build_mutsel/mutants/p48332/m0055_selector.c:104:37: error: use of undeclared identifier 'scheme'
+  104 |     return orbit == CT_ORBIT_EDGE ? scheme->buffer_edge : scheme->buffer_corner;
+      |                                     ^~~~~~
+build_mutsel/mutants/p48332/m0055_selector.c:104:59: error: use of undeclared identifier 'scheme'
+  104 |     return orbit == CT_ORBIT_EDGE ? scheme->buffer_edge : scheme->buffer_corner;
+      |                                                           ^~~~~~
+build_mutsel/mutants/p48332/m0055_selector.c:297:52: error: too many arguments to function call, expected 1, have 2
+  297 |         int buffer = ct_selector_buffer_of(scheme, orbit);
+      |                      ~~~~~~~~~~~~~~~~~~~~~         ^~~~~
+build_mutsel/mutants/p48332/m0055_selector.c:103:12: note: 'ct_selector_buffer_of' declared here
+  103 | static int ct_selector_buffer_of(const ct_selector_scheme /scheme, ct_orbit orbit) {
+      |            ^                     ~~~~~~~~~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0055_selector.c:334:48: error: too many arguments to function call, expected 1, have 2
+  334 |     int buffer = ct_selector_buffer_of(scheme, orbit);
+      |                  ~~~~~~~~~~~~~~~~~~~~~         ^~~~~
+build_mutsel/mutants/p48332/m0055_selector.c:103:12: note: 'ct_selector_buffer_of' declared here
+  103 | static int ct_selector_buffer_of(const ct_selector_scheme /scheme, ct_orbit orbit) {
+      |            ^                     ~~~~~~~~~~~~~~~~~~~~~~~~
+6 errors generated.
+mutate: suite selector_case_keys exited 1
+build_mutsel/mutants/p48332/m0057_selector.c:107:81: error: expected ')'
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage /stage,
+      |                                                                                 ^
+build_mutsel/mutants/p48332/m0057_selector.c:107:32: note: to match this '('
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage /stage,
+      |                                ^
+build_mutsel/mutants/p48332/m0057_selector.c:115:14: error: use of undeclared identifier 'stage'
+  115 |             *stage = ct_selector_table[i].stage;
+      |              ^~~~~
+build_mutsel/mutants/p48332/m0057_selector.c:116:14: error: use of undeclared identifier 'orbit'
+  116 |             *orbit = ct_selector_table[i].orbit;
+      |              ^~~~~
+build_mutsel/mutants/p48332/m0057_selector.c:117:14: error: use of undeclared identifier 'source'
+  117 |             *source = ct_selector_table[i].source;
+      |              ^~~~~~
+build_mutsel/mutants/p48332/m0057_selector.c:245:54: error: too many arguments to function call, expected 4, have 6
+  245 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |         ~~~~~~~~~~~~~~~~~~~~                         ^~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0057_selector.c:107:12: note: 'ct_selector_list_def' declared here
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage /stage,
+      |            ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0057_selector.c:286:54: error: too many arguments to function call, expected 4, have 6
+  286 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |         ~~~~~~~~~~~~~~~~~~~~                         ^~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0057_selector.c:107:12: note: 'ct_selector_list_def' declared here
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage /stage,
+      |            ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0057_selector.c:329:54: error: too many arguments to function call, expected 4, have 6
+  329 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |         ~~~~~~~~~~~~~~~~~~~~                         ^~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0057_selector.c:107:12: note: 'ct_selector_list_def' declared here
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage /stage,
+      |            ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0057_selector.c:352:54: error: too many arguments to function call, expected 4, have 6
+  352 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |         ~~~~~~~~~~~~~~~~~~~~                         ^~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0057_selector.c:107:12: note: 'ct_selector_list_def' declared here
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage /stage,
+      |            ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0057_selector.c:381:54: error: too many arguments to function call, expected 4, have 6
+  381 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |         ~~~~~~~~~~~~~~~~~~~~                         ^~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0057_selector.c:107:12: note: 'ct_selector_list_def' declared here
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage /stage,
+      |            ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+9 errors generated.
+build_mutsel/mutants/p48332/m0058_selector.c:108:42: error: expected ')'
+  108 |                                 ct_orbit /orbit, ct_selector_source *source) {
+      |                                          ^
+build_mutsel/mutants/p48332/m0058_selector.c:107:32: note: to match this '('
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage *stage,
+      |                                ^
+build_mutsel/mutants/p48332/m0058_selector.c:116:14: error: use of undeclared identifier 'orbit'
+  116 |             *orbit = ct_selector_table[i].orbit;
+      |              ^~~~~
+build_mutsel/mutants/p48332/m0058_selector.c:117:14: error: use of undeclared identifier 'source'
+  117 |             *source = ct_selector_table[i].source;
+      |              ^~~~~~
+build_mutsel/mutants/p48332/m0058_selector.c:245:62: error: too many arguments to function call, expected 5, have 6
+  245 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |         ~~~~~~~~~~~~~~~~~~~~                                 ^~~~~~~
+build_mutsel/mutants/p48332/m0058_selector.c:107:12: note: 'ct_selector_list_def' declared here
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage *stage,
+      |            ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  108 |                                 ct_orbit /orbit, ct_selector_source *source) {
+      |                                 ~~~~~~~~
+build_mutsel/mutants/p48332/m0058_selector.c:286:62: error: too many arguments to function call, expected 5, have 6
+  286 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |         ~~~~~~~~~~~~~~~~~~~~                                 ^~~~~~~
+build_mutsel/mutants/p48332/m0058_selector.c:107:12: note: 'ct_selector_list_def' declared here
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage *stage,
+      |            ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  108 |                                 ct_orbit /orbit, ct_selector_source *source) {
+      |                                 ~~~~~~~~
+build_mutsel/mutants/p48332/m0058_selector.c:329:62: error: too many arguments to function call, expected 5, have 6
+  329 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |         ~~~~~~~~~~~~~~~~~~~~                                 ^~~~~~~
+build_mutsel/mutants/p48332/m0058_selector.c:107:12: note: 'ct_selector_list_def' declared here
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage *stage,
+      |            ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  108 |                                 ct_orbit /orbit, ct_selector_source *source) {
+      |                                 ~~~~~~~~
+build_mutsel/mutants/p48332/m0058_selector.c:352:62: error: too many arguments to function call, expected 5, have 6
+  352 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |         ~~~~~~~~~~~~~~~~~~~~                                 ^~~~~~~
+build_mutsel/mutants/p48332/m0058_selector.c:107:12: note: 'ct_selector_list_def' declared here
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage *stage,
+      |            ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  108 |                                 ct_orbit /orbit, ct_selector_source *source) {
+      |                                 ~~~~~~~~
+build_mutsel/mutants/p48332/m0058_selector.c:381:62: error: too many arguments to function call, expected 5, have 6
+  381 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |         ~~~~~~~~~~~~~~~~~~~~                                 ^~~~~~~
+build_mutsel/mutants/p48332/m0058_selector.c:107:12: note: 'ct_selector_list_def' declared here
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage *stage,
+      |            ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  108 |                                 ct_orbit /orbit, ct_selector_source *source) {
+      |                                 ~~~~~~~~
+8 errors generated.
+build_mutsel/mutants/p48332/m0059_selector.c:108:69: error: expected ')'
+  108 |                                 ct_orbit *orbit, ct_selector_source /source) {
+      |                                                                     ^
+build_mutsel/mutants/p48332/m0059_selector.c:107:32: note: to match this '('
+  107 | static int ct_selector_list_def(ct_event ev, ct_method m, int list_id, ct_stage *stage,
+      |                                ^
+build_mutsel/mutants/p48332/m0059_selector.c:117:14: error: use of undeclared identifier 'source'
+  117 |             *source = ct_selector_table[i].source;
+      |              ^~~~~~
+build_mutsel/mutants/p48332/m0059_selector.c:245:62: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  245 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                                                              ^~~~~~~
+build_mutsel/mutants/p48332/m0059_selector.c:108:69: note: passing argument to parameter here
+  108 |                                 ct_orbit *orbit, ct_selector_source /source) {
+      |                                                                     ^
+build_mutsel/mutants/p48332/m0059_selector.c:286:62: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  286 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                                                              ^~~~~~~
+build_mutsel/mutants/p48332/m0059_selector.c:108:69: note: passing argument to parameter here
+  108 |                                 ct_orbit *orbit, ct_selector_source /source) {
+      |                                                                     ^
+build_mutsel/mutants/p48332/m0059_selector.c:329:62: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  329 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |                                                              ^~~~~~~
+build_mutsel/mutants/p48332/m0059_selector.c:108:69: note: passing argument to parameter here
+  108 |                                 ct_orbit *orbit, ct_selector_source /source) {
+      |                                                                     ^
+build_mutsel/mutants/p48332/m0059_selector.c:352:62: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  352 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |                                                              ^~~~~~~
+build_mutsel/mutants/p48332/m0059_selector.c:108:69: note: passing argument to parameter here
+  108 |                                 ct_orbit *orbit, ct_selector_source /source) {
+      |                                                                     ^
+build_mutsel/mutants/p48332/m0059_selector.c:381:62: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  381 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |                                                              ^~~~~~~
+build_mutsel/mutants/p48332/m0059_selector.c:108:69: note: passing argument to parameter here
+  108 |                                 ct_orbit *orbit, ct_selector_source /source) {
+      |                                                                     ^
+7 errors generated.
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: scope=src/trainer/selector.c files=1 sites=365 suites=11
+KILLED    m0001 src/trainer/selector.c:11 [arith + -> -]
+KILLED    m0002 src/trainer/selector.c:11 [int+1 1 -> 2]
+KILLED    m0003 src/trainer/selector.c:11 [int-1 1 -> 0]
+KILLED    m0004 src/trainer/selector.c:12 [arith + -> -]
+SURVIVED  m0005 src/trainer/selector.c:12 [int+1 1 -> 2]
+KILLED    m0006 src/trainer/selector.c:12 [int-1 1 -> 0]
+KILLED    m0007 src/trainer/selector.c:13 [int+1 3 -> 4]
+KILLED    m0008 src/trainer/selector.c:13 [int-1 3 -> 2]
+SURVIVED  m0009 src/trainer/selector.c:14 [int+1 1 -> 2]
+KILLED    m0010 src/trainer/selector.c:14 [int-1 1 -> 0]
+          build break
+SURVIVED  m0011 src/trainer/selector.c:14 [int+1 8 -> 9]
+KILLED    m0012 src/trainer/selector.c:14 [int-1 8 -> 7]
+SURVIVED  m0013 src/trainer/selector.c:15 [int+1 1 -> 2]
+KILLED    m0014 src/trainer/selector.c:15 [int-1 1 -> 0]
+          build break
+SURVIVED  m0015 src/trainer/selector.c:15 [int+1 5 -> 6]
+SURVIVED  m0016 src/trainer/selector.c:15 [int-1 5 -> 4]
+KILLED    m0017 src/trainer/selector.c:16 [arith * -> /]
+KILLED    m0018 src/trainer/selector.c:69 [arith * -> /]
+          build break
+KILLED    m0019 src/trainer/selector.c:80 [cmp >= -> >]
+KILLED    m0020 src/trainer/selector.c:80 [int+1 0 -> 1]
+SURVIVED  m0021 src/trainer/selector.c:80 [int-1 0 -> -1]
+SURVIVED  m0022 src/trainer/selector.c:80 [logic && -> ||]
+SURVIVED  m0023 src/trainer/selector.c:80 [cmp < -> <=]
+KILLED    m0024 src/trainer/selector.c:84 [cmp >= -> >]
+KILLED    m0025 src/trainer/selector.c:84 [int+1 0 -> 1]
+SURVIVED  m0026 src/trainer/selector.c:84 [int-1 0 -> -1]
+SURVIVED  m0027 src/trainer/selector.c:84 [logic && -> ||]
+SURVIVED  m0028 src/trainer/selector.c:84 [cmp < -> <=]
+KILLED    m0029 src/trainer/selector.c:88 [not-del ! -> (deleted)]
+SURVIVED  m0030 src/trainer/selector.c:88 [logic || -> &&]
+KILLED    m0031 src/trainer/selector.c:88 [not-del ! -> (deleted)]
+SURVIVED  m0032 src/trainer/selector.c:89 [ret-lit 0 -> 1]
+SURVIVED  m0033 src/trainer/selector.c:89 [int+1 0 -> 1]
+SURVIVED  m0034 src/trainer/selector.c:89 [int-1 0 -> -1]
+SURVIVED  m0035 src/trainer/selector.c:91 [int+1 0 -> 1]
+KILLED    m0036 src/trainer/selector.c:91 [int-1 0 -> -1]
+KILLED    m0037 src/trainer/selector.c:91 [cmp < -> <=]
+KILLED    m0038 src/trainer/selector.c:91 [arith / -> *]
+SURVIVED  m0039 src/trainer/selector.c:91 [int+1 0 -> 1]
+SURVIVED  m0040 src/trainer/selector.c:91 [int-1 0 -> -1]
+KILLED    m0041 src/trainer/selector.c:92 [cmp == -> !=]
+SURVIVED  m0042 src/trainer/selector.c:92 [logic && -> ||]
+KILLED    m0043 src/trainer/selector.c:92 [cmp == -> !=]
+KILLED    m0044 src/trainer/selector.c:93 [ret-lit 1 -> 0]
+SURVIVED  m0045 src/trainer/selector.c:93 [int+1 1 -> 2]
+KILLED    m0046 src/trainer/selector.c:93 [int-1 1 -> 0]
+SURVIVED  m0047 src/trainer/selector.c:96 [ret-lit 0 -> 1]
+SURVIVED  m0048 src/trainer/selector.c:96 [int+1 0 -> 1]
+SURVIVED  m0049 src/trainer/selector.c:96 [int-1 0 -> -1]
+SURVIVED  m0050 src/trainer/selector.c:100 [cmp < -> <=]
+SURVIVED  m0051 src/trainer/selector.c:100 [int+1 0 -> 1]
+SURVIVED  m0052 src/trainer/selector.c:100 [int-1 0 -> -1]
+KILLED    m0053 src/trainer/selector.c:100 [int+1 0 -> 1]
+SURVIVED  m0054 src/trainer/selector.c:100 [int-1 0 -> -1]
+KILLED    m0055 src/trainer/selector.c:103 [arith * -> /]
+          build break
+KILLED    m0056 src/trainer/selector.c:104 [cmp == -> !=]
+KILLED    m0057 src/trainer/selector.c:107 [arith * -> /]
+          build break
+KILLED    m0058 src/trainer/selector.c:108 [arith * -> /]
+          build break
+KILLED    m0059 src/trainer/selector.c:108 [arith * -> /]
+          build break
+KILLED    m0060 src/trainer/selector.c:109 [int+1 0 -> 1]
+KILLED    m0061 src/trainer/selector.c:109 [int-1 0 -> -1]
+KILLED    m0062 src/trainer/selector.c:110 [int+1 0 -> 1]
+KILLED    m0063 src/trainer/selector.c:110 [int-1 0 -> -1]
+SURVIVED  m0064 src/trainer/selector.c:110 [cmp < -> <=]
+SURVIVED  m0065 src/trainer/selector.c:110 [arith / -> *]
+SURVIVED  m0066 src/trainer/selector.c:110 [int+1 0 -> 1]
+SURVIVED  m0067 src/trainer/selector.c:110 [int-1 0 -> -1]
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+build_mutsel/mutants/p48332/m0072_selector.c:115:13: error: expected expression
+  115 |             /stage = ct_selector_table[i].stage;
+      |             ^
+1 error generated.
+build_mutsel/mutants/p48332/m0073_selector.c:116:13: error: expected expression
+  116 |             /orbit = ct_selector_table[i].orbit;
+      |             ^
+1 error generated.
+build_mutsel/mutants/p48332/m0074_selector.c:117:13: error: expected expression
+  117 |             /source = ct_selector_table[i].source;
+      |             ^
+1 error generated.
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited -1073741795
+mutate: suite selector_case_counts exited -1073741795
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+build_mutsel/mutants/p48332/m0089_selector.c:135:48: error: expected ')'
+  135 | static int ct_selector_parse_buffer(const char /text, int fallback) {
+      |                                                ^
+build_mutsel/mutants/p48332/m0089_selector.c:135:36: note: to match this '('
+  135 | static int ct_selector_parse_buffer(const char /text, int fallback) {
+      |                                    ^
+build_mutsel/mutants/p48332/m0089_selector.c:137:21: error: use of undeclared identifier 'text'
+  137 |     long v = strtol(text, &end, CT_DECIMAL_BASE);
+      |                     ^~~~
+build_mutsel/mutants/p48332/m0089_selector.c:138:16: error: use of undeclared identifier 'text'
+  138 |     if (end == text || end[0] != '\0' || v < 0 || v >= CT_LETTER_STICKERS) {
+      |                ^~~~
+build_mutsel/mutants/p48332/m0089_selector.c:139:16: error: use of undeclared identifier 'fallback'
+  139 |         return fallback;
+      |                ^~~~~~~~
+build_mutsel/mutants/p48332/m0089_selector.c:165:53: error: too many arguments to function call, expected 1, have 2
+  165 |             int v = ct_selector_parse_buffer(value, ct_selector_buffer_keys[i].fallback);
+      |                     ~~~~~~~~~~~~~~~~~~~~~~~~        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0089_selector.c:135:12: note: 'ct_selector_parse_buffer' declared here
+  135 | static int ct_selector_parse_buffer(const char /text, int fallback) {
+      |            ^                        ~~~~~~~~~~
+5 errors generated.
+build_mutsel/mutants/p48332/m0090_selector.c:136:10: error: expected identifier or '('
+  136 |     char /end = NULL;
+      |          ^
+build_mutsel/mutants/p48332/m0090_selector.c:137:28: error: use of undeclared identifier 'end'
+  137 |     long v = strtol(text, &end, CT_DECIMAL_BASE);
+      |                            ^~~
+build_mutsel/mutants/p48332/m0090_selector.c:138:9: error: use of undeclared identifier 'end'
+  138 |     if (end == text || end[0] != '\0' || v < 0 || v >= CT_LETTER_STICKERS) {
+      |         ^~~
+build_mutsel/mutants/p48332/m0090_selector.c:138:24: error: use of undeclared identifier 'end'
+  138 |     if (end == text || end[0] != '\0' || v < 0 || v >= CT_LETTER_STICKERS) {
+      |                        ^~~
+4 errors generated.
+mutate: suite selector_scheme_load exited 1
+build_mutsel/mutants/p48332/m0092_selector.c:138:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  138 |     if (end == text && end[0] != '\0' || v < 0 || v >= CT_LETTER_STICKERS) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~ ~~
+build_mutsel/mutants/p48332/m0092_selector.c:138:21: note: place parentheses around the '&&' expression to silence this warning
+  138 |     if (end == text && end[0] != '\0' || v < 0 || v >= CT_LETTER_STICKERS) {
+      |                     ^
+      |         (                            )
+1 error generated.
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+build_mutsel/mutants/p48332/m0096_selector.c:138:39: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  138 |     if (end == text || end[0] != '\0' && v < 0 || v >= CT_LETTER_STICKERS) {
+      |                     ~~ ~~~~~~~~~~~~~~~^~~~~~~~
+build_mutsel/mutants/p48332/m0096_selector.c:138:39: note: place parentheses around the '&&' expression to silence this warning
+  138 |     if (end == text || end[0] != '\0' && v < 0 || v >= CT_LETTER_STICKERS) {
+      |                                       ^
+      |                        (                      )
+1 error generated.
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+build_mutsel/mutants/p48332/m0100_selector.c:138:48: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  138 |     if (end == text || end[0] != '\0' || v < 0 && v >= CT_LETTER_STICKERS) {
+      |                                       ~~ ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0100_selector.c:138:48: note: place parentheses around the '&&' expression to silence this warning
+  138 |     if (end == text || end[0] != '\0' || v < 0 && v >= CT_LETTER_STICKERS) {
+      |                                          ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite selector_scheme_load exited 1
+build_mutsel/mutants/p48332/m0102_selector.c:144:37: error: expected ')'
+  144 | int ct_selector_scheme_load(sqlite3 /db, ct_selector_scheme *out) {
+      |                                     ^
+build_mutsel/mutants/p48332/m0102_selector.c:144:28: note: to match this '('
+  144 | int ct_selector_scheme_load(sqlite3 /db, ct_selector_scheme *out) {
+      |                            ^
+build_mutsel/mutants/p48332/m0102_selector.c:144:5: error: conflicting types for 'ct_selector_scheme_load'
+  144 | int ct_selector_scheme_load(sqlite3 /db, ct_selector_scheme *out) {
+      |     ^
+src\trainer/selector.h:41:5: note: previous declaration is here
+   41 | int ct_selector_scheme_load(sqlite3 *db, ct_selector_scheme *out);
+      |     ^
+build_mutsel/mutants/p48332/m0102_selector.c:144:37: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  144 | int ct_selector_scheme_load(sqlite3 /db, ct_selector_scheme *out) {
+      |                                     ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_mutsel/mutants/p48332/m0102_selector.c:145:9: error: use of undeclared identifier 'db'
+  145 |     if (db == NULL || out == NULL) {
+      |         ^~
+build_mutsel/mutants/p48332/m0102_selector.c:145:23: error: use of undeclared identifier 'out'
+  145 |     if (db == NULL || out == NULL) {
+      |                       ^~~
+build_mutsel/mutants/p48332/m0102_selector.c:148:46: error: use of undeclared identifier 'db'
+  148 |     int scheme = ct_letter_scheme_default_id(db);
+      |                                              ^~
+build_mutsel/mutants/p48332/m0102_selector.c:150:35: error: use of undeclared identifier 'db'
+  150 |         if (ct_letter_seed_speffz(db) != 0) {
+      |                                   ^~
+build_mutsel/mutants/p48332/m0102_selector.c:153:46: error: use of undeclared identifier 'db'
+  153 |         scheme = ct_letter_scheme_default_id(db);
+      |                                              ^~
+build_mutsel/mutants/p48332/m0102_selector.c:155:43: error: use of undeclared identifier 'db'
+  155 |     if (scheme <= 0 || ct_letter_map_load(db, scheme, &out->map) < 0) {
+      |                                           ^~
+build_mutsel/mutants/p48332/m0102_selector.c:155:56: error: use of undeclared identifier 'out'
+  155 |     if (scheme <= 0 || ct_letter_map_load(db, scheme, &out->map) < 0) {
+      |                                                        ^~~
+build_mutsel/mutants/p48332/m0102_selector.c:158:5: error: use of undeclared identifier 'out'
+  158 |     out->buffer_corner = ct_selector_buffer_keys[0].fallback;
+      |     ^~~
+build_mutsel/mutants/p48332/m0102_selector.c:159:5: error: use of undeclared identifier 'out'
+  159 |     out->buffer_edge = ct_selector_buffer_keys[1].fallback;
+      |     ^~~
+build_mutsel/mutants/p48332/m0102_selector.c:163:34: error: use of undeclared identifier 'db'
+  163 |         if (ct_repo_settings_get(db, ct_selector_buffer_keys[i].key, value,
+      |                                  ^~
+build_mutsel/mutants/p48332/m0102_selector.c:167:17: error: use of undeclared identifier 'out'
+  167 |                 out->buffer_corner = v;
+      |                 ^~~
+build_mutsel/mutants/p48332/m0102_selector.c:169:17: error: use of undeclared identifier 'out'
+  169 |                 out->buffer_edge = v;
+      |                 ^~~
+15 errors generated.
+build_mutsel/mutants/p48332/m0103_selector.c:144:61: error: expected ')'
+  144 | int ct_selector_scheme_load(sqlite3 *db, ct_selector_scheme /out) {
+      |                                                             ^
+build_mutsel/mutants/p48332/m0103_selector.c:144:28: note: to match this '('
+  144 | int ct_selector_scheme_load(sqlite3 *db, ct_selector_scheme /out) {
+      |                            ^
+build_mutsel/mutants/p48332/m0103_selector.c:144:5: error: conflicting types for 'ct_selector_scheme_load'
+  144 | int ct_selector_scheme_load(sqlite3 *db, ct_selector_scheme /out) {
+      |     ^
+src\trainer/selector.h:41:5: note: previous declaration is here
+   41 | int ct_selector_scheme_load(sqlite3 *db, ct_selector_scheme *out);
+      |     ^
+build_mutsel/mutants/p48332/m0103_selector.c:145:23: error: use of undeclared identifier 'out'
+  145 |     if (db == NULL || out == NULL) {
+      |                       ^~~
+build_mutsel/mutants/p48332/m0103_selector.c:155:56: error: use of undeclared identifier 'out'
+  155 |     if (scheme <= 0 || ct_letter_map_load(db, scheme, &out->map) < 0) {
+      |                                                        ^~~
+build_mutsel/mutants/p48332/m0103_selector.c:158:5: error: use of undeclared identifier 'out'
+  158 |     out->buffer_corner = ct_selector_buffer_keys[0].fallback;
+      |     ^~~
+build_mutsel/mutants/p48332/m0103_selector.c:159:5: error: use of undeclared identifier 'out'
+  159 |     out->buffer_edge = ct_selector_buffer_keys[1].fallback;
+      |     ^~~
+build_mutsel/mutants/p48332/m0103_selector.c:167:17: error: use of undeclared identifier 'out'
+  167 |                 out->buffer_corner = v;
+      |                 ^~~
+build_mutsel/mutants/p48332/m0103_selector.c:169:17: error: use of undeclared identifier 'out'
+  169 |                 out->buffer_edge = v;
+      |                 ^~~
+8 errors generated.
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited -1073741795
+mutate: suite selector_scheme_load exited -1073741795
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+build_mutsel/mutants/p48332/m0121_selector.c:158:26: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  158 |     out->buffer_corner = ct_selector_buffer_keys[-1].fallback;
+      |                          ^                       ~~
+build_mutsel/mutants/p48332/m0121_selector.c:68:1: note: array 'ct_selector_buffer_keys' declared here
+   68 | static const struct {
+      | ^
+1 error generated.
+build_mutsel/mutants/p48332/m0122_selector.c:159:24: error: array index 2 is past the end of the array (that has type 'const struct (unnamed at build_mutsel/mutants/p48332/m0122_selector.c:68:14)[2]') [-Werror,-Warray-bounds]
+  159 |     out->buffer_edge = ct_selector_buffer_keys[2].fallback;
+      |                        ^                       ~
+build_mutsel/mutants/p48332/m0122_selector.c:68:1: note: array 'ct_selector_buffer_keys' declared here
+   68 | static const struct {
+      | ^
+1 error generated.
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited -1073741795
+mutate: suite selector_scheme_load exited -1073741795
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+KILLED    m0068 src/trainer/selector.c:111 [cmp != -> ==]
+KILLED    m0069 src/trainer/selector.c:111 [logic || -> &&]
+KILLED    m0070 src/trainer/selector.c:111 [cmp != -> ==]
+KILLED    m0071 src/trainer/selector.c:114 [cmp == -> !=]
+KILLED    m0072 src/trainer/selector.c:115 [arith * -> /]
+          build break
+KILLED    m0073 src/trainer/selector.c:116 [arith * -> /]
+          build break
+KILLED    m0074 src/trainer/selector.c:117 [arith * -> /]
+          build break
+KILLED    m0075 src/trainer/selector.c:118 [ret-lit 0 -> 1]
+KILLED    m0076 src/trainer/selector.c:118 [int+1 0 -> 1]
+KILLED    m0077 src/trainer/selector.c:118 [int-1 0 -> -1]
+SURVIVED  m0078 src/trainer/selector.c:126 [int+1 0 -> 1]
+KILLED    m0079 src/trainer/selector.c:126 [int-1 0 -> -1]
+KILLED    m0080 src/trainer/selector.c:127 [int+1 0 -> 1]
+KILLED    m0081 src/trainer/selector.c:127 [int-1 0 -> -1]
+KILLED    m0082 src/trainer/selector.c:127 [cmp < -> <=]
+KILLED    m0083 src/trainer/selector.c:127 [arith / -> *]
+SURVIVED  m0084 src/trainer/selector.c:127 [int+1 0 -> 1]
+SURVIVED  m0085 src/trainer/selector.c:127 [int-1 0 -> -1]
+KILLED    m0086 src/trainer/selector.c:128 [cmp == -> !=]
+SURVIVED  m0087 src/trainer/selector.c:128 [logic && -> ||]
+KILLED    m0088 src/trainer/selector.c:128 [cmp == -> !=]
+KILLED    m0089 src/trainer/selector.c:135 [arith * -> /]
+          build break
+KILLED    m0090 src/trainer/selector.c:136 [arith * -> /]
+          build break
+KILLED    m0091 src/trainer/selector.c:138 [cmp == -> !=]
+KILLED    m0092 src/trainer/selector.c:138 [logic || -> &&]
+          build break
+KILLED    m0093 src/trainer/selector.c:138 [int+1 0 -> 1]
+KILLED    m0094 src/trainer/selector.c:138 [int-1 0 -> -1]
+KILLED    m0095 src/trainer/selector.c:138 [cmp != -> ==]
+KILLED    m0096 src/trainer/selector.c:138 [logic || -> &&]
+          build break
+KILLED    m0097 src/trainer/selector.c:138 [cmp < -> <=]
+KILLED    m0098 src/trainer/selector.c:138 [int+1 0 -> 1]
+KILLED    m0099 src/trainer/selector.c:138 [int-1 0 -> -1]
+KILLED    m0100 src/trainer/selector.c:138 [logic || -> &&]
+          build break
+KILLED    m0101 src/trainer/selector.c:138 [cmp >= -> >]
+KILLED    m0102 src/trainer/selector.c:144 [arith * -> /]
+          build break
+KILLED    m0103 src/trainer/selector.c:144 [arith * -> /]
+          build break
+KILLED    m0104 src/trainer/selector.c:145 [cmp == -> !=]
+KILLED    m0105 src/trainer/selector.c:145 [logic || -> &&]
+KILLED    m0106 src/trainer/selector.c:145 [cmp == -> !=]
+KILLED    m0107 src/trainer/selector.c:149 [cmp <= -> <]
+SURVIVED  m0108 src/trainer/selector.c:149 [int+1 0 -> 1]
+KILLED    m0109 src/trainer/selector.c:149 [int-1 0 -> -1]
+KILLED    m0110 src/trainer/selector.c:150 [cmp != -> ==]
+KILLED    m0111 src/trainer/selector.c:150 [int+1 0 -> 1]
+KILLED    m0112 src/trainer/selector.c:150 [int-1 0 -> -1]
+SURVIVED  m0113 src/trainer/selector.c:155 [cmp <= -> <]
+KILLED    m0114 src/trainer/selector.c:155 [int+1 0 -> 1]
+SURVIVED  m0115 src/trainer/selector.c:155 [int-1 0 -> -1]
+KILLED    m0116 src/trainer/selector.c:155 [logic || -> &&]
+SURVIVED  m0117 src/trainer/selector.c:155 [cmp < -> <=]
+SURVIVED  m0118 src/trainer/selector.c:155 [int+1 0 -> 1]
+SURVIVED  m0119 src/trainer/selector.c:155 [int-1 0 -> -1]
+KILLED    m0120 src/trainer/selector.c:158 [int+1 0 -> 1]
+KILLED    m0121 src/trainer/selector.c:158 [int-1 0 -> -1]
+          build break
+KILLED    m0122 src/trainer/selector.c:159 [int+1 1 -> 2]
+          build break
+KILLED    m0123 src/trainer/selector.c:159 [int-1 1 -> 0]
+KILLED    m0124 src/trainer/selector.c:161 [int+1 0 -> 1]
+KILLED    m0125 src/trainer/selector.c:161 [int-1 0 -> -1]
+KILLED    m0126 src/trainer/selector.c:162 [cmp < -> <=]
+KILLED    m0127 src/trainer/selector.c:162 [arith / -> *]
+SURVIVED  m0128 src/trainer/selector.c:162 [int+1 0 -> 1]
+SURVIVED  m0129 src/trainer/selector.c:162 [int-1 0 -> -1]
+KILLED    m0130 src/trainer/selector.c:164 [cmp == -> !=]
+KILLED    m0131 src/trainer/selector.c:164 [int+1 0 -> 1]
+KILLED    m0132 src/trainer/selector.c:164 [int-1 0 -> -1]
+mutate: suite selector_scheme_load exited 1
+build_mutsel/mutants/p48332/m0135_selector.c:166:19: error: comparison of integers of different signs: 'unsigned long' and 'int' [-Werror,-Wsign-compare]
+  166 |             if (i == -1) {
+      |                 ~ ^  ~~
+1 error generated.
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+mutate: suite selector_scheme_load exited 1
+build_mutsel/mutants/p48332/m0139_selector.c:176:33: error: expected ')'
+  176 | int ct_selector_events(ct_event /out, int cap) {
+      |                                 ^
+build_mutsel/mutants/p48332/m0139_selector.c:176:23: note: to match this '('
+  176 | int ct_selector_events(ct_event /out, int cap) {
+      |                       ^
+build_mutsel/mutants/p48332/m0139_selector.c:176:5: error: conflicting types for 'ct_selector_events'
+  176 | int ct_selector_events(ct_event /out, int cap) {
+      |     ^
+src\trainer/selector.h:42:5: note: previous declaration is here
+   42 | int ct_selector_events(ct_event *out, int cap);
+      |     ^
+build_mutsel/mutants/p48332/m0139_selector.c:177:5: error: use of undeclared identifier 'cap'
+  177 |     cap = ct_selector_cap(cap);
+      |     ^~~
+build_mutsel/mutants/p48332/m0139_selector.c:177:27: error: use of undeclared identifier 'cap'
+  177 |     cap = ct_selector_cap(cap);
+      |                           ^~~
+build_mutsel/mutants/p48332/m0139_selector.c:180:13: error: use of undeclared identifier 'out'
+  180 |         if (out != NULL && total < cap) {
+      |             ^~~
+build_mutsel/mutants/p48332/m0139_selector.c:180:36: error: use of undeclared identifier 'cap'
+  180 |         if (out != NULL && total < cap) {
+      |                                    ^~~
+build_mutsel/mutants/p48332/m0139_selector.c:181:13: error: use of undeclared identifier 'out'
+  181 |             out[total] = ev;
+      |             ^~~
+7 errors generated.
+mutate: suite selector_events exited 1
+mutate: suite selector_events exited 1
+mutate: suite selector_events exited 1
+mutate: suite selector_events exited -1073741795
+mutate: suite selector_events exited -1073741795
+mutate: suite selector_events exited 1
+build_mutsel/mutants/p48332/m0146_selector.c:188:48: error: expected ')'
+  188 | int ct_selector_methods(ct_event ev, ct_method /out, int cap) {
+      |                                                ^
+build_mutsel/mutants/p48332/m0146_selector.c:188:24: note: to match this '('
+  188 | int ct_selector_methods(ct_event ev, ct_method /out, int cap) {
+      |                        ^
+build_mutsel/mutants/p48332/m0146_selector.c:188:5: error: conflicting types for 'ct_selector_methods'
+  188 | int ct_selector_methods(ct_event ev, ct_method /out, int cap) {
+      |     ^
+src\trainer/selector.h:43:5: note: previous declaration is here
+   43 | int ct_selector_methods(ct_event ev, ct_method *out, int cap);
+      |     ^
+build_mutsel/mutants/p48332/m0146_selector.c:189:5: error: use of undeclared identifier 'cap'
+  189 |     cap = ct_selector_cap(cap);
+      |     ^~~
+build_mutsel/mutants/p48332/m0146_selector.c:189:27: error: use of undeclared identifier 'cap'
+  189 |     cap = ct_selector_cap(cap);
+      |                           ^~~
+build_mutsel/mutants/p48332/m0146_selector.c:209:13: error: use of undeclared identifier 'out'
+  209 |         if (out != NULL && total < cap) {
+      |             ^~~
+build_mutsel/mutants/p48332/m0146_selector.c:209:36: error: use of undeclared identifier 'cap'
+  209 |         if (out != NULL && total < cap) {
+      |                                    ^~~
+build_mutsel/mutants/p48332/m0146_selector.c:210:13: error: use of undeclared identifier 'out'
+  210 |             out[total] = ct_selector_table[i].method;
+      |             ^~~
+7 errors generated.
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited -1073741795
+mutate: suite selector_methods exited -1073741795
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+mutate: suite selector_methods exited 1
+build_mutsel/mutants/p48332/m0173_selector.c:217:66: error: expected ')'
+  217 | int ct_selector_lists(ct_event ev, ct_method m, ct_selector_list /out, int cap) {
+      |                                                                  ^
+build_mutsel/mutants/p48332/m0173_selector.c:217:22: note: to match this '('
+  217 | int ct_selector_lists(ct_event ev, ct_method m, ct_selector_list /out, int cap) {
+      |                      ^
+build_mutsel/mutants/p48332/m0173_selector.c:217:5: error: conflicting types for 'ct_selector_lists'
+  217 | int ct_selector_lists(ct_event ev, ct_method m, ct_selector_list /out, int cap) {
+      |     ^
+src\trainer/selector.h:44:5: note: previous declaration is here
+   44 | int ct_selector_lists(ct_event ev, ct_method m, ct_selector_list *out, int cap);
+      |     ^
+build_mutsel/mutants/p48332/m0173_selector.c:218:5: error: use of undeclared identifier 'cap'
+  218 |     cap = ct_selector_cap(cap);
+      |     ^~~
+build_mutsel/mutants/p48332/m0173_selector.c:218:27: error: use of undeclared identifier 'cap'
+  218 |     cap = ct_selector_cap(cap);
+      |                           ^~~
+build_mutsel/mutants/p48332/m0173_selector.c:227:13: error: use of undeclared identifier 'out'
+  227 |         if (out != NULL && total < cap) {
+      |             ^~~
+build_mutsel/mutants/p48332/m0173_selector.c:227:36: error: use of undeclared identifier 'cap'
+  227 |         if (out != NULL && total < cap) {
+      |                                    ^~~
+build_mutsel/mutants/p48332/m0173_selector.c:228:13: error: use of undeclared identifier 'out'
+  228 |             out[total].stage = ct_selector_table[i].stage;
+      |             ^~~
+build_mutsel/mutants/p48332/m0173_selector.c:229:13: error: use of undeclared identifier 'out'
+  229 |             out[total].orbit = ct_selector_table[i].orbit;
+      |             ^~~
+build_mutsel/mutants/p48332/m0173_selector.c:230:13: error: use of undeclared identifier 'out'
+  230 |             out[total].source = ct_selector_table[i].source;
+      |             ^~~
+9 errors generated.
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited -1073741795
+mutate: suite selector_lists exited -1073741795
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+mutate: suite selector_lists exited 1
+build_mutsel/mutants/p48332/m0192_selector.c:237:36: error: expected ')'
+  237 | int ct_selector_case_count(sqlite3 /db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |                                    ^
+build_mutsel/mutants/p48332/m0192_selector.c:237:27: note: to match this '('
+  237 | int ct_selector_case_count(sqlite3 /db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |                           ^
+build_mutsel/mutants/p48332/m0192_selector.c:237:5: error: conflicting types for 'ct_selector_case_count'
+  237 | int ct_selector_case_count(sqlite3 /db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |     ^
+src\trainer/selector.h:45:5: note: previous declaration is here
+   45 | int ct_selector_case_count(sqlite3 *db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |     ^
+build_mutsel/mutants/p48332/m0192_selector.c:237:36: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  237 | int ct_selector_case_count(sqlite3 /db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |                                    ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_mutsel/mutants/p48332/m0192_selector.c:239:30: error: use of undeclared identifier 'ev'
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                              ^~
+build_mutsel/mutants/p48332/m0192_selector.c:239:34: error: use of undeclared identifier 'm'
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                  ^
+build_mutsel/mutants/p48332/m0192_selector.c:239:40: error: use of undeclared identifier 'list_id'
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                        ^~~~~~~
+build_mutsel/mutants/p48332/m0192_selector.c:239:55: error: use of undeclared identifier 'list_id'
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                                       ^~~~~~~
+build_mutsel/mutants/p48332/m0192_selector.c:239:89: error: use of undeclared identifier 'ev'
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                                                                         ^~
+build_mutsel/mutants/p48332/m0192_selector.c:239:93: error: use of undeclared identifier 'm'
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                                                                             ^
+build_mutsel/mutants/p48332/m0192_selector.c:245:30: error: use of undeclared identifier 'ev'
+  245 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                              ^~
+build_mutsel/mutants/p48332/m0192_selector.c:245:34: error: use of undeclared identifier 'm'
+  245 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                                  ^
+build_mutsel/mutants/p48332/m0192_selector.c:245:37: error: use of undeclared identifier 'list_id'
+  245 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                                     ^~~~~~~
+build_mutsel/mutants/p48332/m0192_selector.c:252:13: error: use of undeclared identifier 'scheme'
+  252 |         if (scheme == NULL) {
+      |             ^~~~~~
+build_mutsel/mutants/p48332/m0192_selector.c:256:36: error: use of undeclared identifier 'scheme'
+  256 |             return ct_targets_edge(scheme->buffer_edge, NULL, 0);
+      |                                    ^~~~~~
+build_mutsel/mutants/p48332/m0192_selector.c:258:34: error: use of undeclared identifier 'scheme'
+  258 |         return ct_targets_corner(scheme->buffer_corner, NULL, 0);
+      |                                  ^~~~~~
+build_mutsel/mutants/p48332/m0192_selector.c:260:26: error: use of undeclared identifier 'db'
+  260 |     return ct_pack_count(db, ev, m, stage);
+      |                          ^~
+build_mutsel/mutants/p48332/m0192_selector.c:260:30: error: use of undeclared identifier 'ev'
+  260 |     return ct_pack_count(db, ev, m, stage);
+      |                              ^~
+build_mutsel/mutants/p48332/m0192_selector.c:260:34: error: use of undeclared identifier 'm'
+  260 |     return ct_pack_count(db, ev, m, stage);
+      |                                  ^
+18 errors generated.
+build_mutsel/mutants/p48332/m0193_selector.c:237:66: error: expected ')'
+  237 | int ct_selector_case_count(sqlite3 *db, const ct_selector_scheme /scheme, ct_event ev, ct_method m,
+      |                                                                  ^
+build_mutsel/mutants/p48332/m0193_selector.c:237:27: note: to match this '('
+  237 | int ct_selector_case_count(sqlite3 *db, const ct_selector_scheme /scheme, ct_event ev, ct_method m,
+      |                           ^
+build_mutsel/mutants/p48332/m0193_selector.c:237:5: error: conflicting types for 'ct_selector_case_count'
+  237 | int ct_selector_case_count(sqlite3 *db, const ct_selector_scheme /scheme, ct_event ev, ct_method m,
+      |     ^
+src\trainer/selector.h:45:5: note: previous declaration is here
+   45 | int ct_selector_case_count(sqlite3 *db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |     ^
+build_mutsel/mutants/p48332/m0193_selector.c:239:30: error: use of undeclared identifier 'ev'
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                              ^~
+build_mutsel/mutants/p48332/m0193_selector.c:239:34: error: use of undeclared identifier 'm'
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                  ^
+build_mutsel/mutants/p48332/m0193_selector.c:239:40: error: use of undeclared identifier 'list_id'
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                        ^~~~~~~
+build_mutsel/mutants/p48332/m0193_selector.c:239:55: error: use of undeclared identifier 'list_id'
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                                       ^~~~~~~
+build_mutsel/mutants/p48332/m0193_selector.c:239:89: error: use of undeclared identifier 'ev'
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                                                                         ^~
+build_mutsel/mutants/p48332/m0193_selector.c:239:93: error: use of undeclared identifier 'm'
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                                                                             ^
+build_mutsel/mutants/p48332/m0193_selector.c:245:30: error: use of undeclared identifier 'ev'
+  245 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                              ^~
+build_mutsel/mutants/p48332/m0193_selector.c:245:34: error: use of undeclared identifier 'm'
+  245 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                                  ^
+build_mutsel/mutants/p48332/m0193_selector.c:245:37: error: use of undeclared identifier 'list_id'
+  245 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                                     ^~~~~~~
+build_mutsel/mutants/p48332/m0193_selector.c:252:13: error: use of undeclared identifier 'scheme'
+  252 |         if (scheme == NULL) {
+      |             ^~~~~~
+build_mutsel/mutants/p48332/m0193_selector.c:256:36: error: use of undeclared identifier 'scheme'
+  256 |             return ct_targets_edge(scheme->buffer_edge, NULL, 0);
+      |                                    ^~~~~~
+build_mutsel/mutants/p48332/m0193_selector.c:258:34: error: use of undeclared identifier 'scheme'
+  258 |         return ct_targets_corner(scheme->buffer_corner, NULL, 0);
+      |                                  ^~~~~~
+build_mutsel/mutants/p48332/m0193_selector.c:260:30: error: use of undeclared identifier 'ev'
+  260 |     return ct_pack_count(db, ev, m, stage);
+      |                              ^~
+build_mutsel/mutants/p48332/m0193_selector.c:260:34: error: use of undeclared identifier 'm'
+  260 |     return ct_pack_count(db, ev, m, stage);
+      |                                  ^
+16 errors generated.
+mutate: suite selector_case_counts exited 1
+build_mutsel/mutants/p48332/m0195_selector.c:239:37: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  239 |     if (!ct_selector_pair_ok(ev, m) && list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_mutsel/mutants/p48332/m0195_selector.c:239:37: note: place parentheses around the '&&' expression to silence this warning
+  239 |     if (!ct_selector_pair_ok(ev, m) && list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                     ^
+      |         (                                         )
+1 error generated.
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+build_mutsel/mutants/p48332/m0199_selector.c:239:52: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 && list_id >= ct_selector_list_count(ev, m)) {
+      |                                     ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0199_selector.c:239:52: note: place parentheses around the '&&' expression to silence this warning
+  239 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 && list_id >= ct_selector_list_count(ev, m)) {
+      |                                                    ^                                          
+      |                                        (                                                      )
+1 error generated.
+KILLED    m0133 src/trainer/selector.c:166 [cmp == -> !=]
+KILLED    m0134 src/trainer/selector.c:166 [int+1 0 -> 1]
+KILLED    m0135 src/trainer/selector.c:166 [int-1 0 -> -1]
+          build break
+KILLED    m0136 src/trainer/selector.c:173 [ret-lit 0 -> 1]
+KILLED    m0137 src/trainer/selector.c:173 [int+1 0 -> 1]
+KILLED    m0138 src/trainer/selector.c:173 [int-1 0 -> -1]
+KILLED    m0139 src/trainer/selector.c:176 [arith * -> /]
+          build break
+KILLED    m0140 src/trainer/selector.c:178 [int+1 0 -> 1]
+KILLED    m0141 src/trainer/selector.c:178 [int-1 0 -> -1]
+KILLED    m0142 src/trainer/selector.c:179 [cmp < -> <=]
+KILLED    m0143 src/trainer/selector.c:180 [cmp != -> ==]
+KILLED    m0144 src/trainer/selector.c:180 [logic && -> ||]
+KILLED    m0145 src/trainer/selector.c:180 [cmp < -> <=]
+KILLED    m0146 src/trainer/selector.c:188 [arith * -> /]
+          build break
+KILLED    m0147 src/trainer/selector.c:190 [not-del ! -> (deleted)]
+KILLED    m0148 src/trainer/selector.c:191 [ret-lit 0 -> 1]
+KILLED    m0149 src/trainer/selector.c:191 [int+1 0 -> 1]
+KILLED    m0150 src/trainer/selector.c:191 [int-1 0 -> -1]
+KILLED    m0151 src/trainer/selector.c:193 [int+1 0 -> 1]
+KILLED    m0152 src/trainer/selector.c:193 [int-1 0 -> -1]
+KILLED    m0153 src/trainer/selector.c:194 [int+1 0 -> 1]
+KILLED    m0154 src/trainer/selector.c:194 [int-1 0 -> -1]
+KILLED    m0155 src/trainer/selector.c:194 [cmp < -> <=]
+KILLED    m0156 src/trainer/selector.c:194 [arith / -> *]
+SURVIVED  m0157 src/trainer/selector.c:194 [int+1 0 -> 1]
+SURVIVED  m0158 src/trainer/selector.c:194 [int-1 0 -> -1]
+KILLED    m0159 src/trainer/selector.c:195 [cmp != -> ==]
+KILLED    m0160 src/trainer/selector.c:198 [int+1 0 -> 1]
+KILLED    m0161 src/trainer/selector.c:198 [int-1 0 -> -1]
+KILLED    m0162 src/trainer/selector.c:199 [int+1 0 -> 1]
+KILLED    m0163 src/trainer/selector.c:199 [int-1 0 -> -1]
+KILLED    m0164 src/trainer/selector.c:199 [cmp < -> <=]
+KILLED    m0165 src/trainer/selector.c:200 [cmp == -> !=]
+KILLED    m0166 src/trainer/selector.c:200 [logic && -> ||]
+KILLED    m0167 src/trainer/selector.c:201 [cmp == -> !=]
+SURVIVED  m0168 src/trainer/selector.c:202 [int+1 1 -> 2]
+KILLED    m0169 src/trainer/selector.c:202 [int-1 1 -> 0]
+KILLED    m0170 src/trainer/selector.c:209 [cmp != -> ==]
+KILLED    m0171 src/trainer/selector.c:209 [logic && -> ||]
+KILLED    m0172 src/trainer/selector.c:209 [cmp < -> <=]
+KILLED    m0173 src/trainer/selector.c:217 [arith * -> /]
+          build break
+KILLED    m0174 src/trainer/selector.c:219 [not-del ! -> (deleted)]
+KILLED    m0175 src/trainer/selector.c:220 [ret-lit 0 -> 1]
+KILLED    m0176 src/trainer/selector.c:220 [int+1 0 -> 1]
+KILLED    m0177 src/trainer/selector.c:220 [int-1 0 -> -1]
+KILLED    m0178 src/trainer/selector.c:222 [int+1 0 -> 1]
+KILLED    m0179 src/trainer/selector.c:222 [int-1 0 -> -1]
+KILLED    m0180 src/trainer/selector.c:223 [int+1 0 -> 1]
+KILLED    m0181 src/trainer/selector.c:223 [int-1 0 -> -1]
+KILLED    m0182 src/trainer/selector.c:223 [cmp < -> <=]
+KILLED    m0183 src/trainer/selector.c:223 [arith / -> *]
+SURVIVED  m0184 src/trainer/selector.c:223 [int+1 0 -> 1]
+SURVIVED  m0185 src/trainer/selector.c:223 [int-1 0 -> -1]
+KILLED    m0186 src/trainer/selector.c:224 [cmp != -> ==]
+KILLED    m0187 src/trainer/selector.c:224 [logic || -> &&]
+KILLED    m0188 src/trainer/selector.c:224 [cmp != -> ==]
+KILLED    m0189 src/trainer/selector.c:227 [cmp != -> ==]
+KILLED    m0190 src/trainer/selector.c:227 [logic && -> ||]
+KILLED    m0191 src/trainer/selector.c:227 [cmp < -> <=]
+KILLED    m0192 src/trainer/selector.c:237 [arith * -> /]
+          build break
+KILLED    m0193 src/trainer/selector.c:237 [arith * -> /]
+          build break
+KILLED    m0194 src/trainer/selector.c:239 [not-del ! -> (deleted)]
+KILLED    m0195 src/trainer/selector.c:239 [logic || -> &&]
+          build break
+KILLED    m0196 src/trainer/selector.c:239 [cmp < -> <=]
+KILLED    m0197 src/trainer/selector.c:239 [int+1 0 -> 1]
+SURVIVED  m0198 src/trainer/selector.c:239 [int-1 0 -> -1]
+KILLED    m0199 src/trainer/selector.c:239 [logic || -> &&]
+          build break
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+mutate: suite selector_case_counts exited 1
+build_mutsel/mutants/p48332/m0212_selector.c:263:89: error: expected ')'
+  263 | static int ct_selector_chart_pair(ct_orbit orbit, int buffer, int index, ct_target_pair /out) {
+      |                                                                                         ^
+build_mutsel/mutants/p48332/m0212_selector.c:263:34: note: to match this '('
+  263 | static int ct_selector_chart_pair(ct_orbit orbit, int buffer, int index, ct_target_pair /out) {
+      |                                  ^
+build_mutsel/mutants/p48332/m0212_selector.c:273:6: error: use of undeclared identifier 'out'
+  273 |     *out = ct_selector_chart_rows[index];
+      |      ^~~
+build_mutsel/mutants/p48332/m0212_selector.c:298:58: error: passing 'ct_target_pair *' (aka 'struct ct_target_pair *') to parameter of incompatible type 'ct_target_pair' (aka 'struct ct_target_pair'); remove &
+  298 |         if (ct_selector_chart_pair(orbit, buffer, index, &pair) != 0) {
+      |                                                          ^~~~~
+build_mutsel/mutants/p48332/m0212_selector.c:263:89: note: passing argument to parameter here
+  263 | static int ct_selector_chart_pair(ct_orbit orbit, int buffer, int index, ct_target_pair /out) {
+      |                                                                                         ^
+build_mutsel/mutants/p48332/m0212_selector.c:335:54: error: passing 'ct_target_pair *' (aka 'struct ct_target_pair *') to parameter of incompatible type 'ct_target_pair' (aka 'struct ct_target_pair'); remove &
+  335 |     if (ct_selector_chart_pair(orbit, buffer, index, &pair) != 0) {
+      |                                                      ^~~~~
+build_mutsel/mutants/p48332/m0212_selector.c:263:89: note: passing argument to parameter here
+  263 | static int ct_selector_chart_pair(ct_orbit orbit, int buffer, int index, ct_target_pair /out) {
+      |                                                                                         ^
+4 errors generated.
+mutate: suite selector_case_keys exited 1
+build_mutsel/mutants/p48332/m0217_selector.c:270:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  270 |     if (total <= 0 && index < 0 || index >= total) {
+      |         ~~~~~~~~~~~^~~~~~~~~~~~ ~~
+build_mutsel/mutants/p48332/m0217_selector.c:270:20: note: place parentheses around the '&&' expression to silence this warning
+  270 |     if (total <= 0 && index < 0 || index >= total) {
+      |                    ^
+      |         (                      )
+1 error generated.
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+build_mutsel/mutants/p48332/m0221_selector.c:270:33: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  270 |     if (total <= 0 || index < 0 && index >= total) {
+      |                    ~~ ~~~~~~~~~~^~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0221_selector.c:270:33: note: place parentheses around the '&&' expression to silence this warning
+  270 |     if (total <= 0 || index < 0 && index >= total) {
+      |                                 ^                
+      |                       (                          )
+1 error generated.
+mutate: suite selector_case_pairs exited 1
+build_mutsel/mutants/p48332/m0223_selector.c:273:5: error: expected expression
+  273 |     /out = ct_selector_chart_rows[index];
+      |     ^
+1 error generated.
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+build_mutsel/mutants/p48332/m0227_selector.c:277:34: error: expected ')'
+  277 | int ct_selector_case_key(sqlite3 /db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |                                  ^
+build_mutsel/mutants/p48332/m0227_selector.c:277:25: note: to match this '('
+  277 | int ct_selector_case_key(sqlite3 /db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |                         ^
+build_mutsel/mutants/p48332/m0227_selector.c:277:5: error: conflicting types for 'ct_selector_case_key'
+  277 | int ct_selector_case_key(sqlite3 /db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |     ^
+src\trainer/selector.h:47:5: note: previous declaration is here
+   47 | int ct_selector_case_key(sqlite3 *db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |     ^
+build_mutsel/mutants/p48332/m0227_selector.c:277:34: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  277 | int ct_selector_case_key(sqlite3 /db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |                                  ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_mutsel/mutants/p48332/m0227_selector.c:279:40: error: use of undeclared identifier 'db'
+  279 |     int count = ct_selector_case_count(db, scheme, ev, m, list_id);
+      |                                        ^~
+build_mutsel/mutants/p48332/m0227_selector.c:279:44: error: use of undeclared identifier 'scheme'
+  279 |     int count = ct_selector_case_count(db, scheme, ev, m, list_id);
+      |                                            ^~~~~~
+build_mutsel/mutants/p48332/m0227_selector.c:279:52: error: use of undeclared identifier 'ev'
+  279 |     int count = ct_selector_case_count(db, scheme, ev, m, list_id);
+      |                                                    ^~
+build_mutsel/mutants/p48332/m0227_selector.c:279:56: error: use of undeclared identifier 'm'
+  279 |     int count = ct_selector_case_count(db, scheme, ev, m, list_id);
+      |                                                        ^
+build_mutsel/mutants/p48332/m0227_selector.c:279:59: error: use of undeclared identifier 'list_id'
+  279 |     int count = ct_selector_case_count(db, scheme, ev, m, list_id);
+      |                                                           ^~~~~~~
+build_mutsel/mutants/p48332/m0227_selector.c:280:23: error: use of undeclared identifier 'index'
+  280 |     if (count <= 0 || index < 0 || index >= count || out == NULL) {
+      |                       ^~~~~
+build_mutsel/mutants/p48332/m0227_selector.c:280:36: error: use of undeclared identifier 'index'
+  280 |     if (count <= 0 || index < 0 || index >= count || out == NULL) {
+      |                                    ^~~~~
+build_mutsel/mutants/p48332/m0227_selector.c:280:54: error: use of undeclared identifier 'out'
+  280 |     if (count <= 0 || index < 0 || index >= count || out == NULL) {
+      |                                                      ^~~
+build_mutsel/mutants/p48332/m0227_selector.c:286:30: error: use of undeclared identifier 'ev'
+  286 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                              ^~
+build_mutsel/mutants/p48332/m0227_selector.c:286:34: error: use of undeclared identifier 'm'
+  286 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                                  ^
+build_mutsel/mutants/p48332/m0227_selector.c:286:37: error: use of undeclared identifier 'list_id'
+  286 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                                     ^~~~~~~
+build_mutsel/mutants/p48332/m0227_selector.c:290:40: error: use of undeclared identifier 'index'
+  290 |         return ct_cfop_case_key(stage, index, out, cap);
+      |                                        ^~~~~
+build_mutsel/mutants/p48332/m0227_selector.c:290:47: error: use of undeclared identifier 'out'
+  290 |         return ct_cfop_case_key(stage, index, out, cap);
+      |                                               ^~~
+build_mutsel/mutants/p48332/m0227_selector.c:290:52: error: use of undeclared identifier 'cap'
+  290 |         return ct_cfop_case_key(stage, index, out, cap);
+      |                                                    ^~~
+build_mutsel/mutants/p48332/m0227_selector.c:293:13: error: use of undeclared identifier 'scheme'
+  293 |         if (scheme == NULL || cap < (unsigned)CT_SELECTOR_PAIR_KEY_LEN) {
+      |             ^~~~~~
+build_mutsel/mutants/p48332/m0227_selector.c:293:31: error: use of undeclared identifier 'cap'
+  293 |         if (scheme == NULL || cap < (unsigned)CT_SELECTOR_PAIR_KEY_LEN) {
+      |                               ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_mutsel/mutants/p48332/m0228_selector.c:277:64: error: expected ')'
+  277 | int ct_selector_case_key(sqlite3 *db, const ct_selector_scheme /scheme, ct_event ev, ct_method m,
+      |                                                                ^
+build_mutsel/mutants/p48332/m0228_selector.c:277:25: note: to match this '('
+  277 | int ct_selector_case_key(sqlite3 *db, const ct_selector_scheme /scheme, ct_event ev, ct_method m,
+      |                         ^
+build_mutsel/mutants/p48332/m0228_selector.c:277:5: error: conflicting types for 'ct_selector_case_key'
+  277 | int ct_selector_case_key(sqlite3 *db, const ct_selector_scheme /scheme, ct_event ev, ct_method m,
+      |     ^
+src\trainer/selector.h:47:5: note: previous declaration is here
+   47 | int ct_selector_case_key(sqlite3 *db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |     ^
+build_mutsel/mutants/p48332/m0228_selector.c:279:44: error: use of undeclared identifier 'scheme'
+  279 |     int count = ct_selector_case_count(db, scheme, ev, m, list_id);
+      |                                            ^~~~~~
+build_mutsel/mutants/p48332/m0228_selector.c:279:52: error: use of undeclared identifier 'ev'
+  279 |     int count = ct_selector_case_count(db, scheme, ev, m, list_id);
+      |                                                    ^~
+build_mutsel/mutants/p48332/m0228_selector.c:279:56: error: use of undeclared identifier 'm'
+  279 |     int count = ct_selector_case_count(db, scheme, ev, m, list_id);
+      |                                                        ^
+build_mutsel/mutants/p48332/m0228_selector.c:279:59: error: use of undeclared identifier 'list_id'
+  279 |     int count = ct_selector_case_count(db, scheme, ev, m, list_id);
+      |                                                           ^~~~~~~
+build_mutsel/mutants/p48332/m0228_selector.c:280:23: error: use of undeclared identifier 'index'
+  280 |     if (count <= 0 || index < 0 || index >= count || out == NULL) {
+      |                       ^~~~~
+build_mutsel/mutants/p48332/m0228_selector.c:280:36: error: use of undeclared identifier 'index'
+  280 |     if (count <= 0 || index < 0 || index >= count || out == NULL) {
+      |                                    ^~~~~
+build_mutsel/mutants/p48332/m0228_selector.c:280:54: error: use of undeclared identifier 'out'
+  280 |     if (count <= 0 || index < 0 || index >= count || out == NULL) {
+      |                                                      ^~~
+build_mutsel/mutants/p48332/m0228_selector.c:286:30: error: use of undeclared identifier 'ev'
+  286 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                              ^~
+build_mutsel/mutants/p48332/m0228_selector.c:286:34: error: use of undeclared identifier 'm'
+  286 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                                  ^
+build_mutsel/mutants/p48332/m0228_selector.c:286:37: error: use of undeclared identifier 'list_id'
+  286 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0) {
+      |                                     ^~~~~~~
+build_mutsel/mutants/p48332/m0228_selector.c:290:40: error: use of undeclared identifier 'index'
+  290 |         return ct_cfop_case_key(stage, index, out, cap);
+      |                                        ^~~~~
+build_mutsel/mutants/p48332/m0228_selector.c:290:47: error: use of undeclared identifier 'out'
+  290 |         return ct_cfop_case_key(stage, index, out, cap);
+      |                                               ^~~
+build_mutsel/mutants/p48332/m0228_selector.c:290:52: error: use of undeclared identifier 'cap'
+  290 |         return ct_cfop_case_key(stage, index, out, cap);
+      |                                                    ^~~
+build_mutsel/mutants/p48332/m0228_selector.c:293:13: error: use of undeclared identifier 'scheme'
+  293 |         if (scheme == NULL || cap < (unsigned)CT_SELECTOR_PAIR_KEY_LEN) {
+      |             ^~~~~~
+build_mutsel/mutants/p48332/m0228_selector.c:293:31: error: use of undeclared identifier 'cap'
+  293 |         if (scheme == NULL || cap < (unsigned)CT_SELECTOR_PAIR_KEY_LEN) {
+      |                               ^~~
+build_mutsel/mutants/p48332/m0228_selector.c:297:44: error: use of undeclared identifier 'scheme'
+  297 |         int buffer = ct_selector_buffer_of(scheme, orbit);
+      |                                            ^~~~~~
+build_mutsel/mutants/p48332/m0228_selector.c:298:51: error: use of undeclared identifier 'index'
+  298 |         if (ct_selector_chart_pair(orbit, buffer, index, &pair) != 0) {
+      |                                                   ^~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_mutsel/mutants/p48332/m0229_selector.c:278:55: error: expected ')'
+  278 |                          int list_id, int index, char /out, unsigned cap) {
+      |                                                       ^
+build_mutsel/mutants/p48332/m0229_selector.c:277:25: note: to match this '('
+  277 | int ct_selector_case_key(sqlite3 *db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |                         ^
+build_mutsel/mutants/p48332/m0229_selector.c:277:5: error: conflicting types for 'ct_selector_case_key'
+  277 | int ct_selector_case_key(sqlite3 *db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |     ^
+src\trainer/selector.h:47:5: note: previous declaration is here
+   47 | int ct_selector_case_key(sqlite3 *db, const ct_selector_scheme *scheme, ct_event ev, ct_method m,
+      |     ^
+build_mutsel/mutants/p48332/m0229_selector.c:280:54: error: use of undeclared identifier 'out'
+  280 |     if (count <= 0 || index < 0 || index >= count || out == NULL) {
+      |                                                      ^~~
+build_mutsel/mutants/p48332/m0229_selector.c:290:47: error: use of undeclared identifier 'out'
+  290 |         return ct_cfop_case_key(stage, index, out, cap);
+      |                                               ^~~
+build_mutsel/mutants/p48332/m0229_selector.c:290:52: error: use of undeclared identifier 'cap'
+  290 |         return ct_cfop_case_key(stage, index, out, cap);
+      |                                                    ^~~
+build_mutsel/mutants/p48332/m0229_selector.c:293:31: error: use of undeclared identifier 'cap'
+  293 |         if (scheme == NULL || cap < (unsigned)CT_SELECTOR_PAIR_KEY_LEN) {
+      |                               ^~~
+build_mutsel/mutants/p48332/m0229_selector.c:302:9: error: use of undeclared identifier 'out'
+  302 |         out[0] = letters[pair.t1];
+      |         ^~~
+build_mutsel/mutants/p48332/m0229_selector.c:303:9: error: use of undeclared identifier 'out'
+  303 |         out[1] = letters[pair.t2];
+      |         ^~~
+build_mutsel/mutants/p48332/m0229_selector.c:304:9: error: use of undeclared identifier 'out'
+  304 |         out[2] = '\0';
+      |         ^~~
+build_mutsel/mutants/p48332/m0229_selector.c:311:31: error: use of undeclared identifier 'cap'
+  311 |     if (strlen(e.case_key) >= cap) {
+      |                               ^~~
+build_mutsel/mutants/p48332/m0229_selector.c:314:14: error: use of undeclared identifier 'out'
+  314 |     snprintf(out, cap, "%s", e.case_key);
+      |              ^~~
+build_mutsel/mutants/p48332/m0229_selector.c:314:19: error: use of undeclared identifier 'cap'
+  314 |     snprintf(out, cap, "%s", e.case_key);
+      |                   ^~~
+12 errors generated.
+build_mutsel/mutants/p48332/m0233_selector.c:280:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  280 |     if (count <= 0 && index < 0 || index >= count || out == NULL) {
+      |         ~~~~~~~~~~~^~~~~~~~~~~~ ~~
+build_mutsel/mutants/p48332/m0233_selector.c:280:20: note: place parentheses around the '&&' expression to silence this warning
+  280 |     if (count <= 0 && index < 0 || index >= count || out == NULL) {
+      |                    ^
+      |         (                      )
+1 error generated.
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+build_mutsel/mutants/p48332/m0237_selector.c:280:33: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  280 |     if (count <= 0 || index < 0 && index >= count || out == NULL) {
+      |                    ~~ ~~~~~~~~~~^~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0237_selector.c:280:33: note: place parentheses around the '&&' expression to silence this warning
+  280 |     if (count <= 0 || index < 0 && index >= count || out == NULL) {
+      |                                 ^
+      |                       (                          )
+1 error generated.
+build_mutsel/mutants/p48332/m0239_selector.c:280:51: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  280 |     if (count <= 0 || index < 0 || index >= count && out == NULL) {
+      |                                 ~~ ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0239_selector.c:280:51: note: place parentheses around the '&&' expression to silence this warning
+  280 |     if (count <= 0 || index < 0 || index >= count && out == NULL) {
+      |                                    ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+build_mutsel/mutants/p48332/m0252_selector.c:301:20: error: expected identifier or '('
+  301 |         const char /letters = orbit == CT_ORBIT_EDGE ? scheme->map.edge : scheme->map.corner;
+      |                    ^
+build_mutsel/mutants/p48332/m0252_selector.c:302:18: error: use of undeclared identifier 'letters'
+  302 |         out[0] = letters[pair.t1];
+      |                  ^~~~~~~
+build_mutsel/mutants/p48332/m0252_selector.c:303:18: error: use of undeclared identifier 'letters'
+  303 |         out[1] = letters[pair.t2];
+      |                  ^~~~~~~
+3 errors generated.
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+SURVIVED  m0200 src/trainer/selector.c:239 [cmp >= -> >]
+KILLED    m0201 src/trainer/selector.c:245 [cmp != -> ==]
+KILLED    m0202 src/trainer/selector.c:245 [int+1 0 -> 1]
+KILLED    m0203 src/trainer/selector.c:245 [int-1 0 -> -1]
+KILLED    m0204 src/trainer/selector.c:248 [cmp == -> !=]
+KILLED    m0205 src/trainer/selector.c:251 [cmp == -> !=]
+KILLED    m0206 src/trainer/selector.c:252 [cmp == -> !=]
+KILLED    m0207 src/trainer/selector.c:255 [cmp == -> !=]
+SURVIVED  m0208 src/trainer/selector.c:256 [int+1 0 -> 1]
+SURVIVED  m0209 src/trainer/selector.c:256 [int-1 0 -> -1]
+SURVIVED  m0210 src/trainer/selector.c:258 [int+1 0 -> 1]
+SURVIVED  m0211 src/trainer/selector.c:258 [int-1 0 -> -1]
+KILLED    m0212 src/trainer/selector.c:263 [arith * -> /]
+          build break
+KILLED    m0213 src/trainer/selector.c:265 [cmp == -> !=]
+SURVIVED  m0214 src/trainer/selector.c:270 [cmp <= -> <]
+SURVIVED  m0215 src/trainer/selector.c:270 [int+1 0 -> 1]
+SURVIVED  m0216 src/trainer/selector.c:270 [int-1 0 -> -1]
+KILLED    m0217 src/trainer/selector.c:270 [logic || -> &&]
+          build break
+KILLED    m0218 src/trainer/selector.c:270 [cmp < -> <=]
+KILLED    m0219 src/trainer/selector.c:270 [int+1 0 -> 1]
+SURVIVED  m0220 src/trainer/selector.c:270 [int-1 0 -> -1]
+KILLED    m0221 src/trainer/selector.c:270 [logic || -> &&]
+          build break
+KILLED    m0222 src/trainer/selector.c:270 [cmp >= -> >]
+KILLED    m0223 src/trainer/selector.c:273 [arith * -> /]
+          build break
+KILLED    m0224 src/trainer/selector.c:274 [ret-lit 0 -> 1]
+KILLED    m0225 src/trainer/selector.c:274 [int+1 0 -> 1]
+KILLED    m0226 src/trainer/selector.c:274 [int-1 0 -> -1]
+KILLED    m0227 src/trainer/selector.c:277 [arith * -> /]
+          build break
+KILLED    m0228 src/trainer/selector.c:277 [arith * -> /]
+          build break
+KILLED    m0229 src/trainer/selector.c:278 [arith * -> /]
+          build break
+SURVIVED  m0230 src/trainer/selector.c:280 [cmp <= -> <]
+SURVIVED  m0231 src/trainer/selector.c:280 [int+1 0 -> 1]
+SURVIVED  m0232 src/trainer/selector.c:280 [int-1 0 -> -1]
+KILLED    m0233 src/trainer/selector.c:280 [logic || -> &&]
+          build break
+KILLED    m0234 src/trainer/selector.c:280 [cmp < -> <=]
+KILLED    m0235 src/trainer/selector.c:280 [int+1 0 -> 1]
+SURVIVED  m0236 src/trainer/selector.c:280 [int-1 0 -> -1]
+KILLED    m0237 src/trainer/selector.c:280 [logic || -> &&]
+          build break
+SURVIVED  m0238 src/trainer/selector.c:280 [cmp >= -> >]
+KILLED    m0239 src/trainer/selector.c:280 [logic || -> &&]
+          build break
+KILLED    m0240 src/trainer/selector.c:280 [cmp == -> !=]
+KILLED    m0241 src/trainer/selector.c:286 [cmp != -> ==]
+KILLED    m0242 src/trainer/selector.c:286 [int+1 0 -> 1]
+KILLED    m0243 src/trainer/selector.c:286 [int-1 0 -> -1]
+KILLED    m0244 src/trainer/selector.c:289 [cmp == -> !=]
+KILLED    m0245 src/trainer/selector.c:292 [cmp == -> !=]
+KILLED    m0246 src/trainer/selector.c:293 [cmp == -> !=]
+KILLED    m0247 src/trainer/selector.c:293 [logic || -> &&]
+KILLED    m0248 src/trainer/selector.c:293 [cmp < -> <=]
+KILLED    m0249 src/trainer/selector.c:298 [cmp != -> ==]
+KILLED    m0250 src/trainer/selector.c:298 [int+1 0 -> 1]
+KILLED    m0251 src/trainer/selector.c:298 [int-1 0 -> -1]
+KILLED    m0252 src/trainer/selector.c:301 [arith * -> /]
+          build break
+KILLED    m0253 src/trainer/selector.c:301 [cmp == -> !=]
+KILLED    m0254 src/trainer/selector.c:302 [int+1 0 -> 1]
+KILLED    m0255 src/trainer/selector.c:302 [int-1 0 -> -1]
+KILLED    m0256 src/trainer/selector.c:303 [int+1 1 -> 2]
+KILLED    m0257 src/trainer/selector.c:303 [int-1 1 -> 0]
+KILLED    m0258 src/trainer/selector.c:304 [int+1 2 -> 3]
+KILLED    m0259 src/trainer/selector.c:304 [int-1 2 -> 1]
+KILLED    m0260 src/trainer/selector.c:305 [ret-lit 0 -> 1]
+KILLED    m0261 src/trainer/selector.c:305 [int+1 0 -> 1]
+KILLED    m0262 src/trainer/selector.c:305 [int-1 0 -> -1]
+KILLED    m0263 src/trainer/selector.c:308 [cmp != -> ==]
+KILLED    m0264 src/trainer/selector.c:308 [int+1 0 -> 1]
+KILLED    m0265 src/trainer/selector.c:308 [int-1 0 -> -1]
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+build_mutsel/mutants/p48332/m0270_selector.c:318:52: error: expected ')'
+  318 | int ct_selector_case_pair(const ct_selector_scheme /scheme, ct_event ev, ct_method m, int list_id,
+      |                                                    ^
+build_mutsel/mutants/p48332/m0270_selector.c:318:26: note: to match this '('
+  318 | int ct_selector_case_pair(const ct_selector_scheme /scheme, ct_event ev, ct_method m, int list_id,
+      |                          ^
+build_mutsel/mutants/p48332/m0270_selector.c:318:5: error: conflicting types for 'ct_selector_case_pair'
+  318 | int ct_selector_case_pair(const ct_selector_scheme /scheme, ct_event ev, ct_method m, int list_id,
+      |     ^
+src\trainer/selector.h:49:5: note: previous declaration is here
+   49 | int ct_selector_case_pair(const ct_selector_scheme *scheme, ct_event ev, ct_method m, int list_id,
+      |     ^
+build_mutsel/mutants/p48332/m0270_selector.c:320:9: error: use of undeclared identifier 'scheme'
+  320 |     if (scheme == NULL || t1 == NULL || t2 == NULL) {
+      |         ^~~~~~
+build_mutsel/mutants/p48332/m0270_selector.c:320:27: error: use of undeclared identifier 't1'
+  320 |     if (scheme == NULL || t1 == NULL || t2 == NULL) {
+      |                           ^~
+build_mutsel/mutants/p48332/m0270_selector.c:320:41: error: use of undeclared identifier 't2'
+  320 |     if (scheme == NULL || t1 == NULL || t2 == NULL) {
+      |                                         ^~
+build_mutsel/mutants/p48332/m0270_selector.c:323:30: error: use of undeclared identifier 'ev'
+  323 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                              ^~
+build_mutsel/mutants/p48332/m0270_selector.c:323:34: error: use of undeclared identifier 'm'
+  323 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                  ^
+build_mutsel/mutants/p48332/m0270_selector.c:323:40: error: use of undeclared identifier 'list_id'
+  323 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                        ^~~~~~~
+build_mutsel/mutants/p48332/m0270_selector.c:323:55: error: use of undeclared identifier 'list_id'
+  323 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                                       ^~~~~~~
+build_mutsel/mutants/p48332/m0270_selector.c:323:89: error: use of undeclared identifier 'ev'
+  323 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                                                                         ^~
+build_mutsel/mutants/p48332/m0270_selector.c:323:93: error: use of undeclared identifier 'm'
+  323 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                                                                             ^
+build_mutsel/mutants/p48332/m0270_selector.c:329:30: error: use of undeclared identifier 'ev'
+  329 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |                              ^~
+build_mutsel/mutants/p48332/m0270_selector.c:329:34: error: use of undeclared identifier 'm'
+  329 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |                                  ^
+build_mutsel/mutants/p48332/m0270_selector.c:329:37: error: use of undeclared identifier 'list_id'
+  329 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |                                     ^~~~~~~
+build_mutsel/mutants/p48332/m0270_selector.c:334:40: error: use of undeclared identifier 'scheme'
+  334 |     int buffer = ct_selector_buffer_of(scheme, orbit);
+      |                                        ^~~~~~
+build_mutsel/mutants/p48332/m0270_selector.c:335:47: error: use of undeclared identifier 'index'
+  335 |     if (ct_selector_chart_pair(orbit, buffer, index, &pair) != 0) {
+      |                                               ^~~~~
+build_mutsel/mutants/p48332/m0270_selector.c:338:6: error: use of undeclared identifier 't1'
+  338 |     *t1 = pair.t1;
+      |      ^~
+build_mutsel/mutants/p48332/m0270_selector.c:339:6: error: use of undeclared identifier 't2'
+  339 |     *t2 = pair.t2;
+      |      ^~
+18 errors generated.
+build_mutsel/mutants/p48332/m0271_selector.c:319:42: error: expected ')'
+  319 |                           int index, int /t1, int *t2) {
+      |                                          ^
+build_mutsel/mutants/p48332/m0271_selector.c:318:26: note: to match this '('
+  318 | int ct_selector_case_pair(const ct_selector_scheme *scheme, ct_event ev, ct_method m, int list_id,
+      |                          ^
+build_mutsel/mutants/p48332/m0271_selector.c:318:5: error: conflicting types for 'ct_selector_case_pair'
+  318 | int ct_selector_case_pair(const ct_selector_scheme *scheme, ct_event ev, ct_method m, int list_id,
+      |     ^
+src\trainer/selector.h:49:5: note: previous declaration is here
+   49 | int ct_selector_case_pair(const ct_selector_scheme *scheme, ct_event ev, ct_method m, int list_id,
+      |     ^
+build_mutsel/mutants/p48332/m0271_selector.c:320:27: error: use of undeclared identifier 't1'
+  320 |     if (scheme == NULL || t1 == NULL || t2 == NULL) {
+      |                           ^~
+build_mutsel/mutants/p48332/m0271_selector.c:320:41: error: use of undeclared identifier 't2'
+  320 |     if (scheme == NULL || t1 == NULL || t2 == NULL) {
+      |                                         ^~
+build_mutsel/mutants/p48332/m0271_selector.c:338:6: error: use of undeclared identifier 't1'
+  338 |     *t1 = pair.t1;
+      |      ^~
+build_mutsel/mutants/p48332/m0271_selector.c:339:6: error: use of undeclared identifier 't2'
+  339 |     *t2 = pair.t2;
+      |      ^~
+6 errors generated.
+build_mutsel/mutants/p48332/m0272_selector.c:319:51: error: expected ')'
+  319 |                           int index, int *t1, int /t2) {
+      |                                                   ^
+build_mutsel/mutants/p48332/m0272_selector.c:318:26: note: to match this '('
+  318 | int ct_selector_case_pair(const ct_selector_scheme *scheme, ct_event ev, ct_method m, int list_id,
+      |                          ^
+build_mutsel/mutants/p48332/m0272_selector.c:318:5: error: conflicting types for 'ct_selector_case_pair'
+  318 | int ct_selector_case_pair(const ct_selector_scheme *scheme, ct_event ev, ct_method m, int list_id,
+      |     ^
+src\trainer/selector.h:49:5: note: previous declaration is here
+   49 | int ct_selector_case_pair(const ct_selector_scheme *scheme, ct_event ev, ct_method m, int list_id,
+      |     ^
+build_mutsel/mutants/p48332/m0272_selector.c:320:41: error: use of undeclared identifier 't2'
+  320 |     if (scheme == NULL || t1 == NULL || t2 == NULL) {
+      |                                         ^~
+build_mutsel/mutants/p48332/m0272_selector.c:339:6: error: use of undeclared identifier 't2'
+  339 |     *t2 = pair.t2;
+      |      ^~
+4 errors generated.
+mutate: suite selector_case_pairs exited 1
+build_mutsel/mutants/p48332/m0274_selector.c:320:24: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  320 |     if (scheme == NULL && t1 == NULL || t2 == NULL) {
+      |         ~~~~~~~~~~~~~~~^~~~~~~~~~~~~ ~~
+build_mutsel/mutants/p48332/m0274_selector.c:320:24: note: place parentheses around the '&&' expression to silence this warning
+  320 |     if (scheme == NULL && t1 == NULL || t2 == NULL) {
+      |         ~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+1 error generated.
+mutate: suite selector_case_pairs exited 1
+build_mutsel/mutants/p48332/m0276_selector.c:320:38: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  320 |     if (scheme == NULL || t1 == NULL && t2 == NULL) {
+      |                        ~~ ~~~~~~~~~~~^~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0276_selector.c:320:38: note: place parentheses around the '&&' expression to silence this warning
+  320 |     if (scheme == NULL || t1 == NULL && t2 == NULL) {
+      |                           ~~~~~~~~~~~^~~~~~~~~~~~~
+1 error generated.
+mutate: suite selector_case_pairs exited 1
+mutate: suite selector_case_pairs exited 1
+build_mutsel/mutants/p48332/m0279_selector.c:323:37: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  323 |     if (!ct_selector_pair_ok(ev, m) && list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_mutsel/mutants/p48332/m0279_selector.c:323:37: note: place parentheses around the '&&' expression to silence this warning
+  323 |     if (!ct_selector_pair_ok(ev, m) && list_id < 0 || list_id >= ct_selector_list_count(ev, m)) {
+      |                                     ^
+      |         (                                         )
+1 error generated.
+mutate: suite selector_case_pairs exited 1
+mutate: suite selector_case_pairs exited 1
+build_mutsel/mutants/p48332/m0283_selector.c:323:52: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  323 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 && list_id >= ct_selector_list_count(ev, m)) {
+      |                                     ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0283_selector.c:323:52: note: place parentheses around the '&&' expression to silence this warning
+  323 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 && list_id >= ct_selector_list_count(ev, m)) {
+      |                                                    ^                                          
+      |                                        (                                                      )
+1 error generated.
+mutate: suite selector_case_pairs exited 1
+mutate: suite selector_case_pairs exited 1
+mutate: suite selector_case_pairs exited 1
+mutate: suite selector_case_pairs exited 1
+mutate: suite selector_case_pairs exited 1
+mutate: suite selector_case_pairs exited 1
+mutate: suite selector_case_pairs exited 1
+mutate: suite selector_case_pairs exited 1
+build_mutsel/mutants/p48332/m0293_selector.c:338:5: error: expected expression
+  338 |     /t1 = pair.t1;
+      |     ^
+1 error generated.
+build_mutsel/mutants/p48332/m0294_selector.c:339:5: error: expected expression
+  339 |     /t2 = pair.t2;
+      |     ^
+1 error generated.
+mutate: suite selector_case_pairs exited 1
+mutate: suite selector_case_pairs exited 1
+mutate: suite selector_case_pairs exited 1
+build_mutsel/mutants/p48332/m0298_selector.c:343:35: error: expected ')'
+  343 | int ct_selector_pack_case(sqlite3 /db, ct_event ev, ct_method m, int list_id, int index,
+      |                                   ^
+build_mutsel/mutants/p48332/m0298_selector.c:343:26: note: to match this '('
+  343 | int ct_selector_pack_case(sqlite3 /db, ct_event ev, ct_method m, int list_id, int index,
+      |                          ^
+build_mutsel/mutants/p48332/m0298_selector.c:343:5: error: conflicting types for 'ct_selector_pack_case'
+  343 | int ct_selector_pack_case(sqlite3 /db, ct_event ev, ct_method m, int list_id, int index,
+      |     ^
+src\trainer/selector.h:51:5: note: previous declaration is here
+   51 | int ct_selector_pack_case(sqlite3 *db, ct_event ev, ct_method m, int list_id, int index,
+      |     ^
+build_mutsel/mutants/p48332/m0298_selector.c:343:35: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  343 | int ct_selector_pack_case(sqlite3 /db, ct_event ev, ct_method m, int list_id, int index,
+      |                                   ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_mutsel/mutants/p48332/m0298_selector.c:345:30: error: use of undeclared identifier 'ev'
+  345 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m) ||
+      |                              ^~
+build_mutsel/mutants/p48332/m0298_selector.c:345:34: error: use of undeclared identifier 'm'
+  345 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m) ||
+      |                                  ^
+build_mutsel/mutants/p48332/m0298_selector.c:345:40: error: use of undeclared identifier 'list_id'
+  345 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m) ||
+      |                                        ^~~~~~~
+build_mutsel/mutants/p48332/m0298_selector.c:345:55: error: use of undeclared identifier 'list_id'
+  345 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m) ||
+      |                                                       ^~~~~~~
+build_mutsel/mutants/p48332/m0298_selector.c:345:89: error: use of undeclared identifier 'ev'
+  345 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m) ||
+      |                                                                                         ^~
+build_mutsel/mutants/p48332/m0298_selector.c:345:93: error: use of undeclared identifier 'm'
+  345 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m) ||
+      |                                                                                             ^
+build_mutsel/mutants/p48332/m0298_selector.c:346:9: error: use of undeclared identifier 'index'
+  346 |         index < 0 || out == NULL) {
+      |         ^~~~~
+build_mutsel/mutants/p48332/m0298_selector.c:346:22: error: use of undeclared identifier 'out'
+  346 |         index < 0 || out == NULL) {
+      |                      ^~~
+build_mutsel/mutants/p48332/m0298_selector.c:352:30: error: use of undeclared identifier 'ev'
+  352 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |                              ^~
+build_mutsel/mutants/p48332/m0298_selector.c:352:34: error: use of undeclared identifier 'm'
+  352 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |                                  ^
+build_mutsel/mutants/p48332/m0298_selector.c:352:37: error: use of undeclared identifier 'list_id'
+  352 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |                                     ^~~~~~~
+build_mutsel/mutants/p48332/m0298_selector.c:356:15: error: use of undeclared identifier 'index'
+  356 |     int cap = index + 1;
+      |               ^~~~~
+build_mutsel/mutants/p48332/m0298_selector.c:360:29: error: use of undeclared identifier 'db'
+  360 |     int rows = ct_pack_list(db, ev, m, stage, ct_selector_pack_rows, cap);
+      |                             ^~
+build_mutsel/mutants/p48332/m0298_selector.c:360:33: error: use of undeclared identifier 'ev'
+  360 |     int rows = ct_pack_list(db, ev, m, stage, ct_selector_pack_rows, cap);
+      |                                 ^~
+build_mutsel/mutants/p48332/m0298_selector.c:360:37: error: use of undeclared identifier 'm'
+  360 |     int rows = ct_pack_list(db, ev, m, stage, ct_selector_pack_rows, cap);
+      |                                     ^
+build_mutsel/mutants/p48332/m0298_selector.c:364:6: error: use of undeclared identifier 'out'
+  364 |     *out = ct_selector_pack_rows[index];
+      |      ^~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_mutsel/mutants/p48332/m0299_selector.c:344:41: error: expected ')'
+  344 |                           ct_pack_entry /out) {
+      |                                         ^
+build_mutsel/mutants/p48332/m0299_selector.c:343:26: note: to match this '('
+  343 | int ct_selector_pack_case(sqlite3 *db, ct_event ev, ct_method m, int list_id, int index,
+      |                          ^
+build_mutsel/mutants/p48332/m0299_selector.c:343:5: error: conflicting types for 'ct_selector_pack_case'
+  343 | int ct_selector_pack_case(sqlite3 *db, ct_event ev, ct_method m, int list_id, int index,
+      |     ^
+src\trainer/selector.h:51:5: note: previous declaration is here
+   51 | int ct_selector_pack_case(sqlite3 *db, ct_event ev, ct_method m, int list_id, int index,
+      |     ^
+build_mutsel/mutants/p48332/m0299_selector.c:346:22: error: use of undeclared identifier 'out'
+  346 |         index < 0 || out == NULL) {
+      |                      ^~~
+build_mutsel/mutants/p48332/m0299_selector.c:364:6: error: use of undeclared identifier 'out'
+  364 |     *out = ct_selector_pack_rows[index];
+      |      ^~~
+4 errors generated.
+mutate: suite selector_case_keys exited 1
+build_mutsel/mutants/p48332/m0301_selector.c:345:37: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  345 |     if (!ct_selector_pair_ok(ev, m) && list_id < 0 || list_id >= ct_selector_list_count(ev, m) ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_mutsel/mutants/p48332/m0301_selector.c:345:37: note: place parentheses around the '&&' expression to silence this warning
+  345 |     if (!ct_selector_pair_ok(ev, m) && list_id < 0 || list_id >= ct_selector_list_count(ev, m) ||
+      |                                     ^
+      |         (                                         )
+1 error generated.
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+build_mutsel/mutants/p48332/m0305_selector.c:345:52: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  345 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 && list_id >= ct_selector_list_count(ev, m) ||
+      |                                     ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0305_selector.c:345:52: note: place parentheses around the '&&' expression to silence this warning
+  345 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 && list_id >= ct_selector_list_count(ev, m) ||
+      |                                                    ^
+      |                                        (                                                      )
+1 error generated.
+build_mutsel/mutants/p48332/m0307_selector.c:345:96: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  345 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m) &&
+      |                                                    ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  346 |         index < 0 || out == NULL) {
+      |         ~~~~~~~~~
+build_mutsel/mutants/p48332/m0307_selector.c:345:96: note: place parentheses around the '&&' expression to silence this warning
+  345 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m) &&
+      |                                                                                                ^
+      |                                                       (
+  346 |         index < 0 || out == NULL) {
+      |                  )
+1 error generated.
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_pack_cases exited -1073741795
+build_mutsel/mutants/p48332/m0311_selector.c:346:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  345 |     if (!ct_selector_pair_ok(ev, m) || list_id < 0 || list_id >= ct_selector_list_count(ev, m) ||
+      |                                                                                                ~~
+  346 |         index < 0 && out == NULL) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0311_selector.c:346:19: note: place parentheses around the '&&' expression to silence this warning
+  346 |         index < 0 && out == NULL) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+build_mutsel/mutants/p48332/m0323_selector.c:364:5: error: expected expression
+  364 |     /out = ct_selector_pack_rows[index];
+      |     ^
+1 error generated.
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+mutate: suite selector_case_keys exited 1
+build_mutsel/mutants/p48332/m0327_selector.c:368:19: error: expected identifier or '('
+  368 | static const char /const ct_selector_group_prefixes[CT_SELECTOR_GROUPS_MAX] = {"flip.", "twist.",
+      |                   ^
+build_mutsel/mutants/p48332/m0327_selector.c:390:29: error: use of undeclared identifier 'ct_selector_group_prefixes'
+  390 |         size_t len = strlen(ct_selector_group_prefixes[g]);
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0327_selector.c:391:33: error: use of undeclared identifier 'ct_selector_group_prefixes'
+  391 |         if (strncmp(e.case_key, ct_selector_group_prefixes[g], len) == 0) {
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+build_mutsel/mutants/p48332/m0328_selector.c:370:19: error: expected identifier or '('
+  370 | static const char /const ct_selector_group_labels[CT_SELECTOR_GROUPS_MAX] = {"flip", "twist",
+      |                   ^
+build_mutsel/mutants/p48332/m0328_selector.c:402:12: error: use of undeclared identifier 'ct_selector_group_labels'; did you mean 'ct_selector_group_label'?
+  402 |     return ct_selector_group_labels[group];
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~
+      |            ct_selector_group_label
+build_mutsel/mutants/p48332/m0328_selector.c:398:13: note: 'ct_selector_group_label' declared here
+  398 | const char *ct_selector_group_label(int group) {
+      |             ^
+build_mutsel/mutants/p48332/m0328_selector.c:402:12: error: subscript of pointer to function type 'const char *(int)'
+  402 |     return ct_selector_group_labels[group];
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+build_mutsel/mutants/p48332/m0329_selector.c:373:36: error: expected ')'
+  373 | int ct_selector_case_group(sqlite3 /db, ct_event ev, ct_method m, int list_id, int index) {
+      |                                    ^
+build_mutsel/mutants/p48332/m0329_selector.c:373:27: note: to match this '('
+  373 | int ct_selector_case_group(sqlite3 /db, ct_event ev, ct_method m, int list_id, int index) {
+      |                           ^
+build_mutsel/mutants/p48332/m0329_selector.c:373:5: error: conflicting types for 'ct_selector_case_group'
+  373 | int ct_selector_case_group(sqlite3 /db, ct_event ev, ct_method m, int list_id, int index) {
+      |     ^
+src\trainer/selector.h:53:5: note: previous declaration is here
+   53 | int ct_selector_case_group(sqlite3 *db, ct_event ev, ct_method m, int list_id, int index);
+      |     ^
+build_mutsel/mutants/p48332/m0329_selector.c:373:36: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  373 | int ct_selector_case_group(sqlite3 /db, ct_event ev, ct_method m, int list_id, int index) {
+      |                                    ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_mutsel/mutants/p48332/m0329_selector.c:374:9: error: use of undeclared identifier 'db'
+  374 |     if (db == NULL || !ct_selector_pair_ok(ev, m) || list_id < 0 ||
+      |         ^~
+build_mutsel/mutants/p48332/m0329_selector.c:374:44: error: use of undeclared identifier 'ev'
+  374 |     if (db == NULL || !ct_selector_pair_ok(ev, m) || list_id < 0 ||
+      |                                            ^~
+build_mutsel/mutants/p48332/m0329_selector.c:374:48: error: use of undeclared identifier 'm'
+  374 |     if (db == NULL || !ct_selector_pair_ok(ev, m) || list_id < 0 ||
+      |                                                ^
+build_mutsel/mutants/p48332/m0329_selector.c:374:54: error: use of undeclared identifier 'list_id'
+  374 |     if (db == NULL || !ct_selector_pair_ok(ev, m) || list_id < 0 ||
+      |                                                      ^~~~~~~
+build_mutsel/mutants/p48332/m0329_selector.c:375:9: error: use of undeclared identifier 'list_id'
+  375 |         list_id >= ct_selector_list_count(ev, m) || index < 0) {
+      |         ^~~~~~~
+build_mutsel/mutants/p48332/m0329_selector.c:375:43: error: use of undeclared identifier 'ev'
+  375 |         list_id >= ct_selector_list_count(ev, m) || index < 0) {
+      |                                           ^~
+build_mutsel/mutants/p48332/m0329_selector.c:375:47: error: use of undeclared identifier 'm'
+  375 |         list_id >= ct_selector_list_count(ev, m) || index < 0) {
+      |                                               ^
+build_mutsel/mutants/p48332/m0329_selector.c:375:53: error: use of undeclared identifier 'index'
+  375 |         list_id >= ct_selector_list_count(ev, m) || index < 0) {
+      |                                                     ^~~~~
+build_mutsel/mutants/p48332/m0329_selector.c:381:30: error: use of undeclared identifier 'ev'
+  381 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |                              ^~
+build_mutsel/mutants/p48332/m0329_selector.c:381:34: error: use of undeclared identifier 'm'
+  381 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |                                  ^
+build_mutsel/mutants/p48332/m0329_selector.c:381:37: error: use of undeclared identifier 'list_id'
+  381 |     if (ct_selector_list_def(ev, m, list_id, &stage, &orbit, &source) != 0 ||
+      |                                     ^~~~~~~
+build_mutsel/mutants/p48332/m0329_selector.c:386:31: error: use of undeclared identifier 'db'
+  386 |     if (ct_selector_pack_case(db, ev, m, list_id, index, &e) != 0) {
+      |                               ^~
+build_mutsel/mutants/p48332/m0329_selector.c:386:35: error: use of undeclared identifier 'ev'
+  386 |     if (ct_selector_pack_case(db, ev, m, list_id, index, &e) != 0) {
+      |                                   ^~
+build_mutsel/mutants/p48332/m0329_selector.c:386:39: error: use of undeclared identifier 'm'
+  386 |     if (ct_selector_pack_case(db, ev, m, list_id, index, &e) != 0) {
+      |                                       ^
+build_mutsel/mutants/p48332/m0329_selector.c:386:42: error: use of undeclared identifier 'list_id'
+  386 |     if (ct_selector_pack_case(db, ev, m, list_id, index, &e) != 0) {
+      |                                          ^~~~~~~
+build_mutsel/mutants/p48332/m0329_selector.c:386:51: error: use of undeclared identifier 'index'
+  386 |     if (ct_selector_pack_case(db, ev, m, list_id, index, &e) != 0) {
+      |                                                   ^~~~~
+19 errors generated.
+KILLED    m0266 src/trainer/selector.c:311 [cmp >= -> >]
+KILLED    m0267 src/trainer/selector.c:315 [ret-lit 0 -> 1]
+KILLED    m0268 src/trainer/selector.c:315 [int+1 0 -> 1]
+KILLED    m0269 src/trainer/selector.c:315 [int-1 0 -> -1]
+KILLED    m0270 src/trainer/selector.c:318 [arith * -> /]
+          build break
+KILLED    m0271 src/trainer/selector.c:319 [arith * -> /]
+          build break
+KILLED    m0272 src/trainer/selector.c:319 [arith * -> /]
+          build break
+KILLED    m0273 src/trainer/selector.c:320 [cmp == -> !=]
+KILLED    m0274 src/trainer/selector.c:320 [logic || -> &&]
+          build break
+KILLED    m0275 src/trainer/selector.c:320 [cmp == -> !=]
+KILLED    m0276 src/trainer/selector.c:320 [logic || -> &&]
+          build break
+KILLED    m0277 src/trainer/selector.c:320 [cmp == -> !=]
+KILLED    m0278 src/trainer/selector.c:323 [not-del ! -> (deleted)]
+KILLED    m0279 src/trainer/selector.c:323 [logic || -> &&]
+          build break
+KILLED    m0280 src/trainer/selector.c:323 [cmp < -> <=]
+KILLED    m0281 src/trainer/selector.c:323 [int+1 0 -> 1]
+SURVIVED  m0282 src/trainer/selector.c:323 [int-1 0 -> -1]
+KILLED    m0283 src/trainer/selector.c:323 [logic || -> &&]
+          build break
+SURVIVED  m0284 src/trainer/selector.c:323 [cmp >= -> >]
+KILLED    m0285 src/trainer/selector.c:329 [cmp != -> ==]
+KILLED    m0286 src/trainer/selector.c:329 [int+1 0 -> 1]
+KILLED    m0287 src/trainer/selector.c:329 [int-1 0 -> -1]
+KILLED    m0288 src/trainer/selector.c:329 [logic || -> &&]
+KILLED    m0289 src/trainer/selector.c:330 [cmp != -> ==]
+KILLED    m0290 src/trainer/selector.c:335 [cmp != -> ==]
+KILLED    m0291 src/trainer/selector.c:335 [int+1 0 -> 1]
+KILLED    m0292 src/trainer/selector.c:335 [int-1 0 -> -1]
+KILLED    m0293 src/trainer/selector.c:338 [arith * -> /]
+          build break
+KILLED    m0294 src/trainer/selector.c:339 [arith * -> /]
+          build break
+KILLED    m0295 src/trainer/selector.c:340 [ret-lit 0 -> 1]
+KILLED    m0296 src/trainer/selector.c:340 [int+1 0 -> 1]
+KILLED    m0297 src/trainer/selector.c:340 [int-1 0 -> -1]
+KILLED    m0298 src/trainer/selector.c:343 [arith * -> /]
+          build break
+KILLED    m0299 src/trainer/selector.c:344 [arith * -> /]
+          build break
+KILLED    m0300 src/trainer/selector.c:345 [not-del ! -> (deleted)]
+KILLED    m0301 src/trainer/selector.c:345 [logic || -> &&]
+          build break
+KILLED    m0302 src/trainer/selector.c:345 [cmp < -> <=]
+KILLED    m0303 src/trainer/selector.c:345 [int+1 0 -> 1]
+SURVIVED  m0304 src/trainer/selector.c:345 [int-1 0 -> -1]
+KILLED    m0305 src/trainer/selector.c:345 [logic || -> &&]
+          build break
+SURVIVED  m0306 src/trainer/selector.c:345 [cmp >= -> >]
+KILLED    m0307 src/trainer/selector.c:345 [logic || -> &&]
+          build break
+KILLED    m0308 src/trainer/selector.c:346 [cmp < -> <=]
+KILLED    m0309 src/trainer/selector.c:346 [int+1 0 -> 1]
+KILLED    m0310 src/trainer/selector.c:346 [int-1 0 -> -1]
+KILLED    m0311 src/trainer/selector.c:346 [logic || -> &&]
+          build break
+KILLED    m0312 src/trainer/selector.c:346 [cmp == -> !=]
+KILLED    m0313 src/trainer/selector.c:352 [cmp != -> ==]
+KILLED    m0314 src/trainer/selector.c:352 [int+1 0 -> 1]
+KILLED    m0315 src/trainer/selector.c:352 [int-1 0 -> -1]
+SURVIVED  m0316 src/trainer/selector.c:352 [logic || -> &&]
+KILLED    m0317 src/trainer/selector.c:353 [cmp != -> ==]
+KILLED    m0318 src/trainer/selector.c:356 [arith + -> -]
+KILLED    m0319 src/trainer/selector.c:356 [int+1 1 -> 2]
+KILLED    m0320 src/trainer/selector.c:356 [int-1 1 -> 0]
+SURVIVED  m0321 src/trainer/selector.c:357 [cmp > -> >=]
+KILLED    m0322 src/trainer/selector.c:361 [cmp != -> ==]
+KILLED    m0323 src/trainer/selector.c:364 [arith * -> /]
+          build break
+KILLED    m0324 src/trainer/selector.c:365 [ret-lit 0 -> 1]
+KILLED    m0325 src/trainer/selector.c:365 [int+1 0 -> 1]
+KILLED    m0326 src/trainer/selector.c:365 [int-1 0 -> -1]
+KILLED    m0327 src/trainer/selector.c:368 [arith * -> /]
+          build break
+KILLED    m0328 src/trainer/selector.c:370 [arith * -> /]
+          build break
+mutate: suite selector_pack_groups exited 1
+build_mutsel/mutants/p48332/m0331_selector.c:374:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  374 |     if (db == NULL && !ct_selector_pair_ok(ev, m) || list_id < 0 ||
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_mutsel/mutants/p48332/m0331_selector.c:374:20: note: place parentheses around the '&&' expression to silence this warning
+  374 |     if (db == NULL && !ct_selector_pair_ok(ev, m) || list_id < 0 ||
+      |                    ^
+      |         (                                        )
+1 error generated.
+mutate: suite selector_pack_groups exited 1
+build_mutsel/mutants/p48332/m0333_selector.c:374:51: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  374 |     if (db == NULL || !ct_selector_pair_ok(ev, m) && list_id < 0 ||
+      |                    ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0333_selector.c:374:51: note: place parentheses around the '&&' expression to silence this warning
+  374 |     if (db == NULL || !ct_selector_pair_ok(ev, m) && list_id < 0 ||
+      |                                                   ^
+      |                       (                                         )
+1 error generated.
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+build_mutsel/mutants/p48332/m0337_selector.c:374:66: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  374 |     if (db == NULL || !ct_selector_pair_ok(ev, m) || list_id < 0 &&
+      |                                                   ~~ ~~~~~~~~~~~~^~
+  375 |         list_id >= ct_selector_list_count(ev, m) || index < 0) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0337_selector.c:374:66: note: place parentheses around the '&&' expression to silence this warning
+  374 |     if (db == NULL || !ct_selector_pair_ok(ev, m) || list_id < 0 &&
+      |                                                                  ^
+      |                                                      (
+  375 |         list_id >= ct_selector_list_count(ev, m) || index < 0) {
+      |                                                 )
+1 error generated.
+build_mutsel/mutants/p48332/m0339_selector.c:375:50: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  374 |     if (db == NULL || !ct_selector_pair_ok(ev, m) || list_id < 0 ||
+      |                                                                  ~~
+  375 |         list_id >= ct_selector_list_count(ev, m) && index < 0) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+build_mutsel/mutants/p48332/m0339_selector.c:375:50: note: place parentheses around the '&&' expression to silence this warning
+  375 |         list_id >= ct_selector_list_count(ev, m) && index < 0) {
+      |                                                  ^           
+      |         (                                                    )
+1 error generated.
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited -1073741795
+mutate: suite selector_pack_groups exited -1073741795
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+build_mutsel/mutants/p48332/m0360_selector.c:398:12: error: expected identifier or '('
+  398 | const char /ct_selector_group_label(int group) {
+      |            ^
+1 error generated.
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited 1
+mutate: suite selector_pack_groups exited -1073741795
+mutate: suite selector_pack_groups exited -1073741795
+mutate: suite selector_pack_groups exited -1073741795
+KILLED    m0329 src/trainer/selector.c:373 [arith * -> /]
+          build break
+KILLED    m0330 src/trainer/selector.c:374 [cmp == -> !=]
+KILLED    m0331 src/trainer/selector.c:374 [logic || -> &&]
+          build break
+KILLED    m0332 src/trainer/selector.c:374 [not-del ! -> (deleted)]
+KILLED    m0333 src/trainer/selector.c:374 [logic || -> &&]
+          build break
+KILLED    m0334 src/trainer/selector.c:374 [cmp < -> <=]
+KILLED    m0335 src/trainer/selector.c:374 [int+1 0 -> 1]
+SURVIVED  m0336 src/trainer/selector.c:374 [int-1 0 -> -1]
+KILLED    m0337 src/trainer/selector.c:374 [logic || -> &&]
+          build break
+SURVIVED  m0338 src/trainer/selector.c:375 [cmp >= -> >]
+KILLED    m0339 src/trainer/selector.c:375 [logic || -> &&]
+          build break
+KILLED    m0340 src/trainer/selector.c:375 [cmp < -> <=]
+KILLED    m0341 src/trainer/selector.c:375 [int+1 0 -> 1]
+SURVIVED  m0342 src/trainer/selector.c:375 [int-1 0 -> -1]
+KILLED    m0343 src/trainer/selector.c:381 [cmp != -> ==]
+KILLED    m0344 src/trainer/selector.c:381 [int+1 0 -> 1]
+KILLED    m0345 src/trainer/selector.c:381 [int-1 0 -> -1]
+SURVIVED  m0346 src/trainer/selector.c:381 [logic || -> &&]
+KILLED    m0347 src/trainer/selector.c:382 [cmp != -> ==]
+KILLED    m0348 src/trainer/selector.c:386 [cmp != -> ==]
+KILLED    m0349 src/trainer/selector.c:386 [int+1 0 -> 1]
+KILLED    m0350 src/trainer/selector.c:386 [int-1 0 -> -1]
+SURVIVED  m0351 src/trainer/selector.c:389 [int+1 0 -> 1]
+KILLED    m0352 src/trainer/selector.c:389 [int-1 0 -> -1]
+KILLED    m0353 src/trainer/selector.c:389 [cmp < -> <=]
+KILLED    m0354 src/trainer/selector.c:391 [cmp == -> !=]
+KILLED    m0355 src/trainer/selector.c:391 [int+1 0 -> 1]
+KILLED    m0356 src/trainer/selector.c:391 [int-1 0 -> -1]
+KILLED    m0357 src/trainer/selector.c:395 [ret-lit 0 -> 1]
+KILLED    m0358 src/trainer/selector.c:395 [int+1 0 -> 1]
+KILLED    m0359 src/trainer/selector.c:395 [int-1 0 -> -1]
+KILLED    m0360 src/trainer/selector.c:398 [arith * -> /]
+          build break
+KILLED    m0361 src/trainer/selector.c:399 [cmp < -> <=]
+KILLED    m0362 src/trainer/selector.c:399 [int+1 0 -> 1]
+KILLED    m0363 src/trainer/selector.c:399 [int-1 0 -> -1]
+KILLED    m0364 src/trainer/selector.c:399 [logic || -> &&]
+KILLED    m0365 src/trainer/selector.c:399 [cmp >= -> >]
+ACCEPTED  m0005 src/trainer/selector.c:12 [int+1 1 -> 2] :: method bound widening admits enum values with no table row, every public function then returns the empty scan result over the pinned surface
+ACCEPTED  m0009 src/trainer/selector.c:14 [int+1 1 -> 2] :: pack row cap widening admits indexes past the largest seeded pack (169 rows), unreachable over the pinned pack data
+ACCEPTED  m0011 src/trainer/selector.c:14 [int+1 8 -> 9] :: pack row cap widening admits indexes past the largest seeded pack (169 rows), unreachable over the pinned pack data
+ACCEPTED  m0013 src/trainer/selector.c:15 [int+1 1 -> 2] :: settings buffer size plus or minus one byte changes nothing for the short numerals the buffer parser accepts
+ACCEPTED  m0015 src/trainer/selector.c:15 [int+1 5 -> 6] :: settings buffer size plus or minus one byte changes nothing for the short numerals the buffer parser accepts
+ACCEPTED  m0016 src/trainer/selector.c:15 [int-1 5 -> 4] :: settings buffer size plus or minus one byte changes nothing for the short numerals the buffer parser accepts
+ACCEPTED  m0021 src/trainer/selector.c:80 [int-1 0 -> -1] :: enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+ACCEPTED  m0022 src/trainer/selector.c:80 [logic && -> ||] :: enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+ACCEPTED  m0023 src/trainer/selector.c:80 [cmp < -> <=] :: enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+ACCEPTED  m0026 src/trainer/selector.c:84 [int-1 0 -> -1] :: enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+ACCEPTED  m0027 src/trainer/selector.c:84 [logic && -> ||] :: enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+ACCEPTED  m0028 src/trainer/selector.c:84 [cmp < -> <=] :: enum range guard relaxation is subsumed by the table scan, no row matches an out of range enum so callers see the empty result
+ACCEPTED  m0030 src/trainer/selector.c:88 [logic || -> &&] :: guard flip still lands in the table scan, which returns the empty result for the unpaired input
+ACCEPTED  m0032 src/trainer/selector.c:89 [ret-lit 0 -> 1] :: no match return literal is truthiness only, callers rescan the table and produce the same totals and errors
+ACCEPTED  m0033 src/trainer/selector.c:89 [int+1 0 -> 1] :: no match return literal is truthiness only, callers rescan the table and produce the same totals and errors
+ACCEPTED  m0034 src/trainer/selector.c:89 [int-1 0 -> -1] :: no match return literal is truthiness only, callers rescan the table and produce the same totals and errors
+ACCEPTED  m0035 src/trainer/selector.c:91 [int+1 0 -> 1] :: loop start and match mutants still locate every pinned pair through the remaining rows, no pair is defined by a single row
+ACCEPTED  m0039 src/trainer/selector.c:91 [int+1 0 -> 1] :: loop start and match mutants still locate every pinned pair through the remaining rows, no pair is defined by a single row
+ACCEPTED  m0040 src/trainer/selector.c:91 [int-1 0 -> -1] :: loop start and match mutants still locate every pinned pair through the remaining rows, no pair is defined by a single row
+ACCEPTED  m0042 src/trainer/selector.c:92 [logic && -> ||] :: match condition mutants still locate every pinned pair through the remaining rows, no pair is defined by a single row
+ACCEPTED  m0045 src/trainer/selector.c:93 [int+1 1 -> 2] :: return literal is truthiness only
+ACCEPTED  m0047 src/trainer/selector.c:96 [ret-lit 0 -> 1] :: no match return literal is truthiness only, callers rescan and produce the same totals and errors
+ACCEPTED  m0048 src/trainer/selector.c:96 [int+1 0 -> 1] :: no match return literal is truthiness only, callers rescan and produce the same totals and errors
+ACCEPTED  m0049 src/trainer/selector.c:96 [int-1 0 -> -1] :: no match return literal is truthiness only, callers rescan and produce the same totals and errors
+ACCEPTED  m0050 src/trainer/selector.c:100 [cmp < -> <=] :: cap clamp boundary and return literal mutants agree with the original at every reachable cap, negative caps write nothing under both
+ACCEPTED  m0051 src/trainer/selector.c:100 [int+1 0 -> 1] :: cap clamp boundary and return literal mutants agree with the original at every reachable cap, negative caps write nothing under both
+ACCEPTED  m0052 src/trainer/selector.c:100 [int-1 0 -> -1] :: cap clamp boundary and return literal mutants agree with the original at every reachable cap, negative caps write nothing under both
+ACCEPTED  m0054 src/trainer/selector.c:100 [int-1 0 -> -1] :: cap clamp boundary and return literal mutants agree with the original at every reachable cap, negative caps write nothing under both
+ACCEPTED  m0064 src/trainer/selector.c:110 [cmp < -> <=] :: loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+ACCEPTED  m0065 src/trainer/selector.c:110 [arith / -> *] :: loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+ACCEPTED  m0066 src/trainer/selector.c:110 [int+1 0 -> 1] :: loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+ACCEPTED  m0067 src/trainer/selector.c:110 [int-1 0 -> -1] :: loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+ACCEPTED  m0078 src/trainer/selector.c:126 [int+1 0 -> 1] :: count loop start shift is cancelled by list def failing the same way, both surface as the same -1
+ACCEPTED  m0084 src/trainer/selector.c:127 [int+1 0 -> 1] :: copy loop start and bound shifts change which rows are visited but every pinned list is defined by its full scan
+ACCEPTED  m0085 src/trainer/selector.c:127 [int-1 0 -> -1] :: copy loop start and bound shifts change which rows are visited but every pinned list is defined by its full scan
+ACCEPTED  m0087 src/trainer/selector.c:128 [logic && -> ||] :: match condition mutants keep every pinned list output identical through the full scan
+ACCEPTED  m0108 src/trainer/selector.c:149 [int+1 0 -> 1] :: re entering the speffz seed is a no op, the seed is idempotent and the default id is reread after it
+ACCEPTED  m0113 src/trainer/selector.c:155 [cmp <= -> <] :: scheme ids are never negative past the seed branch and map load returns a row count or negative only, the mutated boundaries are unreachable
+ACCEPTED  m0115 src/trainer/selector.c:155 [int-1 0 -> -1] :: scheme ids are never negative past the seed branch and map load returns a row count or negative only, the mutated boundaries are unreachable
+ACCEPTED  m0117 src/trainer/selector.c:155 [cmp < -> <=] :: scheme ids are never negative past the seed branch and map load returns a row count or negative only, the mutated boundaries are unreachable
+ACCEPTED  m0118 src/trainer/selector.c:155 [int+1 0 -> 1] :: scheme ids are never negative past the seed branch and map load returns a row count or negative only, the mutated boundaries are unreachable
+ACCEPTED  m0119 src/trainer/selector.c:155 [int-1 0 -> -1] :: scheme ids are never negative past the seed branch and map load returns a row count or negative only, the mutated boundaries are unreachable
+ACCEPTED  m0128 src/trainer/selector.c:162 [int+1 0 -> 1] :: sizeof index and bound mutants iterate the same two element array with identical limits
+ACCEPTED  m0129 src/trainer/selector.c:162 [int-1 0 -> -1] :: sizeof index and bound mutants iterate the same two element array with identical limits
+ACCEPTED  m0157 src/trainer/selector.c:194 [int+1 0 -> 1] :: loop start shifts skip rows no pinned list is defined by, later rows of the same pair carry the same entries
+ACCEPTED  m0158 src/trainer/selector.c:194 [int-1 0 -> -1] :: loop start shifts skip rows no pinned list is defined by, later rows of the same pair carry the same entries
+ACCEPTED  m0168 src/trainer/selector.c:202 [int+1 1 -> 2] :: duplicate flag literal is truthiness only
+ACCEPTED  m0184 src/trainer/selector.c:223 [int+1 0 -> 1] :: loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+ACCEPTED  m0185 src/trainer/selector.c:223 [int-1 0 -> -1] :: loop bound and sizeof index mutants walk one dead element or a same sized element, the scan output is identical
+ACCEPTED  m0198 src/trainer/selector.c:239 [int-1 0 -> -1] :: list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+ACCEPTED  m0200 src/trainer/selector.c:239 [cmp >= -> >] :: list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+ACCEPTED  m0208 src/trainer/selector.c:256 [int+1 0 -> 1] :: chart total zero and index boundary mutants coincide with the adjacent guards, both orderings return the same error
+ACCEPTED  m0209 src/trainer/selector.c:256 [int-1 0 -> -1] :: chart total zero and index boundary mutants coincide with the adjacent guards, both orderings return the same error
+ACCEPTED  m0210 src/trainer/selector.c:258 [int+1 0 -> 1] :: chart total zero and index boundary mutants coincide with the adjacent guards, both orderings return the same error
+ACCEPTED  m0211 src/trainer/selector.c:258 [int-1 0 -> -1] :: chart total zero and index boundary mutants coincide with the adjacent guards, both orderings return the same error
+ACCEPTED  m0214 src/trainer/selector.c:270 [cmp <= -> <] :: total and index boundary mutants coincide with the adjacent guard, both orderings return the same error
+ACCEPTED  m0215 src/trainer/selector.c:270 [int+1 0 -> 1] :: total and index boundary mutants coincide with the adjacent guard, both orderings return the same error
+ACCEPTED  m0216 src/trainer/selector.c:270 [int-1 0 -> -1] :: total and index boundary mutants coincide with the adjacent guard, both orderings return the same error
+ACCEPTED  m0220 src/trainer/selector.c:270 [int-1 0 -> -1] :: total and index boundary mutants coincide with the adjacent guard, both orderings return the same error
+ACCEPTED  m0230 src/trainer/selector.c:280 [cmp <= -> <] :: count and index boundary mutants coincide with the adjacent guards, both orderings return the same error or key
+ACCEPTED  m0231 src/trainer/selector.c:280 [int+1 0 -> 1] :: count and index boundary mutants coincide with the adjacent guards, both orderings return the same error or key
+ACCEPTED  m0232 src/trainer/selector.c:280 [int-1 0 -> -1] :: count and index boundary mutants coincide with the adjacent guards, both orderings return the same error or key
+ACCEPTED  m0236 src/trainer/selector.c:280 [int-1 0 -> -1] :: count and index boundary mutants coincide with the adjacent guards, both orderings return the same error or key
+ACCEPTED  m0238 src/trainer/selector.c:280 [cmp >= -> >] :: count and index boundary mutants coincide with the adjacent guards, both orderings return the same error or key
+ACCEPTED  m0282 src/trainer/selector.c:323 [int-1 0 -> -1] :: list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+ACCEPTED  m0284 src/trainer/selector.c:323 [cmp >= -> >] :: list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+ACCEPTED  m0304 src/trainer/selector.c:345 [int-1 0 -> -1] :: list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+ACCEPTED  m0306 src/trainer/selector.c:345 [cmp >= -> >] :: list id bound relaxation admits ids that list def then rejects, both paths return the same -1
+ACCEPTED  m0316 src/trainer/selector.c:352 [logic || -> &&] :: source check flip lands in the pack list scan, which returns zero rows and the same -1
+ACCEPTED  m0321 src/trainer/selector.c:357 [cmp > -> >=] :: cap bound relaxation admits indexes past the largest seeded pack, unreachable over the pinned data
+mutate: generated=365 build_failed=62 killed_by_tests=228 killed=290 survived=75 accepted=70 unexplained=5 skipped=0
+mutate: kill rate 290/365 = 79.5%, with accepted equivalents 360/365 = 98.6%
+mutate: wall 211.5s
+mutate: 5 unexplained survivors
+make: *** [makefile:239: mutate] Error 1

@@ -1,0 +1,644 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build/bin/mutate.exe src/srs build fsrs_golden_first_review fsrs_golden_recall fsrs_golden_forget fsrs_golden_same_day fsrs_golden_interval_table fsrs_init fsrs_retrievability fsrs_stability_properties fsrs_interval_properties fsrs_branch_selection fsrs_clamp_proof fsrs_random_walk
+build/mutants/m0003_fsrs.c:33:45: error: expected ')'
+   33 | static double difficulty_first(const double /w, ct_grade g) {
+      |                                             ^
+build/mutants/m0003_fsrs.c:33:31: note: to match this '('
+   33 | static double difficulty_first(const double /w, ct_grade g) {
+      |                               ^
+build/mutants/m0003_fsrs.c:34:29: error: use of undeclared identifier 'w'
+   34 |     return clamp_difficulty(w[fw_d_init] - exp(w[fw_d_slope] * ((int)g - 1)) + 1);
+      |                             ^
+build/mutants/m0003_fsrs.c:34:48: error: use of undeclared identifier 'w'
+   34 |     return clamp_difficulty(w[fw_d_init] - exp(w[fw_d_slope] * ((int)g - 1)) + 1);
+      |                                                ^
+build/mutants/m0003_fsrs.c:34:70: error: use of undeclared identifier 'g'
+   34 |     return clamp_difficulty(w[fw_d_init] - exp(w[fw_d_slope] * ((int)g - 1)) + 1);
+      |                                                                      ^
+build/mutants/m0003_fsrs.c:100:49: error: too many arguments to function call, expected 1, have 2
+  100 |         out.difficulty = difficulty_first(f->w, g);
+      |                          ~~~~~~~~~~~~~~~~       ^
+build/mutants/m0003_fsrs.c:33:15: note: 'difficulty_first' declared here
+   33 | static double difficulty_first(const double /w, ct_grade g) {
+      |               ^                ~~~~~~~~~~~~
+5 errors generated.
+mutate: suite fsrs_golden_first_review exited 1
+mutate: suite fsrs_golden_first_review exited 1
+mutate: suite fsrs_golden_first_review exited 1
+mutate: suite fsrs_golden_first_review exited 1
+mutate: suite fsrs_golden_first_review exited 1
+ld.lld: error: failed to write output 'build/bin/ct_mutant.exe': permission denied
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+build/mutants/m0012_fsrs.c:37:51: error: expected ')'
+   37 | static double difficulty_easy_anchor(const double /w) {
+      |                                                   ^
+build/mutants/m0012_fsrs.c:37:37: note: to match this '('
+   37 | static double difficulty_easy_anchor(const double /w) {
+      |                                     ^
+build/mutants/m0012_fsrs.c:38:29: error: use of undeclared identifier 'w'
+   38 |     return clamp_difficulty(w[fw_d_init] - exp(w[fw_d_slope] * (CT_EASY - 1)) + 1);
+      |                             ^
+build/mutants/m0012_fsrs.c:38:48: error: use of undeclared identifier 'w'
+   38 |     return clamp_difficulty(w[fw_d_init] - exp(w[fw_d_slope] * (CT_EASY - 1)) + 1);
+      |                                                ^
+build/mutants/m0012_fsrs.c:45:69: error: passing 'const double *' to parameter of incompatible type 'double'
+   45 |     return clamp_difficulty(w[fw_d_revert] * difficulty_easy_anchor(w) +
+      |                                                                     ^
+build/mutants/m0012_fsrs.c:37:51: note: passing argument to parameter here
+   37 | static double difficulty_easy_anchor(const double /w) {
+      |                                                   ^
+4 errors generated.
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+build/mutants/m0021_fsrs.c:41:44: error: expected ')'
+   41 | static double difficulty_next(const double /w, double d, ct_grade g) {
+      |                                            ^
+build/mutants/m0021_fsrs.c:41:30: note: to match this '('
+   41 | static double difficulty_next(const double /w, double d, ct_grade g) {
+      |                              ^
+build/mutants/m0021_fsrs.c:42:21: error: use of undeclared identifier 'w'
+   42 |     double delta = -w[fw_d_delta] * ((int)g - CT_GOOD);
+      |                     ^
+build/mutants/m0021_fsrs.c:42:43: error: use of undeclared identifier 'g'
+   42 |     double delta = -w[fw_d_delta] * ((int)g - CT_GOOD);
+      |                                           ^
+build/mutants/m0021_fsrs.c:43:22: error: use of undeclared identifier 'd'
+   43 |     double shifted = d + delta * (CT_FSRS_MAX_DIFFICULTY - d) /
+      |                      ^
+build/mutants/m0021_fsrs.c:43:60: error: use of undeclared identifier 'd'
+   43 |     double shifted = d + delta * (CT_FSRS_MAX_DIFFICULTY - d) /
+      |                                                            ^
+build/mutants/m0021_fsrs.c:45:29: error: use of undeclared identifier 'w'
+   45 |     return clamp_difficulty(w[fw_d_revert] * difficulty_easy_anchor(w) +
+      |                             ^
+build/mutants/m0021_fsrs.c:45:69: error: use of undeclared identifier 'w'
+   45 |     return clamp_difficulty(w[fw_d_revert] * difficulty_easy_anchor(w) +
+      |                                                                     ^
+build/mutants/m0021_fsrs.c:46:34: error: use of undeclared identifier 'w'
+   46 |                             (1 - w[fw_d_revert]) * shifted);
+      |                                  ^
+build/mutants/m0021_fsrs.c:111:44: error: too many arguments to function call, expected 1, have 3
+  111 |     out.difficulty = difficulty_next(f->w, card->difficulty, g);
+      |                      ~~~~~~~~~~~~~~~       ^~~~~~~~~~~~~~~~~~~
+build/mutants/m0021_fsrs.c:41:15: note: 'difficulty_next' declared here
+   41 | static double difficulty_next(const double /w, double d, ct_grade g) {
+      |               ^               ~~~~~~~~~~~~
+9 errors generated.
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+ld.lld: error: failed to write output 'build/bin/ct_mutant.exe': permission denied
+clang: error: unable to remove file: permission denied
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+build/mutants/m0036_fsrs.c:49:45: error: expected ')'
+   49 | static double stability_recall(const double /w, double s, double d, double r, ct_grade g) {
+      |                                             ^
+build/mutants/m0036_fsrs.c:49:31: note: to match this '('
+   49 | static double stability_recall(const double /w, double s, double d, double r, ct_grade g) {
+      |                               ^
+build/mutants/m0036_fsrs.c:50:20: error: use of undeclared identifier 'g'
+   50 |     double hard = (g == CT_HARD) ? w[fw_hard_penalty] : 1;
+      |                    ^
+build/mutants/m0036_fsrs.c:50:36: error: use of undeclared identifier 'w'
+   50 |     double hard = (g == CT_HARD) ? w[fw_hard_penalty] : 1;
+      |                                    ^
+build/mutants/m0036_fsrs.c:51:20: error: use of undeclared identifier 'g'
+   51 |     double easy = (g == CT_EASY) ? w[fw_easy_bonus] : 1;
+      |                    ^
+build/mutants/m0036_fsrs.c:51:36: error: use of undeclared identifier 'w'
+   51 |     double easy = (g == CT_EASY) ? w[fw_easy_bonus] : 1;
+      |                                    ^
+build/mutants/m0036_fsrs.c:52:22: error: use of undeclared identifier 'w'
+   52 |     double inc = exp(w[fw_s_gain]) * (CT_FSRS_MAX_DIFFICULTY + 1 - d) *
+      |                      ^
+build/mutants/m0036_fsrs.c:52:68: error: use of undeclared identifier 'd'
+   52 |     double inc = exp(w[fw_s_gain]) * (CT_FSRS_MAX_DIFFICULTY + 1 - d) *
+      |                                                                    ^
+build/mutants/m0036_fsrs.c:53:22: error: use of undeclared identifier 's'
+   53 |                  pow(s, -w[fw_s_tension]) * (exp(w[fw_s_press] * (1 - r)) - 1) * hard * easy;
+      |                      ^
+build/mutants/m0036_fsrs.c:53:26: error: use of undeclared identifier 'w'
+   53 |                  pow(s, -w[fw_s_tension]) * (exp(w[fw_s_press] * (1 - r)) - 1) * hard * easy;
+      |                          ^
+build/mutants/m0036_fsrs.c:53:50: error: use of undeclared identifier 'w'
+   53 |                  pow(s, -w[fw_s_tension]) * (exp(w[fw_s_press] * (1 - r)) - 1) * hard * easy;
+      |                                                  ^
+build/mutants/m0036_fsrs.c:53:71: error: use of undeclared identifier 'r'
+   53 |                  pow(s, -w[fw_s_tension]) * (exp(w[fw_s_press] * (1 - r)) - 1) * hard * easy;
+      |                                                                       ^
+build/mutants/m0036_fsrs.c:54:12: error: use of undeclared identifier 's'
+   54 |     return s * (1 + inc);
+      |            ^
+build/mutants/m0036_fsrs.c:114:52: error: too many arguments to function call, expected 1, have 5
+  114 |             clamp_stability(stability_recall(f->w, card->stability, out.difficulty, r, g));
+      |                             ~~~~~~~~~~~~~~~~       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/m0036_fsrs.c:49:15: note: 'stability_recall' declared here
+   49 | static double stability_recall(const double /w, double s, double d, double r, ct_grade g) {
+      |               ^                ~~~~~~~~~~~~
+13 errors generated.
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+ld.lld: error: failed to write output 'build/bin/ct_mutant.exe': permission denied
+clang: error: unable to remove file: permission denied
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+ld.lld: error: failed to write output 'build/bin/ct_mutant.exe': permission denied
+clang: error: unable to remove file: permission denied
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+ld.lld: error: failed to write output 'build/bin/ct_mutant.exe': permission denied
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+build/mutants/m0064_fsrs.c:57:45: error: expected ')'
+   57 | static double stability_forget(const double /w, double s, double d, double r) {
+      |                                             ^
+build/mutants/m0064_fsrs.c:57:31: note: to match this '('
+   57 | static double stability_forget(const double /w, double s, double d, double r) {
+      |                               ^
+build/mutants/m0064_fsrs.c:58:12: error: use of undeclared identifier 'w'
+   58 |     return w[fw_f_init] * pow(d, -w[fw_f_damp]) * (pow(s + 1, w[fw_f_grow]) - 1) *
+      |            ^
+build/mutants/m0064_fsrs.c:58:31: error: use of undeclared identifier 'd'
+   58 |     return w[fw_f_init] * pow(d, -w[fw_f_damp]) * (pow(s + 1, w[fw_f_grow]) - 1) *
+      |                               ^
+build/mutants/m0064_fsrs.c:58:35: error: use of undeclared identifier 'w'
+   58 |     return w[fw_f_init] * pow(d, -w[fw_f_damp]) * (pow(s + 1, w[fw_f_grow]) - 1) *
+      |                                   ^
+build/mutants/m0064_fsrs.c:58:56: error: use of undeclared identifier 's'
+   58 |     return w[fw_f_init] * pow(d, -w[fw_f_damp]) * (pow(s + 1, w[fw_f_grow]) - 1) *
+      |                                                        ^
+build/mutants/m0064_fsrs.c:58:63: error: use of undeclared identifier 'w'
+   58 |     return w[fw_f_init] * pow(d, -w[fw_f_damp]) * (pow(s + 1, w[fw_f_grow]) - 1) *
+      |                                                               ^
+build/mutants/m0064_fsrs.c:59:16: error: use of undeclared identifier 'w'
+   59 |            exp(w[fw_f_fuzz] * (1 - r));
+      |                ^
+build/mutants/m0064_fsrs.c:59:36: error: use of undeclared identifier 'r'
+   59 |            exp(w[fw_f_fuzz] * (1 - r));
+      |                                    ^
+build/mutants/m0064_fsrs.c:117:52: error: too many arguments to function call, expected 1, have 4
+  117 |             clamp_stability(stability_forget(f->w, card->stability, out.difficulty, r));
+      |                             ~~~~~~~~~~~~~~~~       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/m0064_fsrs.c:57:15: note: 'stability_forget' declared here
+   57 | static double stability_forget(const double /w, double s, double d, double r) {
+      |               ^                ~~~~~~~~~~~~
+9 errors generated.
+mutate: suite fsrs_golden_forget exited 1
+mutate: suite fsrs_golden_forget exited 1
+mutate: suite fsrs_golden_forget exited 1
+mutate: suite fsrs_golden_forget exited 1
+mutate: suite fsrs_golden_forget exited 1
+mutate: suite fsrs_golden_forget exited 1
+ld.lld: error: failed to write output 'build/bin/ct_mutant.exe': permission denied
+clang: error: unable to remove file: permission denied
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+mutate: scope=src/srs files=1 sites=136 suites=12
+SURVIVED  m0001 src/srs/fsrs.c:16 [cmp < -> <=]
+SURVIVED  m0002 src/srs/fsrs.c:19 [cmp > -> >=]
+KILLED    m0003 src/srs/fsrs.c:33 [arith * -> /]
+          build break
+KILLED    m0004 src/srs/fsrs.c:34 [arith - -> +]
+SURVIVED  m0005 src/srs/fsrs.c:34 [arith * -> /]
+KILLED    m0006 src/srs/fsrs.c:34 [arith - -> +]
+KILLED    m0007 src/srs/fsrs.c:34 [int+1 1 -> 2]
+KILLED    m0008 src/srs/fsrs.c:34 [int-1 1 -> 0]
+KILLED    m0009 src/srs/fsrs.c:34 [arith + -> -]
+KILLED    m0010 src/srs/fsrs.c:34 [int+1 1 -> 2]
+          link break
+SURVIVED  m0011 src/srs/fsrs.c:34 [int-1 1 -> 0]
+KILLED    m0012 src/srs/fsrs.c:37 [arith * -> /]
+          build break
+KILLED    m0013 src/srs/fsrs.c:38 [arith - -> +]
+SURVIVED  m0014 src/srs/fsrs.c:38 [arith * -> /]
+KILLED    m0015 src/srs/fsrs.c:38 [arith - -> +]
+SURVIVED  m0016 src/srs/fsrs.c:38 [int+1 1 -> 2]
+KILLED    m0017 src/srs/fsrs.c:38 [int-1 1 -> 0]
+SURVIVED  m0018 src/srs/fsrs.c:38 [arith + -> -]
+KILLED    m0019 src/srs/fsrs.c:38 [int+1 1 -> 2]
+KILLED    m0020 src/srs/fsrs.c:38 [int-1 1 -> 0]
+KILLED    m0021 src/srs/fsrs.c:41 [arith * -> /]
+          build break
+KILLED    m0022 src/srs/fsrs.c:42 [arith - -> +]
+SURVIVED  m0023 src/srs/fsrs.c:42 [arith * -> /]
+KILLED    m0024 src/srs/fsrs.c:42 [arith - -> +]
+SURVIVED  m0025 src/srs/fsrs.c:43 [arith + -> -]
+KILLED    m0026 src/srs/fsrs.c:43 [arith * -> /]
+SURVIVED  m0027 src/srs/fsrs.c:43 [arith - -> +]
+KILLED    m0028 src/srs/fsrs.c:43 [arith / -> *]
+          link break
+KILLED    m0029 src/srs/fsrs.c:44 [arith - -> +]
+SURVIVED  m0030 src/srs/fsrs.c:45 [arith * -> /]
+KILLED    m0031 src/srs/fsrs.c:45 [arith + -> -]
+SURVIVED  m0032 src/srs/fsrs.c:46 [int+1 1 -> 2]
+KILLED    m0033 src/srs/fsrs.c:46 [int-1 1 -> 0]
+SURVIVED  m0034 src/srs/fsrs.c:46 [arith - -> +]
+KILLED    m0035 src/srs/fsrs.c:46 [arith * -> /]
+KILLED    m0036 src/srs/fsrs.c:49 [arith * -> /]
+          build break
+SURVIVED  m0037 src/srs/fsrs.c:50 [cmp == -> !=]
+KILLED    m0038 src/srs/fsrs.c:50 [int+1 1 -> 2]
+SURVIVED  m0039 src/srs/fsrs.c:50 [int-1 1 -> 0]
+KILLED    m0040 src/srs/fsrs.c:51 [cmp == -> !=]
+SURVIVED  m0041 src/srs/fsrs.c:51 [int+1 1 -> 2]
+KILLED    m0042 src/srs/fsrs.c:51 [int-1 1 -> 0]
+SURVIVED  m0043 src/srs/fsrs.c:52 [arith * -> /]
+KILLED    m0044 src/srs/fsrs.c:52 [arith + -> -]
+SURVIVED  m0045 src/srs/fsrs.c:52 [int+1 1 -> 2]
+KILLED    m0046 src/srs/fsrs.c:52 [int-1 1 -> 0]
+          link break
+KILLED    m0047 src/srs/fsrs.c:52 [arith - -> +]
+SURVIVED  m0048 src/srs/fsrs.c:52 [arith * -> /]
+KILLED    m0049 src/srs/fsrs.c:53 [arith - -> +]
+SURVIVED  m0050 src/srs/fsrs.c:53 [arith * -> /]
+KILLED    m0051 src/srs/fsrs.c:53 [arith * -> /]
+          link break
+KILLED    m0052 src/srs/fsrs.c:53 [int+1 1 -> 2]
+          link break
+SURVIVED  m0053 src/srs/fsrs.c:53 [int-1 1 -> 0]
+KILLED    m0054 src/srs/fsrs.c:53 [arith - -> +]
+KILLED    m0055 src/srs/fsrs.c:53 [arith - -> +]
+SURVIVED  m0056 src/srs/fsrs.c:53 [int+1 1 -> 2]
+KILLED    m0057 src/srs/fsrs.c:53 [int-1 1 -> 0]
+SURVIVED  m0058 src/srs/fsrs.c:53 [arith * -> /]
+KILLED    m0059 src/srs/fsrs.c:53 [arith * -> /]
+SURVIVED  m0060 src/srs/fsrs.c:54 [arith * -> /]
+KILLED    m0061 src/srs/fsrs.c:54 [int+1 1 -> 2]
+SURVIVED  m0062 src/srs/fsrs.c:54 [int-1 1 -> 0]
+KILLED    m0063 src/srs/fsrs.c:54 [arith + -> -]
+KILLED    m0064 src/srs/fsrs.c:57 [arith * -> /]
+          build break
+SURVIVED  m0065 src/srs/fsrs.c:58 [arith * -> /]
+KILLED    m0066 src/srs/fsrs.c:58 [arith - -> +]
+SURVIVED  m0067 src/srs/fsrs.c:58 [arith * -> /]
+KILLED    m0068 src/srs/fsrs.c:58 [arith + -> -]
+SURVIVED  m0069 src/srs/fsrs.c:58 [int+1 1 -> 2]
+KILLED    m0070 src/srs/fsrs.c:58 [int-1 1 -> 0]
+SURVIVED  m0071 src/srs/fsrs.c:58 [arith - -> +]
+KILLED    m0072 src/srs/fsrs.c:58 [int+1 1 -> 2]
+SURVIVED  m0073 src/srs/fsrs.c:58 [int-1 1 -> 0]
+KILLED    m0074 src/srs/fsrs.c:58 [arith * -> /]
+SURVIVED  m0075 src/srs/fsrs.c:59 [arith * -> /]
+KILLED    m0076 src/srs/fsrs.c:59 [int+1 1 -> 2]
+SURVIVED  m0077 src/srs/fsrs.c:59 [int-1 1 -> 0]
+KILLED    m0078 src/srs/fsrs.c:59 [arith - -> +]
+          lbuild/mutants/m0079_fsrs.c:62:47: error: expected ')'
+   62 | static double stability_same_day(const double /w, double s, ct_grade g) {
+      |                                               ^
+build/mutants/m0079_fsrs.c:62:33: note: to match this '('
+   62 | static double stability_same_day(const double /w, double s, ct_grade g) {
+      |                                 ^
+build/mutants/m0079_fsrs.c:63:12: error: use of undeclared identifier 's'
+   63 |     return s * exp(w[fw_sd_gain] * ((int)g - CT_GOOD + w[fw_sd_bias]));
+      |            ^
+build/mutants/m0079_fsrs.c:63:20: error: use of undeclared identifier 'w'
+   63 |     return s * exp(w[fw_sd_gain] * ((int)g - CT_GOOD + w[fw_sd_bias]));
+      |                    ^
+build/mutants/m0079_fsrs.c:63:42: error: use of undeclared identifier 'g'
+   63 |     return s * exp(w[fw_sd_gain] * ((int)g - CT_GOOD + w[fw_sd_bias]));
+      |                                          ^
+build/mutants/m0079_fsrs.c:63:56: error: use of undeclared identifier 'w'
+   63 |     return s * exp(w[fw_sd_gain] * ((int)g - CT_GOOD + w[fw_sd_bias]));
+      |                                                        ^
+build/mutants/m0079_fsrs.c:106:66: error: too many arguments to function call, expected 1, have 3
+  106 |         out.stability = clamp_stability(stability_same_day(f->w, card->stability, g));
+      |                                         ~~~~~~~~~~~~~~~~~~       ^~~~~~~~~~~~~~~~~~
+build/mutants/m0079_fsrs.c:62:15: note: 'stability_same_day' declared here
+   62 | static double stability_same_day(const double /w, double s, ct_grade g) {
+      |               ^                  ~~~~~~~~~~~~
+6 errors generated.
+ld.lld: error: failed to write output 'build/bin/ct_mutant.exe': permission denied
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+mutate: suite fsrs_golden_same_day exited 1
+build/mutants/m0084_fsrs.c:66:27: error: expected ')'
+   66 | void ct_fsrs_init(ct_fsrs /f, const ct_config *cfg) {
+      |                           ^
+build/mutants/m0084_fsrs.c:66:18: note: to match this '('
+   66 | void ct_fsrs_init(ct_fsrs /f, const ct_config *cfg) {
+      |                  ^
+build/mutants/m0084_fsrs.c:66:6: error: conflicting types for 'ct_fsrs_init'
+   66 | void ct_fsrs_init(ct_fsrs /f, const ct_config *cfg) {
+      |      ^
+src\srs/fsrs.h:26:6: note: previous declaration is here
+   26 | void ct_fsrs_init(ct_fsrs *f, const ct_config *cfg);
+      |      ^
+build/mutants/m0084_fsrs.c:68:9: error: use of undeclared identifier 'f'
+   68 |         f->w[i] = cfg->fsrs.w[i];
+      |         ^
+build/mutants/m0084_fsrs.c:68:19: error: use of undeclared identifier 'cfg'
+   68 |         f->w[i] = cfg->fsrs.w[i];
+      |                   ^~~
+build/mutants/m0084_fsrs.c:70:5: error: use of undeclared identifier 'f'
+   70 |     f->request_retention = cfg->fsrs.request_retention;
+      |     ^
+build/mutants/m0084_fsrs.c:70:28: error: use of undeclared identifier 'cfg'
+   70 |     f->request_retention = cfg->fsrs.request_retention;
+      |                            ^~~
+build/mutants/m0084_fsrs.c:71:5: error: use of undeclared identifier 'f'
+   71 |     f->max_ivl_days = cfg->fsrs.max_ivl_days;
+      |     ^
+build/mutants/m0084_fsrs.c:71:23: error: use of undeclared identifier 'cfg'
+   71 |     f->max_ivl_days = cfg->fsrs.max_ivl_days;
+      |                       ^~~
+8 errors generated.
+build/mutants/m0085_fsrs.c:66:47: error: expected ')'
+   66 | void ct_fsrs_init(ct_fsrs *f, const ct_config /cfg) {
+      |                                               ^
+build/mutants/m0085_fsrs.c:66:18: note: to match this '('
+   66 | void ct_fsrs_init(ct_fsrs *f, const ct_config /cfg) {
+      |                  ^
+build/mutants/m0085_fsrs.c:66:6: error: conflicting types for 'ct_fsrs_init'
+   66 | void ct_fsrs_init(ct_fsrs *f, const ct_config /cfg) {
+      |      ^
+src\srs/fsrs.h:26:6: note: previous declaration is here
+   26 | void ct_fsrs_init(ct_fsrs *f, const ct_config *cfg);
+      |      ^
+build/mutants/m0085_fsrs.c:68:19: error: use of undeclared identifier 'cfg'
+   68 |         f->w[i] = cfg->fsrs.w[i];
+      |                   ^~~
+build/mutants/m0085_fsrs.c:70:28: error: use of undeclared identifier 'cfg'
+   70 |     f->request_retention = cfg->fsrs.request_retention;
+      |                            ^~~
+build/mutants/m0085_fsrs.c:71:23: error: use of undeclared identifier 'cfg'
+   71 |     f->max_ivl_days = cfg->fsrs.max_ivl_days;
+      |                       ^~~
+5 errors generated.
+mutate: suite fsrs_golden_first_review exited 1
+mutate: suite fsrs_golden_first_review exited -1073741795
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+build/mutants/m0095_fsrs.c:81:47: error: expected ')'
+   81 | long ct_fsrs_next_interval_days(const ct_fsrs /f, double stability) {
+      |                                               ^
+build/mutants/m0095_fsrs.c:81:32: note: to match this '('
+   81 | long ct_fsrs_next_interval_days(const ct_fsrs /f, double stability) {
+      |                                ^
+build/mutants/m0095_fsrs.c:81:6: error: conflicting types for 'ct_fsrs_next_interval_days'
+   81 | long ct_fsrs_next_interval_days(const ct_fsrs /f, double stability) {
+      |      ^
+src\srs/fsrs.h:30:6: note: previous declaration is here
+   30 | long ct_fsrs_next_interval_days(const ct_fsrs *f, double stability);
+      |      ^
+build/mutants/m0095_fsrs.c:82:19: error: use of undeclared identifier 'stability'
+   82 |     double raw = (stability / CT_FSRS_FACTOR) *
+      |                   ^~~~~~~~~
+build/mutants/m0095_fsrs.c:83:23: error: use of undeclared identifier 'f'
+   83 |                  (pow(f->request_retention, 1 / CT_FSRS_DECAY) - 1);
+      |                       ^
+build/mutants/m0095_fsrs.c:87:15: error: use of undeclared identifier 'f'
+   87 |     if (raw > f->max_ivl_days) {
+      |               ^
+build/mutants/m0095_fsrs.c:88:22: error: use of undeclared identifier 'f'
+   88 |         return (long)f->max_ivl_days;
+      |                      ^
+6 errors generated.
+mutate: suite fsrs_golden_recall exited 1
+ld.lld: error: failed to write output 'build/bin/ct_mutant.exe': permission denied
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_forget exited 1
+mutate: suite fsrs_golden_interval_table exited 1
+mutate: suite fsrs_golden_interval_table exited 1
+build/mutants/m0111_fsrs.c:93:43: error: expected ')'
+   93 | ct_fsrs_card ct_fsrs_review(const ct_fsrs /f, const ct_fsrs_card *card, ct_grade g,
+      |                                           ^
+build/mutants/m0111_fsrs.c:93:28: note: to match this '('
+   93 | ct_fsrs_card ct_fsrs_review(const ct_fsrs /f, const ct_fsrs_card *card, ct_grade g,
+      |                            ^
+build/mutants/m0111_fsrs.c:93:14: error: conflicting types for 'ct_fsrs_review'
+   93 | ct_fsrs_card ct_fsrs_review(const ct_fsrs /f, const ct_fsrs_card *card, ct_grade g,
+      |              ^
+src\srs/fsrs.h:32:14: note: previous declaration is here
+   32 | ct_fsrs_card ct_fsrs_review(const ct_fsrs *f, const ct_fsrs_card *card, ct_grade g,
+      |              ^
+build/mutants/m0111_fsrs.c:95:25: error: use of undeclared identifier 'card'
+   95 |     ct_fsrs_card out = *card;
+      |                         ^~~~
+build/mutants/m0111_fsrs.c:96:16: error: use of undeclared identifier 'card'
+   96 |     out.reps = card->reps + 1;
+      |                ^~~~
+build/mutants/m0111_fsrs.c:97:27: error: use of undeclared identifier 'today_day'
+   97 |     out.last_review_day = today_day;
+      |                           ^~~~~~~~~
+build/mutants/m0111_fsrs.c:98:9: error: use of undeclared identifier 'card'
+   98 |     if (card->state == 0) {
+      |         ^~~~
+build/mutants/m0111_fsrs.c:99:41: error: use of undeclared identifier 'f'
+   99 |         out.stability = clamp_stability(f->w[(int)g - 1]);
+      |                                         ^
+build/mutants/m0111_fsrs.c:99:51: error: use of undeclared identifier 'g'
+   99 |         out.stability = clamp_stability(f->w[(int)g - 1]);
+      |                                                   ^
+build/mutants/m0111_fsrs.c:100:43: error: use of undeclared identifier 'f'
+  100 |         out.difficulty = difficulty_first(f->w, g);
+      |                                           ^
+build/mutants/m0111_fsrs.c:100:49: error: use of undeclared identifier 'g'
+  100 |         out.difficulty = difficulty_first(f->w, g);
+      |                                                 ^
+build/mutants/m0111_fsrs.c:102:23: error: use of undeclared identifier 'today_day'
+  102 |         out.due_day = today_day;
+      |                       ^~~~~~~~~
+build/mutants/m0111_fsrs.c:105:9: error: use of undeclared identifier 'elapsed_days'
+  105 |     if (elapsed_days == 0 && card->last_review_day == today_day) {
+      |         ^~~~~~~~~~~~
+build/mutants/m0111_fsrs.c:105:30: error: use of undeclared identifier 'card'
+  105 |     if (elapsed_days == 0 && card->last_review_day == today_day) {
+      |                              ^~~~
+build/mutants/m0111_fsrs.c:105:55: error: use of undeclared identifier 'today_day'
+  105 |     if (elapsed_days == 0 && card->last_review_day == today_day) {
+      |                                                       ^~~~~~~~~
+build/mutants/m0111_fsrs.c:106:60: error: use of undeclared identifier 'f'
+  106 |         out.stability = clamp_stability(stability_same_day(f->w, card->stability, g));
+      |                                                            ^
+build/mutants/m0111_fsrs.c:106:66: error: use of undeclared identifier 'card'
+  106 |         out.stability = clamp_stability(stability_same_day(f->w, card->stability, g));
+      |                                                                  ^~~~
+build/mutants/m0111_fsrs.c:106:83: error: use of undeclared identifier 'g'
+  106 |         out.stability = clamp_stability(stability_same_day(f->w, card->stability, g));
+      |                                                                                   ^
+build/mutants/m0111_fsrs.c:107:23: error: use of undeclared identifier 'today_day'
+  107 |         out.due_day = today_day;
+      |                       ^~~~~~~~~
+build/mutants/m0111_fsrs.c:110:39: error: use of undeclared identifier 'card'
+  110 |     double r = ct_fsrs_retrievability(card->stability, elapsed_days);
+      |                                       ^~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build/mutants/m0112_fsrs.c:93:66: error: expected ')'
+   93 | ct_fsrs_card ct_fsrs_review(const ct_fsrs *f, const ct_fsrs_card /card, ct_grade g,
+      |                                                                  ^
+build/mutants/m0112_fsrs.c:93:28: note: to match this '('
+   93 | ct_fsrs_card ct_fsrs_review(const ct_fsrs *f, const ct_fsrs_card /card, ct_grade g,
+      |                            ^
+build/mutants/m0112_fsrs.c:93:14: error: conflicting types for 'ct_fsrs_review'
+   93 | ct_fsrs_card ct_fsrs_review(const ct_fsrs *f, const ct_fsrs_card /card, ct_grade g,
+      |              ^
+src\srs/fsrs.h:32:14: note: previous declaration is here
+   32 | ct_fsrs_card ct_fsrs_review(const ct_fsrs *f, const ct_fsrs_card *card, ct_grade g,
+      |              ^
+build/mutants/m0112_fsrs.c:95:25: error: use of undeclared identifier 'card'
+   95 |     ct_fsrs_card out = *card;
+      |                         ^~~~
+build/mutants/m0112_fsrs.c:96:16: error: use of undeclared identifier 'card'
+   96 |     out.reps = card->reps + 1;
+      |                ^~~~
+build/mutants/m0112_fsrs.c:97:27: error: use of undeclared identifier 'today_day'
+   97 |     out.last_review_day = today_day;
+      |                           ^~~~~~~~~
+build/mutants/m0112_fsrs.c:98:9: error: use of undeclared identifier 'card'
+   98 |     if (card->state == 0) {
+      |         ^~~~
+build/mutants/m0112_fsrs.c:99:51: error: use of undeclared identifier 'g'
+   99 |         out.stability = clamp_stability(f->w[(int)g - 1]);
+      |                                                   ^
+build/mutants/m0112_fsrs.c:100:49: error: use of undeclared identifier 'g'
+  100 |         out.difficulty = difficulty_first(f->w, g);
+      |                                                 ^
+build/mutants/m0112_fsrs.c:102:23: error: use of undeclared identifier 'today_day'
+  102 |         out.due_day = today_day;
+      |                       ^~~~~~~~~
+build/mutants/m0112_fsrs.c:105:9: error: use of undeclared identifier 'elapsed_days'
+  105 |     if (elapsed_days == 0 && card->last_review_day == today_day) {
+      |         ^~~~~~~~~~~~
+build/mutants/m0112_fsrs.c:105:30: error: use of undeclared identifier 'card'
+  105 |     if (elapsed_days == 0 && card->last_review_day == today_day) {
+      |                              ^~~~
+build/mutants/m0112_fsrs.c:105:55: error: use of undeclared identifier 'today_day'
+  105 |     if (elapsed_days == 0 && card->last_review_day == today_day) {
+      |                                                       ^~~~~~~~~
+build/mutants/m0112_fsrs.c:106:66: error: use of undeclared identifier 'card'
+  106 |         out.stability = clamp_stability(stability_same_day(f->w, card->stability, g));
+      |                                                                  ^~~~
+build/mutants/m0112_fsrs.c:106:83: error: use of undeclared identifier 'g'
+  106 |         out.stability = clamp_stability(stability_same_day(f->w, card->stability, g));
+      |                                                                                   ^
+build/mutants/m0112_fsrs.c:107:23: error: use of undeclared identifier 'today_day'
+  107 |         out.due_day = today_day;
+      |                       ^~~~~~~~~
+build/mutants/m0112_fsrs.c:110:39: error: use of undeclared identifier 'card'
+  110 |     double r = ct_fsrs_retrievability(card->stability, elapsed_days);
+      |                                       ^~~~
+build/mutants/m0112_fsrs.c:110:56: error: use of undeclared identifier 'elapsed_days'
+  110 |     double r = ct_fsrs_retrievability(card->stability, elapsed_days);
+      |                                                        ^~~~~~~~~~~~
+build/mutants/m0112_fsrs.c:111:44: error: use of undeclared identifier 'card'
+  111 |     out.difficulty = difficulty_next(f->w, card->difficulty, g);
+      |                                            ^~~~
+build/mutants/m0112_fsrs.c:111:62: error: use of undeclared identifier 'g'
+  111 |     out.difficulty = difficulty_next(f->w, card->difficulty, g);
+      |                                                              ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build/mutants/m0113_fsrs.c:95:24: error: expected expression
+   95 |     ct_fsrs_card out = /card;
+      |                        ^
+1 error generated.
+mutate: suite fsrs_golden_first_review exited 1
+mutate: suite fsrs_golden_first_review exited 1
+mutate: suite fsrs_golden_first_review exited -1073741795
+mutate: suite fsrs_golden_first_review exited -1073741795
+mutate: suite fsrs_golden_first_review exited -1073741795
+mutate: suite fsrs_golden_first_review exited 1
+mutate: suite fsrs_golden_first_review exited -1073741795
+mutate: suite fsrs_golden_first_review exited 1
+mutate: suite fsrs_golden_first_review exited 1
+mutate: suite fsrs_golden_first_review exited 1
+mutate: suite fsrs_golden_same_day exited 1
+mutate: suite fsrs_golden_same_day exited 1
+mutate: suite fsrs_golden_same_day exited 1
+mutate: suite fsrs_branch_selection exited 1
+mutate: suite fsrs_golden_same_day exited 1
+mutate: suite fsrs_golden_recall exited 1
+mutate: suite fsrs_golden_forget exited 1
+mutate: suite fsrs_golden_forget exited 1
+mutate: suite fsrs_golden_forget exited 1
+mutate: suite fsrs_golden_recall exited -1073741795
+mutate: suite fsrs_golden_recall exited 1
+mutate: 49 unexplained survivors
+ink break
+KILLED    m0079 src/srs/fsrs.c:62 [arith * -> /]
+          build break
+KILLED    m0080 src/srs/fsrs.c:63 [arith * -> /]
+          link break
+SURVIVED  m0081 src/srs/fsrs.c:63 [arith * -> /]
+KILLED    m0082 src/srs/fsrs.c:63 [arith - -> +]
+SURVIVED  m0083 src/srs/fsrs.c:63 [arith + -> -]
+KILLED    m0084 src/srs/fsrs.c:66 [arith * -> /]
+          build break
+KILLED    m0085 src/srs/fsrs.c:66 [arith * -> /]
+          build break
+KILLED    m0086 src/srs/fsrs.c:67 [int+1 0 -> 1]
+SURVIVED  m0087 src/srs/fsrs.c:67 [int-1 0 -> -1]
+KILLED    m0088 src/srs/fsrs.c:67 [cmp < -> <=]
+SURVIVED  m0089 src/srs/fsrs.c:75 [cmp < -> <=]
+SURVIVED  m0090 src/srs/fsrs.c:78 [int+1 1 -> 2]
+KILLED    m0091 src/srs/fsrs.c:78 [int-1 1 -> 0]
+SURVIVED  m0092 src/srs/fsrs.c:78 [arith + -> -]
+KILLED    m0093 src/srs/fsrs.c:78 [arith * -> /]
+SURVIVED  m0094 src/srs/fsrs.c:78 [arith / -> *]
+KILLED    m0095 src/srs/fsrs.c:81 [arith * -> /]
+          build break
+KILLED    m0096 src/srs/fsrs.c:82 [arith / -> *]
+SURVIVED  m0097 src/srs/fsrs.c:82 [arith * -> /]
+KILLED    m0098 src/srs/fsrs.c:83 [int+1 1 -> 2]
+          link break
+SURVIVED  m0099 src/srs/fsrs.c:83 [int-1 1 -> 0]
+KILLED    m0100 src/srs/fsrs.c:83 [arith / -> *]
+SURVIVED  m0101 src/srs/fsrs.c:83 [arith - -> +]
+KILLED    m0102 src/srs/fsrs.c:83 [int+1 1 -> 2]
+SURVIVED  m0103 src/srs/fsrs.c:83 [int-1 1 -> 0]
+SURVIVED  m0104 src/srs/fsrs.c:84 [cmp < -> <=]
+KILLED    m0105 src/srs/fsrs.c:84 [int+1 1 -> 2]
+SURVIVED  m0106 src/srs/fsrs.c:84 [int-1 1 -> 0]
+KILLED    m0107 src/srs/fsrs.c:85 [ret-lit 1 -> 0]
+SURVIVED  m0108 src/srs/fsrs.c:85 [int+1 1 -> 2]
+KILLED    m0109 src/srs/fsrs.c:85 [int-1 1 -> 0]
+SURVIVED  m0110 src/srs/fsrs.c:87 [cmp > -> >=]
+KILLED    m0111 src/srs/fsrs.c:93 [arith * -> /]
+          build break
+KILLED    m0112 src/srs/fsrs.c:93 [arith * -> /]
+          build break
+KILLED    m0113 src/srs/fsrs.c:95 [arith * -> /]
+          build break
+KILLED    m0114 src/srs/fsrs.c:96 [arith + -> -]
+SURVIVED  m0115 src/srs/fsrs.c:96 [int+1 1 -> 2]
+KILLED    m0116 src/srs/fsrs.c:96 [int-1 1 -> 0]
+KILLED    m0117 src/srs/fsrs.c:98 [cmp == -> !=]
+KILLED    m0118 src/srs/fsrs.c:98 [int+1 0 -> 1]
+KILLED    m0119 src/srs/fsrs.c:98 [int-1 0 -> -1]
+KILLED    m0120 src/srs/fsrs.c:99 [arith - -> +]
+KILLED    m0121 src/srs/fsrs.c:99 [int+1 1 -> 2]
+KILLED    m0122 src/srs/fsrs.c:99 [int-1 1 -> 0]
+KILLED    m0123 src/srs/fsrs.c:101 [int+1 1 -> 2]
+KILLED    m0124 src/srs/fsrs.c:101 [int-1 1 -> 0]
+KILLED    m0125 src/srs/fsrs.c:105 [cmp == -> !=]
+KILLED    m0126 src/srs/fsrs.c:105 [int+1 0 -> 1]
+KILLED    m0127 src/srs/fsrs.c:105 [int-1 0 -> -1]
+KILLED    m0128 src/srs/fsrs.c:105 [logic && -> ||]
+KILLED    m0129 src/srs/fsrs.c:105 [cmp == -> !=]
+KILLED    m0130 src/srs/fsrs.c:112 [cmp >= -> >]
+KILLED    m0131 src/srs/fsrs.c:118 [arith + -> -]
+KILLED    m0132 src/srs/fsrs.c:118 [int+1 1 -> 2]
+KILLED    m0133 src/srs/fsrs.c:118 [int-1 1 -> 0]
+SURVIVED  m0134 src/srs/fsrs.c:121 [cmp > -> >=]
+KILLED    m0135 src/srs/fsrs.c:121 [arith - -> +]
+KILLED    m0136 src/srs/fsrs.c:121 [arith + -> -]
+mutate: generated=136 build_failed=20 killed_by_tests=67 killed=87 survived=49 accepted=0 unexplained=49 skipped=0
+mutate: kill rate 87/136 = 64.0%, with accepted equivalents 87/136 = 64.0%
+mutate: wall 90.7s
+make: *** [makefile:181: mutate] Error 1

@@ -1,0 +1,2068 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build/bin/mutate.exe src/trainer/session.c build session_civil_reference session_year_zero_boundaries session_iso_add_days session_iso_add_days_domain session_day_numbers session_stamp_boundaries session_bad_stamp_digits session_queue_guards session_bad_last_review session_flow_golden session_bad_args session_new_card session_lapse session_same_day session_empty_deck session_limits session_card_missing session_absent_row session_stale_last_review session_free_safety review_screen_session_log review_form_begin review_form_end review_form_guards settings_merge_reaches_review
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+build/mutants/p17160/m0005_session.c:60:39: error: division by zero is undefined [-Werror,-Wdivision-by-zero]
+   60 |     long mp = (ct_civ_five * doy + 2) / ct_civ_arc;
+      |                                       ^ ~~~~~~~~~~
+1 error generated.
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_year_zero_boundaries exited 1
+mutate: suite session_year_zero_boundaries exited 1
+mutate: suite session_year_zero_boundaries exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_year_zero_boundaries exited 1
+mutate: suite session_year_zero_boundaries exited 1
+mutate: suite session_year_zero_boundaries exited 1
+build/mutants/p17160/m0033_session.c:57:20: error: division by zero is undefined [-Werror,-Wdivision-by-zero]
+   57 |         (doe - doe / ct_civ_quad_days + doe / ct_civ_century_days - doe / ct_civ_era_days_m1) /
+      |                    ^ ~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: scope=src/trainer/session.c files=1 sites=407 suites=25
+KILLED    m0001 src/trainer/session.c:14 [int+1 3 -> 4]
+KILLED    m0002 src/trainer/session.c:14 [int-1 3 -> 2]
+KILLED    m0003 src/trainer/session.c:15 [int+1 9 -> 10]
+KILLED    m0004 src/trainer/session.c:15 [int-1 9 -> 8]
+KILLED    m0005 src/trainer/session.c:16 [arith * -> /]
+          build break
+KILLED    m0006 src/trainer/session.c:16 [arith + -> -]
+KILLED    m0007 src/trainer/session.c:16 [int+1 8 -> 9]
+KILLED    m0008 src/trainer/session.c:16 [int-1 8 -> 7]
+KILLED    m0009 src/trainer/session.c:17 [int+1 5 -> 6]
+KILLED    m0010 src/trainer/session.c:17 [int-1 5 -> 4]
+KILLED    m0011 src/trainer/session.c:18 [arith * -> /]
+KILLED    m0012 src/trainer/session.c:18 [int+1 2 -> 3]
+KILLED    m0013 src/trainer/session.c:18 [int-1 2 -> 1]
+KILLED    m0014 src/trainer/session.c:19 [int+1 4 -> 5]
+KILLED    m0015 src/trainer/session.c:19 [int-1 4 -> 3]
+KILLED    m0016 src/trainer/session.c:20 [arith * -> /]
+KILLED    m0017 src/trainer/session.c:21 [arith * -> /]
+KILLED    m0018 src/trainer/session.c:22 [arith - -> +]
+KILLED    m0019 src/trainer/session.c:22 [int+1 1 -> 2]
+KILLED    m0020 src/trainer/session.c:22 [int-1 1 -> 0]
+KILLED    m0021 src/trainer/session.c:23 [arith * -> /]
+KILLED    m0022 src/trainer/session.c:23 [arith + -> -]
+KILLED    m0023 src/trainer/session.c:23 [arith * -> /]
+KILLED    m0024 src/trainer/session.c:23 [int+1 6 -> 7]
+KILLED    m0025 src/trainer/session.c:23 [int-1 6 -> 5]
+KILLED    m0026 src/trainer/session.c:23 [arith + -> -]
+KILLED    m0027 src/trainer/session.c:24 [arith - -> +]
+KILLED    m0028 src/trainer/session.c:25 [arith * -> /]
+KILLED    m0029 src/trainer/session.c:25 [arith + -> -]
+KILLED    m0030 src/trainer/session.c:26 [arith - -> +]
+KILLED    m0031 src/trainer/session.c:26 [int+1 1 -> 2]
+KILLED    m0032 src/trainer/session.c:26 [int-1 1 -> 0]
+KILLED    m0033 src/trainer/session.c:27 [arith * -> /]
+          build break
+KILLED    m0034 src/trainer/session.c:28 [arith * -> /]
+SURVIVED  m0035 src/trainer/session.c:28 [arith + -> -]
+SURVIVED  m0036 src/trainer/session.c:28 [arith * -> /]
+KILLED    m0037 src/trainer/session.c:28 [int+1 2 -> 3]
+SURVIVED  m0038 src/trainer/session.c:28 [int-1 2 -> 1]
+SURVIVED  m0039 src/trainer/session.c:28 [arith + -> -]
+KILLED    m0040 src/trainer/session.c:29 [int+1 2 -> 3]
+KILLED    m0041 src/trainer/session.c:29 [int-1 2 -> 1]
+KILLED    m0042 src/trainer/session.c:29 [arith * -> /]
+KILLED    m0043 src/trainer/session.c:29 [arith * -> /]
+KILLED    m0044 src/trainer/session.c:29 [arith * -> /]
+KILLED    m0045 src/trainer/session.c:29 [arith - -> +]
+KILLED    m0046 src/trainer/session.c:29 [arith * -> /]
+KILLED    m0047 src/trainer/session.c:30 [int+1 4 -> 5]
+KILLED    m0048 src/trainer/session.c:30 [int-1 4 -> 3]
+KILLED    m0049 src/trainer/session.c:31 [arith + -> -]
+KILLED    m0050 src/trainer/session.c:31 [int+1 1 -> 2]
+KILLED    m0051 src/trainer/session.c:31 [int-1 1 -> 0]
+KILLED    m0052 src/trainer/session.c:32 [arith + -> -]
+KILLED    m0053 src/trainer/session.c:32 [arith + -> -]
+KILLED    m0054 src/trainer/session.c:32 [int+1 1 -> 2]
+KILLED    m0055 src/trainer/session.c:32 [int-1 1 -> 0]
+KILLED    m0056 src/trainer/session.c:34 [int+1 1 -> 2]
+KILLED    m0057 src/trainer/session.c:34 [int-1 1 -> 0]
+KILLED    m0058 src/trainer/session.c:35 [arith * -> /]
+KILLED    m0059 src/trainer/session.c:35 [arith * -> /]
+KILLED    m0060 src/trainer/session.c:35 [arith * -> /]
+KILLED    m0061 src/trainer/session.c:35 [arith - -> +]
+KILLED    m0062 src/trainer/session.c:35 [int+1 1 -> 2]
+KILLED    m0063 src/trainer/session.c:35 [int-1 1 -> 0]
+KILLED    m0064 src/trainer/session.c:36 [int+1 1 -> 2]
+KILLED    m0065 src/trainer/session.c:36 [int-1 1 -> 0]
+KILLED    m0066 src/trainer/session.c:37 [arith + -> -]
+KILLED    m0067 src/trainer/session.c:37 [int+1 2 -> 3]
+KILLED    m0068 src/trainer/session.c:37 [int-1 2 -> 1]
+KILLED    m0069 src/trainer/session.c:38 [int+1 1 -> 2]
+KILLED    m0070 src/trainer/session.c:38 [int-1 1 -> 0]
+KILLED    m0071 src/trainer/session.c:39 [arith * -> /]
+KILLED    mmutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_year_zero_boundaries exited 1
+mutate: suite session_year_zero_boundaries exited 1
+mutate: suite session_civil_reference exited -1073741795
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+build/mutants/p17160/m0109_session.c:53:39: error: expected ')'
+   53 | static void ct_civil_raw(long z, long /y, int *m, int *d) {
+      |                                       ^
+build/mutants/p17160/m0109_session.c:53:25: note: to match this '('
+   53 | static void ct_civil_raw(long z, long /y, int *m, int *d) {
+      |                         ^
+build/mutants/p17160/m0109_session.c:62:6: error: use of undeclared identifier 'm'
+   62 |     *m = mm;
+      |      ^
+build/mutants/p17160/m0109_session.c:63:6: error: use of undeclared identifier 'd'
+   63 |     *d = (int)(doy - (ct_civ_arc * mp + 2) / ct_civ_five + 1);
+      |      ^
+build/mutants/p17160/m0109_session.c:64:6: error: use of undeclared identifier 'y'
+   64 |     *y = yoe + era * ct_civ_era_years + (mm <= 2);
+      |      ^
+build/mutants/p17160/m0109_session.c:72:65: error: too many arguments to function call, expected 2, have 4
+   72 |     ct_civil_raw(day + ct_days_raw(ct_civ_epoch_year, 1, 1), y, m, d);
+      |     ~~~~~~~~~~~~                                                ^~~~
+build/mutants/p17160/m0109_session.c:53:13: note: 'ct_civil_raw' declared here
+   53 | static void ct_civil_raw(long z, long /y, int *m, int *d) {
+      |             ^            ~~~~~~~~~~~~
+5 errors generated.
+build/mutants/p17160/m0110_session.c:53:47: error: expected ')'
+   53 | static void ct_civil_raw(long z, long *y, int /m, int *d) {
+      |                                               ^
+build/mutants/p17160/m0110_session.c:53:25: note: to match this '('
+   53 | static void ct_civil_raw(long z, long *y, int /m, int *d) {
+      |                         ^
+build/mutants/p17160/m0110_session.c:62:6: error: use of undeclared identifier 'm'
+   62 |     *m = mm;
+      |      ^
+build/mutants/p17160/m0110_session.c:63:6: error: use of undeclared identifier 'd'
+   63 |     *d = (int)(doy - (ct_civ_arc * mp + 2) / ct_civ_five + 1);
+      |      ^
+build/mutants/p17160/m0110_session.c:72:68: error: too many arguments to function call, expected 3, have 4
+   72 |     ct_civil_raw(day + ct_days_raw(ct_civ_epoch_year, 1, 1), y, m, d);
+      |     ~~~~~~~~~~~~                                                   ^
+build/mutants/p17160/m0110_session.c:53:13: note: 'ct_civil_raw' declared here
+   53 | static void ct_civil_raw(long z, long *y, int /m, int *d) {
+      |             ^            ~~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+build/mutants/p17160/m0111_session.c:53:55: error: expected ')'
+   53 | static void ct_civil_raw(long z, long *y, int *m, int /d) {
+      |                                                       ^
+build/mutants/p17160/m0111_session.c:53:25: note: to match this '('
+   53 | static void ct_civil_raw(long z, long *y, int *m, int /d) {
+      |                         ^
+build/mutants/p17160/m0111_session.c:63:6: error: use of undeclared identifier 'd'
+   63 |     *d = (int)(doy - (ct_civ_arc * mp + 2) / ct_civ_five + 1);
+      |      ^
+build/mutants/p17160/m0111_session.c:72:68: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; dereference with * [-Wint-conversion]
+   72 |     ct_civil_raw(day + ct_days_raw(ct_civ_epoch_year, 1, 1), y, m, d);
+      |                                                                    ^
+      |                                                                    *
+build/mutants/p17160/m0111_session.c:53:55: note: passing argument to parameter here
+   53 | static void ct_civil_raw(long z, long *y, int *m, int /d) {
+      |                                                       ^
+3 errors generated.
+mutate: suite session_year_zero_boundaries exited 1
+mutate: suite session_year_zero_boundaries exited 1
+mutate: suite session_civil_reference exited -1073741795
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_year_zero_boundaries exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_day_numbers exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+build/mutants/p17160/m0140_session.c:62:5: error: expected expression
+   62 |     /m = mm;
+      |     ^
+1 error generated.
+build/mutants/p17160/m0141_session.c:63:5: error: expected expression
+   63 |     /d = (int)(doy - (ct_civ_arc * mp + 2) / ct_civ_five + 1);
+      |     ^
+1 error generated.
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+0072 src/trainer/session.c:39 [int+1 3 -> 4]
+KILLED    m0073 src/trainer/session.c:39 [int-1 3 -> 2]
+KILLED    m0074 src/trainer/session.c:39 [arith + -> -]
+KILLED    m0075 src/trainer/session.c:39 [int+1 1 -> 2]
+KILLED    m0076 src/trainer/session.c:39 [int-1 1 -> 0]
+KILLED    m0077 src/trainer/session.c:44 [cmp <= -> <]
+KILLED    m0078 src/trainer/session.c:44 [int+1 2 -> 3]
+KILLED    m0079 src/trainer/session.c:44 [int-1 2 -> 1]
+SURVIVED  m0080 src/trainer/session.c:45 [cmp >= -> >]
+SURVIVED  m0081 src/trainer/session.c:45 [int+1 0 -> 1]
+KILLED    m0082 src/trainer/session.c:45 [int-1 0 -> -1]
+KILLED    m0083 src/trainer/session.c:45 [arith - -> +]
+KILLED    m0084 src/trainer/session.c:45 [arith / -> *]
+KILLED    m0085 src/trainer/session.c:46 [arith - -> +]
+KILLED    m0086 src/trainer/session.c:46 [arith * -> /]
+KILLED    m0087 src/trainer/session.c:47 [cmp > -> >=]
+KILLED    m0088 src/trainer/session.c:47 [int+1 2 -> 3]
+KILLED    m0089 src/trainer/session.c:47 [int-1 2 -> 1]
+KILLED    m0090 src/trainer/session.c:47 [arith - -> +]
+KILLED    m0091 src/trainer/session.c:47 [arith + -> -]
+KILLED    m0092 src/trainer/session.c:48 [arith * -> /]
+KILLED    m0093 src/trainer/session.c:48 [arith + -> -]
+KILLED    m0094 src/trainer/session.c:48 [int+1 2 -> 3]
+KILLED    m0095 src/trainer/session.c:48 [int-1 2 -> 1]
+KILLED    m0096 src/trainer/session.c:48 [arith / -> *]
+KILLED    m0097 src/trainer/session.c:48 [arith + -> -]
+KILLED    m0098 src/trainer/session.c:48 [arith - -> +]
+KILLED    m0099 src/trainer/session.c:48 [int+1 1 -> 2]
+KILLED    m0100 src/trainer/session.c:48 [int-1 1 -> 0]
+KILLED    m0101 src/trainer/session.c:49 [arith * -> /]
+KILLED    m0102 src/trainer/session.c:49 [arith + -> -]
+KILLED    m0103 src/trainer/session.c:49 [arith / -> *]
+KILLED    m0104 src/trainer/session.c:49 [arith - -> +]
+KILLED    m0105 src/trainer/session.c:49 [arith / -> *]
+KILLED    m0106 src/trainer/session.c:49 [arith + -> -]
+KILLED    m0107 src/trainer/session.c:50 [arith * -> /]
+KILLED    m0108 src/trainer/session.c:50 [arith + -> -]
+KILLED    m0109 src/trainer/session.c:53 [arith * -> /]
+          build break
+KILLED    m0110 src/trainer/session.c:53 [arith * -> /]
+          build break
+KILLED    m0111 src/trainer/session.c:53 [arith * -> /]
+          build break
+SURVIVED  m0112 src/trainer/session.c:54 [cmp >= -> >]
+SURVIVED  m0113 src/trainer/session.c:54 [int+1 0 -> 1]
+KILLED    m0114 src/trainer/session.c:54 [int-1 0 -> -1]
+KILLED    m0115 src/trainer/session.c:54 [arith - -> +]
+KILLED    m0116 src/trainer/session.c:54 [arith / -> *]
+KILLED    m0117 src/trainer/session.c:55 [arith - -> +]
+KILLED    m0118 src/trainer/session.c:55 [arith * -> /]
+KILLED    m0119 src/trainer/session.c:57 [arith - -> +]
+KILLED    m0120 src/trainer/session.c:57 [arith / -> *]
+KILLED    m0121 src/trainer/session.c:57 [arith + -> -]
+KILLED    m0122 src/trainer/session.c:57 [arith / -> *]
+KILLED    m0123 src/trainer/session.c:57 [arith - -> +]
+KILLED    m0124 src/trainer/session.c:57 [arith / -> *]
+KILLED    m0125 src/trainer/session.c:57 [arith / -> *]
+KILLED    m0126 src/trainer/session.c:59 [arith - -> +]
+KILLED    m0127 src/trainer/session.c:59 [arith * -> /]
+KILLED    m0128 src/trainer/session.c:59 [arith + -> -]
+KILLED    m0129 src/trainer/session.c:59 [arith / -> *]
+KILLED    m0130 src/trainer/session.c:59 [arith - -> +]
+KILLED    m0131 src/trainer/session.c:59 [arith / -> *]
+KILLED    m0132 src/trainer/session.c:60 [arith * -> /]
+KILLED    m0133 src/trainer/session.c:60 [arith + -> -]
+KILLED    m0134 src/trainer/session.c:60 [int+1 2 -> 3]
+KILLED    m0135 src/trainer/session.c:60 [int-1 2 -> 1]
+KILLED    m0136 src/trainer/session.c:60 [arith / -> *]
+KILLED    m0137 src/trainer/session.c:61 [cmp < -> <=]
+KILLED    m0138 src/trainer/session.c:61 [arith + -> -]
+KILLED    m0139 src/trainer/session.c:61 [arith - -> +]
+KILLED    m0140 src/trainer/session.c:62 [arith * -> /]
+          build break
+KILLED    m0141 src/trainer/session.c:63 [arith * -> /]
+          build break
+KILLED    m0142 src/trainer/session.c:63 [arith - -> +]
+KILLED    m0143 src/traimutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+build/mutants/p17160/m0151_session.c:64:5: error: expected expression
+   64 |     /y = yoe + era * ct_civ_era_years + (mm <= 2);
+      |     ^
+1 error generated.
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+build/mutants/p17160/m0163_session.c:71:44: error: expected ')'
+   71 | void ct_session_day_to_date(long day, long /y, int *m, int *d) {
+      |                                            ^
+build/mutants/p17160/m0163_session.c:71:28: note: to match this '('
+   71 | void ct_session_day_to_date(long day, long /y, int *m, int *d) {
+      |                            ^
+build/mutants/p17160/m0163_session.c:71:6: error: conflicting types for 'ct_session_day_to_date'
+   71 | void ct_session_day_to_date(long day, long /y, int *m, int *d) {
+      |      ^
+src\trainer/session.h:48:6: note: previous declaration is here
+   48 | void ct_session_day_to_date(long day, long *y, int *m, int *d);
+      |      ^
+build/mutants/p17160/m0163_session.c:72:62: error: use of undeclared identifier 'y'
+   72 |     ct_civil_raw(day + ct_days_raw(ct_civ_epoch_year, 1, 1), y, m, d);
+      |                                                              ^
+build/mutants/p17160/m0163_session.c:72:65: error: use of undeclared identifier 'm'
+   72 |     ct_civil_raw(day + ct_days_raw(ct_civ_epoch_year, 1, 1), y, m, d);
+      |                                                                 ^
+build/mutants/p17160/m0163_session.c:72:68: error: use of undeclared identifier 'd'
+   72 |     ct_civil_raw(day + ct_days_raw(ct_civ_epoch_year, 1, 1), y, m, d);
+      |                                                                    ^
+5 errors generated.
+build/mutants/p17160/m0164_session.c:71:52: error: expected ')'
+   71 | void ct_session_day_to_date(long day, long *y, int /m, int *d) {
+      |                                                    ^
+build/mutants/p17160/m0164_session.c:71:28: note: to match this '('
+   71 | void ct_session_day_to_date(long day, long *y, int /m, int *d) {
+      |                            ^
+build/mutants/p17160/m0164_session.c:71:6: error: conflicting types for 'ct_session_day_to_date'
+   71 | void ct_session_day_to_date(long day, long *y, int /m, int *d) {
+      |      ^
+src\trainer/session.h:48:6: note: previous declaration is here
+   48 | void ct_session_day_to_date(long day, long *y, int *m, int *d);
+      |      ^
+build/mutants/p17160/m0164_session.c:72:65: error: use of undeclared identifier 'm'
+   72 |     ct_civil_raw(day + ct_days_raw(ct_civ_epoch_year, 1, 1), y, m, d);
+      |                                                                 ^
+build/mutants/p17160/m0164_session.c:72:68: error: use of undeclared identifier 'd'
+   72 |     ct_civil_raw(day + ct_days_raw(ct_civ_epoch_year, 1, 1), y, m, d);
+      |                                                                    ^
+4 errors generated.
+build/mutants/p17160/m0165_session.c:71:60: error: expected ')'
+   71 | void ct_session_day_to_date(long day, long *y, int *m, int /d) {
+      |                                                            ^
+build/mutants/p17160/m0165_session.c:71:28: note: to match this '('
+   71 | void ct_session_day_to_date(long day, long *y, int *m, int /d) {
+      |                            ^
+build/mutants/p17160/m0165_session.c:71:6: error: conflicting types for 'ct_session_day_to_date'
+   71 | void ct_session_day_to_date(long day, long *y, int *m, int /d) {
+      |      ^
+src\trainer/session.h:48:6: note: previous declaration is here
+   48 | void ct_session_day_to_date(long day, long *y, int *m, int *d);
+      |      ^
+build/mutants/p17160/m0165_session.c:72:68: error: use of undeclared identifier 'd'
+   72 |     ct_civil_raw(day + ct_days_raw(ct_civ_epoch_year, 1, 1), y, m, d);
+      |                                                                    ^
+3 errors generated.
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+mutate: suite session_civil_reference exited 1
+build/mutants/p17160/m0171_session.c:75:36: error: expected ')'
+   75 | static int ct_iso_digit(const char /s, int at) {
+      |                                    ^
+build/mutants/p17160/m0171_session.c:75:24: note: to match this '('
+   75 | static int ct_iso_digit(const char /s, int at) {
+      |                        ^
+build/mutants/p17160/m0171_session.c:76:14: error: use of undeclared identifier 's'
+   76 |     char c = s[at];
+      |              ^
+build/mutants/p17160/m0171_session.c:76:16: error: use of undeclared identifier 'at'
+   76 |     char c = s[at];
+      |                ^~
+build/mutants/p17160/m0171_session.c:87:35: error: too many arguments to function call, expected 1, have 2
+   87 |         int v = ct_iso_digit(iso, i);
+      |                 ~~~~~~~~~~~~      ^
+build/mutants/p17160/m0171_session.c:75:12: note: 'ct_iso_digit' declared here
+   75 | static int ct_iso_digit(const char /s, int at) {
+      |            ^            ~~~~~~~~~~
+build/mutants/p17160/m0171_session.c:96:32: error: too many arguments to function call, expected 1, have 2
+   96 |     int m1 = ct_iso_digit(iso, ct_iso_month_at);
+      |              ~~~~~~~~~~~~      ^~~~~~~~~~~~~~~
+build/mutants/p17160/m0171_session.c:75:12: note: 'ct_iso_digit' declared here
+   75 | static int ct_iso_digit(const char /s, int at) {
+      |            ^            ~~~~~~~~~~
+build/mutants/p17160/m0171_session.c:97:32: error: too many arguments to function call, expected 1, have 2
+   97 |     int m2 = ct_iso_digit(iso, ct_iso_month_at + 1);
+      |              ~~~~~~~~~~~~      ^~~~~~~~~~~~~~~~~~~
+build/mutants/p17160/m0171_session.c:75:12: note: 'ct_iso_digit' declared here
+   75 | static int ct_iso_digit(const char /s, int at) {
+      |            ^            ~~~~~~~~~~
+build/mutants/p17160/m0171_session.c:98:32: error: too many arguments to function call, expected 1, have 2
+   98 |     int d1 = ct_iso_digit(iso, ct_iso_day_at);
+      |              ~~~~~~~~~~~~      ^~~~~~~~~~~~~
+build/mutants/p17160/m0171_session.c:75:12: note: 'ct_iso_digit' declared here
+   75 | static int ct_iso_digit(const char /s, int at) {
+      |            ^            ~~~~~~~~~~
+build/mutants/p17160/m0171_session.c:99:32: error: too many arguments to function call, expected 1, have 2
+   99 |     int d2 = ct_iso_digit(iso, ct_iso_day_at + 1);
+      |              ~~~~~~~~~~~~      ^~~~~~~~~~~~~~~~~
+build/mutants/p17160/m0171_session.c:75:12: note: 'ct_iso_digit' declared here
+   75 | static int ct_iso_digit(const char /s, int at) {
+      |            ^            ~~~~~~~~~~
+8 errors generated.
+mutate: suite session_iso_add_days exited 1
+build/mutants/p17160/m0173_session.c:77:17: error: non-overlapping comparisons always evaluate to false [-Werror,-Wtautological-overlap-compare]
+   77 |     if (c < '0' && c > '9')
+      |         ~~~~~~~~^~~~~~~~~~
+1 error generated.
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+build/mutants/p17160/m0179_session.c:82:35: error: expected ')'
+   82 | static int ct_iso_scan(const char /iso, long *y, int *m, int *d) {
+      |                                   ^
+build/mutants/p17160/m0179_session.c:82:23: note: to match this '('
+   82 | static int ct_iso_scan(const char /iso, long *y, int *m, int *d) {
+      |                       ^
+build/mutants/p17160/m0179_session.c:83:9: error: use of undeclared identifier 'iso'
+   83 |     if (iso == NULL)
+      |         ^~~
+build/mutants/p17160/m0179_session.c:87:30: error: use of undeclared identifier 'iso'
+   87 |         int v = ct_iso_digit(iso, i);
+      |                              ^~~
+build/mutants/p17160/m0179_session.c:92:9: error: use of undeclared identifier 'iso'
+   92 |     if (iso[ct_iso_year_digits] != '-')
+      |         ^~~
+build/mutants/p17160/m0179_session.c:94:9: error: use of undeclared identifier 'iso'
+   94 |     if (iso[ct_iso_day_at - 1] != '-')
+      |         ^~~
+build/mutants/p17160/m0179_session.c:96:27: error: use of undeclared identifier 'iso'
+   96 |     int m1 = ct_iso_digit(iso, ct_iso_month_at);
+      |                           ^~~
+build/mutants/p17160/m0179_session.c:97:27: error: use of undeclared identifier 'iso'
+   97 |     int m2 = ct_iso_digit(iso, ct_iso_month_at + 1);
+      |                           ^~~
+build/mutants/p17160/m0179_session.c:98:27: error: use of undeclared identifier 'iso'
+   98 |     int d1 = ct_iso_digit(iso, ct_iso_day_at);
+      |                           ^~~
+build/mutants/p17160/m0179_session.c:99:27: error: use of undeclared identifier 'iso'
+   99 |     int d2 = ct_iso_digit(iso, ct_iso_day_at + 1);
+      |                           ^~~
+build/mutants/p17160/m0179_session.c:109:9: error: use of undeclared identifier 'iso'
+  109 |     if (iso[ct_iso_date_len] != '\0' && iso[ct_iso_date_len] != 'T')
+      |         ^~~
+build/mutants/p17160/m0179_session.c:109:41: error: use of undeclared identifier 'iso'
+  109 |     if (iso[ct_iso_date_len] != '\0' && iso[ct_iso_date_len] != 'T')
+      |                                         ^~~
+build/mutants/p17160/m0179_session.c:111:6: error: use of undeclared identifier 'y'
+  111 |     *y = yy;
+      |      ^
+build/mutants/p17160/m0179_session.c:112:6: error: use of undeclared identifier 'm'
+  112 |     *m = mm;
+      |      ^
+build/mutants/p17160/m0179_session.c:113:6: error: use of undeclared identifier 'd'
+  113 |     *d = dd;
+      |      ^
+build/mutants/p17160/m0179_session.c:120:31: error: too many arguments to function call, expected 1, have 4
+  120 |     int rc = ct_iso_scan(iso, &y, &m, &d);
+      |              ~~~~~~~~~~~      ^~~~~~~~~~
+build/mutants/p17160/m0179_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char /iso, long *y, int *m, int *d) {
+      |            ^           ~~~~~~~~~~
+build/mutants/p17160/m0179_session.c:174:30: error: too many arguments to function call, expected 1, have 4
+  174 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |         ~~~~~~~~~~~          ^~~~~~~~~~
+build/mutants/p17160/m0179_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char /iso, long *y, int *m, int *d) {
+      |            ^           ~~~~~~~~~~
+build/mutants/p17160/m0179_session.c:227:30: error: too many arguments to function call, expected 1, have 4
+  227 |     if (ct_iso_scan(now_iso, &vy, &vm, &vd) != CT_SESSION_OK)
+      |         ~~~~~~~~~~~          ^~~~~~~~~~~~~
+build/mutants/p17160/m0179_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char /iso, long *y, int *m, int *d) {
+      |            ^           ~~~~~~~~~~
+build/mutants/p17160/m0179_session.c:257:46: error: too many arguments to function call, expected 1, have 4
+  257 |             if (ct_iso_scan(row.last_review, &ly, &lm, &ld) != CT_SESSION_OK) {
+      |                 ~~~~~~~~~~~                  ^~~~~~~~~~~~~
+build/mutants/p17160/m0179_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char /iso, long *y, int *m, int *d) {
+      |            ^           ~~~~~~~~~~
+build/mutants/p17160/m0179_session.c:318:30: error: too many arguments to function call, expected 1, have 4
+  318 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |         ~~~~~~~~~~~          ^~~~~~~~~~
+build/mutants/p17160/m0179_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char /iso, long *y, int *m, int *d) {
+      |            ^           ~~~~~~~~~~
+19 errors generated.
+build/mutants/p17160/m0180_session.c:82:46: error: expected ')'
+   82 | static int ct_iso_scan(const char *iso, long /y, int *m, int *d) {
+      |                                              ^
+build/mutants/p17160/m0180_session.c:82:23: note: to match this '('
+   82 | static int ct_iso_scan(const char *iso, long /y, int *m, int *d) {
+      |                       ^
+build/mutants/p17160/m0180_session.c:111:6: error: use of undeclared identifier 'y'
+  111 |     *y = yy;
+      |      ^
+build/mutants/p17160/m0180_session.c:112:6: error: use of undeclared identifier 'm'
+  112 |     *m = mm;
+      |      ^
+build/mutants/p17160/m0180_session.c:113:6: error: use of undeclared identifier 'd'
+  113 |     *d = dd;
+      |      ^
+build/mutants/p17160/m0180_session.c:120:35: error: too many arguments to function call, expected 2, have 4
+  120 |     int rc = ct_iso_scan(iso, &y, &m, &d);
+      |              ~~~~~~~~~~~          ^~~~~~
+build/mutants/p17160/m0180_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char *iso, long /y, int *m, int *d) {
+      |            ^           ~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p17160/m0180_session.c:174:34: error: too many arguments to function call, expected 2, have 4
+  174 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |         ~~~~~~~~~~~              ^~~~~~
+build/mutants/p17160/m0180_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char *iso, long /y, int *m, int *d) {
+      |            ^           ~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p17160/m0180_session.c:227:35: error: too many arguments to function call, expected 2, have 4
+  227 |     if (ct_iso_scan(now_iso, &vy, &vm, &vd) != CT_SESSION_OK)
+      |         ~~~~~~~~~~~               ^~~~~~~~
+build/mutants/p17160/m0180_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char *iso, long /y, int *m, int *d) {
+      |            ^           ~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p17160/m0180_session.c:257:51: error: too many arguments to function call, expected 2, have 4
+  257 |             if (ct_iso_scan(row.last_review, &ly, &lm, &ld) != CT_SESSION_OK) {
+      |                 ~~~~~~~~~~~                       ^~~~~~~~
+build/mutants/p17160/m0180_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char *iso, long /y, int *m, int *d) {
+      |            ^           ~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p17160/m0180_session.c:318:34: error: too many arguments to function call, expected 2, have 4
+  318 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |         ~~~~~~~~~~~              ^~~~~~
+build/mutants/p17160/m0180_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char *iso, long /y, int *m, int *d) {
+      |            ^           ~~~~~~~~~~~~~~~~~~~~~
+9 errors generated.
+build/mutants/p17160/m0181_session.c:82:54: error: expected ')'
+   82 | static int ct_iso_scan(const char *iso, long *y, int /m, int *d) {
+      |                                                      ^
+build/mutants/p17160/m0181_session.c:82:23: note: to match this '('
+   82 | static int ct_iso_scan(const char *iso, long *y, int /m, int *d) {
+      |                       ^
+build/mutants/p17160/m0181_session.c:112:6: error: use of undeclared identifier 'm'
+  112 |     *m = mm;
+      |      ^
+build/mutants/p17160/m0181_session.c:113:6: error: use of undeclared identifier 'd'
+  113 |     *d = dd;
+      |      ^
+build/mutants/p17160/m0181_session.c:120:39: error: too many arguments to function call, expected 3, have 4
+  120 |     int rc = ct_iso_scan(iso, &y, &m, &d);
+      |              ~~~~~~~~~~~              ^~
+build/mutants/p17160/m0181_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char *iso, long *y, int /m, int *d) {
+      |            ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p17160/m0181_session.c:174:38: error: too many arguments to function call, expected 3, have 4
+  174 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |         ~~~~~~~~~~~                  ^~
+build/mutants/p17160/m0181_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char *iso, long *y, int /m, int *d) {
+      |            ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p17160/m0181_session.c:227:40: error: too many arguments to function call, expected 3, have 4
+  227 |     if (ct_iso_scan(now_iso, &vy, &vm, &vd) != CT_SESSION_OK)
+      |         ~~~~~~~~~~~                    ^~~
+build/mutants/p17160/m0181_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char *iso, long *y, int /m, int *d) {
+      |            ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p17160/m0181_session.c:257:56: error: too many arguments to function call, expected 3, have 4
+  257 |             if (ct_iso_scan(row.last_review, &ly, &lm, &ld) != CT_SESSION_OK) {
+      |                 ~~~~~~~~~~~                            ^~~
+build/mutants/p17160/m0181_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char *iso, long *y, int /m, int *d) {
+      |            ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p17160/m0181_session.c:318:38: error: too many arguments to function call, expected 3, have 4
+  318 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |         ~~~~~~~~~~~                  ^~
+build/mutants/p17160/m0181_session.c:82:12: note: 'ct_iso_scan' declared here
+   82 | static int ct_iso_scan(const char *iso, long *y, int /m, int *d) {
+      |            ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+8 errors generated.
+build/mutants/p17160/m0182_session.c:82:62: error: expected ')'
+   82 | static int ct_iso_scan(const char *iso, long *y, int *m, int /d) {
+      |                                                              ^
+build/mutants/p17160/m0182_session.c:82:23: note: to match this '('
+   82 | static int ct_iso_scan(const char *iso, long *y, int *m, int /d) {
+      |                       ^
+build/mutants/p17160/m0182_session.c:113:6: error: use of undeclared identifier 'd'
+  113 |     *d = dd;
+      |      ^
+build/mutants/p17160/m0182_session.c:120:39: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  120 |     int rc = ct_iso_scan(iso, &y, &m, &d);
+      |                                       ^~
+build/mutants/p17160/m0182_session.c:82:62: note: passing argument to parameter here
+   82 | static int ct_iso_scan(const char *iso, long *y, int *m, int /d) {
+      |                                                              ^
+build/mutants/p17160/m0182_session.c:174:38: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  174 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |                                      ^~
+build/mutants/p17160/m0182_session.c:82:62: note: passing argument to parameter here
+   82 | static int ct_iso_scan(const char *iso, long *y, int *m, int /d) {
+      |                                                              ^
+build/mutants/p17160/m0182_session.c:227:40: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  227 |     if (ct_iso_scan(now_iso, &vy, &vm, &vd) != CT_SESSION_OK)
+      |                                        ^~~
+build/mutants/p17160/m0182_session.c:82:62: note: passing argument to parameter here
+   82 | static int ct_iso_scan(const char *iso, long *y, int *m, int /d) {
+      |                                                              ^
+build/mutants/p17160/m0182_session.c:257:56: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  257 |             if (ct_iso_scan(row.last_review, &ly, &lm, &ld) != CT_SESSION_OK) {
+      |                                                        ^~~
+build/mutants/p17160/m0182_session.c:82:62: note: passing argument to parameter here
+   82 | static int ct_iso_scan(const char *iso, long *y, int *m, int /d) {
+      |                                                              ^
+build/mutants/p17160/m0182_session.c:318:38: error: incompatible pointer to integer conversion passing 'int *' to parameter of type 'int'; remove & [-Wint-conversion]
+  318 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |                                      ^~
+build/mutants/p17160/m0182_session.c:82:62: note: passing argument to parameter here
+   82 | static int ct_iso_scan(const char *iso, long *y, int *m, int /d) {
+      |                                                              ^
+7 errors generated.
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+build/mutants/p17160/m0208_session.c:100:16: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  100 |     if (m1 < 0 && m2 < 0 || d1 < 0 || d2 < 0)
+      |         ~~~~~~~^~~~~~~~~ ~~
+build/mutants/p17160/m0208_session.c:100:16: note: place parentheses around the '&&' expression to silence this warning
+  100 |     if (m1 < 0 && m2 < 0 || d1 < 0 || d2 < 0)
+      |                ^
+      |         (               )
+1 error generated.
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+build/mutants/p17160/m0212_session.c:100:26: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  100 |     if (m1 < 0 || m2 < 0 && d1 < 0 || d2 < 0)
+      |                ~~ ~~~~~~~^~~~~~~~~
+build/mutants/p17160/m0212_session.c:100:26: note: place parentheses around the '&&' expression to silence this warning
+  100 |     if (m1 < 0 || m2 < 0 && d1 < 0 || d2 < 0)
+      |                          ^
+      |                   (               )
+1 error generated.
+ner/session.c:63 [arith * -> /]
+KILLED    m0144 src/trainer/session.c:63 [arith + -> -]
+KILLED    m0145 src/trainer/session.c:63 [int+1 2 -> 3]
+KILLED    m0146 src/trainer/session.c:63 [int-1 2 -> 1]
+KILLED    m0147 src/trainer/session.c:63 [arith / -> *]
+KILLED    m0148 src/trainer/session.c:63 [arith + -> -]
+KILLED    m0149 src/trainer/session.c:63 [int+1 1 -> 2]
+KILLED    m0150 src/trainer/session.c:63 [int-1 1 -> 0]
+KILLED    m0151 src/trainer/session.c:64 [arith * -> /]
+          build break
+KILLED    m0152 src/trainer/session.c:64 [arith + -> -]
+KILLED    m0153 src/trainer/session.c:64 [arith * -> /]
+KILLED    m0154 src/trainer/session.c:64 [arith + -> -]
+KILLED    m0155 src/trainer/session.c:64 [cmp <= -> <]
+KILLED    m0156 src/trainer/session.c:64 [int+1 2 -> 3]
+KILLED    m0157 src/trainer/session.c:64 [int-1 2 -> 1]
+KILLED    m0158 src/trainer/session.c:68 [arith - -> +]
+KILLED    m0159 src/trainer/session.c:68 [int+1 1 -> 2]
+KILLED    m0160 src/trainer/session.c:68 [int-1 1 -> 0]
+KILLED    m0161 src/trainer/session.c:68 [int+1 1 -> 2]
+KILLED    m0162 src/trainer/session.c:68 [int-1 1 -> 0]
+KILLED    m0163 src/trainer/session.c:71 [arith * -> /]
+          build break
+KILLED    m0164 src/trainer/session.c:71 [arith * -> /]
+          build break
+KILLED    m0165 src/trainer/session.c:71 [arith * -> /]
+          build break
+KILLED    m0166 src/trainer/session.c:72 [arith + -> -]
+KILLED    m0167 src/trainer/session.c:72 [int+1 1 -> 2]
+KILLED    m0168 src/trainer/session.c:72 [int-1 1 -> 0]
+KILLED    m0169 src/trainer/session.c:72 [int+1 1 -> 2]
+KILLED    m0170 src/trainer/session.c:72 [int-1 1 -> 0]
+KILLED    m0171 src/trainer/session.c:75 [arith * -> /]
+          build break
+KILLED    m0172 src/trainer/session.c:77 [cmp < -> <=]
+KILLED    m0173 src/trainer/session.c:77 [logic || -> &&]
+          build break
+KILLED    m0174 src/trainer/session.c:77 [cmp > -> >=]
+KILLED    m0175 src/trainer/session.c:78 [arith - -> +]
+SURVIVED  m0176 src/trainer/session.c:78 [int+1 1 -> 2]
+KILLED    m0177 src/trainer/session.c:78 [int-1 1 -> 0]
+KILLED    m0178 src/trainer/session.c:79 [arith - -> +]
+KILLED    m0179 src/trainer/session.c:82 [arith * -> /]
+          build break
+KILLED    m0180 src/trainer/session.c:82 [arith * -> /]
+          build break
+KILLED    m0181 src/trainer/session.c:82 [arith * -> /]
+          build break
+KILLED    m0182 src/trainer/session.c:82 [arith * -> /]
+          build break
+KILLED    m0183 src/trainer/session.c:83 [cmp == -> !=]
+KILLED    m0184 src/trainer/session.c:85 [int+1 0 -> 1]
+KILLED    m0185 src/trainer/session.c:85 [int-1 0 -> -1]
+KILLED    m0186 src/trainer/session.c:86 [int+1 0 -> 1]
+KILLED    m0187 src/trainer/session.c:86 [int-1 0 -> -1]
+KILLED    m0188 src/trainer/session.c:86 [cmp < -> <=]
+KILLED    m0189 src/trainer/session.c:88 [cmp < -> <=]
+KILLED    m0190 src/trainer/session.c:88 [int+1 0 -> 1]
+KILLED    m0191 src/trainer/session.c:88 [int-1 0 -> -1]
+KILLED    m0192 src/trainer/session.c:90 [arith * -> /]
+KILLED    m0193 src/trainer/session.c:90 [arith + -> -]
+KILLED    m0194 src/trainer/session.c:92 [cmp != -> ==]
+KILLED    m0195 src/trainer/session.c:94 [arith - -> +]
+KILLED    m0196 src/trainer/session.c:94 [int+1 1 -> 2]
+KILLED    m0197 src/trainer/session.c:94 [int-1 1 -> 0]
+KILLED    m0198 src/trainer/session.c:94 [cmp != -> ==]
+KILLED    m0199 src/trainer/session.c:97 [arith + -> -]
+KILLED    m0200 src/trainer/session.c:97 [int+1 1 -> 2]
+KILLED    m0201 src/trainer/session.c:97 [int-1 1 -> 0]
+KILLED    m0202 src/trainer/session.c:99 [arith + -> -]
+KILLED    m0203 src/trainer/session.c:99 [int+1 1 -> 2]
+KILLED    m0204 src/trainer/session.c:99 [int-1 1 -> 0]
+KILLED    m0205 src/trainer/session.c:100 [cmp < -> <=]
+KILLED    m0206 src/trainer/session.c:100 [int+1 0 -> 1]
+SURVIVED  m0207 src/trainer/session.c:100 [int-1 0 -> -1]
+KILLED    m0208 src/trainer/session.c:100 [logic || -> &&]
+          build break
+KILLED    m0209 src/trainer/session.c:100 [cmp < -> <=]
+KILLED    m0210 src/trainer/session.c:100 [int+1 0 -> 1]
+SURVIVED  m0211 src/trainer/session.c:100 [int-1 0 -> -1]
+KILLEmutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+build/mutants/p17160/m0216_session.c:100:36: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  100 |     if (m1 < 0 || m2 < 0 || d1 < 0 && d2 < 0)
+      |                          ~~ ~~~~~~~^~~~~~~~~
+build/mutants/p17160/m0216_session.c:100:36: note: place parentheses around the '&&' expression to silence this warning
+  100 |     if (m1 < 0 || m2 < 0 || d1 < 0 && d2 < 0)
+      |                                    ^        
+      |                             (               )
+1 error generated.
+mutate: suite review_screen_session_log exited 1
+mutate: suite review_screen_session_log exited 1
+mutate: suite session_bad_stamp_digits exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+build/mutants/p17160/m0225_session.c:107:18: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  107 |     if (ry != yy && rm != mm || rd != dd)
+      |         ~~~~~~~~~^~~~~~~~~~~ ~~
+build/mutants/p17160/m0225_session.c:107:18: note: place parentheses around the '&&' expression to silence this warning
+  107 |     if (ry != yy && rm != mm || rd != dd)
+      |                  ^
+      |         (                   )
+1 error generated.
+mutate: suite session_iso_add_days exited 1
+build/mutants/p17160/m0227_session.c:107:30: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  107 |     if (ry != yy || rm != mm && rd != dd)
+      |                  ~~ ~~~~~~~~~^~~~~~~~~~~
+build/mutants/p17160/m0227_session.c:107:30: note: place parentheses around the '&&' expression to silence this warning
+  107 |     if (ry != yy || rm != mm && rd != dd)
+      |                              ^          
+      |                     (                   )
+1 error generated.
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+build/mutants/p17160/m0230_session.c:109:38: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+  109 |     if (iso[ct_iso_date_len] != '\0' || iso[ct_iso_date_len] != 'T')
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite session_iso_add_days exited 1
+build/mutants/p17160/m0232_session.c:111:5: error: expected expression
+  111 |     /y = yy;
+      |     ^
+1 error generated.
+build/mutants/p17160/m0233_session.c:112:5: error: expected expression
+  112 |     /m = mm;
+      |     ^
+1 error generated.
+build/mutants/p17160/m0234_session.c:113:5: error: expected expression
+  113 |     /d = dd;
+      |     ^
+1 error generated.
+build/mutants/p17160/m0235_session.c:117:40: error: expected ')'
+  117 | int ct_session_iso_add_days(const char /iso, long days, char *out, unsigned cap) {
+      |                                        ^
+build/mutants/p17160/m0235_session.c:117:28: note: to match this '('
+  117 | int ct_session_iso_add_days(const char /iso, long days, char *out, unsigned cap) {
+      |                            ^
+build/mutants/p17160/m0235_session.c:117:5: error: conflicting types for 'ct_session_iso_add_days'
+  117 | int ct_session_iso_add_days(const char /iso, long days, char *out, unsigned cap) {
+      |     ^
+src\trainer/session.h:49:5: note: previous declaration is here
+   49 | int ct_session_iso_add_days(const char *iso, long days, char *out, unsigned cap);
+      |     ^
+build/mutants/p17160/m0235_session.c:120:26: error: use of undeclared identifier 'iso'
+  120 |     int rc = ct_iso_scan(iso, &y, &m, &d);
+      |                          ^~~
+build/mutants/p17160/m0235_session.c:123:9: error: use of undeclared identifier 'out'
+  123 |     if (out == NULL)
+      |         ^~~
+build/mutants/p17160/m0235_session.c:125:25: error: use of undeclared identifier 'iso'
+  125 |     size_t len = strlen(iso);
+      |                         ^~~
+build/mutants/p17160/m0235_session.c:130:9: error: use of undeclared identifier 'days'
+  130 |     if (days < min_day - base || days > max_day - base)
+      |         ^~~~
+build/mutants/p17160/m0235_session.c:130:34: error: use of undeclared identifier 'days'
+  130 |     if (days < min_day - base || days > max_day - base)
+      |                                  ^~~~
+build/mutants/p17160/m0235_session.c:134:35: error: use of undeclared identifier 'days'
+  134 |     ct_session_day_to_date(base + days, &ry, &rm, &rd);
+      |                                   ^~~~
+build/mutants/p17160/m0235_session.c:135:22: error: use of undeclared identifier 'out'
+  135 |     int n = snprintf(out, cap, "%04ld-%02d-%02d", ry, rm, rd);
+      |                      ^~~
+build/mutants/p17160/m0235_session.c:135:27: error: use of undeclared identifier 'cap'
+  135 |     int n = snprintf(out, cap, "%04ld-%02d-%02d", ry, rm, rd);
+      |                           ^~~
+build/mutants/p17160/m0235_session.c:139:33: error: use of undeclared identifier 'cap'
+  139 |     if (date_len + suffix + 1 > cap)
+      |                                 ^~~
+build/mutants/p17160/m0235_session.c:141:12: error: use of undeclared identifier 'out'
+  141 |     memcpy(out + date_len, iso + ct_iso_date_len, suffix);
+      |            ^~~
+build/mutants/p17160/m0235_session.c:141:28: error: use of undeclared identifier 'iso'
+  141 |     memcpy(out + date_len, iso + ct_iso_date_len, suffix);
+      |                            ^~~
+build/mutants/p17160/m0235_session.c:142:5: error: use of undeclared identifier 'out'
+  142 |     out[date_len + suffix] = '\0';
+      |     ^~~
+14 errors generated.
+build/mutants/p17160/m0236_session.c:117:62: error: expected ')'
+  117 | int ct_session_iso_add_days(const char *iso, long days, char /out, unsigned cap) {
+      |                                                              ^
+build/mutants/p17160/m0236_session.c:117:28: note: to match this '('
+  117 | int ct_session_iso_add_days(const char *iso, long days, char /out, unsigned cap) {
+      |                            ^
+build/mutants/p17160/m0236_session.c:117:5: error: conflicting types for 'ct_session_iso_add_days'
+  117 | int ct_session_iso_add_days(const char *iso, long days, char /out, unsigned cap) {
+      |     ^
+src\trainer/session.h:49:5: note: previous declaration is here
+   49 | int ct_session_iso_add_days(const char *iso, long days, char *out, unsigned cap);
+      |     ^
+build/mutants/p17160/m0236_session.c:123:9: error: use of undeclared identifier 'out'
+  123 |     if (out == NULL)
+      |         ^~~
+build/mutants/p17160/m0236_session.c:135:22: error: use of undeclared identifier 'out'
+  135 |     int n = snprintf(out, cap, "%04ld-%02d-%02d", ry, rm, rd);
+      |                      ^~~
+build/mutants/p17160/m0236_session.c:135:27: error: use of undeclared identifier 'cap'
+  135 |     int n = snprintf(out, cap, "%04ld-%02d-%02d", ry, rm, rd);
+      |                           ^~~
+build/mutants/p17160/m0236_session.c:139:33: error: use of undeclared identifier 'cap'
+  139 |     if (date_len + suffix + 1 > cap)
+      |                                 ^~~
+build/mutants/p17160/m0236_session.c:141:12: error: use of undeclared identifier 'out'
+  141 |     memcpy(out + date_len, iso + ct_iso_date_len, suffix);
+      |            ^~~
+build/mutants/p17160/m0236_session.c:142:5: error: use of undeclared identifier 'out'
+  142 |     out[date_len + suffix] = '\0';
+      |     ^~~
+8 errors generated.
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited -1073741795
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days_domain exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+mutate: suite session_iso_add_days exited 1
+build/mutants/p17160/m0260_session.c:146:37: error: expected ')'
+  146 | static int ct_queue_load(ct_session /s, const char *deck, const char *now_iso, int limit) {
+      |                                     ^
+build/mutants/p17160/m0260_session.c:146:25: note: to match this '('
+  146 | static int ct_queue_load(ct_session /s, const char *deck, const char *now_iso, int limit) {
+      |                         ^
+build/mutants/p17160/m0260_session.c:147:20: error: use of undeclared identifier 'limit'
+  147 |     unsigned cap = limit > 0 ? (unsigned)limit : (unsigned)ct_queue_first_cap;
+      |                    ^~~~~
+build/mutants/p17160/m0260_session.c:147:42: error: use of undeclared identifier 'limit'
+  147 |     unsigned cap = limit > 0 ? (unsigned)limit : (unsigned)ct_queue_first_cap;
+      |                                          ^~~~~
+build/mutants/p17160/m0260_session.c:149:31: error: use of undeclared identifier 's'
+  149 |         long *grown = realloc(s->queue, (size_t)cap * sizeof *grown);
+      |                               ^
+build/mutants/p17160/m0260_session.c:152:9: error: use of undeclared identifier 's'
+  152 |         s->queue = grown;
+      |         ^
+build/mutants/p17160/m0260_session.c:153:35: error: use of undeclared identifier 's'
+  153 |         int n = ct_repo_due_cards(s->db, deck, now_iso, s->queue, (int)cap);
+      |                                   ^
+build/mutants/p17160/m0260_session.c:153:42: error: use of undeclared identifier 'deck'
+  153 |         int n = ct_repo_due_cards(s->db, deck, now_iso, s->queue, (int)cap);
+      |                                          ^~~~
+build/mutants/p17160/m0260_session.c:153:48: error: use of undeclared identifier 'now_iso'
+  153 |         int n = ct_repo_due_cards(s->db, deck, now_iso, s->queue, (int)cap);
+      |                                                ^~~~~~~
+build/mutants/p17160/m0260_session.c:153:57: error: use of undeclared identifier 's'
+  153 |         int n = ct_repo_due_cards(s->db, deck, now_iso, s->queue, (int)cap);
+      |                                                         ^
+build/mutants/p17160/m0260_session.c:156:29: error: use of undeclared identifier 'limit'
+  156 |         if (n < (int)cap || limit > 0) {
+      |                             ^~~~~
+build/mutants/p17160/m0260_session.c:157:13: error: use of undeclared identifier 's'
+  157 |             s->queue_count = n;
+      |             ^
+build/mutants/p17160/m0260_session.c:192:31: error: too many arguments to function call, expected 1, have 4
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |              ~~~~~~~~~~~~~    ^~~~~~~~~~~~~~~~~~~~
+build/mutants/p17160/m0260_session.c:146:12: note: 'ct_queue_load' declared here
+  146 | static int ct_queue_load(ct_session /s, const char *deck, const char *now_iso, int limit) {
+      |            ^             ~~~~~~~~~~
+12 errors generated.
+build/mutants/p17160/m0261_session.c:146:52: error: expected ')'
+  146 | static int ct_queue_load(ct_session *s, const char /deck, const char *now_iso, int limit) {
+      |                                                    ^
+build/mutants/p17160/m0261_session.c:146:25: note: to match this '('
+  146 | static int ct_queue_load(ct_session *s, const char /deck, const char *now_iso, int limit) {
+      |                         ^
+build/mutants/p17160/m0261_session.c:147:20: error: use of undeclared identifier 'limit'
+  147 |     unsigned cap = limit > 0 ? (unsigned)limit : (unsigned)ct_queue_first_cap;
+      |                    ^~~~~
+build/mutants/p17160/m0261_session.c:147:42: error: use of undeclared identifier 'limit'
+  147 |     unsigned cap = limit > 0 ? (unsigned)limit : (unsigned)ct_queue_first_cap;
+      |                                          ^~~~~
+build/mutants/p17160/m0261_session.c:153:42: error: use of undeclared identifier 'deck'
+  153 |         int n = ct_repo_due_cards(s->db, deck, now_iso, s->queue, (int)cap);
+      |                                          ^~~~
+build/mutants/p17160/m0261_session.c:153:48: error: use of undeclared identifier 'now_iso'
+  153 |         int n = ct_repo_due_cards(s->db, deck, now_iso, s->queue, (int)cap);
+      |                                                ^~~~~~~
+build/mutants/p17160/m0261_session.c:156:29: error: use of undeclared identifier 'limit'
+  156 |         if (n < (int)cap || limit > 0) {
+      |                             ^~~~~
+build/mutants/p17160/m0261_session.c:192:37: error: too many arguments to function call, expected 2, have 4
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |              ~~~~~~~~~~~~~          ^~~~~~~~~~~~~~
+build/mutants/p17160/m0261_session.c:146:12: note: 'ct_queue_load' declared here
+  146 | static int ct_queue_load(ct_session *s, const char /deck, const char *now_iso, int limit) {
+      |            ^             ~~~~~~~~~~~~~~~~~~~~~~~~~
+7 errors generated.
+build/mutants/p17160/m0262_session.c:146:70: error: expected ')'
+  146 | static int ct_queue_load(ct_session *s, const char *deck, const char /now_iso, int limit) {
+      |                                                                      ^
+build/mutants/p17160/m0262_session.c:146:25: note: to match this '('
+  146 | static int ct_queue_load(ct_session *s, const char *deck, const char /now_iso, int limit) {
+      |                         ^
+build/mutants/p17160/m0262_session.c:147:20: error: use of undeclared identifier 'limit'
+  147 |     unsigned cap = limit > 0 ? (unsigned)limit : (unsigned)ct_queue_first_cap;
+      |                    ^~~~~
+build/mutants/p17160/m0262_session.c:147:42: error: use of undeclared identifier 'limit'
+  147 |     unsigned cap = limit > 0 ? (unsigned)limit : (unsigned)ct_queue_first_cap;
+      |                                          ^~~~~
+build/mutants/p17160/m0262_session.c:153:48: error: use of undeclared identifier 'now_iso'
+  153 |         int n = ct_repo_due_cards(s->db, deck, now_iso, s->queue, (int)cap);
+      |                                                ^~~~~~~
+build/mutants/p17160/m0262_session.c:156:29: error: use of undeclared identifier 'limit'
+  156 |         if (n < (int)cap || limit > 0) {
+      |                             ^~~~~
+build/mutants/p17160/m0262_session.c:192:46: error: too many arguments to function call, expected 3, have 4
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |              ~~~~~~~~~~~~~                   ^~~~~
+build/mutants/p17160/m0262_session.c:146:12: note: 'ct_queue_load' declared here
+  146 | static int ct_queue_load(ct_session *s, const char *deck, const char /now_iso, int limit) {
+      |            ^             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+6 errors generated.
+mutate: suite session_bad_last_review exited -1073740940
+mutate: suite session_limits exited 1
+mutate: suite session_bad_last_review exited -1073740940
+build/mutants/p17160/m0266_session.c:149:14: error: expected identifier or '('
+  149 |         long /grown = realloc(s->queue, (size_t)cap * sizeof *grown);
+      |              ^
+build/mutants/p17160/m0266_session.c:150:13: error: use of undeclared identifier 'grown'
+  150 |         if (grown == NULL)
+      |             ^~~~~
+build/mutants/p17160/m0266_session.c:152:20: error: use of undeclared identifier 'grown'
+  152 |         s->queue = grown;
+      |                    ^~~~~
+3 errors generated.
+build/mutants/p17160/m0268_session.c:149:62: error: expected expression
+  149 |         long *grown = realloc(s->queue, (size_t)cap * sizeof /grown);
+      |                                                              ^
+1 error generated.
+mutate: suite session_bad_last_review exited 1
+mutate: suite session_empty_deck exited 1
+mutate: suite session_empty_deck exited 1
+mutate: suite session_bad_last_review exited 1
+mutate: suite session_limits exited 1
+D    m0212 src/trainer/session.c:100 [logic || -> &&]
+          build break
+KILLED    m0213 src/trainer/session.c:100 [cmp < -> <=]
+KILLED    m0214 src/trainer/session.c:100 [int+1 0 -> 1]
+SURVIVED  m0215 src/trainer/session.c:100 [int-1 0 -> -1]
+KILLED    m0216 src/trainer/session.c:100 [logic || -> &&]
+          build break
+KILLED    m0217 src/trainer/session.c:100 [cmp < -> <=]
+KILLED    m0218 src/trainer/session.c:100 [int+1 0 -> 1]
+KILLED    m0219 src/trainer/session.c:100 [int-1 0 -> -1]
+KILLED    m0220 src/trainer/session.c:102 [arith * -> /]
+KILLED    m0221 src/trainer/session.c:102 [arith + -> -]
+KILLED    m0222 src/trainer/session.c:103 [arith * -> /]
+KILLED    m0223 src/trainer/session.c:103 [arith + -> -]
+KILLED    m0224 src/trainer/session.c:107 [cmp != -> ==]
+KILLED    m0225 src/trainer/session.c:107 [logic || -> &&]
+          build break
+KILLED    m0226 src/trainer/session.c:107 [cmp != -> ==]
+KILLED    m0227 src/trainer/session.c:107 [logic || -> &&]
+          build break
+KILLED    m0228 src/trainer/session.c:107 [cmp != -> ==]
+KILLED    m0229 src/trainer/session.c:109 [cmp != -> ==]
+KILLED    m0230 src/trainer/session.c:109 [logic && -> ||]
+          build break
+KILLED    m0231 src/trainer/session.c:109 [cmp != -> ==]
+KILLED    m0232 src/trainer/session.c:111 [arith * -> /]
+          build break
+KILLED    m0233 src/trainer/session.c:112 [arith * -> /]
+          build break
+KILLED    m0234 src/trainer/session.c:113 [arith * -> /]
+          build break
+KILLED    m0235 src/trainer/session.c:117 [arith * -> /]
+          build break
+KILLED    m0236 src/trainer/session.c:117 [arith * -> /]
+          build break
+KILLED    m0237 src/trainer/session.c:121 [cmp != -> ==]
+KILLED    m0238 src/trainer/session.c:123 [cmp == -> !=]
+SURVIVED  m0239 src/trainer/session.c:126 [cmp < -> <=]
+SURVIVED  m0240 src/trainer/session.c:126 [int+1 0 -> 1]
+SURVIVED  m0241 src/trainer/session.c:126 [int-1 0 -> -1]
+KILLED    m0242 src/trainer/session.c:126 [arith - -> +]
+KILLED    m0243 src/trainer/session.c:130 [cmp < -> <=]
+KILLED    m0244 src/trainer/session.c:130 [arith - -> +]
+KILLED    m0245 src/trainer/session.c:130 [logic || -> &&]
+KILLED    m0246 src/trainer/session.c:130 [cmp > -> >=]
+KILLED    m0247 src/trainer/session.c:130 [arith - -> +]
+KILLED    m0248 src/trainer/session.c:134 [arith + -> -]
+SURVIVED  m0249 src/trainer/session.c:136 [cmp < -> <=]
+SURVIVED  m0250 src/trainer/session.c:136 [int+1 0 -> 1]
+SURVIVED  m0251 src/trainer/session.c:136 [int-1 0 -> -1]
+KILLED    m0252 src/trainer/session.c:139 [arith + -> -]
+KILLED    m0253 src/trainer/session.c:139 [arith + -> -]
+KILLED    m0254 src/trainer/session.c:139 [int+1 1 -> 2]
+KILLED    m0255 src/trainer/session.c:139 [int-1 1 -> 0]
+KILLED    m0256 src/trainer/session.c:139 [cmp > -> >=]
+KILLED    m0257 src/trainer/session.c:141 [arith + -> -]
+KILLED    m0258 src/trainer/session.c:141 [arith + -> -]
+KILLED    m0259 src/trainer/session.c:142 [arith + -> -]
+KILLED    m0260 src/trainer/session.c:146 [arith * -> /]
+          build break
+KILLED    m0261 src/trainer/session.c:146 [arith * -> /]
+          build break
+KILLED    m0262 src/trainer/session.c:146 [arith * -> /]
+          build break
+KILLED    m0263 src/trainer/session.c:147 [cmp > -> >=]
+KILLED    m0264 src/trainer/session.c:147 [int+1 0 -> 1]
+KILLED    m0265 src/trainer/session.c:147 [int-1 0 -> -1]
+KILLED    m0266 src/trainer/session.c:149 [arith * -> /]
+          build break
+SURVIVED  m0267 src/trainer/session.c:149 [arith * -> /]
+KILLED    m0268 src/trainer/session.c:149 [arith * -> /]
+          build break
+KILLED    m0269 src/trainer/session.c:150 [cmp == -> !=]
+KILLED    m0270 src/trainer/session.c:154 [cmp < -> <=]
+KILLED    m0271 src/trainer/session.c:154 [int+1 0 -> 1]
+SURVIVED  m0272 src/trainer/session.c:154 [int-1 0 -> -1]
+SURVIVED  m0273 src/trainer/session.c:156 [cmp < -> <=]
+KILLED    m0274 src/trainer/session.c:156 [logic || -> &&]
+SURVIVED  m0275 src/trainer/session.c:156 [cmp > -> >=]
+KILLED    m0276 src/trainer/session.c:156 [int+1 0 -> 1]
+SURVIVED  m0277 src/trainer/session.c:156 [int-1 0 -> -1]build/mutants/p17160/m0280_session.c:164:33: error: expected ')'
+  164 | int ct_session_begin(ct_session /s, sqlite3 *db, const ct_fsrs *fsrs, const char *deck,
+      |                                 ^
+build/mutants/p17160/m0280_session.c:164:21: note: to match this '('
+  164 | int ct_session_begin(ct_session /s, sqlite3 *db, const ct_fsrs *fsrs, const char *deck,
+      |                     ^
+build/mutants/p17160/m0280_session.c:164:5: error: conflicting types for 'ct_session_begin'
+  164 | int ct_session_begin(ct_session /s, sqlite3 *db, const ct_fsrs *fsrs, const char *deck,
+      |     ^
+src\trainer/session.h:39:5: note: previous declaration is here
+   39 | int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs *fsrs, const char *deck,
+      |     ^
+build/mutants/p17160/m0280_session.c:166:9: error: use of undeclared identifier 's'
+  166 |     if (s == NULL || db == NULL || fsrs == NULL)
+      |         ^
+build/mutants/p17160/m0280_session.c:166:22: error: use of undeclared identifier 'db'
+  166 |     if (s == NULL || db == NULL || fsrs == NULL)
+      |                      ^~
+build/mutants/p17160/m0280_session.c:166:36: error: use of undeclared identifier 'fsrs'
+  166 |     if (s == NULL || db == NULL || fsrs == NULL)
+      |                                    ^~~~
+build/mutants/p17160/m0280_session.c:168:26: error: use of undeclared identifier 'deck'
+  168 |     if (!ct_repo_text_ok(deck, CT_SESSION_DECK_MAX))
+      |                          ^~~~
+build/mutants/p17160/m0280_session.c:170:26: error: use of undeclared identifier 'now_iso'
+  170 |     if (!ct_repo_text_ok(now_iso, CT_SESSION_STAMP_MAX))
+      |                          ^~~~~~~
+build/mutants/p17160/m0280_session.c:174:21: error: use of undeclared identifier 'now_iso'
+  174 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |                     ^~~~~~~
+build/mutants/p17160/m0280_session.c:176:10: error: use of undeclared identifier 's'
+  176 |     free(s->queue);
+      |          ^
+build/mutants/p17160/m0280_session.c:177:5: error: use of undeclared identifier 's'
+  177 |     s->queue = NULL;
+      |     ^
+build/mutants/p17160/m0280_session.c:178:5: error: use of undeclared identifier 's'
+  178 |     s->queue_count = 0;
+      |     ^
+build/mutants/p17160/m0280_session.c:179:5: error: use of undeclared identifier 's'
+  179 |     s->queue_pos = 0;
+      |     ^
+build/mutants/p17160/m0280_session.c:180:5: error: use of undeclared identifier 's'
+  180 |     s->current_card = 0;
+      |     ^
+build/mutants/p17160/m0280_session.c:181:5: error: use of undeclared identifier 's'
+  181 |     s->card_open = false;
+      |     ^
+build/mutants/p17160/m0280_session.c:182:5: error: use of undeclared identifier 's'
+  182 |     s->n_graded = 0;
+      |     ^
+build/mutants/p17160/m0280_session.c:183:5: error: use of undeclared identifier 's'
+  183 |     s->n_again = 0;
+      |     ^
+build/mutants/p17160/m0280_session.c:184:5: error: use of undeclared identifier 's'
+  184 |     s->n_hard = 0;
+      |     ^
+build/mutants/p17160/m0280_session.c:185:5: error: use of undeclared identifier 's'
+  185 |     s->n_good = 0;
+      |     ^
+build/mutants/p17160/m0280_session.c:186:5: error: use of undeclared identifier 's'
+  186 |     s->n_easy = 0;
+      |     ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build/mutants/p17160/m0281_session.c:164:45: error: expected ')'
+  164 | int ct_session_begin(ct_session *s, sqlite3 /db, const ct_fsrs *fsrs, const char *deck,
+      |                                             ^
+build/mutants/p17160/m0281_session.c:164:21: note: to match this '('
+  164 | int ct_session_begin(ct_session *s, sqlite3 /db, const ct_fsrs *fsrs, const char *deck,
+      |                     ^
+build/mutants/p17160/m0281_session.c:164:5: error: conflicting types for 'ct_session_begin'
+  164 | int ct_session_begin(ct_session *s, sqlite3 /db, const ct_fsrs *fsrs, const char *deck,
+      |     ^
+src\trainer/session.h:39:5: note: previous declaration is here
+   39 | int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs *fsrs, const char *deck,
+      |     ^
+build/mutants/p17160/m0281_session.c:164:45: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  164 | int ct_session_begin(ct_session *s, sqlite3 /db, const ct_fsrs *fsrs, const char *deck,
+      |                                             ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build/mutants/p17160/m0281_session.c:166:22: error: use of undeclared identifier 'db'
+  166 |     if (s == NULL || db == NULL || fsrs == NULL)
+      |                      ^~
+build/mutants/p17160/m0281_session.c:166:36: error: use of undeclared identifier 'fsrs'
+  166 |     if (s == NULL || db == NULL || fsrs == NULL)
+      |                                    ^~~~
+build/mutants/p17160/m0281_session.c:168:26: error: use of undeclared identifier 'deck'
+  168 |     if (!ct_repo_text_ok(deck, CT_SESSION_DECK_MAX))
+      |                          ^~~~
+build/mutants/p17160/m0281_session.c:170:26: error: use of undeclared identifier 'now_iso'
+  170 |     if (!ct_repo_text_ok(now_iso, CT_SESSION_STAMP_MAX))
+      |                          ^~~~~~~
+build/mutants/p17160/m0281_session.c:174:21: error: use of undeclared identifier 'now_iso'
+  174 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |                     ^~~~~~~
+build/mutants/p17160/m0281_session.c:187:13: error: use of undeclared identifier 'db'
+  187 |     s->db = db;
+      |             ^~
+build/mutants/p17160/m0281_session.c:188:15: error: use of undeclared identifier 'fsrs'
+  188 |     s->fsrs = fsrs;
+      |               ^~~~
+build/mutants/p17160/m0281_session.c:189:20: error: use of undeclared identifier 'today_day'
+  189 |     s->today_day = today_day;
+      |                    ^~~~~~~~~
+build/mutants/p17160/m0281_session.c:190:45: error: use of undeclared identifier 'deck'
+  190 |     snprintf(s->deck, sizeof s->deck, "%s", deck);
+      |                                             ^~~~
+build/mutants/p17160/m0281_session.c:191:57: error: use of undeclared identifier 'now_iso'
+  191 |     snprintf(s->started_at, sizeof s->started_at, "%s", now_iso);
+      |                                                         ^~~~~~~
+build/mutants/p17160/m0281_session.c:192:31: error: use of undeclared identifier 'deck'
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |                               ^~~~
+build/mutants/p17160/m0281_session.c:192:37: error: use of undeclared identifier 'now_iso'
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |                                     ^~~~~~~
+build/mutants/p17160/m0281_session.c:192:46: error: use of undeclared identifier 'limit'
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |                                              ^~~~~
+16 errors generated.
+build/mutants/p17160/m0282_session.c:164:64: error: expected ')'
+  164 | int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs /fsrs, const char *deck,
+      |                                                                ^
+build/mutants/p17160/m0282_session.c:164:21: note: to match this '('
+  164 | int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs /fsrs, const char *deck,
+      |                     ^
+build/mutants/p17160/m0282_session.c:164:5: error: conflicting types for 'ct_session_begin'
+  164 | int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs /fsrs, const char *deck,
+      |     ^
+src\trainer/session.h:39:5: note: previous declaration is here
+   39 | int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs *fsrs, const char *deck,
+      |     ^
+build/mutants/p17160/m0282_session.c:166:36: error: use of undeclared identifier 'fsrs'
+  166 |     if (s == NULL || db == NULL || fsrs == NULL)
+      |                                    ^~~~
+build/mutants/p17160/m0282_session.c:168:26: error: use of undeclared identifier 'deck'
+  168 |     if (!ct_repo_text_ok(deck, CT_SESSION_DECK_MAX))
+      |                          ^~~~
+build/mutants/p17160/m0282_session.c:170:26: error: use of undeclared identifier 'now_iso'
+  170 |     if (!ct_repo_text_ok(now_iso, CT_SESSION_STAMP_MAX))
+      |                          ^~~~~~~
+build/mutants/p17160/m0282_session.c:174:21: error: use of undeclared identifier 'now_iso'
+  174 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |                     ^~~~~~~
+build/mutants/p17160/m0282_session.c:188:15: error: use of undeclared identifier 'fsrs'
+  188 |     s->fsrs = fsrs;
+      |               ^~~~
+build/mutants/p17160/m0282_session.c:189:20: error: use of undeclared identifier 'today_day'
+  189 |     s->today_day = today_day;
+      |                    ^~~~~~~~~
+build/mutants/p17160/m0282_session.c:190:45: error: use of undeclared identifier 'deck'
+  190 |     snprintf(s->deck, sizeof s->deck, "%s", deck);
+      |                                             ^~~~
+build/mutants/p17160/m0282_session.c:191:57: error: use of undeclared identifier 'now_iso'
+  191 |     snprintf(s->started_at, sizeof s->started_at, "%s", now_iso);
+      |                                                         ^~~~~~~
+build/mutants/p17160/m0282_session.c:192:31: error: use of undeclared identifier 'deck'
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |                               ^~~~
+build/mutants/p17160/m0282_session.c:192:37: error: use of undeclared identifier 'now_iso'
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |                                     ^~~~~~~
+build/mutants/p17160/m0282_session.c:192:46: error: use of undeclared identifier 'limit'
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |                                              ^~~~~
+13 errors generated.
+build/mutants/p17160/m0283_session.c:164:82: error: expected ')'
+  164 | int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs *fsrs, const char /deck,
+      |                                                                                  ^
+build/mutants/p17160/m0283_session.c:164:21: note: to match this '('
+  164 | int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs *fsrs, const char /deck,
+      |                     ^
+build/mutants/p17160/m0283_session.c:164:5: error: conflicting types for 'ct_session_begin'
+  164 | int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs *fsrs, const char /deck,
+      |     ^
+src\trainer/session.h:39:5: note: previous declaration is here
+   39 | int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs *fsrs, const char *deck,
+      |     ^
+build/mutants/p17160/m0283_session.c:168:26: error: use of undeclared identifier 'deck'
+  168 |     if (!ct_repo_text_ok(deck, CT_SESSION_DECK_MAX))
+      |                          ^~~~
+build/mutants/p17160/m0283_session.c:170:26: error: use of undeclared identifier 'now_iso'
+  170 |     if (!ct_repo_text_ok(now_iso, CT_SESSION_STAMP_MAX))
+      |                          ^~~~~~~
+build/mutants/p17160/m0283_session.c:174:21: error: use of undeclared identifier 'now_iso'
+  174 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |                     ^~~~~~~
+build/mutants/p17160/m0283_session.c:189:20: error: use of undeclared identifier 'today_day'
+  189 |     s->today_day = today_day;
+      |                    ^~~~~~~~~
+build/mutants/p17160/m0283_session.c:190:45: error: use of undeclared identifier 'deck'
+  190 |     snprintf(s->deck, sizeof s->deck, "%s", deck);
+      |                                             ^~~~
+build/mutants/p17160/m0283_session.c:191:57: error: use of undeclared identifier 'now_iso'
+  191 |     snprintf(s->started_at, sizeof s->started_at, "%s", now_iso);
+      |                                                         ^~~~~~~
+build/mutants/p17160/m0283_session.c:192:31: error: use of undeclared identifier 'deck'
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |                               ^~~~
+build/mutants/p17160/m0283_session.c:192:37: error: use of undeclared identifier 'now_iso'
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |                                     ^~~~~~~
+build/mutants/p17160/m0283_session.c:192:46: error: use of undeclared identifier 'limit'
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |                                              ^~~~~
+11 errors generated.
+build/mutants/p17160/m0284_session.c:165:33: error: expected ')'
+  165 |                      const char /now_iso, long today_day, int limit) {
+      |                                 ^
+build/mutants/p17160/m0284_session.c:164:21: note: to match this '('
+  164 | int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs *fsrs, const char *deck,
+      |                     ^
+build/mutants/p17160/m0284_session.c:164:5: error: conflicting types for 'ct_session_begin'
+  164 | int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs *fsrs, const char *deck,
+      |     ^
+src\trainer/session.h:39:5: note: previous declaration is here
+   39 | int ct_session_begin(ct_session *s, sqlite3 *db, const ct_fsrs *fsrs, const char *deck,
+      |     ^
+build/mutants/p17160/m0284_session.c:170:26: error: use of undeclared identifier 'now_iso'
+  170 |     if (!ct_repo_text_ok(now_iso, CT_SESSION_STAMP_MAX))
+      |                          ^~~~~~~
+build/mutants/p17160/m0284_session.c:174:21: error: use of undeclared identifier 'now_iso'
+  174 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |                     ^~~~~~~
+build/mutants/p17160/m0284_session.c:189:20: error: use of undeclared identifier 'today_day'
+  189 |     s->today_day = today_day;
+      |                    ^~~~~~~~~
+build/mutants/p17160/m0284_session.c:191:57: error: use of undeclared identifier 'now_iso'
+  191 |     snprintf(s->started_at, sizeof s->started_at, "%s", now_iso);
+      |                                                         ^~~~~~~
+build/mutants/p17160/m0284_session.c:192:37: error: use of undeclared identifier 'now_iso'
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |                                     ^~~~~~~
+build/mutants/p17160/m0284_session.c:192:46: error: use of undeclared identifier 'limit'
+  192 |     int rc = ct_queue_load(s, deck, now_iso, limit);
+      |                                              ^~~~~
+8 errors generated.
+mutate: suite session_bad_last_review exited 1
+build/mutants/p17160/m0286_session.c:166:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  166 |     if (s == NULL && db == NULL || fsrs == NULL)
+      |         ~~~~~~~~~~^~~~~~~~~~~~~ ~~
+build/mutants/p17160/m0286_session.c:166:19: note: place parentheses around the '&&' expression to silence this warning
+  166 |     if (s == NULL && db == NULL || fsrs == NULL)
+      |         ~~~~~~~~~~^~~~~~~~~~~~~
+1 error generated.
+mutate: suite session_bad_last_review exited 1
+build/mutants/p17160/m0288_session.c:166:33: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  166 |     if (s == NULL || db == NULL && fsrs == NULL)
+      |                   ~~ ~~~~~~~~~~~^~~~~~~~~~~~~~~
+build/mutants/p17160/m0288_session.c:166:33: note: place parentheses around the '&&' expression to silence this warning
+  166 |     if (s == NULL || db == NULL && fsrs == NULL)
+      |                      ~~~~~~~~~~~^~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite session_bad_last_review exited 1
+mutate: suite session_bad_last_review exited 1
+mutate: suite session_bad_last_review exited 1
+mutate: suite session_stamp_boundaries exited 1
+mutate: suite session_bad_last_review exited 1
+mutate: suite session_bad_last_review exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_bad_last_review exited 1
+mutate: suite session_bad_last_review exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_bad_last_review exited 1
+build/mutants/p17160/m0311_session.c:201:35: error: expected ')'
+  201 | int ct_session_current(ct_session /s, ct_card *out) {
+      |                                   ^
+build/mutants/p17160/m0311_session.c:201:23: note: to match this '('
+  201 | int ct_session_current(ct_session /s, ct_card *out) {
+      |                       ^
+build/mutants/p17160/m0311_session.c:201:5: error: conflicting types for 'ct_session_current'
+  201 | int ct_session_current(ct_session /s, ct_card *out) {
+      |     ^
+src\trainer/session.h:41:5: note: previous declaration is here
+   41 | int ct_session_current(ct_session *s, ct_card *out);
+      |     ^
+build/mutants/p17160/m0311_session.c:202:9: error: use of undeclared identifier 's'
+  202 |     if (s == NULL || out == NULL || s->db == NULL)
+      |         ^
+build/mutants/p17160/m0311_session.c:202:22: error: use of undeclared identifier 'out'
+  202 |     if (s == NULL || out == NULL || s->db == NULL)
+      |                      ^~~
+build/mutants/p17160/m0311_session.c:202:37: error: use of undeclared identifier 's'
+  202 |     if (s == NULL || out == NULL || s->db == NULL)
+      |                                     ^
+build/mutants/p17160/m0311_session.c:204:9: error: use of undeclared identifier 's'
+  204 |     if (s->queue == NULL || s->queue_pos >= s->queue_count)
+      |         ^
+build/mutants/p17160/m0311_session.c:204:29: error: use of undeclared identifier 's'
+  204 |     if (s->queue == NULL || s->queue_pos >= s->queue_count)
+      |                             ^
+build/mutants/p17160/m0311_session.c:204:45: error: use of undeclared identifier 's'
+  204 |     if (s->queue == NULL || s->queue_pos >= s->queue_count)
+      |                                             ^
+build/mutants/p17160/m0311_session.c:207:31: error: use of undeclared identifier 's'
+  207 |     int rc = ct_repo_card_get(s->db, s->queue[s->queue_pos], &card);
+      |                               ^
+build/mutants/p17160/m0311_session.c:207:38: error: use of undeclared identifier 's'
+  207 |     int rc = ct_repo_card_get(s->db, s->queue[s->queue_pos], &card);
+      |                                      ^
+build/mutants/p17160/m0311_session.c:207:47: error: use of undeclared identifier 's'
+  207 |     int rc = ct_repo_card_get(s->db, s->queue[s->queue_pos], &card);
+      |                                               ^
+build/mutants/p17160/m0311_session.c:210:6: error: use of undeclared identifier 'out'
+  210 |     *out = card;
+      |      ^~~
+build/mutants/p17160/m0311_session.c:211:5: error: use of undeclared identifier 's'
+  211 |     s->current_card = card.id;
+      |     ^
+build/mutants/p17160/m0311_session.c:212:5: error: use of undeclared identifier 's'
+  212 |     s->card_open = true;
+      |     ^
+14 errors generated.
+build/mutants/p17160/m0312_session.c:201:47: error: expected ')'
+  201 | int ct_session_current(ct_session *s, ct_card /out) {
+      |                                               ^
+build/mutants/p17160/m0312_session.c:201:23: note: to match this '('
+  201 | int ct_session_current(ct_session *s, ct_card /out) {
+      |                       ^
+build/mutants/p17160/m0312_session.c:201:5: error: conflicting types for 'ct_session_current'
+  201 | int ct_session_current(ct_session *s, ct_card /out) {
+      |     ^
+src\trainer/session.h:41:5: note: previous declaration is here
+   41 | int ct_session_current(ct_session *s, ct_card *out);
+      |     ^
+build/mutants/p17160/m0312_session.c:202:22: error: use of undeclared identifier 'out'
+  202 |     if (s == NULL || out == NULL || s->db == NULL)
+      |                      ^~~
+build/mutants/p17160/m0312_session.c:210:6: error: use of undeclared identifier 'out'
+  210 |     *out = card;
+      |      ^~~
+4 errors generated.
+mutate: suite session_queue_guards exited 1
+build/mutants/p17160/m0314_session.c:202:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  202 |     if (s == NULL && out == NULL || s->db == NULL)
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build/mutants/p17160/m0314_session.c:202:19: note: place parentheses around the '&&' expression to silence this warning
+  202 |     if (s == NULL && out == NULL || s->db == NULL)
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite session_queue_guards exited 1
+build/mutants/p17160/m0316_session.c:202:34: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  202 |     if (s == NULL || out == NULL && s->db == NULL)
+      |                   ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+build/mutants/p17160/m0316_session.c:202:34: note: place parentheses around the '&&' expression to silence this warning
+  202 |     if (s == NULL || out == NULL && s->db == NULL)
+      |                      ~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite session_queue_guards exited 1
+mutate: suite session_queue_guards exited -1073741795
+mutate: suite session_queue_guards exited -1073741795
+mutate: suite session_queue_guards exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_card_missing exited 1
+build/mutants/p17160/m0323_session.c:210:5: error: expected expression
+  210 |     /out = card;
+      |     ^
+1 error generated.
+mutate: suite session_flow_golden exited 1
+build/mutants/p17160/m0325_session.c:216:43: error: expected ')'
+  216 | bool ct_session_has_next(const ct_session /s) {
+      |                                           ^
+build/mutants/p17160/m0325_session.c:216:25: note: to match this '('
+  216 | bool ct_session_has_next(const ct_session /s) {
+      |                         ^
+build/mutants/p17160/m0325_session.c:216:6: error: conflicting types for 'ct_session_has_next'
+  216 | bool ct_session_has_next(const ct_session /s) {
+      |      ^
+src\trainer/session.h:42:6: note: previous declaration is here
+   42 | bool ct_session_has_next(const ct_session *s);
+      |      ^
+build/mutants/p17160/m0325_session.c:217:12: error: use of undeclared identifier 's'
+  217 |     return s != NULL && s->queue != NULL && s->queue_pos < s->queue_count;
+      |            ^
+build/mutants/p17160/m0325_session.c:217:25: error: use of undeclared identifier 's'
+  217 |     return s != NULL && s->queue != NULL && s->queue_pos < s->queue_count;
+      |                         ^
+build/mutants/p17160/m0325_session.c:217:45: error: use of undeclared identifier 's'
+  217 |     return s != NULL && s->queue != NULL && s->queue_pos < s->queue_count;
+      |                                             ^
+build/mutants/p17160/m0325_session.c:217:60: error: use of undeclared identifier 's'
+  217 |     return s != NULL && s->queue != NULL && s->queue_pos < s->queue_count;
+      |                                                            ^
+6 errors generated.
+mutate: suite session_flow_golden exited 1
+build/mutants/p17160/m0327_session.c:217:42: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  217 |     return s != NULL || s->queue != NULL && s->queue_pos < s->queue_count;
+      |                      ~~ ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build/mutants/p17160/m0327_session.c:217:42: note: place parentheses around the '&&' expression to silence this warning
+  217 |     return s != NULL || s->queue != NULL && s->queue_pos < s->queue_count;
+      |                                          ^                               
+      |                         (                                                )
+1 error generated.
+mutate: suite session_flow_golden exited 1
+build/mutants/p17160/m0329_session.c:217:22: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  217 |     return s != NULL && s->queue != NULL || s->queue_pos < s->queue_count;
+      |            ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~ ~~
+build/mutants/p17160/m0329_session.c:217:22: note: place parentheses around the '&&' expression to silence this warning
+  217 |     return s != NULL && s->queue != NULL || s->queue_pos < s->queue_count;
+      |            ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite session_flow_golden exited 1
+build/mutants/p17160/m0331_session.c:220:33: error: expected ')'
+  220 | int ct_session_grade(ct_session /s, ct_grade g, const char *now_iso) {
+      |                                 ^
+build/mutants/p17160/m0331_session.c:220:21: note: to match this '('
+  220 | int ct_session_grade(ct_session /s, ct_grade g, const char *now_iso) {
+      |                     ^
+build/mutants/p17160/m0331_session.c:220:5: error: conflicting types for 'ct_session_grade'
+  220 | int ct_session_grade(ct_session /s, ct_grade g, const char *now_iso) {
+      |     ^
+src\trainer/session.h:43:5: note: previous declaration is here
+   43 | int ct_session_grade(ct_session *s, ct_grade g, const char *now_iso);
+      |     ^
+build/mutants/p17160/m0331_session.c:221:9: error: use of undeclared identifier 's'
+  221 |     if (s == NULL || s->db == NULL || s->fsrs == NULL)
+      |         ^
+build/mutants/p17160/m0331_session.c:221:22: error: use of undeclared identifier 's'
+  221 |     if (s == NULL || s->db == NULL || s->fsrs == NULL)
+      |                      ^
+build/mutants/p17160/m0331_session.c:221:39: error: use of undeclared identifier 's'
+  221 |     if (s == NULL || s->db == NULL || s->fsrs == NULL)
+      |                                       ^
+build/mutants/p17160/m0331_session.c:223:9: error: use of undeclared identifier 'g'
+  223 |     if (g < CT_AGAIN || g > CT_EASY)
+      |         ^
+build/mutants/p17160/m0331_session.c:223:25: error: use of undeclared identifier 'g'
+  223 |     if (g < CT_AGAIN || g > CT_EASY)
+      |                         ^
+build/mutants/p17160/m0331_session.c:227:21: error: use of undeclared identifier 'now_iso'
+  227 |     if (ct_iso_scan(now_iso, &vy, &vm, &vd) != CT_SESSION_OK)
+      |                     ^~~~~~~
+build/mutants/p17160/m0331_session.c:229:9: error: use of undeclared identifier 's'
+  229 |     if (s->queue == NULL || s->queue_pos >= s->queue_count)
+      |         ^
+build/mutants/p17160/m0331_session.c:229:29: error: use of undeclared identifier 's'
+  229 |     if (s->queue == NULL || s->queue_pos >= s->queue_count)
+      |                             ^
+build/mutants/p17160/m0331_session.c:229:45: error: use of undeclared identifier 's'
+  229 |     if (s->queue == NULL || s->queue_pos >= s->queue_count)
+      |                                             ^
+build/mutants/p17160/m0331_session.c:231:15: error: use of undeclared identifier 's'
+  231 |     long id = s->queue[s->queue_pos];
+      |               ^
+build/mutants/p17160/m0331_session.c:231:24: error: use of undeclared identifier 's'
+  231 |     long id = s->queue[s->queue_pos];
+      |                        ^
+build/mutants/p17160/m0331_session.c:233:31: error: use of undeclared identifier 's'
+  233 |     int rc = ct_repo_card_get(s->db, id, &card);
+      |                               ^
+build/mutants/p17160/m0331_session.c:238:26: error: use of undeclared identifier 's'
+  238 |     rc = ct_repo_srs_get(s->db, id, &row);
+      |                          ^
+build/mutants/p17160/m0331_session.c:261:32: error: use of undeclared identifier 's'
+  261 |             elapsed = (double)(s->today_day - fc.last_review_day);
+      |                                ^
+build/mutants/p17160/m0331_session.c:267:39: error: use of undeclared identifier 's'
+  267 |     ct_fsrs_card out = ct_fsrs_review(s->fsrs, &fc, g, elapsed, s->today_day);
+      |                                       ^
+build/mutants/p17160/m0331_session.c:267:53: error: use of undeclared identifier 'g'
+  267 |     ct_fsrs_card out = ct_fsrs_review(s->fsrs, &fc, g, elapsed, s->today_day);
+      |                                                     ^
+build/mutants/p17160/m0331_session.c:267:65: error: use of undeclared identifier 's'
+  267 |     ct_fsrs_card out = ct_fsrs_review(s->fsrs, &fc, g, elapsed, s->today_day);
+      |                                                                 ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build/mutants/p17160/m0332_session.c:220:60: error: expected ')'
+  220 | int ct_session_grade(ct_session *s, ct_grade g, const char /now_iso) {
+      |                                                            ^
+build/mutants/p17160/m0332_session.c:220:21: note: to match this '('
+  220 | int ct_session_grade(ct_session *s, ct_grade g, const char /now_iso) {
+      |                     ^
+build/mutants/p17160/m0332_session.c:220:5: error: conflicting types for 'ct_session_grade'
+  220 | int ct_session_grade(ct_session *s, ct_grade g, const char /now_iso) {
+      |     ^
+src\trainer/session.h:43:5: note: previous declaration is here
+   43 | int ct_session_grade(ct_session *s, ct_grade g, const char *now_iso);
+      |     ^
+build/mutants/p17160/m0332_session.c:227:21: error: use of undeclared identifier 'now_iso'
+  227 |     if (ct_iso_scan(now_iso, &vy, &vm, &vd) != CT_SESSION_OK)
+      |                     ^~~~~~~
+build/mutants/p17160/m0332_session.c:278:33: error: use of undeclared identifier 'now_iso'
+  278 |     if (ct_session_iso_add_days(now_iso, ivl, next.due, (unsigned)sizeof next.due) !=
+      |                                 ^~~~~~~
+build/mutants/p17160/m0332_session.c:282:63: error: use of undeclared identifier 'now_iso'
+  282 |     snprintf(next.last_review, sizeof next.last_review, "%s", now_iso);
+      |                                                               ^~~~~~~
+build/mutants/p17160/m0332_session.c:287:52: error: use of undeclared identifier 'now_iso'
+  287 |         rc = ct_repo_review_log(s->db, id, (int)g, now_iso, pre_s, pre_d, elapsed, (double)ivl);
+      |                                                    ^~~~~~~
+6 errors generated.
+mutate: suite session_queue_guards exited 1
+build/mutants/p17160/m0334_session.c:221:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  221 |     if (s == NULL && s->db == NULL || s->fsrs == NULL)
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~ ~~
+build/mutants/p17160/m0334_session.c:221:19: note: place parentheses around the '&&' expression to silence this warning
+  221 |     if (s == NULL && s->db == NULL || s->fsrs == NULL)
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite session_queue_guards exited 1
+build/mutants/p17160/m0336_session.c:221:36: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  221 |     if (s == NULL || s->db == NULL && s->fsrs == NULL)
+      |                   ~~ ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build/mutants/p17160/m0336_session.c:221:36: note: place parentheses around the '&&' expression to silence this warning
+  221 |     if (s == NULL || s->db == NULL && s->fsrs == NULL)
+      |                      ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite session_queue_guards exited 1
+mutate: suite session_lapse exited 1
+build/mutants/p17160/m0339_session.c:223:22: error: non-overlapping comparisons always evaluate to false [-Werror,-Wtautological-overlap-compare]
+  223 |     if (g < CT_AGAIN && g > CT_EASY)
+      |         ~~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite session_flow_golden exited 1
+mutate: suite session_queue_guards exited 1
+
+SURVIVED  m0278 src/trainer/session.c:160 [int+1 2u -> 3u]
+SURVIVED  m0279 src/trainer/session.c:160 [int-1 2u -> 1u]
+KILLED    m0280 src/trainer/session.c:164 [arith * -> /]
+          build break
+KILLED    m0281 src/trainer/session.c:164 [arith * -> /]
+          build break
+KILLED    m0282 src/trainer/session.c:164 [arith * -> /]
+          build break
+KILLED    m0283 src/trainer/session.c:164 [arith * -> /]
+          build break
+KILLED    m0284 src/trainer/session.c:165 [arith * -> /]
+          build break
+KILLED    m0285 src/trainer/session.c:166 [cmp == -> !=]
+KILLED    m0286 src/trainer/session.c:166 [logic || -> &&]
+          build break
+KILLED    m0287 src/trainer/session.c:166 [cmp == -> !=]
+KILLED    m0288 src/trainer/session.c:166 [logic || -> &&]
+          build break
+KILLED    m0289 src/trainer/session.c:166 [cmp == -> !=]
+KILLED    m0290 src/trainer/session.c:168 [not-del ! -> (deleted)]
+KILLED    m0291 src/trainer/session.c:170 [not-del ! -> (deleted)]
+KILLED    m0292 src/trainer/session.c:174 [cmp != -> ==]
+SURVIVED  m0293 src/trainer/session.c:178 [int+1 0 -> 1]
+SURVIVED  m0294 src/trainer/session.c:178 [int-1 0 -> -1]
+KILLED    m0295 src/trainer/session.c:179 [int+1 0 -> 1]
+KILLED    m0296 src/trainer/session.c:179 [int-1 0 -> -1]
+KILLED    m0297 src/trainer/session.c:180 [int+1 0 -> 1]
+KILLED    m0298 src/trainer/session.c:180 [int-1 0 -> -1]
+KILLED    m0299 src/trainer/session.c:181 [bool false -> true]
+KILLED    m0300 src/trainer/session.c:182 [int+1 0 -> 1]
+KILLED    m0301 src/trainer/session.c:182 [int-1 0 -> -1]
+KILLED    m0302 src/trainer/session.c:183 [int+1 0 -> 1]
+KILLED    m0303 src/trainer/session.c:183 [int-1 0 -> -1]
+KILLED    m0304 src/trainer/session.c:184 [int+1 0 -> 1]
+KILLED    m0305 src/trainer/session.c:184 [int-1 0 -> -1]
+KILLED    m0306 src/trainer/session.c:185 [int+1 0 -> 1]
+KILLED    m0307 src/trainer/session.c:185 [int-1 0 -> -1]
+KILLED    m0308 src/trainer/session.c:186 [int+1 0 -> 1]
+KILLED    m0309 src/trainer/session.c:186 [int-1 0 -> -1]
+KILLED    m0310 src/trainer/session.c:193 [cmp != -> ==]
+KILLED    m0311 src/trainer/session.c:201 [arith * -> /]
+          build break
+KILLED    m0312 src/trainer/session.c:201 [arith * -> /]
+          build break
+KILLED    m0313 src/trainer/session.c:202 [cmp == -> !=]
+KILLED    m0314 src/trainer/session.c:202 [logic || -> &&]
+          build break
+KILLED    m0315 src/trainer/session.c:202 [cmp == -> !=]
+KILLED    m0316 src/trainer/session.c:202 [logic || -> &&]
+          build break
+KILLED    m0317 src/trainer/session.c:202 [cmp == -> !=]
+KILLED    m0318 src/trainer/session.c:204 [cmp == -> !=]
+KILLED    m0319 src/trainer/session.c:204 [logic || -> &&]
+KILLED    m0320 src/trainer/session.c:204 [cmp >= -> >]
+KILLED    m0321 src/trainer/session.c:208 [cmp != -> ==]
+KILLED    m0322 src/trainer/session.c:209 [cmp == -> !=]
+KILLED    m0323 src/trainer/session.c:210 [arith * -> /]
+          build break
+KILLED    m0324 src/trainer/session.c:212 [bool true -> false]
+KILLED    m0325 src/trainer/session.c:216 [arith * -> /]
+          build break
+KILLED    m0326 src/trainer/session.c:217 [cmp != -> ==]
+KILLED    m0327 src/trainer/session.c:217 [logic && -> ||]
+          build break
+KILLED    m0328 src/trainer/session.c:217 [cmp != -> ==]
+KILLED    m0329 src/trainer/session.c:217 [logic && -> ||]
+          build break
+KILLED    m0330 src/trainer/session.c:217 [cmp < -> <=]
+KILLED    m0331 src/trainer/session.c:220 [arith * -> /]
+          build break
+KILLED    m0332 src/trainer/session.c:220 [arith * -> /]
+          build break
+KILLED    m0333 src/trainer/session.c:221 [cmp == -> !=]
+KILLED    m0334 src/trainer/session.c:221 [logic || -> &&]
+          build break
+KILLED    m0335 src/trainer/session.c:221 [cmp == -> !=]
+KILLED    m0336 src/trainer/session.c:221 [logic || -> &&]
+          build break
+KILLED    m0337 src/trainer/session.c:221 [cmp == -> !=]
+KILLED    m0338 src/trainer/session.c:223 [cmp < -> <=]
+KILLED    m0339 src/trainer/session.c:223 [logic || -> &&]
+          build break
+KILLED    m0340 src/trainer/session.c:223 [cmp > -> >=]
+KILLmutate: suite session_queue_guards exited -1073741795
+mutate: suite session_queue_guards exited -1073741795
+mutate: suite session_queue_guards exited 1
+mutate: suite session_bad_last_review exited 1
+mutate: suite session_card_missing exited 1
+mutate: suite session_bad_last_review exited 1
+build/mutants/p17160/m0348_session.c:239:26: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+  239 |     if (rc != CT_REPO_OK || rc != CT_REPO_MISSING)
+      |         ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite session_absent_row exited 1
+build/mutants/p17160/m0350_session.c:245:25: error: missing field 'difficulty' initializer [-Werror,-Wmissing-field-initializers]
+  245 |     ct_fsrs_card fc = {1};
+      |                         ^
+1 error generated.
+build/mutants/p17160/m0351_session.c:245:26: error: missing field 'difficulty' initializer [-Werror,-Wmissing-field-initializers]
+  245 |     ct_fsrs_card fc = {-1};
+      |                          ^
+1 error generated.
+mutate: suite session_bad_last_review exited 1
+mutate: suite session_bad_last_review exited 1
+build/mutants/p17160/m0354_session.c:254:13: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  254 |         if (row.last_review[-1] != '\0') {
+      |             ^               ~~
+src\storage/repo_cards.h:42:5: note: array 'last_review' declared here
+   42 |     char last_review[CT_CARD_STAMP_MAX];
+      |     ^
+1 error generated.
+mutate: suite session_bad_last_review exited 1
+mutate: suite session_bad_last_review exited -1073741795
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+build/mutants/p17160/m0376_session.c:313:31: error: expected ')'
+  313 | int ct_session_end(ct_session /s, const char *now_iso) {
+      |                               ^
+build/mutants/p17160/m0376_session.c:313:19: note: to match this '('
+  313 | int ct_session_end(ct_session /s, const char *now_iso) {
+      |                   ^
+build/mutants/p17160/m0376_session.c:313:5: error: conflicting types for 'ct_session_end'
+  313 | int ct_session_end(ct_session /s, const char *now_iso) {
+      |     ^
+src\trainer/session.h:44:5: note: previous declaration is here
+   44 | int ct_session_end(ct_session *s, const char *now_iso);
+      |     ^
+build/mutants/p17160/m0376_session.c:314:9: error: use of undeclared identifier 's'
+  314 |     if (s == NULL || s->db == NULL)
+      |         ^
+build/mutants/p17160/m0376_session.c:314:22: error: use of undeclared identifier 's'
+  314 |     if (s == NULL || s->db == NULL)
+      |                      ^
+build/mutants/p17160/m0376_session.c:318:21: error: use of undeclared identifier 'now_iso'
+  318 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |                     ^~~~~~~
+build/mutants/p17160/m0376_session.c:321:28: error: use of undeclared identifier 's'
+  321 |     if (sqlite3_prepare_v2(s->db, CT_SQL_SESSION_INSERT, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^
+build/mutants/p17160/m0376_session.c:326:33: error: use of undeclared identifier 's'
+  326 |     sqlite3_bind_text(st, ++ix, s->deck, -1, SQLITE_STATIC);
+      |                                 ^
+build/mutants/p17160/m0376_session.c:327:33: error: use of undeclared identifier 's'
+  327 |     sqlite3_bind_text(st, ++ix, s->started_at, -1, SQLITE_STATIC);
+      |                                 ^
+build/mutants/p17160/m0376_session.c:328:33: error: use of undeclared identifier 'now_iso'
+  328 |     sqlite3_bind_text(st, ++ix, now_iso, -1, SQLITE_STATIC);
+      |                                 ^~~~~~~
+build/mutants/p17160/m0376_session.c:329:32: error: use of undeclared identifier 's'
+  329 |     sqlite3_bind_int(st, ++ix, s->n_graded);
+      |                                ^
+build/mutants/p17160/m0376_session.c:330:32: error: use of undeclared identifier 's'
+  330 |     sqlite3_bind_int(st, ++ix, s->n_again);
+      |                                ^
+build/mutants/p17160/m0376_session.c:331:32: error: use of undeclared identifier 's'
+  331 |     sqlite3_bind_int(st, ++ix, s->n_hard);
+      |                                ^
+build/mutants/p17160/m0376_session.c:332:32: error: use of undeclared identifier 's'
+  332 |     sqlite3_bind_int(st, ++ix, s->n_good);
+      |                                ^
+build/mutants/p17160/m0376_session.c:333:32: error: use of undeclared identifier 's'
+  333 |     sqlite3_bind_int(st, ++ix, s->n_easy);
+      |                                ^
+14 errors generated.
+build/mutants/p17160/m0377_session.c:313:46: error: expected ')'
+  313 | int ct_session_end(ct_session *s, const char /now_iso) {
+      |                                              ^
+build/mutants/p17160/m0377_session.c:313:19: note: to match this '('
+  313 | int ct_session_end(ct_session *s, const char /now_iso) {
+      |                   ^
+build/mutants/p17160/m0377_session.c:313:5: error: conflicting types for 'ct_session_end'
+  313 | int ct_session_end(ct_session *s, const char /now_iso) {
+      |     ^
+src\trainer/session.h:44:5: note: previous declaration is here
+   44 | int ct_session_end(ct_session *s, const char *now_iso);
+      |     ^
+build/mutants/p17160/m0377_session.c:318:21: error: use of undeclared identifier 'now_iso'
+  318 |     if (ct_iso_scan(now_iso, &y, &m, &d) != CT_SESSION_OK)
+      |                     ^~~~~~~
+build/mutants/p17160/m0377_session.c:328:33: error: use of undeclared identifier 'now_iso'
+  328 |     sqlite3_bind_text(st, ++ix, now_iso, -1, SQLITE_STATIC);
+      |                                 ^~~~~~~
+4 errors generated.
+mutate: suite session_flow_golden exited 1
+mutate: suite session_bad_args exited -1073741795
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+build/mutants/p17160/m0382_session.c:320:18: error: expected identifier or '('
+  320 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build/mutants/p17160/m0382_session.c:321:63: error: use of undeclared identifier 'st'
+  321 |     if (sqlite3_prepare_v2(s->db, CT_SQL_SESSION_INSERT, -1, &st, NULL) != SQLITE_OK) {
+      |                                                               ^~
+build/mutants/p17160/m0382_session.c:322:26: error: use of undeclared identifier 'st'
+  322 |         sqlite3_finalize(st);
+      |                          ^~
+build/mutants/p17160/m0382_session.c:326:23: error: use of undeclared identifier 'st'
+  326 |     sqlite3_bind_text(st, ++ix, s->deck, -1, SQLITE_STATIC);
+      |                       ^~
+build/mutants/p17160/m0382_session.c:327:23: error: use of undeclared identifier 'st'
+  327 |     sqlite3_bind_text(st, ++ix, s->started_at, -1, SQLITE_STATIC);
+      |                       ^~
+build/mutants/p17160/m0382_session.c:328:23: error: use of undeclared identifier 'st'
+  328 |     sqlite3_bind_text(st, ++ix, now_iso, -1, SQLITE_STATIC);
+      |                       ^~
+build/mutants/p17160/m0382_session.c:329:22: error: use of undeclared identifier 'st'
+  329 |     sqlite3_bind_int(st, ++ix, s->n_graded);
+      |                      ^~
+build/mutants/p17160/m0382_session.c:330:22: error: use of undeclared identifier 'st'
+  330 |     sqlite3_bind_int(st, ++ix, s->n_again);
+      |                      ^~
+build/mutants/p17160/m0382_session.c:331:22: error: use of undeclared identifier 'st'
+  331 |     sqlite3_bind_int(st, ++ix, s->n_hard);
+      |                      ^~
+build/mutants/p17160/m0382_session.c:332:22: error: use of undeclared identifier 'st'
+  332 |     sqlite3_bind_int(st, ++ix, s->n_good);
+      |                      ^~
+build/mutants/p17160/m0382_session.c:333:22: error: use of undeclared identifier 'st'
+  333 |     sqlite3_bind_int(st, ++ix, s->n_easy);
+      |                      ^~
+build/mutants/p17160/m0382_session.c:334:29: error: use of undeclared identifier 'st'
+  334 |     int step = sqlite3_step(st);
+      |                             ^~
+build/mutants/p17160/m0382_session.c:335:22: error: use of undeclared identifier 'st'
+  335 |     sqlite3_finalize(st);
+      |                      ^~
+13 errors generated.
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+mutate: suite session_flow_golden exited 1
+build/mutants/p17160/m0399_session.c:339:33: error: expected ')'
+  339 | void ct_session_free(ct_session /s) {
+      |                                 ^
+build/mutants/p17160/m0399_session.c:339:21: note: to match this '('
+  339 | void ct_session_free(ct_session /s) {
+      |                     ^
+build/mutants/p17160/m0399_session.c:339:6: error: conflicting types for 'ct_session_free'
+  339 | void ct_session_free(ct_session /s) {
+      |      ^
+src\trainer/session.h:45:6: note: previous declaration is here
+   45 | void ct_session_free(ct_session *s);
+      |      ^
+build/mutants/p17160/m0399_session.c:340:9: error: use of undeclared identifier 's'
+  340 |     if (s == NULL)
+      |         ^
+build/mutants/p17160/m0399_session.c:342:10: error: use of undeclared identifier 's'
+  342 |     free(s->queue);
+      |          ^
+build/mutants/p17160/m0399_session.c:343:5: error: use of undeclared identifier 's'
+  343 |     s->queue = NULL;
+      |     ^
+build/mutants/p17160/m0399_session.c:344:5: error: use of undeclared identifier 's'
+  344 |     s->queue_count = 0;
+      |     ^
+build/mutants/p17160/m0399_session.c:345:5: error: use of undeclared identifier 's'
+  345 |     s->queue_pos = 0;
+      |     ^
+build/mutants/p17160/m0399_session.c:346:5: error: use of undeclared identifier 's'
+  346 |     s->current_card = 0;
+      |     ^
+build/mutants/p17160/m0399_session.c:347:5: error: use of undeclared identifier 's'
+  347 |     s->card_open = false;
+      |     ^
+9 errors generated.
+mutate: suite session_flow_golden exited 1
+mutate: suite session_free_safety exited 1
+mutate: suite session_free_safety exited 1
+mutate: suite session_free_safety exited 1
+mutate: suite session_free_safety exited 1
+mutate: suite session_free_safety exited 1
+mutate: suite session_free_safety exited 1
+mutate: suite session_free_safety exited 1
+ED    m0341 src/trainer/session.c:227 [cmp != -> ==]
+KILLED    m0342 src/trainer/session.c:229 [cmp == -> !=]
+KILLED    m0343 src/trainer/session.c:229 [logic || -> &&]
+KILLED    m0344 src/trainer/session.c:229 [cmp >= -> >]
+KILLED    m0345 src/trainer/session.c:234 [cmp != -> ==]
+KILLED    m0346 src/trainer/session.c:235 [cmp == -> !=]
+KILLED    m0347 src/trainer/session.c:239 [cmp != -> ==]
+KILLED    m0348 src/trainer/session.c:239 [logic && -> ||]
+          build break
+KILLED    m0349 src/trainer/session.c:239 [cmp != -> ==]
+KILLED    m0350 src/trainer/session.c:245 [int+1 0 -> 1]
+          build break
+KILLED    m0351 src/trainer/session.c:245 [int-1 0 -> -1]
+          build break
+KILLED    m0352 src/trainer/session.c:246 [cmp == -> !=]
+KILLED    m0353 src/trainer/session.c:254 [int+1 0 -> 1]
+KILLED    m0354 src/trainer/session.c:254 [int-1 0 -> -1]
+          build break
+KILLED    m0355 src/trainer/session.c:254 [cmp != -> ==]
+KILLED    m0356 src/trainer/session.c:257 [cmp != -> ==]
+KILLED    m0357 src/trainer/session.c:261 [arith - -> +]
+SURVIVED  m0358 src/trainer/session.c:262 [cmp < -> <=]
+KILLED    m0359 src/trainer/session.c:268 [arith - -> +]
+SURVIVED  m0360 src/trainer/session.c:269 [cmp < -> <=]
+SURVIVED  m0361 src/trainer/session.c:269 [int+1 0 -> 1]
+SURVIVED  m0362 src/trainer/session.c:269 [int-1 0 -> -1]
+SURVIVED  m0363 src/trainer/session.c:270 [int+1 0 -> 1]
+SURVIVED  m0364 src/trainer/session.c:270 [int-1 0 -> -1]
+KILLED    m0365 src/trainer/session.c:278 [cmp != -> ==]
+KILLED    m0366 src/trainer/session.c:283 [cmp != -> ==]
+KILLED    m0367 src/trainer/session.c:286 [cmp == -> !=]
+KILLED    m0368 src/trainer/session.c:288 [cmp != -> ==]
+KILLED    m0369 src/trainer/session.c:292 [cmp != -> ==]
+KILLED    m0370 src/trainer/session.c:298 [cmp == -> !=]
+KILLED    m0371 src/trainer/session.c:300 [cmp == -> !=]
+KILLED    m0372 src/trainer/session.c:302 [cmp == -> !=]
+KILLED    m0373 src/trainer/session.c:308 [int+1 0 -> 1]
+KILLED    m0374 src/trainer/session.c:308 [int-1 0 -> -1]
+KILLED    m0375 src/trainer/session.c:309 [bool false -> true]
+KILLED    m0376 src/trainer/session.c:313 [arith * -> /]
+          build break
+KILLED    m0377 src/trainer/session.c:313 [arith * -> /]
+          build break
+KILLED    m0378 src/trainer/session.c:314 [cmp == -> !=]
+KILLED    m0379 src/trainer/session.c:314 [logic || -> &&]
+KILLED    m0380 src/trainer/session.c:314 [cmp == -> !=]
+KILLED    m0381 src/trainer/session.c:318 [cmp != -> ==]
+KILLED    m0382 src/trainer/session.c:320 [arith * -> /]
+          build break
+KILLED    m0383 src/trainer/session.c:321 [arith - -> +]
+SURVIVED  m0384 src/trainer/session.c:321 [int+1 1 -> 2]
+KILLED    m0385 src/trainer/session.c:321 [int-1 1 -> 0]
+KILLED    m0386 src/trainer/session.c:321 [cmp != -> ==]
+KILLED    m0387 src/trainer/session.c:325 [int+1 0 -> 1]
+KILLED    m0388 src/trainer/session.c:325 [int-1 0 -> -1]
+KILLED    m0389 src/trainer/session.c:326 [arith - -> +]
+SURVIVED  m0390 src/trainer/session.c:326 [int+1 1 -> 2]
+KILLED    m0391 src/trainer/session.c:326 [int-1 1 -> 0]
+KILLED    m0392 src/trainer/session.c:327 [arith - -> +]
+SURVIVED  m0393 src/trainer/session.c:327 [int+1 1 -> 2]
+KILLED    m0394 src/trainer/session.c:327 [int-1 1 -> 0]
+KILLED    m0395 src/trainer/session.c:328 [arith - -> +]
+SURVIVED  m0396 src/trainer/session.c:328 [int+1 1 -> 2]
+KILLED    m0397 src/trainer/session.c:328 [int-1 1 -> 0]
+KILLED    m0398 src/trainer/session.c:336 [cmp == -> !=]
+KILLED    m0399 src/trainer/session.c:339 [arith * -> /]
+          build break
+KILLED    m0400 src/trainer/session.c:340 [cmp == -> !=]
+KILLED    m0401 src/trainer/session.c:344 [int+1 0 -> 1]
+KILLED    m0402 src/trainer/session.c:344 [int-1 0 -> -1]
+KILLED    m0403 src/trainer/session.c:345 [int+1 0 -> 1]
+KILLED    m0404 src/trainer/session.c:345 [int-1 0 -> -1]
+KILLED    m0405 src/trainer/session.c:346 [int+1 0 -> 1]
+KILLED    m0406 src/trainer/session.c:346 [int-1 0 -> -1]
+KILLED    m0407 src/trainer/session.c:347 [bool false -> true]
+mutate: generated=407 build_failed=61 killed_by_tests=309 killed=370 survived=37 mutate: 37 unexplained survivors
+accepted=0 unexplained=37 skipped=0
+mutate: kill rate 370/407 = 90.9%, with accepted equivalents 370/407 = 90.9%
+mutate: wall 389.8s
+make: *** [makefile:239: mutate] Error 1

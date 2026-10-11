@@ -1,0 +1,179 @@
+effect op.01 T perm
+  corner perm cycle: URB->URF URF->URB
+  corner URB at URF UD sticker on U
+  corner URF at URB UD sticker on U
+  edge perm cycle: UR->UL UL->UR
+  edge UR at UL oriented=1
+  edge UL at UR oriented=1
+  centers: UU LL FF RR BB DD
+effect op.02 Y perm
+  corner perm cycle: ULB->DRF DRF->ULB
+  corner ULB at DRF UD sticker on R
+  corner DRF at ULB UD sticker on L
+  edge perm cycle: UB->UL UL->UB
+  edge UB at UL oriented=1
+  edge UL at UB oriented=1
+  centers: UU LL FF RR BB DD
+effect op.08 parity
+  corner perm cycle: URB->URF URF->URB
+  corner URB at URF UD sticker on U
+  corner URF at URB UD sticker on U
+  edge perm cycle: UB->UL UL->UB
+  edge UB at UL oriented=1
+  edge UL at UB oriented=1
+  centers: UU LL FF RR BB DD
+effect bldtrainer Jb perm
+  corner perm cycle: URB->URF URF->URB
+  corner URB at URF UD sticker on U
+  corner URF at URB UD sticker on U
+  edge perm cycle: UR->UF UF->UR
+  edge UR at UF oriented=1
+  edge UF at UR oriented=1
+  centers: UU LL FF RR BB DD
+effect bldtrainer Y perm
+  corner perm cycle: ULB->URF URF->ULB
+  corner ULB at URF UD sticker on U
+  corner URF at ULB UD sticker on U
+  edge perm cycle: UB->UL UL->UB
+  edge UB at UL oriented=1
+  edge UL at UB oriented=1
+  centers: UU LL FF RR BB DD
+effect m2 parity option 1
+  edge perm cycle: UB->UL UL->UB
+  edge perm cycle: UF->DB DB->UF
+  edge UB at UL oriented=1
+  edge UF at DB oriented=1
+  edge UL at UB oriented=1
+  edge DB at UF oriented=1
+  centers: UD LL FB RR BF DU
+effect m2 parity option 2
+  edge perm cycle: UB->UL UL->UB
+  edge perm cycle: UF->DB DB->UF
+  edge UB at UL oriented=1
+  edge UF at DB oriented=1
+  edge UL at UB oriented=1
+  edge DB at UF oriented=1
+  centers: UD LL FB RR BF DU
+effect m2 buffer flip
+  edge flip in place: UB
+  edge flip in place: UF
+  centers: UU LL FF RR BB DD
+effect m2 flip F2 conjugate
+  edge flip in place: UB
+  edge flip in place: DF
+  centers: UU LL FF RR BB DD
+effect pochmann example 1 orient edges conjugate
+  edge flip in place: UB
+  edge flip in place: UL
+  centers: UU LL FF RR BB DD
+effect pochmann orient corners 1
+  corner twist in place: URB UD sticker now on R
+  corner twist in place: DRF UD sticker now on F
+  centers: UU LL FF RR BB DD
+effect pochmann orient corners 2
+  corner twist in place: URB UD sticker now on B
+  corner twist in place: DRF UD sticker now on R
+  centers: UU LL FF RR BB DD
+effect pochmann orient corners 3 draft row
+  corner twist in place: URB UD sticker now on R
+  corner twist in place: URF UD sticker now on R
+  centers: UU LL FF RR BB DD
+effect pochmann orient corners 4
+  corner twist in place: URB UD sticker now on B
+  corner twist in place: URF UD sticker now on F
+  centers: UU LL FF RR BB DD
+effect pochmann M2R2 odd parity observation
+  corner perm cycle: URF->DRB DRB->URF
+  corner URF at DRB UD sticker on D
+  corner DRB at URF UD sticker on U
+  edge perm cycle: UR->DR DR->UR
+  edge perm cycle: UF->DB DB->UF
+  edge perm cycle: BR->FR FR->BR
+  edge UR at DR oriented=1
+  edge UF at DB oriented=1
+  edge BR at FR oriented=1
+  edge FR at BR oriented=1
+  edge DB at UF oriented=1
+  edge DR at UR oriented=1
+  centers: UD LL FB RR BF DU
+op.02 edge side effect pair: UL UB
+m2 parity option 1 leftover edge pair: UL UB
+m2 parity option 2 leftover edge pair: UL UB
+effect cubefreak example 1 end state
+  corner perm cycle: URB->ULF ULF->URB
+  corner perm cycle: ULB->DRB DRB->ULB
+  corner perm cycle: URF->DLB DLB->DRF DRF->URF
+  corner URB at ULF UD sticker on F
+  corner ULB at DRB UD sticker on D
+  corner URF at DLB UD sticker on L
+  corner ULF at URB UD sticker on R
+  corner DRB at ULB UD sticker on L
+  corner DLB at DRF UD sticker on D
+  corner DRF at URF UD sticker on F
+  corner twist in place: DLF UD sticker now on L
+  centers: UU LL FF RR BB DD
+cubefreak example 2 erratum: printed pair 4 setup BL'B' contradicts the page prep table where LD is BLB', corrected form used, verbatim form cycles the UL piece instead of DL and misses the claimed end state
+effect cubefreak example 2 pair 1 alone
+  edge perm cycle: UR->DF DF->FR FR->UR
+  edge UR at DF oriented=1
+  edge FR at UR oriented=0
+  edge DF at FR oriented=0
+  centers: UU LL FF RR BB DD
+effect cubefreak example 2 pair 2 alone
+  edge perm cycle: BR->DR DR->DF DF->BR
+  edge BR at DR oriented=0
+  edge DR at DF oriented=1
+  edge DF at BR oriented=0
+  centers: UU LL FF RR BB DD
+effect cubefreak example 2 pair 3 alone
+  edge perm cycle: BL->FL FL->DF DF->BL
+  edge BL at FL oriented=0
+  edge FL at DF oriented=0
+  edge DF at BL oriented=0
+  centers: UU LL FF RR BB DD
+effect cubefreak example 2 pair 4 alone
+  edge perm cycle: UF->DF DF->DL DL->UF
+  edge UF at DF oriented=1
+  edge DF at DL oriented=0
+  edge DL at UF oriented=0
+  centers: UU LL FF RR BB DD
+effect cubefreak example 2 pair 5 alone
+  edge perm cycle: UL->DB DB->DF DF->UL
+  edge UL at DB oriented=1
+  edge DB at DF oriented=0
+  edge DF at UL oriented=0
+  centers: UU LL FF RR BB DD
+effect cubefreak example 2 after pairs before orient
+  corner perm cycle: URB->DLB DLB->DRB DRB->DLF DLF->URB
+  corner perm cycle: ULB->DRF DRF->ULF ULF->ULB
+  corner URB at DLB UD sticker on D
+  corner ULB at DRF UD sticker on F
+  corner twist in place: URF UD sticker now on F
+  corner ULF at ULB UD sticker on U
+  corner DRB at DLF UD sticker on D
+  corner DLB at DRB UD sticker on R
+  corner DRF at ULF UD sticker on U
+  corner DLF at URB UD sticker on R
+  edge perm cycle: DR->DF DF->DR
+  edge flip in place: UB
+  edge DR at DF oriented=0
+  edge DF at DR oriented=1
+  centers: UU LL FF RR BB DD
+effect cubefreak example 2 end state
+  corner perm cycle: URB->DLB DLB->DRB DRB->DLF DLF->URB
+  corner perm cycle: ULB->DRF DRF->ULF ULF->ULB
+  corner URB at DLB UD sticker on D
+  corner ULB at DRF UD sticker on F
+  corner twist in place: URF UD sticker now on F
+  corner ULF at ULB UD sticker on U
+  corner DRB at DLF UD sticker on D
+  corner DLB at DRB UD sticker on R
+  corner DRF at ULF UD sticker on U
+  corner DLF at URB UD sticker on R
+  edge perm cycle: DR->DF DF->DR
+  edge DR at DF oriented=1
+  edge DF at DR oriented=1
+  centers: UU LL FF RR BB DD
+cubefreak example 2 leftover edge pair: RD FD
+cubefreak example 2 moved edges: 2
+parity flip twist probe ok
