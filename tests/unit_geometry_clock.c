@@ -112,6 +112,45 @@ CT_SUITE(clock_move_ids) {
     }
 }
 
+CT_SUITE(clock_gate_edges) {
+    CT_ASSERT_EQ(ct_clock_move_id(-1, 1), CT_GEOMETRY_ERR);
+    CT_ASSERT_EQ(ct_clock_move_id(CT_CLOCK_NAMES, 1), CT_GEOMETRY_ERR);
+
+    ct_clock_state s;
+    ct_clock_state_solved(&s);
+    CT_ASSERT_EQ(ct_clock_apply(&s, 0), 0);
+    CT_ASSERT(!s.flipped);
+    CT_ASSERT_EQ(ct_clock_apply(&s, CT_CLOCK_Y2), 0);
+    CT_ASSERT(s.flipped);
+
+    ct_clock_state t;
+    ct_clock_state_solved(&t);
+    CT_ASSERT_EQ(ct_clock_apply(&t, ct_clock_move_id(CT_CLOCK_ALL, -1)), 0);
+    for (int i = 0; i < CT_CLOCK_FACE_CLOCKS; i++) {
+        CT_ASSERT_EQ(t.clocks[i], 11);
+    }
+    for (int i = CT_CLOCK_FACE_CLOCKS; i < CT_CLOCK_CLOCKS; i++) {
+        int r = (i - CT_CLOCK_FACE_CLOCKS) / CT_CLOCK_GRID;
+        int c = (i - CT_CLOCK_FACE_CLOCKS) % CT_CLOCK_GRID;
+        CT_ASSERT_EQ(t.clocks[i], (r == 0 || r == 2) && (c == 0 || c == 2) ? 1 : 0);
+    }
+
+    const ct_geometry *g = ct_geometry_clock();
+    struct {
+        uint8_t lo;
+        uint8_t perm[CT_CLOCK_CLOCKS];
+        uint8_t hi;
+    } box;
+    box.lo = 0xAB;
+    box.hi = 0xCD;
+    CT_ASSERT_EQ(g->move_facelets(g, -1, CT_GEOMETRY_SINGLE_N, box.perm), CT_GEOMETRY_ERR);
+    CT_ASSERT_EQ(g->move_facelets(g, CT_CLOCK_MOVES, CT_GEOMETRY_SINGLE_N, box.perm),
+                 CT_GEOMETRY_ERR);
+    CT_ASSERT_EQ(g->move_facelets(g, CT_CLOCK_Y2, CT_GEOMETRY_SINGLE_N, box.perm), 0);
+    CT_ASSERT_EQ(box.lo, 0xAB);
+    CT_ASSERT_EQ(box.hi, 0xCD);
+}
+
 CT_SUITE(clock_state_vectors) {
     const int amounts[] = {1, 2, 5};
     for (int name = 0; name < CT_CLOCK_NAMES; name++) {
