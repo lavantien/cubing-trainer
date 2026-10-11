@@ -325,6 +325,14 @@ CT_SUITE(trainer_decomp_lines) {
     CT_ASSERT_STR_EQ(lines[1], "interchange R2 D2");
     CT_ASSERT_STR_EQ(lines[2], "insertion R' U' R");
     CT_ASSERT_STR_EQ(lines[3], "class per special");
+    f.sel.case_index = CT_TRAINER_CELL_NONE;
+    CT_ASSERT_EQ(ct_trainer_decomp(&f, lines, CT_TRAINER_DECOMP_LINES), 0);
+    f.sel.case_index = 0;
+    memset(lines, 0, sizeof lines);
+    CT_ASSERT_EQ(ct_trainer_decomp(&f, lines, 0), 0);
+    CT_ASSERT_EQ(ct_trainer_decomp(&f, lines, 1), 1);
+    CT_ASSERT_STR_EQ(lines[0], "setup x y");
+    CT_ASSERT_EQ(lines[1][0], '\0');
     f.alg.interchange[0] = '\0';
     f.alg.classification = CT_CLS_SP7;
     CT_ASSERT_EQ(ct_trainer_decomp(&f, lines, CT_TRAINER_DECOMP_LINES), 3);
@@ -335,6 +343,26 @@ CT_SUITE(trainer_decomp_lines) {
     CT_ASSERT_STR_EQ(lines[0], "setup x y");
     CT_ASSERT_STR_EQ(lines[1], "insertion R' U' R");
     CT_ASSERT_STR_EQ(lines[2], "");
+    snprintf(f.alg.setup, sizeof f.alg.setup, "%s", "x");
+    snprintf(f.alg.insertion, sizeof f.alg.insertion, "%s", "R");
+    memset(lines, 0, sizeof lines);
+    CT_ASSERT_EQ(ct_trainer_decomp(&f, lines, CT_TRAINER_DECOMP_LINES), 3);
+    CT_ASSERT_STR_EQ(lines[0], "setup x");
+    CT_ASSERT_STR_EQ(lines[1], "insertion R");
+    CT_ASSERT_STR_EQ(lines[2], "class SP7");
+}
+
+CT_SUITE(trainer_form_visible_count_edges) {
+    CT_ASSERT_EQ(ct_trainer_form_visible_count(NULL), 0);
+    ct_trainer_form f;
+    memset(&f, 0, sizeof f);
+    CT_ASSERT_EQ(ct_trainer_form_visible_count(&f), 0);
+    f.case_count = 1;
+    f.cell = CT_TRAINER_CELL_NONE;
+    CT_ASSERT_EQ(ct_trainer_form_visible_count(&f), 1);
+    f.case_count = 0;
+    f.cell = 2;
+    CT_ASSERT_EQ(ct_trainer_form_visible_count(&f), 0);
 }
 
 CT_SUITE(trainer_form_letter_scheme_routed) {
