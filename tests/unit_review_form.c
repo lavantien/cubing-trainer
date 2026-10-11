@@ -479,6 +479,95 @@ CT_SUITE(review_screen_session_log) {
     ct_db_close(db);
 }
 
+CT_SUITE(review_form_boundaries) {
+    sqlite3 *db = review_db();
+    long x1 = seed_card(db, "rev", "x1", "R", "", "");
+    long x2 = seed_card(db, "rev", "x2", "", "R", "");
+    long x3 = seed_card(db, "rev", "x3", "???", "", "");
+    seed_due(db, x1);
+    seed_due(db, x2);
+    seed_due(db, x3);
+
+    ct_review_form f;
+    memset(&f, 0, sizeof f);
+    CT_ASSERT_EQ(ct_review_form_begin(&f, db, "rev", now_stamp, today_num, 0), 3);
+    CT_ASSERT_EQ(f.card.id, x1);
+    CT_ASSERT_STR_EQ(f.alg_text, "R");
+    CT_ASSERT_EQ(f.move_count, 1);
+    CT_ASSERT_EQ(f.anim.count, 1);
+
+    CT_ASSERT_EQ(ct_review_form_grade(&f, CT_GOOD, now_stamp), CT_SESSION_OK);
+    CT_ASSERT_EQ(f.card.id, x2);
+    CT_ASSERT_STR_EQ(f.alg_text, "R");
+    CT_ASSERT_EQ(f.move_count, 1);
+    CT_ASSERT_EQ(f.anim.count, 1);
+
+    CT_ASSERT_EQ(ct_review_form_grade(&f, CT_GOOD, now_stamp), CT_SESSION_OK);
+    CT_ASSERT_EQ(f.card.id, x3);
+    CT_ASSERT_EQ(f.status, CT_SESSION_OK);
+    CT_ASSERT_STR_EQ(f.alg_text, "???");
+    CT_ASSERT_EQ(f.move_count, 0);
+    CT_ASSERT_EQ(f.anim.count, 0);
+    CT_ASSERT(ct_cube_solved(&f.cube));
+
+    ct_review_form_reveal(&f);
+    CT_ASSERT(f.revealed);
+    CT_ASSERT(f.playing);
+    CT_ASSERT_EQ(f.anim.count, 0);
+    CT_ASSERT(ct_cube_solved(&f.cube));
+
+    CT_ASSERT_EQ(ct_review_form_scrub(&f, 2), CT_SESSION_OK);
+    CT_ASSERT_EQ(f.scrub_index, 0);
+    CT_ASSERT_EQ(f.anim.count, 0);
+    CT_ASSERT(ct_cube_solved(&f.cube));
+    CT_ASSERT_EQ(ct_review_form_scrub(&f, -1), CT_SESSION_OK);
+    CT_ASSERT_EQ(f.scrub_index, 0);
+    CT_ASSERT_EQ(f.anim.count, 0);
+
+    CT_ASSERT_EQ(ct_review_form_grade(&f, CT_GOOD, now_stamp), CT_SESSION_OK);
+    CT_ASSERT(!ct_session_has_next(&f.session));
+    CT_ASSERT_EQ(f.card.id, 0);
+    CT_ASSERT_EQ(f.alg_text[0], '\0');
+    CT_ASSERT(!f.playing);
+    CT_ASSERT_EQ(f.scrub_index, 0);
+    CT_ASSERT(f.status < 0);
+    ct_db_close(db);
+}
+
+CT_SUITE(review_form_scrub_floor) {
+    sqlite3 *db = review_db();
+    long a = seed_card(db, "rev", "a", "R U R'", "", "");
+    seed_due(db, a);
+
+    ct_review_form f;
+    memset(&f, 0, sizeof f);
+    CT_ASSERT_EQ(ct_review_form_begin(&f, db, "rev", now_stamp, today_num, 0), 1);
+    CT_ASSERT_EQ(ct_review_form_scrub(&f, -1), CT_SESSION_OK);
+    CT_ASSERT_EQ(f.scrub_index, 0);
+    CT_ASSERT_EQ(f.anim.count, 3);
+    CT_ASSERT(!ct_cube_solved(&f.cube));
+
+    ct_move moves[CT_ANIM_QUEUE_CAP];
+    CT_ASSERT_EQ(parse_alg("R U R'", moves), 3);
+    ct_cube exp;
+    scramble_expected(&exp, moves, 3);
+    CT_ASSERT(ct_cube_equal(&f.cube, &exp));
+    ct_db_close(db);
+}
+
+CT_SUITE(review_form_empty_status) {
+    sqlite3 *db = review_db();
+    seed_card(db, "other", "x", "R U", "", "");
+
+    ct_review_form f;
+    memset(&f, 0, sizeof f);
+    CT_ASSERT_EQ(ct_review_form_begin(&f, db, "rev", now_stamp, today_num, 0), 0);
+    CT_ASSERT_EQ(f.session.queue_count, 0);
+    CT_ASSERT(f.status < 0);
+    CT_ASSERT(!ct_session_has_next(&f.session));
+    ct_db_close(db);
+}
+
 CT_SUITE(review_form_guards) {
     sqlite3 *db = review_db();
     long a = seed_card(db, "rev", "a", "R U R'", "", "");

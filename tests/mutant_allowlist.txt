@@ -1280,3 +1280,61 @@ src/ui/screen_cards.c:393	field loop bound, draw path only
 src/ui/screen_cards.c:394	field buffer pointer arithmetic, draw path only
 src/ui/screen_cards.c:395	field placement, draw path only
 src/ui/screen_cards.c:402	status bar rect, draw path only
+src/ui/screen_review.c:11	speed table first entry, consumed only by the gui speed callback no headless suite triggers
+src/ui/screen_review.c:15	margin shift constant, consumed only by the draw-side layout arithmetic no headless suite exercises
+src/ui/screen_review.c:16	pane width divisor, draw layout only
+src/ui/screen_review.c:17	field height shift, draw layout only
+src/ui/screen_review.c:18	text size shift, draw layout only
+src/ui/screen_review.c:20	play button count, consumed only by the draw-side play button row
+src/ui/screen_review.c:21	speed count constant, consumed only by the draw-side speed row and its label array
+src/ui/screen_review.c:24	camera distance, write-only screen state read only by the draw path
+src/ui/screen_review.c:25	camera offset, write-only screen state read only by the draw path
+src/ui/screen_review.c:26	camera fov compose, write-only screen state read only by the draw path
+src/ui/screen_review.c:62	scramble loop overrun applies parser frame residue one slot past the written inverses, it decodes as a zero turn on every suite alg so the extra apply is the identity
+src/ui/screen_review.c:114	local card fill byte, the failure path never reads the local and the success path overwrites every field
+src/ui/screen_review.c:126	weakened parse clamp maps a zero parse to itself, the minus one mutant is killed by the move count pin
+src/ui/screen_review.c:143	weakened parse clamp in reveal maps zero and minus one to an identical empty replay, the plus one mutant is killed by the empty queue pin
+src/ui/screen_review.c:144	minus one clamp replacement in reveal mirrors the original empty replay, no scramble or push happens either way
+src/ui/screen_review.c:192	speed min clamp boundary is idempotent, at the minimum both arms store the same value
+src/ui/screen_review.c:204	weakened negative scrub clamp maps zero to itself, the minus one mutant is killed by the floor pin
+src/ui/screen_review.c:207	upper scrub clamp boundary is idempotent, at move_count both arms store the same value
+src/ui/screen_review.c:212	weakened parse clamp in scrub maps zero and minus one to an identical empty replay
+src/ui/screen_review.c:213	minus one clamp replacement in scrub mirrors the original empty replay
+src/ui/screen_review.c:249	iso scan start index feeds only the day seed of the auto-open session, no suite can pin the wall clock so the day is unobservable
+src/ui/screen_review.c:250	iso field start shift feeds only the unobservable day seed, the stamp still parses to a valid triple
+src/ui/screen_review.c:251	iso value accumulator init feeds only the unobservable day seed
+src/ui/screen_review.c:252	any flag flip only matters for a digitless field, the wall clock stamp always carries digits
+src/ui/screen_review.c:253	weakened digit bound drops trailing nines from the day seed, unobservable in the empty default-deck session
+src/ui/screen_review.c:254	digit accumulation arithmetic feeds only the unobservable day seed
+src/ui/screen_review.c:258	separator guard conjunction flip only matters for a digitless field, the stamp always parses
+src/ui/screen_review.c:264	year store index, the day seed is unobservable in the empty default-deck session
+src/ui/screen_review.c:265	month store value, same unobservable day seed
+src/ui/screen_review.c:266	day store value, same unobservable day seed
+src/ui/screen_review.c:272	scheme loader null guard, the scheme is write-only state read only by the draw path
+src/ui/screen_review.c:276	scheme face loop bound, write-only scheme state read only by the draw path
+src/ui/screen_review.c:277	scheme settings probe, write-only scheme state read only by the draw path
+src/ui/screen_review.c:286	open form memset fill, the subsequent form begin memsets the same struct wholesale
+src/ui/screen_review.c:298	year holder init, overwritten on every scan success and unused on failure
+src/ui/screen_review.c:299	month holder init, overwritten on every scan success and unused on failure
+src/ui/screen_review.c:300	day holder init, overwritten on every scan success and unused on failure
+src/ui/screen_review.c:303	auto-open limit seed, one and minus one build the same empty default-deck queue
+src/ui/screen_review.c:317	opened reset in the escape branch, raylib input branch no headless suite can trigger
+src/ui/screen_review.c:325	scrub index recompute in the frame completion branch, needs a live anim clock no headless suite drives
+src/ui/screen_review.c:326	anim drain check in the frame completion branch, same live-clock branch
+src/ui/screen_review.c:328	playing reset in the frame completion branch, same live-clock branch
+src/ui/screen_review.c:358	button row width split, draw path only
+src/ui/screen_review.c:359	button row loop bound, draw path only
+src/ui/screen_review.c:360	button hit test arithmetic, draw path only
+src/ui/screen_review.c:374	play callback dispatch, gui event branch no headless suite can trigger
+src/ui/screen_review.c:387	null guard after the background clear, draw path only
+src/ui/screen_review.c:394	pane width layout, draw path only
+src/ui/screen_review.c:397	right pane x layout, draw path only
+src/ui/screen_review.c:398	right pane width layout, draw path only
+src/ui/screen_review.c:399	row step layout, draw path only
+src/ui/screen_review.c:403	scissor pane bounds, draw path only
+src/ui/screen_review.c:416	empty card branch, draw path only
+src/ui/screen_review.c:418	status bar rect in the empty branch, draw path only
+src/ui/screen_review.c:439	slider height layout, draw path only
+src/ui/screen_review.c:440	scrub slider, gui event state no headless suite can trigger
+src/ui/screen_review.c:445	status bar rect, draw path only
+src/ui/screen_review.c:100	minus one weakening at the begin gate only relaxes the rc minus one case, the form memset zeroes the session first so the deferred load reproduces the same error status
