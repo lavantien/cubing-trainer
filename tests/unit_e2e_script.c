@@ -1,3 +1,4 @@
+#include <dirent.h>
 #include <sqlite3.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,6 +16,7 @@
 #include "framework.h"
 
 #if defined(_WIN32)
+#include <direct.h>
 #include <process.h>
 #define CT_E2E_PUTENV _putenv
 #define CT_E2E_PID _getpid()
@@ -48,6 +50,32 @@ static int e2e_run(ct_app *app, const char *text, char *err) {
     ct_script_rt rt;
     memset(&rt, 0, sizeof rt);
     return ct_script_run(app, &rt, &script, err, CT_SCRIPT_ERR_MAX);
+}
+
+static void e2e_rm_dir(const char *path) {
+    DIR *d = opendir(path);
+    if (d == NULL) {
+        return;
+    }
+    struct dirent *e;
+    while ((e = readdir(d)) != NULL) {
+        if (strcmp(e->d_name, ".") == 0 || strcmp(e->d_name, "..") == 0) {
+            continue;
+        }
+        char child[CT_DB_PATH_MAX + 64];
+        if (snprintf(child, sizeof child, "%s/%s", path, e->d_name) >= (int)sizeof child) {
+            continue;
+        }
+        DIR *sub = opendir(child);
+        if (sub != NULL) {
+            closedir(sub);
+            e2e_rm_dir(child);
+        } else {
+            remove(child);
+        }
+    }
+    closedir(d);
+    rmdir(path);
 }
 
 static const char e2e_reviews_cap_setup[] = "cards_open unfiled\n"
@@ -375,6 +403,7 @@ CT_SUITE(e2e_run_expect_reviews_cap) {
 CT_SUITE(e2e_run_expect_cfg) {
     char dir[CT_DB_PATH_MAX];
     snprintf(dir, sizeof dir, "build/test_e2e_script/p%ld", (long)CT_E2E_PID);
+    e2e_rm_dir(dir);
     char binding[CT_DB_PATH_MAX + 32];
     snprintf(binding, sizeof binding, "CT_DATA_DIR=%s", dir);
     CT_ASSERT_EQ(CT_E2E_PUTENV(binding), 0);
@@ -461,6 +490,7 @@ CT_SUITE(e2e_run_settings_form) {
 CT_SUITE(e2e_run_restart_merge) {
     char dir[CT_DB_PATH_MAX];
     snprintf(dir, sizeof dir, "build/test_e2e_script/p%ld", (long)CT_E2E_PID);
+    e2e_rm_dir(dir);
     char binding[CT_DB_PATH_MAX + 32];
     snprintf(binding, sizeof binding, "CT_DATA_DIR=%s", dir);
     CT_ASSERT_EQ(CT_E2E_PUTENV(binding), 0);
