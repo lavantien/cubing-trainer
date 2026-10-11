@@ -45,7 +45,7 @@ src/engine/geometry.c:82	col loop bound boundary mutant is equivalent: perm admi
 src/engine/geometry.c:121	cell argument mutants are equivalent: ct_sticker_world derives the axis output from the face normal only and never from row or col, and the center output is discarded here
 src/gen/score.c:39	face bit loop bound mutant is equivalent: faces are validated to 0 to 5 before the call, so the extra iteration tests bit 1<<6 against a bit that is always one of bits 0 to 5 and never matches
 src/gen/score.c:44	face bit not-found return mutants are equivalent: every caller passes score_face_bits of a validated face, and 1<<i for i 0 to 5 covers all six bits, so the not-found return path is unreachable
-src/gen/score.c:139	need sign check mutants are equivalent: need is snprintf's length of a fixed nonempty format, never 0 or negative, and a hypothetical -1 still reaches the cap rejection through the unsigned cast
+src/gen/score.c:161	need sign check mutants are equivalent: need is snprintf's length of a fixed nonempty format, never 0 or negative, and a hypothetical -1 still reaches the cap rejection through the unsigned cast
 src/engine/geometry_sq1.c:30	zero position boundary mutant is a true equivalent: pos == CT_SQ1_ZERO_POS implies x == 0 and y == 0, rejected at function entry, so no reachable input distinguishes < from <=
 src/engine/geometry_sq1.c:69	cut half sibling index mutant is a true equivalent: units[4] == units[6] needs one piece covering units 4 through 6, widths max 2, probe counted 0 nonadjacent equalities over 200000 reachable walks
 src/engine/geometry_sq1.c:86	move id lower guard mutant is a true equivalent: move_id == -1 passes the mutated guard and ct_sq1_move_pair rejects it, same error return
