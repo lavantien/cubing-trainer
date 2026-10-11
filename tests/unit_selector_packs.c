@@ -150,3 +150,59 @@ CT_SUITE(selector_pack_groups) {
                  CT_SELECTOR_ERR);
     ct_db_close(db);
 }
+
+CT_SUITE(selector_group_scope) {
+    sqlite3 *db = NULL;
+    ct_db_open(&db, ":memory:");
+    ct_db_migrate(db, "db/migrations");
+    CT_ASSERT_EQ(ct_pack_seed_file(db, "db/seeds/packs/bigcube_parity.tsv", CT_EVENT_4X4,
+                                   CT_METHOD_YAU, CT_STAGE_PARITY),
+                 5);
+    CT_ASSERT_EQ(ct_pack_seed_file(db, "db/seeds/packs/bigcube_l2e.tsv", CT_EVENT_5X5,
+                                   CT_METHOD_REDUCTION, CT_STAGE_PARITY),
+                 12);
+    CT_ASSERT_EQ(ct_pack_seed_file(db, "db/seeds/packs/bigcube_parity.tsv", CT_EVENT_5X5,
+                                   CT_METHOD_REDUCTION, CT_STAGE_PARITY),
+                 5);
+    CT_ASSERT_EQ(ct_pack_seed_file(db, "db/seeds/packs/bigcube_l2e.tsv", CT_EVENT_6X6,
+                                   CT_METHOD_REDUCTION, CT_STAGE_PARITY),
+                 12);
+    CT_ASSERT_EQ(ct_pack_seed_file(db, "db/seeds/packs/bigcube_parity.tsv", CT_EVENT_6X6,
+                                   CT_METHOD_REDUCTION, CT_STAGE_PARITY),
+                 5);
+    CT_ASSERT_EQ(ct_pack_seed_file(db, "db/seeds/packs/bigcube_l2e.tsv", CT_EVENT_7X7,
+                                   CT_METHOD_REDUCTION, CT_STAGE_PARITY),
+                 12);
+    CT_ASSERT_EQ(ct_pack_seed_file(db, "db/seeds/packs/bigcube_parity.tsv", CT_EVENT_7X7,
+                                   CT_METHOD_REDUCTION, CT_STAGE_PARITY),
+                 5);
+    static const struct {
+        ct_event event;
+        ct_method method;
+        int rows;
+    } decks[] = {
+        {CT_EVENT_4X4, CT_METHOD_YAU, 5},
+        {CT_EVENT_5X5, CT_METHOD_REDUCTION, 17},
+        {CT_EVENT_6X6, CT_METHOD_REDUCTION, 17},
+        {CT_EVENT_7X7, CT_METHOD_REDUCTION, 17},
+    };
+    for (size_t d = 0; d < sizeof decks / sizeof decks[0]; d++) {
+        ct_selector_list lists[SP_LISTS];
+        int list_count = ct_selector_lists(decks[d].event, decks[d].method, lists, SP_LISTS);
+        CT_ASSERT(list_count >= 1);
+        int list_id = -1;
+        for (int i = 0; i < list_count; i++) {
+            if (lists[i].stage == CT_STAGE_PARITY) {
+                list_id = i;
+            }
+        }
+        CT_ASSERT(list_id >= 0);
+        int count = ct_selector_case_count(db, NULL, decks[d].event, decks[d].method, list_id);
+        CT_ASSERT_EQ(count, decks[d].rows);
+        for (int r = 0; r < count; r++) {
+            CT_ASSERT_EQ(ct_selector_case_group(db, decks[d].event, decks[d].method, list_id, r),
+                         0);
+        }
+    }
+    ct_db_close(db);
+}

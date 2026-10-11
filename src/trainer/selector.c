@@ -386,6 +386,9 @@ int ct_selector_case_group(sqlite3 *db, ct_event ev, ct_method m, int list_id, i
     if (ct_selector_pack_case(db, ev, m, list_id, index, &e) != 0) {
         return CT_SELECTOR_ERR;
     }
+    if (ev != CT_EVENT_3BLD || m != CT_METHOD_3STYLE || stage != CT_STAGE_PARITY) {
+        return 0;
+    }
     for (int g = 0; g < CT_SELECTOR_GROUPS_MAX; g++) {
         size_t len = strlen(ct_selector_group_prefixes[g]);
         if (strncmp(e.case_key, ct_selector_group_prefixes[g], len) == 0) {
