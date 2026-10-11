@@ -360,6 +360,13 @@ CT_SUITE(review_log_rows) {
     CT_ASSERT_EQ(rows[0].rating, CT_AGAIN);
     CT_ASSERT_EQ(rows[1].rating, CT_GOOD);
     CT_ASSERT_EQ(ct_repo_reviews_for_card(db, 4242, rows, 6), 0);
+    CT_ASSERT_EQ(ct_repo_reviews_for_card(db, a, rows, 1), 1);
+    CT_ASSERT_EQ(rows[0].rating, CT_AGAIN);
+
+    memset(rows, 0xAA, sizeof rows);
+    CT_ASSERT_EQ(ct_repo_reviews_for_card(db, b, rows, 6), 1);
+    CT_ASSERT_EQ(rows[1].id, 0);
+    CT_ASSERT_EQ(rows[1].rating, 0);
 
     CT_ASSERT(ct_repo_review_log(db, a, 0, "2026-05-04T00:00:00Z", 1.0, 5.0, 0.0, 1.0) < 0);
     CT_ASSERT(ct_repo_review_log(db, a, 5, "2026-05-04T00:00:00Z", 1.0, 5.0, 0.0, 1.0) < 0);
@@ -401,8 +408,10 @@ CT_SUITE(due_cards) {
     CT_ASSERT_EQ(ids[1], equal);
 
     memset(ids, 0, sizeof ids);
+    ids[1] = 777777;
     CT_ASSERT_EQ(ct_repo_due_cards(db, "due", now, ids, 1), 1);
     CT_ASSERT_EQ(ids[0], before);
+    CT_ASSERT_EQ(ids[1], 777777);
 
     CT_ASSERT_EQ(ct_repo_due_cards(db, "other", now, ids, 8), 1);
     CT_ASSERT_EQ(ids[0], other);
@@ -563,6 +572,16 @@ CT_SUITE(card_bad_args) {
     CT_ASSERT(ct_repo_reviews_for_card(db, 0, &rev, 1) < 0);
     CT_ASSERT(ct_repo_reviews_for_card(db, 1, &rev, -1) < 0);
     CT_ASSERT(ct_repo_due_cards(NULL, "d", "2026-06-01T00:00:00Z", NULL, 0) < 0);
+    CT_ASSERT_EQ(ct_repo_reviews_for_card(db, 1, NULL, 0), CT_REPO_OK);
+    CT_ASSERT(ct_repo_due_cards(db, "d", "2026-06-01T00:00:00Z", NULL, 0) == CT_REPO_OK);
+    CT_ASSERT(ct_repo_due_cards(db, "d", "2026-06-01T00:00:00Z", NULL, 1) < 0);
+    long bad_ids[2];
+    CT_ASSERT_EQ(ct_repo_due_cards(db, "d", "2026-06-01T00:00:00Z", bad_ids, -1), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_review_log(db, 0, CT_GOOD, "2026-06-01T00:00:00Z", 1.0, 5.0, 0.0, 1.0),
+                 CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_review_log(NULL, 1, CT_GOOD, "2026-06-01T00:00:00Z", 1.0, 5.0, 0.0, 1.0),
+                 CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_repo_reviews_for_card(db, 0, &rev, 1), CT_REPO_ERR_ARG);
     ct_db_close(db);
 }
 

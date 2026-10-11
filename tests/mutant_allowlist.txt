@@ -1122,3 +1122,12 @@ src/storage/repo_cards.c:327	sqlite reads any negative byte count as nul termina
 src/storage/repo_cards.c:331	sqlite reads any negative byte count as nul terminated, minus two binds the same deck text
 src/storage/repo_cards.c:349	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
 src/storage/repo_cards.c:378	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+src/storage/repo_reviews.c:27	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+src/storage/repo_reviews.c:34	sqlite reads any negative byte count as nul terminated, minus two binds the same stamp
+src/storage/repo_reviews.c:60	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+src/storage/repo_reviews.c:98	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement
+src/storage/repo_reviews.c:103	sqlite reads any negative byte count as nul terminated, minus two binds the same deck text
+src/storage/repo_reviews.c:104	sqlite reads any negative byte count as nul terminated, minus two binds the same stamp
+src/storage/repo_reviews.c:56	cap zero falls through to the empty loop and returns the same zero rows
+src/storage/repo_reviews.c:95	cap zero falls through to the limit zero query and returns the same zero rows
+src/storage/repo_reviews.c:108	the bound cap is also bound as the SQL LIMIT so sqlite3_step never returns ROW once n reaches cap, the widened loop bound re-checks the same DONE step and exits identically
