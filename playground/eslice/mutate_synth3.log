@@ -1,0 +1,1503 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_shots.c -o build_eslice/tobj/tests/unit_shots.o
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c src/ui/screen_trainer.c -o build_eslice/tobj/src/ui/screen_trainer.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_eslice/bin/mutate.exe src/gen/synth.c build_eslice unit_synth_table unit_synth_direct unit_synth_setup unit_synth_determinism unit_synth_config unit_synth_bad_input unit_synth_gates score_subset score_subset_edge
+mutate: scope=src/gen/synth.c files=1 sites=928 suites=9
+KILLED    m0001 src/gen/synth.c:24 [arith * -> /]
+          build break
+KILLED    m0002 src/gen/synth.c:26 [arith * -> /]
+          build break
+KILLED    m0003 src/gen/synth.c:36 [arith * -> /]
+SURVIVED  m0004 src/gen/synth.c:36 [arith - -> +]
+SURVIVED  m0005 src/gen/synth.c:36 [int+1 1 -> 2]
+SURVIVED  m0006 src/gen/synth.c:36 [int-1 1 -> 0]
+KILLED    m0007 src/gen/synth.c:46 [arith * -> /]
+          build break
+KILLED    m0008 src/gen/synth.c:52 [arith * -> /]
+          build break
+KILLED    m0009 src/gen/synth.c:66 [arith * -> /]
+KILLED    m0010 src/gen/synth.c:66 [arith * -> /]
+KILLED    m0011 src/gen/synth.c:66 [arith + -> -]
+KILLED    m0012 src/gen/synth.c:66 [arith * -> /]
+KILLED    m0013 src/gen/synth.c:66 [arith + -> -]
+KILLED    m0014 src/gen/synth.c:70 [arith * -> /]
+KILLED    m0015 src/gen/synth.c:70 [arith * -> /]
+KILLED    m0016 src/gen/synth.c:70 [arith + -> -]
+KILLED    m0017 src/gen/synth.c:70 [arith * -> /]
+KILLED    m0018 src/gen/synth.c:70 [arith + -> -]
+KILLED    m0019 src/gen/synth.c:73 [arith * -> /]
+          build break
+SURVIVED  m0020 src/gen/synth.c:74 [int+1 0 -> 1]
+SURVIVED  m0021 src/gen/synth.c:74 [int-1 0 -> -1]
+KILLED    m0022 src/gen/synth.c:74 [arith * -> /]
+          build break
+KILLED    m0023 src/gen/synth.c:76 [int+1 0 -> 1]
+SURVIVED  m0024 src/gen/synth.c:76 [int-1 0 -> -1]
+SURVIVED  m0025 src/gen/synth.c:76 [cmp < -> <=]
+KILLED    m0026 src/gen/synth.c:77 [int+1 0 -> 1]
+KILLED    m0027 src/gen/synth.c:77 [int-1 0 -> -1]
+SURVIVED  m0028 src/gen/synth.c:77 [cmp < -> <=]
+KILLED    m0029 src/gen/synth.c:78 [int+1 0 -> 1]
+KILLED    m0030 src/gen/synth.c:78 [int-1 0 -> -1]
+SURVIVED  m0031 src/gen/synth.c:78 [cmp < -> <=]
+KILLED    m0032 src/gen/synth.c:86 [arith * -> /]
+          build break
+KILLED    m0033 src/gen/synth.c:87 [int+1 0 -> 1]
+KILLED    m0034 src/gen/synth.c:87 [int-1 0 -> -1]
+SURVIVED  m0035 src/gen/synth.c:87 [cmp < -> <=]
+KILLED    m0036 src/gen/synth.c:88 [int+1 0 -> 1]
+KILLED    m0037 src/gen/synth.c:88 [int-1 0 -> -1]
+SURVIVED  m0038 src/gen/synth.c:88 [cmp < -> <=]
+KILLED    m0039 src/gen/synth.c:89 [int+1 0 -> 1]
+KILLED    m0040 src/gen/synth.c:89 [int-1 0 -> -1]
+SURVIVED  m0041 src/gen/synth.c:89 [cmp < -> <=]
+KILLED    m0042 src/gen/synth.c:96 [arith * -> /]
+          build break
+KILLED    m0043 src/gen/synth.c:96 [arith * -> /]
+          build break
+KILLED    m0044 src/gen/synth.c:97 [int+1 0 -> 1]
+SURVIVED  m0045 src/gen/synth.c:97 [int-1 0 -> -1]
+KILLED    m0046 src/gen/synth.c:97 [cmp < -> <=]
+KILLED    m0047 src/gen/synth.c:102 [arith * -> /]
+          build break
+KILLED    m0048 src/gen/synth.c:103 [int+1 0 -> 1]
+KILLED    m0049 src/gen/synth.c:103 [int-1 0 -> -1]
+KILLED    m0050 src/gen/synth.c:104 [int+1 1 -> 2]
+KILLED    m0051 src/gen/synth.c:104 [int-1 1 -> 0]
+KILLED    m0052 src/gen/synth.c:105 [int+1 2 -> 3]
+KILLED    m0053 src/gen/synth.c:105 [int-1 2 -> 1]
+KILLED    m0054 src/gen/synth.c:106 [int+1 1 -> 2]
+SURVIVED  m0055 src/gen/synth.c:106 [int-1 1 -> 0]
+KILLED    m0056 src/gen/synth.c:106 [cmp < -> <=]
+KILLED    m0057 src/gen/synth.c:108 [arith - -> +]
+KILLED    m0058 src/gen/synth.c:108 [int+1 1 -> 2]
+KILLED    m0059 src/gen/synth.c:108 [int-1 1 -> 0]
+KILLED    m0060 src/gen/synth.c:109 [cmp >= -> >]
+KILLED    m0061 src/gen/synth.c:109 [int+1 0 -> 1]
+SURVIVED  m0062 src/gen/synth.c:109 [int-1 0 -> -1]
+KILLED    m0063 src/gen/synth.c:109 [logic && -> ||]
+SURVIVED  m0064 src/gen/synth.c:109 [cmp > -> >=]
+KILLED    m0065 src/gen/synth.c:110 [arith + -> -]
+KILLED    m0066 src/gen/synth.c:110 [int+1 1 -> 2]
+KILLED    m0067 src/gen/synth.c:110 [int-1 1 -> 0]
+KILLED    m0068 src/gen/synth.c:113 [arith + -> -]
+KILLED    m0069 src/gen/synth.c:113 [int+1 1 -> 2]
+KILLED    m0070 src/gen/synth.c:113 [int-1 1 -> 0]
+KILLED    m0071 src/gen/synth.c:115 [int+1 0 -> 1]
+KILLED    m0072 src/gen/synth.c:115 [int-1 0 -> -1]
+KILLED    m0073 src/gen/synth.c:115 [cmp == -> !=]
+KILLED    m0074 src/gen/synth.c:115 [int+1 0 -> 1]
+KILLED    m0075 src/gen/synth.c:115 [int-1 0 -> -1]
+KILLED    m0076 src/gen/synth.c:115 [cmp == -> !=]
+KILLED    m0077 src/gen/synth.c:116 [arith * -> /]
+          build break
+KILLED    m0078 src/gen/synth.c:116 [cmp == -> !=]
+KILLED    m0079 src/gen/synth.c:116 [int+1 1 -> 2]
+KILLED    m0080 src/gen/synth.c:116 [int-1 1 -> 0]
+KILLED    m0081 src/gen/synth.c:116 [int+1 0 -> 1]
+KILLED    m0082 src/gen/synth.c:116 [int-1 0 -> -1]
+KILLED    m0083 src/gen/synth.c:116 [int+1 1 -> 2]
+KILLED    m0084 src/gen/synth.c:116 [int-1 1 -> 0]
+SURVIVED  m0085 src/gen/synth.c:121 [arith * -> /]
+SURVIVED  m0086 src/gen/synth.c:121 [arith + -> -]
+SURVIVED  m0087 src/gen/synth.c:122 [arith * -> /]
+SURVIVED  m0088 src/gen/synth.c:122 [arith + -> -]
+SURVIVED  m0089 src/gen/synth.c:123 [arith * -> /]
+SURVIVED  m0090 src/gen/synth.c:123 [arith + -> -]
+KILLED    m0091 src/gen/synth.c:129 [cmp != -> ==]
+KILLED    m0092 src/gen/synth.c:129 [int+1 0 -> 1]
+KILLED    m0093 src/gen/synth.c:129 [int-1 0 -> -1]
+KILLED    m0094 src/gen/synth.c:130 [arith * -> /]
+          build break
+KILLED    m0095 src/gen/synth.c:130 [arith - -> +]
+KILLED    m0096 src/gen/synth.c:130 [int+1 1 -> 2]
+KILLED    m0097 src/gen/synth.c:130 [int-1 1 -> 0]
+KILLED    m0098 src/gen/synth.c:131 [int+1 0 -> 1]
+KILLED    m0099 src/gen/synth.c:131 [int-1 0 -> -1]
+          build break
+KILLED    m0100 src/gen/synth.c:131 [cmp == -> !=]
+KILLED    m0101 src/gen/synth.c:131 [logic && -> ||]
+          build break
+KILLED    m0102 src/gen/synth.c:131 [int+1 1 -> 2]
+KILLED    m0103 src/gen/synth.c:131 [int-1 1 -> 0]
+KILLED    m0104 src/gen/synth.c:131 [cmp == -> !=]
+KILLED    m0105 src/gen/synth.c:131 [logic && -> ||]
+          build break
+KILLED    m0106 src/gen/synth.c:131 [int+1 2 -> 3]
+KILLED    m0107 src/gen/synth.c:131 [int-1 2 -> 1]
+KILLED    m0108 src/gen/synth.c:131 [cmp == -> !=]
+KILLED    m0109 src/gen/synth.c:131 [logic && -> ||]
+          build break
+KILLED    m0110 src/gen/synth.c:132 [int+1 3 -> 4]
+          build break
+KILLED    m0111 src/gen/synth.c:132 [int-1 3 -> 2]
+KILLED    m0112 src/gen/synth.c:132 [cmp == -> !=]
+SURVIVED  m0113 src/gen/synth.c:135 [arith + -> -]
+SURVIVED  m0114 src/gen/synth.c:135 [int+1 1 -> 2]
+KILLED    m0115 src/gen/synth.c:135 [int-1 1 -> 0]
+KILLED    m0116 src/gen/synth.c:140 [arith * -> /]
+          build break
+KILLED    m0117 src/gen/synth.c:140 [arith * -> /]
+          build break
+KILLED    m0118 src/gen/synth.c:141 [cmp != -> ==]
+SURVIVED  m0119 src/gen/synth.c:142 [cmp < -> <=]
+SURVIVED  m0120 src/gen/synth.c:144 [cmp != -> ==]
+SURVIVED  m0121 src/gen/synth.c:145 [cmp < -> <=]
+SURVIVED  m0122 src/gen/synth.c:147 [cmp != -> ==]
+SURVIVED  m0123 src/gen/synth.c:148 [cmp < -> <=]
+KILLED    m0124 src/gen/synth.c:150 [cmp < -> <=]
+KILLED    m0125 src/gen/synth.c:153 [arith * -> /]
+          build break
+KILLED    m0126 src/gen/synth.c:153 [arith * -> /]
+          build break
+KILLED    m0127 src/gen/synth.c:154 [cmp != -> ==]
+SURVIVED  m0128 src/gen/synth.c:155 [cmp < -> <=]
+KILLED    m0129 src/gen/synth.c:157 [int+1 0 -> 1]
+SURVIVED  m0130 src/gen/synth.c:157 [int-1 0 -> -1]
+SURVIVED  m0131 src/gen/synth.c:157 [cmp < -> <=]
+SURVIVED  m0132 src/gen/synth.c:159 [bool true -> false]
+KILLED    m0133 src/gen/synth.c:162 [bool false -> true]
+SURVIVED  m0134 src/gen/synth.c:165 [bool false -> true]
+KILLED    m0135 src/gen/synth.c:168 [arith * -> /]
+          build break
+KILLED    m0136 src/gen/synth.c:170 [cmp == -> !=]
+KILLED    m0137 src/gen/synth.c:170 [int+1 0 -> 1]
+KILLED    m0138 src/gen/synth.c:170 [int-1 0 -> -1]
+SURVIVED  m0139 src/gen/synth.c:171 [cmp >= -> >]
+KILLED    m0140 src/gen/synth.c:174 [arith * -> /]
+          build break
+KILLED    m0141 src/gen/synth.c:175 [int+1 0 -> 1]
+KILLED    m0142 src/gen/synth.c:175 [int-1 0 -> -1]
+          build break
+KILLED    m0143 src/gen/synth.c:176 [int+1 1 -> 2]
+KILLED    m0144 src/gen/synth.c:176 [int-1 1 -> 0]
+KILLED    m0145 src/gen/synth.c:177 [int+1 2 -> 3]
+KILLED    m0146 src/gen/synth.c:177 [int-1 2 -> 1]
+KILLED    m0147 src/gen/synth.c:178 [int+1 3 -> 4]
+          build break
+KILLED    m0148 src/gen/synth.c:178 [int-1 3 -> 2]
+KILLED    m0149 src/gen/synth.c:180 [arith * -> /]
+KILLED    m0150 src/gen/synth.c:180 [arith * -> /]
+          build break
+KILLED    m0151 src/gen/synth.c:181 [arith + -> -]
+KILLED    m0152 src/gen/synth.c:181 [int+1 1 -> 2]
+KILLED    m0153 src/gen/synth.c:181 [int-1 1 -> 0]
+KILLED    m0154 src/gen/synth.c:185 [arith * -> /]
+          build break
+KILLED    m0155 src/gen/synth.c:185 [arith - -> +]
+KILLED    m0156 src/gen/synth.c:185 [int+1 1 -> 2]
+KILLED    m0157 src/gen/synth.c:185 [int-1 1 -> 0]
+KILLED    m0158 src/gen/synth.c:188 [arith * -> /]
+KILLED    m0159 src/gen/synth.c:188 [arith * -> /]
+          build break
+KILLED    m0160 src/gen/synth.c:192 [arith * -> /]
+          build break
+KILLED    m0161 src/gen/synth.c:194 [cmp == -> !=]
+KILLED    m0162 src/gen/synth.c:194 [int+1 0 -> 1]
+KILLED    m0163 src/gen/synth.c:194 [int-1 0 -> -1]
+KILLED    m0164 src/gen/synth.c:197 [arith - -> +]
+KILLED    m0165 src/gen/synth.c:197 [int+1 1 -> 2]
+KILLED    m0166 src/gen/synth.c:197 [int-1 1 -> 0]
+KILLED    m0167 src/gen/synth.c:200 [arith * -> /]
+          build break
+KILLED    m0168 src/gen/synth.c:207 [int+1 0 -> 1]
+KILLED    m0169 src/gen/synth.c:207 [int-1 0 -> -1]
+KILLED    m0170 src/gen/synth.c:208 [bool true -> false]
+KILLED    m0171 src/gen/synth.c:209 [bool true -> false]
+KILLED    m0172 src/gen/synth.c:210 [int+1 0 -> 1]
+KILLED    m0173 src/gen/synth.c:210 [int-1 0 -> -1]
+KILLED    m0174 src/gen/synth.c:210 [cmp < -> <=]
+KILLED    m0175 src/gen/synth.c:211 [cmp == -> !=]
+KILLED    m0176 src/gen/synth.c:215 [logic && -> ||]
+KILLED    m0177 src/gen/synth.c:216 [logic && -> ||]
+KILLED    m0178 src/gen/synth.c:218 [cmp == -> !=]
+SURVIVED  m0179 src/gen/synth.c:218 [int+1 0 -> 1]
+SURVIVED  m0180 src/gen/synth.c:218 [int-1 0 -> -1]
+KILLED    m0181 src/gen/synth.c:218 [logic || -> &&]
+KILLED    m0182 src/gen/synth.c:218 [cmp == -> !=]
+KILLED    m0183 src/gen/synth.c:222 [cmp != -> ==]
+KILLED    m0184 src/gen/synth.c:222 [arith * -> /]
+KILLED    m0185 src/gen/synth.c:226 [int+1 0 -> 1]
+KILLED    m0186 src/gen/synth.c:226 [int-1 0 -> -1]
+KILLED    m0187 src/gen/synth.c:226 [cmp < -> <=]
+KILLED    m0188 src/gen/synth.c:229 [bool false -> true]
+SURVIVED  m0189 src/gen/synth.c:230 [int+1 0 -> 1]
+KILLED    m0190 src/gen/synth.c:230 [int-1 0 -> -1]
+SURVIVED  m0191 src/gen/synth.c:230 [cmp < -> <=]
+KILLED    m0192 src/gen/synth.c:237 [int+1 0 -> 1]
+KILLED    m0193 src/gen/synth.c:237 [int-1 0 -> -1]
+SURVIVED  m0194 src/gen/synth.c:238 [cmp < -> <=]
+SURVIVED  m0195 src/gen/synth.c:238 [logic && -> ||]
+KILLED    m0196 src/gen/synth.c:238 [not-del ! -> (deleted)]
+SURVIVED  m0197 src/gen/synth.c:239 [bool true -> false]
+KILLED    m0198 src/gen/synth.c:244 [cmp != -> ==]
+SURVIVED  m0199 src/gen/synth.c:244 [logic || -> &&]
+KILLED    m0200 src/gen/synth.c:244 [cmp != -> ==]
+SURVIVED  m0201 src/gen/synth.c:248 [int+1 0 -> 1]
+SURVIVED  m0202 src/gen/synth.c:248 [int-1 0 -> -1]
+KILLED    m0203 src/gen/synth.c:249 [int+1 0 -> 1]
+KILLED    m0204 src/gen/synth.c:249 [int-1 0 -> -1]
+          build break
+KILLED    m0205 src/gen/synth.c:249 [int+1 1 -> 2]
+KILLED    m0206 src/gen/synth.c:249 [int-1 1 -> 0]
+KILLED    m0207 src/gen/synth.c:249 [int+1 2 -> 3]
+          build break
+KILLED    m0208 src/gen/synth.c:249 [int-1 2 -> 1]
+KILLED    m0209 src/gen/synth.c:250 [int+1 0 -> 1]
+KILLED    m0210 src/gen/synth.c:250 [int-1 0 -> -1]
+          build break
+KILLED    m0211 src/gen/synth.c:250 [int+1 1 -> 2]
+KILLED    m0212 src/gen/synth.c:250 [int-1 1 -> 0]
+KILLED    m0213 src/gen/synth.c:250 [int+1 2 -> 3]
+          build break
+KILLED    m0214 src/gen/synth.c:250 [int-1 2 -> 1]
+KILLED    m0215 src/gen/synth.c:254 [arith * -> /]
+          build break
+KILLED    m0216 src/gen/synth.c:254 [arith * -> /]
+          build break
+KILLED    m0217 src/gen/synth.c:258 [int+1 0 -> 1]
+KILLED    m0218 src/gen/synth.c:258 [int-1 0 -> -1]
+KILLED    m0219 src/gen/synth.c:260 [arith * -> /]
+          build break
+KILLED    m0220 src/gen/synth.c:261 [arith + -> -]
+KILLED    m0221 src/gen/synth.c:261 [arith * -> /]
+KILLED    m0222 src/gen/synth.c:261 [arith * -> /]
+          build break
+KILLED    m0223 src/gen/synth.c:263 [arith * -> /]
+          build break
+KILLED    m0224 src/gen/synth.c:264 [arith + -> -]
+KILLED    m0225 src/gen/synth.c:264 [arith * -> /]
+KILLED    m0226 src/gen/synth.c:264 [arith * -> /]
+          build break
+SURVIVED  m0227 src/gen/synth.c:267 [arith + -> -]
+KILLED    m0228 src/gen/synth.c:267 [arith * -> /]
+KILLED    m0229 src/gen/synth.c:267 [arith * -> /]
+          build break
+KILLED    m0230 src/gen/synth.c:269 [arith * -> /]
+          build break
+KILLED    m0231 src/gen/synth.c:270 [arith + -> -]
+KILLED    m0232 src/gen/synth.c:270 [arith * -> /]
+KILLED    m0233 src/gen/synth.c:270 [arith * -> /]
+          build break
+KILLED    m0234 src/gen/synth.c:272 [arith * -> /]
+          build break
+KILLED    m0235 src/gen/synth.c:277 [arith * -> /]
+          build break
+KILLED    m0236 src/gen/synth.c:277 [arith * -> /]
+          build break
+KILLED    m0237 src/gen/synth.c:278 [arith * -> /]
+          build break
+SURVIVED  m0238 src/gen/synth.c:278 [arith * -> /]
+KILLED    m0239 src/gen/synth.c:279 [arith * -> /]
+          build break
+SURVIVED  m0240 src/gen/synth.c:279 [arith * -> /]
+KILLED    m0241 src/gen/synth.c:280 [arith * -> /]
+          build break
+SURVIVED  m0242 src/gen/synth.c:280 [cmp != -> ==]
+SURVIVED  m0243 src/gen/synth.c:280 [int+1 0 -> 1]
+SURVIVED  m0244 src/gen/synth.c:280 [int-1 0 -> -1]
+SURVIVED  m0245 src/gen/synth.c:281 [bool false -> true]
+KILLED    m0246 src/gen/synth.c:283 [arith * -> /]
+          build break
+SURVIVED  m0247 src/gen/synth.c:283 [cmp != -> ==]
+SURVIVED  m0248 src/gen/synth.c:283 [int+1 0 -> 1]
+SURVIVED  m0249 src/gen/synth.c:283 [int-1 0 -> -1]
+SURVIVED  m0250 src/gen/synth.c:284 [bool false -> true]
+KILLED    m0251 src/gen/synth.c:286 [cmp == -> !=]
+KILLED    m0252 src/gen/synth.c:286 [int+1 0 -> 1]
+KILLED    m0253 src/gen/synth.c:286 [int-1 0 -> -1]
+SURVIVED  m0254 src/gen/synth.c:290 [int+1 0 -> 1]
+KILLED    m0255 src/gen/synth.c:290 [int-1 0 -> -1]
+KILLED    m0256 src/gen/synth.c:290 [cmp < -> <=]
+KILLED    m0257 src/gen/synth.c:291 [bool false -> true]
+KILLED    m0258 src/gen/synth.c:292 [bool false -> true]
+KILLED    m0259 src/gen/synth.c:296 [int+1 0 -> 1]
+KILLED    m0260 src/gen/synth.c:296 [int-1 0 -> -1]
+KILLED    m0261 src/gen/synth.c:296 [cmp < -> <=]
+KILLED    m0262 src/gen/synth.c:302 [bool true -> false]
+KILLED    m0263 src/gen/synth.c:306 [bool true -> false]
+SURVIVED  m0264 src/gen/synth.c:315 [cmp <= -> <]
+SURVIVED  m0265 src/gen/synth.c:315 [int+1 0 -> 1]
+SURVIVED  m0266 src/gen/synth.c:315 [int-1 0 -> -1]
+SURVIVED  m0267 src/gen/synth.c:316 [arith - -> +]
+SURVIVED  m0268 src/gen/synth.c:316 [int+1 1 -> 2]
+SURVIVED  m0269 src/gen/synth.c:316 [int-1 1 -> 0]
+KILLED    m0270 src/gen/synth.c:319 [int+1 0 -> 1]
+KILLED    m0271 src/gen/synth.c:319 [int-1 0 -> -1]
+KILLED    m0272 src/gen/synth.c:321 [int+1 0 -> 1]
+KILLED    m0273 src/gen/synth.c:321 [int-1 0 -> -1]
+SURVIVED  m0274 src/gen/synth.c:321 [cmp < -> <=]
+KILLED    m0275 src/gen/synth.c:322 [bool true -> false]
+SURVIVED  m0276 src/gen/synth.c:323 [int+1 0 -> 1]
+KILLED    m0277 src/gen/synth.c:323 [int-1 0 -> -1]
+KILLED    m0278 src/gen/synth.c:323 [cmp < -> <=]
+SURVIVED  m0279 src/gen/synth.c:324 [not-del ! -> (deleted)]
+SURVIVED  m0280 src/gen/synth.c:328 [bool false -> true]
+KILLED    m0281 src/gen/synth.c:336 [int+1 0 -> 1]
+KILLED    m0282 src/gen/synth.c:336 [int-1 0 -> -1]
+SURVIVED  m0283 src/gen/synth.c:336 [cmp < -> <=]
+KILLED    m0284 src/gen/synth.c:337 [arith * -> /]
+          build break
+SURVIVED  m0285 src/gen/synth.c:338 [int+1 0 -> 1]
+KILLED    m0286 src/gen/synth.c:338 [int-1 0 -> -1]
+SURVIVED  m0287 src/gen/synth.c:338 [cmp < -> <=]
+SURVIVED  m0288 src/gen/synth.c:339 [int+1 1 -> 2]
+SURVIVED  m0289 src/gen/synth.c:339 [int-1 1 -> 0]
+SURVIVED  m0290 src/gen/synth.c:339 [bool true -> false]
+SURVIVED  m0291 src/gen/synth.c:340 [int+1 1 -> 2]
+SURVIVED  m0292 src/gen/synth.c:340 [int-1 1 -> 0]
+SURVIVED  m0293 src/gen/synth.c:340 [bool false -> true]
+SURVIVED  m0294 src/gen/synth.c:342 [int+1 0 -> 1]
+KILLED    m0295 src/gen/synth.c:342 [int-1 0 -> -1]
+SURVIVED  m0296 src/gen/synth.c:342 [cmp < -> <=]
+KILLED    m0297 src/gen/synth.c:343 [arith * -> /]
+          build break
+KILLED    m0298 src/gen/synth.c:344 [arith * -> /]
+          build break
+SURVIVED  m0299 src/gen/synth.c:346 [int+1 0 -> 1]
+KILLED    m0300 src/gen/synth.c:346 [int-1 0 -> -1]
+          build break
+KILLED    m0301 src/gen/synth.c:346 [arith * -> /]
+          build break
+SURVIVED  m0302 src/gen/synth.c:347 [int+1 0 -> 1]
+KILLED    m0303 src/gen/synth.c:347 [int-1 0 -> -1]
+SURVIVED  m0304 src/gen/synth.c:347 [cmp < -> <=]
+KILLED    m0305 src/gen/synth.c:348 [cmp == -> !=]
+KILLED    m0306 src/gen/synth.c:352 [int+1 1 -> 2]
+KILLED    m0307 src/gen/synth.c:352 [int-1 1 -> 0]
+KILLED    m0308 src/gen/synth.c:354 [bool true -> false]
+KILLED    m0309 src/gen/synth.c:355 [bool false -> true]
+KILLED    m0310 src/gen/synth.c:358 [arith - -> +]
+          build break
+KILLED    m0311 src/gen/synth.c:359 [bool true -> false]
+KILLED    m0312 src/gen/synth.c:360 [bool false -> true]
+KILLED    m0313 src/gen/synth.c:361 [arith * -> /]
+          build break
+KILLED    m0314 src/gen/synth.c:362 [arith - -> +]
+          build break
+KILLED    m0315 src/gen/synth.c:362 [arith * -> /]
+          build break
+SURVIVED  m0316 src/gen/synth.c:363 [bool true -> false]
+SURVIVED  m0317 src/gen/synth.c:364 [bool false -> true]
+KILLED    m0318 src/gen/synth.c:375 [arith * -> /]
+          build break
+KILLED    m0319 src/gen/synth.c:376 [cmp == -> !=]
+SURVIVED  m0320 src/gen/synth.c:377 [arith - -> +]
+SURVIVED  m0321 src/gen/synth.c:377 [int+1 1 -> 2]
+SURVIVED  m0322 src/gen/synth.c:377 [int-1 1 -> 0]
+KILLED    m0323 src/gen/synth.c:379 [int+1 0 -> 1]
+KILLED    m0324 src/gen/synth.c:379 [int-1 0 -> -1]
+KILLED    m0325 src/gen/synth.c:380 [int+1 0 -> 1]
+KILLED    m0326 src/gen/synth.c:380 [int-1 0 -> -1]
+SURVIVED  m0327 src/gen/synth.c:381 [cmp < -> <=]
+SURVIVED  m0328 src/gen/synth.c:381 [int+1 0 -> 1]
+SURVIVED  m0329 src/gen/synth.c:381 [int-1 0 -> -1]
+SURVIVED  m0330 src/gen/synth.c:384 [arith - -> +]
+SURVIVED  m0331 src/gen/synth.c:384 [int+1 1 -> 2]
+SURVIVED  m0332 src/gen/synth.c:384 [int-1 1 -> 0]
+KILLED    m0333 src/gen/synth.c:386 [bool true -> false]
+KILLED    m0334 src/gen/synth.c:391 [not-del ! -> (deleted)]
+SURVIVED  m0335 src/gen/synth.c:392 [arith - -> +]
+SURVIVED  m0336 src/gen/synth.c:392 [int+1 1 -> 2]
+SURVIVED  m0337 src/gen/synth.c:392 [int-1 1 -> 0]
+KILLED    m0338 src/gen/synth.c:397 [arith * -> /]
+          build break
+KILLED    m0339 src/gen/synth.c:398 [not-del ! -> (deleted)]
+KILLED    m0340 src/gen/synth.c:398 [logic || -> &&]
+          build break
+KILLED    m0341 src/gen/synth.c:398 [cmp < -> <=]
+KILLED    m0342 src/gen/synth.c:398 [int+1 0 -> 1]
+KILLED    m0343 src/gen/synth.c:398 [int-1 0 -> -1]
+KILLED    m0344 src/gen/synth.c:398 [logic || -> &&]
+          build break
+KILLED    m0345 src/gen/synth.c:398 [cmp >= -> >]
+KILLED    m0346 src/gen/synth.c:398 [logic || -> &&]
+          build break
+KILLED    m0347 src/gen/synth.c:398 [cmp == -> !=]
+KILLED    m0348 src/gen/synth.c:399 [arith - -> +]
+KILLED    m0349 src/gen/synth.c:399 [int+1 1 -> 2]
+KILLED    m0350 src/gen/synth.c:399 [int-1 1 -> 0]
+KILLED    m0351 src/gen/synth.c:401 [arith * -> /]
+          build break
+KILLED    m0352 src/gen/synth.c:402 [cmp == -> !=]
+KILLED    m0353 src/gen/synth.c:402 [logic || -> &&]
+KILLED    m0354 src/gen/synth.c:402 [cmp < -> <=]
+KILLED    m0355 src/gen/synth.c:403 [arith - -> +]
+SURVIVED  m0356 src/gen/synth.c:403 [int+1 1 -> 2]
+KILLED    m0357 src/gen/synth.c:403 [int-1 1 -> 0]
+KILLED    m0358 src/gen/synth.c:405 [int+1 0 -> 1]
+KILLED    m0359 src/gen/synth.c:405 [int-1 0 -> -1]
+KILLED    m0360 src/gen/synth.c:405 [cmp < -> <=]
+KILLED    m0361 src/gen/synth.c:408 [arith * -> /]
+KILLED    m0362 src/gen/synth.c:408 [arith * -> /]
+          build break
+KILLED    m0363 src/gen/synth.c:421 [cmp == -> !=]
+KILLED    m0364 src/gen/synth.c:425 [cmp != -> ==]
+KILLED    m0365 src/gen/synth.c:425 [logic && -> ||]
+          build break
+KILLED    m0366 src/gen/synth.c:425 [cmp != -> ==]
+KILLED    m0367 src/gen/synth.c:426 [bool false -> true]
+KILLED    m0368 src/gen/synth.c:428 [cmp < -> <=]
+KILLED    m0369 src/gen/synth.c:428 [int+1 0 -> 1]
+KILLED    m0370 src/gen/synth.c:428 [int-1 0 -> -1]
+KILLED    m0371 src/gen/synth.c:428 [logic || -> &&]
+          build break
+KILLED    m0372 src/gen/synth.c:428 [cmp < -> <=]
+KILLED    m0373 src/gen/synth.c:428 [int+1 0 -> 1]
+KILLED    m0374 src/gen/synth.c:428 [int-1 0 -> -1]
+KILLED    m0375 src/gen/synth.c:428 [logic || -> &&]
+          build break
+KILLED    m0376 src/gen/synth.c:428 [cmp < -> <=]
+KILLED    m0377 src/gen/synth.c:428 [int+1 0 -> 1]
+SURVIVED  m0378 src/gen/synth.c:428 [int-1 0 -> -1]
+KILLED    m0379 src/gen/synth.c:429 [bool false -> true]
+SURVIVED  m0380 src/gen/synth.c:431 [cmp >= -> >]
+KILLED    m0381 src/gen/synth.c:431 [logic || -> &&]
+          build break
+SURVIVED  m0382 src/gen/synth.c:431 [cmp >= -> >]
+KILLED    m0383 src/gen/synth.c:431 [logic || -> &&]
+          build break
+KILLED    m0384 src/gen/synth.c:431 [cmp >= -> >]
+KILLED    m0385 src/gen/synth.c:432 [bool false -> true]
+KILLED    m0386 src/gen/synth.c:437 [cmp != -> ==]
+KILLED    m0387 src/gen/synth.c:437 [logic && -> ||]
+          build break
+KILLED    m0388 src/gen/synth.c:437 [cmp != -> ==]
+KILLED    m0389 src/gen/synth.c:437 [logic && -> ||]
+          build break
+KILLED    m0390 src/gen/synth.c:437 [cmp != -> ==]
+KILLED    m0391 src/gen/synth.c:440 [arith * -> /]
+          build break
+KILLED    m0392 src/gen/synth.c:446 [cmp != -> ==]
+KILLED    m0393 src/gen/synth.c:446 [logic || -> &&]
+          build break
+KILLED    m0394 src/gen/synth.c:446 [cmp != -> ==]
+KILLED    m0395 src/gen/synth.c:446 [logic || -> &&]
+          build break
+KILLED    m0396 src/gen/synth.c:446 [cmp != -> ==]
+SURVIVED  m0397 src/gen/synth.c:447 [bool false -> true]
+SURVIVED  m0398 src/gen/synth.c:449 [bool false -> true]
+KILLED    m0399 src/gen/synth.c:451 [int+1 0 -> 1]
+KILLED    m0400 src/gen/synth.c:451 [int-1 0 -> -1]
+KILLED    m0401 src/gen/synth.c:451 [cmp < -> <=]
+KILLED    m0402 src/gen/synth.c:453 [cmp == -> !=]
+KILLED    m0403 src/gen/synth.c:456 [cmp == -> !=]
+SURVIVED  m0404 src/gen/synth.c:457 [bool false -> true]
+KILLED    m0405 src/gen/synth.c:460 [int+1 0 -> 1]
+SURVIVED  m0406 src/gen/synth.c:460 [int-1 0 -> -1]
+SURVIVED  m0407 src/gen/synth.c:460 [cmp < -> <=]
+SURVIVED  m0408 src/gen/synth.c:461 [cmp == -> !=]
+KILLED    m0409 src/gen/synth.c:462 [bool true -> false]
+SURVIVED  m0410 src/gen/synth.c:466 [int+1 0 -> 1]
+KILLED    m0411 src/gen/synth.c:466 [int-1 0 -> -1]
+KILLED    m0412 src/gen/synth.c:466 [cmp < -> <=]
+KILLED    m0413 src/gen/synth.c:467 [cmp != -> ==]
+KILLED    m0414 src/gen/synth.c:467 [logic && -> ||]
+KILLED    m0415 src/gen/synth.c:467 [not-del ! -> (deleted)]
+SURVIVED  m0416 src/gen/synth.c:468 [bool false -> true]
+KILLED    m0417 src/gen/synth.c:471 [bool true -> false]
+KILLED    m0418 src/gen/synth.c:474 [arith * -> /]
+          build break
+KILLED    m0419 src/gen/synth.c:474 [arith * -> /]
+          build break
+KILLED    m0420 src/gen/synth.c:474 [arith * -> /]
+          build break
+KILLED    m0421 src/gen/synth.c:477 [cmp != -> ==]
+SURVIVED  m0422 src/gen/synth.c:478 [bool false -> true]
+KILLED    m0423 src/gen/synth.c:480 [arith * -> /]
+KILLED    m0424 src/gen/synth.c:480 [arith * -> /]
+          build break
+KILLED    m0425 src/gen/synth.c:484 [bool true -> false]
+SURVIVED  m0426 src/gen/synth.c:487 [bool true -> false]
+KILLED    m0427 src/gen/synth.c:490 [arith * -> /]
+          build break
+KILLED    m0428 src/gen/synth.c:490 [arith * -> /]
+          build break
+KILLED    m0429 src/gen/synth.c:490 [arith * -> /]
+          build break
+KILLED    m0430 src/gen/synth.c:492 [cmp == -> !=]
+SURVIVED  m0431 src/gen/synth.c:492 [logic || -> &&]
+KILLED    m0432 src/gen/synth.c:492 [arith * -> /]
+          build break
+SURVIVED  m0433 src/gen/synth.c:492 [cmp >= -> >]
+KILLED    m0434 src/gen/synth.c:495 [arith * -> /]
+          build break
+KILLED    m0435 src/gen/synth.c:495 [arith * -> /]
+KILLED    m0436 src/gen/synth.c:495 [arith * -> /]
+          build break
+KILLED    m0437 src/gen/synth.c:496 [arith * -> /]
+          build break
+KILLED    m0438 src/gen/synth.c:497 [arith * -> /]
+          build break
+KILLED    m0439 src/gen/synth.c:498 [arith * -> /]
+          build break
+KILLED    m0440 src/gen/synth.c:501 [arith * -> /]
+          build break
+KILLED    m0441 src/gen/synth.c:501 [arith * -> /]
+          build break
+SURVIVED  m0442 src/gen/synth.c:503 [int+1 0 -> 1]
+SURVIVED  m0443 src/gen/synth.c:503 [int-1 0 -> -1]
+SURVIVED  m0444 src/gen/synth.c:505 [int+1 0 -> 1]
+SURVIVED  m0445 src/gen/synth.c:505 [int-1 0 -> -1]
+SURVIVED  m0446 src/gen/synth.c:505 [cmp < -> <=]
+SURVIVED  m0447 src/gen/synth.c:506 [cmp == -> !=]
+SURVIVED  m0448 src/gen/synth.c:506 [int+1 0 -> 1]
+SURVIVED  m0449 src/gen/synth.c:506 [int-1 0 -> -1]
+SURVIVED  m0450 src/gen/synth.c:506 [int+1 1 -> 2]
+SURVIVED  m0451 src/gen/synth.c:506 [int-1 1 -> 0]
+KILLED    m0452 src/gen/synth.c:507 [arith * -> /]
+          build break
+KILLED    m0453 src/gen/synth.c:507 [int+1 0 -> 1]
+KILLED    m0454 src/gen/synth.c:507 [int-1 0 -> -1]
+          build break
+KILLED    m0455 src/gen/synth.c:507 [int+1 1 -> 2]
+KILLED    m0456 src/gen/synth.c:507 [int-1 1 -> 0]
+KILLED    m0457 src/gen/synth.c:507 [int+1 2 -> 3]
+          build break
+KILLED    m0458 src/gen/synth.c:507 [int-1 2 -> 1]
+KILLED    m0459 src/gen/synth.c:508 [cmp == -> !=]
+KILLED    m0460 src/gen/synth.c:511 [cmp == -> !=]
+KILLED    m0461 src/gen/synth.c:512 [arith * -> /]
+KILLED    m0462 src/gen/synth.c:512 [arith * -> /]
+          build break
+KILLED    m0463 src/gen/synth.c:513 [arith * -> /]
+          build break
+KILLED    m0464 src/gen/synth.c:515 [arith * -> /]
+          build break
+KILLED    m0465 src/gen/synth.c:517 [arith * -> /]
+          build break
+SURVIVED  m0466 src/gen/synth.c:517 [cmp > -> >=]
+SURVIVED  m0467 src/gen/synth.c:517 [int+1 0 -> 1]
+SURVIVED  m0468 src/gen/synth.c:517 [int-1 0 -> -1]
+SURVIVED  m0469 src/gen/synth.c:519 [bool false -> true]
+KILLED    m0470 src/gen/synth.c:522 [arith * -> /]
+          build break
+SURVIVED  m0471 src/gen/synth.c:523 [int+1 0 -> 1]
+SURVIVED  m0472 src/gen/synth.c:523 [int-1 0 -> -1]
+SURVIVED  m0473 src/gen/synth.c:524 [int+1 0 -> 1]
+KILLED    m0474 src/gen/synth.c:524 [int-1 0 -> -1]
+KILLED    m0475 src/gen/synth.c:524 [cmp < -> <=]
+KILLED    m0476 src/gen/synth.c:525 [cmp == -> !=]
+KILLED    m0477 src/gen/synth.c:525 [int+1 0 -> 1]
+KILLED    m0478 src/gen/synth.c:525 [int-1 0 -> -1]
+          build break
+SURVIVED  m0479 src/gen/synth.c:528 [int+1 1 -> 2]
+SURVIVED  m0480 src/gen/synth.c:528 [int-1 1 -> 0]
+SURVIVED  m0481 src/gen/synth.c:528 [cmp < -> <=]
+KILLED    m0482 src/gen/synth.c:529 [int+1 1 -> 2]
+KILLED    m0483 src/gen/synth.c:529 [int-1 1 -> 0]
+SURVIVED  m0484 src/gen/synth.c:529 [int+1 1 -> 2]
+KILLED    m0485 src/gen/synth.c:529 [int-1 1 -> 0]
+KILLED    m0486 src/gen/synth.c:535 [arith * -> /]
+          build break
+SURVIVED  m0487 src/gen/synth.c:540 [int+1 0 -> 1]
+KILLED    m0488 src/gen/synth.c:540 [int-1 0 -> -1]
+KILLED    m0489 src/gen/synth.c:540 [cmp < -> <=]
+SURVIVED  m0490 src/gen/synth.c:541 [arith - -> +]
+SURVIVED  m0491 src/gen/synth.c:541 [int+1 1 -> 2]
+SURVIVED  m0492 src/gen/synth.c:541 [int-1 1 -> 0]
+SURVIVED  m0493 src/gen/synth.c:542 [int+1 0 -> 1]
+KILLED    m0494 src/gen/synth.c:542 [int-1 0 -> -1]
+SURVIVED  m0495 src/gen/synth.c:542 [cmp < -> <=]
+KILLED    m0496 src/gen/synth.c:543 [cmp == -> !=]
+SURVIVED  m0497 src/gen/synth.c:548 [cmp < -> <=]
+SURVIVED  m0498 src/gen/synth.c:548 [int+1 0 -> 1]
+SURVIVED  m0499 src/gen/synth.c:548 [int-1 0 -> -1]
+SURVIVED  m0500 src/gen/synth.c:553 [int+1 0 -> 1]
+SURVIVED  m0501 src/gen/synth.c:553 [int-1 0 -> -1]
+KILLED    m0502 src/gen/synth.c:554 [not-del ! -> (deleted)]
+KILLED    m0503 src/gen/synth.c:554 [int+1 0 -> 1]
+KILLED    m0504 src/gen/synth.c:554 [int-1 0 -> -1]
+          build break
+KILLED    m0505 src/gen/synth.c:554 [int+1 1 -> 2]
+KILLED    m0506 src/gen/synth.c:554 [int-1 1 -> 0]
+KILLED    m0507 src/gen/synth.c:554 [int+1 2 -> 3]
+          build break
+KILLED    m0508 src/gen/synth.c:554 [int-1 2 -> 1]
+SURVIVED  m0509 src/gen/synth.c:560 [cmp < -> <=]
+SURVIVED  m0510 src/gen/synth.c:560 [int+1 0 -> 1]
+SURVIVED  m0511 src/gen/synth.c:560 [int-1 0 -> -1]
+SURVIVED  m0512 src/gen/synth.c:566 [cmp < -> <=]
+SURVIVED  m0513 src/gen/synth.c:566 [int+1 0 -> 1]
+SURVIVED  m0514 src/gen/synth.c:566 [int-1 0 -> -1]
+KILLED    m0515 src/gen/synth.c:569 [not-del ! -> (deleted)]
+KILLED    m0516 src/gen/synth.c:572 [bool true -> false]
+SURVIVED  m0517 src/gen/synth.c:573 [cmp >= -> >]
+SURVIVED  m0518 src/gen/synth.c:574 [bool true -> false]
+KILLED    m0519 src/gen/synth.c:578 [arith * -> /]
+          build break
+SURVIVED  m0520 src/gen/synth.c:582 [cmp > -> >=]
+SURVIVED  m0521 src/gen/synth.c:582 [int+1 0 -> 1]
+SURVIVED  m0522 src/gen/synth.c:582 [int-1 0 -> -1]
+SURVIVED  m0523 src/gen/synth.c:589 [cmp >= -> >]
+SURVIVED  m0524 src/gen/synth.c:592 [int+1 0 -> 1]
+KILLED    m0525 src/gen/synth.c:592 [int-1 0 -> -1]
+KILLED    m0526 src/gen/synth.c:592 [cmp < -> <=]
+KILLED    m0527 src/gen/synth.c:592 [logic && -> ||]
+KILLED    m0528 src/gen/synth.c:592 [not-del ! -> (deleted)]
+KILLED    m0529 src/gen/synth.c:593 [cmp > -> >=]
+SURVIVED  m0530 src/gen/synth.c:593 [int+1 0 -> 1]
+KILLED    m0531 src/gen/synth.c:593 [int-1 0 -> -1]
+KILLED    m0532 src/gen/synth.c:593 [logic && -> ||]
+SURVIVED  m0533 src/gen/synth.c:593 [arith - -> +]
+KILLED    m0534 src/gen/synth.c:593 [int+1 1 -> 2]
+SURVIVED  m0535 src/gen/synth.c:593 [int-1 1 -> 0]
+KILLED    m0536 src/gen/synth.c:593 [cmp == -> !=]
+KILLED    m0537 src/gen/synth.c:598 [arith + -> -]
+KILLED    m0538 src/gen/synth.c:598 [int+1 1 -> 2]
+KILLED    m0539 src/gen/synth.c:598 [int-1 1 -> 0]
+KILLED    m0540 src/gen/synth.c:603 [arith * -> /]
+          build break
+KILLED    m0541 src/gen/synth.c:604 [arith * -> /]
+          build break
+KILLED    m0542 src/gen/synth.c:604 [arith * -> /]
+          build break
+KILLED    m0543 src/gen/synth.c:606 [int+1 0 -> 1]
+KILLED    m0544 src/gen/synth.c:606 [int-1 0 -> -1]
+KILLED    m0545 src/gen/synth.c:608 [arith * -> /]
+KILLED    m0546 src/gen/synth.c:608 [arith * -> /]
+          build break
+KILLED    m0547 src/gen/synth.c:616 [arith * -> /]
+          build break
+SURVIVED  m0548 src/gen/synth.c:617 [int+1 1 -> 2]
+SURVIVED  m0549 src/gen/synth.c:617 [int-1 1 -> 0]
+SURVIVED  m0550 src/gen/synth.c:617 [cmp <= -> <]
+KILLED    m0551 src/gen/synth.c:617 [logic && -> ||]
+KILLED    m0552 src/gen/synth.c:617 [not-del ! -> (deleted)]
+KILLED    m0553 src/gen/synth.c:619 [int+1 0 -> 1]
+KILLED    m0554 src/gen/synth.c:619 [int-1 0 -> -1]
+KILLED    m0555 src/gen/synth.c:621 [arith * -> /]
+          build break
+SURVIVED  m0556 src/gen/synth.c:624 [int+1 1u -> 2u]
+SURVIVED  m0557 src/gen/synth.c:624 [int-1 1u -> 0u]
+SURVIVED  m0558 src/gen/synth.c:624 [arith + -> -]
+SURVIVED  m0559 src/gen/synth.c:624 [arith + -> -]
+SURVIVED  m0560 src/gen/synth.c:624 [arith - -> +]
+KILLED    m0561 src/gen/synth.c:626 [arith * -> /]
+          build break
+SURVIVED  m0562 src/gen/synth.c:627 [int+1 0 -> 1]
+SURVIVED  m0563 src/gen/synth.c:627 [int-1 0 -> -1]
+SURVIVED  m0564 src/gen/synth.c:628 [int+1 0 -> 1]
+SURVIVED  m0565 src/gen/synth.c:628 [int-1 0 -> -1]
+SURVIVED  m0566 src/gen/synth.c:628 [cmp < -> <=]
+SURVIVED  m0567 src/gen/synth.c:629 [arith * -> /]
+SURVIVED  m0568 src/gen/synth.c:629 [arith + -> -]
+KILLED    m0569 src/gen/synth.c:634 [arith * -> /]
+          build break
+KILLED    m0570 src/gen/synth.c:634 [arith * -> /]
+          build break
+KILLED    m0571 src/gen/synth.c:636 [cmp != -> ==]
+KILLED    m0572 src/gen/synth.c:636 [int+1 0 -> 1]
+KILLED    m0573 src/gen/synth.c:636 [int-1 0 -> -1]
+SURVIVED  m0574 src/gen/synth.c:637 [arith - -> +]
+SURVIVED  m0575 src/gen/synth.c:637 [int+1 1 -> 2]
+SURVIVED  m0576 src/gen/synth.c:637 [int-1 1 -> 0]
+SURVIVED  m0577 src/gen/synth.c:637 [cmp == -> !=]
+SURVIVED  m0578 src/gen/synth.c:637 [int+1 0 -> 1]
+SURVIVED  m0579 src/gen/synth.c:637 [int-1 0 -> -1]
+SURVIVED  m0580 src/gen/synth.c:640 [arith + -> -]
+SURVIVED  m0581 src/gen/synth.c:640 [int+1 1 -> 2]
+SURVIVED  m0582 src/gen/synth.c:640 [int-1 1 -> 0]
+SURVIVED  m0583 src/gen/synth.c:651 [int+1 0 -> 1]
+KILLED    m0584 src/gen/synth.c:651 [int-1 0 -> -1]
+KILLED    m0585 src/gen/synth.c:651 [cmp < -> <=]
+KILLED    m0586 src/gen/synth.c:652 [arith * -> /]
+          build break
+SURVIVED  m0587 src/gen/synth.c:653 [cmp == -> !=]
+SURVIVED  m0588 src/gen/synth.c:655 [cmp == -> !=]
+SURVIVED  m0589 src/gen/synth.c:656 [ret-lit 0 -> 1]
+SURVIVED  m0590 src/gen/synth.c:656 [int+1 0 -> 1]
+SURVIVED  m0591 src/gen/synth.c:656 [int-1 0 -> -1]
+SURVIVED  m0592 src/gen/synth.c:659 [int+1 0 -> 1]
+KILLED    m0593 src/gen/synth.c:659 [int-1 0 -> -1]
+KILLED    m0594 src/gen/synth.c:659 [cmp < -> <=]
+SURVIVED  m0595 src/gen/synth.c:661 [int+1 0 -> 1]
+KILLED    m0596 src/gen/synth.c:661 [int-1 0 -> -1]
+SURVIVED  m0597 src/gen/synth.c:662 [int+1 0 -> 1]
+SURVIVED  m0598 src/gen/synth.c:662 [int-1 0 -> -1]
+SURVIVED  m0599 src/gen/synth.c:662 [cmp < -> <=]
+KILLED    m0600 src/gen/synth.c:663 [cmp != -> ==]
+KILLED    m0601 src/gen/synth.c:663 [logic || -> &&]
+SURVIVED  m0602 src/gen/synth.c:663 [cmp == -> !=]
+KILLED    m0603 src/gen/synth.c:669 [int+1 1 -> 2]
+SURVIVED  m0604 src/gen/synth.c:669 [int-1 1 -> 0]
+SURVIVED  m0605 src/gen/synth.c:670 [int+1 0 -> 1]
+KILLED    m0606 src/gen/synth.c:670 [int-1 0 -> -1]
+KILLED    m0607 src/gen/synth.c:670 [cmp < -> <=]
+SURVIVED  m0608 src/gen/synth.c:671 [cmp > -> >=]
+SURVIVED  m0609 src/gen/synth.c:671 [int+1 1 -> 2]
+SURVIVED  m0610 src/gen/synth.c:671 [int-1 1 -> 0]
+SURVIVED  m0611 src/gen/synth.c:675 [int+1 0 -> 1]
+SURVIVED  m0612 src/gen/synth.c:675 [int-1 0 -> -1]
+SURVIVED  m0613 src/gen/synth.c:675 [cmp < -> <=]
+KILLED    m0614 src/gen/synth.c:676 [arith * -> /]
+          build break
+SURVIVED  m0615 src/gen/synth.c:677 [int+1 0 -> 1]
+SURVIVED  m0616 src/gen/synth.c:677 [int-1 0 -> -1]
+SURVIVED  m0617 src/gen/synth.c:677 [cmp < -> <=]
+SURVIVED  m0618 src/gen/synth.c:684 [int+1 0 -> 1]
+KILLED    m0619 src/gen/synth.c:684 [int-1 0 -> -1]
+KILLED    m0620 src/gen/synth.c:684 [cmp < -> <=]
+KILLED    m0621 src/gen/synth.c:685 [arith + -> -]
+SURVIVED  m0622 src/gen/synth.c:685 [int+1 1 -> 2]
+SURVIVED  m0623 src/gen/synth.c:685 [int-1 1 -> 0]
+SURVIVED  m0624 src/gen/synth.c:686 [int+1 0 -> 1]
+SURVIVED  m0625 src/gen/synth.c:686 [int-1 0 -> -1]
+SURVIVED  m0626 src/gen/synth.c:687 [cmp > -> >=]
+SURVIVED  m0627 src/gen/synth.c:687 [int+1 1 -> 2]
+SURVIVED  m0628 src/gen/synth.c:687 [int-1 1 -> 0]
+SURVIVED  m0629 src/gen/synth.c:691 [int+1 0 -> 1]
+KILLED    m0630 src/gen/synth.c:691 [int-1 0 -> -1]
+KILLED    m0631 src/gen/synth.c:691 [cmp < -> <=]
+SURVIVED  m0632 src/gen/synth.c:692 [cmp == -> !=]
+SURVIVED  m0633 src/gen/synth.c:692 [int+1 1 -> 2]
+SURVIVED  m0634 src/gen/synth.c:692 [int-1 1 -> 0]
+KILLED    m0635 src/gen/synth.c:692 [arith - -> +]
+KILLED    m0636 src/gen/synth.c:692 [int+1 1 -> 2]
+SURVIVED  m0637 src/gen/synth.c:692 [int-1 1 -> 0]
+SURVIVED  m0638 src/gen/synth.c:692 [arith - -> +]
+KILLED    m0639 src/gen/synth.c:701 [arith * -> /]
+          build break
+KILLED    m0640 src/gen/synth.c:701 [arith * -> /]
+          build break
+KILLED    m0641 src/gen/synth.c:701 [arith * -> /]
+          build break
+SURVIVED  m0642 src/gen/synth.c:703 [int+1 0 -> 1]
+SURVIVED  m0643 src/gen/synth.c:703 [int-1 0 -> -1]
+SURVIVED  m0644 src/gen/synth.c:705 [cmp >= -> >]
+SURVIVED  m0645 src/gen/synth.c:705 [int+1 0 -> 1]
+SURVIVED  m0646 src/gen/synth.c:705 [int-1 0 -> -1]
+SURVIVED  m0647 src/gen/synth.c:709 [int+1 0 -> 1]
+SURVIVED  m0648 src/gen/synth.c:709 [int-1 0 -> -1]
+SURVIVED  m0649 src/gen/synth.c:709 [cmp < -> <=]
+SURVIVED  m0650 src/gen/synth.c:710 [arith - -> +]
+SURVIVED  m0651 src/gen/synth.c:710 [int+1 1 -> 2]
+SURVIVED  m0652 src/gen/synth.c:710 [int-1 1 -> 0]
+SURVIVED  m0653 src/gen/synth.c:710 [arith - -> +]
+KILLED    m0654 src/gen/synth.c:712 [arith * -> /]
+          build break
+KILLED    m0655 src/gen/synth.c:715 [arith * -> /]
+          build break
+KILLED    m0656 src/gen/synth.c:716 [arith * -> /]
+          build break
+KILLED    m0657 src/gen/synth.c:716 [arith * -> /]
+          build break
+KILLED    m0658 src/gen/synth.c:717 [arith * -> /]
+SURVIVED  m0659 src/gen/synth.c:717 [arith - -> +]
+SURVIVED  m0660 src/gen/synth.c:717 [int+1 1 -> 2]
+SURVIVED  m0661 src/gen/synth.c:717 [int-1 1 -> 0]
+KILLED    m0662 src/gen/synth.c:718 [arith * -> /]
+SURVIVED  m0663 src/gen/synth.c:718 [arith - -> +]
+SURVIVED  m0664 src/gen/synth.c:718 [int+1 1 -> 2]
+SURVIVED  m0665 src/gen/synth.c:718 [int-1 1 -> 0]
+SURVIVED  m0666 src/gen/synth.c:719 [int+1 0 -> 1]
+KILLED    m0667 src/gen/synth.c:719 [int-1 0 -> -1]
+SURVIVED  m0668 src/gen/synth.c:719 [cmp < -> <=]
+SURVIVED  m0669 src/gen/synth.c:724 [int+1 0 -> 1]
+KILLED    m0670 src/gen/synth.c:724 [int-1 0 -> -1]
+KILLED    m0671 src/gen/synth.c:724 [cmp < -> <=]
+SURVIVED  m0672 src/gen/synth.c:730 [int+1 0 -> 1]
+SURVIVED  m0673 src/gen/synth.c:730 [int-1 0 -> -1]
+SURVIVED  m0674 src/gen/synth.c:731 [int+1 0 -> 1]
+SURVIVED  m0675 src/gen/synth.c:731 [int-1 0 -> -1]
+SURVIVED  m0676 src/gen/synth.c:732 [arith * -> /]
+KILLED    m0677 src/gen/synth.c:732 [arith * -> /]
+          build break
+SURVIVED  m0678 src/gen/synth.c:733 [arith * -> /]
+KILLED    m0679 src/gen/synth.c:733 [arith * -> /]
+          build break
+KILLED    m0680 src/gen/synth.c:734 [arith * -> /]
+          build break
+KILLED    m0681 src/gen/synth.c:735 [arith * -> /]
+          build break
+SURVIVED  m0682 src/gen/synth.c:736 [cmp != -> ==]
+KILLED    m0683 src/gen/synth.c:736 [logic && -> ||]
+          build break
+SURVIVED  m0684 src/gen/synth.c:736 [cmp != -> ==]
+KILLED    m0685 src/gen/synth.c:736 [logic && -> ||]
+          build break
+SURVIVED  m0686 src/gen/synth.c:736 [cmp != -> ==]
+KILLED    m0687 src/gen/synth.c:736 [logic && -> ||]
+          build break
+SURVIVED  m0688 src/gen/synth.c:736 [cmp != -> ==]
+SURVIVED  m0689 src/gen/synth.c:737 [bool false -> true]
+SURVIVED  m0690 src/gen/synth.c:741 [cmp > -> >=]
+SURVIVED  m0691 src/gen/synth.c:741 [int+1 0 -> 1]
+SURVIVED  m0692 src/gen/synth.c:741 [int-1 0 -> -1]
+SURVIVED  m0693 src/gen/synth.c:743 [int+1 0 -> 1]
+SURVIVED  m0694 src/gen/synth.c:743 [int-1 0 -> -1]
+SURVIVED  m0695 src/gen/synth.c:744 [int+1 0 -> 1]
+KILLED    m0696 src/gen/synth.c:744 [int-1 0 -> -1]
+SURVIVED  m0697 src/gen/synth.c:745 [int+1 0 -> 1]
+KILLED    m0698 src/gen/synth.c:745 [int-1 0 -> -1]
+KILLED    m0699 src/gen/synth.c:745 [cmp < -> <=]
+SURVIVED  m0700 src/gen/synth.c:746 [int+1 0 -> 1]
+KILLED    m0701 src/gen/synth.c:746 [int-1 0 -> -1]
+SURVIVED  m0702 src/gen/synth.c:748 [int+1 0 -> 1]
+SURVIVED  m0703 src/gen/synth.c:748 [int-1 0 -> -1]
+SURVIVED  m0704 src/gen/synth.c:748 [arith - -> +]
+SURVIVED  m0705 src/gen/synth.c:748 [int+1 1 -> 2]
+SURVIVED  m0706 src/gen/synth.c:748 [int-1 1 -> 0]
+SURVIVED  m0707 src/gen/synth.c:749 [int+1 0 -> 1]
+KILLED    m0708 src/gen/synth.c:749 [int-1 0 -> -1]
+SURVIVED  m0709 src/gen/synth.c:749 [int+1 0 -> 1]
+SURVIVED  m0710 src/gen/synth.c:749 [int-1 0 -> -1]
+SURVIVED  m0711 src/gen/synth.c:749 [int+1 0 -> 1]
+SURVIVED  m0712 src/gen/synth.c:749 [int-1 0 -> -1]
+SURVIVED  m0713 src/gen/synth.c:749 [int+1 0 -> 1]
+SURVIVED  m0714 src/gen/synth.c:749 [int-1 0 -> -1]
+SURVIVED  m0715 src/gen/synth.c:749 [int+1 0 -> 1]
+SURVIVED  m0716 src/gen/synth.c:749 [int-1 0 -> -1]
+SURVIVED  m0717 src/gen/synth.c:750 [int+1 0 -> 1]
+KILLED    m0718 src/gen/synth.c:750 [int-1 0 -> -1]
+SURVIVED  m0719 src/gen/synth.c:750 [int+1 1 -> 2]
+SURVIVED  m0720 src/gen/synth.c:750 [int-1 1 -> 0]
+SURVIVED  m0721 src/gen/synth.c:751 [int+1 1 -> 2]
+SURVIVED  m0722 src/gen/synth.c:751 [int-1 1 -> 0]
+SURVIVED  m0723 src/gen/synth.c:752 [int+1 0 -> 1]
+KILLED    m0724 src/gen/synth.c:752 [int-1 0 -> -1]
+SURVIVED  m0725 src/gen/synth.c:752 [cmp < -> <=]
+SURVIVED  m0726 src/gen/synth.c:754 [cmp != -> ==]
+SURVIVED  m0727 src/gen/synth.c:754 [int+1 0 -> 1]
+SURVIVED  m0728 src/gen/synth.c:754 [int-1 0 -> -1]
+SURVIVED  m0729 src/gen/synth.c:758 [arith - -> +]
+SURVIVED  m0730 src/gen/synth.c:758 [int+1 1 -> 2]
+SURVIVED  m0731 src/gen/synth.c:758 [int-1 1 -> 0]
+SURVIVED  m0732 src/gen/synth.c:759 [int+1 0 -> 1]
+SURVIVED  m0733 src/gen/synth.c:759 [int-1 0 -> -1]
+SURVIVED  m0734 src/gen/synth.c:759 [int+1 0 -> 1]
+SURVIVED  m0735 src/gen/synth.c:759 [int-1 0 -> -1]
+SURVIVED  m0736 src/gen/synth.c:759 [int+1 0 -> 1]
+SURVIVED  m0737 src/gen/synth.c:759 [int-1 0 -> -1]
+SURVIVED  m0738 src/gen/synth.c:759 [int+1 0 -> 1]
+SURVIVED  m0739 src/gen/synth.c:759 [int-1 0 -> -1]
+SURVIVED  m0740 src/gen/synth.c:760 [arith + -> -]
+SURVIVED  m0741 src/gen/synth.c:760 [int+1 1 -> 2]
+SURVIVED  m0742 src/gen/synth.c:760 [int-1 1 -> 0]
+KILLED    m0743 src/gen/synth.c:764 [arith * -> /]
+          build break
+SURVIVED  m0744 src/gen/synth.c:764 [arith * -> /]
+KILLED    m0745 src/gen/synth.c:764 [arith * -> /]
+          build break
+KILLED    m0746 src/gen/synth.c:765 [arith * -> /]
+          build break
+SURVIVED  m0747 src/gen/synth.c:765 [arith * -> /]
+KILLED    m0748 src/gen/synth.c:765 [arith * -> /]
+          build break
+KILLED    m0749 src/gen/synth.c:766 [arith * -> /]
+          build break
+SURVIVED  m0750 src/gen/synth.c:766 [arith * -> /]
+KILLED    m0751 src/gen/synth.c:766 [arith * -> /]
+          build break
+KILLED    m0752 src/gen/synth.c:767 [arith * -> /]
+          build break
+SURVIVED  m0753 src/gen/synth.c:767 [arith * -> /]
+KILLED    m0754 src/gen/synth.c:767 [arith * -> /]
+          build break
+SURVIVED  m0755 src/gen/synth.c:768 [cmp != -> ==]
+KILLED    m0756 src/gen/synth.c:768 [logic && -> ||]
+          build break
+SURVIVED  m0757 src/gen/synth.c:768 [cmp != -> ==]
+KILLED    m0758 src/gen/synth.c:768 [logic && -> ||]
+          build break
+SURVIVED  m0759 src/gen/synth.c:768 [cmp != -> ==]
+KILLED    m0760 src/gen/synth.c:768 [logic && -> ||]
+          build break
+SURVIVED  m0761 src/gen/synth.c:769 [cmp != -> ==]
+SURVIVED  m0762 src/gen/synth.c:771 [int+1 1 -> 2]
+SURVIVED  m0763 src/gen/synth.c:771 [int-1 1 -> 0]
+SURVIVED  m0764 src/gen/synth.c:772 [int+1 0 -> 1]
+KILLED    m0765 src/gen/synth.c:772 [int-1 0 -> -1]
+SURVIVED  m0766 src/gen/synth.c:772 [int+1 0 -> 1]
+KILLED    m0767 src/gen/synth.c:772 [int-1 0 -> -1]
+SURVIVED  m0768 src/gen/synth.c:773 [int+1 0 -> 1]
+KILLED    m0769 src/gen/synth.c:773 [int-1 0 -> -1]
+SURVIVED  m0770 src/gen/synth.c:774 [int+1 0 -> 1]
+SURVIVED  m0771 src/gen/synth.c:774 [int-1 0 -> -1]
+SURVIVED  m0772 src/gen/synth.c:774 [cmp < -> <=]
+SURVIVED  m0773 src/gen/synth.c:777 [int+1 0 -> 1]
+SURVIVED  m0774 src/gen/synth.c:777 [int-1 0 -> -1]
+SURVIVED  m0775 src/gen/synth.c:777 [cmp < -> <=]
+KILLED    m0776 src/gen/synth.c:777 [logic && -> ||]
+SURVIVED  m0777 src/gen/synth.c:777 [not-del ! -> (deleted)]
+SURVIVED  m0778 src/gen/synth.c:778 [cmp <= -> <]
+KILLED    m0779 src/gen/synth.c:779 [arith * -> /]
+          build break
+KILLED    m0780 src/gen/synth.c:780 [arith * -> /]
+          build break
+KILLED    m0781 src/gen/synth.c:781 [arith * -> /]
+          build break
+KILLED    m0782 src/gen/synth.c:782 [arith * -> /]
+          build break
+SURVIVED  m0783 src/gen/synth.c:784 [int+1 0 -> 1]
+KILLED    m0784 src/gen/synth.c:784 [int-1 0 -> -1]
+SURVIVED  m0785 src/gen/synth.c:785 [int+1 0 -> 1]
+KILLED    m0786 src/gen/synth.c:785 [int-1 0 -> -1]
+SURVIVED  m0787 src/gen/synth.c:785 [cmp < -> <=]
+KILLED    m0788 src/gen/synth.c:785 [logic && -> ||]
+SURVIVED  m0789 src/gen/synth.c:785 [not-del ! -> (deleted)]
+SURVIVED  m0790 src/gen/synth.c:787 [int+1 0 -> 1]
+KILLED    m0791 src/gen/synth.c:787 [int-1 0 -> -1]
+SURVIVED  m0792 src/gen/synth.c:787 [cmp < -> <=]
+SURVIVED  m0793 src/gen/synth.c:788 [cmp >= -> >]
+SURVIVED  m0794 src/gen/synth.c:788 [int+1 0 -> 1]
+SURVIVED  m0795 src/gen/synth.c:788 [int-1 0 -> -1]
+SURVIVED  m0796 src/gen/synth.c:788 [logic && -> ||]
+SURVIVED  m0797 src/gen/synth.c:789 [cmp == -> !=]
+SURVIVED  m0798 src/gen/synth.c:793 [int+1 0 -> 1]
+KILLED    m0799 src/gen/synth.c:793 [int-1 0 -> -1]
+KILLED    m0800 src/gen/synth.c:793 [cmp < -> <=]
+SURVIVED  m0801 src/gen/synth.c:797 [cmp != -> ==]
+SURVIVED  m0802 src/gen/synth.c:797 [int+1 0 -> 1]
+SURVIVED  m0803 src/gen/synth.c:797 [int-1 0 -> -1]
+SURVIVED  m0804 src/gen/synth.c:800 [cmp >= -> >]
+SURVIVED  m0805 src/gen/synth.c:806 [arith + -> -]
+SURVIVED  m0806 src/gen/synth.c:806 [int+1 1 -> 2]
+SURVIVED  m0807 src/gen/synth.c:806 [int-1 1 -> 0]
+KILLED    m0808 src/gen/synth.c:808 [cmp != -> ==]
+KILLED    m0809 src/gen/synth.c:808 [int+1 0 -> 1]
+KILLED    m0810 src/gen/synth.c:808 [int-1 0 -> -1]
+SURVIVED  m0811 src/gen/synth.c:810 [arith - -> +]
+SURVIVED  m0812 src/gen/synth.c:810 [int+1 1 -> 2]
+SURVIVED  m0813 src/gen/synth.c:810 [int-1 1 -> 0]
+SURVIVED  m0814 src/gen/synth.c:812 [arith - -> +]
+SURVIVED  m0815 src/gen/synth.c:812 [int+1 1 -> 2]
+SURVIVED  m0816 src/gen/synth.c:812 [int-1 1 -> 0]
+SURVIVED  m0817 src/gen/synth.c:816 [int+1 0 -> 1]
+SURVIVED  m0818 src/gen/synth.c:816 [int-1 0 -> -1]
+SURVIVED  m0819 src/gen/synth.c:817 [int+1 0 -> 1]
+SURVIVED  m0820 src/gen/synth.c:817 [int-1 0 -> -1]
+SURVIVED  m0821 src/gen/synth.c:821 [arith + -> -]
+SURVIVED  m0822 src/gen/synth.c:821 [cmp <= -> <]
+SURVIVED  m0823 src/gen/synth.c:822 [arith * -> /]
+KILLED    m0824 src/gen/synth.c:822 [arith * -> /]
+          build break
+SURVIVED  m0825 src/gen/synth.c:823 [arith + -> -]
+SURVIVED  m0826 src/gen/synth.c:823 [arith * -> /]
+KILLED    m0827 src/gen/synth.c:823 [arith * -> /]
+          build break
+KILLED    m0828 src/gen/synth.c:824 [arith * -> /]
+          build break
+SURVIVED  m0829 src/gen/synth.c:824 [arith + -> -]
+SURVIVED  m0830 src/gen/synth.c:825 [bool true -> false]
+SURVIVED  m0831 src/gen/synth.c:828 [cmp < -> <=]
+KILLED    m0832 src/gen/synth.c:858 [arith * -> /]
+          build break
+KILLED    m0833 src/gen/synth.c:859 [arith * -> /]
+          build break
+KILLED    m0834 src/gen/synth.c:860 [cmp == -> !=]
+KILLED    m0835 src/gen/synth.c:860 [logic || -> &&]
+KILLED    m0836 src/gen/synth.c:860 [cmp == -> !=]
+KILLED    m0837 src/gen/synth.c:861 [arith - -> +]
+SURVIVED  m0838 src/gen/synth.c:861 [int+1 1 -> 2]
+KILLED    m0839 src/gen/synth.c:861 [int-1 1 -> 0]
+KILLED    m0840 src/gen/synth.c:863 [int+1 0 -> 1]
+KILLED    m0841 src/gen/synth.c:863 [int-1 0 -> -1]
+KILLED    m0842 src/gen/synth.c:863 [arith * -> /]
+          build break
+KILLED    m0843 src/gen/synth.c:864 [not-del ! -> (deleted)]
+KILLED    m0844 src/gen/synth.c:865 [arith - -> +]
+SURVIVED  m0845 src/gen/synth.c:865 [int+1 1 -> 2]
+KILLED    m0846 src/gen/synth.c:865 [int-1 1 -> 0]
+KILLED    m0847 src/gen/synth.c:867 [not-del ! -> (deleted)]
+KILLED    m0848 src/gen/synth.c:867 [logic && -> ||]
+SURVIVED  m0849 src/gen/synth.c:867 [cmp < -> <=]
+SURVIVED  m0850 src/gen/synth.c:867 [int+1 0 -> 1]
+SURVIVED  m0851 src/gen/synth.c:867 [int-1 0 -> -1]
+SURVIVED  m0852 src/gen/synth.c:868 [arith - -> +]
+SURVIVED  m0853 src/gen/synth.c:868 [int+1 1 -> 2]
+SURVIVED  m0854 src/gen/synth.c:868 [int-1 1 -> 0]
+SURVIVED  m0855 src/gen/synth.c:874 [cmp < -> <=]
+SURVIVED  m0856 src/gen/synth.c:877 [cmp > -> >=]
+KILLED    m0857 src/gen/synth.c:881 [int+1 0 -> 1]
+KILLED    m0858 src/gen/synth.c:881 [int-1 0 -> -1]
+SURVIVED  m0859 src/gen/synth.c:883 [int+1 0 -> 1]
+SURVIVED  m0860 src/gen/synth.c:883 [int-1 0 -> -1]
+SURVIVED  m0861 src/gen/synth.c:888 [cmp >= -> >]
+SURVIVED  m0862 src/gen/synth.c:888 [int+1 0 -> 1]
+SURVIVED  m0863 src/gen/synth.c:888 [int-1 0 -> -1]
+SURVIVED  m0864 src/gen/synth.c:888 [logic && -> ||]
+KILLED    m0865 src/gen/synth.c:889 [bool false -> true]
+SURVIVED  m0866 src/gen/synth.c:892 [arith * -> /]
+SURVIVED  m0867 src/gen/synth.c:892 [arith - -> +]
+SURVIVED  m0868 src/gen/synth.c:892 [int+1 1 -> 2]
+SURVIVED  m0869 src/gen/synth.c:892 [int-1 1 -> 0]
+SURVIVED  m0870 src/gen/synth.c:894 [cmp > -> >=]
+SURVIVED  m0871 src/gen/synth.c:894 [int+1 0 -> 1]
+SURVIVED  m0872 src/gen/synth.c:894 [int-1 0 -> -1]
+KILLED    m0873 src/gen/synth.c:894 [logic && -> ||]
+          build break
+SURVIVED  m0874 src/gen/synth.c:894 [cmp < -> <=]
+KILLED    m0875 src/gen/synth.c:894 [logic && -> ||]
+          build break
+SURVIVED  m0876 src/gen/synth.c:894 [cmp >= -> >]
+SURVIVED  m0877 src/gen/synth.c:894 [int+1 1 -> 2]
+SURVIVED  m0878 src/gen/synth.c:894 [int-1 1 -> 0]
+SURVIVED  m0879 src/gen/synth.c:896 [cmp > -> >=]
+SURVIVED  m0880 src/gen/synth.c:901 [cmp > -> >=]
+KILLED    m0881 src/gen/synth.c:901 [int+1 0 -> 1]
+SURVIVED  m0882 src/gen/synth.c:901 [int-1 0 -> -1]
+KILLED    m0883 src/gen/synth.c:902 [arith - -> +]
+SURVIVED  m0884 src/gen/synth.c:902 [int+1 1 -> 2]
+SURVIVED  m0885 src/gen/synth.c:902 [int-1 1 -> 0]
+KILLED    m0886 src/gen/synth.c:904 [int+1 0 -> 1]
+KILLED    m0887 src/gen/synth.c:904 [int-1 0 -> -1]
+KILLED    m0888 src/gen/synth.c:904 [cmp < -> <=]
+KILLED    m0889 src/gen/synth.c:906 [cmp != -> ==]
+SURVIVED  m0890 src/gen/synth.c:909 [cmp < -> <=]
+SURVIVED  m0891 src/gen/synth.c:909 [int+1 0 -> 1]
+KILLED    m0892 src/gen/synth.c:909 [int-1 0 -> -1]
+KILLED    m0893 src/gen/synth.c:909 [logic || -> &&]
+SURVIVED  m0894 src/gen/synth.c:909 [cmp < -> <=]
+KILLED    m0895 src/gen/synth.c:914 [cmp >= -> >]
+KILLED    m0896 src/gen/synth.c:914 [int+1 0 -> 1]
+SURVIVED  m0897 src/gen/synth.c:914 [int-1 0 -> -1]
+KILLED    m0898 src/gen/synth.c:914 [logic && -> ||]
+KILLED    m0899 src/gen/synth.c:915 [bool false -> true]
+KILLED    m0900 src/gen/synth.c:916 [ret-lit 0 -> 1]
+KILLED    m0901 src/gen/synth.c:916 [int+1 0 -> 1]
+KILLED    m0902 src/gen/synth.c:916 [int-1 0 -> -1]
+SURVIVED  m0903 src/gen/synth.c:919 [cmp > -> >=]
+SURVIVED  m0904 src/gen/synth.c:919 [int+1 0 -> 1]
+SURVIVED  m0905 src/gen/synth.c:919 [int-1 0 -> -1]
+KILLED    m0906 src/gen/synth.c:919 [logic && -> ||]
+          build break
+SURVIVED  m0907 src/gen/synth.c:919 [cmp == -> !=]
+SURVIVED  m0908 src/gen/synth.c:919 [int+1 0 -> 1]
+SURVIVED  m0909 src/gen/synth.c:919 [int-1 0 -> -1]
+KILLED    m0910 src/gen/synth.c:919 [logic && -> ||]
+          build break
+SURVIVED  m0911 src/gen/synth.c:919 [cmp >= -> >]
+SURVIVED  m0912 src/gen/synth.c:919 [int+1 1 -> 2]
+SURVIVED  m0913 src/gen/synth.c:919 [int-1 1 -> 0]
+SURVIVED  m0914 src/gen/synth.c:921 [cmp > -> >=]
+SURVIVED  m0915 src/gen/synth.c:925 [int+1 0 -> 1]
+SURVIVED  m0916 src/gen/synth.c:925 [int-1 0 -> -1]
+SURVIVED  m0917 src/gen/synth.c:930 [cmp >= -> >]
+SURVIVED  m0918 src/gen/synth.c:930 [int+1 0 -> 1]
+SURVIVED  m0919 src/gen/synth.c:930 [int-1 0 -> -1]
+SURVIVED  m0920 src/gen/synth.c:930 [logic && -> ||]
+SURVIVED  m0921 src/gen/synth.c:932 [bool false -> true]
+SURVIVED  m0922 src/gen/synth.c:932 [bool true -> false]
+SURVIVED  m0923 src/gen/synth.c:933 [ret-lit 0 -> 1]
+SURVIVED  m0924 src/gen/synth.c:933 [int+1 0 -> 1]
+SURVIVED  m0925 src/gen/synth.c:933 [int-1 0 -> -1]
+KILLED    m0926 src/gen/synth.c:937 [ret-lit 0 -> 1]
+KILLED    m0927 src/gen/synth.c:937 [int+1 0 -> 1]
+KILLED    m0928 src/gen/synth.c:937 [int-1 0 -> -1]
+ACCEPTED  m0004 src/gen/synth.c:36 [arith - -> +] :: setup moves array capacity arithmetic is headroom or shrinks the slot so the move memcpy clobbers the adjacent count field into small move values, the narrowed setup enumeration still resolves every pinned target
+ACCEPTED  m0005 src/gen/synth.c:36 [int+1 1 -> 2] :: setup moves array capacity arithmetic is headroom or shrinks the slot so the move memcpy clobbers the adjacent count field into small move values, the narrowed setup enumeration still resolves every pinned target
+ACCEPTED  m0006 src/gen/synth.c:36 [int-1 1 -> 0] :: setup moves array capacity arithmetic is headroom or shrinks the slot so the move memcpy clobbers the adjacent count field into small move values, the narrowed setup enumeration still resolves every pinned target
+ACCEPTED  m0020 src/gen/synth.c:74 [int+1 0 -> 1] :: identity cube memset fill byte is unobservable, every active cell is rewritten before any read and the stride padding is never read
+ACCEPTED  m0021 src/gen/synth.c:74 [int-1 0 -> -1] :: identity cube memset fill byte is unobservable, every active cell is rewritten before any read and the stride padding is never read
+ACCEPTED  m0024 src/gen/synth.c:76 [int-1 0 -> -1] :: face loop shift minus one writes cells before the facelet array into dead stack, the six active faces fully rewrite the domain
+ACCEPTED  m0025 src/gen/synth.c:76 [cmp < -> <=] :: face loop shift minus one writes cells before the facelet array into dead stack, the six active faces fully rewrite the domain
+ACCEPTED  m0028 src/gen/synth.c:77 [cmp < -> <=] :: row loop shift minus one writes the dead padding row of the previous face that no readback touches
+ACCEPTED  m0031 src/gen/synth.c:78 [cmp < -> <=] :: col loop shift minus one writes the dead stride padding cell of the previous row
+ACCEPTED  m0035 src/gen/synth.c:87 [cmp < -> <=] :: readback loop shift minus one writes nine state cells into dead stack, the active cells are all written by the remaining iterations
+ACCEPTED  m0038 src/gen/synth.c:88 [cmp < -> <=] :: readback row bound widening reads the dead stride padding cell and writes the next face cell zero which that face iteration rewrites identically
+ACCEPTED  m0041 src/gen/synth.c:89 [cmp < -> <=] :: readback col bound widening writes one compact slot that the next face iteration rewrites with the identical value
+ACCEPTED  m0045 src/gen/synth.c:97 [int-1 0 -> -1] :: apply loop start minus one applies a garbage move read before the sequence, ct_move_legal rejects it as a no-op in every observed run and the real sequence then applies in full
+ACCEPTED  m0055 src/gen/synth.c:106 [int-1 1 -> 0] :: cycle key sort start shift keeps the sort insertion order deterministic on both the insert and find sides, every pinned key sorts identically because the minimum cell is processed first in both callers, verified by the direct sweep probes
+ACCEPTED  m0062 src/gen/synth.c:109 [int-1 0 -> -1] :: insertion sort inner start minus one probes sorted minus one whose dead stack value never reorders a pinned key, and the widened comparison reads sorted zero which never exceeds the distinct sorted keys
+ACCEPTED  m0064 src/gen/synth.c:109 [cmp > -> >=] :: insertion sort inner start minus one probes sorted minus one whose dead stack value never reorders a pinned key, and the widened comparison reads sorted zero which never exceeds the distinct sorted keys
+ACCEPTED  m0085 src/gen/synth.c:121 [arith * -> /] :: key hash first fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+ACCEPTED  m0086 src/gen/synth.c:121 [arith + -> -] :: key hash first fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+ACCEPTED  m0087 src/gen/synth.c:122 [arith * -> /] :: key hash second fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+ACCEPTED  m0088 src/gen/synth.c:122 [arith + -> -] :: key hash second fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+ACCEPTED  m0089 src/gen/synth.c:123 [arith * -> /] :: key hash third fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+ACCEPTED  m0090 src/gen/synth.c:123 [arith + -> -] :: key hash third fold mutants divide the multiplier or negate the addend, insert and find compute the same mutated slot so the stored key set and every lookup stay identical, the table never fills so probes terminate
+ACCEPTED  m0113 src/gen/synth.c:135 [arith + -> -] :: table slot probe step mutants still terminate at the half loaded open addressed table, minus one and plus two walk the slot ring in a different order while insert and find stay consistent, the step zero variant loops forever on the first collision and is excluded from execution
+ACCEPTED  m0114 src/gen/synth.c:135 [int+1 1 -> 2] :: table slot probe step mutants still terminate at the half loaded open addressed table, minus one and plus two walk the slot ring in a different order while insert and find stay consistent, the step zero variant loops forever on the first collision and is excluded from execution
+ACCEPTED  m0119 src/gen/synth.c:142 [cmp < -> <=] :: move compare face strictness mutants agree on the distinct face values every pinned comparison sees
+ACCEPTED  m0120 src/gen/synth.c:144 [cmp != -> ==] :: move compare depth ordering mutants only reorder equal length tie-break candidates, the golden entry pin and suite corpus are unchanged
+ACCEPTED  m0121 src/gen/synth.c:145 [cmp < -> <=] :: move compare depth strictness mutants agree on the distinct depth values every pinned comparison sees
+ACCEPTED  m0122 src/gen/synth.c:147 [cmp != -> ==] :: move compare depth to ordering mutants only reorder equal length tie-break candidates
+ACCEPTED  m0123 src/gen/synth.c:148 [cmp < -> <=] :: move compare depth to strictness mutants agree on the distinct depth values every pinned comparison sees
+ACCEPTED  m0128 src/gen/synth.c:155 [cmp < -> <=] :: seq better length comparison widening is unreachable behind the equal length guard one line earlier
+ACCEPTED  m0130 src/gen/synth.c:157 [int-1 0 -> -1] :: seq better loop start shift skips the first move of equal length sequences, the stored winner for every pinned key is decided by a later move, verified by the golden entry pin
+ACCEPTED  m0131 src/gen/synth.c:157 [cmp < -> <=] :: seq better loop start shift skips the first move of equal length sequences, the stored winner for every pinned key is decided by a later move, verified by the golden entry pin
+ACCEPTED  m0132 src/gen/synth.c:159 [bool true -> false] :: seq better loop bound widening reads one dead slot past the sequence whose garbage value never flips a pinned tie-break, the shorter operand guard holds the loop
+ACCEPTED  m0134 src/gen/synth.c:165 [bool false -> true] :: seq better all equal return flip stores the equal byte sequence, no pinned key observes the swap
+ACCEPTED  m0139 src/gen/synth.c:171 [cmp >= -> >] :: key cap guard is dead on the pinned build, the table yields 4464 keys against the 6544 capacity
+ACCEPTED  m0179 src/gen/synth.c:218 [int+1 0 -> 1] :: analyze moved count boundary and disjunction mutants collapse into the per times three rejection one line later, moved one still fails the count gate and corner equals edge never holds for a nonzero moved set over the disjoint corner and edge cell partitions
+ACCEPTED  m0180 src/gen/synth.c:218 [int-1 0 -> -1] :: analyze moved count boundary and disjunction mutants collapse into the per times three rejection one line later, moved one still fails the count gate and corner equals edge never holds for a nonzero moved set over the disjoint corner and edge cell partitions
+ACCEPTED  m0189 src/gen/synth.c:230 [int+1 0 -> 1] :: visited walk start shift re-walks the same cycle from its next member, the rotation invariant keying inserts the identical key
+ACCEPTED  m0191 src/gen/synth.c:230 [cmp < -> <=] :: visited walk start shift re-walks the same cycle from its next member, the rotation invariant keying inserts the identical key
+ACCEPTED  m0194 src/gen/synth.c:238 [cmp < -> <=] :: cycle walk bound and conjunction mutants cannot fire on three cycle only walks, the moved count gate excludes shorter cycles and the walk closes at exactly three members
+ACCEPTED  m0195 src/gen/synth.c:238 [logic && -> ||] :: cycle walk bound and conjunction mutants cannot fire on three cycle only walks, the moved count gate excludes shorter cycles and the walk closes at exactly three members
+ACCEPTED  m0197 src/gen/synth.c:239 [bool true -> false] :: visited recheck flip only re-walks already closed cycles, the duplicate insert writes the same canonical key and seq better keeps the incumbent
+ACCEPTED  m0199 src/gen/synth.c:244 [logic || -> &&] :: cycle closure disjunction mutants are absorbed by the closure recheck, no pinned walk violates the closure at length three
+ACCEPTED  m0201 src/gen/synth.c:248 [int+1 0 -> 1] :: direction initializer is a dead store, synth_cycle_key always writes it
+ACCEPTED  m0202 src/gen/synth.c:248 [int-1 0 -> -1] :: direction initializer is a dead store, synth_cycle_key always writes it
+ACCEPTED  m0227 src/gen/synth.c:267 [arith + -> -] :: pair assembly copy width mutants keep the inverse window inside the buffer, the table size pin and suite corpus are unchanged
+ACCEPTED  m0238 src/gen/synth.c:278 [arith * -> /] :: dedup perm buffer capacity is headroom, ct_sticker_perm writes all cells for the validated single moves
+ACCEPTED  m0240 src/gen/synth.c:279 [arith * -> /] :: dedup perm buffer capacity is headroom, ct_sticker_perm writes all cells for the validated single moves
+ACCEPTED  m0242 src/gen/synth.c:280 [cmp != -> ==] :: dedup perm error comparison mutants agree with the nonzero test on the zero and negative returns ct_sticker_perm produces
+ACCEPTED  m0243 src/gen/synth.c:280 [int+1 0 -> 1] :: dedup perm error comparison mutants agree with the nonzero test on the zero and negative returns ct_sticker_perm produces
+ACCEPTED  m0244 src/gen/synth.c:280 [int-1 0 -> -1] :: dedup perm error comparison mutants agree with the nonzero test on the zero and negative returns ct_sticker_perm produces
+ACCEPTED  m0245 src/gen/synth.c:281 [bool false -> true] :: dedup perm error branch is unreachable, the enumerated candidate moves are legal at the build size
+ACCEPTED  m0247 src/gen/synth.c:283 [cmp != -> ==] :: dedup perm error comparison mutants agree with the nonzero test on the zero and negative returns ct_sticker_perm produces
+ACCEPTED  m0248 src/gen/synth.c:283 [int+1 0 -> 1] :: dedup perm error comparison mutants agree with the nonzero test on the zero and negative returns ct_sticker_perm produces
+ACCEPTED  m0249 src/gen/synth.c:283 [int-1 0 -> -1] :: dedup perm error comparison mutants agree with the nonzero test on the zero and negative returns ct_sticker_perm produces
+ACCEPTED  m0250 src/gen/synth.c:284 [bool false -> true] :: dedup perm error branch is unreachable, the enumerated candidate moves are legal at the build size
+ACCEPTED  m0254 src/gen/synth.c:290 [int+1 0 -> 1] :: cells reset loop shift skips one statically zero cell that the sticker scan rewrites before any read
+ACCEPTED  m0264 src/gen/synth.c:315 [cmp <= -> <] :: candidate move failure branch is dead, ct_candidate_moves always returns moves for the build size
+ACCEPTED  m0265 src/gen/synth.c:315 [int+1 0 -> 1] :: candidate move failure branch is dead, ct_candidate_moves always returns moves for the build size
+ACCEPTED  m0266 src/gen/synth.c:315 [int-1 0 -> -1] :: candidate move failure branch is dead, ct_candidate_moves always returns moves for the build size
+ACCEPTED  m0267 src/gen/synth.c:316 [arith - -> +] :: candidate move count guard is dead on the same unreachable branch
+ACCEPTED  m0268 src/gen/synth.c:316 [int+1 1 -> 2] :: candidate move count guard is dead on the same unreachable branch
+ACCEPTED  m0269 src/gen/synth.c:316 [int-1 1 -> 0] :: candidate move count guard is dead on the same unreachable branch
+ACCEPTED  m0274 src/gen/synth.c:321 [cmp < -> <=] :: dedup keep loop start shift skips candidate zero whose duplicate scan finds no earlier duplicate, the candidate zero keys are inserted through the later a loops on the pinned corpus
+ACCEPTED  m0276 src/gen/synth.c:323 [int+1 0 -> 1] :: dedup inner scan start shift misses candidate zero as an earlier duplicate, the kept duplicate re enumerates pairs whose inserts are absorbed by seq better, table size pin holds
+ACCEPTED  m0279 src/gen/synth.c:324 [not-del ! -> (deleted)] :: dedup keep initializer flip marks candidate zero as duplicate in the index array only, the unique set content is restored by the scan on the pinned corpus
+ACCEPTED  m0280 src/gen/synth.c:328 [bool false -> true] :: dedup comparison flip enumerates a superset, the emitted key set and the golden entry are unchanged, verified by the table size pin and suite corpus
+ACCEPTED  m0283 src/gen/synth.c:336 [cmp < -> <=] :: interchange loop start shift skips the first unique candidate whose pair keys are still emitted through the inner loop from the other side on the pinned corpus
+ACCEPTED  m0285 src/gen/synth.c:338 [int+1 0 -> 1] :: insert loop start shift skips the first unique candidate whose pair keys are still emitted through the outer loop on the pinned corpus
+ACCEPTED  m0287 src/gen/synth.c:338 [cmp < -> <=] :: insert loop start shift skips the first unique candidate whose pair keys are still emitted through the outer loop on the pinned corpus
+ACCEPTED  m0288 src/gen/synth.c:339 [int+1 1 -> 2] :: pair order flip emits both orders, the analyzed key set is unchanged, the table size pin holds
+ACCEPTED  m0289 src/gen/synth.c:339 [int-1 1 -> 0] :: pair order flip emits both orders, the analyzed key set is unchanged, the table size pin holds
+ACCEPTED  m0290 src/gen/synth.c:339 [bool true -> false] :: pair order flip emits both orders, the analyzed key set is unchanged, the table size pin holds
+ACCEPTED  m0291 src/gen/synth.c:340 [int+1 1 -> 2] :: pair order flip emits both orders, the analyzed key set is unchanged, the table size pin holds
+ACCEPTED  m0292 src/gen/synth.c:340 [int-1 1 -> 0] :: pair order flip emits both orders, the analyzed key set is unchanged, the table size pin holds
+ACCEPTED  m0293 src/gen/synth.c:340 [bool false -> true] :: pair order flip emits both orders, the analyzed key set is unchanged, the table size pin holds
+ACCEPTED  m0294 src/gen/synth.c:342 [int+1 0 -> 1] :: outer insert loop start shift skips the first conjugate shape whose keys are emitted through the yi loop from the other member on the pinned corpus
+ACCEPTED  m0296 src/gen/synth.c:342 [cmp < -> <=] :: outer insert loop start shift skips the first conjugate shape whose keys are emitted through the yi loop from the other member on the pinned corpus
+ACCEPTED  m0299 src/gen/synth.c:346 [int+1 0 -> 1] :: conjugate insert slot zero write is overwritten by the shape writers before use
+ACCEPTED  m0302 src/gen/synth.c:347 [int+1 0 -> 1] :: conjugate loop start shift skips the first unique candidate whose shapes are emitted from the other member on the pinned corpus
+ACCEPTED  m0304 src/gen/synth.c:347 [cmp < -> <=] :: conjugate loop start shift skips the first unique candidate whose shapes are emitted from the other member on the pinned corpus
+ACCEPTED  m0316 src/gen/synth.c:363 [bool true -> false] :: tail shape pair order flip emits both orders, the key set is unchanged
+ACCEPTED  m0317 src/gen/synth.c:364 [bool false -> true] :: tail shape pair order flip emits both orders, the key set is unchanged
+ACCEPTED  m0320 src/gen/synth.c:377 [arith - -> +] :: allocation failure branch is unreachable in the test harness, the calloc of the table never fails
+ACCEPTED  m0321 src/gen/synth.c:377 [int+1 1 -> 2] :: allocation failure branch is unreachable in the test harness, the calloc of the table never fails
+ACCEPTED  m0322 src/gen/synth.c:377 [int-1 1 -> 0] :: allocation failure branch is unreachable in the test harness, the calloc of the table never fails
+ACCEPTED  m0327 src/gen/synth.c:381 [cmp < -> <=] :: build failure branch is dead, the candidate generator always returns moves
+ACCEPTED  m0328 src/gen/synth.c:381 [int+1 0 -> 1] :: build failure branch is dead, the candidate generator always returns moves
+ACCEPTED  m0329 src/gen/synth.c:381 [int-1 0 -> -1] :: build failure branch is dead, the candidate generator always returns moves
+ACCEPTED  m0330 src/gen/synth.c:384 [arith - -> +] :: build failure branch is dead on the same unreachable path
+ACCEPTED  m0331 src/gen/synth.c:384 [int+1 1 -> 2] :: build failure branch is dead on the same unreachable path
+ACCEPTED  m0332 src/gen/synth.c:384 [int-1 1 -> 0] :: build failure branch is dead on the same unreachable path
+ACCEPTED  m0335 src/gen/synth.c:392 [arith - -> +] :: pre init size return sign is covered by the stress suite init call and the full corpus init ordering, both pinned paths call ct_synth_init before the size query
+ACCEPTED  m0336 src/gen/synth.c:392 [int+1 1 -> 2] :: pre init size return sign is covered by the stress suite init call and the full corpus init ordering, both pinned paths call ct_synth_init before the size query
+ACCEPTED  m0337 src/gen/synth.c:392 [int-1 1 -> 0] :: pre init size return sign is covered by the stress suite init call and the full corpus init ordering, both pinned paths call ct_synth_init before the size query
+ACCEPTED  m0356 src/gen/synth.c:403 [int+1 1 -> 2] :: entry cap guard arithmetic admits caps one below the length, the pinned queries pass the full template cap
+ACCEPTED  m0378 src/gen/synth.c:428 [int-1 0 -> -1] :: third target negative guard minus one admits t2 equal minus one, the invalid cell lookups then miss every table and setup path so the query returns the unfound shape, no pinned assertion reads the exact error code for that input
+ACCEPTED  m0380 src/gen/synth.c:431 [cmp >= -> >] :: first and second target bound widening admits values equal the sticker count whose piece lookups read past the table and the synthesis paths then return the unfound shape, no pinned assertion reads the exact code for those inputs
+ACCEPTED  m0382 src/gen/synth.c:431 [cmp >= -> >] :: first and second target bound widening admits values equal the sticker count whose piece lookups read past the table and the synthesis paths then return the unfound shape, no pinned assertion reads the exact code for those inputs
+ACCEPTED  m0397 src/gen/synth.c:447 [bool false -> true] :: validate cycle cell guard flip admits states whose piece scan then reconstructs the same on piece set, every pinned candidate carries the exact cycle, attempt only divergence
+ACCEPTED  m0398 src/gen/synth.c:449 [bool false -> true] :: on pieces initializer flip sets only element zero true, cell zero is never the distinguishing cell for a candidate that moves whole pieces
+ACCEPTED  m0404 src/gen/synth.c:457 [bool false -> true] :: missing sticker branch is unreachable, case valid guarantees the key cells carry same orbit stickers
+ACCEPTED  m0406 src/gen/synth.c:460 [int-1 0 -> -1] :: piece scan boundary shifts probe dead slots whose garbage piece values never match, one dead probe
+ACCEPTED  m0407 src/gen/synth.c:460 [cmp < -> <=] :: piece scan boundary shifts probe dead slots whose garbage piece values never match, one dead probe
+ACCEPTED  m0408 src/gen/synth.c:461 [cmp == -> !=] :: validate on pieces comparison flip marks the union of the three piece complements which is every cell, the guard reduces to the cycle position check every enumerated candidate already satisfies
+ACCEPTED  m0410 src/gen/synth.c:466 [int+1 0 -> 1] :: validate cell scan start shift skips cell zero whose verdict is carried by the other displaced cells for candidates that move whole pieces
+ACCEPTED  m0416 src/gen/synth.c:468 [bool false -> true] :: validate acceptance flip rejects or accepts only states the candidate generator never produces, every emitted candidate passes both ways on the pinned corpus
+ACCEPTED  m0422 src/gen/synth.c:478 [bool false -> true] :: fill score failure branch is unreachable, the validated candidates always score
+ACCEPTED  m0426 src/gen/synth.c:487 [bool true -> false] :: fill found flip leaves the zeroed result struct, the caller returns the same not found outcome with identical fields
+ACCEPTED  m0431 src/gen/synth.c:492 [logic || -> &&] :: cand add guard disjunction and bound shifts write into the cands array slack, the candidate cap clamps to the array bound on every pinned config
+ACCEPTED  m0433 src/gen/synth.c:492 [cmp >= -> >] :: cand add guard disjunction and bound shifts write into the cands array slack, the candidate cap clamps to the array bound on every pinned config
+ACCEPTED  m0442 src/gen/synth.c:503 [int+1 0 -> 1] :: lookup direction initializer is a dead store, synth_cycle_key always writes it
+ACCEPTED  m0443 src/gen/synth.c:503 [int-1 0 -> -1] :: lookup direction initializer is a dead store, synth_cycle_key always writes it
+ACCEPTED  m0444 src/gen/synth.c:505 [int+1 0 -> 1] :: lookup variant loop bound widening duplicates the k zero attempt, the forward hit returns first
+ACCEPTED  m0445 src/gen/synth.c:505 [int-1 0 -> -1] :: lookup variant loop bound widening duplicates the k zero attempt, the forward hit returns first
+ACCEPTED  m0446 src/gen/synth.c:505 [cmp < -> <=] :: lookup variant loop bound widening duplicates the k zero attempt, the forward hit returns first
+ACCEPTED  m0447 src/gen/synth.c:506 [cmp == -> !=] :: lookup direction key arithmetic reroutes to the same stored key on both iterations, both directions are stored for every cycle, duplicate attempt only
+ACCEPTED  m0448 src/gen/synth.c:506 [int+1 0 -> 1] :: lookup direction key arithmetic reroutes to the same stored key on both iterations, both directions are stored for every cycle, duplicate attempt only
+ACCEPTED  m0449 src/gen/synth.c:506 [int-1 0 -> -1] :: lookup direction key arithmetic reroutes to the same stored key on both iterations, both directions are stored for every cycle, duplicate attempt only
+ACCEPTED  m0450 src/gen/synth.c:506 [int+1 1 -> 2] :: lookup direction key arithmetic reroutes to the same stored key on both iterations, both directions are stored for every cycle, duplicate attempt only
+ACCEPTED  m0451 src/gen/synth.c:506 [int-1 1 -> 0] :: lookup direction key arithmetic reroutes to the same stored key on both iterations, both directions are stored for every cycle, duplicate attempt only
+ACCEPTED  m0466 src/gen/synth.c:517 [cmp > -> >=] :: lookup length guards agree on the stored lengths, every table entry holds at least four moves
+ACCEPTED  m0467 src/gen/synth.c:517 [int+1 0 -> 1] :: lookup length guards agree on the stored lengths, every table entry holds at least four moves
+ACCEPTED  m0468 src/gen/synth.c:517 [int-1 0 -> -1] :: lookup length guards agree on the stored lengths, every table entry holds at least four moves
+ACCEPTED  m0469 src/gen/synth.c:519 [bool false -> true] :: lookup miss flip returns the zero length candidate whose validation then fails, attempt only divergence
+ACCEPTED  m0471 src/gen/synth.c:523 [int+1 0 -> 1] :: setup move slot zero keeps a stale first move that fails legality or duplicates the prior move, setup outcomes unchanged on the pinned corpus
+ACCEPTED  m0472 src/gen/synth.c:523 [int-1 0 -> -1] :: setup move slot zero keeps a stale first move that fails legality or duplicates the prior move, setup outcomes unchanged on the pinned corpus
+ACCEPTED  m0479 src/gen/synth.c:528 [int+1 1 -> 2] :: subset move enumeration prunes only setup candidates, the mask independent direct candidate satisfies every pinned assertion
+ACCEPTED  m0480 src/gen/synth.c:528 [int-1 1 -> 0] :: subset move enumeration prunes only setup candidates, the mask independent direct candidate satisfies every pinned assertion
+ACCEPTED  m0481 src/gen/synth.c:528 [cmp < -> <=] :: subset move enumeration prunes only setup candidates, the mask independent direct candidate satisfies every pinned assertion
+ACCEPTED  m0484 src/gen/synth.c:529 [int+1 1 -> 2] :: subset move depth literal mutant swaps the generated move widths, the surviving variant produces legal wider turns whose setup conjugates still validate every pinned target, the illegal variant is killed
+ACCEPTED  m0490 src/gen/synth.c:541 [arith - -> +] :: setup target search boundary shifts keep the scan inside the state permutation, every target value is always located
+ACCEPTED  m0491 src/gen/synth.c:541 [int+1 1 -> 2] :: setup target search boundary shifts keep the scan inside the state permutation, every target value is always located
+ACCEPTED  m0492 src/gen/synth.c:541 [int-1 1 -> 0] :: setup target search boundary shifts keep the scan inside the state permutation, every target value is always located
+ACCEPTED  m0493 src/gen/synth.c:542 [int+1 0 -> 1] :: setup cell scan start shift skips cell zero placements recovered by the other depth first branches on the pinned corpus
+ACCEPTED  m0495 src/gen/synth.c:542 [cmp < -> <=] :: setup cell scan start shift skips cell zero placements recovered by the other depth first branches on the pinned corpus
+ACCEPTED  m0497 src/gen/synth.c:548 [cmp < -> <=] :: setup cell scan bound widening probes one dead slot whose value never matches a target
+ACCEPTED  m0498 src/gen/synth.c:548 [int+1 0 -> 1] :: setup cell scan bound widening probes one dead slot whose value never matches a target
+ACCEPTED  m0499 src/gen/synth.c:548 [int-1 0 -> -1] :: setup cell scan bound widening probes one dead slot whose value never matches a target
+ACCEPTED  m0500 src/gen/synth.c:553 [int+1 0 -> 1] :: setup inner length initializer is a dead store on the lookup miss path and overwritten on the hit path
+ACCEPTED  m0501 src/gen/synth.c:553 [int-1 0 -> -1] :: setup inner length initializer is a dead store on the lookup miss path and overwritten on the hit path
+ACCEPTED  m0509 src/gen/synth.c:560 [cmp < -> <=] :: setup conjugate failure branch is dead for legal moves within the depth cap
+ACCEPTED  m0510 src/gen/synth.c:560 [int+1 0 -> 1] :: setup conjugate failure branch is dead for legal moves within the depth cap
+ACCEPTED  m0511 src/gen/synth.c:560 [int-1 0 -> -1] :: setup conjugate failure branch is dead for legal moves within the depth cap
+ACCEPTED  m0512 src/gen/synth.c:566 [cmp < -> <=] :: setup simplify failure branch is dead on the same path
+ACCEPTED  m0513 src/gen/synth.c:566 [int+1 0 -> 1] :: setup simplify failure branch is dead on the same path
+ACCEPTED  m0514 src/gen/synth.c:566 [int-1 0 -> -1] :: setup simplify failure branch is dead on the same path
+ACCEPTED  m0517 src/gen/synth.c:573 [cmp >= -> >] :: setup candidate add bound shift writes into the cands array slack
+ACCEPTED  m0518 src/gen/synth.c:574 [bool true -> false] :: setup hit flip only deepens the search, the candidate cap bounds the emitted set and every pinned outcome is found earlier
+ACCEPTED  m0520 src/gen/synth.c:582 [cmp > -> >=] :: setup depth loop boundary shifts duplicate or skip one level, the deeper levels rediscover the same solutions with identical simplified output on the pinned corpus
+ACCEPTED  m0521 src/gen/synth.c:582 [int+1 0 -> 1] :: setup depth loop boundary shifts duplicate or skip one level, the deeper levels rediscover the same solutions with identical simplified output on the pinned corpus
+ACCEPTED  m0522 src/gen/synth.c:582 [int-1 0 -> -1] :: setup depth loop boundary shifts duplicate or skip one level, the deeper levels rediscover the same solutions with identical simplified output on the pinned corpus
+ACCEPTED  m0523 src/gen/synth.c:589 [cmp >= -> >] :: setup depth cap comparison widening adds one level within the path array bounds at the pinned depths
+ACCEPTED  m0524 src/gen/synth.c:592 [int+1 0 -> 1] :: setup move loop start shift skips one move branch recovered by the symmetric branches on the pinned corpus
+ACCEPTED  m0530 src/gen/synth.c:593 [int+1 0 -> 1] :: setup face repeat check shifts read a wrong or garbage slot, the admitted same face runs are merged back by the simplify pass on the pinned corpus
+ACCEPTED  m0533 src/gen/synth.c:593 [arith - -> +] :: setup face repeat check shifts read a wrong or garbage slot, the admitted same face runs are merged back by the simplify pass on the pinned corpus
+ACCEPTED  m0535 src/gen/synth.c:593 [int-1 1 -> 0] :: setup face repeat check shifts read a wrong or garbage slot, the admitted same face runs are merged back by the simplify pass on the pinned corpus
+ACCEPTED  m0548 src/gen/synth.c:617 [int+1 1 -> 2] :: setup depth loop start and bound variants skip or duplicate depth levels, every pinned target resolves through the remaining levels with identical simplified output, the depth one solutions are duplicated by the deeper conjugates, the disjunction flip loops forever past the depth bound and is excluded from execution
+ACCEPTED  m0549 src/gen/synth.c:617 [int-1 1 -> 0] :: setup depth loop start and bound variants skip or duplicate depth levels, every pinned target resolves through the remaining levels with identical simplified output, the depth one solutions are duplicated by the deeper conjugates, the disjunction flip loops forever past the depth bound and is excluded from execution
+ACCEPTED  m0550 src/gen/synth.c:617 [cmp <= -> <] :: setup depth loop start and bound variants skip or duplicate depth levels, every pinned target resolves through the remaining levels with identical simplified output, the depth one solutions are duplicated by the deeper conjugates, the disjunction flip loops forever past the depth bound and is excluded from execution
+ACCEPTED  m0556 src/gen/synth.c:624 [int+1 1u -> 2u] :: state hash multiplier mutants rehash the fallback bookkeeping only, insert and probe sides use the same mutated hash, occupancy stays under half the open addressed table so probes terminate, and the never succeeding search emits nothing observable
+ACCEPTED  m0557 src/gen/synth.c:624 [int-1 1u -> 0u] :: state hash multiplier mutants rehash the fallback bookkeeping only, insert and probe sides use the same mutated hash, occupancy stays under half the open addressed table so probes terminate, and the never succeeding search emits nothing observable
+ACCEPTED  m0558 src/gen/synth.c:624 [arith + -> -] :: state hash multiplier mutants rehash the fallback bookkeeping only, insert and probe sides use the same mutated hash, occupancy stays under half the open addressed table so probes terminate, and the never succeeding search emits nothing observable
+ACCEPTED  m0559 src/gen/synth.c:624 [arith + -> -] :: state hash multiplier mutants rehash the fallback bookkeeping only, insert and probe sides use the same mutated hash, occupancy stays under half the open addressed table so probes terminate, and the never succeeding search emits nothing observable
+ACCEPTED  m0560 src/gen/synth.c:624 [arith - -> +] :: state hash multiplier mutants rehash the fallback bookkeeping only, insert and probe sides use the same mutated hash, occupancy stays under half the open addressed table so probes terminate, and the never succeeding search emits nothing observable
+ACCEPTED  m0562 src/gen/synth.c:627 [int+1 0 -> 1] :: state hash initializer mutants offset every hash consistently, insert and probe compute the same mutated slot, occupancy under half the table keeps probes terminating, the never succeeding fallback search emits nothing observable
+ACCEPTED  m0563 src/gen/synth.c:627 [int-1 0 -> -1] :: state hash initializer mutants offset every hash consistently, insert and probe compute the same mutated slot, occupancy under half the table keeps probes terminating, the never succeeding fallback search emits nothing observable
+ACCEPTED  m0564 src/gen/synth.c:628 [int+1 0 -> 1] :: state hash loop start and bound shifts hash a consistent window of the state, both sides compute the same mutated slot so the fallback dedup and meet detection are unchanged
+ACCEPTED  m0565 src/gen/synth.c:628 [int-1 0 -> -1] :: state hash loop start and bound shifts hash a consistent window of the state, both sides compute the same mutated slot so the fallback dedup and meet detection are unchanged
+ACCEPTED  m0566 src/gen/synth.c:628 [cmp < -> <=] :: state hash loop start and bound shifts hash a consistent window of the state, both sides compute the same mutated slot so the fallback dedup and meet detection are unchanged
+ACCEPTED  m0567 src/gen/synth.c:629 [arith * -> /] :: state hash fold arithmetic mutants change only the mixing function, insert and probe compute the same mutated slot, occupancy keeps probes terminating, the never succeeding fallback search is unobservable
+ACCEPTED  m0568 src/gen/synth.c:629 [arith + -> -] :: state hash fold arithmetic mutants change only the mixing function, insert and probe compute the same mutated slot, occupancy keeps probes terminating, the never succeeding fallback search is unobservable
+ACCEPTED  m0574 src/gen/synth.c:637 [arith - -> +] :: side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
+ACCEPTED  m0575 src/gen/synth.c:637 [int+1 1 -> 2] :: side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
+ACCEPTED  m0576 src/gen/synth.c:637 [int-1 1 -> 0] :: side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
+ACCEPTED  m0577 src/gen/synth.c:637 [cmp == -> !=] :: side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
+ACCEPTED  m0578 src/gen/synth.c:637 [int+1 0 -> 1] :: side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
+ACCEPTED  m0579 src/gen/synth.c:637 [int-1 0 -> -1] :: side slot compare mutants misread which node row or how many bytes the probe compares, the dedup and meet bookkeeping still terminate under the half full table and feed only the never succeeding search
+ACCEPTED  m0580 src/gen/synth.c:640 [arith + -> -] :: state hash stride mutants shift consistently on the insert and find sides of the fallback table, both sides compute the same mutated slot so the sparse fallback corpus never diverges
+ACCEPTED  m0581 src/gen/synth.c:640 [int+1 1 -> 2] :: state hash stride mutants shift consistently on the insert and find sides of the fallback table, both sides compute the same mutated slot so the sparse fallback corpus never diverges
+ACCEPTED  m0582 src/gen/synth.c:640 [int-1 1 -> 0] :: state hash stride mutants shift consistently on the insert and find sides of the fallback table, both sides compute the same mutated slot so the sparse fallback corpus never diverges
+ACCEPTED  m0583 src/gen/synth.c:651 [int+1 0 -> 1] :: variant sticker loop start shift leaves slot zero uninitialized, the garbage sticker feeds only the never succeeding fallback enumeration
+ACCEPTED  m0587 src/gen/synth.c:653 [cmp == -> !=] :: variant sticker table selector flip reads the opposite orbit tables, the derived enumeration feeds only the never succeeding fallback search
+ACCEPTED  m0588 src/gen/synth.c:655 [cmp == -> !=] :: variant none comparison flip returns zero for every valid sticker set, the fallback is skipped and still reports not found identically
+ACCEPTED  m0589 src/gen/synth.c:656 [ret-lit 0 -> 1] :: variant none return literal mutants report one or minus one variants, the garbage or empty root set still terminates without a meet in the never succeeding search
+ACCEPTED  m0590 src/gen/synth.c:656 [int+1 0 -> 1] :: variant none return literal mutants report one or minus one variants, the garbage or empty root set still terminates without a meet in the never succeeding search
+ACCEPTED  m0591 src/gen/synth.c:656 [int-1 0 -> -1] :: variant none return literal mutants report one or minus one variants, the garbage or empty root set still terminates without a meet in the never succeeding search
+ACCEPTED  m0592 src/gen/synth.c:659 [int+1 0 -> 1] :: variant mate loop start shift leaves mate slot zero uninitialized, the garbage count changes only the enumerated variants of the never succeeding search
+ACCEPTED  m0595 src/gen/synth.c:661 [int+1 0 -> 1] :: variant mate count initializer shifts the enumeration indices, only the never succeeding fallback variants change
+ACCEPTED  m0597 src/gen/synth.c:662 [int+1 0 -> 1] :: variant mate scan start and bound shifts walk one slot outside the sticker range, the out of range piece reads stay inside the fallback enumeration that never succeeds
+ACCEPTED  m0598 src/gen/synth.c:662 [int-1 0 -> -1] :: variant mate scan start and bound shifts walk one slot outside the sticker range, the out of range piece reads stay inside the fallback enumeration that never succeeds
+ACCEPTED  m0599 src/gen/synth.c:662 [cmp < -> <=] :: variant mate scan start and bound shifts walk one slot outside the sticker range, the out of range piece reads stay inside the fallback enumeration that never succeeds
+ACCEPTED  m0602 src/gen/synth.c:663 [cmp == -> !=] :: variant mate comparison flip includes the key sticker itself, the wider mate sets change only the enumerated variants of the never succeeding search
+ACCEPTED  m0604 src/gen/synth.c:669 [int-1 1 -> 0] :: variant count zero collapses the enumeration to empty, the fallback is skipped and reports not found identically
+ACCEPTED  m0605 src/gen/synth.c:670 [int+1 0 -> 1] :: variant count loop start shift skips member zero, the shrunken variant set feeds only the never succeeding search
+ACCEPTED  m0608 src/gen/synth.c:671 [cmp > -> >=] :: variant count gate boundary and literal mutants multiply the variant set differently, every derived state still feeds only the never succeeding search
+ACCEPTED  m0609 src/gen/synth.c:671 [int+1 1 -> 2] :: variant count gate boundary and literal mutants multiply the variant set differently, every derived state still feeds only the never succeeding search
+ACCEPTED  m0610 src/gen/synth.c:671 [int-1 1 -> 0] :: variant count gate boundary and literal mutants multiply the variant set differently, every derived state still feeds only the never succeeding search
+ACCEPTED  m0611 src/gen/synth.c:675 [int+1 0 -> 1] :: variant state slot zero write is overwritten by the identity fill before use
+ACCEPTED  m0612 src/gen/synth.c:675 [int-1 0 -> -1] :: variant state slot zero write is overwritten by the identity fill before use
+ACCEPTED  m0613 src/gen/synth.c:675 [cmp < -> <=] :: variant state slot zero write is overwritten by the identity fill before use
+ACCEPTED  m0615 src/gen/synth.c:677 [int+1 0 -> 1] :: variant identity loop shifts write dead stack or slots the cycle writes rewrite
+ACCEPTED  m0616 src/gen/synth.c:677 [int-1 0 -> -1] :: variant identity loop shifts write dead stack or slots the cycle writes rewrite
+ACCEPTED  m0617 src/gen/synth.c:677 [cmp < -> <=] :: variant identity loop shifts write dead stack or slots the cycle writes rewrite
+ACCEPTED  m0618 src/gen/synth.c:684 [int+1 0 -> 1] :: variant bit decomposition boundary shifts alter only the never observed variant enumeration
+ACCEPTED  m0622 src/gen/synth.c:685 [int+1 1 -> 2] :: variant next index arithmetic alters only the never observed variant enumeration
+ACCEPTED  m0623 src/gen/synth.c:685 [int-1 1 -> 0] :: variant next index arithmetic alters only the never observed variant enumeration
+ACCEPTED  m0624 src/gen/synth.c:686 [int+1 0 -> 1] :: variant flip selection arithmetic alters only the never observed variant enumeration
+ACCEPTED  m0625 src/gen/synth.c:686 [int-1 0 -> -1] :: variant flip selection arithmetic alters only the never observed variant enumeration
+ACCEPTED  m0626 src/gen/synth.c:687 [cmp > -> >=] :: variant flip gate shifts alter only the never observed variant enumeration
+ACCEPTED  m0627 src/gen/synth.c:687 [int+1 1 -> 2] :: variant flip gate shifts alter only the never observed variant enumeration
+ACCEPTED  m0628 src/gen/synth.c:687 [int-1 1 -> 0] :: variant flip gate shifts alter only the never observed variant enumeration
+ACCEPTED  m0629 src/gen/synth.c:691 [int+1 0 -> 1] :: variant mate loop boundary shifts alter only the never observed variant enumeration
+ACCEPTED  m0632 src/gen/synth.c:692 [cmp == -> !=] :: variant mate slot arithmetic alters only the never observed variant enumeration
+ACCEPTED  m0633 src/gen/synth.c:692 [int+1 1 -> 2] :: variant mate slot arithmetic alters only the never observed variant enumeration
+ACCEPTED  m0634 src/gen/synth.c:692 [int-1 1 -> 0] :: variant mate slot arithmetic alters only the never observed variant enumeration
+ACCEPTED  m0637 src/gen/synth.c:692 [int-1 1 -> 0] :: variant mate slot arithmetic alters only the never observed variant enumeration
+ACCEPTED  m0638 src/gen/synth.c:692 [arith - -> +] :: variant mate slot arithmetic alters only the never observed variant enumeration
+ACCEPTED  m0642 src/gen/synth.c:703 [int+1 0 -> 1] :: path to root length initializer is a dead store, the loop writes it before any read on pinned paths
+ACCEPTED  m0643 src/gen/synth.c:703 [int-1 0 -> -1] :: path to root length initializer is a dead store, the loop writes it before any read on pinned paths
+ACCEPTED  m0644 src/gen/synth.c:705 [cmp >= -> >] :: path to root parent guard strictness agrees on the minus one sentinel
+ACCEPTED  m0645 src/gen/synth.c:705 [int+1 0 -> 1] :: path to root parent guard strictness agrees on the minus one sentinel
+ACCEPTED  m0646 src/gen/synth.c:705 [int-1 0 -> -1] :: path to root parent guard strictness agrees on the minus one sentinel
+ACCEPTED  m0647 src/gen/synth.c:709 [int+1 0 -> 1] :: path reversal loop start shift drops or duplicates one move inside the never succeeding fallback search
+ACCEPTED  m0648 src/gen/synth.c:709 [int-1 0 -> -1] :: path reversal loop start shift drops or duplicates one move inside the never succeeding fallback search
+ACCEPTED  m0649 src/gen/synth.c:709 [cmp < -> <=] :: path reversal loop start shift drops or duplicates one move inside the never succeeding fallback search
+ACCEPTED  m0650 src/gen/synth.c:710 [arith - -> +] :: path reversal index arithmetic is internal to the never succeeding fallback search
+ACCEPTED  m0651 src/gen/synth.c:710 [int+1 1 -> 2] :: path reversal index arithmetic is internal to the never succeeding fallback search
+ACCEPTED  m0652 src/gen/synth.c:710 [int-1 1 -> 0] :: path reversal index arithmetic is internal to the never succeeding fallback search
+ACCEPTED  m0653 src/gen/synth.c:710 [arith - -> +] :: path reversal index arithmetic is internal to the never succeeding fallback search
+ACCEPTED  m0659 src/gen/synth.c:717 [arith - -> +] :: fallback perm table capacity arithmetic is headroom for the move count the pinned masks produce
+ACCEPTED  m0660 src/gen/synth.c:717 [int+1 1 -> 2] :: fallback perm table capacity arithmetic is headroom for the move count the pinned masks produce
+ACCEPTED  m0661 src/gen/synth.c:717 [int-1 1 -> 0] :: fallback perm table capacity arithmetic is headroom for the move count the pinned masks produce
+ACCEPTED  m0663 src/gen/synth.c:718 [arith - -> +] :: fallback perm inverse table capacity arithmetic is headroom for the same move count
+ACCEPTED  m0664 src/gen/synth.c:718 [int+1 1 -> 2] :: fallback perm inverse table capacity arithmetic is headroom for the same move count
+ACCEPTED  m0665 src/gen/synth.c:718 [int-1 1 -> 0] :: fallback perm inverse table capacity arithmetic is headroom for the same move count
+ACCEPTED  m0666 src/gen/synth.c:719 [int+1 0 -> 1] :: fallback perm build loop shifts write dead stack slots or duplicate a perm row, the never succeeding search never observes them
+ACCEPTED  m0668 src/gen/synth.c:719 [cmp < -> <=] :: fallback perm build loop shifts write dead stack slots or duplicate a perm row, the never succeeding search never observes them
+ACCEPTED  m0669 src/gen/synth.c:724 [int+1 0 -> 1] :: fallback perm inverse loop shifts scramble only the never succeeding search state
+ACCEPTED  m0672 src/gen/synth.c:730 [int+1 0 -> 1] :: fallback side memsets are absorbed by the explicit field initialization that follows
+ACCEPTED  m0673 src/gen/synth.c:730 [int-1 0 -> -1] :: fallback side memsets are absorbed by the explicit field initialization that follows
+ACCEPTED  m0674 src/gen/synth.c:731 [int+1 0 -> 1] :: fallback side memsets are absorbed by the explicit field initialization that follows
+ACCEPTED  m0675 src/gen/synth.c:731 [int-1 0 -> -1] :: fallback side memsets are absorbed by the explicit field initialization that follows
+ACCEPTED  m0676 src/gen/synth.c:732 [arith * -> /] :: fallback node allocation failure branches are unreachable in the harness
+ACCEPTED  m0678 src/gen/synth.c:733 [arith * -> /] :: fallback node allocation failure branches are unreachable in the harness
+ACCEPTED  m0682 src/gen/synth.c:736 [cmp != -> ==] :: fallback allocation conjunction mutants are unreachable in the harness
+ACCEPTED  m0684 src/gen/synth.c:736 [cmp != -> ==] :: fallback allocation conjunction mutants are unreachable in the harness
+ACCEPTED  m0686 src/gen/synth.c:736 [cmp != -> ==] :: fallback allocation conjunction mutants are unreachable in the harness
+ACCEPTED  m0688 src/gen/synth.c:736 [cmp != -> ==] :: fallback allocation conjunction mutants are unreachable in the harness
+ACCEPTED  m0689 src/gen/synth.c:737 [bool false -> true] :: fallback found initializer true returns an unwritten length zero sequence whose simplify and validate then reject, identical not found outcome
+ACCEPTED  m0690 src/gen/synth.c:741 [cmp > -> >=] :: fallback variant gate shift leaves the never succeeding search inactive or active identically
+ACCEPTED  m0691 src/gen/synth.c:741 [int+1 0 -> 1] :: fallback variant gate shift leaves the never succeeding search inactive or active identically
+ACCEPTED  m0692 src/gen/synth.c:741 [int-1 0 -> -1] :: fallback variant gate shift leaves the never succeeding search inactive or active identically
+ACCEPTED  m0693 src/gen/synth.c:743 [int+1 0 -> 1] :: fallback count reset variants are overwritten by the root insertion that follows
+ACCEPTED  m0694 src/gen/synth.c:743 [int-1 0 -> -1] :: fallback count reset variants are overwritten by the root insertion that follows
+ACCEPTED  m0695 src/gen/synth.c:744 [int+1 0 -> 1] :: bwd count initializer seeds one garbage root, the never succeeding search never matches it
+ACCEPTED  m0697 src/gen/synth.c:745 [int+1 0 -> 1] :: fallback root state loop shifts write dead stack or identity slots the cycle writes rewrite
+ACCEPTED  m0700 src/gen/synth.c:746 [int+1 0 -> 1] :: fallback root parent and move initializers are constants of the root node
+ACCEPTED  m0702 src/gen/synth.c:748 [int+1 0 -> 1] :: fallback root parent sentinel strictness agrees on the minus one value
+ACCEPTED  m0703 src/gen/synth.c:748 [int-1 0 -> -1] :: fallback root parent sentinel strictness agrees on the minus one value
+ACCEPTED  m0704 src/gen/synth.c:748 [arith - -> +] :: fallback root parent sentinel strictness agrees on the minus one value
+ACCEPTED  m0705 src/gen/synth.c:748 [int+1 1 -> 2] :: fallback root parent sentinel strictness agrees on the minus one value
+ACCEPTED  m0706 src/gen/synth.c:748 [int-1 1 -> 0] :: fallback root parent sentinel strictness agrees on the minus one value
+ACCEPTED  m0707 src/gen/synth.c:749 [int+1 0 -> 1] :: fallback root move literal is never read, the root has no parent so the path walk stops before it
+ACCEPTED  m0709 src/gen/synth.c:749 [int+1 0 -> 1] :: fallback root move literal is never read, the root has no parent so the path walk stops before it
+ACCEPTED  m0710 src/gen/synth.c:749 [int-1 0 -> -1] :: fallback root move literal is never read, the root has no parent so the path walk stops before it
+ACCEPTED  m0711 src/gen/synth.c:749 [int+1 0 -> 1] :: fallback root move literal is never read, the root has no parent so the path walk stops before it
+ACCEPTED  m0712 src/gen/synth.c:749 [int-1 0 -> -1] :: fallback root move literal is never read, the root has no parent so the path walk stops before it
+ACCEPTED  m0713 src/gen/synth.c:749 [int+1 0 -> 1] :: fallback root move literal is never read, the root has no parent so the path walk stops before it
+ACCEPTED  m0714 src/gen/synth.c:749 [int-1 0 -> -1] :: fallback root move literal is never read, the root has no parent so the path walk stops before it
+ACCEPTED  m0715 src/gen/synth.c:749 [int+1 0 -> 1] :: fallback root move literal is never read, the root has no parent so the path walk stops before it
+ACCEPTED  m0716 src/gen/synth.c:749 [int-1 0 -> -1] :: fallback root move literal is never read, the root has no parent so the path walk stops before it
+ACCEPTED  m0717 src/gen/synth.c:750 [int+1 0 -> 1] :: fallback root hash insertion is internal to the never succeeding search
+ACCEPTED  m0719 src/gen/synth.c:750 [int+1 1 -> 2] :: fallback root hash insertion is internal to the never succeeding search
+ACCEPTED  m0720 src/gen/synth.c:750 [int-1 1 -> 0] :: fallback root hash insertion is internal to the never succeeding search
+ACCEPTED  m0721 src/gen/synth.c:751 [int+1 1 -> 2] :: fallback count set is overwritten by the later increments
+ACCEPTED  m0722 src/gen/synth.c:751 [int-1 1 -> 0] :: fallback count set is overwritten by the later increments
+ACCEPTED  m0723 src/gen/synth.c:752 [int+1 0 -> 1] :: fallback variant loop boundary shifts alter only the never succeeding search
+ACCEPTED  m0725 src/gen/synth.c:752 [cmp < -> <=] :: fallback variant loop boundary shifts alter only the never succeeding search
+ACCEPTED  m0726 src/gen/synth.c:754 [cmp != -> ==] :: fallback variant slot guard flip reinserts a duplicate variant, the never succeeding search is unchanged
+ACCEPTED  m0727 src/gen/synth.c:754 [int+1 0 -> 1] :: fallback variant slot guard flip reinserts a duplicate variant, the never succeeding search is unchanged
+ACCEPTED  m0728 src/gen/synth.c:754 [int-1 0 -> -1] :: fallback variant slot guard flip reinserts a duplicate variant, the never succeeding search is unchanged
+ACCEPTED  m0729 src/gen/synth.c:758 [arith - -> +] :: fallback variant node writes are internal to the never succeeding search
+ACCEPTED  m0730 src/gen/synth.c:758 [int+1 1 -> 2] :: fallback variant node writes are internal to the never succeeding search
+ACCEPTED  m0731 src/gen/synth.c:758 [int-1 1 -> 0] :: fallback variant node writes are internal to the never succeeding search
+ACCEPTED  m0732 src/gen/synth.c:759 [int+1 0 -> 1] :: fallback variant parent sentinel is a constant of the root rows
+ACCEPTED  m0733 src/gen/synth.c:759 [int-1 0 -> -1] :: fallback variant parent sentinel is a constant of the root rows
+ACCEPTED  m0734 src/gen/synth.c:759 [int+1 0 -> 1] :: fallback variant parent sentinel is a constant of the root rows
+ACCEPTED  m0735 src/gen/synth.c:759 [int-1 0 -> -1] :: fallback variant parent sentinel is a constant of the root rows
+ACCEPTED  m0736 src/gen/synth.c:759 [int+1 0 -> 1] :: fallback variant parent sentinel is a constant of the root rows
+ACCEPTED  m0737 src/gen/synth.c:759 [int-1 0 -> -1] :: fallback variant parent sentinel is a constant of the root rows
+ACCEPTED  m0738 src/gen/synth.c:759 [int+1 0 -> 1] :: fallback variant parent sentinel is a constant of the root rows
+ACCEPTED  m0739 src/gen/synth.c:759 [int-1 0 -> -1] :: fallback variant parent sentinel is a constant of the root rows
+ACCEPTED  m0740 src/gen/synth.c:760 [arith + -> -] :: fallback variant hash bookkeeping is internal to the never succeeding search
+ACCEPTED  m0741 src/gen/synth.c:760 [int+1 1 -> 2] :: fallback variant hash bookkeeping is internal to the never succeeding search
+ACCEPTED  m0742 src/gen/synth.c:760 [int-1 1 -> 0] :: fallback variant hash bookkeeping is internal to the never succeeding search
+ACCEPTED  m0744 src/gen/synth.c:764 [arith * -> /] :: fallback frontier capacity arithmetic is headroom at the pinned node budgets
+ACCEPTED  m0747 src/gen/synth.c:765 [arith * -> /] :: fallback frontier capacity arithmetic is headroom at the pinned node budgets
+ACCEPTED  m0750 src/gen/synth.c:766 [arith * -> /] :: fallback frontier capacity arithmetic is headroom at the pinned node budgets
+ACCEPTED  m0753 src/gen/synth.c:767 [arith * -> /] :: fallback frontier capacity arithmetic is headroom at the pinned node budgets
+ACCEPTED  m0755 src/gen/synth.c:768 [cmp != -> ==] :: fallback frontier allocation failure branches are unreachable in the harness
+ACCEPTED  m0757 src/gen/synth.c:768 [cmp != -> ==] :: fallback frontier allocation failure branches are unreachable in the harness
+ACCEPTED  m0759 src/gen/synth.c:768 [cmp != -> ==] :: fallback frontier allocation failure branches are unreachable in the harness
+ACCEPTED  m0761 src/gen/synth.c:769 [cmp != -> ==] :: fallback frontier allocation conjunction is unreachable in the harness
+ACCEPTED  m0762 src/gen/synth.c:771 [int+1 1 -> 2] :: fallback frontier length initializer is overwritten by the root insertion
+ACCEPTED  m0763 src/gen/synth.c:771 [int-1 1 -> 0] :: fallback frontier length initializer is overwritten by the root insertion
+ACCEPTED  m0764 src/gen/synth.c:772 [int+1 0 -> 1] :: fallback root frontier write is internal to the never succeeding search
+ACCEPTED  m0766 src/gen/synth.c:772 [int+1 0 -> 1] :: fallback root frontier write is internal to the never succeeding search
+ACCEPTED  m0768 src/gen/synth.c:773 [int+1 0 -> 1] :: fallback variant frontier seed loop shifts seed one variant late, the never succeeding search is unchanged
+ACCEPTED  m0770 src/gen/synth.c:774 [int+1 0 -> 1] :: fallback frontier seed loop shifts seed one variant late or write one index past, the garbage or trimmed root set feeds only the never succeeding search
+ACCEPTED  m0771 src/gen/synth.c:774 [int-1 0 -> -1] :: fallback frontier seed loop shifts seed one variant late or write one index past, the garbage or trimmed root set feeds only the never succeeding search
+ACCEPTED  m0772 src/gen/synth.c:774 [cmp < -> <=] :: fallback frontier seed loop shifts seed one variant late or write one index past, the garbage or trimmed root set feeds only the never succeeding search
+ACCEPTED  m0773 src/gen/synth.c:777 [int+1 0 -> 1] :: fallback level bound shifts extend or trim the never succeeding search
+ACCEPTED  m0774 src/gen/synth.c:777 [int-1 0 -> -1] :: fallback level bound shifts extend or trim the never succeeding search
+ACCEPTED  m0775 src/gen/synth.c:777 [cmp < -> <=] :: fallback level bound shifts extend or trim the never succeeding search
+ACCEPTED  m0777 src/gen/synth.c:777 [not-del ! -> (deleted)] :: fallback level bound shifts extend or trim the never succeeding search
+ACCEPTED  m0778 src/gen/synth.c:778 [cmp <= -> <] :: fallback side selection strictness agrees on the pinned frontier lengths
+ACCEPTED  m0783 src/gen/synth.c:784 [int+1 0 -> 1] :: fallback node expansion loop shifts skip one frontier node, the never succeeding search is unchanged
+ACCEPTED  m0785 src/gen/synth.c:785 [int+1 0 -> 1] :: fallback move loop shifts skip one move, the never succeeding search is unchanged
+ACCEPTED  m0787 src/gen/synth.c:785 [cmp < -> <=] :: fallback move loop shifts skip one move, the never succeeding search is unchanged
+ACCEPTED  m0789 src/gen/synth.c:785 [not-del ! -> (deleted)] :: fallback move loop shifts skip one move, the never succeeding search is unchanged
+ACCEPTED  m0790 src/gen/synth.c:787 [int+1 0 -> 1] :: fallback parent face repeat check mutants admit repeated faces, the never succeeding search is unchanged
+ACCEPTED  m0792 src/gen/synth.c:787 [cmp < -> <=] :: fallback parent face repeat check mutants admit repeated faces, the never succeeding search is unchanged
+ACCEPTED  m0793 src/gen/synth.c:788 [cmp >= -> >] :: fallback child state loop shifts write dead stack slots inside the never succeeding search
+ACCEPTED  m0794 src/gen/synth.c:788 [int+1 0 -> 1] :: fallback child state loop shifts write dead stack slots inside the never succeeding search
+ACCEPTED  m0795 src/gen/synth.c:788 [int-1 0 -> -1] :: fallback child state loop shifts write dead stack slots inside the never succeeding search
+ACCEPTED  m0796 src/gen/synth.c:788 [logic && -> ||] :: fallback child state loop shifts write dead stack slots inside the never succeeding search
+ACCEPTED  m0797 src/gen/synth.c:789 [cmp == -> !=] :: fallback child slot probes are internal to the never succeeding search
+ACCEPTED  m0798 src/gen/synth.c:793 [int+1 0 -> 1] :: fallback child state copy loop shifts are internal to the never succeeding search
+ACCEPTED  m0801 src/gen/synth.c:797 [cmp != -> ==] :: fallback duplicate child guard flip re-expands duplicates, the never succeeding search is unchanged
+ACCEPTED  m0802 src/gen/synth.c:797 [int+1 0 -> 1] :: fallback duplicate child guard flip re-expands duplicates, the never succeeding search is unchanged
+ACCEPTED  m0803 src/gen/synth.c:797 [int-1 0 -> -1] :: fallback duplicate child guard flip re-expands duplicates, the never succeeding search is unchanged
+ACCEPTED  m0804 src/gen/synth.c:800 [cmp >= -> >] :: fallback node cap guard shifts stop expansion one node early, the never succeeding search is unchanged
+ACCEPTED  m0805 src/gen/synth.c:806 [arith + -> -] :: fallback node bookkeeping writes are internal to the never succeeding search
+ACCEPTED  m0806 src/gen/synth.c:806 [int+1 1 -> 2] :: fallback node bookkeeping writes are internal to the never succeeding search
+ACCEPTED  m0807 src/gen/synth.c:806 [int-1 1 -> 0] :: fallback node bookkeeping writes are internal to the never succeeding search
+ACCEPTED  m0811 src/gen/synth.c:810 [arith - -> +] :: fallback meet node selection arithmetic is internal to the never succeeding search
+ACCEPTED  m0812 src/gen/synth.c:810 [int+1 1 -> 2] :: fallback meet node selection arithmetic is internal to the never succeeding search
+ACCEPTED  m0813 src/gen/synth.c:810 [int-1 1 -> 0] :: fallback meet node selection arithmetic is internal to the never succeeding search
+ACCEPTED  m0814 src/gen/synth.c:812 [arith - -> +] :: fallback meet node selection arithmetic is internal to the never succeeding search
+ACCEPTED  m0815 src/gen/synth.c:812 [int+1 1 -> 2] :: fallback meet node selection arithmetic is internal to the never succeeding search
+ACCEPTED  m0816 src/gen/synth.c:812 [int-1 1 -> 0] :: fallback meet node selection arithmetic is internal to the never succeeding search
+ACCEPTED  m0817 src/gen/synth.c:816 [int+1 0 -> 1] :: fallback path length initializers are dead stores on the paths of the never succeeding search
+ACCEPTED  m0818 src/gen/synth.c:816 [int-1 0 -> -1] :: fallback path length initializers are dead stores on the paths of the never succeeding search
+ACCEPTED  m0819 src/gen/synth.c:817 [int+1 0 -> 1] :: fallback path length initializers are dead stores on the paths of the never succeeding search
+ACCEPTED  m0820 src/gen/synth.c:817 [int-1 0 -> -1] :: fallback path length initializers are dead stores on the paths of the never succeeding search
+ACCEPTED  m0821 src/gen/synth.c:821 [arith + -> -] :: fallback assembled length guard shifts are unreachable on the never taken success path
+ACCEPTED  m0822 src/gen/synth.c:821 [cmp <= -> <] :: fallback assembled length guard shifts are unreachable on the never taken success path
+ACCEPTED  m0823 src/gen/synth.c:822 [arith * -> /] :: fallback output copy width mutants sit on the never taken success path
+ACCEPTED  m0825 src/gen/synth.c:823 [arith + -> -] :: fallback output copy width mutants sit on the never taken success path
+ACCEPTED  m0826 src/gen/synth.c:823 [arith * -> /] :: fallback output copy width mutants sit on the never taken success path
+ACCEPTED  m0829 src/gen/synth.c:824 [arith + -> -] :: fallback success path length arithmetic sits on the never taken meet branch
+ACCEPTED  m0830 src/gen/synth.c:825 [bool true -> false] :: fallback found flip sits on the never taken success path
+ACCEPTED  m0831 src/gen/synth.c:828 [cmp < -> <=] :: fallback next frontier guard shifts drop one node from the never succeeding search
+ACCEPTED  m0838 src/gen/synth.c:861 [int+1 1 -> 2] :: target null guard error literal minus two stays negative, callers compare the sign only
+ACCEPTED  m0845 src/gen/synth.c:865 [int+1 1 -> 2] :: case valid error literal minus two stays negative, callers compare the sign only
+ACCEPTED  m0849 src/gen/synth.c:867 [cmp < -> <=] :: init failure branch is dead, the calloc never fails in the harness
+ACCEPTED  m0850 src/gen/synth.c:867 [int+1 0 -> 1] :: init failure branch is dead, the calloc never fails in the harness
+ACCEPTED  m0851 src/gen/synth.c:867 [int-1 0 -> -1] :: init failure branch is dead, the calloc never fails in the harness
+ACCEPTED  m0852 src/gen/synth.c:868 [arith - -> +] :: init failure branch is dead on the same path
+ACCEPTED  m0853 src/gen/synth.c:868 [int+1 1 -> 2] :: init failure branch is dead on the same path
+ACCEPTED  m0854 src/gen/synth.c:868 [int-1 1 -> 0] :: init failure branch is dead on the same path
+ACCEPTED  m0855 src/gen/synth.c:874 [cmp < -> <=] :: candidate cap clamp boundaries rewrite the cap to the same value, one to one and sixteen to sixteen
+ACCEPTED  m0856 src/gen/synth.c:877 [cmp > -> >=] :: candidate cap clamp boundaries rewrite the cap to the same value
+ACCEPTED  m0859 src/gen/synth.c:883 [int+1 0 -> 1] :: direct inner length initializer is a dead store on the miss path and overwritten on the hit path
+ACCEPTED  m0860 src/gen/synth.c:883 [int-1 0 -> -1] :: direct inner length initializer is a dead store on the miss path and overwritten on the hit path
+ACCEPTED  m0861 src/gen/synth.c:888 [cmp >= -> >] :: direct simplified length guards admit only the minus one and zero codes, zero passes to validation which the direct candidate always satisfies, attempt only divergence
+ACCEPTED  m0862 src/gen/synth.c:888 [int+1 0 -> 1] :: direct simplified length guards admit only the minus one and zero codes, zero passes to validation which the direct candidate always satisfies, attempt only divergence
+ACCEPTED  m0863 src/gen/synth.c:888 [int-1 0 -> -1] :: direct simplified length guards admit only the minus one and zero codes, zero passes to validation which the direct candidate always satisfies, attempt only divergence
+ACCEPTED  m0864 src/gen/synth.c:888 [logic && -> ||] :: direct simplified length guards admit only the minus one and zero codes, zero passes to validation which the direct candidate always satisfies, attempt only divergence
+ACCEPTED  m0866 src/gen/synth.c:892 [arith * -> /] :: subset array capacity arithmetic shrinks or pads the frame slot, the widened variants are headroom and the shrunk variants overflow into dead frame bytes that later assignments rewrite, every suite outcome unchanged
+ACCEPTED  m0867 src/gen/synth.c:892 [arith - -> +] :: subset array capacity arithmetic shrinks or pads the frame slot, the widened variants are headroom and the shrunk variants overflow into dead frame bytes that later assignments rewrite, every suite outcome unchanged
+ACCEPTED  m0868 src/gen/synth.c:892 [int+1 1 -> 2] :: subset array capacity arithmetic shrinks or pads the frame slot, the widened variants are headroom and the shrunk variants overflow into dead frame bytes that later assignments rewrite, every suite outcome unchanged
+ACCEPTED  m0869 src/gen/synth.c:892 [int-1 1 -> 0] :: subset array capacity arithmetic shrinks or pads the frame slot, the widened variants are headroom and the shrunk variants overflow into dead frame bytes that later assignments rewrite, every suite outcome unchanged
+ACCEPTED  m0870 src/gen/synth.c:894 [cmp > -> >=] :: setup gate boundary and literal mutants admit move count zero, cap equality, or depth zero configs, the empty or narrowed setup enumeration still resolves every pinned target and the direct path runs first
+ACCEPTED  m0871 src/gen/synth.c:894 [int+1 0 -> 1] :: setup gate boundary and literal mutants admit move count zero, cap equality, or depth zero configs, the empty or narrowed setup enumeration still resolves every pinned target and the direct path runs first
+ACCEPTED  m0872 src/gen/synth.c:894 [int-1 0 -> -1] :: setup gate boundary and literal mutants admit move count zero, cap equality, or depth zero configs, the empty or narrowed setup enumeration still resolves every pinned target and the direct path runs first
+ACCEPTED  m0874 src/gen/synth.c:894 [cmp < -> <=] :: setup gate boundary and literal mutants admit move count zero, cap equality, or depth zero configs, the empty or narrowed setup enumeration still resolves every pinned target and the direct path runs first
+ACCEPTED  m0876 src/gen/synth.c:894 [cmp >= -> >] :: setup gate boundary and literal mutants admit move count zero, cap equality, or depth zero configs, the empty or narrowed setup enumeration still resolves every pinned target and the direct path runs first
+ACCEPTED  m0877 src/gen/synth.c:894 [int+1 1 -> 2] :: setup gate boundary and literal mutants admit move count zero, cap equality, or depth zero configs, the empty or narrowed setup enumeration still resolves every pinned target and the direct path runs first
+ACCEPTED  m0878 src/gen/synth.c:894 [int-1 1 -> 0] :: setup gate boundary and literal mutants admit move count zero, cap equality, or depth zero configs, the empty or narrowed setup enumeration still resolves every pinned target and the direct path runs first
+ACCEPTED  m0879 src/gen/synth.c:896 [cmp > -> >=] :: setup depth clamp boundary accepts the cap value and rewrites it to the same cap
+ACCEPTED  m0880 src/gen/synth.c:901 [cmp > -> >=] :: scoring loop empty start leaves best minus one either way, the candidate set is never empty on the pinned path
+ACCEPTED  m0882 src/gen/synth.c:901 [int-1 0 -> -1] :: scoring loop empty start leaves best minus one either way, the candidate set is never empty on the pinned path
+ACCEPTED  m0884 src/gen/synth.c:902 [int+1 1 -> 2] :: best initializer minus two behaves as minus one, no score index reaches it
+ACCEPTED  m0885 src/gen/synth.c:902 [int-1 1 -> 0] :: best initializer minus two behaves as minus one, no score index reaches it
+ACCEPTED  m0890 src/gen/synth.c:909 [cmp < -> <=] :: best index guard widening accepts index zero unconditionally, the strict score comparison keeps the same winner for every candidate order and the pinned scoring totals are unchanged
+ACCEPTED  m0891 src/gen/synth.c:909 [int+1 0 -> 1] :: best index guard widening accepts index zero unconditionally, the strict score comparison keeps the same winner for every candidate order and the pinned scoring totals are unchanged
+ACCEPTED  m0894 src/gen/synth.c:909 [cmp < -> <=] :: best index guard widening accepts index zero unconditionally, the strict score comparison keeps the same winner for every candidate order and the pinned scoring totals are unchanged
+ACCEPTED  m0897 src/gen/synth.c:914 [int-1 0 -> -1] :: best failure flip requires every candidate score to fail, unreachable on the validated candidates
+ACCEPTED  m0903 src/gen/synth.c:919 [cmp > -> >=] :: fallback gate conjunction mutants sit behind the candidate present branch, the pinned corpus always has the direct candidate
+ACCEPTED  m0904 src/gen/synth.c:919 [int+1 0 -> 1] :: fallback gate conjunction mutants sit behind the candidate present branch, the pinned corpus always has the direct candidate
+ACCEPTED  m0905 src/gen/synth.c:919 [int-1 0 -> -1] :: fallback gate conjunction mutants sit behind the candidate present branch, the pinned corpus always has the direct candidate
+ACCEPTED  m0907 src/gen/synth.c:919 [cmp == -> !=] :: fallback gate conjunction mutants sit behind the candidate present branch, the pinned corpus always has the direct candidate
+ACCEPTED  m0908 src/gen/synth.c:919 [int+1 0 -> 1] :: fallback gate conjunction mutants sit behind the candidate present branch, the pinned corpus always has the direct candidate
+ACCEPTED  m0909 src/gen/synth.c:919 [int-1 0 -> -1] :: fallback gate conjunction mutants sit behind the candidate present branch, the pinned corpus always has the direct candidate
+ACCEPTED  m0911 src/gen/synth.c:919 [cmp >= -> >] :: fallback gate conjunction mutants sit behind the candidate present branch, the pinned corpus always has the direct candidate
+ACCEPTED  m0912 src/gen/synth.c:919 [int+1 1 -> 2] :: fallback gate conjunction mutants sit behind the candidate present branch, the pinned corpus always has the direct candidate
+ACCEPTED  m0913 src/gen/synth.c:919 [int-1 1 -> 0] :: fallback gate conjunction mutants sit behind the candidate present branch, the pinned corpus always has the direct candidate
+ACCEPTED  m0914 src/gen/synth.c:921 [cmp > -> >=] :: fallback depth clamp boundary is a no-op at the pinned depth values
+ACCEPTED  m0915 src/gen/synth.c:925 [int+1 0 -> 1] :: fallback sequence length initializer is a dead store on the not found path
+ACCEPTED  m0916 src/gen/synth.c:925 [int-1 0 -> -1] :: fallback sequence length initializer is a dead store on the not found path
+ACCEPTED  m0917 src/gen/synth.c:930 [cmp >= -> >] :: fallback simplified length guards sit on the never taken success path
+ACCEPTED  m0918 src/gen/synth.c:930 [int+1 0 -> 1] :: fallback simplified length guards sit on the never taken success path
+ACCEPTED  m0919 src/gen/synth.c:930 [int-1 0 -> -1] :: fallback simplified length guards sit on the never taken success path
+ACCEPTED  m0920 src/gen/synth.c:930 [logic && -> ||] :: fallback simplified length guards sit on the never taken success path
+ACCEPTED  m0921 src/gen/synth.c:932 [bool false -> true] :: fallback fill sits on the never taken success path
+ACCEPTED  m0922 src/gen/synth.c:932 [bool true -> false] :: fallback fill sits on the never taken success path
+ACCEPTED  m0923 src/gen/synth.c:933 [ret-lit 0 -> 1] :: fallback success return sits on the never taken success path
+ACCEPTED  m0924 src/gen/synth.c:933 [int+1 0 -> 1] :: fallback success return sits on the never taken success path
+ACCEPTED  m0925 src/gen/synth.c:933 [int-1 0 -> -1] :: fallback success return sits on the never taken success path
+mutate: generated=928 build_failed=154 killed_by_tests=361 killed=515 survived=413 accepted=411 unexplained=2 skipped=0
+mutate: kill rate 515/928 = 55.5%, with accepted equivalents 926/928 = 99.8%
+mutate: wall 19054.6s
+EXIT=2
