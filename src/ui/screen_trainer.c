@@ -495,8 +495,9 @@ void ct_screen_trainer_draw(ct_app *app) {
     int method_count = ct_selector_methods(f->sel.event, methods, CT_TRAINER_LISTS_MAX);
     int grid_h = row_h * CT_TRAINER_GRID_ROWS + row_h;
     int list_y = margin + row_h + margin;
+    int grid_y = list_y + row_h + 2 * margin;
     int case_y = f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART
-                     ? list_y + grid_h + margin
+                     ? grid_y + grid_h + margin
                      : list_y;
     int status_h = row_h;
     int list_h = h - case_y - status_h - 2 * margin - row_h - margin;
@@ -537,8 +538,8 @@ void ct_screen_trainer_draw(ct_app *app) {
         ct_trainer_on_list(list_active);
     }
     if (f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART) {
-        ct_trainer_draw_grid(f, ct_trainer_rect(margin + 2 * (col_w + margin),
-                                                list_y + row_h + 2 * margin, col_w, grid_h));
+        ct_trainer_draw_grid(f,
+                             ct_trainer_rect(margin + 2 * (col_w + margin), grid_y, col_w, grid_h));
     }
     int visible = ct_trainer_form_visible_count(f);
     if (visible > CT_TRAINER_CASES_MAX) {
