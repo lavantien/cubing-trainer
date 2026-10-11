@@ -339,6 +339,7 @@ CT_SUITE(settings_form_clamps) {
     CT_ASSERT_DBL_EQ(f.move_seconds, CT_ANIM_MIN_MOVE_SECONDS, 1e-12);
     CT_ASSERT_EQ(ct_settings_form_stage_move_seconds(&f, 0.75), CT_REPO_OK);
     CT_ASSERT_DBL_EQ(f.move_seconds, 0.75, 1e-12);
+    CT_ASSERT(f.dirty);
     CT_ASSERT_EQ(ct_settings_form_stage_move_seconds(&f, NAN), CT_REPO_ERR_ARG);
     CT_ASSERT_DBL_EQ(f.move_seconds, 0.75, 1e-12);
     CT_ASSERT_EQ(ct_settings_form_stage_move_seconds(NULL, 0.5), CT_REPO_ERR_ARG);
@@ -483,10 +484,180 @@ CT_SUITE(settings_form_cancel) {
     ct_db_close(db);
 }
 
+CT_SUITE(settings_form_hex) {
+    sqlite3 *db = form_db();
+    ct_settings_form f;
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "ui.color_u", "0a0b0c"), 0);
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "ui.color_l", "ff5800"), 0);
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(f.status, CT_REPO_OK);
+    CT_ASSERT_EQ(f.colors[0][0], 0x0a);
+    CT_ASSERT_EQ(f.colors[0][1], 0x0b);
+    CT_ASSERT_EQ(f.colors[0][2], 0x0c);
+    CT_ASSERT_EQ(f.colors[1][0], 0xff);
+    CT_ASSERT_EQ(f.colors[1][1], 0x58);
+    CT_ASSERT_EQ(f.colors[1][2], 0x00);
+
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "ui.color_f", "G5G5G5"), 0);
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "ui.color_b", "5G5G5G"), 0);
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(f.status, CT_REPO_OK);
+    CT_ASSERT_EQ(f.colors[2][0], 0x00);
+    CT_ASSERT_EQ(f.colors[2][1], 0x9B);
+    CT_ASSERT_EQ(f.colors[2][2], 0x48);
+    CT_ASSERT_EQ(f.colors[4][0], 0x00);
+    CT_ASSERT_EQ(f.colors[4][1], 0x46);
+    CT_ASSERT_EQ(f.colors[4][2], 0xAD);
+
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "ui.color_u", "0f0f0f"), 0);
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(f.status, CT_REPO_OK);
+    CT_ASSERT_EQ(f.colors[0][0], 0x0f);
+    CT_ASSERT_EQ(f.colors[0][1], 0x0f);
+    CT_ASSERT_EQ(f.colors[0][2], 0x0f);
+    ct_db_close(db);
+}
+
+CT_SUITE(settings_form_moves_format) {
+    sqlite3 *db = form_db();
+    ct_settings_form f;
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "gen.preferred_moves", "UDLRFBMES"), 0);
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(f.status, CT_REPO_OK);
+    CT_ASSERT_EQ(f.move_mask, (unsigned)(CT_MOVE_BIT_U | CT_MOVE_BIT_D | CT_MOVE_BIT_L |
+                                         CT_MOVE_BIT_R | CT_MOVE_BIT_F | CT_MOVE_BIT_B |
+                                         CT_MOVE_BIT_M | CT_MOVE_BIT_E | CT_MOVE_BIT_S));
+    CT_ASSERT_EQ(ct_settings_form_save(&f), CT_REPO_OK);
+    char val[CT_SETTINGS_TEXT_MAX];
+    CT_ASSERT_EQ(ct_repo_settings_get(db, "gen.preferred_moves", val, sizeof val), 0);
+    CT_ASSERT_STR_EQ(val, "UDLRFBMES");
+    ct_db_close(db);
+}
+
+CT_SUITE(settings_form_open_dberror) {
+    sqlite3 *db = form_db();
+    ct_settings_form f;
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(f.status, CT_REPO_OK);
+    CT_ASSERT_EQ(sqlite3_exec(db, "DROP TABLE letter_map", NULL, NULL, NULL), SQLITE_OK);
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(f.status, CT_REPO_ERR_DB);
+    ct_db_close(db);
+}
+
+CT_SUITE(settings_form_boundaries) {
+    sqlite3 *db = form_db();
+    ct_settings_form f;
+
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "bld.buffer_corner", "0"), 0);
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "bld.buffer_edge", "24"), 0);
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(f.status, CT_REPO_OK);
+    CT_ASSERT_EQ(f.buffer_corner, 0);
+    CT_ASSERT_EQ(f.buffer_edge, CT_3STYLE_EDGE_BUFFER);
+
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "bld.buffer_corner", "-1"), 0);
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(f.buffer_corner, CT_3STYLE_CORNER_BUFFER);
+
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "bld.buffer_corner", "24"), 0);
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(f.buffer_corner, CT_3STYLE_CORNER_BUFFER);
+
+    CT_ASSERT_EQ(ct_repo_settings_set(db, "gen.preferred_moves", "U"), 0);
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(f.move_mask, (unsigned)CT_MOVE_BIT_U);
+
+    CT_ASSERT_EQ(ct_settings_form_stage_move(&f, 1u << CT_FACE_COUNT), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(f.move_mask, (unsigned)CT_MOVE_BIT_U);
+    CT_ASSERT_EQ(ct_settings_form_stage_color(&f, -1, 0, 5), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_settings_form_stage_color(&f, 0, -1, 5), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_settings_form_stage_color(&f, 0, CT_SETTINGS_CHANNELS, 5), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_settings_form_stage_color(&f, CT_SETTINGS_FACE_COUNT, 0, 5), CT_REPO_ERR_ARG);
+    ct_db_close(db);
+}
+
+CT_SUITE(settings_form_swap_edges) {
+    sqlite3 *db = form_db();
+    ct_settings_form f;
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, CT_LETTER_STICKERS, 'B'),
+                 CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_EDGE, CT_LETTER_STICKERS, 'B'),
+                 CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 0, CT_LETTER_FIRST - 1),
+                 CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 0, CT_LETTER_LAST + 1),
+                 CT_REPO_ERR_ARG);
+    assert_identity_map(&f.staged);
+
+    ct_settings_form_open(&f, db);
+    f.staged.corner[CT_LETTER_STICKERS - 1] = '\0';
+    CT_ASSERT_EQ(f.map.edge[CT_LETTER_STICKERS - 1], CT_LETTER_LAST);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 0, CT_LETTER_LAST), CT_REPO_OK);
+    CT_ASSERT_EQ(f.staged.corner[0], CT_LETTER_LAST);
+    CT_ASSERT_EQ(f.staged.corner[CT_LETTER_STICKERS - 1], '\0');
+    CT_ASSERT_EQ(f.staged.corner[2], 'C');
+    CT_ASSERT_EQ(f.map.edge[CT_LETTER_STICKERS - 1], CT_LETTER_LAST);
+
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(ct_settings_form_save(&f), CT_REPO_OK);
+    f.scheme_id = 0;
+    CT_ASSERT_EQ(ct_settings_form_save(&f), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(f.status, CT_REPO_ERR_ARG);
+    ct_db_close(db);
+}
+
+CT_SUITE(settings_form_letter_edges) {
+    sqlite3 *db = form_db();
+    ct_settings_form f;
+    ct_settings_form_open(&f, db);
+
+    CT_ASSERT_EQ(ct_settings_form_stage_letter(&f, CT_ORBIT_CORNER, 0, CT_LETTER_LAST),
+                 CT_REPO_CONFLICT);
+    f.staged.corner[CT_LETTER_STICKERS - 1] = '\0';
+    CT_ASSERT_EQ(ct_settings_form_stage_letter(&f, CT_ORBIT_CORNER, 0, CT_LETTER_LAST), CT_REPO_OK);
+    CT_ASSERT_EQ(f.staged.corner[0], CT_LETTER_LAST);
+
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 0, CT_LETTER_LAST), CT_REPO_OK);
+    CT_ASSERT_EQ(f.staged.corner[0], CT_LETTER_LAST);
+    CT_ASSERT_EQ(f.staged.corner[CT_LETTER_STICKERS - 1], CT_LETTER_FIRST);
+
+    ct_settings_form_open(&f, db);
+    f.staged.corner[CT_LETTER_STICKERS - 1] = '\0';
+    CT_ASSERT_EQ(
+        ct_settings_form_stage_letter(&f, CT_ORBIT_CORNER, 0, f.map.edge[CT_LETTER_STICKERS - 1]),
+        CT_REPO_OK);
+
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_EDGE, 0, CT_LETTER_LAST), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 0, 'B'), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_settings_form_save(&f), CT_REPO_OK);
+    ct_letter_map m;
+    CT_ASSERT_EQ(ct_letter_map_load(db, f.scheme_id, &m), 2 * CT_LETTER_STICKERS);
+    CT_ASSERT_EQ(m.edge[0], CT_LETTER_LAST);
+    CT_ASSERT_EQ(m.edge[CT_LETTER_STICKERS - 1], CT_LETTER_FIRST);
+    CT_ASSERT_EQ(m.corner[0], 'B');
+    CT_ASSERT_EQ(m.corner[1], 'A');
+
+    int id2 = 0;
+    CT_ASSERT_EQ(ct_letter_scheme_create(db, "empty", &id2), 0);
+    CT_ASSERT(id2 > 0);
+    CT_ASSERT_EQ(ct_letter_scheme_set_default(db, id2), 0);
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(f.status, CT_REPO_OK);
+    CT_ASSERT_EQ(f.scheme_id, id2);
+    CT_ASSERT_EQ(f.staged.corner[0], '\0');
+    CT_ASSERT_EQ(f.staged.edge[CT_LETTER_STICKERS - 1], '\0');
+    ct_db_close(db);
+}
+
 CT_SUITE(settings_form_guards) {
     sqlite3 *db = form_db();
     ct_settings_form_open(NULL, db);
     ct_settings_form_cancel(NULL);
+    ct_screen_settings_update(NULL);
     ct_settings_form f;
     ct_settings_form_open(&f, NULL);
     CT_ASSERT_EQ(f.status, CT_REPO_ERR_ARG);

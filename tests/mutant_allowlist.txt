@@ -804,3 +804,136 @@ src/packs/provenance.c:97	first loop bound widening writes one slot past the blo
 src/packs/provenance.c:139	null data arm mutants are unreachable over the pinned surface: every caller hashes a real buffer, and the length rewrite only feeds that arm
 src/packs/provenance.c:159	bit length loop start skips the top byte which is zero for every reachable message length under 2 to the 53 bytes, the pinned vectors including the 1000 byte pattern leave it zero
 src/packs/provenance.c:175	null out disjunct is unreachable: no pinned caller passes a null out, and the cap zero arm stores nothing either way since snprintf with size zero performs no store
+src/ui/screen_settings.c:22	face name array bound, consumed only by the draw path face labels no headless suite exercises
+src/ui/screen_settings.c:27	orbit count constant, consumed only by draw-side grid and label builders no headless suite exercises
+src/ui/screen_settings.c:30	tab index base, consumed only by the draw-side tab dispatch and clamp no headless suite exercises
+src/ui/screen_settings.c:33	tab count bound, consumed only by the draw-side tab clamp no headless suite exercises
+src/ui/screen_settings.c:34	margin shift constant, draw layout only, no headless suite exercises the draw path
+src/ui/screen_settings.c:35	row height shift constant, draw layout only, no headless suite exercises the draw path
+src/ui/screen_settings.c:36	label width divisor, draw layout only, no headless suite exercises the draw path
+src/ui/screen_settings.c:40	button count constant, draw layout only, no headless suite exercises the draw path
+src/ui/screen_settings.c:41	status text cap, the drawn status bar is the only consumer, truncation is invisible to headless suites
+src/ui/screen_settings.c:59	hex reject return value, callers test the sign only, any negative value is equivalent
+src/ui/screen_settings.c:95	errno reset value, the following check compares against ERANGE only, any non-ERANGE residue behaves identically
+src/ui/screen_settings.c:114	zero fill fallback unreachable, the compiled-in default palette is valid six digit hex on every face
+src/ui/screen_settings.c:128	widened missing-scheme guard reruns the idempotent speffz seed, on a healthy db the default and letters are unchanged, on a broken schema the seed fails exactly where the load would
+src/ui/screen_settings.c:135	second zero guard unreachable, a successful speffz seed always leaves a default scheme so the reread is at least 1
+src/ui/screen_settings.c:191	letter range disjunct weakened to a conjunction still rejects every out of range letter, the delegated stage call reruns the identical range test and returns the same error
+src/ui/screen_settings.c:195	holder init of minus two is still a negative sentinel, the delegate test checks holder below zero and any real match overwrites the init
+src/ui/screen_settings.c:196	holder probe at minus one stores the sentinel itself, any real holder match overwrites it later in the scan, identical outcome on every path
+src/ui/screen_settings.c:259	retention lower clamp boundary is idempotent, at the minimum both arms store the same value
+src/ui/screen_settings.c:261	retention upper clamp boundary is idempotent, at the maximum both arms store the same value
+src/ui/screen_settings.c:276	move seconds lower clamp boundary is idempotent, at the minimum both arms store the same value
+src/ui/screen_settings.c:306	loop and capacity guards never engage, the format writes at most 9 face chars into the 32 byte settings buffer
+src/ui/screen_settings.c:307	rotation probe zeroing unmasks rotation faces whose bits no reachable move mask contains, the config parser and the stage guard both strip them
+src/ui/screen_settings.c:399	letter edit buffer bound, consumed only by the draw-side letter text box no headless suite exercises
+src/ui/screen_settings.c:407	label cell size, consumed only by the draw-side label grid no headless suite exercises
+src/ui/screen_settings.c:436	cell grid column arithmetic, consumed only by the draw path button layout no headless suite exercises
+src/ui/screen_settings.c:438	cell rect composition, consumed only by the draw path button layout no headless suite exercises
+src/ui/screen_settings.c:447	errno reset in the draw-side text apply helper, the check compares against ERANGE only and no headless suite calls the helper
+src/ui/screen_settings.c:450	validation disjunct in the draw-side text apply helper, no headless suite calls the helper
+src/ui/screen_settings.c:459	label orbit loop bound, the label grid is write-only outside the draw path
+src/ui/screen_settings.c:460	label orbit ternary, the label grid is write-only outside the draw path
+src/ui/screen_settings.c:462	label sticker loop bound, the label grid is write-only outside the draw path
+src/ui/screen_settings.c:463	label dash placeholder, read only by the draw path
+src/ui/screen_settings.c:464	label terminator, read only by the draw path
+src/ui/screen_settings.c:472	label width layout, draw path only, no headless suite exercises it
+src/ui/screen_settings.c:473	row step layout, draw path only, no headless suite exercises it
+src/ui/screen_settings.c:476	retention text box rect, draw path only, no headless suite exercises it
+src/ui/screen_settings.c:478	retention edit toggle, gui event state no headless suite can trigger
+src/ui/screen_settings.c:479	retention edit close branch, gui event state no headless suite can trigger
+src/ui/screen_settings.c:480	retention apply inside the text box commit branch, gui event branch no headless suite can trigger
+src/ui/screen_settings.c:481	retention canonical refill inside the commit branch, gui event branch no headless suite can trigger
+src/ui/screen_settings.c:485	idle retention canonical refill, draw path only, no headless suite exercises it
+src/ui/screen_settings.c:489	second row offset, draw layout only, no headless suite exercises it
+src/ui/screen_settings.c:491	seconds text box rect, draw path only, no headless suite exercises it
+src/ui/screen_settings.c:493	seconds edit toggle, gui event state no headless suite can trigger
+src/ui/screen_settings.c:494	seconds edit close branch, gui event state no headless suite can trigger
+src/ui/screen_settings.c:495	seconds apply inside the text box commit branch, gui event branch no headless suite can trigger
+src/ui/screen_settings.c:500	idle seconds canonical refill, draw path only, no headless suite exercises it
+src/ui/screen_settings.c:504	moves group y offset, draw layout only, no headless suite exercises it
+src/ui/screen_settings.c:505	moves group height, draw layout only, no headless suite exercises it
+src/ui/screen_settings.c:508	moves grid width inset, draw layout only, no headless suite exercises it
+src/ui/screen_settings.c:509	moves grid height inset, draw layout only, no headless suite exercises it
+src/ui/screen_settings.c:510	move cell width, draw layout only, no headless suite exercises it
+src/ui/screen_settings.c:511	move cell height, draw layout only, no headless suite exercises it
+src/ui/screen_settings.c:512	shown counter init, drawn toggle placement bookkeeping only
+src/ui/screen_settings.c:513	face loop bound, drawn toggle count only, no headless suite exercises the draw path
+src/ui/screen_settings.c:514	face bit pick, drawn toggle iteration only
+src/ui/screen_settings.c:515	rotation skip, drawn toggle set only
+src/ui/screen_settings.c:518	toggle column arithmetic, draw layout only
+src/ui/screen_settings.c:520	move mask on flag, drawn toggle state only
+src/ui/screen_settings.c:521	toggle label char, drawn toggle text only
+src/ui/screen_settings.c:523	toggle rect, draw layout only
+src/ui/screen_settings.c:524	stage call inside the toggle callback, gui event branch no headless suite can trigger
+src/ui/screen_settings.c:531	cell width divisor, draw layout only
+src/ui/screen_settings.c:532	cell height divisor, draw layout only
+src/ui/screen_settings.c:533	buffer selection ternary, drawn selection outline only
+src/ui/screen_settings.c:534	letter selection ternary, drawn selection outline only
+src/ui/screen_settings.c:535	sticker loop bound, drawn grid iteration only
+src/ui/screen_settings.c:543	orbit array ternary inside the button callback, gui event branch no headless suite can trigger
+src/ui/screen_settings.c:544	letter buffer stash in the button callback, gui event state no headless suite can trigger
+src/ui/screen_settings.c:545	edit flag reset in the button callback, gui event state no headless suite can trigger
+src/ui/screen_settings.c:548	selected outline branch, drawn highlight only
+src/ui/screen_settings.c:550	duplicate outline guard, drawn highlight only
+src/ui/screen_settings.c:551	letter range check in the outline guard, drawn highlight only
+src/ui/screen_settings.c:552	label match in the outline guard, drawn highlight only
+src/ui/screen_settings.c:560	label width divisor, draw layout only
+src/ui/screen_settings.c:564	letter text box rect, draw path only
+src/ui/screen_settings.c:566	letter edit toggle, gui event state no headless suite can trigger
+src/ui/screen_settings.c:567	edit close letter lower bound, gui event branch no headless suite can trigger
+src/ui/screen_settings.c:568	edit close letter upper bound, gui event branch no headless suite can trigger
+src/ui/screen_settings.c:570	swap call inside the text box commit branch, gui event branch no headless suite can trigger
+src/ui/screen_settings.c:572	hint label rect, draw layout only
+src/ui/screen_settings.c:575	grid y offset, draw layout only
+src/ui/screen_settings.c:576	grid height divisor, draw layout only
+src/ui/screen_settings.c:579	corner group rect, draw layout only
+src/ui/screen_settings.c:580	corner grid placement, draw layout only
+src/ui/screen_settings.c:581	edge y offset, draw layout only
+src/ui/screen_settings.c:583	edge group rect, draw layout only
+src/ui/screen_settings.c:584	edge grid placement, draw layout only
+src/ui/screen_settings.c:591	half width divisor, draw layout only
+src/ui/screen_settings.c:592	grid height divisor, draw layout only
+src/ui/screen_settings.c:596	corner buffer group rect, draw layout only
+src/ui/screen_settings.c:597	corner buffer grid placement, draw layout only
+src/ui/screen_settings.c:598	edge x offset, draw layout only
+src/ui/screen_settings.c:600	edge buffer group rect, draw layout only
+src/ui/screen_settings.c:601	edge buffer grid placement, draw layout only
+src/ui/screen_settings.c:603	color band y offset, draw layout only
+src/ui/screen_settings.c:604	color band height, draw layout only
+src/ui/screen_settings.c:606	face width divisor, draw layout only
+src/ui/screen_settings.c:607	inner y offset, draw layout only
+src/ui/screen_settings.c:608	inner height inset, draw layout only
+src/ui/screen_settings.c:609	swatch height divisor, draw layout only
+src/ui/screen_settings.c:610	value box height, draw layout only
+src/ui/screen_settings.c:611	face loop bound, drawn swatch and value box count only
+src/ui/screen_settings.c:612	face x offset, draw layout only
+src/ui/screen_settings.c:614	face label rect, draw layout only
+src/ui/screen_settings.c:616	swatch color compose, drawn swatch only
+src/ui/screen_settings.c:617	channel loop bound, drawn value box count only
+src/ui/screen_settings.c:618	channel index compose, draw layout only
+src/ui/screen_settings.c:619	channel edit flag pick, gui edit state no headless suite can trigger
+src/ui/screen_settings.c:620	idle channel mirror, gui edit state no headless suite can trigger
+src/ui/screen_settings.c:622	value box y offset, draw layout only
+src/ui/screen_settings.c:623	value box rect, draw layout only
+src/ui/screen_settings.c:624	value box commit branch, gui event branch no headless suite can trigger
+src/ui/screen_settings.c:625	edit flag toggle, gui event state no headless suite can trigger
+src/ui/screen_settings.c:626	stage color call inside the commit branch, gui event branch no headless suite can trigger
+src/ui/screen_settings.c:638	opened flag branch, transient screen state read only by the draw path
+src/ui/screen_settings.c:639	opened latch write, transient screen state read only by the draw path
+src/ui/screen_settings.c:640	rejected counter reset, static screen state read only by the draw path
+src/ui/screen_settings.c:643	default sticker selection write, draw-side selection state only
+src/ui/screen_settings.c:644	letter buffer seed from the staged map, draw-side edit buffer only
+src/ui/screen_settings.c:652	null guard after the background clear, unreachable without calling the draw function
+src/ui/screen_settings.c:661	button y offset, draw layout only
+src/ui/screen_settings.c:662	button width divisor, draw layout only
+src/ui/screen_settings.c:664	content y offset, draw layout only
+src/ui/screen_settings.c:665	content width inset, draw layout only
+src/ui/screen_settings.c:666	content height, draw layout only
+src/ui/screen_settings.c:671	tab range clamp, draw-side tab state only
+src/ui/screen_settings.c:687	save branch inside the save button callback, gui event branch no headless suite can trigger
+src/ui/screen_settings.c:689	merge rejected counter inside the save callback, gui event branch no headless suite can trigger
+src/ui/screen_settings.c:690	rejected reset on merge failure, same gui event branch no headless suite can trigger
+src/ui/screen_settings.c:693	cancel call inside the cancel button callback, gui event branch no headless suite can trigger
+src/ui/screen_settings.c:696	rejected status branch, drawn status bar text only
+src/ui/screen_settings.c:702	status bar rect, draw layout only
