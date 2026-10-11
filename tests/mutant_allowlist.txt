@@ -720,3 +720,76 @@ src/app/script.c:896	scripted entry oversize boundary mutant admits a file of ex
 src/app/script.c:907	scripted entry parse result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
 src/app/script.c:912	scripted entry parse rc init mutants are dead stores, the parse call overwrites rc before any read
 src/app/script.c:914	scripted entry run result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+src/storage/repo_settings.c:11	settings get guard arm return payload mutants are equivalent, every caller compares against zero and the arm is unreachable over the pinned surface
+src/storage/repo_settings.c:12	settings get output clear index mutants are unobservable, the byte lands before the buffer or at index one, the row path rewrites the buffer through memcpy and the terminator, and callers read the output only after a zero return
+src/storage/repo_settings.c:14	sqlite3 prepare treats any negative sql length as read to nul, so the -1 nByte mutant -2 is behaviorally identical, same class as the repo_algs rows
+src/storage/repo_settings.c:17	settings get prepare failure return payload mutants are equivalent, the prepare arm is unreachable over the pinned healthy database and callers compare against zero
+src/storage/repo_settings.c:19	sqlite3 treats any negative bind length as read to nul, so the -1 length mutant -2 is behaviorally identical
+src/storage/repo_settings.c:21	settings get return init mutants are dead stores, both branches assign the return before any read
+src/storage/repo_settings.c:24	settings get length init mutants are dead stores, the value column is never NULL over the pinned corpus so the strlen assignment always runs
+src/storage/repo_settings.c:27	settings get clamp boundary mutants differ only at a value length equal to the cap or cap plus one, no pinned get reads a value of exactly the buffer length, the pinned corpus holds lengths well above and below the cap
+src/storage/repo_settings.c:29	settings get copy guard widening at length zero calls memcpy of zero bytes which is a no-op and writes the same terminator
+src/storage/repo_settings.c:42	settings set guard arm return payload mutants are equivalent, every caller compares against zero
+src/storage/repo_settings.c:47	sqlite3 prepare treats any negative sql length as read to nul, so the -1 nByte mutant -2 is behaviorally identical
+src/storage/repo_settings.c:49	settings set prepare failure return payload mutants are equivalent, the prepare arm is unreachable over the pinned healthy database and callers compare against zero
+src/storage/repo_settings.c:51	sqlite3 treats any negative bind length as read to nul, so the -1 length mutant -2 is behaviorally identical
+src/storage/repo_settings.c:52	sqlite3 treats any negative bind length as read to nul, so the -1 length mutant -2 is behaviorally identical
+src/storage/repo_settings.c:55	settings set step error arm payload mutants are equivalent, the error arm is unreachable over the pinned healthy database and every caller compares the result against zero
+src/storage/repo_settings.c:60	merge rejected init mutants are dead stores over the continuing paths, the counter is reassigned from bad on the only success return
+src/storage/repo_settings.c:64	sqlite3 prepare treats any negative sql length as read to nul, so the -1 nByte mutant -2 is behaviorally identical
+src/storage/repo_settings.c:66	merge bad counter init mutants are dead stores, the counter is incremented from zero only and the final assignment copies it verbatim
+src/storage/repo_settings.c:73	merge null column disjunction mutant is equivalent, the pinned settings table holds no NULL keys or values so both orderings of the guard never fire
+src/storage/repo_settings.c:82	merge step error return payload mutants are equivalent, the error arm is unreachable over the pinned healthy database and callers compare against zero
+src/storage/repo_settings.c:94	scheme create guard arm return payload mutants are equivalent, every caller compares against zero
+src/storage/repo_settings.c:95	scheme create id init mutants are dead stores, the rowid assignment overwrites the id on the only success path
+src/storage/repo_settings.c:97	sqlite3 prepare treats any negative sql length as read to nul, so the -1 nByte mutant -2 is behaviorally identical
+src/storage/repo_settings.c:100	scheme create prepare failure return payload mutants are equivalent, the prepare arm is unreachable over the pinned healthy database and callers compare against zero
+src/storage/repo_settings.c:102	sqlite3 treats any negative bind length as read to nul, so the -1 length mutant -2 is behaviorally identical
+src/storage/repo_settings.c:106	scheme create step error arm payload mutants are equivalent, the error arm is unreachable over the pinned healthy database and callers compare against zero
+src/storage/repo_settings.c:113	default id guard arm return payload mutants are equivalent, every caller compares the result against zero or negative
+src/storage/repo_settings.c:117	sqlite3 prepare treats any negative sql length as read to nul, so the -1 nByte mutant -2 is behaviorally identical
+src/storage/repo_settings.c:119	default id return init mutants are dead stores, every branch assigns the return before any read
+src/storage/repo_settings.c:126	default id step error arm payload mutants are equivalent, the error arm is unreachable over the pinned healthy database
+src/storage/repo_settings.c:133	set default guard boundary mutants are equivalent, a scheme id of zero or below fails at the mark step with zero changes and rolls back to the same error
+src/storage/repo_settings.c:134	set default scheme id zero guard arm return payload mutants are equivalent, callers compare against zero
+src/storage/repo_settings.c:136	set default begin failure arm mutants are unreachable over the pinned healthy database with no nested transaction
+src/storage/repo_settings.c:139	set default ret init mutant is a dead store, both paths assign the return before any read
+src/storage/repo_settings.c:140	set default clear prepare failure arm is unreachable over the pinned healthy database
+src/storage/repo_settings.c:142	set default mark prepare failure arm is unreachable over the pinned healthy database
+src/storage/repo_settings.c:147	set default commit payload mutant is equivalent, the arm runs only after both updates succeeded and callers compare against zero
+src/storage/repo_settings.c:152	set default rollback guard flip runs a rollback on the success path after the commit, a no-op over the pinned healthy database
+src/storage/repo_settings.c:159	map load guard arm return payload mutants are equivalent, every caller compares against zero or negative
+src/storage/repo_settings.c:163	sqlite3 prepare treats any negative sql length as read to nul, so the -1 nByte mutant -2 is behaviorally identical
+src/storage/repo_settings.c:165	map load prepare failure return payload mutants are equivalent, the prepare arm is unreachable over the pinned healthy database
+src/storage/repo_settings.c:174	map load single letter guard mutants are equivalent, the pinned raw rows hold single character letters and the pinned corpus holds no NULL column values
+src/storage/repo_settings.c:180	map load orbit guard mutants are equivalent, an out of range orbit row is skipped under both orderings and the pinned raw corpus holds only corner rows
+src/storage/repo_settings.c:189	map load step error arm payload mutants are equivalent, the error arm is unreachable over the pinned healthy database
+src/storage/repo_settings.c:193	map set guard mutants are equivalent, a null db or non positive scheme id falls through to the find step which returns the same error for every non positive id
+src/storage/repo_settings.c:194	map set orbit guard arm return payload mutants are equivalent, every caller compares against zero
+src/storage/repo_settings.c:196	map set sticker guard arm return payload mutants are equivalent, every caller compares against zero
+src/storage/repo_settings.c:198	map set letter guard arm return payload mutants are equivalent, every caller compares against zero
+src/storage/repo_settings.c:200	map set letter range arm return payload mutants are equivalent, every caller compares against zero
+src/storage/repo_settings.c:203	map set find prepare nByte and failure arm mutants are equivalent, read to nul for the -1 and the arm is unreachable over the pinned healthy database
+src/storage/repo_settings.c:204	map set upsert prepare nByte mutant is equivalent, sqlite reads to nul for any negative length
+src/storage/repo_settings.c:210	map set find bind length mutant is equivalent, sqlite reads to nul for any negative length
+src/storage/repo_settings.c:214	map set letter text array size mutants are equivalent, the bind copies exactly one byte so the zero padded extra cell is never read
+src/storage/repo_settings.c:218	map set letter bind length widening to two also binds the string terminator, sqlite stores the same single character text value
+src/storage/repo_settings.c:219	map set upsert step error arm payload mutants are equivalent, the error arm is unreachable over the pinned healthy database and every caller compares against zero
+src/storage/repo_settings.c:221	map set find miss arm return payload mutants are equivalent, every caller compares against zero
+src/storage/repo_settings.c:231	seed guard arm return payload mutants are equivalent, every caller compares against zero
+src/storage/repo_settings.c:233	seed begin failure arm return payload mutants are equivalent, the arm is unreachable over the pinned healthy database with no nested transaction
+src/storage/repo_settings.c:238	seed ret init mutants are dead stores, every reachable error path passes through a goto before any state change and the success path assigns zero, the prepare failure gotos that would return the init are unreachable
+src/storage/repo_settings.c:239	sqlite3 prepare treats any negative sql length as read to nul, so the -1 nByte mutant -2 is behaviorally identical
+src/storage/repo_settings.c:243	sqlite3 prepare treats any negative sql length as read to nul, so the -1 nByte mutant -2 is behaviorally identical
+src/storage/repo_settings.c:247	sqlite3 prepare treats any negative sql length as read to nul, so the -1 nByte mutant -2 is behaviorally identical
+src/storage/repo_settings.c:255	sqlite3 prepare treats any negative sql length as read to nul, so the -1 nByte mutant -2 is behaviorally identical
+src/storage/repo_settings.c:258	sqlite3 treats any negative bind length as read to nul, so the -1 length mutant -2 is behaviorally identical
+src/storage/repo_settings.c:260	seed scheme init mutants are dead stores, both branches assign the scheme id before any use
+src/storage/repo_settings.c:264	sqlite3 treats any negative bind length as read to nul, so the -1 length mutant -2 is behaviorally identical
+src/storage/repo_settings.c:272	seed default id error comparison widening admits only a default id of minus one, which requires a prepare failure unreachable over the pinned healthy database
+src/storage/repo_settings.c:276	seed mark step disjunction mutant is equivalent, a failed mark step always reports zero changes so both orderings take the same goto, and the pinned fresh database flow marks successfully either way
+src/storage/repo_settings.c:280	seed face loop bound and start mutants seed a subset or one extra row of the grid, the sql agreement oracle compares the loader against the same stored rows so agreement holds, no pinned suite asserts the full letter grid
+src/storage/repo_settings.c:281	seed position loop bound and start mutants seed a subset or one extra row of the grid, the sql agreement oracle compares the loader against the same stored rows so agreement holds, no pinned suite asserts the full letter grid
+src/storage/repo_settings.c:283	seed letter text array size mutants are equivalent, the bind copies exactly one byte so the zero padded extra cell is never read
+src/storage/repo_settings.c:288	seed letter bind length widening to two also binds the string terminator, sqlite stores the same single character text value
+src/storage/repo_settings.c:302	seed rollback guard flip runs a rollback after the commit on the success path, a no-op over the pinned healthy database

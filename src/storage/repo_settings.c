@@ -173,6 +173,8 @@ int ct_letter_map_load(sqlite3 *db, int scheme_id, ct_letter_map *out) {
         const unsigned char *letter = sqlite3_column_text(st, 2);
         if (letter == NULL || letter[0] == '\0' || letter[1] != '\0')
             continue;
+        if (letter[0] < CT_LETTER_FIRST || letter[0] > CT_LETTER_LAST)
+            continue;
         if (orbit != CT_ORBIT_CORNER && orbit != CT_ORBIT_EDGE)
             continue;
         if (sticker < 0 || sticker >= CT_LETTER_STICKERS)

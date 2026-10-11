@@ -126,6 +126,25 @@ CT_SUITE(letter_map_validation) {
     CT_ASSERT(ct_letter_map_load(db, id, NULL) < 0);
     CT_ASSERT(ct_letter_map_load(NULL, id, &m) < 0);
     CT_ASSERT_EQ(ct_letter_map_load(db, id, &m), 2);
+    CT_ASSERT_EQ(sqlite3_exec(db,
+                              "INSERT INTO letter_map(scheme_id, orbit, sticker, letter) "
+                              "VALUES(987, 0, 1, 'B')",
+                              NULL, NULL, NULL),
+                 SQLITE_OK);
+    CT_ASSERT_EQ(sqlite3_exec(db,
+                              "INSERT INTO letter_map(scheme_id, orbit, sticker, letter) "
+                              "VALUES(987, 0, 2, 'z')",
+                              NULL, NULL, NULL),
+                 SQLITE_OK);
+    CT_ASSERT_EQ(sqlite3_exec(db,
+                              "INSERT INTO letter_map(scheme_id, orbit, sticker, letter) "
+                              "VALUES(987, 0, 3, '9')",
+                              NULL, NULL, NULL),
+                 SQLITE_OK);
+    CT_ASSERT_EQ(ct_letter_map_load(db, 987, &m), 1);
+    CT_ASSERT_EQ(m.corner[1], 'B');
+    CT_ASSERT_EQ(m.corner[2], '\0');
+    CT_ASSERT_EQ(m.corner[3], '\0');
     ct_db_close(db);
 }
 
