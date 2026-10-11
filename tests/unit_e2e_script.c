@@ -282,28 +282,23 @@ CT_SUITE(e2e_run_expect_srs_reviews) {
              setup);
     CT_ASSERT_EQ(e2e_run(&app, passing, err), 0);
     char notadate[256];
-    snprintf(notadate, sizeof notadate, "%sexpect srs unfiled new-1 due == notadate\n",
-             setup);
+    snprintf(notadate, sizeof notadate, "%sexpect srs unfiled new-1 due == notadate\n", setup);
     CT_ASSERT_EQ(e2e_run(&app, notadate, err), CT_SCRIPT_EXIT_EXPECT);
     CT_ASSERT(strstr(err, "due value is not a date") != NULL);
     char wrong_day[256];
-    snprintf(wrong_day, sizeof wrong_day, "%sexpect srs unfiled new-1 due == 2021-01-01\n",
-             setup);
+    snprintf(wrong_day, sizeof wrong_day, "%sexpect srs unfiled new-1 due == 2021-01-01\n", setup);
     CT_ASSERT_EQ(e2e_run(&app, wrong_day, err), CT_SCRIPT_EXIT_EXPECT);
     CT_ASSERT(strstr(err, "due is [2020-01-01], expected [2021-01-01]") != NULL);
     char wrong_reps[256];
-    snprintf(wrong_reps, sizeof wrong_reps, "%sexpect srs unfiled new-1 reps == 5\n",
-             setup);
+    snprintf(wrong_reps, sizeof wrong_reps, "%sexpect srs unfiled new-1 reps == 5\n", setup);
     CT_ASSERT_EQ(e2e_run(&app, wrong_reps, err), CT_SCRIPT_EXIT_EXPECT);
     CT_ASSERT(strstr(err, "srs reps is 0, expected == 5") != NULL);
     char wrong_lapses[256];
-    snprintf(wrong_lapses, sizeof wrong_lapses,
-             "%sexpect srs unfiled new-1 lapses == 7\n", setup);
+    snprintf(wrong_lapses, sizeof wrong_lapses, "%sexpect srs unfiled new-1 lapses == 7\n", setup);
     CT_ASSERT_EQ(e2e_run(&app, wrong_lapses, err), CT_SCRIPT_EXIT_EXPECT);
     CT_ASSERT(strstr(err, "srs lapses is 0, expected == 7") != NULL);
     char wrong_reviews[256];
-    snprintf(wrong_reviews, sizeof wrong_reviews,
-             "%sexpect reviews unfiled new-1 == 9\n", setup);
+    snprintf(wrong_reviews, sizeof wrong_reviews, "%sexpect reviews unfiled new-1 == 9\n", setup);
     CT_ASSERT_EQ(e2e_run(&app, wrong_reviews, err), CT_SCRIPT_EXIT_EXPECT);
     CT_ASSERT(strstr(err, "ratings are [], expected == [9]") != NULL);
     char bad_op[256];
@@ -405,8 +400,8 @@ CT_SUITE(e2e_run_expect_cfg) {
              saved);
     CT_ASSERT_EQ(e2e_run(&app, passing, err), 0);
     char wrong_setting[256];
-    snprintf(wrong_setting, sizeof wrong_setting,
-             "%sexpect setting srs.request_retention == 0.9\n", saved);
+    snprintf(wrong_setting, sizeof wrong_setting, "%sexpect setting srs.request_retention == 0.9\n",
+             saved);
     CT_ASSERT_EQ(e2e_run(&app, wrong_setting, err), CT_SCRIPT_EXIT_EXPECT);
     CT_ASSERT(strstr(err, "setting is [0.850000], expected == [0.9]") != NULL);
     static const char bad_moves[] = "expect cfg gen.preferred_moves == ZQ\n";
