@@ -90,7 +90,7 @@ CT_FUZZ_SUITES += fuzz_db_card_strings fuzz_db_review_rows fuzz_db_settings_keys
 CT_FUZZ_SUITES += fuzz_config_keys fuzz_config_moves
 CT_FUZZ_SUITES += fuzz_script_parse
 
-.PHONY: all build vendor vendor-verify-selftest release release-verify-selftest test diagrams memguard memguard-selftest run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual visual-selftest db-verify chart
+.PHONY: all build vendor vendor-verify-selftest release release-verify-selftest test diagrams memguard memguard-selftest run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual visual-selftest db-verify chart screenshots
 
 all: build
 
@@ -282,6 +282,14 @@ db-verify: $(DBMAKE_BIN)
 	$(DBMAKE_BIN) $(DBVERIFY_DIR)/migrated.db
 	cp $(DBVERIFY_DIR)/migrated.db $(DBVERIFY_DIR)/copy.db
 	python -I tools/db_verify.py tools/db_schema_check.sql $(DBVERIFY_DIR)/copy.db db/migrations
+
+SHOTS_DIR := docs/img/screens
+SHOTS_RUN_DIR := $(BUILDDIR)/shots
+
+screenshots: build
+	rm -rf $(SHOTS_RUN_DIR) && mkdir -p $(SHOTS_RUN_DIR) $(SHOTS_DIR)
+	CT_DATA_DIR="$(SHOTS_RUN_DIR)/data" $(APP_BIN) --headless --script playground/screens/seed.txt
+	CT_DATA_DIR="$(SHOTS_RUN_DIR)/data" $(APP_BIN) --headless --script playground/screens/shots.txt
 
 clean:
 	rm -rf $(BUILDDIR)

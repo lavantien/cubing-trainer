@@ -1,0 +1,114 @@
+# screenshot sandbox seed, runs against a fresh CT_DATA_DIR through cubing-trainer.exe
+# decks after this script: 3style (generated corner and edge chart slice), cfop_oll, cfop_pll, unfiled (review deck)
+
+cfop_populate pll
+cfop_populate oll
+
+# corner chart slice with stored generated algs, deck 3style
+trainer_list 3bld 3style 0
+trainer_case 0
+trainer_generate
+trainer_save 3style
+trainer_case 1
+trainer_generate
+trainer_save 3style
+trainer_case 2
+trainer_generate
+trainer_save 3style
+trainer_case 3
+trainer_generate
+trainer_save 3style
+trainer_case 4
+trainer_generate
+trainer_save 3style
+trainer_case 5
+trainer_generate
+trainer_save 3style
+
+# review deck with all three variant fields exercised
+cards_open unfiled
+cards_new unfiled
+cards_field alg3 "R U R' U R U2 R'"
+cards_field algbig "R U' R2 F R F' R U R' U' F' U2 F"
+cards_field algoh "R U R' U R U2 R'"
+cards_save
+cards_new unfiled
+cards_field alg3 "R2 D2 R2 U2 R2 D2 R2 U2"
+cards_field algbig "R2 D2 R2 U2 R2 D2 R2 U2"
+cards_save
+cards_new unfiled
+cards_field alg3 "M2 U M2 U2 M2 U M2"
+cards_field algoh "U2 M2 U M2 U2 M2 U"
+cards_save
+cards_new unfiled
+cards_field alg3 "S' R U R' U' R' F R2 U' R' U' R U R' F'"
+cards_save
+cards_new unfiled
+cards_field alg3 "l' U' L U' L' U L U L F' L' F"
+cards_field algbig "x' R U' R' D R U R' D' R U R' D R U' R' D' x"
+cards_save
+cards_new unfiled
+cards_field alg3 "R' U L' U2 R U' R' U2 R L"
+cards_save
+cards_new unfiled
+cards_field alg3 "F R U' R' U' R U R' F' R U R' U' R' F R F'"
+cards_save
+cards_new unfiled
+cards_field alg3 "R U R' U R U' R' U R U2 R'"
+cards_save
+
+# retention curve and heatmap history on the 3style deck, buckets spread by elapsed over stability
+reviewed 3style AB good 2026-01-06 1.0 1
+reviewed 3style AB good 2026-02-18 2.0 30
+reviewed 3style AB again 2026-03-30 1.0 120
+reviewed 3style AD good 2026-01-12 1.0 5
+reviewed 3style AD hard 2026-02-24 2.0 60
+reviewed 3style AF again 2026-01-20 1.0 300
+reviewed 3style AF good 2026-03-02 3.0 15
+reviewed 3style AG good 2026-02-08 2.0 120
+reviewed 3style AG easy 2026-03-14 5.0 10
+reviewed 3style AH again 2026-01-28 1.0 60
+reviewed 3style AH good 2026-03-22 1.0 5
+reviewed 3style AI easy 2026-02-02 4.0 8
+reviewed 3style AI good 2026-03-08 1.0 15
+# second-deck heatmap signal on cfop_pll
+reviewed cfop_pll pll.Aa good 2026-02-10 3.0 12
+reviewed cfop_pll pll.Aa easy 2026-03-12 8.0 6
+reviewed cfop_pll pll.Ab again 2026-01-15 1.0 45
+reviewed cfop_pll pll.Ab good 2026-03-03 2.0 20
+reviewed cfop_pll pll.E good 2026-02-27 5.0 30
+
+# real review sessions for the session history
+due unfiled new-1 2020-01-01
+due unfiled new-2 2020-01-01
+due unfiled new-3 2020-01-01
+review_begin
+review_reveal
+wait 60
+review_grade good
+wait 30
+review_grade easy
+review_end
+due unfiled new-4 2020-01-01
+review_begin
+review_reveal
+wait 60
+review_grade again
+review_end
+
+# final due forecast spread across the unfiled deck
+due_in unfiled new-1 0
+due_in unfiled new-2 0
+due_in unfiled new-3 0
+due_in unfiled new-4 1
+due_in unfiled new-5 2
+due_in unfiled new-6 3
+due_in unfiled new-7 5
+due_in unfiled new-8 8
+due_in 3style AB 0
+due_in 3style AD 2
+due_in 3style AF 5
+
+expect count flashcard == 92
+expect count session_log == 2
+expect count review_log == 21
