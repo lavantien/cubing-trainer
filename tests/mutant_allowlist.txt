@@ -937,3 +937,42 @@ src/ui/screen_settings.c:690	rejected reset on merge failure, same gui event bra
 src/ui/screen_settings.c:693	cancel call inside the cancel button callback, gui event branch no headless suite can trigger
 src/ui/screen_settings.c:696	rejected status branch, drawn status bar text only
 src/ui/screen_settings.c:702	status bar rect, draw layout only
+src/render/renderer.c:31	hex reject return value, callers test the sign only, any negative value is equivalent
+src/render/renderer.c:56	inset clamp lower boundary is idempotent, at the bound both arms return the same value
+src/render/renderer.c:59	inset clamp upper boundary is idempotent, at the bound both arms return the same value
+src/render/renderer.c:77	cube n clamp lower boundary is idempotent, at the minimum both arms store the same value
+src/render/renderer.c:80	cube n clamp upper boundary is idempotent, at the maximum both arms store the same value
+src/render/renderer.c:103	axis angle math in the rotation helper, reachable only from the draw path with an active animation no headless suite exercises
+src/render/renderer.c:104	cross product terms of the draw-only rotation helper, no headless suite exercises it
+src/render/renderer.c:105	cross product terms of the draw-only rotation helper, no headless suite exercises it
+src/render/renderer.c:107	rodrigues x term of the draw-only rotation helper, no headless suite exercises it
+src/render/renderer.c:108	rodrigues y term of the draw-only rotation helper, no headless suite exercises it
+src/render/renderer.c:109	rodrigues z term of the draw-only rotation helper, no headless suite exercises it
+src/render/renderer.c:115	cap boundary shift moves only the cap zero case between the guard return and the clamped empty loop, both outcomes return zero
+src/render/renderer.c:128	rotation axis pick, consumed only inside the draw path rotate branch no headless suite exercises
+src/render/renderer.c:130	rotation axis fallback pick, consumed only inside the draw path rotate branch no headless suite exercises
+src/render/renderer.c:157	rotate conjunction widened to a disjunct still computes the identity at the quads entry angle of zero, nonzero angles live only in the draw path
+src/render/renderer.c:163	corner sign table column widening, the extra column is never read by the corner loop
+src/render/renderer.c:168	x corner term, the row tangent carries no x component in any face frame and the corner sign multipliers are exactly plus or minus one so division equals multiplication
+src/render/renderer.c:169	y corner term, the col tangent carries no y component in any face frame and the corner sign multipliers are exactly plus or minus one so division equals multiplication
+src/render/renderer.c:170	z corner term, the corner sign multipliers are exactly plus or minus one so division equals multiplication
+src/render/renderer.c:183	quads entry rotate flag with a zero move and zero angle reduces the rotation to the identity on every reachable path
+src/render/renderer.c:188	null guard polarity flips only which calls reach the gl draw path, both directions return with no observable state
+src/render/renderer.c:192	rotate flag init inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:195	anim branch inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:198	eased progress divide inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:200	rotation sign pick inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:202	rotation degrees product inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:203	radians conversion inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:204	rotate latch inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:208	emitted count guard inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:211	vertex count product inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:212	vertex buffer size inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:213	color buffer size inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:214	allocation failure guard, no headless suite can force the allocator to fail inside the draw path
+src/render/renderer.c:223	vertex fill index init inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:224	vertex fill index step inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:225	quad fill loop bound inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:227	corner order indexing inside the gl draw path mesh fill, no headless suite exercises it
+src/render/renderer.c:240	mesh triangle count inside the gl draw path, no headless suite exercises it
+src/render/renderer.c:243	mesh upload flag inside the gl draw path, no headless suite exercises it

@@ -171,6 +171,14 @@ CT_SUITE(unit_renderer_counts) {
     c.facelet[0] = 255;
     CT_ASSERT_EQ(ct_renderer_quads(&r, &c, &cs, quads, CT_RENDERER_MAX_QUADS), -1);
     CT_ASSERT(color_eq(quads[10].col, (Color){210, 211, 212, 213}));
+
+    memset(&c, 0, sizeof c);
+    c.n = 1;
+    r.n = 1;
+    CT_ASSERT_EQ(ct_renderer_quads(&r, &c, &cs, quads, CT_RENDERER_MAX_QUADS), 0);
+    c.n = CT_CUBE_MAX_N + 1;
+    r.n = CT_CUBE_MAX_N + 1;
+    CT_ASSERT_EQ(ct_renderer_quads(&r, &c, &cs, quads, CT_RENDERER_MAX_QUADS), 0);
 }
 
 CT_SUITE(unit_renderer_geometry) {
@@ -392,6 +400,8 @@ CT_SUITE(unit_renderer_scheme_hex) {
     CT_ASSERT(color_eq(cs.face[CT_FACE_R], (Color){0, 0, 0, 255}));
     CT_ASSERT(color_eq(cs.face[CT_FACE_B], (Color){255, 255, 255, 255}));
     CT_ASSERT(color_eq(cs.face[CT_FACE_D], (Color){0xFF, 0x58, 0x00, 255}));
+    CT_ASSERT(ct_color_scheme_face_hex(&cs, CT_FACE_U, "999999"));
+    CT_ASSERT(color_eq(cs.face[CT_FACE_U], (Color){0x99, 0x99, 0x99, 255}));
 
     for (int f = 0; f < CT_CUBE_FACE_COUNT; f++) {
         CT_ASSERT(ct_color_scheme_keys[f] != NULL);
