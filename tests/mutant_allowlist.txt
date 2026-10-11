@@ -1444,3 +1444,35 @@ src/ui/screen_stats.c:391	session list guard, draw path only
 src/ui/screen_stats.c:392	session list view rect head, draw path only
 src/ui/screen_stats.c:393	session list view rect continuation, draw path only
 src/ui/screen_stats.c:400	status bar rect, draw path only
+src/trainer/cfop.c:37	stage floor weakening admits only the unnamed minus one stage, every caller passes a named stage enum
+src/trainer/cfop.c:41	sizeof divisor index shift, the element size is uniform so any index yields the same count
+src/trainer/cfop.c:46	reject return value, callers test the sign only, any negative value is equivalent
+src/trainer/cfop.c:50	sizeof divisor index shift, the element size is uniform so any index yields the same count
+src/trainer/cfop.c:52	sizeof divisor index shift, the element size is uniform so any index yields the same count
+src/trainer/cfop.c:55	sizeof divisor index shift, the element size is uniform so any index yields the same count
+src/trainer/cfop.c:73	reject return value, callers test the sign only, any negative value is equivalent
+src/trainer/cfop.c:76	range guard weakening collapses into the index bound disjunct, count zero already rejects every index
+src/trainer/cfop.c:77	reject return value, callers test the sign only, any negative value is equivalent
+src/trainer/cfop.c:81	name length guard variants never fire, every case name is far shorter than the buffer
+src/trainer/cfop.c:82	reject return value, callers test the sign only, any negative value is equivalent
+src/trainer/cfop.c:86	key length guard never reaches the key buffer bound, the cap boundary mutant is killed by the cap safety suite
+src/trainer/cfop.c:87	reject return value, callers test the sign only, any negative value is equivalent
+src/trainer/cfop.c:89	copy length slack, bytes past the terminator are never read
+src/trainer/cfop.c:95	range guard weakening collapses into the index bound disjunct, count zero already rejects every index
+src/trainer/cfop.c:96	reject return value, callers test the sign only, any negative value is equivalent
+src/trainer/cfop.c:106	reject return value, callers test the sign only, any negative value is equivalent
+src/trainer/cfop.c:111	reject return value, callers test the sign only, any negative value is equivalent
+src/trainer/cfop.c:113	copy length slack, bytes past the terminator are never read
+src/trainer/cfop.c:119	reject return value, callers test the sign only, any negative value is equivalent
+src/trainer/cfop.c:122	populate count guard variants collapse into the deck name failure for invalid stages
+src/trainer/cfop.c:123	reject return value, callers test the sign only, any negative value is equivalent
+src/trainer/cfop.c:127	populate deck name failure unreachable, the deck buffer always fits the stage deck name
+src/trainer/cfop.c:133	populate case key failure unreachable, the key buffer always fits every generated key
+src/trainer/cfop.c:136	populate direction guard never fires, the index is range checked so the direction is always a real slot
+src/trainer/cfop.c:137	reject return value, callers test the sign only, any negative value is equivalent
+src/trainer/cfop.c:145	populate repo error branch unreachable, get_by_key returns only ok or missing on the migrated schema
+src/trainer/cfop.c:149	populate name length guard variants never fire, every case name fits the buffer
+src/trainer/cfop.c:150	reject return value, callers test the sign only, any negative value is equivalent
+src/trainer/cfop.c:154	populate deck copy length slack, the destination is zero filled first and the terminator lands from that fill
+src/trainer/cfop.c:155	populate key copy length slack, the destination is zero filled first and the terminator lands from that fill
+src/trainer/cfop.c:164	populate insert failure branch unreachable, insert returns only ok or conflict on the migrated schema
