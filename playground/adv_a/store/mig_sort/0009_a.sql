@@ -1,0 +1,1 @@
+CREATE TABLE s9(a);

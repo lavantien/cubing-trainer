@@ -1,0 +1,1 @@
+CREATE TABLE ovf(a);
