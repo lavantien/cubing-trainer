@@ -1043,3 +1043,12 @@ src/engine/geometry_clock.c:130	name match requires the first character to match
 src/engine/geometry_clock.c:131	no clock name contains an uppercase z, tokens with a z in the letter run match no name either way and reject identically
 src/engine/geometry_clock.c:134	name sentinel minus two satisfies the same negative check
 src/engine/geometry_clock.c:142	unmatched name falls through to the move id call which re-rejects name minus one with the same error
+src/storage/db.c:24	disjunct widening only reruns the wal pragma on a failed handle which reports the same cannot-open code, memory and file success paths already took the branch
+src/storage/db.c:37	close polarity flip leaks the handle on non-null input and returns on null, no suite observes handle lifetime after close
+src/storage/db.c:51	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement text
+src/storage/db.c:54	schema prepare failure is unreachable through the public open path, the fixed catalog query compiles on every healthy handle
+src/storage/db.c:57	sizeof operand index is unevaluated, the table entry size is identical at any index
+src/storage/db.c:61	sqlite reads any negative byte count as nul terminated, minus two binds the same table text
+src/storage/db.c:75	sqlite reads any negative byte count as nul terminated, minus two prepares the same pragma text
+src/storage/db.c:77	version prepare failure is unreachable through the public open path, the fixed pragma compiles on every healthy handle
+src/storage/db.c:79	version step fallback is unreachable, the user version pragma always yields a row on every handle the public path produces

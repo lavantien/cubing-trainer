@@ -143,6 +143,22 @@ CT_SUITE(db_open) {
     query_text(db, "PRAGMA journal_mode", mode, sizeof mode);
     CT_ASSERT_STR_EQ(mode, "memory");
     ct_db_close(db);
+
+    db = (sqlite3 *)0x1;
+    CT_ASSERT(ct_db_open(&db, CT_TEST_DIR "/no_such_dir/x.db") != SQLITE_OK);
+    CT_ASSERT(db == NULL);
+    CT_ASSERT_EQ(ct_db_open(NULL, ":memory:"), SQLITE_MISUSE);
+    CT_ASSERT_EQ(ct_db_open(&db, NULL), SQLITE_MISUSE);
+    CT_ASSERT_EQ(ct_db_version(NULL), -1);
+
+    const char *near_path = "9z_close.db";
+    cleanup_db_files(near_path);
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, near_path), SQLITE_OK);
+    query_text(db, "PRAGMA journal_mode", mode, sizeof mode);
+    CT_ASSERT_STR_EQ(mode, "wal");
+    ct_db_close(db);
+    cleanup_db_files(near_path);
 }
 
 CT_SUITE(migrate) {
@@ -403,6 +419,13 @@ CT_SUITE(db_schema_assert) {
     CT_ASSERT_EQ(sqlite3_exec(db, "DROP TABLE flashcard", NULL, NULL, NULL), SQLITE_OK);
     CT_ASSERT_EQ(ct_db_schema_ok(db), 0);
     CT_ASSERT(ct_db_migrate(db, "db/migrations") != 0);
+    ct_db_close(db);
+
+    db = NULL;
+    CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
+    CT_ASSERT_EQ(ct_db_migrate(db, "db/migrations"), 0);
+    CT_ASSERT_EQ(sqlite3_exec(db, "DROP TABLE settings", NULL, NULL, NULL), SQLITE_OK);
+    CT_ASSERT_EQ(ct_db_schema_ok(db), 0);
     ct_db_close(db);
 
     db = NULL;
