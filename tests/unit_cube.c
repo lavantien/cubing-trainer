@@ -48,6 +48,102 @@ static bool colors_valid(const ct_cube *c) {
     return true;
 }
 
+CT_SUITE(cube_frame_handedness) {
+    for (int face = 0; face < CT_CUBE_FACE_COUNT; face++) {
+        const ct_face_frame *fr = &ct_frames[face];
+        ct_v3 cross = {fr->row.y * fr->col.z - fr->row.z * fr->col.y,
+                       fr->row.z * fr->col.x - fr->row.x * fr->col.z,
+                       fr->row.x * fr->col.y - fr->row.y * fr->col.x};
+        CT_ASSERT_EQ(cross.x, fr->normal.x);
+        CT_ASSERT_EQ(cross.y, fr->normal.y);
+        CT_ASSERT_EQ(cross.z, fr->normal.z);
+    }
+}
+
+CT_SUITE(cube_world_miss) {
+    ct_cell miss = ct_world_sticker((ct_v3){0, 0, 0}, (ct_v3){2, 0, 0}, 3);
+    CT_ASSERT_EQ(miss.face, -1);
+    CT_ASSERT_EQ(miss.row, -1);
+    CT_ASSERT_EQ(miss.col, -1);
+}
+
+CT_SUITE(cube_face_self_rotation) {
+    ct_cube c;
+    ct_cube_init(&c, 3);
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+            c.facelet[(CT_FACE_R * CT_CUBE_STRIDE + row) * CT_CUBE_STRIDE + col] =
+                (uint8_t)(0x10 + row * 3 + col);
+        }
+    }
+    ct_move r = {CT_FACE_R, 1, 1, 1};
+    ct_apply(&c, r);
+    bool changed = false;
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+            if (at(&c, CT_FACE_R, row, col) != (uint8_t)(0x10 + row * 3 + col))
+                changed = true;
+        }
+    }
+    CT_ASSERT(changed);
+
+    ct_cube d;
+    ct_cube_init(&d, 3);
+    d.facelet[(CT_FACE_F * CT_CUBE_STRIDE + 0) * CT_CUBE_STRIDE + 2] = CT_FACE_D;
+    ct_apply(&d, r);
+    CT_ASSERT_EQ(at(&d, CT_FACE_U, 0, 2), CT_FACE_D);
+}
+
+CT_SUITE(cube_solved_edges) {
+    ct_cube c;
+    ct_cube_init(&c, 3);
+    c.facelet[(0 * CT_CUBE_STRIDE + 0) * CT_CUBE_STRIDE + 1] = CT_FACE_F;
+    CT_ASSERT(!ct_cube_solved(&c));
+    ct_cube d;
+    ct_cube_init(&d, 3);
+    d.facelet[(0 * CT_CUBE_STRIDE + 1) * CT_CUBE_STRIDE + 0] = CT_FACE_F;
+    CT_ASSERT(!ct_cube_solved(&d));
+
+    ct_cube two;
+    ct_cube_init(&two, 2);
+    ct_cube three;
+    ct_cube_init(&three, 3);
+    CT_ASSERT(!ct_cube_equal(&two, &three));
+    CT_ASSERT(ct_cube_equal(&two, &two));
+}
+
+CT_SUITE(cube_slab_layers) {
+    int n = 5;
+    ct_move w2 = {CT_FACE_F, 1, 2, 1};
+    ct_cube a;
+    ct_cube_init(&a, n);
+    ct_apply(&a, w2);
+    bool row4_moved = false;
+    bool row3_moved = false;
+    for (int col = 0; col < n; col++) {
+        if (at(&a, CT_FACE_U, 4, col) != CT_FACE_U)
+            row4_moved = true;
+        if (at(&a, CT_FACE_U, 3, col) != CT_FACE_U)
+            row3_moved = true;
+    }
+    CT_ASSERT(row4_moved);
+    CT_ASSERT(row3_moved);
+
+    ct_move w3 = {CT_FACE_F, 1, 3, 1};
+    ct_cube b;
+    ct_cube_init(&b, n);
+    ct_apply(&b, w3);
+    CT_ASSERT(row_all(&b, CT_FACE_U, 1, CT_FACE_U));
+
+    ct_move mid = {CT_FACE_F, 3, 4, 1};
+    ct_cube m;
+    ct_cube_init(&m, n);
+    ct_apply(&m, mid);
+    CT_ASSERT(!row_all(&m, CT_FACE_U, 1, CT_FACE_U));
+    CT_ASSERT(!row_all(&m, CT_FACE_U, 2, CT_FACE_U));
+    CT_ASSERT(row_all(&m, CT_FACE_U, 3, CT_FACE_U));
+}
+
 CT_SUITE(cube_move_legal) {
     for (int n = 2; n <= CT_CUBE_MAX_N; n++) {
         ct_move ok = {CT_FACE_U, 1, n, 1};
