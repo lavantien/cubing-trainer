@@ -22,7 +22,8 @@ enum {
     CT_ALG_PARTS_MAX = CT_ALG_B256,
     CT_ALG_STAMP_MAX = CT_ALG_B32,
     CT_ALG_HASH_HEX_MAX = CT_ALG_B64 | CT_ALG_B1,
-    CT_ALG_CANON_MAX = CT_ALG_B64 << 7
+    CT_ALG_CANON_MAX = CT_ALG_B64 << 7,
+    CT_ALG_CATEGORY_CHART = 0
 };
 
 typedef struct ct_generated_alg {

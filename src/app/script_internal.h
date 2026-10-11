@@ -10,6 +10,9 @@ enum {
     CT_SCRIPT_ARGC_3 = 3,
     CT_SCRIPT_ARGC_4 = 4,
     CT_SCRIPT_ARGC_5 = 5,
+    CT_SCRIPT_EQ = 0,
+    CT_SCRIPT_GE = 1,
+    CT_SCRIPT_LE = 2,
     CT_SCRIPT_NE = 3
 };
 

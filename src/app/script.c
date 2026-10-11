@@ -99,9 +99,6 @@ static const struct {
 enum {
     CT_SCRIPT_KEYWORD = 0,
     CT_SCRIPT_SUB = 1,
-    CT_SCRIPT_EQ = 0,
-    CT_SCRIPT_GE = 1,
-    CT_SCRIPT_LE = 2,
     CT_SCRIPT_YEAR_DIGITS = 4,
     CT_SCRIPT_MONTH_AT = 5,
     CT_SCRIPT_DAY_AT = 8,
@@ -753,7 +750,7 @@ static int ct_script_step_trainer(ct_app *app, ct_script_rt *rt, const ct_script
         a.orbit = rt->orbit;
         snprintf(a.target_pair, sizeof a.target_pair, "%s", rt->target_key);
         a.buffer_mode = CT_BUFFER_FIXED;
-        a.category = rt->list_id;
+        a.category = CT_ALG_CATEGORY_CHART;
         a.classification = rt->cls.cls;
         snprintf(a.sequence, sizeof a.sequence, "%s", rt->alg_text);
         ct_notation_format(rt->cls.setup, rt->cls.setup_len, CT_SCRIPT_CUBE_N, a.setup,

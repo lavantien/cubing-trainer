@@ -6,8 +6,12 @@
 #include "../src/app/app.h"
 #include "../src/app/paths.h"
 #include "../src/app/script.h"
+#include "../src/app/script_internal.h"
 #include "../src/config/config.h"
 #include "../src/storage/db.h"
+#include "../src/storage/repo_cards.h"
+#include "../src/trainer/session.h"
+#include "../src/ui/ui.h"
 #include "framework.h"
 
 #if defined(_WIN32)
@@ -124,6 +128,27 @@ CT_SUITE(e2e_parse_errors) {
     CT_ASSERT_EQ(ct_script_parse("expect wat x == 1\n", &s, err, sizeof err), CT_SCRIPT_EXIT_PARSE);
     CT_ASSERT_EQ(ct_script_parse("expect count flashcard ~= 1\n", &s, err, sizeof err),
                  CT_SCRIPT_EXIT_PARSE);
+    CT_ASSERT_EQ(ct_script_parse("restart\n", &s, err, 0), CT_SCRIPT_EXIT_PARSE);
+    CT_ASSERT_EQ(ct_script_op("=="), CT_SCRIPT_EQ);
+    CT_ASSERT_EQ(ct_script_op(">="), CT_SCRIPT_GE);
+    CT_ASSERT_EQ(ct_script_op("<="), CT_SCRIPT_LE);
+    CT_ASSERT_EQ(ct_script_op("!="), CT_SCRIPT_NE);
+    CT_ASSERT_EQ(ct_script_op("~="), -1);
+    long day = 0;
+    CT_ASSERT_EQ(ct_script_iso_day("2029-09-19", &day), 0);
+    CT_ASSERT_EQ(day, ct_session_date_to_day(2029, 9, 19));
+    CT_ASSERT_EQ(ct_script_iso_day("202x-09-19", &day), -1);
+    CT_ASSERT_EQ(ct_script_iso_day("2029-0x-19", &day), -1);
+    CT_ASSERT_EQ(ct_script_iso_day("2029-09-1x", &day), -1);
+    CT_ASSERT_EQ(ct_script_iso_day("2029x09-19", &day), -1);
+    CT_ASSERT_EQ(ct_script_iso_day("2029-09x19", &day), -1);
+    long num = 0;
+    CT_ASSERT_EQ(ct_script_long("x", &num), -1);
+    CT_ASSERT_EQ(ct_script_long("12x", &num), -1);
+    CT_ASSERT_EQ(ct_script_long("", &num), -1);
+    double dnum = 0;
+    CT_ASSERT_EQ(ct_script_double("x", &dnum), -1);
+    CT_ASSERT_EQ(ct_script_double("nan", &dnum), -1);
 }
 
 CT_SUITE(e2e_parse_caps) {
@@ -143,6 +168,17 @@ CT_SUITE(e2e_parse_caps) {
     }
     CT_ASSERT_EQ(ct_script_parse(many, &s, err, sizeof err), CT_SCRIPT_EXIT_PARSE);
     CT_ASSERT(strstr(err, "too many") != NULL);
+
+    char exact[CT_SCRIPT_TEXT_MAX + 1];
+    int fill = snprintf(exact, sizeof exact, "restart\n#");
+    memset(exact + fill, 'x', (int)sizeof exact - 1 - fill);
+    exact[CT_SCRIPT_TEXT_MAX - 1] = '\0';
+    CT_ASSERT_EQ(strlen(exact), (size_t)CT_SCRIPT_TEXT_MAX - 1);
+    CT_ASSERT_EQ(ct_script_parse(exact, &s, err, sizeof err), 0);
+    exact[CT_SCRIPT_TEXT_MAX - 1] = 'x';
+    exact[CT_SCRIPT_TEXT_MAX] = '\0';
+    CT_ASSERT_EQ(strlen(exact), (size_t)CT_SCRIPT_TEXT_MAX);
+    CT_ASSERT_EQ(ct_script_parse(exact, &s, err, sizeof err), CT_SCRIPT_EXIT_PARSE);
 }
 
 CT_SUITE(e2e_run_review_loop) {
@@ -163,6 +199,8 @@ CT_SUITE(e2e_run_expect_failure) {
                                "expect count flashcard == 5\n";
     CT_ASSERT_EQ(e2e_run(&app, text, err), CT_SCRIPT_EXIT_EXPECT);
     CT_ASSERT(strstr(err, "line 2") != NULL);
+    static const char dbl_text[] = "expect cfg srs.request_retention == 0.95\n";
+    CT_ASSERT_EQ(e2e_run(&app, dbl_text, err), CT_SCRIPT_EXIT_EXPECT);
     ct_db_close(db);
 }
 
@@ -198,7 +236,10 @@ CT_SUITE(e2e_run_settings_form) {
                                "settings_move F on\n"
                                "settings_save\n"
                                "expect setting srs.request_retention == 0.850000\n"
-                               "expect setting gen.preferred_moves == UDF\n";
+                               "expect setting gen.preferred_moves == UDF\n"
+                               "expect cfg srs.request_retention >= 0.9\n"
+                               "expect cfg srs.request_retention <= 0.9\n"
+                               "expect cfg srs.request_retention != 0.5\n";
     CT_ASSERT_EQ(e2e_run(&app, text, err), 0);
     ct_db_close(db);
 }
@@ -246,6 +287,111 @@ CT_SUITE(e2e_run_trainer_generate) {
         "expect genalg AB qtm == 18\n"
         "expect card 3style_corner AB alg3 == \"U' R2 Uw R2 Uw' F2 Uw R2 Uw' F2 R2 U\"\n";
     CT_ASSERT_EQ(e2e_run(&app, text, err), 0);
+    ct_db_close(db);
+}
+
+CT_SUITE(e2e_run_trainer_edge_generate) {
+    sqlite3 *db = e2e_db();
+    ct_app app;
+    e2e_app(&app, db);
+    char err[CT_SCRIPT_ERR_MAX];
+    static const char text[] = "trainer_list 3bld 3style 1\n"
+                               "trainer_case 0\n"
+                               "trainer_generate\n"
+                               "expect algcount == 1\n"
+                               "expect count generated_alg == 1\n"
+                               "expect genalg AB sequence == \"R2 U S' U2 S U R2\"\n"
+                               "expect genalg AB classification == \"SP7\"\n"
+                               "expect genalg AB qtm == 10\n"
+                               "expect algcount >= 1\n"
+                               "expect algcount <= 1\n"
+                               "expect algcount != 2\n";
+    CT_ASSERT_EQ(e2e_run(&app, text, err), 0);
+    ct_trainer_form f;
+    CT_ASSERT_EQ(ct_trainer_form_open(&f, db), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_trainer_form_select_event(&f, CT_EVENT_3BLD), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_trainer_form_select_list(&f, 1), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_trainer_form_select_case(&f, 0), CT_REPO_OK);
+    CT_ASSERT_EQ(f.alg_status, CT_REPO_OK);
+    CT_ASSERT_STR_EQ(f.alg_text, "R2 U S' U2 S U R2");
+    ct_db_close(db);
+}
+
+CT_SUITE(e2e_run_script_guards) {
+    sqlite3 *db = e2e_db();
+    ct_app app;
+    e2e_app(&app, db);
+    char err[CT_SCRIPT_ERR_MAX];
+    static const char unknown_event[] = "trainer_list zzz cfop 0\n";
+    CT_ASSERT_EQ(e2e_run(&app, unknown_event, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "unknown event or method") != NULL);
+    static const char unknown_method[] = "trainer_list 3bld zzz 0\n";
+    CT_ASSERT_EQ(e2e_run(&app, unknown_method, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "unknown event or method") != NULL);
+    static const char list_high[] = "trainer_list 3bld 3style 3\n";
+    CT_ASSERT_EQ(e2e_run(&app, list_high, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "list id out of range") != NULL);
+    static const char list_neg[] = "trainer_list 3bld 3style -1\n";
+    CT_ASSERT_EQ(e2e_run(&app, list_neg, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "list id out of range") != NULL);
+    static const char save_after_list[] = "trainer_list 3bld 3style 0\ntrainer_save d\n";
+    CT_ASSERT_EQ(e2e_run(&app, save_after_list, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "no generated alg in scope") != NULL);
+    static const char save_after_case[] = "trainer_list 3bld 3style 0\ntrainer_case 0\n"
+                                          "trainer_save d\n";
+    CT_ASSERT_EQ(e2e_run(&app, save_after_case, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "no generated alg in scope") != NULL);
+    static const char two_face[] = "settings_open\nsettings_move AB on\n";
+    CT_ASSERT_EQ(e2e_run(&app, two_face, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "one letter") != NULL);
+    static const char bad_stage[] = "cfop_populate bogus\n";
+    CT_ASSERT_EQ(e2e_run(&app, bad_stage, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "unknown cfop stage") != NULL);
+    static const char bad_grade[] = "review_begin\nreview_grade bogus\n";
+    CT_ASSERT_EQ(e2e_run(&app, bad_grade, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "unknown grade") != NULL);
+    static const char case_neg[] = "trainer_list 3bld 3style 0\ntrainer_case -1\n";
+    CT_ASSERT_EQ(e2e_run(&app, case_neg, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "case index out of range") != NULL);
+    static const char case_high[] = "trainer_list 3bld 3style 0\ntrainer_case 99999\n";
+    CT_ASSERT_EQ(e2e_run(&app, case_high, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "case index out of range") != NULL);
+    static const char wait_flow[] = "review_begin\nwait 1\nwait 100000\nreview_end\n"
+                                    "expect count session_log == 1\n";
+    CT_ASSERT_EQ(e2e_run(&app, wait_flow, err), 0);
+    static const char wait_zero[] = "review_begin\nwait 0\n";
+    CT_ASSERT_EQ(e2e_run(&app, wait_zero, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "wait out of range") != NULL);
+    static const char wait_high[] = "review_begin\nwait 100001\n";
+    CT_ASSERT_EQ(e2e_run(&app, wait_high, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "wait out of range") != NULL);
+    static const char stages[] = "cfop_populate oll\n"
+                                 "expect count flashcard == 57\n"
+                                 "cfop_populate f2l\n"
+                                 "expect count flashcard == 221\n";
+    CT_ASSERT_EQ(e2e_run(&app, stages, err), 0);
+    static const char fields[] = "cfop_populate pll\n"
+                                 "cards_open cfop_pll\n"
+                                 "cards_select 0\n"
+                                 "cards_edit\n"
+                                 "cards_field algbig \"R U\"\n"
+                                 "cards_field algoh \"R U'\"\n"
+                                 "cards_field front plainfront\n"
+                                 "cards_save\n"
+                                 "expect card cfop_pll pll.Aa algbig == \"R U\"\n"
+                                 "expect card cfop_pll pll.Aa algoh == \"R U'\"\n"
+                                 "expect card cfop_pll pll.Aa front == plainfront\n";
+    CT_ASSERT_EQ(e2e_run(&app, fields, err), 0);
+    char long_value[CT_CARD_ALG_MAX + 1];
+    memset(long_value, 'R', sizeof long_value - 1);
+    long_value[sizeof long_value - 1] = '\0';
+    char field_text[sizeof long_value + 160];
+    snprintf(field_text, sizeof field_text,
+             "cfop_populate pll\ncards_open cfop_pll\ncards_select 0\ncards_edit\n"
+             "cards_field algbig %s\n",
+             long_value);
+    CT_ASSERT_EQ(e2e_run(&app, field_text, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "too long") != NULL);
     ct_db_close(db);
 }
 

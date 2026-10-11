@@ -283,8 +283,8 @@ static int ct_script_expect_genalg(ct_app *app, const ct_script_rt *rt, const ct
                               CT_SCRIPT_EXIT_EXPECT);
     }
     ct_generated_alg a;
-    if (ct_repo_alg_get(app->db, rt->orbit, ct_script_arg(s, c, 0), CT_BUFFER_FIXED, rt->list_id,
-                        rt->params_hash, &a) != CT_REPO_OK) {
+    if (ct_repo_alg_get(app->db, rt->orbit, ct_script_arg(s, c, 0), CT_BUFFER_FIXED,
+                        CT_ALG_CATEGORY_CHART, rt->params_hash, &a) != CT_REPO_OK) {
         return ct_script_fail(err, cap, c, "generated alg not found", CT_SCRIPT_EXIT_EXPECT);
     }
     const char *field = ct_script_arg(s, c, 1);

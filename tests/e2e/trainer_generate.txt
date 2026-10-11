@@ -10,3 +10,12 @@ expect genalg AB sequence == "U' R2 Uw R2 Uw' F2 Uw R2 Uw' F2 R2 U"
 expect genalg AB classification == "per special"
 expect genalg AB qtm == 18
 expect card 3style_corner AB alg3 == "U' R2 Uw R2 Uw' F2 Uw R2 Uw' F2 R2 U"
+# edge chart list one generates under the chart category and reads back
+trainer_list 3bld 3style 1
+trainer_case 0
+trainer_generate
+expect algcount == 2
+expect count generated_alg == 2
+expect genalg AB sequence == "R2 U S' U2 S U R2"
+expect genalg AB classification == "SP7"
+expect genalg AB qtm == 10
