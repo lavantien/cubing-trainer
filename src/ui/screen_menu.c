@@ -74,18 +74,20 @@ void ct_ui_draw(ct_app *app) {
         ct_screen_stats_draw(app);
         return;
     }
-    ClearBackground(DARKGRAY);
+    ClearBackground(GetColor(CT_UI_COLOR_BG));
     int w = (int)app->cfg.window.width;
     int h = (int)app->cfg.window.height;
     const char *title = "cubing trainer";
-    int title_size = h / CT_UI_TITLE_SIZE_DIVISOR;
-    int title_x = (w - MeasureText(title, title_size)) / 2;
-    DrawText(title, title_x, h / 8, title_size, RAYWHITE);
+    Font font = ct_ui_font();
+    float title_size = (float)CT_UI_FONT_TITLE;
+    float title_w = MeasureTextEx(font, title, title_size, CT_UI_TEXT_SPACING).x;
+    Vector2 title_pos = {(float)w / 2.0f - title_w / 2.0f, (float)h / 8.0f};
+    DrawTextEx(font, title, title_pos, title_size, CT_UI_TEXT_SPACING, GetColor(CT_UI_COLOR_TEXT));
     size_t count = sizeof CT_MENU_ENTRIES / sizeof CT_MENU_ENTRIES[0];
     int btn_w = w / 4;
-    int btn_h = h / CT_UI_BUTTON_HEIGHT_DIVISOR;
-    int step = btn_h + btn_h / 2;
-    int total = (int)(count + 1) * step - btn_h / 2;
+    int btn_h = CT_UI_BTN_H;
+    int step = btn_h + CT_UI_BTN_GAP;
+    int total = (int)(count + 1) * step - CT_UI_BTN_GAP;
     int x = (w - btn_w) / 2;
     int y = h / 2 - total / 2 + h / 8;
     for (size_t i = 0; i < count; i++) {

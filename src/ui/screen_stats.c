@@ -7,18 +7,15 @@
 #include "ui/widgets.h"
 
 enum {
-    CT_STATS_SCR_MARGIN_SHIFT = 6,
-    CT_STATS_SCR_ROW_SHIFT = 4,
     CT_STATS_SCR_LEFT_W_SHIFT = 2,
     CT_STATS_SCR_FORECAST_H_DIV = 3,
     CT_STATS_SCR_DECK_H_DIV = 5,
-    CT_STATS_SCR_HEAT_H_DIV = 5,
+    CT_STATS_SCR_HEAT_H_DIV = 4,
     CT_STATS_SCR_HEAT_COLS = 8,
     CT_STATS_SCR_MARK_DIV = 8,
     CT_STATS_SCR_SUMMARY_LINES = 4,
     CT_STATS_SCR_ISO_DAY_MAX = (1 << 3) + 2,
     CT_STATS_SCR_LABEL_STEP = (1 << 2) + 1,
-    CT_STATS_SCR_TEXT_SHIFT = 1,
     CT_STATS_SCR_LABEL_MAX = CT_STATS_STAMP_MAX + CT_STATS_DECK_MAX,
     CT_STATS_SCR_HOVER_MAX = CT_STATS_CASE_KEY_MAX + CT_STATS_SCR_LABEL_MAX
 };
@@ -198,7 +195,7 @@ static void ct_stats_draw_forecast(ct_stats_view *v, int x, int y, int w, int h,
     int inner_x = x + margin;
     int inner_y = y + margin + row_h;
     int inner_w = w - 2 * margin;
-    int label_h = row_h >> CT_STATS_SCR_TEXT_SHIFT;
+    int label_h = CT_UI_FONT_SMALL + CT_UI_LIST_ITEM_GAP;
     int inner_h = h - (inner_y - y) - margin - label_h;
     char head[CT_STATS_SCR_LABEL_MAX];
     snprintf(head, sizeof head, "due next 30 days: %d",
@@ -211,7 +208,7 @@ static void ct_stats_draw_forecast(ct_stats_view *v, int x, int y, int w, int h,
         values[i] = (double)v->forecast[i].due_count;
     }
     int n = ct_chart_layout(chart, values, v->forecast_count, bars, CT_STATS_FORECAST_DAYS);
-    int small = label_h;
+    Font font = ct_ui_font();
     for (int i = 0; i < n; i++) {
         if (bars[i].bar.height > 0.0f) {
             DrawRectangleRec(bars[i].bar, SKYBLUE);
@@ -221,20 +218,22 @@ static void ct_stats_draw_forecast(ct_stats_view *v, int x, int y, int w, int h,
         }
         char label[CT_STATS_SCR_LABEL_STEP * 2];
         snprintf(label, sizeof label, "%d", (int)bars[i].label_day);
-        DrawText(label, (int)bars[i].bar.x, inner_y + inner_h, small, GRAY);
+        Vector2 label_pos = {bars[i].bar.x, (float)(inner_y + inner_h + CT_UI_LIST_ITEM_GAP)};
+        DrawTextEx(font, label, label_pos, (float)CT_UI_FONT_SMALL, CT_UI_TEXT_SPACING,
+                   GetColor(CT_UI_COLOR_TEXT_DIM));
     }
 }
 
-static void ct_stats_draw_heatmap(ct_stats_view *v, int x, int y, int w, int h, int row_h,
-                                  int margin) {
+static void ct_stats_draw_heatmap(ct_stats_view *v, int x, int y, int w, int h, int margin) {
     GuiGroupBox(ct_stats_rect(x, y, w, h), "case accuracy");
     int inner_x = x + margin;
     int inner_y = y + margin;
     int inner_w = w - 2 * margin;
     int inner_h = h - 2 * margin;
-    int small = row_h >> CT_STATS_SCR_TEXT_SHIFT;
     if (v->case_count <= 0) {
-        DrawText("no reviews yet", inner_x, inner_y, small, GRAY);
+        Vector2 empty_pos = {(float)inner_x, (float)inner_y};
+        DrawTextEx(ct_ui_font(), "no reviews yet", empty_pos, (float)CT_UI_FONT_SMALL,
+                   CT_UI_TEXT_SPACING, GetColor(CT_UI_COLOR_TEXT_DIM));
         return;
     }
     int cols = CT_STATS_SCR_HEAT_COLS;
@@ -250,7 +249,7 @@ static void ct_stats_draw_heatmap(ct_stats_view *v, int x, int y, int w, int h, 
         DrawRectangleRec(cell, ct_heatmap_color(v->cases[i].accuracy));
         if (i == hover) {
             DrawRectangleLines((int)cell.x, (int)cell.y, (int)cell.width, (int)cell.height,
-                               RAYWHITE);
+                               GetColor(CT_UI_COLOR_TEXT));
         }
     }
     if (hover < 0 || hover >= v->case_count) {
@@ -260,7 +259,9 @@ static void ct_stats_draw_heatmap(ct_stats_view *v, int x, int y, int w, int h, 
     char buf[CT_STATS_SCR_HOVER_MAX];
     snprintf(buf, sizeof buf, "%s [%s] %ld of %ld correct", row->case_key,
              ct_stats_dir_tag(row->direction), row->correct, row->reviews);
-    DrawText(buf, inner_x, y + h - margin - small, small, RAYWHITE);
+    Vector2 hover_pos = {(float)inner_x, (float)(y + h - margin - CT_UI_FONT_SMALL)};
+    DrawTextEx(ct_ui_font(), buf, hover_pos, (float)CT_UI_FONT_SMALL, CT_UI_TEXT_SPACING,
+               GetColor(CT_UI_COLOR_TEXT));
 }
 
 static void ct_stats_draw_retention(ct_stats_view *v, int x, int y, int w, int h, int row_h,
@@ -352,16 +353,15 @@ void ct_screen_stats_update(ct_app *app) {
 }
 
 void ct_screen_stats_draw(ct_app *app) {
-    ClearBackground(DARKGRAY);
+    ClearBackground(GetColor(CT_UI_COLOR_BG));
     if (app == NULL) {
         return;
     }
     ct_stats_view *v = &ct_stats.view;
     int w = (int)app->cfg.window.width;
     int h = (int)app->cfg.window.height;
-    int margin = w >> CT_STATS_SCR_MARGIN_SHIFT;
-    int row_h = h >> CT_STATS_SCR_ROW_SHIFT;
-    int status_h = row_h;
+    int margin = CT_UI_MARGIN;
+    int row_h = CT_UI_ROW_H;
     int left_w = w >> CT_STATS_SCR_LEFT_W_SHIFT;
     int deck_h = h / CT_STATS_SCR_DECK_H_DIV;
     int left_x = margin;
@@ -369,7 +369,7 @@ void ct_screen_stats_draw(ct_app *app) {
     int summary_y = deck_y + deck_h + margin;
     int summary_h = row_h * CT_STATS_SCR_SUMMARY_LINES + 2 * margin;
     int sessions_y = summary_y + summary_h + margin;
-    int sessions_h = h - sessions_y - status_h - 2 * margin;
+    int sessions_h = h - sessions_y - CT_UI_STATUS_H - 2 * margin;
     int right_x = left_x + left_w + margin;
     int right_w = w - right_x - margin;
     int forecast_h = h / CT_STATS_SCR_FORECAST_H_DIV;
@@ -377,7 +377,7 @@ void ct_screen_stats_draw(ct_app *app) {
     int heat_h = h / CT_STATS_SCR_HEAT_H_DIV;
     int heat_y = forecast_y + forecast_h + margin;
     int retention_y = heat_y + heat_h + margin;
-    int retention_h = h - retention_y - status_h - margin;
+    int retention_h = h - retention_y - CT_UI_STATUS_H - margin;
 
     int active = ct_stats.deck_active;
     if (GuiListViewEx(ct_stats_rect(left_x, deck_y, left_w, deck_h), ct_stats.deck_ptrs,
@@ -395,8 +395,8 @@ void ct_screen_stats_draw(ct_app *app) {
                       &ct_stats.session_active, NULL);
     }
     ct_stats_draw_forecast(v, right_x, forecast_y, right_w, forecast_h, row_h, margin);
-    ct_stats_draw_heatmap(v, right_x, heat_y, right_w, heat_h, row_h, margin);
+    ct_stats_draw_heatmap(v, right_x, heat_y, right_w, heat_h, margin);
     ct_stats_draw_retention(v, right_x, retention_y, right_w, retention_h, row_h, margin);
-    GuiStatusBar(ct_stats_rect(margin, h - status_h, w - 2 * margin, status_h),
+    GuiStatusBar(ct_stats_rect(margin, h - CT_UI_STATUS_H, w - 2 * margin, CT_UI_STATUS_H),
                  ct_stats_status_text(ct_stats.status));
 }

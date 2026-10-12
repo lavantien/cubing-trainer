@@ -12,10 +12,8 @@ static const double CT_REVIEW_SPEEDS[] = {1.0 / 2.0, 1.0, 2.0};
 
 enum {
     CT_REVIEW_CUBE_N = 3,
-    CT_REVIEW_MARGIN_SHIFT = 6,
     CT_REVIEW_PANE_W_DIV = 2,
-    CT_REVIEW_FIELD_H_SHIFT = 5,
-    CT_REVIEW_TEXT_SHIFT = 5,
+    CT_REVIEW_SLIDER_H_DIV = 2,
     CT_REVIEW_GRADE_COUNT = CT_EASY,
     CT_REVIEW_PLAY_COUNT = 2,
     CT_REVIEW_SPEED_COUNT = (int)(sizeof CT_REVIEW_SPEEDS / sizeof CT_REVIEW_SPEEDS[0]),
@@ -390,22 +388,21 @@ static void ct_review_on_speed(int i) {
 }
 
 void ct_screen_review_draw(ct_app *app) {
-    ClearBackground(DARKGRAY);
+    ClearBackground(GetColor(CT_UI_COLOR_BG));
     if (app == NULL) {
         return;
     }
     ct_review_form *f = &ct_review.form;
     int w = (int)app->cfg.window.width;
     int h = (int)app->cfg.window.height;
-    int margin = w >> CT_REVIEW_MARGIN_SHIFT;
+    int margin = CT_UI_MARGIN;
     int pane_w = w / CT_REVIEW_PANE_W_DIV;
-    int row_h = h >> CT_REVIEW_FIELD_H_SHIFT;
-    int text_size = h >> CT_REVIEW_TEXT_SHIFT;
+    int row_h = CT_UI_ROW_H;
+    float text_size = (float)CT_UI_FONT_BODY;
     int right_x = pane_w + margin;
     int right_w = w - right_x - margin;
-    int step = row_h + margin;
+    int step = CT_UI_ROW_STEP;
     int y = margin;
-    int status_h = row_h;
 
     BeginScissorMode(0, 0, pane_w, h);
     ct_renderer_draw(&ct_review.renderer, &f->cube, &f->anim, &ct_review.scheme, ct_review.camera,
@@ -420,14 +417,18 @@ void ct_screen_review_draw(ct_app *app) {
     GuiLabel(ct_review_rect(right_x, y, right_w, row_h), line);
     y += step;
 
+    Font font = ct_ui_font();
+    Vector2 text_pos = {(float)right_x, (float)y};
     if (f->card.id == 0) {
-        DrawText("no due cards", right_x, y, text_size, RAYWHITE);
-        GuiStatusBar(ct_review_rect(margin, h - status_h, w - 2 * margin, status_h),
+        DrawTextEx(font, "no due cards", text_pos, text_size, CT_UI_TEXT_SPACING,
+                   GetColor(CT_UI_COLOR_TEXT_DIM));
+        GuiStatusBar(ct_review_rect(margin, h - CT_UI_STATUS_H, w - 2 * margin, CT_UI_STATUS_H),
                      ct_review_status_text(f->status));
         return;
     }
 
-    DrawText(f->revealed ? f->alg_text : "hidden", right_x, y, text_size, RAYWHITE);
+    DrawTextEx(font, f->revealed ? f->alg_text : "hidden", text_pos, text_size, CT_UI_TEXT_SPACING,
+               GetColor(CT_UI_COLOR_TEXT));
     if (!f->revealed) {
         int reveal_w = right_w / CT_REVIEW_GRADE_COUNT;
         if (GuiButton(ct_review_rect(right_x + right_w - reveal_w, y, reveal_w, row_h), "reveal")) {
@@ -449,12 +450,12 @@ void ct_screen_review_draw(ct_app *app) {
                           CT_REVIEW_SPEED_LABELS, ct_review_on_speed);
     y += step;
     float v = (float)f->scrub_index;
-    int slider_h = row_h + row_h / CT_REVIEW_PANE_W_DIV;
+    int slider_h = row_h + row_h / CT_REVIEW_SLIDER_H_DIV;
     if (f->move_count > 0 && GuiSlider(ct_review_rect(right_x, y, right_w, slider_h), "scrub", NULL,
                                        &v, 0.0f, (float)f->move_count)) {
         ct_review_form_scrub(f, (int)v);
     }
 
-    GuiStatusBar(ct_review_rect(margin, h - status_h, w - 2 * margin, status_h),
+    GuiStatusBar(ct_review_rect(margin, h - CT_UI_STATUS_H, w - 2 * margin, CT_UI_STATUS_H),
                  ct_review_status_text(f->status));
 }

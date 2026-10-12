@@ -11,10 +11,7 @@ static const char CT_CARDS_KEY_PREFIX[] = "new-";
 static const char CT_CARDS_DEFAULT_DECK[] = "unfiled";
 
 enum {
-    CT_CARDS_MARGIN_SHIFT = 6,
     CT_CARDS_LIST_W_DIV = 3,
-    CT_CARDS_FIELD_H_SHIFT = 4,
-    CT_CARDS_LABEL_W_DIV = 8,
     CT_CARDS_TAG_MAX = 8,
     CT_CARDS_LABEL_MAX = CT_CARD_CASE_KEY_MAX + CT_CARDS_TAG_MAX,
     CT_CARDS_KEY_TRIES = (1 << 7),
@@ -354,27 +351,26 @@ void ct_screen_cards_update(ct_app *app) {
 }
 
 void ct_screen_cards_draw(ct_app *app) {
-    ClearBackground(DARKGRAY);
+    ClearBackground(GetColor(CT_UI_COLOR_BG));
     if (app == NULL)
         return;
     ct_cards_form *f = &ct_cards.form;
     int w = (int)app->cfg.window.width;
     int h = (int)app->cfg.window.height;
-    int margin = w >> CT_CARDS_MARGIN_SHIFT;
-    int row_h = h >> CT_CARDS_FIELD_H_SHIFT;
-    int label_w = w / CT_CARDS_LABEL_W_DIV;
+    int margin = CT_UI_MARGIN;
+    int row_h = CT_UI_ROW_H;
+    int label_w = w / CT_UI_FIELD_LABEL_W_DIV;
     int list_w = w / CT_CARDS_LIST_W_DIV - margin;
     int filter_y = margin;
     int list_y = filter_y + row_h + margin;
-    int status_h = row_h;
-    int list_h = h - list_y - status_h - 2 * margin;
+    int list_h = h - list_y - CT_UI_STATUS_H - 2 * margin;
     int editor_x = margin + list_w + margin;
     int editor_w = w - editor_x - margin;
     int editor_y = margin;
     int btn_h = row_h;
-    int btn_y = h - status_h - margin - btn_h;
-    int btn_w = (editor_w - (CT_CARDS_BTN_COUNT - 1) * margin) / CT_CARDS_BTN_COUNT;
-    int editor_h = btn_y - margin - margin;
+    int btn_y = h - CT_UI_STATUS_H - margin - btn_h;
+    int btn_w = (editor_w - (CT_CARDS_BTN_COUNT - 1) * CT_UI_BTN_GAP) / CT_CARDS_BTN_COUNT;
+    int editor_h = btn_y - margin - editor_y;
     int fields_y = editor_y + row_h + margin;
 
     GuiLabel(ct_cards_rect(margin, filter_y, label_w, row_h), "deck filter");
@@ -393,7 +389,7 @@ void ct_screen_cards_draw(ct_app *app) {
     }
 
     GuiGroupBox(ct_cards_rect(editor_x, editor_y, editor_w, editor_h), "card");
-    int field_step = row_h + margin;
+    int field_step = row_h + CT_UI_ROW_GAP;
     for (int i = 0; i < CT_CARDS_FIELD_COUNT; i++) {
         char *buf = (char *)&f->card + CT_CARDS_FIELDS[i].offset;
         ct_cards_field(editor_x, fields_y + i * field_step, editor_w, label_w, row_h,
@@ -401,8 +397,8 @@ void ct_screen_cards_draw(ct_app *app) {
     }
     ct_cards_recompute_dirty(f);
 
-    ct_cards_buttons(app, editor_x, btn_y, margin, btn_w, btn_h);
+    ct_cards_buttons(app, editor_x, btn_y, CT_UI_BTN_GAP, btn_w, btn_h);
 
-    GuiStatusBar(ct_cards_rect(margin, h - status_h, w - 2 * margin, status_h),
+    GuiStatusBar(ct_cards_rect(margin, h - CT_UI_STATUS_H, w - 2 * margin, CT_UI_STATUS_H),
                  ct_cards_status_text(f->status));
 }

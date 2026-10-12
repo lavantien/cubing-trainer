@@ -27,14 +27,14 @@ enum {
     CT_SETTINGS_ORBITS = 2,
     CT_SETTINGS_HEX_SHIFT = 4,
     CT_SETTINGS_HEX_ALPHA = ('9' - '0') + 1,
-    CT_SETTINGS_MARGIN_SHIFT = 5,
-    CT_SETTINGS_ROW_H_SHIFT = 4,
-    CT_SETTINGS_LABEL_W_DIV = 8,
     CT_SETTINGS_GRID_COLS = CT_LETTER_FACES,
     CT_SETTINGS_GRID_ROWS = CT_LETTER_PER_FACE,
     CT_SETTINGS_MOVE_COLS = CT_LETTER_FACES,
     CT_SETTINGS_BTN_COUNT = 2,
     CT_SETTINGS_STATUS_MAX = (1 << 6),
+    CT_SETTINGS_BOX_PAD_DIV = 2,
+    CT_SETTINGS_COLOR_LABEL_H = 40,
+    CT_SETTINGS_COLOR_SWATCH_H = 56,
 };
 
 static char *ct_settings_orbit(ct_settings_form *f, int orbit) {
@@ -462,11 +462,11 @@ static void ct_settings_build_labels(void) {
     }
 }
 
-static void ct_settings_draw_general(ct_app *app, int x, int y, int w, int h) {
+static void ct_settings_draw_general(int x, int y, int w, int h) {
     ct_settings_form *f = &ct_settings.form;
-    int row_h = app->cfg.window.height >> CT_SETTINGS_ROW_H_SHIFT;
-    int label_w = w / CT_SETTINGS_LABEL_W_DIV;
-    int step = row_h + (w >> CT_SETTINGS_MARGIN_SHIFT);
+    int row_h = CT_UI_ROW_H;
+    int label_w = w / CT_UI_FIELD_LABEL_W_DIV;
+    int step = CT_UI_ROW_STEP;
 
     GuiLabel(ct_settings_rect(x, y, label_w, row_h), "retention");
     if (GuiTextBox(ct_settings_rect(x + label_w, y, w - label_w, row_h), ct_settings.retention_buf,
@@ -500,7 +500,7 @@ static void ct_settings_draw_general(ct_app *app, int x, int y, int w, int h) {
     int gy = row2 + step;
     int gh = y + h - gy;
     GuiGroupBox(ct_settings_rect(x, gy, w, gh), "preferred moves");
-    int pad = w >> CT_SETTINGS_MARGIN_SHIFT;
+    int pad = CT_UI_MARGIN;
     int grid_w = w - 2 * pad;
     int grid_h = gh - 2 * pad;
     int cell_w = grid_w / CT_SETTINGS_MOVE_COLS;
@@ -542,19 +542,21 @@ static void ct_settings_draw_orbit_grid(ct_settings_form *f, int orbit, int x, i
             }
         }
         if (sticker == selected)
-            DrawRectangleLines((int)r.x, (int)r.y, (int)r.width, (int)r.height, GREEN);
+            DrawRectangleLines((int)r.x, (int)r.y, (int)r.width, (int)r.height,
+                               GetColor(CT_UI_COLOR_ACCENT));
         else if (!buffer_mode && ct_settings.letter_buf[0] >= CT_LETTER_FIRST &&
                  ct_settings.letter_buf[0] <= CT_LETTER_LAST &&
                  ct_settings.labels[orbit][sticker][0] == ct_settings.letter_buf[0])
-            DrawRectangleLines((int)r.x, (int)r.y, (int)r.width, (int)r.height, MAROON);
+            DrawRectangleLines((int)r.x, (int)r.y, (int)r.width, (int)r.height,
+                               GetColor(CT_UI_COLOR_DANGER));
     }
 }
 
-static void ct_settings_draw_letters(ct_app *app, int x, int y, int w, int h) {
+static void ct_settings_draw_letters(int x, int y, int w, int h) {
     ct_settings_form *f = &ct_settings.form;
-    int row_h = app->cfg.window.height >> CT_SETTINGS_ROW_H_SHIFT;
-    int label_w = w / CT_SETTINGS_LABEL_W_DIV;
-    int margin = w >> CT_SETTINGS_MARGIN_SHIFT;
+    int row_h = CT_UI_ROW_H;
+    int label_w = w / CT_UI_FIELD_LABEL_W_DIV;
+    int margin = CT_UI_ROW_GAP;
 
     GuiLabel(ct_settings_rect(x, y, label_w, row_h), "letter");
     if (GuiTextBox(ct_settings_rect(x + label_w, y, label_w, row_h), ct_settings.letter_buf,
@@ -569,7 +571,7 @@ static void ct_settings_draw_letters(ct_app *app, int x, int y, int w, int h) {
              "click a cell then type a letter, a taken letter swaps cells");
 
     int grid_y = y + row_h + margin;
-    int grid_h = (h - row_h - margin - margin) / CT_SETTINGS_ORBITS;
+    int grid_h = (h - row_h - 2 * margin - CT_UI_ROW_GAP) / CT_SETTINGS_ORBITS;
     int pad = margin;
     GuiGroupBox(ct_settings_rect(x, grid_y, w, grid_h), "corners");
     ct_settings_draw_orbit_grid(f, CT_ORBIT_CORNER, x + pad, grid_y + pad, w - 2 * pad,
@@ -580,12 +582,11 @@ static void ct_settings_draw_letters(ct_app *app, int x, int y, int w, int h) {
                                 grid_h - 2 * pad, false);
 }
 
-static void ct_settings_draw_bld(ct_app *app, int x, int y, int w, int h) {
+static void ct_settings_draw_bld(int x, int y, int w, int h) {
     ct_settings_form *f = &ct_settings.form;
-    int row_h = app->cfg.window.height >> CT_SETTINGS_ROW_H_SHIFT;
-    int margin = w >> CT_SETTINGS_MARGIN_SHIFT;
+    int margin = CT_UI_ROW_GAP;
     int half_w = (w - margin) / CT_SETTINGS_ORBITS;
-    int grid_h = (h - margin - row_h - margin - margin) / CT_SETTINGS_ORBITS;
+    int grid_h = (h - margin - CT_UI_ROW_STEP) / CT_SETTINGS_ORBITS;
     int pad = margin;
 
     GuiGroupBox(ct_settings_rect(x, y, half_w, grid_h), "corner buffer");
@@ -599,24 +600,26 @@ static void ct_settings_draw_bld(ct_app *app, int x, int y, int w, int h) {
     int color_y = y + grid_h + margin;
     int color_h = h - (color_y - y);
     GuiGroupBox(ct_settings_rect(x, color_y, w, color_h), "colors");
-    int color_pad = margin / CT_SETTINGS_ORBITS;
+    int color_pad = CT_UI_MARGIN / CT_SETTINGS_ORBITS;
     int face_w = (w - 2 * color_pad) / CT_SETTINGS_FACE_COUNT;
     int inner_y = color_y + color_pad;
     int inner_h = color_h - 2 * color_pad;
-    int swatch_h = inner_h / CT_SETTINGS_ORBITS;
-    int box_h = (inner_h - swatch_h - color_pad) / CT_SETTINGS_CHANNELS;
+    int box_h = (inner_h - CT_SETTINGS_COLOR_LABEL_H - CT_SETTINGS_COLOR_SWATCH_H - color_pad) /
+                CT_SETTINGS_CHANNELS;
     for (int face = 0; face < CT_SETTINGS_FACE_COUNT; face++) {
         int fx = x + pad + face * face_w;
-        GuiLabel(ct_settings_rect(fx, inner_y, face_w, row_h), CT_SETTINGS_FACE_NAMES[face]);
+        GuiLabel(ct_settings_rect(fx, inner_y, face_w, CT_SETTINGS_COLOR_LABEL_H),
+                 CT_SETTINGS_FACE_NAMES[face]);
         Color c = {f->colors[face][0], f->colors[face][1], f->colors[face][2],
                    CT_SETTINGS_COLOR_MAX};
-        DrawRectangle(fx, inner_y + row_h, face_w - color_pad, swatch_h - row_h, c);
+        DrawRectangle(fx, inner_y + CT_SETTINGS_COLOR_LABEL_H, face_w - color_pad,
+                      CT_SETTINGS_COLOR_SWATCH_H, c);
+        int by = inner_y + CT_SETTINGS_COLOR_LABEL_H + CT_SETTINGS_COLOR_SWATCH_H;
         for (int ch = 0; ch < CT_SETTINGS_CHANNELS; ch++) {
             int idx = face * CT_SETTINGS_CHANNELS + ch;
             bool edit = (ct_settings.chan_edit & (1u << idx)) != 0;
             if (!edit)
                 ct_settings.chan[face][ch] = f->colors[face][ch];
-            int by = inner_y + swatch_h;
             if (GuiValueBox(ct_settings_rect(fx, by + ch * box_h, face_w - color_pad, box_h), NULL,
                             &ct_settings.chan[face][ch], 0, CT_SETTINGS_COLOR_MAX, edit) != 0) {
                 ct_settings.chan_edit ^= 1u << idx;
@@ -656,17 +659,16 @@ void ct_screen_settings_update(ct_app *app) {
 }
 
 void ct_screen_settings_draw(ct_app *app) {
-    ClearBackground(DARKGRAY);
+    ClearBackground(GetColor(CT_UI_COLOR_BG));
     if (app == NULL)
         return;
     ct_settings_form *f = &ct_settings.form;
     int w = (int)app->cfg.window.width;
     int h = (int)app->cfg.window.height;
-    int margin = w >> CT_SETTINGS_MARGIN_SHIFT;
-    int row_h = h >> CT_SETTINGS_ROW_H_SHIFT;
-    int status_h = row_h;
+    int margin = CT_UI_MARGIN;
+    int row_h = CT_UI_ROW_H;
     int btn_h = row_h;
-    int btn_y = h - status_h - margin - btn_h;
+    int btn_y = h - CT_UI_STATUS_H - margin - btn_h;
     int btn_w = (w - 2 * margin - margin) / CT_SETTINGS_BTN_COUNT;
     int content_x = margin;
     int content_y = margin + row_h + margin;
@@ -681,13 +683,13 @@ void ct_screen_settings_draw(ct_app *app) {
 
     switch (ct_settings.tab) {
     case CT_SETTINGS_TAB_LETTERS:
-        ct_settings_draw_letters(app, content_x, content_y, content_w, content_h);
+        ct_settings_draw_letters(content_x, content_y, content_w, content_h);
         break;
     case CT_SETTINGS_TAB_BLD:
-        ct_settings_draw_bld(app, content_x, content_y, content_w, content_h);
+        ct_settings_draw_bld(content_x, content_y, content_w, content_h);
         break;
     default:
-        ct_settings_draw_general(app, content_x, content_y, content_w, content_h);
+        ct_settings_draw_general(content_x, content_y, content_w, content_h);
         break;
     }
 
@@ -707,5 +709,6 @@ void ct_screen_settings_draw(ct_app *app) {
     } else {
         snprintf(status_buf, sizeof status_buf, "%s", ct_settings_status_text(f->status));
     }
-    GuiStatusBar(ct_settings_rect(margin, h - status_h, content_w, status_h), status_buf);
+    GuiStatusBar(ct_settings_rect(margin, h - CT_UI_STATUS_H, content_w, CT_UI_STATUS_H),
+                 status_buf);
 }

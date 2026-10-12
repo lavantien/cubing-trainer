@@ -8,10 +8,6 @@
 #include "ui/widgets.h"
 
 enum {
-    CT_TRAINER_MARGIN_SHIFT = 6,
-    CT_TRAINER_COL_DIV = 5,
-    CT_TRAINER_FIELD_H_SHIFT = 4,
-    CT_TRAINER_TEXT_SHIFT = 5,
     CT_TRAINER_GRID_COLS = CT_LETTER_FACES,
     CT_TRAINER_GRID_ROWS = CT_LETTER_PER_FACE,
     CT_TRAINER_KEY_MAX = CT_CARD_CASE_KEY_MAX,
@@ -19,10 +15,7 @@ enum {
     CT_TRAINER_CASES_MAX = CT_LETTER_STICKERS * CT_LETTER_STICKERS,
     CT_TRAINER_HALF = 2,
     CT_TRAINER_DETAIL_COL = 3,
-    CT_TRAINER_FRONT_ROW = 3,
-    CT_TRAINER_ALG_ROW = 4,
-    CT_TRAINER_DECOMP_FIRST_ROW = CT_TRAINER_ALG_ROW + 1,
-    CT_TRAINER_DECOMP_STEP_DIV = 2
+    CT_TRAINER_DECOMP_STEP = CT_UI_FONT_BODY + CT_UI_ROW_GAP / 2
 };
 
 static const char *const CT_TRAINER_EVENT_NAMES[] = {
@@ -448,24 +441,31 @@ static void ct_trainer_draw_grid(ct_trainer_form *f, Rectangle bounds) {
         f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.map.edge : f->scheme.map.corner;
     int buffer = f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.buffer_edge
                                                                  : f->scheme.buffer_corner;
+    Font font = ct_ui_font();
     for (int i = 0; i < CT_LETTER_STICKERS; i++) {
         Rectangle cell;
         if (ct_heatmap_cell(bounds, CT_TRAINER_GRID_COLS, CT_TRAINER_GRID_ROWS, i, &cell) != 0) {
             continue;
         }
-        char label[2] = {letters[i], '\0'};
-        Color tint = RAYWHITE;
         if (i == f->cell) {
-            tint = YELLOW;
+            DrawRectangleRec(cell, GetColor(CT_UI_COLOR_ACCENT_TINT));
         } else if (i == buffer) {
-            tint = SKYBLUE;
+            DrawRectangleRec(cell, GetColor(CT_UI_COLOR_PANEL_ACTIVE));
         }
-        float cell_size = cell.height / CT_TRAINER_HALF;
-        int size = (int)cell_size;
-        float tw = (float)MeasureText(label, size);
-        float cx = cell.x + (cell.width - tw) / CT_TRAINER_HALF;
-        float cy = cell.y + (cell.height - cell_size) / CT_TRAINER_HALF;
-        DrawText(label, (int)cx, (int)cy, size, tint);
+        DrawRectangleLines((int)cell.x, (int)cell.y, (int)cell.width, (int)cell.height,
+                           GetColor(CT_UI_COLOR_BORDER));
+        char label[2] = {letters[i], '\0'};
+        Color tint = GetColor(CT_UI_COLOR_TEXT);
+        if (i == f->cell) {
+            tint = GetColor(CT_UI_COLOR_ACCENT);
+        } else if (i == buffer) {
+            tint = GetColor(CT_UI_COLOR_WARN);
+        }
+        float size = cell.height / CT_TRAINER_HALF;
+        float tw = MeasureTextEx(font, label, size, CT_UI_TEXT_SPACING).x;
+        Vector2 pos = {cell.x + (cell.width - tw) / CT_TRAINER_HALF,
+                       cell.y + (cell.height - size) / CT_TRAINER_HALF};
+        DrawTextEx(font, label, pos, size, CT_UI_TEXT_SPACING, tint);
     }
     Vector2 mouse = GetMousePosition();
     int picked = ct_heatmap_pick(bounds, CT_TRAINER_GRID_COLS, CT_TRAINER_GRID_ROWS, mouse);
@@ -479,44 +479,48 @@ static void ct_trainer_draw_grid(ct_trainer_form *f, Rectangle bounds) {
 }
 
 void ct_screen_trainer_draw(ct_app *app) {
-    ClearBackground(DARKGRAY);
+    ClearBackground(GetColor(CT_UI_COLOR_BG));
     if (app == NULL) {
         return;
     }
     ct_trainer_form *f = &ct_trainer.form;
     int w = (int)app->cfg.window.width;
     int h = (int)app->cfg.window.height;
-    int margin = w >> CT_TRAINER_MARGIN_SHIFT;
-    int row_h = h >> CT_TRAINER_FIELD_H_SHIFT;
-    int text_size = h >> CT_TRAINER_TEXT_SHIFT;
-    int col_w = w / CT_TRAINER_COL_DIV - margin;
+    int margin = CT_UI_MARGIN;
+    int row_h = CT_UI_ROW_H;
+    float text_size = (float)CT_UI_FONT_BODY;
+    int col_w = w / CT_UI_COL_DIV - margin;
     int events = ct_selector_events(NULL, 0);
     ct_method methods[CT_TRAINER_LISTS_MAX];
     int method_count = ct_selector_methods(f->sel.event, methods, CT_TRAINER_LISTS_MAX);
-    int grid_h = row_h * CT_TRAINER_GRID_ROWS + row_h;
-    int list_y = margin + row_h + margin;
-    int grid_y = list_y + row_h + 2 * margin;
-    int case_y = f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART
-                     ? grid_y + grid_h + margin
-                     : list_y;
-    int status_h = row_h;
-    int list_h = h - case_y - status_h - 2 * margin - row_h - margin;
-    if (list_h < row_h) {
-        list_h = row_h;
-    }
+    int col_h = h - margin - CT_UI_STATUS_H - margin;
+    int list_y = margin;
+    int stage_y = list_y;
+    int stage_h = row_h + margin;
+    int chart = f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART;
+    int grid_h = row_h * CT_TRAINER_GRID_ROWS + CT_UI_ROW_GAP;
+    int grid_y = stage_y + stage_h + CT_UI_ROW_GAP;
+    int case_y = chart ? grid_y + grid_h + CT_UI_ROW_GAP : stage_y + stage_h + CT_UI_ROW_GAP;
+    int case_h = h - case_y - CT_UI_STATUS_H - margin;
     int detail_x = margin + CT_TRAINER_DETAIL_COL * (col_w + margin);
     int detail_w = w - detail_x - margin;
+    int detail_h = h - 2 * margin - CT_UI_STATUS_H;
+    int detail_pad = margin;
+    int line1_y = margin + row_h;
+    int line2_y = line1_y + row_h;
+    int front_y = line2_y + row_h + CT_UI_ROW_GAP;
+    int alg_y = front_y + row_h;
+    int decomp_y = alg_y + row_h + CT_UI_ROW_GAP;
 
     ct_trainer_build_labels(&ct_trainer);
     if (f->list_count <= 0 || f->db == NULL) {
-        GuiStatusBar(ct_trainer_rect(margin, h - status_h, w - 2 * margin, status_h),
+        GuiStatusBar(ct_trainer_rect(margin, h - CT_UI_STATUS_H, w - 2 * margin, CT_UI_STATUS_H),
                      "no lists for this event");
         return;
     }
     int event_active = (int)f->sel.event;
-    if (GuiListViewEx(ct_trainer_rect(margin, list_y, col_w, h - list_y - status_h - 2 * margin),
-                      ct_trainer.event_ptrs, events, &ct_trainer.event_scroll, &event_active,
-                      NULL)) {
+    if (GuiListViewEx(ct_trainer_rect(margin, list_y, col_w, col_h), ct_trainer.event_ptrs, events,
+                      &ct_trainer.event_scroll, &event_active, NULL)) {
         ct_trainer_on_event(event_active);
     }
     int method_active = -1;
@@ -525,19 +529,18 @@ void ct_screen_trainer_draw(ct_app *app) {
             method_active = i;
         }
     }
-    if (GuiListViewEx(ct_trainer_rect(margin + col_w + margin, list_y, col_w,
-                                      h - list_y - status_h - 2 * margin),
+    if (GuiListViewEx(ct_trainer_rect(margin + col_w + margin, list_y, col_w, col_h),
                       ct_trainer.method_ptrs, method_count, &ct_trainer.method_scroll,
                       &method_active, NULL)) {
         ct_trainer_on_method(method_active);
     }
     int list_active = f->sel.list_id;
-    if (GuiListViewEx(ct_trainer_rect(margin + 2 * (col_w + margin), list_y, col_w, row_h + margin),
+    if (GuiListViewEx(ct_trainer_rect(margin + 2 * (col_w + margin), stage_y, col_w, stage_h),
                       ct_trainer.list_ptrs, f->list_count, &ct_trainer.list_scroll, &list_active,
                       NULL)) {
         ct_trainer_on_list(list_active);
     }
-    if (f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART) {
+    if (chart) {
         ct_trainer_draw_grid(f,
                              ct_trainer_rect(margin + 2 * (col_w + margin), grid_y, col_w, grid_h));
     }
@@ -545,17 +548,17 @@ void ct_screen_trainer_draw(ct_app *app) {
     if (visible > CT_TRAINER_CASES_MAX) {
         visible = CT_TRAINER_CASES_MAX;
     }
-    if (GuiListViewEx(ct_trainer_rect(margin + 2 * (col_w + margin), case_y, col_w, list_h),
+    if (GuiListViewEx(ct_trainer_rect(margin + 2 * (col_w + margin), case_y, col_w, case_h),
                       ct_trainer.case_ptrs, visible, &ct_trainer.case_scroll,
                       &ct_trainer.case_active, NULL)) {
         ct_trainer_on_case(ct_trainer.case_active);
     }
 
-    GuiGroupBox(ct_trainer_rect(detail_x, margin, detail_w, h - 2 * margin - status_h), "case");
+    GuiGroupBox(ct_trainer_rect(detail_x, margin, detail_w, detail_h), "case");
     char line[CT_TRAINER_KEY_MAX];
     snprintf(line, sizeof line, "event %s method %s", ct_trainer_event_name(f->sel.event),
              ct_trainer_method_name(f->sel.method));
-    GuiLabel(ct_trainer_rect(detail_x + margin, margin + row_h, detail_w - 2 * margin, row_h),
+    GuiLabel(ct_trainer_rect(detail_x + detail_pad, line1_y, detail_w - 2 * detail_pad, row_h),
              line);
     if (f->group_count > 1) {
         int written =
@@ -572,29 +575,35 @@ void ct_screen_trainer_draw(ct_app *app) {
         snprintf(line, sizeof line, "list %s cases %d",
                  ct_trainer_stage_name(f->lists[f->sel.list_id].stage), f->case_count);
     }
-    GuiLabel(ct_trainer_rect(detail_x + margin, margin + 2 * row_h, detail_w - 2 * margin, row_h),
+    GuiLabel(ct_trainer_rect(detail_x + detail_pad, line2_y, detail_w - 2 * detail_pad, row_h),
              line);
+    Font font = ct_ui_font();
+    Vector2 detail_pos = {(float)(detail_x + detail_pad), 0.0f};
     if (f->sel.case_index >= 0) {
-        DrawText(f->front, detail_x + margin, margin + CT_TRAINER_FRONT_ROW * row_h, text_size,
-                 RAYWHITE);
-        DrawText(f->alg_text[0] != '\0' ? f->alg_text : "no alg", detail_x + margin,
-                 margin + CT_TRAINER_ALG_ROW * row_h, text_size,
-                 f->alg_text[0] != '\0' ? RAYWHITE : GRAY);
+        detail_pos.y = (float)front_y;
+        DrawTextEx(font, f->front, detail_pos, text_size, CT_UI_TEXT_SPACING,
+                   GetColor(CT_UI_COLOR_TEXT));
+        detail_pos.y = (float)alg_y;
+        DrawTextEx(font, f->alg_text[0] != '\0' ? f->alg_text : "no alg", detail_pos, text_size,
+                   CT_UI_TEXT_SPACING,
+                   f->alg_text[0] != '\0' ? GetColor(CT_UI_COLOR_TEXT)
+                                          : GetColor(CT_UI_COLOR_TEXT_DIM));
     } else {
-        DrawText("no case selected", detail_x + margin, margin + CT_TRAINER_FRONT_ROW * row_h,
-                 text_size, GRAY);
+        detail_pos.y = (float)front_y;
+        DrawTextEx(font, "no case selected", detail_pos, text_size, CT_UI_TEXT_SPACING,
+                   GetColor(CT_UI_COLOR_TEXT_DIM));
     }
     char decomp[CT_TRAINER_DECOMP_LINES][CT_TRAINER_DECOMP_MAX];
     int decomp_count = ct_trainer_decomp(f, decomp, CT_TRAINER_DECOMP_LINES);
-    int decomp_step = text_size + text_size / CT_TRAINER_DECOMP_STEP_DIV;
     for (int i = 0; i < decomp_count; i++) {
-        DrawText(decomp[i], detail_x + margin,
-                 margin + CT_TRAINER_DECOMP_FIRST_ROW * row_h + i * decomp_step, text_size, GRAY);
+        detail_pos.y = (float)(decomp_y + i * CT_TRAINER_DECOMP_STEP);
+        DrawTextEx(font, decomp[i], detail_pos, text_size, CT_UI_TEXT_SPACING,
+                   GetColor(CT_UI_COLOR_TEXT_DIM));
     }
-    if (GuiButton(ct_trainer_rect(detail_x, h - status_h - margin - row_h, detail_w, row_h),
+    if (GuiButton(ct_trainer_rect(detail_x, h - CT_UI_STATUS_H - margin - row_h, detail_w, row_h),
                   "back")) {
         app->screen = CT_SCREEN_MENU;
     }
-    GuiStatusBar(ct_trainer_rect(margin, h - status_h, w - 2 * margin, status_h),
+    GuiStatusBar(ct_trainer_rect(margin, h - CT_UI_STATUS_H, w - 2 * margin, CT_UI_STATUS_H),
                  f->status == CT_REPO_OK ? "ok" : "error");
 }
