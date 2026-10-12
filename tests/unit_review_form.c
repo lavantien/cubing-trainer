@@ -41,6 +41,20 @@ static void seed_due(sqlite3 *db, long id) {
     CT_ASSERT_EQ(ct_repo_srs_put(db, id, &row), CT_REPO_OK);
 }
 
+static void seed_due_early(sqlite3 *db, long id) {
+    ct_srs_row row;
+    memset(&row, 0, sizeof row);
+    snprintf(row.due, sizeof row.due, "%s", "2020-01-01T00:00:00Z");
+    CT_ASSERT_EQ(ct_repo_srs_put(db, id, &row), CT_REPO_OK);
+}
+
+static void drop_corner_memo(sqlite3 *db, const char *pair) {
+    char sql[96];
+    snprintf(sql, sizeof sql, "DELETE FROM memo_pair WHERE orbit = %d AND pair = '%s'",
+             CT_ORBIT_CORNER, pair);
+    CT_ASSERT_EQ(sqlite3_exec(db, sql, NULL, NULL, NULL), SQLITE_OK);
+}
+
 static int parse_alg(const char *alg, ct_move *out) {
     return ct_notation_parse(alg, 3, out, CT_ANIM_QUEUE_CAP);
 }
@@ -565,6 +579,106 @@ CT_SUITE(review_form_empty_status) {
     CT_ASSERT_EQ(f.session.queue_count, 0);
     CT_ASSERT(f.status < 0);
     CT_ASSERT(!ct_session_has_next(&f.session));
+    ct_db_close(db);
+}
+
+CT_SUITE(review_form_memo_pairs) {
+    sqlite3 *db = review_db();
+    long pair = seed_card(db, "rev", "AB", "R U", "", "");
+    long digit = seed_card(db, "rev", "1A", "R U", "", "");
+    long bracket = seed_card(db, "rev", "[A", "R U", "", "");
+    long zlast = seed_card(db, "rev", "XA", "R U", "", "");
+    seed_due(db, pair);
+    seed_due(db, digit);
+    seed_due(db, bracket);
+    seed_due(db, zlast);
+    drop_corner_memo(db, "AB");
+    CT_ASSERT_EQ(ct_memo_set(db, CT_ORBIT_EDGE, "AB", "b", "q"), CT_REPO_OK);
+
+    ct_review_form f;
+    memset(&f, 0, sizeof f);
+    CT_ASSERT_EQ(ct_review_form_begin(&f, db, "rev", now_stamp, today_num, 0), 4);
+    CT_ASSERT_EQ(f.card.id, pair);
+    CT_ASSERT(f.memo_pair);
+    CT_ASSERT_STR_EQ(f.memo_image, "q");
+    CT_ASSERT_EQ(f.move_count, 2);
+
+    CT_ASSERT_EQ(ct_review_form_grade(&f, CT_GOOD, now_stamp), CT_SESSION_OK);
+    CT_ASSERT_EQ(f.card.id, digit);
+    CT_ASSERT(!f.memo_pair);
+    CT_ASSERT_EQ(f.memo_image[0], '\0');
+
+    CT_ASSERT_EQ(ct_review_form_grade(&f, CT_GOOD, now_stamp), CT_SESSION_OK);
+    CT_ASSERT_EQ(f.card.id, bracket);
+    CT_ASSERT(!f.memo_pair);
+    CT_ASSERT_EQ(f.memo_image[0], '\0');
+
+    CT_ASSERT_EQ(ct_review_form_grade(&f, CT_GOOD, now_stamp), CT_SESSION_OK);
+    CT_ASSERT_EQ(f.card.id, zlast);
+    CT_ASSERT(f.memo_pair);
+
+    ct_db_close(db);
+}
+
+CT_SUITE(review_form_memo_idle) {
+    sqlite3 *db = review_db();
+    long a = seed_card(db, "rev", "AB", "R U", "", "");
+    seed_due(db, a);
+    drop_corner_memo(db, "AB");
+    CT_ASSERT_EQ(ct_memo_set(db, CT_ORBIT_EDGE, "AB", "b", "img"), CT_REPO_OK);
+
+    ct_review_form f;
+    memset(&f, 0, sizeof f);
+    CT_ASSERT_EQ(ct_review_form_begin(&f, db, "rev", now_stamp, today_num, 0), 1);
+    CT_ASSERT(f.memo_pair);
+    CT_ASSERT_STR_EQ(f.memo_image, "img");
+
+    CT_ASSERT_EQ(ct_review_form_grade(&f, CT_GOOD, now_stamp), CT_SESSION_OK);
+    CT_ASSERT(!ct_session_has_next(&f.session));
+    CT_ASSERT_EQ(f.card.id, 0);
+    CT_ASSERT(!f.memo_pair);
+    CT_ASSERT_EQ(f.memo_image[0], '\0');
+
+    ct_db_close(db);
+}
+
+CT_SUITE(review_screen_auto_open) {
+    sqlite3 *db = review_db();
+    long a = seed_card(db, CT_UI_DEFAULT_DECK, "AB", "R U R'", "", "");
+    long b = seed_card(db, CT_UI_DEFAULT_DECK, "CD", "U R U'", "", "");
+    seed_due_early(db, a);
+    seed_due_early(db, b);
+
+    ct_app app;
+    memset(&app, 0, sizeof app);
+    app.cfg = ct_config_defaults();
+    app.db = db;
+    app.screen = CT_SCREEN_REVIEW;
+    app.fixed_dt = 1.0 / (double)app.cfg.window.target_fps;
+
+    ct_screen_review_update(&app);
+    ct_review_form *f = ct_screen_review_form();
+    CT_ASSERT_EQ(f->session.queue_count, 2);
+    CT_ASSERT_EQ(f->card.id, a);
+
+    char now[CT_SESSION_STAMP_MAX];
+    ct_now_utc_iso(now, (unsigned)sizeof now);
+    long y = (now[0] - '0') * 1000 + (now[1] - '0') * 100 + (now[2] - '0') * 10 + (now[3] - '0');
+    int m = (now[5] - '0') * 10 + (now[6] - '0');
+    int d = (now[8] - '0') * 10 + (now[9] - '0');
+    CT_ASSERT_EQ(f->session.today_day, ct_session_date_to_day(y, m, d));
+
+    ct_review_form_reveal(f);
+    CT_ASSERT(f->playing);
+    for (int i = 0; i < 1000 && f->playing; i++) {
+        ct_screen_review_update(&app);
+    }
+    CT_ASSERT(!f->playing);
+    CT_ASSERT_EQ(f->scrub_index, 3);
+    CT_ASSERT_EQ(f->anim.count, 0);
+
+    ct_review_form_end(f, now);
+    ct_session_free(&f->session);
     ct_db_close(db);
 }
 

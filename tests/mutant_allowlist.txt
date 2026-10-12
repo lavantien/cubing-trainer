@@ -1627,3 +1627,55 @@ src/ui/screen_settings.c:710	rejected counter reset inside the save callback, gu
 src/ui/screen_settings.c:713	cancel call inside the cancel button callback, gui event branch no headless suite can trigger
 src/ui/screen_settings.c:716	rejected status branch, drawn status bar text only
 src/ui/screen_settings.c:722	status bar rect, draw layout only
+src/ui/screen_review.c:12	speed table first entry, consumed only by the gui speed callback no headless suite triggers
+src/ui/screen_review.c:17	slider height divisor, drawn slider geometry only
+src/ui/screen_review.c:19	play button count, consumed only by the draw-side play button row
+src/ui/screen_review.c:62	scramble loop overrun applies parser frame residue one slot past the written inverses, it decodes as a zero turn on every suite alg so the extra apply is the identity
+src/ui/screen_review.c:113	edge probe conjunction flip, every miss memsets the row image empty so both disjuncts collapse to the same empty copy
+src/ui/screen_review.c:144	local card fill byte, the failure path never reads the local and the repo get memsets every field
+src/ui/screen_review.c:157	weakened parse clamp, every reachable parse error code is minus two or lower so the shifted bound still clamps to zero
+src/ui/screen_review.c:174	weakened parse clamp in reveal, zero maps to itself and every error code stays below the shifted bound
+src/ui/screen_review.c:175	minus one clamp replacement in reveal mirrors the original empty replay, the inverse helper rejects a negative count so no scramble or push happens either way
+src/ui/screen_review.c:223	speed min clamp boundary is idempotent, at the minimum both arms store the same value
+src/ui/screen_review.c:235	weakened negative scrub clamp maps zero to itself
+src/ui/screen_review.c:238	upper scrub clamp boundary is idempotent, at move_count both arms store the same value
+src/ui/screen_review.c:243	weakened parse clamp in scrub maps zero to itself and every error code stays below the shifted bound
+src/ui/screen_review.c:244	minus one clamp replacement in scrub mirrors the original empty replay
+src/ui/screen_review.c:283	any flag flip only matters for a digitless field, the wall clock stamp always carries digits
+src/ui/screen_review.c:284	weakened digit bound drops trailing nines from the day seed, a nine free stamp parses identically
+src/ui/screen_review.c:289	separator guard conjunction flip only matters for a digitless field, the stamp always parses
+src/ui/screen_review.c:308	scheme settings probe, write-only scheme state read only by the draw path
+src/ui/screen_review.c:317	open form memset fill, the subsequent form begin memsets the same struct wholesale
+src/ui/screen_review.c:322	camera square distance, draw-side camera geometry only
+src/ui/screen_review.c:323	camera depth sum, draw-side camera geometry only
+src/ui/screen_review.c:325	camera half width factors, draw-side camera geometry only
+src/ui/screen_review.c:326	camera aspect factors, draw-side camera geometry only
+src/ui/screen_review.c:327	camera diagonal divisor, draw-side camera geometry only
+src/ui/screen_review.c:328	camera pan factors, draw-side camera geometry only
+src/ui/screen_review.c:329	camera position offsets, draw-side camera geometry only
+src/ui/screen_review.c:330	camera target offset, draw-side camera geometry only
+src/ui/screen_review.c:336	year holder init, overwritten on every scan success and unused on failure
+src/ui/screen_review.c:337	month holder init, overwritten on every scan success and unused on failure
+src/ui/screen_review.c:338	day holder init, overwritten on every scan success and unused on failure
+src/ui/screen_review.c:341	auto-open limit seed, minus one takes the same unlimited queue path as zero
+src/ui/screen_review.c:358	opened reset in the escape branch, raylib input branch no headless suite can trigger
+src/ui/screen_review.c:399	button row width split, draw path only
+src/ui/screen_review.c:400	button row loop bound, draw path only
+src/ui/screen_review.c:415	play callback dispatch index, gui event branch no headless suite can trigger
+src/ui/screen_review.c:428	null guard after the background clear, draw path only
+src/ui/screen_review.c:435	pane width layout, draw path only
+src/ui/screen_review.c:438	right pane x layout, draw path only
+src/ui/screen_review.c:439	right pane width layout, draw path only
+src/ui/screen_review.c:443	scissor pane bounds, draw path only
+src/ui/screen_review.c:444	text pane background rect, draw path only
+src/ui/screen_review.c:459	empty card branch, draw path only
+src/ui/screen_review.c:462	status bar rect, draw path only
+src/ui/screen_review.c:468	memo image pick, drawn title text only
+src/ui/screen_review.c:470	memo color pick, drawn title color only
+src/ui/screen_review.c:472	memo title y advance, draw layout only
+src/ui/screen_review.c:477	reveal gate, mutant only flips when the reveal button paints, firing the button needs live mouse input that no suite injects, so no model state ever changes
+src/ui/screen_review.c:478	reveal button width division feeds only the button rectangle, pixel geometry with no model effect
+src/ui/screen_review.c:479	reveal button rectangle arithmetic feeds only the gui hit box, pixel geometry with no model effect
+src/ui/screen_review.c:498	slider height divisor, drawn slider geometry only
+src/ui/screen_review.c:501	scrub slider gate, gui slider return branch no headless suite can trigger
+src/ui/screen_review.c:506	status bar rect, draw path only
