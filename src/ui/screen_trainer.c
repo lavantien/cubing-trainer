@@ -16,11 +16,7 @@ enum {
     CT_TRAINER_HALF = 2,
     CT_TRAINER_DETAIL_COL = 3,
     CT_TRAINER_DECOMP_STEP = CT_UI_FONT_BODY + CT_UI_ROW_GAP / 2,
-    CT_TRAINER_MEMO_PAD = 12,
-    CT_TRAINER_MEMO_ROW_H = 28,
-    CT_TRAINER_MEMO_FIELD_H = 32,
     CT_TRAINER_MEMO_GAP = 8,
-    CT_TRAINER_MEMO_FIELD_GAP = 12,
     CT_TRAINER_MEMO_DECOMP_RESERVE = CT_TRAINER_DECOMP_LINES * CT_TRAINER_DECOMP_STEP
 };
 
@@ -198,8 +194,8 @@ static void ct_trainer_memo_reload_rows(ct_trainer_form *f) {
         source != CT_SELECTOR_CHART) {
         return;
     }
-    int n = ct_memo_list(f->db, f->lists[f->sel.list_id].orbit, f->memo_rows,
-                         CT_TRAINER_MEMO_ROWS_MAX);
+    int n =
+        ct_memo_list(f->db, f->lists[f->sel.list_id].orbit, f->memo_rows, CT_TRAINER_MEMO_ROWS_MAX);
     f->memo_row_count = n > 0 ? n : 0;
 }
 
@@ -710,33 +706,32 @@ void ct_screen_trainer_draw(ct_app *app) {
     if (chart && f->sel.case_index >= 0) {
         int memo_y = decomp_y + CT_TRAINER_MEMO_DECOMP_RESERVE + CT_TRAINER_MEMO_GAP;
         int memo_h = back_y - CT_UI_ROW_GAP - memo_y;
-        int memo_pad = CT_TRAINER_MEMO_PAD;
+        int memo_pad = CT_UI_MEMO_PAD;
         int memo_w = detail_w - 2 * memo_pad;
         GuiGroupBox(ct_trainer_rect(detail_x, memo_y, detail_w, memo_h), "memo");
         char memo_line[CT_MEMO_TEXT_MAX + CT_TRAINER_KEY_MAX];
         int row1_y = memo_y + memo_pad;
-        int row2_y = row1_y + CT_TRAINER_MEMO_ROW_H;
+        int row2_y = row1_y + CT_UI_MEMO_ROW_H;
         snprintf(memo_line, sizeof memo_line, "phoneme %s", f->memo_saved_phoneme);
-        GuiLabel(ct_trainer_rect(detail_x + memo_pad, row1_y, memo_w, CT_TRAINER_MEMO_ROW_H),
+        GuiLabel(ct_trainer_rect(detail_x + memo_pad, row1_y, memo_w, CT_UI_MEMO_ROW_H),
                  memo_line);
         snprintf(memo_line, sizeof memo_line, "image %s", f->memo_saved_image);
-        GuiLabel(ct_trainer_rect(detail_x + memo_pad, row2_y, memo_w, CT_TRAINER_MEMO_ROW_H),
+        GuiLabel(ct_trainer_rect(detail_x + memo_pad, row2_y, memo_w, CT_UI_MEMO_ROW_H),
                  memo_line);
-        int box_y = row2_y + CT_TRAINER_MEMO_ROW_H + CT_TRAINER_MEMO_GAP;
-        int box_w = (memo_w - CT_TRAINER_MEMO_FIELD_GAP) / 2;
-        if (GuiTextBox(ct_trainer_rect(detail_x + memo_pad, box_y, box_w, CT_TRAINER_MEMO_FIELD_H),
+        int box_y = row2_y + CT_UI_MEMO_ROW_H + CT_TRAINER_MEMO_GAP;
+        int box_w = (memo_w - CT_UI_MEMO_FIELD_GAP) / 2;
+        if (GuiTextBox(ct_trainer_rect(detail_x + memo_pad, box_y, box_w, CT_UI_MEMO_FIELD_H),
                        f->memo_phoneme, (int)sizeof f->memo_phoneme,
                        ct_trainer.memo_edit_phoneme)) {
             ct_trainer.memo_edit_phoneme = !ct_trainer.memo_edit_phoneme;
         }
-        if (GuiTextBox(ct_trainer_rect(detail_x + memo_pad + box_w + CT_TRAINER_MEMO_FIELD_GAP,
-                                       box_y, box_w, CT_TRAINER_MEMO_FIELD_H),
+        if (GuiTextBox(ct_trainer_rect(detail_x + memo_pad + box_w + CT_UI_MEMO_FIELD_GAP,
+                                       box_y, box_w, CT_UI_MEMO_FIELD_H),
                        f->memo_image, (int)sizeof f->memo_image, ct_trainer.memo_edit_image)) {
             ct_trainer.memo_edit_image = !ct_trainer.memo_edit_image;
         }
-        int save_y = box_y + CT_TRAINER_MEMO_FIELD_H + CT_TRAINER_MEMO_GAP;
-        if (GuiButton(ct_trainer_rect(detail_x + memo_pad, save_y, memo_w,
-                                      CT_TRAINER_MEMO_FIELD_H),
+        int save_y = box_y + CT_UI_MEMO_FIELD_H + CT_TRAINER_MEMO_GAP;
+        if (GuiButton(ct_trainer_rect(detail_x + memo_pad, save_y, memo_w, CT_UI_MEMO_FIELD_H),
                       "save memo")) {
             ct_trainer.memo_edit_phoneme = false;
             ct_trainer.memo_edit_image = false;

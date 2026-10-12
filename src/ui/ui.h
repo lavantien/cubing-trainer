@@ -10,10 +10,10 @@
 #include "packs/packs.h"
 #include "render/anim.h"
 #include "stats/stats.h"
+#include "storage/db.h"
 #include "storage/repo_algs.h"
 #include "storage/repo_cards.h"
 #include "storage/repo_settings.h"
-#include "storage/db.h"
 #include "trainer/selector.h"
 #include "trainer/session.h"
 

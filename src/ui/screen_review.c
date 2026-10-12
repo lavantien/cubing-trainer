@@ -466,8 +466,7 @@ void ct_screen_review_draw(ct_app *app) {
 
     if (f->memo_pair) {
         DrawTextEx(font, f->memo_image[0] != '\0' ? f->memo_image : f->card.case_key,
-                   (Vector2){(float)right_x, (float)y}, (float)CT_UI_FONT_TITLE,
-                   CT_UI_TEXT_SPACING,
+                   (Vector2){(float)right_x, (float)y}, (float)CT_UI_FONT_TITLE, CT_UI_TEXT_SPACING,
                    f->memo_image[0] != '\0' ? GetColor(CT_UI_COLOR_TEXT)
                                             : GetColor(CT_UI_COLOR_TEXT_DIM));
         y += CT_UI_FONT_TITLE + CT_UI_ROW_GAP;
