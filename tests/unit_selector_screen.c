@@ -21,7 +21,9 @@ enum {
     TSS_SPECIALS_ROWS = 85,
     TSS_PLL_CASES = 21,
     TSS_SAMPLES = 3,
-    TSS_CELL = 1
+    TSS_CELL = 1,
+    TSS_FIND_ROWS = 5,
+    TSS_OVERFLOW = 2
 };
 
 static sqlite3 *tss_db(void) {
@@ -350,6 +352,12 @@ CT_SUITE(trainer_decomp_lines) {
     CT_ASSERT_STR_EQ(lines[0], "setup x");
     CT_ASSERT_STR_EQ(lines[1], "insertion R");
     CT_ASSERT_STR_EQ(lines[2], "class SP7");
+    f.alg.setup[0] = '\0';
+    memset(lines, 0, sizeof lines);
+    CT_ASSERT_EQ(ct_trainer_decomp(&f, lines, CT_TRAINER_DECOMP_LINES), 2);
+    CT_ASSERT_STR_EQ(lines[0], "insertion R");
+    CT_ASSERT_STR_EQ(lines[1], "class SP7");
+    CT_ASSERT_EQ(lines[2][0], '\0');
 }
 
 CT_SUITE(trainer_form_visible_count_edges) {
@@ -381,4 +389,164 @@ CT_SUITE(trainer_form_letter_scheme_routed) {
     CT_ASSERT_EQ(ct_trainer_form_select_case(&f, 0), CT_REPO_OK);
     CT_ASSERT_STR_EQ(f.front, "AC");
     ct_db_close(db);
+}
+
+CT_SUITE(trainer_form_memo_lifecycle) {
+    sqlite3 *db = tss_db();
+    ct_trainer_form f;
+    CT_ASSERT_EQ(ct_trainer_form_open(&f, db), CT_REPO_OK);
+    CT_ASSERT_EQ(f.memo_row_count, 0);
+    CT_ASSERT_EQ(ct_trainer_form_select_event(&f, CT_EVENT_3BLD), CT_REPO_OK);
+    CT_ASSERT_EQ(f.memo_row_count, CT_TRAINER_MEMO_ROWS_MAX);
+    CT_ASSERT_STR_EQ(f.memo_rows[0].pair, "AA");
+    CT_ASSERT_EQ(ct_memo_set(db, CT_ORBIT_CORNER, "AB", "ph", "img"), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_trainer_form_select_list(&f, 0), CT_REPO_OK);
+    CT_ASSERT_EQ(f.memo_row_count, CT_TRAINER_MEMO_ROWS_MAX);
+    CT_ASSERT_EQ(ct_trainer_form_select_case(&f, 0), CT_REPO_OK);
+    CT_ASSERT_STR_EQ(f.front, "AB");
+    CT_ASSERT_STR_EQ(f.memo_phoneme, "ph");
+    CT_ASSERT_STR_EQ(f.memo_image, "img");
+    CT_ASSERT_STR_EQ(f.memo_saved_phoneme, "ph");
+    CT_ASSERT_STR_EQ(f.memo_saved_image, "img");
+    CT_ASSERT_EQ(ct_trainer_form_select_list(&f, 1), CT_REPO_OK);
+    CT_ASSERT_STR_EQ(f.memo_phoneme, "");
+    CT_ASSERT_STR_EQ(f.memo_image, "");
+    CT_ASSERT_STR_EQ(f.memo_saved_phoneme, "");
+    CT_ASSERT_STR_EQ(f.memo_saved_image, "");
+    CT_ASSERT_EQ(f.memo_row_count, CT_TRAINER_MEMO_ROWS_MAX);
+    ct_db_close(db);
+}
+
+CT_SUITE(trainer_form_memo_find_rows) {
+    sqlite3 *db = tss_db();
+    static const char *const pairs[TSS_FIND_ROWS] = {"AB", "AC", "AD", "AE", "AF"};
+    static const char *const images[TSS_FIND_ROWS] = {"imgB", "imgC", "imgD", "imgE", "imgF"};
+    for (int i = 0; i < TSS_FIND_ROWS; i++) {
+        CT_ASSERT_EQ(ct_memo_set(db, CT_ORBIT_CORNER, pairs[i], "ph", images[i]), CT_REPO_OK);
+    }
+    ct_trainer_form f;
+    CT_ASSERT_EQ(ct_trainer_form_open(&f, db), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_trainer_form_select_event(&f, CT_EVENT_3BLD), CT_REPO_OK);
+    CT_ASSERT_EQ(f.memo_row_count, CT_TRAINER_MEMO_ROWS_MAX);
+    for (int i = 0; i < f.memo_row_count; i++) {
+        const ct_memo_list_row *row = ct_trainer_form_memo_find(&f, f.memo_rows[i].pair);
+        CT_ASSERT(row != NULL);
+        CT_ASSERT_STR_EQ(row->pair, f.memo_rows[i].pair);
+    }
+    for (int i = 0; i < TSS_FIND_ROWS; i++) {
+        const ct_memo_list_row *row = ct_trainer_form_memo_find(&f, pairs[i]);
+        CT_ASSERT(row != NULL);
+        CT_ASSERT_STR_EQ(row->image, images[i]);
+    }
+    ct_db_close(db);
+}
+
+CT_SUITE(trainer_form_memo_save_guards) {
+    sqlite3 *db = tss_db();
+    CT_ASSERT_EQ(ct_trainer_form_memo_save(NULL), CT_REPO_ERR_ARG);
+    CT_ASSERT(ct_trainer_form_memo_find(NULL, "AB") == NULL);
+    CT_ASSERT_EQ(ct_memo_set(db, CT_ORBIT_CORNER, "AB", "sentinel", "sentinel"), CT_REPO_OK);
+    ct_trainer_form f;
+    memset(&f, 0, sizeof f);
+    f.db = db;
+    snprintf(f.front, sizeof f.front, "%s", "AB");
+    snprintf(f.memo_phoneme, sizeof f.memo_phoneme, "%s", "p");
+    snprintf(f.memo_image, sizeof f.memo_image, "%s", "i");
+    f.sel.case_index = 0;
+    f.sel.list_id = -1;
+    CT_ASSERT_EQ(ct_trainer_form_memo_save(&f), CT_REPO_ERR_ARG);
+    f.sel.list_id = 1;
+    f.list_count = 1;
+    f.lists[1].orbit = CT_ORBIT_CORNER;
+    f.lists[1].source = CT_SELECTOR_CHART;
+    CT_ASSERT_EQ(ct_trainer_form_memo_save(&f), CT_REPO_ERR_ARG);
+    f.sel.list_id = 2;
+    f.lists[2].orbit = CT_ORBIT_CORNER;
+    f.lists[2].source = CT_SELECTOR_CHART;
+    CT_ASSERT_EQ(ct_trainer_form_memo_save(&f), CT_REPO_ERR_ARG);
+    ct_memo_row row;
+    CT_ASSERT_EQ(ct_memo_get(db, CT_ORBIT_CORNER, "AB", &row), CT_REPO_OK);
+    CT_ASSERT_STR_EQ(row.phoneme, "sentinel");
+    CT_ASSERT_STR_EQ(row.image, "sentinel");
+    ct_db_close(db);
+}
+
+CT_SUITE(trainer_form_all_lists_counts) {
+    sqlite3 *db = tss_db();
+    ct_trainer_form f;
+    CT_ASSERT_EQ(ct_trainer_form_open(&f, db), CT_REPO_OK);
+    for (ct_event ev = CT_EVENT_3X3; ev <= CT_EVENT_FTO; ev++) {
+        ct_method methods[CT_TRAINER_LISTS_MAX];
+        int method_count = ct_selector_methods(ev, methods, CT_TRAINER_LISTS_MAX);
+        CT_ASSERT(method_count > 0);
+        for (int mi = 0; mi < method_count; mi++) {
+            CT_ASSERT_EQ(ct_trainer_form_select_event(&f, ev), CT_REPO_OK);
+            CT_ASSERT_EQ(ct_trainer_form_select_method(&f, methods[mi]), CT_REPO_OK);
+            int lists = ct_selector_lists(ev, methods[mi], NULL, 0);
+            CT_ASSERT(lists > 0);
+            for (int li = 0; li < lists; li++) {
+                CT_ASSERT_EQ(ct_trainer_form_select_list(&f, li), CT_REPO_OK);
+                CT_ASSERT_EQ(f.sel.list_id, li);
+                CT_ASSERT_EQ(f.list_count, lists);
+                CT_ASSERT_EQ(f.case_count, ct_selector_case_count(db, &f.scheme, ev, methods[mi], li));
+            }
+        }
+    }
+    ct_db_close(db);
+}
+
+CT_SUITE(trainer_form_cell_pair_overflow) {
+    sqlite3 *db = tss_db();
+    ct_trainer_form f;
+    memset(&f, 0, sizeof f);
+    f.db = db;
+    f.sel.event = CT_EVENT_3BLD;
+    f.sel.method = CT_METHOD_3STYLE;
+    f.sel.list_id = 0;
+    f.list_count = 1;
+    f.lists[0].orbit = CT_ORBIT_CORNER;
+    f.lists[0].source = CT_SELECTOR_CHART;
+    CT_ASSERT_EQ(ct_selector_scheme_load(db, &f.scheme), 0);
+    f.case_count = TSS_CORNER_CASES + TSS_OVERFLOW;
+    f.cell = TSS_CELL;
+    static ct_target_pair pairs[TSS_CORNER_CASES];
+    CT_ASSERT_EQ(ct_targets_corner(f.scheme.buffer_corner, pairs, TSS_CORNER_CASES),
+                 TSS_CORNER_CASES);
+    int expect = 0;
+    for (int i = 0; i < TSS_CORNER_CASES; i++) {
+        if (pairs[i].t1 == TSS_CELL || pairs[i].t2 == TSS_CELL) {
+            expect++;
+        }
+    }
+    CT_ASSERT(expect > 0);
+    CT_ASSERT_EQ(ct_trainer_form_visible_count(&f), expect);
+    CT_ASSERT_EQ(ct_trainer_form_nth_visible(&f, expect), -1);
+    ct_db_close(db);
+}
+
+CT_SUITE(trainer_screen_update_reopen) {
+    ct_screen_trainer_update(NULL);
+    sqlite3 *db = tss_db();
+    ct_app app;
+    memset(&app, 0, sizeof app);
+    app.db = db;
+    app.screen = CT_SCREEN_TRAINER;
+    ct_screen_trainer_update(&app);
+    ct_trainer_form *f = ct_screen_trainer_form();
+    CT_ASSERT(f->db == db);
+    CT_ASSERT_EQ(f->sel.event, CT_EVENT_3X3);
+    CT_ASSERT_EQ(ct_trainer_form_select_case(f, 0), CT_REPO_OK);
+    CT_ASSERT_EQ(f->sel.case_index, 0);
+    ct_screen_trainer_update(&app);
+    CT_ASSERT_EQ(f->sel.case_index, 0);
+    sqlite3 *db2 = tss_db();
+    ct_app app2;
+    memset(&app2, 0, sizeof app2);
+    app2.db = db2;
+    app2.screen = CT_SCREEN_TRAINER;
+    ct_screen_trainer_update(&app2);
+    CT_ASSERT(ct_screen_trainer_form()->db == db2);
+    CT_ASSERT_EQ(ct_screen_trainer_form()->sel.case_index, -1);
+    ct_db_close(db);
+    ct_db_close(db2);
 }

@@ -1518,3 +1518,45 @@ src/ui/screen_trainer.c:734	screen draw body feeds only the raylib frame loop no
 src/ui/screen_trainer.c:735	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:742	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:743	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:14	CT_TRAINER_EVENTS_MAX only sizes event label arrays and bounds the build_labels loop and on_event callback, all in the unexecuted draw path, so the value never reaches a gate-observable surface
+src/ui/screen_trainer.c:15	CT_TRAINER_CASES_MAX only sizes case_labels and case_ptrs and bounds the build_labels loop in the unexecuted draw path
+src/ui/screen_trainer.c:16	CT_TRAINER_HALF is consumed only by grid text layout math in the allowlisted draw region
+src/ui/screen_trainer.c:17	CT_TRAINER_DETAIL_COL is consumed only by the detail column x offset in the allowlisted draw region
+src/ui/screen_trainer.c:40	sizeof of any element subscript yields the same element size, the subscript is never evaluated, and with / turned into * the helpers run only from build_labels and draw with in-range indices
+src/ui/screen_trainer.c:41	ct_trainer_event_name is only called with event ids below the table size from build_labels and the draw region, so the i == count branch never runs
+src/ui/screen_trainer.c:47	ct_trainer_method_name is only called with method ids below the table size from build_labels and the draw region, so the i == count branch never runs
+src/ui/screen_trainer.c:53	ct_trainer_stage_name is only called with stage ids below the table size from build_labels and the draw region, so the i == count branch never runs
+src/ui/screen_trainer.c:67	reload only runs after its callers validated list_count >= 1, so the line 88 assignment always overwrites the initial case_count and the list_count <= 0 early return never executes
+src/ui/screen_trainer.c:80	every reload call site guarantees list_count >= 1, so list_count == 0 never reaches this comparison
+src/ui/screen_trainer.c:84	callers either reset list_id to 0 or bounds-check it below list_count, so list_id == list_count never reaches this reset guard
+src/ui/screen_trainer.c:85	dead store inside the unreachable list_id >= list_count branch guarded at line 84
+src/ui/screen_trainer.c:88	n > 0 and n >= 0 agree on every reachable n because n == 0 takes the else branch under both forms and yields 0, no selector list yields exactly one case, and case_count is never negative on valid reload passes
+src/ui/screen_trainer.c:95	the guarded max update is idempotent, widening the condition only re-assigns group_count a value it already holds
+src/ui/screen_trainer.c:118	form_open and reload explicitly assign every field any public read touches before it is read, so the memset fill byte only reaches never-read fields
+src/ui/screen_trainer.c:128	ct_selector_methods for 3x3 always returns 1 from the static table, so both zero-variant comparisons are equally false
+src/ui/screen_trainer.c:159	the mutated literal is the capacity argument, out == NULL makes ct_selector_lists ignore it and ct_selector_cap clamps negatives to 0
+src/ui/screen_trainer.c:199	both orbits are fully seeded with 576 memo pairs and the row cap equals 576, so n is always 576 and neither the else branch nor any comparison outcome changes
+src/ui/screen_trainer.c:232	front is fully rewritten by snprintf or case_key on every reachable success path and re-cleared on both error paths, and the seeded pack tables never fail an in-range fetch
+src/ui/screen_trainer.c:259	ct_selector_case_key never fails for an in-range index on the seeded databases, so this error-path clear never executes
+src/ui/screen_trainer.c:304	the lo = -1 start only reaches a negative probe index on a query sorting below every stored row, and row 0 is the seeded AA while an absent query would also non-terminate under the line 315 mutant so no gate suite can safely issue it
+src/ui/screen_trainer.c:307	binary search returns the identical row for any pivot index in range, these mutations only reorder probes, the /1 form degenerating to a correct linear descent from hi
+src/ui/screen_trainer.c:312	cmp == 0 already returned at line 309, so the <= and < 1 variants never see a divergent comparison value
+src/ui/screen_trainer.c:315	hi = mid preserves the invariant that a present target stays inside the interval, so stored pairs return the identical row and the only divergence is a non-terminating loop on absent pairs, which no gate suite queries because the timeout-less driver would deadlock
+src/ui/screen_trainer.c:346	t1 initializer is dead, ct_selector_case_pair overwrites both outputs on the only path that reads them and the failure path returns before any read
+src/ui/screen_trainer.c:347	t2 initializer is dead, ct_selector_case_pair overwrites both outputs on the only path that reads them and the failure path returns before any read
+src/ui/screen_trainer.c:356	with case_count == 0 every continuation path still returns 0, the source guard returns case_count and the match loop runs zero iterations
+src/ui/screen_trainer.c:374	visible == -1 continues into paths that all return -1, the ternary yields visible itself under case_count > 0 and the counting loop can never match a negative target
+src/ui/screen_trainer.c:383	the i = -1 and i == case_count iterations call ct_selector_case_pair, which rejects both out-of-range indexes, so cell_matches returns 0 and the loop behaves identically
+src/ui/screen_trainer.c:396	cap == 0 continues into a path that writes nothing and returns n == 0 identical to the guard result, and cap < 0 is caught by both comparison forms
+src/ui/screen_trainer.c:403	n is provably 0 at the setup check, so < and <= differ only at cap == 0, which the entry guard already returned for
+src/ui/screen_trainer.c:447	with out == NULL ct_selector_events never reads the capacity argument, and the only caller is build_labels which runs solely from the unexecuted draw path
+src/ui/screen_trainer.c:455	label loop inside static build_labels, executed only from the allowlisted draw region, and the label arrays have no gate-observable surface
+src/ui/screen_trainer.c:466	case_active reset inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+src/ui/screen_trainer.c:467	visible-case loop inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+src/ui/screen_trainer.c:469	case-key failure branch inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+src/ui/screen_trainer.c:471	empty-label clear inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+src/ui/screen_trainer.c:475	memo image append guard inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+src/ui/screen_trainer.c:482	active-row comparison inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+src/ui/screen_trainer.c:489	static GuiTree event callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_event which rejects them unobserved
+src/ui/screen_trainer.c:498	static GuiTree method callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_method which rejects them unobserved
+src/ui/screen_trainer.c:504	static GuiTree list callback guard invoked only from the draw region, negative active values flow into ct_trainer_form_select_list which rejects them unobserved
