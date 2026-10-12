@@ -1,0 +1,14 @@
+residual lane-context crash analysis, 2026-10-12
+
+observation: full 17-mutant script_shots lanes segfault e2e_run_shot_guards for m0108 and m0132, whose guards-path behavior is pristine-identical (both mutate dead code for that suite). 6 of 6 full-lane replays produced guards segfaults on one or both; m0108 passed guards in the 6th.
+
+not the binary: byte-exact lane exe (captured post-link) ran guards 25/25 clean; relinked mutant exe 50/50 clean; 5x single-mutant and pair lanes clean; prefix-8 lane clean.
+not the environment block: full-lane vs prefix-8 CT_MUTATE_ONLY env on the fixed exe, 20/20 clean each.
+not pristine code: 100/100 e2e_run_shot_guards and 100/100 shots_arg_guards direct loops, 10x render-then-guards sequences, all clean after 5cbfc07.
+not exit state: ct_script_run closes the window after every script (src/app/script.c:837), every suite process exits with the window closed.
+
+conclusion: process-history dependent GPU driver failure (NVIDIA 617.42) after rapid successive GL context churn, roughly 150 short-lived processes per full lane including about ten 5-cycle render suite executions inside two minutes. not reproducible on demand outside the full-lane context, no repo code path involved.
+
+verdict impact: none. every segfault-credited mutant across the three lanes holds a deterministic verdict independent of the guards segv: m0108 dies at e2e_run_due_in exit 1 (5/5 probes), m0132 dies at e2e_run_shot_render exit 1 (5/5 probes), m0145 and m0173 carry genuine arg-index minus-one wild reads that crash deterministically (5/5 probes), the six trainer and shots lane mutants are deterministic 5/5, and m0093/m0131 surfaced as flake-masked survivors already covered by allowlist dead-store rows.
+
+lane hygiene: run one lane at a time with no concurrent GL-heavy loops; when a suite segfault lands on a mutant whose edit cannot reach that suite, verify the verdict with a single-mutant CT_MUTATE_ONLY probe over the full suite list before trusting or rewriting any verdict.

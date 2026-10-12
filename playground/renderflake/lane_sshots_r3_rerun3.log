@@ -1,0 +1,23 @@
+mutate: scope=src/app/script_shots.c files=1 sites=193 suites=10
+KILLED    m0007 src/app/script_shots.c:51 [bool false -> true]
+KILLED    m0026 src/app/script_shots.c:63 [arith / -> *]
+KILLED    m0071 src/app/script_shots.c:102 [int-1 4 -> 3]
+KILLED    m0082 src/app/script_shots.c:110 [int-1 0 -> -1]
+KILLED    m0087 src/app/script_shots.c:117 [int+1 0 -> 1]
+KILLED    m0091 src/app/script_shots.c:119 [cmp != -> ==]
+SURVIVED  m0093 src/app/script_shots.c:122 [int-1 0 -> -1]
+KILLED    m0108 src/app/script_shots.c:139 [int+1 0 -> 1]
+KILLED    m0122 src/app/script_shots.c:156 [int-1 0 -> -1]
+SURVIVED  m0131 src/app/script_shots.c:162 [int-1 0 -> -1]
+KILLED    m0132 src/app/script_shots.c:163 [int+1 2 -> 3]
+KILLED    m0145 src/app/script_shots.c:179 [int-1 0 -> -1]
+KILLED    m0158 src/app/script_shots.c:193 [int-1 0 -> -1]
+KILLED    m0165 src/app/script_shots.c:197 [int-1 0 -> -1]
+KILLED    m0168 src/app/script_shots.c:203 [int-1 1 -> 0]
+KILLED    m0173 src/app/script_shots.c:207 [int-1 0 -> -1]
+KILLED    m0174 src/app/script_shots.c:209 [cmp == -> !=]
+ACCEPTED  m0093 src/app/script_shots.c:122 [int-1 0 -> -1] :: days init is a dead store, the long parse callee overwrites it on every path that reads it
+ACCEPTED  m0131 src/app/script_shots.c:162 [int-1 0 -> -1] :: pick init is a dead store, the long parse callee overwrites it on every path that reads it
+mutate: generated=17 build_failed=0 killed_by_tests=15 killed=15 survived=2 accepted=2 unexplained=0 skipped=176
+mutate: kill rate 15/17 = 88.2%, with accepted equivalents 17/17 = 100.0%
+mutate: wall 114.5s
