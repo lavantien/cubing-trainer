@@ -1,0 +1,6 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_e2e_script.c -o build_eslice/tobj/tests/unit_e2e_script.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_eslice/bin/mutate.exe src/app/script.c build_eslice e2e_parse_flow e2e_parse_comments_and_quotes e2e_parse_errors e2e_parse_caps e2e_parse_shot_words e2e_run_review_loop e2e_run_expect_failure e2e_run_cfop_cards e2e_run_settings_form e2e_run_restart_merge e2e_run_trainer_generate e2e_run_trainer_edge_generate e2e_run_script_guards e2e_run_shot_guards e2e_run_shot_render fuzz_script_parse
+mutate: scope=src/app/script.c files=1 sites=792 suites=16
+EXIT=2

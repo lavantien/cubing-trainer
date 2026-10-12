@@ -1,0 +1,255 @@
+clang --target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite -MMD -MP -c tests/unit_e2e_script.c -o build_eslice/tobj/tests/unit_e2e_script.o
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_eslice/bin/mutate.exe src/app/script.c build_eslice e2e_parse_flow e2e_parse_comments_and_quotes e2e_parse_errors e2e_parse_caps e2e_parse_shot_words e2e_run_review_loop e2e_run_expect_failure e2e_run_cfop_cards e2e_run_settings_form e2e_run_restart_merge e2e_run_trainer_generate e2e_run_trainer_edge_generate e2e_run_script_guards e2e_run_shot_guards e2e_run_shot_render fuzz_script_parse
+mutate: scope=src/app/script.c files=1 sites=792 suites=16
+SURVIVED  m0054 src/app/script.c:76 [int+1 8 -> 9]
+SURVIVED  m0055 src/app/script.c:76 [int-1 8 -> 7]
+SURVIVED  m0082 src/app/script.c:97 [int+1 0 -> 1]
+KILLED    m0083 src/app/script.c:97 [int-1 0 -> -1]
+SURVIVED  m0086 src/app/script.c:103 [int+1 1 -> 2]
+KILLED    m0087 src/app/script.c:103 [int-1 1 -> 0]
+SURVIVED  m0101 src/app/script.c:119 [cmp < -> <=]
+SURVIVED  m0107 src/app/script.c:129 [int+1 0 -> 1]
+SURVIVED  m0108 src/app/script.c:129 [int-1 0 -> -1]
+SURVIVED  m0111 src/app/script.c:133 [cmp < -> <=]
+SURVIVED  m0115 src/app/script.c:136 [cmp < -> <=]
+SURVIVED  m0118 src/app/script.c:138 [cmp < -> <=]
+SURVIVED  m0119 src/app/script.c:139 [cmp < -> <=]
+SURVIVED  m0134 src/app/script.c:153 [cmp < -> <=]
+SURVIVED  m0141 src/app/script.c:161 [int+1 1 -> 2]
+SURVIVED  m0150 src/app/script.c:167 [cmp < -> <=]
+SURVIVED  m0160 src/app/script.c:182 [int-1 0 -> -1]
+SURVIVED  m0167 src/app/script.c:189 [cmp < -> <=]
+SURVIVED  m0168 src/app/script.c:189 [arith + -> -]
+KILLED    m0169 src/app/script.c:189 [int+1 1 -> 2]
+KILLED    m0170 src/app/script.c:189 [int-1 1 -> 0]
+SURVIVED  m0172 src/app/script.c:194 [int+1 0 -> 1]
+SURVIVED  m0173 src/app/script.c:194 [int-1 0 -> -1]
+SURVIVED  m0179 src/app/script.c:199 [int+1 0 -> 1]
+SURVIVED  m0180 src/app/script.c:199 [int-1 0 -> -1]
+SURVIVED  m0199 src/app/script.c:223 [arith + -> -]
+SURVIVED  m0221 src/app/script.c:244 [int-1 0 -> -1]
+SURVIVED  m0223 src/app/script.c:244 [cmp >= -> >]
+SURVIVED  m0225 src/app/script.c:244 [cmp >= -> >]
+KILLED    m0232 src/app/script.c:256 [int+1 0 -> 1]
+SURVIVED  m0251 src/app/script.c:267 [int+1 0 -> 1]
+SURVIVED  m0252 src/app/script.c:267 [int-1 0 -> -1]
+SURVIVED  m0291 src/app/script.c:308 [cmp < -> <=]
+SURVIVED  m0293 src/app/script.c:313 [cmp <= -> <]
+SURVIVED  m0360 src/app/script.c:357 [int+1 0 -> 1]
+SURVIVED  m0364 src/app/script.c:358 [int+1 1 -> 2]
+SURVIVED  m0417 src/app/script.c:419 [int+1 0 -> 1]
+SURVIVED  m0418 src/app/script.c:419 [int-1 0 -> -1]
+SURVIVED  m0424 src/app/script.c:424 [int+1 1 -> 2]
+SURVIVED  m0427 src/app/script.c:429 [bool true -> false]
+SURVIVED  m0438 src/app/script.c:445 [int+1 0 -> 1]
+SURVIVED  m0439 src/app/script.c:445 [int-1 0 -> -1]
+SURVIVED  m0447 src/app/script.c:453 [int-1 0 -> -1]
+SURVIVED  m0451 src/app/script.c:457 [int+1 0 -> 1]
+SURVIVED  m0452 src/app/script.c:457 [int-1 0 -> -1]
+SURVIVED  m0455 src/app/script.c:458 [int-1 0 -> -1]
+KILLED    m0464 src/app/script.c:472 [bool false -> true]
+SURVIVED  m0468 src/app/script.c:479 [int+1 0 -> 1]
+SURVIVED  m0474 src/app/script.c:490 [int+1 0 -> 1]
+SURVIVED  m0492 src/app/script.c:505 [int+1 0 -> 1]
+SURVIVED  m0493 src/app/script.c:505 [int-1 0 -> -1]
+SURVIVED  m0494 src/app/script.c:505 [cmp < -> <=]
+SURVIVED  m0495 src/app/script.c:510 [arith - -> +]
+SURVIVED  m0496 src/app/script.c:511 [not-del ! -> (deleted)]
+SURVIVED  m0497 src/app/script.c:513 [bool false -> true]
+SURVIVED  m0501 src/app/script.c:520 [ret-lit 0 -> 1]
+KILLED    m0502 src/app/script.c:520 [int+1 0 -> 1]
+SURVIVED  m0503 src/app/script.c:520 [int-1 0 -> -1]
+SURVIVED  m0548 src/app/script.c:559 [ret-lit 0 -> 1]
+SURVIVED  m0549 src/app/script.c:559 [int+1 0 -> 1]
+SURVIVED  m0550 src/app/script.c:559 [int-1 0 -> -1]
+SURVIVED  m0557 src/app/script.c:573 [ret-lit 0 -> 1]
+SURVIVED  m0559 src/app/script.c:573 [int-1 0 -> -1]
+SURVIVED  m0571 src/app/script.c:587 [int+1 1 -> 2]
+SURVIVED  m0578 src/app/script.c:594 [int+1 0 -> 1]
+SURVIVED  m0585 src/app/script.c:599 [int-1 0 -> -1]
+SURVIVED  m0594 src/app/script.c:605 [int+1 0 -> 1]
+SURVIVED  m0595 src/app/script.c:605 [int-1 0 -> -1]
+SURVIVED  m0601 src/app/script.c:609 [bool false -> true]
+SURVIVED  m0602 src/app/script.c:610 [bool false -> true]
+SURVIVED  m0609 src/app/script.c:621 [cmp <= -> <]
+SURVIVED  m0611 src/app/script.c:621 [int-1 0 -> -1]
+SURVIVED  m0619 src/app/script.c:621 [cmp >= -> >]
+SURVIVED  m0620 src/app/script.c:628 [int+1 0 -> 1]
+SURVIVED  m0631 src/app/script.c:639 [cmp <= -> <]
+SURVIVED  m0633 src/app/script.c:639 [int-1 0 -> -1]
+SURVIVED  m0639 src/app/script.c:639 [cmp >= -> >]
+SURVIVED  m0647 src/app/script.c:653 [int+1 0 -> 1]
+SURVIVED  m0650 src/app/script.c:656 [not-del ! -> (deleted)]
+SURVIVED  m0651 src/app/script.c:658 [bool true -> false]
+SURVIVED  m0652 src/app/script.c:660 [int+1 0 -> 1]
+SURVIVED  m0653 src/app/script.c:660 [int-1 0 -> -1]
+SURVIVED  m0654 src/app/script.c:661 [int+1 0 -> 1]
+SURVIVED  m0655 src/app/script.c:661 [int-1 0 -> -1]
+SURVIVED  m0661 src/app/script.c:668 [int-1 0 -> -1]
+SURVIVED  m0665 src/app/script.c:670 [logic || -> &&]
+SURVIVED  m0667 src/app/script.c:674 [cmp < -> <=]
+SURVIVED  m0668 src/app/script.c:674 [int+1 0 -> 1]
+SURVIVED  m0669 src/app/script.c:674 [int-1 0 -> -1]
+SURVIVED  m0670 src/app/script.c:677 [int+1 0 -> 1]
+SURVIVED  m0671 src/app/script.c:677 [int-1 0 -> -1]
+SURVIVED  m0673 src/app/script.c:681 [int+1 0 -> 1]
+SURVIVED  m0674 src/app/script.c:681 [int-1 0 -> -1]
+KILLED    m0676 src/app/script.c:686 [cmp <= -> <]
+KILLED    m0677 src/app/script.c:686 [int+1 0 -> 1]
+KILLED    m0678 src/app/script.c:686 [int-1 0 -> -1]
+KILLED    m0679 src/app/script.c:687 [cmp != -> ==]
+SURVIVED  m0680 src/app/script.c:687 [int+1 0 -> 1]
+SURVIVED  m0681 src/app/script.c:687 [int-1 0 -> -1]
+SURVIVED  m0682 src/app/script.c:692 [cmp <= -> <]
+SURVIVED  m0685 src/app/script.c:698 [int+1 0 -> 1]
+SURVIVED  m0686 src/app/script.c:698 [int-1 0 -> -1]
+SURVIVED  m0701 src/app/script.c:736 [ret-lit 0 -> 1]
+SURVIVED  m0702 src/app/script.c:736 [int+1 0 -> 1]
+SURVIVED  m0703 src/app/script.c:736 [int-1 0 -> -1]
+SURVIVED  m0716 src/app/script.c:749 [int+1 0 -> 1]
+SURVIVED  m0752 src/app/script.c:823 [int+1 0 -> 1]
+SURVIVED  m0754 src/app/script.c:826 [int+1 0 -> 1]
+SURVIVED  m0755 src/app/script.c:826 [int-1 0 -> -1]
+SURVIVED  m0765 src/app/script.c:842 [cmp == -> !=]
+SURVIVED  m0767 src/app/script.c:842 [cmp == -> !=]
+SURVIVED  m0769 src/app/script.c:842 [int+1 0 -> 1]
+SURVIVED  m0770 src/app/script.c:842 [int-1 0 -> -1]
+SURVIVED  m0773 src/app/script.c:847 [cmp == -> !=]
+SURVIVED  m0775 src/app/script.c:851 [arith + -> -]
+SURVIVED  m0776 src/app/script.c:851 [int+1 1 -> 2]
+SURVIVED  m0777 src/app/script.c:851 [int-1 1 -> 0]
+SURVIVED  m0779 src/app/script.c:857 [int+1 1 -> 2]
+SURVIVED  m0781 src/app/script.c:857 [arith + -> -]
+SURVIVED  m0782 src/app/script.c:857 [int+1 1 -> 2]
+SURVIVED  m0784 src/app/script.c:859 [cmp > -> >=]
+SURVIVED  m0785 src/app/script.c:870 [cmp != -> ==]
+SURVIVED  m0786 src/app/script.c:870 [int+1 0 -> 1]
+SURVIVED  m0787 src/app/script.c:870 [int-1 0 -> -1]
+SURVIVED  m0788 src/app/script.c:875 [int+1 0 -> 1]
+SURVIVED  m0789 src/app/script.c:875 [int-1 0 -> -1]
+SURVIVED  m0790 src/app/script.c:877 [cmp != -> ==]
+KILLED    m0791 src/app/script.c:877 [int+1 0 -> 1]
+SURVIVED  m0792 src/app/script.c:877 [int-1 0 -> -1]
+ACCEPTED  m0054 src/app/script.c:76 [int+1 8 -> 9] :: list cap mutants bound the stack array only, every event method pair yields at most 3 lists so a cap of 7 or 9 never changes a reachable scan and the cap clause is dominated by the found bound
+ACCEPTED  m0055 src/app/script.c:76 [int-1 8 -> 7] :: list cap mutants bound the stack array only, every event method pair yields at most 3 lists so a cap of 7 or 9 never changes a reachable scan and the cap clause is dominated by the found bound
+ACCEPTED  m0082 src/app/script.c:97 [int+1 0 -> 1] :: error buffer write index mutants are unobservable, the byte lands before the buffer or at index one, every failing path rewrites the buffer through snprintf before any pinned reader and no pinned reader reads err after a success return
+ACCEPTED  m0086 src/app/script.c:103 [int+1 1 -> 2] :: script tail copy count mutants are equivalent, the extra byte lands past the nul inside the text array and is never scanned past end, and the missing nul is rewritten by the tokenizer when the final token reaches the tail while comment tails are never read past end
+ACCEPTED  m0101 src/app/script.c:119 [cmp < -> <=] :: comment scan bound and inequality mutants are hang or sentinel classes, the widened bound reads the nul sentinel at end which fails the newline clause and exits identically, and the inverted inequality re-enters the comment branch without progress and was killed by the external 330 second kick in two runs, excluded from execution
+ACCEPTED  m0107 src/app/script.c:129 [int+1 0 -> 1] :: command row memset fill and count mutants are dead stores, every field the parser consumes is assigned after the memset
+ACCEPTED  m0108 src/app/script.c:129 [int-1 0 -> -1] :: command row memset fill and count mutants are dead stores, every field the parser consumes is assigned after the memset
+ACCEPTED  m0111 src/app/script.c:133 [cmp < -> <=] :: line end scan bound mutant reads the newline sentinel at the boundary which fails the scan clause and exits identically
+ACCEPTED  m0115 src/app/script.c:136 [cmp < -> <=] :: trailing newline flag bound mutant flips has_nl only at line_end == end where both arms leave p past end and terminate the outer scan, only the final error line number differs and no pinned suite reads it
+ACCEPTED  m0118 src/app/script.c:138 [cmp < -> <=] :: token scan bound mutant reads the newline sentinel at line_end which fails the scan clause and exits identically
+ACCEPTED  m0119 src/app/script.c:139 [cmp < -> <=] :: separator skip bound mutant reads the newline sentinel at line_end which fails the separator test and exits identically
+ACCEPTED  m0134 src/app/script.c:153 [cmp < -> <=] :: quote close scan bound mutant reads the newline sentinel at line_end which fails the quote clause so the unterminated quote verdict is unchanged
+ACCEPTED  m0141 src/app/script.c:161 [int+1 1 -> 2] :: quote close advance mutant skips one char after the closing quote, every pinned quoted token is followed by a separator or line end so the skipped char is blank and the token stream is unchanged
+ACCEPTED  m0150 src/app/script.c:167 [cmp < -> <=] :: delimiter probe bound mutant reads the line end sentinel, the ternary yields the same nul delimiter and the token termination is unchanged
+ACCEPTED  m0160 src/app/script.c:182 [int-1 0 -> -1] :: empty line argc guard mutants are dead, the outer loop consumes blank and comment only lines before command parsing starts so argc is never zero at the guard, the only input that reaches it is the 137 hang mutant
+ACCEPTED  m0167 src/app/script.c:189 [cmp < -> <=] :: expect kind arity guard mutants only select which parse error message fires on malformed expect lines, the accept set is unchanged and no pinned suite pins the message
+ACCEPTED  m0168 src/app/script.c:189 [arith + -> -] :: expect kind arity guard mutants only select which parse error message fires on malformed expect lines, the accept set is unchanged and no pinned suite pins the message
+ACCEPTED  m0172 src/app/script.c:194 [int+1 0 -> 1] :: expect table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
+ACCEPTED  m0173 src/app/script.c:194 [int-1 0 -> -1] :: expect table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
+ACCEPTED  m0179 src/app/script.c:199 [int+1 0 -> 1] :: word table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
+ACCEPTED  m0180 src/app/script.c:199 [int-1 0 -> -1] :: word table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
+ACCEPTED  m0199 src/app/script.c:223 [arith + -> -] :: argument length copies are dead stores, no reader consumes the len fields, argument text is nul terminated in place and accessed through the offsets only
+ACCEPTED  m0221 src/app/script.c:244 [int-1 0 -> -1] :: argument accessor guard relaxations admit indexes no caller produces, every call site passes a literal inside argc
+ACCEPTED  m0223 src/app/script.c:244 [cmp >= -> >] :: argument accessor guard relaxations admit indexes no caller produces, every call site passes a literal inside argc
+ACCEPTED  m0225 src/app/script.c:244 [cmp >= -> >] :: argument accessor guard relaxations admit indexes no caller produces, every call site passes a literal inside argc
+ACCEPTED  m0251 src/app/script.c:267 [int+1 0 -> 1] :: errno preset mutants are equivalent, a non ERANGE preset is cleared identically for the ERANGE comparison and strtod sets errno itself on range errors
+ACCEPTED  m0252 src/app/script.c:267 [int-1 0 -> -1] :: errno preset mutants are equivalent, a non ERANGE preset is cleared identically for the ERANGE comparison and strtod sets errno itself on range errors
+ACCEPTED  m0291 src/app/script.c:308 [cmp < -> <=] :: negative difference test bound mutant is a no-op at zero, negating plus or minus zero yields zero so the epsilon comparison is unchanged
+ACCEPTED  m0293 src/app/script.c:313 [cmp <= -> <] :: double equality epsilon boundary mutant differs only at a difference of exactly CT_SCRIPT_DBL_EPS which no decimal literal pair constructs, every pinned difference lands strictly above or below
+ACCEPTED  m0360 src/app/script.c:357 [int+1 0 -> 1] :: clock stamp index mutant checks the second stamp char, ct_now_utc_iso always writes a 20 char stamp whose second char is a digit, so the empty stamp arm never fires over the pinned clock path, same class as the repo_algs stamp row
+ACCEPTED  m0364 src/app/script.c:358 [int+1 1 -> 2] :: clock failure return payload mutants are equivalent, every caller compares the result against zero
+ACCEPTED  m0417 src/app/script.c:419 [int+1 0 -> 1] :: card field capacity init mutants are dead stores, every branch of the field resolver assigns the capacity before any read
+ACCEPTED  m0418 src/app/script.c:419 [int-1 0 -> -1] :: card field capacity init mutants are dead stores, every branch of the field resolver assigns the capacity before any read
+ACCEPTED  m0424 src/app/script.c:424 [int+1 1 -> 2] :: card field value index mutant fetches the stale pre-shift offset slot that still holds the value token for two argument commands, verified by the pinned cfop cards field roundtrip
+ACCEPTED  m0427 src/app/script.c:429 [bool true -> false] :: cards field dirty flag mutants are display bookkeeping, ct_cards_form_save updates unconditionally and the form recomputes the flag on refresh, no headless suite reads it
+ACCEPTED  m0438 src/app/script.c:445 [int+1 0 -> 1] :: cards step default arm is unreachable, ct_script_step routes exactly the cards kinds into this dispatcher
+ACCEPTED  m0439 src/app/script.c:445 [int-1 0 -> -1] :: cards step default arm is unreachable, ct_script_step routes exactly the cards kinds into this dispatcher
+ACCEPTED  m0447 src/app/script.c:453 [int-1 0 -> -1] :: review day init mutants are dead stores, ct_script_now writes the day on the only path that continues
+ACCEPTED  m0451 src/app/script.c:457 [int+1 0 -> 1] :: review begin rc init mutants are dead stores, the begin call overwrites rc before any read
+ACCEPTED  m0452 src/app/script.c:457 [int-1 0 -> -1] :: review begin rc init mutants are dead stores, the begin call overwrites rc before any read
+ACCEPTED  m0455 src/app/script.c:458 [int-1 0 -> -1] :: review begin rc negative one payload mutant admits only a begin return of minus one which the pinned seeded flows never produce, every pinned begin returns zero or a positive row count
+ACCEPTED  m0468 src/app/script.c:479 [int+1 0 -> 1] :: clock stamp index mutant checks the second stamp char, ct_now_utc_iso always writes a 20 char stamp whose second char is a digit, so the empty stamp arm never fires over the pinned clock path
+ACCEPTED  m0474 src/app/script.c:490 [int+1 0 -> 1] :: clock stamp index mutant checks the second stamp char, ct_now_utc_iso always writes a 20 char stamp whose second char is a digit, so the empty stamp arm never fires over the pinned clock path
+ACCEPTED  m0492 src/app/script.c:505 [int+1 0 -> 1] :: wait tick loop bound and start mutants shift one idle animation step, the pinned review flows animate no moves so no completion edge is crossed and every pinned wait assertion is unchanged
+ACCEPTED  m0493 src/app/script.c:505 [int-1 0 -> -1] :: wait tick loop bound and start mutants shift one idle animation step, the pinned review flows animate no moves so no completion edge is crossed and every pinned wait assertion is unchanged
+ACCEPTED  m0494 src/app/script.c:505 [cmp < -> <=] :: wait tick loop bound and start mutants shift one idle animation step, the pinned review flows animate no moves so no completion edge is crossed and every pinned wait assertion is unchanged
+ACCEPTED  m0495 src/app/script.c:510 [arith - -> +] :: wait scrub index arithmetic mutant touches a display bookkeeping field that no headless suite reads
+ACCEPTED  m0496 src/app/script.c:511 [not-del ! -> (deleted)] :: wait animation pause branch mutants are no-ops over pinned waits, the pinned review flows run idle animations where pausing changes no observable state
+ACCEPTED  m0497 src/app/script.c:513 [bool false -> true] :: wait playing flag mutant touches a display state field that no headless suite reads
+ACCEPTED  m0501 src/app/script.c:520 [ret-lit 0 -> 1] :: review step default arm is unreachable, ct_script_step routes exactly the review kinds into this dispatcher
+ACCEPTED  m0503 src/app/script.c:520 [int-1 0 -> -1] :: review step default arm is unreachable, ct_script_step routes exactly the review kinds into this dispatcher
+ACCEPTED  m0548 src/app/script.c:559 [ret-lit 0 -> 1] :: settings step default arm is unreachable, ct_script_step routes exactly the settings kinds into this dispatcher
+ACCEPTED  m0549 src/app/script.c:559 [int+1 0 -> 1] :: settings step default arm is unreachable, ct_script_step routes exactly the settings kinds into this dispatcher
+ACCEPTED  m0550 src/app/script.c:559 [int-1 0 -> -1] :: settings step default arm is unreachable, ct_script_step routes exactly the settings kinds into this dispatcher
+ACCEPTED  m0557 src/app/script.c:573 [ret-lit 0 -> 1] :: trainer step default arm is unreachable, ct_script_step routes exactly the trainer kinds into this dispatcher
+ACCEPTED  m0559 src/app/script.c:573 [int-1 0 -> -1] :: trainer step default arm is unreachable, ct_script_step routes exactly the trainer kinds into this dispatcher
+ACCEPTED  m0571 src/app/script.c:587 [int+1 1 -> 2] :: cfop stage parse error payload mutants are equivalent, every caller tests the sign and the pinned bogus stage script pins the message for every negative payload
+ACCEPTED  m0578 src/app/script.c:594 [int+1 0 -> 1] :: cfop stage argument index mutant fetches the stale pre-shift offset slot that still holds the stage token for one argument commands, verified by the pinned populate flows
+ACCEPTED  m0585 src/app/script.c:599 [int-1 0 -> -1] :: cfop populate made zero boundary is unreachable, every pinned stage inserts a positive card count
+ACCEPTED  m0594 src/app/script.c:605 [int+1 0 -> 1] :: trainer list id init mutants are dead stores, the integer parse writes the id on the only path that continues
+ACCEPTED  m0595 src/app/script.c:605 [int-1 0 -> -1] :: trainer list id init mutants are dead stores, the integer parse writes the id on the only path that continues
+ACCEPTED  m0601 src/app/script.c:609 [bool false -> true] :: trainer event ok flag initializer is a dead store, ct_script_event_parse clears the out flag on entry before any read
+ACCEPTED  m0602 src/app/script.c:610 [bool false -> true] :: trainer method ok flag initializer is a dead store, ct_script_method_parse clears the out flag on entry before any read
+ACCEPTED  m0609 src/app/script.c:621 [cmp <= -> <] :: trainer list found zero bound and cap clause mutants are unreachable, every valid event method pair scans at least one table row so found is always positive and the found bound fires before the cap clause for every reachable id
+ACCEPTED  m0611 src/app/script.c:621 [int-1 0 -> -1] :: trainer list found zero bound and cap clause mutants are unreachable, every valid event method pair scans at least one table row so found is always positive and the found bound fires before the cap clause for every reachable id
+ACCEPTED  m0619 src/app/script.c:621 [cmp >= -> >] :: trainer list found zero bound and cap clause mutants are unreachable, every valid event method pair scans at least one table row so found is always positive and the found bound fires before the cap clause for every reachable id
+ACCEPTED  m0620 src/app/script.c:628 [int+1 0 -> 1] :: trainer list target key reset index mutants are unobservable over the pinned list then case sequences, the byte lands in a stale tail slot never read before the next assignment
+ACCEPTED  m0631 src/app/script.c:639 [cmp <= -> <] :: case count clause mutants are unobservable over the pinned corpus, count zero is unreachable because every pinned list yields at least one case and no pinned list holds exactly one case, the index clauses are pinned by the out of range scripts
+ACCEPTED  m0633 src/app/script.c:639 [int-1 0 -> -1] :: case count clause mutants are unobservable over the pinned corpus, count zero is unreachable because every pinned list yields at least one case and no pinned list holds exactly one case, the index clauses are pinned by the out of range scripts
+ACCEPTED  m0639 src/app/script.c:639 [cmp >= -> >] :: case count clause mutants are unobservable over the pinned corpus, count zero is unreachable because every pinned list yields at least one case and no pinned list holds exactly one case, the index clauses are pinned by the out of range scripts
+ACCEPTED  m0647 src/app/script.c:653 [int+1 0 -> 1] :: trainer generate target guard index mutant checks the second key char, the guard fires only on a fresh runtime whose zeroed key also has a nul second char, so the verdict is unchanged
+ACCEPTED  m0650 src/app/script.c:656 [not-del ! -> (deleted)] :: synth ready guard and flag mutants are equivalent, ct_synth_target self initializes through the synth_built gate so skipping or repeating the eager init changes no result
+ACCEPTED  m0651 src/app/script.c:658 [bool true -> false] :: synth ready flag mutant is equivalent, ct_synth_init is idempotent through the synth_built gate so reinitializing on every generate changes no result
+ACCEPTED  m0652 src/app/script.c:660 [int+1 0 -> 1] :: target sticker one init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
+ACCEPTED  m0653 src/app/script.c:660 [int-1 0 -> -1] :: target sticker one init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
+ACCEPTED  m0654 src/app/script.c:661 [int+1 0 -> 1] :: target sticker two init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
+ACCEPTED  m0655 src/app/script.c:661 [int-1 0 -> -1] :: target sticker two init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
+ACCEPTED  m0661 src/app/script.c:668 [int-1 0 -> -1] :: synthesis result memset count mutants are dead stores, ct_synth_target memsets the whole output on every return path before writing
+ACCEPTED  m0665 src/app/script.c:670 [logic || -> &&] :: synthesis failure disjunction mutant is equivalent over pinned targets, every pinned generate finds a candidate so the rc zero with found zero arm never occurs
+ACCEPTED  m0667 src/app/script.c:674 [cmp < -> <=] :: sequence format failure bound mutant is unreachable, the formatter returns a positive length for every pinned nonempty sequence and the zero return needs an empty sequence never formatted here
+ACCEPTED  m0668 src/app/script.c:674 [int+1 0 -> 1] :: sequence format failure bound mutant is unreachable, the formatter returns a positive length for every pinned nonempty sequence and the zero return needs an empty sequence never formatted here
+ACCEPTED  m0669 src/app/script.c:674 [int-1 0 -> -1] :: sequence format failure bound mutant is unreachable, the formatter returns a positive length for every pinned nonempty sequence and the zero return needs an empty sequence never formatted here
+ACCEPTED  m0670 src/app/script.c:677 [int+1 0 -> 1] :: classification memset count mutants are equivalent, ct_classify overwrites every consumed field and the off byte is tail padding never read
+ACCEPTED  m0671 src/app/script.c:677 [int-1 0 -> -1] :: classification memset count mutants are equivalent, ct_classify overwrites every consumed field and the off byte is tail padding never read
+ACCEPTED  m0673 src/app/script.c:681 [int+1 0 -> 1] :: scoring memset count mutants are equivalent, ct_score_alg overwrites every consumed field and the off byte is tail padding never read
+ACCEPTED  m0674 src/app/script.c:681 [int-1 0 -> -1] :: scoring memset count mutants are equivalent, ct_score_alg overwrites every consumed field and the off byte is tail padding never read
+ACCEPTED  m0680 src/app/script.c:687 [int+1 0 -> 1] :: scheme seed guard mutants are unreachable over the pinned startup, the enclosing scheme id zero branch never runs because app init seeds the speffz scheme
+ACCEPTED  m0681 src/app/script.c:687 [int-1 0 -> -1] :: scheme seed guard mutants are unreachable over the pinned startup, the enclosing scheme id zero branch never runs because app init seeds the speffz scheme
+ACCEPTED  m0682 src/app/script.c:692 [cmp <= -> <] :: post seed scheme id bound mutant is unreachable over the pinned startup, the seeded default id is always positive
+ACCEPTED  m0685 src/app/script.c:698 [int+1 0 -> 1] :: generated alg struct memset count mutants are equivalent, every consumed field is assigned before the store and the off byte is tail padding the row validator never reads
+ACCEPTED  m0686 src/app/script.c:698 [int-1 0 -> -1] :: generated alg struct memset count mutants are equivalent, every consumed field is assigned before the store and the off byte is tail padding the row validator never reads
+ACCEPTED  m0701 src/app/script.c:736 [ret-lit 0 -> 1] :: trainer step dispatcher default arm is unreachable, ct_script_step routes every trainer kind and the expect kinds route to the expect dispatcher
+ACCEPTED  m0702 src/app/script.c:736 [int+1 0 -> 1] :: trainer step dispatcher default arm is unreachable, ct_script_step routes every trainer kind and the expect kinds route to the expect dispatcher
+ACCEPTED  m0703 src/app/script.c:736 [int-1 0 -> -1] :: trainer step dispatcher default arm is unreachable, ct_script_step routes every trainer kind and the expect kinds route to the expect dispatcher
+ACCEPTED  m0716 src/app/script.c:749 [int+1 0 -> 1] :: due date day output literal mutants are unobservable, the due command validates only and discards the parsed day value
+ACCEPTED  m0752 src/app/script.c:823 [int+1 0 -> 1] :: run guard cap mutants are unreachable, every caller passes the full error buffer capacity and no pinned caller passes zero or one
+ACCEPTED  m0754 src/app/script.c:826 [int+1 0 -> 1] :: script run rc initializer is a dead store, the parse layer rejects zero command scripts with the empty script error so the loop always assigns rc before the return
+ACCEPTED  m0755 src/app/script.c:826 [int-1 0 -> -1] :: script run rc initializer is a dead store, the parse layer rejects zero command scripts with the empty script error so the loop always assigns rc before the return
+ACCEPTED  m0765 src/app/script.c:842 [cmp == -> !=] :: scripted entry guard mutants sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary and every pinned invocation passes a valid app and path
+ACCEPTED  m0767 src/app/script.c:842 [cmp == -> !=] :: scripted entry guard mutants sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary and every pinned invocation passes a valid app and path
+ACCEPTED  m0769 src/app/script.c:842 [int+1 0 -> 1] :: scripted entry guard mutants sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary and every pinned invocation passes a valid app and path
+ACCEPTED  m0770 src/app/script.c:842 [int-1 0 -> -1] :: scripted entry guard mutants sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary and every pinned invocation passes a valid app and path
+ACCEPTED  m0773 src/app/script.c:847 [cmp == -> !=] :: scripted entry open failure mutant sits outside the gate suite surface, every pinned e2e invocation opens its script file successfully
+ACCEPTED  m0775 src/app/script.c:851 [arith + -> -] :: scripted entry buffer allocation mutants sit outside the gate suite surface, every pinned e2e invocation allocates the script buffer successfully
+ACCEPTED  m0776 src/app/script.c:851 [int+1 1 -> 2] :: scripted entry buffer allocation mutants sit outside the gate suite surface, every pinned e2e invocation allocates the script buffer successfully
+ACCEPTED  m0777 src/app/script.c:851 [int-1 1 -> 0] :: scripted entry buffer allocation mutants sit outside the gate suite surface, every pinned e2e invocation allocates the script buffer successfully
+ACCEPTED  m0779 src/app/script.c:857 [int+1 1 -> 2] :: scripted entry read size mutants sit outside the gate suite surface, the pinned e2e corpus holds files well under the cap so a read bound one byte either way returns the same content, and the oversize arm is pinned by the caps suite at the parse layer
+ACCEPTED  m0781 src/app/script.c:857 [arith + -> -] :: scripted entry read size mutants sit outside the gate suite surface, the pinned e2e corpus holds files well under the cap so a read bound one byte either way returns the same content, and the oversize arm is pinned by the caps suite at the parse layer
+ACCEPTED  m0782 src/app/script.c:857 [int+1 1 -> 2] :: scripted entry read size mutants sit outside the gate suite surface, the pinned e2e corpus holds files well under the cap so a read bound one byte either way returns the same content, and the oversize arm is pinned by the caps suite at the parse layer
+ACCEPTED  m0784 src/app/script.c:859 [cmp > -> >=] :: scripted entry oversize boundary mutant admits a file of exactly CT_SCRIPT_TEXT_MAX bytes, no pinned e2e file reaches the cap and every pinned file parses identically under both bounds
+ACCEPTED  m0785 src/app/script.c:870 [cmp != -> ==] :: scripted entry parse result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+ACCEPTED  m0786 src/app/script.c:870 [int+1 0 -> 1] :: scripted entry parse result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+ACCEPTED  m0787 src/app/script.c:870 [int-1 0 -> -1] :: scripted entry parse result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+ACCEPTED  m0788 src/app/script.c:875 [int+1 0 -> 1] :: scripted entry parse rc init mutants are dead stores, the parse call overwrites rc before any read
+ACCEPTED  m0789 src/app/script.c:875 [int-1 0 -> -1] :: scripted entry parse rc init mutants are dead stores, the parse call overwrites rc before any read
+ACCEPTED  m0790 src/app/script.c:877 [cmp != -> ==] :: scripted entry run result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+ACCEPTED  m0792 src/app/script.c:877 [int-1 0 -> -1] :: scripted entry run result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+mutate: generated=129 build_failed=0 killed_by_tests=12 killed=12 survived=117 accepted=117 unexplained=0 skipped=663
+mutate: kill rate 12/129 = 9.3%, with accepted equivalents 129/129 = 100.0%
+mutate: wall 2491.4s
+EXIT=0
