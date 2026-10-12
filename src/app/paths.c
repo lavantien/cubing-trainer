@@ -147,6 +147,30 @@ int ct_migrations_dir(char *out, unsigned cap) {
     return ct_exe_resource_dir(CT_MIGRATIONS_EXE_REL, out, cap);
 }
 
+int ct_font_path(char *out, unsigned cap) {
+    if (out == NULL || cap == 0)
+        return -1;
+    const char *override = getenv(CT_UI_FONT_ENV);
+    if (override != NULL && override[0] != '\0') {
+        int written = snprintf(out, cap, "%s", override);
+        if (written < 0 || (unsigned)written >= cap) {
+            fprintf(stderr, "cubing-trainer: %s is too long\n", CT_UI_FONT_ENV);
+            return -1;
+        }
+        return 0;
+    }
+    char dir[CT_APP_EXE_PATH_MAX];
+    if (ct_exe_resource_dir(CT_UI_FONT_EXE_REL, dir, (unsigned)sizeof dir) != 0) {
+        return -1;
+    }
+    int written = snprintf(out, cap, "%s/%s", dir, CT_UI_FONT_NAME);
+    if (written < 0 || (unsigned)written >= cap) {
+        fprintf(stderr, "cubing-trainer: font path too long\n");
+        return -1;
+    }
+    return 0;
+}
+
 int ct_data_dir(const char *dir_name, char *out, unsigned cap) {
     if (out == NULL || cap == 0)
         return -1;

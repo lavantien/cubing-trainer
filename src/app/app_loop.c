@@ -63,6 +63,11 @@ void ct_app_run(ct_app *app) {
     }
     InitWindow((int)app->cfg.window.width, (int)app->cfg.window.height, "cubing-trainer");
     SetTargetFPS((int)app->cfg.window.target_fps);
+    char font_path[CT_APP_EXE_PATH_MAX];
+    if (ct_font_path(font_path, (unsigned)sizeof font_path) != 0) {
+        font_path[0] = '\0';
+    }
+    ct_ui_theme_load(font_path);
     while (app->running && !WindowShouldClose()) {
         app->acc += GetFrameTime();
         double catchup_cap =
@@ -78,6 +83,7 @@ void ct_app_run(ct_app *app) {
         ct_ui_draw(app);
         EndDrawing();
     }
+    ct_ui_theme_release();
     CloseWindow();
 }
 

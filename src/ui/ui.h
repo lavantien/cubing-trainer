@@ -3,6 +3,8 @@
 
 #include <limits.h>
 
+#include "raylib.h"
+
 #include "app/app.h"
 #include "engine/cube.h"
 #include "packs/packs.h"
@@ -16,6 +18,10 @@
 
 void ct_ui_update(ct_app *app);
 void ct_ui_draw(ct_app *app);
+
+bool ct_ui_theme_load(const char *font_path);
+Font ct_ui_font(void);
+void ct_ui_theme_release(void);
 
 enum { CT_CARDS_PAGE = (1 << 4) };
 

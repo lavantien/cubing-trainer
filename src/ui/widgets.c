@@ -3,6 +3,95 @@
 #include <limits.h>
 #include <math.h>
 #include <stddef.h>
+#include <stdio.h>
+
+#include "config/config.h"
+#include "raygui.h"
+#include "ui/ui.h"
+
+static Font ct_ui_font_state;
+static bool ct_ui_font_owned;
+
+static int ct_ui_font_codepoints(int *out, int cap) {
+    int n = 0;
+    for (int c = CT_UI_FONT_ASCII_FIRST; c <= CT_UI_FONT_ASCII_LAST && n < cap; c++) {
+        out[n++] = c;
+    }
+    for (int c = CT_UI_FONT_LATIN_FIRST; c <= CT_UI_FONT_LATIN_LAST && n < cap; c++) {
+        out[n++] = c;
+    }
+    for (int c = CT_UI_FONT_VIET_FIRST; c <= CT_UI_FONT_VIET_LAST && n < cap; c++) {
+        out[n++] = c;
+    }
+    return n;
+}
+
+static void ct_ui_theme_apply(void) {
+    GuiSetStyle(DEFAULT, BORDER_COLOR_NORMAL, (int)CT_UI_COLOR_BORDER);
+    GuiSetStyle(DEFAULT, BASE_COLOR_NORMAL, (int)CT_UI_COLOR_PANEL);
+    GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, (int)CT_UI_COLOR_TEXT);
+    GuiSetStyle(DEFAULT, BORDER_COLOR_FOCUSED, (int)CT_UI_COLOR_ACCENT);
+    GuiSetStyle(DEFAULT, BASE_COLOR_FOCUSED, (int)CT_UI_COLOR_ACCENT_TINT);
+    GuiSetStyle(DEFAULT, TEXT_COLOR_FOCUSED, (int)CT_UI_COLOR_TEXT);
+    GuiSetStyle(DEFAULT, BORDER_COLOR_PRESSED, (int)CT_UI_COLOR_ACCENT);
+    GuiSetStyle(DEFAULT, BASE_COLOR_PRESSED, (int)CT_UI_COLOR_ACCENT);
+    GuiSetStyle(DEFAULT, TEXT_COLOR_PRESSED, (int)CT_UI_COLOR_PANEL);
+    GuiSetStyle(DEFAULT, BORDER_COLOR_DISABLED, (int)CT_UI_COLOR_BORDER);
+    GuiSetStyle(DEFAULT, BASE_COLOR_DISABLED, (int)CT_UI_COLOR_PANEL_ACTIVE);
+    GuiSetStyle(DEFAULT, TEXT_COLOR_DISABLED, (int)CT_UI_COLOR_TEXT_DISABLED);
+    GuiSetStyle(DEFAULT, LINE_COLOR, (int)CT_UI_COLOR_BORDER);
+    GuiSetStyle(DEFAULT, BACKGROUND_COLOR, (int)CT_UI_COLOR_BG);
+    GuiSetStyle(DEFAULT, TEXT_SIZE, CT_UI_FONT_BODY);
+    GuiSetStyle(DEFAULT, TEXT_SPACING, CT_UI_TEXT_SPACING);
+    GuiSetStyle(LISTVIEW, LIST_ITEMS_HEIGHT, CT_UI_LIST_ITEM_H);
+    GuiSetStyle(LISTVIEW, LIST_ITEMS_SPACING, CT_UI_LIST_ITEM_GAP);
+    GuiSetStyle(LISTVIEW, SCROLLBAR_WIDTH, CT_UI_SCROLL_W);
+}
+
+bool ct_ui_theme_load(const char *font_path) {
+    if (ct_ui_font_owned) {
+        ct_ui_theme_release();
+    }
+    ct_ui_font_state = GetFontDefault();
+    ct_ui_font_owned = false;
+    if (font_path != NULL && font_path[0] != '\0') {
+        int codepoints[CT_UI_FONT_CODEPOINTS_MAX];
+        int count = ct_ui_font_codepoints(codepoints, CT_UI_FONT_CODEPOINTS_MAX);
+        Font loaded = LoadFontEx(font_path, CT_UI_FONT_BODY, codepoints, count);
+        if (loaded.texture.id != 0 && loaded.glyphCount > 0) {
+            ct_ui_font_state = loaded;
+            ct_ui_font_owned = true;
+            SetTextureFilter(ct_ui_font_state.texture, TEXTURE_FILTER_BILINEAR);
+        } else {
+            fprintf(stderr, "cubing-trainer: cannot load font %s, using the default font\n",
+                    font_path);
+            if (loaded.texture.id != 0) {
+                UnloadFont(loaded);
+            }
+        }
+    }
+    if (ct_ui_font_state.texture.id > 0) {
+        GuiSetFont(ct_ui_font_state);
+    }
+    ct_ui_theme_apply();
+    return ct_ui_font_owned;
+}
+
+Font ct_ui_font(void) {
+    if (ct_ui_font_state.texture.id == 0) {
+        ct_ui_font_state = GetFontDefault();
+    }
+    return ct_ui_font_state;
+}
+
+void ct_ui_theme_release(void) {
+    GuiSetFont(GetFontDefault());
+    if (ct_ui_font_owned) {
+        UnloadFont(ct_ui_font_state);
+        ct_ui_font_owned = false;
+    }
+    ct_ui_font_state = GetFontDefault();
+}
 
 enum { CT_CHART_GAP_DIV = 4 };
 

@@ -274,6 +274,27 @@ typedef enum ct_cfg_status {
 #define CT_CLASSIFY_SP9_MOVES 9
 #define CT_CLASSIFY_COLUMN_MOVES 11
 #define CT_CLASSIFY_FMT_MAX 48
+#define CT_UI_MARGIN 24
+#define CT_UI_ROW_H 48
+#define CT_UI_ROW_GAP 16
+#define CT_UI_ROW_STEP (CT_UI_ROW_H + CT_UI_ROW_GAP)
+#define CT_UI_STATUS_H 44
+#define CT_UI_BTN_H 52
+#define CT_UI_BTN_GAP 16
+#define CT_UI_LIST_ITEM_H 34
+#define CT_UI_LIST_ITEM_GAP 2
+#define CT_UI_SCROLL_W 14
+#define CT_UI_TEXT_SPACING 1
+#define CT_UI_FIELD_LABEL_W_DIV 8
+#define CT_UI_COL_DIV 5
+#define CT_UI_FONT_ASCII_FIRST 32
+#define CT_UI_FONT_ASCII_LAST 126
+#define CT_UI_FONT_LATIN_FIRST 0x00C0
+#define CT_UI_FONT_LATIN_LAST 0x024F
+#define CT_UI_FONT_VIET_FIRST 0x1EA0
+#define CT_UI_FONT_VIET_LAST 0x1EF9
+#define CT_UI_FONT_CODEPOINTS_MAX 576
+#define CT_UI_PATH_SEP '/'
 
 static inline unsigned ct_move_face_from_char(char c) {
     switch (c) {

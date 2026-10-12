@@ -7,6 +7,7 @@
 #include <sqlite3.h>
 
 #include "../src/app/app.h"
+#include "../src/app/paths.h"
 #include "../src/app/shots.h"
 #include "../src/config/config.h"
 #include "../src/packs/seed_registry.h"
@@ -86,15 +87,33 @@ CT_SUITE(shots_state_guards) {
     ct_db_close(db);
 }
 
+static bool shots_gui_left_custom(unsigned custom_id, unsigned default_id) {
+    return GuiGetFont().texture.id == default_id && GuiGetFont().texture.id != custom_id;
+}
+
 CT_SUITE(shots_font_rebind) {
     sqlite3 *db = shots_db();
     ct_app app;
     shots_app(&app, db);
+    char font_path[CT_APP_EXE_PATH_MAX];
+    CT_ASSERT_EQ(ct_font_path(font_path, (unsigned)sizeof font_path), 0);
     CT_ASSERT_EQ(ct_shots_menu(&app, "build/test_shots_api/rebind1.png"), CT_SHOTS_OK);
+    Font gui = GuiGetFont();
+    CT_ASSERT(gui.baseSize == CT_UI_FONT_BODY);
+    CT_ASSERT(gui.texture.id != 0);
+    CT_ASSERT(gui.texture.id != GetFontDefault().texture.id);
+    CT_ASSERT(gui.glyphs != NULL && gui.recs != NULL && gui.glyphCount > 0);
+    CT_ASSERT(ct_ui_font().texture.id == gui.texture.id);
+    unsigned custom_id = (unsigned)gui.texture.id;
+    unsigned default_id = (unsigned)GetFontDefault().texture.id;
     ct_shots_close();
+    CT_ASSERT(shots_gui_left_custom(custom_id, default_id));
     CT_ASSERT_EQ(ct_shots_menu(&app, "build/test_shots_api/rebind2.png"), CT_SHOTS_OK);
-    CT_ASSERT(GuiGetFont().glyphs == GetFontDefault().glyphs);
-    CT_ASSERT(GuiGetFont().recs == GetFontDefault().recs);
+    Font gui2 = GuiGetFont();
+    CT_ASSERT(gui2.baseSize == CT_UI_FONT_BODY);
+    CT_ASSERT(gui2.texture.id != 0);
+    CT_ASSERT(gui2.texture.id != GetFontDefault().texture.id);
+    CT_ASSERT(gui2.glyphs != NULL && gui2.recs != NULL && gui2.glyphCount > 0);
     CT_ASSERT_EQ(remove("build/test_shots_api/rebind1.png"), 0);
     CT_ASSERT_EQ(remove("build/test_shots_api/rebind2.png"), 0);
     ct_shots_close();

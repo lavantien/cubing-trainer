@@ -30,7 +30,11 @@ static int ct_shots_window(ct_app *app) {
         if (!IsWindowReady()) {
             return CT_SHOTS_E_WINDOW;
         }
-        GuiSetFont(GetFontDefault());
+        char font_path[CT_APP_EXE_PATH_MAX];
+        if (ct_font_path(font_path, (unsigned)sizeof font_path) != 0) {
+            font_path[0] = '\0';
+        }
+        ct_ui_theme_load(font_path);
         ct_shots_window_open = true;
     }
     app->cfg.window.width = CT_WINDOW_WIDTH;
@@ -86,6 +90,7 @@ static int ct_shots_show(ct_app *app, ct_ui_screen screen, const char *out_path)
 
 void ct_shots_close(void) {
     if (ct_shots_window_open) {
+        ct_ui_theme_release();
         CloseWindow();
         ct_shots_window_open = false;
     }
