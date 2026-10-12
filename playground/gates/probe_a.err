@@ -1,0 +1,78 @@
+build_gate/mutants/p11400/m0001_config.c:26:36: error: expected ')'
+   26 | static int parse_double(const char /text, double *out) {
+      |                                    ^
+build_gate/mutants/p11400/m0001_config.c:26:24: note: to match this '('
+   26 | static int parse_double(const char /text, double *out) {
+      |                        ^
+build_gate/mutants/p11400/m0001_config.c:27:9: error: use of undeclared identifier 'text'
+   27 |     if (text == NULL || text[0] == '\0') {
+      |         ^~~~
+build_gate/mutants/p11400/m0001_config.c:27:25: error: use of undeclared identifier 'text'
+   27 |     if (text == NULL || text[0] == '\0') {
+      |                         ^~~~
+build_gate/mutants/p11400/m0001_config.c:32:27: error: use of undeclared identifier 'text'
+   32 |     double value = strtod(text, &end);
+      |                           ^~~~
+build_gate/mutants/p11400/m0001_config.c:33:16: error: use of undeclared identifier 'text'
+   33 |     if (end == text || end[0] != '\0' || errno == ERANGE || !isfinite(value)) {
+      |                ^~~~
+build_gate/mutants/p11400/m0001_config.c:36:6: error: use of undeclared identifier 'out'
+   36 |     *out = value;
+      |      ^~~
+build_gate/mutants/p11400/m0001_config.c:56:34: error: too many arguments to function call, expected 1, have 2
+   56 |     int rc = parse_double(value, &parsed);
+      |              ~~~~~~~~~~~~        ^~~~~~~
+build_gate/mutants/p11400/m0001_config.c:26:12: note: 'parse_double' declared here
+   26 | static int parse_double(const char /text, double *out) {
+      |            ^            ~~~~~~~~~~
+build_gate/mutants/p11400/m0001_config.c:91:34: error: too many arguments to function call, expected 1, have 2
+   91 |     int rc = parse_double(value, &parsed);
+      |              ~~~~~~~~~~~~        ^~~~~~~
+build_gate/mutants/p11400/m0001_config.c:26:12: note: 'parse_double' declared here
+   26 | static int parse_double(const char /text, double *out) {
+      |            ^            ~~~~~~~~~~
+8 errors generated.
+build_gate/mutants/p11400/m0002_config.c:26:50: error: expected ')'
+   26 | static int parse_double(const char *text, double /out) {
+      |                                                  ^
+build_gate/mutants/p11400/m0002_config.c:26:24: note: to match this '('
+   26 | static int parse_double(const char *text, double /out) {
+      |                        ^
+build_gate/mutants/p11400/m0002_config.c:36:6: error: use of undeclared identifier 'out'
+   36 |     *out = value;
+      |      ^~~
+build_gate/mutants/p11400/m0002_config.c:56:34: error: passing 'double *' to parameter of incompatible type 'double'; remove &
+   56 |     int rc = parse_double(value, &parsed);
+      |                                  ^~~~~~~
+build_gate/mutants/p11400/m0002_config.c:26:50: note: passing argument to parameter here
+   26 | static int parse_double(const char *text, double /out) {
+      |                                                  ^
+build_gate/mutants/p11400/m0002_config.c:91:34: error: passing 'double *' to parameter of incompatible type 'double'; remove &
+   91 |     int rc = parse_double(value, &parsed);
+      |                                  ^~~~~~~
+build_gate/mutants/p11400/m0002_config.c:26:50: note: passing argument to parameter here
+   26 | static int parse_double(const char *text, double /out) {
+      |                                                  ^
+4 errors generated.
+build_gate/mutants/p11400/m0010_config.c:31:10: error: expected identifier or '('
+   31 |     char /end = NULL;
+      |          ^
+build_gate/mutants/p11400/m0010_config.c:32:34: error: use of undeclared identifier 'end'
+   32 |     double value = strtod(text, &end);
+      |                                  ^~~
+build_gate/mutants/p11400/m0010_config.c:33:9: error: use of undeclared identifier 'end'
+   33 |     if (end == text || end[0] != '\0' || errno == ERANGE || !isfinite(value)) {
+      |         ^~~
+build_gate/mutants/p11400/m0010_config.c:33:24: error: use of undeclared identifier 'end'
+   33 |     if (end == text || end[0] != '\0' || errno == ERANGE || !isfinite(value)) {
+      |                        ^~~
+4 errors generated.
+build_gate/mutants/p11400/m0012_config.c:33:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   33 |     if (end == text && end[0] != '\0' || errno == ERANGE || !isfinite(value)) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p11400/m0012_config.c:33:21: note: place parentheses around the '&&' expression to silence this warning
+   33 |     if (end == text && end[0] != '\0' || errno == ERANGE || !isfinite(value)) {
+      |                     ^
+      |         (                            )
+1 error generated.
+mutate: 1 unexplained survivors

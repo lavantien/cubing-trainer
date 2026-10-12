@@ -1,0 +1,23 @@
+mutate: scope=src/config/config.c files=1 sites=304 suites=1
+KILLED    m0001 src/config/config.c:26 [arith * -> /]
+          build break
+KILLED    m0002 src/config/config.c:26 [arith * -> /]
+          build break
+KILLED    m0003 src/config/config.c:27 [cmp == -> !=]
+SURVIVED  m0004 src/config/config.c:27 [logic || -> &&]
+KILLED    m0005 src/config/config.c:27 [int+1 0 -> 1]
+KILLED    m0006 src/config/config.c:27 [int-1 0 -> -1]
+KILLED    m0007 src/config/config.c:27 [cmp == -> !=]
+SURVIVED  m0008 src/config/config.c:30 [int+1 0 -> 1]
+SURVIVED  m0009 src/config/config.c:30 [int-1 0 -> -1]
+KILLED    m0010 src/config/config.c:31 [arith * -> /]
+          build break
+KILLED    m0011 src/config/config.c:33 [cmp == -> !=]
+KILLED    m0012 src/config/config.c:33 [logic || -> &&]
+          build break
+ACCEPTED  m0004 src/config/config.c:27 [logic || -> &&] :: the null text arm is unreachable, ct_config_set rejects a null value before any parser runs
+ACCEPTED  m0008 src/config/config.c:30 [int+1 0 -> 1] :: the errno preset mutant to 1 or -1 never equals ERANGE and the strto functions leave errno untouched on success, the range check decides identically
+ACCEPTED  m0009 src/config/config.c:30 [int-1 0 -> -1] :: the errno preset mutant to 1 or -1 never equals ERANGE and the strto functions leave errno untouched on success, the range check decides identically
+mutate: generated=12 resumed=0 build_failed=4 killed_by_tests=5 killed=9 survived=3 accepted=3 unexplained=0 skipped=292
+mutate: kill rate 9/12 = 75.0%, with accepted equivalents 12/12 = 100.0%
+mutate: wall 7.8s

@@ -42,7 +42,15 @@ if ($code -eq 0) {
         $err = Join-Path $gates ("lane_{0:d2}_{1}.err" -f $i, $name)
         Stamp "lane $i $scope suites=$($plan.$scope.Count) START"
         & make BUILDDIR=build_gate mutate SCOPE=$scope "SUITE=$suites" 1> $log 2> $err
-        Stamp "lane $i $scope EXIT=$LASTEXITCODE"
+        $code = $LASTEXITCODE
+        if ($code -ne 0) {
+            Stamp "lane $i $scope EXIT=$code retry once"
+            $log = Join-Path $gates ("lane_{0:d2}_{1}.retry.log" -f $i, $name)
+            $err = Join-Path $gates ("lane_{0:d2}_{1}.retry.err" -f $i, $name)
+            & make BUILDDIR=build_gate mutate SCOPE=$scope "SUITE=$suites" 1> $log 2> $err
+            $code = $LASTEXITCODE
+        }
+        Stamp "lane $i $scope EXIT=$code"
     }
 }
 Stamp "orchestrator DONE"

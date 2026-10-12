@@ -116,6 +116,10 @@ static ct_surv g_surv[CT_MUT_SURV_MAX];
 static size_t g_nsurv;
 static ct_allow g_allow[CT_MUT_ALLOW_MAX];
 static size_t g_nallow;
+static char *g_resumed;
+static unsigned long g_resumed_n;
+static FILE *g_journal;
+static bool g_resume_on;
 
 static const char *const ct_punct3[] = {"<<=", ">>=", "..."};
 static const char *const ct_punct2[] = {"->",  "++",  "--",  "<<",  ">>",  "<=",  ">=",  "==",  "!=",
@@ -797,6 +801,118 @@ static const char *ct_env(const char *name, const char *dflt) {
     return v != NULL && v[0] != '\0' ? v : dflt;
 }
 
+static unsigned long long ct_hash64(unsigned long long h, const char *data, size_t n) {
+    for (size_t i = 0; i < n; i++) {
+        h ^= (unsigned char)data[i];
+        h *= 0x100000001b3ULL;
+    }
+    return h;
+}
+
+static unsigned long long ct_inputs_hash(void) {
+    unsigned long long h = 0xcbf29ce484222325ULL;
+    for (size_t f = 0; f < g_nfiles; f++) {
+        h = ct_hash64(h, g_files[f].rel, strlen(g_files[f].rel));
+        h = ct_hash64(h, "\xff", 1);
+        h = ct_hash64(h, g_files[f].src, g_files[f].len);
+    }
+    h = ct_hash64(h, g_cfg.cc, strlen(g_cfg.cc));
+    h = ct_hash64(h, g_cfg.cflags, strlen(g_cfg.cflags));
+    h = ct_hash64(h, g_cfg.ldflags, strlen(g_cfg.ldflags));
+    h = ct_hash64(h, (const char *)&g_nsuites, sizeof g_nsuites);
+    for (size_t i = 0; i < g_nsuites; i++) {
+        h = ct_hash64(h, g_suites[i], strlen(g_suites[i]));
+    }
+    return h;
+}
+
+static void ct_journal_path(const char *build, const char *scope, char *out, size_t cap) {
+    char flat[CT_MUT_REL_MAX];
+    size_t n = 0;
+    for (const char *p = scope; *p != '\0' && n + 8 < sizeof flat; p++) {
+        char c = *p;
+        if (c == '/' || c == '\\' || c == ':' || c == '*' || c == '?' || c == '"') {
+            c = '_';
+        }
+        flat[n++] = c;
+    }
+    flat[n] = '\0';
+    snprintf(out, cap, "%s/mutants/%s.journal", build, flat);
+}
+
+static void ct_journal_record(size_t id, char verdict) {
+    if (g_journal == NULL) {
+        return;
+    }
+    fprintf(g_journal, "V %zu %c\n", id, verdict);
+    fflush(g_journal);
+}
+
+static bool ct_journal_open(const char *build, const char *scope) {
+    char path[CT_MUT_REL_MAX];
+    char line[128];
+    unsigned long long want = ct_inputs_hash();
+    FILE *in;
+    g_resumed = calloc(g_nsites, 1);
+    if (g_resumed == NULL) {
+        return false;
+    }
+    ct_journal_path(build, scope, path, sizeof path);
+    in = fopen(path, "r");
+    if (in != NULL) {
+        unsigned long long got = 0;
+        size_t sites = 0;
+        bool ok = fgets(line, sizeof line, in) != NULL &&
+                  sscanf(line, "J %llu %zu", &got, &sites) == 2 && got == want && sites == g_nsites;
+        while (ok && fgets(line, sizeof line, in) != NULL) {
+            size_t id = 0;
+            char verdict = 0;
+            if (sscanf(line, "V %zu %c", &id, &verdict) != 2 || id == 0 || id > g_nsites ||
+                (verdict != 'k' && verdict != 'b' && verdict != 's') || g_resumed[id - 1] != 0) {
+                ok = false;
+                break;
+            }
+            g_resumed[id - 1] = verdict;
+        }
+        fclose(in);
+        if (ok && g_resume_on) {
+            for (size_t i = 0; i < g_nsites; i++) {
+                if (g_resumed[i] != 0) {
+                    g_resumed_n++;
+                }
+            }
+            g_journal = fopen(path, "a");
+            return g_journal != NULL;
+        }
+        memset(g_resumed, 0, g_nsites);
+        g_resumed_n = 0;
+    }
+    g_journal = fopen(path, "w");
+    if (g_journal != NULL) {
+        fprintf(g_journal, "J %llu %zu\n", want, g_nsites);
+        fflush(g_journal);
+    }
+    return g_journal != NULL;
+}
+
+static void ct_note_survivor(size_t id, const ct_site *s) {
+    if (g_nsurv == CT_MUT_SURV_MAX) {
+        fprintf(stderr, "mutate: survivor capacity exceeded\n");
+        exit(2);
+    }
+    ct_mut_file *mf = &g_files[s->file];
+    ct_token *k = &mf->toks[s->tok];
+    g_surv[g_nsurv].id = id;
+    g_surv[g_nsurv].file = s->file;
+    g_surv[g_nsurv].line = k->line;
+    g_surv[g_nsurv].op = s->op;
+    size_t n = k->len < sizeof g_surv[g_nsurv].old - 1 ? k->len : sizeof g_surv[g_nsurv].old - 1;
+    memcpy(g_surv[g_nsurv].old, mf->src + k->off, n);
+    g_surv[g_nsurv].old[n] = '\0';
+    snprintf(g_surv[g_nsurv].text, CT_MUT_TEXT_MAX, "%s", s->text);
+    g_nsurv++;
+}
+
 static void ct_split_list(char *buf, char out[][CT_MUT_EXCLUDE_NAME_MAX], size_t *out_n, size_t out_max) {
     char *save = NULL;
     for (char *tok = strtok_r(buf, ", ", &save); tok != NULL; tok = strtok_r(NULL, ", ", &save)) {
@@ -822,6 +938,7 @@ static void ct_load_cfg(void) {
     g_cfg.allowlist = ct_env("CT_MUTATE_ALLOWLIST", "tests/mutant_allowlist.txt");
     g_cfg.list = ct_env("CT_MUTATE_LIST", "0")[0] == '1';
     g_cfg.keep = ct_env("CT_MUTATE_KEEP", "0")[0] == '1';
+    g_resume_on = ct_env("CT_MUTATE_RESUME", "1")[0] == '1';
     snprintf(buf, sizeof buf, "%s", ct_env("CT_MUTATE_ONLY", ""));
     char *save = NULL;
     for (char *tok = strtok_r(buf, ", ", &save); tok != NULL; tok = strtok_r(NULL, ", ", &save)) {
@@ -863,6 +980,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "usage: mutate.exe <scope_dir_or_file> <build_dir> [suite filter ...]\n");
         return 2;
     }
+    setvbuf(stdout, NULL, _IOLBF, 0);
     char scope[CT_MUT_REL_MAX];
     snprintf(scope, sizeof scope, "%s", argv[1]);
     ct_normalize_slashes(scope);
@@ -915,6 +1033,12 @@ int main(int argc, char **argv) {
         fprintf(stderr, "mutate: cannot create %s\n", mutants_dir);
         return 2;
     }
+    if (!ct_journal_open(build, scope)) {
+        fprintf(stderr, "mutate: journal unavailable, running without resume\n");
+    }
+    if (g_resumed_n > 0) {
+        printf("mutate: resumed %lu of %zu sites from journal\n", g_resumed_n, g_nsites);
+    }
     if (!ct_link_exe(base_exe, NULL, NULL)) {
         fprintf(stderr, "mutate: baseline link failed\n");
         return 2;
@@ -939,6 +1063,21 @@ int main(int argc, char **argv) {
             continue;
         }
         generated++;
+        if (g_resumed != NULL && g_resumed[i] != 0) {
+            char verdict = g_resumed[i];
+            const char *word = verdict == 's' ? "survived" : verdict == 'b' ? "build break" : "killed by tests";
+            ct_print_site("RESUMED", id, s);
+            printf("          journal %s\n", word);
+            if (verdict == 'b') {
+                build_failed++;
+            } else if (verdict == 'k') {
+                killed_tests++;
+            } else {
+                survived++;
+                ct_note_survivor(id, s);
+            }
+            continue;
+        }
         ct_mut_file *mf = &g_files[s->file];
         char orig_obj[CT_MUT_REL_MAX];
         ct_orig_object(build, mf->rel, orig_obj, sizeof orig_obj);
@@ -974,6 +1113,7 @@ int main(int argc, char **argv) {
             build_failed++;
             ct_print_site("KILLED", id, s);
             printf("          build break\n");
+            ct_journal_record(id, 'b');
             if (!g_cfg.keep) {
                 remove(mutant_c);
             }
@@ -983,6 +1123,7 @@ int main(int argc, char **argv) {
             build_failed++;
             ct_print_site("KILLED", id, s);
             printf("          link break\n");
+            ct_journal_record(id, 'b');
             if (!g_cfg.keep) {
                 remove(mutant_c);
                 remove(mutant_o);
@@ -993,23 +1134,12 @@ int main(int argc, char **argv) {
         if (ct_run_suites(mutant_exe) != 0) {
             killed_tests++;
             ct_print_site("KILLED", id, s);
+            ct_journal_record(id, 'k');
         } else {
             survived++;
             ct_print_site("SURVIVED", id, s);
-            if (g_nsurv == CT_MUT_SURV_MAX) {
-                fprintf(stderr, "mutate: survivor capacity exceeded\n");
-                return 2;
-            }
-            ct_token *k = &mf->toks[s->tok];
-            g_surv[g_nsurv].id = id;
-            g_surv[g_nsurv].file = s->file;
-            g_surv[g_nsurv].line = k->line;
-            g_surv[g_nsurv].op = s->op;
-            size_t n = k->len < sizeof g_surv[g_nsurv].old - 1 ? k->len : sizeof g_surv[g_nsurv].old - 1;
-            memcpy(g_surv[g_nsurv].old, mf->src + k->off, n);
-            g_surv[g_nsurv].old[n] = '\0';
-            snprintf(g_surv[g_nsurv].text, CT_MUT_TEXT_MAX, "%s", s->text);
-            g_nsurv++;
+            ct_note_survivor(id, s);
+            ct_journal_record(id, 's');
         }
         if (!g_cfg.keep) {
             remove(mutant_c);
@@ -1036,15 +1166,18 @@ int main(int argc, char **argv) {
         }
     }
     double wall = ct_now_sec() - t0;
-    printf("mutate: generated=%lu build_failed=%lu killed_by_tests=%lu killed=%lu survived=%lu "
+    printf("mutate: generated=%lu resumed=%lu build_failed=%lu killed_by_tests=%lu killed=%lu survived=%lu "
            "accepted=%lu unexplained=%lu skipped=%lu\n",
-           generated, build_failed, killed_tests, killed, survived, accepted, unexplained, skipped);
+           generated, g_resumed_n, build_failed, killed_tests, killed, survived, accepted, unexplained, skipped);
     if (generated > 0) {
         printf("mutate: kill rate %lu/%lu = %.1f%%, with accepted equivalents %lu/%lu = %.1f%%\n", killed,
                generated, 100.0 * (double)killed / (double)generated, killed + accepted, generated,
                100.0 * (double)(killed + accepted) / (double)generated);
     }
     printf("mutate: wall %.1fs\n", wall);
+    if (g_journal != NULL) {
+        fclose(g_journal);
+    }
     remove(base_exe);
     remove(mutant_exe);
     if (!g_cfg.keep) {
