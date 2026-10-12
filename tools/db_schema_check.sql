@@ -1,6 +1,6 @@
 WITH want(name) AS (
     VALUES ('settings'), ('letter_scheme'), ('letter_map'), ('flashcard'), ('srs_state'),
-           ('review_log'), ('generated_alg'), ('session_log'), ('event_pack')
+           ('review_log'), ('generated_alg'), ('session_log'), ('event_pack'), ('memo_pair')
 )
 SELECT CASE
            WHEN EXISTS (SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = want.name)
@@ -22,7 +22,9 @@ WITH want(tbl, col) AS (
            ('generated_alg', 'params_hash'),
            ('session_log', 'id'), ('session_log', 'deck'),
            ('event_pack', 'id'), ('event_pack', 'event'), ('event_pack', 'method'),
-           ('event_pack', 'stage'), ('event_pack', 'case_key')
+           ('event_pack', 'stage'), ('event_pack', 'case_key'),
+           ('memo_pair', 'orbit'), ('memo_pair', 'pair'), ('memo_pair', 'phoneme'),
+           ('memo_pair', 'image'), ('memo_pair', 'updated_at')
 )
 SELECT CASE
            WHEN EXISTS (SELECT 1 FROM pragma_table_info(want.tbl) WHERE name = want.col)
@@ -30,6 +32,26 @@ SELECT CASE
            ELSE 'FAIL missing column ' || want.tbl || '.' || want.col
        END
 FROM want;
+
+WITH want(tbl, col, type) AS (
+    VALUES ('memo_pair', 'orbit', 'INTEGER'), ('memo_pair', 'pair', 'TEXT'),
+           ('memo_pair', 'phoneme', 'TEXT'), ('memo_pair', 'image', 'TEXT'),
+           ('memo_pair', 'updated_at', 'TEXT')
+)
+SELECT CASE
+           WHEN EXISTS (SELECT 1 FROM pragma_table_info(want.tbl)
+                        WHERE name = want.col AND type = want.type)
+           THEN 'ok column type ' || want.tbl || '.' || want.col || ' ' || want.type
+           ELSE 'FAIL missing column type ' || want.tbl || '.' || want.col || ' ' || want.type
+       END
+FROM want;
+
+SELECT CASE
+           WHEN (SELECT count(*) FROM pragma_table_info('memo_pair') WHERE pk > 0) = 2
+                AND (SELECT sum(pk) FROM pragma_table_info('memo_pair')) = 3
+           THEN 'ok memo_pair primary key orbit pair'
+           ELSE 'FAIL memo_pair primary key'
+       END;
 
 WITH want(name) AS (
     VALUES ('idx_flashcard_deck'), ('idx_review_log_card'), ('idx_srs_state_due'),
@@ -44,8 +66,8 @@ FROM want;
 
 SELECT CASE
            WHEN (SELECT count(*) FROM sqlite_master
-                 WHERE type = 'table' AND name NOT LIKE 'sqlite_%') = 9
-           THEN 'ok table count 9'
+                 WHERE type = 'table' AND name NOT LIKE 'sqlite_%') = 10
+           THEN 'ok table count 10'
            ELSE 'FAIL unexpected table count'
        END;
 

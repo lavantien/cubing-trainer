@@ -244,7 +244,7 @@ CT_SUITE(pack_startup_real_app_init) {
     ct_app_init(&app);
     CT_ASSERT(app.running);
     CT_ASSERT(app.db != NULL);
-    CT_ASSERT_EQ(ct_db_version(app.db), 1);
+    CT_ASSERT_EQ(ct_db_version(app.db), 2);
     CT_ASSERT_EQ(pack_rows_total(app.db), CT_PACKSTART_TOTAL_ROWS);
     CT_ASSERT_EQ(ct_pack_count(app.db, CT_EVENT_SQUARE1, CT_METHOD_LBL, CT_STAGE_CUBESHAPE), 169);
     CT_ASSERT_EQ(ct_pack_count(app.db, CT_EVENT_2X2, CT_METHOD_CLL, CT_STAGE_CLL), 42);

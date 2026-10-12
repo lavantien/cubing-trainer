@@ -95,8 +95,9 @@ CT_FUZZ_SUITES += fuzz_srs_walk fuzz_srs_elapsed fuzz_srs_grade_space
 CT_FUZZ_SUITES += fuzz_db_card_strings fuzz_db_review_rows fuzz_db_settings_keys
 CT_FUZZ_SUITES += fuzz_config_keys fuzz_config_moves
 CT_FUZZ_SUITES += fuzz_script_parse
+CT_FUZZ_SUITES += fuzz_db_memo_pairs
 
-.PHONY: all build vendor vendor-verify-selftest release release-verify-selftest test diagrams memguard memguard-selftest run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual visual-selftest db-verify chart screenshots
+.PHONY: all build vendor vendor-verify-selftest release release-verify-selftest test diagrams memguard memguard-selftest run clean spike build-headless fmt fmt-check lint analyze fuzz mutate e2e visual visual-selftest db-verify chart screenshots memo-seed
 
 all: build
 
@@ -309,3 +310,6 @@ screenshots: build
 
 clean:
 	rm -rf $(BUILDDIR)
+
+memo-seed:
+	python -I tools/memo_gen.py --check

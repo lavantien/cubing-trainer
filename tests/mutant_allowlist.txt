@@ -1519,3 +1519,13 @@ src/stats/stats.c:127	peak ratio zero count weakening returns the same zero thro
 src/stats/stats.c:131	peak seed variants never change the ratio, equal maxima collapse to the same value
 src/stats/stats.c:134	equal peak update is an identity
 src/stats/stats.c:148	rank clamp boundary weakening maps count equal to cap to the same n
+src/storage/repo_memo.c:24	pair letter lower bound mutants are true equivalents: the characters below A and the characters at or below @ are the same set since @ is A minus one, no reachable char distinguishes < from <=
+src/storage/repo_memo.c:32	null-column branch write index mutants are equivalent: both memo_pair text columns are NOT NULL under the schema so the branch is unreachable, and ct_memo_get pre-zeroes the output wholesale so any index write is unobservable
+src/storage/repo_memo.c:36	read clamp boundary mutant is equivalent: it differs only at a stored length of exactly the cap, every memo_pair write path rejects text at or above CT_MEMO_TEXT_MAX so no stored row reaches the boundary
+src/storage/repo_memo.c:37	read clamp value mutants sit on the unreachable cap branch, no stored memo text reaches the cap so the clamped value is never produced
+src/storage/repo_memo.c:49	sqlite3_prepare_v2 treats any negative sql length as read to nul, the -1 nByte mutant -2 is behaviorally identical
+src/storage/repo_memo.c:54	sqlite3 treats any negative bind length as read to nul, the -1 length mutant -2 is behaviorally identical
+src/storage/repo_memo.c:78	sqlite3_prepare_v2 treats any negative sql length as read to nul, the -1 nByte mutant -2 is behaviorally identical
+src/storage/repo_memo.c:83	sqlite3 treats any negative bind length as read to nul, the -1 length mutant -2 is behaviorally identical
+src/storage/repo_memo.c:84	sqlite3 treats any negative bind length as read to nul, the -1 length mutant -2 is behaviorally identical
+src/storage/repo_memo.c:85	sqlite3 treats any negative bind length as read to nul, the -1 length mutant -2 is behaviorally identical

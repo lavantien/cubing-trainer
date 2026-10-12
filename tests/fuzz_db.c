@@ -406,3 +406,77 @@ CT_SUITE(fuzz_db_settings_keys) {
         ct_db_close(db);
     }
 }
+
+CT_SUITE(fuzz_db_memo_pairs) {
+    int iters = ct_fuzz_iterations();
+    int count = iters < CT_DBS_ITERS ? iters : CT_DBS_ITERS;
+    CT_ASSERT(count >= 1);
+    for (int i = 0; i < count; i++) {
+        uint64_t seed = 0x4E4D0000u + (uint64_t)i;
+        ct_sfc64 s;
+        ct_sfc64_init(&s, seed);
+        sqlite3 *db = NULL;
+        CT_FZ(ct_dbs_open(&db) == 0, seed);
+
+        char pair_raw[8];
+        bool pair_terminated = ct_sfc64_range(&s, 8) != 0;
+        unsigned pair_mode = (unsigned)ct_sfc64_range(&s, 3);
+        for (unsigned k = 0; k < sizeof pair_raw; k++)
+            pair_raw[k] = pair_terminated ? '\0' : ct_dbs_byte(&s);
+        if (pair_terminated) {
+            unsigned len = 2 + (unsigned)ct_sfc64_range(&s, 2);
+            for (unsigned k = 0; k < len && k + 1 < sizeof pair_raw; k++) {
+                if (pair_mode == 0)
+                    pair_raw[k] = (char)('A' + ct_sfc64_range(&s, 26));
+                else if (pair_mode == 1)
+                    pair_raw[k] = (char)('a' + ct_sfc64_range(&s, 26));
+                else
+                    pair_raw[k] = ct_dbs_byte(&s);
+            }
+        }
+        bool pair_valid = pair_terminated && pair_raw[0] >= 'A' && pair_raw[0] <= 'X' &&
+                          pair_raw[1] >= 'A' && pair_raw[1] <= 'X' && pair_raw[2] == '\0';
+        int orbit = (int)ct_sfc64_range(&s, 9) - 3;
+        bool orbit_valid = orbit == CT_ORBIT_CORNER || orbit == CT_ORBIT_EDGE;
+
+        char phoneme[CT_DBS_TEXT_MAX];
+        char image[CT_DBS_TEXT_MAX];
+        bool ph_terminated = ct_sfc64_range(&s, 6) != 0;
+        bool im_terminated = ct_sfc64_range(&s, 6) != 0;
+        ct_dbs_field(&s, phoneme, sizeof phoneme, ph_terminated);
+        ct_dbs_field(&s, image, sizeof image, im_terminated);
+        bool ph_ok = false;
+        bool im_ok = false;
+        if (ph_terminated)
+            ph_ok = strlen(phoneme) >= 1 && strlen(phoneme) < CT_MEMO_TEXT_MAX;
+        if (im_terminated)
+            im_ok = strlen(image) >= 1 && strlen(image) < CT_MEMO_TEXT_MAX;
+
+        ct_memo_row row;
+        int grc = ct_memo_get(db, orbit, pair_raw, &row);
+        if (!orbit_valid || !pair_valid) {
+            CT_FZ(grc == CT_REPO_ERR_ARG, seed);
+        } else {
+            CT_FZ(grc == CT_REPO_OK || grc == CT_REPO_MISSING, seed);
+            if (grc == CT_REPO_OK) {
+                CT_FZ(row.phoneme[0] != '\0', seed);
+                CT_FZ(row.image[0] != '\0', seed);
+            }
+        }
+        int src = ct_memo_set(db, orbit, pair_raw, phoneme, image);
+        if (!orbit_valid || !pair_valid || !ph_ok || !im_ok) {
+            CT_FZ(src == CT_REPO_ERR_ARG, seed);
+        } else {
+            CT_FZ(src == CT_REPO_OK, seed);
+            CT_FZ(ct_memo_get(db, orbit, pair_raw, &row) == CT_REPO_OK, seed);
+            CT_FZ(strcmp(row.phoneme, phoneme) == 0, seed);
+            CT_FZ(strcmp(row.image, image) == 0, seed);
+        }
+        sqlite3_stmt *ck = NULL;
+        CT_FZ(sqlite3_prepare_v2(db, "SELECT count(*) FROM memo_pair", -1, &ck, NULL) == SQLITE_OK,
+              seed);
+        CT_FZ(sqlite3_step(ck) == SQLITE_ROW && sqlite3_column_int(ck, 0) == 1152, seed);
+        sqlite3_finalize(ck);
+        ct_db_close(db);
+    }
+}
