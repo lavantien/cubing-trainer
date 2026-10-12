@@ -713,11 +713,9 @@ void ct_screen_trainer_draw(ct_app *app) {
         int row1_y = memo_y + memo_pad;
         int row2_y = row1_y + CT_UI_MEMO_ROW_H;
         snprintf(memo_line, sizeof memo_line, "phoneme %s", f->memo_saved_phoneme);
-        GuiLabel(ct_trainer_rect(detail_x + memo_pad, row1_y, memo_w, CT_UI_MEMO_ROW_H),
-                 memo_line);
+        GuiLabel(ct_trainer_rect(detail_x + memo_pad, row1_y, memo_w, CT_UI_MEMO_ROW_H), memo_line);
         snprintf(memo_line, sizeof memo_line, "image %s", f->memo_saved_image);
-        GuiLabel(ct_trainer_rect(detail_x + memo_pad, row2_y, memo_w, CT_UI_MEMO_ROW_H),
-                 memo_line);
+        GuiLabel(ct_trainer_rect(detail_x + memo_pad, row2_y, memo_w, CT_UI_MEMO_ROW_H), memo_line);
         int box_y = row2_y + CT_UI_MEMO_ROW_H + CT_TRAINER_MEMO_GAP;
         int box_w = (memo_w - CT_UI_MEMO_FIELD_GAP) / 2;
         if (GuiTextBox(ct_trainer_rect(detail_x + memo_pad, box_y, box_w, CT_UI_MEMO_FIELD_H),
@@ -725,8 +723,8 @@ void ct_screen_trainer_draw(ct_app *app) {
                        ct_trainer.memo_edit_phoneme)) {
             ct_trainer.memo_edit_phoneme = !ct_trainer.memo_edit_phoneme;
         }
-        if (GuiTextBox(ct_trainer_rect(detail_x + memo_pad + box_w + CT_UI_MEMO_FIELD_GAP,
-                                       box_y, box_w, CT_UI_MEMO_FIELD_H),
+        if (GuiTextBox(ct_trainer_rect(detail_x + memo_pad + box_w + CT_UI_MEMO_FIELD_GAP, box_y,
+                                       box_w, CT_UI_MEMO_FIELD_H),
                        f->memo_image, (int)sizeof f->memo_image, ct_trainer.memo_edit_image)) {
             ct_trainer.memo_edit_image = !ct_trainer.memo_edit_image;
         }

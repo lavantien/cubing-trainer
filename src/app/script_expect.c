@@ -340,8 +340,8 @@ static int ct_script_expect_genalg(ct_app *app, const ct_script_rt *rt, const ct
     return ct_script_fail(err, cap, c, "unknown genalg field", CT_SCRIPT_EXIT_EXPECT);
 }
 
-static int ct_script_expect_memo(ct_app *app, const ct_script *s, const ct_script_row *c,
-                                 char *err, unsigned cap) {
+static int ct_script_expect_memo(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+                                 unsigned cap) {
     int orbit = ct_script_orbit_parse(ct_script_arg(s, c, 0));
     if (orbit < 0) {
         return ct_script_fail(err, cap, c, "unknown orbit", CT_SCRIPT_EXIT_EXPECT);

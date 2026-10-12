@@ -786,7 +786,8 @@ static int ct_script_step_memo(ct_app *app, const ct_script *s, const ct_script_
                             : ct_script_fail(err, cap, c, "memo set failed", CT_SCRIPT_EXIT_RUN);
 }
 
-static void ct_script_rt_reset(ct_script_rt *rt) {    if (rt->review_open) {
+static void ct_script_rt_reset(ct_script_rt *rt) {
+    if (rt->review_open) {
         ct_session_free(&rt->review.session);
     }
     memset(rt, 0, sizeof *rt);
