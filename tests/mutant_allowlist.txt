@@ -1679,3 +1679,23 @@ src/ui/screen_review.c:479	reveal button rectangle arithmetic feeds only the gui
 src/ui/screen_review.c:498	slider height divisor, drawn slider geometry only
 src/ui/screen_review.c:501	scrub slider gate, gui slider return branch no headless suite can trigger
 src/ui/screen_review.c:506	status bar rect, draw path only
+src/ui/screen_cards.c:14	list width divisor constant feeds only the draw-side list width arithmetic no headless suite exercises
+src/ui/screen_cards.c:16	label max feeds only the draw-side label buffer bound no headless suite exercises
+src/ui/screen_cards.c:28	cap guard arms are unreachable, the only caller passes the fixed page size 16 so cap never equals 0 or goes negative
+src/ui/screen_cards.c:57	selected sentinel collapses before observation, with rows open assigns 0 right after and without rows reload clamps back to -1
+src/ui/screen_cards.c:81	deck list rc boundary arms are identical, the copy loop is a no-op at rc 0 and never entered at negative rc
+src/ui/screen_cards.c:86	rc zero boundary is identical in both branches, row_count stays 0 and status stays ok either way
+src/ui/screen_cards.c:106	the zero clamp arm maps row 0 to itself, only the negative arm distinguishes and that mutant is killed
+src/ui/screen_cards.c:253	label loop bound feeds only the draw-side label builder no headless suite exercises
+src/ui/screen_cards.c:257	empty label write offset feeds only the draw-side label builder no headless suite exercises
+src/ui/screen_cards.c:268	recompute guard arms run only in the draw path, the dirty flag is write-only across the app
+src/ui/screen_cards.c:271	recompute fetch guard runs only in the draw path, the dirty flag is write-only across the app
+src/ui/screen_cards.c:276	dirty compare chain runs only in the draw-side recompute, the flag is write-only across the app
+src/ui/screen_cards.c:287	field text box rect arithmetic, draw path only no headless suite exercises
+src/ui/screen_cards.c:304	field count index shift is equivalent, every spec element has the same size so the divisor is unchanged
+src/ui/screen_cards.c:311	button hit test rect arithmetic feeds only the draw-side button row no headless suite exercises
+src/ui/screen_cards.c:318	deck pick ternary inside the new button callback, gui event branch no headless suite can trigger
+src/ui/screen_cards.c:355	null guard after the background clear, draw path only
+src/ui/screen_cards.c:363	list width layout arithmetic, draw path only
+src/ui/screen_cards.c:365	list y layout arithmetic, draw path only
+src/ui/screen_cards.c:377	filter text box rect arithmetic, draw path only

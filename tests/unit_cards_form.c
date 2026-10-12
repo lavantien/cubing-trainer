@@ -399,6 +399,54 @@ CT_SUITE(cards_form_boundaries) {
     ct_db_close(db);
 }
 
+CT_SUITE(cards_form_null_deck) {
+    sqlite3 *db = form_db();
+    seed(db, "na", "n1", "R");
+    seed(db, "na", "n2", "R U");
+    seed(db, "nb", "n3", "R U'");
+
+    ct_cards_form f;
+    ct_cards_form_open(&f, db, NULL);
+    CT_ASSERT_EQ(f.row_count, 3);
+    CT_ASSERT_EQ(f.selected, 0);
+    CT_ASSERT_EQ(f.deck_filter[0], '\0');
+    CT_ASSERT_EQ(f.card.id, f.ids[0]);
+    CT_ASSERT_STR_EQ(f.card.case_key, "n1");
+
+    ct_cards_form_reload(&f, db);
+    CT_ASSERT_EQ(f.row_count, 3);
+    ct_db_close(db);
+}
+
+CT_SUITE(cards_screen_auto_open) {
+    sqlite3 *db = form_db();
+    seed(db, "au", "a1", "R");
+    seed(db, "au", "a2", "R U");
+    seed(db, "au", "a3", "R U'");
+
+    ct_app app;
+    memset(&app, 0, sizeof app);
+    app.cfg = ct_config_defaults();
+    app.db = db;
+    app.screen = CT_SCREEN_CARDS;
+    app.fixed_dt = 1.0 / (double)app.cfg.window.target_fps;
+
+    ct_screen_cards_update(&app);
+    ct_cards_form *f = ct_screen_cards_form();
+    CT_ASSERT_EQ(f->row_count, 3);
+    CT_ASSERT_EQ(ct_cards_form_select(f, 2), CT_REPO_OK);
+    CT_ASSERT_EQ(f->selected, 2);
+
+    ct_screen_cards_update(&app);
+    CT_ASSERT_EQ(f->row_count, 3);
+    CT_ASSERT_EQ(f->selected, 2);
+    CT_ASSERT_STR_EQ(f->card.case_key, "a3");
+    CT_ASSERT_EQ(app.screen, CT_SCREEN_CARDS);
+
+    ct_screen_cards_update(NULL);
+    ct_db_close(db);
+}
+
 CT_SUITE(cards_form_create_retry) {
     sqlite3 *db = form_db();
     seed_key_range(db, "c64", 17, 80);
