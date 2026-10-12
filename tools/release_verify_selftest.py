@@ -9,6 +9,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTDIR = os.path.join(ROOT, "build", "release_selftest")
 
 EXE_REL = "dist/bin/cubing-trainer.exe"
+FONT_REL = "assets/fonts/IosevkaNerdFont-Regular.ttf"
 MIGRATIONS = ["001_init.sql", "002_next.sql"]
 PACKS = ["a.tsv", "b.tsv"]
 EXPECTED_ROWS = 3
@@ -34,6 +35,7 @@ def build_tree(base):
     repo_migrations = os.path.join(base, "repo_migrations")
     repo_packs = os.path.join(base, "repo_packs")
     write(os.path.join(release, *EXE_REL.split("/")), b"exe bytes")
+    write(os.path.join(release, *FONT_REL.split("/")), b"font bytes")
     for name in MIGRATIONS:
         write(os.path.join(release, "db", "migrations", name), b"-- migration")
         write(os.path.join(repo_migrations, name), b"-- migration")
@@ -48,6 +50,10 @@ def build_zip(path, release, extra=None, backslash=True, prefix=None, duplicate=
     parts = ([prefix] if prefix else []) + EXE_REL.split("/")
     with zipfile.ZipFile(path, "w") as zf:
         zf.write(os.path.join(release, *EXE_REL.split("/")), sep.join(parts))
+        zf.write(
+            os.path.join(release, *FONT_REL.split("/")),
+            sep.join(([prefix] if prefix else []) + FONT_REL.split("/")),
+        )
         for name in MIGRATIONS:
             zf.write(
                 os.path.join(release, "db", "migrations", name),

@@ -20,6 +20,12 @@ RAYGUI_SHA3 := 723b0b86b71a5df7163ee48fcdf4afd0e44abfcf547326f848161b6c5682d6b7
 RAYLIB_URL := https://github.com/raysan5/raylib/archive/refs/tags/$(RAYLIB_VERSION).tar.gz
 RAYGUI_URL := https://github.com/raysan5/raygui/archive/refs/tags/$(RAYGUI_VERSION).tar.gz
 SQLITE_URL := https://sqlite.org/$(SQLITE_YEAR)/sqlite-amalgamation-$(SQLITE_CODE).zip
+IOSEVKA_VERSION := 3.5.1
+IOSEVKA_SHA3 := a8672b57062b1a2e8549b5a6e68b60a8185d7d1b480812126941499de0fa7d00
+IOSEVKA_URL := https://github.com/ryanoasis/nerd-fonts/releases/download/v$(IOSEVKA_VERSION)/Iosevka.zip
+IOSEVKA_FONT_FILE := IosevkaNerdFont-Regular.ttf
+ASSET_FONT_DIR := assets/fonts
+ASSET_FONT := $(ASSET_FONT_DIR)/$(IOSEVKA_FONT_FILE)
 
 BUILDDIR := build
 BINDIR := $(BUILDDIR)/bin
@@ -164,10 +170,11 @@ test-%: $(TEST_BIN)
 $(TEST_BIN): $(TEST_OBJ) $(LIB_TOBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) | $(BINDIR)
 	$(CC) $(CROSS_LINK) -g -o $@ $(TEST_OBJ) $(LIB_TOBJ) $(RAYGUI_OBJ) $(RAYLIB_OBJ) $(SQLITE_OBJ) $(WINLIBS_LDLIBS)
 
-vendor: $(DLDIR)/raylib.stamp $(DLDIR)/raygui.stamp $(DLDIR)/sqlite.stamp
+vendor: $(DLDIR)/raylib.stamp $(DLDIR)/raygui.stamp $(DLDIR)/sqlite.stamp $(DLDIR)/iosevka.stamp
 	python -I tools/vendor_verify.py $(DLDIR)/raylib.tar.gz $(RAYLIB_SHA3)
 	python -I tools/vendor_verify.py $(DLDIR)/raygui.tar.gz $(RAYGUI_SHA3)
 	python -I tools/vendor_verify.py $(DLDIR)/sqlite.zip $(SQLITE_SHA3)
+	python -I tools/vendor_verify.py $(DLDIR)/iosevka.zip $(IOSEVKA_SHA3)
 
 vendor-verify-selftest:
 	python -I tools/vendor_verify_selftest.py
@@ -199,6 +206,14 @@ $(DLDIR)/sqlite.stamp: | $(DLDIR)
 	rm -rf $(DLDIR)/sqlite_x
 	echo $(SQLITE_URL) > $@
 
+$(DLDIR)/iosevka.stamp: | $(DLDIR)
+	curl.exe -fsIL -o NUL $(IOSEVKA_URL)
+	curl.exe -fsL -o $(DLDIR)/iosevka.zip $(IOSEVKA_URL)
+	python -I tools/vendor_verify.py $(DLDIR)/iosevka.zip $(IOSEVKA_SHA3)
+	mkdir -p $(ASSET_FONT_DIR)
+	python -I -c "import sys,zipfile; zipfile.ZipFile(sys.argv[1]).extract(sys.argv[3], sys.argv[2])" $(DLDIR)/iosevka.zip $(ASSET_FONT_DIR) $(IOSEVKA_FONT_FILE)
+	echo $(IOSEVKA_URL) > $@
+
 diagrams:
 	node tools/gen_diagrams.mjs
 
@@ -214,12 +229,13 @@ $(MEMGUARD_SLEEPER_BIN): tools/memguard_sleeper.c | $(BINDIR)
 run: build
 	$(APP_BIN)
 
-release: build
+release: build $(ASSET_FONT)
 	rm -rf $(RELEASE_DIR)
-	mkdir -p $(RELEASE_PKG)/dist/bin $(RELEASE_PKG)/db/seeds
+	mkdir -p $(RELEASE_PKG)/dist/bin $(RELEASE_PKG)/db/seeds $(RELEASE_PKG)/$(ASSET_FONT_DIR)
 	cp $(APP_BIN) $(RELEASE_EXE)
 	cp -r db/migrations $(RELEASE_PKG)/db/migrations
 	cp -r db/seeds/packs $(RELEASE_PKG)/db/seeds/packs
+	cp $(ASSET_FONT) $(RELEASE_PKG)/$(ASSET_FONT)
 	rm -f $(BUILDDIR)/cubing-trainer-*.zip
 	pwsh.exe -NoProfile -Command "Compress-Archive -Path '$(RELEASE_DIR)/*' -DestinationPath '$(RELEASE_ZIP)'"
 	printf 'restart\n' > $(RELEASE_CASE)

@@ -10,9 +10,10 @@ import zipfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 USAGE = "usage: python -I tools/release_verify.py <release_dir> <zip> <script_case>"
 EXE_REL = "dist/bin/cubing-trainer.exe"
+FONT_REL = "assets/fonts/IosevkaNerdFont-Regular.ttf"
 DB_DIR_NAME = "cubing-trainer"
 DB_FILENAME = "trainer.db"
-EXPECTED_PACK_ROWS = 574
+EXPECTED_PACK_ROWS = 714
 RUN_TIMEOUT_SECS = 30
 MIGRATION_NAME_RE = re.compile(r"(\d+)_.*\.sql")
 
@@ -56,7 +57,7 @@ def verify_layout(release_dir, migrations_dir, packs_dir, exe_rel):
     elif got_packs != want_packs:
         failures.append(f"pack seeds mismatch: release={sorted(got_packs)} repo={sorted(want_packs)}")
     staged = tree_files(release_dir)
-    expected = {exe_rel}
+    expected = {exe_rel, FONT_REL}
     expected |= {"db/migrations/" + name for name in want_migrations}
     expected |= {"db/seeds/packs/" + name for name in want_packs}
     if staged != expected:
@@ -154,6 +155,12 @@ def main():
     packs_dir = os.path.join(ROOT, "db", "seeds", "packs")
     work = os.path.join(ROOT, "build", "release_verify")
     failures = verify_layout(release_dir, migrations_dir, packs_dir, EXE_REL)
+    font_repo = pathlib.Path(ROOT) / FONT_REL
+    font_pkg = pathlib.Path(release_dir) / FONT_REL
+    if not font_repo.is_file():
+        failures.append(f"vendored font missing in the repo at {font_repo}, run make vendor")
+    elif font_pkg.read_bytes() != font_repo.read_bytes():
+        failures.append("packaged font differs from the vendored file")
     failures += verify_zip(zip_path, release_dir, os.path.basename(os.path.normpath(release_dir)))
     if failures:
         for failure in failures:
