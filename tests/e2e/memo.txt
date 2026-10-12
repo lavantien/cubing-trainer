@@ -1,0 +1,21 @@
+# memo letter pair round trips through the chart trainer path and the review deck
+trainer_list 3bld 3style 0
+trainer_case 0
+expect memo corner AB phoneme == "a^w1 bep5"
+expect memo corner AB image == "atlas bridge"
+memo_set corner AB "ah1 bo1" "amber boat"
+expect memo corner AB phoneme == "ah1 bo1"
+expect memo corner AB image == "amber boat"
+expect memo corner AB image != "atlas bridge"
+expect memo edge AB image == "atlas bridge"
+# edge orbit mutates independently of the corner row
+memo_set edge AB "eh1 bo2" "ember barn"
+expect memo edge AB image == "ember barn"
+expect memo corner AB image == "amber boat"
+# the review flow reads the mutated corner image for a saved 3-style card
+trainer_generate
+trainer_save unfiled
+due unfiled AB 2020-01-01
+review_begin
+expect card unfiled AB key == AB
+expect memo corner AB image == "amber boat"

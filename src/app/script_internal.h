@@ -27,6 +27,7 @@ int ct_script_now(char *now, unsigned cap, long *day);
 ct_event ct_script_event_parse(const char *word, bool *ok);
 ct_method ct_script_method_parse(const char *word, bool *ok);
 ct_grade ct_script_grade_parse(const char *word, bool *ok);
+int ct_script_orbit_parse(const char *word);
 int ct_script_step_shot(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
                         unsigned cap);
 int ct_script_step_reviewed(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,

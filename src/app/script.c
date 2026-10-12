@@ -54,6 +54,7 @@ static const ct_script_word CT_SCRIPT_WORDS[] = {
     {"shot_settings", CT_SCRIPT_SHOT_SETTINGS, CT_SCRIPT_ARGC_2},
     {"shot_stats", CT_SCRIPT_SHOT_STATS, CT_SCRIPT_ARGC_1},
     {"reviewed", CT_SCRIPT_REVIEWED, 6},
+    {"memo_set", CT_SCRIPT_MEMO_SET, CT_SCRIPT_ARGC_4},
 };
 
 static const ct_script_word CT_SCRIPT_EXPECTS[] = {
@@ -65,6 +66,7 @@ static const ct_script_word CT_SCRIPT_EXPECTS[] = {
     {"cfg", CT_SCRIPT_EXPECT_CFG, CT_SCRIPT_ARGC_3},
     {"algcount", CT_SCRIPT_EXPECT_ALGCOUNT, 2},
     {"genalg", CT_SCRIPT_EXPECT_GENALG, CT_SCRIPT_ARGC_4},
+    {"memo", CT_SCRIPT_EXPECT_MEMO, CT_SCRIPT_ARGC_5},
 };
 
 enum {
@@ -208,7 +210,7 @@ int ct_script_parse(const char *src, ct_script *out, char *err, unsigned cap) {
                      spec->argc);
             return CT_SCRIPT_EXIT_PARSE;
         }
-        static const int CT_SCRIPT_OP_AT[CT_SCRIPT_ARGS_MAX] = {
+        static const int CT_SCRIPT_OP_AT[CT_SCRIPT_EXPECT_MEMO - CT_SCRIPT_EXPECT_COUNT + 1] = {
             [CT_SCRIPT_EXPECT_COUNT - CT_SCRIPT_EXPECT_COUNT] = CT_SCRIPT_ARGC_1,
             [CT_SCRIPT_EXPECT_CARD - CT_SCRIPT_EXPECT_COUNT] = CT_SCRIPT_ARGC_3,
             [CT_SCRIPT_EXPECT_SRS - CT_SCRIPT_EXPECT_COUNT] = CT_SCRIPT_ARGC_3,
@@ -217,6 +219,7 @@ int ct_script_parse(const char *src, ct_script *out, char *err, unsigned cap) {
             [CT_SCRIPT_EXPECT_CFG - CT_SCRIPT_EXPECT_COUNT] = CT_SCRIPT_ARGC_1,
             [CT_SCRIPT_EXPECT_ALGCOUNT - CT_SCRIPT_EXPECT_COUNT] = CT_SCRIPT_ARGC_0,
             [CT_SCRIPT_EXPECT_GENALG - CT_SCRIPT_EXPECT_COUNT] = CT_SCRIPT_ARGC_2,
+            [CT_SCRIPT_EXPECT_MEMO - CT_SCRIPT_EXPECT_COUNT] = CT_SCRIPT_ARGC_3,
         };
         for (int i = 0; i < spec->argc; i++) {
             cmd->off[i] = cmd->off[drop + i];
@@ -757,8 +760,33 @@ static int ct_script_step_due(ct_app *app, const ct_script *s, const ct_script_r
                             : ct_script_fail(err, cap, c, "srs seed failed", CT_SCRIPT_EXIT_RUN);
 }
 
-static void ct_script_rt_reset(ct_script_rt *rt) {
-    if (rt->review_open) {
+int ct_script_orbit_parse(const char *word) {
+    if (strcmp(word, "corner") == 0) {
+        return CT_ORBIT_CORNER;
+    }
+    if (strcmp(word, "edge") == 0) {
+        return CT_ORBIT_EDGE;
+    }
+    return -1;
+}
+
+static int ct_script_step_memo(ct_app *app, const ct_script *s, const ct_script_row *c, char *err,
+                               unsigned cap) {
+    int orbit = ct_script_orbit_parse(ct_script_arg(s, c, 0));
+    if (orbit < 0) {
+        return ct_script_fail(err, cap, c, "unknown orbit", CT_SCRIPT_EXIT_RUN);
+    }
+    const char *phoneme = ct_script_arg(s, c, 2);
+    const char *image = ct_script_arg(s, c, 3);
+    if (strlen(phoneme) >= CT_MEMO_TEXT_MAX || strlen(image) >= CT_MEMO_TEXT_MAX) {
+        return ct_script_fail(err, cap, c, "memo text too long", CT_SCRIPT_EXIT_RUN);
+    }
+    int rc = ct_memo_set(app->db, orbit, ct_script_arg(s, c, 1), phoneme, image);
+    return rc == CT_REPO_OK ? 0
+                            : ct_script_fail(err, cap, c, "memo set failed", CT_SCRIPT_EXIT_RUN);
+}
+
+static void ct_script_rt_reset(ct_script_rt *rt) {    if (rt->review_open) {
         ct_session_free(&rt->review.session);
     }
     memset(rt, 0, sizeof *rt);
@@ -814,6 +842,8 @@ static int ct_script_step(ct_app *app, ct_script_rt *rt, const ct_script *s, con
         return ct_script_step_shot(app, s, c, err, cap);
     case CT_SCRIPT_REVIEWED:
         return ct_script_step_reviewed(app, s, c, err, cap);
+    case CT_SCRIPT_MEMO_SET:
+        return ct_script_step_memo(app, s, c, err, cap);
     default:
         return ct_script_expect(app, rt, s, c, err, cap);
     }

@@ -606,6 +606,115 @@ CT_SUITE(e2e_run_trainer_memo_panel) {
     ct_db_close(db);
 }
 
+CT_SUITE(e2e_parse_memo_words) {
+    ct_script s;
+    char err[CT_SCRIPT_ERR_MAX];
+    static const char text[] = "memo_set corner AB \"ah1 bo1\" \"amber boat\"\n"
+                               "expect memo corner AB image == \"amber boat\"\n"
+                               "expect memo edge AB phoneme != \"ah1 bo1\"\n";
+    CT_ASSERT_EQ(ct_script_parse(text, &s, err, sizeof err), 0);
+    CT_ASSERT_EQ(s.count, 3);
+    CT_ASSERT_EQ(s.cmds[0].kind, CT_SCRIPT_MEMO_SET);
+    CT_ASSERT_EQ(s.cmds[0].argc, 4);
+    CT_ASSERT_STR_EQ(ct_script_arg(&s, &s.cmds[0], 0), "corner");
+    CT_ASSERT_STR_EQ(ct_script_arg(&s, &s.cmds[0], 1), "AB");
+    CT_ASSERT_STR_EQ(ct_script_arg(&s, &s.cmds[0], 2), "ah1 bo1");
+    CT_ASSERT_STR_EQ(ct_script_arg(&s, &s.cmds[0], 3), "amber boat");
+    CT_ASSERT_EQ(s.cmds[1].kind, CT_SCRIPT_EXPECT_MEMO);
+    CT_ASSERT_EQ(s.cmds[1].argc, 5);
+    CT_ASSERT_STR_EQ(ct_script_arg(&s, &s.cmds[1], 0), "corner");
+    CT_ASSERT_STR_EQ(ct_script_arg(&s, &s.cmds[1], 1), "AB");
+    CT_ASSERT_STR_EQ(ct_script_arg(&s, &s.cmds[1], 2), "image");
+    CT_ASSERT_STR_EQ(ct_script_arg(&s, &s.cmds[1], 3), "==");
+    CT_ASSERT_STR_EQ(ct_script_arg(&s, &s.cmds[1], 4), "amber boat");
+    CT_ASSERT_EQ(s.cmds[2].kind, CT_SCRIPT_EXPECT_MEMO);
+    CT_ASSERT_STR_EQ(ct_script_arg(&s, &s.cmds[2], 2), "phoneme");
+    static const char arity[] = "memo_set corner AB x\n";
+    CT_ASSERT_EQ(ct_script_parse(arity, &s, err, sizeof err), CT_SCRIPT_EXIT_PARSE);
+    CT_ASSERT(strstr(err, "arity") != NULL);
+    static const char bad_op[] = "expect memo corner AB image ~= x\n";
+    CT_ASSERT_EQ(ct_script_parse(bad_op, &s, err, sizeof err), CT_SCRIPT_EXIT_PARSE);
+}
+
+CT_SUITE(e2e_run_memo_roundtrip) {
+    sqlite3 *db = e2e_db();
+    ct_app app;
+    e2e_app(&app, db);
+    char err[CT_SCRIPT_ERR_MAX];
+    static const char text[] = "trainer_list 3bld 3style 0\n"
+                               "trainer_case 0\n"
+                               "expect memo corner AB phoneme == \"a^w1 bep5\"\n"
+                               "expect memo corner AB image == \"atlas bridge\"\n"
+                               "memo_set corner AB \"ah1 bo1\" \"amber boat\"\n"
+                               "expect memo corner AB phoneme == \"ah1 bo1\"\n"
+                               "expect memo corner AB image == \"amber boat\"\n"
+                               "expect memo corner AB image != \"atlas bridge\"\n"
+                               "expect memo edge AB image == \"atlas bridge\"\n"
+                               "memo_set edge AB \"eh1 bo2\" \"ember barn\"\n"
+                               "expect memo edge AB image == \"ember barn\"\n"
+                               "trainer_generate\n"
+                               "trainer_save unfiled\n"
+                               "due unfiled AB 2020-01-01\n"
+                               "review_begin\n";
+    ct_script script;
+    CT_ASSERT_EQ(ct_script_parse(text, &script, err, sizeof err), 0);
+    ct_script_rt rt;
+    memset(&rt, 0, sizeof rt);
+    CT_ASSERT_EQ(ct_script_run(&app, &rt, &script, err, sizeof err), 0);
+    CT_ASSERT_STR_EQ(rt.review.card.case_key, "AB");
+    CT_ASSERT(rt.review.memo_pair);
+    CT_ASSERT_STR_EQ(rt.review.memo_image, "amber boat");
+    ct_memo_row stored;
+    CT_ASSERT_EQ(ct_memo_get(db, CT_ORBIT_CORNER, "AB", &stored), CT_REPO_OK);
+    CT_ASSERT_STR_EQ(stored.phoneme, "ah1 bo1");
+    CT_ASSERT_STR_EQ(stored.image, "amber boat");
+    CT_ASSERT_EQ(ct_memo_get(db, CT_ORBIT_EDGE, "AB", &stored), CT_REPO_OK);
+    CT_ASSERT_STR_EQ(stored.image, "ember barn");
+    ct_db_close(db);
+}
+
+CT_SUITE(e2e_run_memo_guards) {
+    sqlite3 *db = e2e_db();
+    ct_app app;
+    e2e_app(&app, db);
+    char err[CT_SCRIPT_ERR_MAX];
+    static const char bad_orbit[] = "memo_set middle AB p i\n";
+    CT_ASSERT_EQ(e2e_run(&app, bad_orbit, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "unknown orbit") != NULL);
+    static const char bad_orbit_expect[] = "expect memo middle AB image == x\n";
+    CT_ASSERT_EQ(e2e_run(&app, bad_orbit_expect, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "unknown orbit") != NULL);
+    static const char bad_pair[] = "memo_set corner AY p i\n";
+    CT_ASSERT_EQ(e2e_run(&app, bad_pair, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "memo set failed") != NULL);
+    static const char lower_pair[] = "memo_set corner ab p i\n";
+    CT_ASSERT_EQ(e2e_run(&app, lower_pair, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "memo set failed") != NULL);
+    static const char long_pair[] = "memo_set corner ABC p i\n";
+    CT_ASSERT_EQ(e2e_run(&app, long_pair, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "memo set failed") != NULL);
+    char big[CT_MEMO_TEXT_MAX + 1];
+    memset(big, 'm', sizeof big - 1);
+    big[sizeof big - 1] = '\0';
+    char big_text[CT_SCRIPT_ERR_MAX + 64];
+    snprintf(big_text, sizeof big_text, "memo_set corner AB %s i\n", big);
+    CT_ASSERT_EQ(e2e_run(&app, big_text, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "too long") != NULL);
+    static const char missing[] = "expect memo corner ZZ image == x\n";
+    CT_ASSERT_EQ(e2e_run(&app, missing, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "memo row missing") != NULL);
+    static const char bad_field[] = "expect memo corner AB wat == x\n";
+    CT_ASSERT_EQ(e2e_run(&app, bad_field, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "unknown memo field") != NULL);
+    static const char bad_cmp[] = "expect memo corner AB image >= atlas\n";
+    CT_ASSERT_EQ(e2e_run(&app, bad_cmp, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "memo supports == or !=") != NULL);
+    static const char wrong_value[] = "expect memo corner AB image == nope\n";
+    CT_ASSERT_EQ(e2e_run(&app, wrong_value, err), CT_SCRIPT_EXIT_EXPECT);
+    CT_ASSERT(strstr(err, "memo image is [atlas bridge], expected == [nope]") != NULL);
+    ct_db_close(db);
+}
+
 CT_SUITE(e2e_run_script_guards) {
     sqlite3 *db = e2e_db();
     ct_app app;

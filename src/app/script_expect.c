@@ -340,6 +340,38 @@ static int ct_script_expect_genalg(ct_app *app, const ct_script_rt *rt, const ct
     return ct_script_fail(err, cap, c, "unknown genalg field", CT_SCRIPT_EXIT_EXPECT);
 }
 
+static int ct_script_expect_memo(ct_app *app, const ct_script *s, const ct_script_row *c,
+                                 char *err, unsigned cap) {
+    int orbit = ct_script_orbit_parse(ct_script_arg(s, c, 0));
+    if (orbit < 0) {
+        return ct_script_fail(err, cap, c, "unknown orbit", CT_SCRIPT_EXIT_EXPECT);
+    }
+    ct_memo_row row;
+    if (ct_memo_get(app->db, orbit, ct_script_arg(s, c, 1), &row) != CT_REPO_OK) {
+        return ct_script_fail(err, cap, c, "memo row missing", CT_SCRIPT_EXIT_EXPECT);
+    }
+    const char *field = ct_script_arg(s, c, 2);
+    const char *got;
+    if (strcmp(field, "phoneme") == 0) {
+        got = row.phoneme;
+    } else if (strcmp(field, "image") == 0) {
+        got = row.image;
+    } else {
+        return ct_script_fail(err, cap, c, "unknown memo field", CT_SCRIPT_EXIT_EXPECT);
+    }
+    int op = ct_script_op(ct_script_arg(s, c, CT_SCRIPT_ARGC_3));
+    if (op != CT_SCRIPT_EQ && op != CT_SCRIPT_NE) {
+        return ct_script_fail(err, cap, c, "memo supports == or !=", CT_SCRIPT_EXIT_EXPECT);
+    }
+    bool equal = strcmp(got, ct_script_arg(s, c, CT_SCRIPT_ARGC_4)) == 0;
+    if (equal != (op == CT_SCRIPT_EQ)) {
+        snprintf(err, cap, "line %d: memo %s is [%s], expected %s [%s]", c->line, field, got,
+                 ct_script_arg(s, c, CT_SCRIPT_ARGC_3), ct_script_arg(s, c, CT_SCRIPT_ARGC_4));
+        return CT_SCRIPT_EXIT_EXPECT;
+    }
+    return 0;
+}
+
 int ct_script_expect(ct_app *app, ct_script_rt *rt, const ct_script *s, const ct_script_row *c,
                      char *err, unsigned cap) {
     switch (c->kind) {
@@ -357,6 +389,8 @@ int ct_script_expect(ct_app *app, ct_script_rt *rt, const ct_script *s, const ct
         return ct_script_expect_cfg(app, s, c, err, cap);
     case CT_SCRIPT_EXPECT_ALGCOUNT:
         return ct_script_expect_algcount(app, rt, s, c, err, cap);
+    case CT_SCRIPT_EXPECT_MEMO:
+        return ct_script_expect_memo(app, s, c, err, cap);
     default:
         return ct_script_expect_genalg(app, rt, s, c, err, cap);
     }
