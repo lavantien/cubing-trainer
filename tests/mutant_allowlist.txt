@@ -603,90 +603,6 @@ src/ui/screen_trainer.c:323	setup guard capacity mutants differ only at cap zero
 src/ui/screen_trainer.c:472	mouse pick gate needs a live mouse press no suite injects, headless capture never presses so no model state changes
 src/ui/screen_trainer.c:545	visible clamp bound sits above every reachable list count, the corner chart tops at 378 and the edge chart at 440 so the clamp never fires over registered packs
 src/ui/screen_trainer.c:590	decomposition loop bound mutant reads one row past the four row array into uninitialized stack and draws it, draw-only divergence no headless suite exercises
-src/app/script.c:76	list cap mutants bound the stack array only, every event method pair yields at most 3 lists so a cap of 7 or 9 never changes a reachable scan and the cap clause is dominated by the found bound
-src/app/script.c:97	error buffer write index mutants are unobservable, the byte lands before the buffer or at index one, every failing path rewrites the buffer through snprintf before any pinned reader and no pinned reader reads err after a success return
-src/app/script.c:103	script tail copy count mutants are equivalent, the extra byte lands past the nul inside the text array and is never scanned past end, and the missing nul is rewritten by the tokenizer when the final token reaches the tail while comment tails are never read past end
-src/app/script.c:108	outer scan bound widening mutant loops forever at end of text through the argc zero continue arm, confirmed spin in two independent gate runs and killed by the external 330 second kick, excluded from execution
-src/app/script.c:119	comment scan bound and inequality mutants are hang or sentinel classes, the widened bound reads the nul sentinel at end which fails the newline clause and exits identically, and the inverted inequality re-enters the comment branch without progress and was killed by the external 330 second kick in two runs, excluded from execution
-src/app/script.c:129	command row memset fill and count mutants are dead stores, every field the parser consumes is assigned after the memset
-src/app/script.c:133	line end scan bound mutant reads the newline sentinel at the boundary which fails the scan clause and exits identically
-src/app/script.c:136	trailing newline flag bound mutant flips has_nl only at line_end == end where both arms leave p past end and terminate the outer scan, only the final error line number differs and no pinned suite reads it
-src/app/script.c:138	token scan bound mutant reads the newline sentinel at line_end which fails the scan clause and exits identically
-src/app/script.c:139	separator skip bound mutant reads the newline sentinel at line_end which fails the separator test and exits identically
-src/app/script.c:153	quote close scan bound mutant reads the newline sentinel at line_end which fails the quote clause so the unterminated quote verdict is unchanged
-src/app/script.c:161	quote close advance mutant skips one char after the closing quote, every pinned quoted token is followed by a separator or line end so the skipped char is blank and the token stream is unchanged
-src/app/script.c:167	delimiter probe bound mutant reads the line end sentinel, the ternary yields the same nul delimiter and the token termination is unchanged
-src/app/script.c:182	empty line argc guard mutants are dead, the outer loop consumes blank and comment only lines before command parsing starts so argc is never zero at the guard, the only input that reaches it is the 137 hang mutant
-src/app/script.c:189	expect kind arity guard mutants only select which parse error message fires on malformed expect lines, the accept set is unchanged and no pinned suite pins the message
-src/app/script.c:194	expect table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
-src/app/script.c:199	word table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
-src/app/script.c:221	argument shift loop bound mutant writes one offset slot past argc, the slot is in bounds padding and every accessor bounds the index by argc before reading
-src/app/script.c:223	argument length copies are dead stores, no reader consumes the len fields, argument text is nul terminated in place and accessed through the offsets only
-src/app/script.c:244	argument accessor guard relaxations admit indexes no caller produces, every call site passes a literal inside argc
-src/app/script.c:256	errno preset mutants are equivalent, a non ERANGE preset is cleared identically for the ERANGE comparison and strtol sets errno itself on range errors
-src/app/script.c:267	errno preset mutants are equivalent, a non ERANGE preset is cleared identically for the ERANGE comparison and strtod sets errno itself on range errors
-src/app/script.c:308	negative difference test bound mutant is a no-op at zero, negating plus or minus zero yields zero so the epsilon comparison is unchanged
-src/app/script.c:313	double equality epsilon boundary mutant differs only at a difference of exactly CT_SCRIPT_DBL_EPS which no decimal literal pair constructs, every pinned difference lands strictly above or below
-src/app/script.c:319	double inequality epsilon boundary mutant differs only at a difference of exactly CT_SCRIPT_DBL_EPS which no decimal literal pair constructs, every pinned difference lands strictly above or below
-src/app/script.c:357	clock stamp index mutant checks the second stamp char, ct_now_utc_iso always writes a 20 char stamp whose second char is a digit, so the empty stamp arm never fires over the pinned clock path, same class as the repo_algs stamp row
-src/app/script.c:358	clock failure return payload mutants are equivalent, every caller compares the result against zero
-src/app/script.c:392	cards open argument index mutants are equivalent, the index 1 fetch reads the stale pre-shift offset slot that still holds the deck token for one argument commands, and the minus one fetch returns NULL which opens the unfiltered form, the pinned single deck corpus addresses the same rows either way
-src/app/script.c:419	card field capacity init mutants are dead stores, every branch of the field resolver assigns the capacity before any read
-src/app/script.c:424	card field value index mutant fetches the stale pre-shift offset slot that still holds the value token for two argument commands, verified by the pinned cfop cards field roundtrip
-src/app/script.c:445	cards step default arm is unreachable, ct_script_step routes exactly the cards kinds into this dispatcher
-src/app/script.c:453	review day init mutants are dead stores, ct_script_now writes the day on the only path that continues
-src/app/script.c:457	review begin rc init mutants are dead stores, the begin call overwrites rc before any read
-src/app/script.c:458	review begin rc negative one payload mutant admits only a begin return of minus one which the pinned seeded flows never produce, every pinned begin returns zero or a positive row count
-src/app/script.c:479	clock stamp index mutant checks the second stamp char, ct_now_utc_iso always writes a 20 char stamp whose second char is a digit, so the empty stamp arm never fires over the pinned clock path
-src/app/script.c:490	clock stamp index mutant checks the second stamp char, ct_now_utc_iso always writes a 20 char stamp whose second char is a digit, so the empty stamp arm never fires over the pinned clock path
-src/app/script.c:505	wait tick loop bound and start mutants shift one idle animation step, the pinned review flows animate no moves so no completion edge is crossed and every pinned wait assertion is unchanged
-src/app/script.c:510	wait scrub index arithmetic mutant touches a display bookkeeping field that no headless suite reads
-src/app/script.c:511	wait animation pause branch mutants are no-ops over pinned waits, the pinned review flows run idle animations where pausing changes no observable state
-src/app/script.c:513	wait playing flag mutant touches a display state field that no headless suite reads
-src/app/script.c:520	review step default arm is unreachable, ct_script_step routes exactly the review kinds into this dispatcher
-src/app/script.c:559	settings step default arm is unreachable, ct_script_step routes exactly the settings kinds into this dispatcher
-src/app/script.c:573	trainer step default arm is unreachable, ct_script_step routes exactly the trainer kinds into this dispatcher
-src/app/script.c:594	cfop stage argument index mutant fetches the stale pre-shift offset slot that still holds the stage token for one argument commands, verified by the pinned populate flows
-src/app/script.c:595	cfop stage negative bound payload mutant admits only a parse return of minus one as a valid stage, the pinned bogus stage script pins the exact error message for every payload
-src/app/script.c:599	cfop populate made zero boundary is unreachable, every pinned stage inserts a positive card count
-src/app/script.c:605	trainer list id init mutants are dead stores, the integer parse writes the id on the only path that continues
-src/app/script.c:621	trainer list found zero bound and cap clause mutants are unreachable, every valid event method pair scans at least one table row so found is always positive and the found bound fires before the cap clause for every reachable id
-src/app/script.c:628	trainer list target key reset index mutants are unobservable over the pinned list then case sequences, the byte lands in a stale tail slot never read before the next assignment
-src/app/script.c:653	trainer generate target guard index mutant checks the second key char, the guard fires only on a fresh runtime whose zeroed key also has a nul second char, so the verdict is unchanged
-src/app/script.c:656	synth ready guard and flag mutants are equivalent, ct_synth_target self initializes through the synth_built gate so skipping or repeating the eager init changes no result
-src/app/script.c:658	synth ready flag mutant is equivalent, ct_synth_init is idempotent through the synth_built gate so reinitializing on every generate changes no result
-src/app/script.c:660	target sticker one init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
-src/app/script.c:661	target sticker two init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
-src/app/script.c:666	orbit buffer ternary mutant is equivalent, both scheme buffers carry the default index 2 from the equal corner and edge constants, verified by direct scheme load probe, so the ternary selects an identical buffer on every reachable flow
-src/app/script.c:668	synthesis result memset count mutants are dead stores, ct_synth_target memsets the whole output on every return path before writing
-src/app/script.c:670	synthesis failure disjunction mutant is equivalent over pinned targets, every pinned generate finds a candidate so the rc zero with found zero arm never occurs
-src/app/script.c:674	sequence format failure bound mutant is unreachable, the formatter returns a positive length for every pinned nonempty sequence and the zero return needs an empty sequence never formatted here
-src/app/script.c:677	classification memset count mutants are equivalent, ct_classify overwrites every consumed field and the off byte is tail padding never read
-src/app/script.c:681	scoring memset count mutants are equivalent, ct_score_alg overwrites every consumed field and the off byte is tail padding never read
-src/app/script.c:686	scheme id zero bound and payload mutants are unreachable over the pinned startup, app init seeds the speffz scheme so the default id is always positive and the seed branch never runs
-src/app/script.c:687	scheme seed guard mutants are unreachable over the pinned startup, the enclosing scheme id zero branch never runs because app init seeds the speffz scheme
-src/app/script.c:692	post seed scheme id bound mutant is unreachable over the pinned startup, the seeded default id is always positive
-src/app/script.c:698	generated alg struct memset count mutants are equivalent, every consumed field is assigned before the store and the off byte is tail padding the row validator never reads
-src/app/script.c:736	trainer step dispatcher default arm is unreachable, ct_script_step routes every trainer kind and the expect kinds route to the expect dispatcher
-src/app/script.c:749	due date day output literal mutants are unobservable, the due command validates only and discards the parsed day value
-src/app/script.c:823	run guard cap mutants are unreachable, every caller passes the full error buffer capacity and no pinned caller passes zero or one
-src/app/script.c:429	cards field dirty flag mutants are display bookkeeping, ct_cards_form_save updates unconditionally and the form recomputes the flag on refresh, no headless suite reads it
-src/app/script.c:587	cfop stage parse error payload mutants are equivalent, every caller tests the sign and the pinned bogus stage script pins the message for every negative payload
-src/app/script.c:639	case count clause mutants are unobservable over the pinned corpus, count zero is unreachable because every pinned list yields at least one case and no pinned list holds exactly one case, the index clauses are pinned by the out of range scripts
-src/app/script.c:835	final review open reset is a dead store, the runtime dies at function return and no reader follows
-src/app/script.c:842	scripted entry guard mutants sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary and every pinned invocation passes a valid app and path
-src/app/script.c:847	scripted entry open failure mutant sits outside the gate suite surface, every pinned e2e invocation opens its script file successfully
-src/app/script.c:851	scripted entry buffer allocation mutants sit outside the gate suite surface, every pinned e2e invocation allocates the script buffer successfully
-src/app/script.c:852	scripted entry allocation failure guard sits outside the gate suite surface, malloc failure is unreachable in every pinned e2e invocation
-src/app/script.c:857	scripted entry read size mutants sit outside the gate suite surface, the pinned e2e corpus holds files well under the cap so a read bound one byte either way returns the same content, and the oversize arm is pinned by the caps suite at the parse layer
-src/app/script.c:859	scripted entry oversize boundary mutant admits a file of exactly CT_SCRIPT_TEXT_MAX bytes, no pinned e2e file reaches the cap and every pinned file parses identically under both bounds
-src/app/script.c:870	scripted entry parse result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
-src/app/script.c:875	scripted entry parse rc init mutants are dead stores, the parse call overwrites rc before any read
-src/app/script.c:877	scripted entry run result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
-src/app/script.c:472	review grade found flag initializer is a dead store, ct_script_grade_parse clears the out flag on entry before any read
-src/app/script.c:609	trainer event ok flag initializer is a dead store, ct_script_event_parse clears the out flag on entry before any read
-src/app/script.c:610	trainer method ok flag initializer is a dead store, ct_script_method_parse clears the out flag on entry before any read
-src/app/script.c:826	script run rc initializer is a dead store, the parse layer rejects zero command scripts with the empty script error so the loop always assigns rc before the return
 src/app/script_shots.c:52	event table bound denominator mutant swaps the element sizeof for index one, both denominators are the same struct size so the loop count is identical
 src/app/script_shots.c:63	method table bound denominator mutant swaps the element sizeof for index one, both denominators are the same struct size so the loop count is identical
 src/app/script_shots.c:74	grade table bound denominator mutant swaps the element sizeof for index one, both denominators are the same struct size so the loop count is identical
@@ -1560,3 +1476,77 @@ src/ui/screen_trainer.c:482	active-row comparison inside static build_labels, ex
 src/ui/screen_trainer.c:489	static GuiTree event callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_event which rejects them unobserved
 src/ui/screen_trainer.c:498	static GuiTree method callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_method which rejects them unobserved
 src/ui/screen_trainer.c:504	static GuiTree list callback guard invoked only from the draw region, negative active values flow into ct_trainer_form_select_list which rejects them unobserved
+src/app/script.c:78	list cap mutants bound the stack array only, every event method pair yields at most 3 lists so a cap of 7 or 9 never changes a reachable scan and the found clause rejects every id at or above it first
+src/app/script.c:99	error buffer clear index mutants are unobservable, the byte lands before the buffer or at index one, every failing path rewrites the buffer through snprintf before any pinned reader and no pinned reader reads err after a success return
+src/app/script.c:105	script tail copy count mutants are equivalent, the extra byte lands past the nul inside the text array and is never scanned past end, and the short copy leaves the tail byte the tokenizer rewrites when the final token reaches it while comment tails are never read past end
+src/app/script.c:121	comment scan bound widening reads the nul sentinel at end which fails the newline clause and exits identically
+src/app/script.c:131	command row memset fill mutants are dead stores, every field the parser consumes is assigned after the memset
+src/app/script.c:135	line end scan bound widening reads the nul sentinel at the boundary which fails the scan clause and leaves the same line end
+src/app/script.c:140	token scan bound widening reaches the break arm at line_end and exits the token loop identically
+src/app/script.c:141	separator skip bound widening reads the newline sentinel at line_end which fails the separator test and exits identically
+src/app/script.c:155	quote close scan bound widening reads the newline sentinel at line_end which fails the quote clause so the unterminated quote verdict is unchanged
+src/app/script.c:163	quote close advance mutant skips one char after the closing quote, every quoted token is followed by a separator or line end so the skipped char is blank and the token stream is unchanged
+src/app/script.c:169	delimiter probe bound widening reads the newline or nul sentinel at line_end, neither equals the hash delimiter so the token termination is unchanged
+src/app/script.c:184	empty line argc guard mutant compares against minus one, argc is never zero at the guard because the outer loop consumes blank and comment only lines before command parsing starts
+src/app/script.c:191	expect kind arity guard mutants only select which parse error message fires on expect lines with fewer than three tokens, the accept set is unchanged and no pinned suite pins the message
+src/app/script.c:196	expect table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
+src/app/script.c:201	word table element size index mutants are equivalent, the entries are a uniform struct so sizeof of any element is identical
+src/app/script.c:213	operator index array size mutants only change trailing slack, the designated values at the used indices are unchanged and the runtime index never reaches the boundary
+src/app/script.c:224	argument shift loop bound widening writes one offset slot past argc, the slot is in bounds padding and every accessor bounds the index by argc before reading
+src/app/script.c:226	argument length copy arithmetic mutant is a dead store, no reader consumes the len fields, argument text is nul terminated in place and accessed through the offsets only
+src/app/script.c:247	accessor cap clause widening differs only at an index equal to the args max with argc above it, argc never exceeds six so the argc clause rejects that index first
+src/app/script.c:259	errno preset mutants are equivalent, a non ERANGE preset is cleared identically for the ERANGE comparison and strtol sets errno itself on range errors
+src/app/script.c:270	errno preset mutants are equivalent, a non ERANGE preset is cleared identically for the ERANGE comparison and strtod sets errno itself on range errors
+src/app/script.c:311	negative difference test bound widening is a no-op at zero, negating plus or minus zero yields zero so the epsilon comparison is unchanged
+src/app/script.c:316	double equality epsilon boundary mutant differs only at a difference of exactly the epsilon constant which no decimal literal pair constructs, every pinned difference lands strictly above or below
+src/app/script.c:322	double inequality epsilon boundary mutant differs only at a difference of exactly the epsilon constant which no decimal literal pair constructs, every pinned difference lands strictly above or below
+src/app/script.c:360	clock stamp index mutant checks the second stamp char, the utc clock always writes a stamp whose second char is a digit so the empty stamp arm never fires
+src/app/script.c:361	clock failure return payload mutants are unreachable, the utc clock always writes a parseable stamp so the failure return never executes
+src/app/script.c:422	card field capacity init mutants are dead stores, every branch of the field resolver assigns the capacity before any read
+src/app/script.c:427	card field value index shift runs through the guard the strlen nonnull assumption deletes at o2, the stale pre-shift offset slot still holds the value token for two argument commands
+src/app/script.c:432	cards field dirty flag mutant is display bookkeeping, the save path updates unconditionally and the form recomputes the flag on refresh, no headless suite reads it
+src/app/script.c:448	cards step default arm is unreachable, the step dispatcher routes exactly the cards kinds into this handler
+src/app/script.c:456	review day init mutants are dead stores, the clock helper writes the day on the only path that continues
+src/app/script.c:460	review begin limit minus one takes the same unlimited paging path as zero, the queue loader branches only on limit greater than zero
+src/app/script.c:461	review begin rc bound widening admits only a begin return of minus one, every reachable begin returns a nonnegative queue count over the scripted default deck
+src/app/script.c:475	review grade found flag initializer is a dead store, the grade parse helper clears the out flag on entry before any read
+src/app/script.c:482	clock stamp index mutant checks the second stamp char, the utc clock always writes a stamp whose second char is a digit so the empty stamp arm never fires
+src/app/script.c:493	clock stamp index mutant checks the second stamp char, the utc clock always writes a stamp whose second char is a digit so the empty stamp arm never fires
+src/app/script.c:508	wait tick loop bound and start mutants shift one animation step, no script observable reads animation progress and no pinned wait count sits on a completion edge
+src/app/script.c:514	wait animation pause branch mutant touches only anim bookkeeping, pausing a completed or idle animation changes no graded state
+src/app/script.c:516	wait playing flag mutant touches a display state field that no headless suite reads
+src/app/script.c:523	review step default arm is unreachable, the step dispatcher routes exactly the review kinds into this handler
+src/app/script.c:576	settings step default arm is unreachable, the step dispatcher routes exactly the settings kinds into this handler
+src/app/script.c:590	cfop stage parse error payload mutant is sign tested, both failure paths return a negative payload and the pinned bogus stage script pins the message
+src/app/script.c:597	cfop stage argument index shift runs through the guard the strcmp nonnull assumption deletes at o2, the stale pre-shift offset slot still holds the stage token for one argument commands
+src/app/script.c:602	cfop populate bound widening admits made values of minus one and zero, every reachable stage inserts a positive card count and populate failures are unreachable over the in memory corpus
+src/app/script.c:608	trainer list id init mutants are dead stores, the integer parse writes the id on the only path that continues
+src/app/script.c:612	trainer event ok flag initializer is a dead store, the event parse helper clears the out flag on entry before any read
+src/app/script.c:613	trainer method ok flag initializer is a dead store, the method parse helper clears the out flag on entry before any read
+src/app/script.c:624	list guard bound and cap mutants are clause dominated, found zero rejects through the found index clause with the same verdict and message and the cap clause never fires because no pair yields more than three lists
+src/app/script.c:631	trainer list target key reset index mutant writes the nul one byte into a stale tail slot, the key is rewritten by the next case step before any read
+src/app/script.c:642	case guard bound mutants are clause dominated or unreachable, count zero rejects through the index clause with the same verdict and no selector list holds exactly one case across cfop stages, chart targets, and seeded packs
+src/app/script.c:659	synth ready guard mutant is equivalent, the synthesis entry self initializes through its built gate so skipping the eager init changes no result
+src/app/script.c:663	target sticker one init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
+src/app/script.c:664	target sticker two init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
+src/app/script.c:669	orbit buffer ternary flip is equivalent over the script surface, no script word stages buffer overrides so both scheme buffers carry the equal fallback index and the flip selects the same buffer
+src/app/script.c:671	synthesis result memset fill mutants are dead stores, the synthesis entry memsets the whole output on every return path before writing
+src/app/script.c:673	synthesis failure disjunction mutant is equivalent over reachable targets, every generate resolves a candidate so the success with found false arm never occurs
+src/app/script.c:680	classification memset fill mutants are equivalent, the classifier overwrites every consumed field and the off bytes are tail padding never read
+src/app/script.c:684	scoring memset fill mutants are equivalent, the scorer overwrites every consumed field and the off bytes are tail padding never read
+src/app/script.c:689	scheme id bound mutants never change the verdict, generate only runs after the list step seeded the scheme so the id is always one at the guard and the widened bound only reenters an idempotent find first reseed
+src/app/script.c:690	scheme seed guard mutants are unreachable, generate only runs after the list step seeded the scheme so the enclosing branch never runs
+src/app/script.c:695	post seed scheme id bound mutants are unreachable, the scheme id is always one on every path that reaches the guard
+src/app/script.c:701	generated alg struct memset fill mutants are equivalent, every consumed field is assigned before the store and the off bytes are tail padding the row validator never reads
+src/app/script.c:739	trainer step dispatcher default arm is unreachable, the step dispatcher routes every trainer kind and the expect kinds route to the expect handler
+src/app/script.c:752	due date day output literal mutants are unobservable, the due command validates only and discards the parsed day value
+src/app/script.c:770	orbit parse error payload mutant is sign tested, both callers compare the result against zero
+src/app/script.c:873	scripted entry guard mutants sit outside the gate suite surface, the file entry runs only through the e2e make target against the real binary where every pinned invocation passes a valid app and path
+src/app/script.c:878	scripted entry open failure mutant sits outside the gate suite surface, every pinned e2e invocation opens its script file successfully
+src/app/script.c:882	scripted entry buffer allocation mutants sit outside the gate suite surface, every pinned e2e invocation allocates the script buffer successfully
+src/app/script.c:883	scripted entry allocation failure guard sits outside the gate suite surface, malloc failure is unreachable in every pinned e2e invocation
+src/app/script.c:888	scripted entry read size mutants sit outside the gate suite surface, the pinned e2e corpus holds files well under the cap so a read bound one byte either way returns the same content, and the oversize arm is pinned by the caps suite at the parse layer
+src/app/script.c:890	scripted entry oversize boundary mutant admits a file of exactly the text cap, no pinned e2e file reaches the cap
+src/app/script.c:901	scripted entry parse result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr
+src/app/script.c:906	scripted entry runtime seed mutants sit outside the gate suite surface, no gate suite invokes the file entry so the seed never executes
+src/app/script.c:908	scripted entry run result comparison mutants change only the stderr diagnostic, the return code is rc in both arms and no gate suite reads stderr

@@ -154,6 +154,11 @@ CT_SUITE(e2e_parse_flow) {
     CT_ASSERT_EQ(s.cmds[18].kind, CT_SCRIPT_EXPECT_REVIEWS);
     CT_ASSERT_EQ(s.cmds[18].argc, 4);
     CT_ASSERT_EQ(s.cmds[19].kind, CT_SCRIPT_EXPECT_COUNT);
+    CT_ASSERT(ct_script_arg(&s, &s.cmds[0], -1) == NULL);
+    CT_ASSERT(ct_script_arg(&s, &s.cmds[0], 1) == NULL);
+    CT_ASSERT(ct_script_arg(&s, &s.cmds[13], 3) == NULL);
+    CT_ASSERT(ct_script_arg(NULL, &s.cmds[0], 0) == NULL);
+    CT_ASSERT(ct_script_arg(&s, NULL, 0) == NULL);
 }
 
 CT_SUITE(e2e_parse_comments_and_quotes) {
@@ -700,6 +705,13 @@ CT_SUITE(e2e_run_memo_guards) {
     snprintf(big_text, sizeof big_text, "memo_set corner AB %s i\n", big);
     CT_ASSERT_EQ(e2e_run(&app, big_text, err), CT_SCRIPT_EXIT_RUN);
     CT_ASSERT(strstr(err, "too long") != NULL);
+    char big_image[CT_MEMO_TEXT_MAX + 1];
+    memset(big_image, 'i', sizeof big_image - 1);
+    big_image[sizeof big_image - 1] = '\0';
+    char big_image_text[CT_SCRIPT_ERR_MAX + 64];
+    snprintf(big_image_text, sizeof big_image_text, "memo_set corner AB p %s\n", big_image);
+    CT_ASSERT_EQ(e2e_run(&app, big_image_text, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "too long") != NULL);
     static const char missing[] = "expect memo corner ZZ image == x\n";
     CT_ASSERT_EQ(e2e_run(&app, missing, err), CT_SCRIPT_EXIT_EXPECT);
     CT_ASSERT(strstr(err, "memo row missing") != NULL);
@@ -790,6 +802,44 @@ CT_SUITE(e2e_run_script_guards) {
              long_value);
     CT_ASSERT_EQ(e2e_run(&app, field_text, err), CT_SCRIPT_EXIT_RUN);
     CT_ASSERT(strstr(err, "too long") != NULL);
+    static const char list_single[] = "trainer_list 2x2 cll 0\n";
+    CT_ASSERT_EQ(e2e_run(&app, list_single, err), 0);
+    static const char case_edge[] = "trainer_list 3x3 cfop 0\ntrainer_case 21\n";
+    CT_ASSERT_EQ(e2e_run(&app, case_edge, err), CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "case index out of range") != NULL);
+    static const char two_due[] = "cards_open unfiled\n"
+                                  "cards_new unfiled\n"
+                                  "cards_field alg3 \"R U R'\"\n"
+                                  "cards_save\n"
+                                  "cards_new unfiled\n"
+                                  "cards_field alg3 \"R U R'\"\n"
+                                  "cards_save\n"
+                                  "due unfiled new-1 2020-01-01\n"
+                                  "due unfiled new-2 2020-01-01\n"
+                                  "review_begin\n"
+                                  "review_grade good\n"
+                                  "review_grade easy\n"
+                                  "review_end\n"
+                                  "expect srs unfiled new-1 reps == 1\n"
+                                  "expect srs unfiled new-2 reps == 1\n"
+                                  "expect count session_log == 2\n";
+    CT_ASSERT_EQ(e2e_run(&app, two_due, err), 0);
+    ct_script cap_script;
+    CT_ASSERT_EQ(ct_script_parse("settings_open\n", &cap_script, err, CT_SCRIPT_ERR_MAX), 0);
+    ct_script_rt cap_rt;
+    memset(&cap_rt, 0, sizeof cap_rt);
+    char one_cap[1];
+    CT_ASSERT_EQ(ct_script_run(&app, &cap_rt, &cap_script, one_cap, 1), 0);
+    ct_script open_script;
+    CT_ASSERT_EQ(ct_script_parse("review_begin\n", &open_script, err, CT_SCRIPT_ERR_MAX), 0);
+    ct_script_rt shared_rt;
+    memset(&shared_rt, 0, sizeof shared_rt);
+    CT_ASSERT_EQ(ct_script_run(&app, &shared_rt, &open_script, err, CT_SCRIPT_ERR_MAX), 0);
+    ct_script reveal_script;
+    CT_ASSERT_EQ(ct_script_parse("review_reveal\n", &reveal_script, err, CT_SCRIPT_ERR_MAX), 0);
+    CT_ASSERT_EQ(ct_script_run(&app, &shared_rt, &reveal_script, err, CT_SCRIPT_ERR_MAX),
+                 CT_SCRIPT_EXIT_RUN);
+    CT_ASSERT(strstr(err, "review session not open") != NULL);
     ct_db_close(db);
 }
 
