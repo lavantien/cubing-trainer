@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "app/paths.h"
+#include "raygui.h"
 #include "raylib.h"
 #include "ui/ui.h"
 
@@ -29,6 +30,7 @@ static int ct_shots_window(ct_app *app) {
         if (!IsWindowReady()) {
             return CT_SHOTS_E_WINDOW;
         }
+        GuiSetFont(GetFontDefault());
         ct_shots_window_open = true;
     }
     app->cfg.window.width = CT_WINDOW_WIDTH;

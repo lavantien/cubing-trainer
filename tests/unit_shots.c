@@ -13,6 +13,8 @@
 #include "../src/storage/db.h"
 #include "../src/ui/ui.h"
 #include "framework.h"
+#include "raygui.h"
+#include "raylib.h"
 
 #define CT_SHOTS_OUT_DIR "build/test_shots_api"
 
@@ -80,6 +82,21 @@ CT_SUITE(shots_state_guards) {
     CT_ASSERT_EQ(
         ct_shots_trainer(&app, CT_EVENT_3X3, CT_METHOD_SARAH_INTERMEDIATE, 0, 0, CT_TEST_GUARD_PNG),
         CT_SHOTS_E_STATE);
+    ct_shots_close();
+    ct_db_close(db);
+}
+
+CT_SUITE(shots_font_rebind) {
+    sqlite3 *db = shots_db();
+    ct_app app;
+    shots_app(&app, db);
+    CT_ASSERT_EQ(ct_shots_menu(&app, "build/test_shots_api/rebind1.png"), CT_SHOTS_OK);
+    ct_shots_close();
+    CT_ASSERT_EQ(ct_shots_menu(&app, "build/test_shots_api/rebind2.png"), CT_SHOTS_OK);
+    CT_ASSERT(GuiGetFont().glyphs == GetFontDefault().glyphs);
+    CT_ASSERT(GuiGetFont().recs == GetFontDefault().recs);
+    CT_ASSERT_EQ(remove("build/test_shots_api/rebind1.png"), 0);
+    CT_ASSERT_EQ(remove("build/test_shots_api/rebind2.png"), 0);
     ct_shots_close();
     ct_db_close(db);
 }
