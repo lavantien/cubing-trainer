@@ -12,3 +12,9 @@ conclusion: process-history dependent GPU driver failure (NVIDIA 617.42) after r
 verdict impact: none. every segfault-credited mutant across the three lanes holds a deterministic verdict independent of the guards segv: m0108 dies at e2e_run_due_in exit 1 (5/5 probes), m0132 dies at e2e_run_shot_render exit 1 (5/5 probes), m0145 and m0173 carry genuine arg-index minus-one wild reads that crash deterministically (5/5 probes), the six trainer and shots lane mutants are deterministic 5/5, and m0093/m0131 surfaced as flake-masked survivors already covered by allowlist dead-store rows.
 
 lane hygiene: run one lane at a time with no concurrent GL-heavy loops; when a suite segfault lands on a mutant whose edit cannot reach that suite, verify the verdict with a single-mutant CT_MUTATE_ONLY probe over the full suite list before trusting or rewriting any verdict.
+
+addendum, full final-state gates after 5cbfc07:
+
+full shots.c gate (full_shots_r6.log): 119 generated, 108 killed, 11 accepted, 0 unexplained, wall 197.9s, suite list extended with shots_font_rebind. identical totals to the closing r5 lane, so no survivor was flake-killed. segv events m0001, m0013, m0055 (deterministic no-window draw kills, probed 5/5) plus m0049 (shots.c:90 bool flip, the new font_rebind suite driving the broken path into an invalid-state draw, deterministic class).
+
+full script_shots.c gate (full_sshots_r4.log): 193 generated, 171 killed, 22 accepted, 0 unexplained, wall 905.8s. killed dropped 173 to 171 and survivors rose 20 to 22 exactly by m0093 and m0131, the two flake-masked dead-store equivalents, now correctly surviving and accepted by their pre-existing rows. the guards segv set m0122, m0145, m0158, m0173 matches the original closing lane's set exactly; m0145 and m0173 are deterministic arg-index wild reads (5/5 probes), m0122 and m0158 also die by assert kills on e2e_run_shot_render in other runs, so no verdict depends on the segv.

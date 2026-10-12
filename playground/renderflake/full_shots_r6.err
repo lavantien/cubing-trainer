@@ -1,0 +1,1080 @@
+mutate: suite shots_arg_guards exited -1073741819
+build_scrn2/mutants/p28892/m0002_shots.c:16:42: error: expected ')'
+   16 | static int ct_shots_args_ok(const ct_app /app, const char *out_path) {
+      |                                          ^
+build_scrn2/mutants/p28892/m0002_shots.c:16:28: note: to match this '('
+   16 | static int ct_shots_args_ok(const ct_app /app, const char *out_path) {
+      |                            ^
+build_scrn2/mutants/p28892/m0002_shots.c:17:9: error: use of undeclared identifier 'app'
+   17 |     if (app == NULL || !app->running) {
+      |         ^~~
+build_scrn2/mutants/p28892/m0002_shots.c:17:25: error: use of undeclared identifier 'app'
+   17 |     if (app == NULL || !app->running) {
+      |                         ^~~
+build_scrn2/mutants/p28892/m0002_shots.c:20:9: error: use of undeclared identifier 'out_path'
+   20 |     if (out_path == NULL || out_path[0] == '\0') {
+      |         ^~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:20:29: error: use of undeclared identifier 'out_path'
+   20 |     if (out_path == NULL || out_path[0] == '\0') {
+      |                             ^~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:95:36: error: too many arguments to function call, expected 1, have 2
+   95 |     int rc = ct_shots_args_ok(app, out_path);
+      |              ~~~~~~~~~~~~~~~~      ^~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:16:12: note: 'ct_shots_args_ok' declared here
+   16 | static int ct_shots_args_ok(const ct_app /app, const char *out_path) {
+      |            ^                ~~~~~~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:104:36: error: too many arguments to function call, expected 1, have 2
+  104 |     int rc = ct_shots_args_ok(app, out_path);
+      |              ~~~~~~~~~~~~~~~~      ^~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:16:12: note: 'ct_shots_args_ok' declared here
+   16 | static int ct_shots_args_ok(const ct_app /app, const char *out_path) {
+      |            ^                ~~~~~~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:132:36: error: too many arguments to function call, expected 1, have 2
+  132 |     int rc = ct_shots_args_ok(app, out_path);
+      |              ~~~~~~~~~~~~~~~~      ^~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:16:12: note: 'ct_shots_args_ok' declared here
+   16 | static int ct_shots_args_ok(const ct_app /app, const char *out_path) {
+      |            ^                ~~~~~~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:156:36: error: too many arguments to function call, expected 1, have 2
+  156 |     int rc = ct_shots_args_ok(app, out_path);
+      |              ~~~~~~~~~~~~~~~~      ^~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:16:12: note: 'ct_shots_args_ok' declared here
+   16 | static int ct_shots_args_ok(const ct_app /app, const char *out_path) {
+      |            ^                ~~~~~~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:178:36: error: too many arguments to function call, expected 1, have 2
+  178 |     int rc = ct_shots_args_ok(app, out_path);
+      |              ~~~~~~~~~~~~~~~~      ^~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:16:12: note: 'ct_shots_args_ok' declared here
+   16 | static int ct_shots_args_ok(const ct_app /app, const char *out_path) {
+      |            ^                ~~~~~~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:209:36: error: too many arguments to function call, expected 1, have 2
+  209 |     int rc = ct_shots_args_ok(app, out_path);
+      |              ~~~~~~~~~~~~~~~~      ^~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:16:12: note: 'ct_shots_args_ok' declared here
+   16 | static int ct_shots_args_ok(const ct_app /app, const char *out_path) {
+      |            ^                ~~~~~~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:227:36: error: too many arguments to function call, expected 1, have 2
+  227 |     int rc = ct_shots_args_ok(app, out_path);
+      |              ~~~~~~~~~~~~~~~~      ^~~~~~~~
+build_scrn2/mutants/p28892/m0002_shots.c:16:12: note: 'ct_shots_args_ok' declared here
+   16 | static int ct_shots_args_ok(const ct_app /app, const char *out_path) {
+      |            ^                ~~~~~~~~~~~~
+12 errors generated.
+build_scrn2/mutants/p28892/m0003_shots.c:16:59: error: expected ')'
+   16 | static int ct_shots_args_ok(const ct_app *app, const char /out_path) {
+      |                                                           ^
+build_scrn2/mutants/p28892/m0003_shots.c:16:28: note: to match this '('
+   16 | static int ct_shots_args_ok(const ct_app *app, const char /out_path) {
+      |                            ^
+build_scrn2/mutants/p28892/m0003_shots.c:20:9: error: use of undeclared identifier 'out_path'
+   20 |     if (out_path == NULL || out_path[0] == '\0') {
+      |         ^~~~~~~~
+build_scrn2/mutants/p28892/m0003_shots.c:20:29: error: use of undeclared identifier 'out_path'
+   20 |     if (out_path == NULL || out_path[0] == '\0') {
+      |                             ^~~~~~~~
+build_scrn2/mutants/p28892/m0003_shots.c:95:36: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+   95 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0003_shots.c:16:59: note: passing argument to parameter here
+   16 | static int ct_shots_args_ok(const ct_app *app, const char /out_path) {
+      |                                                           ^
+build_scrn2/mutants/p28892/m0003_shots.c:104:36: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  104 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0003_shots.c:16:59: note: passing argument to parameter here
+   16 | static int ct_shots_args_ok(const ct_app *app, const char /out_path) {
+      |                                                           ^
+build_scrn2/mutants/p28892/m0003_shots.c:132:36: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  132 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0003_shots.c:16:59: note: passing argument to parameter here
+   16 | static int ct_shots_args_ok(const ct_app *app, const char /out_path) {
+      |                                                           ^
+build_scrn2/mutants/p28892/m0003_shots.c:156:36: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  156 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0003_shots.c:16:59: note: passing argument to parameter here
+   16 | static int ct_shots_args_ok(const ct_app *app, const char /out_path) {
+      |                                                           ^
+build_scrn2/mutants/p28892/m0003_shots.c:178:36: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  178 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0003_shots.c:16:59: note: passing argument to parameter here
+   16 | static int ct_shots_args_ok(const ct_app *app, const char /out_path) {
+      |                                                           ^
+build_scrn2/mutants/p28892/m0003_shots.c:209:36: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  209 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0003_shots.c:16:59: note: passing argument to parameter here
+   16 | static int ct_shots_args_ok(const ct_app *app, const char /out_path) {
+      |                                                           ^
+build_scrn2/mutants/p28892/m0003_shots.c:227:36: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  227 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0003_shots.c:16:59: note: passing argument to parameter here
+   16 | static int ct_shots_args_ok(const ct_app *app, const char /out_path) {
+      |                                                           ^
+10 errors generated.
+mutate: suite shots_arg_guards exited -1073741795
+mutate: suite shots_arg_guards exited -1073741795
+mutate: suite shots_arg_guards exited 1
+mutate: suite shots_arg_guards exited -1073741795
+mutate: suite shots_arg_guards exited -1073741795
+mutate: suite shots_path_bounds exited 1
+mutate: suite shots_state_guards exited 1
+mutate: suite shots_state_guards exited 1
+build_scrn2/mutants/p28892/m0012_shots.c:26:35: error: expected ')'
+   26 | static int ct_shots_window(ct_app /app) {
+      |                                   ^
+build_scrn2/mutants/p28892/m0012_shots.c:26:27: note: to match this '('
+   26 | static int ct_shots_window(ct_app /app) {
+      |                           ^
+build_scrn2/mutants/p28892/m0012_shots.c:36:5: error: use of undeclared identifier 'app'
+   36 |     app->cfg.window.width = CT_WINDOW_WIDTH;
+      |     ^~~
+build_scrn2/mutants/p28892/m0012_shots.c:37:5: error: use of undeclared identifier 'app'
+   37 |     app->cfg.window.height = CT_WINDOW_HEIGHT;
+      |     ^~~
+build_scrn2/mutants/p28892/m0012_shots.c:78:30: error: passing 'ct_app *' to parameter of incompatible type 'ct_app'; dereference with *
+   78 |     int rc = ct_shots_window(app);
+      |                              ^~~
+      |                              *
+build_scrn2/mutants/p28892/m0012_shots.c:26:35: note: passing argument to parameter here
+   26 | static int ct_shots_window(ct_app /app) {
+      |                                   ^
+build_scrn2/mutants/p28892/m0012_shots.c:108:26: error: passing 'ct_app *' to parameter of incompatible type 'ct_app'; dereference with *
+  108 |     rc = ct_shots_window(app);
+      |                          ^~~
+      |                          *
+build_scrn2/mutants/p28892/m0012_shots.c:26:35: note: passing argument to parameter here
+   26 | static int ct_shots_window(ct_app /app) {
+      |                                   ^
+build_scrn2/mutants/p28892/m0012_shots.c:136:26: error: passing 'ct_app *' to parameter of incompatible type 'ct_app'; dereference with *
+  136 |     rc = ct_shots_window(app);
+      |                          ^~~
+      |                          *
+build_scrn2/mutants/p28892/m0012_shots.c:26:35: note: passing argument to parameter here
+   26 | static int ct_shots_window(ct_app /app) {
+      |                                   ^
+build_scrn2/mutants/p28892/m0012_shots.c:160:26: error: passing 'ct_app *' to parameter of incompatible type 'ct_app'; dereference with *
+  160 |     rc = ct_shots_window(app);
+      |                          ^~~
+      |                          *
+build_scrn2/mutants/p28892/m0012_shots.c:26:35: note: passing argument to parameter here
+   26 | static int ct_shots_window(ct_app /app) {
+      |                                   ^
+build_scrn2/mutants/p28892/m0012_shots.c:185:26: error: passing 'ct_app *' to parameter of incompatible type 'ct_app'; dereference with *
+  185 |     rc = ct_shots_window(app);
+      |                          ^~~
+      |                          *
+build_scrn2/mutants/p28892/m0012_shots.c:26:35: note: passing argument to parameter here
+   26 | static int ct_shots_window(ct_app /app) {
+      |                                   ^
+build_scrn2/mutants/p28892/m0012_shots.c:216:26: error: passing 'ct_app *' to parameter of incompatible type 'ct_app'; dereference with *
+  216 |     rc = ct_shots_window(app);
+      |                          ^~~
+      |                          *
+build_scrn2/mutants/p28892/m0012_shots.c:26:35: note: passing argument to parameter here
+   26 | static int ct_shots_window(ct_app /app) {
+      |                                   ^
+9 errors generated.
+mutate: suite shots_render_smoke exited -1073741819
+mutate: suite shots_state_guards exited 1
+build_scrn2/mutants/p28892/m0016_shots.c:41:39: error: expected ')'
+   41 | static int ct_shots_mkdirs(const char /out_path) {
+      |                                       ^
+build_scrn2/mutants/p28892/m0016_shots.c:41:27: note: to match this '('
+   41 | static int ct_shots_mkdirs(const char /out_path) {
+      |                           ^
+build_scrn2/mutants/p28892/m0016_shots.c:43:25: error: use of undeclared identifier 'out_path'
+   43 |     size_t len = strlen(out_path);
+      |                         ^~~~~~~~
+build_scrn2/mutants/p28892/m0016_shots.c:47:17: error: use of undeclared identifier 'out_path'
+   47 |     memcpy(dir, out_path, len + 1);
+      |                 ^~~~~~~~
+build_scrn2/mutants/p28892/m0016_shots.c:61:30: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+   61 |     int rc = ct_shots_mkdirs(out_path);
+      |                              ^~~~~~~~
+build_scrn2/mutants/p28892/m0016_shots.c:41:39: note: passing argument to parameter here
+   41 | static int ct_shots_mkdirs(const char /out_path) {
+      |                                       ^
+4 errors generated.
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_path_bounds exited 1
+build_scrn2/mutants/p28892/m0019_shots.c:44:13: error: comparison of integers of different signs: 'size_t' (aka 'unsigned long long') and 'int' [-Werror,-Wsign-compare]
+   44 |     if (len == -1 || len >= sizeof dir) {
+      |         ~~~ ^  ~~
+1 error generated.
+mutate: suite shots_path_bounds exited 1
+mutate: suite shots_path_bounds exited 1
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_render_smoke exited 1
+build_scrn2/mutants/p28892/m0025_shots.c:48:10: error: expected identifier or '('
+   48 |     char /last = strrchr(dir, '/');
+      |          ^
+build_scrn2/mutants/p28892/m0025_shots.c:50:30: error: use of undeclared identifier 'last'
+   50 |     if (last_win != NULL && (last == NULL || last_win > last)) {
+      |                              ^~~~
+build_scrn2/mutants/p28892/m0025_shots.c:50:57: error: use of undeclared identifier 'last'
+   50 |     if (last_win != NULL && (last == NULL || last_win > last)) {
+      |                                                         ^~~~
+build_scrn2/mutants/p28892/m0025_shots.c:51:9: error: use of undeclared identifier 'last'
+   51 |         last = last_win;
+      |         ^~~~
+build_scrn2/mutants/p28892/m0025_shots.c:53:9: error: use of undeclared identifier 'last'
+   53 |     if (last == NULL || last == dir || last[1] == '\0') {
+      |         ^~~~
+build_scrn2/mutants/p28892/m0025_shots.c:53:25: error: use of undeclared identifier 'last'
+   53 |     if (last == NULL || last == dir || last[1] == '\0') {
+      |                         ^~~~
+build_scrn2/mutants/p28892/m0025_shots.c:53:40: error: use of undeclared identifier 'last'
+   53 |     if (last == NULL || last == dir || last[1] == '\0') {
+      |                                        ^~~~
+build_scrn2/mutants/p28892/m0025_shots.c:56:6: error: use of undeclared identifier 'last'
+   56 |     *last = '\0';
+      |      ^~~~
+8 errors generated.
+build_scrn2/mutants/p28892/m0026_shots.c:49:10: error: expected identifier or '('
+   49 |     char /last_win = strrchr(dir, '\\');
+      |          ^
+build_scrn2/mutants/p28892/m0026_shots.c:50:9: error: use of undeclared identifier 'last_win'
+   50 |     if (last_win != NULL && (last == NULL || last_win > last)) {
+      |         ^~~~~~~~
+build_scrn2/mutants/p28892/m0026_shots.c:50:46: error: use of undeclared identifier 'last_win'
+   50 |     if (last_win != NULL && (last == NULL || last_win > last)) {
+      |                                              ^~~~~~~~
+build_scrn2/mutants/p28892/m0026_shots.c:51:16: error: use of undeclared identifier 'last_win'
+   51 |         last = last_win;
+      |                ^~~~~~~~
+4 errors generated.
+mutate: suite shots_path_bounds exited 1
+mutate: suite shots_path_bounds exited -1073741795
+build_scrn2/mutants/p28892/m0033_shots.c:53:22: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   53 |     if (last == NULL && last == dir || last[1] == '\0') {
+      |         ~~~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_scrn2/mutants/p28892/m0033_shots.c:53:22: note: place parentheses around the '&&' expression to silence this warning
+   53 |     if (last == NULL && last == dir || last[1] == '\0') {
+      |                      ^
+      |         (                          )
+1 error generated.
+mutate: suite shots_path_bounds exited 1
+build_scrn2/mutants/p28892/m0035_shots.c:53:37: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   53 |     if (last == NULL || last == dir && last[1] == '\0') {
+      |                      ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p28892/m0035_shots.c:53:37: note: place parentheses around the '&&' expression to silence this warning
+   53 |     if (last == NULL || last == dir && last[1] == '\0') {
+      |                                     ^                 
+      |                         (                             )
+1 error generated.
+mutate: suite shots_path_bounds exited 1
+mutate: suite shots_path_bounds exited 1
+mutate: suite shots_path_bounds exited 1
+build_scrn2/mutants/p28892/m0039_shots.c:56:5: error: expected expression
+   56 |     /last = '\0';
+      |     ^
+1 error generated.
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_render_smoke exited 1
+build_scrn2/mutants/p28892/m0043_shots.c:60:35: error: expected ')'
+   60 | static int ct_shots_render(ct_app /app, const char *out_path) {
+      |                                   ^
+build_scrn2/mutants/p28892/m0043_shots.c:60:27: note: to match this '('
+   60 | static int ct_shots_render(ct_app /app, const char *out_path) {
+      |                           ^
+build_scrn2/mutants/p28892/m0043_shots.c:61:30: error: use of undeclared identifier 'out_path'
+   61 |     int rc = ct_shots_mkdirs(out_path);
+      |                              ^~~~~~~~
+build_scrn2/mutants/p28892/m0043_shots.c:67:16: error: use of undeclared identifier 'app'
+   67 |     ct_ui_draw(app);
+      |                ^~~
+build_scrn2/mutants/p28892/m0043_shots.c:71:39: error: use of undeclared identifier 'out_path'
+   71 |     bool written = ExportImage(frame, out_path);
+      |                                       ^~~~~~~~
+build_scrn2/mutants/p28892/m0043_shots.c:84:33: error: too many arguments to function call, expected 1, have 2
+   84 |     return ct_shots_render(app, out_path);
+      |            ~~~~~~~~~~~~~~~      ^~~~~~~~
+build_scrn2/mutants/p28892/m0043_shots.c:60:12: note: 'ct_shots_render' declared here
+   60 | static int ct_shots_render(ct_app /app, const char *out_path) {
+      |            ^               ~~~~~~
+build_scrn2/mutants/p28892/m0043_shots.c:127:33: error: too many arguments to function call, expected 1, have 2
+  127 |     return ct_shots_render(app, out_path);
+      |            ~~~~~~~~~~~~~~~      ^~~~~~~~
+build_scrn2/mutants/p28892/m0043_shots.c:60:12: note: 'ct_shots_render' declared here
+   60 | static int ct_shots_render(ct_app /app, const char *out_path) {
+      |            ^               ~~~~~~
+build_scrn2/mutants/p28892/m0043_shots.c:152:33: error: too many arguments to function call, expected 1, have 2
+  152 |     return ct_shots_render(app, out_path);
+      |            ~~~~~~~~~~~~~~~      ^~~~~~~~
+build_scrn2/mutants/p28892/m0043_shots.c:60:12: note: 'ct_shots_render' declared here
+   60 | static int ct_shots_render(ct_app /app, const char *out_path) {
+      |            ^               ~~~~~~
+build_scrn2/mutants/p28892/m0043_shots.c:174:33: error: too many arguments to function call, expected 1, have 2
+  174 |     return ct_shots_render(app, out_path);
+      |            ~~~~~~~~~~~~~~~      ^~~~~~~~
+build_scrn2/mutants/p28892/m0043_shots.c:60:12: note: 'ct_shots_render' declared here
+   60 | static int ct_shots_render(ct_app /app, const char *out_path) {
+      |            ^               ~~~~~~
+build_scrn2/mutants/p28892/m0043_shots.c:205:33: error: too many arguments to function call, expected 1, have 2
+  205 |     return ct_shots_render(app, out_path);
+      |            ~~~~~~~~~~~~~~~      ^~~~~~~~
+build_scrn2/mutants/p28892/m0043_shots.c:60:12: note: 'ct_shots_render' declared here
+   60 | static int ct_shots_render(ct_app /app, const char *out_path) {
+      |            ^               ~~~~~~
+build_scrn2/mutants/p28892/m0043_shots.c:223:33: error: too many arguments to function call, expected 1, have 2
+  223 |     return ct_shots_render(app, out_path);
+      |            ~~~~~~~~~~~~~~~      ^~~~~~~~
+build_scrn2/mutants/p28892/m0043_shots.c:60:12: note: 'ct_shots_render' declared here
+   60 | static int ct_shots_render(ct_app /app, const char *out_path) {
+      |            ^               ~~~~~~
+10 errors generated.
+build_scrn2/mutants/p28892/m0044_shots.c:60:52: error: expected ')'
+   60 | static int ct_shots_render(ct_app *app, const char /out_path) {
+      |                                                    ^
+build_scrn2/mutants/p28892/m0044_shots.c:60:27: note: to match this '('
+   60 | static int ct_shots_render(ct_app *app, const char /out_path) {
+      |                           ^
+build_scrn2/mutants/p28892/m0044_shots.c:61:30: error: use of undeclared identifier 'out_path'
+   61 |     int rc = ct_shots_mkdirs(out_path);
+      |                              ^~~~~~~~
+build_scrn2/mutants/p28892/m0044_shots.c:71:39: error: use of undeclared identifier 'out_path'
+   71 |     bool written = ExportImage(frame, out_path);
+      |                                       ^~~~~~~~
+build_scrn2/mutants/p28892/m0044_shots.c:84:33: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+   84 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+build_scrn2/mutants/p28892/m0044_shots.c:60:52: note: passing argument to parameter here
+   60 | static int ct_shots_render(ct_app *app, const char /out_path) {
+      |                                                    ^
+build_scrn2/mutants/p28892/m0044_shots.c:127:33: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  127 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+build_scrn2/mutants/p28892/m0044_shots.c:60:52: note: passing argument to parameter here
+   60 | static int ct_shots_render(ct_app *app, const char /out_path) {
+      |                                                    ^
+build_scrn2/mutants/p28892/m0044_shots.c:152:33: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  152 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+build_scrn2/mutants/p28892/m0044_shots.c:60:52: note: passing argument to parameter here
+   60 | static int ct_shots_render(ct_app *app, const char /out_path) {
+      |                                                    ^
+build_scrn2/mutants/p28892/m0044_shots.c:174:33: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  174 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+build_scrn2/mutants/p28892/m0044_shots.c:60:52: note: passing argument to parameter here
+   60 | static int ct_shots_render(ct_app *app, const char /out_path) {
+      |                                                    ^
+build_scrn2/mutants/p28892/m0044_shots.c:205:33: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  205 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+build_scrn2/mutants/p28892/m0044_shots.c:60:52: note: passing argument to parameter here
+   60 | static int ct_shots_render(ct_app *app, const char /out_path) {
+      |                                                    ^
+build_scrn2/mutants/p28892/m0044_shots.c:223:33: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  223 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+build_scrn2/mutants/p28892/m0044_shots.c:60:52: note: passing argument to parameter here
+   60 | static int ct_shots_render(ct_app *app, const char /out_path) {
+      |                                                    ^
+9 errors generated.
+mutate: suite shots_render_smoke exited 1
+build_scrn2/mutants/p28892/m0046_shots.c:77:33: error: expected ')'
+   77 | static int ct_shots_show(ct_app /app, ct_ui_screen screen, const char *out_path) {
+      |                                 ^
+build_scrn2/mutants/p28892/m0046_shots.c:77:25: note: to match this '('
+   77 | static int ct_shots_show(ct_app /app, ct_ui_screen screen, const char *out_path) {
+      |                         ^
+build_scrn2/mutants/p28892/m0046_shots.c:78:30: error: use of undeclared identifier 'app'
+   78 |     int rc = ct_shots_window(app);
+      |                              ^~~
+build_scrn2/mutants/p28892/m0046_shots.c:82:5: error: use of undeclared identifier 'app'
+   82 |     app->screen = screen;
+      |     ^~~
+build_scrn2/mutants/p28892/m0046_shots.c:82:19: error: use of undeclared identifier 'screen'; did you mean 'strlen'?
+   82 |     app->screen = screen;
+      |                   ^~~~~~
+      |                   strlen
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\string.h:64:18: note: 'strlen' declared here
+   64 |   size_t __cdecl strlen(const char *_Str);
+      |                  ^
+build_scrn2/mutants/p28892/m0046_shots.c:83:18: error: use of undeclared identifier 'app'
+   83 |     ct_ui_update(app);
+      |                  ^~~
+build_scrn2/mutants/p28892/m0046_shots.c:84:28: error: use of undeclared identifier 'app'
+   84 |     return ct_shots_render(app, out_path);
+      |                            ^~~
+build_scrn2/mutants/p28892/m0046_shots.c:84:33: error: use of undeclared identifier 'out_path'
+   84 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+build_scrn2/mutants/p28892/m0046_shots.c:99:31: error: too many arguments to function call, expected 1, have 3
+   99 |     return ct_shots_show(app, CT_SCREEN_MENU, out_path);
+      |            ~~~~~~~~~~~~~      ^~~~~~~~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p28892/m0046_shots.c:77:12: note: 'ct_shots_show' declared here
+   77 | static int ct_shots_show(ct_app /app, ct_ui_screen screen, const char *out_path) {
+      |            ^             ~~~~~~
+build_scrn2/mutants/p28892/m0046_shots.c:231:31: error: too many arguments to function call, expected 1, have 3
+  231 |     return ct_shots_show(app, CT_SCREEN_STATS, out_path);
+      |            ~~~~~~~~~~~~~      ^~~~~~~~~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p28892/m0046_shots.c:77:12: note: 'ct_shots_show' declared here
+   77 | static int ct_shots_show(ct_app /app, ct_ui_screen screen, const char *out_path) {
+      |            ^             ~~~~~~
+9 errors generated.
+build_scrn2/mutants/p28892/m0047_shots.c:77:71: error: expected ')'
+   77 | static int ct_shots_show(ct_app *app, ct_ui_screen screen, const char /out_path) {
+      |                                                                       ^
+build_scrn2/mutants/p28892/m0047_shots.c:77:25: note: to match this '('
+   77 | static int ct_shots_show(ct_app *app, ct_ui_screen screen, const char /out_path) {
+      |                         ^
+build_scrn2/mutants/p28892/m0047_shots.c:84:33: error: use of undeclared identifier 'out_path'
+   84 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+build_scrn2/mutants/p28892/m0047_shots.c:99:47: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+   99 |     return ct_shots_show(app, CT_SCREEN_MENU, out_path);
+      |                                               ^~~~~~~~
+build_scrn2/mutants/p28892/m0047_shots.c:77:71: note: passing argument to parameter here
+   77 | static int ct_shots_show(ct_app *app, ct_ui_screen screen, const char /out_path) {
+      |                                                                       ^
+build_scrn2/mutants/p28892/m0047_shots.c:231:48: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'char' [-Wint-conversion]
+  231 |     return ct_shots_show(app, CT_SCREEN_STATS, out_path);
+      |                                                ^~~~~~~~
+build_scrn2/mutants/p28892/m0047_shots.c:77:71: note: passing argument to parameter here
+   77 | static int ct_shots_show(ct_app *app, ct_ui_screen screen, const char /out_path) {
+      |                                                                       ^
+4 errors generated.
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_font_rebind exited -1073741819
+build_scrn2/mutants/p28892/m0050_shots.c:94:26: error: expected ')'
+   94 | int ct_shots_menu(ct_app /app, const char *out_path) {
+      |                          ^
+build_scrn2/mutants/p28892/m0050_shots.c:94:18: note: to match this '('
+   94 | int ct_shots_menu(ct_app /app, const char *out_path) {
+      |                  ^
+build_scrn2/mutants/p28892/m0050_shots.c:94:5: error: conflicting types for 'ct_shots_menu'
+   94 | int ct_shots_menu(ct_app /app, const char *out_path) {
+      |     ^
+src\app/shots.h:16:5: note: previous declaration is here
+   16 | int ct_shots_menu(ct_app *app, const char *out_path);
+      |     ^
+build_scrn2/mutants/p28892/m0050_shots.c:95:31: error: use of undeclared identifier 'app'
+   95 |     int rc = ct_shots_args_ok(app, out_path);
+      |                               ^~~
+build_scrn2/mutants/p28892/m0050_shots.c:95:36: error: use of undeclared identifier 'out_path'
+   95 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0050_shots.c:99:26: error: use of undeclared identifier 'app'
+   99 |     return ct_shots_show(app, CT_SCREEN_MENU, out_path);
+      |                          ^~~
+build_scrn2/mutants/p28892/m0050_shots.c:99:47: error: use of undeclared identifier 'out_path'
+   99 |     return ct_shots_show(app, CT_SCREEN_MENU, out_path);
+      |                                               ^~~~~~~~
+6 errors generated.
+build_scrn2/mutants/p28892/m0051_shots.c:94:43: error: expected ')'
+   94 | int ct_shots_menu(ct_app *app, const char /out_path) {
+      |                                           ^
+build_scrn2/mutants/p28892/m0051_shots.c:94:18: note: to match this '('
+   94 | int ct_shots_menu(ct_app *app, const char /out_path) {
+      |                  ^
+build_scrn2/mutants/p28892/m0051_shots.c:94:5: error: conflicting types for 'ct_shots_menu'
+   94 | int ct_shots_menu(ct_app *app, const char /out_path) {
+      |     ^
+src\app/shots.h:16:5: note: previous declaration is here
+   16 | int ct_shots_menu(ct_app *app, const char *out_path);
+      |     ^
+build_scrn2/mutants/p28892/m0051_shots.c:95:36: error: use of undeclared identifier 'out_path'
+   95 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0051_shots.c:99:47: error: use of undeclared identifier 'out_path'
+   99 |     return ct_shots_show(app, CT_SCREEN_MENU, out_path);
+      |                                               ^~~~~~~~
+4 errors generated.
+mutate: suite shots_arg_guards exited -1073741795
+build_scrn2/mutants/p28892/m0053_shots.c:102:29: error: expected ')'
+  102 | int ct_shots_trainer(ct_app /app, ct_event ev, ct_method m, int list_id, int case_index,
+      |                             ^
+build_scrn2/mutants/p28892/m0053_shots.c:102:21: note: to match this '('
+  102 | int ct_shots_trainer(ct_app /app, ct_event ev, ct_method m, int list_id, int case_index,
+      |                     ^
+build_scrn2/mutants/p28892/m0053_shots.c:102:5: error: conflicting types for 'ct_shots_trainer'
+  102 | int ct_shots_trainer(ct_app /app, ct_event ev, ct_method m, int list_id, int case_index,
+      |     ^
+src\app/shots.h:17:5: note: previous declaration is here
+   17 | int ct_shots_trainer(ct_app *app, ct_event ev, ct_method m, int list_id, int case_index,
+      |     ^
+build_scrn2/mutants/p28892/m0053_shots.c:104:31: error: use of undeclared identifier 'app'
+  104 |     int rc = ct_shots_args_ok(app, out_path);
+      |                               ^~~
+build_scrn2/mutants/p28892/m0053_shots.c:104:36: error: use of undeclared identifier 'out_path'
+  104 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0053_shots.c:108:26: error: use of undeclared identifier 'app'
+  108 |     rc = ct_shots_window(app);
+      |                          ^~~
+build_scrn2/mutants/p28892/m0053_shots.c:112:5: error: use of undeclared identifier 'app'
+  112 |     app->screen = CT_SCREEN_TRAINER;
+      |     ^~~
+build_scrn2/mutants/p28892/m0053_shots.c:113:18: error: use of undeclared identifier 'app'
+  113 |     ct_ui_update(app);
+      |                  ^~~
+build_scrn2/mutants/p28892/m0053_shots.c:118:41: error: use of undeclared identifier 'ev'
+  118 |     if (ct_trainer_form_select_event(f, ev) != CT_REPO_OK ||
+      |                                         ^~
+build_scrn2/mutants/p28892/m0053_shots.c:119:42: error: use of undeclared identifier 'm'
+  119 |         ct_trainer_form_select_method(f, m) != CT_REPO_OK ||
+      |                                          ^
+build_scrn2/mutants/p28892/m0053_shots.c:120:40: error: use of undeclared identifier 'list_id'
+  120 |         ct_trainer_form_select_list(f, list_id) != CT_REPO_OK) {
+      |                                        ^~~~~~~
+build_scrn2/mutants/p28892/m0053_shots.c:123:9: error: use of undeclared identifier 'case_index'
+  123 |     if (case_index != CT_TRAINER_CELL_NONE &&
+      |         ^~~~~~~~~~
+build_scrn2/mutants/p28892/m0053_shots.c:124:40: error: use of undeclared identifier 'case_index'
+  124 |         ct_trainer_form_select_case(f, case_index) != CT_REPO_OK) {
+      |                                        ^~~~~~~~~~
+build_scrn2/mutants/p28892/m0053_shots.c:127:28: error: use of undeclared identifier 'app'
+  127 |     return ct_shots_render(app, out_path);
+      |                            ^~~
+build_scrn2/mutants/p28892/m0053_shots.c:127:33: error: use of undeclared identifier 'out_path'
+  127 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+14 errors generated.
+build_scrn2/mutants/p28892/m0054_shots.c:103:33: error: expected ')'
+  103 |                      const char /out_path) {
+      |                                 ^
+build_scrn2/mutants/p28892/m0054_shots.c:102:21: note: to match this '('
+  102 | int ct_shots_trainer(ct_app *app, ct_event ev, ct_method m, int list_id, int case_index,
+      |                     ^
+build_scrn2/mutants/p28892/m0054_shots.c:102:5: error: conflicting types for 'ct_shots_trainer'
+  102 | int ct_shots_trainer(ct_app *app, ct_event ev, ct_method m, int list_id, int case_index,
+      |     ^
+src\app/shots.h:17:5: note: previous declaration is here
+   17 | int ct_shots_trainer(ct_app *app, ct_event ev, ct_method m, int list_id, int case_index,
+      |     ^
+build_scrn2/mutants/p28892/m0054_shots.c:104:36: error: use of undeclared identifier 'out_path'
+  104 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0054_shots.c:127:33: error: use of undeclared identifier 'out_path'
+  127 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+4 errors generated.
+mutate: suite shots_arg_guards exited -1073741819
+mutate: suite shots_state_guards exited 1
+build_scrn2/mutants/p28892/m0057_shots.c:114:21: error: expected identifier or '('
+  114 |     ct_trainer_form /f = ct_screen_trainer_form();
+      |                     ^
+build_scrn2/mutants/p28892/m0057_shots.c:115:9: error: use of undeclared identifier 'f'
+  115 |     if (f == NULL || f->db == NULL) {
+      |         ^
+build_scrn2/mutants/p28892/m0057_shots.c:115:22: error: use of undeclared identifier 'f'
+  115 |     if (f == NULL || f->db == NULL) {
+      |                      ^
+build_scrn2/mutants/p28892/m0057_shots.c:118:38: error: use of undeclared identifier 'f'
+  118 |     if (ct_trainer_form_select_event(f, ev) != CT_REPO_OK ||
+      |                                      ^
+build_scrn2/mutants/p28892/m0057_shots.c:119:39: error: use of undeclared identifier 'f'
+  119 |         ct_trainer_form_select_method(f, m) != CT_REPO_OK ||
+      |                                       ^
+build_scrn2/mutants/p28892/m0057_shots.c:120:37: error: use of undeclared identifier 'f'
+  120 |         ct_trainer_form_select_list(f, list_id) != CT_REPO_OK) {
+      |                                     ^
+build_scrn2/mutants/p28892/m0057_shots.c:124:37: error: use of undeclared identifier 'f'
+  124 |         ct_trainer_form_select_case(f, case_index) != CT_REPO_OK) {
+      |                                     ^
+7 errors generated.
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_render_smoke exited 1
+build_scrn2/mutants/p28892/m0062_shots.c:118:59: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  118 |     if (ct_trainer_form_select_event(f, ev) != CT_REPO_OK &&
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  119 |         ct_trainer_form_select_method(f, m) != CT_REPO_OK ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_scrn2/mutants/p28892/m0062_shots.c:118:59: note: place parentheses around the '&&' expression to silence this warning
+  118 |     if (ct_trainer_form_select_event(f, ev) != CT_REPO_OK &&
+      |                                                           ^
+      |         (
+  119 |         ct_trainer_form_select_method(f, m) != CT_REPO_OK ||
+      |                                                          )
+1 error generated.
+mutate: suite shots_state_guards exited 1
+build_scrn2/mutants/p28892/m0064_shots.c:119:59: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  118 |     if (ct_trainer_form_select_event(f, ev) != CT_REPO_OK ||
+      |                                                           ~~
+  119 |         ct_trainer_form_select_method(f, m) != CT_REPO_OK &&
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  120 |         ct_trainer_form_select_list(f, list_id) != CT_REPO_OK) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p28892/m0064_shots.c:119:59: note: place parentheses around the '&&' expression to silence this warning
+  119 |         ct_trainer_form_select_method(f, m) != CT_REPO_OK &&
+      |                                                           ^
+      |         (
+  120 |         ct_trainer_form_select_list(f, list_id) != CT_REPO_OK) {
+      |                                                              
+      |                                                              )
+1 error generated.
+mutate: suite shots_state_guards exited 1
+mutate: suite shots_state_guards exited 1
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_state_guards exited 1
+build_scrn2/mutants/p28892/m0069_shots.c:130:27: error: expected ')'
+  130 | int ct_shots_chart(ct_app /app, ct_event ev, ct_method m, int list_id, int cell,
+      |                           ^
+build_scrn2/mutants/p28892/m0069_shots.c:130:19: note: to match this '('
+  130 | int ct_shots_chart(ct_app /app, ct_event ev, ct_method m, int list_id, int cell,
+      |                   ^
+build_scrn2/mutants/p28892/m0069_shots.c:130:5: error: conflicting types for 'ct_shots_chart'
+  130 | int ct_shots_chart(ct_app /app, ct_event ev, ct_method m, int list_id, int cell,
+      |     ^
+src\app/shots.h:19:5: note: previous declaration is here
+   19 | int ct_shots_chart(ct_app *app, ct_event ev, ct_method m, int list_id, int cell,
+      |     ^
+build_scrn2/mutants/p28892/m0069_shots.c:132:31: error: use of undeclared identifier 'app'
+  132 |     int rc = ct_shots_args_ok(app, out_path);
+      |                               ^~~
+build_scrn2/mutants/p28892/m0069_shots.c:132:36: error: use of undeclared identifier 'out_path'
+  132 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0069_shots.c:136:26: error: use of undeclared identifier 'app'
+  136 |     rc = ct_shots_window(app);
+      |                          ^~~
+build_scrn2/mutants/p28892/m0069_shots.c:140:5: error: use of undeclared identifier 'app'
+  140 |     app->screen = CT_SCREEN_TRAINER;
+      |     ^~~
+build_scrn2/mutants/p28892/m0069_shots.c:141:18: error: use of undeclared identifier 'app'
+  141 |     ct_ui_update(app);
+      |                  ^~~
+build_scrn2/mutants/p28892/m0069_shots.c:146:41: error: use of undeclared identifier 'ev'
+  146 |     if (ct_trainer_form_select_event(f, ev) != CT_REPO_OK ||
+      |                                         ^~
+build_scrn2/mutants/p28892/m0069_shots.c:147:42: error: use of undeclared identifier 'm'
+  147 |         ct_trainer_form_select_method(f, m) != CT_REPO_OK ||
+      |                                          ^
+build_scrn2/mutants/p28892/m0069_shots.c:148:40: error: use of undeclared identifier 'list_id'
+  148 |         ct_trainer_form_select_list(f, list_id) != CT_REPO_OK ||
+      |                                        ^~~~~~~
+build_scrn2/mutants/p28892/m0069_shots.c:149:40: error: use of undeclared identifier 'cell'
+  149 |         ct_trainer_form_select_cell(f, cell) != CT_REPO_OK) {
+      |                                        ^~~~
+build_scrn2/mutants/p28892/m0069_shots.c:152:28: error: use of undeclared identifier 'app'
+  152 |     return ct_shots_render(app, out_path);
+      |                            ^~~
+build_scrn2/mutants/p28892/m0069_shots.c:152:33: error: use of undeclared identifier 'out_path'
+  152 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+13 errors generated.
+build_scrn2/mutants/p28892/m0070_shots.c:131:31: error: expected ')'
+  131 |                    const char /out_path) {
+      |                               ^
+build_scrn2/mutants/p28892/m0070_shots.c:130:19: note: to match this '('
+  130 | int ct_shots_chart(ct_app *app, ct_event ev, ct_method m, int list_id, int cell,
+      |                   ^
+build_scrn2/mutants/p28892/m0070_shots.c:130:5: error: conflicting types for 'ct_shots_chart'
+  130 | int ct_shots_chart(ct_app *app, ct_event ev, ct_method m, int list_id, int cell,
+      |     ^
+src\app/shots.h:19:5: note: previous declaration is here
+   19 | int ct_shots_chart(ct_app *app, ct_event ev, ct_method m, int list_id, int cell,
+      |     ^
+build_scrn2/mutants/p28892/m0070_shots.c:132:36: error: use of undeclared identifier 'out_path'
+  132 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0070_shots.c:152:33: error: use of undeclared identifier 'out_path'
+  152 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+4 errors generated.
+mutate: suite shots_state_guards exited 1
+mutate: suite shots_state_guards exited 1
+build_scrn2/mutants/p28892/m0073_shots.c:142:21: error: expected identifier or '('
+  142 |     ct_trainer_form /f = ct_screen_trainer_form();
+      |                     ^
+build_scrn2/mutants/p28892/m0073_shots.c:143:9: error: use of undeclared identifier 'f'
+  143 |     if (f == NULL || f->db == NULL) {
+      |         ^
+build_scrn2/mutants/p28892/m0073_shots.c:143:22: error: use of undeclared identifier 'f'
+  143 |     if (f == NULL || f->db == NULL) {
+      |                      ^
+build_scrn2/mutants/p28892/m0073_shots.c:146:38: error: use of undeclared identifier 'f'
+  146 |     if (ct_trainer_form_select_event(f, ev) != CT_REPO_OK ||
+      |                                      ^
+build_scrn2/mutants/p28892/m0073_shots.c:147:39: error: use of undeclared identifier 'f'
+  147 |         ct_trainer_form_select_method(f, m) != CT_REPO_OK ||
+      |                                       ^
+build_scrn2/mutants/p28892/m0073_shots.c:148:37: error: use of undeclared identifier 'f'
+  148 |         ct_trainer_form_select_list(f, list_id) != CT_REPO_OK ||
+      |                                     ^
+build_scrn2/mutants/p28892/m0073_shots.c:149:37: error: use of undeclared identifier 'f'
+  149 |         ct_trainer_form_select_cell(f, cell) != CT_REPO_OK) {
+      |                                     ^
+7 errors generated.
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_render_smoke exited 1
+build_scrn2/mutants/p28892/m0078_shots.c:146:59: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  146 |     if (ct_trainer_form_select_event(f, ev) != CT_REPO_OK &&
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  147 |         ct_trainer_form_select_method(f, m) != CT_REPO_OK ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_scrn2/mutants/p28892/m0078_shots.c:146:59: note: place parentheses around the '&&' expression to silence this warning
+  146 |     if (ct_trainer_form_select_event(f, ev) != CT_REPO_OK &&
+      |                                                           ^
+      |         (
+  147 |         ct_trainer_form_select_method(f, m) != CT_REPO_OK ||
+      |                                                          )
+1 error generated.
+mutate: suite shots_render_smoke exited 1
+build_scrn2/mutants/p28892/m0080_shots.c:147:59: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  146 |     if (ct_trainer_form_select_event(f, ev) != CT_REPO_OK ||
+      |                                                           ~~
+  147 |         ct_trainer_form_select_method(f, m) != CT_REPO_OK &&
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  148 |         ct_trainer_form_select_list(f, list_id) != CT_REPO_OK ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p28892/m0080_shots.c:147:59: note: place parentheses around the '&&' expression to silence this warning
+  147 |         ct_trainer_form_select_method(f, m) != CT_REPO_OK &&
+      |                                                           ^
+      |         (
+  148 |         ct_trainer_form_select_list(f, list_id) != CT_REPO_OK ||
+      |                                                              )
+1 error generated.
+mutate: suite shots_render_smoke exited 1
+build_scrn2/mutants/p28892/m0082_shots.c:148:63: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  147 |         ct_trainer_form_select_method(f, m) != CT_REPO_OK ||
+      |                                                           ~~
+  148 |         ct_trainer_form_select_list(f, list_id) != CT_REPO_OK &&
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  149 |         ct_trainer_form_select_cell(f, cell) != CT_REPO_OK) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_scrn2/mutants/p28892/m0082_shots.c:148:63: note: place parentheses around the '&&' expression to silence this warning
+  148 |         ct_trainer_form_select_list(f, list_id) != CT_REPO_OK &&
+      |                                                               ^
+      |         (
+  149 |         ct_trainer_form_select_cell(f, cell) != CT_REPO_OK) {
+      |                                                           
+      |                                                           )
+1 error generated.
+mutate: suite shots_state_guards exited 1
+build_scrn2/mutants/p28892/m0084_shots.c:155:28: error: expected ')'
+  155 | int ct_shots_review(ct_app /app, bool revealed, const char *out_path) {
+      |                            ^
+build_scrn2/mutants/p28892/m0084_shots.c:155:20: note: to match this '('
+  155 | int ct_shots_review(ct_app /app, bool revealed, const char *out_path) {
+      |                    ^
+build_scrn2/mutants/p28892/m0084_shots.c:155:5: error: conflicting types for 'ct_shots_review'
+  155 | int ct_shots_review(ct_app /app, bool revealed, const char *out_path) {
+      |     ^
+src\app/shots.h:21:5: note: previous declaration is here
+   21 | int ct_shots_review(ct_app *app, bool revealed, const char *out_path);
+      |     ^
+build_scrn2/mutants/p28892/m0084_shots.c:156:31: error: use of undeclared identifier 'app'
+  156 |     int rc = ct_shots_args_ok(app, out_path);
+      |                               ^~~
+build_scrn2/mutants/p28892/m0084_shots.c:156:36: error: use of undeclared identifier 'out_path'
+  156 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0084_shots.c:160:26: error: use of undeclared identifier 'app'
+  160 |     rc = ct_shots_window(app);
+      |                          ^~~
+build_scrn2/mutants/p28892/m0084_shots.c:164:5: error: use of undeclared identifier 'app'
+  164 |     app->screen = CT_SCREEN_REVIEW;
+      |     ^~~
+build_scrn2/mutants/p28892/m0084_shots.c:165:18: error: use of undeclared identifier 'app'
+  165 |     ct_ui_update(app);
+      |                  ^~~
+build_scrn2/mutants/p28892/m0084_shots.c:171:9: error: use of undeclared identifier 'revealed'
+  171 |     if (revealed) {
+      |         ^~~~~~~~
+build_scrn2/mutants/p28892/m0084_shots.c:174:28: error: use of undeclared identifier 'app'
+  174 |     return ct_shots_render(app, out_path);
+      |                            ^~~
+build_scrn2/mutants/p28892/m0084_shots.c:174:33: error: use of undeclared identifier 'out_path'
+  174 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+10 errors generated.
+build_scrn2/mutants/p28892/m0085_shots.c:155:60: error: expected ')'
+  155 | int ct_shots_review(ct_app *app, bool revealed, const char /out_path) {
+      |                                                            ^
+build_scrn2/mutants/p28892/m0085_shots.c:155:20: note: to match this '('
+  155 | int ct_shots_review(ct_app *app, bool revealed, const char /out_path) {
+      |                    ^
+build_scrn2/mutants/p28892/m0085_shots.c:155:5: error: conflicting types for 'ct_shots_review'
+  155 | int ct_shots_review(ct_app *app, bool revealed, const char /out_path) {
+      |     ^
+src\app/shots.h:21:5: note: previous declaration is here
+   21 | int ct_shots_review(ct_app *app, bool revealed, const char *out_path);
+      |     ^
+build_scrn2/mutants/p28892/m0085_shots.c:156:36: error: use of undeclared identifier 'out_path'
+  156 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0085_shots.c:174:33: error: use of undeclared identifier 'out_path'
+  174 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+4 errors generated.
+mutate: suite shots_arg_guards exited -1073741795
+mutate: suite shots_render_smoke exited 1
+build_scrn2/mutants/p28892/m0088_shots.c:166:20: error: expected identifier or '('
+  166 |     ct_review_form /f = ct_screen_review_form();
+      |                    ^
+build_scrn2/mutants/p28892/m0088_shots.c:167:9: error: use of undeclared identifier 'f'
+  167 |     if (f == NULL || f->db == NULL) {
+      |         ^
+build_scrn2/mutants/p28892/m0088_shots.c:167:22: error: use of undeclared identifier 'f'
+  167 |     if (f == NULL || f->db == NULL) {
+      |                      ^
+build_scrn2/mutants/p28892/m0088_shots.c:170:30: error: use of undeclared identifier 'f'
+  170 |     ct_review_form_load_case(f);
+      |                              ^
+build_scrn2/mutants/p28892/m0088_shots.c:172:31: error: use of undeclared identifier 'f'
+  172 |         ct_review_form_reveal(f);
+      |                               ^
+5 errors generated.
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_render_smoke exited 1
+build_scrn2/mutants/p28892/m0092_shots.c:177:27: error: expected ')'
+  177 | int ct_shots_cards(ct_app /app, const char *deck, bool editing, const char *out_path) {
+      |                           ^
+build_scrn2/mutants/p28892/m0092_shots.c:177:19: note: to match this '('
+  177 | int ct_shots_cards(ct_app /app, const char *deck, bool editing, const char *out_path) {
+      |                   ^
+build_scrn2/mutants/p28892/m0092_shots.c:177:5: error: conflicting types for 'ct_shots_cards'
+  177 | int ct_shots_cards(ct_app /app, const char *deck, bool editing, const char *out_path) {
+      |     ^
+src\app/shots.h:22:5: note: previous declaration is here
+   22 | int ct_shots_cards(ct_app *app, const char *deck, bool editing, const char *out_path);
+      |     ^
+build_scrn2/mutants/p28892/m0092_shots.c:178:31: error: use of undeclared identifier 'app'
+  178 |     int rc = ct_shots_args_ok(app, out_path);
+      |                               ^~~
+build_scrn2/mutants/p28892/m0092_shots.c:178:36: error: use of undeclared identifier 'out_path'
+  178 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0092_shots.c:182:9: error: use of undeclared identifier 'deck'
+  182 |     if (deck == NULL || deck[0] == '\0') {
+      |         ^~~~
+build_scrn2/mutants/p28892/m0092_shots.c:182:25: error: use of undeclared identifier 'deck'
+  182 |     if (deck == NULL || deck[0] == '\0') {
+      |                         ^~~~
+build_scrn2/mutants/p28892/m0092_shots.c:185:26: error: use of undeclared identifier 'app'
+  185 |     rc = ct_shots_window(app);
+      |                          ^~~
+build_scrn2/mutants/p28892/m0092_shots.c:189:5: error: use of undeclared identifier 'app'
+  189 |     app->screen = CT_SCREEN_CARDS;
+      |     ^~~
+build_scrn2/mutants/p28892/m0092_shots.c:190:18: error: use of undeclared identifier 'app'
+  190 |     ct_ui_update(app);
+      |                  ^~~
+build_scrn2/mutants/p28892/m0092_shots.c:195:59: error: use of undeclared identifier 'deck'
+  195 |     snprintf(f->deck_filter, sizeof f->deck_filter, "%s", deck);
+      |                                                           ^~~~
+build_scrn2/mutants/p28892/m0092_shots.c:196:29: error: use of undeclared identifier 'app'
+  196 |     ct_cards_form_reload(f, app->db);
+      |                             ^~~
+build_scrn2/mutants/p28892/m0092_shots.c:200:9: error: use of undeclared identifier 'editing'
+  200 |     if (editing) {
+      |         ^~~~~~~
+build_scrn2/mutants/p28892/m0092_shots.c:205:28: error: use of undeclared identifier 'app'
+  205 |     return ct_shots_render(app, out_path);
+      |                            ^~~
+build_scrn2/mutants/p28892/m0092_shots.c:205:33: error: use of undeclared identifier 'out_path'
+  205 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+14 errors generated.
+build_scrn2/mutants/p28892/m0093_shots.c:177:44: error: expected ')'
+  177 | int ct_shots_cards(ct_app *app, const char /deck, bool editing, const char *out_path) {
+      |                                            ^
+build_scrn2/mutants/p28892/m0093_shots.c:177:19: note: to match this '('
+  177 | int ct_shots_cards(ct_app *app, const char /deck, bool editing, const char *out_path) {
+      |                   ^
+build_scrn2/mutants/p28892/m0093_shots.c:177:5: error: conflicting types for 'ct_shots_cards'
+  177 | int ct_shots_cards(ct_app *app, const char /deck, bool editing, const char *out_path) {
+      |     ^
+src\app/shots.h:22:5: note: previous declaration is here
+   22 | int ct_shots_cards(ct_app *app, const char *deck, bool editing, const char *out_path);
+      |     ^
+build_scrn2/mutants/p28892/m0093_shots.c:178:36: error: use of undeclared identifier 'out_path'
+  178 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0093_shots.c:182:9: error: use of undeclared identifier 'deck'
+  182 |     if (deck == NULL || deck[0] == '\0') {
+      |         ^~~~
+build_scrn2/mutants/p28892/m0093_shots.c:182:25: error: use of undeclared identifier 'deck'
+  182 |     if (deck == NULL || deck[0] == '\0') {
+      |                         ^~~~
+build_scrn2/mutants/p28892/m0093_shots.c:195:59: error: use of undeclared identifier 'deck'
+  195 |     snprintf(f->deck_filter, sizeof f->deck_filter, "%s", deck);
+      |                                                           ^~~~
+build_scrn2/mutants/p28892/m0093_shots.c:200:9: error: use of undeclared identifier 'editing'
+  200 |     if (editing) {
+      |         ^~~~~~~
+build_scrn2/mutants/p28892/m0093_shots.c:205:33: error: use of undeclared identifier 'out_path'
+  205 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+8 errors generated.
+build_scrn2/mutants/p28892/m0094_shots.c:177:76: error: expected ')'
+  177 | int ct_shots_cards(ct_app *app, const char *deck, bool editing, const char /out_path) {
+      |                                                                            ^
+build_scrn2/mutants/p28892/m0094_shots.c:177:19: note: to match this '('
+  177 | int ct_shots_cards(ct_app *app, const char *deck, bool editing, const char /out_path) {
+      |                   ^
+build_scrn2/mutants/p28892/m0094_shots.c:177:5: error: conflicting types for 'ct_shots_cards'
+  177 | int ct_shots_cards(ct_app *app, const char *deck, bool editing, const char /out_path) {
+      |     ^
+src\app/shots.h:22:5: note: previous declaration is here
+   22 | int ct_shots_cards(ct_app *app, const char *deck, bool editing, const char *out_path);
+      |     ^
+build_scrn2/mutants/p28892/m0094_shots.c:178:36: error: use of undeclared identifier 'out_path'
+  178 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0094_shots.c:205:33: error: use of undeclared identifier 'out_path'
+  205 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+4 errors generated.
+mutate: suite shots_arg_guards exited 1
+mutate: suite shots_arg_guards exited -1073741795
+mutate: suite shots_arg_guards exited -1073741795
+mutate: suite shots_arg_guards exited 1
+mutate: suite shots_state_guards exited 1
+mutate: suite shots_arg_guards exited 1
+mutate: suite shots_state_guards exited 1
+build_scrn2/mutants/p28892/m0102_shots.c:191:19: error: expected identifier or '('
+  191 |     ct_cards_form /f = ct_screen_cards_form();
+      |                   ^
+build_scrn2/mutants/p28892/m0102_shots.c:192:9: error: use of undeclared identifier 'f'
+  192 |     if (f == NULL || f->db == NULL) {
+      |         ^
+build_scrn2/mutants/p28892/m0102_shots.c:192:22: error: use of undeclared identifier 'f'
+  192 |     if (f == NULL || f->db == NULL) {
+      |                      ^
+build_scrn2/mutants/p28892/m0102_shots.c:195:14: error: use of undeclared identifier 'f'
+  195 |     snprintf(f->deck_filter, sizeof f->deck_filter, "%s", deck);
+      |              ^
+build_scrn2/mutants/p28892/m0102_shots.c:195:37: error: use of undeclared identifier 'f'
+  195 |     snprintf(f->deck_filter, sizeof f->deck_filter, "%s", deck);
+      |                                     ^
+build_scrn2/mutants/p28892/m0102_shots.c:196:26: error: use of undeclared identifier 'f'
+  196 |     ct_cards_form_reload(f, app->db);
+      |                          ^
+build_scrn2/mutants/p28892/m0102_shots.c:197:30: error: use of undeclared identifier 'f'
+  197 |     if (ct_cards_form_select(f, 0) != CT_REPO_OK) {
+      |                              ^
+build_scrn2/mutants/p28892/m0102_shots.c:201:38: error: use of undeclared identifier 'f'
+  201 |         if (ct_cards_form_begin_edit(f) != CT_REPO_OK) {
+      |                                      ^
+8 errors generated.
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_path_bounds exited 1
+mutate: suite shots_render_smoke exited 1
+mutate: suite shots_render_smoke exited 1
+build_scrn2/mutants/p28892/m0110_shots.c:208:30: error: expected ')'
+  208 | int ct_shots_settings(ct_app /app, int tab, const char *out_path) {
+      |                              ^
+build_scrn2/mutants/p28892/m0110_shots.c:208:22: note: to match this '('
+  208 | int ct_shots_settings(ct_app /app, int tab, const char *out_path) {
+      |                      ^
+build_scrn2/mutants/p28892/m0110_shots.c:208:5: error: conflicting types for 'ct_shots_settings'
+  208 | int ct_shots_settings(ct_app /app, int tab, const char *out_path) {
+      |     ^
+src\app/shots.h:23:5: note: previous declaration is here
+   23 | int ct_shots_settings(ct_app *app, int tab, const char *out_path);
+      |     ^
+build_scrn2/mutants/p28892/m0110_shots.c:209:31: error: use of undeclared identifier 'app'
+  209 |     int rc = ct_shots_args_ok(app, out_path);
+      |                               ^~~
+build_scrn2/mutants/p28892/m0110_shots.c:209:36: error: use of undeclared identifier 'out_path'
+  209 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0110_shots.c:213:9: error: use of undeclared identifier 'tab'
+  213 |     if (tab < CT_SETTINGS_TAB_GENERAL || tab >= CT_SETTINGS_TAB_COUNT) {
+      |         ^~~
+build_scrn2/mutants/p28892/m0110_shots.c:213:42: error: use of undeclared identifier 'tab'
+  213 |     if (tab < CT_SETTINGS_TAB_GENERAL || tab >= CT_SETTINGS_TAB_COUNT) {
+      |                                          ^~~
+build_scrn2/mutants/p28892/m0110_shots.c:216:26: error: use of undeclared identifier 'app'
+  216 |     rc = ct_shots_window(app);
+      |                          ^~~
+build_scrn2/mutants/p28892/m0110_shots.c:220:5: error: use of undeclared identifier 'app'
+  220 |     app->screen = CT_SCREEN_SETTINGS;
+      |     ^~~
+build_scrn2/mutants/p28892/m0110_shots.c:221:18: error: use of undeclared identifier 'app'
+  221 |     ct_ui_update(app);
+      |                  ^~~
+build_scrn2/mutants/p28892/m0110_shots.c:222:35: error: use of undeclared identifier 'tab'
+  222 |     ct_screen_settings_select_tab(tab);
+      |                                   ^~~
+build_scrn2/mutants/p28892/m0110_shots.c:223:28: error: use of undeclared identifier 'app'
+  223 |     return ct_shots_render(app, out_path);
+      |                            ^~~
+build_scrn2/mutants/p28892/m0110_shots.c:223:33: error: use of undeclared identifier 'out_path'
+  223 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+12 errors generated.
+build_scrn2/mutants/p28892/m0111_shots.c:208:56: error: expected ')'
+  208 | int ct_shots_settings(ct_app *app, int tab, const char /out_path) {
+      |                                                        ^
+build_scrn2/mutants/p28892/m0111_shots.c:208:22: note: to match this '('
+  208 | int ct_shots_settings(ct_app *app, int tab, const char /out_path) {
+      |                      ^
+build_scrn2/mutants/p28892/m0111_shots.c:208:5: error: conflicting types for 'ct_shots_settings'
+  208 | int ct_shots_settings(ct_app *app, int tab, const char /out_path) {
+      |     ^
+src\app/shots.h:23:5: note: previous declaration is here
+   23 | int ct_shots_settings(ct_app *app, int tab, const char *out_path);
+      |     ^
+build_scrn2/mutants/p28892/m0111_shots.c:209:36: error: use of undeclared identifier 'out_path'
+  209 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0111_shots.c:223:33: error: use of undeclared identifier 'out_path'
+  223 |     return ct_shots_render(app, out_path);
+      |                                 ^~~~~~~~
+4 errors generated.
+mutate: suite shots_arg_guards exited 1
+mutate: suite shots_render_smoke exited 1
+build_scrn2/mutants/p28892/m0114_shots.c:213:39: error: non-overlapping comparisons always evaluate to false [-Werror,-Wtautological-overlap-compare]
+  213 |     if (tab < CT_SETTINGS_TAB_GENERAL && tab >= CT_SETTINGS_TAB_COUNT) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite shots_arg_guards exited 1
+mutate: suite shots_render_smoke exited 1
+build_scrn2/mutants/p28892/m0117_shots.c:226:27: error: expected ')'
+  226 | int ct_shots_stats(ct_app /app, const char *out_path) {
+      |                           ^
+build_scrn2/mutants/p28892/m0117_shots.c:226:19: note: to match this '('
+  226 | int ct_shots_stats(ct_app /app, const char *out_path) {
+      |                   ^
+build_scrn2/mutants/p28892/m0117_shots.c:226:5: error: conflicting types for 'ct_shots_stats'
+  226 | int ct_shots_stats(ct_app /app, const char *out_path) {
+      |     ^
+src\app/shots.h:24:5: note: previous declaration is here
+   24 | int ct_shots_stats(ct_app *app, const char *out_path);
+      |     ^
+build_scrn2/mutants/p28892/m0117_shots.c:227:31: error: use of undeclared identifier 'app'
+  227 |     int rc = ct_shots_args_ok(app, out_path);
+      |                               ^~~
+build_scrn2/mutants/p28892/m0117_shots.c:227:36: error: use of undeclared identifier 'out_path'
+  227 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0117_shots.c:231:26: error: use of undeclared identifier 'app'
+  231 |     return ct_shots_show(app, CT_SCREEN_STATS, out_path);
+      |                          ^~~
+build_scrn2/mutants/p28892/m0117_shots.c:231:48: error: use of undeclared identifier 'out_path'
+  231 |     return ct_shots_show(app, CT_SCREEN_STATS, out_path);
+      |                                                ^~~~~~~~
+6 errors generated.
+build_scrn2/mutants/p28892/m0118_shots.c:226:44: error: expected ')'
+  226 | int ct_shots_stats(ct_app *app, const char /out_path) {
+      |                                            ^
+build_scrn2/mutants/p28892/m0118_shots.c:226:19: note: to match this '('
+  226 | int ct_shots_stats(ct_app *app, const char /out_path) {
+      |                   ^
+build_scrn2/mutants/p28892/m0118_shots.c:226:5: error: conflicting types for 'ct_shots_stats'
+  226 | int ct_shots_stats(ct_app *app, const char /out_path) {
+      |     ^
+src\app/shots.h:24:5: note: previous declaration is here
+   24 | int ct_shots_stats(ct_app *app, const char *out_path);
+      |     ^
+build_scrn2/mutants/p28892/m0118_shots.c:227:36: error: use of undeclared identifier 'out_path'
+  227 |     int rc = ct_shots_args_ok(app, out_path);
+      |                                    ^~~~~~~~
+build_scrn2/mutants/p28892/m0118_shots.c:231:48: error: use of undeclared identifier 'out_path'
+  231 |     return ct_shots_show(app, CT_SCREEN_STATS, out_path);
+      |                                                ^~~~~~~~
+4 errors generated.
+mutate: suite shots_arg_guards exited -1073741795
