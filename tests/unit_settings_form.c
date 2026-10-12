@@ -531,6 +531,13 @@ CT_SUITE(settings_form_moves_format) {
     char val[CT_SETTINGS_TEXT_MAX];
     CT_ASSERT_EQ(ct_repo_settings_get(db, "gen.preferred_moves", val, sizeof val), 0);
     CT_ASSERT_STR_EQ(val, "UDLRFBMES");
+
+    f.move_mask = CT_MOVE_BIT_U | CT_MOVE_BIT_X;
+    CT_ASSERT_EQ(ct_settings_form_save(&f), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_repo_settings_get(db, "gen.preferred_moves", val, sizeof val), 0);
+    CT_ASSERT_STR_EQ(val, "U");
+    ct_settings_form_open(&f, db);
+    CT_ASSERT_EQ(f.move_mask, (unsigned)CT_MOVE_BIT_U);
     ct_db_close(db);
 }
 
@@ -605,6 +612,21 @@ CT_SUITE(settings_form_swap_edges) {
     f.scheme_id = 0;
     CT_ASSERT_EQ(ct_settings_form_save(&f), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(f.status, CT_REPO_ERR_ARG);
+
+    ct_settings_form_open(&f, db);
+    f.staged.corner[3] = '\0';
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 0, '\0'), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(f.status, CT_REPO_ERR_ARG);
+    CT_ASSERT(!f.dirty);
+    CT_ASSERT_EQ(f.staged.corner[0], 'A');
+    CT_ASSERT_EQ(f.staged.corner[3], '\0');
+
+    f.staged.corner[5] = 'Z';
+    CT_ASSERT_EQ(ct_settings_form_swap_letter(&f, CT_ORBIT_CORNER, 0, 'Z'), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(f.status, CT_REPO_ERR_ARG);
+    CT_ASSERT(!f.dirty);
+    CT_ASSERT_EQ(f.staged.corner[0], 'A');
+    CT_ASSERT_EQ(f.staged.corner[5], 'Z');
     ct_db_close(db);
 }
 
@@ -650,6 +672,24 @@ CT_SUITE(settings_form_letter_edges) {
     CT_ASSERT_EQ(f.scheme_id, id2);
     CT_ASSERT_EQ(f.staged.corner[0], '\0');
     CT_ASSERT_EQ(f.staged.edge[CT_LETTER_STICKERS - 1], '\0');
+
+    sqlite3 *fresh = form_db();
+    int custom = 0;
+    CT_ASSERT_EQ(ct_letter_scheme_create(fresh, "custom", &custom), 0);
+    CT_ASSERT_EQ(custom, 1);
+    CT_ASSERT_EQ(ct_letter_scheme_set_default(fresh, custom), 0);
+    ct_settings_form_open(&f, fresh);
+    CT_ASSERT_EQ(f.status, CT_REPO_OK);
+    CT_ASSERT_EQ(f.scheme_id, 1);
+    CT_ASSERT_EQ(f.staged.corner[0], '\0');
+    CT_ASSERT_EQ(ct_letter_scheme_default_id(fresh), 1);
+    sqlite3_stmt *st = NULL;
+    CT_ASSERT_EQ(
+        sqlite3_prepare_v2(fresh, "SELECT COUNT(*) FROM letter_scheme", -1, &st, NULL), SQLITE_OK);
+    CT_ASSERT_EQ(sqlite3_step(st), SQLITE_ROW);
+    CT_ASSERT_EQ(sqlite3_column_int(st, 0), 1);
+    sqlite3_finalize(st);
+    ct_db_close(fresh);
     ct_db_close(db);
 }
 
