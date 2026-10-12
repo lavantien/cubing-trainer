@@ -284,6 +284,9 @@ typedef enum ct_cfg_status {
 #define CT_UI_LIST_ITEM_H 34
 #define CT_UI_LIST_ITEM_GAP 2
 #define CT_UI_SCROLL_W 14
+#define CT_UI_CELL_FOCUS_LINE 2
+#define CT_UI_REVIEW_CAM_DIST 5.4f
+#define CT_UI_MENU_BAND_DIV 8
 #define CT_UI_TEXT_SPACING 1
 #define CT_UI_FIELD_LABEL_W_DIV 8
 #define CT_UI_COL_DIV 5

@@ -81,7 +81,8 @@ void ct_ui_draw(ct_app *app) {
     Font font = ct_ui_font();
     float title_size = (float)CT_UI_FONT_TITLE;
     float title_w = MeasureTextEx(font, title, title_size, CT_UI_TEXT_SPACING).x;
-    Vector2 title_pos = {(float)w / 2.0f - title_w / 2.0f, (float)h / 8.0f};
+    Vector2 title_pos = {(float)w / 2.0f - title_w / 2.0f,
+                         (float)h / (float)CT_UI_MENU_BAND_DIV};
     DrawTextEx(font, title, title_pos, title_size, CT_UI_TEXT_SPACING, GetColor(CT_UI_COLOR_TEXT));
     size_t count = sizeof CT_MENU_ENTRIES / sizeof CT_MENU_ENTRIES[0];
     int btn_w = w / 4;

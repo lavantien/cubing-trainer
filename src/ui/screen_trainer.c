@@ -452,8 +452,14 @@ static void ct_trainer_draw_grid(ct_trainer_form *f, Rectangle bounds) {
         } else if (i == buffer) {
             DrawRectangleRec(cell, GetColor(CT_UI_COLOR_PANEL_ACTIVE));
         }
-        DrawRectangleLines((int)cell.x, (int)cell.y, (int)cell.width, (int)cell.height,
-                           GetColor(CT_UI_COLOR_BORDER));
+        if (i == f->cell) {
+            DrawRectangleLinesEx(cell, (float)CT_UI_CELL_FOCUS_LINE, GetColor(CT_UI_COLOR_ACCENT));
+        } else if (i == buffer) {
+            DrawRectangleLinesEx(cell, (float)CT_UI_CELL_FOCUS_LINE, GetColor(CT_UI_COLOR_WARN));
+        } else {
+            DrawRectangleLines((int)cell.x, (int)cell.y, (int)cell.width, (int)cell.height,
+                               GetColor(CT_UI_COLOR_BORDER));
+        }
         char label[2] = {letters[i], '\0'};
         Color tint = GetColor(CT_UI_COLOR_TEXT);
         if (i == f->cell) {

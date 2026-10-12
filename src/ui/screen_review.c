@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -18,10 +19,7 @@ enum {
     CT_REVIEW_PLAY_COUNT = 2,
     CT_REVIEW_SPEED_COUNT = (int)(sizeof CT_REVIEW_SPEEDS / sizeof CT_REVIEW_SPEEDS[0]),
     CT_REVIEW_ISO_FIELDS = 3,
-    CT_REVIEW_LINE_MAX = CT_CARD_CASE_KEY_MAX + CT_CARD_DECK_MAX,
-    CT_REVIEW_CAM_DIST = 4,
-    CT_REVIEW_CAM_OFFS = 2,
-    CT_REVIEW_FOV_DEG = CT_DECIMAL_BASE * 4
+    CT_REVIEW_LINE_MAX = CT_CARD_CASE_KEY_MAX + CT_CARD_DECK_MAX
 };
 
 static const ct_grade CT_REVIEW_GRADES[CT_REVIEW_GRADE_COUNT] = {CT_AGAIN, CT_HARD, CT_GOOD,
@@ -288,12 +286,19 @@ static void ct_review_open(ct_app *app) {
     memset(&ct_review.form, 0, sizeof ct_review.form);
     ct_renderer_init(&ct_review.renderer, CT_REVIEW_CUBE_N);
     ct_review_load_scheme(app->db);
-    float dist = (float)CT_REVIEW_CAM_DIST;
-    float offs = (float)CT_REVIEW_CAM_OFFS;
+    float dist = CT_UI_REVIEW_CAM_DIST;
     ct_review.camera.position = (Vector3){dist, dist, dist};
-    ct_review.camera.target = (Vector3){offs, 0.0f, 0.0f};
+    float sq = dist * dist;
+    float depth = sqrtf(sq + sq + sq);
+    float half_w = tanf(CT_HEADLESS_CAM_FOVY * (float)CT_RENDERER_PI /
+                        (float)CT_RENDERER_STRAIGHT_ANGLE_DEGREES / 2.0f) *
+                   depth * ((float)app->cfg.window.width / (float)app->cfg.window.height);
+    float diag = 1.0f / sqrtf((float)CT_REVIEW_PANE_W_DIV);
+    float pan = half_w / (float)CT_REVIEW_PANE_W_DIV * diag;
+    ct_review.camera.position = (Vector3){dist + pan, dist, dist - pan};
+    ct_review.camera.target = (Vector3){pan, 0.0f, -pan};
     ct_review.camera.up = (Vector3){0.0f, 1.0f, 0.0f};
-    ct_review.camera.fovy = (float)CT_REVIEW_FOV_DEG;
+    ct_review.camera.fovy = CT_HEADLESS_CAM_FOVY;
     ct_review.camera.projection = CAMERA_PERSPECTIVE;
     char now[CT_SESSION_STAMP_MAX];
     ct_now_utc_iso(now, (unsigned)sizeof now);
@@ -405,6 +410,7 @@ void ct_screen_review_draw(ct_app *app) {
     int y = margin;
 
     BeginScissorMode(0, 0, pane_w, h);
+    DrawRectangle(0, 0, pane_w, h, GetColor(CT_UI_COLOR_TEXT));
     ct_renderer_draw(&ct_review.renderer, &f->cube, &f->anim, &ct_review.scheme, ct_review.camera,
                      app->cfg.anim.move_seconds);
     EndScissorMode();
@@ -451,7 +457,9 @@ void ct_screen_review_draw(ct_app *app) {
     y += step;
     float v = (float)f->scrub_index;
     int slider_h = row_h + row_h / CT_REVIEW_SLIDER_H_DIV;
-    if (f->move_count > 0 && GuiSlider(ct_review_rect(right_x, y, right_w, slider_h), "scrub", NULL,
+    GuiLabel(ct_review_rect(right_x, y, right_w, row_h), "scrub");
+    y += row_h;
+    if (f->move_count > 0 && GuiSlider(ct_review_rect(right_x, y, right_w, slider_h), NULL, NULL,
                                        &v, 0.0f, (float)f->move_count)) {
         ct_review_form_scrub(f, (int)v);
     }

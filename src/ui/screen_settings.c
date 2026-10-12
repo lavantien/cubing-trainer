@@ -33,8 +33,8 @@ enum {
     CT_SETTINGS_BTN_COUNT = 2,
     CT_SETTINGS_STATUS_MAX = (1 << 6),
     CT_SETTINGS_BOX_PAD_DIV = 2,
-    CT_SETTINGS_COLOR_LABEL_H = 40,
-    CT_SETTINGS_COLOR_SWATCH_H = 56,
+    CT_SETTINGS_COLOR_LABEL_H = CT_UI_STATUS_H,
+    CT_SETTINGS_COLOR_SWATCH_H = CT_UI_BTN_H,
 };
 
 static char *ct_settings_orbit(ct_settings_form *f, int orbit) {
@@ -429,8 +429,8 @@ static Rectangle ct_settings_rect(int x, int y, int w, int h) {
 }
 
 static Rectangle ct_settings_cell_rect(int x, int y, int cell_w, int cell_h, int sticker) {
-    int col = sticker / CT_SETTINGS_GRID_COLS;
-    int row = sticker % CT_SETTINGS_GRID_COLS;
+    int col = sticker / CT_LETTER_PER_FACE;
+    int row = sticker % CT_LETTER_PER_FACE;
     return ct_settings_rect(x + col * cell_w, y + row * cell_h, cell_w, cell_h);
 }
 
@@ -515,9 +515,11 @@ static void ct_settings_draw_general(int x, int y, int w, int h) {
         shown++;
         bool on = (f->move_mask & bit) != 0;
         char label[2] = {ct_move_face_char(bit), '\0'};
-        if (GuiToggle(
-                ct_settings_rect(x + pad + col * cell_w, gy + pad + row * cell_h, cell_w, cell_h),
-                label, &on) != 0)
+        int gap = CT_UI_BTN_GAP / CT_SETTINGS_ORBITS;
+        if (GuiToggle(ct_settings_rect(x + pad + col * cell_w + gap / CT_SETTINGS_ORBITS,
+                                       gy + pad + row * cell_h + gap, cell_w - gap,
+                                       cell_h - 2 * gap),
+                      label, &on) != 0)
             ct_settings_form_stage_move(f, bit);
     }
 }
@@ -608,12 +610,20 @@ static void ct_settings_draw_bld(int x, int y, int w, int h) {
                 CT_SETTINGS_CHANNELS;
     for (int face = 0; face < CT_SETTINGS_FACE_COUNT; face++) {
         int fx = x + pad + face * face_w;
-        GuiLabel(ct_settings_rect(fx, inner_y, face_w, CT_SETTINGS_COLOR_LABEL_H),
-                 CT_SETTINGS_FACE_NAMES[face]);
+        char face_label[2] = {CT_SETTINGS_FACE_NAMES[face][0], '\0'};
+        float face_label_size = (float)CT_UI_FONT_BODY;
+        float face_label_w =
+            MeasureTextEx(ct_ui_font(), face_label, face_label_size, CT_UI_TEXT_SPACING).x;
+        Vector2 face_pos = {(float)fx + ((float)face_w - (float)color_pad - face_label_w) / 2.0f,
+                            (float)inner_y};
+        DrawTextEx(ct_ui_font(), face_label, face_pos, face_label_size, CT_UI_TEXT_SPACING,
+                   GetColor(CT_UI_COLOR_TEXT_DIM));
         Color c = {f->colors[face][0], f->colors[face][1], f->colors[face][2],
                    CT_SETTINGS_COLOR_MAX};
         DrawRectangle(fx, inner_y + CT_SETTINGS_COLOR_LABEL_H, face_w - color_pad,
                       CT_SETTINGS_COLOR_SWATCH_H, c);
+        DrawRectangleLines(fx, inner_y + CT_SETTINGS_COLOR_LABEL_H, face_w - color_pad,
+                           CT_SETTINGS_COLOR_SWATCH_H, GetColor(CT_UI_COLOR_BORDER));
         int by = inner_y + CT_SETTINGS_COLOR_LABEL_H + CT_SETTINGS_COLOR_SWATCH_H;
         for (int ch = 0; ch < CT_SETTINGS_CHANNELS; ch++) {
             int idx = face * CT_SETTINGS_CHANNELS + ch;
