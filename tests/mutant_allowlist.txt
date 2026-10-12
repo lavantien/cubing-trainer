@@ -1699,3 +1699,50 @@ src/ui/screen_cards.c:355	null guard after the background clear, draw path only
 src/ui/screen_cards.c:363	list width layout arithmetic, draw path only
 src/ui/screen_cards.c:365	list y layout arithmetic, draw path only
 src/ui/screen_cards.c:377	filter text box rect arithmetic, draw path only
+src/ui/screen_stats.c:10	left width shift constant feeds only the draw layout division
+src/ui/screen_stats.c:11	forecast band height divisor feeds only the draw layout division
+src/ui/screen_stats.c:15	retention mark divisor feeds only the draw marker size division
+src/ui/screen_stats.c:28	guard int-1 only misses ct_repo_err_arg which the identical text_ok check at select_deck entry makes unreachable, repo failures return err_db
+src/ui/screen_stats.c:32	heatmap rank minus one needs a negative count or null array, unreachable after case_accuracy returns a bounded count into fixed buffers
+src/ui/screen_stats.c:36	card list re-runs the same 64 byte deck text_ok already enforced at entry so err_arg is unreachable
+src/ui/screen_stats.c:40	row cap off-by-one only adds a cap-zero reviews call that returns ok without writing rows
+src/ui/screen_stats.c:44	reviews err_arg needs a null db or non-positive card id, ids from card_list are always positive and the cap stays at least one
+src/ui/screen_stats.c:54	retention returns the fixed bucket count never zero and err_arg needs null or negative args the fixed static buffers prevent
+src/ui/screen_stats.c:71	deck stats re-runs the same stamp text_ok already validated at load entry so err_arg is unreachable
+src/ui/screen_stats.c:75	from_day only ever receives the 11 byte precision write so the extra buffer byte is dead
+src/ui/screen_stats.c:79	forecast err_arg is unreachable with fixed positive days and cap and a 10 char day prefix, and a zero row count is unobservable because load zeroes forecast_count first
+src/ui/screen_stats.c:84	sessions err_arg needs a null db or negative cap, both fixed at the call site
+src/ui/screen_stats.c:105	deck sections can only return ok or err_db because its own err_arg sites are unreachable, exactly minus one never flows
+src/ui/screen_stats.c:119	worst cases with n of zero clamps to zero through the min either way and negative n is unchanged
+src/ui/screen_stats.c:180	deck label loop writes only file static label arrays consumed by the raygui list view in draw
+src/ui/screen_stats.c:184	session label loop writes only file static label arrays consumed by the raygui list view in draw
+src/ui/screen_stats.c:195	forecast inner x offset feeds only the raygui frame layout
+src/ui/screen_stats.c:196	forecast inner y offset feeds only the raygui frame layout
+src/ui/screen_stats.c:197	forecast inner width and height arithmetic feed only the chart rectangle in draw
+src/ui/screen_stats.c:203	forecast headline label rectangle feeds only the raygui label call
+src/ui/screen_stats.c:207	forecast value copy loop bound feeds only the chart layout call in draw
+src/ui/screen_stats.c:212	forecast bar draw loop bound feeds only the frame loop
+src/ui/screen_stats.c:213	zero height bar skip only changes pixel output
+src/ui/screen_stats.c:221	forecast day label position math feeds only drawtextex
+src/ui/screen_stats.c:229	heatmap inner x offset feeds only the frame layout
+src/ui/screen_stats.c:230	heatmap inner y offset feeds only the frame layout
+src/ui/screen_stats.c:240	heatmap grid row count arithmetic feeds only the cell rectangle math in draw
+src/ui/screen_stats.c:245	heatmap cell loop bound feeds only the frame loop
+src/ui/screen_stats.c:250	hover outline equality only changes pixel output
+src/ui/screen_stats.c:255	hover tooltip guard only changes pixel output
+src/ui/screen_stats.c:262	hover tooltip baseline position math feeds only drawtextex
+src/ui/screen_stats.c:273	retention inner height arithmetic feeds only the chart rectangle in draw
+src/ui/screen_stats.c:279	retention headline label rectangle feeds only the raygui label call
+src/ui/screen_stats.c:285	retention rate conversion feeds only the chart layout values in draw
+src/ui/screen_stats.c:291	retention mark size division feeds only the marker rectangle in draw
+src/ui/screen_stats.c:297	retention bar draw guard only changes pixel output
+src/ui/screen_stats.c:300	empty bucket skip only changes pixel output
+src/ui/screen_stats.c:306	retention marker position arithmetic feeds only the drawrectangle calls
+src/ui/screen_stats.c:310	has_prev flag only gates the drawline polyline calls
+src/ui/screen_stats.c:322	no deck selected guard only swaps the raygui label text
+src/ui/screen_stats.c:334	deck summary label stacking math feeds only the raygui label loop
+src/ui/screen_stats.c:343	opened flag only gates reload frequency of file static state with no exported observable
+src/ui/screen_stats.c:357	draw null guard sits behind clearbackground which no headless suite can invoke
+src/ui/screen_stats.c:372	sessions band y stacking arithmetic feeds only the frame layout
+src/ui/screen_stats.c:380	retention band y stacking arithmetic feeds only the frame layout
+src/ui/screen_stats.c:400	status bar rectangle math feeds only the raygui status bar call

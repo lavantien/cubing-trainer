@@ -562,3 +562,55 @@ CT_SUITE(stats_screen_heatmap_color) {
     CT_ASSERT_EQ(three_quarter.r, 127);
     CT_ASSERT_EQ(three_quarter.g, 255);
 }
+
+CT_SUITE(stats_screen_deck_reset) {
+    seed_state s;
+    seed_build(&s);
+
+    ct_stats_view v;
+    CT_ASSERT_EQ(ct_stats_view_load(&v, s.db, NOW, NULL), CT_REPO_OK);
+    CT_ASSERT_EQ(v.deck_selected, 0);
+    CT_ASSERT_EQ(v.case_count, 8);
+    CT_ASSERT_EQ(v.retention[9].reviews, 8);
+    CT_ASSERT_DBL_EQ(v.retention_summary.total_reviews, 16.0, 1e-12);
+
+    CT_ASSERT_EQ(ct_stats_view_select_deck(&v, "ghost"), CT_REPO_OK);
+    CT_ASSERT_EQ(v.deck_selected, -1);
+    CT_ASSERT_EQ(v.case_count, 0);
+    CT_ASSERT_EQ(v.retention_count, CT_STATS_RETENTION_BUCKETS);
+    CT_ASSERT_EQ(v.retention[9].reviews, 0);
+    CT_ASSERT_DBL_EQ(v.retention_summary.total_reviews, 0.0, 1e-15);
+    CT_ASSERT_DBL_EQ(v.retention_summary.total_correct, 0.0, 1e-15);
+    CT_ASSERT_EQ(v.retention_summary.worst_bucket, -1);
+
+    ct_db_close(s.db);
+}
+
+CT_SUITE(stats_screen_deck_lookup_full) {
+    sqlite3 *db = seed_db();
+    for (int i = 0; i < CT_STATS_MAX_DECKS; i++) {
+        char deck[SEED_LABEL_MAX];
+        char key[SEED_KEYS_MAX];
+        snprintf(deck, sizeof deck, "d%02d", i);
+        snprintf(key, sizeof key, "k%d", i);
+        long id;
+        seed_insert_card(db, deck, key, CT_DIR_FR, &id);
+        CT_ASSERT(id > 0);
+    }
+
+    ct_stats_view v;
+    CT_ASSERT_EQ(ct_stats_view_load(&v, db, NOW, NULL), CT_REPO_OK);
+    CT_ASSERT_EQ(v.deck_count, CT_STATS_MAX_DECKS);
+    CT_ASSERT_EQ(ct_stats_view_select_deck(&v, "@"), CT_REPO_OK);
+    CT_ASSERT_EQ(v.deck_selected, -1);
+    CT_ASSERT_EQ(v.case_count, 0);
+    CT_ASSERT_EQ(v.retention_count, CT_STATS_RETENTION_BUCKETS);
+
+    ct_db_close(db);
+}
+
+CT_SUITE(stats_screen_update_guard) {
+    ct_screen_stats_update(NULL);
+    ct_screen_stats_update(NULL);
+    CT_ASSERT(1);
+}
