@@ -390,10 +390,8 @@ src/gen/synth.c:589	setup depth cap comparison widening adds one level within th
 src/gen/synth.c:592	setup move loop start shift skips one move branch recovered by the symmetric branches on the pinned corpus
 src/gen/synth.c:593	setup face repeat check shifts read a wrong or garbage slot, the admitted same face runs are merged back by the simplify pass on the pinned corpus
 src/gen/synth.c:640	state hash stride mutants shift consistently on the insert and find sides of the fallback table, both sides compute the same mutated slot so the sparse fallback corpus never diverges
-src/gen/synth.c:674	variant count arithmetic mutants change only the never observed fallback enumeration, the fallback search never returns found within any pinned depth so no output flows through the variants
 src/gen/synth.c:675	variant state slot zero write is overwritten by the identity fill before use
 src/gen/synth.c:677	variant identity loop shifts write dead stack or slots the cycle writes rewrite
-src/gen/synth.c:680	variant cycle write positions are pure fallback internals, the never succeeding search never emits them
 src/gen/synth.c:684	variant bit decomposition boundary shifts alter only the never observed variant enumeration
 src/gen/synth.c:685	variant next index arithmetic alters only the never observed variant enumeration
 src/gen/synth.c:686	variant flip selection arithmetic alters only the never observed variant enumeration
@@ -428,7 +426,6 @@ src/gen/synth.c:754	fallback variant slot guard flip reinserts a duplicate varia
 src/gen/synth.c:758	fallback variant node writes are internal to the never succeeding search
 src/gen/synth.c:759	fallback variant parent sentinel is a constant of the root rows
 src/gen/synth.c:760	fallback variant hash bookkeeping is internal to the never succeeding search
-src/gen/synth.c:761	fallback variant count increments are internal to the never succeeding search
 src/gen/synth.c:764	fallback frontier capacity arithmetic is headroom at the pinned node budgets
 src/gen/synth.c:765	fallback frontier capacity arithmetic is headroom at the pinned node budgets
 src/gen/synth.c:766	fallback frontier capacity arithmetic is headroom at the pinned node budgets
@@ -458,10 +455,6 @@ src/gen/synth.c:822	fallback output copy width mutants sit on the never taken su
 src/gen/synth.c:823	fallback output copy width mutants sit on the never taken success path
 src/gen/synth.c:825	fallback found flip sits on the never taken success path
 src/gen/synth.c:828	fallback next frontier guard shifts drop one node from the never succeeding search
-src/gen/synth.c:829	fallback next frontier bookkeeping is internal to the never succeeding search
-src/gen/synth.c:830	fallback count increments are internal to the never succeeding search
-src/gen/synth.c:832	fallback frontier swap pointer arithmetic swaps the same buffers in a different order
-src/gen/synth.c:833	fallback frontier length assignments track the swapped pointers identically
 src/gen/synth.c:860	target null guard conjunction still leaves the cfg null rejection to the case scan one line later, both paths return the same code
 src/gen/synth.c:867	init failure branch is dead, the calloc never fails in the harness
 src/gen/synth.c:868	init failure branch is dead on the same path
@@ -541,7 +534,6 @@ src/ui/screen_trainer.c:12	layout divisor, consumed only by the raylib draw path
 src/ui/screen_trainer.c:13	layout shift constant, consumed only by the raylib draw path no headless suite exercises
 src/ui/screen_trainer.c:14	layout shift constant, consumed only by the raylib draw path no headless suite exercises
 src/ui/screen_trainer.c:18	label array bound, consumed only by the draw-side label builder and event handler no headless suite exercises
-src/ui/screen_trainer.c:20	label array bound, consumed only by the draw-side label builder and case clamp no headless suite exercises
 src/ui/screen_trainer.c:20	centering divisor, consumed only by the raylib draw path no headless suite exercises
 src/ui/screen_trainer.c:45	name table sizing, consumed only by the draw-side label builder no headless suite exercises
 src/ui/screen_trainer.c:46	name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
@@ -568,7 +560,6 @@ src/ui/screen_trainer.c:317	unreachable failure return, the pair writer never fa
 src/ui/screen_trainer.c:276	case_count zero arm is a true equivalent, falling through returns f->case_count which is zero there, identical to the early return
 src/ui/screen_trainer.c:303	out-of-range iteration calls cell_matches which returns zero because the pair writer rejects the index, totals unchanged
 src/ui/screen_trainer.c:294	visible below minus one lets -1 through and every downstream branch returns -1 for it, identical result
-src/ui/screen_trainer.c:303	out-of-range iteration calls cell_matches which returns zero because the pair writer rejects the index, totals unchanged
 src/ui/screen_trainer.c:365	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
 src/ui/screen_trainer.c:366	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
 src/ui/screen_trainer.c:373	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
@@ -596,7 +587,7 @@ src/ui/screen_trainer.c:460	draw path, only reachable from the raylib letter gri
 src/ui/screen_trainer.c:463	draw path, only reachable from the raylib letter grid draw no headless suite exercises
 src/ui/screen_trainer.c:466	draw path, only reachable from the raylib letter grid draw no headless suite exercises
 src/ui/screen_trainer.c:467	draw path, only reachable from the raylib letter grid draw no headless suite exercises
-src/ui/screen_trainer.c:507	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:507	draw path, only reachable from the raylib letter grid draw and its layout arithmetic, no headless suite exercises
 src/ui/screen_trainer.c:473	draw path, only reachable from the raylib letter grid draw no headless suite exercises
 src/ui/screen_trainer.c:483	draw path, only reachable from the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:492	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
@@ -607,7 +598,6 @@ src/ui/screen_trainer.c:499	draw path, layout arithmetic only consumed by the ra
 src/ui/screen_trainer.c:500	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:503	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:504	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
-src/ui/screen_trainer.c:507	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:508	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:511	draw path, only reachable from the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:512	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
@@ -619,7 +609,6 @@ src/ui/screen_trainer.c:528	draw path, layout arithmetic only consumed by the ra
 src/ui/screen_trainer.c:529	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:535	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:540	draw path, only reachable from the raylib screen draw no headless suite exercises
-src/ui/screen_trainer.c:541	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:542	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:581	draw path, only reachable from the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:548	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
@@ -633,7 +622,6 @@ src/ui/screen_trainer.c:575	draw path, layout arithmetic only consumed by the ra
 src/ui/screen_trainer.c:577	draw path, only reachable from the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:578	draw path, only reachable from the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:580	draw path, only reachable from the raylib screen draw no headless suite exercises
-src/ui/screen_trainer.c:581	draw path, only reachable from the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:584	draw path, only reachable from the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:594	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:598	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
@@ -641,7 +629,7 @@ src/ui/screen_trainer.c:599	draw path, only reachable from the raylib screen dra
 src/ui/screen_trainer.c:19	case label bound sits above every reachable list count, the corner chart tops at 378 and the edge chart at 440 so the clamp never fires over registered packs
 src/ui/screen_trainer.c:21	detail column index feeds only the right pane x origin, pixel geometry no headless suite asserts
 src/ui/screen_trainer.c:22	front row index feeds only the right pane y origin, pixel geometry no headless suite asserts
-src/ui/screen_trainer.c:23	alg row index feeds only the right pane y origin, full-binary kills observed for it were gpu crash flakes reproduced in one of two probe runs, no suite asserts the pixels
+src/ui/screen_trainer.c:23	alg row index feeds only the right pane y origin, the full binary killed it in both probe runs so the accept rests solely on the r3 lane survival, no suite asserts the pixels
 src/ui/screen_trainer.c:24	decomposition first row index feeds only the right pane y origin, full-binary kills observed for it were gpu crash flakes reproduced in one of two probe runs, no suite asserts the pixels
 src/ui/screen_trainer.c:25	decomposition step divisor feeds only the line pitch, pixel geometry no headless suite asserts
 src/ui/screen_trainer.c:121	method count guard arms a static label builder called only from the raylib frame draw, no headless suite reaches it
@@ -653,10 +641,10 @@ src/ui/screen_trainer.c:472	mouse pick gate needs a live mouse press no suite in
 src/ui/screen_trainer.c:498	grid anchor arithmetic feeds only pixel layout, full-binary kills observed for it were gpu crash flakes reproduced in one of two probe runs, no suite asserts the pixels
 src/ui/screen_trainer.c:545	visible clamp bound sits above every reachable list count, the corner chart tops at 378 and the edge chart at 440 so the clamp never fires over registered packs
 src/ui/screen_trainer.c:582	alg present ternary feeds only the text color, pixel geometry no headless suite asserts
-src/ui/screen_trainer.c:589	decomposition line pitch feeds only pixel layout, full-binary kills observed for it were gpu crash flakes reproduced in one of two probe runs, no suite asserts the pixels
-src/ui/screen_trainer.c:590	decomposition loop bound mutant writes one line further into the caller array that always holds capacity plus room, no suite reads past the returned count
+src/ui/screen_trainer.c:589	decomposition line pitch feeds only pixel layout, the full binary killed it in both probe runs so the accept rests solely on the r3 lane survival, no suite asserts the pixels
+src/ui/screen_trainer.c:590	decomposition loop bound mutant reads one row past the four row array into uninitialized stack and draws it, draw-only divergence no headless suite exercises
 src/ui/screen_trainer.c:591	decomposition draw x origin feeds only pixel layout, no headless suite asserts the pixels
-src/ui/screen_trainer.c:592	decomposition draw y arithmetic feeds only pixel layout, full-binary kills observed for it were gpu crash flakes reproduced in one of two probe runs, no suite asserts the pixels
+src/ui/screen_trainer.c:592	decomposition draw y arithmetic feeds only pixel layout, the full binary killed it in both probe runs so the accept rests solely on the r3 lane survival, no suite asserts the pixels
 src/app/script.c:76	list cap mutants bound the stack array only, every event method pair yields at most 3 lists so a cap of 7 or 9 never changes a reachable scan and the cap clause is dominated by the found bound
 src/app/script.c:97	error buffer write index mutants are unobservable, the byte lands before the buffer or at index one, every failing path rewrites the buffer through snprintf before any pinned reader and no pinned reader reads err after a success return
 src/app/script.c:103	script tail copy count mutants are equivalent, the extra byte lands past the nul inside the text array and is never scanned past end, and the missing nul is rewritten by the tokenizer when the final token reaches the tail while comment tails are never read past end
@@ -753,8 +741,8 @@ src/app/script_shots.c:155	method ok init is a dead store, the method parse call
 src/app/script_shots.c:161	list id init is a dead store, the long parse callee overwrites it on every path that reads it
 src/app/script_shots.c:162	pick init is a dead store, the long parse callee overwrites it on every path that reads it
 src/app/script_shots.c:225	default arm of the shot dispatch is dead, the caller routes only the seven shot kinds into this step so the fallback return is unreachable
-src/app/shots.c:34	window open flag mutant re-inits an already ready window, raylib 6 ignores the second init and every capture renders byte-identical, so no observable output changes
-src/app/shots.c:47	memcpy count mutant copies one byte past the source nul into the slot after the destination nul, every reader stops at the nul so the directory walk is identical
+src/app/shots.c:34	window open flag mutant re-runs InitWindow on every capture, the second init rebuilds the window and default font and the post-init GuiSetFont rebinding keeps every capture byte-identical, hash verified in playground/screens_r2
+src/app/shots.c:47	memcpy count mutant copies one byte past the source nul, every reader stops at the destination nul so the walk is identical, at the max accepted length the extra byte lands one past the dir array, no suite feeds a near-max path and no trap exists for a one byte stack overwrite on this target, coverage based accept
 src/app/shots.c:50	separator preference mutants are equivalents, a null last makes last_win > last true on this target so the flipped null test and the flipped logic still assign last_win, assigning null when no separator exists equals leaving last null, and the greater-equal arm differs only when both separators land on the same character which strrchr cannot produce
 src/app/shots.c:115	form null guard mutants are dead arms, the form is a static singleton that the preceding ct_ui_update always opens with the live db, so both null conditions are unreachable through the public capture api
 src/app/shots.c:143	form null guard mutants are dead arms, the form is a static singleton that the preceding ct_ui_update always opens with the live db, so both null conditions are unreachable through the public capture api
