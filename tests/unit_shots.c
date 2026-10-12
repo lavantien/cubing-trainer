@@ -83,6 +83,11 @@ CT_SUITE(shots_state_guards) {
     CT_ASSERT_EQ(
         ct_shots_trainer(&app, CT_EVENT_3X3, CT_METHOD_SARAH_INTERMEDIATE, 0, 0, CT_TEST_GUARD_PNG),
         CT_SHOTS_E_STATE);
+    ct_app nodb;
+    shots_app(&nodb, db);
+    nodb.db = NULL;
+    CT_ASSERT_EQ(ct_shots_review(&nodb, false, "build/test_shots_api/null_db.png"),
+                 CT_SHOTS_E_STATE);
     ct_shots_close();
     ct_db_close(db);
 }
@@ -175,6 +180,8 @@ CT_SUITE(shots_path_bounds) {
     shots_app(&app, db);
     shots_scrub_dir("build/test_shots_api/trail");
     shots_scrub_dir("build/test_shots_api/bs");
+    shots_scrub_dir("build/test_shots_api/fwd");
+    shots_scrub_dir("build/test_shots_api_bw");
     char huge[CT_APP_EXE_PATH_MAX + 2];
     memset(huge, 'a', sizeof huge - 1);
     huge[sizeof huge - 1] = '\0';
@@ -194,6 +201,14 @@ CT_SUITE(shots_path_bounds) {
     CT_ASSERT(stat("build/test_shots_api/bs", &st) == 0);
     CT_ASSERT_EQ(remove("build/test_shots_api/bs/menu.png"), 0);
     CT_ASSERT_EQ(_rmdir("build/test_shots_api/bs"), 0);
+    CT_ASSERT_EQ(ct_shots_menu(&app, "build/test_shots_api\\fwd/mix.png"), CT_SHOTS_OK);
+    CT_ASSERT(stat("build/test_shots_api/fwd", &st) == 0);
+    CT_ASSERT_EQ(remove("build/test_shots_api/fwd/mix.png"), 0);
+    CT_ASSERT_EQ(_rmdir("build/test_shots_api/fwd"), 0);
+    CT_ASSERT_EQ(ct_shots_menu(&app, "build/test_shots_api_bw\\bwd.png"), CT_SHOTS_OK);
+    CT_ASSERT(stat("build/test_shots_api_bw", &st) == 0);
+    CT_ASSERT_EQ(remove("build/test_shots_api_bw/bwd.png"), 0);
+    CT_ASSERT_EQ(_rmdir("build/test_shots_api_bw"), 0);
     ct_cards_form seed;
     ct_cards_form_open(&seed, db, "unfiled");
     CT_ASSERT_EQ(ct_cards_form_create(&seed, db, "unfiled"), CT_REPO_OK);
