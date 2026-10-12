@@ -13,6 +13,7 @@
 #include "storage/repo_algs.h"
 #include "storage/repo_cards.h"
 #include "storage/repo_settings.h"
+#include "storage/db.h"
 #include "trainer/selector.h"
 #include "trainer/session.h"
 
@@ -58,7 +59,8 @@ enum {
     CT_TRAINER_CELL_NONE = -1,
     CT_TRAINER_NO_DETAIL = -1,
     CT_TRAINER_ALG_CATEGORY = CT_ALG_CATEGORY_CHART,
-    CT_TRAINER_DECOMP_MAX = CT_ALG_SETUP_MAX + CT_CARD_CASE_KEY_MAX
+    CT_TRAINER_DECOMP_MAX = CT_ALG_SETUP_MAX + CT_CARD_CASE_KEY_MAX,
+    CT_TRAINER_MEMO_ROWS_MAX = CT_LETTER_STICKERS * CT_LETTER_STICKERS
 };
 
 typedef struct {
@@ -79,6 +81,12 @@ typedef struct {
     int alg_status;
     char front[CT_TRAINER_FRONT_MAX];
     char alg_text[CT_TRAINER_ALG_MAX];
+    ct_memo_list_row memo_rows[CT_TRAINER_MEMO_ROWS_MAX];
+    int memo_row_count;
+    char memo_saved_phoneme[CT_MEMO_TEXT_MAX];
+    char memo_saved_image[CT_MEMO_TEXT_MAX];
+    char memo_phoneme[CT_MEMO_TEXT_MAX];
+    char memo_image[CT_MEMO_TEXT_MAX];
     int status;
 } ct_trainer_form;
 
@@ -92,6 +100,8 @@ int ct_trainer_form_clear_cell(ct_trainer_form *f);
 int ct_trainer_form_visible_count(const ct_trainer_form *f);
 int ct_trainer_form_nth_visible(const ct_trainer_form *f, int visible);
 int ct_trainer_decomp(const ct_trainer_form *f, char (*lines)[CT_TRAINER_DECOMP_MAX], int cap);
+int ct_trainer_form_memo_save(ct_trainer_form *f);
+const ct_memo_list_row *ct_trainer_form_memo_find(const ct_trainer_form *f, const char *pair);
 
 ct_trainer_form *ct_screen_trainer_form(void);
 
@@ -152,6 +162,8 @@ typedef struct {
     ct_cube cube;
     ct_anim anim;
     char alg_text[CT_CARD_ALG_MAX];
+    char memo_image[CT_MEMO_TEXT_MAX];
+    bool memo_pair;
     int move_count;
     bool revealed;
     bool playing;

@@ -16,7 +16,14 @@ typedef struct {
     char image[CT_MEMO_TEXT_MAX];
 } ct_memo_row;
 
+typedef struct {
+    char pair[CT_MEMO_PAIR_MAX];
+    char phoneme[CT_MEMO_TEXT_MAX];
+    char image[CT_MEMO_TEXT_MAX];
+} ct_memo_list_row;
+
 int ct_memo_get(sqlite3 *db, int orbit, const char *pair, ct_memo_row *out);
 int ct_memo_set(sqlite3 *db, int orbit, const char *pair, const char *phoneme, const char *image);
+int ct_memo_list(sqlite3 *db, int orbit, ct_memo_list_row *rows, int cap);
 
 #endif

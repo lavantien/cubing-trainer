@@ -6,6 +6,7 @@
 #include "../src/config/config.h"
 #include "../src/storage/db.h"
 #include "../src/storage/repo_cards.h"
+#include "../src/storage/repo_settings.h"
 #include "framework.h"
 
 static sqlite3 *open_migrated(void) {
@@ -120,5 +121,55 @@ CT_SUITE(memo_repo) {
     ct_memo_row seeded;
     CT_ASSERT_EQ(ct_memo_get(db, CT_ORBIT_EDGE, "AB", &seeded), CT_REPO_OK);
     CT_ASSERT(seeded.phoneme[0] != '\0');
+    ct_db_close(db);
+}
+
+enum { CT_MEMO_LIST_FULL = CT_LETTER_STICKERS * CT_LETTER_STICKERS };
+
+CT_SUITE(memo_repo_list) {
+    sqlite3 *db = open_migrated();
+    ct_memo_list_row rows[CT_MEMO_LIST_FULL];
+    int n = ct_memo_list(db, CT_ORBIT_CORNER, rows, CT_MEMO_LIST_FULL);
+    CT_ASSERT_EQ(n, CT_MEMO_LIST_FULL);
+    CT_ASSERT_STR_EQ(rows[0].pair, "AA");
+    CT_ASSERT_STR_EQ(rows[0].phoneme, "a^w1 a^w1");
+    CT_ASSERT_STR_EQ(rows[0].image, "atlas atlas");
+    CT_ASSERT_STR_EQ(rows[CT_MEMO_LIST_FULL - 1].pair, "XX");
+    int bx = ('B' - 'A') * CT_LETTER_STICKERS + ('X' - 'A');
+    CT_ASSERT_STR_EQ(rows[bx].pair, "BX");
+    ct_memo_row one;
+    CT_ASSERT_EQ(ct_memo_get(db, CT_ORBIT_CORNER, "BX", &one), CT_REPO_OK);
+    CT_ASSERT_STR_EQ(rows[bx].phoneme, one.phoneme);
+    CT_ASSERT_STR_EQ(rows[bx].image, one.image);
+    int e = ct_memo_list(db, CT_ORBIT_EDGE, rows, CT_MEMO_LIST_FULL);
+    CT_ASSERT_EQ(e, CT_MEMO_LIST_FULL);
+    CT_ASSERT_STR_EQ(rows[0].pair, "AA");
+    CT_ASSERT_STR_EQ(rows[1].pair, "AB");
+
+    CT_ASSERT_EQ(ct_memo_list(db, CT_ORBIT_EDGE, rows, 3), 3);
+    CT_ASSERT_STR_EQ(rows[0].pair, "AA");
+    CT_ASSERT_STR_EQ(rows[1].pair, "AB");
+    CT_ASSERT_STR_EQ(rows[2].pair, "AC");
+    snprintf(rows[0].pair, sizeof rows[0].pair, "zz");
+    CT_ASSERT_EQ(ct_memo_list(db, CT_ORBIT_EDGE, rows, 0), 0);
+    CT_ASSERT_STR_EQ(rows[0].pair, "zz");
+    CT_ASSERT_EQ(ct_memo_list(db, CT_ORBIT_CENTER, rows, CT_MEMO_LIST_FULL), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_memo_list(db, -1, rows, CT_MEMO_LIST_FULL), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_memo_list(db, CT_ORBIT_CORNER, NULL, 4), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(ct_memo_list(NULL, CT_ORBIT_CORNER, rows, CT_MEMO_LIST_FULL), CT_REPO_ERR_ARG);
+
+    CT_ASSERT_EQ(ct_memo_set(db, CT_ORBIT_CORNER, "AB", "ah1 bo1", "amber boat"), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_memo_list(db, CT_ORBIT_CORNER, rows, CT_MEMO_LIST_FULL), CT_MEMO_LIST_FULL);
+    CT_ASSERT_STR_EQ(rows[1].image, "amber boat");
+    CT_ASSERT_STR_EQ(rows[1].phoneme, "ah1 bo1");
+    CT_ASSERT_EQ(ct_memo_list(db, CT_ORBIT_EDGE, rows, CT_MEMO_LIST_FULL), CT_MEMO_LIST_FULL);
+    CT_ASSERT_STR_EQ(rows[1].image, "atlas bridge");
+
+    CT_ASSERT_EQ(
+        sqlite3_exec(db, "DELETE FROM memo_pair WHERE orbit = 0 AND pair = 'AB'", NULL, NULL, NULL),
+        SQLITE_OK);
+    CT_ASSERT_EQ(ct_memo_list(db, CT_ORBIT_CORNER, rows, CT_MEMO_LIST_FULL), CT_MEMO_LIST_FULL - 1);
+    CT_ASSERT_STR_EQ(rows[0].pair, "AA");
+    CT_ASSERT_STR_EQ(rows[1].pair, "AC");
     ct_db_close(db);
 }

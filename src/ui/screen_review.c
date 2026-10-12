@@ -78,12 +78,42 @@ static void ct_review_push_queue(ct_review_form *f, const ct_move *moves, int co
 static void ct_review_idle(ct_review_form *f) {
     memset(&f->card, 0, sizeof f->card);
     f->alg_text[0] = '\0';
+    f->memo_image[0] = '\0';
+    f->memo_pair = false;
     f->move_count = 0;
     ct_cube_init(&f->cube, CT_REVIEW_CUBE_N);
     ct_anim_init(&f->anim);
     f->revealed = false;
     f->playing = false;
     f->scrub_index = 0;
+}
+
+static bool ct_review_pair_key(const char *key) {
+    if (key[0] < CT_LETTER_FIRST || key[0] > CT_LETTER_LAST) {
+        return false;
+    }
+    if (key[1] < CT_LETTER_FIRST || key[1] > CT_LETTER_LAST) {
+        return false;
+    }
+    return key[2] == '\0';
+}
+
+static void ct_review_load_memo(ct_review_form *f) {
+    f->memo_pair = ct_review_pair_key(f->card.case_key);
+    f->memo_image[0] = '\0';
+    if (!f->memo_pair) {
+        return;
+    }
+    ct_memo_row row;
+    if (ct_memo_get(f->db, CT_ORBIT_CORNER, f->card.case_key, &row) == CT_REPO_OK &&
+        row.image[0] != '\0') {
+        snprintf(f->memo_image, sizeof f->memo_image, "%s", row.image);
+        return;
+    }
+    if (ct_memo_get(f->db, CT_ORBIT_EDGE, f->card.case_key, &row) == CT_REPO_OK &&
+        row.image[0] != '\0') {
+        snprintf(f->memo_image, sizeof f->memo_image, "%s", row.image);
+    }
 }
 
 int ct_review_form_begin(ct_review_form *f, sqlite3 *db, const char *deck, const char *now_iso,
@@ -120,6 +150,7 @@ int ct_review_form_load_case(ct_review_form *f) {
         return rc;
     }
     f->card = card;
+    ct_review_load_memo(f);
     snprintf(f->alg_text, sizeof f->alg_text, "%s", ct_review_pick_alg(&f->card));
     ct_move moves[CT_ANIM_QUEUE_CAP];
     int n = ct_notation_parse(f->alg_text, CT_REVIEW_CUBE_N, moves, CT_ANIM_QUEUE_CAP);
@@ -433,6 +464,15 @@ void ct_screen_review_draw(ct_app *app) {
         return;
     }
 
+    if (f->memo_pair) {
+        DrawTextEx(font, f->memo_image[0] != '\0' ? f->memo_image : f->card.case_key,
+                   (Vector2){(float)right_x, (float)y}, (float)CT_UI_FONT_TITLE,
+                   CT_UI_TEXT_SPACING,
+                   f->memo_image[0] != '\0' ? GetColor(CT_UI_COLOR_TEXT)
+                                            : GetColor(CT_UI_COLOR_TEXT_DIM));
+        y += CT_UI_FONT_TITLE + CT_UI_ROW_GAP;
+        text_pos.y = (float)y;
+    }
     DrawTextEx(font, f->revealed ? f->alg_text : "hidden", text_pos, text_size, CT_UI_TEXT_SPACING,
                GetColor(CT_UI_COLOR_TEXT));
     if (!f->revealed) {

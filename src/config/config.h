@@ -262,6 +262,7 @@ typedef enum ct_cfg_status {
 #define CT_UI_FONT_ENV "CT_FONT_FILE"
 #define CT_UI_FONT_EXE_REL "../../assets/fonts"
 #define CT_MEMO_TEXT_MAX 64
+#define CT_MEMO_PAIR_MAX 3
 #define CT_CLASSIFY_LABEL_MAX 24
 #define CT_CLASSIFY_REASON_MAX 96
 #define CT_CLASSIFY_SETUP_MAX 4

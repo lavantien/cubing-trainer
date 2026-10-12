@@ -563,6 +563,49 @@ CT_SUITE(e2e_run_trainer_edge_generate) {
     ct_db_close(db);
 }
 
+CT_SUITE(e2e_run_trainer_memo_panel) {
+    sqlite3 *db = e2e_db();
+    ct_trainer_form f;
+    CT_ASSERT_EQ(ct_trainer_form_open(&f, db), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_trainer_form_select_event(&f, CT_EVENT_3BLD), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_trainer_form_select_list(&f, 0), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_trainer_form_select_case(&f, 0), CT_REPO_OK);
+    CT_ASSERT_STR_EQ(f.front, "AB");
+    CT_ASSERT_EQ(f.memo_row_count, CT_LETTER_STICKERS * CT_LETTER_STICKERS);
+    CT_ASSERT_STR_EQ(f.memo_saved_phoneme, "a^w1 bep5");
+    CT_ASSERT_STR_EQ(f.memo_saved_image, "atlas bridge");
+    CT_ASSERT_STR_EQ(f.memo_phoneme, "a^w1 bep5");
+    CT_ASSERT_STR_EQ(f.memo_image, "atlas bridge");
+    const ct_memo_list_row *row = ct_trainer_form_memo_find(&f, "AB");
+    CT_ASSERT(row != NULL);
+    if (row != NULL) {
+        CT_ASSERT_STR_EQ(row->phoneme, "a^w1 bep5");
+        CT_ASSERT_STR_EQ(row->image, "atlas bridge");
+    }
+    row = ct_trainer_form_memo_find(&f, "QX");
+    CT_ASSERT(row != NULL);
+    CT_ASSERT(ct_trainer_form_memo_find(&f, "ZZ") == NULL);
+    snprintf(f.memo_phoneme, sizeof f.memo_phoneme, "ah1 bo1");
+    snprintf(f.memo_image, sizeof f.memo_image, "amber boat");
+    CT_ASSERT_EQ(ct_trainer_form_memo_save(&f), CT_REPO_OK);
+    CT_ASSERT_STR_EQ(f.memo_saved_phoneme, "ah1 bo1");
+    CT_ASSERT_STR_EQ(f.memo_saved_image, "amber boat");
+    CT_ASSERT_STR_EQ(f.memo_phoneme, "ah1 bo1");
+    CT_ASSERT_STR_EQ(f.memo_image, "amber boat");
+    row = ct_trainer_form_memo_find(&f, "AB");
+    CT_ASSERT(row != NULL);
+    if (row != NULL) {
+        CT_ASSERT_STR_EQ(row->image, "amber boat");
+    }
+    ct_memo_row direct;
+    CT_ASSERT_EQ(ct_memo_get(db, CT_ORBIT_CORNER, "AB", &direct), CT_REPO_OK);
+    CT_ASSERT_STR_EQ(direct.image, "amber boat");
+    f.memo_image[0] = '\0';
+    CT_ASSERT_EQ(ct_trainer_form_memo_save(&f), CT_REPO_ERR_ARG);
+    CT_ASSERT_STR_EQ(f.memo_saved_image, "amber boat");
+    ct_db_close(db);
+}
+
 CT_SUITE(e2e_run_script_guards) {
     sqlite3 *db = e2e_db();
     ct_app app;

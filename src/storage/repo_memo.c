@@ -7,6 +7,8 @@
 
 static const char CT_SQL_MEMO_GET[] =
     "SELECT phoneme, image FROM memo_pair WHERE orbit = ? AND pair = ?";
+static const char CT_SQL_MEMO_LIST[] =
+    "SELECT pair, phoneme, image FROM memo_pair WHERE orbit = ? ORDER BY pair";
 static const char CT_SQL_MEMO_SET[] =
     "INSERT INTO memo_pair(orbit, pair, phoneme, image) VALUES(?, ?, ?, ?)"
     " ON CONFLICT(orbit, pair) DO UPDATE SET"
@@ -63,6 +65,30 @@ int ct_memo_get(sqlite3 *db, int orbit, const char *pair, ct_memo_row *out) {
     }
     sqlite3_finalize(st);
     return ret;
+}
+
+int ct_memo_list(sqlite3 *db, int orbit, ct_memo_list_row *rows, int cap) {
+    if (db == NULL || cap < 0 || (rows == NULL && cap > 0)) {
+        return CT_REPO_ERR_ARG;
+    }
+    if (!ct_memo_orbit_ok(orbit)) {
+        return CT_REPO_ERR_ARG;
+    }
+    sqlite3_stmt *st = NULL;
+    if (sqlite3_prepare_v2(db, CT_SQL_MEMO_LIST, -1, &st, NULL) != SQLITE_OK) {
+        sqlite3_finalize(st);
+        return CT_REPO_ERR_DB;
+    }
+    sqlite3_bind_int(st, 1, orbit);
+    int count = 0;
+    while (count < cap && sqlite3_step(st) == SQLITE_ROW) {
+        ct_memo_read_text(st, 0, rows[count].pair, sizeof rows[count].pair);
+        ct_memo_read_text(st, 1, rows[count].phoneme, sizeof rows[count].phoneme);
+        ct_memo_read_text(st, 2, rows[count].image, sizeof rows[count].image);
+        count++;
+    }
+    sqlite3_finalize(st);
+    return count;
 }
 
 int ct_memo_set(sqlite3 *db, int orbit, const char *pair, const char *phoneme, const char *image) {

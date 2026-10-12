@@ -15,7 +15,13 @@ enum {
     CT_TRAINER_CASES_MAX = CT_LETTER_STICKERS * CT_LETTER_STICKERS,
     CT_TRAINER_HALF = 2,
     CT_TRAINER_DETAIL_COL = 3,
-    CT_TRAINER_DECOMP_STEP = CT_UI_FONT_BODY + CT_UI_ROW_GAP / 2
+    CT_TRAINER_DECOMP_STEP = CT_UI_FONT_BODY + CT_UI_ROW_GAP / 2,
+    CT_TRAINER_MEMO_PAD = 12,
+    CT_TRAINER_MEMO_ROW_H = 28,
+    CT_TRAINER_MEMO_FIELD_H = 32,
+    CT_TRAINER_MEMO_GAP = 8,
+    CT_TRAINER_MEMO_FIELD_GAP = 12,
+    CT_TRAINER_MEMO_DECOMP_RESERVE = CT_TRAINER_DECOMP_LINES * CT_TRAINER_DECOMP_STEP
 };
 
 static const char *const CT_TRAINER_EVENT_NAMES[] = {
@@ -51,6 +57,15 @@ static const char *ct_trainer_stage_name(ct_stage st) {
     return i < count ? CT_TRAINER_STAGE_NAMES[i] : "?";
 }
 
+static void ct_trainer_memo_clear_case(ct_trainer_form *f) {
+    f->memo_saved_phoneme[0] = '\0';
+    f->memo_saved_image[0] = '\0';
+    f->memo_phoneme[0] = '\0';
+    f->memo_image[0] = '\0';
+}
+
+static void ct_trainer_memo_reload_rows(ct_trainer_form *f);
+
 static void ct_trainer_form_reload(ct_trainer_form *f) {
     f->list_count = ct_selector_lists(f->sel.event, f->sel.method, f->lists, CT_TRAINER_LISTS_MAX);
     f->case_count = 0;
@@ -64,6 +79,8 @@ static void ct_trainer_form_reload(ct_trainer_form *f) {
     f->alg_text[0] = '\0';
     f->pack_status = CT_TRAINER_NO_DETAIL;
     f->alg_status = CT_TRAINER_NO_DETAIL;
+    f->memo_row_count = 0;
+    ct_trainer_memo_clear_case(f);
     if (f->list_count <= 0) {
         f->status = CT_REPO_ERR_DB;
         return;
@@ -83,6 +100,7 @@ static void ct_trainer_form_reload(ct_trainer_form *f) {
             f->group_count = group + 1;
         }
     }
+    ct_trainer_memo_reload_rows(f);
     f->status = CT_REPO_OK;
 }
 
@@ -173,6 +191,35 @@ static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source *
     return CT_REPO_OK;
 }
 
+static void ct_trainer_memo_reload_rows(ct_trainer_form *f) {
+    f->memo_row_count = 0;
+    ct_selector_source source;
+    if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+        source != CT_SELECTOR_CHART) {
+        return;
+    }
+    int n = ct_memo_list(f->db, f->lists[f->sel.list_id].orbit, f->memo_rows,
+                         CT_TRAINER_MEMO_ROWS_MAX);
+    f->memo_row_count = n > 0 ? n : 0;
+}
+
+static void ct_trainer_memo_load_case(ct_trainer_form *f) {
+    ct_trainer_memo_clear_case(f);
+    ct_selector_source source;
+    if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+        source != CT_SELECTOR_CHART) {
+        return;
+    }
+    ct_memo_row row;
+    if (ct_memo_get(f->db, f->lists[f->sel.list_id].orbit, f->front, &row) != CT_REPO_OK) {
+        return;
+    }
+    snprintf(f->memo_saved_phoneme, sizeof f->memo_saved_phoneme, "%s", row.phoneme);
+    snprintf(f->memo_saved_image, sizeof f->memo_saved_image, "%s", row.image);
+    snprintf(f->memo_phoneme, sizeof f->memo_phoneme, "%s", row.phoneme);
+    snprintf(f->memo_image, sizeof f->memo_image, "%s", row.image);
+}
+
 int ct_trainer_form_select_case(ct_trainer_form *f, int index) {
     if (f == NULL || f->db == NULL) {
         return CT_REPO_ERR_ARG;
@@ -190,6 +237,7 @@ int ct_trainer_form_select_case(ct_trainer_form *f, int index) {
     f->alg_text[0] = '\0';
     f->pack_status = CT_TRAINER_NO_DETAIL;
     f->alg_status = CT_TRAINER_NO_DETAIL;
+    ct_trainer_memo_clear_case(f);
     ct_selector_source source;
     if (ct_trainer_list_source(f, &source) != CT_REPO_OK) {
         f->status = CT_REPO_ERR_DB;
@@ -227,8 +275,51 @@ int ct_trainer_form_select_case(ct_trainer_form *f, int index) {
             snprintf(f->alg_text, sizeof f->alg_text, "%s", f->alg.sequence);
         }
     }
+    ct_trainer_memo_load_case(f);
     f->status = CT_REPO_OK;
     return CT_REPO_OK;
+}
+
+int ct_trainer_form_memo_save(ct_trainer_form *f) {
+    if (f == NULL || f->db == NULL) {
+        return CT_REPO_ERR_ARG;
+    }
+    ct_selector_source source;
+    if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+        f->sel.case_index < 0 || f->front[0] == '\0') {
+        f->status = CT_REPO_ERR_ARG;
+        return CT_REPO_ERR_ARG;
+    }
+    int rc = ct_memo_set(f->db, f->lists[f->sel.list_id].orbit, f->front, f->memo_phoneme,
+                         f->memo_image);
+    f->status = rc;
+    if (rc != CT_REPO_OK) {
+        return rc;
+    }
+    ct_trainer_memo_load_case(f);
+    ct_trainer_memo_reload_rows(f);
+    return CT_REPO_OK;
+}
+
+const ct_memo_list_row *ct_trainer_form_memo_find(const ct_trainer_form *f, const char *pair) {
+    if (f == NULL || pair == NULL) {
+        return NULL;
+    }
+    int lo = 0;
+    int hi = f->memo_row_count - 1;
+    while (lo <= hi) {
+        int mid = lo + (hi - lo) / 2;
+        int cmp = strcmp(f->memo_rows[mid].pair, pair);
+        if (cmp == 0) {
+            return &f->memo_rows[mid];
+        }
+        if (cmp < 0) {
+            lo = mid + 1;
+        } else {
+            hi = mid - 1;
+        }
+    }
+    return NULL;
 }
 
 int ct_trainer_form_select_cell(ct_trainer_form *f, int sticker) {
@@ -337,6 +428,8 @@ typedef struct {
     int list_scroll;
     int case_scroll;
     int case_active;
+    bool memo_edit_phoneme;
+    bool memo_edit_image;
     char event_labels[CT_TRAINER_EVENTS_MAX][CT_TRAINER_KEY_MAX];
     char *event_ptrs[CT_TRAINER_EVENTS_MAX];
     char method_labels[CT_TRAINER_LISTS_MAX][CT_TRAINER_KEY_MAX];
@@ -381,6 +474,13 @@ static void ct_trainer_build_labels(ct_trainer_screen *s) {
                                               f->sel.list_id, index, s->case_labels[v],
                                               (unsigned)sizeof s->case_labels[v]) != 0) {
             s->case_labels[v][0] = '\0';
+        } else {
+            const ct_memo_list_row *row = ct_trainer_form_memo_find(f, s->case_labels[v]);
+            if (row != NULL && row->image[0] != '\0') {
+                char key[CT_TRAINER_KEY_MAX];
+                snprintf(key, sizeof key, "%s", s->case_labels[v]);
+                snprintf(s->case_labels[v], sizeof s->case_labels[v], "%s %s", key, row->image);
+            }
         }
         s->case_ptrs[v] = s->case_labels[v];
         if (index == f->sel.case_index) {
@@ -606,8 +706,44 @@ void ct_screen_trainer_draw(ct_app *app) {
         DrawTextEx(font, decomp[i], detail_pos, text_size, CT_UI_TEXT_SPACING,
                    GetColor(CT_UI_COLOR_TEXT_DIM));
     }
-    if (GuiButton(ct_trainer_rect(detail_x, h - CT_UI_STATUS_H - margin - row_h, detail_w, row_h),
-                  "back")) {
+    int back_y = h - CT_UI_STATUS_H - margin - row_h;
+    if (chart && f->sel.case_index >= 0) {
+        int memo_y = decomp_y + CT_TRAINER_MEMO_DECOMP_RESERVE + CT_TRAINER_MEMO_GAP;
+        int memo_h = back_y - CT_UI_ROW_GAP - memo_y;
+        int memo_pad = CT_TRAINER_MEMO_PAD;
+        int memo_w = detail_w - 2 * memo_pad;
+        GuiGroupBox(ct_trainer_rect(detail_x, memo_y, detail_w, memo_h), "memo");
+        char memo_line[CT_MEMO_TEXT_MAX + CT_TRAINER_KEY_MAX];
+        int row1_y = memo_y + memo_pad;
+        int row2_y = row1_y + CT_TRAINER_MEMO_ROW_H;
+        snprintf(memo_line, sizeof memo_line, "phoneme %s", f->memo_saved_phoneme);
+        GuiLabel(ct_trainer_rect(detail_x + memo_pad, row1_y, memo_w, CT_TRAINER_MEMO_ROW_H),
+                 memo_line);
+        snprintf(memo_line, sizeof memo_line, "image %s", f->memo_saved_image);
+        GuiLabel(ct_trainer_rect(detail_x + memo_pad, row2_y, memo_w, CT_TRAINER_MEMO_ROW_H),
+                 memo_line);
+        int box_y = row2_y + CT_TRAINER_MEMO_ROW_H + CT_TRAINER_MEMO_GAP;
+        int box_w = (memo_w - CT_TRAINER_MEMO_FIELD_GAP) / 2;
+        if (GuiTextBox(ct_trainer_rect(detail_x + memo_pad, box_y, box_w, CT_TRAINER_MEMO_FIELD_H),
+                       f->memo_phoneme, (int)sizeof f->memo_phoneme,
+                       ct_trainer.memo_edit_phoneme)) {
+            ct_trainer.memo_edit_phoneme = !ct_trainer.memo_edit_phoneme;
+        }
+        if (GuiTextBox(ct_trainer_rect(detail_x + memo_pad + box_w + CT_TRAINER_MEMO_FIELD_GAP,
+                                       box_y, box_w, CT_TRAINER_MEMO_FIELD_H),
+                       f->memo_image, (int)sizeof f->memo_image, ct_trainer.memo_edit_image)) {
+            ct_trainer.memo_edit_image = !ct_trainer.memo_edit_image;
+        }
+        int save_y = box_y + CT_TRAINER_MEMO_FIELD_H + CT_TRAINER_MEMO_GAP;
+        if (GuiButton(ct_trainer_rect(detail_x + memo_pad, save_y, memo_w,
+                                      CT_TRAINER_MEMO_FIELD_H),
+                      "save memo")) {
+            ct_trainer.memo_edit_phoneme = false;
+            ct_trainer.memo_edit_image = false;
+            ct_trainer_form_memo_save(f);
+        }
+    }
+    if (GuiButton(ct_trainer_rect(detail_x, back_y, detail_w, row_h), "back")) {
         app->screen = CT_SCREEN_MENU;
     }
     GuiStatusBar(ct_trainer_rect(margin, h - CT_UI_STATUS_H, w - 2 * margin, CT_UI_STATUS_H),
