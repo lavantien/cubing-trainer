@@ -1765,3 +1765,26 @@ src/app/shots.c:54	greater versus greater-equal differ only when both separator 
 src/app/shots.c:120	trainer form null guard conjunction mutant, the form accessor returns a static singleton so the null arm is dead, and the null db form only arises with a null app db where ct_trainer_form_select_event guards null db at entry and the select chain returns the same e_state, no observable difference
 src/app/shots.c:148	chart form null guard conjunction mutant, same static singleton form, the null db form reconverges through the ct_trainer_form_select_event entry guard into the same e_state return
 src/app/shots.c:202	negative pick index is clamped to row zero by ct_cards_form_select, so the -1 mutant selects the same first row and the capture is identical
+src/ui/widgets.c:17	ascii fill cap clause is never the binding term, the 95 codepoint range ends 481 slots before the 576 cap
+src/ui/widgets.c:20	latin fill cap clause is never the binding term, the 401 codepoint range ends 81 slots before the 576 cap
+src/ui/widgets.c:23	viet range end is never binding, the 576 cap truncates the fill ten codepoints before the range end
+src/ui/widgets.c:57	empty font path reaches the loader either way and is rejected identically, only the stderr message differs and the return stays false
+src/ui/widgets.c:61	atlas texture id is an opaque gpu handle, the default atlas takes id 1 and the custom atlas loads above it so the mutated literal never separates the branch, loadfontex returns a populated atlas or a fully zeroed font so both or operands flip together, and glyphcount sits at the 576 codepoint budget on every reachable load so the widened, lowered, and minus one bounds keep every comparison outcome
+src/ui/widgets.c:73	zero id never reaches the guard with a live window, pre window a guisetfont of the unbound font normalizes back to the default inside guigetfont, and the default atlas id 1 with every custom atlas id above it keeps the raised bound from changing the bind decision
+src/ui/widgets.c:91	stale owned flag is reset at the top of every load before any read and raylib guards unloading the default font copy as a no-op
+src/ui/widgets.c:99	count minus one and cap minus one both clamp n to the same minus one and return it through the empty loop
+src/ui/widgets.c:102	clamp ternary boundary at count equal to cap stores the same value in both arms
+src/ui/widgets.c:103	zero fast path boundary, falling through skips the empty loop and returns the same zero
+src/ui/widgets.c:111	max scan comparison at equality restores the same maximum, idempotent
+src/ui/widgets.c:116	bar value gate at zero, both ternary arms yield zero for the equality case
+src/ui/widgets.c:129	zero rows slip the weakened guard into the row bound check which rejects them with the same minus one
+src/ui/widgets.c:144	zero cols slip the weakened guard into the column clamp which returns minus one, matching the guard outcome
+src/ui/widgets.c:153	column clamp reachable only when the quotient reaches cols, the hit test rejects the right edge so the scaled quotient stays strictly below cols, defensive float guard
+src/ui/widgets.c:154	column clamp store is dead code behind the unreachable clamp branch
+src/ui/widgets.c:156	row clamp reachable only when the quotient reaches rows, the hit test rejects the bottom edge so the scaled quotient stays strictly below rows, defensive float guard
+src/ui/widgets.c:157	row clamp store is dead code behind the unreachable clamp branch
+src/ui/widgets.c:164	accuracy lower clamp boundary is idempotent, at zero both arms store zero
+src/ui/widgets.c:167	accuracy upper clamp boundary is idempotent, at one both arms store one
+src/ui/widgets.c:173	half boundary is the continuous crossing where both branches produce full red and green, identical color bytes
+src/ui/screen_menu.c:86	sizeof on any element of the uniform entry array yields the same element size, count unchanged
+src/ui/screen_menu.c:101	quit branch needs a real gui mouse release inside the rect, no headless path can force the raygui pressed result

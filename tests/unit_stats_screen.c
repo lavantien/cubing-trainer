@@ -3,12 +3,14 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../src/app/paths.h"
 #include "../src/config/config.h"
 #include "../src/srs/fsrs.h"
 #include "../src/stats/stats.h"
 #include "../src/ui/ui.h"
 #include "../src/ui/widgets.h"
 #include "framework.h"
+#include "raygui.h"
 
 static const char NOW[] = "2026-06-01T00:00:00Z";
 static const char STAMP_A[] = "2026-05-01T00:00:00Z";
@@ -362,6 +364,25 @@ CT_SUITE(stats_screen_chart_layout) {
     CT_ASSERT_DBL_EQ(bars[0].bar.height, 25.0, 1e-9);
     CT_ASSERT_DBL_EQ(bars[2].bar.height, 100.0, 1e-9);
 
+    double descend[3] = {8.0, 4.0, 1.0};
+    CT_ASSERT_EQ(ct_chart_layout(b, descend, 3, bars, 3), 3);
+    CT_ASSERT_DBL_EQ(bars[0].bar.height, 100.0, 1e-9);
+    CT_ASSERT_DBL_EQ(bars[1].bar.height, 50.0, 1e-9);
+    CT_ASSERT_DBL_EQ(bars[2].bar.height, 12.5, 1e-9);
+
+    double nan_mix[4] = {3.0, NAN, 2.0, 1.0};
+    CT_ASSERT_EQ(ct_chart_layout(b, nan_mix, 4, bars, 4), 4);
+    CT_ASSERT_DBL_EQ(bars[0].bar.height, 100.0, 1e-9);
+    CT_ASSERT_DBL_EQ(bars[1].bar.height, 0.0, 1e-12);
+    CT_ASSERT_DBL_EQ(bars[2].bar.height, 200.0 / 3.0, 1e-4);
+    CT_ASSERT_DBL_EQ(bars[3].bar.height, 100.0 / 3.0, 1e-4);
+
+    double inf_tail[3] = {2.0, 1.0, INFINITY};
+    CT_ASSERT_EQ(ct_chart_layout(b, inf_tail, 3, bars, 3), 3);
+    CT_ASSERT_DBL_EQ(bars[0].bar.height, 100.0, 1e-9);
+    CT_ASSERT_DBL_EQ(bars[1].bar.height, 50.0, 1e-9);
+    CT_ASSERT_DBL_EQ(bars[2].bar.height, 0.0, 1e-12);
+
     ct_chart_bar full[4];
     CT_ASSERT_EQ(ct_chart_layout(b, vals, 4, full, 4), 4);
     CT_ASSERT_EQ(ct_chart_layout(b, vals, 4, bars, 2), 2);
@@ -448,6 +469,8 @@ CT_SUITE(stats_screen_heatmap_grid) {
     CT_ASSERT_EQ(ct_heatmap_cell(b, 6, 4, -1, &r), -1);
     CT_ASSERT_EQ(ct_heatmap_cell(b, 6, 4, 24, &r), -1);
     CT_ASSERT_EQ(ct_heatmap_cell(b, 0, 4, 0, &r), -1);
+    CT_ASSERT_EQ(ct_heatmap_cell(b, 6, 0, 0, &r), -1);
+    CT_ASSERT_EQ(ct_heatmap_cell(b, 6, 0, 7, &r), -1);
     CT_ASSERT_EQ(ct_heatmap_cell(b, 6, -1, 0, &r), -1);
     CT_ASSERT_EQ(ct_heatmap_cell(b, 6, 4, 0, NULL), -1);
     Vector2 origin = {0.0f, 0.0f};
@@ -613,4 +636,112 @@ CT_SUITE(stats_screen_update_guard) {
     ct_screen_stats_update(NULL);
     ct_screen_stats_update(NULL);
     CT_ASSERT(1);
+}
+
+CT_SUITE(stats_screen_font_lifecycle) {
+    SetConfigFlags(FLAG_WINDOW_HIDDEN);
+    InitWindow(CT_WINDOW_WIDTH, CT_WINDOW_HEIGHT, "stats_screen_font_lifecycle");
+    CT_ASSERT(IsWindowReady());
+    CT_ASSERT_EQ(ct_ui_font().texture.id, GetFontDefault().texture.id);
+    char font_path[CT_APP_EXE_PATH_MAX];
+    CT_ASSERT_EQ(ct_font_path(font_path, (unsigned)sizeof font_path), 0);
+    CT_ASSERT(font_path[0] != '\0');
+
+    CT_ASSERT_EQ(ct_ui_theme_load(NULL), false);
+    CT_ASSERT_EQ(ct_ui_theme_load(""), false);
+
+    int expected[CT_UI_FONT_CODEPOINTS_MAX];
+    int expected_n = 0;
+    for (int c = CT_UI_FONT_ASCII_FIRST;
+         c <= CT_UI_FONT_ASCII_LAST && expected_n < CT_UI_FONT_CODEPOINTS_MAX; c++) {
+        expected[expected_n++] = c;
+    }
+    for (int c = CT_UI_FONT_LATIN_FIRST;
+         c <= CT_UI_FONT_LATIN_LAST && expected_n < CT_UI_FONT_CODEPOINTS_MAX; c++) {
+        expected[expected_n++] = c;
+    }
+    for (int c = CT_UI_FONT_VIET_FIRST;
+         c <= CT_UI_FONT_VIET_LAST && expected_n < CT_UI_FONT_CODEPOINTS_MAX; c++) {
+        expected[expected_n++] = c;
+    }
+    CT_ASSERT_EQ(expected_n, CT_UI_FONT_CODEPOINTS_MAX);
+
+    CT_ASSERT_EQ(ct_ui_theme_load(font_path), true);
+    Font gui = GuiGetFont();
+    CT_ASSERT_EQ(gui.baseSize, CT_UI_FONT_BODY);
+    CT_ASSERT_EQ(gui.glyphCount, expected_n);
+    for (int i = 0; i < expected_n; i++) {
+        CT_ASSERT_EQ(gui.glyphs[i].value, expected[i]);
+    }
+    CT_ASSERT(gui.texture.id != GetFontDefault().texture.id);
+    CT_ASSERT_EQ(ct_ui_font().texture.id, gui.texture.id);
+
+    ct_ui_theme_release();
+    CT_ASSERT_EQ(GuiGetFont().texture.id, GetFontDefault().texture.id);
+
+    CT_ASSERT_EQ(ct_ui_theme_load(NULL), false);
+    CT_ASSERT_EQ(ct_ui_theme_load(font_path), true);
+    CT_ASSERT_EQ(GuiGetFont().glyphCount, expected_n);
+    CT_ASSERT_EQ(GuiGetFont().glyphs[expected_n - 1].value, expected[expected_n - 1]);
+    ct_ui_theme_release();
+    CloseWindow();
+}
+
+CT_SUITE(stats_screen_menu_layout) {
+    SetConfigFlags(FLAG_WINDOW_HIDDEN);
+    InitWindow(CT_WINDOW_WIDTH, CT_WINDOW_HEIGHT, "stats_screen_menu_layout");
+    CT_ASSERT(IsWindowReady());
+    char font_path[CT_APP_EXE_PATH_MAX];
+    CT_ASSERT_EQ(ct_font_path(font_path, (unsigned)sizeof font_path), 0);
+    CT_ASSERT_EQ(ct_ui_theme_load(font_path), true);
+
+    ct_app app;
+    memset(&app, 0, sizeof app);
+    app.cfg = ct_config_defaults();
+    app.cfg.window.width = CT_WINDOW_WIDTH;
+    app.cfg.window.height = CT_WINDOW_HEIGHT;
+    app.screen = CT_SCREEN_MENU;
+    app.running = true;
+
+    RenderTexture2D target = LoadRenderTexture(CT_WINDOW_WIDTH, CT_WINDOW_HEIGHT);
+    BeginTextureMode(target);
+    ct_ui_draw(&app);
+    EndTextureMode();
+    Image frame = LoadImageFromTexture(target.texture);
+    ImageFlipVertical(&frame);
+
+    enum { MENU_ROWS = 6, MENU_INSET = 4 };
+    int btn_w = CT_WINDOW_WIDTH / 4;
+    int btn_h = CT_UI_BTN_H;
+    int step = btn_h + CT_UI_BTN_GAP;
+    int total = MENU_ROWS * step - CT_UI_BTN_GAP;
+    int x = (CT_WINDOW_WIDTH - btn_w) / 2;
+    int y = CT_WINDOW_HEIGHT / 2 - total / 2 + CT_WINDOW_HEIGHT / CT_UI_MENU_BAND_DIV;
+    Color panel = GetColor(CT_UI_COLOR_PANEL);
+    Color bg = GetColor(CT_UI_COLOR_BG);
+    for (int i = 0; i < MENU_ROWS; i++) {
+        Color px = GetImageColor(frame, x + MENU_INSET, y + i * step + btn_h / 2);
+        CT_ASSERT_EQ(px.r, panel.r);
+        CT_ASSERT_EQ(px.g, panel.g);
+        CT_ASSERT_EQ(px.b, panel.b);
+    }
+    Color left = GetImageColor(frame, x - MENU_INSET, y + btn_h / 2);
+    CT_ASSERT_EQ(left.r, bg.r);
+    CT_ASSERT_EQ(left.g, bg.g);
+    CT_ASSERT_EQ(left.b, bg.b);
+    Color right = GetImageColor(frame, x + btn_w + MENU_INSET, y + btn_h / 2);
+    CT_ASSERT_EQ(right.r, bg.r);
+    CT_ASSERT_EQ(right.g, bg.g);
+    CT_ASSERT_EQ(right.b, bg.b);
+    Color gap_px = GetImageColor(frame, x + MENU_INSET, y + btn_h + CT_UI_BTN_GAP / 2);
+    CT_ASSERT_EQ(gap_px.r, bg.r);
+    CT_ASSERT_EQ(gap_px.g, bg.g);
+    CT_ASSERT_EQ(gap_px.b, bg.b);
+    CT_ASSERT_EQ(app.screen, CT_SCREEN_MENU);
+    CT_ASSERT(app.running);
+
+    UnloadImage(frame);
+    UnloadRenderTexture(target);
+    ct_ui_theme_release();
+    CloseWindow();
 }
