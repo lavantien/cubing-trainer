@@ -218,6 +218,9 @@ CT_SUITE(path_data_dir_env) {
     snprintf(want, sizeof want, "%s/custom", base);
     CT_ASSERT_STR_EQ(out, want);
     CT_ASSERT(dir_exists(want));
+    memset(out, 0xAA, sizeof out);
+    CT_ASSERT_EQ(ct_data_dir("x", out, 1u), -1);
+    CT_ASSERT(out[0] == '\0');
     CT_ASSERT_EQ(ct_data_dir("cubing-trainer", out, 8u), -1);
     CT_ASSERT_EQ(ct_data_dir(NULL, out, (unsigned)sizeof out), -1);
     const char *bf = CT_PATH_TEST_DIR "/data/fblock";
@@ -233,4 +236,29 @@ CT_SUITE(path_data_dir_env) {
         set_env(CT_DATA_DIR_ENV, restore);
     else
         CT_ASSERT_EQ(CT_PATH_PUTENV(empty_entry), 0);
+}
+
+CT_SUITE(path_font_env) {
+    char out[CT_PATH_BUF_MAX];
+    CT_ASSERT_EQ(ct_font_path(NULL, (unsigned)sizeof out), -1);
+    CT_ASSERT_EQ(ct_font_path(out, 0u), -1);
+    set_env(CT_UI_FONT_ENV, "C:/fonts/x.ttf");
+    CT_ASSERT_EQ(ct_font_path(out, (unsigned)sizeof out), 0);
+    CT_ASSERT_STR_EQ(out, "C:/fonts/x.ttf");
+    set_env(CT_UI_FONT_ENV, "f");
+    CT_ASSERT_EQ(ct_font_path(out, (unsigned)sizeof out), 0);
+    CT_ASSERT_STR_EQ(out, "f");
+    set_env(CT_UI_FONT_ENV, "12345678");
+    CT_ASSERT_EQ(ct_font_path(out, 8u), -1);
+    set_env(CT_UI_FONT_ENV, "1234567");
+    CT_ASSERT_EQ(ct_font_path(out, 8u), 0);
+    CT_ASSERT_STR_EQ(out, "1234567");
+    set_env(CT_UI_FONT_ENV, "");
+    CT_ASSERT_EQ(ct_font_path(out, (unsigned)sizeof out), 0);
+    CT_ASSERT(strstr(out, CT_UI_FONT_EXE_REL) != NULL);
+    CT_ASSERT(strstr(out, CT_UI_FONT_NAME) != NULL);
+    unsigned full = (unsigned)strlen(out);
+    CT_ASSERT_EQ(ct_font_path(out, full), -1);
+    CT_ASSERT_EQ(ct_font_path(out, full + 1u), 0);
+    CT_ASSERT_EQ(ct_font_path(out, 8u), -1);
 }

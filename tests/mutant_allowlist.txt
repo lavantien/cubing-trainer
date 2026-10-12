@@ -1752,3 +1752,10 @@ src/app/app_loop.c:71	the frame loop gate feeds only the raylib pump no gate sui
 src/app/app_loop.c:74	the catchup cap arithmetic steers the accumulator clamp inside the raylib frame loop no gate suite exercises and diverges only on single frame durations the gate machine never yields deterministically
 src/app/app_loop.c:75	the clamp comparison differs only at exact double equality between the accumulator and the cap inside the raylib frame loop no gate suite exercises, a value real frame times never produce
 src/app/app_loop.c:78	the fixed step gate differs only at exact double equality between the accumulator and the fixed step inside the raylib frame loop no gate suite exercises, a value real frame times never produce
+src/app/paths.c:154	the byte before every env value reachable in the harness is the equals separator of the putenv entry, never nul, and the unset case short circuits at the first arm
+src/app/paths.c:156	written zero is unreachable for a nonempty override string and a negative written slips into the unsigned cast comparison which rejects it identically
+src/app/paths.c:164	ct_exe_resource_dir succeeds on every harness call, the failure arm and its return variants never run
+src/app/paths.c:167	written zero is unreachable because the format always emits the resource dir, the separator slash, and a nonempty font name, and a negative written slips into the unsigned cast comparison which rejects it identically
+src/app/paths.c:179	every reachable value at this line comes from a putenv entry whose byte before the value is the equals separator, and the unset case short circuits at the null arm
+src/app/paths.c:182	every reachable value at this line comes from a putenv entry whose byte before the value is the equals separator, and the unset case short circuits at the null arm
+src/app/paths.c:190	written zero is unreachable because the base and the joined name always emit at least the separator slash, and a negative written slips into the unsigned cast comparison which rejects it identically
