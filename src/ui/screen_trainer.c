@@ -112,10 +112,13 @@ static int ct_trainer_form_refresh_inputs(ct_trainer_form *f) {
 }
 
 int ct_trainer_form_open(ct_trainer_form *f, sqlite3 *db) {
-    if (f == NULL || db == NULL) {
+    if (f == NULL) {
         return CT_REPO_ERR_ARG;
     }
     memset(f, 0, sizeof *f);
+    if (db == NULL) {
+        return CT_REPO_ERR_ARG;
+    }
     f->db = db;
     f->cfg = ct_config_defaults();
     if (ct_trainer_form_refresh_inputs(f) != CT_REPO_OK) {
