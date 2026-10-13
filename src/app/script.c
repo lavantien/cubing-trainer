@@ -69,14 +69,7 @@ static const ct_script_word CT_SCRIPT_EXPECTS[] = {
     {"memo", CT_SCRIPT_EXPECT_MEMO, CT_SCRIPT_ARGC_5},
 };
 
-enum {
-    CT_SCRIPT_KEYWORD = 0,
-    CT_SCRIPT_SUB = 1,
-    CT_SCRIPT_YEAR_DIGITS = 4,
-    CT_SCRIPT_MONTH_AT = 5,
-    CT_SCRIPT_DAY_AT = 8,
-    CT_SCRIPT_LIST_CAP = 8
-};
+enum { CT_SCRIPT_KEYWORD = 0, CT_SCRIPT_SUB = 1, CT_SCRIPT_LIST_CAP = 8 };
 
 static int ct_script_sep(char c) {
     return c == ' ' || c == '\t' || c == '\r';
@@ -324,35 +317,7 @@ int ct_script_double_ok(int op, double a, double b) {
 }
 
 int ct_script_iso_day(const char *iso, long *day) {
-    long y = 0;
-    for (int i = 0; i < CT_SCRIPT_YEAR_DIGITS; i++) {
-        if (iso[i] < '0' || iso[i] > '9') {
-            return -1;
-        }
-        y = y * CT_DECIMAL_BASE + (iso[i] - '0');
-    }
-    if (iso[CT_SCRIPT_YEAR_DIGITS] != '-') {
-        return -1;
-    }
-    int m = 0;
-    for (int i = CT_SCRIPT_MONTH_AT; i < CT_SCRIPT_MONTH_AT + 2; i++) {
-        if (iso[i] < '0' || iso[i] > '9') {
-            return -1;
-        }
-        m = m * CT_DECIMAL_BASE + (iso[i] - '0');
-    }
-    if (iso[CT_SCRIPT_MONTH_AT + 2] != '-') {
-        return -1;
-    }
-    int d = 0;
-    for (int i = CT_SCRIPT_DAY_AT; i < CT_SCRIPT_DAY_AT + 2; i++) {
-        if (iso[i] < '0' || iso[i] > '9') {
-            return -1;
-        }
-        d = d * CT_DECIMAL_BASE + (iso[i] - '0');
-    }
-    *day = ct_session_date_to_day(y, m, d);
-    return 0;
+    return ct_session_iso_day(iso, day) == CT_SESSION_OK ? 0 : -1;
 }
 
 int ct_script_now(char *now, unsigned cap, long *day) {

@@ -18,7 +18,6 @@ enum {
     CT_REVIEW_GRADE_COUNT = CT_EASY,
     CT_REVIEW_PLAY_COUNT = 2,
     CT_REVIEW_SPEED_COUNT = (int)(sizeof CT_REVIEW_SPEEDS / sizeof CT_REVIEW_SPEEDS[0]),
-    CT_REVIEW_ISO_FIELDS = 3,
     CT_REVIEW_LINE_MAX = CT_CARD_CASE_KEY_MAX + CT_CARD_DECK_MAX
 };
 
@@ -275,29 +274,6 @@ static void ct_review_log_session(void) {
     ct_review.session_logged = true;
 }
 
-static int ct_review_iso_scan(const char *iso, long *y, int *m, int *d) {
-    int parts[CT_REVIEW_ISO_FIELDS];
-    int at = 0;
-    for (int p = 0; p < CT_REVIEW_ISO_FIELDS; p++) {
-        int v = 0;
-        bool any = false;
-        while (iso[at] >= '0' && iso[at] <= '9') {
-            v = v * CT_DECIMAL_BASE + (iso[at] - '0');
-            at++;
-            any = true;
-        }
-        if (!any || (iso[at] != '-' && iso[at] != 'T')) {
-            return CT_SESSION_ERR_ARG;
-        }
-        parts[p] = v;
-        at++;
-    }
-    *y = parts[0];
-    *m = parts[1];
-    *d = parts[2];
-    return CT_SESSION_OK;
-}
-
 static void ct_review_load_scheme(sqlite3 *db) {
     ct_review.scheme = ct_color_scheme_default();
     if (db == NULL) {
@@ -333,12 +309,9 @@ static void ct_review_open(ct_app *app) {
     ct_review.camera.projection = CAMERA_PERSPECTIVE;
     char now[CT_SESSION_STAMP_MAX];
     ct_now_utc_iso(now, (unsigned)sizeof now);
-    long y = 0;
-    int m = 0;
-    int d = 0;
-    if (ct_review_iso_scan(now, &y, &m, &d) == CT_SESSION_OK) {
-        ct_review_form_begin(&ct_review.form, app->db, CT_UI_DEFAULT_DECK, now,
-                             ct_session_date_to_day(y, m, d), 0);
+    long day = 0;
+    if (ct_session_iso_day(now, &day) == CT_SESSION_OK) {
+        ct_review_form_begin(&ct_review.form, app->db, CT_UI_DEFAULT_DECK, now, day, 0);
     }
 }
 

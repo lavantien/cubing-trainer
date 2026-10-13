@@ -115,6 +115,12 @@ CT_SUITE(path_mkdirs_relative) {
     char badcomp[CT_PATH_BUF_MAX];
     snprintf(badcomp, sizeof badcomp, "%s/ba<d/leaf", CT_PATH_TEST_DIR);
     CT_ASSERT_EQ(ct_mkdirs(badcomp), -1);
+    char guard[CT_PATH_BUF_MAX];
+    memset(guard, '/', sizeof guard - 1);
+    guard[sizeof guard - 1] = '\0';
+    snprintf(guard, sizeof guard, "%s/guard/x", CT_PATH_TEST_DIR);
+    CT_ASSERT_EQ(ct_mkdirs(guard), 0);
+    CT_ASSERT(dir_exists(guard));
     wipe_test_dir();
 }
 

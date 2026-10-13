@@ -251,6 +251,28 @@ CT_SUITE(session_iso_add_days) {
     CT_ASSERT(ct_session_iso_add_days("2026-01-01", 1, NULL, (unsigned)sizeof out) < 0);
 }
 
+CT_SUITE(session_iso_day) {
+    long day = 0;
+    CT_ASSERT_EQ(ct_session_iso_day("2019-09-29", &day), CT_SESSION_OK);
+    CT_ASSERT_EQ(day, ct_session_date_to_day(2019, 9, 29));
+    CT_ASSERT_EQ(ct_session_iso_day("2026-10-13T09:41:05Z", &day), CT_SESSION_OK);
+    CT_ASSERT_EQ(day, ct_session_date_to_day(2026, 10, 13));
+    CT_ASSERT_EQ(ct_session_iso_day("2026-10-13", &day), CT_SESSION_OK);
+    CT_ASSERT_EQ(day, ct_session_date_to_day(2026, 10, 13));
+    CT_ASSERT(ct_session_iso_day(NULL, &day) < 0);
+    CT_ASSERT(ct_session_iso_day("", &day) < 0);
+    CT_ASSERT(ct_session_iso_day("2019", &day) < 0);
+    CT_ASSERT(ct_session_iso_day("201x-09-29", &day) < 0);
+    CT_ASSERT(ct_session_iso_day("2019-0x-29", &day) < 0);
+    CT_ASSERT(ct_session_iso_day("2019-09-2x", &day) < 0);
+    CT_ASSERT(ct_session_iso_day("2019x09-29", &day) < 0);
+    CT_ASSERT(ct_session_iso_day("2019-09x29", &day) < 0);
+    CT_ASSERT(ct_session_iso_day("-019-09-29", &day) < 0);
+    CT_ASSERT(ct_session_iso_day("2019-09-", &day) < 0);
+    CT_ASSERT(ct_session_iso_day("2019-09-29Q", &day) < 0);
+    CT_ASSERT(ct_session_iso_day("2019-09-29", NULL) < 0);
+}
+
 CT_SUITE(session_iso_add_days_domain) {
     char out[CT_SESSION_STAMP_MAX];
     CT_ASSERT(ct_session_iso_add_days("2026-10-09", LONG_MAX, out, (unsigned)sizeof out) < 0);

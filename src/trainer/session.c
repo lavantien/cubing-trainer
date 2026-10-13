@@ -114,6 +114,15 @@ static int ct_iso_scan(const char *iso, long *y, int *m, int *d) {
     return CT_SESSION_OK;
 }
 
+int ct_session_iso_day(const char *iso, long *day) {
+    long y;
+    int m, d;
+    if (day == NULL || ct_iso_scan(iso, &y, &m, &d) != CT_SESSION_OK)
+        return CT_SESSION_ERR_ARG;
+    *day = ct_session_date_to_day(y, m, d);
+    return CT_SESSION_OK;
+}
+
 int ct_session_iso_add_days(const char *iso, long days, char *out, unsigned cap) {
     long y;
     int m, d;

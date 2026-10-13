@@ -39,6 +39,7 @@ CT_SUITE(trainer_form_open) {
     ct_trainer_form f;
     CT_ASSERT_EQ(ct_trainer_form_open(NULL, db), CT_REPO_ERR_ARG);
     CT_ASSERT_EQ(ct_trainer_form_open(&f, NULL), CT_REPO_ERR_ARG);
+    CT_ASSERT_EQ(f.memo_row_count, 0);
     CT_ASSERT_EQ(ct_trainer_form_open(&f, db), CT_REPO_OK);
     CT_ASSERT(f.db == db);
     CT_ASSERT_EQ(f.sel.event, CT_EVENT_3X3);

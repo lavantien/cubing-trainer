@@ -46,6 +46,7 @@ void ct_session_free(ct_session *s);
 
 long ct_session_date_to_day(long y, int m, int d);
 void ct_session_day_to_date(long day, long *y, int *m, int *d);
+int ct_session_iso_day(const char *iso, long *day);
 int ct_session_iso_add_days(const char *iso, long days, char *out, unsigned cap);
 
 #ifdef __cplusplus
