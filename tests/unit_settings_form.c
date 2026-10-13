@@ -684,8 +684,8 @@ CT_SUITE(settings_form_letter_edges) {
     CT_ASSERT_EQ(f.staged.corner[0], '\0');
     CT_ASSERT_EQ(ct_letter_scheme_default_id(fresh), 1);
     sqlite3_stmt *st = NULL;
-    CT_ASSERT_EQ(
-        sqlite3_prepare_v2(fresh, "SELECT COUNT(*) FROM letter_scheme", -1, &st, NULL), SQLITE_OK);
+    CT_ASSERT_EQ(sqlite3_prepare_v2(fresh, "SELECT COUNT(*) FROM letter_scheme", -1, &st, NULL),
+                 SQLITE_OK);
     CT_ASSERT_EQ(sqlite3_step(st), SQLITE_ROW);
     CT_ASSERT_EQ(sqlite3_column_int(st, 0), 1);
     sqlite3_finalize(st);
