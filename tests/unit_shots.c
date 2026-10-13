@@ -88,6 +88,16 @@ CT_SUITE(shots_state_guards) {
     nodb.db = NULL;
     CT_ASSERT_EQ(ct_shots_review(&nodb, false, "build/test_shots_api/null_db.png"),
                  CT_SHOTS_E_STATE);
+    ct_cards_form seed;
+    ct_cards_form_open(&seed, db, "unfiled");
+    CT_ASSERT_EQ(ct_cards_form_create(&seed, db, "unfiled"), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_cards_form_create(&seed, db, "unfiled"), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_shots_cards(&app, "unfiled", true, CT_SHOTS_OUT_DIR "/two_cards.png"),
+                 CT_SHOTS_OK);
+    ct_cards_form *cards = ct_screen_cards_form();
+    CT_ASSERT(cards->row_count >= 2);
+    CT_ASSERT_EQ(cards->selected, 0);
+    CT_ASSERT_EQ(remove(CT_SHOTS_OUT_DIR "/two_cards.png"), 0);
     ct_shots_close();
     ct_db_close(db);
 }

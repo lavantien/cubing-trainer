@@ -46,6 +46,17 @@ typedef struct {
     ct_fsrs_card final[SEED_CARDS];
 } seed_state;
 
+static bool stats_window_open = false;
+
+static void stats_window_cleanup(void) {
+    if (!stats_window_open) {
+        return;
+    }
+    ct_ui_theme_release();
+    CloseWindow();
+    stats_window_open = false;
+}
+
 static sqlite3 *seed_db(void) {
     sqlite3 *db = NULL;
     CT_ASSERT_EQ(ct_db_open(&db, ":memory:"), SQLITE_OK);
@@ -639,8 +650,10 @@ CT_SUITE(stats_screen_update_guard) {
 }
 
 CT_SUITE(stats_screen_font_lifecycle) {
+    stats_window_cleanup();
     SetConfigFlags(FLAG_WINDOW_HIDDEN);
     InitWindow(CT_WINDOW_WIDTH, CT_WINDOW_HEIGHT, "stats_screen_font_lifecycle");
+    stats_window_open = true;
     CT_ASSERT(IsWindowReady());
     CT_ASSERT_EQ(ct_ui_font().texture.id, GetFontDefault().texture.id);
     char font_path[CT_APP_EXE_PATH_MAX];
@@ -683,13 +696,14 @@ CT_SUITE(stats_screen_font_lifecycle) {
     CT_ASSERT_EQ(ct_ui_theme_load(font_path), true);
     CT_ASSERT_EQ(GuiGetFont().glyphCount, expected_n);
     CT_ASSERT_EQ(GuiGetFont().glyphs[expected_n - 1].value, expected[expected_n - 1]);
-    ct_ui_theme_release();
-    CloseWindow();
+    stats_window_cleanup();
 }
 
 CT_SUITE(stats_screen_menu_layout) {
+    stats_window_cleanup();
     SetConfigFlags(FLAG_WINDOW_HIDDEN);
     InitWindow(CT_WINDOW_WIDTH, CT_WINDOW_HEIGHT, "stats_screen_menu_layout");
+    stats_window_open = true;
     CT_ASSERT(IsWindowReady());
     char font_path[CT_APP_EXE_PATH_MAX];
     CT_ASSERT_EQ(ct_font_path(font_path, (unsigned)sizeof font_path), 0);
@@ -742,6 +756,5 @@ CT_SUITE(stats_screen_menu_layout) {
 
     UnloadImage(frame);
     UnloadRenderTexture(target);
-    ct_ui_theme_release();
-    CloseWindow();
+    stats_window_cleanup();
 }
