@@ -39,6 +39,16 @@ static long seed_full(sqlite3 *db, const char *deck, const char *key) {
     return c.id;
 }
 
+static bool cards_screen_bound = false;
+
+static void cards_screen_cleanup(void) {
+    if (!cards_screen_bound) {
+        return;
+    }
+    ct_cards_form_open(ct_screen_cards_form(), NULL, "");
+    cards_screen_bound = false;
+}
+
 CT_SUITE(cards_form_open) {
     sqlite3 *db = form_db();
     for (int i = 0; i < 5; i++) {
@@ -432,6 +442,7 @@ CT_SUITE(cards_screen_auto_open) {
     app.fixed_dt = 1.0 / (double)app.cfg.window.target_fps;
 
     ct_screen_cards_update(&app);
+    cards_screen_bound = true;
     ct_cards_form *f = ct_screen_cards_form();
     CT_ASSERT_EQ(f->row_count, 3);
     CT_ASSERT_EQ(ct_cards_form_select(f, 2), CT_REPO_OK);
@@ -444,6 +455,8 @@ CT_SUITE(cards_screen_auto_open) {
     CT_ASSERT_EQ(app.screen, CT_SCREEN_CARDS);
 
     ct_screen_cards_update(NULL);
+    cards_screen_cleanup();
+    CT_ASSERT(ct_screen_cards_form()->db == NULL);
     ct_db_close(db);
 }
 

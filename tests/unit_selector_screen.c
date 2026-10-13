@@ -488,7 +488,8 @@ CT_SUITE(trainer_form_all_lists_counts) {
                 CT_ASSERT_EQ(ct_trainer_form_select_list(&f, li), CT_REPO_OK);
                 CT_ASSERT_EQ(f.sel.list_id, li);
                 CT_ASSERT_EQ(f.list_count, lists);
-                CT_ASSERT_EQ(f.case_count, ct_selector_case_count(db, &f.scheme, ev, methods[mi], li));
+                CT_ASSERT_EQ(f.case_count,
+                             ct_selector_case_count(db, &f.scheme, ev, methods[mi], li));
             }
         }
     }
@@ -524,7 +525,18 @@ CT_SUITE(trainer_form_cell_pair_overflow) {
     ct_db_close(db);
 }
 
+static bool trainer_screen_bound = false;
+
+static void trainer_screen_cleanup(void) {
+    if (!trainer_screen_bound) {
+        return;
+    }
+    ct_trainer_form_open(ct_screen_trainer_form(), NULL);
+    trainer_screen_bound = false;
+}
+
 CT_SUITE(trainer_screen_update_reopen) {
+    trainer_screen_cleanup();
     ct_screen_trainer_update(NULL);
     sqlite3 *db = tss_db();
     ct_app app;
@@ -532,6 +544,7 @@ CT_SUITE(trainer_screen_update_reopen) {
     app.db = db;
     app.screen = CT_SCREEN_TRAINER;
     ct_screen_trainer_update(&app);
+    trainer_screen_bound = true;
     ct_trainer_form *f = ct_screen_trainer_form();
     CT_ASSERT(f->db == db);
     CT_ASSERT_EQ(f->sel.event, CT_EVENT_3X3);
@@ -547,6 +560,8 @@ CT_SUITE(trainer_screen_update_reopen) {
     ct_screen_trainer_update(&app2);
     CT_ASSERT(ct_screen_trainer_form()->db == db2);
     CT_ASSERT_EQ(ct_screen_trainer_form()->sel.case_index, -1);
+    trainer_screen_cleanup();
+    CT_ASSERT(ct_screen_trainer_form()->db == NULL);
     ct_db_close(db);
     ct_db_close(db2);
 }
