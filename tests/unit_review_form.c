@@ -12,6 +12,7 @@
 
 static const char now_stamp[] = "2026-10-09T00:00:00Z";
 static const long today_num = 20735;
+static const long day_start_window_s = 5;
 
 static sqlite3 *review_db(void) {
     sqlite3 *db = NULL;
@@ -461,6 +462,13 @@ static int session_log_count(sqlite3 *db) {
     return n;
 }
 
+static void review_screen_rebind(void) {
+    ct_review_form *f = ct_screen_review_form();
+    if (f != NULL) {
+        f->db = NULL;
+    }
+}
+
 CT_SUITE(review_screen_session_log) {
     sqlite3 *db = review_db();
     seed_card(db, "other", "x", "R U", "", "");
@@ -472,6 +480,7 @@ CT_SUITE(review_screen_session_log) {
     app.screen = CT_SCREEN_REVIEW;
     app.fixed_dt = 1.0 / (double)app.cfg.window.target_fps;
 
+    review_screen_rebind();
     ct_screen_review_update(&app);
     CT_ASSERT_EQ(session_log_count(db), 1);
 
@@ -582,6 +591,58 @@ CT_SUITE(review_form_empty_status) {
     ct_db_close(db);
 }
 
+CT_SUITE(review_form_memo_second) {
+    sqlite3 *db = review_db();
+    long below = seed_card(db, "rev", "A1", "R U", "", "");
+    long sym = seed_card(db, "rev", "A[", "R U", "", "");
+    long above = seed_card(db, "rev", "AY", "R U", "", "");
+    long extra = seed_card(db, "rev", "AB2", "R U", "", "");
+    long corner_hit = seed_card(db, "rev", "AD", "R U", "", "");
+    long second_last = seed_card(db, "rev", "CX", "R U", "", "");
+    seed_due(db, below);
+    seed_due(db, sym);
+    seed_due(db, above);
+    seed_due(db, extra);
+    seed_due(db, corner_hit);
+    seed_due(db, second_last);
+    CT_ASSERT_EQ(ct_memo_set(db, CT_ORBIT_CORNER, "AD", "d", "c"), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_memo_set(db, CT_ORBIT_EDGE, "AD", "d", "z"), CT_REPO_OK);
+    CT_ASSERT_EQ(ct_memo_set(db, CT_ORBIT_CORNER, "CX", "x", "w"), CT_REPO_OK);
+
+    ct_review_form f;
+    memset(&f, 0, sizeof f);
+    CT_ASSERT_EQ(ct_review_form_begin(&f, db, "rev", now_stamp, today_num, 0), 6);
+    CT_ASSERT_EQ(f.card.id, below);
+    CT_ASSERT(!f.memo_pair);
+    CT_ASSERT_EQ(f.memo_image[0], '\0');
+
+    CT_ASSERT_EQ(ct_review_form_grade(&f, CT_GOOD, now_stamp), CT_SESSION_OK);
+    CT_ASSERT_EQ(f.card.id, sym);
+    CT_ASSERT(!f.memo_pair);
+    CT_ASSERT_EQ(f.memo_image[0], '\0');
+
+    CT_ASSERT_EQ(ct_review_form_grade(&f, CT_GOOD, now_stamp), CT_SESSION_OK);
+    CT_ASSERT_EQ(f.card.id, above);
+    CT_ASSERT(!f.memo_pair);
+    CT_ASSERT_EQ(f.memo_image[0], '\0');
+
+    CT_ASSERT_EQ(ct_review_form_grade(&f, CT_GOOD, now_stamp), CT_SESSION_OK);
+    CT_ASSERT_EQ(f.card.id, extra);
+    CT_ASSERT(!f.memo_pair);
+    CT_ASSERT_EQ(f.memo_image[0], '\0');
+
+    CT_ASSERT_EQ(ct_review_form_grade(&f, CT_GOOD, now_stamp), CT_SESSION_OK);
+    CT_ASSERT_EQ(f.card.id, corner_hit);
+    CT_ASSERT(f.memo_pair);
+    CT_ASSERT_STR_EQ(f.memo_image, "c");
+
+    CT_ASSERT_EQ(ct_review_form_grade(&f, CT_GOOD, now_stamp), CT_SESSION_OK);
+    CT_ASSERT_EQ(f.card.id, second_last);
+    CT_ASSERT(f.memo_pair);
+    CT_ASSERT_STR_EQ(f.memo_image, "w");
+    ct_db_close(db);
+}
+
 CT_SUITE(review_form_memo_pairs) {
     sqlite3 *db = review_db();
     long pair = seed_card(db, "rev", "AB", "R U", "", "");
@@ -656,6 +717,7 @@ CT_SUITE(review_screen_auto_open) {
     app.screen = CT_SCREEN_REVIEW;
     app.fixed_dt = 1.0 / (double)app.cfg.window.target_fps;
 
+    review_screen_rebind();
     ct_screen_review_update(&app);
     ct_review_form *f = ct_screen_review_form();
     CT_ASSERT_EQ(f->session.queue_count, 2);
@@ -666,7 +728,13 @@ CT_SUITE(review_screen_auto_open) {
     long y = (now[0] - '0') * 1000 + (now[1] - '0') * 100 + (now[2] - '0') * 10 + (now[3] - '0');
     int m = (now[5] - '0') * 10 + (now[6] - '0');
     int d = (now[8] - '0') * 10 + (now[9] - '0');
-    CT_ASSERT_EQ(f->session.today_day, ct_session_date_to_day(y, m, d));
+    int hh = (now[11] - '0') * 10 + (now[12] - '0');
+    int mm = (now[14] - '0') * 10 + (now[15] - '0');
+    int ss = (now[17] - '0') * 10 + (now[18] - '0');
+    long stamp_day = ct_session_date_to_day(y, m, d);
+    long stamp_second = (long)(hh * 3600 + mm * 60 + ss);
+    CT_ASSERT(f->session.today_day == stamp_day ||
+              (stamp_second < day_start_window_s && f->session.today_day == stamp_day - 1));
 
     ct_review_form_reveal(f);
     CT_ASSERT(f->playing);
