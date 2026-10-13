@@ -141,10 +141,10 @@ src/gen/classify.c:513	decide corner flag logic mutants are equivalent: cl_decid
 src/gen/classify.c:514	decide edge flag logic mutants are equivalent: cl_decide only runs inside the single-orbit gate in ct_classify, so info->corner and info->edge are never both true or both false at any call
 src/gen/classify.c:550	fmt width check mutants are equivalent: the formatted spans hold at most 5 moves at n = 3, about 24 characters against the 48-character buffer, so the failure branch is unreachable
 src/gen/classify.c:551	fmt guard write mutants are equivalent: the guarded branch is unreachable because the spans never exceed the format buffer
-src/packs/seed_registry.c:34	sizeof index mutant reads a same sized element, the count is unchanged
+src/packs/seed_registry.c:35	sizeof index mutant reads a same sized element, the count is unchanged
 src/packs/seed_registry.c:41	dir emptiness check shift is subsumed by opendir failing on the empty path
-src/packs/seed_registry.c:54	snprintf boundary and logic mutants sit at path lengths no registry file name reaches, and a truncated path still fails opendir
-src/packs/seed_registry.c:60	seed file return boundary mutants sit at 0 and -1, the loop only produces row counts or errors below -1
+src/packs/seed_registry.c:55	snprintf boundary and logic mutants sit at path lengths no registry file name reaches, and a truncated path still fails opendir
+src/packs/seed_registry.c:61	seed file return boundary mutants sit at 0 and -1, the loop only produces row counts or errors below -1
 src/packs/packs.c:42	sqlite3 treats any negative nByte as read-to-nul, so the -1 bind length mutant -2 is behaviorally identical
 src/packs/packs.c:57	the null-column branch writes into an entry that ct_pack_get and ct_pack_list pre-zero, so the write index inside the field is unobservable
 src/packs/packs.c:112	the canon bound is unreachable, the largest entry fields sum to about half of CT_PACK_CANON_MAX
@@ -213,8 +213,6 @@ src/gen/classify.c:258	twist count init plus one is cancelled by the integer div
 src/gen/classify.c:259	perm scan cell loop start one skips cell zero, a corner sticker cell whose corner conjunct is the constant true and whose edge conjunct is always also cleared by another displaced corner cell because pieces move whole, verified cell zero is a corner cell by sticker table probe
 src/gen/classify.c:268	corner swaps init is a dead store, cl_orbit_transposition always writes the out parameter on its normal return and the caller overwrites it with minus one on every early return
 src/gen/classify.c:269	edge swaps init is a dead store, cl_orbit_transposition always writes the out parameter on its normal return and the caller overwrites it with minus one on every early return
-src/gen/classify.c:271	flip scan face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
-src/gen/classify.c:274	flip scan corner cell face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
 src/gen/classify.c:276	home gate disjunction computes the orientation counts on extra non home states, the counts are only read behind swaps equal zero which implies home, so every consumer verdict is unchanged
 src/gen/classify.c:278	flip scan edge cell face initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
 src/gen/classify.c:279	flip scan edge cell row initializer is a dead store, ct_sticker_cell unconditionally writes all three outputs
@@ -526,83 +524,40 @@ src/config/config.c:225	the errno preset mutant to 1 or -1 never equals ERANGE a
 src/config/config.c:257	the index mutant reads the matched underscore byte before the face, never nul, and the empty face still returns UNKNOWN through the token guard
 src/config/config.c:261	the sentinel mutant -2 passes the same idx < 0 rejection, only the sign is consumed
 src/config/config.c:271	the sentinel mutant -2 passes the same idx < 0 rejection, only the sign is consumed
-src/ui/screen_trainer.c:18	label array bound, consumed only by the draw-side label builder and event handler no headless suite exercises
-src/ui/screen_trainer.c:20	centering divisor, consumed only by the raylib draw path no headless suite exercises
-src/ui/screen_trainer.c:45	name table sizing, consumed only by the draw-side label builder no headless suite exercises
+src/ui/screen_trainer.c:18	decomp step spacing arithmetic, consumed only by the raylib draw path
+src/ui/screen_trainer.c:20	memo decomp reserve arithmetic, consumed only by the raylib draw path
 src/ui/screen_trainer.c:46	name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
-src/ui/screen_trainer.c:51	name table sizing, consumed only by the draw-side label builder no headless suite exercises
 src/ui/screen_trainer.c:52	name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
-src/ui/screen_trainer.c:57	name table sizing, consumed only by the draw-side label builder no headless suite exercises
-src/ui/screen_trainer.c:58	name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
-src/ui/screen_trainer.c:63	transient reset, every reachable path overwrites case_count at the case-count query, and the zero-list early return state cannot occur because the caller already rejected pairs without lists
-src/ui/screen_trainer.c:74	zero-list guard unreachable, ct_selector_lists always yields at least one list for an event and method that passed the caller guard
-src/ui/screen_trainer.c:78	clamp fires only when sel.list_id reached list_count, every public setter resets or bounds list_id below list_count before reload runs
-src/ui/screen_trainer.c:79	reachable only inside the same unfireable list_id clamp
-src/ui/screen_trainer.c:82	ternary boundary is a true equivalent, n == 0 selects 0 in both arms, and n below 0 requires a registered list with zero cases
-src/ui/screen_trainer.c:83	off-by-one iteration queries case_group at an out-of-range index which returns CT_SELECTOR_ERR and is skipped, group totals unchanged
-src/ui/screen_trainer.c:89	both mutants converge to the same group_count, the write stores group + 1 regardless and when group + 1 equals group_count both arms leave it unchanged
-src/ui/screen_trainer.c:111	memset fill byte, open assigns cfg, scheme, and selector state and reload resets every field the suites read before it is read
-src/ui/screen_trainer.c:137	zero-methods guard unreachable, the selector registry exposes at least one method for every event
-src/ui/screen_trainer.c:152	zero-list guard unreachable from the method side, ct_selector_lists for a method that passed the pair check always yields at least one list
+src/ui/screen_trainer.c:57	saved memo clear, the field is fully overwritten by the memo row load before the only draw-side read
+src/ui/screen_trainer.c:58	saved memo clear, the field is fully overwritten by the memo row load before the only draw-side read
+src/ui/screen_trainer.c:89	off-by-one iteration queries case_group at an out-of-range index which returns CT_SELECTOR_ERR and is skipped, group totals unchanged
 src/ui/screen_trainer.c:176	defensive bound, public setters keep sel.list_id within 0 and list_count minus 1 so both comparison mutants are equivalent on every reachable state
-src/ui/screen_trainer.c:196	the clear is redundant on every reachable path, the pack branch snprintf rewrites the buffer from index 0 and the chart key writer never fails for an in-range index
 src/ui/screen_trainer.c:222	guard unreachable, the chart key writer never fails for an in-range index under a loaded scheme so the clear never runs
 src/ui/screen_trainer.c:266	dead store, the pair writer assigns both outputs before any read on the success path and the failure path returns without reading
-src/ui/screen_trainer.c:267	dead store, the pair writer assigns both outputs before any read on the success path and the failure path returns without reading
-src/ui/screen_trainer.c:317	unreachable failure return, the pair writer never fails for an in-range chart index under a loaded scheme, both filter loops only pass in-range indices
-src/ui/screen_trainer.c:276	case_count zero arm is a true equivalent, falling through returns f->case_count which is zero there, identical to the early return
 src/ui/screen_trainer.c:303	out-of-range iteration calls cell_matches which returns zero because the pair writer rejects the index, totals unchanged
-src/ui/screen_trainer.c:294	visible below minus one lets -1 through and every downstream branch returns -1 for it, identical result
-src/ui/screen_trainer.c:365	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
-src/ui/screen_trainer.c:366	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
-src/ui/screen_trainer.c:373	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
+src/ui/screen_trainer.c:316	decomposition capacity guard boundary mutants collapse at cap zero and minus one, both return an empty line set before any write, the cap one boundary is killed by the pinned suite
+src/ui/screen_trainer.c:353	cell pair lookup error arm is dead over validated loop indexes, the only caller walks zero to case count minus one against the loaded list so the pair call never fails
+src/ui/screen_trainer.c:368	visible count loop bound mutants wrap one index past the range, the pair lookup rejects the out of range index through its own guard so the extra probe counts nothing
 src/ui/screen_trainer.c:378	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
-src/ui/screen_trainer.c:384	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
 src/ui/screen_trainer.c:385	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
 src/ui/screen_trainer.c:387	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
-src/ui/screen_trainer.c:389	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
 src/ui/screen_trainer.c:390	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
-src/ui/screen_trainer.c:393	draw path, only reachable from the raylib screen draw and label build no headless suite exercises
 src/ui/screen_trainer.c:400	draw path, only reachable from the raylib screen draw event handler no headless suite exercises
 src/ui/screen_trainer.c:409	draw path, only reachable from the raylib screen draw method handler no headless suite exercises
 src/ui/screen_trainer.c:415	draw path, only reachable from the raylib screen draw list handler no headless suite exercises
-src/ui/screen_trainer.c:422	draw path, only reachable from the raylib screen draw case handler no headless suite exercises
-src/ui/screen_trainer.c:428	draw path, only reachable from the raylib frame update loop no headless suite exercises
-src/ui/screen_trainer.c:431	draw path, only reachable from the raylib frame update loop no headless suite exercises
-src/ui/screen_trainer.c:432	draw path, only reachable from the raylib frame update loop no headless suite exercises
 src/ui/screen_trainer.c:448	draw path, only reachable from the raylib letter grid draw no headless suite exercises
 src/ui/screen_trainer.c:449	draw path, only reachable from the raylib letter grid draw no headless suite exercises
 src/ui/screen_trainer.c:451	draw path, only reachable from the raylib letter grid draw no headless suite exercises
-src/ui/screen_trainer.c:453	draw path, only reachable from the raylib letter grid draw no headless suite exercises
-src/ui/screen_trainer.c:456	draw path, only reachable from the raylib letter grid draw no headless suite exercises
 src/ui/screen_trainer.c:458	draw path, only reachable from the raylib letter grid draw no headless suite exercises
-src/ui/screen_trainer.c:460	draw path, only reachable from the raylib letter grid draw no headless suite exercises
+src/ui/screen_trainer.c:472	mouse pick gate needs a live mouse press no suite injects, headless capture never presses so no model state changes
 src/ui/screen_trainer.c:507	draw path, only reachable from the raylib letter grid draw and its layout arithmetic, no headless suite exercises
-src/ui/screen_trainer.c:473	draw path, only reachable from the raylib letter grid draw no headless suite exercises
-src/ui/screen_trainer.c:483	draw path, only reachable from the raylib screen draw no headless suite exercises
-src/ui/screen_trainer.c:493	draw path, only reachable from the raylib screen draw no headless suite exercises
-src/ui/screen_trainer.c:508	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
-src/ui/screen_trainer.c:511	draw path, only reachable from the raylib screen draw no headless suite exercises
-src/ui/screen_trainer.c:522	draw path, only reachable from the raylib screen draw no headless suite exercises
+src/ui/screen_trainer.c:514	draw path, only reachable from the raylib screen draw case handler no headless suite exercises
+src/ui/screen_trainer.c:519	draw path, only reachable from the raylib frame update loop no headless suite exercises
+src/ui/screen_trainer.c:520	draw path, only reachable from the raylib frame update loop no headless suite exercises
 src/ui/screen_trainer.c:523	draw path, only reachable from the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:524	draw path, only reachable from the raylib screen draw no headless suite exercises
-src/ui/screen_trainer.c:542	draw path, layout arithmetic only consumed by the raylib screen draw no headless suite exercises
-src/ui/screen_trainer.c:560	draw path, only reachable from the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:564	draw path, only reachable from the raylib screen draw no headless suite exercises
-src/ui/screen_trainer.c:565	draw path, only reachable from the raylib screen draw no headless suite exercises
-src/ui/screen_trainer.c:568	draw path, only reachable from the raylib screen draw no headless suite exercises
 src/ui/screen_trainer.c:577	draw path, only reachable from the raylib screen draw no headless suite exercises
-src/ui/screen_trainer.c:599	draw path, only reachable from the raylib screen draw no headless suite exercises
-src/ui/screen_trainer.c:19	case label bound sits above every reachable list count, the corner chart tops at 378 and the edge chart at 440 so the clamp never fires over registered packs
-src/ui/screen_trainer.c:21	detail column index feeds only the right pane x origin, pixel geometry no headless suite asserts
-src/ui/screen_trainer.c:121	method count guard arms a static label builder called only from the raylib frame draw, no headless suite reaches it
-src/ui/screen_trainer.c:270	cell pair lookup error arm is dead over validated loop indexes, the only caller walks zero to case count minus one against the loaded list so the pair call never fails
-src/ui/screen_trainer.c:285	visible count loop bound mutants wrap one index past the range, the pair lookup rejects the out of range index through its own guard so the extra probe counts nothing
-src/ui/screen_trainer.c:316	decomposition capacity guard boundary mutants collapse at cap zero and minus one, both return an empty line set before any write, the cap one boundary is killed by the pinned suite
-src/ui/screen_trainer.c:323	setup guard capacity mutants differ only at cap zero which the outer capacity guard already rejected, n is always zero at this guard so the comparison cannot distinguish
-src/ui/screen_trainer.c:472	mouse pick gate needs a live mouse press no suite injects, headless capture never presses so no model state changes
-src/ui/screen_trainer.c:545	visible clamp bound sits above every reachable list count, the corner chart tops at 378 and the edge chart at 440 so the clamp never fires over registered packs
-src/ui/screen_trainer.c:590	decomposition loop bound mutant reads one row past the four row array into uninitialized stack and draws it, draw-only divergence no headless suite exercises
 src/app/script_shots.c:52	event table bound denominator mutant swaps the element sizeof for index one, both denominators are the same struct size so the loop count is identical
 src/app/script_shots.c:63	method table bound denominator mutant swaps the element sizeof for index one, both denominators are the same struct size so the loop count is identical
 src/app/script_shots.c:74	grade table bound denominator mutant swaps the element sizeof for index one, both denominators are the same struct size so the loop count is identical
@@ -615,14 +570,9 @@ src/app/script_shots.c:155	method ok init is a dead store, the method parse call
 src/app/script_shots.c:161	list id init is a dead store, the long parse callee overwrites it on every path that reads it
 src/app/script_shots.c:162	pick init is a dead store, the long parse callee overwrites it on every path that reads it
 src/app/script_shots.c:225	default arm of the shot dispatch is dead, the caller routes only the seven shot kinds into this step so the fallback return is unreachable
-src/app/shots.c:34	window open flag mutant re-runs InitWindow on every capture, the second init rebuilds the window and default font and the post-init GuiSetFont rebinding keeps every capture byte-identical, hash verified in playground/screens_r2
-src/app/shots.c:47	memcpy count mutant copies one byte past the source nul, every reader stops at the destination nul so the walk is identical, at the max accepted length the extra byte lands one past the dir array, no suite feeds a near-max path and no trap exists for a one byte stack overwrite on this target, coverage based accept
-src/app/shots.c:50	separator preference mutants are equivalents, a null last makes last_win > last true on this target so the flipped null test and the flipped logic still assign last_win, assigning null when no separator exists equals leaving last null, and the greater-equal arm differs only when both separators land on the same character which strrchr cannot produce
-src/app/shots.c:115	form null guard mutants are dead arms, the form is a static singleton that the preceding ct_ui_update always opens with the live db, so both null conditions are unreachable through the public capture api
-src/app/shots.c:143	form null guard mutants are dead arms, the form is a static singleton that the preceding ct_ui_update always opens with the live db, so both null conditions are unreachable through the public capture api
-src/app/shots.c:167	form null guard mutants are dead arms, the form is a static singleton that the preceding ct_ui_update always opens with the live db, so both null conditions are unreachable through the public capture api
-src/app/shots.c:192	form null guard mutants are dead arms, the form is a static singleton that the preceding ct_ui_update always opens with the live db, so both null conditions are unreachable through the public capture api
-src/app/shots.c:197	negative pick index is clamped to row zero by ct_cards_form_select, so the -1 mutant selects the same first row and the capture is identical
+src/app/shots.c:27	window open flag mutant re-runs InitWindow on every capture, the second init rebuilds the window and default font and the post-init GuiSetFont rebinding keeps every capture byte-identical, hash verified in playground/screens_r2
+src/app/shots.c:172	form null guard mutants are dead arms, the form is a static singleton that the preceding ct_ui_update always opens with the live db, so both null conditions are unreachable through the public capture api
+src/app/shots.c:197	form null guard mutants are dead arms, the form is a static singleton that the preceding ct_ui_update always opens with the live db, so both null conditions are unreachable through the public capture api
 src/storage/repo_settings.c:11	settings get guard arm return payload mutants are equivalent, every caller compares against zero and the arm is unreachable over the pinned surface
 src/storage/repo_settings.c:12	settings get output clear index mutants are unobservable, the byte lands before the buffer or at index one, the row path rewrites the buffer through memcpy and the terminator, and callers read the output only after a zero return
 src/storage/repo_settings.c:14	sqlite3 prepare treats any negative sql length as read to nul, so the -1 nByte mutant -2 is behaviorally identical, same class as the repo_algs rows
@@ -712,46 +662,22 @@ src/ui/screen_settings.c:27	orbit count constant, consumed only by draw-side gri
 src/ui/screen_settings.c:33	tab count bound, consumed only by the draw-side tab clamp no headless suite exercises
 src/ui/screen_settings.c:34	margin shift constant, draw layout only, no headless suite exercises the draw path
 src/ui/screen_settings.c:35	row height shift constant, draw layout only, no headless suite exercises the draw path
-src/ui/screen_settings.c:36	label width divisor, draw layout only, no headless suite exercises the draw path
 src/ui/screen_settings.c:40	button count constant, draw layout only, no headless suite exercises the draw path
 src/ui/screen_settings.c:41	status text cap, the drawn status bar is the only consumer, truncation is invisible to headless suites
 src/ui/screen_settings.c:59	hex reject return value, callers test the sign only, any negative value is equivalent
-src/ui/screen_settings.c:95	errno reset value, the following check compares against ERANGE only, any non-ERANGE residue behaves identically
 src/ui/screen_settings.c:114	zero fill fallback unreachable, the compiled-in default palette is valid six digit hex on every face
-src/ui/screen_settings.c:128	widened missing-scheme guard reruns the idempotent speffz seed, on a healthy db the default and letters are unchanged, on a broken schema the seed fails exactly where the load would
-src/ui/screen_settings.c:135	second zero guard unreachable, a successful speffz seed always leaves a default scheme so the reread is at least 1
+src/ui/screen_settings.c:124	widened missing-scheme guard reruns the idempotent speffz seed, on a healthy db the default and letters are unchanged, on a broken schema the seed fails exactly where the load would
 src/ui/screen_settings.c:191	letter range disjunct weakened to a conjunction still rejects every out of range letter, the delegated stage call reruns the identical range test and returns the same error
-src/ui/screen_settings.c:195	holder init of minus two is still a negative sentinel, the delegate test checks holder below zero and any real match overwrites the init
-src/ui/screen_settings.c:196	holder probe at minus one stores the sentinel itself, any real holder match overwrites it later in the scan, identical outcome on every path
-src/ui/screen_settings.c:259	retention lower clamp boundary is idempotent, at the minimum both arms store the same value
-src/ui/screen_settings.c:261	retention upper clamp boundary is idempotent, at the maximum both arms store the same value
-src/ui/screen_settings.c:276	move seconds lower clamp boundary is idempotent, at the minimum both arms store the same value
 src/ui/screen_settings.c:306	loop and capacity guards never engage, the format writes at most 9 face chars into the 32 byte settings buffer
-src/ui/screen_settings.c:307	rotation probe zeroing unmasks rotation faces whose bits no reachable move mask contains, the config parser and the stage guard both strip them
-src/ui/screen_settings.c:399	letter edit buffer bound, consumed only by the draw-side letter text box no headless suite exercises
-src/ui/screen_settings.c:407	label cell size, consumed only by the draw-side label grid no headless suite exercises
-src/ui/screen_settings.c:436	cell grid column arithmetic, consumed only by the draw path button layout no headless suite exercises
-src/ui/screen_settings.c:438	cell rect composition, consumed only by the draw path button layout no headless suite exercises
-src/ui/screen_settings.c:447	errno reset in the draw-side text apply helper, the check compares against ERANGE only and no headless suite calls the helper
-src/ui/screen_settings.c:450	validation disjunct in the draw-side text apply helper, no headless suite calls the helper
+src/ui/screen_settings.c:303	rotation probe zeroing unmasks rotation faces whose bits no reachable move mask contains, the config parser and the stage guard both strip them
 src/ui/screen_settings.c:459	label orbit loop bound, the label grid is write-only outside the draw path
 src/ui/screen_settings.c:460	label orbit ternary, the label grid is write-only outside the draw path
-src/ui/screen_settings.c:462	label sticker loop bound, the label grid is write-only outside the draw path
-src/ui/screen_settings.c:463	label dash placeholder, read only by the draw path
-src/ui/screen_settings.c:464	label terminator, read only by the draw path
 src/ui/screen_settings.c:472	label width layout, draw path only, no headless suite exercises it
-src/ui/screen_settings.c:473	row step layout, draw path only, no headless suite exercises it
 src/ui/screen_settings.c:476	retention text box rect, draw path only, no headless suite exercises it
-src/ui/screen_settings.c:478	retention edit toggle, gui event state no headless suite can trigger
-src/ui/screen_settings.c:479	retention edit close branch, gui event state no headless suite can trigger
-src/ui/screen_settings.c:480	retention apply inside the text box commit branch, gui event branch no headless suite can trigger
 src/ui/screen_settings.c:481	retention canonical refill inside the commit branch, gui event branch no headless suite can trigger
 src/ui/screen_settings.c:485	idle retention canonical refill, draw path only, no headless suite exercises it
 src/ui/screen_settings.c:489	second row offset, draw layout only, no headless suite exercises it
 src/ui/screen_settings.c:491	seconds text box rect, draw path only, no headless suite exercises it
-src/ui/screen_settings.c:493	seconds edit toggle, gui event state no headless suite can trigger
-src/ui/screen_settings.c:494	seconds edit close branch, gui event state no headless suite can trigger
-src/ui/screen_settings.c:495	seconds apply inside the text box commit branch, gui event branch no headless suite can trigger
 src/ui/screen_settings.c:500	idle seconds canonical refill, draw path only, no headless suite exercises it
 src/ui/screen_settings.c:504	moves group y offset, draw layout only, no headless suite exercises it
 src/ui/screen_settings.c:505	moves group height, draw layout only, no headless suite exercises it
@@ -759,24 +685,14 @@ src/ui/screen_settings.c:508	moves grid width inset, draw layout only, no headle
 src/ui/screen_settings.c:509	moves grid height inset, draw layout only, no headless suite exercises it
 src/ui/screen_settings.c:510	move cell width, draw layout only, no headless suite exercises it
 src/ui/screen_settings.c:511	move cell height, draw layout only, no headless suite exercises it
-src/ui/screen_settings.c:512	shown counter init, drawn toggle placement bookkeeping only
-src/ui/screen_settings.c:513	face loop bound, drawn toggle count only, no headless suite exercises the draw path
 src/ui/screen_settings.c:514	face bit pick, drawn toggle iteration only
-src/ui/screen_settings.c:515	rotation skip, drawn toggle set only
 src/ui/screen_settings.c:521	toggle label char, drawn toggle text only
-src/ui/screen_settings.c:523	toggle rect, draw layout only
-src/ui/screen_settings.c:524	stage call inside the toggle callback, gui event branch no headless suite can trigger
 src/ui/screen_settings.c:531	cell width divisor, draw layout only
 src/ui/screen_settings.c:532	cell height divisor, draw layout only
 src/ui/screen_settings.c:533	buffer selection ternary, drawn selection outline only
-src/ui/screen_settings.c:534	letter selection ternary, drawn selection outline only
-src/ui/screen_settings.c:535	sticker loop bound, drawn grid iteration only
 src/ui/screen_settings.c:543	orbit array ternary inside the button callback, gui event branch no headless suite can trigger
-src/ui/screen_settings.c:544	letter buffer stash in the button callback, gui event state no headless suite can trigger
-src/ui/screen_settings.c:548	selected outline branch, drawn highlight only
 src/ui/screen_settings.c:550	duplicate outline guard, drawn highlight only
 src/ui/screen_settings.c:551	letter range check in the outline guard, drawn highlight only
-src/ui/screen_settings.c:552	label match in the outline guard, drawn highlight only
 src/ui/screen_settings.c:560	label width divisor, draw layout only
 src/ui/screen_settings.c:564	letter text box rect, draw path only
 src/ui/screen_settings.c:566	letter edit toggle, gui event state no headless suite can trigger
@@ -790,42 +706,20 @@ src/ui/screen_settings.c:580	corner grid placement, draw layout only
 src/ui/screen_settings.c:581	edge y offset, draw layout only
 src/ui/screen_settings.c:584	edge grid placement, draw layout only
 src/ui/screen_settings.c:591	half width divisor, draw layout only
-src/ui/screen_settings.c:592	grid height divisor, draw layout only
 src/ui/screen_settings.c:596	corner buffer group rect, draw layout only
 src/ui/screen_settings.c:597	corner buffer grid placement, draw layout only
-src/ui/screen_settings.c:598	edge x offset, draw layout only
 src/ui/screen_settings.c:600	edge buffer group rect, draw layout only
-src/ui/screen_settings.c:601	edge buffer grid placement, draw layout only
 src/ui/screen_settings.c:603	color band y offset, draw layout only
-src/ui/screen_settings.c:604	color band height, draw layout only
 src/ui/screen_settings.c:608	inner height inset, draw layout only
 src/ui/screen_settings.c:609	swatch height divisor, draw layout only
 src/ui/screen_settings.c:611	face loop bound, drawn swatch and value box count only
 src/ui/screen_settings.c:612	face x offset, draw layout only
-src/ui/screen_settings.c:614	face label rect, draw layout only
-src/ui/screen_settings.c:616	swatch color compose, drawn swatch only
 src/ui/screen_settings.c:617	channel loop bound, drawn value box count only
-src/ui/screen_settings.c:618	channel index compose, draw layout only
-src/ui/screen_settings.c:620	idle channel mirror, gui edit state no headless suite can trigger
-src/ui/screen_settings.c:622	value box y offset, draw layout only
 src/ui/screen_settings.c:623	value box rect, draw layout only
-src/ui/screen_settings.c:624	value box commit branch, gui event branch no headless suite can trigger
 src/ui/screen_settings.c:625	edit flag toggle, gui event state no headless suite can trigger
-src/ui/screen_settings.c:626	stage color call inside the commit branch, gui event branch no headless suite can trigger
-src/ui/screen_settings.c:638	opened flag branch, transient screen state read only by the draw path
-src/ui/screen_settings.c:639	opened latch write, transient screen state read only by the draw path
-src/ui/screen_settings.c:640	rejected counter reset, static screen state read only by the draw path
-src/ui/screen_settings.c:643	default sticker selection write, draw-side selection state only
-src/ui/screen_settings.c:644	letter buffer seed from the staged map, draw-side edit buffer only
-src/ui/screen_settings.c:652	null guard after the background clear, unreachable without calling the draw function
 src/ui/screen_settings.c:661	button y offset, draw layout only
-src/ui/screen_settings.c:662	button width divisor, draw layout only
 src/ui/screen_settings.c:664	content y offset, draw layout only
 src/ui/screen_settings.c:671	tab range clamp, draw-side tab state only
-src/ui/screen_settings.c:689	merge rejected counter inside the save callback, gui event branch no headless suite can trigger
-src/ui/screen_settings.c:693	cancel call inside the cancel button callback, gui event branch no headless suite can trigger
-src/ui/screen_settings.c:696	rejected status branch, drawn status bar text only
-src/ui/screen_settings.c:702	status bar rect, draw layout only
 src/render/renderer.c:31	hex reject return value, callers test the sign only, any negative value is equivalent
 src/render/renderer.c:56	inset clamp lower boundary is idempotent, at the bound both arms return the same value
 src/render/renderer.c:59	inset clamp upper boundary is idempotent, at the bound both arms return the same value
@@ -873,20 +767,7 @@ src/render/anim.c:91	prefix negative clamp boundary is idempotent, at zero both 
 src/render/anim.c:101	ease lower clamp boundary is idempotent, at zero both arms return zero
 src/render/anim.c:104	ease upper clamp boundary is idempotent, at one both arms return one
 src/render/anim.c:107	ease branch boundary, the cubic curve is continuous at the half point so both arms return one half
-src/ui/widgets.c:10	negative count and cap literals widened by one flow into the clamped n and return the same minus one through the empty loop
-src/ui/widgets.c:13	prefix clamp ternary boundary is idempotent, at count equal to cap both arms store the same value
-src/ui/widgets.c:14	zero fast path, falling through reaches the empty loop and returns the same zero
-src/ui/widgets.c:22	max scan comparison at equality restores the same maximum, idempotent
-src/ui/widgets.c:27	bar value gate at zero, both arms of the ternary yield zero
-src/ui/widgets.c:40	zero rows and zero cols slip the weakened guard into the row bound or the pick clamps which reject them with the same minus one
-src/ui/widgets.c:55	zero cols slips the weakened pick guard into the clamps which return minus one, matching the guard outcome
-src/ui/widgets.c:64	pick col clamp reachable only when the coordinate reaches the far edge, which the bounds guard already rejects, defensive against float rounding
-src/ui/widgets.c:65	pick row clamp reachable only at the far edge the bounds guard rejects
-src/ui/widgets.c:67	pick row clamp reachable only at the far edge the bounds guard rejects
 src/ui/widgets.c:68	pick row clamp reachable only at the far edge the bounds guard rejects
-src/ui/widgets.c:75	accuracy lower clamp boundary is idempotent, at zero both arms store zero
-src/ui/widgets.c:78	accuracy upper clamp boundary is idempotent, at one both arms store one
-src/ui/widgets.c:84	color ramp is continuous at the half point, both arms yield full red and full green there
 src/storage/repo_stats.c:47	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement text
 src/storage/repo_stats.c:51	sqlite reads any negative byte count as nul terminated, minus two binds the same stamp text
 src/storage/repo_stats.c:87	sqlite reads any negative byte count as nul terminated, minus two prepares the same statement text
@@ -1026,7 +907,6 @@ src/app/paths.c:53	the mutant equality value one is unreachable from _mkdir, and
 src/app/paths.c:56	posix branch of the mkdir helper is excluded by the preprocessor on this platform build, the mutant never compiles into the binary
 src/app/paths.c:57	posix branch of the mkdir helper is excluded by the preprocessor on this platform build, the mutant never compiles into the binary
 src/app/paths.c:70	the widened bound reads the nul terminator which is never a separator, the extra iteration is a no-op continue
-src/app/paths.c:80	the shifted index reads one byte at or past the terminator, whichever byte it sees the skip arm returns zero and the fallthrough arm hits the EEXIST left by the loop own prefix mkdir, both return zero
 src/app/paths.c:86	cap one slips the guard and fails the snprintf truncation check one line later with the same minus one
 src/app/paths.c:95	written zero is unreachable, the format always emits at least the separator slash, and a negative written slips into the unsigned cast comparison which rejects it identically
 src/app/paths.c:103	GetModuleFileNameA never returns one on a reachable call, the zero and cap boundaries require api failures the harness never triggers, and the conjunction mutant disarms only that unreachable failure arm
@@ -1034,7 +914,6 @@ src/app/paths.c:104	guard return payload mutants are sign only for the nonzero v
 src/app/paths.c:107	linux arm of ct_exe_path is excluded by the preprocessor on this platform build
 src/app/paths.c:108	linux arm of ct_exe_path is excluded by the preprocessor on this platform build
 src/app/paths.c:109	linux arm of ct_exe_path is excluded by the preprocessor on this platform build
-src/app/paths.c:110	linux arm of ct_exe_path is excluded by the preprocessor on this platform build
 src/app/paths.c:111	linux arm of ct_exe_path is excluded by the preprocessor on this platform build
 src/app/paths.c:115	fallback arm of ct_exe_path is excluded by the preprocessor on this platform build
 src/app/paths.c:120	cap one slips the guard and fails the nested snprintf truncation or the resource call with the same minus one
@@ -1044,9 +923,7 @@ src/app/paths.c:136	cap one slips the guard and fails the override snprintf or t
 src/app/paths.c:139	the byte before every reachable env value is the equals separator of the putenv entry, never nul, and the unset case short circuits at the null check
 src/app/paths.c:141	written zero is unreachable for a bare nonempty override string, and a negative written slips into the unsigned cast comparison which rejects it identically
 src/app/paths.c:151	cap one slips the guard and fails the data dir snprintf truncation check with the same minus one
-src/app/paths.c:155	the byte before every reachable env value is the equals separator of the putenv entry, never nul, and the null case short circuits at the first arm
 src/app/paths.c:158	the byte before every reachable env value is the equals separator of the putenv entry, never nul, and the null case short circuits at the first arm
-src/app/paths.c:166	written zero is unreachable for a slash joined pair of strings, and a negative written slips into the unsigned cast comparison which rejects it identically
 src/app/headless.c:32	the move seconds constant feeds only the mid scene animation elapsed value inside the render body, no gate suite observes the animation clock
 src/app/headless.c:54	count zero is unreachable because empty algs are gated by the callers, and the minus one parse code requires null args the render guards already rejected, only deeper negatives reach the check
 src/app/headless.c:57	the loop bound and start shifts apply a stack garbage move read before or past the sequence which ct_apply treats as a no-op, or trim the scramble to its first move, observable only through rendered pixels no gate suite pins
@@ -1060,10 +937,6 @@ src/app/app_loop.c:24	the guard family sits on path lengths beyond every reachab
 src/app/app_loop.c:26	the write sits on the filename snprintf failure arm which no reachable harness path length triggers
 src/app/app_loop.c:47	the branch only selects the stderr diagnostic, seeding runs inside the condition either way, and the call returns only zero or negative over the reachable flow
 src/app/app_loop.c:61	the run guard feeds only the raylib frame loop no gate suite exercises
-src/app/app_loop.c:66	inside the raylib frame loop no gate suite exercises
-src/app/app_loop.c:69	inside the raylib frame loop no gate suite exercises
-src/app/app_loop.c:70	inside the raylib frame loop no gate suite exercises
-src/app/app_loop.c:73	inside the raylib frame loop no gate suite exercises
 src/app/main.c:8	argv guards sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary where every pinned invocation passes the exact headless script argc
 src/app/main.c:9	argv guards sit outside the gate suite surface, the app file entry runs only through the e2e make target against the real binary where every pinned invocation passes the exact script flag
 src/app/main.c:14	init failure latch sits outside the gate suite surface, every pinned e2e invocation inits a running app
@@ -1103,46 +976,29 @@ src/ui/screen_menu.c:65	review draw dispatch feeds only the raylib frame loop no
 src/ui/screen_menu.c:69	settings draw dispatch feeds only the raylib frame loop no gate suite exercises
 src/ui/screen_menu.c:73	stats draw dispatch feeds only the raylib frame loop no gate suite exercises
 src/ui/screen_menu.c:84	menu entry count sizing, consumed only by the raylib draw path no gate suite exercises
-src/ui/screen_menu.c:85	button width divisor, consumed only by the raylib draw path no gate suite exercises
+src/ui/screen_menu.c:87	button width divisor, consumed only by the raylib draw path no gate suite exercises
 src/ui/screen_menu.c:89	button column centering, consumed only by the raylib draw path no gate suite exercises
 src/ui/screen_menu.c:90	menu block centering arithmetic, consumed only by the raylib draw path no gate suite exercises
 src/ui/screen_menu.c:91	entry loop bound and offsets, consumed only by the raylib draw path no gate suite exercises
 src/ui/screen_menu.c:92	entry rect stride, consumed only by the raylib draw path no gate suite exercises
-src/ui/screen_menu.c:97	quit rect stride, consumed only by the raylib draw path no gate suite exercises
 src/ui/screen_menu.c:99	quit button callback fires only inside the raylib draw loop no gate suite exercises
 src/ui/screen_cards.c:15	list width divisor constant, consumed only by the draw-side layout arithmetic no headless suite exercises
 src/ui/screen_cards.c:18	tag max feeds only the label buffer bound consumed by the draw-side label builder no headless suite exercises
-src/ui/screen_cards.c:19	label max feeds only the draw-side label buffer no headless suite exercises
-src/ui/screen_cards.c:21	button index base, the switch dispatch uses the same enum names so only the draw-side button row observes the shift
-src/ui/screen_cards.c:31	negative cap guard is unreachable, every caller passes the fixed page size 16
-src/ui/screen_cards.c:34	sqlite3_prepare_v2 treats any negative nByte as read to nul, the -1 mutant -2 is behaviorally identical
-src/ui/screen_cards.c:59	open memset fill byte is unobservable, reload and refresh rewrite every field any suite reads
-src/ui/screen_cards.c:60	selected sentinel mutants collapse before observation, with rows open assigns 0 right after and without rows reload clamps back to -1
-src/ui/screen_cards.c:84	rc zero boundary is identical in both branches, row_count stays 0 and status stays ok either way
-src/ui/screen_cards.c:85	copy loop overrun slot sits past row_count and no reader ever indexes it
-src/ui/screen_cards.c:89	rc zero boundary is identical in both branches, the same collapse as the deck list rc check
+src/ui/screen_cards.c:31	sqlite3_prepare_v2 treats any negative nByte as read to nul, the -1 mutant -2 is behaviorally identical
+src/ui/screen_cards.c:56	open memset fill byte is unobservable, reload and refresh rewrite every field any suite reads
+src/ui/screen_cards.c:82	copy loop overrun slot sits past row_count and no reader ever indexes it
 src/ui/screen_cards.c:109	the zero clamp arm maps row 0 to itself, only the negative arm distinguishes and that mutant is killed
-src/ui/screen_cards.c:188	find loop overrun compares the zero filled slot past the rows which never matches a real id
-src/ui/screen_cards.c:252	label loop bound feeds only the draw-side list view no headless suite exercises
-src/ui/screen_cards.c:254	label db guard feeds only the draw-side label builder no headless suite exercises
+src/ui/screen_cards.c:185	find loop overrun compares the zero filled slot past the rows which never matches a real id
 src/ui/screen_cards.c:255	label fetch failure branch feeds only the draw-side label builder no headless suite exercises
 src/ui/screen_cards.c:256	empty label write feeds only the draw-side list view no headless suite exercises
 src/ui/screen_cards.c:266	dirty reset runs only in the draw-side recompute and the dirty flag is write-only across the app
 src/ui/screen_cards.c:267	recompute guard runs only in the draw path, the dirty flag is write-only across the app
-src/ui/screen_cards.c:270	recompute fetch guard runs only in the draw path, the dirty flag is write-only across the app
-src/ui/screen_cards.c:273	dirty compare chain runs only in the draw-side recompute, the flag is write-only across the app
 src/ui/screen_cards.c:274	dirty compare chain continuation, draw path only, the flag is write-only across the app
 src/ui/screen_cards.c:275	dirty compare chain tail, draw path only, the flag is write-only across the app
-src/ui/screen_cards.c:286	field text box rect arithmetic, draw path only no headless suite exercises
-src/ui/screen_cards.c:303	field count constant, consumed only by the draw-side field loop no headless suite exercises
 src/ui/screen_cards.c:309	button loop bound feeds only the draw-side button row no headless suite exercises
 src/ui/screen_cards.c:310	button hit test feeds only the draw-side button row no headless suite exercises
-src/ui/screen_cards.c:317	deck pick ternary inside the new button callback, gui event branch no headless suite can trigger
 src/ui/screen_cards.c:341	cards update entry guard, no gate suite calls the cards update loop so both arms are unobserved
-src/ui/screen_cards.c:343	opened latch read, static cards screen state no gate suite observes
 src/ui/screen_cards.c:344	opened latch write, static cards screen state no gate suite observes
-src/ui/screen_cards.c:354	null guard after the background clear, draw path only
-src/ui/screen_cards.c:361	label width layout, draw path only
 src/ui/screen_cards.c:362	list width layout, draw path only
 src/ui/screen_cards.c:366	list height layout, draw path only
 src/ui/screen_cards.c:367	editor x layout, draw path only
@@ -1158,56 +1014,20 @@ src/ui/screen_cards.c:393	field loop bound, draw path only
 src/ui/screen_cards.c:394	field buffer pointer arithmetic, draw path only
 src/ui/screen_cards.c:395	field placement, draw path only
 src/ui/screen_cards.c:402	status bar rect, draw path only
-src/ui/screen_review.c:11	speed table first entry, consumed only by the gui speed callback no headless suite triggers
 src/ui/screen_review.c:16	pane width divisor, draw layout only
 src/ui/screen_review.c:20	play button count, consumed only by the draw-side play button row
 src/ui/screen_review.c:21	speed count constant, consumed only by the draw-side speed row and its label array
-src/ui/screen_review.c:66	scramble loop overrun applies parser frame residue one slot past the written inverses, it decodes as a zero turn on every suite alg so the extra apply is the identity
-src/ui/screen_review.c:118	local card fill byte, the failure path never reads the local and the success path overwrites every field
-src/ui/screen_review.c:130	weakened parse clamp maps a zero parse to itself, the minus one mutant is killed by the move count pin
-src/ui/screen_review.c:147	weakened parse clamp in reveal maps zero and minus one to an identical empty replay, the plus one mutant is killed by the empty queue pin
 src/ui/screen_review.c:148	minus one clamp replacement in reveal mirrors the original empty replay, no scramble or push happens either way
 src/ui/screen_review.c:196	speed min clamp boundary is idempotent, at the minimum both arms store the same value
 src/ui/screen_review.c:208	weakened negative scrub clamp maps zero to itself, the minus one mutant is killed by the floor pin
-src/ui/screen_review.c:211	upper scrub clamp boundary is idempotent, at move_count both arms store the same value
-src/ui/screen_review.c:216	weakened parse clamp in scrub maps zero and minus one to an identical empty replay
-src/ui/screen_review.c:217	minus one clamp replacement in scrub mirrors the original empty replay
-src/ui/screen_review.c:253	iso scan start index feeds only the day seed of the auto-open session, no suite can pin the wall clock so the day is unobservable
-src/ui/screen_review.c:254	iso field start shift feeds only the unobservable day seed, the stamp still parses to a valid triple
-src/ui/screen_review.c:255	iso value accumulator init feeds only the unobservable day seed
-src/ui/screen_review.c:256	any flag flip only matters for a digitless field, the wall clock stamp always carries digits
-src/ui/screen_review.c:257	weakened digit bound drops trailing nines from the day seed, unobservable in the empty default-deck session
-src/ui/screen_review.c:258	digit accumulation arithmetic feeds only the unobservable day seed
-src/ui/screen_review.c:262	separator guard conjunction flip only matters for a digitless field, the stamp always parses
-src/ui/screen_review.c:268	year store index, the day seed is unobservable in the empty default-deck session
-src/ui/screen_review.c:269	month store value, same unobservable day seed
-src/ui/screen_review.c:270	day store value, same unobservable day seed
-src/ui/screen_review.c:276	scheme loader null guard, the scheme is write-only state read only by the draw path
-src/ui/screen_review.c:280	scheme face loop bound, write-only scheme state read only by the draw path
-src/ui/screen_review.c:281	scheme settings probe, write-only scheme state read only by the draw path
-src/ui/screen_review.c:290	open form memset fill, the subsequent form begin memsets the same struct wholesale
-src/ui/screen_review.c:302	year holder init, overwritten on every scan success and unused on failure
-src/ui/screen_review.c:303	month holder init, overwritten on every scan success and unused on failure
-src/ui/screen_review.c:304	day holder init, overwritten on every scan success and unused on failure
-src/ui/screen_review.c:307	auto-open limit seed, one and minus one build the same empty default-deck queue
+src/ui/screen_review.c:303	scheme loader null guard, the scheme is write-only state read only by the draw path
+src/ui/screen_review.c:307	scheme face loop bound, write-only scheme state read only by the draw path
+src/ui/screen_review.c:215	scrub index recompute in the frame completion branch, needs a live anim clock no headless suite drives
 src/ui/screen_review.c:324	opened reset in the escape branch, raylib input branch no headless suite can trigger
-src/ui/screen_review.c:332	scrub index recompute in the frame completion branch, needs a live anim clock no headless suite drives
-src/ui/screen_review.c:333	anim drain check in the frame completion branch, same live-clock branch
-src/ui/screen_review.c:335	playing reset in the frame completion branch, same live-clock branch
-src/ui/screen_review.c:365	button row width split, draw path only
 src/ui/screen_review.c:366	button row loop bound, draw path only
 src/ui/screen_review.c:367	button hit test arithmetic, draw path only
-src/ui/screen_review.c:381	play callback dispatch, gui event branch no headless suite can trigger
-src/ui/screen_review.c:394	null guard after the background clear, draw path only
 src/ui/screen_review.c:401	pane width layout, draw path only
-src/ui/screen_review.c:404	right pane x layout, draw path only
-src/ui/screen_review.c:405	right pane width layout, draw path only
-src/ui/screen_review.c:410	scissor pane bounds, draw path only
-src/ui/screen_review.c:423	empty card branch, draw path only
-src/ui/screen_review.c:431	reveal gate mutant only flips when the reveal button paints, firing the button needs live mouse input that no suite injects, so no model state ever changes
-src/ui/screen_review.c:432	reveal button width division feeds only the button rectangle, pixel geometry with no model effect
-src/ui/screen_review.c:433	reveal button rectangle arithmetic feeds only the gui hit box, pixel geometry with no model effect
-src/ui/screen_review.c:104	minus one weakening at the begin gate only relaxes the rc minus one case, the form memset zeroes the session first so the deferred load reproduces the same error status
+src/ui/screen_review.c:130	minus one weakening at the begin gate only relaxes the rc minus one case, the form memset zeroes the session first so the deferred load reproduces the same error status
 src/ui/screen_stats.c:12	left width shift constant, draw layout only
 src/ui/screen_stats.c:13	forecast height divisor, draw layout only
 src/ui/screen_stats.c:14	deck pane height divisor, draw layout only
@@ -1215,72 +1035,39 @@ src/ui/screen_stats.c:16	heatmap column count, draw grid only
 src/ui/screen_stats.c:17	mark size divisor, draw marker only
 src/ui/screen_stats.c:18	summary line count, draw summary rows only
 src/ui/screen_stats.c:20	forecast label step, draw label cadence only
-src/ui/screen_stats.c:31	case accuracy error guard minus one relaxation, no suite call makes the repo return exactly minus one here
-src/ui/screen_stats.c:35	heatmap rank guard minus one relaxation, the rank call succeeds on every suite input
 src/ui/screen_stats.c:39	card list error guard minus one relaxation, no suite call makes the repo return exactly minus one here
 src/ui/screen_stats.c:43	row cap weakening runs one extra card query at a zero remaining cap which writes nothing
-src/ui/screen_stats.c:46	review row cap arithmetic flip only matters past the row budget, suite decks hold at most 16 reviews
-src/ui/screen_stats.c:47	review fetch error guard minus one relaxation, no suite call makes the repo return exactly minus one here
-src/ui/screen_stats.c:57	retention error guard, the call args are a static array with a constant bucket count so no variant fires
-src/ui/screen_stats.c:69	view load memset fill byte is unobservable, every count field gates the reads that follow
-src/ui/screen_stats.c:74	deck stats error guard minus one relaxation, no suite call makes the repo return exactly minus one here
-src/ui/screen_stats.c:78	from_day buffer bound slack, snprintf writes at most eleven bytes either way
-src/ui/screen_stats.c:82	forecast error guard, the row count is a constant day span so the weakened boundaries never fire
-src/ui/screen_stats.c:87	sessions error guard minus one relaxation, no suite call makes the repo return exactly minus one here
+src/ui/screen_stats.c:66	view load memset fill byte is unobservable, every count field gates the reads that follow
 src/ui/screen_stats.c:94	deck count pick boundary weakening maps zero to itself identically
 src/ui/screen_stats.c:108	deck sections error guard minus one relaxation, no suite call makes the path return exactly minus one here
-src/ui/screen_stats.c:112	deck match loop overrun compares the zero filled name slot past the decks, never matches a real deck
+src/ui/screen_stats.c:109	deck match loop overrun compares the zero filled name slot past the decks, never matches a real deck
 src/ui/screen_stats.c:122	worst cases negative guard weakening maps zero to the same zero result
-src/ui/screen_stats.c:125	worst cases clamp boundary weakening maps n equal to case_count to the same value
-src/ui/screen_stats.c:183	deck label loop bound feeds only the draw-side deck list view no headless suite exercises
-src/ui/screen_stats.c:187	session label loop bound feeds only the draw-side session list view no headless suite exercises
 src/ui/screen_stats.c:198	forecast inner x layout, draw path only
 src/ui/screen_stats.c:199	forecast inner y layout, draw path only
-src/ui/screen_stats.c:200	forecast inner width layout, draw path only
-src/ui/screen_stats.c:202	forecast inner height layout, draw path only
-src/ui/screen_stats.c:206	forecast head label rect, draw path only
-src/ui/screen_stats.c:210	forecast value loop bound, draw path only
-src/ui/screen_stats.c:215	forecast bar loop bound, draw path only
 src/ui/screen_stats.c:216	forecast bar visibility, draw path only
 src/ui/screen_stats.c:219	forecast label cadence, draw path only
-src/ui/screen_stats.c:222	forecast label buffer size, draw path only
 src/ui/screen_stats.c:231	heatmap inner x layout, draw path only
 src/ui/screen_stats.c:232	heatmap inner y layout, draw path only
 src/ui/screen_stats.c:233	heatmap inner width layout, draw path only
-src/ui/screen_stats.c:234	heatmap inner height layout, draw path only
-src/ui/screen_stats.c:236	heatmap empty branch, draw path only
-src/ui/screen_stats.c:241	heatmap row count arithmetic, draw grid only
 src/ui/screen_stats.c:246	heatmap cell loop bound, draw path only
-src/ui/screen_stats.c:247	heatmap cell guard, draw path only
-src/ui/screen_stats.c:251	heatmap hover outline, draw path only
-src/ui/screen_stats.c:256	heatmap hover range guard, draw path only
-src/ui/screen_stats.c:269	retention inner x layout, draw path only
 src/ui/screen_stats.c:270	retention inner y layout, draw path only
 src/ui/screen_stats.c:271	retention inner width layout, draw path only
 src/ui/screen_stats.c:272	retention inner height layout, draw path only
-src/ui/screen_stats.c:278	retention head label rect, draw path only
-src/ui/screen_stats.c:282	retention rate loop bound, draw path only
 src/ui/screen_stats.c:283	retention rate ternary head, draw chart feed only
 src/ui/screen_stats.c:284	retention rate divide, draw chart feed only
-src/ui/screen_stats.c:288	retention mark size divisor, draw marker only
 src/ui/screen_stats.c:289	retention mark floor guard, draw marker only
 src/ui/screen_stats.c:290	retention mark floor value, draw marker only
-src/ui/screen_stats.c:292	retention line state flag, draw path only
 src/ui/screen_stats.c:293	retention prev x state, draw path only
 src/ui/screen_stats.c:294	retention prev y state, draw path only
 src/ui/screen_stats.c:295	retention point loop bound, draw path only
 src/ui/screen_stats.c:296	retention bar visibility, draw path only
-src/ui/screen_stats.c:299	retention empty bucket skip, draw path only
-src/ui/screen_stats.c:302	retention point x compose, draw path only
+src/ui/screen_stats.c:300	retention empty bucket skip, draw path only
 src/ui/screen_stats.c:303	retention point y compose head, draw path only
 src/ui/screen_stats.c:304	retention point y scale, draw path only
 src/ui/screen_stats.c:305	retention marker rect, draw path only
-src/ui/screen_stats.c:309	retention line latch, draw path only
-src/ui/screen_stats.c:318	deck summary inner x layout, draw path only
 src/ui/screen_stats.c:319	deck summary inner y layout, draw path only
 src/ui/screen_stats.c:320	deck summary inner width layout, draw path only
 src/ui/screen_stats.c:321	deck summary selection guard, draw path only
-src/ui/screen_stats.c:327	deck summary line text, draw path only
 src/ui/screen_stats.c:328	deck summary line text, draw path only
 src/ui/screen_stats.c:329	deck summary line text, draw path only
 src/ui/screen_stats.c:330	deck summary last line pointer, draw path only
@@ -1288,9 +1075,7 @@ src/ui/screen_stats.c:331	deck summary last line text, draw path only
 src/ui/screen_stats.c:332	deck summary label loop bound, draw path only
 src/ui/screen_stats.c:333	deck summary label rect, draw path only
 src/ui/screen_stats.c:338	stats update entry guard, no gate suite calls the stats update loop so both arms are unobserved
-src/ui/screen_stats.c:341	stats opened latch read, static screen state no gate suite observes
 src/ui/screen_stats.c:342	stats opened latch write, static screen state no gate suite observes
-src/ui/screen_stats.c:356	null guard after the background clear, draw path only
 src/ui/screen_stats.c:366	deck pane height layout, draw path only
 src/ui/screen_stats.c:369	summary y layout, draw path only
 src/ui/screen_stats.c:370	summary height layout, draw path only
@@ -1349,37 +1134,28 @@ src/stats/stats.c:131	peak seed variants never change the ratio, equal maxima co
 src/stats/stats.c:134	equal peak update is an identity
 src/stats/stats.c:148	rank clamp boundary weakening maps count equal to cap to the same n
 src/storage/repo_memo.c:24	pair letter lower bound mutants are true equivalents: the characters below A and the characters at or below @ are the same set since @ is A minus one, no reachable char distinguishes < from <=
-src/storage/repo_memo.c:32	null-column branch write index mutants are equivalent: both memo_pair text columns are NOT NULL under the schema so the branch is unreachable, and ct_memo_get pre-zeroes the output wholesale so any index write is unobservable
-src/storage/repo_memo.c:36	read clamp boundary mutant is equivalent: it differs only at a stored length of exactly the cap, every memo_pair write path rejects text at or above CT_MEMO_TEXT_MAX so no stored row reaches the boundary
+src/storage/repo_memo.c:34	null-column branch write index mutants are equivalent: both memo_pair text columns are NOT NULL under the schema so the branch is unreachable, and ct_memo_get pre-zeroes the output wholesale so any index write is unobservable
+src/storage/repo_memo.c:38	read clamp boundary mutant is equivalent: it differs only at a stored length of exactly the cap, every memo_pair write path rejects text at or above CT_MEMO_TEXT_MAX so no stored row reaches the boundary
 src/storage/repo_memo.c:37	read clamp value mutants sit on the unreachable cap branch, no stored memo text reaches the cap so the clamped value is never produced
 src/storage/repo_memo.c:49	sqlite3_prepare_v2 treats any negative sql length as read to nul, the -1 nByte mutant -2 is behaviorally identical
-src/storage/repo_memo.c:54	sqlite3 treats any negative bind length as read to nul, the -1 length mutant -2 is behaviorally identical
+src/storage/repo_memo.c:56	sqlite3 treats any negative bind length as read to nul, the -1 length mutant -2 is behaviorally identical
 src/storage/repo_memo.c:78	sqlite3_prepare_v2 treats any negative sql length as read to nul, the -1 nByte mutant -2 is behaviorally identical
 src/storage/repo_memo.c:83	sqlite3 treats any negative bind length as read to nul, the -1 length mutant -2 is behaviorally identical
 src/storage/repo_memo.c:84	sqlite3 treats any negative bind length as read to nul, the -1 length mutant -2 is behaviorally identical
 src/storage/repo_memo.c:85	sqlite3 treats any negative bind length as read to nul, the -1 length mutant -2 is behaviorally identical
 src/ui/screen_trainer.c:537	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:538	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:541	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:543	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:546	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:548	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:551	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:553	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:559	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:561	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:563	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:556	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:562	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:566	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:569	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:574	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:575	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:585	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:594	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:595	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:578	chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:588	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:597	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:598	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:601	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:602	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:603	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:604	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:605	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:606	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
@@ -1388,52 +1164,44 @@ src/ui/screen_trainer.c:608	screen draw body feeds only the raylib frame loop no
 src/ui/screen_trainer.c:609	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:611	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:612	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:613	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:614	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:615	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:616	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:618	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:619	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:628	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:629	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:630	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:634	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:640	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:647	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:622	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:631	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:632	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:633	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:637	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:643	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:650	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:653	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:663	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:665	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:669	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:670	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:666	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:668	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:672	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:673	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:680	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:683	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:684	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:689	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:691	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:700	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:701	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:705	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:706	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:707	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:687	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:692	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:694	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:703	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:704	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:708	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:709	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:710	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:713	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:714	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:717	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:716	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:718	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:719	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:720	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:723	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:721	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:724	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:726	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:729	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:731	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:732	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:734	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:735	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:742	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
-src/ui/screen_trainer.c:743	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:745	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+src/ui/screen_trainer.c:746	screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
 src/ui/screen_trainer.c:14	CT_TRAINER_EVENTS_MAX only sizes event label arrays and bounds the build_labels loop and on_event callback, all in the unexecuted draw path, so the value never reaches a gate-observable surface
 src/ui/screen_trainer.c:15	CT_TRAINER_CASES_MAX only sizes case_labels and case_ptrs and bounds the build_labels loop in the unexecuted draw path
 src/ui/screen_trainer.c:16	CT_TRAINER_HALF is consumed only by grid text layout math in the allowlisted draw region
@@ -1449,33 +1217,29 @@ src/ui/screen_trainer.c:85	dead store inside the unreachable list_id >= list_cou
 src/ui/screen_trainer.c:88	n > 0 and n >= 0 agree on every reachable n because n == 0 takes the else branch under both forms and yields 0, no selector list yields exactly one case, and case_count is never negative on valid reload passes
 src/ui/screen_trainer.c:95	the guarded max update is idempotent, widening the condition only re-assigns group_count a value it already holds
 src/ui/screen_trainer.c:118	form_open and reload explicitly assign every field any public read touches before it is read, so the memset fill byte only reaches never-read fields
-src/ui/screen_trainer.c:128	ct_selector_methods for 3x3 always returns 1 from the static table, so both zero-variant comparisons are equally false
-src/ui/screen_trainer.c:159	the mutated literal is the capacity argument, out == NULL makes ct_selector_lists ignore it and ct_selector_cap clamps negatives to 0
-src/ui/screen_trainer.c:199	both orbits are fully seeded with 576 memo pairs and the row cap equals 576, so n is always 576 and neither the else branch nor any comparison outcome changes
-src/ui/screen_trainer.c:232	front is fully rewritten by snprintf or case_key on every reachable success path and re-cleared on both error paths, and the seeded pack tables never fail an in-range fetch
-src/ui/screen_trainer.c:259	ct_selector_case_key never fails for an in-range index on the seeded databases, so this error-path clear never executes
+src/ui/screen_trainer.c:131	ct_selector_methods for 3x3 always returns 1 from the static table, so both zero-variant comparisons are equally false
+src/ui/screen_trainer.c:162	the mutated literal is the capacity argument, out == NULL makes ct_selector_lists ignore it and ct_selector_cap clamps negatives to 0
+src/ui/screen_trainer.c:202	corpus precondition, both chart orbits seed the full 576 memo table matching the row cap so n saturates and both arms agree, pinned by seed registry counts
+src/ui/screen_trainer.c:235	front is fully rewritten by snprintf or case_key on every reachable success path and re-cleared on both error paths, and the seeded pack tables never fail an in-range fetch
+src/ui/screen_trainer.c:262	ct_selector_case_key never fails for an in-range index on the seeded databases, so this error-path clear never executes
 src/ui/screen_trainer.c:304	the lo = -1 start only reaches a negative probe index on a query sorting below every stored row, and row 0 is the seeded AA while an absent query would also non-terminate under the line 315 mutant so no gate suite can safely issue it
 src/ui/screen_trainer.c:307	binary search returns the identical row for any pivot index in range, these mutations only reorder probes, the /1 form degenerating to a correct linear descent from hi
 src/ui/screen_trainer.c:312	cmp == 0 already returned at line 309, so the <= and < 1 variants never see a divergent comparison value
 src/ui/screen_trainer.c:315	hi = mid preserves the invariant that a present target stays inside the interval, so stored pairs return the identical row and the only divergence is a non-terminating loop on absent pairs, which no gate suite queries because the timeout-less driver would deadlock
-src/ui/screen_trainer.c:346	t1 initializer is dead, ct_selector_case_pair overwrites both outputs on the only path that reads them and the failure path returns before any read
-src/ui/screen_trainer.c:347	t2 initializer is dead, ct_selector_case_pair overwrites both outputs on the only path that reads them and the failure path returns before any read
-src/ui/screen_trainer.c:356	with case_count == 0 every continuation path still returns 0, the source guard returns case_count and the match loop runs zero iterations
-src/ui/screen_trainer.c:374	visible == -1 continues into paths that all return -1, the ternary yields visible itself under case_count > 0 and the counting loop can never match a negative target
-src/ui/screen_trainer.c:383	the i = -1 and i == case_count iterations call ct_selector_case_pair, which rejects both out-of-range indexes, so cell_matches returns 0 and the loop behaves identically
-src/ui/screen_trainer.c:396	cap == 0 continues into a path that writes nothing and returns n == 0 identical to the guard result, and cap < 0 is caught by both comparison forms
-src/ui/screen_trainer.c:403	n is provably 0 at the setup check, so < and <= differ only at cap == 0, which the entry guard already returned for
-src/ui/screen_trainer.c:447	with out == NULL ct_selector_events never reads the capacity argument, and the only caller is build_labels which runs solely from the unexecuted draw path
-src/ui/screen_trainer.c:455	label loop inside static build_labels, executed only from the allowlisted draw region, and the label arrays have no gate-observable surface
-src/ui/screen_trainer.c:466	case_active reset inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
-src/ui/screen_trainer.c:467	visible-case loop inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+src/ui/screen_trainer.c:349	t1 initializer is dead, ct_selector_case_pair overwrites both outputs on the only path that reads them and the failure path returns before any read
+src/ui/screen_trainer.c:350	t2 initializer is dead, ct_selector_case_pair overwrites both outputs on the only path that reads them and the failure path returns before any read
+src/ui/screen_trainer.c:359	with case_count == 0 every continuation path still returns 0, the source guard returns case_count and the match loop runs zero iterations
+src/ui/screen_trainer.c:377	visible == -1 continues into paths that all return -1, the ternary yields visible itself under case_count > 0 and the counting loop can never match a negative target
+src/ui/screen_trainer.c:386	the i = -1 and i == case_count iterations call ct_selector_case_pair, which rejects both out-of-range indexes, so cell_matches returns 0 and the loop behaves identically
+src/ui/screen_trainer.c:399	cap == 0 continues into a path that writes nothing and returns n == 0 identical to the guard result, and cap < 0 is caught by both comparison forms
+src/ui/screen_trainer.c:406	n is provably 0 at the setup check, so < and <= differ only at cap == 0, which the entry guard already returned for
+src/ui/screen_trainer.c:450	with out == NULL ct_selector_events never reads the capacity argument, and the only caller is build_labels which runs solely from the unexecuted draw path
 src/ui/screen_trainer.c:469	case-key failure branch inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
-src/ui/screen_trainer.c:471	empty-label clear inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+src/ui/screen_trainer.c:470	visible-case loop inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
 src/ui/screen_trainer.c:475	memo image append guard inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
-src/ui/screen_trainer.c:482	active-row comparison inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
-src/ui/screen_trainer.c:489	static GuiTree event callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_event which rejects them unobserved
-src/ui/screen_trainer.c:498	static GuiTree method callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_method which rejects them unobserved
-src/ui/screen_trainer.c:504	static GuiTree list callback guard invoked only from the draw region, negative active values flow into ct_trainer_form_select_list which rejects them unobserved
+src/ui/screen_trainer.c:485	active-row comparison inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+src/ui/screen_trainer.c:492	static GuiTree event callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_event which rejects them unobserved
+src/ui/screen_trainer.c:501	static GuiTree method callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_method which rejects them unobserved
 src/app/script.c:78	list cap mutants bound the stack array only, every event method pair yields at most 3 lists so a cap of 7 or 9 never changes a reachable scan and the found clause rejects every id at or above it first
 src/app/script.c:99	error buffer clear index mutants are unobservable, the byte lands before the buffer or at index one, every failing path rewrites the buffer through snprintf before any pinned reader and no pinned reader reads err after a success return
 src/app/script.c:105	script tail copy count mutants are equivalent, the extra byte lands past the nul inside the text array and is never scanned past end, and the short copy leaves the tail byte the tokenizer rewrites when the final token reaches it while comment tails are never read past end
@@ -1508,7 +1272,6 @@ src/app/script.c:432	cards field dirty flag mutant is display bookkeeping, the s
 src/app/script.c:448	cards step default arm is unreachable, the step dispatcher routes exactly the cards kinds into this handler
 src/app/script.c:456	review day init mutants are dead stores, the clock helper writes the day on the only path that continues
 src/app/script.c:460	review begin limit minus one takes the same unlimited paging path as zero, the queue loader branches only on limit greater than zero
-src/app/script.c:461	review begin rc bound widening admits only a begin return of minus one, every reachable begin returns a nonnegative queue count over the scripted default deck
 src/app/script.c:475	review grade found flag initializer is a dead store, the grade parse helper clears the out flag on entry before any read
 src/app/script.c:482	clock stamp index mutant checks the second stamp char, the utc clock always writes a stamp whose second char is a digit so the empty stamp arm never fires
 src/app/script.c:493	clock stamp index mutant checks the second stamp char, the utc clock always writes a stamp whose second char is a digit so the empty stamp arm never fires
@@ -1525,7 +1288,7 @@ src/app/script.c:612	trainer event ok flag initializer is a dead store, the even
 src/app/script.c:613	trainer method ok flag initializer is a dead store, the method parse helper clears the out flag on entry before any read
 src/app/script.c:624	list guard bound and cap mutants are clause dominated, found zero rejects through the found index clause with the same verdict and message and the cap clause never fires because no pair yields more than three lists
 src/app/script.c:631	trainer list target key reset index mutant writes the nul one byte into a stale tail slot, the key is rewritten by the next case step before any read
-src/app/script.c:642	case guard bound mutants are clause dominated or unreachable, count zero rejects through the index clause with the same verdict and no selector list holds exactly one case across cfop stages, chart targets, and seeded packs
+src/app/script.c:642	empty and negative case counts reject identically, count zero is excluded by every selector list holding at least one case across cfop stages, chart targets, and seeded packs, a corpus precondition pinned by selector tests
 src/app/script.c:659	synth ready guard mutant is equivalent, the synthesis entry self initializes through its built gate so skipping the eager init changes no result
 src/app/script.c:663	target sticker one init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
 src/app/script.c:664	target sticker two init mutants are dead stores, the pair resolver writes both outputs on the only path that continues
@@ -1641,9 +1404,6 @@ src/ui/screen_review.c:235	weakened negative scrub clamp maps zero to itself
 src/ui/screen_review.c:238	upper scrub clamp boundary is idempotent, at move_count both arms store the same value
 src/ui/screen_review.c:243	weakened parse clamp in scrub maps zero to itself and every error code stays below the shifted bound
 src/ui/screen_review.c:244	minus one clamp replacement in scrub mirrors the original empty replay
-src/ui/screen_review.c:283	any flag flip only matters for a digitless field, the wall clock stamp always carries digits
-src/ui/screen_review.c:284	weakened digit bound drops trailing nines from the day seed, a nine free stamp parses identically
-src/ui/screen_review.c:289	separator guard conjunction flip only matters for a digitless field, the stamp always parses
 src/ui/screen_review.c:308	scheme settings probe, write-only scheme state read only by the draw path
 src/ui/screen_review.c:317	open form memset fill, the subsequent form begin memsets the same struct wholesale
 src/ui/screen_review.c:322	camera square distance, draw-side camera geometry only
@@ -1682,7 +1442,7 @@ src/ui/screen_review.c:506	status bar rect, draw path only
 src/ui/screen_cards.c:14	list width divisor constant feeds only the draw-side list width arithmetic no headless suite exercises
 src/ui/screen_cards.c:16	label max feeds only the draw-side label buffer bound no headless suite exercises
 src/ui/screen_cards.c:28	cap guard arms are unreachable, the only caller passes the fixed page size 16 so cap never equals 0 or goes negative
-src/ui/screen_cards.c:57	selected sentinel collapses before observation, with rows open assigns 0 right after and without rows reload clamps back to -1
+src/ui/screen_cards.c:57	selected sentinel unobserved, open assigns 0 right after when rows exist and the reload clamp restores -1 for the zero arm when no rows
 src/ui/screen_cards.c:81	deck list rc boundary arms are identical, the copy loop is a no-op at rc 0 and never entered at negative rc
 src/ui/screen_cards.c:86	rc zero boundary is identical in both branches, row_count stays 0 and status stays ok either way
 src/ui/screen_cards.c:106	the zero clamp arm maps row 0 to itself, only the negative arm distinguishes and that mutant is killed
@@ -1736,7 +1496,6 @@ src/ui/screen_stats.c:279	retention headline label rectangle feeds only the rayg
 src/ui/screen_stats.c:285	retention rate conversion feeds only the chart layout values in draw
 src/ui/screen_stats.c:291	retention mark size division feeds only the marker rectangle in draw
 src/ui/screen_stats.c:297	retention bar draw guard only changes pixel output
-src/ui/screen_stats.c:300	empty bucket skip only changes pixel output
 src/ui/screen_stats.c:306	retention marker position arithmetic feeds only the drawrectangle calls
 src/ui/screen_stats.c:310	has_prev flag only gates the drawline polyline calls
 src/ui/screen_stats.c:322	no deck selected guard only swaps the raygui label text
@@ -1764,7 +1523,7 @@ src/app/shots.c:51	memcpy length plus one copies one byte past the source nul in
 src/app/shots.c:54	greater versus greater-equal differ only when both separator scans return the same pointer, strrchr over the two distinct separators slash and backslash can never alias, true equivalent
 src/app/shots.c:120	trainer form null guard conjunction mutant, the form accessor returns a static singleton so the null arm is dead, and the null db form only arises with a null app db where ct_trainer_form_select_event guards null db at entry and the select chain returns the same e_state, no observable difference
 src/app/shots.c:148	chart form null guard conjunction mutant, same static singleton form, the null db form reconverges through the ct_trainer_form_select_event entry guard into the same e_state return
-src/app/shots.c:202	negative pick index is clamped to row zero by ct_cards_form_select, so the -1 mutant selects the same first row and the capture is identical
+src/app/shots.c:202	negative pick index clamps to row zero inside ct_cards_form_select, the minus one arm captures the identical first row, the plus one arm is killed by the two card selected pin in shots_state_guards
 src/ui/widgets.c:17	ascii fill cap clause is never the binding term, the 95 codepoint range ends 481 slots before the 576 cap
 src/ui/widgets.c:20	latin fill cap clause is never the binding term, the 401 codepoint range ends 81 slots before the 576 cap
 src/ui/widgets.c:23	viet range end is never binding, the 576 cap truncates the fill ten codepoints before the range end
@@ -1788,3 +1547,11 @@ src/ui/widgets.c:167	accuracy upper clamp boundary is idempotent, at one both ar
 src/ui/widgets.c:173	half boundary is the continuous crossing where both branches produce full red and green, identical color bytes
 src/ui/screen_menu.c:86	sizeof on any element of the uniform entry array yields the same element size, count unchanged
 src/ui/screen_menu.c:101	quit branch needs a real gui mouse release inside the rect, no headless path can force the raygui pressed result
+src/app/script.c:138	final-line newline boundary only shifts diagnostic line numbers
+src/app/script.c:513	scrub index display value unused by script assertions
+src/app/script.c:656	empty target guard, suite scripts always scope a pair first
+src/app/script.c:661	repeated synth init is idempotent
+src/app/script.c:677	format returns positive length on success, guard flips stay false
+src/app/script.c:857	initial rc overwritten by first step, empty script unasserted
+src/ui/screen_review.c:103	redundant with idle zeroing of memo image at load start
+src/ui/screen_review.c:108	memo set validates images non-empty so corner get success implies image present

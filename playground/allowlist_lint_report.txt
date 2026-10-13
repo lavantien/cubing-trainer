@@ -1,0 +1,91 @@
+src/storage/repo_algs.c  rows=17 ok=14 dead=0 suspect=3
+  SUSPECT:80 missing=ct_repo_alg_get dst[0] = '\0';
+  SUSPECT:194 missing=ct_alg_row_valid return 1;
+  SUSPECT:242 missing=ct_alg_from_row memset(out, 0, sizeof *out);
+src/gen/targets.c  rows=18 ok=17 dead=0 suspect=1
+  SUSPECT:62 missing=ct_corner_grid int row = 0;
+src/gen/score.c  rows=3 ok=2 dead=0 suspect=1
+  SUSPECT:44 missing=score_face_bits return -1;
+src/engine/geometry_sq1.c  rows=12 ok=9 dead=0 suspect=3
+  SUSPECT:86 missing=ct_sq1_move_pair if (state == NULL || move_id < 0 || move_id >= CT_SQ1_MOVES) {
+  SUSPECT:219 missing=ct_sq1_move_id if (parsed > CT_SQ1_TURN_MAX) {
+  SUSPECT:226 missing=ct_sq1_move_id if (digits > 1 && parsed < CT_DECIMAL_BASE) {
+src/gen/interchange.c  rows=17 ok=13 dead=0 suspect=4
+  SUSPECT:29 missing=ct_apply memset(&c, 0, sizeof c);
+  SUSPECT:83 missing=ct_sticker_cell int xf = 0;
+  SUSPECT:84 missing=ct_sticker_cell int xr = 0;
+  SUSPECT:85 missing=ct_sticker_cell int xc = 0;
+src/trainer/selector.c  rows=39 ok=36 dead=0 suspect=3
+  SUSPECT:374 missing=ct_selector_list_def if (db == NULL || !ct_selector_pair_ok(ev, m) || list_id < 0 ||
+  SUSPECT:375 missing=ct_selector_pack_case list_id >= ct_selector_list_count(ev, m) || index < 0) {
+  SUSPECT:104 missing=CT_3STYLE_CORNER_BUFFER return orbit == CT_ORBIT_EDGE ? scheme->buffer_edge : scheme->buffer_corner;
+src/gen/classify.c  rows=127 ok=120 dead=0 suspect=7
+  SUSPECT:513 missing=ct_classify bool corner = info->corner && !info->edge;
+  SUSPECT:514 missing=ct_classify bool edge = info->edge && !info->corner;
+  SUSPECT:50 missing=ct_classification_label static const char cl_labels[CT_CLS_UNKNOWN + 1][CT_CLASSIFY_LABEL_MAX] = {
+  SUSPECT:55 missing=ct_classification_alias static const char cl_aliases[CT_CLS_UNKNOWN + 1][CT_CLASSIFY_LABEL_MAX] = {
+  SUSPECT:115 missing=ct_move_legal for (int i = 0; i < len; i++) {
+  SUSPECT:128 missing=ct_sticker_cell for (int s = 0; s < CT_TARGET_STICKERS; s++) {
+  SUSPECT:728 missing=ct_notation_parse if (alg == NULL || out == NULL) {
+src/packs/seed_registry.c  rows=4 ok=3 dead=0 suspect=1
+  SUSPECT:55 missing=opendir if (written < 0 || (unsigned)written >= sizeof path) {
+src/packs/packs.c  rows=22 ok=17 dead=0 suspect=5
+  SUSPECT:57 missing=ct_pack_get dst[0] = '\0';
+  SUSPECT:112 missing=CT_PACK_CANON_MAX if (n < 0 || (unsigned)n >= sizeof canon)
+  SUSPECT:153 missing=ct_pack_from_row memset(out, 0, sizeof *out);
+  SUSPECT:274 missing=memset memcpy(dst, src, n + 1);
+  SUSPECT:310 missing=strcmp memcpy(header, line, n + 1);
+src/gen/synth.c  rows=220 ok=215 dead=0 suspect=5
+  SUSPECT:97 missing=ct_move_legal for (int i = 0; i < len; i++) {
+  SUSPECT:115 missing=synth_cycle_key int next = sorted[0] == x ? y : (sorted[0] == y ? z : x);
+  SUSPECT:392 missing=ct_synth_init return -1;
+  SUSPECT:867 missing=calloc if (!synth_built && ct_synth_init() < 0) {
+  SUSPECT:36 missing=memcpy ct_move moves[CT_CUBE_FACE_COUNT * (CT_MOVE_QUARTERS - 1)];
+src/config/config.c  rows=18 ok=15 dead=0 suspect=3
+  SUSPECT:27 missing=ct_config_set if (text == NULL || text[0] == '\0') {
+  SUSPECT:41 missing=ct_config_set if (text == NULL || text[0] == '\0') {
+  SUSPECT:175 missing=memset for (int i = 0; i < CT_FACE_COUNT; i++) {
+src/ui/screen_trainer.c  rows=131 ok=125 dead=0 suspect=6
+  SUSPECT:89 missing=CT_SELECTOR_ERR for (int i = 0; i < f->case_count; i++) {
+  SUSPECT:15 missing=case_labels CT_TRAINER_CASES_MAX = CT_LETTER_STICKERS * CT_LETTER_STICKERS,
+  SUSPECT:162 missing=ct_selector_cap if (ct_selector_lists(f->sel.event, m, NULL, 0) <= 0) {
+  SUSPECT:235 missing=snprintf f->front[0] = '\0';
+  SUSPECT:377 missing=case_count if (f == NULL || visible < 0) {
+  SUSPECT:386 missing=ct_selector_case_pair for (int i = 0; i < f->case_count; i++) {
+src/app/shots.c  rows=9 ok=8 dead=0 suspect=1
+  SUSPECT:27 missing=GuiSetFont if (!ct_shots_window_open) {
+src/storage/repo_settings.c  rows=73 ok=72 dead=0 suspect=1
+  SUSPECT:12 missing=memcpy out[0] = '\0';
+src/storage/migrate.c  rows=56 ok=55 dead=0 suspect=1
+  SUSPECT:193 missing=opendir if (db == NULL || migrations_dir == NULL)
+src/storage/repo_cards.c  rows=14 ok=12 dead=0 suspect=2
+  SUSPECT:173 missing=gmtime if (now[0] == '\0')
+  SUSPECT:216 missing=gmtime if (now[0] == '\0')
+src/app/paths.c  rows=30 ok=21 dead=0 suspect=9
+  SUSPECT:86 missing=snprintf if (exe_path == NULL || rel == NULL || out == NULL || cap == 0)
+  SUSPECT:107 missing=ct_exe_path long n = readlink(CT_PROC_SELF_EXE, out, cap - 1);
+  SUSPECT:108 missing=ct_exe_path if (n <= 0 || (unsigned long)n + 1 >= (unsigned long)cap)
+  SUSPECT:109 missing=ct_exe_path return -1;
+  SUSPECT:111 missing=ct_exe_path return 0;
+  SUSPECT:115 missing=ct_exe_path return -1;
+  SUSPECT:120 missing=snprintf if (rel == NULL || out == NULL || cap == 0)
+  SUSPECT:136 missing=snprintf if (out == NULL || cap == 0)
+  SUSPECT:151 missing=snprintf if (out == NULL || cap == 0)
+src/app/headless.c  rows=6 ok=4 dead=0 suspect=2
+  SUSPECT:82 missing=ct_notation_parse const char *scramble = (alg != NULL && alg[0] != '\0') ? alg : CT_HEADLESS_SCRAMBLE_ALG;
+  SUSPECT:90 missing=ct_notation_parse if (alg != NULL && alg[0] != '\0') {
+src/app/app_loop.c  rows=13 ok=11 dead=0 suspect=2
+  SUSPECT:26 missing=snprintf app->db_path[0] = '\0';
+  SUSPECT:68 missing=ct_app_run font_path[0] = '\0';
+src/app/script_expect.c  rows=16 ok=15 dead=0 suspect=1
+  SUSPECT:45 missing=strlen if (sqlite3_prepare_v2(db, sql, -1, &st, NULL) != SQLITE_OK) {
+src/ui/screen_cards.c  rows=52 ok=51 dead=0 suspect=1
+  SUSPECT:82 missing=row_count for (int i = 0; i < rc; i++)
+src/ui/screen_review.c  rows=65 ok=64 dead=0 suspect=1
+  SUSPECT:130 missing=memset if (rc < 0) {
+src/storage/repo_memo.c  rows=10 ok=8 dead=0 suspect=2
+  SUSPECT:34 missing=memo_pair dst[0] = '\0';
+  SUSPECT:38 missing=memo_pair if (n >= cap)
+src/app/script.c  rows=79 ok=78 dead=0 suspect=1
+  SUSPECT:597 missing=strcmp int stage = ct_script_stage_parse(ct_script_arg(s, c, 0));
+TOTAL rows=1557 ok=1491 dead=0 suspect=66 malformed=0
