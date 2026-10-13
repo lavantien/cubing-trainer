@@ -30,6 +30,8 @@ SUITE_RE = re.compile(r"CT_SUITE\(([a-z0-9_]+)\)")
 
 GL_CHURN = {"e2e_run_shot_render", "e2e_run_shot_guards", "shots_render_smoke"}
 
+E2E_SCRIPT_FILES = {"unit_e2e_script.c", "unit_e2e_script_playback.c"}
+
 E2E_KEYWORDS = {
     "src/ui/screen_trainer.c": r"trainer|memo",
     "src/ui/screen_review.c": r"review",
@@ -67,8 +69,12 @@ def suite_blocks(path):
 
 def main():
     suites = {}
+    seen_in = {}
     for tf in sorted((root / "tests").glob("unit_*.c")):
         for name, block in suite_blocks(tf):
+            if name in suites and seen_in[name] != tf.name:
+                raise SystemExit(f"duplicate suite name {name} in {tf.name} and {seen_in[name]}")
+            seen_in[name] = tf.name
             suites[name] = (tf.name, block)
     funcs = {scope: defined_functions(root / scope) for scope in SCOPES}
     plan = {}
@@ -77,14 +83,16 @@ def main():
         for name, (tf, block) in suites.items():
             if any(re.search(rf"\b{re.escape(f)}\b", block) for f in funcs[scope]):
                 refs.add(name)
-            elif tf == "unit_e2e_script.c" and scope in E2E_KEYWORDS:
+            elif tf in E2E_SCRIPT_FILES and scope in E2E_KEYWORDS:
                 if re.search(E2E_KEYWORDS[scope], block):
                     refs.add(name)
         overlay = OVERLAYS.get(scope)
         if overlay == "all_e2e":
-            refs |= {n for n, (tf, _) in suites.items() if tf == "unit_e2e_script.c"}
+            refs |= {n for n, (tf, _) in suites.items() if tf in E2E_SCRIPT_FILES}
         elif overlay == "e2e_run":
-            refs |= {n for n, (tf, _) in suites.items() if tf == "unit_e2e_script.c" and n.startswith("e2e_run")}
+            refs |= {
+                n for n, (tf, _) in suites.items() if tf in E2E_SCRIPT_FILES and n.startswith("e2e_run")
+            }
         elif isinstance(overlay, list):
             refs |= set(overlay)
         if scope != "src/app/shots.c":
