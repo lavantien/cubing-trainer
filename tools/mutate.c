@@ -2,6 +2,7 @@
 #include <dirent.h>
 #include <errno.h>
 #include <limits.h>
+#include <signal.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -15,14 +16,28 @@
 #ifdef _WIN32
 #include <direct.h>
 #include <process.h>
+#include <windows.h>
 #define CT_MKDIR(p) _mkdir(p)
 #define CT_RMDIR(p) _rmdir(p)
 #define CT_PID() _getpid()
+static int ct_pid_alive(long pid) {
+    HANDLE h = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, (DWORD)pid);
+    if (h == NULL) {
+        return 0;
+    }
+    DWORD code = 0;
+    BOOL have = GetExitCodeProcess(h, &code);
+    CloseHandle(h);
+    return have && code == STILL_ACTIVE;
+}
 #else
 #include <unistd.h>
 #define CT_MKDIR(p) mkdir(p, 0755)
 #define CT_RMDIR(p) rmdir(p)
 #define CT_PID() getpid()
+static int ct_pid_alive(long pid) {
+    return !(kill(pid, 0) == -1 && errno == ESRCH);
+}
 #endif
 
 #define CT_MUT_REL_MAX 512
@@ -33,7 +48,7 @@
 #define CT_MUT_OBJ_MAX 4096
 #define CT_MUT_SUITE_MAX 128
 #define CT_MUT_CMD_MAX 32768
-#define CT_MUT_ALLOW_MAX 2048
+#define CT_MUT_ALLOW_MAX 4096
 #define CT_MUT_SURV_MAX 2048
 #define CT_MUT_ONLY_MAX 256
 #define CT_MUT_EXCLUDE_MAX 256
@@ -120,6 +135,8 @@ static char *g_resumed;
 static unsigned long g_resumed_n;
 static FILE *g_journal;
 static bool g_resume_on;
+static FILE *g_lock;
+static char g_lock_path[CT_MUT_REL_MAX];
 
 static const char *const ct_punct3[] = {"<<=", ">>=", "..."};
 static const char *const ct_punct2[] = {"->",  "++",  "--",  "<<",  ">>",  "<=",  ">=",  "==",  "!=",
@@ -809,35 +826,144 @@ static unsigned long long ct_hash64(unsigned long long h, const char *data, size
     return h;
 }
 
+static unsigned long long ct_hash_field(unsigned long long h, const char *data, size_t n) {
+    unsigned char lenb[8];
+    for (size_t i = 0; i < 8; i++) {
+        lenb[i] = (unsigned char)((unsigned long long)n >> (8 * i));
+    }
+    h = ct_hash64(h, (const char *)lenb, sizeof lenb);
+    return ct_hash64(h, data, n);
+}
+
+static unsigned long long ct_digest_field(unsigned long long h, const char *path) {
+    unsigned long long pathlen = strlen(path);
+    h = ct_hash_field(h, path, pathlen);
+    char buf[65536];
+    size_t n;
+    FILE *f = fopen(path, "rb");
+    if (f == NULL) {
+        return h;
+    }
+    if (fseek(f, 0, SEEK_END) == 0) {
+        long sz = ftell(f);
+        if (sz > 0) {
+            unsigned char lenb[8];
+            unsigned long long n64 = (unsigned long long)sz;
+            for (size_t i = 0; i < 8; i++) {
+                lenb[i] = (unsigned char)(n64 >> (8 * i));
+            }
+            h = ct_hash64(h, (const char *)lenb, sizeof lenb);
+            rewind(f);
+            while ((n = fread(buf, 1, sizeof buf, f)) > 0) {
+                h = ct_hash64(h, buf, n);
+            }
+        } else {
+            unsigned char lenb[8] = {0};
+            h = ct_hash64(h, (const char *)lenb, sizeof lenb);
+        }
+    }
+    fclose(f);
+    return h;
+}
+
 static unsigned long long ct_inputs_hash(void) {
     unsigned long long h = 0xcbf29ce484222325ULL;
     for (size_t f = 0; f < g_nfiles; f++) {
-        h = ct_hash64(h, g_files[f].rel, strlen(g_files[f].rel));
-        h = ct_hash64(h, "\xff", 1);
-        h = ct_hash64(h, g_files[f].src, g_files[f].len);
+        h = ct_hash_field(h, g_files[f].rel, strlen(g_files[f].rel));
+        h = ct_hash_field(h, g_files[f].src, g_files[f].len);
     }
-    h = ct_hash64(h, g_cfg.cc, strlen(g_cfg.cc));
-    h = ct_hash64(h, g_cfg.cflags, strlen(g_cfg.cflags));
-    h = ct_hash64(h, g_cfg.ldflags, strlen(g_cfg.ldflags));
+    h = ct_hash_field(h, g_cfg.cc, strlen(g_cfg.cc));
+    h = ct_hash_field(h, g_cfg.cflags, strlen(g_cfg.cflags));
+    h = ct_hash_field(h, g_cfg.ldflags, strlen(g_cfg.ldflags));
+    h = ct_hash_field(h, g_cfg.ldlibs, strlen(g_cfg.ldlibs));
+    h = ct_hash64(h, (const char *)&g_cfg.exclude_n, sizeof g_cfg.exclude_n);
+    for (size_t i = 0; i < g_cfg.exclude_n; i++) {
+        h = ct_hash_field(h, g_cfg.exclude[i], strlen(g_cfg.exclude[i]));
+    }
     h = ct_hash64(h, (const char *)&g_nsuites, sizeof g_nsuites);
     for (size_t i = 0; i < g_nsuites; i++) {
-        h = ct_hash64(h, g_suites[i], strlen(g_suites[i]));
+        h = ct_hash_field(h, g_suites[i], strlen(g_suites[i]));
+    }
+    h = ct_hash64(h, (const char *)&g_nobjs, sizeof g_nobjs);
+    for (size_t i = 0; i < g_nobjs; i++) {
+        if (strstr(g_objs[i], "/tobj/tests/") != NULL) {
+            h = ct_digest_field(h, g_objs[i]);
+        }
     }
     return h;
 }
 
-static void ct_journal_path(const char *build, const char *scope, char *out, size_t cap) {
-    char flat[CT_MUT_REL_MAX];
+static void ct_scope_flat(const char *scope, char *out, size_t cap) {
     size_t n = 0;
-    for (const char *p = scope; *p != '\0' && n + 8 < sizeof flat; p++) {
+    for (const char *p = scope; *p != '\0' && n + 1 < cap; p++) {
         char c = *p;
         if (c == '/' || c == '\\' || c == ':' || c == '*' || c == '?' || c == '"') {
             c = '_';
         }
-        flat[n++] = c;
+        out[n++] = c;
     }
-    flat[n] = '\0';
-    snprintf(out, cap, "%s/mutants/%s.journal", build, flat);
+    out[n] = '\0';
+}
+
+static void ct_journal_path(const char *build, const char *scope, char *out, size_t cap) {
+    char flat[CT_MUT_REL_MAX];
+    ct_scope_flat(scope, flat, sizeof flat);
+    if (snprintf(out, cap, "%s/mutants/%s.journal", build, flat) >= (int)cap) {
+        fprintf(stderr, "mutate: journal path too long for scope %s\n", scope);
+        exit(2);
+    }
+}
+
+static void ct_lock_release(void) {
+    if (g_lock != NULL) {
+        fclose(g_lock);
+        g_lock = NULL;
+    }
+    if (g_lock_path[0] != '\0') {
+        remove(g_lock_path);
+        g_lock_path[0] = '\0';
+    }
+}
+
+static void ct_lock_take(const char *build, const char *scope) {
+    char flat[CT_MUT_REL_MAX];
+    ct_scope_flat(scope, flat, sizeof flat);
+    if (snprintf(g_lock_path, sizeof g_lock_path, "%s/mutants/%s.lock", build, flat) >=
+        (int)sizeof g_lock_path) {
+        fprintf(stderr, "mutate: lock path too long for scope %s\n", scope);
+        exit(2);
+    }
+    for (int attempt = 0; attempt < 2; attempt++) {
+        g_lock = fopen(g_lock_path, "wx");
+        if (g_lock != NULL) {
+            fprintf(g_lock, "%ld\n", (long)CT_PID());
+            fflush(g_lock);
+            atexit(ct_lock_release);
+            return;
+        }
+        if (errno != EEXIST) {
+            fprintf(stderr, "mutate: cannot create lock %s: %s\n", g_lock_path, strerror(errno));
+            exit(2);
+        }
+        long pid = 0;
+        FILE *in = fopen(g_lock_path, "r");
+        if (in != NULL) {
+            char buf[32];
+            if (fgets(buf, sizeof buf, in) != NULL) {
+                pid = strtol(buf, NULL, 10);
+            }
+            fclose(in);
+        }
+        if (pid > 0 && !ct_pid_alive(pid)) {
+            fprintf(stderr, "mutate: removing stale lock %s left by pid %ld\n", g_lock_path, pid);
+            remove(g_lock_path);
+            continue;
+        }
+        fprintf(stderr, "mutate: lock %s exists, another mutate run holds this scope\n", g_lock_path);
+        exit(2);
+    }
+    fprintf(stderr, "mutate: lock %s exists, another mutate run holds this scope\n", g_lock_path);
+    exit(2);
 }
 
 static void ct_journal_record(size_t id, char verdict) {
@@ -850,6 +976,7 @@ static void ct_journal_record(size_t id, char verdict) {
 
 static bool ct_journal_open(const char *build, const char *scope) {
     char path[CT_MUT_REL_MAX];
+    char old[CT_MUT_REL_MAX + 8];
     char line[128];
     unsigned long long want = ct_inputs_hash();
     FILE *in;
@@ -857,17 +984,27 @@ static bool ct_journal_open(const char *build, const char *scope) {
     if (g_resumed == NULL) {
         return false;
     }
+    ct_lock_take(build, scope);
     ct_journal_path(build, scope, path, sizeof path);
     in = fopen(path, "r");
     if (in != NULL) {
         unsigned long long got = 0;
         size_t sites = 0;
+        bool torn = false;
         bool ok = fgets(line, sizeof line, in) != NULL &&
                   sscanf(line, "J %llu %zu", &got, &sites) == 2 && got == want && sites == g_nsites;
         while (ok && fgets(line, sizeof line, in) != NULL) {
             size_t id = 0;
             char verdict = 0;
-            if (sscanf(line, "V %zu %c", &id, &verdict) != 2 || id == 0 || id > g_nsites ||
+            int used = 0;
+            char *nl = strchr(line, '\n');
+            if (nl == NULL) {
+                torn = true;
+                break;
+            }
+            *nl = '\0';
+            if (sscanf(line, "V %zu %c%n", &id, &verdict, &used) != 2 || (size_t)used != strlen(line) ||
+                id == 0 || id > g_nsites ||
                 (verdict != 'k' && verdict != 'b' && verdict != 's') || g_resumed[id - 1] != 0) {
                 ok = false;
                 break;
@@ -876,6 +1013,19 @@ static bool ct_journal_open(const char *build, const char *scope) {
         }
         fclose(in);
         if (ok && g_resume_on) {
+            if (torn) {
+                FILE *w = fopen(path, "w");
+                if (w == NULL) {
+                    return false;
+                }
+                fprintf(w, "J %llu %zu\n", want, g_nsites);
+                for (size_t i = 0; i < g_nsites; i++) {
+                    if (g_resumed[i] != 0) {
+                        fprintf(w, "V %zu %c\n", i + 1, g_resumed[i]);
+                    }
+                }
+                fclose(w);
+            }
             for (size_t i = 0; i < g_nsites; i++) {
                 if (g_resumed[i] != 0) {
                     g_resumed_n++;
@@ -886,6 +1036,11 @@ static bool ct_journal_open(const char *build, const char *scope) {
         }
         memset(g_resumed, 0, g_nsites);
         g_resumed_n = 0;
+        snprintf(old, sizeof old, "%s.old", path);
+        remove(old);
+        if (rename(path, old) != 0) {
+            fprintf(stderr, "mutate: cannot archive journal %s to %s, truncating\n", path, old);
+        }
     }
     g_journal = fopen(path, "w");
     if (g_journal != NULL) {
@@ -980,7 +1135,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "usage: mutate.exe <scope_dir_or_file> <build_dir> [suite filter ...]\n");
         return 2;
     }
-    setvbuf(stdout, NULL, _IOLBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 0);
     char scope[CT_MUT_REL_MAX];
     snprintf(scope, sizeof scope, "%s", argv[1]);
     ct_normalize_slashes(scope);
