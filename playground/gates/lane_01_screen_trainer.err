@@ -1,0 +1,2032 @@
+build_gate/mutants/p41276/m0016_screen_trainer.c:23:19: error: expected identifier or '('
+   23 | static const char /const CT_TRAINER_EVENT_NAMES[] = {
+      |                   ^
+build_gate/mutants/p41276/m0016_screen_trainer.c:40:34: error: use of undeclared identifier 'CT_TRAINER_EVENT_NAMES'
+   40 |     unsigned long count = sizeof CT_TRAINER_EVENT_NAMES / sizeof CT_TRAINER_EVENT_NAMES[0];
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0016_screen_trainer.c:40:66: error: use of undeclared identifier 'CT_TRAINER_EVENT_NAMES'
+   40 |     unsigned long count = sizeof CT_TRAINER_EVENT_NAMES / sizeof CT_TRAINER_EVENT_NAMES[0];
+      |                                                                  ^~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0016_screen_trainer.c:41:24: error: use of undeclared identifier 'CT_TRAINER_EVENT_NAMES'
+   41 |     return i < count ? CT_TRAINER_EVENT_NAMES[i] : "?";
+      |                        ^~~~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+build_gate/mutants/p41276/m0017_screen_trainer.c:28:19: error: expected identifier or '('
+   28 | static const char /const CT_TRAINER_METHOD_NAMES[] = {
+      |                   ^
+build_gate/mutants/p41276/m0017_screen_trainer.c:46:34: error: use of undeclared identifier 'CT_TRAINER_METHOD_NAMES'
+   46 |     unsigned long count = sizeof CT_TRAINER_METHOD_NAMES / sizeof CT_TRAINER_METHOD_NAMES[0];
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0017_screen_trainer.c:46:67: error: use of undeclared identifier 'CT_TRAINER_METHOD_NAMES'
+   46 |     unsigned long count = sizeof CT_TRAINER_METHOD_NAMES / sizeof CT_TRAINER_METHOD_NAMES[0];
+      |                                                                   ^~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0017_screen_trainer.c:47:24: error: use of undeclared identifier 'CT_TRAINER_METHOD_NAMES'
+   47 |     return i < count ? CT_TRAINER_METHOD_NAMES[i] : "?";
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+build_gate/mutants/p41276/m0018_screen_trainer.c:33:19: error: expected identifier or '('
+   33 | static const char /const CT_TRAINER_STAGE_NAMES[] = {
+      |                   ^
+build_gate/mutants/p41276/m0018_screen_trainer.c:52:34: error: use of undeclared identifier 'CT_TRAINER_STAGE_NAMES'
+   52 |     unsigned long count = sizeof CT_TRAINER_STAGE_NAMES / sizeof CT_TRAINER_STAGE_NAMES[0];
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0018_screen_trainer.c:52:66: error: use of undeclared identifier 'CT_TRAINER_STAGE_NAMES'
+   52 |     unsigned long count = sizeof CT_TRAINER_STAGE_NAMES / sizeof CT_TRAINER_STAGE_NAMES[0];
+      |                                                                  ^~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0018_screen_trainer.c:53:24: error: use of undeclared identifier 'CT_TRAINER_STAGE_NAMES'
+   53 |     return i < count ? CT_TRAINER_STAGE_NAMES[i] : "?";
+      |                        ^~~~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+build_gate/mutants/p41276/m0019_screen_trainer.c:38:19: error: expected identifier or '('
+   38 | static const char /ct_trainer_event_name(ct_event ev) {
+      |                   ^
+build_gate/mutants/p41276/m0019_screen_trainer.c:450:18: error: use of undeclared identifier 'ct_trainer_event_name'
+  450 |                  ct_trainer_event_name((ct_event)i));
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0019_screen_trainer.c:661:55: error: use of undeclared identifier 'ct_trainer_event_name'
+  661 |     snprintf(line, sizeof line, "event %s method %s", ct_trainer_event_name(f->sel.event),
+      |                                                       ^~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+build_gate/mutants/p41276/m0024_screen_trainer.c:44:19: error: expected identifier or '('
+   44 | static const char /ct_trainer_method_name(ct_method m) {
+      |                   ^
+build_gate/mutants/p41276/m0024_screen_trainer.c:457:18: error: use of undeclared identifier 'ct_trainer_method_name'
+  457 |                  ct_trainer_method_name(methods[i]));
+      |                  ^~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0024_screen_trainer.c:662:14: error: use of undeclared identifier 'ct_trainer_method_name'
+  662 |              ct_trainer_method_name(f->sel.method));
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+build_gate/mutants/p41276/m0029_screen_trainer.c:50:19: error: expected identifier or '('
+   50 | static const char /ct_trainer_stage_name(ct_stage st) {
+      |                   ^
+build_gate/mutants/p41276/m0029_screen_trainer.c:462:18: error: use of undeclared identifier 'ct_trainer_stage_name'
+  462 |                  ct_trainer_stage_name(f->lists[i].stage));
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0029_screen_trainer.c:668:22: error: use of undeclared identifier 'ct_trainer_stage_name'
+  668 |                      ct_trainer_stage_name(f->lists[f->sel.list_id].stage), f->case_count);
+      |                      ^~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0029_screen_trainer.c:678:18: error: use of undeclared identifier 'ct_trainer_stage_name'
+  678 |                  ct_trainer_stage_name(f->lists[f->sel.list_id].stage), f->case_count);
+      |                  ^~~~~~~~~~~~~~~~~~~~~
+4 errors generated.
+build_gate/mutants/p41276/m0034_screen_trainer.c:56:56: error: expected ')'
+   56 | static void ct_trainer_memo_clear_case(ct_trainer_form /f) {
+      |                                                        ^
+build_gate/mutants/p41276/m0034_screen_trainer.c:56:39: note: to match this '('
+   56 | static void ct_trainer_memo_clear_case(ct_trainer_form /f) {
+      |                                       ^
+build_gate/mutants/p41276/m0034_screen_trainer.c:57:5: error: use of undeclared identifier 'f'
+   57 |     f->memo_saved_phoneme[0] = '\0';
+      |     ^
+build_gate/mutants/p41276/m0034_screen_trainer.c:58:5: error: use of undeclared identifier 'f'
+   58 |     f->memo_saved_image[0] = '\0';
+      |     ^
+build_gate/mutants/p41276/m0034_screen_trainer.c:59:5: error: use of undeclared identifier 'f'
+   59 |     f->memo_phoneme[0] = '\0';
+      |     ^
+build_gate/mutants/p41276/m0034_screen_trainer.c:60:5: error: use of undeclared identifier 'f'
+   60 |     f->memo_image[0] = '\0';
+      |     ^
+build_gate/mutants/p41276/m0034_screen_trainer.c:79:32: error: passing 'ct_trainer_form *' to parameter of incompatible type 'ct_trainer_form'; dereference with *
+   79 |     ct_trainer_memo_clear_case(f);
+      |                                ^
+      |                                *
+build_gate/mutants/p41276/m0034_screen_trainer.c:56:56: note: passing argument to parameter here
+   56 | static void ct_trainer_memo_clear_case(ct_trainer_form /f) {
+      |                                                        ^
+build_gate/mutants/p41276/m0034_screen_trainer.c:203:32: error: passing 'ct_trainer_form *' to parameter of incompatible type 'ct_trainer_form'; dereference with *
+  203 |     ct_trainer_memo_clear_case(f);
+      |                                ^
+      |                                *
+build_gate/mutants/p41276/m0034_screen_trainer.c:56:56: note: passing argument to parameter here
+   56 | static void ct_trainer_memo_clear_case(ct_trainer_form /f) {
+      |                                                        ^
+build_gate/mutants/p41276/m0034_screen_trainer.c:236:32: error: passing 'ct_trainer_form *' to parameter of incompatible type 'ct_trainer_form'; dereference with *
+  236 |     ct_trainer_memo_clear_case(f);
+      |                                ^
+      |                                *
+build_gate/mutants/p41276/m0034_screen_trainer.c:56:56: note: passing argument to parameter here
+   56 | static void ct_trainer_memo_clear_case(ct_trainer_form /f) {
+      |                                                        ^
+8 errors generated.
+build_gate/mutants/p41276/m0036_screen_trainer.c:57:5: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   57 |     f->memo_saved_phoneme[-1] = '\0';
+      |     ^                     ~~
+src\ui/ui.h:86:5: note: array 'memo_saved_phoneme' declared here
+   86 |     char memo_saved_phoneme[CT_MEMO_TEXT_MAX];
+      |     ^
+1 error generated.
+build_gate/mutants/p41276/m0038_screen_trainer.c:58:5: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   58 |     f->memo_saved_image[-1] = '\0';
+      |     ^                   ~~
+src\ui/ui.h:87:5: note: array 'memo_saved_image' declared here
+   87 |     char memo_saved_image[CT_MEMO_TEXT_MAX];
+      |     ^
+1 error generated.
+build_gate/mutants/p41276/m0040_screen_trainer.c:59:5: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   59 |     f->memo_phoneme[-1] = '\0';
+      |     ^               ~~
+src\ui/ui.h:88:5: note: array 'memo_phoneme' declared here
+   88 |     char memo_phoneme[CT_MEMO_TEXT_MAX];
+      |     ^
+1 error generated.
+build_gate/mutants/p41276/m0042_screen_trainer.c:60:5: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   60 |     f->memo_image[-1] = '\0';
+      |     ^             ~~
+src\ui/ui.h:89:5: note: array 'memo_image' declared here
+   89 |     char memo_image[CT_MEMO_TEXT_MAX];
+      |     ^
+1 error generated.
+build_gate/mutants/p41276/m0043_screen_trainer.c:63:57: error: expected ')'
+   63 | static void ct_trainer_memo_reload_rows(ct_trainer_form /f);
+      |                                                         ^
+build_gate/mutants/p41276/m0043_screen_trainer.c:63:40: note: to match this '('
+   63 | static void ct_trainer_memo_reload_rows(ct_trainer_form /f);
+      |                                        ^
+build_gate/mutants/p41276/m0043_screen_trainer.c:99:33: error: passing 'ct_trainer_form *' to parameter of incompatible type 'ct_trainer_form'; dereference with *
+   99 |     ct_trainer_memo_reload_rows(f);
+      |                                 ^
+      |                                 *
+build_gate/mutants/p41276/m0043_screen_trainer.c:63:57: note: passing argument to parameter here
+   63 | static void ct_trainer_memo_reload_rows(ct_trainer_form /f);
+      |                                                         ^
+build_gate/mutants/p41276/m0043_screen_trainer.c:190:13: error: conflicting types for 'ct_trainer_memo_reload_rows'
+  190 | static void ct_trainer_memo_reload_rows(ct_trainer_form *f) {
+      |             ^
+build_gate/mutants/p41276/m0043_screen_trainer.c:63:13: note: previous declaration is here
+   63 | static void ct_trainer_memo_reload_rows(ct_trainer_form /f);
+      |             ^
+build_gate/mutants/p41276/m0043_screen_trainer.c:296:33: error: passing 'ct_trainer_form *' to parameter of incompatible type 'ct_trainer_form'; dereference with *
+  296 |     ct_trainer_memo_reload_rows(f);
+      |                                 ^
+      |                                 *
+build_gate/mutants/p41276/m0043_screen_trainer.c:63:57: note: passing argument to parameter here
+   63 | static void ct_trainer_memo_reload_rows(ct_trainer_form /f);
+      |                                                         ^
+4 errors generated.
+build_gate/mutants/p41276/m0044_screen_trainer.c:65:52: error: expected ')'
+   65 | static void ct_trainer_form_reload(ct_trainer_form /f) {
+      |                                                    ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:65:35: note: to match this '('
+   65 | static void ct_trainer_form_reload(ct_trainer_form /f) {
+      |                                   ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:66:5: error: use of undeclared identifier 'f'
+   66 |     f->list_count = ct_selector_lists(f->sel.event, f->sel.method, f->lists, CT_TRAINER_LISTS_MAX);
+      |     ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:66:39: error: use of undeclared identifier 'f'
+   66 |     f->list_count = ct_selector_lists(f->sel.event, f->sel.method, f->lists, CT_TRAINER_LISTS_MAX);
+      |                                       ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:66:53: error: use of undeclared identifier 'f'
+   66 |     f->list_count = ct_selector_lists(f->sel.event, f->sel.method, f->lists, CT_TRAINER_LISTS_MAX);
+      |                                                     ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:66:68: error: use of undeclared identifier 'f'
+   66 |     f->list_count = ct_selector_lists(f->sel.event, f->sel.method, f->lists, CT_TRAINER_LISTS_MAX);
+      |                                                                    ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:67:5: error: use of undeclared identifier 'f'
+   67 |     f->case_count = 0;
+      |     ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:68:5: error: use of undeclared identifier 'f'
+   68 |     f->group_count = 0;
+      |     ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:70:9: error: use of undeclared identifier 'f'
+   70 |         f->group_counts[g] = 0;
+      |         ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:72:5: error: use of undeclared identifier 'f'
+   72 |     f->cell = CT_TRAINER_CELL_NONE;
+      |     ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:73:5: error: use of undeclared identifier 'f'
+   73 |     f->sel.case_index = -1;
+      |     ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:74:5: error: use of undeclared identifier 'f'
+   74 |     f->front[0] = '\0';
+      |     ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:75:5: error: use of undeclared identifier 'f'
+   75 |     f->alg_text[0] = '\0';
+      |     ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:76:5: error: use of undeclared identifier 'f'
+   76 |     f->pack_status = CT_TRAINER_NO_DETAIL;
+      |     ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:77:5: error: use of undeclared identifier 'f'
+   77 |     f->alg_status = CT_TRAINER_NO_DETAIL;
+      |     ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:78:5: error: use of undeclared identifier 'f'
+   78 |     f->memo_row_count = 0;
+      |     ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:79:32: error: use of undeclared identifier 'f'
+   79 |     ct_trainer_memo_clear_case(f);
+      |                                ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:80:9: error: use of undeclared identifier 'f'
+   80 |     if (f->list_count <= 0) {
+      |         ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:81:9: error: use of undeclared identifier 'f'
+   81 |         f->status = CT_REPO_ERR_DB;
+      |         ^
+build_gate/mutants/p41276/m0044_screen_trainer.c:84:9: error: use of undeclared identifier 'f'
+   84 |     if (f->sel.list_id >= f->list_count) {
+      |         ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite e2e_run_trainer_edge_generate exited -1073741795
+mutate: suite e2e_run_trainer_edge_generate exited -1073741795
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+build_gate/mutants/p41276/m0058_screen_trainer.c:74:5: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   74 |     f->front[-1] = '\0';
+      |     ^        ~~
+src\ui/ui.h:82:5: note: array 'front' declared here
+   82 |     char front[CT_TRAINER_FRONT_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_form_case_detail exited 1
+build_gate/mutants/p41276/m0060_screen_trainer.c:75:5: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   75 |     f->alg_text[-1] = '\0';
+      |     ^           ~~
+src\ui/ui.h:83:5: note: array 'alg_text' declared here
+   83 |     char alg_text[CT_TRAINER_ALG_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite e2e_run_trainer_edge_generate exited -1073741795
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+build_gate/mutants/p41276/m0087_screen_trainer.c:103:59: error: expected ')'
+  103 | static int ct_trainer_form_refresh_inputs(ct_trainer_form /f) {
+      |                                                           ^
+build_gate/mutants/p41276/m0087_screen_trainer.c:103:42: note: to match this '('
+  103 | static int ct_trainer_form_refresh_inputs(ct_trainer_form /f) {
+      |                                          ^
+build_gate/mutants/p41276/m0087_screen_trainer.c:104:32: error: use of undeclared identifier 'f'
+  104 |     if (ct_repo_settings_merge(f->db, &f->cfg) != 0) {
+      |                                ^
+build_gate/mutants/p41276/m0087_screen_trainer.c:104:40: error: use of undeclared identifier 'f'
+  104 |     if (ct_repo_settings_merge(f->db, &f->cfg) != 0) {
+      |                                        ^
+build_gate/mutants/p41276/m0087_screen_trainer.c:107:33: error: use of undeclared identifier 'f'
+  107 |     if (ct_selector_scheme_load(f->db, &f->scheme) != 0) {
+      |                                 ^
+build_gate/mutants/p41276/m0087_screen_trainer.c:107:41: error: use of undeclared identifier 'f'
+  107 |     if (ct_selector_scheme_load(f->db, &f->scheme) != 0) {
+      |                                         ^
+build_gate/mutants/p41276/m0087_screen_trainer.c:110:5: error: use of undeclared identifier 'f'
+  110 |     f->scheme_id = ct_letter_scheme_default_id(f->db);
+      |     ^
+build_gate/mutants/p41276/m0087_screen_trainer.c:110:48: error: use of undeclared identifier 'f'
+  110 |     f->scheme_id = ct_letter_scheme_default_id(f->db);
+      |                                                ^
+build_gate/mutants/p41276/m0087_screen_trainer.c:121:40: error: passing 'ct_trainer_form *' to parameter of incompatible type 'ct_trainer_form'; dereference with *
+  121 |     if (ct_trainer_form_refresh_inputs(f) != CT_REPO_OK) {
+      |                                        ^
+      |                                        *
+build_gate/mutants/p41276/m0087_screen_trainer.c:103:59: note: passing argument to parameter here
+  103 | static int ct_trainer_form_refresh_inputs(ct_trainer_form /f) {
+      |                                                           ^
+build_gate/mutants/p41276/m0087_screen_trainer.c:227:40: error: passing 'ct_trainer_form *' to parameter of incompatible type 'ct_trainer_form'; dereference with *
+  227 |     if (ct_trainer_form_refresh_inputs(f) != CT_REPO_OK) {
+      |                                        ^
+      |                                        *
+build_gate/mutants/p41276/m0087_screen_trainer.c:103:59: note: passing argument to parameter here
+  103 | static int ct_trainer_form_refresh_inputs(ct_trainer_form /f) {
+      |                                                           ^
+9 errors generated.
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+build_gate/mutants/p41276/m0094_screen_trainer.c:114:42: error: expected ')'
+  114 | int ct_trainer_form_open(ct_trainer_form /f, sqlite3 *db) {
+      |                                          ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:114:25: note: to match this '('
+  114 | int ct_trainer_form_open(ct_trainer_form /f, sqlite3 *db) {
+      |                         ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:114:5: error: conflicting types for 'ct_trainer_form_open'
+  114 | int ct_trainer_form_open(ct_trainer_form /f, sqlite3 *db) {
+      |     ^
+src\ui/ui.h:93:5: note: previous declaration is here
+   93 | int ct_trainer_form_open(ct_trainer_form *f, sqlite3 *db);
+      |     ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:115:9: error: use of undeclared identifier 'f'
+  115 |     if (f == NULL || db == NULL) {
+      |         ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:115:22: error: use of undeclared identifier 'db'
+  115 |     if (f == NULL || db == NULL) {
+      |                      ^~
+build_gate/mutants/p41276/m0094_screen_trainer.c:118:12: error: use of undeclared identifier 'f'
+  118 |     memset(f, 0, sizeof *f);
+      |            ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:118:26: error: use of undeclared identifier 'f'
+  118 |     memset(f, 0, sizeof *f);
+      |                          ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:119:5: error: use of undeclared identifier 'f'
+  119 |     f->db = db;
+      |     ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:119:13: error: use of undeclared identifier 'db'
+  119 |     f->db = db;
+      |             ^~
+build_gate/mutants/p41276/m0094_screen_trainer.c:120:5: error: use of undeclared identifier 'f'
+  120 |     f->cfg = ct_config_defaults();
+      |     ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:121:40: error: use of undeclared identifier 'f'
+  121 |     if (ct_trainer_form_refresh_inputs(f) != CT_REPO_OK) {
+      |                                        ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:122:9: error: use of undeclared identifier 'f'
+  122 |         f->status = CT_REPO_ERR_DB;
+      |         ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:125:5: error: use of undeclared identifier 'f'
+  125 |     f->sel.event = CT_EVENT_3X3;
+      |     ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:127:44: error: use of undeclared identifier 'f'
+  127 |     int method_count = ct_selector_methods(f->sel.event, methods, CT_TRAINER_LISTS_MAX);
+      |                                            ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:129:9: error: use of undeclared identifier 'f'
+  129 |         f->status = CT_REPO_ERR_DB;
+      |         ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:132:5: error: use of undeclared identifier 'f'
+  132 |     f->sel.method = methods[0];
+      |     ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:133:5: error: use of undeclared identifier 'f'
+  133 |     f->sel.list_id = 0;
+      |     ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:134:28: error: use of undeclared identifier 'f'
+  134 |     ct_trainer_form_reload(f);
+      |                            ^
+build_gate/mutants/p41276/m0094_screen_trainer.c:135:12: error: use of undeclared identifier 'f'
+  135 |     return f->status;
+      |            ^
+18 errors generated.
+build_gate/mutants/p41276/m0095_screen_trainer.c:114:54: error: expected ')'
+  114 | int ct_trainer_form_open(ct_trainer_form *f, sqlite3 /db) {
+      |                                                      ^
+build_gate/mutants/p41276/m0095_screen_trainer.c:114:25: note: to match this '('
+  114 | int ct_trainer_form_open(ct_trainer_form *f, sqlite3 /db) {
+      |                         ^
+build_gate/mutants/p41276/m0095_screen_trainer.c:114:5: error: conflicting types for 'ct_trainer_form_open'
+  114 | int ct_trainer_form_open(ct_trainer_form *f, sqlite3 /db) {
+      |     ^
+src\ui/ui.h:93:5: note: previous declaration is here
+   93 | int ct_trainer_form_open(ct_trainer_form *f, sqlite3 *db);
+      |     ^
+build_gate/mutants/p41276/m0095_screen_trainer.c:114:54: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  114 | int ct_trainer_form_open(ct_trainer_form *f, sqlite3 /db) {
+      |                                                      ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_gate/mutants/p41276/m0095_screen_trainer.c:115:22: error: use of undeclared identifier 'db'
+  115 |     if (f == NULL || db == NULL) {
+      |                      ^~
+build_gate/mutants/p41276/m0095_screen_trainer.c:119:13: error: use of undeclared identifier 'db'
+  119 |     f->db = db;
+      |             ^~
+5 errors generated.
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite trainer_form_open exited -1073741819
+mutate: suite e2e_run_trainer_edge_generate exited 1
+build_gate/mutants/p41276/m0101_screen_trainer.c:118:25: error: expected expression
+  118 |     memset(f, 0, sizeof /f);
+      |                         ^
+1 error generated.
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+build_gate/mutants/p41276/m0107_screen_trainer.c:132:21: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  132 |     f->sel.method = methods[-1];
+      |                     ^       ~~
+build_gate/mutants/p41276/m0107_screen_trainer.c:126:5: note: array 'methods' declared here
+  126 |     ct_method methods[CT_TRAINER_LISTS_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_form_open exited 1
+mutate: suite trainer_form_open exited 1
+build_gate/mutants/p41276/m0110_screen_trainer.c:138:50: error: expected ')'
+  138 | int ct_trainer_form_select_event(ct_trainer_form /f, ct_event ev) {
+      |                                                  ^
+build_gate/mutants/p41276/m0110_screen_trainer.c:138:33: note: to match this '('
+  138 | int ct_trainer_form_select_event(ct_trainer_form /f, ct_event ev) {
+      |                                 ^
+build_gate/mutants/p41276/m0110_screen_trainer.c:138:5: error: conflicting types for 'ct_trainer_form_select_event'
+  138 | int ct_trainer_form_select_event(ct_trainer_form /f, ct_event ev) {
+      |     ^
+src\ui/ui.h:94:5: note: previous declaration is here
+   94 | int ct_trainer_form_select_event(ct_trainer_form *f, ct_event ev);
+      |     ^
+build_gate/mutants/p41276/m0110_screen_trainer.c:139:9: error: use of undeclared identifier 'f'
+  139 |     if (f == NULL || f->db == NULL) {
+      |         ^
+build_gate/mutants/p41276/m0110_screen_trainer.c:139:22: error: use of undeclared identifier 'f'
+  139 |     if (f == NULL || f->db == NULL) {
+      |                      ^
+build_gate/mutants/p41276/m0110_screen_trainer.c:143:44: error: use of undeclared identifier 'ev'
+  143 |     int method_count = ct_selector_methods(ev, methods, CT_TRAINER_LISTS_MAX);
+      |                                            ^~
+build_gate/mutants/p41276/m0110_screen_trainer.c:145:9: error: use of undeclared identifier 'f'
+  145 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p41276/m0110_screen_trainer.c:148:5: error: use of undeclared identifier 'f'
+  148 |     f->sel.event = ev;
+      |     ^
+build_gate/mutants/p41276/m0110_screen_trainer.c:148:20: error: use of undeclared identifier 'ev'
+  148 |     f->sel.event = ev;
+      |                    ^~
+build_gate/mutants/p41276/m0110_screen_trainer.c:149:5: error: use of undeclared identifier 'f'
+  149 |     f->sel.method = methods[0];
+      |     ^
+build_gate/mutants/p41276/m0110_screen_trainer.c:150:5: error: use of undeclared identifier 'f'
+  150 |     f->sel.list_id = 0;
+      |     ^
+build_gate/mutants/p41276/m0110_screen_trainer.c:151:28: error: use of undeclared identifier 'f'
+  151 |     ct_trainer_form_reload(f);
+      |                            ^
+build_gate/mutants/p41276/m0110_screen_trainer.c:152:12: error: use of undeclared identifier 'f'
+  152 |     return f->status;
+      |            ^
+12 errors generated.
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+build_gate/mutants/p41276/m0118_screen_trainer.c:149:21: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  149 |     f->sel.method = methods[-1];
+      |                     ^       ~~
+build_gate/mutants/p41276/m0118_screen_trainer.c:142:5: note: array 'methods' declared here
+  142 |     ct_method methods[CT_TRAINER_LISTS_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+build_gate/mutants/p41276/m0121_screen_trainer.c:155:51: error: expected ')'
+  155 | int ct_trainer_form_select_method(ct_trainer_form /f, ct_method m) {
+      |                                                   ^
+build_gate/mutants/p41276/m0121_screen_trainer.c:155:34: note: to match this '('
+  155 | int ct_trainer_form_select_method(ct_trainer_form /f, ct_method m) {
+      |                                  ^
+build_gate/mutants/p41276/m0121_screen_trainer.c:155:5: error: conflicting types for 'ct_trainer_form_select_method'
+  155 | int ct_trainer_form_select_method(ct_trainer_form /f, ct_method m) {
+      |     ^
+src\ui/ui.h:95:5: note: previous declaration is here
+   95 | int ct_trainer_form_select_method(ct_trainer_form *f, ct_method m);
+      |     ^
+build_gate/mutants/p41276/m0121_screen_trainer.c:156:9: error: use of undeclared identifier 'f'
+  156 |     if (f == NULL || f->db == NULL) {
+      |         ^
+build_gate/mutants/p41276/m0121_screen_trainer.c:156:22: error: use of undeclared identifier 'f'
+  156 |     if (f == NULL || f->db == NULL) {
+      |                      ^
+build_gate/mutants/p41276/m0121_screen_trainer.c:159:27: error: use of undeclared identifier 'f'
+  159 |     if (ct_selector_lists(f->sel.event, m, NULL, 0) <= 0) {
+      |                           ^
+build_gate/mutants/p41276/m0121_screen_trainer.c:159:41: error: use of undeclared identifier 'm'
+  159 |     if (ct_selector_lists(f->sel.event, m, NULL, 0) <= 0) {
+      |                                         ^
+build_gate/mutants/p41276/m0121_screen_trainer.c:160:9: error: use of undeclared identifier 'f'
+  160 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p41276/m0121_screen_trainer.c:163:5: error: use of undeclared identifier 'f'
+  163 |     f->sel.method = m;
+      |     ^
+build_gate/mutants/p41276/m0121_screen_trainer.c:163:21: error: use of undeclared identifier 'm'
+  163 |     f->sel.method = m;
+      |                     ^
+build_gate/mutants/p41276/m0121_screen_trainer.c:164:5: error: use of undeclared identifier 'f'
+  164 |     f->sel.list_id = 0;
+      |     ^
+build_gate/mutants/p41276/m0121_screen_trainer.c:165:28: error: use of undeclared identifier 'f'
+  165 |     ct_trainer_form_reload(f);
+      |                            ^
+build_gate/mutants/p41276/m0121_screen_trainer.c:166:12: error: use of undeclared identifier 'f'
+  166 |     return f->status;
+      |            ^
+12 errors generated.
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+build_gate/mutants/p41276/m0132_screen_trainer.c:169:49: error: expected ')'
+  169 | int ct_trainer_form_select_list(ct_trainer_form /f, int list_id) {
+      |                                                 ^
+build_gate/mutants/p41276/m0132_screen_trainer.c:169:32: note: to match this '('
+  169 | int ct_trainer_form_select_list(ct_trainer_form /f, int list_id) {
+      |                                ^
+build_gate/mutants/p41276/m0132_screen_trainer.c:169:5: error: conflicting types for 'ct_trainer_form_select_list'
+  169 | int ct_trainer_form_select_list(ct_trainer_form /f, int list_id) {
+      |     ^
+src\ui/ui.h:96:5: note: previous declaration is here
+   96 | int ct_trainer_form_select_list(ct_trainer_form *f, int list_id);
+      |     ^
+build_gate/mutants/p41276/m0132_screen_trainer.c:170:9: error: use of undeclared identifier 'f'
+  170 |     if (f == NULL || f->db == NULL) {
+      |         ^
+build_gate/mutants/p41276/m0132_screen_trainer.c:170:22: error: use of undeclared identifier 'f'
+  170 |     if (f == NULL || f->db == NULL) {
+      |                      ^
+build_gate/mutants/p41276/m0132_screen_trainer.c:173:9: error: use of undeclared identifier 'list_id'
+  173 |     if (list_id < 0 || list_id >= f->list_count) {
+      |         ^~~~~~~
+build_gate/mutants/p41276/m0132_screen_trainer.c:173:24: error: use of undeclared identifier 'list_id'
+  173 |     if (list_id < 0 || list_id >= f->list_count) {
+      |                        ^~~~~~~
+build_gate/mutants/p41276/m0132_screen_trainer.c:173:35: error: use of undeclared identifier 'f'
+  173 |     if (list_id < 0 || list_id >= f->list_count) {
+      |                                   ^
+build_gate/mutants/p41276/m0132_screen_trainer.c:174:9: error: use of undeclared identifier 'f'
+  174 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p41276/m0132_screen_trainer.c:177:5: error: use of undeclared identifier 'f'
+  177 |     f->sel.list_id = list_id;
+      |     ^
+build_gate/mutants/p41276/m0132_screen_trainer.c:177:22: error: use of undeclared identifier 'list_id'
+  177 |     f->sel.list_id = list_id;
+      |                      ^~~~~~~
+build_gate/mutants/p41276/m0132_screen_trainer.c:178:28: error: use of undeclared identifier 'f'
+  178 |     ct_trainer_form_reload(f);
+      |                            ^
+build_gate/mutants/p41276/m0132_screen_trainer.c:179:12: error: use of undeclared identifier 'f'
+  179 |     return f->status;
+      |            ^
+12 errors generated.
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+build_gate/mutants/p41276/m0141_screen_trainer.c:182:57: error: expected ')'
+  182 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |                                                         ^
+build_gate/mutants/p41276/m0141_screen_trainer.c:182:34: note: to match this '('
+  182 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |                                  ^
+build_gate/mutants/p41276/m0141_screen_trainer.c:183:9: error: use of undeclared identifier 'f'
+  183 |     if (f->sel.list_id < 0 || f->sel.list_id >= f->list_count) {
+      |         ^
+build_gate/mutants/p41276/m0141_screen_trainer.c:183:31: error: use of undeclared identifier 'f'
+  183 |     if (f->sel.list_id < 0 || f->sel.list_id >= f->list_count) {
+      |                               ^
+build_gate/mutants/p41276/m0141_screen_trainer.c:183:49: error: use of undeclared identifier 'f'
+  183 |     if (f->sel.list_id < 0 || f->sel.list_id >= f->list_count) {
+      |                                                 ^
+build_gate/mutants/p41276/m0141_screen_trainer.c:186:6: error: use of undeclared identifier 'source'
+  186 |     *source = f->lists[f->sel.list_id].source;
+      |      ^~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:186:15: error: use of undeclared identifier 'f'
+  186 |     *source = f->lists[f->sel.list_id].source;
+      |               ^
+build_gate/mutants/p41276/m0141_screen_trainer.c:186:24: error: use of undeclared identifier 'f'
+  186 |     *source = f->lists[f->sel.list_id].source;
+      |                        ^
+build_gate/mutants/p41276/m0141_screen_trainer.c:193:52: error: too many arguments to function call, expected 1, have 2
+  193 |     if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |                          ~~~~~~~~~~~~~~~~~~~~~~    ^~~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:182:12: note: 'ct_trainer_list_source' declared here
+  182 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |            ^                      ~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:205:52: error: too many arguments to function call, expected 1, have 2
+  205 |     if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |                          ~~~~~~~~~~~~~~~~~~~~~~    ^~~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:182:12: note: 'ct_trainer_list_source' declared here
+  182 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |            ^                      ~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:238:35: error: too many arguments to function call, expected 1, have 2
+  238 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~    ^~~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:182:12: note: 'ct_trainer_list_source' declared here
+  182 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |            ^                      ~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:284:35: error: too many arguments to function call, expected 1, have 2
+  284 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~    ^~~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:182:12: note: 'ct_trainer_list_source' declared here
+  182 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |            ^                      ~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:326:35: error: too many arguments to function call, expected 1, have 2
+  326 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~    ^~~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:182:12: note: 'ct_trainer_list_source' declared here
+  182 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |            ^                      ~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:360:35: error: too many arguments to function call, expected 1, have 2
+  360 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~    ^~~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:182:12: note: 'ct_trainer_list_source' declared here
+  182 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |            ^                      ~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:378:35: error: too many arguments to function call, expected 1, have 2
+  378 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~    ^~~~~~~
+build_gate/mutants/p41276/m0141_screen_trainer.c:182:12: note: 'ct_trainer_list_source' declared here
+  182 | static int ct_trainer_list_source(const ct_trainer_form /f, ct_selector_source *source) {
+      |            ^                      ~~~~~~~~~~~~~~~~~~~~~
+14 errors generated.
+build_gate/mutants/p41276/m0142_screen_trainer.c:182:80: error: expected ')'
+  182 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                                                                ^
+build_gate/mutants/p41276/m0142_screen_trainer.c:182:34: note: to match this '('
+  182 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                  ^
+build_gate/mutants/p41276/m0142_screen_trainer.c:186:6: error: use of undeclared identifier 'source'
+  186 |     *source = f->lists[f->sel.list_id].source;
+      |      ^~~~~~
+build_gate/mutants/p41276/m0142_screen_trainer.c:193:52: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  193 |     if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |                                                    ^~~~~~~
+build_gate/mutants/p41276/m0142_screen_trainer.c:182:80: note: passing argument to parameter here
+  182 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                                                                ^
+build_gate/mutants/p41276/m0142_screen_trainer.c:205:52: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  205 |     if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |                                                    ^~~~~~~
+build_gate/mutants/p41276/m0142_screen_trainer.c:182:80: note: passing argument to parameter here
+  182 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                                                                ^
+build_gate/mutants/p41276/m0142_screen_trainer.c:238:35: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  238 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK) {
+      |                                   ^~~~~~~
+build_gate/mutants/p41276/m0142_screen_trainer.c:182:80: note: passing argument to parameter here
+  182 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                                                                ^
+build_gate/mutants/p41276/m0142_screen_trainer.c:284:35: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  284 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                   ^~~~~~~
+build_gate/mutants/p41276/m0142_screen_trainer.c:182:80: note: passing argument to parameter here
+  182 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                                                                ^
+build_gate/mutants/p41276/m0142_screen_trainer.c:326:35: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  326 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                   ^~~~~~~
+build_gate/mutants/p41276/m0142_screen_trainer.c:182:80: note: passing argument to parameter here
+  182 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                                                                ^
+build_gate/mutants/p41276/m0142_screen_trainer.c:360:35: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  360 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                   ^~~~~~~
+build_gate/mutants/p41276/m0142_screen_trainer.c:182:80: note: passing argument to parameter here
+  182 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                                                                ^
+build_gate/mutants/p41276/m0142_screen_trainer.c:378:35: error: incompatible pointer to integer conversion passing 'ct_selector_source *' (aka 'enum ct_selector_source *') to parameter of type 'ct_selector_source' (aka 'enum ct_selector_source'); remove & [-Wint-conversion]
+  378 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                   ^~~~~~~
+build_gate/mutants/p41276/m0142_screen_trainer.c:182:80: note: passing argument to parameter here
+  182 | static int ct_trainer_list_source(const ct_trainer_form *f, ct_selector_source /source) {
+      |                                                                                ^
+9 errors generated.
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited 1
+build_gate/mutants/p41276/m0148_screen_trainer.c:186:5: error: expected expression
+  186 |     /source = f->lists[f->sel.list_id].source;
+      |     ^
+1 error generated.
+build_gate/mutants/p41276/m0149_screen_trainer.c:190:57: error: expected ')'
+  190 | static void ct_trainer_memo_reload_rows(ct_trainer_form /f) {
+      |                                                         ^
+build_gate/mutants/p41276/m0149_screen_trainer.c:190:40: note: to match this '('
+  190 | static void ct_trainer_memo_reload_rows(ct_trainer_form /f) {
+      |                                        ^
+build_gate/mutants/p41276/m0149_screen_trainer.c:190:13: error: conflicting types for 'ct_trainer_memo_reload_rows'
+  190 | static void ct_trainer_memo_reload_rows(ct_trainer_form /f) {
+      |             ^
+build_gate/mutants/p41276/m0149_screen_trainer.c:63:13: note: previous declaration is here
+   63 | static void ct_trainer_memo_reload_rows(ct_trainer_form *f);
+      |             ^
+build_gate/mutants/p41276/m0149_screen_trainer.c:191:5: error: use of undeclared identifier 'f'
+  191 |     f->memo_row_count = 0;
+      |     ^
+build_gate/mutants/p41276/m0149_screen_trainer.c:193:9: error: use of undeclared identifier 'f'
+  193 |     if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |         ^
+build_gate/mutants/p41276/m0149_screen_trainer.c:193:49: error: use of undeclared identifier 'f'
+  193 |     if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |                                                 ^
+build_gate/mutants/p41276/m0149_screen_trainer.c:198:22: error: use of undeclared identifier 'f'
+  198 |         ct_memo_list(f->db, f->lists[f->sel.list_id].orbit, f->memo_rows, CT_TRAINER_MEMO_ROWS_MAX);
+      |                      ^
+build_gate/mutants/p41276/m0149_screen_trainer.c:198:29: error: use of undeclared identifier 'f'
+  198 |         ct_memo_list(f->db, f->lists[f->sel.list_id].orbit, f->memo_rows, CT_TRAINER_MEMO_ROWS_MAX);
+      |                             ^
+build_gate/mutants/p41276/m0149_screen_trainer.c:198:38: error: use of undeclared identifier 'f'
+  198 |         ct_memo_list(f->db, f->lists[f->sel.list_id].orbit, f->memo_rows, CT_TRAINER_MEMO_ROWS_MAX);
+      |                                      ^
+build_gate/mutants/p41276/m0149_screen_trainer.c:198:61: error: use of undeclared identifier 'f'
+  198 |         ct_memo_list(f->db, f->lists[f->sel.list_id].orbit, f->memo_rows, CT_TRAINER_MEMO_ROWS_MAX);
+      |                                                             ^
+build_gate/mutants/p41276/m0149_screen_trainer.c:199:5: error: use of undeclared identifier 'f'
+  199 |     f->memo_row_count = n > 0 ? n : 0;
+      |     ^
+10 errors generated.
+mutate: suite e2e_run_trainer_memo_panel exited 1
+build_gate/mutants/p41276/m0153_screen_trainer.c:193:23: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  193 |     if (f->db == NULL && ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |         ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p41276/m0153_screen_trainer.c:193:23: note: place parentheses around the '&&' expression to silence this warning
+  193 |     if (f->db == NULL && ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |                       ^
+      |         (                                                                )
+build_gate/mutants/p41276/m0153_screen_trainer.c:193:9: error: variable 'source' is used uninitialized whenever '&&' condition is false [-Werror,-Wsometimes-uninitialized]
+  193 |     if (f->db == NULL && ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |         ^~~~~~~~~~~~~
+build_gate/mutants/p41276/m0153_screen_trainer.c:194:9: note: uninitialized use occurs here
+  194 |         source != CT_SELECTOR_CHART) {
+      |         ^~~~~~
+build_gate/mutants/p41276/m0153_screen_trainer.c:193:9: note: remove the '&&' if its condition is always true
+  193 |     if (f->db == NULL && ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |         ^~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0153_screen_trainer.c:192:5: note: variable 'source' is declared here
+  192 |     ct_selector_source source;
+      |     ^
+2 errors generated.
+mutate: suite e2e_run_trainer_memo_panel exited 1
+build_gate/mutants/p41276/m0155_screen_trainer.c:193:75: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  193 |     if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK &&
+      |                       ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  194 |         source != CT_SELECTOR_CHART) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0155_screen_trainer.c:193:75: note: place parentheses around the '&&' expression to silence this warning
+  193 |     if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK &&
+      |                                                                           ^
+      |                          (
+  194 |         source != CT_SELECTOR_CHART) {
+      |                                    
+      |                                    )
+1 error generated.
+mutate: suite e2e_run_trainer_memo_panel exited 1
+build_gate/mutants/p41276/m0162_screen_trainer.c:202:55: error: expected ')'
+  202 | static void ct_trainer_memo_load_case(ct_trainer_form /f) {
+      |                                                       ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:202:38: note: to match this '('
+  202 | static void ct_trainer_memo_load_case(ct_trainer_form /f) {
+      |                                      ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:203:32: error: use of undeclared identifier 'f'
+  203 |     ct_trainer_memo_clear_case(f);
+      |                                ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:205:9: error: use of undeclared identifier 'f'
+  205 |     if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |         ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:205:49: error: use of undeclared identifier 'f'
+  205 |     if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |                                                 ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:210:21: error: use of undeclared identifier 'f'
+  210 |     if (ct_memo_get(f->db, f->lists[f->sel.list_id].orbit, f->front, &row) != CT_REPO_OK) {
+      |                     ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:210:28: error: use of undeclared identifier 'f'
+  210 |     if (ct_memo_get(f->db, f->lists[f->sel.list_id].orbit, f->front, &row) != CT_REPO_OK) {
+      |                            ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:210:37: error: use of undeclared identifier 'f'
+  210 |     if (ct_memo_get(f->db, f->lists[f->sel.list_id].orbit, f->front, &row) != CT_REPO_OK) {
+      |                                     ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:210:60: error: use of undeclared identifier 'f'
+  210 |     if (ct_memo_get(f->db, f->lists[f->sel.list_id].orbit, f->front, &row) != CT_REPO_OK) {
+      |                                                            ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:213:14: error: use of undeclared identifier 'f'
+  213 |     snprintf(f->memo_saved_phoneme, sizeof f->memo_saved_phoneme, "%s", row.phoneme);
+      |              ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:213:44: error: use of undeclared identifier 'f'
+  213 |     snprintf(f->memo_saved_phoneme, sizeof f->memo_saved_phoneme, "%s", row.phoneme);
+      |                                            ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:214:14: error: use of undeclared identifier 'f'
+  214 |     snprintf(f->memo_saved_image, sizeof f->memo_saved_image, "%s", row.image);
+      |              ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:214:42: error: use of undeclared identifier 'f'
+  214 |     snprintf(f->memo_saved_image, sizeof f->memo_saved_image, "%s", row.image);
+      |                                          ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:215:14: error: use of undeclared identifier 'f'
+  215 |     snprintf(f->memo_phoneme, sizeof f->memo_phoneme, "%s", row.phoneme);
+      |              ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:215:38: error: use of undeclared identifier 'f'
+  215 |     snprintf(f->memo_phoneme, sizeof f->memo_phoneme, "%s", row.phoneme);
+      |                                      ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:216:14: error: use of undeclared identifier 'f'
+  216 |     snprintf(f->memo_image, sizeof f->memo_image, "%s", row.image);
+      |              ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:216:36: error: use of undeclared identifier 'f'
+  216 |     snprintf(f->memo_image, sizeof f->memo_image, "%s", row.image);
+      |                                    ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:274:31: error: passing 'ct_trainer_form *' to parameter of incompatible type 'ct_trainer_form'; dereference with *
+  274 |     ct_trainer_memo_load_case(f);
+      |                               ^
+      |                               *
+build_gate/mutants/p41276/m0162_screen_trainer.c:202:55: note: passing argument to parameter here
+  202 | static void ct_trainer_memo_load_case(ct_trainer_form /f) {
+      |                                                       ^
+build_gate/mutants/p41276/m0162_screen_trainer.c:295:31: error: passing 'ct_trainer_form *' to parameter of incompatible type 'ct_trainer_form'; dereference with *
+  295 |     ct_trainer_memo_load_case(f);
+      |                               ^
+      |                               *
+build_gate/mutants/p41276/m0162_screen_trainer.c:202:55: note: passing argument to parameter here
+  202 | static void ct_trainer_memo_load_case(ct_trainer_form /f) {
+      |                                                       ^
+18 errors generated.
+mutate: suite e2e_run_trainer_memo_panel exited 1
+build_gate/mutants/p41276/m0164_screen_trainer.c:205:23: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  205 |     if (f->db == NULL && ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |         ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p41276/m0164_screen_trainer.c:205:23: note: place parentheses around the '&&' expression to silence this warning
+  205 |     if (f->db == NULL && ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |                       ^
+      |         (                                                                )
+build_gate/mutants/p41276/m0164_screen_trainer.c:205:9: error: variable 'source' is used uninitialized whenever '&&' condition is false [-Werror,-Wsometimes-uninitialized]
+  205 |     if (f->db == NULL && ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |         ^~~~~~~~~~~~~
+build_gate/mutants/p41276/m0164_screen_trainer.c:206:9: note: uninitialized use occurs here
+  206 |         source != CT_SELECTOR_CHART) {
+      |         ^~~~~~
+build_gate/mutants/p41276/m0164_screen_trainer.c:205:9: note: remove the '&&' if its condition is always true
+  205 |     if (f->db == NULL && ct_trainer_list_source(f, &source) != CT_REPO_OK ||
+      |         ^~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0164_screen_trainer.c:204:5: note: variable 'source' is declared here
+  204 |     ct_selector_source source;
+      |     ^
+2 errors generated.
+mutate: suite e2e_run_trainer_memo_panel exited 1
+build_gate/mutants/p41276/m0166_screen_trainer.c:205:75: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  205 |     if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK &&
+      |                       ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  206 |         source != CT_SELECTOR_CHART) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0166_screen_trainer.c:205:75: note: place parentheses around the '&&' expression to silence this warning
+  205 |     if (f->db == NULL || ct_trainer_list_source(f, &source) != CT_REPO_OK &&
+      |                                                                           ^
+      |                          (
+  206 |         source != CT_SELECTOR_CHART) {
+      |                                    
+      |                                    )
+1 error generated.
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited 1
+build_gate/mutants/p41276/m0169_screen_trainer.c:219:49: error: expected ')'
+  219 | int ct_trainer_form_select_case(ct_trainer_form /f, int index) {
+      |                                                 ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:219:32: note: to match this '('
+  219 | int ct_trainer_form_select_case(ct_trainer_form /f, int index) {
+      |                                ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:219:5: error: conflicting types for 'ct_trainer_form_select_case'
+  219 | int ct_trainer_form_select_case(ct_trainer_form /f, int index) {
+      |     ^
+src\ui/ui.h:97:5: note: previous declaration is here
+   97 | int ct_trainer_form_select_case(ct_trainer_form *f, int index);
+      |     ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:220:9: error: use of undeclared identifier 'f'
+  220 |     if (f == NULL || f->db == NULL) {
+      |         ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:220:22: error: use of undeclared identifier 'f'
+  220 |     if (f == NULL || f->db == NULL) {
+      |                      ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:223:9: error: use of undeclared identifier 'index'
+  223 |     if (index < 0 || index >= f->case_count) {
+      |         ^~~~~
+build_gate/mutants/p41276/m0169_screen_trainer.c:223:22: error: use of undeclared identifier 'index'
+  223 |     if (index < 0 || index >= f->case_count) {
+      |                      ^~~~~
+build_gate/mutants/p41276/m0169_screen_trainer.c:223:31: error: use of undeclared identifier 'f'
+  223 |     if (index < 0 || index >= f->case_count) {
+      |                               ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:224:9: error: use of undeclared identifier 'f'
+  224 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:227:40: error: use of undeclared identifier 'f'
+  227 |     if (ct_trainer_form_refresh_inputs(f) != CT_REPO_OK) {
+      |                                        ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:228:9: error: use of undeclared identifier 'f'
+  228 |         f->status = CT_REPO_ERR_DB;
+      |         ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:231:5: error: use of undeclared identifier 'f'
+  231 |     f->sel.case_index = index;
+      |     ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:231:25: error: use of undeclared identifier 'index'
+  231 |     f->sel.case_index = index;
+      |                         ^~~~~
+build_gate/mutants/p41276/m0169_screen_trainer.c:232:5: error: use of undeclared identifier 'f'
+  232 |     f->front[0] = '\0';
+      |     ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:233:5: error: use of undeclared identifier 'f'
+  233 |     f->alg_text[0] = '\0';
+      |     ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:234:5: error: use of undeclared identifier 'f'
+  234 |     f->pack_status = CT_TRAINER_NO_DETAIL;
+      |     ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:235:5: error: use of undeclared identifier 'f'
+  235 |     f->alg_status = CT_TRAINER_NO_DETAIL;
+      |     ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:236:32: error: use of undeclared identifier 'f'
+  236 |     ct_trainer_memo_clear_case(f);
+      |                                ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:238:32: error: use of undeclared identifier 'f'
+  238 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK) {
+      |                                ^
+build_gate/mutants/p41276/m0169_screen_trainer.c:239:9: error: use of undeclared identifier 'f'
+  239 |         f->status = CT_REPO_ERR_DB;
+      |         ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+build_gate/mutants/p41276/m0180_screen_trainer.c:232:5: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  232 |     f->front[-1] = '\0';
+      |     ^        ~~
+src\ui/ui.h:82:5: note: array 'front' declared here
+   82 |     char front[CT_TRAINER_FRONT_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_form_select_refreshes_inputs exited 1
+build_gate/mutants/p41276/m0182_screen_trainer.c:233:5: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  233 |     f->alg_text[-1] = '\0';
+      |     ^           ~~
+src\ui/ui.h:83:5: note: array 'alg_text' declared here
+   83 |     char alg_text[CT_TRAINER_ALG_MAX];
+      |     ^
+1 error generated.
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite trainer_form_case_detail exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+build_gate/mutants/p41276/m0195_screen_trainer.c:259:9: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  259 |         f->front[-1] = '\0';
+      |         ^        ~~
+src\ui/ui.h:82:5: note: array 'front' declared here
+   82 |     char front[CT_TRAINER_FRONT_MAX];
+      |     ^
+1 error generated.
+mutate: suite e2e_run_trainer_edge_generate exited 1
+mutate: suite e2e_run_trainer_edge_generate exited 1
+build_gate/mutants/p41276/m0198_screen_trainer.c:279:47: error: expected ')'
+  279 | int ct_trainer_form_memo_save(ct_trainer_form /f) {
+      |                                               ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:279:30: note: to match this '('
+  279 | int ct_trainer_form_memo_save(ct_trainer_form /f) {
+      |                              ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:279:5: error: conflicting types for 'ct_trainer_form_memo_save'
+  279 | int ct_trainer_form_memo_save(ct_trainer_form /f) {
+      |     ^
+src\ui/ui.h:103:5: note: previous declaration is here
+  103 | int ct_trainer_form_memo_save(ct_trainer_form *f);
+      |     ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:280:9: error: use of undeclared identifier 'f'
+  280 |     if (f == NULL || f->db == NULL) {
+      |         ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:280:22: error: use of undeclared identifier 'f'
+  280 |     if (f == NULL || f->db == NULL) {
+      |                      ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:284:32: error: use of undeclared identifier 'f'
+  284 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:285:9: error: use of undeclared identifier 'f'
+  285 |         f->sel.case_index < 0 || f->front[0] == '\0') {
+      |         ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:285:34: error: use of undeclared identifier 'f'
+  285 |         f->sel.case_index < 0 || f->front[0] == '\0') {
+      |                                  ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:286:9: error: use of undeclared identifier 'f'
+  286 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:289:26: error: use of undeclared identifier 'f'
+  289 |     int rc = ct_memo_set(f->db, f->lists[f->sel.list_id].orbit, f->front, f->memo_phoneme,
+      |                          ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:289:33: error: use of undeclared identifier 'f'
+  289 |     int rc = ct_memo_set(f->db, f->lists[f->sel.list_id].orbit, f->front, f->memo_phoneme,
+      |                                 ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:289:42: error: use of undeclared identifier 'f'
+  289 |     int rc = ct_memo_set(f->db, f->lists[f->sel.list_id].orbit, f->front, f->memo_phoneme,
+      |                                          ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:289:65: error: use of undeclared identifier 'f'
+  289 |     int rc = ct_memo_set(f->db, f->lists[f->sel.list_id].orbit, f->front, f->memo_phoneme,
+      |                                                                 ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:289:75: error: use of undeclared identifier 'f'
+  289 |     int rc = ct_memo_set(f->db, f->lists[f->sel.list_id].orbit, f->front, f->memo_phoneme,
+      |                                                                           ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:290:26: error: use of undeclared identifier 'f'
+  290 |                          f->memo_image);
+      |                          ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:291:5: error: use of undeclared identifier 'f'
+  291 |     f->status = rc;
+      |     ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:295:31: error: use of undeclared identifier 'f'
+  295 |     ct_trainer_memo_load_case(f);
+      |                               ^
+build_gate/mutants/p41276/m0198_screen_trainer.c:296:33: error: use of undeclared identifier 'f'
+  296 |     ct_trainer_memo_reload_rows(f);
+      |                                 ^
+17 errors generated.
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited 1
+build_gate/mutants/p41276/m0203_screen_trainer.c:284:58: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  284 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p41276/m0203_screen_trainer.c:284:58: note: place parentheses around the '&&' expression to silence this warning
+  284 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |                                                          ^
+      |         (                                                                              )
+1 error generated.
+mutate: suite e2e_run_trainer_memo_panel exited 1
+build_gate/mutants/p41276/m0205_screen_trainer.c:284:89: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  284 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                          ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  285 |         f->sel.case_index < 0 || f->front[0] == '\0') {
+      |         ~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0205_screen_trainer.c:284:89: note: place parentheses around the '&&' expression to silence this warning
+  284 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                                                         ^
+      |                                                             (
+  285 |         f->sel.case_index < 0 || f->front[0] == '\0') {
+      |                              )
+1 error generated.
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited 1
+build_gate/mutants/p41276/m0209_screen_trainer.c:285:31: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  284 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                                                                         ~~
+  285 |         f->sel.case_index < 0 && f->front[0] == '\0') {
+      |         ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0209_screen_trainer.c:285:31: note: place parentheses around the '&&' expression to silence this warning
+  285 |         f->sel.case_index < 0 && f->front[0] == '\0') {
+      |                               ^                     
+      |         (                                           )
+1 error generated.
+build_gate/mutants/p41276/m0211_screen_trainer.c:285:34: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  285 |         f->sel.case_index < 0 || f->front[-1] == '\0') {
+      |                                  ^        ~~
+src\ui/ui.h:82:5: note: array 'front' declared here
+   82 |     char front[CT_TRAINER_FRONT_MAX];
+      |     ^
+1 error generated.
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited 1
+build_gate/mutants/p41276/m0214_screen_trainer.c:300:24: error: expected identifier or '('
+  300 | const ct_memo_list_row /ct_trainer_form_memo_find(const ct_trainer_form *f, const char *pair) {
+      |                        ^
+1 error generated.
+build_gate/mutants/p41276/m0215_screen_trainer.c:300:73: error: expected ')'
+  300 | const ct_memo_list_row *ct_trainer_form_memo_find(const ct_trainer_form /f, const char *pair) {
+      |                                                                         ^
+build_gate/mutants/p41276/m0215_screen_trainer.c:300:50: note: to match this '('
+  300 | const ct_memo_list_row *ct_trainer_form_memo_find(const ct_trainer_form /f, const char *pair) {
+      |                                                  ^
+build_gate/mutants/p41276/m0215_screen_trainer.c:300:25: error: conflicting types for 'ct_trainer_form_memo_find'
+  300 | const ct_memo_list_row *ct_trainer_form_memo_find(const ct_trainer_form /f, const char *pair) {
+      |                         ^
+src\ui/ui.h:104:25: note: previous declaration is here
+  104 | const ct_memo_list_row *ct_trainer_form_memo_find(const ct_trainer_form *f, const char *pair);
+      |                         ^
+build_gate/mutants/p41276/m0215_screen_trainer.c:301:9: error: use of undeclared identifier 'f'
+  301 |     if (f == NULL || pair == NULL) {
+      |         ^
+build_gate/mutants/p41276/m0215_screen_trainer.c:301:22: error: use of undeclared identifier 'pair'
+  301 |     if (f == NULL || pair == NULL) {
+      |                      ^~~~
+build_gate/mutants/p41276/m0215_screen_trainer.c:305:14: error: use of undeclared identifier 'f'
+  305 |     int hi = f->memo_row_count - 1;
+      |              ^
+build_gate/mutants/p41276/m0215_screen_trainer.c:308:26: error: use of undeclared identifier 'f'
+  308 |         int cmp = strcmp(f->memo_rows[mid].pair, pair);
+      |                          ^
+build_gate/mutants/p41276/m0215_screen_trainer.c:308:50: error: use of undeclared identifier 'pair'
+  308 |         int cmp = strcmp(f->memo_rows[mid].pair, pair);
+      |                                                  ^~~~
+build_gate/mutants/p41276/m0215_screen_trainer.c:310:21: error: use of undeclared identifier 'f'
+  310 |             return &f->memo_rows[mid];
+      |                     ^
+8 errors generated.
+build_gate/mutants/p41276/m0216_screen_trainer.c:300:88: error: expected ')'
+  300 | const ct_memo_list_row *ct_trainer_form_memo_find(const ct_trainer_form *f, const char /pair) {
+      |                                                                                        ^
+build_gate/mutants/p41276/m0216_screen_trainer.c:300:50: note: to match this '('
+  300 | const ct_memo_list_row *ct_trainer_form_memo_find(const ct_trainer_form *f, const char /pair) {
+      |                                                  ^
+build_gate/mutants/p41276/m0216_screen_trainer.c:300:25: error: conflicting types for 'ct_trainer_form_memo_find'
+  300 | const ct_memo_list_row *ct_trainer_form_memo_find(const ct_trainer_form *f, const char /pair) {
+      |                         ^
+src\ui/ui.h:104:25: note: previous declaration is here
+  104 | const ct_memo_list_row *ct_trainer_form_memo_find(const ct_trainer_form *f, const char *pair);
+      |                         ^
+build_gate/mutants/p41276/m0216_screen_trainer.c:301:22: error: use of undeclared identifier 'pair'
+  301 |     if (f == NULL || pair == NULL) {
+      |                      ^~~~
+build_gate/mutants/p41276/m0216_screen_trainer.c:308:50: error: use of undeclared identifier 'pair'
+  308 |         int cmp = strcmp(f->memo_rows[mid].pair, pair);
+      |                                                  ^~~~
+4 errors generated.
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited -1073741795
+mutate: suite e2e_run_trainer_memo_panel exited -1073741795
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited -1073741795
+mutate: suite e2e_run_trainer_memo_panel exited -1073741795
+mutate: suite e2e_run_trainer_memo_panel exited -1073741795
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited 1
+mutate: suite e2e_run_trainer_memo_panel exited -1
+mutate: suite e2e_run_trainer_memo_panel exited -1
+mutate: suite e2e_run_trainer_memo_panel exited -1
+mutate: suite e2e_run_trainer_memo_panel exited 1
+build_gate/mutants/p41276/m0243_screen_trainer.c:321:49: error: expected ')'
+  321 | int ct_trainer_form_select_cell(ct_trainer_form /f, int sticker) {
+      |                                                 ^
+build_gate/mutants/p41276/m0243_screen_trainer.c:321:32: note: to match this '('
+  321 | int ct_trainer_form_select_cell(ct_trainer_form /f, int sticker) {
+      |                                ^
+build_gate/mutants/p41276/m0243_screen_trainer.c:321:5: error: conflicting types for 'ct_trainer_form_select_cell'
+  321 | int ct_trainer_form_select_cell(ct_trainer_form /f, int sticker) {
+      |     ^
+src\ui/ui.h:98:5: note: previous declaration is here
+   98 | int ct_trainer_form_select_cell(ct_trainer_form *f, int sticker);
+      |     ^
+build_gate/mutants/p41276/m0243_screen_trainer.c:322:9: error: use of undeclared identifier 'f'
+  322 |     if (f == NULL) {
+      |         ^
+build_gate/mutants/p41276/m0243_screen_trainer.c:326:32: error: use of undeclared identifier 'f'
+  326 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                ^
+build_gate/mutants/p41276/m0243_screen_trainer.c:327:9: error: use of undeclared identifier 'sticker'
+  327 |         sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |         ^~~~~~~
+build_gate/mutants/p41276/m0243_screen_trainer.c:327:24: error: use of undeclared identifier 'sticker'
+  327 |         sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |                        ^~~~~~~
+build_gate/mutants/p41276/m0243_screen_trainer.c:328:9: error: use of undeclared identifier 'f'
+  328 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p41276/m0243_screen_trainer.c:331:5: error: use of undeclared identifier 'f'
+  331 |     f->cell = sticker;
+      |     ^
+build_gate/mutants/p41276/m0243_screen_trainer.c:331:15: error: use of undeclared identifier 'sticker'
+  331 |     f->cell = sticker;
+      |               ^~~~~~~
+build_gate/mutants/p41276/m0243_screen_trainer.c:332:5: error: use of undeclared identifier 'f'
+  332 |     f->status = CT_REPO_OK;
+      |     ^
+10 errors generated.
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build_gate/mutants/p41276/m0246_screen_trainer.c:326:58: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  326 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p41276/m0246_screen_trainer.c:326:58: note: place parentheses around the '&&' expression to silence this warning
+  326 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |                                                          ^
+      |         (                                                                              )
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+build_gate/mutants/p41276/m0248_screen_trainer.c:326:89: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  326 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                          ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  327 |         sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |         ~~~~~~~~~~~
+build_gate/mutants/p41276/m0248_screen_trainer.c:326:89: note: place parentheses around the '&&' expression to silence this warning
+  326 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                                                         ^
+      |                                                             (
+  327 |         sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |                    )
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build_gate/mutants/p41276/m0252_screen_trainer.c:327:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  326 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                                                                         ~~
+  327 |         sticker < 0 && sticker >= CT_LETTER_STICKERS) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0252_screen_trainer.c:327:21: note: place parentheses around the '&&' expression to silence this warning
+  327 |         sticker < 0 && sticker >= CT_LETTER_STICKERS) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+build_gate/mutants/p41276/m0254_screen_trainer.c:336:48: error: expected ')'
+  336 | int ct_trainer_form_clear_cell(ct_trainer_form /f) {
+      |                                                ^
+build_gate/mutants/p41276/m0254_screen_trainer.c:336:31: note: to match this '('
+  336 | int ct_trainer_form_clear_cell(ct_trainer_form /f) {
+      |                               ^
+build_gate/mutants/p41276/m0254_screen_trainer.c:336:5: error: conflicting types for 'ct_trainer_form_clear_cell'
+  336 | int ct_trainer_form_clear_cell(ct_trainer_form /f) {
+      |     ^
+src\ui/ui.h:99:5: note: previous declaration is here
+   99 | int ct_trainer_form_clear_cell(ct_trainer_form *f);
+      |     ^
+build_gate/mutants/p41276/m0254_screen_trainer.c:337:9: error: use of undeclared identifier 'f'
+  337 |     if (f == NULL) {
+      |         ^
+build_gate/mutants/p41276/m0254_screen_trainer.c:340:5: error: use of undeclared identifier 'f'
+  340 |     f->cell = CT_TRAINER_CELL_NONE;
+      |     ^
+build_gate/mutants/p41276/m0254_screen_trainer.c:341:5: error: use of undeclared identifier 'f'
+  341 |     f->status = CT_REPO_OK;
+      |     ^
+5 errors generated.
+mutate: suite trainer_form_chart_cells exited 1
+build_gate/mutants/p41276/m0256_screen_trainer.c:345:58: error: expected ')'
+  345 | static int ct_trainer_cell_matches(const ct_trainer_form /f, int index) {
+      |                                                          ^
+build_gate/mutants/p41276/m0256_screen_trainer.c:345:35: note: to match this '('
+  345 | static int ct_trainer_cell_matches(const ct_trainer_form /f, int index) {
+      |                                   ^
+build_gate/mutants/p41276/m0256_screen_trainer.c:348:32: error: use of undeclared identifier 'f'
+  348 |     if (ct_selector_case_pair(&f->scheme, f->sel.event, f->sel.method, f->sel.list_id, index, &t1,
+      |                                ^
+build_gate/mutants/p41276/m0256_screen_trainer.c:348:43: error: use of undeclared identifier 'f'
+  348 |     if (ct_selector_case_pair(&f->scheme, f->sel.event, f->sel.method, f->sel.list_id, index, &t1,
+      |                                           ^
+build_gate/mutants/p41276/m0256_screen_trainer.c:348:57: error: use of undeclared identifier 'f'
+  348 |     if (ct_selector_case_pair(&f->scheme, f->sel.event, f->sel.method, f->sel.list_id, index, &t1,
+      |                                                         ^
+build_gate/mutants/p41276/m0256_screen_trainer.c:348:72: error: use of undeclared identifier 'f'
+  348 |     if (ct_selector_case_pair(&f->scheme, f->sel.event, f->sel.method, f->sel.list_id, index, &t1,
+      |                                                                        ^
+build_gate/mutants/p41276/m0256_screen_trainer.c:348:88: error: use of undeclared identifier 'index'
+  348 |     if (ct_selector_case_pair(&f->scheme, f->sel.event, f->sel.method, f->sel.list_id, index, &t1,
+      |                                                                                        ^~~~~
+build_gate/mutants/p41276/m0256_screen_trainer.c:352:18: error: use of undeclared identifier 'f'
+  352 |     return t1 == f->cell || t2 == f->cell;
+      |                  ^
+build_gate/mutants/p41276/m0256_screen_trainer.c:352:35: error: use of undeclared identifier 'f'
+  352 |     return t1 == f->cell || t2 == f->cell;
+      |                                   ^
+build_gate/mutants/p41276/m0256_screen_trainer.c:366:40: error: too many arguments to function call, expected 1, have 2
+  366 |         if (ct_trainer_cell_matches(f, i)) {
+      |             ~~~~~~~~~~~~~~~~~~~~~~~    ^
+build_gate/mutants/p41276/m0256_screen_trainer.c:345:12: note: 'ct_trainer_cell_matches' declared here
+  345 | static int ct_trainer_cell_matches(const ct_trainer_form /f, int index) {
+      |            ^                       ~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0256_screen_trainer.c:384:41: error: too many arguments to function call, expected 1, have 2
+  384 |         if (!ct_trainer_cell_matches(f, i)) {
+      |              ~~~~~~~~~~~~~~~~~~~~~~~    ^
+build_gate/mutants/p41276/m0256_screen_trainer.c:345:12: note: 'ct_trainer_cell_matches' declared here
+  345 | static int ct_trainer_cell_matches(const ct_trainer_form /f, int index) {
+      |            ^                       ~~~~~~~~~~~~~~~~~~~~~
+10 errors generated.
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build_gate/mutants/p41276/m0272_screen_trainer.c:355:57: error: expected ')'
+  355 | int ct_trainer_form_visible_count(const ct_trainer_form /f) {
+      |                                                         ^
+build_gate/mutants/p41276/m0272_screen_trainer.c:355:34: note: to match this '('
+  355 | int ct_trainer_form_visible_count(const ct_trainer_form /f) {
+      |                                  ^
+build_gate/mutants/p41276/m0272_screen_trainer.c:355:5: error: conflicting types for 'ct_trainer_form_visible_count'
+  355 | int ct_trainer_form_visible_count(const ct_trainer_form /f) {
+      |     ^
+src\ui/ui.h:100:5: note: previous declaration is here
+  100 | int ct_trainer_form_visible_count(const ct_trainer_form *f);
+      |     ^
+build_gate/mutants/p41276/m0272_screen_trainer.c:356:9: error: use of undeclared identifier 'f'
+  356 |     if (f == NULL || f->case_count <= 0) {
+      |         ^
+build_gate/mutants/p41276/m0272_screen_trainer.c:356:22: error: use of undeclared identifier 'f'
+  356 |     if (f == NULL || f->case_count <= 0) {
+      |                      ^
+build_gate/mutants/p41276/m0272_screen_trainer.c:360:32: error: use of undeclared identifier 'f'
+  360 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                ^
+build_gate/mutants/p41276/m0272_screen_trainer.c:361:9: error: use of undeclared identifier 'f'
+  361 |         f->cell == CT_TRAINER_CELL_NONE) {
+      |         ^
+build_gate/mutants/p41276/m0272_screen_trainer.c:362:16: error: use of undeclared identifier 'f'
+  362 |         return f->case_count;
+      |                ^
+build_gate/mutants/p41276/m0272_screen_trainer.c:365:25: error: use of undeclared identifier 'f'
+  365 |     for (int i = 0; i < f->case_count; i++) {
+      |                         ^
+build_gate/mutants/p41276/m0272_screen_trainer.c:366:37: error: use of undeclared identifier 'f'
+  366 |         if (ct_trainer_cell_matches(f, i)) {
+      |                                     ^
+9 errors generated.
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_visible_count_edges exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build_gate/mutants/p41276/m0282_screen_trainer.c:360:58: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  360 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p41276/m0282_screen_trainer.c:360:58: note: place parentheses around the '&&' expression to silence this warning
+  360 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |                                                          ^
+      |         (                                                                              )
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+build_gate/mutants/p41276/m0284_screen_trainer.c:360:89: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  360 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                          ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  361 |         f->cell == CT_TRAINER_CELL_NONE) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0284_screen_trainer.c:360:89: note: place parentheses around the '&&' expression to silence this warning
+  360 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                                                         ^
+      |                                                             (
+  361 |         f->cell == CT_TRAINER_CELL_NONE) {
+      |                                        
+      |                                        )
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build_gate/mutants/p41276/m0291_screen_trainer.c:373:55: error: expected ')'
+  373 | int ct_trainer_form_nth_visible(const ct_trainer_form /f, int visible) {
+      |                                                       ^
+build_gate/mutants/p41276/m0291_screen_trainer.c:373:32: note: to match this '('
+  373 | int ct_trainer_form_nth_visible(const ct_trainer_form /f, int visible) {
+      |                                ^
+build_gate/mutants/p41276/m0291_screen_trainer.c:373:5: error: conflicting types for 'ct_trainer_form_nth_visible'
+  373 | int ct_trainer_form_nth_visible(const ct_trainer_form /f, int visible) {
+      |     ^
+src\ui/ui.h:101:5: note: previous declaration is here
+  101 | int ct_trainer_form_nth_visible(const ct_trainer_form *f, int visible);
+      |     ^
+build_gate/mutants/p41276/m0291_screen_trainer.c:374:9: error: use of undeclared identifier 'f'
+  374 |     if (f == NULL || visible < 0) {
+      |         ^
+build_gate/mutants/p41276/m0291_screen_trainer.c:374:22: error: use of undeclared identifier 'visible'
+  374 |     if (f == NULL || visible < 0) {
+      |                      ^~~~~~~
+build_gate/mutants/p41276/m0291_screen_trainer.c:378:32: error: use of undeclared identifier 'f'
+  378 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART ||
+      |                                ^
+build_gate/mutants/p41276/m0291_screen_trainer.c:379:9: error: use of undeclared identifier 'f'
+  379 |         f->cell == CT_TRAINER_CELL_NONE) {
+      |         ^
+build_gate/mutants/p41276/m0291_screen_trainer.c:380:16: error: use of undeclared identifier 'visible'
+  380 |         return visible < f->case_count ? visible : -1;
+      |                ^~~~~~~
+build_gate/mutants/p41276/m0291_screen_trainer.c:380:26: error: use of undeclared identifier 'f'
+  380 |         return visible < f->case_count ? visible : -1;
+      |                          ^
+build_gate/mutants/p41276/m0291_screen_trainer.c:380:42: error: use of undeclared identifier 'visible'
+  380 |         return visible < f->case_count ? visible : -1;
+      |                                          ^~~~~~~
+build_gate/mutants/p41276/m0291_screen_trainer.c:383:25: error: use of undeclared identifier 'f'
+  383 |     for (int i = 0; i < f->case_count; i++) {
+      |                         ^
+build_gate/mutants/p41276/m0291_screen_trainer.c:384:38: error: use of undeclared identifier 'f'
+  384 |         if (!ct_trainer_cell_matches(f, i)) {
+      |                                      ^
+build_gate/mutants/p41276/m0291_screen_trainer.c:387:21: error: use of undeclared identifier 'visible'
+  387 |         if (seen == visible) {
+      |                     ^~~~~~~
+12 errors generated.
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_navigation exited -1073741795
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build_gate/mutants/p41276/m0301_screen_trainer.c:378:58: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  378 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p41276/m0301_screen_trainer.c:378:58: note: place parentheses around the '&&' expression to silence this warning
+  378 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK && source != CT_SELECTOR_CHART ||
+      |                                                          ^
+      |         (                                                                              )
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+build_gate/mutants/p41276/m0303_screen_trainer.c:378:89: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  378 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                          ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  379 |         f->cell == CT_TRAINER_CELL_NONE) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0303_screen_trainer.c:378:89: note: place parentheses around the '&&' expression to silence this warning
+  378 |     if (ct_trainer_list_source(f, &source) != CT_REPO_OK || source != CT_SELECTOR_CHART &&
+      |                                                                                         ^
+      |                                                             (
+  379 |         f->cell == CT_TRAINER_CELL_NONE) {
+      |                                        
+      |                                        )
+1 error generated.
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_navigation exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+mutate: suite trainer_form_chart_cells exited 1
+build_gate/mutants/p41276/m0319_screen_trainer.c:395:45: error: expected ')'
+  395 | int ct_trainer_decomp(const ct_trainer_form /f, char (*lines)[CT_TRAINER_DECOMP_MAX], int cap) {
+      |                                             ^
+build_gate/mutants/p41276/m0319_screen_trainer.c:395:22: note: to match this '('
+  395 | int ct_trainer_decomp(const ct_trainer_form /f, char (*lines)[CT_TRAINER_DECOMP_MAX], int cap) {
+      |                      ^
+build_gate/mutants/p41276/m0319_screen_trainer.c:395:5: error: conflicting types for 'ct_trainer_decomp'
+  395 | int ct_trainer_decomp(const ct_trainer_form /f, char (*lines)[CT_TRAINER_DECOMP_MAX], int cap) {
+      |     ^
+src\ui/ui.h:102:5: note: previous declaration is here
+  102 | int ct_trainer_decomp(const ct_trainer_form *f, char (*lines)[CT_TRAINER_DECOMP_MAX], int cap);
+      |     ^
+build_gate/mutants/p41276/m0319_screen_trainer.c:396:9: error: use of undeclared identifier 'f'
+  396 |     if (f == NULL || lines == NULL || cap <= 0) {
+      |         ^
+build_gate/mutants/p41276/m0319_screen_trainer.c:396:22: error: use of undeclared identifier 'lines'
+  396 |     if (f == NULL || lines == NULL || cap <= 0) {
+      |                      ^~~~~
+build_gate/mutants/p41276/m0319_screen_trainer.c:396:39: error: use of undeclared identifier 'cap'
+  396 |     if (f == NULL || lines == NULL || cap <= 0) {
+      |                                       ^~~
+build_gate/mutants/p41276/m0319_screen_trainer.c:399:9: error: use of undeclared identifier 'f'
+  399 |     if (f->sel.case_index < 0 || f->alg_status != CT_REPO_OK || f->alg.sequence[0] == '\0') {
+      |         ^
+build_gate/mutants/p41276/m0319_screen_trainer.c:399:34: error: use of undeclared identifier 'f'
+  399 |     if (f->sel.case_index < 0 || f->alg_status != CT_REPO_OK || f->alg.sequence[0] == '\0') {
+      |                                  ^
+build_gate/mutants/p41276/m0319_screen_trainer.c:399:65: error: use of undeclared identifier 'f'
+  399 |     if (f->sel.case_index < 0 || f->alg_status != CT_REPO_OK || f->alg.sequence[0] == '\0') {
+      |                                                                 ^
+build_gate/mutants/p41276/m0319_screen_trainer.c:403:13: error: use of undeclared identifier 'cap'
+  403 |     if (n < cap && f->alg.setup[0] != '\0') {
+      |             ^~~
+build_gate/mutants/p41276/m0319_screen_trainer.c:403:20: error: use of undeclared identifier 'f'
+  403 |     if (n < cap && f->alg.setup[0] != '\0') {
+      |                    ^
+build_gate/mutants/p41276/m0319_screen_trainer.c:404:18: error: use of undeclared identifier 'lines'
+  404 |         snprintf(lines[n++], CT_TRAINER_DECOMP_MAX, "setup %s", f->alg.setup);
+      |                  ^~~~~
+build_gate/mutants/p41276/m0319_screen_trainer.c:404:65: error: use of undeclared identifier 'f'
+  404 |         snprintf(lines[n++], CT_TRAINER_DECOMP_MAX, "setup %s", f->alg.setup);
+      |                                                                 ^
+build_gate/mutants/p41276/m0319_screen_trainer.c:406:13: error: use of undeclared identifier 'cap'
+  406 |     if (n < cap && f->alg.interchange[0] != '\0') {
+      |             ^~~
+build_gate/mutants/p41276/m0319_screen_trainer.c:406:20: error: use of undeclared identifier 'f'
+  406 |     if (n < cap && f->alg.interchange[0] != '\0') {
+      |                    ^
+build_gate/mutants/p41276/m0319_screen_trainer.c:407:18: error: use of undeclared identifier 'lines'
+  407 |         snprintf(lines[n++], CT_TRAINER_DECOMP_MAX, "interchange %s", f->alg.interchange);
+      |                  ^~~~~
+build_gate/mutants/p41276/m0319_screen_trainer.c:407:71: error: use of undeclared identifier 'f'
+  407 |         snprintf(lines[n++], CT_TRAINER_DECOMP_MAX, "interchange %s", f->alg.interchange);
+      |                                                                       ^
+build_gate/mutants/p41276/m0319_screen_trainer.c:409:13: error: use of undeclared identifier 'cap'
+  409 |     if (n < cap && f->alg.insertion[0] != '\0') {
+      |             ^~~
+build_gate/mutants/p41276/m0319_screen_trainer.c:409:20: error: use of undeclared identifier 'f'
+  409 |     if (n < cap && f->alg.insertion[0] != '\0') {
+      |                    ^
+build_gate/mutants/p41276/m0319_screen_trainer.c:410:18: error: use of undeclared identifier 'lines'
+  410 |         snprintf(lines[n++], CT_TRAINER_DECOMP_MAX, "insertion %s", f->alg.insertion);
+      |                  ^~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_gate/mutants/p41276/m0320_screen_trainer.c:395:55: error: expected ')'
+  395 | int ct_trainer_decomp(const ct_trainer_form *f, char (/lines)[CT_TRAINER_DECOMP_MAX], int cap) {
+      |                                                       ^
+build_gate/mutants/p41276/m0320_screen_trainer.c:395:54: note: to match this '('
+  395 | int ct_trainer_decomp(const ct_trainer_form *f, char (/lines)[CT_TRAINER_DECOMP_MAX], int cap) {
+      |                                                      ^
+build_gate/mutants/p41276/m0320_screen_trainer.c:395:5: error: conflicting types for 'ct_trainer_decomp'
+  395 | int ct_trainer_decomp(const ct_trainer_form *f, char (/lines)[CT_TRAINER_DECOMP_MAX], int cap) {
+      |     ^
+src\ui/ui.h:102:5: note: previous declaration is here
+  102 | int ct_trainer_decomp(const ct_trainer_form *f, char (*lines)[CT_TRAINER_DECOMP_MAX], int cap);
+      |     ^
+build_gate/mutants/p41276/m0320_screen_trainer.c:396:22: error: use of undeclared identifier 'lines'
+  396 |     if (f == NULL || lines == NULL || cap <= 0) {
+      |                      ^~~~~
+build_gate/mutants/p41276/m0320_screen_trainer.c:404:18: error: use of undeclared identifier 'lines'
+  404 |         snprintf(lines[n++], CT_TRAINER_DECOMP_MAX, "setup %s", f->alg.setup);
+      |                  ^~~~~
+build_gate/mutants/p41276/m0320_screen_trainer.c:407:18: error: use of undeclared identifier 'lines'
+  407 |         snprintf(lines[n++], CT_TRAINER_DECOMP_MAX, "interchange %s", f->alg.interchange);
+      |                  ^~~~~
+build_gate/mutants/p41276/m0320_screen_trainer.c:410:18: error: use of undeclared identifier 'lines'
+  410 |         snprintf(lines[n++], CT_TRAINER_DECOMP_MAX, "insertion %s", f->alg.insertion);
+      |                  ^~~~~
+build_gate/mutants/p41276/m0320_screen_trainer.c:413:18: error: use of undeclared identifier 'lines'
+  413 |         snprintf(lines[n++], CT_TRAINER_DECOMP_MAX, "class %s",
+      |                  ^~~~~
+7 errors generated.
+mutate: suite trainer_decomp_lines exited -1073741795
+build_gate/mutants/p41276/m0322_screen_trainer.c:396:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  396 |     if (f == NULL && lines == NULL || cap <= 0) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p41276/m0322_screen_trainer.c:396:19: note: place parentheses around the '&&' expression to silence this warning
+  396 |     if (f == NULL && lines == NULL || cap <= 0) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite trainer_decomp_lines exited 1
+build_gate/mutants/p41276/m0324_screen_trainer.c:396:36: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  396 |     if (f == NULL || lines == NULL && cap <= 0) {
+      |                   ~~ ~~~~~~~~~~~~~~^~~~~~~~~~~
+build_gate/mutants/p41276/m0324_screen_trainer.c:396:36: note: place parentheses around the '&&' expression to silence this warning
+  396 |     if (f == NULL || lines == NULL && cap <= 0) {
+      |                                    ^          
+      |                      (                        )
+1 error generated.
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+build_gate/mutants/p41276/m0334_screen_trainer.c:399:31: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  399 |     if (f->sel.case_index < 0 && f->alg_status != CT_REPO_OK || f->alg.sequence[0] == '\0') {
+      |         ~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p41276/m0334_screen_trainer.c:399:31: note: place parentheses around the '&&' expression to silence this warning
+  399 |     if (f->sel.case_index < 0 && f->alg_status != CT_REPO_OK || f->alg.sequence[0] == '\0') {
+      |                               ^
+      |         (                                                   )
+1 error generated.
+mutate: suite trainer_decomp_lines exited 1
+build_gate/mutants/p41276/m0336_screen_trainer.c:399:62: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  399 |     if (f->sel.case_index < 0 || f->alg_status != CT_REPO_OK && f->alg.sequence[0] == '\0') {
+      |                               ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0336_screen_trainer.c:399:62: note: place parentheses around the '&&' expression to silence this warning
+  399 |     if (f->sel.case_index < 0 || f->alg_status != CT_REPO_OK && f->alg.sequence[0] == '\0') {
+      |                                                              ^                            
+      |                                  (                                                        )
+1 error generated.
+mutate: suite trainer_decomp_lines exited 1
+build_gate/mutants/p41276/m0338_screen_trainer.c:399:65: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  399 |     if (f->sel.case_index < 0 || f->alg_status != CT_REPO_OK || f->alg.sequence[-1] == '\0') {
+      |                                                                 ^               ~~
+src\storage/repo_algs.h:35:5: note: array 'sequence' declared here
+   35 |     char sequence[CT_ALG_SEQ_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+build_gate/mutants/p41276/m0348_screen_trainer.c:403:20: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  403 |     if (n < cap && f->alg.setup[-1] != '\0') {
+      |                    ^            ~~
+src\storage/repo_algs.h:37:5: note: array 'setup' declared here
+   37 |     char setup[CT_ALG_SETUP_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+build_gate/mutants/p41276/m0353_screen_trainer.c:406:20: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  406 |     if (n < cap && f->alg.interchange[-1] != '\0') {
+      |                    ^                  ~~
+src\storage/repo_algs.h:38:5: note: array 'interchange' declared here
+   38 |     char interchange[CT_ALG_INTER_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+build_gate/mutants/p41276/m0358_screen_trainer.c:409:20: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  409 |     if (n < cap && f->alg.insertion[-1] != '\0') {
+      |                    ^                ~~
+src\storage/repo_algs.h:39:5: note: array 'insertion' declared here
+   39 |     char insertion[CT_ALG_INSERT_MAX];
+      |     ^
+1 error generated.
+mutate: suite trainer_decomp_lines exited 1
+mutate: suite trainer_decomp_lines exited 1
+build_gate/mutants/p41276/m0361_screen_trainer.c:430:10: error: expected member name or ';' after declaration specifiers
+  430 |     char /event_ptrs[CT_TRAINER_EVENTS_MAX];
+      |     ~~~~ ^
+build_gate/mutants/p41276/m0361_screen_trainer.c:430:9: error: expected ';' at end of declaration list
+  430 |     char /event_ptrs[CT_TRAINER_EVENTS_MAX];
+      |         ^
+      |         ;
+build_gate/mutants/p41276/m0361_screen_trainer.c:451:12: error: no member named 'event_ptrs' in 'struct (unnamed at build_gate/mutants/p41276/m0361_screen_trainer.c:419:9)'
+  451 |         s->event_ptrs[i] = s->event_labels[i];
+      |         ~  ^
+build_gate/mutants/p41276/m0361_screen_trainer.c:624:81: error: no member named 'event_ptrs' in 'struct (unnamed at build_gate/mutants/p41276/m0361_screen_trainer.c:419:9)'
+  624 |     if (GuiListViewEx(ct_trainer_rect(margin, list_y, col_w, col_h), ct_trainer.event_ptrs, events,
+      |                                                                      ~~~~~~~~~~ ^
+4 errors generated.
+build_gate/mutants/p41276/m0362_screen_trainer.c:432:10: error: expected member name or ';' after declaration specifiers
+  432 |     char /method_ptrs[CT_TRAINER_LISTS_MAX];
+      |     ~~~~ ^
+build_gate/mutants/p41276/m0362_screen_trainer.c:432:9: error: expected ';' at end of declaration list
+  432 |     char /method_ptrs[CT_TRAINER_LISTS_MAX];
+      |         ^
+      |         ;
+build_gate/mutants/p41276/m0362_screen_trainer.c:458:12: error: no member named 'method_ptrs' in 'struct (unnamed at build_gate/mutants/p41276/m0362_screen_trainer.c:419:9)'
+  458 |         s->method_ptrs[i] = s->method_labels[i];
+      |         ~  ^
+build_gate/mutants/p41276/m0362_screen_trainer.c:635:34: error: no member named 'method_ptrs' in 'struct (unnamed at build_gate/mutants/p41276/m0362_screen_trainer.c:419:9)'
+  635 |                       ct_trainer.method_ptrs, method_count, &ct_trainer.method_scroll,
+      |                       ~~~~~~~~~~ ^
+4 errors generated.
+build_gate/mutants/p41276/m0363_screen_trainer.c:434:10: error: expected member name or ';' after declaration specifiers
+  434 |     char /list_ptrs[CT_TRAINER_LISTS_MAX];
+      |     ~~~~ ^
+build_gate/mutants/p41276/m0363_screen_trainer.c:434:9: error: expected ';' at end of declaration list
+  434 |     char /list_ptrs[CT_TRAINER_LISTS_MAX];
+      |         ^
+      |         ;
+build_gate/mutants/p41276/m0363_screen_trainer.c:463:12: error: no member named 'list_ptrs' in 'struct (unnamed at build_gate/mutants/p41276/m0363_screen_trainer.c:419:9)'
+  463 |         s->list_ptrs[i] = s->list_labels[i];
+      |         ~  ^
+build_gate/mutants/p41276/m0363_screen_trainer.c:641:34: error: no member named 'list_ptrs' in 'struct (unnamed at build_gate/mutants/p41276/m0363_screen_trainer.c:419:9)'
+  641 |                       ct_trainer.list_ptrs, f->list_count, &ct_trainer.list_scroll, &list_active,
+      |                       ~~~~~~~~~~ ^
+4 errors generated.
+build_gate/mutants/p41276/m0364_screen_trainer.c:436:10: error: expected member name or ';' after declaration specifiers
+  436 |     char /case_ptrs[CT_TRAINER_CASES_MAX];
+      |     ~~~~ ^
+build_gate/mutants/p41276/m0364_screen_trainer.c:436:9: error: expected ';' at end of declaration list
+  436 |     char /case_ptrs[CT_TRAINER_CASES_MAX];
+      |         ^
+      |         ;
+build_gate/mutants/p41276/m0364_screen_trainer.c:481:12: error: no member named 'case_ptrs' in 'struct (unnamed at build_gate/mutants/p41276/m0364_screen_trainer.c:419:9)'
+  481 |         s->case_ptrs[v] = s->case_labels[v];
+      |         ~  ^
+build_gate/mutants/p41276/m0364_screen_trainer.c:654:34: error: no member named 'case_ptrs' in 'struct (unnamed at build_gate/mutants/p41276/m0364_screen_trainer.c:419:9)'
+  654 |                       ct_trainer.case_ptrs, visible, &ct_trainer.case_scroll,
+      |                       ~~~~~~~~~~ ^
+4 errors generated.
+build_gate/mutants/p41276/m0365_screen_trainer.c:441:17: error: expected identifier or '('
+  441 | ct_trainer_form /ct_screen_trainer_form(void) {
+      |                 ^
+1 error generated.
+build_gate/mutants/p41276/m0366_screen_trainer.c:445:55: error: expected ')'
+  445 | static void ct_trainer_build_labels(ct_trainer_screen /s) {
+      |                                                       ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:445:36: note: to match this '('
+  445 | static void ct_trainer_build_labels(ct_trainer_screen /s) {
+      |                                    ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:446:27: error: use of undeclared identifier 's'
+  446 |     ct_trainer_form *f = &s->form;
+      |                           ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:449:18: error: use of undeclared identifier 's'
+  449 |         snprintf(s->event_labels[i], sizeof s->event_labels[i], "%s",
+      |                  ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:449:45: error: use of undeclared identifier 's'
+  449 |         snprintf(s->event_labels[i], sizeof s->event_labels[i], "%s",
+      |                                             ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:451:9: error: use of undeclared identifier 's'
+  451 |         s->event_ptrs[i] = s->event_labels[i];
+      |         ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:451:28: error: use of undeclared identifier 's'
+  451 |         s->event_ptrs[i] = s->event_labels[i];
+      |                            ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:456:18: error: use of undeclared identifier 's'
+  456 |         snprintf(s->method_labels[i], sizeof s->method_labels[i], "%s",
+      |                  ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:456:46: error: use of undeclared identifier 's'
+  456 |         snprintf(s->method_labels[i], sizeof s->method_labels[i], "%s",
+      |                                              ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:458:9: error: use of undeclared identifier 's'
+  458 |         s->method_ptrs[i] = s->method_labels[i];
+      |         ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:458:29: error: use of undeclared identifier 's'
+  458 |         s->method_ptrs[i] = s->method_labels[i];
+      |                             ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:461:18: error: use of undeclared identifier 's'
+  461 |         snprintf(s->list_labels[i], sizeof s->list_labels[i], "%s",
+      |                  ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:461:44: error: use of undeclared identifier 's'
+  461 |         snprintf(s->list_labels[i], sizeof s->list_labels[i], "%s",
+      |                                            ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:463:9: error: use of undeclared identifier 's'
+  463 |         s->list_ptrs[i] = s->list_labels[i];
+      |         ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:463:27: error: use of undeclared identifier 's'
+  463 |         s->list_ptrs[i] = s->list_labels[i];
+      |                           ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:466:5: error: use of undeclared identifier 's'
+  466 |     s->case_active = -1;
+      |     ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:470:70: error: use of undeclared identifier 's'
+  470 |                                               f->sel.list_id, index, s->case_labels[v],
+      |                                                                      ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:471:64: error: use of undeclared identifier 's'
+  471 |                                               (unsigned)sizeof s->case_labels[v]) != 0) {
+      |                                                                ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:472:13: error: use of undeclared identifier 's'
+  472 |             s->case_labels[v][0] = '\0';
+      |             ^
+build_gate/mutants/p41276/m0366_screen_trainer.c:474:72: error: use of undeclared identifier 's'
+  474 |             const ct_memo_list_row *row = ct_trainer_form_memo_find(f, s->case_labels[v]);
+      |                                                                        ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_gate/mutants/p41276/m0367_screen_trainer.c:446:21: error: expected identifier or '('
+  446 |     ct_trainer_form /f = &s->form;
+      |                     ^
+build_gate/mutants/p41276/m0367_screen_trainer.c:454:44: error: use of undeclared identifier 'f'
+  454 |     int method_count = ct_selector_methods(f->sel.event, methods, CT_TRAINER_LISTS_MAX);
+      |                                            ^
+build_gate/mutants/p41276/m0367_screen_trainer.c:460:25: error: use of undeclared identifier 'f'
+  460 |     for (int i = 0; i < f->list_count; i++) {
+      |                         ^
+build_gate/mutants/p41276/m0367_screen_trainer.c:462:40: error: use of undeclared identifier 'f'
+  462 |                  ct_trainer_stage_name(f->lists[i].stage));
+      |                                        ^
+build_gate/mutants/p41276/m0367_screen_trainer.c:465:49: error: use of undeclared identifier 'f'
+  465 |     int visible = ct_trainer_form_visible_count(f);
+      |                                                 ^
+build_gate/mutants/p41276/m0367_screen_trainer.c:468:49: error: use of undeclared identifier 'f'
+  468 |         int index = ct_trainer_form_nth_visible(f, v);
+      |                                                 ^
+build_gate/mutants/p41276/m0367_screen_trainer.c:469:47: error: use of undeclared identifier 'f'
+  469 |         if (index < 0 || ct_selector_case_key(f->db, &f->scheme, f->sel.event, f->sel.method,
+      |                                               ^
+build_gate/mutants/p41276/m0367_screen_trainer.c:469:55: error: use of undeclared identifier 'f'
+  469 |         if (index < 0 || ct_selector_case_key(f->db, &f->scheme, f->sel.event, f->sel.method,
+      |                                                       ^
+build_gate/mutants/p41276/m0367_screen_trainer.c:469:66: error: use of undeclared identifier 'f'
+  469 |         if (index < 0 || ct_selector_case_key(f->db, &f->scheme, f->sel.event, f->sel.method,
+      |                                                                  ^
+build_gate/mutants/p41276/m0367_screen_trainer.c:469:80: error: use of undeclared identifier 'f'
+  469 |         if (index < 0 || ct_selector_case_key(f->db, &f->scheme, f->sel.event, f->sel.method,
+      |                                                                                ^
+build_gate/mutants/p41276/m0367_screen_trainer.c:470:47: error: use of undeclared identifier 'f'
+  470 |                                               f->sel.list_id, index, s->case_labels[v],
+      |                                               ^
+build_gate/mutants/p41276/m0367_screen_trainer.c:474:69: error: use of undeclared identifier 'f'
+  474 |             const ct_memo_list_row *row = ct_trainer_form_memo_find(f, s->case_labels[v]);
+      |                                                                     ^
+build_gate/mutants/p41276/m0367_screen_trainer.c:482:22: error: use of undeclared identifier 'f'
+  482 |         if (index == f->sel.case_index) {
+      |                      ^
+13 errors generated.
+build_gate/mutants/p41276/m0397_screen_trainer.c:472:13: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  472 |             s->case_labels[v][-1] = '\0';
+      |             ^                 ~~
+build_gate/mutants/p41276/m0397_screen_trainer.c:435:5: note: array 'case_labels' declared here
+  435 |     char case_labels[CT_TRAINER_CASES_MAX][CT_TRAINER_KEY_MAX];
+      |     ^
+1 error generated.
+build_gate/mutants/p41276/m0398_screen_trainer.c:474:36: error: expected identifier or '('
+  474 |             const ct_memo_list_row /row = ct_trainer_form_memo_find(f, s->case_labels[v]);
+      |                                    ^
+build_gate/mutants/p41276/m0398_screen_trainer.c:475:17: error: use of undeclared identifier 'row'
+  475 |             if (row != NULL && row->image[0] != '\0') {
+      |                 ^~~
+build_gate/mutants/p41276/m0398_screen_trainer.c:475:32: error: use of undeclared identifier 'row'
+  475 |             if (row != NULL && row->image[0] != '\0') {
+      |                                ^~~
+build_gate/mutants/p41276/m0398_screen_trainer.c:478:85: error: use of undeclared identifier 'row'
+  478 |                 snprintf(s->case_labels[v], sizeof s->case_labels[v], "%s %s", key, row->image);
+      |                                                                                     ^~~
+4 errors generated.
+build_gate/mutants/p41276/m0402_screen_trainer.c:475:32: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  475 |             if (row != NULL && row->image[-1] != '\0') {
+      |                                ^          ~~
+src\storage/db.h:22:5: note: array 'image' declared here
+   22 |     char image[CT_MEMO_TEXT_MAX];
+      |     ^
+1 error generated.
+build_gate/mutants/p41276/m0421_screen_trainer.c:516:38: error: expected ')'
+  516 | void ct_screen_trainer_update(ct_app /app) {
+      |                                      ^
+build_gate/mutants/p41276/m0421_screen_trainer.c:516:30: note: to match this '('
+  516 | void ct_screen_trainer_update(ct_app /app) {
+      |                              ^
+build_gate/mutants/p41276/m0421_screen_trainer.c:516:6: error: conflicting types for 'ct_screen_trainer_update'
+  516 | void ct_screen_trainer_update(ct_app /app) {
+      |      ^
+src\ui/ui.h:108:6: note: previous declaration is here
+  108 | void ct_screen_trainer_update(ct_app *app);
+      |      ^
+build_gate/mutants/p41276/m0421_screen_trainer.c:517:9: error: use of undeclared identifier 'app'
+  517 |     if (app == NULL) {
+      |         ^~~
+build_gate/mutants/p41276/m0421_screen_trainer.c:520:53: error: use of undeclared identifier 'app'
+  520 |     if (!ct_trainer.opened || ct_trainer.form.db != app->db) {
+      |                                                     ^~~
+build_gate/mutants/p41276/m0421_screen_trainer.c:522:48: error: use of undeclared identifier 'app'
+  522 |         ct_trainer_form_open(&ct_trainer.form, app->db);
+      |                                                ^~~
+build_gate/mutants/p41276/m0421_screen_trainer.c:525:9: error: use of undeclared identifier 'app'
+  525 |         app->screen = CT_SCREEN_MENU;
+      |         ^~~
+6 errors generated.
+build_gate/mutants/p41276/m0427_screen_trainer.c:534:50: error: expected ')'
+  534 | static void ct_trainer_draw_grid(ct_trainer_form /f, Rectangle bounds) {
+      |                                                  ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:534:33: note: to match this '('
+  534 | static void ct_trainer_draw_grid(ct_trainer_form /f, Rectangle bounds) {
+      |                                 ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:535:17: error: use of undeclared identifier 'bounds'
+  535 |     GuiGroupBox(bounds, "letters");
+      |                 ^~~~~~
+build_gate/mutants/p41276/m0427_screen_trainer.c:537:9: error: use of undeclared identifier 'f'
+  537 |         f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.map.edge : f->scheme.map.corner;
+      |         ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:537:18: error: use of undeclared identifier 'f'
+  537 |         f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.map.edge : f->scheme.map.corner;
+      |                  ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:537:59: error: use of undeclared identifier 'f'
+  537 |         f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.map.edge : f->scheme.map.corner;
+      |                                                           ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:537:80: error: use of undeclared identifier 'f'
+  537 |         f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.map.edge : f->scheme.map.corner;
+      |                                                                                ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:538:18: error: use of undeclared identifier 'f'
+  538 |     int buffer = f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.buffer_edge
+      |                  ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:538:27: error: use of undeclared identifier 'f'
+  538 |     int buffer = f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.buffer_edge
+      |                           ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:538:68: error: use of undeclared identifier 'f'
+  538 |     int buffer = f->lists[f->sel.list_id].orbit == CT_ORBIT_EDGE ? f->scheme.buffer_edge
+      |                                                                    ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:539:68: error: use of undeclared identifier 'f'
+  539 |                                                                  : f->scheme.buffer_corner;
+      |                                                                    ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:543:29: error: use of undeclared identifier 'bounds'
+  543 |         if (ct_heatmap_cell(bounds, CT_TRAINER_GRID_COLS, CT_TRAINER_GRID_ROWS, i, &cell) != 0) {
+      |                             ^~~~~~
+build_gate/mutants/p41276/m0427_screen_trainer.c:546:18: error: use of undeclared identifier 'f'
+  546 |         if (i == f->cell) {
+      |                  ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:551:18: error: use of undeclared identifier 'f'
+  551 |         if (i == f->cell) {
+      |                  ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:561:18: error: use of undeclared identifier 'f'
+  561 |         if (i == f->cell) {
+      |                  ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:573:34: error: use of undeclared identifier 'bounds'
+  573 |     int picked = ct_heatmap_pick(bounds, CT_TRAINER_GRID_COLS, CT_TRAINER_GRID_ROWS, mouse);
+      |                                  ^~~~~~
+build_gate/mutants/p41276/m0427_screen_trainer.c:575:23: error: use of undeclared identifier 'f'
+  575 |         if (picked == f->cell) {
+      |                       ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:576:40: error: use of undeclared identifier 'f'
+  576 |             ct_trainer_form_clear_cell(f);
+      |                                        ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:578:41: error: use of undeclared identifier 'f'
+  578 |             ct_trainer_form_select_cell(f, picked);
+      |                                         ^
+build_gate/mutants/p41276/m0427_screen_trainer.c:647:30: error: too many arguments to function call, expected 1, have 2
+  646 |         ct_trainer_draw_grid(f,
+      |         ~~~~~~~~~~~~~~~~~~~~
+  647 |                              ct_trainer_rect(margin + 2 * (col_w + margin), grid_y, col_w, grid_h));
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p41276/m0427_screen_trainer.c:534:13: note: 'ct_trainer_draw_grid' declared here
+  534 | static void ct_trainer_draw_grid(ct_trainer_form /f, Rectangle bounds) {
+      |             ^                    ~~~~~~~~~~~~~~~
+19 errors generated.
+build_gate/mutants/p41276/m0428_screen_trainer.c:536:16: error: expected identifier or '('
+  536 |     const char /letters =
+      |                ^
+build_gate/mutants/p41276/m0428_screen_trainer.c:559:26: error: use of undeclared identifier 'letters'
+  559 |         char label[2] = {letters[i], '\0'};
+      |                          ^~~~~~~
+2 errors generated.
+build_gate/mutants/p41276/m0442_screen_trainer.c:559:38: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+  559 |         char label[1] = {letters[i], '\0'};
+      |                                      ^~~~
+1 error generated.
+build_gate/mutants/p41276/m0457_screen_trainer.c:583:36: error: expected ')'
+  583 | void ct_screen_trainer_draw(ct_app /app) {
+      |                                    ^
+build_gate/mutants/p41276/m0457_screen_trainer.c:583:28: note: to match this '('
+  583 | void ct_screen_trainer_draw(ct_app /app) {
+      |                            ^
+build_gate/mutants/p41276/m0457_screen_trainer.c:583:6: error: conflicting types for 'ct_screen_trainer_draw'
+  583 | void ct_screen_trainer_draw(ct_app /app) {
+      |      ^
+src\ui/ui.h:109:6: note: previous declaration is here
+  109 | void ct_screen_trainer_draw(ct_app *app);
+      |      ^
+build_gate/mutants/p41276/m0457_screen_trainer.c:585:9: error: use of undeclared identifier 'app'
+  585 |     if (app == NULL) {
+      |         ^~~
+build_gate/mutants/p41276/m0457_screen_trainer.c:589:18: error: use of undeclared identifier 'app'
+  589 |     int w = (int)app->cfg.window.width;
+      |                  ^~~
+build_gate/mutants/p41276/m0457_screen_trainer.c:590:18: error: use of undeclared identifier 'app'
+  590 |     int h = (int)app->cfg.window.height;
+      |                  ^~~
+build_gate/mutants/p41276/m0457_screen_trainer.c:740:9: error: use of undeclared identifier 'app'
+  740 |         app->screen = CT_SCREEN_MENU;
+      |         ^~~
+6 errors generated.
+build_gate/mutants/p41276/m0459_screen_trainer.c:588:21: error: expected identifier or '('
+  588 |     ct_trainer_form /f = &ct_trainer.form;
+      |                     ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:597:44: error: use of undeclared identifier 'f'
+  597 |     int method_count = ct_selector_methods(f->sel.event, methods, CT_TRAINER_LISTS_MAX);
+      |                                            ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:602:17: error: use of undeclared identifier 'f'
+  602 |     int chart = f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART;
+      |                 ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:602:38: error: use of undeclared identifier 'f'
+  602 |     int chart = f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART;
+      |                                      ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:602:47: error: use of undeclared identifier 'f'
+  602 |     int chart = f->list_count > 0 && f->lists[f->sel.list_id].source == CT_SELECTOR_CHART;
+      |                                               ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:618:9: error: use of undeclared identifier 'f'
+  618 |     if (f->list_count <= 0 || f->db == NULL) {
+      |         ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:618:31: error: use of undeclared identifier 'f'
+  618 |     if (f->list_count <= 0 || f->db == NULL) {
+      |                               ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:623:29: error: use of undeclared identifier 'f'
+  623 |     int event_active = (int)f->sel.event;
+      |                             ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:630:27: error: use of undeclared identifier 'f'
+  630 |         if (methods[i] == f->sel.method) {
+      |                           ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:639:23: error: use of undeclared identifier 'f'
+  639 |     int list_active = f->sel.list_id;
+      |                       ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:641:45: error: use of undeclared identifier 'f'
+  641 |                       ct_trainer.list_ptrs, f->list_count, &ct_trainer.list_scroll, &list_active,
+      |                                             ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:646:30: error: use of undeclared identifier 'f'
+  646 |         ct_trainer_draw_grid(f,
+      |                              ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:649:49: error: use of undeclared identifier 'f'
+  649 |     int visible = ct_trainer_form_visible_count(f);
+      |                                                 ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:661:77: error: use of undeclared identifier 'f'
+  661 |     snprintf(line, sizeof line, "event %s method %s", ct_trainer_event_name(f->sel.event),
+      |                                                                             ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:662:37: error: use of undeclared identifier 'f'
+  662 |              ct_trainer_method_name(f->sel.method));
+      |                                     ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:665:9: error: use of undeclared identifier 'f'
+  665 |     if (f->group_count > 1) {
+      |         ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:668:44: error: use of undeclared identifier 'f'
+  668 |                      ct_trainer_stage_name(f->lists[f->sel.list_id].stage), f->case_count);
+      |                                            ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:668:53: error: use of undeclared identifier 'f'
+  668 |                      ct_trainer_stage_name(f->lists[f->sel.list_id].stage), f->case_count);
+      |                                                     ^
+build_gate/mutants/p41276/m0459_screen_trainer.c:668:77: error: use of undeclared identifier 'f'
+  668 |                      ct_trainer_stage_name(f->lists[f->sel.list_id].stage), f->case_count);
+      |                                                                             ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_gate/mutants/p41276/m0566_screen_trainer.c:689:26: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  689 |         DrawTextEx(font, f->alg_text[-1] != '\0' ? f->alg_text : "no alg", detail_pos, text_size,
+      |                          ^           ~~
+src\ui/ui.h:83:5: note: array 'alg_text' declared here
+   83 |     char alg_text[CT_TRAINER_ALG_MAX];
+      |     ^
+1 error generated.
+build_gate/mutants/p41276/m0569_screen_trainer.c:691:20: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  691 |                    f->alg_text[-1] != '\0' ? GetColor(CT_UI_COLOR_TEXT)
+      |                    ^           ~~
+src\ui/ui.h:83:5: note: array 'alg_text' declared here
+   83 |     char alg_text[CT_TRAINER_ALG_MAX];
+      |     ^
+1 error generated.
+build_gate/mutants/p41276/m0591_screen_trainer.c:712:24: error: zero size arrays are an extension [-Werror,-Wzero-length-array]
+  712 |         char memo_line[CT_MEMO_TEXT_MAX - CT_TRAINER_KEY_MAX];
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src\config/config.h:264:26: note: expanded from macro 'CT_MEMO_TEXT_MAX'
+  264 | #define CT_MEMO_TEXT_MAX 64
+      |                          ^
+1 error generated.
+mutate: 301 unexplained survivors
+make: *** [makefile:273: mutate] Error 1

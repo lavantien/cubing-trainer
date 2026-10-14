@@ -1,0 +1,1826 @@
+build_gate/mutants/p496/m0001_screen_settings.c:18:19: error: expected identifier or '('
+   18 | static const char /const CT_SETTINGS_COLOR_DEFAULTS[CT_SETTINGS_FACE_COUNT] = {
+      |                   ^
+build_gate/mutants/p496/m0001_screen_settings.c:104:27: error: use of undeclared identifier 'CT_SETTINGS_COLOR_DEFAULTS'
+  104 |         const char *src = CT_SETTINGS_COLOR_DEFAULTS[face];
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+2 errors generated.
+build_gate/mutants/p496/m0003_screen_settings.c:23:5: error: initializer-string for character array is too long, array size is 1 but initializer has size 2 (including the null terminating character); did you mean to use the 'nonstring' attribute? [-Werror,-Wunterminated-string-initialization]
+   23 |     "U", "L", "F", "R", "B", "D",
+      |     ^~~
+build_gate/mutants/p496/m0003_screen_settings.c:23:10: error: initializer-string for character array is too long, array size is 1 but initializer has size 2 (including the null terminating character); did you mean to use the 'nonstring' attribute? [-Werror,-Wunterminated-string-initialization]
+   23 |     "U", "L", "F", "R", "B", "D",
+      |          ^~~
+build_gate/mutants/p496/m0003_screen_settings.c:23:15: error: initializer-string for character array is too long, array size is 1 but initializer has size 2 (including the null terminating character); did you mean to use the 'nonstring' attribute? [-Werror,-Wunterminated-string-initialization]
+   23 |     "U", "L", "F", "R", "B", "D",
+      |               ^~~
+build_gate/mutants/p496/m0003_screen_settings.c:23:20: error: initializer-string for character array is too long, array size is 1 but initializer has size 2 (including the null terminating character); did you mean to use the 'nonstring' attribute? [-Werror,-Wunterminated-string-initialization]
+   23 |     "U", "L", "F", "R", "B", "D",
+      |                    ^~~
+build_gate/mutants/p496/m0003_screen_settings.c:23:25: error: initializer-string for character array is too long, array size is 1 but initializer has size 2 (including the null terminating character); did you mean to use the 'nonstring' attribute? [-Werror,-Wunterminated-string-initialization]
+   23 |     "U", "L", "F", "R", "B", "D",
+      |                         ^~~
+build_gate/mutants/p496/m0003_screen_settings.c:23:30: error: initializer-string for character array is too long, array size is 1 but initializer has size 2 (including the null terminating character); did you mean to use the 'nonstring' attribute? [-Werror,-Wunterminated-string-initialization]
+   23 |     "U", "L", "F", "R", "B", "D",
+      |                              ^~~
+6 errors generated.
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+build_gate/mutants/p496/m0015_screen_settings.c:715:21: error: zero size arrays are an extension [-Werror,-Wzero-length-array]
+  715 |     char status_buf[CT_SETTINGS_STATUS_MAX];
+      |                     ^~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+build_gate/mutants/p496/m0020_screen_settings.c:40:13: error: expected identifier or '('
+   40 | static char /ct_settings_orbit(ct_settings_form *f, int orbit) {
+      |             ^
+build_gate/mutants/p496/m0020_screen_settings.c:154:17: error: use of undeclared identifier 'ct_settings_orbit'
+  154 |     char *arr = ct_settings_orbit(f, orbit);
+      |                 ^~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0020_screen_settings.c:182:17: error: use of undeclared identifier 'ct_settings_orbit'
+  182 |     char *arr = ct_settings_orbit(f, orbit);
+      |                 ^~~~~~~~~~~~~~~~~
+3 errors generated.
+build_gate/mutants/p496/m0021_screen_settings.c:40:49: error: expected ')'
+   40 | static char *ct_settings_orbit(ct_settings_form /f, int orbit) {
+      |                                                 ^
+build_gate/mutants/p496/m0021_screen_settings.c:40:31: note: to match this '('
+   40 | static char *ct_settings_orbit(ct_settings_form /f, int orbit) {
+      |                               ^
+build_gate/mutants/p496/m0021_screen_settings.c:41:9: error: use of undeclared identifier 'orbit'
+   41 |     if (orbit == CT_ORBIT_CORNER)
+      |         ^~~~~
+build_gate/mutants/p496/m0021_screen_settings.c:42:16: error: use of undeclared identifier 'f'
+   42 |         return f->staged.corner;
+      |                ^
+build_gate/mutants/p496/m0021_screen_settings.c:43:9: error: use of undeclared identifier 'orbit'
+   43 |     if (orbit == CT_ORBIT_EDGE)
+      |         ^~~~~
+build_gate/mutants/p496/m0021_screen_settings.c:44:16: error: use of undeclared identifier 'f'
+   44 |         return f->staged.edge;
+      |                ^
+build_gate/mutants/p496/m0021_screen_settings.c:154:38: error: too many arguments to function call, expected 1, have 2
+  154 |     char *arr = ct_settings_orbit(f, orbit);
+      |                 ~~~~~~~~~~~~~~~~~    ^~~~~
+build_gate/mutants/p496/m0021_screen_settings.c:40:14: note: 'ct_settings_orbit' declared here
+   40 | static char *ct_settings_orbit(ct_settings_form /f, int orbit) {
+      |              ^                 ~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0021_screen_settings.c:182:38: error: too many arguments to function call, expected 1, have 2
+  182 |     char *arr = ct_settings_orbit(f, orbit);
+      |                 ~~~~~~~~~~~~~~~~~    ^~~~~
+build_gate/mutants/p496/m0021_screen_settings.c:40:14: note: 'ct_settings_orbit' declared here
+   40 | static char *ct_settings_orbit(ct_settings_form /f, int orbit) {
+      |              ^                 ~~~~~~~~~~~~~~~~
+7 errors generated.
+mutate: suite settings_form_guards exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_cancel exited 1
+build_gate/mutants/p496/m0025_screen_settings.c:49:18: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+   49 |     if (c >= '0' || c <= '9')
+      |         ~~~~~~~~~^~~~~~~~~~~
+1 error generated.
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_hex exited 1
+build_gate/mutants/p496/m0029_screen_settings.c:51:18: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+   51 |     if (c >= 'a' || c <= 'f')
+      |         ~~~~~~~~~^~~~~~~~~~~
+1 error generated.
+mutate: suite settings_form_hex exited 1
+mutate: suite settings_form_hex exited 1
+mutate: suite settings_form_hex exited 1
+mutate: suite settings_form_cancel exited 1
+build_gate/mutants/p496/m0034_screen_settings.c:53:18: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+   53 |     if (c >= 'A' || c <= 'F')
+      |         ~~~~~~~~~^~~~~~~~~~~
+1 error generated.
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_hex exited 1
+mutate: suite settings_form_hex exited 1
+build_gate/mutants/p496/m0041_screen_settings.c:58:48: error: expected ')'
+   58 | static bool ct_settings_parse_color(const char /text, unsigned char out[CT_SETTINGS_CHANNELS]) {
+      |                                                ^
+build_gate/mutants/p496/m0041_screen_settings.c:58:36: note: to match this '('
+   58 | static bool ct_settings_parse_color(const char /text, unsigned char out[CT_SETTINGS_CHANNELS]) {
+      |                                    ^
+build_gate/mutants/p496/m0041_screen_settings.c:59:16: error: use of undeclared identifier 'text'
+   59 |     if (strlen(text) != 2 * (size_t)CT_SETTINGS_CHANNELS)
+      |                ^~~~
+build_gate/mutants/p496/m0041_screen_settings.c:63:41: error: use of undeclared identifier 'text'
+   63 |         int hi = ct_settings_hex_nibble(text[off]);
+      |                                         ^~~~
+build_gate/mutants/p496/m0041_screen_settings.c:64:41: error: use of undeclared identifier 'text'
+   64 |         int lo = ct_settings_hex_nibble(text[off + 1]);
+      |                                         ^~~~
+build_gate/mutants/p496/m0041_screen_settings.c:67:9: error: use of undeclared identifier 'out'
+   67 |         out[ch] = (unsigned char)((hi << CT_SETTINGS_HEX_SHIFT) | lo);
+      |         ^~~
+build_gate/mutants/p496/m0041_screen_settings.c:106:42: error: too many arguments to function call, expected 1, have 2
+  106 |             ct_settings_parse_color(buf, f->colors[face])) {
+      |             ~~~~~~~~~~~~~~~~~~~~~~~      ^~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0041_screen_settings.c:58:13: note: 'ct_settings_parse_color' declared here
+   58 | static bool ct_settings_parse_color(const char /text, unsigned char out[CT_SETTINGS_CHANNELS]) {
+      |             ^                       ~~~~~~~~~~
+build_gate/mutants/p496/m0041_screen_settings.c:109:43: error: too many arguments to function call, expected 1, have 2
+  109 |         if (!ct_settings_parse_color(src, f->colors[face]))
+      |              ~~~~~~~~~~~~~~~~~~~~~~~      ^~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0041_screen_settings.c:58:13: note: 'ct_settings_parse_color' declared here
+   58 | static bool ct_settings_parse_color(const char /text, unsigned char out[CT_SETTINGS_CHANNELS]) {
+      |             ^                       ~~~~~~~~~~
+7 errors generated.
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_open_fallbacks exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite e2e_run_expect_cfg exited -1073741795
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_hex exited -1073741795
+mutate: suite settings_form_hex exited -1073741795
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_cancel exited 1
+mutate: suite settings_form_hex exited 1
+mutate: suite settings_form_hex exited 1
+mutate: suite settings_form_cancel exited 1
+build_gate/mutants/p496/m0065_screen_settings.c:72:51: error: expected ')'
+   72 | static void ct_settings_load_cfg(ct_settings_form /f) {
+      |                                                   ^
+build_gate/mutants/p496/m0065_screen_settings.c:72:33: note: to match this '('
+   72 | static void ct_settings_load_cfg(ct_settings_form /f) {
+      |                                 ^
+build_gate/mutants/p496/m0065_screen_settings.c:75:30: error: use of undeclared identifier 'f'
+   75 |     if (ct_repo_settings_get(f->db, CT_SETTINGS_KEY_RETENTION, buf, sizeof buf) == 0)
+      |                              ^
+build_gate/mutants/p496/m0065_screen_settings.c:77:30: error: use of undeclared identifier 'f'
+   77 |     if (ct_repo_settings_get(f->db, CT_SETTINGS_KEY_SECONDS, buf, sizeof buf) == 0)
+      |                              ^
+build_gate/mutants/p496/m0065_screen_settings.c:79:30: error: use of undeclared identifier 'f'
+   79 |     if (ct_repo_settings_get(f->db, CT_SETTINGS_KEY_MOVES, buf, sizeof buf) == 0)
+      |                              ^
+build_gate/mutants/p496/m0065_screen_settings.c:81:5: error: use of undeclared identifier 'f'
+   81 |     f->retention = cfg.fsrs.request_retention;
+      |     ^
+build_gate/mutants/p496/m0065_screen_settings.c:82:5: error: use of undeclared identifier 'f'
+   82 |     f->move_seconds = cfg.anim.move_seconds;
+      |     ^
+build_gate/mutants/p496/m0065_screen_settings.c:83:5: error: use of undeclared identifier 'f'
+   83 |     f->move_mask =
+      |     ^
+build_gate/mutants/p496/m0065_screen_settings.c:141:26: error: passing 'ct_settings_form *' to parameter of incompatible type 'ct_settings_form'; dereference with *
+  141 |     ct_settings_load_cfg(f);
+      |                          ^
+      |                          *
+build_gate/mutants/p496/m0065_screen_settings.c:72:51: note: passing argument to parameter here
+   72 | static void ct_settings_load_cfg(ct_settings_form /f) {
+      |                                                   ^
+8 errors generated.
+mutate: suite settings_form_open_stored exited 1
+mutate: suite settings_form_open_stored exited 1
+mutate: suite settings_form_open_stored exited 1
+mutate: suite settings_form_open_fallbacks exited 1
+mutate: suite settings_form_open_fallbacks exited 1
+mutate: suite settings_form_open_fallbacks exited 1
+mutate: suite settings_form_boundaries exited 1
+mutate: suite settings_form_boundaries exited 1
+mutate: suite settings_form_boundaries exited 1
+mutate: suite settings_form_boundaries exited 1
+mutate: suite settings_form_boundaries exited 1
+build_gate/mutants/p496/m0077_screen_settings.c:84:33: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+   84 |         cfg.gen.preferred_moves == -1 ? CT_GEN_DEFAULT_PREFERRED_MOVES : cfg.gen.preferred_moves;
+      |         ~~~~~~~~~~~~~~~~~~~~~~~ ^  ~~
+1 error generated.
+build_gate/mutants/p496/m0078_screen_settings.c:87:44: error: expected ')'
+   87 | static int ct_settings_load_buffer(sqlite3 /db, const char *key, int fallback) {
+      |                                            ^
+build_gate/mutants/p496/m0078_screen_settings.c:87:35: note: to match this '('
+   87 | static int ct_settings_load_buffer(sqlite3 /db, const char *key, int fallback) {
+      |                                   ^
+build_gate/mutants/p496/m0078_screen_settings.c:87:44: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   87 | static int ct_settings_load_buffer(sqlite3 /db, const char *key, int fallback) {
+      |                                            ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_gate/mutants/p496/m0078_screen_settings.c:89:30: error: use of undeclared identifier 'db'
+   89 |     if (ct_repo_settings_get(db, key, buf, sizeof buf) != 0)
+      |                              ^~
+build_gate/mutants/p496/m0078_screen_settings.c:89:34: error: use of undeclared identifier 'key'
+   89 |     if (ct_repo_settings_get(db, key, buf, sizeof buf) != 0)
+      |                                  ^~~
+build_gate/mutants/p496/m0078_screen_settings.c:90:16: error: use of undeclared identifier 'fallback'
+   90 |         return fallback;
+      |                ^~~~~~~~
+build_gate/mutants/p496/m0078_screen_settings.c:95:16: error: use of undeclared identifier 'fallback'
+   95 |         return fallback;
+      |                ^~~~~~~~
+build_gate/mutants/p496/m0078_screen_settings.c:97:16: error: use of undeclared identifier 'fallback'
+   97 |         return fallback;
+      |                ^~~~~~~~
+build_gate/mutants/p496/m0078_screen_settings.c:143:37: error: too many arguments to function call, expected 1, have 3
+  143 |         ct_settings_load_buffer(db, CT_SETTINGS_KEY_BUFFER_CORNER, CT_3STYLE_CORNER_BUFFER);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0078_screen_settings.c:87:12: note: 'ct_settings_load_buffer' declared here
+   87 | static int ct_settings_load_buffer(sqlite3 /db, const char *key, int fallback) {
+      |            ^                       ~~~~~~~
+build_gate/mutants/p496/m0078_screen_settings.c:145:37: error: too many arguments to function call, expected 1, have 3
+  145 |         ct_settings_load_buffer(db, CT_SETTINGS_KEY_BUFFER_EDGE, CT_3STYLE_EDGE_BUFFER);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0078_screen_settings.c:87:12: note: 'ct_settings_load_buffer' declared here
+   87 | static int ct_settings_load_buffer(sqlite3 /db, const char *key, int fallback) {
+      |            ^                       ~~~~~~~
+9 errors generated.
+build_gate/mutants/p496/m0079_screen_settings.c:87:60: error: expected ')'
+   87 | static int ct_settings_load_buffer(sqlite3 *db, const char /key, int fallback) {
+      |                                                            ^
+build_gate/mutants/p496/m0079_screen_settings.c:87:35: note: to match this '('
+   87 | static int ct_settings_load_buffer(sqlite3 *db, const char /key, int fallback) {
+      |                                   ^
+build_gate/mutants/p496/m0079_screen_settings.c:89:34: error: use of undeclared identifier 'key'
+   89 |     if (ct_repo_settings_get(db, key, buf, sizeof buf) != 0)
+      |                                  ^~~
+build_gate/mutants/p496/m0079_screen_settings.c:90:16: error: use of undeclared identifier 'fallback'
+   90 |         return fallback;
+      |                ^~~~~~~~
+build_gate/mutants/p496/m0079_screen_settings.c:95:16: error: use of undeclared identifier 'fallback'
+   95 |         return fallback;
+      |                ^~~~~~~~
+build_gate/mutants/p496/m0079_screen_settings.c:97:16: error: use of undeclared identifier 'fallback'
+   97 |         return fallback;
+      |                ^~~~~~~~
+build_gate/mutants/p496/m0079_screen_settings.c:143:68: error: too many arguments to function call, expected 2, have 3
+  143 |         ct_settings_load_buffer(db, CT_SETTINGS_KEY_BUFFER_CORNER, CT_3STYLE_CORNER_BUFFER);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~                                    ^~~~~~~~~~~~~~~~~~~~~~~
+src\config/config.h:227:33: note: expanded from macro 'CT_3STYLE_CORNER_BUFFER'
+  227 | #define CT_3STYLE_CORNER_BUFFER 2
+      |                                 ^
+build_gate/mutants/p496/m0079_screen_settings.c:87:12: note: 'ct_settings_load_buffer' declared here
+   87 | static int ct_settings_load_buffer(sqlite3 *db, const char /key, int fallback) {
+      |            ^                       ~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0079_screen_settings.c:145:66: error: too many arguments to function call, expected 2, have 3
+  145 |         ct_settings_load_buffer(db, CT_SETTINGS_KEY_BUFFER_EDGE, CT_3STYLE_EDGE_BUFFER);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~                                  ^~~~~~~~~~~~~~~~~~~~~
+src\config/config.h:228:31: note: expanded from macro 'CT_3STYLE_EDGE_BUFFER'
+  228 | #define CT_3STYLE_EDGE_BUFFER 2
+      |                               ^
+build_gate/mutants/p496/m0079_screen_settings.c:87:12: note: 'ct_settings_load_buffer' declared here
+   87 | static int ct_settings_load_buffer(sqlite3 *db, const char /key, int fallback) {
+      |            ^                       ~~~~~~~~~~~~~~~~~~~~~~~
+7 errors generated.
+mutate: suite settings_form_boundaries exited 1
+mutate: suite settings_form_boundaries exited 1
+mutate: suite settings_form_boundaries exited 1
+build_gate/mutants/p496/m0085_screen_settings.c:92:10: error: expected identifier or '('
+   92 |     char /end = NULL;
+      |          ^
+build_gate/mutants/p496/m0085_screen_settings.c:93:27: error: use of undeclared identifier 'end'
+   93 |     long v = strtol(buf, &end, CT_DECIMAL_BASE);
+      |                           ^~~
+build_gate/mutants/p496/m0085_screen_settings.c:94:9: error: use of undeclared identifier 'end'
+   94 |     if (end == buf || end[0] != '\0' || errno == ERANGE)
+      |         ^~~
+build_gate/mutants/p496/m0085_screen_settings.c:94:23: error: use of undeclared identifier 'end'
+   94 |     if (end == buf || end[0] != '\0' || errno == ERANGE)
+      |                       ^~~
+4 errors generated.
+mutate: suite settings_form_boundaries exited 1
+build_gate/mutants/p496/m0087_screen_settings.c:94:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   94 |     if (end == buf && end[0] != '\0' || errno == ERANGE)
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p496/m0087_screen_settings.c:94:20: note: place parentheses around the '&&' expression to silence this warning
+   94 |     if (end == buf && end[0] != '\0' || errno == ERANGE)
+      |                    ^
+      |         (                           )
+1 error generated.
+mutate: suite settings_form_boundaries exited 1
+mutate: suite settings_form_boundaries exited 1
+mutate: suite settings_form_boundaries exited 1
+build_gate/mutants/p496/m0091_screen_settings.c:94:38: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   94 |     if (end == buf || end[0] != '\0' && errno == ERANGE)
+      |                    ~~ ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0091_screen_settings.c:94:38: note: place parentheses around the '&&' expression to silence this warning
+   94 |     if (end == buf || end[0] != '\0' && errno == ERANGE)
+      |                       ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite settings_form_boundaries exited 1
+mutate: suite settings_form_boundaries exited 1
+mutate: suite settings_form_boundaries exited 1
+mutate: suite settings_form_boundaries exited 1
+mutate: suite settings_form_boundaries exited 1
+mutate: suite settings_form_boundaries exited 1
+build_gate/mutants/p496/m0098_screen_settings.c:101:54: error: expected ')'
+  101 | static void ct_settings_load_colors(ct_settings_form /f) {
+      |                                                      ^
+build_gate/mutants/p496/m0098_screen_settings.c:101:36: note: to match this '('
+  101 | static void ct_settings_load_colors(ct_settings_form /f) {
+      |                                    ^
+build_gate/mutants/p496/m0098_screen_settings.c:105:34: error: use of undeclared identifier 'f'
+  105 |         if (ct_repo_settings_get(f->db, ct_color_scheme_keys[face], buf, sizeof buf) == 0 &&
+      |                                  ^
+build_gate/mutants/p496/m0098_screen_settings.c:106:42: error: use of undeclared identifier 'f'
+  106 |             ct_settings_parse_color(buf, f->colors[face])) {
+      |                                          ^
+build_gate/mutants/p496/m0098_screen_settings.c:109:43: error: use of undeclared identifier 'f'
+  109 |         if (!ct_settings_parse_color(src, f->colors[face]))
+      |                                           ^
+build_gate/mutants/p496/m0098_screen_settings.c:110:20: error: use of undeclared identifier 'f'
+  110 |             memset(f->colors[face], 0, CT_SETTINGS_CHANNELS);
+      |                    ^
+build_gate/mutants/p496/m0098_screen_settings.c:146:29: error: passing 'ct_settings_form *' to parameter of incompatible type 'ct_settings_form'; dereference with *
+  146 |     ct_settings_load_colors(f);
+      |                             ^
+      |                             *
+build_gate/mutants/p496/m0098_screen_settings.c:101:54: note: passing argument to parameter here
+  101 | static void ct_settings_load_colors(ct_settings_form /f) {
+      |                                                      ^
+6 errors generated.
+mutate: suite settings_form_cancel exited 1
+mutate: suite e2e_run_expect_cfg exited -1073741795
+mutate: suite e2e_run_expect_cfg exited -1073741795
+build_gate/mutants/p496/m0102_screen_settings.c:104:20: error: expected identifier or '('
+  104 |         const char /src = CT_SETTINGS_COLOR_DEFAULTS[face];
+      |                    ^
+build_gate/mutants/p496/m0102_screen_settings.c:109:38: error: use of undeclared identifier 'src'
+  109 |         if (!ct_settings_parse_color(src, f->colors[face]))
+      |                                      ^~~
+2 errors generated.
+mutate: suite settings_form_hex exited 1
+mutate: suite settings_form_hex exited 1
+mutate: suite settings_form_hex exited 1
+mutate: suite settings_form_hex exited 1
+mutate: suite settings_form_cancel exited 1
+build_gate/mutants/p496/m0110_screen_settings.c:114:45: error: expected ')'
+  114 | void ct_settings_form_open(ct_settings_form /f, sqlite3 *db) {
+      |                                             ^
+build_gate/mutants/p496/m0110_screen_settings.c:114:27: note: to match this '('
+  114 | void ct_settings_form_open(ct_settings_form /f, sqlite3 *db) {
+      |                           ^
+build_gate/mutants/p496/m0110_screen_settings.c:114:6: error: conflicting types for 'ct_settings_form_open'
+  114 | void ct_settings_form_open(ct_settings_form /f, sqlite3 *db) {
+      |      ^
+src\ui/ui.h:140:6: note: previous declaration is here
+  140 | void ct_settings_form_open(ct_settings_form *f, sqlite3 *db);
+      |      ^
+build_gate/mutants/p496/m0110_screen_settings.c:115:9: error: use of undeclared identifier 'f'
+  115 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p496/m0110_screen_settings.c:117:12: error: use of undeclared identifier 'f'
+  117 |     memset(f, 0, sizeof *f);
+      |            ^
+build_gate/mutants/p496/m0110_screen_settings.c:117:26: error: use of undeclared identifier 'f'
+  117 |     memset(f, 0, sizeof *f);
+      |                          ^
+build_gate/mutants/p496/m0110_screen_settings.c:118:5: error: use of undeclared identifier 'f'
+  118 |     f->db = db;
+      |     ^
+build_gate/mutants/p496/m0110_screen_settings.c:118:13: error: use of undeclared identifier 'db'
+  118 |     f->db = db;
+      |             ^~
+build_gate/mutants/p496/m0110_screen_settings.c:119:9: error: use of undeclared identifier 'db'
+  119 |     if (db == NULL) {
+      |         ^~
+build_gate/mutants/p496/m0110_screen_settings.c:120:9: error: use of undeclared identifier 'f'
+  120 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p496/m0110_screen_settings.c:123:46: error: use of undeclared identifier 'db'
+  123 |     int scheme = ct_letter_scheme_default_id(db);
+      |                                              ^~
+build_gate/mutants/p496/m0110_screen_settings.c:125:35: error: use of undeclared identifier 'db'
+  125 |         if (ct_letter_seed_speffz(db) != 0) {
+      |                                   ^~
+build_gate/mutants/p496/m0110_screen_settings.c:126:13: error: use of undeclared identifier 'f'
+  126 |             f->status = CT_REPO_ERR_DB;
+      |             ^
+build_gate/mutants/p496/m0110_screen_settings.c:129:46: error: use of undeclared identifier 'db'
+  129 |         scheme = ct_letter_scheme_default_id(db);
+      |                                              ^~
+build_gate/mutants/p496/m0110_screen_settings.c:132:9: error: use of undeclared identifier 'f'
+  132 |         f->status = CT_REPO_ERR_DB;
+      |         ^
+build_gate/mutants/p496/m0110_screen_settings.c:135:5: error: use of undeclared identifier 'f'
+  135 |     f->scheme_id = scheme;
+      |     ^
+build_gate/mutants/p496/m0110_screen_settings.c:136:28: error: use of undeclared identifier 'db'
+  136 |     if (ct_letter_map_load(db, scheme, &f->map) < 0) {
+      |                            ^~
+build_gate/mutants/p496/m0110_screen_settings.c:136:41: error: use of undeclared identifier 'f'
+  136 |     if (ct_letter_map_load(db, scheme, &f->map) < 0) {
+      |                                         ^
+build_gate/mutants/p496/m0110_screen_settings.c:137:9: error: use of undeclared identifier 'f'
+  137 |         f->status = CT_REPO_ERR_DB;
+      |         ^
+build_gate/mutants/p496/m0110_screen_settings.c:140:5: error: use of undeclared identifier 'f'
+  140 |     f->staged = f->map;
+      |     ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_gate/mutants/p496/m0111_screen_settings.c:114:57: error: expected ')'
+  114 | void ct_settings_form_open(ct_settings_form *f, sqlite3 /db) {
+      |                                                         ^
+build_gate/mutants/p496/m0111_screen_settings.c:114:27: note: to match this '('
+  114 | void ct_settings_form_open(ct_settings_form *f, sqlite3 /db) {
+      |                           ^
+build_gate/mutants/p496/m0111_screen_settings.c:114:6: error: conflicting types for 'ct_settings_form_open'
+  114 | void ct_settings_form_open(ct_settings_form *f, sqlite3 /db) {
+      |      ^
+src\ui/ui.h:140:6: note: previous declaration is here
+  140 | void ct_settings_form_open(ct_settings_form *f, sqlite3 *db);
+      |      ^
+build_gate/mutants/p496/m0111_screen_settings.c:114:57: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  114 | void ct_settings_form_open(ct_settings_form *f, sqlite3 /db) {
+      |                                                         ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_gate/mutants/p496/m0111_screen_settings.c:118:13: error: use of undeclared identifier 'db'
+  118 |     f->db = db;
+      |             ^~
+build_gate/mutants/p496/m0111_screen_settings.c:119:9: error: use of undeclared identifier 'db'
+  119 |     if (db == NULL) {
+      |         ^~
+build_gate/mutants/p496/m0111_screen_settings.c:123:46: error: use of undeclared identifier 'db'
+  123 |     int scheme = ct_letter_scheme_default_id(db);
+      |                                              ^~
+build_gate/mutants/p496/m0111_screen_settings.c:125:35: error: use of undeclared identifier 'db'
+  125 |         if (ct_letter_seed_speffz(db) != 0) {
+      |                                   ^~
+build_gate/mutants/p496/m0111_screen_settings.c:129:46: error: use of undeclared identifier 'db'
+  129 |         scheme = ct_letter_scheme_default_id(db);
+      |                                              ^~
+build_gate/mutants/p496/m0111_screen_settings.c:136:28: error: use of undeclared identifier 'db'
+  136 |     if (ct_letter_map_load(db, scheme, &f->map) < 0) {
+      |                            ^~
+build_gate/mutants/p496/m0111_screen_settings.c:143:33: error: use of undeclared identifier 'db'
+  143 |         ct_settings_load_buffer(db, CT_SETTINGS_KEY_BUFFER_CORNER, CT_3STYLE_CORNER_BUFFER);
+      |                                 ^~
+build_gate/mutants/p496/m0111_screen_settings.c:145:33: error: use of undeclared identifier 'db'
+  145 |         ct_settings_load_buffer(db, CT_SETTINGS_KEY_BUFFER_EDGE, CT_3STYLE_EDGE_BUFFER);
+      |                                 ^~
+11 errors generated.
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_open exited 1
+mutate: suite settings_form_open exited 1
+build_gate/mutants/p496/m0115_screen_settings.c:117:25: error: expected expression
+  117 |     memset(f, 0, sizeof /f);
+      |                         ^
+1 error generated.
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_open_dberror exited 1
+mutate: suite settings_form_cancel exited 1
+build_gate/mutants/p496/m0130_screen_settings.c:151:52: error: expected ')'
+  151 | int ct_settings_form_stage_letter(ct_settings_form /f, int orbit, int sticker, char letter) {
+      |                                                    ^
+build_gate/mutants/p496/m0130_screen_settings.c:151:34: note: to match this '('
+  151 | int ct_settings_form_stage_letter(ct_settings_form /f, int orbit, int sticker, char letter) {
+      |                                  ^
+build_gate/mutants/p496/m0130_screen_settings.c:151:5: error: conflicting types for 'ct_settings_form_stage_letter'
+  151 | int ct_settings_form_stage_letter(ct_settings_form /f, int orbit, int sticker, char letter) {
+      |     ^
+src\ui/ui.h:141:5: note: previous declaration is here
+  141 | int ct_settings_form_stage_letter(ct_settings_form *f, int orbit, int sticker, char letter);
+      |     ^
+build_gate/mutants/p496/m0130_screen_settings.c:152:9: error: use of undeclared identifier 'f'
+  152 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p496/m0130_screen_settings.c:154:35: error: use of undeclared identifier 'f'
+  154 |     char *arr = ct_settings_orbit(f, orbit);
+      |                                   ^
+build_gate/mutants/p496/m0130_screen_settings.c:154:38: error: use of undeclared identifier 'orbit'
+  154 |     char *arr = ct_settings_orbit(f, orbit);
+      |                                      ^~~~~
+build_gate/mutants/p496/m0130_screen_settings.c:155:24: error: use of undeclared identifier 'sticker'
+  155 |     if (arr == NULL || sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |                        ^~~~~~~
+build_gate/mutants/p496/m0130_screen_settings.c:155:39: error: use of undeclared identifier 'sticker'
+  155 |     if (arr == NULL || sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |                                       ^~~~~~~
+build_gate/mutants/p496/m0130_screen_settings.c:156:9: error: use of undeclared identifier 'f'
+  156 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p496/m0130_screen_settings.c:159:9: error: use of undeclared identifier 'letter'
+  159 |     if (letter < CT_LETTER_FIRST || letter > CT_LETTER_LAST) {
+      |         ^~~~~~
+build_gate/mutants/p496/m0130_screen_settings.c:159:37: error: use of undeclared identifier 'letter'
+  159 |     if (letter < CT_LETTER_FIRST || letter > CT_LETTER_LAST) {
+      |                                     ^~~~~~
+build_gate/mutants/p496/m0130_screen_settings.c:160:9: error: use of undeclared identifier 'f'
+  160 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p496/m0130_screen_settings.c:164:18: error: use of undeclared identifier 'sticker'
+  164 |         if (i != sticker && arr[i] == letter) {
+      |                  ^~~~~~~
+build_gate/mutants/p496/m0130_screen_settings.c:164:39: error: use of undeclared identifier 'letter'
+  164 |         if (i != sticker && arr[i] == letter) {
+      |                                       ^~~~~~
+build_gate/mutants/p496/m0130_screen_settings.c:165:13: error: use of undeclared identifier 'f'
+  165 |             f->status = CT_REPO_CONFLICT;
+      |             ^
+build_gate/mutants/p496/m0130_screen_settings.c:169:13: error: use of undeclared identifier 'sticker'
+  169 |     if (arr[sticker] == letter) {
+      |             ^~~~~~~
+build_gate/mutants/p496/m0130_screen_settings.c:169:25: error: use of undeclared identifier 'letter'
+  169 |     if (arr[sticker] == letter) {
+      |                         ^~~~~~
+build_gate/mutants/p496/m0130_screen_settings.c:170:9: error: use of undeclared identifier 'f'
+  170 |         f->status = CT_REPO_OK;
+      |         ^
+build_gate/mutants/p496/m0130_screen_settings.c:173:9: error: use of undeclared identifier 'sticker'
+  173 |     arr[sticker] = letter;
+      |         ^~~~~~~
+build_gate/mutants/p496/m0130_screen_settings.c:173:20: error: use of undeclared identifier 'letter'
+  173 |     arr[sticker] = letter;
+      |                    ^~~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite settings_form_guards exited 1
+build_gate/mutants/p496/m0132_screen_settings.c:154:10: error: expected identifier or '('
+  154 |     char /arr = ct_settings_orbit(f, orbit);
+      |          ^
+build_gate/mutants/p496/m0132_screen_settings.c:155:9: error: use of undeclared identifier 'arr'
+  155 |     if (arr == NULL || sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |         ^~~
+build_gate/mutants/p496/m0132_screen_settings.c:164:29: error: use of undeclared identifier 'arr'
+  164 |         if (i != sticker && arr[i] == letter) {
+      |                             ^~~
+build_gate/mutants/p496/m0132_screen_settings.c:169:9: error: use of undeclared identifier 'arr'
+  169 |     if (arr[sticker] == letter) {
+      |         ^~~
+build_gate/mutants/p496/m0132_screen_settings.c:173:5: error: use of undeclared identifier 'arr'
+  173 |     arr[sticker] = letter;
+      |     ^~~
+build_gate/mutants/p496/m0132_screen_settings.c:151:60: error: unused parameter 'orbit' [-Werror,-Wunused-parameter]
+  151 | int ct_settings_form_stage_letter(ct_settings_form *f, int orbit, int sticker, char letter) {
+      |                                                            ^
+6 errors generated.
+mutate: suite settings_form_guards exited 1
+build_gate/mutants/p496/m0134_screen_settings.c:155:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  155 |     if (arr == NULL && sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_gate/mutants/p496/m0134_screen_settings.c:155:21: note: place parentheses around the '&&' expression to silence this warning
+  155 |     if (arr == NULL && sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |                     ^
+      |         (                         )
+1 error generated.
+mutate: suite settings_form_guards exited 1
+mutate: suite settings_form_guards exited 1
+mutate: suite settings_form_letters exited 1
+build_gate/mutants/p496/m0138_screen_settings.c:155:36: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  155 |     if (arr == NULL || sticker < 0 && sticker >= CT_LETTER_STICKERS) {
+      |                     ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0138_screen_settings.c:155:36: note: place parentheses around the '&&' expression to silence this warning
+  155 |     if (arr == NULL || sticker < 0 && sticker >= CT_LETTER_STICKERS) {
+      |                        ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite settings_form_letters exited 1
+mutate: suite settings_form_guards exited 1
+mutate: suite settings_form_letters exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_letters exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_swap exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_guards exited 1
+mutate: suite settings_form_guards exited 1
+mutate: suite settings_form_guards exited 1
+mutate: suite settings_form_guards exited 1
+build_gate/mutants/p496/m0151_screen_settings.c:179:51: error: expected ')'
+  179 | int ct_settings_form_swap_letter(ct_settings_form /f, int orbit, int sticker, char letter) {
+      |                                                   ^
+build_gate/mutants/p496/m0151_screen_settings.c:179:33: note: to match this '('
+  179 | int ct_settings_form_swap_letter(ct_settings_form /f, int orbit, int sticker, char letter) {
+      |                                 ^
+build_gate/mutants/p496/m0151_screen_settings.c:179:5: error: conflicting types for 'ct_settings_form_swap_letter'
+  179 | int ct_settings_form_swap_letter(ct_settings_form /f, int orbit, int sticker, char letter) {
+      |     ^
+src\ui/ui.h:142:5: note: previous declaration is here
+  142 | int ct_settings_form_swap_letter(ct_settings_form *f, int orbit, int sticker, char letter);
+      |     ^
+build_gate/mutants/p496/m0151_screen_settings.c:180:9: error: use of undeclared identifier 'f'
+  180 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p496/m0151_screen_settings.c:182:35: error: use of undeclared identifier 'f'
+  182 |     char *arr = ct_settings_orbit(f, orbit);
+      |                                   ^
+build_gate/mutants/p496/m0151_screen_settings.c:182:38: error: use of undeclared identifier 'orbit'
+  182 |     char *arr = ct_settings_orbit(f, orbit);
+      |                                      ^~~~~
+build_gate/mutants/p496/m0151_screen_settings.c:183:24: error: use of undeclared identifier 'sticker'
+  183 |     if (arr == NULL || sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |                        ^~~~~~~
+build_gate/mutants/p496/m0151_screen_settings.c:183:39: error: use of undeclared identifier 'sticker'
+  183 |     if (arr == NULL || sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |                                       ^~~~~~~
+build_gate/mutants/p496/m0151_screen_settings.c:184:9: error: use of undeclared identifier 'f'
+  184 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p496/m0151_screen_settings.c:187:9: error: use of undeclared identifier 'letter'
+  187 |     if (letter < CT_LETTER_FIRST || letter > CT_LETTER_LAST) {
+      |         ^~~~~~
+build_gate/mutants/p496/m0151_screen_settings.c:187:37: error: use of undeclared identifier 'letter'
+  187 |     if (letter < CT_LETTER_FIRST || letter > CT_LETTER_LAST) {
+      |                                     ^~~~~~
+build_gate/mutants/p496/m0151_screen_settings.c:188:9: error: use of undeclared identifier 'f'
+  188 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p496/m0151_screen_settings.c:193:18: error: use of undeclared identifier 'sticker'
+  193 |         if (i != sticker && arr[i] == letter) {
+      |                  ^~~~~~~
+build_gate/mutants/p496/m0151_screen_settings.c:193:39: error: use of undeclared identifier 'letter'
+  193 |         if (i != sticker && arr[i] == letter) {
+      |                                       ^~~~~~
+build_gate/mutants/p496/m0151_screen_settings.c:197:27: error: use of undeclared identifier 'sticker'
+  197 |     if (holder < 0 || arr[sticker] == letter) {
+      |                           ^~~~~~~
+build_gate/mutants/p496/m0151_screen_settings.c:197:39: error: use of undeclared identifier 'letter'
+  197 |     if (holder < 0 || arr[sticker] == letter) {
+      |                                       ^~~~~~
+build_gate/mutants/p496/m0151_screen_settings.c:198:46: error: use of undeclared identifier 'f'
+  198 |         return ct_settings_form_stage_letter(f, orbit, sticker, letter);
+      |                                              ^
+build_gate/mutants/p496/m0151_screen_settings.c:198:49: error: use of undeclared identifier 'orbit'
+  198 |         return ct_settings_form_stage_letter(f, orbit, sticker, letter);
+      |                                                 ^~~~~
+build_gate/mutants/p496/m0151_screen_settings.c:198:56: error: use of undeclared identifier 'sticker'
+  198 |         return ct_settings_form_stage_letter(f, orbit, sticker, letter);
+      |                                                        ^~~~~~~
+build_gate/mutants/p496/m0151_screen_settings.c:198:65: error: use of undeclared identifier 'letter'
+  198 |         return ct_settings_form_stage_letter(f, orbit, sticker, letter);
+      |                                                                 ^~~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite settings_form_letter_edges exited 1
+build_gate/mutants/p496/m0153_screen_settings.c:182:10: error: expected identifier or '('
+  182 |     char /arr = ct_settings_orbit(f, orbit);
+      |          ^
+build_gate/mutants/p496/m0153_screen_settings.c:183:9: error: use of undeclared identifier 'arr'
+  183 |     if (arr == NULL || sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |         ^~~
+build_gate/mutants/p496/m0153_screen_settings.c:193:29: error: use of undeclared identifier 'arr'
+  193 |         if (i != sticker && arr[i] == letter) {
+      |                             ^~~
+build_gate/mutants/p496/m0153_screen_settings.c:197:23: error: use of undeclared identifier 'arr'
+  197 |     if (holder < 0 || arr[sticker] == letter) {
+      |                       ^~~
+build_gate/mutants/p496/m0153_screen_settings.c:200:18: error: use of undeclared identifier 'arr'
+  200 |     char freed = arr[sticker];
+      |                  ^~~
+build_gate/mutants/p496/m0153_screen_settings.c:201:5: error: use of undeclared identifier 'arr'
+  201 |     arr[sticker] = letter;
+      |     ^~~
+build_gate/mutants/p496/m0153_screen_settings.c:202:5: error: use of undeclared identifier 'arr'
+  202 |     arr[holder] = freed;
+      |     ^~~
+7 errors generated.
+mutate: suite settings_form_letter_edges exited 1
+build_gate/mutants/p496/m0155_screen_settings.c:183:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  183 |     if (arr == NULL && sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_gate/mutants/p496/m0155_screen_settings.c:183:21: note: place parentheses around the '&&' expression to silence this warning
+  183 |     if (arr == NULL && sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |                     ^
+      |         (                         )
+1 error generated.
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_swap exited 1
+build_gate/mutants/p496/m0159_screen_settings.c:183:36: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  183 |     if (arr == NULL || sticker < 0 && sticker >= CT_LETTER_STICKERS) {
+      |                     ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0159_screen_settings.c:183:36: note: place parentheses around the '&&' expression to silence this warning
+  183 |     if (arr == NULL || sticker < 0 && sticker >= CT_LETTER_STICKERS) {
+      |                        ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite settings_form_swap_edges exited 1
+mutate: suite settings_form_swap exited 1
+mutate: suite settings_form_swap_edges exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_swap exited 1
+mutate: suite settings_form_swap exited 1
+mutate: suite settings_form_swap exited 1
+mutate: suite settings_form_swap exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_swap exited 1
+mutate: suite settings_form_swap exited 1
+mutate: suite settings_form_swap_edges exited 1
+mutate: suite settings_form_swap_edges exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_swap exited 1
+build_gate/mutants/p496/m0179_screen_settings.c:208:51: error: expected ')'
+  208 | int ct_settings_form_stage_color(ct_settings_form /f, int face, int channel, int value) {
+      |                                                   ^
+build_gate/mutants/p496/m0179_screen_settings.c:208:33: note: to match this '('
+  208 | int ct_settings_form_stage_color(ct_settings_form /f, int face, int channel, int value) {
+      |                                 ^
+build_gate/mutants/p496/m0179_screen_settings.c:208:5: error: conflicting types for 'ct_settings_form_stage_color'
+  208 | int ct_settings_form_stage_color(ct_settings_form /f, int face, int channel, int value) {
+      |     ^
+src\ui/ui.h:143:5: note: previous declaration is here
+  143 | int ct_settings_form_stage_color(ct_settings_form *f, int face, int channel, int value);
+      |     ^
+build_gate/mutants/p496/m0179_screen_settings.c:209:9: error: use of undeclared identifier 'f'
+  209 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p496/m0179_screen_settings.c:211:9: error: use of undeclared identifier 'face'
+  211 |     if (face < 0 || face >= CT_SETTINGS_FACE_COUNT || channel < 0 ||
+      |         ^~~~
+build_gate/mutants/p496/m0179_screen_settings.c:211:21: error: use of undeclared identifier 'face'
+  211 |     if (face < 0 || face >= CT_SETTINGS_FACE_COUNT || channel < 0 ||
+      |                     ^~~~
+build_gate/mutants/p496/m0179_screen_settings.c:211:55: error: use of undeclared identifier 'channel'
+  211 |     if (face < 0 || face >= CT_SETTINGS_FACE_COUNT || channel < 0 ||
+      |                                                       ^~~~~~~
+build_gate/mutants/p496/m0179_screen_settings.c:212:9: error: use of undeclared identifier 'channel'
+  212 |         channel >= CT_SETTINGS_CHANNELS || value < 0 || value > CT_SETTINGS_COLOR_MAX) {
+      |         ^~~~~~~
+build_gate/mutants/p496/m0179_screen_settings.c:212:44: error: use of undeclared identifier 'value'
+  212 |         channel >= CT_SETTINGS_CHANNELS || value < 0 || value > CT_SETTINGS_COLOR_MAX) {
+      |                                            ^~~~~
+build_gate/mutants/p496/m0179_screen_settings.c:212:57: error: use of undeclared identifier 'value'
+  212 |         channel >= CT_SETTINGS_CHANNELS || value < 0 || value > CT_SETTINGS_COLOR_MAX) {
+      |                                                         ^~~~~
+build_gate/mutants/p496/m0179_screen_settings.c:213:9: error: use of undeclared identifier 'f'
+  213 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p496/m0179_screen_settings.c:216:5: error: use of undeclared identifier 'f'
+  216 |     f->colors[face][channel] = (unsigned char)value;
+      |     ^
+build_gate/mutants/p496/m0179_screen_settings.c:216:15: error: use of undeclared identifier 'face'
+  216 |     f->colors[face][channel] = (unsigned char)value;
+      |               ^~~~
+build_gate/mutants/p496/m0179_screen_settings.c:216:21: error: use of undeclared identifier 'channel'
+  216 |     f->colors[face][channel] = (unsigned char)value;
+      |                     ^~~~~~~
+build_gate/mutants/p496/m0179_screen_settings.c:216:47: error: use of undeclared identifier 'value'
+  216 |     f->colors[face][channel] = (unsigned char)value;
+      |                                               ^~~~~
+build_gate/mutants/p496/m0179_screen_settings.c:217:5: error: use of undeclared identifier 'f'
+  217 |     f->dirty = true;
+      |     ^
+build_gate/mutants/p496/m0179_screen_settings.c:218:5: error: use of undeclared identifier 'f'
+  218 |     f->status = CT_REPO_OK;
+      |     ^
+16 errors generated.
+mutate: suite settings_colors_scheme_round_trip exited 1
+mutate: suite settings_colors_scheme_round_trip exited 1
+mutate: suite settings_colors_scheme_round_trip exited 1
+mutate: suite settings_form_boundaries exited -1073741795
+build_gate/mutants/p496/m0184_screen_settings.c:211:18: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  211 |     if (face < 0 && face >= CT_SETTINGS_FACE_COUNT || channel < 0 ||
+      |         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p496/m0184_screen_settings.c:211:18: note: place parentheses around the '&&' expression to silence this warning
+  211 |     if (face < 0 && face >= CT_SETTINGS_FACE_COUNT || channel < 0 ||
+      |                  ^
+      |         (                                         )
+1 error generated.
+mutate: suite settings_form_boundaries exited -1073741795
+build_gate/mutants/p496/m0186_screen_settings.c:211:52: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  211 |     if (face < 0 || face >= CT_SETTINGS_FACE_COUNT && channel < 0 ||
+      |                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+build_gate/mutants/p496/m0186_screen_settings.c:211:52: note: place parentheses around the '&&' expression to silence this warning
+  211 |     if (face < 0 || face >= CT_SETTINGS_FACE_COUNT && channel < 0 ||
+      |                                                    ^
+      |                     (                                            )
+1 error generated.
+mutate: suite settings_colors_scheme_round_trip exited 1
+mutate: suite settings_colors_scheme_round_trip exited 1
+mutate: suite settings_form_boundaries exited -1073741795
+build_gate/mutants/p496/m0190_screen_settings.c:211:67: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  211 |     if (face < 0 || face >= CT_SETTINGS_FACE_COUNT || channel < 0 &&
+      |                                                    ~~ ~~~~~~~~~~~~^~
+  212 |         channel >= CT_SETTINGS_CHANNELS || value < 0 || value > CT_SETTINGS_COLOR_MAX) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0190_screen_settings.c:211:67: note: place parentheses around the '&&' expression to silence this warning
+  211 |     if (face < 0 || face >= CT_SETTINGS_FACE_COUNT || channel < 0 &&
+      |                                                                   ^
+      |                                                       (
+  212 |         channel >= CT_SETTINGS_CHANNELS || value < 0 || value > CT_SETTINGS_COLOR_MAX) {
+      |                                        )
+1 error generated.
+mutate: suite settings_form_boundaries exited -1073741795
+build_gate/mutants/p496/m0192_screen_settings.c:212:41: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  211 |     if (face < 0 || face >= CT_SETTINGS_FACE_COUNT || channel < 0 ||
+      |                                                                   ~~
+  212 |         channel >= CT_SETTINGS_CHANNELS && value < 0 || value > CT_SETTINGS_COLOR_MAX) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+build_gate/mutants/p496/m0192_screen_settings.c:212:41: note: place parentheses around the '&&' expression to silence this warning
+  212 |         channel >= CT_SETTINGS_CHANNELS && value < 0 || value > CT_SETTINGS_COLOR_MAX) {
+      |                                         ^
+      |         (                                           )
+1 error generated.
+mutate: suite settings_form_colors exited 1
+mutate: suite settings_form_colors exited 1
+mutate: suite settings_form_colors exited 1
+build_gate/mutants/p496/m0196_screen_settings.c:212:54: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  212 |         channel >= CT_SETTINGS_CHANNELS || value < 0 && value > CT_SETTINGS_COLOR_MAX) {
+      |                                         ~~ ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0196_screen_settings.c:212:54: note: place parentheses around the '&&' expression to silence this warning
+  212 |         channel >= CT_SETTINGS_CHANNELS || value < 0 && value > CT_SETTINGS_COLOR_MAX) {
+      |                                                      ^                               
+      |                                            (                                         )
+1 error generated.
+mutate: suite settings_form_colors exited 1
+mutate: suite settings_form_colors exited 1
+build_gate/mutants/p496/m0199_screen_settings.c:222:50: error: expected ')'
+  222 | int ct_settings_form_stage_move(ct_settings_form /f, unsigned bit) {
+      |                                                  ^
+build_gate/mutants/p496/m0199_screen_settings.c:222:32: note: to match this '('
+  222 | int ct_settings_form_stage_move(ct_settings_form /f, unsigned bit) {
+      |                                ^
+build_gate/mutants/p496/m0199_screen_settings.c:222:5: error: conflicting types for 'ct_settings_form_stage_move'
+  222 | int ct_settings_form_stage_move(ct_settings_form /f, unsigned bit) {
+      |     ^
+src\ui/ui.h:144:5: note: previous declaration is here
+  144 | int ct_settings_form_stage_move(ct_settings_form *f, unsigned bit);
+      |     ^
+build_gate/mutants/p496/m0199_screen_settings.c:223:9: error: use of undeclared identifier 'f'
+  223 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p496/m0199_screen_settings.c:225:10: error: use of undeclared identifier 'bit'
+  225 |     if ((bit & CT_MOVE_ROTATION_MASK) != 0) {
+      |          ^~~
+build_gate/mutants/p496/m0199_screen_settings.c:226:9: error: use of undeclared identifier 'f'
+  226 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p496/m0199_screen_settings.c:231:26: error: use of undeclared identifier 'bit'
+  231 |         if ((1u << i) == bit)
+      |                          ^~~
+build_gate/mutants/p496/m0199_screen_settings.c:235:9: error: use of undeclared identifier 'f'
+  235 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p496/m0199_screen_settings.c:238:10: error: use of undeclared identifier 'f'
+  238 |     if ((f->move_mask & ~bit) == 0) {
+      |          ^
+build_gate/mutants/p496/m0199_screen_settings.c:238:26: error: use of undeclared identifier 'bit'
+  238 |     if ((f->move_mask & ~bit) == 0) {
+      |                          ^~~
+build_gate/mutants/p496/m0199_screen_settings.c:239:9: error: use of undeclared identifier 'f'
+  239 |         f->status = CT_REPO_CONFLICT;
+      |         ^
+build_gate/mutants/p496/m0199_screen_settings.c:242:5: error: use of undeclared identifier 'f'
+  242 |     f->move_mask ^= bit;
+      |     ^
+build_gate/mutants/p496/m0199_screen_settings.c:242:21: error: use of undeclared identifier 'bit'
+  242 |     f->move_mask ^= bit;
+      |                     ^~~
+build_gate/mutants/p496/m0199_screen_settings.c:243:5: error: use of undeclared identifier 'f'
+  243 |     f->dirty = true;
+      |     ^
+build_gate/mutants/p496/m0199_screen_settings.c:244:5: error: use of undeclared identifier 'f'
+  244 |     f->status = CT_REPO_OK;
+      |     ^
+14 errors generated.
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_boundaries exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited -1073741795
+mutate: suite settings_form_boundaries exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_boundaries exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_moves exited 1
+build_gate/mutants/p496/m0215_screen_settings.c:238:31: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  238 |     if ((f->move_mask & ~bit) == -1) {
+      |          ~~~~~~~~~~~~~~~~~~~  ^  ~~
+1 error generated.
+mutate: suite settings_form_moves exited 1
+build_gate/mutants/p496/m0217_screen_settings.c:248:55: error: expected ')'
+  248 | int ct_settings_form_stage_retention(ct_settings_form /f, double v) {
+      |                                                       ^
+build_gate/mutants/p496/m0217_screen_settings.c:248:37: note: to match this '('
+  248 | int ct_settings_form_stage_retention(ct_settings_form /f, double v) {
+      |                                     ^
+build_gate/mutants/p496/m0217_screen_settings.c:248:5: error: conflicting types for 'ct_settings_form_stage_retention'
+  248 | int ct_settings_form_stage_retention(ct_settings_form /f, double v) {
+      |     ^
+src\ui/ui.h:145:5: note: previous declaration is here
+  145 | int ct_settings_form_stage_retention(ct_settings_form *f, double v);
+      |     ^
+build_gate/mutants/p496/m0217_screen_settings.c:249:9: error: use of undeclared identifier 'f'
+  249 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p496/m0217_screen_settings.c:251:19: error: use of undeclared identifier 'v'
+  251 |     if (!isfinite(v)) {
+      |                   ^
+build_gate/mutants/p496/m0217_screen_settings.c:252:9: error: use of undeclared identifier 'f'
+  252 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p496/m0217_screen_settings.c:255:9: error: use of undeclared identifier 'v'
+  255 |     if (v < CT_FSRS_RETENTION_MIN)
+      |         ^
+build_gate/mutants/p496/m0217_screen_settings.c:256:9: error: use of undeclared identifier 'v'
+  256 |         v = CT_FSRS_RETENTION_MIN;
+      |         ^
+build_gate/mutants/p496/m0217_screen_settings.c:257:9: error: use of undeclared identifier 'v'
+  257 |     if (v > CT_FSRS_RETENTION_MAX)
+      |         ^
+build_gate/mutants/p496/m0217_screen_settings.c:258:9: error: use of undeclared identifier 'v'
+  258 |         v = CT_FSRS_RETENTION_MAX;
+      |         ^
+build_gate/mutants/p496/m0217_screen_settings.c:259:5: error: use of undeclared identifier 'f'
+  259 |     f->retention = v;
+      |     ^
+build_gate/mutants/p496/m0217_screen_settings.c:259:20: error: use of undeclared identifier 'v'
+  259 |     f->retention = v;
+      |                    ^
+build_gate/mutants/p496/m0217_screen_settings.c:260:5: error: use of undeclared identifier 'f'
+  260 |     f->dirty = true;
+      |     ^
+build_gate/mutants/p496/m0217_screen_settings.c:261:5: error: use of undeclared identifier 'f'
+  261 |     f->status = CT_REPO_OK;
+      |     ^
+13 errors generated.
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_clamps exited 1
+build_gate/mutants/p496/m0223_screen_settings.c:265:58: error: expected ')'
+  265 | int ct_settings_form_stage_move_seconds(ct_settings_form /f, double v) {
+      |                                                          ^
+build_gate/mutants/p496/m0223_screen_settings.c:265:40: note: to match this '('
+  265 | int ct_settings_form_stage_move_seconds(ct_settings_form /f, double v) {
+      |                                        ^
+build_gate/mutants/p496/m0223_screen_settings.c:265:5: error: conflicting types for 'ct_settings_form_stage_move_seconds'
+  265 | int ct_settings_form_stage_move_seconds(ct_settings_form /f, double v) {
+      |     ^
+src\ui/ui.h:146:5: note: previous declaration is here
+  146 | int ct_settings_form_stage_move_seconds(ct_settings_form *f, double v);
+      |     ^
+build_gate/mutants/p496/m0223_screen_settings.c:266:9: error: use of undeclared identifier 'f'
+  266 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p496/m0223_screen_settings.c:268:19: error: use of undeclared identifier 'v'
+  268 |     if (!isfinite(v)) {
+      |                   ^
+build_gate/mutants/p496/m0223_screen_settings.c:269:9: error: use of undeclared identifier 'f'
+  269 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p496/m0223_screen_settings.c:272:9: error: use of undeclared identifier 'v'
+  272 |     if (v < CT_ANIM_MIN_MOVE_SECONDS)
+      |         ^
+build_gate/mutants/p496/m0223_screen_settings.c:273:9: error: use of undeclared identifier 'v'
+  273 |         v = CT_ANIM_MIN_MOVE_SECONDS;
+      |         ^
+build_gate/mutants/p496/m0223_screen_settings.c:274:5: error: use of undeclared identifier 'f'
+  274 |     f->move_seconds = v;
+      |     ^
+build_gate/mutants/p496/m0223_screen_settings.c:274:23: error: use of undeclared identifier 'v'
+  274 |     f->move_seconds = v;
+      |                       ^
+build_gate/mutants/p496/m0223_screen_settings.c:275:5: error: use of undeclared identifier 'f'
+  275 |     f->dirty = true;
+      |     ^
+build_gate/mutants/p496/m0223_screen_settings.c:276:5: error: use of undeclared identifier 'f'
+  276 |     f->status = CT_REPO_OK;
+      |     ^
+11 errors generated.
+mutate: suite settings_form_clamps exited 1
+mutate: suite settings_form_clamps exited 1
+mutate: suite settings_form_clamps exited 1
+build_gate/mutants/p496/m0228_screen_settings.c:280:52: error: expected ')'
+  280 | int ct_settings_form_stage_buffer(ct_settings_form /f, int orbit, int sticker) {
+      |                                                    ^
+build_gate/mutants/p496/m0228_screen_settings.c:280:34: note: to match this '('
+  280 | int ct_settings_form_stage_buffer(ct_settings_form /f, int orbit, int sticker) {
+      |                                  ^
+build_gate/mutants/p496/m0228_screen_settings.c:280:5: error: conflicting types for 'ct_settings_form_stage_buffer'
+  280 | int ct_settings_form_stage_buffer(ct_settings_form /f, int orbit, int sticker) {
+      |     ^
+src\ui/ui.h:147:5: note: previous declaration is here
+  147 | int ct_settings_form_stage_buffer(ct_settings_form *f, int orbit, int sticker);
+      |     ^
+build_gate/mutants/p496/m0228_screen_settings.c:281:9: error: use of undeclared identifier 'f'
+  281 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p496/m0228_screen_settings.c:283:9: error: use of undeclared identifier 'orbit'
+  283 |     if (orbit != CT_ORBIT_CORNER && orbit != CT_ORBIT_EDGE) {
+      |         ^~~~~
+build_gate/mutants/p496/m0228_screen_settings.c:283:37: error: use of undeclared identifier 'orbit'
+  283 |     if (orbit != CT_ORBIT_CORNER && orbit != CT_ORBIT_EDGE) {
+      |                                     ^~~~~
+build_gate/mutants/p496/m0228_screen_settings.c:284:9: error: use of undeclared identifier 'f'
+  284 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p496/m0228_screen_settings.c:287:9: error: use of undeclared identifier 'sticker'
+  287 |     if (sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |         ^~~~~~~
+build_gate/mutants/p496/m0228_screen_settings.c:287:24: error: use of undeclared identifier 'sticker'
+  287 |     if (sticker < 0 || sticker >= CT_LETTER_STICKERS) {
+      |                        ^~~~~~~
+build_gate/mutants/p496/m0228_screen_settings.c:288:9: error: use of undeclared identifier 'f'
+  288 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p496/m0228_screen_settings.c:291:9: error: use of undeclared identifier 'orbit'
+  291 |     if (orbit == CT_ORBIT_CORNER)
+      |         ^~~~~
+build_gate/mutants/p496/m0228_screen_settings.c:292:9: error: use of undeclared identifier 'f'
+  292 |         f->buffer_corner = sticker;
+      |         ^
+build_gate/mutants/p496/m0228_screen_settings.c:292:28: error: use of undeclared identifier 'sticker'
+  292 |         f->buffer_corner = sticker;
+      |                            ^~~~~~~
+build_gate/mutants/p496/m0228_screen_settings.c:294:9: error: use of undeclared identifier 'f'
+  294 |         f->buffer_edge = sticker;
+      |         ^
+build_gate/mutants/p496/m0228_screen_settings.c:294:26: error: use of undeclared identifier 'sticker'
+  294 |         f->buffer_edge = sticker;
+      |                          ^~~~~~~
+build_gate/mutants/p496/m0228_screen_settings.c:295:5: error: use of undeclared identifier 'f'
+  295 |     f->dirty = true;
+      |     ^
+build_gate/mutants/p496/m0228_screen_settings.c:296:5: error: use of undeclared identifier 'f'
+  296 |     f->status = CT_REPO_OK;
+      |     ^
+16 errors generated.
+mutate: suite settings_form_buffers exited 1
+mutate: suite settings_form_buffers exited 1
+build_gate/mutants/p496/m0231_screen_settings.c:283:34: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+  283 |     if (orbit != CT_ORBIT_CORNER || orbit != CT_ORBIT_EDGE) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+mutate: suite settings_form_buffers exited 1
+mutate: suite settings_form_buffers exited 1
+mutate: suite settings_form_buffers exited 1
+mutate: suite settings_form_buffers exited 1
+mutate: suite settings_form_buffers exited 1
+mutate: suite settings_form_buffers exited 1
+mutate: suite settings_form_buffers exited 1
+mutate: suite settings_form_buffers exited 1
+build_gate/mutants/p496/m0240_screen_settings.c:300:58: error: expected ')'
+  300 | static void ct_settings_format_moves(unsigned mask, char /out, size_t cap) {
+      |                                                          ^
+build_gate/mutants/p496/m0240_screen_settings.c:300:37: note: to match this '('
+  300 | static void ct_settings_format_moves(unsigned mask, char /out, size_t cap) {
+      |                                     ^
+build_gate/mutants/p496/m0240_screen_settings.c:302:50: error: use of undeclared identifier 'cap'
+  302 |     for (int i = 0; i < CT_FACE_COUNT && n + 1 < cap; i++) {
+      |                                                  ^~~
+build_gate/mutants/p496/m0240_screen_settings.c:307:13: error: use of undeclared identifier 'out'
+  307 |             out[n++] = c;
+      |             ^~~
+build_gate/mutants/p496/m0240_screen_settings.c:309:5: error: use of undeclared identifier 'out'
+  309 |     out[n] = '\0';
+      |     ^~~
+build_gate/mutants/p496/m0240_screen_settings.c:346:53: error: too many arguments to function call, expected 2, have 3
+  346 |         ct_settings_format_moves(f->move_mask, buf, sizeof buf);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~                    ^~~~~~~~~~
+build_gate/mutants/p496/m0240_screen_settings.c:300:13: note: 'ct_settings_format_moves' declared here
+  300 | static void ct_settings_format_moves(unsigned mask, char /out, size_t cap) {
+      |             ^                        ~~~~~~~~~~~~~~~~~~~
+5 errors generated.
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited -1073741795
+mutate: suite e2e_run_restart_merge exited 1
+mutate: suite e2e_run_expect_cfg exited -1073741795
+mutate: suite e2e_run_expect_cfg exited -1073741795
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_moves_format exited 1
+mutate: suite settings_form_moves_format exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+build_gate/mutants/p496/m0264_screen_settings.c:306:45: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  306 |         if (c != '\0' && (mask & (1u << i)) != -1)
+      |                           ~~~~~~~~~~~~~~~~  ^  ~~
+1 error generated.
+build_gate/mutants/p496/m0265_screen_settings.c:312:44: error: expected ')'
+  312 | int ct_settings_form_save(ct_settings_form /f) {
+      |                                            ^
+build_gate/mutants/p496/m0265_screen_settings.c:312:26: note: to match this '('
+  312 | int ct_settings_form_save(ct_settings_form /f) {
+      |                          ^
+build_gate/mutants/p496/m0265_screen_settings.c:312:5: error: conflicting types for 'ct_settings_form_save'
+  312 | int ct_settings_form_save(ct_settings_form /f) {
+      |     ^
+src\ui/ui.h:148:5: note: previous declaration is here
+  148 | int ct_settings_form_save(ct_settings_form *f);
+      |     ^
+build_gate/mutants/p496/m0265_screen_settings.c:313:9: error: use of undeclared identifier 'f'
+  313 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p496/m0265_screen_settings.c:315:9: error: use of undeclared identifier 'f'
+  315 |     if (f->db == NULL || f->scheme_id <= 0) {
+      |         ^
+build_gate/mutants/p496/m0265_screen_settings.c:315:26: error: use of undeclared identifier 'f'
+  315 |     if (f->db == NULL || f->scheme_id <= 0) {
+      |                          ^
+build_gate/mutants/p496/m0265_screen_settings.c:316:9: error: use of undeclared identifier 'f'
+  316 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p496/m0265_screen_settings.c:319:19: error: use of undeclared identifier 'f'
+  319 |     sqlite3 *db = f->db;
+      |                   ^
+build_gate/mutants/p496/m0265_screen_settings.c:321:9: error: use of undeclared identifier 'f'
+  321 |         f->status = CT_REPO_ERR_DB;
+      |         ^
+build_gate/mutants/p496/m0265_screen_settings.c:326:54: error: use of undeclared identifier 'f'
+  326 |         const char *arr = orbit == CT_ORBIT_CORNER ? f->staged.corner : f->staged.edge;
+      |                                                      ^
+build_gate/mutants/p496/m0265_screen_settings.c:326:73: error: use of undeclared identifier 'f'
+  326 |         const char *arr = orbit == CT_ORBIT_CORNER ? f->staged.corner : f->staged.edge;
+      |                                                                         ^
+build_gate/mutants/p496/m0265_screen_settings.c:330:39: error: use of undeclared identifier 'f'
+  330 |             if (ct_letter_map_set(db, f->scheme_id, orbit, sticker, arr[sticker]) != 0)
+      |                                       ^
+build_gate/mutants/p496/m0265_screen_settings.c:336:43: error: use of undeclared identifier 'f'
+  336 |         snprintf(buf, sizeof buf, "%.6f", f->retention);
+      |                                           ^
+build_gate/mutants/p496/m0265_screen_settings.c:341:43: error: use of undeclared identifier 'f'
+  341 |         snprintf(buf, sizeof buf, "%.6f", f->move_seconds);
+      |                                           ^
+build_gate/mutants/p496/m0265_screen_settings.c:346:34: error: use of undeclared identifier 'f'
+  346 |         ct_settings_format_moves(f->move_mask, buf, sizeof buf);
+      |                                  ^
+build_gate/mutants/p496/m0265_screen_settings.c:351:41: error: use of undeclared identifier 'f'
+  351 |         snprintf(buf, sizeof buf, "%d", f->buffer_corner);
+      |                                         ^
+build_gate/mutants/p496/m0265_screen_settings.c:356:41: error: use of undeclared identifier 'f'
+  356 |         snprintf(buf, sizeof buf, "%d", f->buffer_edge);
+      |                                         ^
+build_gate/mutants/p496/m0265_screen_settings.c:361:61: error: use of undeclared identifier 'f'
+  361 |         snprintf(buf, sizeof buf, "%02X%02X%02X", (unsigned)f->colors[face][0],
+      |                                                             ^
+build_gate/mutants/p496/m0265_screen_settings.c:362:28: error: use of undeclared identifier 'f'
+  362 |                  (unsigned)f->colors[face][1], (unsigned)f->colors[face][2]);
+      |                            ^
+build_gate/mutants/p496/m0265_screen_settings.c:362:58: error: use of undeclared identifier 'f'
+  362 |                  (unsigned)f->colors[face][1], (unsigned)f->colors[face][2]);
+      |                                                          ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_save exited 1
+mutate: suite settings_form_swap_edges exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_swap_edges exited 1
+build_gate/mutants/p496/m0272_screen_settings.c:319:13: error: expected identifier or '('
+  319 |     sqlite3 /db = f->db;
+      |             ^
+build_gate/mutants/p496/m0272_screen_settings.c:320:22: error: use of undeclared identifier 'db'
+  320 |     if (sqlite3_exec(db, "BEGIN", NULL, NULL, NULL) != SQLITE_OK) {
+      |                      ^~
+build_gate/mutants/p496/m0272_screen_settings.c:330:35: error: use of undeclared identifier 'db'
+  330 |             if (ct_letter_map_set(db, f->scheme_id, orbit, sticker, arr[sticker]) != 0)
+      |                                   ^~
+build_gate/mutants/p496/m0272_screen_settings.c:337:34: error: use of undeclared identifier 'db'
+  337 |         if (ct_repo_settings_set(db, CT_SETTINGS_KEY_RETENTION, buf) != 0)
+      |                                  ^~
+build_gate/mutants/p496/m0272_screen_settings.c:342:34: error: use of undeclared identifier 'db'
+  342 |         if (ct_repo_settings_set(db, CT_SETTINGS_KEY_SECONDS, buf) != 0)
+      |                                  ^~
+build_gate/mutants/p496/m0272_screen_settings.c:347:34: error: use of undeclared identifier 'db'
+  347 |         if (ct_repo_settings_set(db, CT_SETTINGS_KEY_MOVES, buf) != 0)
+      |                                  ^~
+build_gate/mutants/p496/m0272_screen_settings.c:352:34: error: use of undeclared identifier 'db'
+  352 |         if (ct_repo_settings_set(db, CT_SETTINGS_KEY_BUFFER_CORNER, buf) != 0)
+      |                                  ^~
+build_gate/mutants/p496/m0272_screen_settings.c:357:34: error: use of undeclared identifier 'db'
+  357 |         if (ct_repo_settings_set(db, CT_SETTINGS_KEY_BUFFER_EDGE, buf) != 0)
+      |                                  ^~
+build_gate/mutants/p496/m0272_screen_settings.c:363:34: error: use of undeclared identifier 'db'
+  363 |         if (ct_repo_settings_set(db, ct_color_scheme_keys[face], buf) != 0)
+      |                                  ^~
+build_gate/mutants/p496/m0272_screen_settings.c:367:22: error: use of undeclared identifier 'db'
+  367 |         sqlite3_exec(db, "ROLLBACK", NULL, NULL, NULL);
+      |                      ^~
+build_gate/mutants/p496/m0272_screen_settings.c:371:22: error: use of undeclared identifier 'db'
+  371 |     if (sqlite3_exec(db, "COMMIT", NULL, NULL, NULL) != SQLITE_OK) {
+      |                      ^~
+build_gate/mutants/p496/m0272_screen_settings.c:372:22: error: use of undeclared identifier 'db'
+  372 |         sqlite3_exec(db, "ROLLBACK", NULL, NULL, NULL);
+      |                      ^~
+12 errors generated.
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_letter_edges exited 1
+build_gate/mutants/p496/m0277_screen_settings.c:326:20: error: expected identifier or '('
+  326 |         const char /arr = orbit == CT_ORBIT_CORNER ? f->staged.corner : f->staged.edge;
+      |                    ^
+build_gate/mutants/p496/m0277_screen_settings.c:328:17: error: use of undeclared identifier 'arr'
+  328 |             if (arr[sticker] == '\0')
+      |                 ^~~
+build_gate/mutants/p496/m0277_screen_settings.c:330:69: error: use of undeclared identifier 'arr'
+  330 |             if (ct_letter_map_set(db, f->scheme_id, orbit, sticker, arr[sticker]) != 0)
+      |                                                                     ^~~
+3 errors generated.
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite settings_form_letter_edges exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_save exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_save exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_save exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_colors_scheme_round_trip exited 1
+mutate: suite e2e_run_expect_cfg exited -1073741795
+mutate: suite e2e_run_expect_cfg exited -1073741795
+mutate: suite e2e_run_expect_cfg exited -1073741795
+mutate: suite settings_colors_scheme_round_trip exited 1
+mutate: suite settings_colors_scheme_round_trip exited 1
+mutate: suite e2e_run_expect_cfg exited -1073741795
+mutate: suite settings_colors_scheme_round_trip exited 1
+mutate: suite settings_colors_scheme_round_trip exited 1
+mutate: suite e2e_run_expect_cfg exited -1073741795
+mutate: suite settings_colors_scheme_round_trip exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite settings_form_save exited 1
+build_gate/mutants/p496/m0325_screen_settings.c:382:47: error: expected ')'
+  382 | void ct_settings_form_cancel(ct_settings_form /f) {
+      |                                               ^
+build_gate/mutants/p496/m0325_screen_settings.c:382:29: note: to match this '('
+  382 | void ct_settings_form_cancel(ct_settings_form /f) {
+      |                             ^
+build_gate/mutants/p496/m0325_screen_settings.c:382:6: error: conflicting types for 'ct_settings_form_cancel'
+  382 | void ct_settings_form_cancel(ct_settings_form /f) {
+      |      ^
+src\ui/ui.h:149:6: note: previous declaration is here
+  149 | void ct_settings_form_cancel(ct_settings_form *f);
+      |      ^
+build_gate/mutants/p496/m0325_screen_settings.c:383:9: error: use of undeclared identifier 'f'
+  383 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p496/m0325_screen_settings.c:385:27: error: use of undeclared identifier 'f'
+  385 |     ct_settings_form_open(f, f->db);
+      |                           ^
+build_gate/mutants/p496/m0325_screen_settings.c:385:30: error: use of undeclared identifier 'f'
+  385 |     ct_settings_form_open(f, f->db);
+      |                              ^
+5 errors generated.
+mutate: suite settings_form_cancel exited 1
+build_gate/mutants/p496/m0330_screen_settings.c:460:13: error: array index 1 is past the end of the array (that has type 'char[1]') [-Werror,-Warray-bounds]
+  460 |             ct_settings.labels[orbit][i][1] = '\0';
+      |             ^                            ~
+build_gate/mutants/p496/m0330_screen_settings.c:403:5: note: array 'labels' declared here
+  403 |     char labels[CT_SETTINGS_ORBITS][CT_LETTER_STICKERS][1];
+      |     ^
+1 error generated.
+build_gate/mutants/p496/m0331_screen_settings.c:409:19: error: expected identifier or '('
+  409 | static const char /ct_settings_status_text(int status) {
+      |                   ^
+build_gate/mutants/p496/m0331_screen_settings.c:718:18: error: use of undeclared identifier 'ct_settings_status_text'
+  718 |                  ct_settings_status_text(f->status), ct_settings.rejected);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0331_screen_settings.c:720:55: error: use of undeclared identifier 'ct_settings_status_text'
+  720 |         snprintf(status_buf, sizeof status_buf, "%s", ct_settings_status_text(f->status));
+      |                                                       ^~~~~~~~~~~~~~~~~~~~~~~
+3 errors generated.
+build_gate/mutants/p496/m0337_screen_settings.c:437:43: error: expected ')'
+  437 | static void ct_settings_canon_double(char /buf, size_t cap, double v) {
+      |                                           ^
+build_gate/mutants/p496/m0337_screen_settings.c:437:37: note: to match this '('
+  437 | static void ct_settings_canon_double(char /buf, size_t cap, double v) {
+      |                                     ^
+build_gate/mutants/p496/m0337_screen_settings.c:438:14: error: use of undeclared identifier 'buf'
+  438 |     snprintf(buf, cap, "%.6f", v);
+      |              ^~~
+build_gate/mutants/p496/m0337_screen_settings.c:438:19: error: use of undeclared identifier 'cap'
+  438 |     snprintf(buf, cap, "%.6f", v);
+      |                   ^~~
+build_gate/mutants/p496/m0337_screen_settings.c:438:32: error: use of undeclared identifier 'v'
+  438 |     snprintf(buf, cap, "%.6f", v);
+      |                                ^
+build_gate/mutants/p496/m0337_screen_settings.c:477:65: error: too many arguments to function call, expected 1, have 3
+  477 |             ct_settings_canon_double(ct_settings.retention_buf, sizeof ct_settings.retention_buf,
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  478 |                                      f->retention);
+      |                                      ~~~~~~~~~~~~
+build_gate/mutants/p496/m0337_screen_settings.c:437:13: note: 'ct_settings_canon_double' declared here
+  437 | static void ct_settings_canon_double(char /buf, size_t cap, double v) {
+      |             ^                        ~~~~
+build_gate/mutants/p496/m0337_screen_settings.c:482:61: error: too many arguments to function call, expected 1, have 3
+  482 |         ct_settings_canon_double(ct_settings.retention_buf, sizeof ct_settings.retention_buf,
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  483 |                                  f->retention);
+      |                                  ~~~~~~~~~~~~
+build_gate/mutants/p496/m0337_screen_settings.c:437:13: note: 'ct_settings_canon_double' declared here
+  437 | static void ct_settings_canon_double(char /buf, size_t cap, double v) {
+      |             ^                        ~~~~
+build_gate/mutants/p496/m0337_screen_settings.c:492:63: error: too many arguments to function call, expected 1, have 3
+  492 |             ct_settings_canon_double(ct_settings.seconds_buf, sizeof ct_settings.seconds_buf,
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  493 |                                      f->move_seconds);
+      |                                      ~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0337_screen_settings.c:437:13: note: 'ct_settings_canon_double' declared here
+  437 | static void ct_settings_canon_double(char /buf, size_t cap, double v) {
+      |             ^                        ~~~~
+build_gate/mutants/p496/m0337_screen_settings.c:497:59: error: too many arguments to function call, expected 1, have 3
+  497 |         ct_settings_canon_double(ct_settings.seconds_buf, sizeof ct_settings.seconds_buf,
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  498 |                                  f->move_seconds);
+      |                                  ~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0337_screen_settings.c:437:13: note: 'ct_settings_canon_double' declared here
+  437 | static void ct_settings_canon_double(char /buf, size_t cap, double v) {
+      |             ^                        ~~~~
+8 errors generated.
+build_gate/mutants/p496/m0338_screen_settings.c:441:49: error: expected ')'
+  441 | static void ct_settings_apply_double(const char /text, bool retention) {
+      |                                                 ^
+build_gate/mutants/p496/m0338_screen_settings.c:441:37: note: to match this '('
+  441 | static void ct_settings_apply_double(const char /text, bool retention) {
+      |                                     ^
+build_gate/mutants/p496/m0338_screen_settings.c:445:23: error: use of undeclared identifier 'text'
+  445 |     double v = strtod(text, &end);
+      |                       ^~~~
+build_gate/mutants/p496/m0338_screen_settings.c:446:16: error: use of undeclared identifier 'text'
+  446 |     if (end == text || end[0] != '\0' || errno == ERANGE)
+      |                ^~~~
+build_gate/mutants/p496/m0338_screen_settings.c:448:9: error: use of undeclared identifier 'retention'
+  448 |     if (retention)
+      |         ^~~~~~~~~
+build_gate/mutants/p496/m0338_screen_settings.c:476:65: error: too many arguments to function call, expected 1, have 2
+  476 |             ct_settings_apply_double(ct_settings.retention_buf, true);
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~                            ^~~~
+build_gate/mutants/p496/m0338_screen_settings.c:441:13: note: 'ct_settings_apply_double' declared here
+  441 | static void ct_settings_apply_double(const char /text, bool retention) {
+      |             ^                        ~~~~~~~~~~
+build_gate/mutants/p496/m0338_screen_settings.c:491:63: error: too many arguments to function call, expected 1, have 2
+  491 |             ct_settings_apply_double(ct_settings.seconds_buf, false);
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~                          ^~~~~
+build_gate/mutants/p496/m0338_screen_settings.c:441:13: note: 'ct_settings_apply_double' declared here
+  441 | static void ct_settings_apply_double(const char /text, bool retention) {
+      |             ^                        ~~~~~~~~~~
+6 errors generated.
+build_gate/mutants/p496/m0339_screen_settings.c:442:22: error: expected identifier or '('
+  442 |     ct_settings_form /f = &ct_settings.form;
+      |                      ^
+build_gate/mutants/p496/m0339_screen_settings.c:449:42: error: use of undeclared identifier 'f'
+  449 |         ct_settings_form_stage_retention(f, v);
+      |                                          ^
+build_gate/mutants/p496/m0339_screen_settings.c:451:45: error: use of undeclared identifier 'f'
+  451 |         ct_settings_form_stage_move_seconds(f, v);
+      |                                             ^
+3 errors generated.
+build_gate/mutants/p496/m0342_screen_settings.c:444:10: error: expected identifier or '('
+  444 |     char /end = NULL;
+      |          ^
+build_gate/mutants/p496/m0342_screen_settings.c:445:30: error: use of undeclared identifier 'end'
+  445 |     double v = strtod(text, &end);
+      |                              ^~~
+build_gate/mutants/p496/m0342_screen_settings.c:446:9: error: use of undeclared identifier 'end'
+  446 |     if (end == text || end[0] != '\0' || errno == ERANGE)
+      |         ^~~
+build_gate/mutants/p496/m0342_screen_settings.c:446:24: error: use of undeclared identifier 'end'
+  446 |     if (end == text || end[0] != '\0' || errno == ERANGE)
+      |                        ^~~
+4 errors generated.
+build_gate/mutants/p496/m0344_screen_settings.c:446:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  446 |     if (end == text && end[0] != '\0' || errno == ERANGE)
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p496/m0344_screen_settings.c:446:21: note: place parentheses around the '&&' expression to silence this warning
+  446 |     if (end == text && end[0] != '\0' || errno == ERANGE)
+      |                     ^
+      |         (                            )
+1 error generated.
+build_gate/mutants/p496/m0348_screen_settings.c:446:39: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  446 |     if (end == text || end[0] != '\0' && errno == ERANGE)
+      |                     ~~ ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0348_screen_settings.c:446:39: note: place parentheses around the '&&' expression to silence this warning
+  446 |     if (end == text || end[0] != '\0' && errno == ERANGE)
+      |                        ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+1 error generated.
+build_gate/mutants/p496/m0353_screen_settings.c:456:20: error: expected identifier or '('
+  456 |         const char /arr = orbit == CT_ORBIT_CORNER ? ct_settings.form.staged.corner
+      |                    ^
+build_gate/mutants/p496/m0353_screen_settings.c:459:47: error: use of undeclared identifier 'arr'
+  459 |             ct_settings.labels[orbit][i][0] = arr[i] != '\0' ? arr[i] : '-';
+      |                                               ^~~
+build_gate/mutants/p496/m0353_screen_settings.c:459:64: error: use of undeclared identifier 'arr'
+  459 |             ct_settings.labels[orbit][i][0] = arr[i] != '\0' ? arr[i] : '-';
+      |                                                                ^~~
+3 errors generated.
+build_gate/mutants/p496/m0359_screen_settings.c:459:13: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  459 |             ct_settings.labels[orbit][i][-1] = arr[i] != '\0' ? arr[i] : '-';
+      |             ^                            ~~
+build_gate/mutants/p496/m0359_screen_settings.c:403:5: note: array 'labels' declared here
+  403 |     char labels[CT_SETTINGS_ORBITS][CT_LETTER_STICKERS][2];
+      |     ^
+1 error generated.
+build_gate/mutants/p496/m0361_screen_settings.c:460:13: error: array index 2 is past the end of the array (that has type 'char[2]') [-Werror,-Warray-bounds]
+  460 |             ct_settings.labels[orbit][i][2] = '\0';
+      |             ^                            ~
+build_gate/mutants/p496/m0361_screen_settings.c:403:5: note: array 'labels' declared here
+  403 |     char labels[CT_SETTINGS_ORBITS][CT_LETTER_STICKERS][2];
+      |     ^
+1 error generated.
+build_gate/mutants/p496/m0363_screen_settings.c:466:22: error: expected identifier or '('
+  466 |     ct_settings_form /f = &ct_settings.form;
+      |                      ^
+build_gate/mutants/p496/m0363_screen_settings.c:478:38: error: use of undeclared identifier 'f'
+  478 |                                      f->retention);
+      |                                      ^
+build_gate/mutants/p496/m0363_screen_settings.c:483:34: error: use of undeclared identifier 'f'
+  483 |                                  f->retention);
+      |                                  ^
+build_gate/mutants/p496/m0363_screen_settings.c:493:38: error: use of undeclared identifier 'f'
+  493 |                                      f->move_seconds);
+      |                                      ^
+build_gate/mutants/p496/m0363_screen_settings.c:498:34: error: use of undeclared identifier 'f'
+  498 |                                  f->move_seconds);
+      |                                  ^
+build_gate/mutants/p496/m0363_screen_settings.c:516:20: error: use of undeclared identifier 'f'
+  516 |         bool on = (f->move_mask & bit) != 0;
+      |                    ^
+build_gate/mutants/p496/m0363_screen_settings.c:523:41: error: use of undeclared identifier 'f'
+  523 |             ct_settings_form_stage_move(f, bit);
+      |                                         ^
+7 errors generated.
+build_gate/mutants/p496/m0404_screen_settings.c:516:40: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  516 |         bool on = (f->move_mask & bit) != -1;
+      |                    ~~~~~~~~~~~~~~~~~~  ^  ~~
+1 error generated.
+build_gate/mutants/p496/m0406_screen_settings.c:517:50: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+  517 |         char label[1] = {ct_move_face_char(bit), '\0'};
+      |                                                  ^~~~
+1 error generated.
+build_gate/mutants/p496/m0425_screen_settings.c:527:58: error: expected ')'
+  527 | static void ct_settings_draw_orbit_grid(ct_settings_form /f, int orbit, int x, int y, int w, int h,
+      |                                                          ^
+build_gate/mutants/p496/m0425_screen_settings.c:527:40: note: to match this '('
+  527 | static void ct_settings_draw_orbit_grid(ct_settings_form /f, int orbit, int x, int y, int w, int h,
+      |                                        ^
+build_gate/mutants/p496/m0425_screen_settings.c:529:18: error: use of undeclared identifier 'w'
+  529 |     int cell_w = w / CT_SETTINGS_GRID_COLS;
+      |                  ^
+build_gate/mutants/p496/m0425_screen_settings.c:530:18: error: use of undeclared identifier 'h'
+  530 |     int cell_h = h / CT_SETTINGS_GRID_ROWS;
+      |                  ^
+build_gate/mutants/p496/m0425_screen_settings.c:531:20: error: use of undeclared identifier 'buffer_mode'
+  531 |     int selected = buffer_mode ? (orbit == CT_ORBIT_CORNER ? f->buffer_corner : f->buffer_edge)
+      |                    ^~~~~~~~~~~
+build_gate/mutants/p496/m0425_screen_settings.c:531:35: error: use of undeclared identifier 'orbit'
+  531 |     int selected = buffer_mode ? (orbit == CT_ORBIT_CORNER ? f->buffer_corner : f->buffer_edge)
+      |                                   ^~~~~
+build_gate/mutants/p496/m0425_screen_settings.c:531:62: error: use of undeclared identifier 'f'
+  531 |     int selected = buffer_mode ? (orbit == CT_ORBIT_CORNER ? f->buffer_corner : f->buffer_edge)
+      |                                                              ^
+build_gate/mutants/p496/m0425_screen_settings.c:531:81: error: use of undeclared identifier 'f'
+  531 |     int selected = buffer_mode ? (orbit == CT_ORBIT_CORNER ? f->buffer_corner : f->buffer_edge)
+      |                                                                                 ^
+build_gate/mutants/p496/m0425_screen_settings.c:532:35: error: use of undeclared identifier 'orbit'
+  532 |                                : (orbit == ct_settings.sel_orbit ? ct_settings.sel_sticker : -1);
+      |                                   ^~~~~
+build_gate/mutants/p496/m0425_screen_settings.c:534:45: error: use of undeclared identifier 'x'
+  534 |         Rectangle r = ct_settings_cell_rect(x, y, cell_w, cell_h, sticker);
+      |                                             ^
+build_gate/mutants/p496/m0425_screen_settings.c:534:48: error: use of undeclared identifier 'y'
+  534 |         Rectangle r = ct_settings_cell_rect(x, y, cell_w, cell_h, sticker);
+      |                                                ^
+build_gate/mutants/p496/m0425_screen_settings.c:535:45: error: use of undeclared identifier 'orbit'
+  535 |         if (GuiButton(r, ct_settings.labels[orbit][sticker])) {
+      |                                             ^~~~~
+build_gate/mutants/p496/m0425_screen_settings.c:536:17: error: use of undeclared identifier 'buffer_mode'
+  536 |             if (buffer_mode) {
+      |                 ^~~~~~~~~~~
+build_gate/mutants/p496/m0425_screen_settings.c:537:47: error: use of undeclared identifier 'f'
+  537 |                 ct_settings_form_stage_buffer(f, orbit, sticker);
+      |                                               ^
+build_gate/mutants/p496/m0425_screen_settings.c:537:50: error: use of undeclared identifier 'orbit'
+  537 |                 ct_settings_form_stage_buffer(f, orbit, sticker);
+      |                                                  ^~~~~
+build_gate/mutants/p496/m0425_screen_settings.c:539:41: error: use of undeclared identifier 'orbit'
+  539 |                 ct_settings.sel_orbit = orbit;
+      |                                         ^~~~~
+build_gate/mutants/p496/m0425_screen_settings.c:541:35: error: use of undeclared identifier 'orbit'
+  541 |                 const char *arr = orbit == CT_ORBIT_CORNER ? f->staged.corner : f->staged.edge;
+      |                                   ^~~~~
+build_gate/mutants/p496/m0425_screen_settings.c:541:62: error: use of undeclared identifier 'f'
+  541 |                 const char *arr = orbit == CT_ORBIT_CORNER ? f->staged.corner : f->staged.edge;
+      |                                                              ^
+build_gate/mutants/p496/m0425_screen_settings.c:541:81: error: use of undeclared identifier 'f'
+  541 |                 const char *arr = orbit == CT_ORBIT_CORNER ? f->staged.corner : f->staged.edge;
+      |                                                                                 ^
+build_gate/mutants/p496/m0425_screen_settings.c:549:19: error: use of undeclared identifier 'buffer_mode'
+  549 |         else if (!buffer_mode && ct_settings.letter_buf[0] >= CT_LETTER_FIRST &&
+      |                   ^~~~~~~~~~~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_gate/mutants/p496/m0436_screen_settings.c:541:28: error: expected identifier or '('
+  541 |                 const char /arr = orbit == CT_ORBIT_CORNER ? f->staged.corner : f->staged.edge;
+      |                            ^
+build_gate/mutants/p496/m0436_screen_settings.c:542:45: error: use of undeclared identifier 'arr'
+  542 |                 ct_settings.letter_buf[0] = arr[sticker];
+      |                                             ^~~
+2 errors generated.
+build_gate/mutants/p496/m0439_screen_settings.c:542:17: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  542 |                 ct_settings.letter_buf[-1] = arr[sticker];
+      |                 ^                      ~~
+build_gate/mutants/p496/m0439_screen_settings.c:395:5: note: array 'letter_buf' declared here
+  395 |     char letter_buf[2];
+      |     ^
+1 error generated.
+build_gate/mutants/p496/m0443_screen_settings.c:550:62: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  549 |         else if (!buffer_mode || ct_settings.letter_buf[0] >= CT_LETTER_FIRST &&
+      |                               ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  550 |                  ct_settings.letter_buf[0] <= CT_LETTER_LAST &&
+      |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  551 |                  ct_settings.labels[orbit][sticker][0] == ct_settings.letter_buf[0])
+      |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0443_screen_settings.c:550:62: note: place parentheses around the '&&' expression to silence this warning
+  549 |         else if (!buffer_mode || ct_settings.letter_buf[0] >= CT_LETTER_FIRST &&
+      |                                  (
+  550 |                  ct_settings.letter_buf[0] <= CT_LETTER_LAST &&
+      |                                                              ^
+  551 |                  ct_settings.labels[orbit][sticker][0] == ct_settings.letter_buf[0])
+      |                                                                                    
+      |                                                                                    )
+1 error generated.
+build_gate/mutants/p496/m0445_screen_settings.c:549:34: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  549 |         else if (!buffer_mode && ct_settings.letter_buf[-1] >= CT_LETTER_FIRST &&
+      |                                  ^                      ~~
+build_gate/mutants/p496/m0445_screen_settings.c:395:5: note: array 'letter_buf' declared here
+  395 |     char letter_buf[2];
+      |     ^
+1 error generated.
+build_gate/mutants/p496/m0447_screen_settings.c:549:31: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  549 |         else if (!buffer_mode && ct_settings.letter_buf[0] >= CT_LETTER_FIRST ||
+      |                  ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p496/m0447_screen_settings.c:549:31: note: place parentheses around the '&&' expression to silence this warning
+  549 |         else if (!buffer_mode && ct_settings.letter_buf[0] >= CT_LETTER_FIRST ||
+      |                  ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0447_screen_settings.c:550:62: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  549 |         else if (!buffer_mode && ct_settings.letter_buf[0] >= CT_LETTER_FIRST ||
+      |                                                                               ~~
+  550 |                  ct_settings.letter_buf[0] <= CT_LETTER_LAST &&
+      |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  551 |                  ct_settings.labels[orbit][sticker][0] == ct_settings.letter_buf[0])
+      |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0447_screen_settings.c:550:62: note: place parentheses around the '&&' expression to silence this warning
+  550 |                  ct_settings.letter_buf[0] <= CT_LETTER_LAST &&
+      |                                                              ^
+      |                  (
+  551 |                  ct_settings.labels[orbit][sticker][0] == ct_settings.letter_buf[0])
+      |                                                                                    
+      |                                                                                    )
+2 errors generated.
+build_gate/mutants/p496/m0449_screen_settings.c:550:18: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  550 |                  ct_settings.letter_buf[-1] <= CT_LETTER_LAST &&
+      |                  ^                      ~~
+build_gate/mutants/p496/m0449_screen_settings.c:395:5: note: array 'letter_buf' declared here
+  395 |     char letter_buf[2];
+      |     ^
+1 error generated.
+build_gate/mutants/p496/m0451_screen_settings.c:549:79: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  549 |         else if (!buffer_mode && ct_settings.letter_buf[0] >= CT_LETTER_FIRST &&
+      |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  550 |                  ct_settings.letter_buf[0] <= CT_LETTER_LAST ||
+      |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p496/m0451_screen_settings.c:549:79: note: place parentheses around the '&&' expression to silence this warning
+  549 |         else if (!buffer_mode && ct_settings.letter_buf[0] >= CT_LETTER_FIRST &&
+      |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  550 |                  ct_settings.letter_buf[0] <= CT_LETTER_LAST ||
+      |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+build_gate/mutants/p496/m0453_screen_settings.c:551:18: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  551 |                  ct_settings.labels[orbit][sticker][-1] == ct_settings.letter_buf[0])
+      |                  ^                                  ~~
+build_gate/mutants/p496/m0453_screen_settings.c:403:5: note: array 'labels' declared here
+  403 |     char labels[CT_SETTINGS_ORBITS][CT_LETTER_STICKERS][2];
+      |     ^
+1 error generated.
+build_gate/mutants/p496/m0456_screen_settings.c:551:59: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  551 |                  ct_settings.labels[orbit][sticker][0] == ct_settings.letter_buf[-1])
+      |                                                           ^                      ~~
+build_gate/mutants/p496/m0456_screen_settings.c:395:5: note: array 'letter_buf' declared here
+  395 |     char letter_buf[2];
+      |     ^
+1 error generated.
+build_gate/mutants/p496/m0457_screen_settings.c:558:22: error: expected identifier or '('
+  558 |     ct_settings_form /f = &ct_settings.form;
+      |                      ^
+build_gate/mutants/p496/m0457_screen_settings.c:569:42: error: use of undeclared identifier 'f'
+  569 |             ct_settings_form_swap_letter(f, ct_settings.sel_orbit, ct_settings.sel_sticker,
+      |                                          ^
+build_gate/mutants/p496/m0457_screen_settings.c:579:33: error: use of undeclared identifier 'f'
+  579 |     ct_settings_draw_orbit_grid(f, CT_ORBIT_CORNER, x + pad, grid_y + pad, w - 2 * pad,
+      |                                 ^
+build_gate/mutants/p496/m0457_screen_settings.c:583:33: error: use of undeclared identifier 'f'
+  583 |     ct_settings_draw_orbit_grid(f, CT_ORBIT_EDGE, x + pad, edge_y + pad, w - 2 * pad,
+      |                                 ^
+4 errors generated.
+build_gate/mutants/p496/m0462_screen_settings.c:567:86: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  567 |         if (!ct_settings.letter_edit || ct_settings.letter_buf[0] >= CT_LETTER_FIRST &&
+      |                                      ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  568 |             ct_settings.letter_buf[0] <= CT_LETTER_LAST)
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p496/m0462_screen_settings.c:567:86: note: place parentheses around the '&&' expression to silence this warning
+  567 |         if (!ct_settings.letter_edit || ct_settings.letter_buf[0] >= CT_LETTER_FIRST &&
+      |                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  568 |             ct_settings.letter_buf[0] <= CT_LETTER_LAST)
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+build_gate/mutants/p496/m0464_screen_settings.c:567:41: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  567 |         if (!ct_settings.letter_edit && ct_settings.letter_buf[-1] >= CT_LETTER_FIRST &&
+      |                                         ^                      ~~
+build_gate/mutants/p496/m0464_screen_settings.c:395:5: note: array 'letter_buf' declared here
+  395 |     char letter_buf[2];
+      |     ^
+1 error generated.
+build_gate/mutants/p496/m0466_screen_settings.c:567:38: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  567 |         if (!ct_settings.letter_edit && ct_settings.letter_buf[0] >= CT_LETTER_FIRST ||
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p496/m0466_screen_settings.c:567:38: note: place parentheses around the '&&' expression to silence this warning
+  567 |         if (!ct_settings.letter_edit && ct_settings.letter_buf[0] >= CT_LETTER_FIRST ||
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+build_gate/mutants/p496/m0468_screen_settings.c:568:13: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  568 |             ct_settings.letter_buf[-1] <= CT_LETTER_LAST)
+      |             ^                      ~~
+build_gate/mutants/p496/m0468_screen_settings.c:395:5: note: array 'letter_buf' declared here
+  395 |     char letter_buf[2];
+      |     ^
+1 error generated.
+build_gate/mutants/p496/m0471_screen_settings.c:570:42: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  570 |                                          ct_settings.letter_buf[-1]);
+      |                                          ^                      ~~
+build_gate/mutants/p496/m0471_screen_settings.c:395:5: note: array 'letter_buf' declared here
+  395 |     char letter_buf[2];
+      |     ^
+1 error generated.
+build_gate/mutants/p496/m0513_screen_settings.c:588:22: error: expected identifier or '('
+  588 |     ct_settings_form /f = &ct_settings.form;
+      |                      ^
+build_gate/mutants/p496/m0513_screen_settings.c:595:33: error: use of undeclared identifier 'f'
+  595 |     ct_settings_draw_orbit_grid(f, CT_ORBIT_CORNER, x + pad, y + pad, half_w - 2 * pad,
+      |                                 ^
+build_gate/mutants/p496/m0513_screen_settings.c:599:33: error: use of undeclared identifier 'f'
+  599 |     ct_settings_draw_orbit_grid(f, CT_ORBIT_EDGE, edge_x + pad, y + pad, half_w - 2 * pad,
+      |                                 ^
+build_gate/mutants/p496/m0513_screen_settings.c:621:20: error: use of undeclared identifier 'f'
+  621 |         Color c = {f->colors[face][0], f->colors[face][1], f->colors[face][2],
+      |                    ^
+build_gate/mutants/p496/m0513_screen_settings.c:621:40: error: use of undeclared identifier 'f'
+  621 |         Color c = {f->colors[face][0], f->colors[face][1], f->colors[face][2],
+      |                                        ^
+build_gate/mutants/p496/m0513_screen_settings.c:621:60: error: use of undeclared identifier 'f'
+  621 |         Color c = {f->colors[face][0], f->colors[face][1], f->colors[face][2],
+      |                                                            ^
+build_gate/mutants/p496/m0513_screen_settings.c:632:46: error: use of undeclared identifier 'f'
+  632 |                 ct_settings.chan[face][ch] = f->colors[face][ch];
+      |                                              ^
+build_gate/mutants/p496/m0513_screen_settings.c:637:50: error: use of undeclared identifier 'f'
+  637 |                     ct_settings_form_stage_color(f, face, ch, ct_settings.chan[face][ch]);
+      |                                                  ^
+build_gate/mutants/p496/m0513_screen_settings.c:638:50: error: use of undeclared identifier 'f'
+  638 |                     ct_settings.chan[face][ch] = f->colors[face][ch];
+      |                                                  ^
+9 errors generated.
+build_gate/mutants/p496/m0569_screen_settings.c:613:64: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+  613 |         char face_label[1] = {CT_SETTINGS_FACE_NAMES[face][0], '\0'};
+      |                                                                ^~~~
+1 error generated.
+build_gate/mutants/p496/m0597_screen_settings.c:630:63: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  630 |             bool edit = (ct_settings.chan_edit & (1u << idx)) != -1;
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ^  ~~
+1 error generated.
+build_gate/mutants/p496/m0614_screen_settings.c:656:39: error: expected ')'
+  656 | void ct_screen_settings_update(ct_app /app) {
+      |                                       ^
+build_gate/mutants/p496/m0614_screen_settings.c:656:31: note: to match this '('
+  656 | void ct_screen_settings_update(ct_app /app) {
+      |                               ^
+build_gate/mutants/p496/m0614_screen_settings.c:656:6: error: conflicting types for 'ct_screen_settings_update'
+  656 | void ct_screen_settings_update(ct_app /app) {
+      |      ^
+src\ui/ui.h:151:6: note: previous declaration is here
+  151 | void ct_screen_settings_update(ct_app *app);
+      |      ^
+build_gate/mutants/p496/m0614_screen_settings.c:657:9: error: use of undeclared identifier 'app'
+  657 |     if (app == NULL)
+      |         ^~~
+build_gate/mutants/p496/m0614_screen_settings.c:659:55: error: use of undeclared identifier 'app'
+  659 |     if (!ct_settings.opened || ct_settings.form.db != app->db) {
+      |                                                       ^~~
+build_gate/mutants/p496/m0614_screen_settings.c:662:50: error: use of undeclared identifier 'app'
+  662 |         ct_settings_form_open(&ct_settings.form, app->db);
+      |                                                  ^~~
+build_gate/mutants/p496/m0614_screen_settings.c:668:9: error: use of undeclared identifier 'app'
+  668 |         app->screen = CT_SCREEN_MENU;
+      |         ^~~
+6 errors generated.
+mutate: suite settings_form_guards exited -1073741795
+build_gate/mutants/p496/m0625_screen_settings.c:665:9: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  665 |         ct_settings.letter_buf[-1] = ct_settings.form.staged.corner[0];
+      |         ^                      ~~
+build_gate/mutants/p496/m0625_screen_settings.c:395:5: note: array 'letter_buf' declared here
+  395 |     char letter_buf[2];
+      |     ^
+1 error generated.
+build_gate/mutants/p496/m0627_screen_settings.c:665:37: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  665 |         ct_settings.letter_buf[0] = ct_settings.form.staged.corner[-1];
+      |                                     ^                              ~~
+src\storage/repo_settings.h:15:5: note: array 'corner' declared here
+   15 |     char corner[CT_LETTER_STICKERS];
+      |     ^
+1 error generated.
+build_gate/mutants/p496/m0628_screen_settings.c:671:37: error: expected ')'
+  671 | void ct_screen_settings_draw(ct_app /app) {
+      |                                     ^
+build_gate/mutants/p496/m0628_screen_settings.c:671:29: note: to match this '('
+  671 | void ct_screen_settings_draw(ct_app /app) {
+      |                             ^
+build_gate/mutants/p496/m0628_screen_settings.c:671:6: error: conflicting types for 'ct_screen_settings_draw'
+  671 | void ct_screen_settings_draw(ct_app /app) {
+      |      ^
+src\ui/ui.h:152:6: note: previous declaration is here
+  152 | void ct_screen_settings_draw(ct_app *app);
+      |      ^
+build_gate/mutants/p496/m0628_screen_settings.c:673:9: error: use of undeclared identifier 'app'
+  673 |     if (app == NULL)
+      |         ^~~
+build_gate/mutants/p496/m0628_screen_settings.c:676:18: error: use of undeclared identifier 'app'
+  676 |     int w = (int)app->cfg.window.width;
+      |                  ^~~
+build_gate/mutants/p496/m0628_screen_settings.c:677:18: error: use of undeclared identifier 'app'
+  677 |     int h = (int)app->cfg.window.height;
+      |                  ^~~
+build_gate/mutants/p496/m0628_screen_settings.c:708:54: error: use of undeclared identifier 'app'
+  708 |             int rc = ct_repo_settings_merge_rejected(app->db, &app->cfg, &ct_settings.rejected);
+      |                                                      ^~~
+build_gate/mutants/p496/m0628_screen_settings.c:708:64: error: use of undeclared identifier 'app'
+  708 |             int rc = ct_repo_settings_merge_rejected(app->db, &app->cfg, &ct_settings.rejected);
+      |                                                                ^~~
+7 errors generated.
+build_gate/mutants/p496/m0630_screen_settings.c:675:22: error: expected identifier or '('
+  675 |     ct_settings_form /f = &ct_settings.form;
+      |                      ^
+build_gate/mutants/p496/m0630_screen_settings.c:707:35: error: use of undeclared identifier 'f'
+  707 |         if (ct_settings_form_save(f) == CT_REPO_OK) {
+      |                                   ^
+build_gate/mutants/p496/m0630_screen_settings.c:714:33: error: use of undeclared identifier 'f'
+  714 |         ct_settings_form_cancel(f);
+      |                                 ^
+build_gate/mutants/p496/m0630_screen_settings.c:718:42: error: use of undeclared identifier 'f'
+  718 |                  ct_settings_status_text(f->status), ct_settings.rejected);
+      |                                          ^
+build_gate/mutants/p496/m0630_screen_settings.c:720:79: error: use of undeclared identifier 'f'
+  720 |         snprintf(status_buf, sizeof status_buf, "%s", ct_settings_status_text(f->status));
+      |                                                                               ^
+5 errors generated.
+build_gate/mutants/p496/m0649_screen_settings.c:691:51: error: non-overlapping comparisons always evaluate to false [-Werror,-Wtautological-overlap-compare]
+  691 |     if (ct_settings.tab < CT_SETTINGS_TAB_GENERAL && ct_settings.tab >= CT_SETTINGS_TAB_COUNT)
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

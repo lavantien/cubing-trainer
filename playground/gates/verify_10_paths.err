@@ -1,0 +1,820 @@
+mutate: suite e2e_run_expect_cfg exited 1
+build_gate/mutants/p54060/m0002_paths.c:19:21: error: non-overlapping comparisons always evaluate to false [-Werror,-Wtautological-overlap-compare]
+   19 |     return c == '/' && c == '\\';
+      |            ~~~~~~~~~^~~~~~~~~~~~
+1 error generated.
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite path_root_len exited 1
+build_gate/mutants/p54060/m0005_paths.c:23:22: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+   23 |     return (c >= 'A' || c <= 'Z') || (c >= 'a' && c <= 'z');
+      |             ~~~~~~~~~^~~~~~~~~~~
+1 error generated.
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+build_gate/mutants/p54060/m0009_paths.c:23:48: error: overlapping comparisons always evaluate to true [-Werror,-Wtautological-overlap-compare]
+   23 |     return (c >= 'A' && c <= 'Z') || (c >= 'a' || c <= 'z');
+      |                                       ~~~~~~~~~^~~~~~~~~~~
+1 error generated.
+mutate: suite path_root_len exited 1
+build_gate/mutants/p54060/m0011_paths.c:26:38: error: expected ')'
+   26 | unsigned ct_path_root_len(const char /path) {
+      |                                      ^
+build_gate/mutants/p54060/m0011_paths.c:26:26: note: to match this '('
+   26 | unsigned ct_path_root_len(const char /path) {
+      |                          ^
+build_gate/mutants/p54060/m0011_paths.c:26:10: error: conflicting types for 'ct_path_root_len'
+   26 | unsigned ct_path_root_len(const char /path) {
+      |          ^
+src\app/paths.h:4:10: note: previous declaration is here
+    4 | unsigned ct_path_root_len(const char *path);
+      |          ^
+build_gate/mutants/p54060/m0011_paths.c:27:9: error: use of undeclared identifier 'path'
+   27 |     if (path == NULL || path[0] == '\0')
+      |         ^~~~
+build_gate/mutants/p54060/m0011_paths.c:27:25: error: use of undeclared identifier 'path'
+   27 |     if (path == NULL || path[0] == '\0')
+      |                         ^~~~
+build_gate/mutants/p54060/m0011_paths.c:29:25: error: use of undeclared identifier 'path'
+   29 |     if (!ct_path_is_sep(path[0])) {
+      |                         ^~~~
+build_gate/mutants/p54060/m0011_paths.c:30:37: error: use of undeclared identifier 'path'
+   30 |         if (ct_path_is_drive_letter(path[0]) && path[1] == ':')
+      |                                     ^~~~
+build_gate/mutants/p54060/m0011_paths.c:30:49: error: use of undeclared identifier 'path'
+   30 |         if (ct_path_is_drive_letter(path[0]) && path[1] == ':')
+      |                                                 ^~~~
+build_gate/mutants/p54060/m0011_paths.c:31:35: error: use of undeclared identifier 'path'
+   31 |             return ct_path_is_sep(path[CT_PATH_ROOT_DRIVE]) ? CT_PATH_ROOT_DRIVE_SEP
+      |                                   ^~~~
+build_gate/mutants/p54060/m0011_paths.c:35:25: error: use of undeclared identifier 'path'
+   35 |     if (!ct_path_is_sep(path[1]))
+      |                         ^~~~
+build_gate/mutants/p54060/m0011_paths.c:38:27: error: use of undeclared identifier 'path'
+   38 |     while (ct_path_is_sep(path[i]))
+      |                           ^~~~
+build_gate/mutants/p54060/m0011_paths.c:41:16: error: use of undeclared identifier 'path'
+   41 |         while (path[i] != '\0' && !ct_path_is_sep(path[i]))
+      |                ^~~~
+build_gate/mutants/p54060/m0011_paths.c:41:51: error: use of undeclared identifier 'path'
+   41 |         while (path[i] != '\0' && !ct_path_is_sep(path[i]))
+      |                                                   ^~~~
+build_gate/mutants/p54060/m0011_paths.c:43:13: error: use of undeclared identifier 'path'
+   43 |         if (path[i] == '\0')
+      |             ^~~~
+13 errors generated.
+mutate: suite path_root_len exited -1073741795
+mutate: suite path_root_len exited -1073741795
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited -1073741819
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited -1073741795
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+mutate: suite path_root_len exited 1
+build_gate/mutants/p54060/m0048_paths.c:51:36: error: expected ')'
+   51 | static int ct_mkdir_one(const char /path) {
+      |                                    ^
+build_gate/mutants/p54060/m0048_paths.c:51:24: note: to match this '('
+   51 | static int ct_mkdir_one(const char /path) {
+      |                        ^
+build_gate/mutants/p54060/m0048_paths.c:53:16: error: use of undeclared identifier 'path'
+   53 |     if (_mkdir(path) == 0 || errno == EEXIST)
+      |                ^~~~
+build_gate/mutants/p54060/m0048_paths.c:59:69: error: use of undeclared identifier 'path'
+   59 |     fprintf(stderr, "cubing-trainer: cannot create directory %s\n", path);
+      |                                                                     ^~~~
+build_gate/mutants/p54060/m0048_paths.c:75:31: error: incompatible pointer to integer conversion passing 'char *' to parameter of type 'char'; dereference with * [-Wint-conversion]
+   75 |         int rc = ct_mkdir_one(path);
+      |                               ^~~~
+      |                               *
+build_gate/mutants/p54060/m0048_paths.c:51:36: note: passing argument to parameter here
+   51 | static int ct_mkdir_one(const char /path) {
+      |                                    ^
+build_gate/mutants/p54060/m0048_paths.c:82:25: error: incompatible pointer to integer conversion passing 'char *' to parameter of type 'char'; dereference with * [-Wint-conversion]
+   82 |     return ct_mkdir_one(path);
+      |                         ^~~~
+      |                         *
+build_gate/mutants/p54060/m0048_paths.c:51:36: note: passing argument to parameter here
+   51 | static int ct_mkdir_one(const char /path) {
+      |                                    ^
+5 errors generated.
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite path_mkdirs_relative exited 1
+mutate: suite path_mkdirs_relative exited 1
+mutate: suite path_data_dir_env exited 1
+build_gate/mutants/p54060/m0068_paths.c:63:20: error: expected ')'
+   63 | int ct_mkdirs(char /path) {
+      |                    ^
+build_gate/mutants/p54060/m0068_paths.c:63:14: note: to match this '('
+   63 | int ct_mkdirs(char /path) {
+      |              ^
+build_gate/mutants/p54060/m0068_paths.c:63:5: error: conflicting types for 'ct_mkdirs'
+   63 | int ct_mkdirs(char /path) {
+      |     ^
+src\app/paths.h:5:5: note: previous declaration is here
+    5 | int ct_mkdirs(char *path);
+      |     ^
+build_gate/mutants/p54060/m0068_paths.c:64:9: error: use of undeclared identifier 'path'
+   64 |     if (path == NULL || path[0] == '\0') {
+      |         ^~~~
+build_gate/mutants/p54060/m0068_paths.c:64:25: error: use of undeclared identifier 'path'
+   64 |     if (path == NULL || path[0] == '\0') {
+      |                         ^~~~
+build_gate/mutants/p54060/m0068_paths.c:68:25: error: use of undeclared identifier 'path'
+   68 |     size_t len = strlen(path);
+      |                         ^~~~
+build_gate/mutants/p54060/m0068_paths.c:69:36: error: use of undeclared identifier 'path'
+   69 |     size_t root = ct_path_root_len(path);
+      |                                    ^~~~
+build_gate/mutants/p54060/m0068_paths.c:71:29: error: use of undeclared identifier 'path'
+   71 |         if (!ct_path_is_sep(path[i]))
+      |                             ^~~~
+build_gate/mutants/p54060/m0068_paths.c:73:22: error: use of undeclared identifier 'path'
+   73 |         char saved = path[i];
+      |                      ^~~~
+build_gate/mutants/p54060/m0068_paths.c:74:9: error: use of undeclared identifier 'path'
+   74 |         path[i] = '\0';
+      |         ^~~~
+build_gate/mutants/p54060/m0068_paths.c:75:31: error: use of undeclared identifier 'path'
+   75 |         int rc = ct_mkdir_one(path);
+      |                               ^~~~
+build_gate/mutants/p54060/m0068_paths.c:76:9: error: use of undeclared identifier 'path'
+   76 |         path[i] = saved;
+      |         ^~~~
+build_gate/mutants/p54060/m0068_paths.c:80:24: error: use of undeclared identifier 'path'
+   80 |     if (ct_path_is_sep(path[len - 1]))
+      |                        ^~~~
+build_gate/mutants/p54060/m0068_paths.c:82:25: error: use of undeclared identifier 'path'
+   82 |     return ct_mkdir_one(path);
+      |                         ^~~~
+13 errors generated.
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite path_mkdirs_relative exited -1073741795
+mutate: suite path_mkdirs_relative exited -1073741795
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite path_mkdirs_relative exited 1
+mutate: suite path_mkdirs_relative exited 1
+mutate: suite path_mkdirs_relative exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite path_mkdirs_relative exited 1
+mutate: suite path_mkdirs_relative exited 1
+mutate: suite path_mkdirs_relative exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_mkdirs_relative exited 1
+mutate: suite path_mkdirs_relative exited 1
+mutate: suite path_mkdirs_relative exited 1
+build_gate/mutants/p54060/m0091_paths.c:85:32: error: expected ')'
+   85 | int ct_exe_relative(const char /exe_path, const char *rel, char *out, unsigned cap) {
+      |                                ^
+build_gate/mutants/p54060/m0091_paths.c:85:20: note: to match this '('
+   85 | int ct_exe_relative(const char /exe_path, const char *rel, char *out, unsigned cap) {
+      |                    ^
+build_gate/mutants/p54060/m0091_paths.c:85:5: error: conflicting types for 'ct_exe_relative'
+   85 | int ct_exe_relative(const char /exe_path, const char *rel, char *out, unsigned cap) {
+      |     ^
+src\app/paths.h:6:5: note: previous declaration is here
+    6 | int ct_exe_relative(const char *exe_path, const char *rel, char *out, unsigned cap);
+      |     ^
+build_gate/mutants/p54060/m0091_paths.c:86:9: error: use of undeclared identifier 'exe_path'
+   86 |     if (exe_path == NULL || rel == NULL || out == NULL || cap == 0)
+      |         ^~~~~~~~
+build_gate/mutants/p54060/m0091_paths.c:86:29: error: use of undeclared identifier 'rel'
+   86 |     if (exe_path == NULL || rel == NULL || out == NULL || cap == 0)
+      |                             ^~~
+build_gate/mutants/p54060/m0091_paths.c:86:44: error: use of undeclared identifier 'out'
+   86 |     if (exe_path == NULL || rel == NULL || out == NULL || cap == 0)
+      |                                            ^~~
+build_gate/mutants/p54060/m0091_paths.c:86:59: error: use of undeclared identifier 'cap'
+   86 |     if (exe_path == NULL || rel == NULL || out == NULL || cap == 0)
+      |                                                           ^~~
+build_gate/mutants/p54060/m0091_paths.c:89:26: error: use of undeclared identifier 'exe_path'
+   89 |     for (const char *p = exe_path; *p != '\0'; p++) {
+      |                          ^~~~~~~~
+build_gate/mutants/p54060/m0091_paths.c:93:44: error: use of undeclared identifier 'exe_path'
+   93 |     size_t dir_len = last == NULL ? strlen(exe_path) : (size_t)(last - exe_path);
+      |                                            ^~~~~~~~
+build_gate/mutants/p54060/m0091_paths.c:93:72: error: use of undeclared identifier 'exe_path'
+   93 |     size_t dir_len = last == NULL ? strlen(exe_path) : (size_t)(last - exe_path);
+      |                                                                        ^~~~~~~~
+build_gate/mutants/p54060/m0091_paths.c:94:28: error: use of undeclared identifier 'out'
+   94 |     int written = snprintf(out, cap, "%.*s/%s", (int)dir_len, exe_path, rel);
+      |                            ^~~
+build_gate/mutants/p54060/m0091_paths.c:94:33: error: use of undeclared identifier 'cap'
+   94 |     int written = snprintf(out, cap, "%.*s/%s", (int)dir_len, exe_path, rel);
+      |                                 ^~~
+build_gate/mutants/p54060/m0091_paths.c:94:63: error: use of undeclared identifier 'exe_path'
+   94 |     int written = snprintf(out, cap, "%.*s/%s", (int)dir_len, exe_path, rel);
+      |                                                               ^~~~~~~~
+build_gate/mutants/p54060/m0091_paths.c:94:73: error: use of undeclared identifier 'rel'
+   94 |     int written = snprintf(out, cap, "%.*s/%s", (int)dir_len, exe_path, rel);
+      |                                                                         ^~~
+build_gate/mutants/p54060/m0091_paths.c:95:45: error: use of undeclared identifier 'cap'
+   95 |     if (written < 0 || (unsigned)written >= cap)
+      |                                             ^~~
+14 errors generated.
+build_gate/mutants/p54060/m0092_paths.c:85:54: error: expected ')'
+   85 | int ct_exe_relative(const char *exe_path, const char /rel, char *out, unsigned cap) {
+      |                                                      ^
+build_gate/mutants/p54060/m0092_paths.c:85:20: note: to match this '('
+   85 | int ct_exe_relative(const char *exe_path, const char /rel, char *out, unsigned cap) {
+      |                    ^
+build_gate/mutants/p54060/m0092_paths.c:85:5: error: conflicting types for 'ct_exe_relative'
+   85 | int ct_exe_relative(const char *exe_path, const char /rel, char *out, unsigned cap) {
+      |     ^
+src\app/paths.h:6:5: note: previous declaration is here
+    6 | int ct_exe_relative(const char *exe_path, const char *rel, char *out, unsigned cap);
+      |     ^
+build_gate/mutants/p54060/m0092_paths.c:86:29: error: use of undeclared identifier 'rel'
+   86 |     if (exe_path == NULL || rel == NULL || out == NULL || cap == 0)
+      |                             ^~~
+build_gate/mutants/p54060/m0092_paths.c:86:44: error: use of undeclared identifier 'out'
+   86 |     if (exe_path == NULL || rel == NULL || out == NULL || cap == 0)
+      |                                            ^~~
+build_gate/mutants/p54060/m0092_paths.c:86:59: error: use of undeclared identifier 'cap'
+   86 |     if (exe_path == NULL || rel == NULL || out == NULL || cap == 0)
+      |                                                           ^~~
+build_gate/mutants/p54060/m0092_paths.c:94:28: error: use of undeclared identifier 'out'
+   94 |     int written = snprintf(out, cap, "%.*s/%s", (int)dir_len, exe_path, rel);
+      |                            ^~~
+build_gate/mutants/p54060/m0092_paths.c:94:33: error: use of undeclared identifier 'cap'
+   94 |     int written = snprintf(out, cap, "%.*s/%s", (int)dir_len, exe_path, rel);
+      |                                 ^~~
+build_gate/mutants/p54060/m0092_paths.c:94:73: error: use of undeclared identifier 'rel'
+   94 |     int written = snprintf(out, cap, "%.*s/%s", (int)dir_len, exe_path, rel);
+      |                                                                         ^~~
+build_gate/mutants/p54060/m0092_paths.c:95:45: error: use of undeclared identifier 'cap'
+   95 |     if (written < 0 || (unsigned)written >= cap)
+      |                                             ^~~
+9 errors generated.
+build_gate/mutants/p54060/m0093_paths.c:85:65: error: expected ')'
+   85 | int ct_exe_relative(const char *exe_path, const char *rel, char /out, unsigned cap) {
+      |                                                                 ^
+build_gate/mutants/p54060/m0093_paths.c:85:20: note: to match this '('
+   85 | int ct_exe_relative(const char *exe_path, const char *rel, char /out, unsigned cap) {
+      |                    ^
+build_gate/mutants/p54060/m0093_paths.c:85:5: error: conflicting types for 'ct_exe_relative'
+   85 | int ct_exe_relative(const char *exe_path, const char *rel, char /out, unsigned cap) {
+      |     ^
+src\app/paths.h:6:5: note: previous declaration is here
+    6 | int ct_exe_relative(const char *exe_path, const char *rel, char *out, unsigned cap);
+      |     ^
+build_gate/mutants/p54060/m0093_paths.c:86:44: error: use of undeclared identifier 'out'
+   86 |     if (exe_path == NULL || rel == NULL || out == NULL || cap == 0)
+      |                                            ^~~
+build_gate/mutants/p54060/m0093_paths.c:86:59: error: use of undeclared identifier 'cap'
+   86 |     if (exe_path == NULL || rel == NULL || out == NULL || cap == 0)
+      |                                                           ^~~
+build_gate/mutants/p54060/m0093_paths.c:94:28: error: use of undeclared identifier 'out'
+   94 |     int written = snprintf(out, cap, "%.*s/%s", (int)dir_len, exe_path, rel);
+      |                            ^~~
+build_gate/mutants/p54060/m0093_paths.c:94:33: error: use of undeclared identifier 'cap'
+   94 |     int written = snprintf(out, cap, "%.*s/%s", (int)dir_len, exe_path, rel);
+      |                                 ^~~
+build_gate/mutants/p54060/m0093_paths.c:95:45: error: use of undeclared identifier 'cap'
+   95 |     if (written < 0 || (unsigned)written >= cap)
+      |                                             ^~~
+7 errors generated.
+mutate: suite path_exe_relative exited 1
+build_gate/mutants/p54060/m0095_paths.c:86:26: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   86 |     if (exe_path == NULL && rel == NULL || out == NULL || cap == 0)
+      |         ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_gate/mutants/p54060/m0095_paths.c:86:26: note: place parentheses around the '&&' expression to silence this warning
+   86 |     if (exe_path == NULL && rel == NULL || out == NULL || cap == 0)
+      |         ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite path_exe_relative exited 1
+build_gate/mutants/p54060/m0097_paths.c:86:41: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   86 |     if (exe_path == NULL || rel == NULL && out == NULL || cap == 0)
+      |                          ~~ ~~~~~~~~~~~~^~~~~~~~~~~~~~
+build_gate/mutants/p54060/m0097_paths.c:86:41: note: place parentheses around the '&&' expression to silence this warning
+   86 |     if (exe_path == NULL || rel == NULL && out == NULL || cap == 0)
+      |                             ~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite path_exe_relative exited 1
+build_gate/mutants/p54060/m0099_paths.c:86:56: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   86 |     if (exe_path == NULL || rel == NULL || out == NULL && cap == 0)
+      |                                         ~~ ~~~~~~~~~~~~^~~~~~~~~~~
+build_gate/mutants/p54060/m0099_paths.c:86:56: note: place parentheses around the '&&' expression to silence this warning
+   86 |     if (exe_path == NULL || rel == NULL || out == NULL && cap == 0)
+      |                                                        ^          
+      |                                            (                      )
+1 error generated.
+mutate: suite path_exe_relative exited 1
+build_gate/mutants/p54060/m0102_paths.c:86:63: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+   86 |     if (exe_path == NULL || rel == NULL || out == NULL || cap == -1)
+      |                                                           ~~~ ^  ~~
+1 error generated.
+mutate: suite path_exe_relative exited 1
+mutate: suite path_exe_relative exited 1
+mutate: suite path_exe_relative exited 1
+build_gate/mutants/p54060/m0106_paths.c:88:16: error: expected identifier or '('
+   88 |     const char /last = NULL;
+      |                ^
+build_gate/mutants/p54060/m0106_paths.c:91:13: error: use of undeclared identifier 'last'
+   91 |             last = p;
+      |             ^~~~
+build_gate/mutants/p54060/m0106_paths.c:93:22: error: use of undeclared identifier 'last'
+   93 |     size_t dir_len = last == NULL ? strlen(exe_path) : (size_t)(last - exe_path);
+      |                      ^~~~
+build_gate/mutants/p54060/m0106_paths.c:93:65: error: use of undeclared identifier 'last'
+   93 |     size_t dir_len = last == NULL ? strlen(exe_path) : (size_t)(last - exe_path);
+      |                                                                 ^~~~
+4 errors generated.
+build_gate/mutants/p54060/m0107_paths.c:89:21: error: expected identifier or '('
+   89 |     for (const char /p = exe_path; *p != '\0'; p++) {
+      |                     ^
+build_gate/mutants/p54060/m0107_paths.c:89:36: error: expected ';' in 'for' statement specifier
+   89 |     for (const char /p = exe_path; *p != '\0'; p++) {
+      |                                    ^
+build_gate/mutants/p54060/m0107_paths.c:89:37: error: use of undeclared identifier 'p'
+   89 |     for (const char /p = exe_path; *p != '\0'; p++) {
+      |                                     ^
+build_gate/mutants/p54060/m0107_paths.c:89:48: error: use of undeclared identifier 'p'
+   89 |     for (const char /p = exe_path; *p != '\0'; p++) {
+      |                                                ^
+build_gate/mutants/p54060/m0107_paths.c:90:29: error: use of undeclared identifier 'p'
+   90 |         if (ct_path_is_sep(*p))
+      |                             ^
+build_gate/mutants/p54060/m0107_paths.c:91:20: error: use of undeclared identifier 'p'
+   91 |             last = p;
+      |                    ^
+6 errors generated.
+build_gate/mutants/p54060/m0108_paths.c:89:36: error: expected expression
+   89 |     for (const char *p = exe_path; /p != '\0'; p++) {
+      |                                    ^
+1 error generated.
+mutate: suite path_exe_relative exited 1
+build_gate/mutants/p54060/m0110_paths.c:90:28: error: expected expression
+   90 |         if (ct_path_is_sep(/p))
+      |                            ^
+1 error generated.
+mutate: suite path_exe_relative exited 1
+build_gate/mutants/p54060/m0112_paths.c:93:70: error: invalid operands to binary expression ('const char *' and 'const char *')
+   93 |     size_t dir_len = last == NULL ? strlen(exe_path) : (size_t)(last + exe_path);
+      |                                                                 ~~~~ ^ ~~~~~~~~
+1 error generated.
+mutate: suite path_exe_relative exited 1
+mutate: suite path_exe_relative exited 1
+mutate: suite path_exe_relative exited 1
+mutate: suite path_exe_relative exited 1
+mutate: suite path_exe_relative exited 1
+mutate: suite path_exe_relative exited 1
+mutate: suite path_exe_relative exited 1
+mutate: suite path_exe_relative exited 1
+build_gate/mutants/p54060/m0124_paths.c:100:29: error: expected ')'
+  100 | static int ct_exe_path(char /out, unsigned cap) {
+      |                             ^
+build_gate/mutants/p54060/m0124_paths.c:100:23: note: to match this '('
+  100 | static int ct_exe_path(char /out, unsigned cap) {
+      |                       ^
+build_gate/mutants/p54060/m0124_paths.c:102:48: error: use of undeclared identifier 'out'
+  102 |     unsigned long n = GetModuleFileNameA(NULL, out, (unsigned long)cap);
+      |                                                ^~~
+build_gate/mutants/p54060/m0124_paths.c:102:68: error: use of undeclared identifier 'cap'
+  102 |     unsigned long n = GetModuleFileNameA(NULL, out, (unsigned long)cap);
+      |                                                                    ^~~
+build_gate/mutants/p54060/m0124_paths.c:103:39: error: use of undeclared identifier 'cap'
+  103 |     if (n == 0 || n >= (unsigned long)cap)
+      |                                       ^~~
+build_gate/mutants/p54060/m0124_paths.c:123:26: error: too many arguments to function call, expected 1, have 2
+  123 |     if (ct_exe_path(exe, (unsigned)sizeof exe) != 0) {
+      |         ~~~~~~~~~~~      ^~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p54060/m0124_paths.c:100:12: note: 'ct_exe_path' declared here
+  100 | static int ct_exe_path(char /out, unsigned cap) {
+      |            ^           ~~~~
+5 errors generated.
+mutate: suite path_font_env exited 1
+build_gate/mutants/p54060/m0127_paths.c:103:11: error: comparison of integers of different signs: 'unsigned long' and 'int' [-Werror,-Wsign-compare]
+  103 |     if (n == -1 || n >= (unsigned long)cap)
+      |         ~ ^  ~~
+1 error generated.
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+build_gate/mutants/p54060/m0156_paths.c:119:36: error: expected ')'
+  119 | int ct_exe_resource_dir(const char /rel, char *out, unsigned cap) {
+      |                                    ^
+build_gate/mutants/p54060/m0156_paths.c:119:24: note: to match this '('
+  119 | int ct_exe_resource_dir(const char /rel, char *out, unsigned cap) {
+      |                        ^
+build_gate/mutants/p54060/m0156_paths.c:119:5: error: conflicting types for 'ct_exe_resource_dir'
+  119 | int ct_exe_resource_dir(const char /rel, char *out, unsigned cap) {
+      |     ^
+src\app/paths.h:7:5: note: previous declaration is here
+    7 | int ct_exe_resource_dir(const char *rel, char *out, unsigned cap);
+      |     ^
+build_gate/mutants/p54060/m0156_paths.c:120:9: error: use of undeclared identifier 'rel'
+  120 |     if (rel == NULL || out == NULL || cap == 0)
+      |         ^~~
+build_gate/mutants/p54060/m0156_paths.c:120:24: error: use of undeclared identifier 'out'
+  120 |     if (rel == NULL || out == NULL || cap == 0)
+      |                        ^~~
+build_gate/mutants/p54060/m0156_paths.c:120:39: error: use of undeclared identifier 'cap'
+  120 |     if (rel == NULL || out == NULL || cap == 0)
+      |                                       ^~~
+build_gate/mutants/p54060/m0156_paths.c:127:30: error: use of undeclared identifier 'rel'
+  127 |     if (ct_exe_relative(exe, rel, out, cap) != 0) {
+      |                              ^~~
+build_gate/mutants/p54060/m0156_paths.c:127:35: error: use of undeclared identifier 'out'
+  127 |     if (ct_exe_relative(exe, rel, out, cap) != 0) {
+      |                                   ^~~
+build_gate/mutants/p54060/m0156_paths.c:127:40: error: use of undeclared identifier 'cap'
+  127 |     if (ct_exe_relative(exe, rel, out, cap) != 0) {
+      |                                        ^~~
+build_gate/mutants/p54060/m0156_paths.c:129:17: error: use of undeclared identifier 'rel'
+  129 |                 rel);
+      |                 ^~~
+9 errors generated.
+build_gate/mutants/p54060/m0157_paths.c:119:47: error: expected ')'
+  119 | int ct_exe_resource_dir(const char *rel, char /out, unsigned cap) {
+      |                                               ^
+build_gate/mutants/p54060/m0157_paths.c:119:24: note: to match this '('
+  119 | int ct_exe_resource_dir(const char *rel, char /out, unsigned cap) {
+      |                        ^
+build_gate/mutants/p54060/m0157_paths.c:119:5: error: conflicting types for 'ct_exe_resource_dir'
+  119 | int ct_exe_resource_dir(const char *rel, char /out, unsigned cap) {
+      |     ^
+src\app/paths.h:7:5: note: previous declaration is here
+    7 | int ct_exe_resource_dir(const char *rel, char *out, unsigned cap);
+      |     ^
+build_gate/mutants/p54060/m0157_paths.c:120:24: error: use of undeclared identifier 'out'
+  120 |     if (rel == NULL || out == NULL || cap == 0)
+      |                        ^~~
+build_gate/mutants/p54060/m0157_paths.c:120:39: error: use of undeclared identifier 'cap'
+  120 |     if (rel == NULL || out == NULL || cap == 0)
+      |                                       ^~~
+build_gate/mutants/p54060/m0157_paths.c:127:35: error: use of undeclared identifier 'out'
+  127 |     if (ct_exe_relative(exe, rel, out, cap) != 0) {
+      |                                   ^~~
+build_gate/mutants/p54060/m0157_paths.c:127:40: error: use of undeclared identifier 'cap'
+  127 |     if (ct_exe_relative(exe, rel, out, cap) != 0) {
+      |                                        ^~~
+6 errors generated.
+mutate: suite path_font_env exited 1
+build_gate/mutants/p54060/m0159_paths.c:120:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  120 |     if (rel == NULL && out == NULL || cap == 0)
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_gate/mutants/p54060/m0159_paths.c:120:21: note: place parentheses around the '&&' expression to silence this warning
+  120 |     if (rel == NULL && out == NULL || cap == 0)
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite path_font_env exited 1
+build_gate/mutants/p54060/m0161_paths.c:120:36: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  120 |     if (rel == NULL || out == NULL && cap == 0)
+      |                     ~~ ~~~~~~~~~~~~^~~~~~~~~~~
+build_gate/mutants/p54060/m0161_paths.c:120:36: note: place parentheses around the '&&' expression to silence this warning
+  120 |     if (rel == NULL || out == NULL && cap == 0)
+      |                                    ^          
+      |                        (                      )
+1 error generated.
+mutate: suite path_font_env exited 1
+build_gate/mutants/p54060/m0164_paths.c:120:43: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  120 |     if (rel == NULL || out == NULL || cap == -1)
+      |                                       ~~~ ^  ~~
+1 error generated.
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_migrations_dir_override exited 1
+mutate: suite path_migrations_dir_override exited 1
+mutate: suite path_migrations_dir_override exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+build_gate/mutants/p54060/m0183_paths.c:135:28: error: expected ')'
+  135 | int ct_migrations_dir(char /out, unsigned cap) {
+      |                            ^
+build_gate/mutants/p54060/m0183_paths.c:135:22: note: to match this '('
+  135 | int ct_migrations_dir(char /out, unsigned cap) {
+      |                      ^
+build_gate/mutants/p54060/m0183_paths.c:135:5: error: conflicting types for 'ct_migrations_dir'
+  135 | int ct_migrations_dir(char /out, unsigned cap) {
+      |     ^
+src\app/paths.h:8:5: note: previous declaration is here
+    8 | int ct_migrations_dir(char *out, unsigned cap);
+      |     ^
+build_gate/mutants/p54060/m0183_paths.c:136:9: error: use of undeclared identifier 'out'
+  136 |     if (out == NULL || cap == 0)
+      |         ^~~
+build_gate/mutants/p54060/m0183_paths.c:136:24: error: use of undeclared identifier 'cap'
+  136 |     if (out == NULL || cap == 0)
+      |                        ^~~
+build_gate/mutants/p54060/m0183_paths.c:140:32: error: use of undeclared identifier 'out'
+  140 |         int written = snprintf(out, cap, "%s", override);
+      |                                ^~~
+build_gate/mutants/p54060/m0183_paths.c:140:37: error: use of undeclared identifier 'cap'
+  140 |         int written = snprintf(out, cap, "%s", override);
+      |                                     ^~~
+build_gate/mutants/p54060/m0183_paths.c:141:49: error: use of undeclared identifier 'cap'
+  141 |         if (written < 0 || (unsigned)written >= cap) {
+      |                                                 ^~~
+build_gate/mutants/p54060/m0183_paths.c:147:55: error: use of undeclared identifier 'out'
+  147 |     return ct_exe_resource_dir(CT_MIGRATIONS_EXE_REL, out, cap);
+      |                                                       ^~~
+build_gate/mutants/p54060/m0183_paths.c:147:60: error: use of undeclared identifier 'cap'
+  147 |     return ct_exe_resource_dir(CT_MIGRATIONS_EXE_REL, out, cap);
+      |                                                            ^~~
+9 errors generated.
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+build_gate/mutants/p54060/m0188_paths.c:136:28: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  136 |     if (out == NULL || cap == -1)
+      |                        ~~~ ^  ~~
+1 error generated.
+mutate: suite path_migrations_dir_override exited 1
+mutate: suite path_migrations_dir_override exited 1
+mutate: suite path_migrations_dir_override exited 1
+build_gate/mutants/p54060/m0192_paths.c:138:16: error: expected identifier or '('
+  138 |     const char /override = getenv(CT_MIGRATIONS_ENV);
+      |                ^
+build_gate/mutants/p54060/m0192_paths.c:139:9: error: use of undeclared identifier 'override'
+  139 |     if (override != NULL && override[0] != '\0') {
+      |         ^~~~~~~~
+build_gate/mutants/p54060/m0192_paths.c:139:29: error: use of undeclared identifier 'override'
+  139 |     if (override != NULL && override[0] != '\0') {
+      |                             ^~~~~~~~
+build_gate/mutants/p54060/m0192_paths.c:140:48: error: use of undeclared identifier 'override'
+  140 |         int written = snprintf(out, cap, "%s", override);
+      |                                                ^~~~~~~~
+4 errors generated.
+mutate: suite path_migrations_dir_override exited 1
+mutate: suite path_migrations_dir_override exited -1073741795
+mutate: suite path_migrations_dir_override exited 1
+mutate: suite path_migrations_dir_override exited 1
+mutate: suite path_migrations_dir_override exited 1
+mutate: suite path_migrations_dir_override exited 1
+mutate: suite path_migrations_dir_override exited 1
+mutate: suite path_migrations_dir_override exited 1
+mutate: suite path_migrations_dir_override exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+mutate: suite e2e_run_expect_cfg exited 1
+build_gate/mutants/p54060/m0209_paths.c:150:23: error: expected ')'
+  150 | int ct_font_path(char /out, unsigned cap) {
+      |                       ^
+build_gate/mutants/p54060/m0209_paths.c:150:17: note: to match this '('
+  150 | int ct_font_path(char /out, unsigned cap) {
+      |                 ^
+build_gate/mutants/p54060/m0209_paths.c:150:5: error: conflicting types for 'ct_font_path'
+  150 | int ct_font_path(char /out, unsigned cap) {
+      |     ^
+src\app/paths.h:9:5: note: previous declaration is here
+    9 | int ct_font_path(char *out, unsigned cap);
+      |     ^
+build_gate/mutants/p54060/m0209_paths.c:151:9: error: use of undeclared identifier 'out'
+  151 |     if (out == NULL || cap == 0)
+      |         ^~~
+build_gate/mutants/p54060/m0209_paths.c:151:24: error: use of undeclared identifier 'cap'
+  151 |     if (out == NULL || cap == 0)
+      |                        ^~~
+build_gate/mutants/p54060/m0209_paths.c:155:32: error: use of undeclared identifier 'out'
+  155 |         int written = snprintf(out, cap, "%s", override);
+      |                                ^~~
+build_gate/mutants/p54060/m0209_paths.c:155:37: error: use of undeclared identifier 'cap'
+  155 |         int written = snprintf(out, cap, "%s", override);
+      |                                     ^~~
+build_gate/mutants/p54060/m0209_paths.c:156:49: error: use of undeclared identifier 'cap'
+  156 |         if (written < 0 || (unsigned)written >= cap) {
+      |                                                 ^~~
+build_gate/mutants/p54060/m0209_paths.c:166:28: error: use of undeclared identifier 'out'
+  166 |     int written = snprintf(out, cap, "%s/%s", dir, CT_UI_FONT_NAME);
+      |                            ^~~
+build_gate/mutants/p54060/m0209_paths.c:166:33: error: use of undeclared identifier 'cap'
+  166 |     int written = snprintf(out, cap, "%s/%s", dir, CT_UI_FONT_NAME);
+      |                                 ^~~
+build_gate/mutants/p54060/m0209_paths.c:167:45: error: use of undeclared identifier 'cap'
+  167 |     if (written < 0 || (unsigned)written >= cap) {
+      |                                             ^~~
+10 errors generated.
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+build_gate/mutants/p54060/m0214_paths.c:151:28: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  151 |     if (out == NULL || cap == -1)
+      |                        ~~~ ^  ~~
+1 error generated.
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+build_gate/mutants/p54060/m0218_paths.c:153:16: error: expected identifier or '('
+  153 |     const char /override = getenv(CT_UI_FONT_ENV);
+      |                ^
+build_gate/mutants/p54060/m0218_paths.c:154:9: error: use of undeclared identifier 'override'
+  154 |     if (override != NULL && override[0] != '\0') {
+      |         ^~~~~~~~
+build_gate/mutants/p54060/m0218_paths.c:154:29: error: use of undeclared identifier 'override'
+  154 |     if (override != NULL && override[0] != '\0') {
+      |                             ^~~~~~~~
+build_gate/mutants/p54060/m0218_paths.c:155:48: error: use of undeclared identifier 'override'
+  155 |         int written = snprintf(out, cap, "%s", override);
+      |                                                ^~~~~~~~
+4 errors generated.
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited -1073741795
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+mutate: suite path_font_env exited 1
+build_gate/mutants/p54060/m0252_paths.c:174:28: error: expected ')'
+  174 | int ct_data_dir(const char /dir_name, char *out, unsigned cap) {
+      |                            ^
+build_gate/mutants/p54060/m0252_paths.c:174:16: note: to match this '('
+  174 | int ct_data_dir(const char /dir_name, char *out, unsigned cap) {
+      |                ^
+build_gate/mutants/p54060/m0252_paths.c:174:5: error: conflicting types for 'ct_data_dir'
+  174 | int ct_data_dir(const char /dir_name, char *out, unsigned cap) {
+      |     ^
+src\app/paths.h:10:5: note: previous declaration is here
+   10 | int ct_data_dir(const char *dir_name, char *out, unsigned cap);
+      |     ^
+build_gate/mutants/p54060/m0252_paths.c:175:9: error: use of undeclared identifier 'out'
+  175 |     if (out == NULL || cap == 0)
+      |         ^~~
+build_gate/mutants/p54060/m0252_paths.c:175:24: error: use of undeclared identifier 'cap'
+  175 |     if (out == NULL || cap == 0)
+      |                        ^~~
+build_gate/mutants/p54060/m0252_paths.c:177:5: error: use of undeclared identifier 'out'
+  177 |     out[0] = '\0';
+      |     ^~~
+build_gate/mutants/p54060/m0252_paths.c:187:9: error: use of undeclared identifier 'dir_name'
+  187 |     if (dir_name == NULL)
+      |         ^~~~~~~~
+build_gate/mutants/p54060/m0252_paths.c:189:28: error: use of undeclared identifier 'out'
+  189 |     int written = snprintf(out, cap, "%s/%s", base, dir_name);
+      |                            ^~~
+build_gate/mutants/p54060/m0252_paths.c:189:33: error: use of undeclared identifier 'cap'
+  189 |     int written = snprintf(out, cap, "%s/%s", base, dir_name);
+      |                                 ^~~
+build_gate/mutants/p54060/m0252_paths.c:189:53: error: use of undeclared identifier 'dir_name'
+  189 |     int written = snprintf(out, cap, "%s/%s", base, dir_name);
+      |                                                     ^~~~~~~~
+build_gate/mutants/p54060/m0252_paths.c:190:45: error: use of undeclared identifier 'cap'
+  190 |     if (written < 0 || (unsigned)written >= cap) {
+      |                                             ^~~
+build_gate/mutants/p54060/m0252_paths.c:194:19: error: use of undeclared identifier 'out'
+  194 |     if (ct_mkdirs(out) != 0) {
+      |                   ^~~
+build_gate/mutants/p54060/m0252_paths.c:195:9: error: use of undeclared identifier 'out'
+  195 |         out[0] = '\0';
+      |         ^~~
+12 errors generated.
+build_gate/mutants/p54060/m0253_paths.c:174:44: error: expected ')'
+  174 | int ct_data_dir(const char *dir_name, char /out, unsigned cap) {
+      |                                            ^
+build_gate/mutants/p54060/m0253_paths.c:174:16: note: to match this '('
+  174 | int ct_data_dir(const char *dir_name, char /out, unsigned cap) {
+      |                ^
+build_gate/mutants/p54060/m0253_paths.c:174:5: error: conflicting types for 'ct_data_dir'
+  174 | int ct_data_dir(const char *dir_name, char /out, unsigned cap) {
+      |     ^
+src\app/paths.h:10:5: note: previous declaration is here
+   10 | int ct_data_dir(const char *dir_name, char *out, unsigned cap);
+      |     ^
+build_gate/mutants/p54060/m0253_paths.c:175:9: error: use of undeclared identifier 'out'
+  175 |     if (out == NULL || cap == 0)
+      |         ^~~
+build_gate/mutants/p54060/m0253_paths.c:175:24: error: use of undeclared identifier 'cap'
+  175 |     if (out == NULL || cap == 0)
+      |                        ^~~
+build_gate/mutants/p54060/m0253_paths.c:177:5: error: use of undeclared identifier 'out'
+  177 |     out[0] = '\0';
+      |     ^~~
+build_gate/mutants/p54060/m0253_paths.c:189:28: error: use of undeclared identifier 'out'
+  189 |     int written = snprintf(out, cap, "%s/%s", base, dir_name);
+      |                            ^~~
+build_gate/mutants/p54060/m0253_paths.c:189:33: error: use of undeclared identifier 'cap'
+  189 |     int written = snprintf(out, cap, "%s/%s", base, dir_name);
+      |                                 ^~~
+build_gate/mutants/p54060/m0253_paths.c:190:45: error: use of undeclared identifier 'cap'
+  190 |     if (written < 0 || (unsigned)written >= cap) {
+      |                                             ^~~
+build_gate/mutants/p54060/m0253_paths.c:194:19: error: use of undeclared identifier 'out'
+  194 |     if (ct_mkdirs(out) != 0) {
+      |                   ^~~
+build_gate/mutants/p54060/m0253_paths.c:195:9: error: use of undeclared identifier 'out'
+  195 |         out[0] = '\0';
+      |         ^~~
+10 errors generated.
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite path_data_dir_env exited -1073741795
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite path_data_dir_env exited 1
+build_gate/mutants/p54060/m0258_paths.c:175:28: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+  175 |     if (out == NULL || cap == -1)
+      |                        ~~~ ^  ~~
+1 error generated.
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+build_gate/mutants/p54060/m0264_paths.c:178:16: error: expected identifier or '('
+  178 |     const char /base = getenv(CT_DATA_DIR_OVERRIDE_ENV);
+      |                ^
+build_gate/mutants/p54060/m0264_paths.c:179:9: error: use of undeclared identifier 'base'
+  179 |     if (base == NULL || base[0] == '\0') {
+      |         ^~~~
+build_gate/mutants/p54060/m0264_paths.c:179:25: error: use of undeclared identifier 'base'
+  179 |     if (base == NULL || base[0] == '\0') {
+      |                         ^~~~
+build_gate/mutants/p54060/m0264_paths.c:180:9: error: use of undeclared identifier 'base'
+  180 |         base = getenv(CT_DATA_DIR_ENV);
+      |         ^~~~
+build_gate/mutants/p54060/m0264_paths.c:182:9: error: use of undeclared identifier 'base'
+  182 |     if (base == NULL || base[0] == '\0') {
+      |         ^~~~
+build_gate/mutants/p54060/m0264_paths.c:182:25: error: use of undeclared identifier 'base'
+  182 |     if (base == NULL || base[0] == '\0') {
+      |                         ^~~~
+build_gate/mutants/p54060/m0264_paths.c:189:47: error: use of undeclared identifier 'base'
+  189 |     int written = snprintf(out, cap, "%s/%s", base, dir_name);
+      |                                               ^~~~
+7 errors generated.
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited -1073741795
+mutate: suite path_data_dir_env exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite path_data_dir_env exited -1073741795
+mutate: suite path_data_dir_env exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite path_data_dir_env exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: suite e2e_data_dir_override exited 1
+mutate: 2 unexplained survivors
+make: *** [makefile:273: mutate] Error 1

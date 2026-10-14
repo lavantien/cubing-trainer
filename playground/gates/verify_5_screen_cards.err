@@ -1,0 +1,1365 @@
+mutate: suite cards_form_create_retry exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_create_retry exited 1
+mutate: suite cards_form_create_retry exited 1
+build_gate/mutants/p48436/m0011_screen_cards.c:308:90: error: excess elements in array initializer [-Werror,-Wexcess-initializers]
+  308 |                                                                      "cancel", "delete", "back"};
+      |                                                                                          ^~~~~~
+1 error generated.
+build_gate/mutants/p48436/m0012_screen_cards.c:27:38: error: expected ')'
+   27 | static int ct_cards_list_all(sqlite3 /db, long *ids, int cap) {
+      |                                      ^
+build_gate/mutants/p48436/m0012_screen_cards.c:27:29: note: to match this '('
+   27 | static int ct_cards_list_all(sqlite3 /db, long *ids, int cap) {
+      |                             ^
+build_gate/mutants/p48436/m0012_screen_cards.c:27:38: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   27 | static int ct_cards_list_all(sqlite3 /db, long *ids, int cap) {
+      |                                      ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_gate/mutants/p48436/m0012_screen_cards.c:28:9: error: use of undeclared identifier 'db'
+   28 |     if (db == NULL || ids == NULL || cap < 0)
+      |         ^~
+build_gate/mutants/p48436/m0012_screen_cards.c:28:23: error: use of undeclared identifier 'ids'
+   28 |     if (db == NULL || ids == NULL || cap < 0)
+      |                       ^~~
+build_gate/mutants/p48436/m0012_screen_cards.c:28:38: error: use of undeclared identifier 'cap'
+   28 |     if (db == NULL || ids == NULL || cap < 0)
+      |                                      ^~~
+build_gate/mutants/p48436/m0012_screen_cards.c:31:28: error: use of undeclared identifier 'db'
+   31 |     if (sqlite3_prepare_v2(db, CT_SQL_CARDS_ALL, -1, &st, NULL) != SQLITE_OK) {
+      |                            ^~
+build_gate/mutants/p48436/m0012_screen_cards.c:37:16: error: use of undeclared identifier 'cap'
+   37 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_gate/mutants/p48436/m0012_screen_cards.c:38:9: error: use of undeclared identifier 'ids'
+   38 |         ids[n++] = (long)sqlite3_column_int64(st, 0);
+      |         ^~~
+build_gate/mutants/p48436/m0012_screen_cards.c:77:36: error: too many arguments to function call, expected 1, have 3
+   77 |         rc = ct_cards_list_all(db, f->ids, CT_CARDS_PAGE);
+      |              ~~~~~~~~~~~~~~~~~     ^~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p48436/m0012_screen_cards.c:27:12: note: 'ct_cards_list_all' declared here
+   27 | static int ct_cards_list_all(sqlite3 /db, long *ids, int cap) {
+      |            ^                 ~~~~~~~
+9 errors generated.
+build_gate/mutants/p48436/m0013_screen_cards.c:27:48: error: expected ')'
+   27 | static int ct_cards_list_all(sqlite3 *db, long /ids, int cap) {
+      |                                                ^
+build_gate/mutants/p48436/m0013_screen_cards.c:27:29: note: to match this '('
+   27 | static int ct_cards_list_all(sqlite3 *db, long /ids, int cap) {
+      |                             ^
+build_gate/mutants/p48436/m0013_screen_cards.c:28:23: error: use of undeclared identifier 'ids'
+   28 |     if (db == NULL || ids == NULL || cap < 0)
+      |                       ^~~
+build_gate/mutants/p48436/m0013_screen_cards.c:28:38: error: use of undeclared identifier 'cap'
+   28 |     if (db == NULL || ids == NULL || cap < 0)
+      |                                      ^~~
+build_gate/mutants/p48436/m0013_screen_cards.c:37:16: error: use of undeclared identifier 'cap'
+   37 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                ^~~
+build_gate/mutants/p48436/m0013_screen_cards.c:38:9: error: use of undeclared identifier 'ids'
+   38 |         ids[n++] = (long)sqlite3_column_int64(st, 0);
+      |         ^~~
+build_gate/mutants/p48436/m0013_screen_cards.c:77:44: error: too many arguments to function call, expected 2, have 3
+   77 |         rc = ct_cards_list_all(db, f->ids, CT_CARDS_PAGE);
+      |              ~~~~~~~~~~~~~~~~~             ^~~~~~~~~~~~~
+build_gate/mutants/p48436/m0013_screen_cards.c:27:12: note: 'ct_cards_list_all' declared here
+   27 | static int ct_cards_list_all(sqlite3 *db, long /ids, int cap) {
+      |            ^                 ~~~~~~~~~~~~~~~~~
+6 errors generated.
+mutate: suite cards_form_boundaries exited 1
+build_gate/mutants/p48436/m0015_screen_cards.c:28:20: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   28 |     if (db == NULL && ids == NULL || cap < 0)
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~ ~~
+build_gate/mutants/p48436/m0015_screen_cards.c:28:20: note: place parentheses around the '&&' expression to silence this warning
+   28 |     if (db == NULL && ids == NULL || cap < 0)
+      |         ~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite cards_form_boundaries exited 1
+build_gate/mutants/p48436/m0017_screen_cards.c:28:35: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   28 |     if (db == NULL || ids == NULL && cap < 0)
+      |                    ~~ ~~~~~~~~~~~~^~~~~~~~~~
+build_gate/mutants/p48436/m0017_screen_cards.c:28:35: note: place parentheses around the '&&' expression to silence this warning
+   28 |     if (db == NULL || ids == NULL && cap < 0)
+      |                                   ^         
+      |                       (                     )
+1 error generated.
+build_gate/mutants/p48436/m0021_screen_cards.c:30:18: error: expected identifier or '('
+   30 |     sqlite3_stmt /st = NULL;
+      |                  ^
+build_gate/mutants/p48436/m0021_screen_cards.c:31:55: error: use of undeclared identifier 'st'
+   31 |     if (sqlite3_prepare_v2(db, CT_SQL_CARDS_ALL, -1, &st, NULL) != SQLITE_OK) {
+      |                                                       ^~
+build_gate/mutants/p48436/m0021_screen_cards.c:32:26: error: use of undeclared identifier 'st'
+   32 |         sqlite3_finalize(st);
+      |                          ^~
+build_gate/mutants/p48436/m0021_screen_cards.c:37:44: error: use of undeclared identifier 'st'
+   37 |     while (n < cap && (step = sqlite3_step(st)) == SQLITE_ROW) {
+      |                                            ^~
+build_gate/mutants/p48436/m0021_screen_cards.c:38:47: error: use of undeclared identifier 'st'
+   38 |         ids[n++] = (long)sqlite3_column_int64(st, 0);
+      |                                               ^~
+build_gate/mutants/p48436/m0021_screen_cards.c:40:22: error: use of undeclared identifier 'st'
+   40 |     sqlite3_finalize(st);
+      |                      ^~
+6 errors generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_null_deck exited 1
+build_gate/mutants/p48436/m0036_screen_cards.c:46:49: error: expected ')'
+   46 | static void ct_cards_form_refresh(ct_cards_form /f) {
+      |                                                 ^
+build_gate/mutants/p48436/m0036_screen_cards.c:46:34: note: to match this '('
+   46 | static void ct_cards_form_refresh(ct_cards_form /f) {
+      |                                  ^
+build_gate/mutants/p48436/m0036_screen_cards.c:47:13: error: use of undeclared identifier 'f'
+   47 |     memset(&f->card, 0, sizeof f->card);
+      |             ^
+build_gate/mutants/p48436/m0036_screen_cards.c:47:32: error: use of undeclared identifier 'f'
+   47 |     memset(&f->card, 0, sizeof f->card);
+      |                                ^
+build_gate/mutants/p48436/m0036_screen_cards.c:48:9: error: use of undeclared identifier 'f'
+   48 |     if (f->db == NULL || f->selected < 0 || f->selected >= f->row_count)
+      |         ^
+build_gate/mutants/p48436/m0036_screen_cards.c:48:26: error: use of undeclared identifier 'f'
+   48 |     if (f->db == NULL || f->selected < 0 || f->selected >= f->row_count)
+      |                          ^
+build_gate/mutants/p48436/m0036_screen_cards.c:48:45: error: use of undeclared identifier 'f'
+   48 |     if (f->db == NULL || f->selected < 0 || f->selected >= f->row_count)
+      |                                             ^
+build_gate/mutants/p48436/m0036_screen_cards.c:48:60: error: use of undeclared identifier 'f'
+   48 |     if (f->db == NULL || f->selected < 0 || f->selected >= f->row_count)
+      |                                                            ^
+build_gate/mutants/p48436/m0036_screen_cards.c:50:5: error: use of undeclared identifier 'f'
+   50 |     f->status = ct_repo_card_get(f->db, f->ids[f->selected], &f->card);
+      |     ^
+build_gate/mutants/p48436/m0036_screen_cards.c:50:34: error: use of undeclared identifier 'f'
+   50 |     f->status = ct_repo_card_get(f->db, f->ids[f->selected], &f->card);
+      |                                  ^
+build_gate/mutants/p48436/m0036_screen_cards.c:50:41: error: use of undeclared identifier 'f'
+   50 |     f->status = ct_repo_card_get(f->db, f->ids[f->selected], &f->card);
+      |                                         ^
+build_gate/mutants/p48436/m0036_screen_cards.c:50:48: error: use of undeclared identifier 'f'
+   50 |     f->status = ct_repo_card_get(f->db, f->ids[f->selected], &f->card);
+      |                                                ^
+build_gate/mutants/p48436/m0036_screen_cards.c:50:63: error: use of undeclared identifier 'f'
+   50 |     f->status = ct_repo_card_get(f->db, f->ids[f->selected], &f->card);
+      |                                                               ^
+build_gate/mutants/p48436/m0036_screen_cards.c:63:31: error: passing 'ct_cards_form *' to parameter of incompatible type 'ct_cards_form'; dereference with *
+   63 |         ct_cards_form_refresh(f);
+      |                               ^
+      |                               *
+build_gate/mutants/p48436/m0036_screen_cards.c:46:49: note: passing argument to parameter here
+   46 | static void ct_cards_form_refresh(ct_cards_form /f) {
+      |                                                 ^
+build_gate/mutants/p48436/m0036_screen_cards.c:95:27: error: passing 'ct_cards_form *' to parameter of incompatible type 'ct_cards_form'; dereference with *
+   95 |     ct_cards_form_refresh(f);
+      |                           ^
+      |                           *
+build_gate/mutants/p48436/m0036_screen_cards.c:46:49: note: passing argument to parameter here
+   46 | static void ct_cards_form_refresh(ct_cards_form /f) {
+      |                                                 ^
+build_gate/mutants/p48436/m0036_screen_cards.c:115:27: error: passing 'ct_cards_form *' to parameter of incompatible type 'ct_cards_form'; dereference with *
+  115 |     ct_cards_form_refresh(f);
+      |                           ^
+      |                           *
+build_gate/mutants/p48436/m0036_screen_cards.c:46:49: note: passing argument to parameter here
+   46 | static void ct_cards_form_refresh(ct_cards_form /f) {
+      |                                                 ^
+build_gate/mutants/p48436/m0036_screen_cards.c:191:27: error: passing 'ct_cards_form *' to parameter of incompatible type 'ct_cards_form'; dereference with *
+  191 |     ct_cards_form_refresh(f);
+      |                           ^
+      |                           *
+build_gate/mutants/p48436/m0036_screen_cards.c:46:49: note: passing argument to parameter here
+   46 | static void ct_cards_form_refresh(ct_cards_form /f) {
+      |                                                 ^
+build_gate/mutants/p48436/m0036_screen_cards.c:202:27: error: passing 'ct_cards_form *' to parameter of incompatible type 'ct_cards_form'; dereference with *
+  202 |     ct_cards_form_refresh(f);
+      |                           ^
+      |                           *
+build_gate/mutants/p48436/m0036_screen_cards.c:46:49: note: passing argument to parameter here
+   46 | static void ct_cards_form_refresh(ct_cards_form /f) {
+      |                                                 ^
+17 errors generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+build_gate/mutants/p48436/m0040_screen_cards.c:48:23: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   48 |     if (f->db == NULL && f->selected < 0 || f->selected >= f->row_count)
+      |         ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p48436/m0040_screen_cards.c:48:23: note: place parentheses around the '&&' expression to silence this warning
+   48 |     if (f->db == NULL && f->selected < 0 || f->selected >= f->row_count)
+      |                       ^
+      |         (                               )
+1 error generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited -1073741795
+build_gate/mutants/p48436/m0044_screen_cards.c:48:42: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   48 |     if (f->db == NULL || f->selected < 0 && f->selected >= f->row_count)
+      |                       ~~ ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p48436/m0044_screen_cards.c:48:42: note: place parentheses around the '&&' expression to silence this warning
+   48 |     if (f->db == NULL || f->selected < 0 && f->selected >= f->row_count)
+      |                                          ^                             
+      |                          (                                             )
+1 error generated.
+mutate: suite cards_form_boundaries exited 1
+build_gate/mutants/p48436/m0046_screen_cards.c:53:39: error: expected ')'
+   53 | void ct_cards_form_open(ct_cards_form /f, sqlite3 *db, const char *deck) {
+      |                                       ^
+build_gate/mutants/p48436/m0046_screen_cards.c:53:24: note: to match this '('
+   53 | void ct_cards_form_open(ct_cards_form /f, sqlite3 *db, const char *deck) {
+      |                        ^
+build_gate/mutants/p48436/m0046_screen_cards.c:53:6: error: conflicting types for 'ct_cards_form_open'
+   53 | void ct_cards_form_open(ct_cards_form /f, sqlite3 *db, const char *deck) {
+      |      ^
+src\ui/ui.h:41:6: note: previous declaration is here
+   41 | void ct_cards_form_open(ct_cards_form *f, sqlite3 *db, const char *deck);
+      |      ^
+build_gate/mutants/p48436/m0046_screen_cards.c:54:9: error: use of undeclared identifier 'f'
+   54 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p48436/m0046_screen_cards.c:56:12: error: use of undeclared identifier 'f'
+   56 |     memset(f, 0, sizeof *f);
+      |            ^
+build_gate/mutants/p48436/m0046_screen_cards.c:56:26: error: use of undeclared identifier 'f'
+   56 |     memset(f, 0, sizeof *f);
+      |                          ^
+build_gate/mutants/p48436/m0046_screen_cards.c:57:5: error: use of undeclared identifier 'f'
+   57 |     f->selected = -1;
+      |     ^
+build_gate/mutants/p48436/m0046_screen_cards.c:58:9: error: use of undeclared identifier 'deck'
+   58 |     if (deck != NULL)
+      |         ^~~~
+build_gate/mutants/p48436/m0046_screen_cards.c:59:18: error: use of undeclared identifier 'f'
+   59 |         snprintf(f->deck_filter, sizeof f->deck_filter, "%s", deck);
+      |                  ^
+build_gate/mutants/p48436/m0046_screen_cards.c:59:41: error: use of undeclared identifier 'f'
+   59 |         snprintf(f->deck_filter, sizeof f->deck_filter, "%s", deck);
+      |                                         ^
+build_gate/mutants/p48436/m0046_screen_cards.c:59:63: error: use of undeclared identifier 'deck'
+   59 |         snprintf(f->deck_filter, sizeof f->deck_filter, "%s", deck);
+      |                                                               ^~~~
+build_gate/mutants/p48436/m0046_screen_cards.c:60:26: error: use of undeclared identifier 'f'
+   60 |     ct_cards_form_reload(f, db);
+      |                          ^
+build_gate/mutants/p48436/m0046_screen_cards.c:60:29: error: use of undeclared identifier 'db'
+   60 |     ct_cards_form_reload(f, db);
+      |                             ^~
+build_gate/mutants/p48436/m0046_screen_cards.c:61:9: error: use of undeclared identifier 'f'
+   61 |     if (f->row_count > 0) {
+      |         ^
+build_gate/mutants/p48436/m0046_screen_cards.c:62:9: error: use of undeclared identifier 'f'
+   62 |         f->selected = 0;
+      |         ^
+build_gate/mutants/p48436/m0046_screen_cards.c:63:31: error: use of undeclared identifier 'f'
+   63 |         ct_cards_form_refresh(f);
+      |                               ^
+15 errors generated.
+build_gate/mutants/p48436/m0047_screen_cards.c:53:51: error: expected ')'
+   53 | void ct_cards_form_open(ct_cards_form *f, sqlite3 /db, const char *deck) {
+      |                                                   ^
+build_gate/mutants/p48436/m0047_screen_cards.c:53:24: note: to match this '('
+   53 | void ct_cards_form_open(ct_cards_form *f, sqlite3 /db, const char *deck) {
+      |                        ^
+build_gate/mutants/p48436/m0047_screen_cards.c:53:6: error: conflicting types for 'ct_cards_form_open'
+   53 | void ct_cards_form_open(ct_cards_form *f, sqlite3 /db, const char *deck) {
+      |      ^
+src\ui/ui.h:41:6: note: previous declaration is here
+   41 | void ct_cards_form_open(ct_cards_form *f, sqlite3 *db, const char *deck);
+      |      ^
+build_gate/mutants/p48436/m0047_screen_cards.c:53:51: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   53 | void ct_cards_form_open(ct_cards_form *f, sqlite3 /db, const char *deck) {
+      |                                                   ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_gate/mutants/p48436/m0047_screen_cards.c:58:9: error: use of undeclared identifier 'deck'
+   58 |     if (deck != NULL)
+      |         ^~~~
+build_gate/mutants/p48436/m0047_screen_cards.c:59:63: error: use of undeclared identifier 'deck'
+   59 |         snprintf(f->deck_filter, sizeof f->deck_filter, "%s", deck);
+      |                                                               ^~~~
+build_gate/mutants/p48436/m0047_screen_cards.c:60:29: error: use of undeclared identifier 'db'
+   60 |     ct_cards_form_reload(f, db);
+      |                             ^~
+6 errors generated.
+build_gate/mutants/p48436/m0048_screen_cards.c:53:67: error: expected ')'
+   53 | void ct_cards_form_open(ct_cards_form *f, sqlite3 *db, const char /deck) {
+      |                                                                   ^
+build_gate/mutants/p48436/m0048_screen_cards.c:53:24: note: to match this '('
+   53 | void ct_cards_form_open(ct_cards_form *f, sqlite3 *db, const char /deck) {
+      |                        ^
+build_gate/mutants/p48436/m0048_screen_cards.c:53:6: error: conflicting types for 'ct_cards_form_open'
+   53 | void ct_cards_form_open(ct_cards_form *f, sqlite3 *db, const char /deck) {
+      |      ^
+src\ui/ui.h:41:6: note: previous declaration is here
+   41 | void ct_cards_form_open(ct_cards_form *f, sqlite3 *db, const char *deck);
+      |      ^
+build_gate/mutants/p48436/m0048_screen_cards.c:58:9: error: use of undeclared identifier 'deck'
+   58 |     if (deck != NULL)
+      |         ^~~~
+build_gate/mutants/p48436/m0048_screen_cards.c:59:63: error: use of undeclared identifier 'deck'
+   59 |         snprintf(f->deck_filter, sizeof f->deck_filter, "%s", deck);
+      |                                                               ^~~~
+4 errors generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_null_deck exited 1
+mutate: suite cards_form_null_deck exited 1
+build_gate/mutants/p48436/m0052_screen_cards.c:56:25: error: expected expression
+   56 |     memset(f, 0, sizeof /f);
+      |                         ^
+1 error generated.
+mutate: suite cards_form_open exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_open exited 1
+mutate: suite cards_form_cancel exited 1
+mutate: suite cards_form_open exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+build_gate/mutants/p48436/m0062_screen_cards.c:67:41: error: expected ')'
+   67 | void ct_cards_form_reload(ct_cards_form /f, sqlite3 *db) {
+      |                                         ^
+build_gate/mutants/p48436/m0062_screen_cards.c:67:26: note: to match this '('
+   67 | void ct_cards_form_reload(ct_cards_form /f, sqlite3 *db) {
+      |                          ^
+build_gate/mutants/p48436/m0062_screen_cards.c:67:6: error: conflicting types for 'ct_cards_form_reload'
+   67 | void ct_cards_form_reload(ct_cards_form /f, sqlite3 *db) {
+      |      ^
+src\ui/ui.h:42:6: note: previous declaration is here
+   42 | void ct_cards_form_reload(ct_cards_form *f, sqlite3 *db);
+      |      ^
+build_gate/mutants/p48436/m0062_screen_cards.c:68:9: error: use of undeclared identifier 'f'
+   68 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p48436/m0062_screen_cards.c:70:5: error: use of undeclared identifier 'f'
+   70 |     f->db = db;
+      |     ^
+build_gate/mutants/p48436/m0062_screen_cards.c:70:13: error: use of undeclared identifier 'db'
+   70 |     f->db = db;
+      |             ^~
+build_gate/mutants/p48436/m0062_screen_cards.c:71:5: error: use of undeclared identifier 'f'
+   71 |     f->editing = false;
+      |     ^
+build_gate/mutants/p48436/m0062_screen_cards.c:72:5: error: use of undeclared identifier 'f'
+   72 |     f->dirty = false;
+      |     ^
+build_gate/mutants/p48436/m0062_screen_cards.c:74:9: error: use of undeclared identifier 'db'
+   74 |     if (db == NULL) {
+      |         ^~
+build_gate/mutants/p48436/m0062_screen_cards.c:76:16: error: use of undeclared identifier 'f'
+   76 |     } else if (f->deck_filter[0] == '\0') {
+      |                ^
+build_gate/mutants/p48436/m0062_screen_cards.c:77:32: error: use of undeclared identifier 'db'
+   77 |         rc = ct_cards_list_all(db, f->ids, CT_CARDS_PAGE);
+      |                                ^~
+build_gate/mutants/p48436/m0062_screen_cards.c:77:36: error: use of undeclared identifier 'f'
+   77 |         rc = ct_cards_list_all(db, f->ids, CT_CARDS_PAGE);
+      |                                    ^
+build_gate/mutants/p48436/m0062_screen_cards.c:80:32: error: use of undeclared identifier 'db'
+   80 |         rc = ct_repo_card_list(db, f->deck_filter, rows, CT_CARDS_PAGE);
+      |                                ^~
+build_gate/mutants/p48436/m0062_screen_cards.c:80:36: error: use of undeclared identifier 'f'
+   80 |         rc = ct_repo_card_list(db, f->deck_filter, rows, CT_CARDS_PAGE);
+      |                                    ^
+build_gate/mutants/p48436/m0062_screen_cards.c:83:17: error: use of undeclared identifier 'f'
+   83 |                 f->ids[i] = rows[i].id;
+      |                 ^
+build_gate/mutants/p48436/m0062_screen_cards.c:87:9: error: use of undeclared identifier 'f'
+   87 |         f->row_count = 0;
+      |         ^
+build_gate/mutants/p48436/m0062_screen_cards.c:88:9: error: use of undeclared identifier 'f'
+   88 |         f->status = rc;
+      |         ^
+build_gate/mutants/p48436/m0062_screen_cards.c:90:9: error: use of undeclared identifier 'f'
+   90 |         f->row_count = rc;
+      |         ^
+build_gate/mutants/p48436/m0062_screen_cards.c:91:9: error: use of undeclared identifier 'f'
+   91 |         f->status = CT_REPO_OK;
+      |         ^
+build_gate/mutants/p48436/m0062_screen_cards.c:93:9: error: use of undeclared identifier 'f'
+   93 |     if (f->selected >= f->row_count)
+      |         ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_gate/mutants/p48436/m0063_screen_cards.c:67:53: error: expected ')'
+   67 | void ct_cards_form_reload(ct_cards_form *f, sqlite3 /db) {
+      |                                                     ^
+build_gate/mutants/p48436/m0063_screen_cards.c:67:26: note: to match this '('
+   67 | void ct_cards_form_reload(ct_cards_form *f, sqlite3 /db) {
+      |                          ^
+build_gate/mutants/p48436/m0063_screen_cards.c:67:6: error: conflicting types for 'ct_cards_form_reload'
+   67 | void ct_cards_form_reload(ct_cards_form *f, sqlite3 /db) {
+      |      ^
+src\ui/ui.h:42:6: note: previous declaration is here
+   42 | void ct_cards_form_reload(ct_cards_form *f, sqlite3 *db);
+      |      ^
+build_gate/mutants/p48436/m0063_screen_cards.c:67:53: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+   67 | void ct_cards_form_reload(ct_cards_form *f, sqlite3 /db) {
+      |                                                     ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_gate/mutants/p48436/m0063_screen_cards.c:70:13: error: use of undeclared identifier 'db'
+   70 |     f->db = db;
+      |             ^~
+build_gate/mutants/p48436/m0063_screen_cards.c:74:9: error: use of undeclared identifier 'db'
+   74 |     if (db == NULL) {
+      |         ^~
+build_gate/mutants/p48436/m0063_screen_cards.c:77:32: error: use of undeclared identifier 'db'
+   77 |         rc = ct_cards_list_all(db, f->ids, CT_CARDS_PAGE);
+      |                                ^~
+build_gate/mutants/p48436/m0063_screen_cards.c:80:32: error: use of undeclared identifier 'db'
+   80 |         rc = ct_repo_card_list(db, f->deck_filter, rows, CT_CARDS_PAGE);
+      |                                ^~
+7 errors generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_create_retry exited 1
+mutate: suite cards_form_delete exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+build_gate/mutants/p48436/m0069_screen_cards.c:76:16: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+   76 |     } else if (f->deck_filter[-1] == '\0') {
+      |                ^              ~~
+src\ui/ui.h:32:5: note: array 'deck_filter' declared here
+   32 |     char deck_filter[CT_CARD_DECK_MAX];
+      |     ^
+1 error generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited -1073741795
+mutate: suite cards_form_create_retry exited -1073741795
+mutate: suite cards_form_open exited 1
+mutate: suite cards_form_open exited 1
+mutate: suite cards_form_open exited 1
+mutate: suite cards_form_delete exited 1
+mutate: suite cards_form_delete exited 1
+mutate: suite cards_form_delete exited 1
+mutate: suite cards_form_delete exited 1
+build_gate/mutants/p48436/m0086_screen_cards.c:98:40: error: expected ')'
+   98 | int ct_cards_form_select(ct_cards_form /f, int row) {
+      |                                        ^
+build_gate/mutants/p48436/m0086_screen_cards.c:98:25: note: to match this '('
+   98 | int ct_cards_form_select(ct_cards_form /f, int row) {
+      |                         ^
+build_gate/mutants/p48436/m0086_screen_cards.c:98:5: error: conflicting types for 'ct_cards_form_select'
+   98 | int ct_cards_form_select(ct_cards_form /f, int row) {
+      |     ^
+src\ui/ui.h:43:5: note: previous declaration is here
+   43 | int ct_cards_form_select(ct_cards_form *f, int row);
+      |     ^
+build_gate/mutants/p48436/m0086_screen_cards.c:99:9: error: use of undeclared identifier 'f'
+   99 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p48436/m0086_screen_cards.c:101:9: error: use of undeclared identifier 'f'
+  101 |     if (f->row_count <= 0) {
+      |         ^
+build_gate/mutants/p48436/m0086_screen_cards.c:102:9: error: use of undeclared identifier 'f'
+  102 |         f->selected = -1;
+      |         ^
+build_gate/mutants/p48436/m0086_screen_cards.c:103:9: error: use of undeclared identifier 'f'
+  103 |         f->status = CT_REPO_MISSING;
+      |         ^
+build_gate/mutants/p48436/m0086_screen_cards.c:106:9: error: use of undeclared identifier 'row'
+  106 |     if (row < 0)
+      |         ^~~
+build_gate/mutants/p48436/m0086_screen_cards.c:107:9: error: use of undeclared identifier 'row'
+  107 |         row = 0;
+      |         ^~~
+build_gate/mutants/p48436/m0086_screen_cards.c:108:9: error: use of undeclared identifier 'row'
+  108 |     if (row >= f->row_count)
+      |         ^~~
+build_gate/mutants/p48436/m0086_screen_cards.c:108:16: error: use of undeclared identifier 'f'
+  108 |     if (row >= f->row_count)
+      |                ^
+build_gate/mutants/p48436/m0086_screen_cards.c:109:9: error: use of undeclared identifier 'row'
+  109 |         row = f->row_count - 1;
+      |         ^~~
+build_gate/mutants/p48436/m0086_screen_cards.c:109:15: error: use of undeclared identifier 'f'
+  109 |         row = f->row_count - 1;
+      |               ^
+build_gate/mutants/p48436/m0086_screen_cards.c:110:5: error: use of undeclared identifier 'f'
+  110 |     f->selected = row;
+      |     ^
+build_gate/mutants/p48436/m0086_screen_cards.c:110:19: error: use of undeclared identifier 'row'
+  110 |     f->selected = row;
+      |                   ^~~
+build_gate/mutants/p48436/m0086_screen_cards.c:111:9: error: use of undeclared identifier 'f'
+  111 |     if (f->db == NULL) {
+      |         ^
+build_gate/mutants/p48436/m0086_screen_cards.c:112:9: error: use of undeclared identifier 'f'
+  112 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p48436/m0086_screen_cards.c:115:27: error: use of undeclared identifier 'f'
+  115 |     ct_cards_form_refresh(f);
+      |                           ^
+build_gate/mutants/p48436/m0086_screen_cards.c:116:12: error: use of undeclared identifier 'f'
+  116 |     return f->status;
+      |            ^
+18 errors generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_select exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_select exited 1
+mutate: suite cards_form_select exited 1
+mutate: suite cards_form_select exited 1
+mutate: suite cards_form_select exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_select exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+build_gate/mutants/p48436/m0104_screen_cards.c:119:44: error: expected ')'
+  119 | int ct_cards_form_begin_edit(ct_cards_form /f) {
+      |                                            ^
+build_gate/mutants/p48436/m0104_screen_cards.c:119:29: note: to match this '('
+  119 | int ct_cards_form_begin_edit(ct_cards_form /f) {
+      |                             ^
+build_gate/mutants/p48436/m0104_screen_cards.c:119:5: error: conflicting types for 'ct_cards_form_begin_edit'
+  119 | int ct_cards_form_begin_edit(ct_cards_form /f) {
+      |     ^
+src\ui/ui.h:44:5: note: previous declaration is here
+   44 | int ct_cards_form_begin_edit(ct_cards_form *f);
+      |     ^
+build_gate/mutants/p48436/m0104_screen_cards.c:120:9: error: use of undeclared identifier 'f'
+  120 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p48436/m0104_screen_cards.c:122:9: error: use of undeclared identifier 'f'
+  122 |     if (f->selected < 0 || f->selected >= f->row_count) {
+      |         ^
+build_gate/mutants/p48436/m0104_screen_cards.c:122:28: error: use of undeclared identifier 'f'
+  122 |     if (f->selected < 0 || f->selected >= f->row_count) {
+      |                            ^
+build_gate/mutants/p48436/m0104_screen_cards.c:122:43: error: use of undeclared identifier 'f'
+  122 |     if (f->selected < 0 || f->selected >= f->row_count) {
+      |                                           ^
+build_gate/mutants/p48436/m0104_screen_cards.c:123:9: error: use of undeclared identifier 'f'
+  123 |         f->status = CT_REPO_MISSING;
+      |         ^
+build_gate/mutants/p48436/m0104_screen_cards.c:126:5: error: use of undeclared identifier 'f'
+  126 |     f->editing = true;
+      |     ^
+build_gate/mutants/p48436/m0104_screen_cards.c:127:5: error: use of undeclared identifier 'f'
+  127 |     f->status = CT_REPO_OK;
+      |     ^
+9 errors generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_cancel exited 1
+mutate: suite cards_form_cancel exited 1
+mutate: suite cards_form_select exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_select exited 1
+build_gate/mutants/p48436/m0112_screen_cards.c:131:38: error: expected ')'
+  131 | int ct_cards_form_save(ct_cards_form /f, sqlite3 *db) {
+      |                                      ^
+build_gate/mutants/p48436/m0112_screen_cards.c:131:23: note: to match this '('
+  131 | int ct_cards_form_save(ct_cards_form /f, sqlite3 *db) {
+      |                       ^
+build_gate/mutants/p48436/m0112_screen_cards.c:131:5: error: conflicting types for 'ct_cards_form_save'
+  131 | int ct_cards_form_save(ct_cards_form /f, sqlite3 *db) {
+      |     ^
+src\ui/ui.h:45:5: note: previous declaration is here
+   45 | int ct_cards_form_save(ct_cards_form *f, sqlite3 *db);
+      |     ^
+build_gate/mutants/p48436/m0112_screen_cards.c:132:9: error: use of undeclared identifier 'f'
+  132 |     if (f == NULL || db == NULL)
+      |         ^
+build_gate/mutants/p48436/m0112_screen_cards.c:132:22: error: use of undeclared identifier 'db'
+  132 |     if (f == NULL || db == NULL)
+      |                      ^~
+build_gate/mutants/p48436/m0112_screen_cards.c:134:9: error: use of undeclared identifier 'f'
+  134 |     if (f->selected < 0 || f->selected >= f->row_count || f->card.id <= 0) {
+      |         ^
+build_gate/mutants/p48436/m0112_screen_cards.c:134:28: error: use of undeclared identifier 'f'
+  134 |     if (f->selected < 0 || f->selected >= f->row_count || f->card.id <= 0) {
+      |                            ^
+build_gate/mutants/p48436/m0112_screen_cards.c:134:43: error: use of undeclared identifier 'f'
+  134 |     if (f->selected < 0 || f->selected >= f->row_count || f->card.id <= 0) {
+      |                                           ^
+build_gate/mutants/p48436/m0112_screen_cards.c:134:59: error: use of undeclared identifier 'f'
+  134 |     if (f->selected < 0 || f->selected >= f->row_count || f->card.id <= 0) {
+      |                                                           ^
+build_gate/mutants/p48436/m0112_screen_cards.c:135:9: error: use of undeclared identifier 'f'
+  135 |         f->status = CT_REPO_MISSING;
+      |         ^
+build_gate/mutants/p48436/m0112_screen_cards.c:138:34: error: use of undeclared identifier 'db'
+  138 |     int rc = ct_repo_card_update(db, &f->card);
+      |                                  ^~
+build_gate/mutants/p48436/m0112_screen_cards.c:138:39: error: use of undeclared identifier 'f'
+  138 |     int rc = ct_repo_card_update(db, &f->card);
+      |                                       ^
+build_gate/mutants/p48436/m0112_screen_cards.c:139:5: error: use of undeclared identifier 'f'
+  139 |     f->status = rc;
+      |     ^
+build_gate/mutants/p48436/m0112_screen_cards.c:141:9: error: use of undeclared identifier 'f'
+  141 |         f->dirty = false;
+      |         ^
+build_gate/mutants/p48436/m0112_screen_cards.c:142:9: error: use of undeclared identifier 'f'
+  142 |         f->editing = false;
+      |         ^
+14 errors generated.
+build_gate/mutants/p48436/m0113_screen_cards.c:131:50: error: expected ')'
+  131 | int ct_cards_form_save(ct_cards_form *f, sqlite3 /db) {
+      |                                                  ^
+build_gate/mutants/p48436/m0113_screen_cards.c:131:23: note: to match this '('
+  131 | int ct_cards_form_save(ct_cards_form *f, sqlite3 /db) {
+      |                       ^
+build_gate/mutants/p48436/m0113_screen_cards.c:131:5: error: conflicting types for 'ct_cards_form_save'
+  131 | int ct_cards_form_save(ct_cards_form *f, sqlite3 /db) {
+      |     ^
+src\ui/ui.h:45:5: note: previous declaration is here
+   45 | int ct_cards_form_save(ct_cards_form *f, sqlite3 *db);
+      |     ^
+build_gate/mutants/p48436/m0113_screen_cards.c:131:50: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  131 | int ct_cards_form_save(ct_cards_form *f, sqlite3 /db) {
+      |                                                  ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_gate/mutants/p48436/m0113_screen_cards.c:132:22: error: use of undeclared identifier 'db'
+  132 |     if (f == NULL || db == NULL)
+      |                      ^~
+build_gate/mutants/p48436/m0113_screen_cards.c:138:34: error: use of undeclared identifier 'db'
+  138 |     int rc = ct_repo_card_update(db, &f->card);
+      |                                  ^~
+5 errors generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_guards exited -1073741795
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_edit_save exited 1
+mutate: suite cards_form_edit_save exited 1
+mutate: suite cards_form_guards exited 1
+build_gate/mutants/p48436/m0120_screen_cards.c:134:25: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  134 |     if (f->selected < 0 && f->selected >= f->row_count || f->card.id <= 0) {
+      |         ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p48436/m0120_screen_cards.c:134:25: note: place parentheses around the '&&' expression to silence this warning
+  134 |     if (f->selected < 0 && f->selected >= f->row_count || f->card.id <= 0) {
+      |                         ^
+      |         (                                             )
+1 error generated.
+mutate: suite cards_form_boundaries exited 1
+build_gate/mutants/p48436/m0122_screen_cards.c:134:56: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  134 |     if (f->selected < 0 || f->selected >= f->row_count && f->card.id <= 0) {
+      |                         ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build_gate/mutants/p48436/m0122_screen_cards.c:134:56: note: place parentheses around the '&&' expression to silence this warning
+  134 |     if (f->selected < 0 || f->selected >= f->row_count && f->card.id <= 0) {
+      |                                                        ^                 
+      |                            (                                             )
+1 error generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_edit_save exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_edit_save exited 1
+mutate: suite cards_form_edit_save exited 1
+mutate: suite cards_form_edit_save exited 1
+build_gate/mutants/p48436/m0129_screen_cards.c:147:40: error: expected ')'
+  147 | int ct_cards_form_delete(ct_cards_form /f, sqlite3 *db) {
+      |                                        ^
+build_gate/mutants/p48436/m0129_screen_cards.c:147:25: note: to match this '('
+  147 | int ct_cards_form_delete(ct_cards_form /f, sqlite3 *db) {
+      |                         ^
+build_gate/mutants/p48436/m0129_screen_cards.c:147:5: error: conflicting types for 'ct_cards_form_delete'
+  147 | int ct_cards_form_delete(ct_cards_form /f, sqlite3 *db) {
+      |     ^
+src\ui/ui.h:46:5: note: previous declaration is here
+   46 | int ct_cards_form_delete(ct_cards_form *f, sqlite3 *db);
+      |     ^
+build_gate/mutants/p48436/m0129_screen_cards.c:148:9: error: use of undeclared identifier 'f'
+  148 |     if (f == NULL || db == NULL)
+      |         ^
+build_gate/mutants/p48436/m0129_screen_cards.c:148:22: error: use of undeclared identifier 'db'
+  148 |     if (f == NULL || db == NULL)
+      |                      ^~
+build_gate/mutants/p48436/m0129_screen_cards.c:150:9: error: use of undeclared identifier 'f'
+  150 |     if (f->selected < 0 || f->selected >= f->row_count || f->ids[f->selected] <= 0) {
+      |         ^
+build_gate/mutants/p48436/m0129_screen_cards.c:150:28: error: use of undeclared identifier 'f'
+  150 |     if (f->selected < 0 || f->selected >= f->row_count || f->ids[f->selected] <= 0) {
+      |                            ^
+build_gate/mutants/p48436/m0129_screen_cards.c:150:43: error: use of undeclared identifier 'f'
+  150 |     if (f->selected < 0 || f->selected >= f->row_count || f->ids[f->selected] <= 0) {
+      |                                           ^
+build_gate/mutants/p48436/m0129_screen_cards.c:150:59: error: use of undeclared identifier 'f'
+  150 |     if (f->selected < 0 || f->selected >= f->row_count || f->ids[f->selected] <= 0) {
+      |                                                           ^
+build_gate/mutants/p48436/m0129_screen_cards.c:150:66: error: use of undeclared identifier 'f'
+  150 |     if (f->selected < 0 || f->selected >= f->row_count || f->ids[f->selected] <= 0) {
+      |                                                                  ^
+build_gate/mutants/p48436/m0129_screen_cards.c:151:9: error: use of undeclared identifier 'f'
+  151 |         f->status = CT_REPO_MISSING;
+      |         ^
+build_gate/mutants/p48436/m0129_screen_cards.c:154:34: error: use of undeclared identifier 'db'
+  154 |     int rc = ct_repo_card_delete(db, f->ids[f->selected]);
+      |                                  ^~
+build_gate/mutants/p48436/m0129_screen_cards.c:154:38: error: use of undeclared identifier 'f'
+  154 |     int rc = ct_repo_card_delete(db, f->ids[f->selected]);
+      |                                      ^
+build_gate/mutants/p48436/m0129_screen_cards.c:154:45: error: use of undeclared identifier 'f'
+  154 |     int rc = ct_repo_card_delete(db, f->ids[f->selected]);
+      |                                             ^
+build_gate/mutants/p48436/m0129_screen_cards.c:155:5: error: use of undeclared identifier 'f'
+  155 |     f->status = rc;
+      |     ^
+build_gate/mutants/p48436/m0129_screen_cards.c:157:30: error: use of undeclared identifier 'f'
+  157 |         ct_cards_form_reload(f, db);
+      |                              ^
+build_gate/mutants/p48436/m0129_screen_cards.c:157:33: error: use of undeclared identifier 'db'
+  157 |         ct_cards_form_reload(f, db);
+      |                                 ^~
+16 errors generated.
+build_gate/mutants/p48436/m0130_screen_cards.c:147:52: error: expected ')'
+  147 | int ct_cards_form_delete(ct_cards_form *f, sqlite3 /db) {
+      |                                                    ^
+build_gate/mutants/p48436/m0130_screen_cards.c:147:25: note: to match this '('
+  147 | int ct_cards_form_delete(ct_cards_form *f, sqlite3 /db) {
+      |                         ^
+build_gate/mutants/p48436/m0130_screen_cards.c:147:5: error: conflicting types for 'ct_cards_form_delete'
+  147 | int ct_cards_form_delete(ct_cards_form *f, sqlite3 /db) {
+      |     ^
+src\ui/ui.h:46:5: note: previous declaration is here
+   46 | int ct_cards_form_delete(ct_cards_form *f, sqlite3 *db);
+      |     ^
+build_gate/mutants/p48436/m0130_screen_cards.c:147:52: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  147 | int ct_cards_form_delete(ct_cards_form *f, sqlite3 /db) {
+      |                                                    ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_gate/mutants/p48436/m0130_screen_cards.c:148:22: error: use of undeclared identifier 'db'
+  148 |     if (f == NULL || db == NULL)
+      |                      ^~
+build_gate/mutants/p48436/m0130_screen_cards.c:154:34: error: use of undeclared identifier 'db'
+  154 |     int rc = ct_repo_card_delete(db, f->ids[f->selected]);
+      |                                  ^~
+build_gate/mutants/p48436/m0130_screen_cards.c:157:33: error: use of undeclared identifier 'db'
+  157 |         ct_cards_form_reload(f, db);
+      |                                 ^~
+6 errors generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_guards exited -1073741795
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_delete exited -1073741795
+build_gate/mutants/p48436/m0137_screen_cards.c:150:25: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  150 |     if (f->selected < 0 && f->selected >= f->row_count || f->ids[f->selected] <= 0) {
+      |         ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p48436/m0137_screen_cards.c:150:25: note: place parentheses around the '&&' expression to silence this warning
+  150 |     if (f->selected < 0 && f->selected >= f->row_count || f->ids[f->selected] <= 0) {
+      |                         ^
+      |         (                                             )
+1 error generated.
+mutate: suite cards_form_boundaries exited 1
+build_gate/mutants/p48436/m0139_screen_cards.c:150:56: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  150 |     if (f->selected < 0 || f->selected >= f->row_count && f->ids[f->selected] <= 0) {
+      |                         ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p48436/m0139_screen_cards.c:150:56: note: place parentheses around the '&&' expression to silence this warning
+  150 |     if (f->selected < 0 || f->selected >= f->row_count && f->ids[f->selected] <= 0) {
+      |                                                        ^                          
+      |                            (                                                      )
+1 error generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_delete exited 1
+build_gate/mutants/p48436/m0144_screen_cards.c:161:40: error: expected ')'
+  161 | int ct_cards_form_create(ct_cards_form /f, sqlite3 *db, const char *deck) {
+      |                                        ^
+build_gate/mutants/p48436/m0144_screen_cards.c:161:25: note: to match this '('
+  161 | int ct_cards_form_create(ct_cards_form /f, sqlite3 *db, const char *deck) {
+      |                         ^
+build_gate/mutants/p48436/m0144_screen_cards.c:161:5: error: conflicting types for 'ct_cards_form_create'
+  161 | int ct_cards_form_create(ct_cards_form /f, sqlite3 *db, const char *deck) {
+      |     ^
+src\ui/ui.h:47:5: note: previous declaration is here
+   47 | int ct_cards_form_create(ct_cards_form *f, sqlite3 *db, const char *deck);
+      |     ^
+build_gate/mutants/p48436/m0144_screen_cards.c:162:9: error: use of undeclared identifier 'f'
+  162 |     if (f == NULL || db == NULL)
+      |         ^
+build_gate/mutants/p48436/m0144_screen_cards.c:162:22: error: use of undeclared identifier 'db'
+  162 |     if (f == NULL || db == NULL)
+      |                      ^~
+build_gate/mutants/p48436/m0144_screen_cards.c:164:26: error: use of undeclared identifier 'deck'
+  164 |     if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX)) {
+      |                          ^~~~
+build_gate/mutants/p48436/m0144_screen_cards.c:165:9: error: use of undeclared identifier 'f'
+  165 |         f->status = CT_REPO_ERR_ARG;
+      |         ^
+build_gate/mutants/p48436/m0144_screen_cards.c:170:43: error: use of undeclared identifier 'deck'
+  170 |     snprintf(c.deck, sizeof c.deck, "%s", deck);
+      |                                           ^~~~
+build_gate/mutants/p48436/m0144_screen_cards.c:172:22: error: use of undeclared identifier 'f'
+  172 |     long seq = (long)f->row_count + 1;
+      |                      ^
+build_gate/mutants/p48436/m0144_screen_cards.c:176:34: error: use of undeclared identifier 'db'
+  176 |         rc = ct_repo_card_insert(db, &c);
+      |                                  ^~
+build_gate/mutants/p48436/m0144_screen_cards.c:181:5: error: use of undeclared identifier 'f'
+  181 |     f->status = rc;
+      |     ^
+build_gate/mutants/p48436/m0144_screen_cards.c:184:26: error: use of undeclared identifier 'f'
+  184 |     ct_cards_form_reload(f, db);
+      |                          ^
+build_gate/mutants/p48436/m0144_screen_cards.c:184:29: error: use of undeclared identifier 'db'
+  184 |     ct_cards_form_reload(f, db);
+      |                             ^~
+build_gate/mutants/p48436/m0144_screen_cards.c:185:25: error: use of undeclared identifier 'f'
+  185 |     for (int i = 0; i < f->row_count; i++) {
+      |                         ^
+build_gate/mutants/p48436/m0144_screen_cards.c:186:13: error: use of undeclared identifier 'f'
+  186 |         if (f->ids[i] == c.id) {
+      |             ^
+build_gate/mutants/p48436/m0144_screen_cards.c:187:13: error: use of undeclared identifier 'f'
+  187 |             f->selected = i;
+      |             ^
+build_gate/mutants/p48436/m0144_screen_cards.c:191:27: error: use of undeclared identifier 'f'
+  191 |     ct_cards_form_refresh(f);
+      |                           ^
+build_gate/mutants/p48436/m0144_screen_cards.c:192:5: error: use of undeclared identifier 'f'
+  192 |     f->editing = true;
+      |     ^
+build_gate/mutants/p48436/m0144_screen_cards.c:193:5: error: use of undeclared identifier 'f'
+  193 |     f->dirty = false;
+      |     ^
+18 errors generated.
+build_gate/mutants/p48436/m0145_screen_cards.c:161:52: error: expected ')'
+  161 | int ct_cards_form_create(ct_cards_form *f, sqlite3 /db, const char *deck) {
+      |                                                    ^
+build_gate/mutants/p48436/m0145_screen_cards.c:161:25: note: to match this '('
+  161 | int ct_cards_form_create(ct_cards_form *f, sqlite3 /db, const char *deck) {
+      |                         ^
+build_gate/mutants/p48436/m0145_screen_cards.c:161:5: error: conflicting types for 'ct_cards_form_create'
+  161 | int ct_cards_form_create(ct_cards_form *f, sqlite3 /db, const char *deck) {
+      |     ^
+src\ui/ui.h:47:5: note: previous declaration is here
+   47 | int ct_cards_form_create(ct_cards_form *f, sqlite3 *db, const char *deck);
+      |     ^
+build_gate/mutants/p48436/m0145_screen_cards.c:161:52: error: variable has incomplete type 'sqlite3' (aka 'struct sqlite3')
+  161 | int ct_cards_form_create(ct_cards_form *f, sqlite3 /db, const char *deck) {
+      |                                                    ^
+third_party/sqlite\sqlite3.h:275:16: note: forward declaration of 'struct sqlite3'
+  275 | typedef struct sqlite3 sqlite3;
+      |                ^
+build_gate/mutants/p48436/m0145_screen_cards.c:162:22: error: use of undeclared identifier 'db'
+  162 |     if (f == NULL || db == NULL)
+      |                      ^~
+build_gate/mutants/p48436/m0145_screen_cards.c:164:26: error: use of undeclared identifier 'deck'
+  164 |     if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX)) {
+      |                          ^~~~
+build_gate/mutants/p48436/m0145_screen_cards.c:170:43: error: use of undeclared identifier 'deck'
+  170 |     snprintf(c.deck, sizeof c.deck, "%s", deck);
+      |                                           ^~~~
+build_gate/mutants/p48436/m0145_screen_cards.c:176:34: error: use of undeclared identifier 'db'
+  176 |         rc = ct_repo_card_insert(db, &c);
+      |                                  ^~
+build_gate/mutants/p48436/m0145_screen_cards.c:184:29: error: use of undeclared identifier 'db'
+  184 |     ct_cards_form_reload(f, db);
+      |                             ^~
+8 errors generated.
+build_gate/mutants/p48436/m0146_screen_cards.c:161:68: error: expected ')'
+  161 | int ct_cards_form_create(ct_cards_form *f, sqlite3 *db, const char /deck) {
+      |                                                                    ^
+build_gate/mutants/p48436/m0146_screen_cards.c:161:25: note: to match this '('
+  161 | int ct_cards_form_create(ct_cards_form *f, sqlite3 *db, const char /deck) {
+      |                         ^
+build_gate/mutants/p48436/m0146_screen_cards.c:161:5: error: conflicting types for 'ct_cards_form_create'
+  161 | int ct_cards_form_create(ct_cards_form *f, sqlite3 *db, const char /deck) {
+      |     ^
+src\ui/ui.h:47:5: note: previous declaration is here
+   47 | int ct_cards_form_create(ct_cards_form *f, sqlite3 *db, const char *deck);
+      |     ^
+build_gate/mutants/p48436/m0146_screen_cards.c:164:26: error: use of undeclared identifier 'deck'
+  164 |     if (!ct_repo_text_ok(deck, CT_CARD_DECK_MAX)) {
+      |                          ^~~~
+build_gate/mutants/p48436/m0146_screen_cards.c:170:43: error: use of undeclared identifier 'deck'
+  170 |     snprintf(c.deck, sizeof c.deck, "%s", deck);
+      |                                           ^~~~
+4 errors generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_guards exited -1073741795
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_create_retry exited 1
+mutate: suite cards_form_create_retry exited 1
+mutate: suite cards_form_create_retry exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited -1073741795
+mutate: suite cards_form_create_retry exited -1073741795
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_create exited 1
+mutate: suite cards_form_create exited 1
+build_gate/mutants/p48436/m0167_screen_cards.c:197:41: error: expected ')'
+  197 | void ct_cards_form_cancel(ct_cards_form /f) {
+      |                                         ^
+build_gate/mutants/p48436/m0167_screen_cards.c:197:26: note: to match this '('
+  197 | void ct_cards_form_cancel(ct_cards_form /f) {
+      |                          ^
+build_gate/mutants/p48436/m0167_screen_cards.c:197:6: error: conflicting types for 'ct_cards_form_cancel'
+  197 | void ct_cards_form_cancel(ct_cards_form /f) {
+      |      ^
+src\ui/ui.h:48:6: note: previous declaration is here
+   48 | void ct_cards_form_cancel(ct_cards_form *f);
+      |      ^
+build_gate/mutants/p48436/m0167_screen_cards.c:198:9: error: use of undeclared identifier 'f'
+  198 |     if (f == NULL)
+      |         ^
+build_gate/mutants/p48436/m0167_screen_cards.c:200:5: error: use of undeclared identifier 'f'
+  200 |     f->editing = false;
+      |     ^
+build_gate/mutants/p48436/m0167_screen_cards.c:201:5: error: use of undeclared identifier 'f'
+  201 |     f->dirty = false;
+      |     ^
+build_gate/mutants/p48436/m0167_screen_cards.c:202:27: error: use of undeclared identifier 'f'
+  202 |     ct_cards_form_refresh(f);
+      |                           ^
+6 errors generated.
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_boundaries exited 1
+mutate: suite cards_form_cancel exited 1
+build_gate/mutants/p48436/m0171_screen_cards.c:211:10: error: expected member name or ';' after declaration specifiers
+  211 |     char /label_ptrs[CT_CARDS_PAGE];
+      |     ~~~~ ^
+build_gate/mutants/p48436/m0171_screen_cards.c:211:9: error: expected ';' at end of declaration list
+  211 |     char /label_ptrs[CT_CARDS_PAGE];
+      |         ^
+      |         ;
+build_gate/mutants/p48436/m0171_screen_cards.c:262:18: error: no member named 'label_ptrs' in 'struct (unnamed at build_gate/mutants/p48436/m0171_screen_cards.c:205:9)'
+  262 |         ct_cards.label_ptrs[i] = ct_cards.labels[i];
+      |         ~~~~~~~~ ^
+build_gate/mutants/p48436/m0171_screen_cards.c:386:79: error: no member named 'label_ptrs' in 'struct (unnamed at build_gate/mutants/p48436/m0171_screen_cards.c:205:9)'
+  386 |     if (GuiListViewEx(ct_cards_rect(margin, list_y, list_w, list_h), ct_cards.label_ptrs,
+      |                                                                      ~~~~~~~~ ^
+4 errors generated.
+build_gate/mutants/p48436/m0172_screen_cards.c:216:15: error: expected identifier or '('
+  216 | ct_cards_form /ct_screen_cards_form(void) {
+      |               ^
+1 error generated.
+build_gate/mutants/p48436/m0173_screen_cards.c:220:19: error: expected identifier or '('
+  220 | static const char /ct_cards_dir_tag(int direction) {
+      |                   ^
+build_gate/mutants/p48436/m0173_screen_cards.c:260:22: error: use of undeclared identifier 'ct_cards_dir_tag'
+  260 |                      ct_cards_dir_tag(c.direction));
+      |                      ^~~~~~~~~~~~~~~~
+2 errors generated.
+build_gate/mutants/p48436/m0174_screen_cards.c:235:19: error: expected identifier or '('
+  235 | static const char /ct_cards_status_text(int status) {
+      |                   ^
+build_gate/mutants/p48436/m0174_screen_cards.c:403:18: error: use of undeclared identifier 'ct_cards_status_text'
+  403 |                  ct_cards_status_text(f->status));
+      |                  ^~~~~~~~~~~~~~~~~~~~
+2 errors generated.
+mutate: suite shots_path_bounds exited -1073741795
+build_gate/mutants/p48436/m0182_screen_cards.c:257:13: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  257 |             ct_cards.labels[i][-1] = '\0';
+      |             ^                  ~~
+build_gate/mutants/p48436/m0182_screen_cards.c:210:5: note: array 'labels' declared here
+  210 |     char labels[CT_CARDS_PAGE][CT_CARDS_LABEL_MAX];
+      |     ^
+1 error generated.
+build_gate/mutants/p48436/m0183_screen_cards.c:266:52: error: expected ')'
+  266 | static void ct_cards_recompute_dirty(ct_cards_form /f) {
+      |                                                    ^
+build_gate/mutants/p48436/m0183_screen_cards.c:266:37: note: to match this '('
+  266 | static void ct_cards_recompute_dirty(ct_cards_form /f) {
+      |                                     ^
+build_gate/mutants/p48436/m0183_screen_cards.c:267:5: error: use of undeclared identifier 'f'
+  267 |     f->dirty = false;
+      |     ^
+build_gate/mutants/p48436/m0183_screen_cards.c:268:10: error: use of undeclared identifier 'f'
+  268 |     if (!f->editing || f->db == NULL || f->card.id <= 0)
+      |          ^
+build_gate/mutants/p48436/m0183_screen_cards.c:268:24: error: use of undeclared identifier 'f'
+  268 |     if (!f->editing || f->db == NULL || f->card.id <= 0)
+      |                        ^
+build_gate/mutants/p48436/m0183_screen_cards.c:268:41: error: use of undeclared identifier 'f'
+  268 |     if (!f->editing || f->db == NULL || f->card.id <= 0)
+      |                                         ^
+build_gate/mutants/p48436/m0183_screen_cards.c:271:26: error: use of undeclared identifier 'f'
+  271 |     if (ct_repo_card_get(f->db, f->card.id, &cur) != CT_REPO_OK)
+      |                          ^
+build_gate/mutants/p48436/m0183_screen_cards.c:271:33: error: use of undeclared identifier 'f'
+  271 |     if (ct_repo_card_get(f->db, f->card.id, &cur) != CT_REPO_OK)
+      |                                 ^
+build_gate/mutants/p48436/m0183_screen_cards.c:273:5: error: use of undeclared identifier 'f'
+  273 |     f->dirty =
+      |     ^
+build_gate/mutants/p48436/m0183_screen_cards.c:274:16: error: use of undeclared identifier 'f'
+  274 |         strcmp(f->card.alg_3x3, cur.alg_3x3) != 0 || strcmp(f->card.alg_big, cur.alg_big) != 0 ||
+      |                ^
+build_gate/mutants/p48436/m0183_screen_cards.c:274:61: error: use of undeclared identifier 'f'
+  274 |         strcmp(f->card.alg_3x3, cur.alg_3x3) != 0 || strcmp(f->card.alg_big, cur.alg_big) != 0 ||
+      |                                                             ^
+build_gate/mutants/p48436/m0183_screen_cards.c:275:16: error: use of undeclared identifier 'f'
+  275 |         strcmp(f->card.alg_oh, cur.alg_oh) != 0 ||
+      |                ^
+build_gate/mutants/p48436/m0183_screen_cards.c:276:16: error: use of undeclared identifier 'f'
+  276 |         strcmp(f->card.front_json, cur.front_json) != 0 || strcmp(f->card.notes, cur.notes) != 0;
+      |                ^
+build_gate/mutants/p48436/m0183_screen_cards.c:276:67: error: use of undeclared identifier 'f'
+  276 |         strcmp(f->card.front_json, cur.front_json) != 0 || strcmp(f->card.notes, cur.notes) != 0;
+      |                                                                   ^
+build_gate/mutants/p48436/m0183_screen_cards.c:398:30: error: passing 'ct_cards_form *' to parameter of incompatible type 'ct_cards_form'; dereference with *
+  398 |     ct_cards_recompute_dirty(f);
+      |                              ^
+      |                              *
+build_gate/mutants/p48436/m0183_screen_cards.c:266:52: note: passing argument to parameter here
+  266 | static void ct_cards_recompute_dirty(ct_cards_form /f) {
+      |                                                    ^
+14 errors generated.
+build_gate/mutants/p48436/m0186_screen_cards.c:268:21: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  268 |     if (!f->editing && f->db == NULL || f->card.id <= 0)
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p48436/m0186_screen_cards.c:268:21: note: place parentheses around the '&&' expression to silence this warning
+  268 |     if (!f->editing && f->db == NULL || f->card.id <= 0)
+      |         ~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+1 error generated.
+build_gate/mutants/p48436/m0188_screen_cards.c:268:38: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  268 |     if (!f->editing || f->db == NULL && f->card.id <= 0)
+      |                     ~~ ~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+build_gate/mutants/p48436/m0188_screen_cards.c:268:38: note: place parentheses around the '&&' expression to silence this warning
+  268 |     if (!f->editing || f->db == NULL && f->card.id <= 0)
+      |                                      ^                 
+      |                        (                               )
+1 error generated.
+build_gate/mutants/p48436/m0196_screen_cards.c:274:51: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  274 |         strcmp(f->card.alg_3x3, cur.alg_3x3) != 0 && strcmp(f->card.alg_big, cur.alg_big) != 0 ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p48436/m0196_screen_cards.c:274:51: note: place parentheses around the '&&' expression to silence this warning
+  274 |         strcmp(f->card.alg_3x3, cur.alg_3x3) != 0 && strcmp(f->card.alg_big, cur.alg_big) != 0 ||
+      |                                                   ^
+      |         (                                                                                     )
+1 error generated.
+build_gate/mutants/p48436/m0200_screen_cards.c:274:96: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  274 |         strcmp(f->card.alg_3x3, cur.alg_3x3) != 0 || strcmp(f->card.alg_big, cur.alg_big) != 0 &&
+      |                                                   ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  275 |         strcmp(f->card.alg_oh, cur.alg_oh) != 0 ||
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p48436/m0200_screen_cards.c:274:96: note: place parentheses around the '&&' expression to silence this warning
+  274 |         strcmp(f->card.alg_3x3, cur.alg_3x3) != 0 || strcmp(f->card.alg_big, cur.alg_big) != 0 &&
+      |                                                                                                ^
+      |                                                      (
+  275 |         strcmp(f->card.alg_oh, cur.alg_oh) != 0 ||
+      |                                                )
+1 error generated.
+build_gate/mutants/p48436/m0204_screen_cards.c:275:49: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  274 |         strcmp(f->card.alg_3x3, cur.alg_3x3) != 0 || strcmp(f->card.alg_big, cur.alg_big) != 0 ||
+      |                                                                                                ~~
+  275 |         strcmp(f->card.alg_oh, cur.alg_oh) != 0 &&
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  276 |         strcmp(f->card.front_json, cur.front_json) != 0 || strcmp(f->card.notes, cur.notes) != 0;
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p48436/m0204_screen_cards.c:275:49: note: place parentheses around the '&&' expression to silence this warning
+  275 |         strcmp(f->card.alg_oh, cur.alg_oh) != 0 &&
+      |                                                 ^
+      |         (
+  276 |         strcmp(f->card.front_json, cur.front_json) != 0 || strcmp(f->card.notes, cur.notes) != 0;
+      |                                                        )
+1 error generated.
+build_gate/mutants/p48436/m0208_screen_cards.c:276:57: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  275 |         strcmp(f->card.alg_oh, cur.alg_oh) != 0 ||
+      |                                                 ~~
+  276 |         strcmp(f->card.front_json, cur.front_json) != 0 && strcmp(f->card.notes, cur.notes) != 0;
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p48436/m0208_screen_cards.c:276:57: note: place parentheses around the '&&' expression to silence this warning
+  276 |         strcmp(f->card.front_json, cur.front_json) != 0 && strcmp(f->card.notes, cur.notes) != 0;
+      |                                                         ^                                       
+      |         (                                                                                       )
+1 error generated.
+build_gate/mutants/p48436/m0212_screen_cards.c:284:84: error: expected ')'
+  284 | static void ct_cards_field(int x, int y, int w, int label_w, int row_h, const char /label,
+      |                                                                                    ^
+build_gate/mutants/p48436/m0212_screen_cards.c:284:27: note: to match this '('
+  284 | static void ct_cards_field(int x, int y, int w, int label_w, int row_h, const char /label,
+      |                           ^
+build_gate/mutants/p48436/m0212_screen_cards.c:286:51: error: use of undeclared identifier 'label'
+  286 |     GuiLabel(ct_cards_rect(x, y, label_w, row_h), label);
+      |                                                   ^~~~~
+build_gate/mutants/p48436/m0212_screen_cards.c:287:67: error: use of undeclared identifier 'buf'
+  287 |     GuiTextBox(ct_cards_rect(x + label_w, y, w - label_w, row_h), buf, (int)cap, edit);
+      |                                                                   ^~~
+build_gate/mutants/p48436/m0212_screen_cards.c:287:77: error: use of undeclared identifier 'cap'
+  287 |     GuiTextBox(ct_cards_rect(x + label_w, y, w - label_w, row_h), buf, (int)cap, edit);
+      |                                                                             ^~~
+build_gate/mutants/p48436/m0212_screen_cards.c:287:82: error: use of undeclared identifier 'edit'
+  287 |     GuiTextBox(ct_cards_rect(x + label_w, y, w - label_w, row_h), buf, (int)cap, edit);
+      |                                                                                  ^~~~
+build_gate/mutants/p48436/m0212_screen_cards.c:396:50: error: too many arguments to function call, expected 6, have 9
+  395 |         ct_cards_field(editor_x, fields_y + i * field_step, editor_w, label_w, row_h,
+      |         ~~~~~~~~~~~~~~
+  396 |                        CT_CARDS_FIELDS[i].label, buf, CT_CARDS_FIELDS[i].cap, f->editing);
+      |                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p48436/m0212_screen_cards.c:284:13: note: 'ct_cards_field' declared here
+  284 | static void ct_cards_field(int x, int y, int w, int label_w, int row_h, const char /label,
+      |             ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+6 errors generated.
+build_gate/mutants/p48436/m0213_screen_cards.c:285:33: error: expected ')'
+  285 |                            char /buf, size_t cap, bool edit) {
+      |                                 ^
+build_gate/mutants/p48436/m0213_screen_cards.c:284:27: note: to match this '('
+  284 | static void ct_cards_field(int x, int y, int w, int label_w, int row_h, const char *label,
+      |                           ^
+build_gate/mutants/p48436/m0213_screen_cards.c:287:67: error: use of undeclared identifier 'buf'
+  287 |     GuiTextBox(ct_cards_rect(x + label_w, y, w - label_w, row_h), buf, (int)cap, edit);
+      |                                                                   ^~~
+build_gate/mutants/p48436/m0213_screen_cards.c:287:77: error: use of undeclared identifier 'cap'
+  287 |     GuiTextBox(ct_cards_rect(x + label_w, y, w - label_w, row_h), buf, (int)cap, edit);
+      |                                                                             ^~~
+build_gate/mutants/p48436/m0213_screen_cards.c:287:82: error: use of undeclared identifier 'edit'
+  287 |     GuiTextBox(ct_cards_rect(x + label_w, y, w - label_w, row_h), buf, (int)cap, edit);
+      |                                                                                  ^~~~
+build_gate/mutants/p48436/m0213_screen_cards.c:396:55: error: too many arguments to function call, expected 7, have 9
+  395 |         ct_cards_field(editor_x, fields_y + i * field_step, editor_w, label_w, row_h,
+      |         ~~~~~~~~~~~~~~
+  396 |                        CT_CARDS_FIELDS[i].label, buf, CT_CARDS_FIELDS[i].cap, f->editing);
+      |                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p48436/m0213_screen_cards.c:284:13: note: 'ct_cards_field' declared here
+  284 | static void ct_cards_field(int x, int y, int w, int label_w, int row_h, const char *label,
+      |             ^              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  285 |                            char /buf, size_t cap, bool edit) {
+      |                            ~~~~
+5 errors generated.
+build_gate/mutants/p48436/m0216_screen_cards.c:291:16: error: expected member name or ';' after declaration specifiers
+  291 |     const char /label;
+      |     ~~~~~~~~~~ ^
+build_gate/mutants/p48436/m0216_screen_cards.c:291:15: error: expected ';' at end of declaration list
+  291 |     const char /label;
+      |               ^
+      |               ;
+build_gate/mutants/p48436/m0216_screen_cards.c:304:38: error: invalid application of 'sizeof' to an incomplete type 'const ct_cards_field_spec[]' (aka 'const struct (unnamed at build_gate/mutants/p48436/m0216_screen_cards.c:290:9)[]')
+  304 | enum { CT_CARDS_FIELD_COUNT = sizeof CT_CARDS_FIELDS / sizeof CT_CARDS_FIELDS[0] };
+      |                                      ^~~~~~~~~~~~~~~
+build_gate/mutants/p48436/m0216_screen_cards.c:396:43: error: no member named 'label' in 'struct (unnamed at build_gate/mutants/p48436/m0216_screen_cards.c:290:9)'
+  396 |                        CT_CARDS_FIELDS[i].label, buf, CT_CARDS_FIELDS[i].cap, f->editing);
+      |                        ~~~~~~~~~~~~~~~~~~ ^
+4 errors generated.
+mutate: suite shots_path_bounds exited -1073741795
+build_gate/mutants/p48436/m0220_screen_cards.c:306:37: error: expected ')'
+  306 | static void ct_cards_buttons(ct_app /app, int x, int y, int gap, int btn_w, int btn_h) {
+      |                                     ^
+build_gate/mutants/p48436/m0220_screen_cards.c:306:29: note: to match this '('
+  306 | static void ct_cards_buttons(ct_app /app, int x, int y, int gap, int btn_w, int btn_h) {
+      |                             ^
+build_gate/mutants/p48436/m0220_screen_cards.c:311:38: error: use of undeclared identifier 'x'
+  311 |         if (!GuiButton(ct_cards_rect(x + i * (btn_w + gap), y, btn_w, btn_h),
+      |                                      ^
+build_gate/mutants/p48436/m0220_screen_cards.c:311:47: error: use of undeclared identifier 'btn_w'
+  311 |         if (!GuiButton(ct_cards_rect(x + i * (btn_w + gap), y, btn_w, btn_h),
+      |                                               ^~~~~
+build_gate/mutants/p48436/m0220_screen_cards.c:311:55: error: use of undeclared identifier 'gap'
+  311 |         if (!GuiButton(ct_cards_rect(x + i * (btn_w + gap), y, btn_w, btn_h),
+      |                                                       ^~~
+build_gate/mutants/p48436/m0220_screen_cards.c:311:61: error: use of undeclared identifier 'y'
+  311 |         if (!GuiButton(ct_cards_rect(x + i * (btn_w + gap), y, btn_w, btn_h),
+      |                                                             ^
+build_gate/mutants/p48436/m0220_screen_cards.c:311:64: error: use of undeclared identifier 'btn_w'
+  311 |         if (!GuiButton(ct_cards_rect(x + i * (btn_w + gap), y, btn_w, btn_h),
+      |                                                                ^~~~~
+build_gate/mutants/p48436/m0220_screen_cards.c:311:71: error: use of undeclared identifier 'btn_h'
+  311 |         if (!GuiButton(ct_cards_rect(x + i * (btn_w + gap), y, btn_w, btn_h),
+      |                                                                       ^~~~~
+build_gate/mutants/p48436/m0220_screen_cards.c:318:20: error: use of undeclared identifier 'app'
+  318 |                 f, app->db, f->deck_filter[0] != '\0' ? f->deck_filter : CT_CARDS_DEFAULT_DECK);
+      |                    ^~~
+build_gate/mutants/p48436/m0220_screen_cards.c:324:35: error: use of undeclared identifier 'app'
+  324 |             ct_cards_form_save(f, app->db);
+      |                                   ^~~
+build_gate/mutants/p48436/m0220_screen_cards.c:330:37: error: use of undeclared identifier 'app'
+  330 |             ct_cards_form_delete(f, app->db);
+      |                                     ^~~
+build_gate/mutants/p48436/m0220_screen_cards.c:333:13: error: use of undeclared identifier 'app'
+  333 |             app->screen = CT_SCREEN_MENU;
+      |             ^~~
+build_gate/mutants/p48436/m0220_screen_cards.c:400:27: error: too many arguments to function call, expected 1, have 6
+  400 |     ct_cards_buttons(app, editor_x, btn_y, CT_UI_BTN_GAP, btn_w, btn_h);
+      |     ~~~~~~~~~~~~~~~~      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p48436/m0220_screen_cards.c:306:13: note: 'ct_cards_buttons' declared here
+  306 | static void ct_cards_buttons(ct_app /app, int x, int y, int gap, int btn_w, int btn_h) {
+      |             ^                ~~~~~~
+12 errors generated.
+build_gate/mutants/p48436/m0221_screen_cards.c:307:23: error: expected identifier or '('
+  307 |     static const char /const CT_CARDS_BUTTONS[CT_CARDS_BTN_COUNT] = {"new",    "edit",   "save",
+      |                       ^
+build_gate/mutants/p48436/m0221_screen_cards.c:312:24: error: use of undeclared identifier 'CT_CARDS_BUTTONS'; did you mean 'CT_CARDS_BTN_NEW'?
+  312 |                        CT_CARDS_BUTTONS[i])) {
+      |                        ^~~~~~~~~~~~~~~~
+      |                        CT_CARDS_BTN_NEW
+build_gate/mutants/p48436/m0221_screen_cards.c:18:5: note: 'CT_CARDS_BTN_NEW' declared here
+   18 |     CT_CARDS_BTN_NEW = 0,
+      |     ^
+build_gate/mutants/p48436/m0221_screen_cards.c:312:40: error: subscripted value is not an array, pointer, or vector
+  312 |                        CT_CARDS_BUTTONS[i])) {
+      |                        ~~~~~~~~~~~~~~~~^~
+3 errors generated.
+build_gate/mutants/p48436/m0222_screen_cards.c:309:19: error: expected identifier or '('
+  309 |     ct_cards_form /f = &ct_cards.form;
+      |                   ^
+build_gate/mutants/p48436/m0222_screen_cards.c:318:17: error: use of undeclared identifier 'f'
+  318 |                 f, app->db, f->deck_filter[0] != '\0' ? f->deck_filter : CT_CARDS_DEFAULT_DECK);
+      |                 ^
+build_gate/mutants/p48436/m0222_screen_cards.c:318:29: error: use of undeclared identifier 'f'
+  318 |                 f, app->db, f->deck_filter[0] != '\0' ? f->deck_filter : CT_CARDS_DEFAULT_DECK);
+      |                             ^
+build_gate/mutants/p48436/m0222_screen_cards.c:318:57: error: use of undeclared identifier 'f'
+  318 |                 f, app->db, f->deck_filter[0] != '\0' ? f->deck_filter : CT_CARDS_DEFAULT_DECK);
+      |                                                         ^
+build_gate/mutants/p48436/m0222_screen_cards.c:321:38: error: use of undeclared identifier 'f'
+  321 |             ct_cards_form_begin_edit(f);
+      |                                      ^
+build_gate/mutants/p48436/m0222_screen_cards.c:324:32: error: use of undeclared identifier 'f'
+  324 |             ct_cards_form_save(f, app->db);
+      |                                ^
+build_gate/mutants/p48436/m0222_screen_cards.c:327:34: error: use of undeclared identifier 'f'
+  327 |             ct_cards_form_cancel(f);
+      |                                  ^
+build_gate/mutants/p48436/m0222_screen_cards.c:330:34: error: use of undeclared identifier 'f'
+  330 |             ct_cards_form_delete(f, app->db);
+      |                                  ^
+8 errors generated.
+mutate: suite shots_path_bounds exited -1073741795
+mutate: suite shots_path_bounds exited -1073741795
+mutate: suite shots_path_bounds exited 1
+build_gate/mutants/p48436/m0231_screen_cards.c:318:29: error: array index -1 is before the beginning of the array [-Werror,-Warray-bounds]
+  318 |                 f, app->db, f->deck_filter[-1] != '\0' ? f->deck_filter : CT_CARDS_DEFAULT_DECK);
+      |                             ^              ~~
+src\ui/ui.h:32:5: note: array 'deck_filter' declared here
+   32 |     char deck_filter[CT_CARD_DECK_MAX];
+      |     ^
+1 error generated.
+build_gate/mutants/p48436/m0233_screen_cards.c:341:36: error: expected ')'
+  341 | void ct_screen_cards_update(ct_app /app) {
+      |                                    ^
+build_gate/mutants/p48436/m0233_screen_cards.c:341:28: note: to match this '('
+  341 | void ct_screen_cards_update(ct_app /app) {
+      |                            ^
+build_gate/mutants/p48436/m0233_screen_cards.c:341:6: error: conflicting types for 'ct_screen_cards_update'
+  341 | void ct_screen_cards_update(ct_app /app) {
+      |      ^
+src\ui/ui.h:50:6: note: previous declaration is here
+   50 | void ct_screen_cards_update(ct_app *app);
+      |      ^
+build_gate/mutants/p48436/m0233_screen_cards.c:342:9: error: use of undeclared identifier 'app'
+  342 |     if (app == NULL)
+      |         ^~~
+build_gate/mutants/p48436/m0233_screen_cards.c:344:49: error: use of undeclared identifier 'app'
+  344 |     if (!ct_cards.opened || ct_cards.form.db != app->db) {
+      |                                                 ^~~
+build_gate/mutants/p48436/m0233_screen_cards.c:346:44: error: use of undeclared identifier 'app'
+  346 |         ct_cards_form_open(&ct_cards.form, app->db, "");
+      |                                            ^~~
+build_gate/mutants/p48436/m0233_screen_cards.c:349:9: error: use of undeclared identifier 'app'
+  349 |         app->screen = CT_SCREEN_MENU;
+      |         ^~~
+6 errors generated.
+mutate: suite cards_screen_auto_open exited 1
+mutate: suite cards_screen_auto_open exited 1
+mutate: suite cards_screen_auto_open exited 1
+mutate: suite cards_screen_auto_open exited 1
+build_gate/mutants/p48436/m0239_screen_cards.c:353:34: error: expected ')'
+  353 | void ct_screen_cards_draw(ct_app /app) {
+      |                                  ^
+build_gate/mutants/p48436/m0239_screen_cards.c:353:26: note: to match this '('
+  353 | void ct_screen_cards_draw(ct_app /app) {
+      |                          ^
+build_gate/mutants/p48436/m0239_screen_cards.c:353:6: error: conflicting types for 'ct_screen_cards_draw'
+  353 | void ct_screen_cards_draw(ct_app /app) {
+      |      ^
+src\ui/ui.h:51:6: note: previous declaration is here
+   51 | void ct_screen_cards_draw(ct_app *app);
+      |      ^
+build_gate/mutants/p48436/m0239_screen_cards.c:355:9: error: use of undeclared identifier 'app'
+  355 |     if (app == NULL)
+      |         ^~~
+build_gate/mutants/p48436/m0239_screen_cards.c:358:18: error: use of undeclared identifier 'app'
+  358 |     int w = (int)app->cfg.window.width;
+      |                  ^~~
+build_gate/mutants/p48436/m0239_screen_cards.c:359:18: error: use of undeclared identifier 'app'
+  359 |     int h = (int)app->cfg.window.height;
+      |                  ^~~
+build_gate/mutants/p48436/m0239_screen_cards.c:381:37: error: use of undeclared identifier 'app'
+  381 |             ct_cards_form_reload(f, app->db);
+      |                                     ^~~
+build_gate/mutants/p48436/m0239_screen_cards.c:400:22: error: use of undeclared identifier 'app'
+  400 |     ct_cards_buttons(app, editor_x, btn_y, CT_UI_BTN_GAP, btn_w, btn_h);
+      |                      ^~~
+7 errors generated.
+build_gate/mutants/p48436/m0241_screen_cards.c:357:19: error: expected identifier or '('
+  357 |     ct_cards_form /f = &ct_cards.form;
+      |                   ^
+build_gate/mutants/p48436/m0241_screen_cards.c:378:20: error: use of undeclared identifier 'f'
+  378 |                    f->deck_filter, (int)sizeof f->deck_filter, ct_cards.deck_edit)) {
+      |                    ^
+build_gate/mutants/p48436/m0241_screen_cards.c:378:48: error: use of undeclared identifier 'f'
+  378 |                    f->deck_filter, (int)sizeof f->deck_filter, ct_cards.deck_edit)) {
+      |                                                ^
+build_gate/mutants/p48436/m0241_screen_cards.c:381:34: error: use of undeclared identifier 'f'
+  381 |             ct_cards_form_reload(f, app->db);
+      |                                  ^
+build_gate/mutants/p48436/m0241_screen_cards.c:385:18: error: use of undeclared identifier 'f'
+  385 |     int active = f->selected;
+      |                  ^
+build_gate/mutants/p48436/m0241_screen_cards.c:387:23: error: use of undeclared identifier 'f'
+  387 |                       f->row_count, &ct_cards.list_scroll, &active, NULL)) {
+      |                       ^
+build_gate/mutants/p48436/m0241_screen_cards.c:388:30: error: use of undeclared identifier 'f'
+  388 |         ct_cards_form_select(f, active);
+      |                              ^
+build_gate/mutants/p48436/m0241_screen_cards.c:394:30: error: use of undeclared identifier 'f'
+  394 |         char *buf = (char *)&f->card + CT_CARDS_FIELDS[i].offset;
+      |                              ^
+build_gate/mutants/p48436/m0241_screen_cards.c:396:79: error: use of undeclared identifier 'f'
+  396 |                        CT_CARDS_FIELDS[i].label, buf, CT_CARDS_FIELDS[i].cap, f->editing);
+      |                                                                               ^
+build_gate/mutants/p48436/m0241_screen_cards.c:398:30: error: use of undeclared identifier 'f'
+  398 |     ct_cards_recompute_dirty(f);
+      |                              ^
+build_gate/mutants/p48436/m0241_screen_cards.c:403:39: error: use of undeclared identifier 'f'
+  403 |                  ct_cards_status_text(f->status));
+      |                                       ^
+11 errors generated.
+mutate: suite shots_path_bounds exited -1073741819
+mutate: suite shots_path_bounds exited -1073741819
+mutate: suite shots_path_bounds exited -1073741795
+mutate: suite shots_path_bounds exited -1073741795
+build_gate/mutants/p48436/m0278_screen_cards.c:394:14: error: expected identifier or '('
+  394 |         char /buf = (char *)&f->card + CT_CARDS_FIELDS[i].offset;
+      |              ^
+build_gate/mutants/p48436/m0278_screen_cards.c:396:50: error: use of undeclared identifier 'buf'
+  396 |                        CT_CARDS_FIELDS[i].label, buf, CT_CARDS_FIELDS[i].cap, f->editing);
+      |                                                  ^~~
+2 errors generated.
+build_gate/mutants/p48436/m0279_screen_cards.c:394:27: error: expected ')'
+  394 |         char *buf = (char /)&f->card + CT_CARDS_FIELDS[i].offset;
+      |                           ^
+build_gate/mutants/p48436/m0279_screen_cards.c:394:21: note: to match this '('
+  394 |         char *buf = (char /)&f->card + CT_CARDS_FIELDS[i].offset;
+      |                     ^
+build_gate/mutants/p48436/m0279_screen_cards.c:394:21: error: cast to smaller integer type 'char' from 'ct_card *' (aka 'struct ct_card *') [-Werror,-Wpointer-to-int-cast]
+  394 |         char *buf = (char /)&f->card + CT_CARDS_FIELDS[i].offset;
+      |                     ^~~~~~~~~~~~~~~~
+build_gate/mutants/p48436/m0279_screen_cards.c:394:15: error: incompatible integer to pointer conversion initializing 'char *' with an expression of type 'size_t' (aka 'unsigned long long') [-Wint-conversion]
+  394 |         char *buf = (char /)&f->card + CT_CARDS_FIELDS[i].offset;
+      |               ^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3 errors generated.

@@ -1,0 +1,24 @@
+mutate: scope=src/app/app_loop.c files=1 sites=55 suites=8
+SURVIVED  m0044 src/app/app_loop.c:67 [cmp != -> ==]
+SURVIVED  m0045 src/app/app_loop.c:67 [int+1 0 -> 1]
+SURVIVED  m0046 src/app/app_loop.c:67 [int-1 0 -> -1]
+SURVIVED  m0047 src/app/app_loop.c:68 [int+1 0 -> 1]
+SURVIVED  m0049 src/app/app_loop.c:71 [logic && -> ||]
+SURVIVED  m0050 src/app/app_loop.c:71 [not-del ! -> (deleted)]
+SURVIVED  m0051 src/app/app_loop.c:74 [arith * -> /]
+SURVIVED  m0052 src/app/app_loop.c:74 [arith / -> *]
+SURVIVED  m0053 src/app/app_loop.c:75 [cmp > -> >=]
+SURVIVED  m0054 src/app/app_loop.c:78 [cmp >= -> >]
+ACCEPTED  m0044 src/app/app_loop.c:67 [cmp != -> ==] :: the font guard only picks the theme loader string inside the raylib frame loop no gate suite exercises, ct_font_path returns only zero in the harness layout and the loader normalizes every unusable string to the default font identically
+ACCEPTED  m0045 src/app/app_loop.c:67 [int+1 0 -> 1] :: the font guard only picks the theme loader string inside the raylib frame loop no gate suite exercises, ct_font_path returns only zero in the harness layout and the loader normalizes every unusable string to the default font identically
+ACCEPTED  m0046 src/app/app_loop.c:67 [int-1 0 -> -1] :: the font guard only picks the theme loader string inside the raylib frame loop no gate suite exercises, ct_font_path returns only zero in the harness layout and the loader normalizes every unusable string to the default font identically
+ACCEPTED  m0047 src/app/app_loop.c:68 [int+1 0 -> 1] :: the fallback write only truncates the theme loader string inside the raylib frame loop no gate suite exercises, the loader normalizes empty and unreadable strings to the default font identically and ct_app_run releases the theme before returning
+ACCEPTED  m0049 src/app/app_loop.c:71 [logic && -> ||] :: the frame loop gate feeds only the raylib pump no gate suite exercises, the or mutant diverges solely by refusing shutdown which stalls the suite run instead of failing an assertion and the deleted not only skips frames whose absence nothing observes after the theme release
+ACCEPTED  m0050 src/app/app_loop.c:71 [not-del ! -> (deleted)] :: the frame loop gate feeds only the raylib pump no gate suite exercises, the or mutant diverges solely by refusing shutdown which stalls the suite run instead of failing an assertion and the deleted not only skips frames whose absence nothing observes after the theme release
+ACCEPTED  m0051 src/app/app_loop.c:74 [arith * -> /] :: the catchup cap arithmetic steers the accumulator clamp inside the raylib frame loop no gate suite exercises and diverges only on single frame durations the gate machine never yields deterministically
+ACCEPTED  m0052 src/app/app_loop.c:74 [arith / -> *] :: the catchup cap arithmetic steers the accumulator clamp inside the raylib frame loop no gate suite exercises and diverges only on single frame durations the gate machine never yields deterministically
+ACCEPTED  m0053 src/app/app_loop.c:75 [cmp > -> >=] :: the clamp comparison differs only at exact double equality between the accumulator and the cap inside the raylib frame loop no gate suite exercises, a value real frame times never produce
+ACCEPTED  m0054 src/app/app_loop.c:78 [cmp >= -> >] :: the fixed step gate differs only at exact double equality between the accumulator and the fixed step inside the raylib frame loop no gate suite exercises, a value real frame times never produce
+mutate: generated=10 resumed=0 build_failed=0 killed_by_tests=0 killed=0 survived=10 accepted=10 unexplained=0 skipped=45
+mutate: kill rate 0/10 = 0.0%, with accepted equivalents 10/10 = 100.0%
+mutate: wall 15.9s

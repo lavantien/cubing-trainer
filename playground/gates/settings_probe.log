@@ -1,0 +1,31 @@
+probe ids 118,162,252,39,83,123,168,220,245,250
+SURVIVED  m0039 src/ui/screen_settings.c:55 [int+1 1 -> 2]
+SURVIVED  m0083 src/ui/screen_settings.c:91 [int+1 0 -> 1]
+KILLED    m0118 src/ui/screen_settings.c:124 [int+1 0 -> 1]
+SURVIVED  m0123 src/ui/screen_settings.c:131 [cmp <= -> <]
+KILLED    m0162 src/ui/screen_settings.c:187 [logic || -> &&]
+SURVIVED  m0168 src/ui/screen_settings.c:192 [int-1 0 -> -1]
+SURVIVED  m0220 src/ui/screen_settings.c:255 [cmp < -> <=]
+SURVIVED  m0245 src/ui/screen_settings.c:302 [cmp < -> <=]
+SURVIVED  m0250 src/ui/screen_settings.c:302 [cmp < -> <=]
+KILLED    m0252 src/ui/screen_settings.c:303 [int-1 1u -> 0u]
+mutate: generated=10 resumed=0 build_failed=0 killed_by_tests=3 killed=3 survived=7 accepted=0 unexplained=7 skipped=652
+mutate: kill rate 3/10 = 30.0%, with accepted equivalents 3/10 = 30.0%
+probe ids 84,108,109,125,221,226,248,249
+SURVIVED  m0084 src/ui/screen_settings.c:91 [int-1 0 -> -1]
+SURVIVED  m0108 src/ui/screen_settings.c:110 [int+1 0 -> 1]
+SURVIVED  m0109 src/ui/screen_settings.c:110 [int-1 0 -> -1]
+SURVIVED  m0125 src/ui/screen_settings.c:131 [int-1 0 -> -1]
+SURVIVED  m0221 src/ui/screen_settings.c:257 [cmp > -> >=]
+SURVIVED  m0226 src/ui/screen_settings.c:272 [cmp < -> <=]
+SURVIVED  m0248 src/ui/screen_settings.c:302 [int+1 1 -> 2]
+SURVIVED  m0249 src/ui/screen_settings.c:302 [int-1 1 -> 0]
+mutate: generated=8 resumed=0 build_failed=0 killed_by_tests=0 killed=0 survived=8 accepted=0 unexplained=8 skipped=654
+mutate: kill rate 0/8 = 0.0%, with accepted equivalents 0/8 = 0.0%
+probe ids 402,612,616,619
+SURVIVED  m0402 src/ui/screen_settings.c:516 [cmp != -> ==]
+SURVIVED  m0612 src/ui/screen_settings.c:646 [cmp < -> <=]
+SURVIVED  m0616 src/ui/screen_settings.c:659 [not-del ! -> (deleted)]
+SURVIVED  m0619 src/ui/screen_settings.c:660 [bool true -> false]
+mutate: generated=4 resumed=0 build_failed=0 killed_by_tests=0 killed=0 survived=4 accepted=0 unexplained=4 skipped=658
+mutate: kill rate 0/4 = 0.0%, with accepted equivalents 0/4 = 0.0%

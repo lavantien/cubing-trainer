@@ -1,0 +1,967 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_gate/bin/mutate.exe src/ui/screen_trainer.c build_gate e2e_data_dir_override e2e_parse_memo_words e2e_parse_shot_words e2e_run_expect_genalg e2e_run_memo_guards e2e_run_memo_roundtrip e2e_run_script_guards e2e_run_trainer_edge_generate e2e_run_trainer_generate e2e_run_trainer_memo_panel trainer_decomp_lines trainer_form_all_lists_counts trainer_form_case_detail trainer_form_cell_pair_overflow trainer_form_chart_cells trainer_form_generated_alg trainer_form_letter_scheme_routed trainer_form_memo_find_rows trainer_form_memo_lifecycle trainer_form_memo_save_guards trainer_form_navigation trainer_form_open trainer_form_select_refreshes_inputs trainer_form_visible_count_edges trainer_screen_update_reopen
+mutate: scope=src/ui/screen_trainer.c files=1 sites=617 suites=25
+SURVIVED  m0001 src/ui/screen_trainer.c:14 [arith + -> -]
+SURVIVED  m0002 src/ui/screen_trainer.c:14 [int+1 1 -> 2]
+SURVIVED  m0003 src/ui/screen_trainer.c:14 [int-1 1 -> 0]
+SURVIVED  m0004 src/ui/screen_trainer.c:15 [arith * -> /]
+SURVIVED  m0005 src/ui/screen_trainer.c:16 [int+1 2 -> 3]
+SURVIVED  m0006 src/ui/screen_trainer.c:16 [int-1 2 -> 1]
+SURVIVED  m0007 src/ui/screen_trainer.c:17 [int+1 3 -> 4]
+SURVIVED  m0008 src/ui/screen_trainer.c:17 [int-1 3 -> 2]
+SURVIVED  m0009 src/ui/screen_trainer.c:18 [arith + -> -]
+SURVIVED  m0010 src/ui/screen_trainer.c:18 [arith / -> *]
+SURVIVED  m0011 src/ui/screen_trainer.c:18 [int+1 2 -> 3]
+SURVIVED  m0012 src/ui/screen_trainer.c:18 [int-1 2 -> 1]
+SURVIVED  m0013 src/ui/screen_trainer.c:19 [int+1 8 -> 9]
+SURVIVED  m0014 src/ui/screen_trainer.c:19 [int-1 8 -> 7]
+SURVIVED  m0015 src/ui/screen_trainer.c:20 [arith * -> /]
+KILLED    m0016 src/ui/screen_trainer.c:23 [arith * -> /]
+          build break
+KILLED    m0017 src/ui/screen_trainer.c:28 [arith * -> /]
+          build break
+KILLED    m0018 src/ui/screen_trainer.c:33 [arith * -> /]
+          build break
+KILLED    m0019 src/ui/screen_trainer.c:38 [arith * -> /]
+          build break
+SURVIVED  m0020 src/ui/screen_trainer.c:40 [arith / -> *]
+SURVIVED  m0021 src/ui/screen_trainer.c:40 [int+1 0 -> 1]
+SURVIVED  m0022 src/ui/screen_trainer.c:40 [int-1 0 -> -1]
+SURVIVED  m0023 src/ui/screen_trainer.c:41 [cmp < -> <=]
+KILLED    m0024 src/ui/screen_trainer.c:44 [arith * -> /]
+          build break
+SURVIVED  m0025 src/ui/screen_trainer.c:46 [arith / -> *]
+SURVIVED  m0026 src/ui/screen_trainer.c:46 [int+1 0 -> 1]
+SURVIVED  m0027 src/ui/screen_trainer.c:46 [int-1 0 -> -1]
+SURVIVED  m0028 src/ui/screen_trainer.c:47 [cmp < -> <=]
+KILLED    m0029 src/ui/screen_trainer.c:50 [arith * -> /]
+          build break
+SURVIVED  m0030 src/ui/screen_trainer.c:52 [arith / -> *]
+SURVIVED  m0031 src/ui/screen_trainer.c:52 [int+1 0 -> 1]
+SURVIVED  m0032 src/ui/screen_trainer.c:52 [int-1 0 -> -1]
+SURVIVED  m0033 src/ui/screen_trainer.c:53 [cmp < -> <=]
+KILLED    m0034 src/ui/screen_trainer.c:56 [arith * -> /]
+          build break
+KILLED    m0035 src/ui/screen_trainer.c:57 [int+1 0 -> 1]
+KILLED    m0036 src/ui/screen_trainer.c:57 [int-1 0 -> -1]
+          build break
+KILLED    m0037 src/ui/screen_trainer.c:58 [int+1 0 -> 1]
+KILLED    m0038 src/ui/screen_trainer.c:58 [int-1 0 -> -1]
+          build break
+KILLED    m0039 src/ui/screen_trainer.c:59 [int+1 0 -> 1]
+KILLED    m0040 src/ui/screen_trainer.c:59 [int-1 0 -> -1]
+          build break
+KILLED    m0041 src/ui/screen_trainer.c:60 [int+1 0 -> 1]
+KILLED    m0042 src/ui/screen_trainer.c:60 [int-1 0 -> -1]
+          build break
+KILLED    m0043 src/ui/screen_trainer.c:63 [arith * -> /]
+          build break
+KILLED    m0044 src/ui/screen_trainer.c:65 [arith * -> /]
+          build break
+SURVIVED  m0045 src/ui/screen_trainer.c:67 [int+1 0 -> 1]
+SURVIVED  m0046 src/ui/screen_trainer.c:67 [int-1 0 -> -1]
+KILLED    m0047 src/ui/screen_trainer.c:68 [int+1 0 -> 1]
+KILLED    m0048 src/ui/screen_trainer.c:68 [int-1 0 -> -1]
+KILLED    m0049 src/ui/screen_trainer.c:69 [int+1 0 -> 1]
+KILLED    m0050 src/ui/screen_trainer.c:69 [int-1 0 -> -1]
+KILLED    m0051 src/ui/screen_trainer.c:69 [cmp < -> <=]
+KILLED    m0052 src/ui/screen_trainer.c:70 [int+1 0 -> 1]
+KILLED    m0053 src/ui/screen_trainer.c:70 [int-1 0 -> -1]
+KILLED    m0054 src/ui/screen_trainer.c:73 [arith - -> +]
+KILLED    m0055 src/ui/screen_trainer.c:73 [int+1 1 -> 2]
+KILLED    m0056 src/ui/screen_trainer.c:73 [int-1 1 -> 0]
+KILLED    m0057 src/ui/screen_trainer.c:74 [int+1 0 -> 1]
+KILLED    m0058 src/ui/screen_trainer.c:74 [int-1 0 -> -1]
+          build break
+KILLED    m0059 src/ui/screen_trainer.c:75 [int+1 0 -> 1]
+KILLED    m0060 src/ui/screen_trainer.c:75 [int-1 0 -> -1]
+          build break
+SURVIVED  m0061 src/ui/screen_trainer.c:78 [int+1 0 -> 1]
+SURVIVED  m0062 src/ui/screen_trainer.c:78 [int-1 0 -> -1]
+SURVIVED  m0063 src/ui/screen_trainer.c:80 [cmp <= -> <]
+KILLED    m0064 src/ui/screen_trainer.c:80 [int+1 0 -> 1]
+SURVIVED  m0065 src/ui/screen_trainer.c:80 [int-1 0 -> -1]
+SURVIVED  m0066 src/ui/screen_trainer.c:84 [cmp >= -> >]
+SURVIVED  m0067 src/ui/screen_trainer.c:85 [int+1 0 -> 1]
+SURVIVED  m0068 src/ui/screen_trainer.c:85 [int-1 0 -> -1]
+SURVIVED  m0069 src/ui/screen_trainer.c:88 [cmp > -> >=]
+SURVIVED  m0070 src/ui/screen_trainer.c:88 [int+1 0 -> 1]
+SURVIVED  m0071 src/ui/screen_trainer.c:88 [int-1 0 -> -1]
+KILLED    m0072 src/ui/screen_trainer.c:88 [int+1 0 -> 1]
+KILLED    m0073 src/ui/screen_trainer.c:88 [int-1 0 -> -1]
+KILLED    m0074 src/ui/screen_trainer.c:89 [int+1 0 -> 1]
+SURVIVED  m0075 src/ui/screen_trainer.c:89 [int-1 0 -> -1]
+SURVIVED  m0076 src/ui/screen_trainer.c:89 [cmp < -> <=]
+KILLED    m0077 src/ui/screen_trainer.c:91 [cmp < -> <=]
+KILLED    m0078 src/ui/screen_trainer.c:91 [int+1 0 -> 1]
+KILLED    m0079 src/ui/screen_trainer.c:91 [int-1 0 -> -1]
+KILLED    m0080 src/ui/screen_trainer.c:95 [arith + -> -]
+SURVIVED  m0081 src/ui/screen_trainer.c:95 [int+1 1 -> 2]
+KILLED    m0082 src/ui/screen_trainer.c:95 [int-1 1 -> 0]
+SURVIVED  m0083 src/ui/screen_trainer.c:95 [cmp > -> >=]
+KILLED    m0084 src/ui/screen_trainer.c:96 [arith + -> -]
+KILLED    m0085 src/ui/screen_trainer.c:96 [int+1 1 -> 2]
+KILLED    m0086 src/ui/screen_trainer.c:96 [int-1 1 -> 0]
+KILLED    m0087 src/ui/screen_trainer.c:103 [arith * -> /]
+          build break
+KILLED    m0088 src/ui/screen_trainer.c:104 [cmp != -> ==]
+KILLED    m0089 src/ui/screen_trainer.c:104 [int+1 0 -> 1]
+KILLED    m0090 src/ui/screen_trainer.c:104 [int-1 0 -> -1]
+KILLED    m0091 src/ui/screen_trainer.c:107 [cmp != -> ==]
+KILLED    m0092 src/ui/screen_trainer.c:107 [int+1 0 -> 1]
+KILLED    m0093 src/ui/screen_trainer.c:107 [int-1 0 -> -1]
+KILLED    m0094 src/ui/screen_trainer.c:114 [arith * -> /]
+          build break
+KILLED    m0095 src/ui/screen_trainer.c:114 [arith * -> /]
+          build break
+KILLED    m0096 src/ui/screen_trainer.c:115 [cmp == -> !=]
+KILLED    m0097 src/ui/screen_trainer.c:118 [int+1 0 -> 1]
+KILLED    m0098 src/ui/screen_trainer.c:118 [int-1 0 -> -1]
+KILLED    m0099 src/ui/screen_trainer.c:118 [arith * -> /]
+          build break
+KILLED    m0100 src/ui/screen_trainer.c:119 [cmp == -> !=]
+KILLED    m0101 src/ui/screen_trainer.c:124 [cmp != -> ==]
+SURVIVED  m0102 src/ui/screen_trainer.c:131 [cmp <= -> <]
+KILLED    m0103 src/ui/screen_trainer.c:131 [int+1 0 -> 1]
+SURVIVED  m0104 src/ui/screen_trainer.c:131 [int-1 0 -> -1]
+KILLED    m0105 src/ui/screen_trainer.c:135 [int+1 0 -> 1]
+KILLED    m0106 src/ui/screen_trainer.c:135 [int-1 0 -> -1]
+          build break
+KILLED    m0107 src/ui/screen_trainer.c:136 [int+1 0 -> 1]
+KILLED    m0108 src/ui/screen_trainer.c:136 [int-1 0 -> -1]
+KILLED    m0109 src/ui/screen_trainer.c:141 [arith * -> /]
+          build break
+KILLED    m0110 src/ui/screen_trainer.c:142 [cmp == -> !=]
+KILLED    m0111 src/ui/screen_trainer.c:142 [logic || -> &&]
+KILLED    m0112 src/ui/screen_trainer.c:142 [cmp == -> !=]
+KILLED    m0113 src/ui/screen_trainer.c:147 [cmp <= -> <]
+KILLED    m0114 src/ui/screen_trainer.c:147 [int+1 0 -> 1]
+KILLED    m0115 src/ui/screen_trainer.c:147 [int-1 0 -> -1]
+KILLED    m0116 src/ui/screen_trainer.c:152 [int+1 0 -> 1]
+KILLED    m0117 src/ui/screen_trainer.c:152 [int-1 0 -> -1]
+          build break
+KILLED    m0118 src/ui/screen_trainer.c:153 [int+1 0 -> 1]
+KILLED    m0119 src/ui/screen_trainer.c:153 [int-1 0 -> -1]
+KILLED    m0120 src/ui/screen_trainer.c:158 [arith * -> /]
+          build break
+KILLED    m0121 src/ui/screen_trainer.c:159 [cmp == -> !=]
+KILLED    m0122 src/ui/screen_trainer.c:159 [logic || -> &&]
+KILLED    m0123 src/ui/screen_trainer.c:159 [cmp == -> !=]
+SURVIVED  m0124 src/ui/screen_trainer.c:162 [int+1 0 -> 1]
+SURVIVED  m0125 src/ui/screen_trainer.c:162 [int-1 0 -> -1]
+KILLED    m0126 src/ui/screen_trainer.c:162 [cmp <= -> <]
+KILLED    m0127 src/ui/screen_trainer.c:162 [int+1 0 -> 1]
+KILLED    m0128 src/ui/screen_trainer.c:162 [int-1 0 -> -1]
+KILLED    m0129 src/ui/screen_trainer.c:167 [int+1 0 -> 1]
+KILLED    m0130 src/ui/screen_trainer.c:167 [int-1 0 -> -1]
+KILLED    m0131 src/ui/screen_trainer.c:172 [arith * -> /]
+          build break
+KILLED    m0132 src/ui/screen_trainer.c:173 [cmp == -> !=]
+KILLED    m0133 src/ui/screen_trainer.c:173 [logic || -> &&]
+KILLED    m0134 src/ui/screen_trainer.c:173 [cmp == -> !=]
+KILLED    m0135 src/ui/screen_trainer.c:176 [cmp < -> <=]
+KILLED    m0136 src/ui/screen_trainer.c:176 [int+1 0 -> 1]
+KILLED    m0137 src/ui/screen_trainer.c:176 [int-1 0 -> -1]
+KILLED    m0138 src/ui/screen_trainer.c:176 [logic || -> &&]
+KILLED    m0139 src/ui/screen_trainer.c:176 [cmp >= -> >]
+KILLED    m0140 src/ui/screen_trainer.c:185 [arith * -> /]
+          build break
+KILLED    m0141 src/ui/screen_trainer.c:185 [arith * -> /]
+          build break
+KILLED    m0142 src/ui/screen_trainer.c:186 [cmp < -> <=]
+KILLED    m0143 src/ui/screen_trainer.c:186 [int+1 0 -> 1]
+KILLED    m0144 src/ui/screen_trainer.c:186 [int-1 0 -> -1]
+KILLED    m0145 src/ui/screen_trainer.c:186 [logic || -> &&]
+KILLED    m0146 src/ui/screen_trainer.c:186 [cmp >= -> >]
+KILLED    m0147 src/ui/screen_trainer.c:189 [arith * -> /]
+          build break
+KILLED    m0148 src/ui/screen_trainer.c:193 [arith * -> /]
+          build break
+KILLED    m0149 src/ui/screen_trainer.c:194 [int+1 0 -> 1]
+KILLED    m0150 src/ui/screen_trainer.c:194 [int-1 0 -> -1]
+KILLED    m0151 src/ui/screen_trainer.c:196 [cmp == -> !=]
+KILLED    m0152 src/ui/screen_trainer.c:196 [logic || -> &&]
+          build break
+KILLED    m0153 src/ui/screen_trainer.c:196 [cmp != -> ==]
+KILLED    m0154 src/ui/screen_trainer.c:196 [logic || -> &&]
+          build break
+KILLED    m0155 src/ui/screen_trainer.c:197 [cmp != -> ==]
+SURVIVED  m0156 src/ui/screen_trainer.c:202 [cmp > -> >=]
+SURVIVED  m0157 src/ui/screen_trainer.c:202 [int+1 0 -> 1]
+SURVIVED  m0158 src/ui/screen_trainer.c:202 [int-1 0 -> -1]
+SURVIVED  m0159 src/ui/screen_trainer.c:202 [int+1 0 -> 1]
+SURVIVED  m0160 src/ui/screen_trainer.c:202 [int-1 0 -> -1]
+KILLED    m0161 src/ui/screen_trainer.c:205 [arith * -> /]
+          build break
+KILLED    m0162 src/ui/screen_trainer.c:208 [cmp == -> !=]
+KILLED    m0163 src/ui/screen_trainer.c:208 [logic || -> &&]
+          build break
+KILLED    m0164 src/ui/screen_trainer.c:208 [cmp != -> ==]
+KILLED    m0165 src/ui/screen_trainer.c:208 [logic || -> &&]
+          build break
+KILLED    m0166 src/ui/screen_trainer.c:209 [cmp != -> ==]
+KILLED    m0167 src/ui/screen_trainer.c:213 [cmp != -> ==]
+KILLED    m0168 src/ui/screen_trainer.c:222 [arith * -> /]
+          build break
+KILLED    m0169 src/ui/screen_trainer.c:223 [cmp == -> !=]
+KILLED    m0170 src/ui/screen_trainer.c:223 [logic || -> &&]
+KILLED    m0171 src/ui/screen_trainer.c:223 [cmp == -> !=]
+KILLED    m0172 src/ui/screen_trainer.c:226 [cmp < -> <=]
+KILLED    m0173 src/ui/screen_trainer.c:226 [int+1 0 -> 1]
+KILLED    m0174 src/ui/screen_trainer.c:226 [int-1 0 -> -1]
+KILLED    m0175 src/ui/screen_trainer.c:226 [logic || -> &&]
+KILLED    m0176 src/ui/screen_trainer.c:226 [cmp >= -> >]
+KILLED    m0177 src/ui/screen_trainer.c:230 [cmp != -> ==]
+SURVIVED  m0178 src/ui/screen_trainer.c:235 [int+1 0 -> 1]
+KILLED    m0179 src/ui/screen_trainer.c:235 [int-1 0 -> -1]
+          build break
+KILLED    m0180 src/ui/screen_trainer.c:236 [int+1 0 -> 1]
+KILLED    m0181 src/ui/screen_trainer.c:236 [int-1 0 -> -1]
+          build break
+KILLED    m0182 src/ui/screen_trainer.c:241 [cmp != -> ==]
+KILLED    m0183 src/ui/screen_trainer.c:245 [cmp == -> !=]
+KILLED    m0184 src/ui/screen_trainer.c:249 [cmp == -> !=]
+KILLED    m0185 src/ui/screen_trainer.c:249 [int+1 0 -> 1]
+KILLED    m0186 src/ui/screen_trainer.c:249 [int-1 0 -> -1]
+KILLED    m0187 src/ui/screen_trainer.c:250 [cmp != -> ==]
+KILLED    m0188 src/ui/screen_trainer.c:250 [int+1 0 -> 1]
+KILLED    m0189 src/ui/screen_trainer.c:250 [int-1 0 -> -1]
+KILLED    m0190 src/ui/screen_trainer.c:261 [cmp != -> ==]
+KILLED    m0191 src/ui/screen_trainer.c:261 [int+1 0 -> 1]
+KILLED    m0192 src/ui/screen_trainer.c:261 [int-1 0 -> -1]
+SURVIVED  m0193 src/ui/screen_trainer.c:262 [int+1 0 -> 1]
+KILLED    m0194 src/ui/screen_trainer.c:262 [int-1 0 -> -1]
+          build break
+KILLED    m0195 src/ui/screen_trainer.c:266 [cmp == -> !=]
+KILLED    m0196 src/ui/screen_trainer.c:273 [cmp == -> !=]
+KILLED    m0197 src/ui/screen_trainer.c:282 [arith * -> /]
+          build break
+KILLED    m0198 src/ui/screen_trainer.c:283 [cmp == -> !=]
+KILLED    m0199 src/ui/screen_trainer.c:283 [logic || -> &&]
+KILLED    m0200 src/ui/screen_trainer.c:283 [cmp == -> !=]
+KILLED    m0201 src/ui/screen_trainer.c:287 [cmp != -> ==]
+KILLED    m0202 src/ui/screen_trainer.c:287 [logic || -> &&]
+          build break
+KILLED    m0203 src/ui/screen_trainer.c:287 [cmp != -> ==]
+KILLED    m0204 src/ui/screen_trainer.c:287 [logic || -> &&]
+          build break
+KILLED    m0205 src/ui/screen_trainer.c:288 [cmp < -> <=]
+KILLED    m0206 src/ui/screen_trainer.c:288 [int+1 0 -> 1]
+SURVIVED  m0207 src/ui/screen_trainer.c:288 [int-1 0 -> -1]
+KILLED    m0208 src/ui/screen_trainer.c:288 [logic || -> &&]
+          build break
+SURVIVED  m0209 src/ui/screen_trainer.c:288 [int+1 0 -> 1]
+KILLED    m0210 src/ui/screen_trainer.c:288 [int-1 0 -> -1]
+          build break
+KILLED    m0211 src/ui/screen_trainer.c:288 [cmp == -> !=]
+KILLED    m0212 src/ui/screen_trainer.c:295 [cmp != -> ==]
+KILLED    m0213 src/ui/screen_trainer.c:303 [arith * -> /]
+          build break
+KILLED    m0214 src/ui/screen_trainer.c:303 [arith * -> /]
+          build break
+KILLED    m0215 src/ui/screen_trainer.c:303 [arith * -> /]
+          build break
+KILLED    m0216 src/ui/screen_trainer.c:304 [cmp == -> !=]
+KILLED    m0217 src/ui/screen_trainer.c:304 [logic || -> &&]
+KILLED    m0218 src/ui/screen_trainer.c:304 [cmp == -> !=]
+KILLED    m0219 src/ui/screen_trainer.c:307 [int+1 0 -> 1]
+SURVIVED  m0220 src/ui/screen_trainer.c:307 [int-1 0 -> -1]
+KILLED    m0221 src/ui/screen_trainer.c:308 [arith - -> +]
+KILLED    m0222 src/ui/screen_trainer.c:308 [int+1 1 -> 2]
+KILLED    m0223 src/ui/screen_trainer.c:308 [int-1 1 -> 0]
+KILLED    m0224 src/ui/screen_trainer.c:309 [cmp <= -> <]
+KILLED    m0225 src/ui/screen_trainer.c:310 [arith + -> -]
+KILLED    m0226 src/ui/screen_trainer.c:310 [arith - -> +]
+KILLED    m0227 src/ui/screen_trainer.c:310 [arith / -> *]
+SURVIVED  m0228 src/ui/screen_trainer.c:310 [int+1 2 -> 3]
+SURVIVED  m0229 src/ui/screen_trainer.c:310 [int-1 2 -> 1]
+KILLED    m0230 src/ui/screen_trainer.c:312 [cmp == -> !=]
+KILLED    m0231 src/ui/screen_trainer.c:312 [int+1 0 -> 1]
+KILLED    m0232 src/ui/screen_trainer.c:312 [int-1 0 -> -1]
+SURVIVED  m0233 src/ui/screen_trainer.c:315 [cmp < -> <=]
+SURVIVED  m0234 src/ui/screen_trainer.c:315 [int+1 0 -> 1]
+KILLED    m0235 src/ui/screen_trainer.c:315 [int-1 0 -> -1]
+KILLED    m0236 src/ui/screen_trainer.c:316 [arith + -> -]
+KILLED    m0237 src/ui/screen_trainer.c:316 [int+1 1 -> 2]
+KILLED    m0238 src/ui/screen_trainer.c:316 [int-1 1 -> 0]
+KILLED    m0239 src/ui/screen_trainer.c:318 [arith - -> +]
+KILLED    m0240 src/ui/screen_trainer.c:318 [int+1 1 -> 2]
+SURVIVED  m0241 src/ui/screen_trainer.c:318 [int-1 1 -> 0]
+KILLED    m0242 src/ui/screen_trainer.c:324 [arith * -> /]
+          build break
+KILLED    m0243 src/ui/screen_trainer.c:325 [cmp == -> !=]
+KILLED    m0244 src/ui/screen_trainer.c:329 [cmp != -> ==]
+KILLED    m0245 src/ui/screen_trainer.c:329 [logic || -> &&]
+          build break
+KILLED    m0246 src/ui/screen_trainer.c:329 [cmp != -> ==]
+KILLED    m0247 src/ui/screen_trainer.c:329 [logic || -> &&]
+          build break
+KILLED    m0248 src/ui/screen_trainer.c:330 [cmp < -> <=]
+KILLED    m0249 src/ui/screen_trainer.c:330 [int+1 0 -> 1]
+KILLED    m0250 src/ui/screen_trainer.c:330 [int-1 0 -> -1]
+KILLED    m0251 src/ui/screen_trainer.c:330 [logic || -> &&]
+          build break
+KILLED    m0252 src/ui/screen_trainer.c:330 [cmp >= -> >]
+KILLED    m0253 src/ui/screen_trainer.c:339 [arith * -> /]
+          build break
+KILLED    m0254 src/ui/screen_trainer.c:340 [cmp == -> !=]
+KILLED    m0255 src/ui/screen_trainer.c:348 [arith * -> /]
+          build break
+SURVIVED  m0256 src/ui/screen_trainer.c:349 [arith - -> +]
+SURVIVED  m0257 src/ui/screen_trainer.c:349 [int+1 1 -> 2]
+SURVIVED  m0258 src/ui/screen_trainer.c:349 [int-1 1 -> 0]
+SURVIVED  m0259 src/ui/screen_trainer.c:350 [arith - -> +]
+SURVIVED  m0260 src/ui/screen_trainer.c:350 [int+1 1 -> 2]
+SURVIVED  m0261 src/ui/screen_trainer.c:350 [int-1 1 -> 0]
+KILLED    m0262 src/ui/screen_trainer.c:352 [cmp != -> ==]
+KILLED    m0263 src/ui/screen_trainer.c:352 [int+1 0 -> 1]
+KILLED    m0264 src/ui/screen_trainer.c:352 [int-1 0 -> -1]
+KILLED    m0265 src/ui/screen_trainer.c:353 [ret-lit 0 -> 1]
+KILLED    m0266 src/ui/screen_trainer.c:353 [int+1 0 -> 1]
+KILLED    m0267 src/ui/screen_trainer.c:353 [int-1 0 -> -1]
+KILLED    m0268 src/ui/screen_trainer.c:355 [cmp == -> !=]
+KILLED    m0269 src/ui/screen_trainer.c:355 [logic || -> &&]
+KILLED    m0270 src/ui/screen_trainer.c:355 [cmp == -> !=]
+KILLED    m0271 src/ui/screen_trainer.c:358 [arith * -> /]
+          build break
+KILLED    m0272 src/ui/screen_trainer.c:359 [cmp == -> !=]
+KILLED    m0273 src/ui/screen_trainer.c:359 [logic || -> &&]
+SURVIVED  m0274 src/ui/screen_trainer.c:359 [cmp <= -> <]
+KILLED    m0275 src/ui/screen_trainer.c:359 [int+1 0 -> 1]
+SURVIVED  m0276 src/ui/screen_trainer.c:359 [int-1 0 -> -1]
+KILLED    m0277 src/ui/screen_trainer.c:360 [ret-lit 0 -> 1]
+KILLED    m0278 src/ui/screen_trainer.c:360 [int+1 0 -> 1]
+KILLED    m0279 src/ui/screen_trainer.c:360 [int-1 0 -> -1]
+KILLED    m0280 src/ui/screen_trainer.c:363 [cmp != -> ==]
+KILLED    m0281 src/ui/screen_trainer.c:363 [logic || -> &&]
+          build break
+KILLED    m0282 src/ui/screen_trainer.c:363 [cmp != -> ==]
+KILLED    m0283 src/ui/screen_trainer.c:363 [logic || -> &&]
+          build break
+KILLED    m0284 src/ui/screen_trainer.c:364 [cmp == -> !=]
+KILLED    m0285 src/ui/screen_trainer.c:367 [int+1 0 -> 1]
+KILLED    m0286 src/ui/screen_trainer.c:367 [int-1 0 -> -1]
+KILLED    m0287 src/ui/screen_trainer.c:368 [int+1 0 -> 1]
+SURVIVED  m0288 src/ui/screen_trainer.c:368 [int-1 0 -> -1]
+SURVIVED  m0289 src/ui/screen_trainer.c:368 [cmp < -> <=]
+KILLED    m0290 src/ui/screen_trainer.c:376 [arith * -> /]
+          build break
+KILLED    m0291 src/ui/screen_trainer.c:377 [cmp == -> !=]
+KILLED    m0292 src/ui/screen_trainer.c:377 [logic || -> &&]
+KILLED    m0293 src/ui/screen_trainer.c:377 [cmp < -> <=]
+KILLED    m0294 src/ui/screen_trainer.c:377 [int+1 0 -> 1]
+SURVIVED  m0295 src/ui/screen_trainer.c:377 [int-1 0 -> -1]
+KILLED    m0296 src/ui/screen_trainer.c:378 [arith - -> +]
+KILLED    m0297 src/ui/screen_trainer.c:378 [int+1 1 -> 2]
+KILLED    m0298 src/ui/screen_trainer.c:378 [int-1 1 -> 0]
+KILLED    m0299 src/ui/screen_trainer.c:381 [cmp != -> ==]
+KILLED    m0300 src/ui/screen_trainer.c:381 [logic || -> &&]
+          build break
+KILLED    m0301 src/ui/screen_trainer.c:381 [cmp != -> ==]
+KILLED    m0302 src/ui/screen_trainer.c:381 [logic || -> &&]
+          build break
+KILLED    m0303 src/ui/screen_trainer.c:382 [cmp == -> !=]
+KILLED    m0304 src/ui/screen_trainer.c:383 [cmp < -> <=]
+KILLED    m0305 src/ui/screen_trainer.c:383 [arith - -> +]
+KILLED    m0306 src/ui/screen_trainer.c:383 [int+1 1 -> 2]
+KILLED    m0307 src/ui/screen_trainer.c:383 [int-1 1 -> 0]
+KILLED    m0308 src/ui/screen_trainer.c:385 [int+1 0 -> 1]
+KILLED    m0309 src/ui/screen_trainer.c:385 [int-1 0 -> -1]
+KILLED    m0310 src/ui/screen_trainer.c:386 [int+1 0 -> 1]
+SURVIVED  m0311 src/ui/screen_trainer.c:386 [int-1 0 -> -1]
+SURVIVED  m0312 src/ui/screen_trainer.c:386 [cmp < -> <=]
+KILLED    m0313 src/ui/screen_trainer.c:387 [not-del ! -> (deleted)]
+KILLED    m0314 src/ui/screen_trainer.c:390 [cmp == -> !=]
+KILLED    m0315 src/ui/screen_trainer.c:395 [arith - -> +]
+KILLED    m0316 src/ui/screen_trainer.c:395 [int+1 1 -> 2]
+KILLED    m0317 src/ui/screen_trainer.c:395 [int-1 1 -> 0]
+KILLED    m0318 src/ui/screen_trainer.c:398 [arith * -> /]
+          build break
+KILLED    m0319 src/ui/screen_trainer.c:398 [arith * -> /]
+          build break
+KILLED    m0320 src/ui/screen_trainer.c:399 [cmp == -> !=]
+KILLED    m0321 src/ui/screen_trainer.c:399 [logic || -> &&]
+          build break
+KILLED    m0322 src/ui/screen_trainer.c:399 [cmp == -> !=]
+KILLED    m0323 src/ui/screen_trainer.c:399 [logic || -> &&]
+          build break
+SURVIVED  m0324 src/ui/screen_trainer.c:399 [cmp <= -> <]
+KILLED    m0325 src/ui/screen_trainer.c:399 [int+1 0 -> 1]
+SURVIVED  m0326 src/ui/screen_trainer.c:399 [int-1 0 -> -1]
+KILLED    m0327 src/ui/screen_trainer.c:400 [ret-lit 0 -> 1]
+KILLED    m0328 src/ui/screen_trainer.c:400 [int+1 0 -> 1]
+KILLED    m0329 src/ui/screen_trainer.c:400 [int-1 0 -> -1]
+KILLED    m0330 src/ui/screen_trainer.c:402 [cmp < -> <=]
+KILLED    m0331 src/ui/screen_trainer.c:402 [int+1 0 -> 1]
+KILLED    m0332 src/ui/screen_trainer.c:402 [int-1 0 -> -1]
+KILLED    m0333 src/ui/screen_trainer.c:402 [logic || -> &&]
+          build break
+KILLED    m0334 src/ui/screen_trainer.c:402 [cmp != -> ==]
+KILLED    m0335 src/ui/screen_trainer.c:402 [logic || -> &&]
+          build break
+KILLED    m0336 src/ui/screen_trainer.c:402 [int+1 0 -> 1]
+KILLED    m0337 src/ui/screen_trainer.c:402 [int-1 0 -> -1]
+          build break
+KILLED    m0338 src/ui/screen_trainer.c:402 [cmp == -> !=]
+KILLED    m0339 src/ui/screen_trainer.c:403 [ret-lit 0 -> 1]
+KILLED    m0340 src/ui/screen_trainer.c:403 [int+1 0 -> 1]
+KILLED    m0341 src/ui/screen_trainer.c:403 [int-1 0 -> -1]
+KILLED    m0342 src/ui/screen_trainer.c:405 [int+1 0 -> 1]
+KILLED    m0343 src/ui/screen_trainer.c:405 [int-1 0 -> -1]
+SURVIVED  m0344 src/ui/screen_trainer.c:406 [cmp < -> <=]
+KILLED    m0345 src/ui/screen_trainer.c:406 [logic && -> ||]
+KILLED    m0346 src/ui/screen_trainer.c:406 [int+1 0 -> 1]
+KILLED    m0347 src/ui/screen_trainer.c:406 [int-1 0 -> -1]
+          build break
+KILLED    m0348 src/ui/screen_trainer.c:406 [cmp != -> ==]
+KILLED    m0349 src/ui/screen_trainer.c:409 [cmp < -> <=]
+KILLED    m0350 src/ui/screen_trainer.c:409 [logic && -> ||]
+KILLED    m0351 src/ui/screen_trainer.c:409 [int+1 0 -> 1]
+KILLED    m0352 src/ui/screen_trainer.c:409 [int-1 0 -> -1]
+          build break
+KILLED    m0353 src/ui/screen_trainer.c:409 [cmp != -> ==]
+KILLED    m0354 src/ui/screen_trainer.c:412 [cmp < -> <=]
+KILLED    m0355 src/ui/screen_trainer.c:412 [logic && -> ||]
+KILLED    m0356 src/ui/screen_trainer.c:412 [int+1 0 -> 1]
+KILLED    m0357 src/ui/screen_trainer.c:412 [int-1 0 -> -1]
+          build break
+KILLED    m0358 src/ui/screen_trainer.c:412 [cmp != -> ==]
+KILLED    m0359 src/ui/screen_trainer.c:415 [cmp < -> <=]
+KILLED    m0360 src/ui/screen_trainer.c:433 [arith * -> /]
+          build break
+KILLED    m0361 src/ui/screen_trainer.c:435 [arith * -> /]
+          build break
+KILLED    m0362 src/ui/screen_trainer.c:437 [arith * -> /]
+          build break
+KILLED    m0363 src/ui/screen_trainer.c:439 [arith * -> /]
+          build break
+KILLED    m0364 src/ui/screen_trainer.c:444 [arith * -> /]
+          build break
+KILLED    m0365 src/ui/screen_trainer.c:448 [arith * -> /]
+          build break
+KILLED    m0366 src/ui/screen_trainer.c:449 [arith * -> /]
+          build break
+SURVIVED  m0367 src/ui/screen_trainer.c:450 [int+1 0 -> 1]
+SURVIVED  m0368 src/ui/screen_trainer.c:450 [int-1 0 -> -1]
+SURVIVED  m0369 src/ui/screen_trainer.c:451 [int+1 0 -> 1]
+SURVIVED  m0370 src/ui/screen_trainer.c:451 [int-1 0 -> -1]
+SURVIVED  m0371 src/ui/screen_trainer.c:451 [cmp < -> <=]
+SURVIVED  m0372 src/ui/screen_trainer.c:451 [logic && -> ||]
+SURVIVED  m0373 src/ui/screen_trainer.c:451 [cmp < -> <=]
+SURVIVED  m0374 src/ui/screen_trainer.c:458 [int+1 0 -> 1]
+SURVIVED  m0375 src/ui/screen_trainer.c:458 [int-1 0 -> -1]
+SURVIVED  m0376 src/ui/screen_trainer.c:458 [cmp < -> <=]
+SURVIVED  m0377 src/ui/screen_trainer.c:463 [int+1 0 -> 1]
+SURVIVED  m0378 src/ui/screen_trainer.c:463 [int-1 0 -> -1]
+SURVIVED  m0379 src/ui/screen_trainer.c:463 [cmp < -> <=]
+SURVIVED  m0380 src/ui/screen_trainer.c:469 [arith - -> +]
+SURVIVED  m0381 src/ui/screen_trainer.c:469 [int+1 1 -> 2]
+SURVIVED  m0382 src/ui/screen_trainer.c:469 [int-1 1 -> 0]
+SURVIVED  m0383 src/ui/screen_trainer.c:470 [int+1 0 -> 1]
+SURVIVED  m0384 src/ui/screen_trainer.c:470 [int-1 0 -> -1]
+SURVIVED  m0385 src/ui/screen_trainer.c:470 [cmp < -> <=]
+SURVIVED  m0386 src/ui/screen_trainer.c:470 [logic && -> ||]
+SURVIVED  m0387 src/ui/screen_trainer.c:470 [cmp < -> <=]
+SURVIVED  m0388 src/ui/screen_trainer.c:472 [cmp < -> <=]
+SURVIVED  m0389 src/ui/screen_trainer.c:472 [int+1 0 -> 1]
+SURVIVED  m0390 src/ui/screen_trainer.c:472 [int-1 0 -> -1]
+SURVIVED  m0391 src/ui/screen_trainer.c:472 [logic || -> &&]
+SURVIVED  m0392 src/ui/screen_trainer.c:474 [cmp != -> ==]
+SURVIVED  m0393 src/ui/screen_trainer.c:474 [int+1 0 -> 1]
+SURVIVED  m0394 src/ui/screen_trainer.c:474 [int-1 0 -> -1]
+SURVIVED  m0395 src/ui/screen_trainer.c:475 [int+1 0 -> 1]
+KILLED    m0396 src/ui/screen_trainer.c:475 [int-1 0 -> -1]
+          build break
+KILLED    m0397 src/ui/screen_trainer.c:477 [arith * -> /]
+          build break
+SURVIVED  m0398 src/ui/screen_trainer.c:478 [cmp != -> ==]
+SURVIVED  m0399 src/ui/screen_trainer.c:478 [logic && -> ||]
+SURVIVED  m0400 src/ui/screen_trainer.c:478 [int+1 0 -> 1]
+KILLED    m0401 src/ui/screen_trainer.c:478 [int-1 0 -> -1]
+          build break
+SURVIVED  m0402 src/ui/screen_trainer.c:478 [cmp != -> ==]
+SURVIVED  m0403 src/ui/screen_trainer.c:485 [cmp == -> !=]
+SURVIVED  m0404 src/ui/screen_trainer.c:492 [cmp >= -> >]
+SURVIVED  m0405 src/ui/screen_trainer.c:492 [int+1 0 -> 1]
+SURVIVED  m0406 src/ui/screen_trainer.c:492 [int-1 0 -> -1]
+SURVIVED  m0407 src/ui/screen_trainer.c:492 [logic && -> ||]
+SURVIVED  m0408 src/ui/screen_trainer.c:492 [cmp < -> <=]
+SURVIVED  m0409 src/ui/screen_trainer.c:501 [cmp >= -> >]
+SURVIVED  m0410 src/ui/screen_trainer.c:501 [int+1 0 -> 1]
+SURVIVED  m0411 src/ui/screen_trainer.c:501 [int-1 0 -> -1]
+SURVIVED  m0412 src/ui/screen_trainer.c:501 [logic && -> ||]
+SURVIVED  m0413 src/ui/screen_trainer.c:501 [cmp < -> <=]
+SURVIVED  m0414 src/ui/screen_trainer.c:507 [cmp >= -> >]
+SURVIVED  m0415 src/ui/screen_trainer.c:507 [int+1 0 -> 1]
+SURVIVED  m0416 src/ui/screen_trainer.c:507 [int-1 0 -> -1]
+SURVIVED  m0417 src/ui/screen_trainer.c:514 [cmp >= -> >]
+SURVIVED  m0418 src/ui/screen_trainer.c:514 [int+1 0 -> 1]
+SURVIVED  m0419 src/ui/screen_trainer.c:514 [int-1 0 -> -1]
+KILLED    m0420 src/ui/screen_trainer.c:519 [arith * -> /]
+          build break
+KILLED    m0421 src/ui/screen_trainer.c:520 [cmp == -> !=]
+KILLED    m0422 src/ui/screen_trainer.c:523 [not-del ! -> (deleted)]
+KILLED    m0423 src/ui/screen_trainer.c:523 [logic || -> &&]
+KILLED    m0424 src/ui/screen_trainer.c:523 [cmp != -> ==]
+KILLED    m0425 src/ui/screen_trainer.c:524 [bool true -> false]
+KILLED    m0426 src/ui/screen_trainer.c:537 [arith * -> /]
+          build break
+KILLED    m0427 src/ui/screen_trainer.c:539 [arith * -> /]
+          build break
+SURVIVED  m0428 src/ui/screen_trainer.c:540 [cmp == -> !=]
+SURVIVED  m0429 src/ui/screen_trainer.c:541 [cmp == -> !=]
+SURVIVED  m0430 src/ui/screen_trainer.c:544 [int+1 0 -> 1]
+SURVIVED  m0431 src/ui/screen_trainer.c:544 [int-1 0 -> -1]
+SURVIVED  m0432 src/ui/screen_trainer.c:544 [cmp < -> <=]
+SURVIVED  m0433 src/ui/screen_trainer.c:546 [cmp != -> ==]
+SURVIVED  m0434 src/ui/screen_trainer.c:546 [int+1 0 -> 1]
+SURVIVED  m0435 src/ui/screen_trainer.c:546 [int-1 0 -> -1]
+SURVIVED  m0436 src/ui/screen_trainer.c:549 [cmp == -> !=]
+SURVIVED  m0437 src/ui/screen_trainer.c:551 [cmp == -> !=]
+SURVIVED  m0438 src/ui/screen_trainer.c:554 [cmp == -> !=]
+SURVIVED  m0439 src/ui/screen_trainer.c:556 [cmp == -> !=]
+SURVIVED  m0440 src/ui/screen_trainer.c:562 [int+1 2 -> 3]
+KILLED    m0441 src/ui/screen_trainer.c:562 [int-1 2 -> 1]
+          build break
+SURVIVED  m0442 src/ui/screen_trainer.c:564 [cmp == -> !=]
+SURVIVED  m0443 src/ui/screen_trainer.c:566 [cmp == -> !=]
+SURVIVED  m0444 src/ui/screen_trainer.c:569 [arith / -> *]
+SURVIVED  m0445 src/ui/screen_trainer.c:571 [arith + -> -]
+SURVIVED  m0446 src/ui/screen_trainer.c:571 [arith - -> +]
+SURVIVED  m0447 src/ui/screen_trainer.c:571 [arith / -> *]
+SURVIVED  m0448 src/ui/screen_trainer.c:572 [arith + -> -]
+SURVIVED  m0449 src/ui/screen_trainer.c:572 [arith - -> +]
+SURVIVED  m0450 src/ui/screen_trainer.c:572 [arith / -> *]
+SURVIVED  m0451 src/ui/screen_trainer.c:577 [cmp >= -> >]
+SURVIVED  m0452 src/ui/screen_trainer.c:577 [int+1 0 -> 1]
+SURVIVED  m0453 src/ui/screen_trainer.c:577 [int-1 0 -> -1]
+SURVIVED  m0454 src/ui/screen_trainer.c:577 [logic && -> ||]
+SURVIVED  m0455 src/ui/screen_trainer.c:578 [cmp == -> !=]
+KILLED    m0456 src/ui/screen_trainer.c:586 [arith * -> /]
+          build break
+SURVIVED  m0457 src/ui/screen_trainer.c:588 [cmp == -> !=]
+KILLED    m0458 src/ui/screen_trainer.c:591 [arith * -> /]
+          build break
+SURVIVED  m0459 src/ui/screen_trainer.c:597 [arith / -> *]
+SURVIVED  m0460 src/ui/screen_trainer.c:597 [arith - -> +]
+SURVIVED  m0461 src/ui/screen_trainer.c:598 [int+1 0 -> 1]
+SURVIVED  m0462 src/ui/screen_trainer.c:598 [int-1 0 -> -1]
+SURVIVED  m0463 src/ui/screen_trainer.c:601 [arith - -> +]
+SURVIVED  m0464 src/ui/screen_trainer.c:601 [arith - -> +]
+SURVIVED  m0465 src/ui/screen_trainer.c:601 [arith - -> +]
+SURVIVED  m0466 src/ui/screen_trainer.c:604 [arith + -> -]
+SURVIVED  m0467 src/ui/screen_trainer.c:605 [cmp > -> >=]
+SURVIVED  m0468 src/ui/screen_trainer.c:605 [int+1 0 -> 1]
+SURVIVED  m0469 src/ui/screen_trainer.c:605 [int-1 0 -> -1]
+SURVIVED  m0470 src/ui/screen_trainer.c:605 [logic && -> ||]
+SURVIVED  m0471 src/ui/screen_trainer.c:605 [cmp == -> !=]
+SURVIVED  m0472 src/ui/screen_trainer.c:606 [arith * -> /]
+SURVIVED  m0473 src/ui/screen_trainer.c:606 [arith + -> -]
+SURVIVED  m0474 src/ui/screen_trainer.c:607 [arith + -> -]
+SURVIVED  m0475 src/ui/screen_trainer.c:607 [arith + -> -]
+SURVIVED  m0476 src/ui/screen_trainer.c:608 [arith + -> -]
+SURVIVED  m0477 src/ui/screen_trainer.c:608 [arith + -> -]
+SURVIVED  m0478 src/ui/screen_trainer.c:608 [arith + -> -]
+SURVIVED  m0479 src/ui/screen_trainer.c:608 [arith + -> -]
+SURVIVED  m0480 src/ui/screen_trainer.c:609 [arith - -> +]
+SURVIVED  m0481 src/ui/screen_trainer.c:609 [arith - -> +]
+SURVIVED  m0482 src/ui/screen_trainer.c:609 [arith - -> +]
+SURVIVED  m0483 src/ui/screen_trainer.c:610 [arith + -> -]
+SURVIVED  m0484 src/ui/screen_trainer.c:610 [arith * -> /]
+SURVIVED  m0485 src/ui/screen_trainer.c:610 [arith + -> -]
+SURVIVED  m0486 src/ui/screen_trainer.c:611 [arith - -> +]
+SURVIVED  m0487 src/ui/screen_trainer.c:611 [arith - -> +]
+SURVIVED  m0488 src/ui/screen_trainer.c:612 [arith - -> +]
+SURVIVED  m0489 src/ui/screen_trainer.c:612 [int+1 2 -> 3]
+SURVIVED  m0490 src/ui/screen_trainer.c:612 [int-1 2 -> 1]
+SURVIVED  m0491 src/ui/screen_trainer.c:612 [arith * -> /]
+SURVIVED  m0492 src/ui/screen_trainer.c:612 [arith - -> +]
+SURVIVED  m0493 src/ui/screen_trainer.c:614 [arith + -> -]
+SURVIVED  m0494 src/ui/screen_trainer.c:615 [arith + -> -]
+SURVIVED  m0495 src/ui/screen_trainer.c:616 [arith + -> -]
+SURVIVED  m0496 src/ui/screen_trainer.c:616 [arith + -> -]
+SURVIVED  m0497 src/ui/screen_trainer.c:617 [arith + -> -]
+SURVIVED  m0498 src/ui/screen_trainer.c:618 [arith + -> -]
+SURVIVED  m0499 src/ui/screen_trainer.c:618 [arith + -> -]
+SURVIVED  m0500 src/ui/screen_trainer.c:621 [cmp <= -> <]
+SURVIVED  m0501 src/ui/screen_trainer.c:621 [int+1 0 -> 1]
+SURVIVED  m0502 src/ui/screen_trainer.c:621 [int-1 0 -> -1]
+SURVIVED  m0503 src/ui/screen_trainer.c:621 [logic || -> &&]
+SURVIVED  m0504 src/ui/screen_trainer.c:621 [cmp == -> !=]
+SURVIVED  m0505 src/ui/screen_trainer.c:622 [arith - -> +]
+SURVIVED  m0506 src/ui/screen_trainer.c:622 [arith - -> +]
+SURVIVED  m0507 src/ui/screen_trainer.c:622 [int+1 2 -> 3]
+SURVIVED  m0508 src/ui/screen_trainer.c:622 [int-1 2 -> 1]
+SURVIVED  m0509 src/ui/screen_trainer.c:622 [arith * -> /]
+SURVIVED  m0510 src/ui/screen_trainer.c:631 [arith - -> +]
+SURVIVED  m0511 src/ui/screen_trainer.c:631 [int+1 1 -> 2]
+SURVIVED  m0512 src/ui/screen_trainer.c:631 [int-1 1 -> 0]
+SURVIVED  m0513 src/ui/screen_trainer.c:632 [int+1 0 -> 1]
+SURVIVED  m0514 src/ui/screen_trainer.c:632 [int-1 0 -> -1]
+SURVIVED  m0515 src/ui/screen_trainer.c:632 [cmp < -> <=]
+SURVIVED  m0516 src/ui/screen_trainer.c:633 [cmp == -> !=]
+SURVIVED  m0517 src/ui/screen_trainer.c:637 [arith + -> -]
+SURVIVED  m0518 src/ui/screen_trainer.c:637 [arith + -> -]
+SURVIVED  m0519 src/ui/screen_trainer.c:643 [arith + -> -]
+SURVIVED  m0520 src/ui/screen_trainer.c:643 [int+1 2 -> 3]
+SURVIVED  m0521 src/ui/screen_trainer.c:643 [int-1 2 -> 1]
+SURVIVED  m0522 src/ui/screen_trainer.c:643 [arith * -> /]
+SURVIVED  m0523 src/ui/screen_trainer.c:643 [arith + -> -]
+SURVIVED  m0524 src/ui/screen_trainer.c:650 [arith + -> -]
+SURVIVED  m0525 src/ui/screen_trainer.c:650 [int+1 2 -> 3]
+SURVIVED  m0526 src/ui/screen_trainer.c:650 [int-1 2 -> 1]
+SURVIVED  m0527 src/ui/screen_trainer.c:650 [arith * -> /]
+SURVIVED  m0528 src/ui/screen_trainer.c:650 [arith + -> -]
+SURVIVED  m0529 src/ui/screen_trainer.c:653 [cmp > -> >=]
+SURVIVED  m0530 src/ui/screen_trainer.c:656 [arith + -> -]
+SURVIVED  m0531 src/ui/screen_trainer.c:656 [int+1 2 -> 3]
+SURVIVED  m0532 src/ui/screen_trainer.c:656 [int-1 2 -> 1]
+SURVIVED  m0533 src/ui/screen_trainer.c:656 [arith * -> /]
+SURVIVED  m0534 src/ui/screen_trainer.c:656 [arith + -> -]
+SURVIVED  m0535 src/ui/screen_trainer.c:666 [arith + -> -]
+SURVIVED  m0536 src/ui/screen_trainer.c:666 [arith - -> +]
+SURVIVED  m0537 src/ui/screen_trainer.c:666 [int+1 2 -> 3]
+SURVIVED  m0538 src/ui/screen_trainer.c:666 [int-1 2 -> 1]
+SURVIVED  m0539 src/ui/screen_trainer.c:666 [arith * -> /]
+SURVIVED  m0540 src/ui/screen_trainer.c:668 [cmp > -> >=]
+SURVIVED  m0541 src/ui/screen_trainer.c:668 [int+1 1 -> 2]
+SURVIVED  m0542 src/ui/screen_trainer.c:668 [int-1 1 -> 0]
+SURVIVED  m0543 src/ui/screen_trainer.c:672 [int+1 0 -> 1]
+SURVIVED  m0544 src/ui/screen_trainer.c:672 [int-1 0 -> -1]
+SURVIVED  m0545 src/ui/screen_trainer.c:672 [cmp < -> <=]
+SURVIVED  m0546 src/ui/screen_trainer.c:672 [logic && -> ||]
+SURVIVED  m0547 src/ui/screen_trainer.c:672 [cmp < -> <=]
+SURVIVED  m0548 src/ui/screen_trainer.c:673 [cmp < -> <=]
+SURVIVED  m0549 src/ui/screen_trainer.c:673 [int+1 0 -> 1]
+SURVIVED  m0550 src/ui/screen_trainer.c:673 [int-1 0 -> -1]
+SURVIVED  m0551 src/ui/screen_trainer.c:673 [logic || -> &&]
+SURVIVED  m0552 src/ui/screen_trainer.c:673 [cmp >= -> >]
+SURVIVED  m0553 src/ui/screen_trainer.c:676 [arith + -> -]
+SURVIVED  m0554 src/ui/screen_trainer.c:676 [arith - -> +]
+SURVIVED  m0555 src/ui/screen_trainer.c:683 [arith + -> -]
+SURVIVED  m0556 src/ui/screen_trainer.c:683 [arith - -> +]
+SURVIVED  m0557 src/ui/screen_trainer.c:683 [int+1 2 -> 3]
+SURVIVED  m0558 src/ui/screen_trainer.c:683 [int-1 2 -> 1]
+SURVIVED  m0559 src/ui/screen_trainer.c:683 [arith * -> /]
+SURVIVED  m0560 src/ui/screen_trainer.c:686 [arith + -> -]
+SURVIVED  m0561 src/ui/screen_trainer.c:687 [cmp >= -> >]
+SURVIVED  m0562 src/ui/screen_trainer.c:687 [int+1 0 -> 1]
+SURVIVED  m0563 src/ui/screen_trainer.c:687 [int-1 0 -> -1]
+SURVIVED  m0564 src/ui/screen_trainer.c:692 [int+1 0 -> 1]
+KILLED    m0565 src/ui/screen_trainer.c:692 [int-1 0 -> -1]
+          build break
+SURVIVED  m0566 src/ui/screen_trainer.c:692 [cmp != -> ==]
+SURVIVED  m0567 src/ui/screen_trainer.c:694 [int+1 0 -> 1]
+KILLED    m0568 src/ui/screen_trainer.c:694 [int-1 0 -> -1]
+          build break
+SURVIVED  m0569 src/ui/screen_trainer.c:694 [cmp != -> ==]
+SURVIVED  m0570 src/ui/screen_trainer.c:703 [int+1 0 -> 1]
+SURVIVED  m0571 src/ui/screen_trainer.c:703 [int-1 0 -> -1]
+SURVIVED  m0572 src/ui/screen_trainer.c:703 [cmp < -> <=]
+SURVIVED  m0573 src/ui/screen_trainer.c:704 [arith + -> -]
+SURVIVED  m0574 src/ui/screen_trainer.c:704 [arith * -> /]
+SURVIVED  m0575 src/ui/screen_trainer.c:708 [arith - -> +]
+SURVIVED  m0576 src/ui/screen_trainer.c:708 [arith - -> +]
+SURVIVED  m0577 src/ui/screen_trainer.c:708 [arith - -> +]
+SURVIVED  m0578 src/ui/screen_trainer.c:709 [logic && -> ||]
+SURVIVED  m0579 src/ui/screen_trainer.c:709 [cmp >= -> >]
+SURVIVED  m0580 src/ui/screen_trainer.c:709 [int+1 0 -> 1]
+SURVIVED  m0581 src/ui/screen_trainer.c:709 [int-1 0 -> -1]
+SURVIVED  m0582 src/ui/screen_trainer.c:710 [arith + -> -]
+SURVIVED  m0583 src/ui/screen_trainer.c:710 [arith + -> -]
+SURVIVED  m0584 src/ui/screen_trainer.c:711 [arith - -> +]
+SURVIVED  m0585 src/ui/screen_trainer.c:711 [arith - -> +]
+SURVIVED  m0586 src/ui/screen_trainer.c:713 [arith - -> +]
+SURVIVED  m0587 src/ui/screen_trainer.c:713 [int+1 2 -> 3]
+SURVIVED  m0588 src/ui/screen_trainer.c:713 [int-1 2 -> 1]
+SURVIVED  m0589 src/ui/screen_trainer.c:713 [arith * -> /]
+KILLED    m0590 src/ui/screen_trainer.c:715 [arith + -> -]
+          build break
+SURVIVED  m0591 src/ui/screen_trainer.c:716 [arith + -> -]
+SURVIVED  m0592 src/ui/screen_trainer.c:717 [arith + -> -]
+SURVIVED  m0593 src/ui/screen_trainer.c:719 [arith + -> -]
+SURVIVED  m0594 src/ui/screen_trainer.c:721 [arith + -> -]
+SURVIVED  m0595 src/ui/screen_trainer.c:722 [arith + -> -]
+SURVIVED  m0596 src/ui/screen_trainer.c:722 [arith + -> -]
+SURVIVED  m0597 src/ui/screen_trainer.c:723 [arith - -> +]
+SURVIVED  m0598 src/ui/screen_trainer.c:723 [arith / -> *]
+SURVIVED  m0599 src/ui/screen_trainer.c:723 [int+1 2 -> 3]
+SURVIVED  m0600 src/ui/screen_trainer.c:723 [int-1 2 -> 1]
+SURVIVED  m0601 src/ui/screen_trainer.c:724 [arith + -> -]
+SURVIVED  m0602 src/ui/screen_trainer.c:727 [not-del ! -> (deleted)]
+SURVIVED  m0603 src/ui/screen_trainer.c:729 [arith + -> -]
+SURVIVED  m0604 src/ui/screen_trainer.c:729 [arith + -> -]
+SURVIVED  m0605 src/ui/screen_trainer.c:729 [arith + -> -]
+SURVIVED  m0606 src/ui/screen_trainer.c:732 [not-del ! -> (deleted)]
+SURVIVED  m0607 src/ui/screen_trainer.c:734 [arith + -> -]
+SURVIVED  m0608 src/ui/screen_trainer.c:734 [arith + -> -]
+SURVIVED  m0609 src/ui/screen_trainer.c:735 [arith + -> -]
+SURVIVED  m0610 src/ui/screen_trainer.c:737 [bool false -> true]
+SURVIVED  m0611 src/ui/screen_trainer.c:738 [bool false -> true]
+SURVIVED  m0612 src/ui/screen_trainer.c:745 [arith - -> +]
+SURVIVED  m0613 src/ui/screen_trainer.c:745 [arith - -> +]
+SURVIVED  m0614 src/ui/screen_trainer.c:745 [int+1 2 -> 3]
+SURVIVED  m0615 src/ui/screen_trainer.c:745 [int-1 2 -> 1]
+SURVIVED  m0616 src/ui/screen_trainer.c:745 [arith * -> /]
+SURVIVED  m0617 src/ui/screen_trainer.c:746 [cmp == -> !=]
+ACCEPTED  m0001 src/ui/screen_trainer.c:14 [arith + -> -] :: CT_TRAINER_EVENTS_MAX only sizes event label arrays and bounds the build_labels loop and on_event callback, all in the unexecuted draw path, so the value never reaches a gate-observable surface
+ACCEPTED  m0002 src/ui/screen_trainer.c:14 [int+1 1 -> 2] :: CT_TRAINER_EVENTS_MAX only sizes event label arrays and bounds the build_labels loop and on_event callback, all in the unexecuted draw path, so the value never reaches a gate-observable surface
+ACCEPTED  m0003 src/ui/screen_trainer.c:14 [int-1 1 -> 0] :: CT_TRAINER_EVENTS_MAX only sizes event label arrays and bounds the build_labels loop and on_event callback, all in the unexecuted draw path, so the value never reaches a gate-observable surface
+ACCEPTED  m0004 src/ui/screen_trainer.c:15 [arith * -> /] :: CT_TRAINER_CASES_MAX only sizes case_labels and case_ptrs and bounds the build_labels loop in the unexecuted draw path
+ACCEPTED  m0005 src/ui/screen_trainer.c:16 [int+1 2 -> 3] :: CT_TRAINER_HALF is consumed only by grid text layout math in the allowlisted draw region
+ACCEPTED  m0006 src/ui/screen_trainer.c:16 [int-1 2 -> 1] :: CT_TRAINER_HALF is consumed only by grid text layout math in the allowlisted draw region
+ACCEPTED  m0007 src/ui/screen_trainer.c:17 [int+1 3 -> 4] :: CT_TRAINER_DETAIL_COL is consumed only by the detail column x offset in the allowlisted draw region
+ACCEPTED  m0008 src/ui/screen_trainer.c:17 [int-1 3 -> 2] :: CT_TRAINER_DETAIL_COL is consumed only by the detail column x offset in the allowlisted draw region
+ACCEPTED  m0009 src/ui/screen_trainer.c:18 [arith + -> -] :: decomp step spacing arithmetic, consumed only by the raylib draw path
+ACCEPTED  m0010 src/ui/screen_trainer.c:18 [arith / -> *] :: decomp step spacing arithmetic, consumed only by the raylib draw path
+ACCEPTED  m0011 src/ui/screen_trainer.c:18 [int+1 2 -> 3] :: decomp step spacing arithmetic, consumed only by the raylib draw path
+ACCEPTED  m0012 src/ui/screen_trainer.c:18 [int-1 2 -> 1] :: decomp step spacing arithmetic, consumed only by the raylib draw path
+ACCEPTED  m0015 src/ui/screen_trainer.c:20 [arith * -> /] :: memo decomp reserve arithmetic, consumed only by the raylib draw path
+ACCEPTED  m0020 src/ui/screen_trainer.c:40 [arith / -> *] :: sizeof of any element subscript yields the same element size, the subscript is never evaluated, and with / turned into * the helpers run only from build_labels and draw with in-range indices
+ACCEPTED  m0021 src/ui/screen_trainer.c:40 [int+1 0 -> 1] :: sizeof of any element subscript yields the same element size, the subscript is never evaluated, and with / turned into * the helpers run only from build_labels and draw with in-range indices
+ACCEPTED  m0022 src/ui/screen_trainer.c:40 [int-1 0 -> -1] :: sizeof of any element subscript yields the same element size, the subscript is never evaluated, and with / turned into * the helpers run only from build_labels and draw with in-range indices
+ACCEPTED  m0023 src/ui/screen_trainer.c:41 [cmp < -> <=] :: ct_trainer_event_name is only called with event ids below the table size from build_labels and the draw region, so the i == count branch never runs
+ACCEPTED  m0025 src/ui/screen_trainer.c:46 [arith / -> *] :: name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0026 src/ui/screen_trainer.c:46 [int+1 0 -> 1] :: name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0027 src/ui/screen_trainer.c:46 [int-1 0 -> -1] :: name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0028 src/ui/screen_trainer.c:47 [cmp < -> <=] :: ct_trainer_method_name is only called with method ids below the table size from build_labels and the draw region, so the i == count branch never runs
+ACCEPTED  m0030 src/ui/screen_trainer.c:52 [arith / -> *] :: name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0031 src/ui/screen_trainer.c:52 [int+1 0 -> 1] :: name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0032 src/ui/screen_trainer.c:52 [int-1 0 -> -1] :: name table bounds pick, consumed only by the draw-side label builder no headless suite exercises
+ACCEPTED  m0033 src/ui/screen_trainer.c:53 [cmp < -> <=] :: ct_trainer_stage_name is only called with stage ids below the table size from build_labels and the draw region, so the i == count branch never runs
+ACCEPTED  m0045 src/ui/screen_trainer.c:67 [int+1 0 -> 1] :: reload only runs after its callers validated list_count >= 1, so the line 88 assignment always overwrites the initial case_count and the list_count <= 0 early return never executes
+ACCEPTED  m0046 src/ui/screen_trainer.c:67 [int-1 0 -> -1] :: reload only runs after its callers validated list_count >= 1, so the line 88 assignment always overwrites the initial case_count and the list_count <= 0 early return never executes
+ACCEPTED  m0063 src/ui/screen_trainer.c:80 [cmp <= -> <] :: every reload call site guarantees list_count >= 1, so list_count == 0 never reaches this comparison
+ACCEPTED  m0065 src/ui/screen_trainer.c:80 [int-1 0 -> -1] :: every reload call site guarantees list_count >= 1, so list_count == 0 never reaches this comparison
+ACCEPTED  m0066 src/ui/screen_trainer.c:84 [cmp >= -> >] :: callers either reset list_id to 0 or bounds-check it below list_count, so list_id == list_count never reaches this reset guard
+ACCEPTED  m0067 src/ui/screen_trainer.c:85 [int+1 0 -> 1] :: dead store inside the unreachable list_id >= list_count branch guarded at line 84
+ACCEPTED  m0068 src/ui/screen_trainer.c:85 [int-1 0 -> -1] :: dead store inside the unreachable list_id >= list_count branch guarded at line 84
+ACCEPTED  m0069 src/ui/screen_trainer.c:88 [cmp > -> >=] :: n > 0 and n >= 0 agree on every reachable n because n == 0 takes the else branch under both forms and yields 0, no selector list yields exactly one case, and case_count is never negative on valid reload passes
+ACCEPTED  m0070 src/ui/screen_trainer.c:88 [int+1 0 -> 1] :: n > 0 and n >= 0 agree on every reachable n because n == 0 takes the else branch under both forms and yields 0, no selector list yields exactly one case, and case_count is never negative on valid reload passes
+ACCEPTED  m0071 src/ui/screen_trainer.c:88 [int-1 0 -> -1] :: n > 0 and n >= 0 agree on every reachable n because n == 0 takes the else branch under both forms and yields 0, no selector list yields exactly one case, and case_count is never negative on valid reload passes
+ACCEPTED  m0075 src/ui/screen_trainer.c:89 [int-1 0 -> -1] :: off-by-one iteration queries case_group at an out-of-range index which returns CT_SELECTOR_ERR and is skipped, group totals unchanged
+ACCEPTED  m0076 src/ui/screen_trainer.c:89 [cmp < -> <=] :: off-by-one iteration queries case_group at an out-of-range index which returns CT_SELECTOR_ERR and is skipped, group totals unchanged
+ACCEPTED  m0081 src/ui/screen_trainer.c:95 [int+1 1 -> 2] :: the guarded max update is idempotent, widening the condition only re-assigns group_count a value it already holds
+ACCEPTED  m0083 src/ui/screen_trainer.c:95 [cmp > -> >=] :: the guarded max update is idempotent, widening the condition only re-assigns group_count a value it already holds
+ACCEPTED  m0102 src/ui/screen_trainer.c:131 [cmp <= -> <] :: ct_selector_methods for 3x3 always returns 1 from the static table, so both zero-variant comparisons are equally false
+ACCEPTED  m0104 src/ui/screen_trainer.c:131 [int-1 0 -> -1] :: ct_selector_methods for 3x3 always returns 1 from the static table, so both zero-variant comparisons are equally false
+ACCEPTED  m0124 src/ui/screen_trainer.c:162 [int+1 0 -> 1] :: the mutated literal is the capacity argument, out == NULL makes ct_selector_lists ignore it and ct_selector_cap clamps negatives to 0
+ACCEPTED  m0125 src/ui/screen_trainer.c:162 [int-1 0 -> -1] :: the mutated literal is the capacity argument, out == NULL makes ct_selector_lists ignore it and ct_selector_cap clamps negatives to 0
+ACCEPTED  m0156 src/ui/screen_trainer.c:202 [cmp > -> >=] :: corpus precondition, both chart orbits seed the full 576 memo table matching the row cap so n saturates and both arms agree, pinned by seed registry counts
+ACCEPTED  m0157 src/ui/screen_trainer.c:202 [int+1 0 -> 1] :: corpus precondition, both chart orbits seed the full 576 memo table matching the row cap so n saturates and both arms agree, pinned by seed registry counts
+ACCEPTED  m0158 src/ui/screen_trainer.c:202 [int-1 0 -> -1] :: corpus precondition, both chart orbits seed the full 576 memo table matching the row cap so n saturates and both arms agree, pinned by seed registry counts
+ACCEPTED  m0159 src/ui/screen_trainer.c:202 [int+1 0 -> 1] :: corpus precondition, both chart orbits seed the full 576 memo table matching the row cap so n saturates and both arms agree, pinned by seed registry counts
+ACCEPTED  m0160 src/ui/screen_trainer.c:202 [int-1 0 -> -1] :: corpus precondition, both chart orbits seed the full 576 memo table matching the row cap so n saturates and both arms agree, pinned by seed registry counts
+ACCEPTED  m0178 src/ui/screen_trainer.c:235 [int+1 0 -> 1] :: front is fully rewritten by snprintf or case_key on every reachable success path and re-cleared on both error paths, and the seeded pack tables never fail an in-range fetch
+ACCEPTED  m0193 src/ui/screen_trainer.c:262 [int+1 0 -> 1] :: ct_selector_case_key never fails for an in-range index on the seeded databases, so this error-path clear never executes
+ACCEPTED  m0220 src/ui/screen_trainer.c:307 [int-1 0 -> -1] :: binary search returns the identical row for any pivot index in range, these mutations only reorder probes, the /1 form degenerating to a correct linear descent from hi
+ACCEPTED  m0233 src/ui/screen_trainer.c:315 [cmp < -> <=] :: hi = mid preserves the invariant that a present target stays inside the interval, so stored pairs return the identical row and the only divergence is a non-terminating loop on absent pairs, which no gate suite queries because the timeout-less driver would deadlock
+ACCEPTED  m0234 src/ui/screen_trainer.c:315 [int+1 0 -> 1] :: hi = mid preserves the invariant that a present target stays inside the interval, so stored pairs return the identical row and the only divergence is a non-terminating loop on absent pairs, which no gate suite queries because the timeout-less driver would deadlock
+ACCEPTED  m0256 src/ui/screen_trainer.c:349 [arith - -> +] :: t1 initializer is dead, ct_selector_case_pair overwrites both outputs on the only path that reads them and the failure path returns before any read
+ACCEPTED  m0257 src/ui/screen_trainer.c:349 [int+1 1 -> 2] :: t1 initializer is dead, ct_selector_case_pair overwrites both outputs on the only path that reads them and the failure path returns before any read
+ACCEPTED  m0258 src/ui/screen_trainer.c:349 [int-1 1 -> 0] :: t1 initializer is dead, ct_selector_case_pair overwrites both outputs on the only path that reads them and the failure path returns before any read
+ACCEPTED  m0259 src/ui/screen_trainer.c:350 [arith - -> +] :: t2 initializer is dead, ct_selector_case_pair overwrites both outputs on the only path that reads them and the failure path returns before any read
+ACCEPTED  m0260 src/ui/screen_trainer.c:350 [int+1 1 -> 2] :: t2 initializer is dead, ct_selector_case_pair overwrites both outputs on the only path that reads them and the failure path returns before any read
+ACCEPTED  m0261 src/ui/screen_trainer.c:350 [int-1 1 -> 0] :: t2 initializer is dead, ct_selector_case_pair overwrites both outputs on the only path that reads them and the failure path returns before any read
+ACCEPTED  m0274 src/ui/screen_trainer.c:359 [cmp <= -> <] :: with case_count == 0 every continuation path still returns 0, the source guard returns case_count and the match loop runs zero iterations
+ACCEPTED  m0276 src/ui/screen_trainer.c:359 [int-1 0 -> -1] :: with case_count == 0 every continuation path still returns 0, the source guard returns case_count and the match loop runs zero iterations
+ACCEPTED  m0288 src/ui/screen_trainer.c:368 [int-1 0 -> -1] :: visible count loop bound mutants wrap one index past the range, the pair lookup rejects the out of range index through its own guard so the extra probe counts nothing
+ACCEPTED  m0289 src/ui/screen_trainer.c:368 [cmp < -> <=] :: visible count loop bound mutants wrap one index past the range, the pair lookup rejects the out of range index through its own guard so the extra probe counts nothing
+ACCEPTED  m0295 src/ui/screen_trainer.c:377 [int-1 0 -> -1] :: visible == -1 continues into paths that all return -1, the ternary yields visible itself under case_count > 0 and the counting loop can never match a negative target
+ACCEPTED  m0311 src/ui/screen_trainer.c:386 [int-1 0 -> -1] :: the i = -1 and i == case_count iterations call ct_selector_case_pair, which rejects both out-of-range indexes, so cell_matches returns 0 and the loop behaves identically
+ACCEPTED  m0312 src/ui/screen_trainer.c:386 [cmp < -> <=] :: the i = -1 and i == case_count iterations call ct_selector_case_pair, which rejects both out-of-range indexes, so cell_matches returns 0 and the loop behaves identically
+ACCEPTED  m0324 src/ui/screen_trainer.c:399 [cmp <= -> <] :: cap == 0 continues into a path that writes nothing and returns n == 0 identical to the guard result, and cap < 0 is caught by both comparison forms
+ACCEPTED  m0326 src/ui/screen_trainer.c:399 [int-1 0 -> -1] :: cap == 0 continues into a path that writes nothing and returns n == 0 identical to the guard result, and cap < 0 is caught by both comparison forms
+ACCEPTED  m0344 src/ui/screen_trainer.c:406 [cmp < -> <=] :: n is provably 0 at the setup check, so < and <= differ only at cap == 0, which the entry guard already returned for
+ACCEPTED  m0367 src/ui/screen_trainer.c:450 [int+1 0 -> 1] :: with out == NULL ct_selector_events never reads the capacity argument, and the only caller is build_labels which runs solely from the unexecuted draw path
+ACCEPTED  m0368 src/ui/screen_trainer.c:450 [int-1 0 -> -1] :: with out == NULL ct_selector_events never reads the capacity argument, and the only caller is build_labels which runs solely from the unexecuted draw path
+ACCEPTED  m0369 src/ui/screen_trainer.c:451 [int+1 0 -> 1] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0370 src/ui/screen_trainer.c:451 [int-1 0 -> -1] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0371 src/ui/screen_trainer.c:451 [cmp < -> <=] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0372 src/ui/screen_trainer.c:451 [logic && -> ||] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0373 src/ui/screen_trainer.c:451 [cmp < -> <=] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0374 src/ui/screen_trainer.c:458 [int+1 0 -> 1] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0375 src/ui/screen_trainer.c:458 [int-1 0 -> -1] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0376 src/ui/screen_trainer.c:458 [cmp < -> <=] :: draw path, only reachable from the raylib letter grid draw no headless suite exercises
+ACCEPTED  m0380 src/ui/screen_trainer.c:469 [arith - -> +] :: case-key failure branch inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+ACCEPTED  m0381 src/ui/screen_trainer.c:469 [int+1 1 -> 2] :: case-key failure branch inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+ACCEPTED  m0382 src/ui/screen_trainer.c:469 [int-1 1 -> 0] :: case-key failure branch inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+ACCEPTED  m0383 src/ui/screen_trainer.c:470 [int+1 0 -> 1] :: visible-case loop inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+ACCEPTED  m0384 src/ui/screen_trainer.c:470 [int-1 0 -> -1] :: visible-case loop inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+ACCEPTED  m0385 src/ui/screen_trainer.c:470 [cmp < -> <=] :: visible-case loop inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+ACCEPTED  m0386 src/ui/screen_trainer.c:470 [logic && -> ||] :: visible-case loop inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+ACCEPTED  m0387 src/ui/screen_trainer.c:470 [cmp < -> <=] :: visible-case loop inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+ACCEPTED  m0388 src/ui/screen_trainer.c:472 [cmp < -> <=] :: mouse pick gate needs a live mouse press no suite injects, headless capture never presses so no model state changes
+ACCEPTED  m0389 src/ui/screen_trainer.c:472 [int+1 0 -> 1] :: mouse pick gate needs a live mouse press no suite injects, headless capture never presses so no model state changes
+ACCEPTED  m0390 src/ui/screen_trainer.c:472 [int-1 0 -> -1] :: mouse pick gate needs a live mouse press no suite injects, headless capture never presses so no model state changes
+ACCEPTED  m0391 src/ui/screen_trainer.c:472 [logic || -> &&] :: mouse pick gate needs a live mouse press no suite injects, headless capture never presses so no model state changes
+ACCEPTED  m0395 src/ui/screen_trainer.c:475 [int+1 0 -> 1] :: memo image append guard inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+ACCEPTED  m0403 src/ui/screen_trainer.c:485 [cmp == -> !=] :: active-row comparison inside static build_labels, executed only from the allowlisted draw region with no gate-observable surface
+ACCEPTED  m0404 src/ui/screen_trainer.c:492 [cmp >= -> >] :: static GuiTree event callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_event which rejects them unobserved
+ACCEPTED  m0405 src/ui/screen_trainer.c:492 [int+1 0 -> 1] :: static GuiTree event callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_event which rejects them unobserved
+ACCEPTED  m0406 src/ui/screen_trainer.c:492 [int-1 0 -> -1] :: static GuiTree event callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_event which rejects them unobserved
+ACCEPTED  m0407 src/ui/screen_trainer.c:492 [logic && -> ||] :: static GuiTree event callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_event which rejects them unobserved
+ACCEPTED  m0408 src/ui/screen_trainer.c:492 [cmp < -> <=] :: static GuiTree event callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_event which rejects them unobserved
+ACCEPTED  m0409 src/ui/screen_trainer.c:501 [cmp >= -> >] :: static GuiTree method callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_method which rejects them unobserved
+ACCEPTED  m0410 src/ui/screen_trainer.c:501 [int+1 0 -> 1] :: static GuiTree method callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_method which rejects them unobserved
+ACCEPTED  m0411 src/ui/screen_trainer.c:501 [int-1 0 -> -1] :: static GuiTree method callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_method which rejects them unobserved
+ACCEPTED  m0412 src/ui/screen_trainer.c:501 [logic && -> ||] :: static GuiTree method callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_method which rejects them unobserved
+ACCEPTED  m0413 src/ui/screen_trainer.c:501 [cmp < -> <=] :: static GuiTree method callback guard invoked only from the draw region, out-of-range active values flow into ct_trainer_form_select_method which rejects them unobserved
+ACCEPTED  m0414 src/ui/screen_trainer.c:507 [cmp >= -> >] :: draw path, only reachable from the raylib letter grid draw and its layout arithmetic, no headless suite exercises
+ACCEPTED  m0415 src/ui/screen_trainer.c:507 [int+1 0 -> 1] :: draw path, only reachable from the raylib letter grid draw and its layout arithmetic, no headless suite exercises
+ACCEPTED  m0416 src/ui/screen_trainer.c:507 [int-1 0 -> -1] :: draw path, only reachable from the raylib letter grid draw and its layout arithmetic, no headless suite exercises
+ACCEPTED  m0417 src/ui/screen_trainer.c:514 [cmp >= -> >] :: draw path, only reachable from the raylib screen draw case handler no headless suite exercises
+ACCEPTED  m0418 src/ui/screen_trainer.c:514 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw case handler no headless suite exercises
+ACCEPTED  m0419 src/ui/screen_trainer.c:514 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw case handler no headless suite exercises
+ACCEPTED  m0429 src/ui/screen_trainer.c:541 [cmp == -> !=] :: chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0433 src/ui/screen_trainer.c:546 [cmp != -> ==] :: chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0434 src/ui/screen_trainer.c:546 [int+1 0 -> 1] :: chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0435 src/ui/screen_trainer.c:546 [int-1 0 -> -1] :: chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0437 src/ui/screen_trainer.c:551 [cmp == -> !=] :: chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0439 src/ui/screen_trainer.c:556 [cmp == -> !=] :: chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0440 src/ui/screen_trainer.c:562 [int+1 2 -> 3] :: chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0442 src/ui/screen_trainer.c:564 [cmp == -> !=] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0443 src/ui/screen_trainer.c:566 [cmp == -> !=] :: chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0444 src/ui/screen_trainer.c:569 [arith / -> *] :: chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0451 src/ui/screen_trainer.c:577 [cmp >= -> >] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0452 src/ui/screen_trainer.c:577 [int+1 0 -> 1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0453 src/ui/screen_trainer.c:577 [int-1 0 -> -1] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0454 src/ui/screen_trainer.c:577 [logic && -> ||] :: draw path, only reachable from the raylib screen draw no headless suite exercises
+ACCEPTED  m0455 src/ui/screen_trainer.c:578 [cmp == -> !=] :: chart grid draw feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0457 src/ui/screen_trainer.c:588 [cmp == -> !=] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0459 src/ui/screen_trainer.c:597 [arith / -> *] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0460 src/ui/screen_trainer.c:597 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0461 src/ui/screen_trainer.c:598 [int+1 0 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0462 src/ui/screen_trainer.c:598 [int-1 0 -> -1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0463 src/ui/screen_trainer.c:601 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0464 src/ui/screen_trainer.c:601 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0465 src/ui/screen_trainer.c:601 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0466 src/ui/screen_trainer.c:604 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0467 src/ui/screen_trainer.c:605 [cmp > -> >=] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0468 src/ui/screen_trainer.c:605 [int+1 0 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0469 src/ui/screen_trainer.c:605 [int-1 0 -> -1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0470 src/ui/screen_trainer.c:605 [logic && -> ||] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0471 src/ui/screen_trainer.c:605 [cmp == -> !=] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0472 src/ui/screen_trainer.c:606 [arith * -> /] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0473 src/ui/screen_trainer.c:606 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0474 src/ui/screen_trainer.c:607 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0475 src/ui/screen_trainer.c:607 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0476 src/ui/screen_trainer.c:608 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0477 src/ui/screen_trainer.c:608 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0478 src/ui/screen_trainer.c:608 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0479 src/ui/screen_trainer.c:608 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0480 src/ui/screen_trainer.c:609 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0481 src/ui/screen_trainer.c:609 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0482 src/ui/screen_trainer.c:609 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0486 src/ui/screen_trainer.c:611 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0487 src/ui/screen_trainer.c:611 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0488 src/ui/screen_trainer.c:612 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0489 src/ui/screen_trainer.c:612 [int+1 2 -> 3] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0490 src/ui/screen_trainer.c:612 [int-1 2 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0491 src/ui/screen_trainer.c:612 [arith * -> /] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0492 src/ui/screen_trainer.c:612 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0493 src/ui/screen_trainer.c:614 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0494 src/ui/screen_trainer.c:615 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0495 src/ui/screen_trainer.c:616 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0496 src/ui/screen_trainer.c:616 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0498 src/ui/screen_trainer.c:618 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0499 src/ui/screen_trainer.c:618 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0505 src/ui/screen_trainer.c:622 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0506 src/ui/screen_trainer.c:622 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0507 src/ui/screen_trainer.c:622 [int+1 2 -> 3] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0508 src/ui/screen_trainer.c:622 [int-1 2 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0509 src/ui/screen_trainer.c:622 [arith * -> /] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0510 src/ui/screen_trainer.c:631 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0511 src/ui/screen_trainer.c:631 [int+1 1 -> 2] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0512 src/ui/screen_trainer.c:631 [int-1 1 -> 0] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0513 src/ui/screen_trainer.c:632 [int+1 0 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0514 src/ui/screen_trainer.c:632 [int-1 0 -> -1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0515 src/ui/screen_trainer.c:632 [cmp < -> <=] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0516 src/ui/screen_trainer.c:633 [cmp == -> !=] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0517 src/ui/screen_trainer.c:637 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0518 src/ui/screen_trainer.c:637 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0519 src/ui/screen_trainer.c:643 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0520 src/ui/screen_trainer.c:643 [int+1 2 -> 3] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0521 src/ui/screen_trainer.c:643 [int-1 2 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0522 src/ui/screen_trainer.c:643 [arith * -> /] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0523 src/ui/screen_trainer.c:643 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0524 src/ui/screen_trainer.c:650 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0525 src/ui/screen_trainer.c:650 [int+1 2 -> 3] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0526 src/ui/screen_trainer.c:650 [int-1 2 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0527 src/ui/screen_trainer.c:650 [arith * -> /] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0528 src/ui/screen_trainer.c:650 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0529 src/ui/screen_trainer.c:653 [cmp > -> >=] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0535 src/ui/screen_trainer.c:666 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0536 src/ui/screen_trainer.c:666 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0537 src/ui/screen_trainer.c:666 [int+1 2 -> 3] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0538 src/ui/screen_trainer.c:666 [int-1 2 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0539 src/ui/screen_trainer.c:666 [arith * -> /] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0540 src/ui/screen_trainer.c:668 [cmp > -> >=] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0541 src/ui/screen_trainer.c:668 [int+1 1 -> 2] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0542 src/ui/screen_trainer.c:668 [int-1 1 -> 0] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0543 src/ui/screen_trainer.c:672 [int+1 0 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0544 src/ui/screen_trainer.c:672 [int-1 0 -> -1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0545 src/ui/screen_trainer.c:672 [cmp < -> <=] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0546 src/ui/screen_trainer.c:672 [logic && -> ||] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0547 src/ui/screen_trainer.c:672 [cmp < -> <=] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0548 src/ui/screen_trainer.c:673 [cmp < -> <=] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0549 src/ui/screen_trainer.c:673 [int+1 0 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0550 src/ui/screen_trainer.c:673 [int-1 0 -> -1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0551 src/ui/screen_trainer.c:673 [logic || -> &&] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0552 src/ui/screen_trainer.c:673 [cmp >= -> >] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0555 src/ui/screen_trainer.c:683 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0556 src/ui/screen_trainer.c:683 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0557 src/ui/screen_trainer.c:683 [int+1 2 -> 3] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0558 src/ui/screen_trainer.c:683 [int-1 2 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0559 src/ui/screen_trainer.c:683 [arith * -> /] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0561 src/ui/screen_trainer.c:687 [cmp >= -> >] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0562 src/ui/screen_trainer.c:687 [int+1 0 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0563 src/ui/screen_trainer.c:687 [int-1 0 -> -1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0564 src/ui/screen_trainer.c:692 [int+1 0 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0566 src/ui/screen_trainer.c:692 [cmp != -> ==] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0567 src/ui/screen_trainer.c:694 [int+1 0 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0569 src/ui/screen_trainer.c:694 [cmp != -> ==] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0570 src/ui/screen_trainer.c:703 [int+1 0 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0571 src/ui/screen_trainer.c:703 [int-1 0 -> -1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0572 src/ui/screen_trainer.c:703 [cmp < -> <=] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0573 src/ui/screen_trainer.c:704 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0574 src/ui/screen_trainer.c:704 [arith * -> /] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0575 src/ui/screen_trainer.c:708 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0576 src/ui/screen_trainer.c:708 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0577 src/ui/screen_trainer.c:708 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0578 src/ui/screen_trainer.c:709 [logic && -> ||] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0579 src/ui/screen_trainer.c:709 [cmp >= -> >] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0580 src/ui/screen_trainer.c:709 [int+1 0 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0581 src/ui/screen_trainer.c:709 [int-1 0 -> -1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0582 src/ui/screen_trainer.c:710 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0583 src/ui/screen_trainer.c:710 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0586 src/ui/screen_trainer.c:713 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0587 src/ui/screen_trainer.c:713 [int+1 2 -> 3] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0588 src/ui/screen_trainer.c:713 [int-1 2 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0589 src/ui/screen_trainer.c:713 [arith * -> /] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0591 src/ui/screen_trainer.c:716 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0592 src/ui/screen_trainer.c:717 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0593 src/ui/screen_trainer.c:719 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0594 src/ui/screen_trainer.c:721 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0597 src/ui/screen_trainer.c:723 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0598 src/ui/screen_trainer.c:723 [arith / -> *] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0599 src/ui/screen_trainer.c:723 [int+1 2 -> 3] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0600 src/ui/screen_trainer.c:723 [int-1 2 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0601 src/ui/screen_trainer.c:724 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0603 src/ui/screen_trainer.c:729 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0604 src/ui/screen_trainer.c:729 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0605 src/ui/screen_trainer.c:729 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0606 src/ui/screen_trainer.c:732 [not-del ! -> (deleted)] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0607 src/ui/screen_trainer.c:734 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0608 src/ui/screen_trainer.c:734 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0609 src/ui/screen_trainer.c:735 [arith + -> -] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0612 src/ui/screen_trainer.c:745 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0613 src/ui/screen_trainer.c:745 [arith - -> +] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0614 src/ui/screen_trainer.c:745 [int+1 2 -> 3] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0615 src/ui/screen_trainer.c:745 [int-1 2 -> 1] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0616 src/ui/screen_trainer.c:745 [arith * -> /] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+ACCEPTED  m0617 src/ui/screen_trainer.c:746 [cmp == -> !=] :: screen draw body feeds only the raylib frame loop no gate suite asserts pixels lane 1 log 2026-10-12
+mutate: generated=617 resumed=0 build_failed=86 killed_by_tests=219 killed=305 survived=312 accepted=257 unexplained=55 skipped=0
+mutate: kill rate 305/617 = 49.4%, with accepted equivalents 562/617 = 91.1%
+mutate: wall 11461.4s

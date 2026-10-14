@@ -1,0 +1,12 @@
+mutate: scope=src/ui/screen_settings.c files=1 sites=662 suites=28
+SURVIVED  m0039 src/ui/screen_settings.c:55 [int+1 1 -> 2]
+KILLED    m0118 src/ui/screen_settings.c:124 [int+1 0 -> 1]
+KILLED    m0162 src/ui/screen_settings.c:187 [logic || -> &&]
+SURVIVED  m0165 src/ui/screen_settings.c:191 [int+1 1 -> 2]
+SURVIVED  m0168 src/ui/screen_settings.c:192 [int-1 0 -> -1]
+KILLED    m0252 src/ui/screen_settings.c:303 [int-1 1u -> 0u]
+SURVIVED  m0612 src/ui/screen_settings.c:646 [cmp < -> <=]
+ACCEPTED  m0165 src/ui/screen_settings.c:191 [int+1 1 -> 2] :: letter range disjunct weakened to a conjunction still rejects every out of range letter, the delegated stage call reruns the identical range test and returns the same error
+mutate: generated=7 resumed=0 build_failed=0 killed_by_tests=3 killed=3 survived=4 accepted=1 unexplained=3 skipped=655
+mutate: kill rate 3/7 = 42.9%, with accepted equivalents 4/7 = 57.1%
+mutate: wall 18.2s

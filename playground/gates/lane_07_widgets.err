@@ -1,0 +1,417 @@
+build_gate/mutants/p51160/m0001_widgets.c:15:38: error: expected ')'
+   15 | static int ct_ui_font_codepoints(int /out, int cap) {
+      |                                      ^
+build_gate/mutants/p51160/m0001_widgets.c:15:33: note: to match this '('
+   15 | static int ct_ui_font_codepoints(int /out, int cap) {
+      |                                 ^
+build_gate/mutants/p51160/m0001_widgets.c:17:76: error: use of undeclared identifier 'cap'
+   17 |     for (int c = CT_UI_FONT_ASCII_FIRST; c <= CT_UI_FONT_ASCII_LAST && n < cap; c++) {
+      |                                                                            ^~~
+build_gate/mutants/p51160/m0001_widgets.c:18:9: error: use of undeclared identifier 'out'
+   18 |         out[n++] = c;
+      |         ^~~
+build_gate/mutants/p51160/m0001_widgets.c:20:76: error: use of undeclared identifier 'cap'
+   20 |     for (int c = CT_UI_FONT_LATIN_FIRST; c <= CT_UI_FONT_LATIN_LAST && n < cap; c++) {
+      |                                                                            ^~~
+build_gate/mutants/p51160/m0001_widgets.c:21:9: error: use of undeclared identifier 'out'
+   21 |         out[n++] = c;
+      |         ^~~
+build_gate/mutants/p51160/m0001_widgets.c:23:74: error: use of undeclared identifier 'cap'
+   23 |     for (int c = CT_UI_FONT_VIET_FIRST; c <= CT_UI_FONT_VIET_LAST && n < cap; c++) {
+      |                                                                          ^~~
+build_gate/mutants/p51160/m0001_widgets.c:24:9: error: use of undeclared identifier 'out'
+   24 |         out[n++] = c;
+      |         ^~~
+build_gate/mutants/p51160/m0001_widgets.c:59:55: error: too many arguments to function call, expected 1, have 2
+   59 |         int count = ct_ui_font_codepoints(codepoints, CT_UI_FONT_CODEPOINTS_MAX);
+      |                     ~~~~~~~~~~~~~~~~~~~~~             ^~~~~~~~~~~~~~~~~~~~~~~~~
+src\config/config.h:304:35: note: expanded from macro 'CT_UI_FONT_CODEPOINTS_MAX'
+  304 | #define CT_UI_FONT_CODEPOINTS_MAX 576
+      |                                   ^~~
+build_gate/mutants/p51160/m0001_widgets.c:15:12: note: 'ct_ui_font_codepoints' declared here
+   15 | static int ct_ui_font_codepoints(int /out, int cap) {
+      |            ^                     ~~~
+8 errors generated.
+mutate: suite shots_font_rebind exited -1073741819
+build_gate/mutants/p51160/m0013_widgets.c:51:34: error: expected ')'
+   51 | bool ct_ui_theme_load(const char /font_path) {
+      |                                  ^
+build_gate/mutants/p51160/m0013_widgets.c:51:22: note: to match this '('
+   51 | bool ct_ui_theme_load(const char /font_path) {
+      |                      ^
+build_gate/mutants/p51160/m0013_widgets.c:51:6: error: conflicting types for 'ct_ui_theme_load'
+   51 | bool ct_ui_theme_load(const char /font_path) {
+      |      ^
+src\ui/ui.h:23:6: note: previous declaration is here
+   23 | bool ct_ui_theme_load(const char *font_path);
+      |      ^
+build_gate/mutants/p51160/m0013_widgets.c:57:9: error: use of undeclared identifier 'font_path'
+   57 |     if (font_path != NULL && font_path[0] != '\0') {
+      |         ^~~~~~~~~
+build_gate/mutants/p51160/m0013_widgets.c:57:30: error: use of undeclared identifier 'font_path'
+   57 |     if (font_path != NULL && font_path[0] != '\0') {
+      |                              ^~~~~~~~~
+build_gate/mutants/p51160/m0013_widgets.c:60:34: error: use of undeclared identifier 'font_path'
+   60 |         Font loaded = LoadFontEx(font_path, CT_UI_FONT_BODY, codepoints, count);
+      |                                  ^~~~~~~~~
+build_gate/mutants/p51160/m0013_widgets.c:67:21: error: use of undeclared identifier 'font_path'
+   67 |                     font_path);
+      |                     ^~~~~~~~~
+6 errors generated.
+mutate: suite shots_font_rebind exited 1
+mutate: suite shots_font_rebind exited 1
+mutate: suite shots_font_rebind exited 1
+mutate: suite shots_font_rebind exited 1
+build_gate/mutants/p51160/m0022_widgets.c:61:31: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+   61 |         if (loaded.texture.id != -1 && loaded.glyphCount > 0) {
+      |             ~~~~~~~~~~~~~~~~~ ^  ~~
+1 error generated.
+build_gate/mutants/p51160/m0030_widgets.c:68:35: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+   68 |             if (loaded.texture.id != -1) {
+      |                 ~~~~~~~~~~~~~~~~~ ^  ~~
+1 error generated.
+mutate: suite shots_font_rebind exited 1
+mutate: suite shots_font_rebind exited 1
+build_gate/mutants/p51160/m0036_widgets.c:81:37: error: comparison of integers of different signs: 'unsigned int' and 'int' [-Werror,-Wsign-compare]
+   81 |     if (ct_ui_font_state.texture.id == -1) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^  ~~
+1 error generated.
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+build_gate/mutants/p51160/m0040_widgets.c:98:52: error: expected ')'
+   98 | int ct_chart_layout(Rectangle bounds, const double /values, int count, ct_chart_bar *out, int cap) {
+      |                                                    ^
+build_gate/mutants/p51160/m0040_widgets.c:98:20: note: to match this '('
+   98 | int ct_chart_layout(Rectangle bounds, const double /values, int count, ct_chart_bar *out, int cap) {
+      |                    ^
+build_gate/mutants/p51160/m0040_widgets.c:98:5: error: conflicting types for 'ct_chart_layout'
+   98 | int ct_chart_layout(Rectangle bounds, const double /values, int count, ct_chart_bar *out, int cap) {
+      |     ^
+src\ui/widgets.h:12:5: note: previous declaration is here
+   12 | int ct_chart_layout(Rectangle bounds, const double *values, int count, ct_chart_bar *out, int cap);
+      |     ^
+build_gate/mutants/p51160/m0040_widgets.c:99:9: error: use of undeclared identifier 'count'
+   99 |     if (count < 0 || (count > 0 && values == NULL) || (cap > 0 && out == NULL) || cap < 0) {
+      |         ^~~~~
+build_gate/mutants/p51160/m0040_widgets.c:99:23: error: use of undeclared identifier 'count'
+   99 |     if (count < 0 || (count > 0 && values == NULL) || (cap > 0 && out == NULL) || cap < 0) {
+      |                       ^~~~~
+build_gate/mutants/p51160/m0040_widgets.c:99:36: error: use of undeclared identifier 'values'
+   99 |     if (count < 0 || (count > 0 && values == NULL) || (cap > 0 && out == NULL) || cap < 0) {
+      |                                    ^~~~~~
+build_gate/mutants/p51160/m0040_widgets.c:99:56: error: use of undeclared identifier 'cap'
+   99 |     if (count < 0 || (count > 0 && values == NULL) || (cap > 0 && out == NULL) || cap < 0) {
+      |                                                        ^~~
+build_gate/mutants/p51160/m0040_widgets.c:99:67: error: use of undeclared identifier 'out'
+   99 |     if (count < 0 || (count > 0 && values == NULL) || (cap > 0 && out == NULL) || cap < 0) {
+      |                                                                   ^~~
+build_gate/mutants/p51160/m0040_widgets.c:99:83: error: use of undeclared identifier 'cap'
+   99 |     if (count < 0 || (count > 0 && values == NULL) || (cap > 0 && out == NULL) || cap < 0) {
+      |                                                                                   ^~~
+build_gate/mutants/p51160/m0040_widgets.c:102:13: error: use of undeclared identifier 'count'
+  102 |     int n = count < cap ? count : cap;
+      |             ^~~~~
+build_gate/mutants/p51160/m0040_widgets.c:102:21: error: use of undeclared identifier 'cap'
+  102 |     int n = count < cap ? count : cap;
+      |                     ^~~
+build_gate/mutants/p51160/m0040_widgets.c:102:27: error: use of undeclared identifier 'count'
+  102 |     int n = count < cap ? count : cap;
+      |                           ^~~~~
+build_gate/mutants/p51160/m0040_widgets.c:102:35: error: use of undeclared identifier 'cap'
+  102 |     int n = count < cap ? count : cap;
+      |                                   ^~~
+build_gate/mutants/p51160/m0040_widgets.c:106:50: error: use of undeclared identifier 'count'
+  106 |     double unit = (double)bounds.width / (double)count;
+      |                                                  ^~~~~
+build_gate/mutants/p51160/m0040_widgets.c:110:25: error: use of undeclared identifier 'count'
+  110 |     for (int i = 0; i < count; i++) {
+      |                         ^~~~~
+build_gate/mutants/p51160/m0040_widgets.c:111:22: error: use of undeclared identifier 'values'
+  111 |         if (isfinite(values[i]) && values[i] > max) {
+      |                      ^~~~~~
+build_gate/mutants/p51160/m0040_widgets.c:111:36: error: use of undeclared identifier 'values'
+  111 |         if (isfinite(values[i]) && values[i] > max) {
+      |                                    ^~~~~~
+build_gate/mutants/p51160/m0040_widgets.c:112:19: error: use of undeclared identifier 'values'
+  112 |             max = values[i];
+      |                   ^~~~~~
+build_gate/mutants/p51160/m0040_widgets.c:116:33: error: use of undeclared identifier 'values'; did you mean 'value'?
+  116 |         double value = isfinite(values[i]) && values[i] > 0.0 ? values[i] : 0.0;
+      |                                 ^~~~~~
+      |                                 value
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\math.h:509:34: note: expanded from macro 'isfinite'
+  509 | #define isfinite(x) ((fpclassify(x) & FP_NAN) == 0)
+      |                                  ^
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\math.h:497:43: note: expanded from macro 'fpclassify'
+  497 |   __mingw_types_compatible_p (__typeof__ (x), double),            \
+      |                                           ^
+C:\Users\lavantien\scoop\apps\mingw-winlibs-ucrt\current\x86_64-w64-mingw32\include\math.h:95:80: note: expanded from macro '__mingw_types_compatible_p'
+   95 | #define __mingw_types_compatible_p(type1, type2) __builtin_types_compatible_p (type1, type2)
+      |                                                                                ^~~~~
+build_gate/mutants/p51160/m0040_widgets.c:116:16: note: 'value' declared here
+  116 |         double value = isfinite(values[i]) && values[i] > 0.0 ? values[i] : 0.0;
+      |                ^
+build_gate/mutants/p51160/m0040_widgets.c:116:39: error: subscripted value is not an array, pointer, or vector
+  116 |         double value = isfinite(values[i]) && values[i] > 0.0 ? values[i] : 0.0;
+      |                                 ~~~~~~^~
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+build_gate/mutants/p51160/m0041_widgets.c:98:85: error: expected ')'
+   98 | int ct_chart_layout(Rectangle bounds, const double *values, int count, ct_chart_bar /out, int cap) {
+      |                                                                                     ^
+build_gate/mutants/p51160/m0041_widgets.c:98:20: note: to match this '('
+   98 | int ct_chart_layout(Rectangle bounds, const double *values, int count, ct_chart_bar /out, int cap) {
+      |                    ^
+build_gate/mutants/p51160/m0041_widgets.c:98:5: error: conflicting types for 'ct_chart_layout'
+   98 | int ct_chart_layout(Rectangle bounds, const double *values, int count, ct_chart_bar /out, int cap) {
+      |     ^
+src\ui/widgets.h:12:5: note: previous declaration is here
+   12 | int ct_chart_layout(Rectangle bounds, const double *values, int count, ct_chart_bar *out, int cap);
+      |     ^
+build_gate/mutants/p51160/m0041_widgets.c:99:56: error: use of undeclared identifier 'cap'
+   99 |     if (count < 0 || (count > 0 && values == NULL) || (cap > 0 && out == NULL) || cap < 0) {
+      |                                                        ^~~
+build_gate/mutants/p51160/m0041_widgets.c:99:67: error: use of undeclared identifier 'out'
+   99 |     if (count < 0 || (count > 0 && values == NULL) || (cap > 0 && out == NULL) || cap < 0) {
+      |                                                                   ^~~
+build_gate/mutants/p51160/m0041_widgets.c:99:83: error: use of undeclared identifier 'cap'
+   99 |     if (count < 0 || (count > 0 && values == NULL) || (cap > 0 && out == NULL) || cap < 0) {
+      |                                                                                   ^~~
+build_gate/mutants/p51160/m0041_widgets.c:102:21: error: use of undeclared identifier 'cap'
+  102 |     int n = count < cap ? count : cap;
+      |                     ^~~
+build_gate/mutants/p51160/m0041_widgets.c:102:35: error: use of undeclared identifier 'cap'
+  102 |     int n = count < cap ? count : cap;
+      |                                   ^~~
+build_gate/mutants/p51160/m0041_widgets.c:118:9: error: use of undeclared identifier 'out'
+  118 |         out[i].bar.x = (float)(bounds.x + unit * (double)i + gap / 2.0);
+      |         ^~~
+build_gate/mutants/p51160/m0041_widgets.c:119:9: error: use of undeclared identifier 'out'
+  119 |         out[i].bar.y = (float)(bounds.y + (double)bounds.height - h);
+      |         ^~~
+build_gate/mutants/p51160/m0041_widgets.c:120:9: error: use of undeclared identifier 'out'
+  120 |         out[i].bar.width = (float)bar_w;
+      |         ^~~
+build_gate/mutants/p51160/m0041_widgets.c:121:9: error: use of undeclared identifier 'out'
+  121 |         out[i].bar.height = (float)h;
+      |         ^~~
+build_gate/mutants/p51160/m0041_widgets.c:122:9: error: use of undeclared identifier 'out'
+  122 |         out[i].value = values[i];
+      |         ^~~
+build_gate/mutants/p51160/m0041_widgets.c:123:9: error: use of undeclared identifier 'out'
+  123 |         out[i].label_day = (double)i;
+      |         ^~~
+13 errors generated.
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+build_gate/mutants/p51160/m0045_widgets.c:99:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   99 |     if (count < 0 && (count > 0 && values == NULL) || (cap > 0 && out == NULL) || cap < 0) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p51160/m0045_widgets.c:99:19: note: place parentheses around the '&&' expression to silence this warning
+   99 |     if (count < 0 && (count > 0 && values == NULL) || (cap > 0 && out == NULL) || cap < 0) {
+      |                   ^
+      |         (                                         )
+1 error generated.
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited -1073741795
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+build_gate/mutants/p51160/m0051_widgets.c:99:52: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   99 |     if (count < 0 || (count > 0 && values == NULL) && (cap > 0 && out == NULL) || cap < 0) {
+      |                   ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p51160/m0051_widgets.c:99:52: note: place parentheses around the '&&' expression to silence this warning
+   99 |     if (count < 0 || (count > 0 && values == NULL) && (cap > 0 && out == NULL) || cap < 0) {
+      |                                                    ^
+      |                      (                                                        )
+1 error generated.
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited -1073741795
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+build_gate/mutants/p51160/m0057_widgets.c:99:80: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+   99 |     if (count < 0 || (count > 0 && values == NULL) || (cap > 0 && out == NULL) && cap < 0) {
+      |                                                    ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+build_gate/mutants/p51160/m0057_widgets.c:99:80: note: place parentheses around the '&&' expression to silence this warning
+   99 |     if (count < 0 || (count > 0 && values == NULL) || (cap > 0 && out == NULL) && cap < 0) {
+      |                                                                                ^         
+      |                                                       (                                  )
+1 error generated.
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+mutate: suite stats_screen_chart_layout exited 1
+build_gate/mutants/p51160/m0093_widgets.c:128:80: error: expected ')'
+  128 | int ct_heatmap_cell(Rectangle bounds, int cols, int rows, int index, Rectangle /out) {
+      |                                                                                ^
+build_gate/mutants/p51160/m0093_widgets.c:128:20: note: to match this '('
+  128 | int ct_heatmap_cell(Rectangle bounds, int cols, int rows, int index, Rectangle /out) {
+      |                    ^
+build_gate/mutants/p51160/m0093_widgets.c:128:5: error: conflicting types for 'ct_heatmap_cell'
+  128 | int ct_heatmap_cell(Rectangle bounds, int cols, int rows, int index, Rectangle /out) {
+      |     ^
+src\ui/widgets.h:13:5: note: previous declaration is here
+   13 | int ct_heatmap_cell(Rectangle bounds, int cols, int rows, int index, Rectangle *out);
+      |     ^
+build_gate/mutants/p51160/m0093_widgets.c:129:72: error: use of undeclared identifier 'out'
+  129 |     if (cols <= 0 || rows <= 0 || index < 0 || index / cols >= rows || out == NULL) {
+      |                                                                        ^~~
+build_gate/mutants/p51160/m0093_widgets.c:136:5: error: use of undeclared identifier 'out'
+  136 |     out->x = bounds.x + cell_w * (float)col;
+      |     ^~~
+build_gate/mutants/p51160/m0093_widgets.c:137:5: error: use of undeclared identifier 'out'
+  137 |     out->y = bounds.y + cell_h * (float)row;
+      |     ^~~
+build_gate/mutants/p51160/m0093_widgets.c:138:5: error: use of undeclared identifier 'out'
+  138 |     out->width = cell_w;
+      |     ^~~
+build_gate/mutants/p51160/m0093_widgets.c:139:5: error: use of undeclared identifier 'out'
+  139 |     out->height = cell_h;
+      |     ^~~
+7 errors generated.
+mutate: suite stats_screen_heatmap_grid exited -1073741795
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited -1073741795
+build_gate/mutants/p51160/m0097_widgets.c:129:19: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  129 |     if (cols <= 0 && rows <= 0 || index < 0 || index / cols >= rows || out == NULL) {
+      |         ~~~~~~~~~~^~~~~~~~~~~~ ~~
+build_gate/mutants/p51160/m0097_widgets.c:129:19: note: place parentheses around the '&&' expression to silence this warning
+  129 |     if (cols <= 0 && rows <= 0 || index < 0 || index / cols >= rows || out == NULL) {
+      |                   ^
+      |         (                     )
+1 error generated.
+mutate: suite stats_screen_heatmap_grid exited 1
+build_gate/mutants/p51160/m0101_widgets.c:129:32: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  129 |     if (cols <= 0 || rows <= 0 && index < 0 || index / cols >= rows || out == NULL) {
+      |                   ~~ ~~~~~~~~~~^~~~~~~~~~~~
+build_gate/mutants/p51160/m0101_widgets.c:129:32: note: place parentheses around the '&&' expression to silence this warning
+  129 |     if (cols <= 0 || rows <= 0 && index < 0 || index / cols >= rows || out == NULL) {
+      |                                ^
+      |                      (                     )
+1 error generated.
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+build_gate/mutants/p51160/m0105_widgets.c:129:45: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  129 |     if (cols <= 0 || rows <= 0 || index < 0 && index / cols >= rows || out == NULL) {
+      |                                ~~ ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p51160/m0105_widgets.c:129:45: note: place parentheses around the '&&' expression to silence this warning
+  129 |     if (cols <= 0 || rows <= 0 || index < 0 && index / cols >= rows || out == NULL) {
+      |                                             ^
+      |                                   (                                )
+1 error generated.
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+build_gate/mutants/p51160/m0108_widgets.c:129:69: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  129 |     if (cols <= 0 || rows <= 0 || index < 0 || index / cols >= rows && out == NULL) {
+      |                                             ~~ ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+build_gate/mutants/p51160/m0108_widgets.c:129:69: note: place parentheses around the '&&' expression to silence this warning
+  129 |     if (cols <= 0 || rows <= 0 || index < 0 || index / cols >= rows && out == NULL) {
+      |                                                ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+1 error generated.
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+build_gate/mutants/p51160/m0134_widgets.c:147:28: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  147 |     if (point.x < bounds.x && point.y < bounds.y || point.x >= bounds.x + bounds.width ||
+      |         ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~ ~~
+build_gate/mutants/p51160/m0134_widgets.c:147:28: note: place parentheses around the '&&' expression to silence this warning
+  147 |     if (point.x < bounds.x && point.y < bounds.y || point.x >= bounds.x + bounds.width ||
+      |                            ^
+      |         (                                       )
+1 error generated.
+mutate: suite stats_screen_heatmap_grid exited 1
+build_gate/mutants/p51160/m0136_widgets.c:147:50: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  147 |     if (point.x < bounds.x || point.y < bounds.y && point.x >= bounds.x + bounds.width ||
+      |                            ~~ ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p51160/m0136_widgets.c:147:50: note: place parentheses around the '&&' expression to silence this warning
+  147 |     if (point.x < bounds.x || point.y < bounds.y && point.x >= bounds.x + bounds.width ||
+      |                                                  ^
+      |                               (                                                       )
+1 error generated.
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+build_gate/mutants/p51160/m0139_widgets.c:147:88: error: '&&' within '||' [-Werror,-Wlogical-op-parentheses]
+  147 |     if (point.x < bounds.x || point.y < bounds.y || point.x >= bounds.x + bounds.width &&
+      |                                                  ~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+  148 |         point.y >= bounds.y + bounds.height) {
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+build_gate/mutants/p51160/m0139_widgets.c:147:88: note: place parentheses around the '&&' expression to silence this warning
+  147 |     if (point.x < bounds.x || point.y < bounds.y || point.x >= bounds.x + bounds.width &&
+      |                                                                                        ^
+      |                                                     (
+  148 |         point.y >= bounds.y + bounds.height) {
+      |                                            
+      |                                            )
+1 error generated.
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_grid exited 1
+mutate: suite stats_screen_heatmap_color exited 1
+mutate: suite stats_screen_heatmap_color exited -1073741795
+mutate: suite stats_screen_heatmap_color exited 1
+mutate: suite stats_screen_heatmap_color exited 1
+mutate: suite stats_screen_heatmap_color exited -1073741795
+mutate: suite stats_screen_heatmap_color exited 1
+mutate: suite stats_screen_heatmap_color exited 1
+mutate: suite stats_screen_heatmap_color exited 1
+mutate: suite stats_screen_heatmap_color exited 1
+mutate: suite stats_screen_heatmap_color exited 1
+mutate: 45 unexplained survivors
+make: *** [makefile:273: mutate] Error 1

@@ -1,0 +1,92 @@
+CT_MUTATE_CC="clang" CT_MUTATE_CFLAGS="--target=x86_64-w64-mingw32 -std=c23 -O2 -Wall -Wextra -Werror -Wpedantic -g -fsanitize=undefined -fsanitize-trap=all -Isrc -Ithird_party/raylib/src -Ithird_party/raygui/src -Ithird_party/sqlite" \
+CT_MUTATE_LDFLAGS="--target=x86_64-w64-mingw32 -fuse-ld=lld -g" CT_MUTATE_LDLIBS="-static-libgcc -lopengl32 -lgdi32 -lwinmm" \
+build_gate/bin/mutate.exe src/ui/screen_menu.c build_gate stats_screen_menu_layout stats_screen_view_load
+mutate: scope=src/ui/screen_menu.c files=1 sites=61 suites=2
+KILLED    m0001 src/ui/screen_menu.c:8 [arith * -> /]
+          build break
+KILLED    m0002 src/ui/screen_menu.c:19 [arith * -> /]
+          build break
+SURVIVED  m0003 src/ui/screen_menu.c:20 [cmp == -> !=]
+SURVIVED  m0004 src/ui/screen_menu.c:24 [cmp == -> !=]
+SURVIVED  m0005 src/ui/screen_menu.c:28 [cmp == -> !=]
+SURVIVED  m0006 src/ui/screen_menu.c:32 [cmp == -> !=]
+SURVIVED  m0007 src/ui/screen_menu.c:36 [cmp == -> !=]
+SURVIVED  m0008 src/ui/screen_menu.c:40 [cmp != -> ==]
+SURVIVED  m0009 src/ui/screen_menu.c:45 [bool false -> true]
+SURVIVED  m0010 src/ui/screen_menu.c:48 [int+1 0 -> 1]
+SURVIVED  m0011 src/ui/screen_menu.c:48 [int-1 0 -> -1]
+SURVIVED  m0012 src/ui/screen_menu.c:48 [cmp < -> <=]
+SURVIVED  m0013 src/ui/screen_menu.c:48 [arith / -> *]
+SURVIVED  m0014 src/ui/screen_menu.c:48 [int+1 0 -> 1]
+SURVIVED  m0015 src/ui/screen_menu.c:48 [int-1 0 -> -1]
+KILLED    m0016 src/ui/screen_menu.c:56 [arith * -> /]
+          build break
+KILLED    m0017 src/ui/screen_menu.c:57 [cmp == -> !=]
+KILLED    m0018 src/ui/screen_menu.c:61 [cmp == -> !=]
+KILLED    m0019 src/ui/screen_menu.c:65 [cmp == -> !=]
+KILLED    m0020 src/ui/screen_menu.c:69 [cmp == -> !=]
+KILLED    m0021 src/ui/screen_menu.c:73 [cmp == -> !=]
+KILLED    m0022 src/ui/screen_menu.c:80 [arith * -> /]
+          build break
+SURVIVED  m0023 src/ui/screen_menu.c:84 [arith / -> *]
+SURVIVED  m0024 src/ui/screen_menu.c:84 [arith - -> +]
+SURVIVED  m0025 src/ui/screen_menu.c:84 [arith / -> *]
+SURVIVED  m0026 src/ui/screen_menu.c:84 [arith / -> *]
+KILLED    m0027 src/ui/screen_menu.c:86 [arith / -> *]
+SURVIVED  m0028 src/ui/screen_menu.c:86 [int+1 0 -> 1]
+SURVIVED  m0029 src/ui/screen_menu.c:86 [int-1 0 -> -1]
+KILLED    m0030 src/ui/screen_menu.c:87 [arith / -> *]
+KILLED    m0031 src/ui/screen_menu.c:87 [int+1 4 -> 5]
+KILLED    m0032 src/ui/screen_menu.c:87 [int-1 4 -> 3]
+KILLED    m0033 src/ui/screen_menu.c:89 [arith + -> -]
+KILLED    m0034 src/ui/screen_menu.c:90 [arith + -> -]
+KILLED    m0035 src/ui/screen_menu.c:90 [int+1 1 -> 2]
+KILLED    m0036 src/ui/screen_menu.c:90 [int-1 1 -> 0]
+KILLED    m0037 src/ui/screen_menu.c:90 [arith * -> /]
+KILLED    m0038 src/ui/screen_menu.c:90 [arith - -> +]
+KILLED    m0039 src/ui/screen_menu.c:91 [arith - -> +]
+KILLED    m0040 src/ui/screen_menu.c:91 [arith / -> *]
+KILLED    m0041 src/ui/screen_menu.c:91 [int+1 2 -> 3]
+KILLED    m0042 src/ui/screen_menu.c:91 [int-1 2 -> 1]
+KILLED    m0043 src/ui/screen_menu.c:92 [arith / -> *]
+KILLED    m0044 src/ui/screen_menu.c:92 [int+1 2 -> 3]
+KILLED    m0045 src/ui/screen_menu.c:92 [int-1 2 -> 1]
+KILLED    m0046 src/ui/screen_menu.c:92 [arith - -> +]
+KILLED    m0047 src/ui/screen_menu.c:92 [arith / -> *]
+KILLED    m0048 src/ui/screen_menu.c:92 [int+1 2 -> 3]
+KILLED    m0049 src/ui/screen_menu.c:92 [int-1 2 -> 1]
+KILLED    m0050 src/ui/screen_menu.c:92 [arith + -> -]
+KILLED    m0051 src/ui/screen_menu.c:92 [arith / -> *]
+KILLED    m0052 src/ui/screen_menu.c:92 [int+1 8 -> 9]
+KILLED    m0053 src/ui/screen_menu.c:92 [int-1 8 -> 7]
+KILLED    m0054 src/ui/screen_menu.c:93 [int+1 0 -> 1]
+KILLED    m0055 src/ui/screen_menu.c:93 [int-1 0 -> -1]
+KILLED    m0056 src/ui/screen_menu.c:93 [cmp < -> <=]
+KILLED    m0057 src/ui/screen_menu.c:94 [arith + -> -]
+KILLED    m0058 src/ui/screen_menu.c:94 [arith * -> /]
+KILLED    m0059 src/ui/screen_menu.c:99 [arith + -> -]
+KILLED    m0060 src/ui/screen_menu.c:99 [arith * -> /]
+SURVIVED  m0061 src/ui/screen_menu.c:101 [bool false -> true]
+ACCEPTED  m0003 src/ui/screen_menu.c:20 [cmp == -> !=] :: trainer screen dispatch feeds only the raylib frame loop no gate suite exercises
+ACCEPTED  m0004 src/ui/screen_menu.c:24 [cmp == -> !=] :: cards screen dispatch feeds only the raylib frame loop no gate suite exercises
+ACCEPTED  m0005 src/ui/screen_menu.c:28 [cmp == -> !=] :: review screen dispatch feeds only the raylib frame loop no gate suite exercises
+ACCEPTED  m0006 src/ui/screen_menu.c:32 [cmp == -> !=] :: settings screen dispatch feeds only the raylib frame loop no gate suite exercises
+ACCEPTED  m0007 src/ui/screen_menu.c:36 [cmp == -> !=] :: stats screen dispatch feeds only the raylib frame loop no gate suite exercises
+ACCEPTED  m0008 src/ui/screen_menu.c:40 [cmp != -> ==] :: unknown screen reset to menu feeds only the raylib frame loop no gate suite exercises
+ACCEPTED  m0009 src/ui/screen_menu.c:45 [bool false -> true] :: escape exit sits inside the raylib input loop no gate suite exercises
+ACCEPTED  m0010 src/ui/screen_menu.c:48 [int+1 0 -> 1] :: menu key scan bound and entry offsets feed only the raylib input loop no gate suite exercises
+ACCEPTED  m0011 src/ui/screen_menu.c:48 [int-1 0 -> -1] :: menu key scan bound and entry offsets feed only the raylib input loop no gate suite exercises
+ACCEPTED  m0012 src/ui/screen_menu.c:48 [cmp < -> <=] :: menu key scan bound and entry offsets feed only the raylib input loop no gate suite exercises
+ACCEPTED  m0013 src/ui/screen_menu.c:48 [arith / -> *] :: menu key scan bound and entry offsets feed only the raylib input loop no gate suite exercises
+ACCEPTED  m0014 src/ui/screen_menu.c:48 [int+1 0 -> 1] :: menu key scan bound and entry offsets feed only the raylib input loop no gate suite exercises
+ACCEPTED  m0015 src/ui/screen_menu.c:48 [int-1 0 -> -1] :: menu key scan bound and entry offsets feed only the raylib input loop no gate suite exercises
+ACCEPTED  m0023 src/ui/screen_menu.c:84 [arith / -> *] :: menu entry count sizing, consumed only by the raylib draw path no gate suite exercises
+ACCEPTED  m0024 src/ui/screen_menu.c:84 [arith - -> +] :: menu entry count sizing, consumed only by the raylib draw path no gate suite exercises
+ACCEPTED  m0025 src/ui/screen_menu.c:84 [arith / -> *] :: menu entry count sizing, consumed only by the raylib draw path no gate suite exercises
+ACCEPTED  m0026 src/ui/screen_menu.c:84 [arith / -> *] :: menu entry count sizing, consumed only by the raylib draw path no gate suite exercises
+ACCEPTED  m0028 src/ui/screen_menu.c:86 [int+1 0 -> 1] :: sizeof on any element of the uniform entry array yields the same element size, count unchanged
+ACCEPTED  m0029 src/ui/screen_menu.c:86 [int-1 0 -> -1] :: sizeof on any element of the uniform entry array yields the same element size, count unchanged
+ACCEPTED  m0061 src/ui/screen_menu.c:101 [bool false -> true] :: quit branch needs a real gui mouse release inside the rect, no headless path can force the raygui pressed result
+mutate: generated=61 resumed=0 build_failed=4 killed_by_tests=37 killed=41 survived=20 accepted=20 unexplained=0 skipped=0
+mutate: kill rate 41/61 = 67.2%, with accepted equivalents 61/61 = 100.0%
+mutate: wall 78.3s
