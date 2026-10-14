@@ -2,62 +2,30 @@
 
 Speedsolving trainer for all WCA events. This README is the source of truth for the technical tables, the architecture, and the diagrams.
 
-## Overview
+## Contents
 
-cubing-trainer trains algorithms across all WCA events through flashcards with spaced repetition, auto-animates any algorithm on a 3D cube, and auto-generates 3-style commutator algorithms with structural classification, constrained to a preferred move subset and scored for fingertrick friendliness, including full floating-buffer mode.
-
-The stack is raylib 6, C23, and SQLite, built with clang 23 targeting mingw-w64 over the winlibs sysroot, driven by GNU make.
-
-The 3-style generator is the distinguishing feature. It emits commutators labeled by structure (setup, interchange, insertion, pure, A9, B9, and the rest of the BH taxonomy), searches under a preferred move subset that defaults to R, U, D, and runs in fixed-buffer or floating-buffer mode.
-
-## Build and make targets
-
-Prerequisites, verified on this machine 2026-10-09: LLVM clang 23.1.3, winlibs UCRT gcc 16.2.0 as the mingw-w64 sysroot, GNU make 4.4.1, cmake, ninja, sqlite3 CLI 3.53.4, python 3 for the vendor, db-verify, and visual targets, and node with npx and mmdc (mermaid-cli). No MSYS2, no pkg-config.
-
-Run `make vendor` first. It HEAD-checks each URL, downloads, extracts the pinned third party sources under third_party/, and verifies every archive by SHA3-256 through tools/vendor_verify.py: the raylib 6.0 and raygui 5.0 tag tarballs, the SQLite 3.53.4 amalgamation zip, and the nerd-fonts v3.5.1 Iosevka.zip whose single IosevkaNerdFont-Regular.ttf extracts into the gitignored assets/fonts runtime tree. Each stamp recipe verifies before extracting and the vendor target re-verifies the kept archives in build/vendor on every run, so a corrupted or truncated download fails the target and needs build/vendor removed to re-download. The zip extracts through python's zipfile module instead of tar because GNU tar on the make shell cannot read zip while the Windows bsdtar can, which made the old tar line depend on which tar won PATH order. raylib compiles from the flat third_party/raylib/src/*.c set of 7 TUs with -DPLATFORM_DESKTOP, a recursive glob over-collects platform files and breaks on duplicate symbols. raygui 5.0 ships only raygui.h, so the Makefile generates build/raygui_impl.c holding RAYGUI_IMPLEMENTATION plus the include as its single TU. sqlite3.c compiles with -Wno-error for two unused parameters in its Windows VFS code.
-
-The toolchain spelling is decided, evidence in playground/spike_link/REPORT.md. Compile lines carry `--target=x86_64-w64-mingw32` alone and link lines add `-fuse-ld=lld`, which resolves crt2.o, crtbegin.o, and the gcc 16.2.0 library directories from the winlibs install. The `--gcc-install-dir` spelling is inert on clang 23.1.3, fails under -Werror as an unused argument, and is not used. One environment hazard: this account exports C_INCLUDE_PATH and CPLUS_INCLUDE_PATH at a foreign gcc, so the Makefile clobbers both to empty for every recipe. The link set for anything touching raylib is -static-libgcc -lopengl32 -lgdi32 -lwinmm, and those Windows libraries appear on no other link line.
-
-| target | what it does |
-| --- | --- |
-| vendor | download, HEAD-check, SHA3-256 verify, and extract raylib 6.0, raygui 5.0, the sqlite amalgamation, and the Iosevka Nerd Font into third_party/ and assets/fonts/, re-verifying the kept archives every run |
-| vendor-verify-selftest | exercise the archive hash checker against synthetic matches, corruptions, and malformed hashes |
-| build | compile app, raylib, raygui, and sqlite sources and emit build/bin/cubing-trainer.exe |
-| build-headless | compile tools/render_scene.c against the full library set and emit build/bin/render_scene.exe |
-| spike | build and run the M0 toolchain spike from playground/spike_link |
-| test | run the full unit suite |
-| test-\<suite\> | run suites whose name matches the filter |
-| fmt | format the tree |
-| fmt-check | check formatting without writing |
-| lint | clang-tidy plus the -Wall -Wextra -Werror -Wpedantic -std=c23 gate plus zero-comment and stray-constant checks |
-| analyze | run clang --analyze over the sources |
-| fuzz | run the 17 in-process fuzz suites, CT_FUZZ_LOOPS multiplies the iteration count |
-| fuzz-\<suite\> | run one fuzz suite |
-| mutate | run the token mutation harness over the SCOPE directory or file with the optional SUITE filter |
-| e2e | run every tests/e2e/*.txt through cubing-trainer.exe --headless --script |
-| visual | render the 4 golden scenes fresh into build/visual and compare against tests/golden through tools/run_visual.py and tools/visual_check.py |
-| screenshots | seed a fresh CT_DATA_DIR sandbox and capture every feature point into docs/img/screens at fixed 1280x720 |
-| db-verify | build a migrated DB through tools/make_db.c, then check integrity, user_version, and 54 schema assertions through the sqlite3 CLI |
-| memo-seed | regenerate db/migrations/002_memo_pairs.sql through tools/memo_gen.py and fail on drift from the committed file |
-| diagrams | render every docs/diagrams/*.mmd to PNG through tools/gen_diagrams.mjs |
-| memguard | run tools/memguard.ps1 to enforce the combined working set cap on project processes |
-| memguard-selftest | verify memguard process matching against a spawned sleeper exe |
-| run | build then launch the trainer window |
-| release | assemble build/release/cubing-trainer, zip it as build/cubing-trainer-\<git-describe\>.zip, and verify layout, zip bytes, a headless run, and fatal exits through tools/release_verify.py |
-| release-verify-selftest | exercise the release verifier's layout, zip, and database assertions against synthetic trees |
-| clean | remove build outputs |
-
-make build-headless emits build/bin/render_scene.exe, the headless scene renderer that make visual drives. make e2e drives the real app binary the same way: each tests/e2e/*.txt case runs cubing-trainer.exe --headless --script with CT_DATA_DIR pointed at a fresh build/e2e/<case> sandbox, so no case ever touches the real %LOCALAPPDATA% database, and any nonzero case exit fails the target.
-
-make release packages the trainer as build/cubing-trainer-\<git-describe\>.zip holding one cubing-trainer folder with dist/bin/cubing-trainer.exe plus db/migrations, db/seeds/packs, and assets/fonts/IosevkaNerdFont-Regular.ttf. The exe resolves the migrations and seed pack trees plus the UI font exactly two directories up from its own location through the CT_MIGRATIONS_EXE_REL, CT_SEEDS_PACKS_EXE_REL, and CT_UI_FONT_EXE_REL defaults in the config hub, so it sits under dist/bin, the same two-level shape as build/bin inside the repo, and any shallower or deeper placement breaks all three resolutions. tools/release_verify.py compares the packaged file sets against the repo trees, compares every zip entry byte for byte, runs the packaged exe headless from a foreign working directory against a fresh LOCALAPPDATA and asserts the database migrates to the latest user_version and event_pack holds all 714 seed rows, then asserts the two fatal paths, LOCALAPPDATA unset and a missing migrations directory, both exit 1 with their startup errors.
-
-make visual locks against concurrent runs through build/visual.lock and, for the animated mid scene, renders twice per gate and requires the pair to self-agree before comparing against the committed golden, retrying once on disagreement. Persistent pair disagreement exits 3 as an infra flake, self-agreement that mismatches the golden exits 2 as a regression signal with evidence copied under build/visual_evidence. This split exists because golden_mid_3 flips between two byte-stable rasterization outputs on this machine on a minutes timescale, independent of source and binary, while the static scenes never flip; the phenomenon, proof, and drifted sample are recorded in tests/golden/PROVENANCE.md and playground/m7_visual/.
-
-make screenshots drives the real exe end to end: it rebuilds cubing-trainer.exe, seeds a throwaway data directory under build/shots through playground/screens/seed.txt, then runs playground/screens/shots.txt against the same directory. Each shot command opens a hidden 1280x720 window, walks the real ct_ui_update and ct_ui_draw path into the target screen state, renders offscreen through LoadRenderTexture, and exports the PNG into docs/img/screens. Two consecutive runs over the same day produce byte-identical SHA-256 hashes for all 11 images, proven per run pair, while the stats session rows and the seeded review history embed real dates, so a corpus regenerated on a later date differs exactly there.
+- [Usage](#usage) with the screenshots of every core functionality and the four flow diagrams
+  - [Menu](#menu), [Trainer selector](#trainer-selector), [Letter chart](#letter-chart), [3-style case view](#3-style-case-view), [Review](#review), [Cards](#cards), [Settings](#settings), [Stats](#stats), [Core flows](#core-flows)
+- [Overview](#overview)
+- [Build and make targets](#build-and-make-targets)
+- [Architecture](#architecture)
+- [Cube engine](#cube-engine)
+- [Notation grammar](#notation-grammar)
+- [Commutator classes](#commutator-classes)
+- [Case tables and letters](#case-tables-and-letters)
+- [Event packs](#event-packs)
+- [Database schema](#database-schema)
+- [FSRS scheduler](#fsrs-scheduler)
+- [Generator](#generator)
+- [Testing](#testing)
+- [Source records](#source-records)
+- [Diagrams](#diagrams)
 
 ## Usage
 
 `make run` opens the trainer windowed at the config default 1280x720. First start migrates the database, merges settings, and seeds every registered pack, so all screens have content before any configuration. The UI renders Iosevka Nerd Font at a 22 px body on the light high-contrast theme, both vendored and configured through the config hub, and falls back to the raylib default font with one stderr line when the font file is missing. The screenshots below are the real app in that seeded state, one per feature point.
+
+Each GitHub release carries the zip that make release assembles and verifies: unpack it, then run cubing-trainer/dist/bin/cubing-trainer.exe, the same two-level shape the exe resolves its migrations, seed packs, and UI font from.
 
 ### Menu
 
@@ -118,6 +86,79 @@ Bld picks the corner and edge buffer stickers from the same grids and edits the 
 ![stats](docs/img/screens/stats.png)
 
 Stats aggregates the review history: the deck list selects a deck, the summary shows card and due counts with learning and review splits plus average stability and difficulty, the session list records past runs, the forecast bars count due cards over the next 30 days, the case accuracy heatmap colors every case by its hit rate with the row readable on hover, and the retention panel bars the actual recall per elapsed bucket with the predicted recall drawn as a marker line over them.
+
+### Core flows
+
+The four flowcharts below are the landed runtime flows, rendered from docs/diagrams/*.mmd by make diagrams and committed as PNG files.
+
+![app loop](docs/diagrams/app_loop.png)
+
+The app main loop: fixed-timestep update plus render.
+
+![review session flow](docs/diagrams/review_session_flow.png)
+
+A review session from the due queue through reveal, grade, and the FSRS update to the session log.
+
+![generator pipeline](docs/diagrams/generator_pipeline.png)
+
+The src/gen stages from target enumeration to cached algs.
+
+![data flow](docs/diagrams/data_flow.png)
+
+The ui screens through the repo layer to sqlite, settings rows merging over config defaults.
+
+## Overview
+
+cubing-trainer trains algorithms across all WCA events through flashcards with spaced repetition, auto-animates any algorithm on a 3D cube, and auto-generates 3-style commutator algorithms with structural classification, constrained to a preferred move subset and scored for fingertrick friendliness, including full floating-buffer mode.
+
+The stack is raylib 6, C23, and SQLite, built with clang 23 targeting mingw-w64 over the winlibs sysroot, driven by GNU make.
+
+The 3-style generator is the distinguishing feature. It emits commutators labeled by structure (setup, interchange, insertion, pure, A9, B9, and the rest of the BH taxonomy), searches under a preferred move subset that defaults to R, U, D, and runs in fixed-buffer or floating-buffer mode.
+
+## Build and make targets
+
+Prerequisites, verified on this machine 2026-10-09: LLVM clang 23.1.3, winlibs UCRT gcc 16.2.0 as the mingw-w64 sysroot, GNU make 4.4.1, cmake, ninja, sqlite3 CLI 3.53.4, python 3 for the vendor, db-verify, and visual targets, and node with npx and mmdc (mermaid-cli). No MSYS2, no pkg-config.
+
+Run `make vendor` first. It HEAD-checks each URL, downloads, extracts the pinned third party sources under third_party/, and verifies every archive by SHA3-256 through tools/vendor_verify.py: the raylib 6.0 and raygui 5.0 tag tarballs, the SQLite 3.53.4 amalgamation zip, and the nerd-fonts v3.5.1 Iosevka.zip whose single IosevkaNerdFont-Regular.ttf extracts into the gitignored assets/fonts runtime tree. Each stamp recipe verifies before extracting and the vendor target re-verifies the kept archives in build/vendor on every run, so a corrupted or truncated download fails the target and needs build/vendor removed to re-download. The zip extracts through python's zipfile module instead of tar because GNU tar on the make shell cannot read zip while the Windows bsdtar can, which made the old tar line depend on which tar won PATH order. raylib compiles from the flat third_party/raylib/src/*.c set of 7 TUs with -DPLATFORM_DESKTOP, a recursive glob over-collects platform files and breaks on duplicate symbols. raygui 5.0 ships only raygui.h, so the Makefile generates build/raygui_impl.c holding RAYGUI_IMPLEMENTATION plus the include as its single TU. sqlite3.c compiles with -Wno-error for two unused parameters in its Windows VFS code.
+
+The toolchain spelling is decided, evidence in playground/spike_link/REPORT.md. Compile lines carry `--target=x86_64-w64-mingw32` alone and link lines add `-fuse-ld=lld`, which resolves crt2.o, crtbegin.o, and the gcc 16.2.0 library directories from the winlibs install. The `--gcc-install-dir` spelling is inert on clang 23.1.3, fails under -Werror as an unused argument, and is not used. One environment hazard: this account exports C_INCLUDE_PATH and CPLUS_INCLUDE_PATH at a foreign gcc, so the Makefile clobbers both to empty for every recipe. The link set for anything touching raylib is -static-libgcc -lopengl32 -lgdi32 -lwinmm, and those Windows libraries appear on no other link line.
+
+| target | what it does |
+| --- | --- |
+| vendor | download, HEAD-check, SHA3-256 verify, and extract raylib 6.0, raygui 5.0, the sqlite amalgamation, and the Iosevka Nerd Font into third_party/ and assets/fonts/, re-verifying the kept archives every run |
+| vendor-verify-selftest | exercise the archive hash checker against synthetic matches, corruptions, and malformed hashes |
+| build | compile app, raylib, raygui, and sqlite sources and emit build/bin/cubing-trainer.exe |
+| build-headless | compile tools/render_scene.c against the full library set and emit build/bin/render_scene.exe |
+| spike | build and run the M0 toolchain spike from playground/spike_link |
+| test | run the full unit suite |
+| test-\<suite\> | run suites whose name matches the filter |
+| fmt | format the tree |
+| fmt-check | check formatting without writing |
+| lint | clang-tidy plus the -Wall -Wextra -Werror -Wpedantic -std=c23 gate plus zero-comment and stray-constant checks |
+| analyze | run clang --analyze over the sources |
+| fuzz | run the 17 in-process fuzz suites, CT_FUZZ_LOOPS multiplies the iteration count |
+| fuzz-\<suite\> | run one fuzz suite |
+| mutate | run the token mutation harness over the SCOPE directory or file with the optional SUITE filter |
+| e2e | run every tests/e2e/*.txt through cubing-trainer.exe --headless --script |
+| visual | render the 4 golden scenes fresh into build/visual and compare against tests/golden through tools/run_visual.py and tools/visual_check.py |
+| screenshots | seed a fresh CT_DATA_DIR sandbox and capture every feature point into docs/img/screens at fixed 1280x720 |
+| db-verify | build a migrated DB through tools/make_db.c, then check integrity, user_version, and 54 schema assertions through the sqlite3 CLI |
+| memo-seed | regenerate db/migrations/002_memo_pairs.sql through tools/memo_gen.py and fail on drift from the committed file |
+| diagrams | render every docs/diagrams/*.mmd to PNG through tools/gen_diagrams.mjs |
+| memguard | run tools/memguard.ps1 to enforce the combined working set cap on project processes |
+| memguard-selftest | verify memguard process matching against a spawned sleeper exe |
+| run | build then launch the trainer window |
+| release | assemble build/release/cubing-trainer, zip it as build/cubing-trainer-\<git-describe\>.zip, and verify layout, zip bytes, a headless run, and fatal exits through tools/release_verify.py |
+| release-verify-selftest | exercise the release verifier's layout, zip, and database assertions against synthetic trees |
+| clean | remove build outputs |
+
+make build-headless emits build/bin/render_scene.exe, the headless scene renderer that make visual drives. make e2e drives the real app binary the same way: each tests/e2e/*.txt case runs cubing-trainer.exe --headless --script with CT_DATA_DIR pointed at a fresh build/e2e/<case> sandbox, so no case ever touches the real %LOCALAPPDATA% database, and any nonzero case exit fails the target.
+
+make release packages the trainer as build/cubing-trainer-\<git-describe\>.zip holding one cubing-trainer folder with dist/bin/cubing-trainer.exe plus db/migrations, db/seeds/packs, and assets/fonts/IosevkaNerdFont-Regular.ttf. The exe resolves the migrations and seed pack trees plus the UI font exactly two directories up from its own location through the CT_MIGRATIONS_EXE_REL, CT_SEEDS_PACKS_EXE_REL, and CT_UI_FONT_EXE_REL defaults in the config hub, so it sits under dist/bin, the same two-level shape as build/bin inside the repo, and any shallower or deeper placement breaks all three resolutions. tools/release_verify.py compares the packaged file sets against the repo trees, compares every zip entry byte for byte, runs the packaged exe headless from a foreign working directory against a fresh LOCALAPPDATA and asserts the database migrates to the latest user_version and event_pack holds all 714 seed rows, then asserts the two fatal paths, LOCALAPPDATA unset and a missing migrations directory, both exit 1 with their startup errors.
+
+make visual locks against concurrent runs through build/visual.lock and, for the animated mid scene, renders twice per gate and requires the pair to self-agree before comparing against the committed golden, retrying once on disagreement. Persistent pair disagreement exits 3 as an infra flake, self-agreement that mismatches the golden exits 2 as a regression signal with evidence copied under build/visual_evidence. This split exists because golden_mid_3 flips between two byte-stable rasterization outputs on this machine on a minutes timescale, independent of source and binary, while the static scenes never flip; the phenomenon, proof, and drifted sample are recorded in tests/golden/PROVENANCE.md and playground/m7_visual/.
+
+make screenshots drives the real exe end to end: it rebuilds cubing-trainer.exe, seeds a throwaway data directory under build/shots through playground/screens/seed.txt, then runs playground/screens/shots.txt against the same directory. Each shot command opens a hidden 1280x720 window, walks the real ct_ui_update and ct_ui_draw path into the target screen state, renders offscreen through LoadRenderTexture, and exports the PNG into docs/img/screens. Two consecutive runs over the same day produce byte-identical SHA-256 hashes for all 11 images, proven per run pair, while the stats session rows and the seeded review history embed real dates, so a corpus regenerated on a later date differs exactly there.
 
 ## Architecture
 
@@ -399,7 +440,7 @@ Policy: every sourcing action leaves a physical artifact with the source URL, re
 
 ## Diagrams
 
-All 5 diagrams are mermaid flowchart LR rendered to PNG by make diagrams through the installed mmdc. Sources are docs/diagrams/*.mmd and the rendered PNG files are committed alongside them:
+All 5 diagrams are mermaid flowchart LR rendered to PNG by make diagrams through the installed mmdc. Sources are docs/diagrams/*.mmd and the rendered PNG files are committed alongside them. The 4 runtime flows are embedded under [Core flows](#core-flows) in the usage section, so the table below tracks status and adds the plan artifact:
 
 | diagram | shows | status |
 | --- | --- | --- |
