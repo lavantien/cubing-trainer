@@ -136,7 +136,7 @@ The toolchain spelling is decided, evidence in playground/spike_link/REPORT.md. 
 | fmt-check | check formatting without writing |
 | lint | clang-tidy plus the -Wall -Wextra -Werror -Wpedantic -std=c23 gate plus zero-comment and stray-constant checks |
 | analyze | run clang --analyze over the sources |
-| fuzz | run the 17 in-process fuzz suites, CT_FUZZ_LOOPS multiplies the iteration count |
+| fuzz | run the 18 in-process fuzz suites, CT_FUZZ_LOOPS multiplies the iteration count |
 | fuzz-\<suite\> | run one fuzz suite |
 | mutate | run the token mutation harness over the SCOPE directory or file with the optional SUITE filter |
 | e2e | run every tests/e2e/*.txt through cubing-trainer.exe --headless --script |
