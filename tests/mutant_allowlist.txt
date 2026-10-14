@@ -86,7 +86,7 @@ src/app/script.c:325	clock stamp index mutant checks the second stamp char, the 
 src/app/script.c:326	clock failure return payload mutants are unreachable, the utc clock always writes a parseable stamp so the failure return never executes
 src/app/script.c:387	card field capacity init mutants are dead stores, every branch of the field resolver assigns the capacity before any read
 src/app/script.c:392	card field value index shift runs through the guard the strlen nonnull assumption deletes at o2, the stale pre-shift offset slot still holds the value token for two argument commands
-src/app/script.c:430	review begin rc bound widening admits only a begin return of minus one, every reachable begin returns a nonnegative queue count over the scripted default deck
+src/app/script.c:426	review begin rc bound widening admits only a begin return of minus one, every reachable begin returns a nonnegative queue count over the scripted default deck
 src/app/script.c:397	cards field dirty flag mutant is display bookkeeping, the save path updates unconditionally and the form recomputes the flag on refresh, no headless suite reads it
 src/app/script.c:413	cards step default arm is unreachable, the step dispatcher routes exactly the cards kinds into this handler
 src/app/script.c:421	review day init mutants are dead stores, the clock helper writes the day on the only path that continues
@@ -1417,6 +1417,7 @@ src/ui/screen_trainer.c:53	ct_trainer_stage_name is only called with stage ids b
 src/ui/screen_trainer.c:57	saved memo clear, the field is fully overwritten by the memo row load before the only draw-side read
 src/ui/screen_trainer.c:58	saved memo clear, the field is fully overwritten by the memo row load before the only draw-side read
 src/ui/screen_trainer.c:67	reload only runs after its callers validated list_count >= 1, so the line 88 assignment always overwrites the initial case_count and the list_count <= 0 early return never executes
+src/ui/screen_trainer.c:78	dead store, memo_reload_rows at the reload tail unconditionally rewrites memo_row_count before any read, and the no lists early return that skips it is unreachable per the line 80 row, with the residual case_count zero gate closing the case label loop that feeds memo_find
 src/ui/screen_trainer.c:80	every reload call site guarantees list_count >= 1, so list_count == 0 never reaches this comparison
 src/ui/screen_trainer.c:84	callers either reset list_id to 0 or bounds-check it below list_count, so list_id == list_count never reaches this reset guard
 src/ui/screen_trainer.c:85	dead store inside the unreachable list_id >= list_count branch guarded at line 84
