@@ -1,0 +1,11 @@
+rm -rf build/release
+mkdir -p build/release/cubing-trainer/dist/bin build/release/cubing-trainer/db/seeds build/release/cubing-trainer/assets/fonts
+cp build/bin/cubing-trainer.exe build/release/cubing-trainer/dist/bin/cubing-trainer.exe
+cp -r db/migrations build/release/cubing-trainer/db/migrations
+cp -r db/seeds/packs build/release/cubing-trainer/db/seeds/packs
+cp assets/fonts/IosevkaNerdFont-Regular.ttf build/release/cubing-trainer/assets/fonts/IosevkaNerdFont-Regular.ttf
+rm -f build/cubing-trainer-*.zip
+pwsh.exe -NoProfile -Command "Compress-Archive -Path 'build/release/*' -DestinationPath 'build/cubing-trainer-fcb25f9.zip'"
+printf 'restart\n' > build/release_smoke.txt
+python -I tools/release_verify.py build/release/cubing-trainer build/cubing-trainer-fcb25f9.zip build/release_smoke.txt
+release verify passed: layout, zip, migration to 2, 714 event_pack rows, fatal paths clean
